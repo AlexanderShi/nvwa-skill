@@ -45,6 +45,45 @@
 
 ---
 
+## 📦 本仓库收录的人物 Skill（`product/`）
+
+`product/` 目录下收录了用女娲蒸馏好、**开箱即用**的人物思维 Skill：
+
+| Skill | 说明 |
+|-------|------|
+| [`product/刘亦菲`](product/刘亦菲) | 刘亦菲思维视角：7 个核心心智模型、12 条决策启发式、完整表达 DNA + 13 份调研底稿 |
+
+### 怎么用
+
+**1. 把 skill 文件夹复制到你的 Claude Code skills 目录**
+
+- 全局（所有项目可用）：`~/.claude/skills/`
+- 或项目级（仅当前项目）：`<你的项目>/.claude/skills/`
+
+```bash
+# macOS / Linux：全局安装「刘亦菲」skill
+cp -r product/刘亦菲 ~/.claude/skills/刘亦菲
+```
+```powershell
+# Windows PowerShell
+Copy-Item -Recurse "product\刘亦菲" "$HOME\.claude\skills\刘亦菲"
+```
+
+**2. 重启 / 重载 Claude Code**，让它扫描到新 skill。
+
+**3. 用触发语激活**，直接以人物身份对话：
+
+- 「用刘亦菲的视角看看我这个决定」
+- 「刘亦菲会怎么看 XX」
+- 「我想和刘亦菲聊聊 / 采访刘亦菲」
+
+**4. 退出角色**：说「退出」「切回正常」「不用扮演了」。
+
+> 💡 每个 skill 都是**自包含**的——整个文件夹复制走就能独立使用，`references/` 里还留着完整调研底稿，方便核对与二次编辑。
+> 想收录更多人物？用女娲蒸馏（见 [安装](#安装) 与 [工作原理](#工作原理)），把产出的 `<人物>` 文件夹放进 `product/` 即可。
+
+---
+
 ## 效果示例
 
 ```
