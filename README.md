@@ -1,6 +1,8 @@
 <div align="center">
 
-# 女娲.skill
+# 会大闪的女娲
+
+<sub>🔀 本项目基于 <a href="https://github.com/alchaincyf/nuwa-skill">花叔 · nuwa-skill</a>（MIT License）二次开发与再分发 · 原始版权、LICENSE 及 SKILL.md 创建者署名均归 <a href="https://x.com/AlchainHust">花叔</a> 所有</sub>
 
 <p align="center">
   <img src="assets/hero.gif" alt="nuwa-skill Hero Animation" />
