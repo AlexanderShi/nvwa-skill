@@ -58,6 +58,12 @@ def main() -> None:
     ap.add_argument("--prefix", default="yifei_", help="Filename prefix for auto-named output.")
     ap.add_argument("--open", action="store_true", help="Open the file when done (Windows).")
     ap.add_argument("--speed", type=float, default=1.0, help="<1 slower, >1 faster.")
+    ap.add_argument("--nfe-step", type=int, default=32,
+                    help="Diffusion steps. Higher = smoother/cleaner, slower. 32=default, 48-64=nicer.")
+    ap.add_argument("--cross-fade", type=float, default=0.15,
+                    help="Crossfade seconds between generated chunks. Higher = less 'separate sentences'.")
+    ap.add_argument("--cfg", type=float, default=2.0, help="Guidance strength (adherence to ref).")
+    ap.add_argument("--sway", type=float, default=-1.0, help="Sway sampling coefficient.")
     args = ap.parse_args()
 
     ref = Path(args.reference)
@@ -133,6 +139,10 @@ def main() -> None:
         gen_text=gen_text,
         file_wave=str(out),
         speed=args.speed,
+        nfe_step=args.nfe_step,
+        cross_fade_duration=args.cross_fade,
+        cfg_strength=args.cfg,
+        sway_sampling_coef=args.sway,
         remove_silence=False,            # avoids an ffmpeg dependency
     )
     print(f"[done] wrote {out.resolve()}")

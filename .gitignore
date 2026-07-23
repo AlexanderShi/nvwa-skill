@@ -11,6 +11,10 @@ voice_tts/my_voice.wav
 voice_tts/ref_clip.wav
 voice_tts/output/
 *.wav
+*.m4a
+
+# Third-party CosyVoice clone (5GB+, has its own git; install separately)
+voice_tts/CosyVoice/
 
 # Transient working files & logs
 voice_tts/passage.txt
