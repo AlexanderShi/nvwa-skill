@@ -1,0 +1,17 @@
+# Python virtualenvs (huge, machine-specific)
+voice_tts/.venv-f5/
+**/.venv*/
+**/__pycache__/
+
+# Bundled binaries
+voice_tts/ffbin/
+
+# Personal voice recordings & generated audio (never publish)
+voice_tts/my_voice.wav
+voice_tts/ref_clip.wav
+voice_tts/output/
+*.wav
+
+# Transient working files & logs
+voice_tts/passage.txt
+*.log

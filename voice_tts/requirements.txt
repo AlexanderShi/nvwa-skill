@@ -1,0 +1,10 @@
+# Default synthetic backend (runs anywhere, no GPU, no cloning) -------------
+edge-tts>=6.1.0
+
+# Optional cloning backend (clone a voice YOU HAVE THE RIGHTS TO) -----------
+# Uncomment to use --backend elevenlabs
+# elevenlabs>=1.5.0
+
+# Optional local playback of generated audio -------------------------------
+# (files are always written to disk regardless)
+# playsound==1.2.2
