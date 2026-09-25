@@ -31,6 +31,7 @@
 提PR在对应表格加一行即可，门槛见 [CONTRIBUTING.md](CONTRIBUTING.md)：
 
 - 人物skill：自建仓库 + 调研底稿自包含 + 诚实边界 + [保真度评分卡](references/fidelity-scorecard.md) ≥ B
+- 研究skill（`*-research-craft`）：同上，评分卡按「研究Skill变体」打分
 - 合集/工具/编排项目：README说清楚与女娲的关系，无伦理红线问题
 
 一行格式：`| [owner/repo](链接) | 一句话说明 |`

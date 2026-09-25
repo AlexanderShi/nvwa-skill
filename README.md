@@ -303,6 +303,53 @@ git clone https://github.com/alchaincyf/nuwa-skill <上面对应的路径>
 
 ---
 
+## 🔬 蒸馏研究者的研究方法（研究Skill）
+
+人物Skill蒸馏的是一个人**怎么想**。对顶尖研究者，你往往更想学他**怎么做研究**：怎么选题、怎么切入、实验怎么设计、卡住了先查什么、什么时候该放弃、论文怎么写。女娲的研究模式把这些蒸馏成一个**研究导师Skill**——你带着自己的研究问题来，它用这位研究者的方法给你可执行的下一步。
+
+```
+> 蒸馏 Richard Hamming 的研究方法
+> 学 Karpathy 怎么做研究，做个研究Skill
+> 我想要一个 Terence Tao 式的科研导师
+> 蒸馏「ML研究方法论」，综合 Hamming、Schulman、Karpathy 几个人
+```
+
+造完之后这样用：
+
+```
+> 用 Hamming 的方法帮我评估这个选题值不值得做
+> 按 Karpathy 的做法，我的模型 loss 不降，下一步查什么？
+> 用这个研究Skill帮我审一下论文草稿的结构
+```
+
+### 和人物Skill有什么不同
+
+| | 人物Skill | 研究Skill |
+|---|---|---|
+| 捕捉 | 怎么想、怎么说 | 怎么做研究：选题、实验、判断结果、写作 |
+| 核心单元 | 心智模型 | 研究方法（带操作步骤）+ 研究品味（判断标准）+ 阶段工作流 |
+| 激活后 | 以此人身份对话 | 导师模式：用此人的方法处理你的研究任务（口吻可选） |
+| 最重要的证据 | 言论 | 行为留痕：论文结构、代码、消融实验、rebuttal、放弃的方向 |
+| 额外的关 | — | **言行一致**：他说的方法必须在他实际的论文/代码里找得到；**引用可核实**：不编造论文 |
+
+### 研究模式的六路调研
+
+代表作（发表全景 + 代表作解剖）· 方法论自述（他主张怎么做）· 过程证据（他实际怎么做）· 学生与合作者（指导风格、默会知识）· 同行批评（盲区）· 研究轨迹（转向与时机）。
+
+Agent 1 可以先用脚本拉发表全景（数据来自 [OpenAlex](https://openalex.org)，免费无需 key）：
+
+```bash
+python3 scripts/fetch_publications.py "Richard Hamming" --out <skill目录>/references/sources/publications
+```
+
+输出高被引论文、按5年分段的研究方向变化、一作→末作的转变（从亲手做到带团队）、高频合作者（含疑似学生信号）、最近论文和代表作候选。
+
+`scripts/merge_research.py` 和 `scripts/quality_check.py` 会自动识别研究Skill，跑对应的检查（研究方法有没有操作步骤、有没有言行对照、有没有代表作解剖、研究诚信规则、引用可核实……）。
+
+完整方法论见 [references/research-extraction-framework.md](references/research-extraction-framework.md)，产出模板见 [references/research-skill-template.md](references/research-skill-template.md)。
+
+---
+
 ## 已蒸馏人物
 
 女娲已蒸馏了14位人物 + 1个主题。每个都是独立的、可直接安装使用的Skill，全部基于 Agent Skills 协议，可在 Claude Code / Codex / Cursor / OpenClaw / Hermes 等 runtime 通用：
@@ -393,8 +440,17 @@ npx skills add alchaincyf/darwin-skill
 nuwa-skill/
 ├── SKILL.md                      # 女娲本体
 ├── references/
-│   ├── extraction-framework.md   # 提炼方法论（想深入了解看这个）
-│   └── skill-template.md         # 生成Skill的模板
+│   ├── extraction-framework.md          # 提炼方法论（想深入了解看这个）
+│   ├── skill-template.md                # 生成人物Skill的模板
+│   ├── research-extraction-framework.md # 研究Skill提炼方法论
+│   ├── research-skill-template.md       # 生成研究Skill的模板
+│   └── fidelity-scorecard.md            # 保真度评分卡（含研究Skill变体）
+├── scripts/
+│   ├── fetch_publications.py     # 拉取研究者发表全景（OpenAlex）
+│   ├── download_subtitles.sh     # 下载YouTube字幕
+│   ├── srt_to_transcript.py      # 字幕清洗为纯文本
+│   ├── merge_research.py         # Phase 1.5 调研摘要（人物/研究模式自动识别）
+│   └── quality_check.py          # Phase 4 质量自检（人物/研究模式自动识别）
 └── examples/                          # 13个人物 + 1个主题，含完整调研数据
     ├── steve-jobs-perspective/        # ⭐ 乔布斯（含实战对话记录）
     ├── paul-graham-perspective/       # Paul Graham
@@ -486,6 +542,8 @@ Not role-playing. Cognitive architecture extraction.
 **Install** (cross-runtime, auto-detects your agent): `npx skills add alchaincyf/nuwa-skill`
 
 **How it works**: Input a name → 6 parallel research agents → 40+ primary sources → triple-verified mental models → quality-validated SKILL.md
+
+**Research skills**: For top researchers, Nuwa can also distill *how they do research* — problem selection, experiment design, debugging, when to quit, paper writing — into an executable research-mentor skill. Say "distill Richard Hamming's research skills". See [references/research-extraction-framework.md](references/research-extraction-framework.md).
 
 **13 person skills + 1 topic skill included** — all with full research data. The Jobs example includes a complete multi-turn conversation demo.
 

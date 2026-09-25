@@ -159,6 +159,25 @@ skills를 자동 로드하지 않는 runtime이라도, `SKILL.md` 내용을 대�
 
 ---
 
+## 🔬 연구자의 '연구하는 방법' 증류하기 (연구 Skill)
+
+인물 Skill은 한 사람이 **어떻게 생각하는지**를 증류합니다. 최고의 연구자에게서 정말 배우고 싶은 것은 **어떻게 연구하는지**일 때가 많습니다. 주제를 어떻게 고르는지, 실험을 어떻게 설계하는지, 막혔을 때 무엇부터 확인하는지, 언제 포기하는지, 논문을 어떻게 쓰는지. Nuwa의 연구 모드는 이것을 실행 가능한 **연구 멘토 Skill**로 증류합니다. 여러분의 연구 문제를 가져오면, 그 연구자의 방법으로 다음 단계를 제시합니다.
+
+```
+> Richard Hamming의 연구 방법을 증류해줘
+> Karpathy가 연구하는 방식으로 연구 Skill을 만들어줘
+> Hamming, Schulman, Karpathy를 종합해 "ML 연구 방법론"을 증류해줘
+```
+
+- 인물 Skill과의 차이: 핵심 단위는 멘탈 모델이 아니라 "연구 방법(구체적 절차 포함) + 연구 안목 + 단계별 워크플로". 활성화되면 본인을 연기하지 않고, 멘토 모드로 여러분의 연구 과제에 방법을 적용합니다
+- 추가 관문: **언행일치**(본인이 말한 방법이 실제 논문·코드에 나타나는가)와 **인용 검증 가능성**(논문을 지어내지 않음)
+- `scripts/fetch_publications.py`로 [OpenAlex](https://openalex.org)에서 논문 전체상(고피인용 논문, 연구 주제 변화, 공저자, 대표작 후보)을 가져올 수 있습니다
+- `merge_research.py`와 `quality_check.py`는 연구 Skill을 자동 인식해 해당 검사를 실행합니다
+
+방법론: [references/research-extraction-framework.md](references/research-extraction-framework.md) · 템플릿: [references/research-skill-template.md](references/research-skill-template.md) (모두 중국어)
+
+---
+
 ## 증류된 인물
 
 Nuwa는 이미 14명의 인물 + 1개의 테마를 증류했다. 각각은 독립적이고 바로 설치해 사용할 수 있는 Skill이며, 모두 Agent Skills 표준 기반으로 Claude Code / Codex / Cursor / OpenClaw / Hermes 등 runtime에서 범용으로 작동한다:
