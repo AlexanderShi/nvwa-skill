@@ -1,0 +1,481 @@
+[
+ {
+  "id": "S104",
+  "year": "2009",
+  "title": "Ranking small regular polygons by area and by perimeter",
+  "read_level": "full",
+  "contribution": "Proves that from pentagons on the regular small odd n-gon has more area than the regular (n+1)-gon and that successive area (and perimeter) differences shrink, yielding a short new proof of Reinhardt's theorem that regular even n-gons of unit diameter are not optimal (text read: Russian original, Diskretnyi Analiz i Issledovanie Operatsii 15(3), 2008).",
+  "problem_entry": "A plot of area vs perimeter of regular and known-optimal small polygons suggests two regularities; the paper sets out to prove them and their perimeter analogues (pp. 3-4).",
+  "key_idea": "Work only with closed forms for regular small polygons, extend them to real x, and get Reinhardt's theorem as a corollary by adding one vertex to the odd regular (n-1)-gon (pp. 4-8).",
+  "assumptions": "Convex, unit-diameter, regular polygons; everything explicit, no further hypotheses (p. 4).",
+  "proof_devices": [
+   "Taylor sandwich of sin and cos^2 giving strict lower/upper bounds on the extended area functions (eqs. 2-3, p. 5)",
+   "positive multiplier turns the bound difference into a polynomial whose largest real root (Maple: 5.6029, 11.0747, 3.3876) lies below the threshold (pp. 5-6, 8)",
+   "finite table of exact values closes the small cases n=3..14 (pp. 4-5)",
+   "identity P_k = P_2k for odd k gives the perimeter ranking directly (p. 7)"
+  ],
+  "experiments": "none (only a table of exact values, p. 4)",
+  "positioning": "Contrasts its vertex-addition argument with Reinhardt's and later authors' (added to the even polygon) and with Mossinghoff's more laborious route from the (n-1)-gon (p. 8).",
+  "writing": "Short note: figure-driven motivation, then theorem-proof blocks; no conclusion section (pp. 3-8).",
+  "limits_future": "No limitations or future work stated; root locations rest on Maple without discussed certification (pp. 6, 8-9).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Outside DFO: results stated exactly relative to thresholds with small cases checked, but no ladder or counterexample.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "Numerically found optima feed the plot; the paper's output is purely analytic.",
+    "pages": "pp. 3-8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "plot the known optima, prove what the plot shows",
+    "evidence": "Figure of regular vs known-optimal small polygons suggests observations (i)-(ii) that become Theorems 1-3.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "To compare terms of a trigonometric sequence, extend to real x, sandwich trig factors between Taylor polynomials, clear positive denominators, show the largest real root of the resulting polynomial lies below a threshold, and settle remaining cases from a table (pp. 5-6, 8).",
+   "Obtain the classical theorem as a two-line corollary of the new inequality by adding one vertex to the neighbouring odd regular polygon (p. 8)."
+  ],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "Этот рисунок интуитивно приводит к следующим наблюдениям",
+    "page": 4
+   },
+   {
+    "text": "Цель статьи — доказать эти свойства вместе с аналогичными для периметров.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S039",
+  "year": "2010",
+  "title": "A method for stochastic constrained optimization using derivative-free surrogate pattern search and collocation",
+  "read_level": "full",
+  "contribution": "Extends the Surrogate Management Framework (Kriging SEARCH + MADS POLL + filter) to uncertain parameters and design variables by wrapping sparse-grid stochastic collocation inside the blackbox, with GPS-type convergence transferred per collocation point and 15-20x savings over Monte Carlo on chance-constrained beams.",
+  "problem_entry": "Expensive PDE-based design under uncertainty where gradients are impractical and Monte Carlo UQ is too slow (pp. 1-2).",
+  "key_idea": "A 'stochastic black box' wrapper (collocation + moments) leaves the SMF/MADS loop unchanged except the evaluation step; a hierarchical variant raises the collocation depth seeded by the previous filter (pp. 6-7).",
+  "assumptions": "J in C0 or C^(Ny+Nz) for interpolant convergence; r(xi_i) in C1 on a compact level set for GPS results; chance constraints aggregated into H with H=0 required (pp. 8-9, 12).",
+  "proof_devices": [
+   "triangle-inequality split of interpolation error into sparse-grid and Kriging terms (eqs. 9-11, pp. 8-9)",
+   "per-collocation-point application of Torczon's Theorems 3.5/3.6 recombined through non-negative quadrature weights, ||grad r^m|| <= sum w_i ||grad r^m(xi_i)|| (eq. 12, pp. 9-10)",
+   "variance >= 0 ties first and second moments of sensitivities (eq. 13, p. 9)"
+  ],
+  "experiments": "Four problems, single runs, total simulator calls vs Monte Carlo per collocation depth (beam: 8,905 vs 8.4M calls; lognormal beam: 1.86M vs 25M, no feasible point below level 10) (Tables 2-3, pp. 13, 15).",
+  "positioning": "Builds on SMF (Booker et al.), MADS, filter GPS and Torczon's GPS theory; positions against stochastic gradient-based collocation methods and Monte Carlo (pp. 2, 5).",
+  "writing": "Engineering JCP style; candid admissions (missing filter-MADS proof, very large evaluation counts) (pp. 11, 13).",
+  "limits_future": "Few design variables; depth depends on PDF; filter-MADS unproved; future OrthoMADS polling, progressive barrier, adaptive collocation (pp. 11, 16, 18).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Kriging surrogate in SEARCH, POLL 'provides the convergence framework'; LHS start does not affect convergence.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Ladder imported from Torczon and Audet-Dennis rather than built; constrained filter-MADS runs with an acknowledged missing proof.",
+    "pages": "pp. 9-11"
+   },
+   {
+    "method": "Research Taste mark 3",
+    "relation": "contradiction",
+    "note": "Filter chosen over PB on empirical grounds (filter plots) though PB has theory; PB deferred.",
+    "pages": "pp. 11, 18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Quantifiable chance constraints aggregated into one H and handled by a filter, not PB.",
+    "pages": "pp. 5, 12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Currency is simulator calls, but the only baseline is Monte Carlo UQ under the same optimizer; no replications.",
+    "pages": "pp. 13, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "non-intrusive stochastic wrapper",
+    "evidence": "UQ layer placed inside the blackbox so the deterministic optimizer and its analysis are reused unchanged.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "transferable": [
+   "Wrap uncertainty inside the blackbox (moments or chance-constraint values on a quadrature grid) so any deterministic DFO solver applies unchanged (pp. 6-7).",
+   "Coarse-to-fine continuation over a fidelity parameter, stopping a level when its solution repeats and seeding the next level with the previous filter points (p. 7).",
+   "Report per fidelity level the collocation points, best point, cost and total simulator calls next to a Monte Carlo row reaching the same design (pp. 13, 15)."
+  ],
+  "coauthors": "S. Sankaran, A.L. Marsden",
+  "quotes": [
+   {
+    "text": "The POLL step consists of a local exploration in the space of d.v.s, and provides the convergence framework for the algorithm.",
+    "page": 5
+   },
+   {
+    "text": "However, no convergence proof has been published yet for the MADS technique with the filter approach. An attempt for such a proof is beyond the scope of this article.",
+    "page": 11
+   }
+  ]
+ },
+ {
+  "id": "S057",
+  "year": "2010",
+  "title": "Algorithmic parameter optimization of the DFO method with the OPAL framework",
+  "read_level": "full",
+  "contribution": "Introduces Opal, a Python modelling layer that casts parameter tuning as a blackbox problem built from atomic and compound measures and solves it with NOMAD, and tunes DFO's five real parameters with train/cross-validation splits on CUTEr/HS problems.",
+  "problem_entry": "Parameter tuning where performance is nonsmooth, non-analytic and not even a function (CPU time noise), and users keep defaults (pp. 2-3).",
+  "key_idea": "min psi(p) s.t. p in P, phi(p) in M with psi, phi compound measures of solver outputs; non-intrusive Python front end over NOMAD (pp. 7, 9-11).",
+  "assumptions": "Real parameters only; DFO bounds from the user manual; stopping tolerance (and feasibility tolerance in 4.4) and ineffective penalty parameter fixed; EB/PB treatment of the constraints not stated (pp. 9, 15, 17).",
+  "proof_devices": [
+   "none new; recalls the MADS hierarchy (liminf Delta_k=0, Clarke, KKT) (pp. 8-9)"
+  ],
+  "experiments": "82 unconstrained CUTEr and 125 HS problems; 50/25/10% training subsets (every k-th alphabetically), NOMAD defaults with 500-evaluation cap (302-474 used), cross-validation tables and evaluation performance profiles; one run per setting (pp. 14, 18-22).",
+  "positioning": "Implements and extends Audet & Orban 2006; contrasts with calibra (<=5 parameters, no guarantee), ParamILS, ATLAS, PHiPAC, OSKI (pp. 3-5).",
+  "writing": "Software-chapter style with a code listing walked line by line; reports a weak unconstrained result openly (pp. 11-12, 21).",
+  "limits_future": "Training-set choice drives results; 300-500 blackbox evaluations may be expensive; future: better initial guesses, integer/categorical parameters, surrogates; robust parameters open (p. 23).",
+  "method_links": [
+   {
+    "method": "Research Heuristic 7",
+    "relation": "evidence",
+    "note": "The algorithm is treated as a blackbox tuned by MADS, 'in contrast with heuristic methods'.",
+    "pages": "pp. 3, 8"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Opal is a modelling front end over NOMAD with a solver extension point.",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation-based profiles on held-out problems, but no competing tuner and no replications.",
+    "pages": "pp. 4, 20-22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "phi_SOLVED=1 (unrelaxable) and phi_QUALITY<=0 (quantifiable) but no EB/PB choice reported.",
+    "pages": "pp. 8, 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "train/held-out split for tuned algorithmic parameters",
+    "evidence": "Every 2nd/4th/10th problem alphabetically for training, rest for cross-validation (second occurrence after s02).",
+    "pages": "p. 18"
+   },
+   {
+    "pattern": "audit the literature instances",
+    "evidence": "Notes HS26 is misclassified as inequality-constrained in Conn et al.",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "freeze gameable parameters",
+    "evidence": "Stopping tolerance fixed because the optimizer 'would simply increase its value'; penalty parameter fixed on unconstrained problems.",
+    "pages": "p. 17"
+   }
+  ],
+  "transferable": [
+   "Before tuning, fix parameters the objective can game (stopping/feasibility tolerances when minimizing work) and those without effect on the instance class (p. 17).",
+   "Use a bounded symmetric relative change (a-b)/(a+b) per problem, averaged over problems solved by both settings, as objective and as a no-worse constraint (pp. 15-17).",
+   "Tune on every k-th problem and report on the rest with evaluation performance profiles, including a profile of the per-problem ratios (pp. 18-21)."
+  ],
+  "coauthors": "C.-K. Dang, D. Orban",
+  "quotes": [
+   {
+    "text": "Besides only requiring the evaluation of ψ at a number of different values of p, a well-chosen direct method will offer certain optimality guarantees upon termination, which is in contrast with heuristic methods.",
+    "page": 3
+   },
+   {
+    "text": "Allowing it to vary while minimizing the number of evaluations would not make sense, since the optimizer would simply increase its value.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S067",
+  "year": "2010",
+  "title": "On Proper Refinement of Bimatrix Games Extreme Nash Equilibria",
+  "read_level": "unreadable",
+  "contribution": "Not assessed: the text file is byte-identical to D002's file (the 2012 Automatica paper), not the 2010 GERAD report named in the list.",
+  "problem_entry": "not read",
+  "key_idea": "not read",
+  "assumptions": "not read",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "not read",
+  "writing": "not read",
+  "limits_future": "not read; the Automatica version was received 17 January 2008 (D002 p. 1), so the report is plausibly an earlier version of the same work (not verified)",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Belhaiza, P. Hansen",
+  "quotes": []
+ },
+ {
+  "id": "S146",
+  "year": "2010",
+  "title": "Optimization problems in planar geometry",
+  "read_level": "full",
+  "contribution": "Four-page TOGO 2010 talk abstract that maps twenty extremal problems for convex polygons (five attributes, one fixed, one maximized) and their equilateral variants into status tables of trivial, solved (for which n, by whom) and open cases.",
+  "problem_entry": "Survey entry: geometric reasoning since the Greeks, complemented over four decades by global optimization (p. 1).",
+  "key_idea": "Min/max duality reduces the family to maximization; Tables 1-2 give the status of each (fixed, maximized) pair and name the global solvers used (QP, IBBA, GloptiPoly) (pp. 2-3).",
+  "assumptions": "Planar convex polygons with vertices in cyclic order; explicit vertex formulas for A, P, D, S, W (pp. 1-2).",
+  "proof_devices": [
+   "min/max duality: minimizing X with Y fixed is equivalent to maximizing Y with X fixed (p. 2)"
+  ],
+  "experiments": "none",
+  "positioning": "Updates the group's own surveys (JOGO 2007; Fields 2009) and credits Zenodorus, Reinhardt, Graham, Tamvakis, Datta, Bezdek & Fodor, Foster & Szabo, Mossinghoff, Larcher & Pillichshammer, Henrion & Messine (pp. 2-3).",
+  "writing": "Extended abstract: definitions, two status tables, one sentence promising directions in the talk (pp. 1-3).",
+  "limits_future": "Most solved cases cover small n, odd n or n with an odd factor; several cells open; directions not written down (pp. 2-3).",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "Stated in one sentence: the geometrical approach has been complemented by global optimization methods.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "status grid as agenda",
+    "evidence": "Grid of (fixed, maximized) attribute pairs marked trivial / solved (n, reference) / open, reduced by min-max duality.",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "transferable": [
+   "Map a problem family as a (fixed x optimized) grid, collapse it by min/max duality, mark each cell trivial / solved-for-which-cases (with reference) / open, and pick the next paper from the open cells (pp. 2-3)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "This combination allowed solution of instances than could be solved by any one of these two approaches alone.",
+    "page": 1
+   },
+   {
+    "text": "Minimizing a first attribute while fixing a second one is equivalent to maximizing the second one while fixing the first one.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "D002",
+  "year": "2012",
+  "title": "On proper refinement of Nash equilibria for bimatrix games",
+  "read_level": "full",
+  "contribution": "Defines a big-M 0-1 encoding of epsilon-proper profiles and a parametric 0-1 mixed QP whose optimal epsilon(sigma) indicates properness of a perfect extreme equilibrium, a companion program that certifies non-properness, and a six-step procedure that finds a proper equilibrium for any bimatrix game.",
+  "problem_entry": "Perfect and proper refinements are rarely used for lack of analytical and numerical tools; 'How can we automatically detect proper extreme Nash equilibria?' (pp. 1-2).",
+  "key_idea": "Minimize epsilon over the encoded epsilon-proper set near a given equilibrium as the probability floor sigma -> 0; use the numerics only as an indication and build the epsilon-sequence analytically (pp. 2-5).",
+  "assumptions": "Finite bimatrix games; sufficiently large L; existence of proper equilibria (Myerson 1978) and extreme perfect equilibria (Borm et al.) (pp. 2, 5).",
+  "proof_devices": [
+   "big-M binary encoding of the implication (if A_i x2 < A_h x2 then x1i <= eps x1h) with exclusivity u_ih + u_hi <= 1 (p. 2)",
+   "nested feasible sets Omega^sigma'' subset Omega^sigma' give monotone epsilon(sigma) (Corollary 3.2, p. 3)",
+   "non-properness certificate: max sigma with eps <= eps_bar/2 has optimum zero (Theorem 3.5, p. 5)"
+  ],
+  "experiments": "Three small worked games (5x5 with 7 extreme equilibria, a 2x3 zero-sum game, Myerson's 4x2 example) solved with NEW-QP and EXMIP; properness judged from eps_bar values at small sigma; no timings (pp. 3-6).",
+  "positioning": "Continues the authors' enumeration work (Audet et al. 2001, 2006, 2009) and relies on Myerson, Jansen, van Damme, Selten for refinement theory (pp. 1, 6-7).",
+  "writing": "Question-led introduction; worked examples carry most of the argument; explicit warning that numerics cannot certify properness (pp. 1-5).",
+  "limits_future": "Numerical judgement of f(sigma) -> 0 and hand construction of sequences; suggested use for subgame-perfect equilibria of extensive games (pp. 3, 5-6).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Outside DFO: iff characterization plus a one-sided certificate for the negative case, with explicit refusal to certify the positive case numerically; no counterexamples to hypotheses.",
+    "pages": "pp. 2-5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "numeric indication, analytic certificate",
+    "evidence": "Global 0-1 QP flags candidate proper equilibria; epsilon-sequences are then constructed by hand; generalizes the s03 geometry candidate to game theory.",
+    "pages": "pp. 3-5"
+   }
+  ],
+  "transferable": [
+   "Encode a conditional ordering constraint (if a_i < a_h then x_i <= eps x_h) with two binaries, big-M and an exclusivity constraint (p. 2).",
+   "Prove monotonicity of a parametric optimal value from nested feasible sets (p. 3).",
+   "Certify a negative limit property with a companion program that maximizes the parameter under half the observed bound and has optimum zero (p. 5)."
+  ],
+  "coauthors": "S. Belhaiza, P. Hansen",
+  "quotes": [
+   {
+    "text": "How can we automatically detect proper extreme Nash equilibria?",
+    "page": 2
+   },
+   {
+    "text": "Therefore, it would be risky to use the result provided by the optimization to certify that an equilibrium is proper.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S118",
+  "year": "2012",
+  "title": "Construction of sparse signal representations with adaptive multiscale orthogonal bases",
+  "read_level": "partial",
+  "contribution": "Builds adaptive multiscale orthonormal bases layer by layer by minimizing a p-norm sparsity measure on the unit sphere, proves that optima have d-1 zero inner products (reducing each layer to finite enumeration), and beats best-order Daubechies wavelets by 6-37 points of sparsity ratio on seven families of piecewise signals (text read: GERAD G-2010-42).",
+  "problem_entry": "Wavelet selection is a significant problem; leave the multiresolution framework and design the basis from an optimization perspective (p. 7).",
+  "key_idea": "Multilayer design raises the proportion of small-scale vectors to 1 - alpha/(2^(nmax-2) l1) -> 1; each layer vector minimizes sum |sigma_i^T y|^p over the sphere, with p chosen per layer by the true count (pp. 8-15).",
+  "assumptions": "Sampled signals; reference signal length 1.5N; tau = 1e-12; S spans R^d, p in ]0,1] for Theorem 3.1 (pp. 13-14).",
+  "proof_devices": [
+   "concavity of the objective along a chord through the optimum orthogonal to all active vectors, with the chord midpoint (1-eps) y_hat giving a contradiction (Theorem 3.1, pp. 13-14)",
+   "finite enumeration of (d-1)-subsets and kernels as an exact solution method (Corollary 3.2, p. 14)"
+  ],
+  "experiments": "Seven random piecewise signal families; basis built on one reference realization, tested on 100 independent signals; Daubechies order chosen per test signal (1-40); min/median SR with realization spread; timings 0.26-15 min (pp. 16-17).",
+  "positioning": "Extends Saucier's single-layer multiscale PCA (Pssv <= 2/3); positions against wavelet matching, matching pursuit, wavelet packets, PCA filter banks (pp. 7, 11).",
+  "writing": "Signal-processing style; concrete drawbacks listed (cost, O(N^2) storage, no fast transform) and admitted uncertainty on maximal SR (pp. 15, 20-21).",
+  "limits_future": "Costly basis computation, storage and transform; maximal SR not certain because step size 1 was never run; future: use surplus degrees of freedom for other objectives (pp. 15, 20-21).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Outside DFO: baseline given its best configuration per test instance, held-out realizations, but the currency is sparsity rather than evaluations.",
+    "pages": "p. 16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Structural theorem on optimal solutions replaces convergence analysis; no counterexamples.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "method": "new-pattern candidate: compare each model class with its own best configuration",
+    "relation": "evidence",
+    "note": "Daubechies order selected per test signal from 1-40.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "concavity on chords => finite candidate set",
+    "evidence": "Theorem 3.1 shows optima have d-1 active zero products; Corollary 3.2 turns the continuous problem into enumeration.",
+    "pages": "pp. 13-14"
+   }
+  ],
+  "transferable": [
+   "For objectives concave along chords once active terms are fixed (e.g. sum |a_i^T y|^p on the sphere), prove optima have d-1 active zeros by the chord-midpoint contradiction and solve by enumeration (pp. 13-14).",
+   "Build on one realization, test on 100 independent ones, give the baseline its best configuration per test instance, report min and median (p. 16).",
+   "Select a smoothing exponent from a geometric grid by the unsmoothed target metric on the full data (p. 15)."
+  ],
+  "coauthors": "A. Saucier",
+  "quotes": [
+   {
+    "text": "We emphasize that this orthogonality is a consequence of the optimization, as it is not built into the construction algorithm.",
+    "page": 18
+   },
+   {
+    "text": "In that sense, we are not certain that the maximum possible SR was obtained, which is not necessarily a drawback if the SR obtained for k > 1 is very high.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S074",
+  "year": "2013",
+  "title": "Snow water equivalent estimation using blackbox optimization",
+  "read_level": "full",
+  "contribution": "Formulates Hydro-Quebec's GMON snow-monitor placement as a MADS blackbox with a spiral feasibility repair and a public-testable surrogate, and introduces variable grouping/regrouping strategies whose final all-variable group restores the MADS convergence analysis, with the MVT rule best on the true function (text read: preprint of Feb 23, 2011).",
+  "problem_entry": "Industrial need (where to place gamma monitors to minimize kriging error) with a fragmented feasible domain and a proprietary blackbox runnable only at HQ (pp. 2-4).",
+  "key_idea": "Poll within groups of variables for speed, regroup by merge-only rules until one group holds all variables; repair infeasible locations inside the blackbox; order trial points by an error map or surrogate (pp. 5, 10-18).",
+  "assumptions": "f may be +infinity (failures); convergence inherited from MADS Theorem 3.12 under local Lipschitz continuity; D must positively span each group subspace (pp. 8, 10-11).",
+  "proof_devices": [
+   "refining directions dense only in the union of group subspaces (Theorem 3.1, p. 11)",
+   "explicit lost direction d=(0,0,0,1,1) for overlapping groups (p. 11)",
+   "finitely many merge-only regroupings reduce to plain MADS, inheriting its analysis (pp. 12, 14, 22)"
+  ],
+  "experiments": "18 instances (3 basins x m=5..10), NOMAD defaults, budget 1000 with reports at 250/500/1000, 12 combinations on the surrogate then 6 on the true function from the best surrogate point, per-instance table and performance profile; CS and MADS baselines only, single runs; means 4.98-5.13% (pp. 14-21).",
+  "positioning": "Builds on the group's parallel space decomposition (PSD-MADS), tsunami buoys and hydraulic-capture work; reviews SWE estimation and kriging network design in hydrology (pp. 2-3, 8, 22).",
+  "writing": "Application-first introduction; tables ordered by mean; openly reports that surrogate conclusions reversed on the true function (pp. 15, 20, 22).",
+  "limits_future": "Surrogate too simple to discriminate strategies; differences small; kriging with external drift planned (pp. 6, 20-22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Grouping and trial-point ordering are practical freedoms; merge-only regrouping recovers the MADS guarantee.",
+    "pages": "pp. 12, 14, 18, 22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Theorem 3.1 states what fixed groups guarantee, and an explicit direction shows the all-variables group cannot be dropped.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Unrelaxable location constraint enforced by an in-blackbox repair with failure beyond radius 15 rather than EB/PB.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Proprietary HQ blackbox gets a surrogate stand-in testable outside HQ; release not mentioned; rankings did not transfer.",
+    "pages": "pp. 3-8, 20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Three budget levels and a performance profile, but no other-family competitor and no replications.",
+    "pages": "pp. 15, 21"
+   },
+   {
+    "method": "Research Heuristic 10",
+    "relation": "evidence",
+    "note": "Garnier's 2010 MSc thesis holds the fuller strategy set.",
+    "pages": "p. 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged and used as rankers",
+    "evidence": "Trial points ordered by surrogate value before true evaluations.",
+    "pages": "p. 18"
+   },
+   {
+    "pattern": "eventually-static adaptation",
+    "evidence": "Finitely many merge-only regroupings, then plain MADS (eventually-full grouping).",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "scaled-down public twin of a proprietary blackbox",
+    "evidence": "Potential-well surrogate built because HQ tools cannot run outside HQ; constants tuned by expert visual comparison.",
+    "pages": "pp. 3, 6-8"
+   },
+   {
+    "pattern": "surrogate-to-truth reversal report",
+    "evidence": "INDIV STATIC best on the surrogate but never best and 7/18 worst on the true function, reported and explained.",
+    "pages": "pp. 20, 22"
+   }
+  ],
+  "transferable": [
+   "Restrict polls to structured variable groups but make regrouping merge-only so that one group eventually holds all variables and the standard analysis applies (pp. 12, 14).",
+   "Put a deterministic nearest-feasible repair (spiral over inf-norm radius 1..15) inside the blackbox and return failure only when the radius is exhausted (p. 5).",
+   "Select strategies by the mean over several budgets rather than the best final value, to favour robust ones (p. 17).",
+   "Develop on the surrogate, test a short list on the true function from the surrogate's best point, and report reversals (pp. 14, 18, 20)."
+  ],
+  "coauthors": "S. Alarie, V. Garnier, S. Le Digabel, L.-A. Leclaire",
+  "quotes": [
+   {
+    "text": "However restricting the exploration to these groups weakens the theoretical convergence analysis and may lead to practical difficulties by making it impossible to escape from an undesirable region by varying only a subset of variables.",
+    "page": 11
+   },
+   {
+    "text": "The usefulness of the regrouping strategies is not apparent from the numerical tests on the surrogate function.",
+    "page": 22
+   }
+  ]
+ }
+]

@@ -1,0 +1,351 @@
+[
+ {
+  "id": "S010",
+  "year": "2000",
+  "title": "A branch and cut algorithm for nonconvex quadratically constrained quadratic programming",
+  "read_level": "full",
+  "contribution": "A finite branch-and-cut algorithm for nonconvex QCQP that returns an eps_r-eps_z-optimal solution. It uses four parameterized RLT cut classes (one new: tangent planes to the paraboloid (x_i+gamma x_j)^2), a minimax error criterion to pick the best cut in each class, and switching variables delta_i(alpha) that make every cut valid tree-wide so branching structure can be reused. Two literature problems are certified to eps-optimality for the first time. [Read from OCR of the PDF, CRPC-TR99783-S Jan 1999; the text file is garbled.]",
+  "problem_entry": "QQP subsumes 0-1, bilinear, bilevel and LCP; feasibility is NP-hard and optimization strongly NP-hard, so large instances are 'probably out of reach'. The entry is incremental: RLT 'is not new, but is extended' by asking which cut in each family is best and by making cuts tree-wide valid (pp. 4-5).",
+  "key_idea": "Gate the node-local cuts (secant C_III, quadrant hulls C_IV) with dichotomy variables delta_i(alpha) in [0,1], so a cut is redundant when delta is free and active when delta is fixed. Choose each cut parameter by equalizing two monotone error terms, e.g. alpha=(sqrt2-1)x_i+(2-sqrt2)sqrt(v_i) (pp. 10-16, 18-19).",
+  "assumptions": "Only that finite bounds on all variables are obtainable (iterative RLT bounding, section 2.3). The solution concept is double-tolerance eps_r-approximate / eps_z-optimal (pp. 4, 9-10, 17).",
+  "proof_devices": [
+   "validity of the RLT relaxation by substituting v*=x*^2, w*=x*x* (Prop 2.1, p. 8)",
+   "minimax equalization: max(e1, alpha*e2) is minimized where the monotone increasing and decreasing error terms are equal, giving the root of a quadratic as a convex combination of endpoints (Props 4.1-4.5, pp. 13-16)",
+   "finite termination: each son linearizes an interval of length eps_r/u_i within tolerance, so there are finitely many cuts per variable (Thm 5.2, pp. 21-22)",
+   "global validity of cuts via switching variables that make constraints redundant when free (p. 11)"
+  ],
+  "experiments": "C++/CPLEX 4.0 on an Ultra-1/167. Worked HS71 reformulation: 69 nodes, 25 delta variables, 599 cuts, 7.18 s. Ablation with midpoint branching: 189 nodes, 1076 cuts. Seven literature problems (up to 16 variables and 24 quadratic terms): 7-2847 nodes, 0.65-7551 s, tolerance 1e-6 or 1e-5. The table includes a difficulty indicator (variables not at a bound). No competitor code; comparison is to published solutions (pp. 22-27).",
+  "positioning": "Neutral, technique-sorted survey of the RLT/linearization, generalized Benders and d.c. lines, with no criticism. Adopts Sherali-Tuncbilek notation. Claims first certified optima for problems 6-7, confirms the HS heuristic solutions of problems 3-4 and improves problem 6 (pp. 6-8, 27).",
+  "writing": "Enumerated First/Second/Third contribution paragraph, with the new cut class flagged (p. 5); one figure per error-minimization result (pp. 13, 17); short declarative observations on the tree (p. 24); low hedging.",
+  "limits_future": "Large QQPs probably out of reach (p. 4); difficulty tracks the number of variables not at their bounds (p. 26); reformulation choice not studied (p. 25). Future work: other problem classes and comparison with alternate methods (p. 27).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "A precisely stated double-tolerance guarantee with finite termination, but a single result with no ladder and no test of whether the assumptions are necessary.",
+    "pages": "pp. 17, 21-22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Currency is nodes, cuts and CPU seconds. Includes a self-ablation and comparison to published solutions, but no competitor run.",
+    "pages": "pp. 23, 26-27"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Industrial-origin instances (Haverly pooling, alkylation, membrane separation) reformulated with the full data of the largest printed; early, non-blackbox form.",
+    "pages": "pp. 25-26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimax error equalization for parameter choice",
+    "evidence": "Every cut parameter is chosen by equalizing two monotone error terms, with a closed form and a one-paragraph proof.",
+    "pages": "pp. 13-16"
+   },
+   {
+    "pattern": "globally valid local cuts via switching variables",
+    "evidence": "delta_i(alpha) makes node cuts redundant when free, so the tree reuses one model and existing branching structure.",
+    "pages": "pp. 11, 18-19, 21"
+   },
+   {
+    "pattern": "certify or improve published solutions of literature instances",
+    "evidence": "Confirms HS solutions of problems 3-4, improves problem 6, and gives first eps-optimality for problems 6-7; also seen in S015 (c01).",
+    "pages": "p. 27"
+   }
+  ],
+  "transferable": [
+   "Gate node-specific cuts with a [0,1] switching variable so they are valid tree-wide and the branching structure can be reused (pp. 11, 21).",
+   "Choose a design parameter that trades two monotone error terms by equalizing them; the proof is one paragraph and yields a closed form (p. 13).",
+   "Report a problem-difficulty indicator next to performance numbers (here, the number of variables not at a bound, borrowed from prior work) (pp. 6, 26).",
+   "Ablate your own heuristic choice on the showcase instance and report structural counts, not only time (p. 23)."
+  ],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard",
+  "quotes": []
+ },
+ {
+  "id": "S011",
+  "year": "2001",
+  "title": "Pattern search algorithms for mixed variable programming",
+  "read_level": "full",
+  "contribution": "Extends Lewis-Torczon GPS to mixed continuous and categorical variables. Local optimality is defined relative to a user-specified neighbor map N. The GMVP algorithm (continuous poll, discrete-neighbor poll, and a xi-triggered extended poll) provably reaches limit points satisfying first-order conditions in the continuous variables and optimality relative to N. A costlier strong extended poll gives zero gradients at tied neighbors. Demonstrated on a thermal-insulation design where the number of shields is a variable.",
+  "problem_entry": "Categorical variables in engineering blackboxes have numeric codes without meaning, so continuous relaxation and branch and bound are unavailable (the simulator cannot take a relaxed input) and local optimality must be user-defined. The anchor is a collaborator's thermal-insulation problem, where categorical choices gave a 65% better design (pp. 1-2, 4).",
+  "key_idea": "Keep GPS's free Search and rigid Poll, and add polling over user-defined discrete neighbors plus an extended continuous poll around any neighbor within xi of the incumbent. N and xi are exposed as priced 'knobs' that buy stronger local optimality with more evaluations (pp. 3, 5-8, 10-11).",
+  "assumptions": "(A1) compact level set L_xi(x0); (A2) f is C^1 in the continuous variables for fixed discrete ones; bounds on the continuous variables; N continuous along converging sequences (pp. 4, 10). Analysis uses the mean value theorem, not Clarke calculus.",
+  "proof_devices": [
+   "rational-tau integer-lattice argument for liminf Delta_k = 0, adapted with the finite number of discrete values dmax (Lemma 4.1, Thm 4.2, p. 12)",
+   "focus on unsuccessful iterations as the 'key to our simpler proof' (p. 11)",
+   "contradiction via continuity of the neighbor map to show f(x_hat) <= f(y) for y in N(x_hat) (Thm 4.4, p. 14)",
+   "mean-value-theorem plus positive-spanning-set lemmas for interior and boundary limit points (Lemmas 4.5-4.6, pp. 14-15)",
+   "sufficient-decrease-type lemma plus telescoping-sum contradiction for the strong extended poll (Lemmas 4.10-4.11, Thm 4.12, pp. 16-18)"
+  ],
+  "experiments": "Toy problem with 2 continuous variables and 1 binary: cycles analyzed, the cheap vs strong extended poll separated, and the strong version reaching the global minimizer (pp. 18-20). Thermal insulation: 4 runs (xi 1% or 5%, with or without insulator knowledge pruning N); objective vs evaluations; evaluations reported as to-find plus to-certify (2639+2083=4722; 2345+1861=4206; 13329 vs 10053); no competitor, single runs (pp. 20-22; digits from PDF OCR).",
+  "positioning": "Continues Torczon and Lewis-Torczon and claims shorter proofs (pp. 2, 11). Concedes branch and bound where it applies (p. 2). Relies on the author's own tightness TR for the negative results (p. 15). Booker et al. surrogates are the intended Search content (p. 11).",
+  "writing": "User-facing: poses the question of what local solution the user wants (p. 3) and names the controls knobs (pp. 3, 8). Discusses the pejorative connotation of 'unsuccessful' iterations without imposing new terms (p. 11). Admits that counterexamples to the xi trade-off are easy (p. 8).",
+  "limits_future": "Optimality only relative to the user's N; stronger guarantees cost evaluations; no lim ||grad f|| = 0 and no second-order conditions (pp. 3-4, 15-16). Future work: exploit varying mesh reduction for speed (p. 11).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The Search can be any finite strategy, with the Poll as failsafe; the Search determines global quality in practice and the Poll guarantees convergence.",
+    "pages": "pp. 5-6, 11"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Conditions (2.1)-(2.5) form a ladder in which stronger rungs cost more polling; a separating example is included and the tightness TR is cited.",
+    "pages": "pp. 4, 15, 18-20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Early semantics-first move for variables rather than constraints: categorical inputs get a neighbor map because the simulator cannot accept relaxed values; structural constraints are encoded in N.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "A real collaborator problem (Kokkolaras), but not released as an artifact.",
+    "pages": "pp. 4-5, 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "user-defined optimality notion as a priced knob",
+    "evidence": "N and xi let the user pay evaluations for stronger local optimality; this prefigures CatMADS neighborhoods.",
+    "pages": "pp. 3, 8, 11"
+   },
+   {
+    "pattern": "report cost-to-find vs cost-to-certify",
+    "evidence": "Evaluations to find the best point and additional evaluations to show it is a local mesh optimizer are reported separately.",
+    "pages": "p. 22"
+   },
+   {
+    "pattern": "unify by recovering prior theorems as corollaries",
+    "evidence": "GMVP reduces to Lewis-Torczon when nd=0, with shorter proofs claimed; also in S002 and S005.",
+    "pages": "pp. 2, 11"
+   }
+  ],
+  "transferable": [
+   "Define local optimality for non-metric variables via a user neighbor map plus a continuity condition on the map, and prove optimality relative to it (pp. 3-4).",
+   "Add a threshold-triggered extended poll that buys a stronger guarantee only where a discrete neighbor is nearly as good (p. 8).",
+   "Separate evaluations-to-find from evaluations-to-certify when reporting runs (p. 22).",
+   "State a cheap result, a costlier stronger result, and an example that separates them (Prop 4.9, Thm 4.12, section 5.1)."
+  ],
+  "coauthors": "J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "It would be surprising if one could run the simulation code with a continuous variable where the simulation expects a discrete input",
+    "page": 2
+   },
+   {
+    "text": "which is as it should be for an algorithm that uses only function values and no derivatives",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S002",
+  "year": "2002",
+  "title": "Analysis of generalized pattern searches",
+  "read_level": "full",
+  "contribution": "A simpler, unified convergence analysis of Torczon and Lewis-Torczon GPS applied to the barrier function f_Omega = f + psi_Omega. It covers discontinuous and extended-valued f, and gives a seven-rung hierarchy of optimality conditions, from lower semicontinuity to global C^1, that depends on local smoothness at the limit of a refining subsequence and on the directions polled. Earlier results are recovered as corollaries.",
+  "problem_entry": "GPS with surrogates works on engineering problems where evaluations fail (about 66% of the time on a helicopter rotor design) and f is not even continuous, yet existing theorems assume C^1. The goal is to explain the success under practical hypotheses (pp. 1-2).",
+  "key_idea": "Change the lens, not the algorithm: treat constraints and failures as f = +inf, prove existence of refining subsequences without smoothness, then use Clarke's lim-sup difference-quotient definition, which failed polls satisfy directly, to get f°(x_hat; d) >= 0 on directions polled infinitely often (pp. 2, 8-10).",
+  "assumptions": "A1 finite f_Omega(x0); A2 rational constraint matrix; A3 iterates in a compact set (a bounded level set suffices, compactness not assumed). All smoothness is local at the limit point; direction rules must conform to Omega for the linearly constrained results (pp. 5-6, 13).",
+  "proof_devices": [
+   "mesh-separation lemma min ||u-v|| >= Delta_k/||G^-1|| from integrality of Z (Lemma 3.2, p. 7)",
+   "rational tau = p/q puts all iterates on one integer lattice, so liminf Delta_k = 0 by contradiction (Prop 3.4, p. 8)",
+   "refining subsequence of mesh local optimizers (Def 3.5, Thm 3.6, p. 8)",
+   "Clarke derivative lim sup bounded below by failed-poll difference quotients (Thm 3.7, p. 9)",
+   "positive spanning set plus strict differentiability gives grad f = 0 (Thm 3.9, p. 10)",
+   "seven-rung hierarchy (i)-(vii) summarizing conclusions per smoothness level (p. 12)",
+   "one-dimensional or two-dimensional examples per rung: x^2(2+sin(pi/x)), Hiriart-Urruty-Lemarechal convex kink function, |x1|+|x2| with ill-chosen D (pp. 9-11)"
+  ],
+  "experiments": "none (analytic examples only; cites Boeing surrogate-GPS efficiency and an unpublished diagnostic plot, pp. 2-3)",
+  "positioning": "Unifies and simplifies Torczon and Lewis-Torczon, with previous results as corollaries. Treats Coope-Price as a trade-off that shifts the burden to the implementation. Ends by sorting routes to general constraints: the barrier with a finite D is insufficient, so filter GPS, augmented Lagrangian or Coope-Price (pp. 1, 7, 11-14).",
+  "writing": "Explicit contribution sentence in the abstract; flags counter-intuitive consequences ('stationary points are the least interesting'); disowns overclaiming (p. 11); includes known proofs for the sake of simplification (p. 5); every theorem is followed by discussion or an example.",
+  "limits_future": "Results hold only for directions used infinitely often; a finite D makes the barrier inadequate for general constraints; nonstationary limit points can exist; no rates. Future work: the filter paper (pp. 9, 12, 14).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Primary source: hierarchy (i)-(vii), results 'sharp in that they predict the behavior', and examples where the new results apply but earlier ones do not.",
+    "pages": "pp. 1, 3, 9-12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The Search is 'a key point', a theoretical liability that must be retained; the analysis is independent of the Search if it is finite and on the mesh.",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Failed evaluations as f = inf and constraints as an indicator barrier; concluding that the barrier cannot serve general constraints seeds the relaxable/unrelaxable split.",
+    "pages": "pp. 2, 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "unify by recovering prior theorems as corollaries",
+    "evidence": "Torczon's and Lewis-Torczon's results recovered as Corollaries 3.11, 3.12 and 3.16; also in S005 (pp. 11, 19) and S011 (p. 2).",
+    "pages": "pp. 1, 11-13"
+   },
+   {
+    "pattern": "rename terminology to match what the proof uses",
+    "evidence": "'successful/unsuccessful' replaced by 'improved mesh point / mesh local optimizer' because the unsuccessful iterations carry the analysis; also S011 p. 11, S005 pp. 5-7.",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Model constraint violation and evaluation failure as +inf so several constrained variants collapse into one extended-valued analysis (p. 2).",
+   "Match your algorithm's failure certificate (nonnegative difference quotients) to a generalized derivative defined as a lim sup of such quotients; the main theorem then follows from the definition (pp. 9-10).",
+   "Structure results as existence without assumptions, then stronger conclusions under stronger local assumptions, summarized in a numbered hierarchy (pp. 2, 12).",
+   "Give a small example per rung where the new result applies and the old theory does not (pp. 9-11)."
+  ],
+  "coauthors": "J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "Regardless, this freedom must be retained.",
+    "page": 3
+   },
+   {
+    "text": "Again, we emphasize that GPS is a directional method, and the choice of directions is crucial.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S005",
+  "year": "2004",
+  "title": "A pattern search filter method for nonlinear programming without derivatives",
+  "read_level": "full",
+  "contribution": "Filter-GPS for general constrained blackbox optimization. It keeps the Search/Poll division, accepts steps unfiltered in (h_X, f) with only simple decrease, keeps linear constraints by barrier, and polls around either the feasible or the least-infeasible incumbent. The analysis gives Clarke-type conditions on the cone of refining and limit directions, stronger for h than for f, with examples showing sharpness and limitations and a Boeing wing-planform illustration.",
+  "problem_entry": "Fletcher-Leyffer filters need derivatives, sufficient decrease and Fritz John points; Lewis-Torczon augmented Lagrangian GPS needs C^2, a full-rank Jacobian, penalties and multipliers. Blackboxes fail and are noisy, so the paper accepts weaker guarantees and drops all of these requirements (pp. 1-3).",
+  "key_idea": "Replace GPS's decrease test by filter acceptance on (h_X, f). The filter holds only infeasible points and the best feasible point is kept separately; the mesh is the union of meshes around all evaluated points; the poll center is either incumbent; h = ||C_+||_2^2 (pp. 5-10).",
+  "assumptions": "All trial points in a compact set; X a full-dimensional polyhedron with nondegenerate constraints; local Lipschitz or strict differentiability at the limit; no constraint qualification. The authors concede that h encodes weights and that the Lipschitz framing is 'beside the point' for practice (pp. 1, 3, 11-12).",
+  "proof_devices": [
+   "Clarke derivative with perturbed direction w->v (Lemma 5.3, pp. 12-13)",
+   "monotone-sequence lemma: normalized limit directions of a nonincreasing-value sequence have g°(x_hat; v) >= 0 (Lemma 5.5, pp. 13-14)",
+   "refining directions R_g(K) from ordered pairs of polled points and limit directions L_g(K) (Def 5.7, Thm 5.9, pp. 15-16)",
+   "generalized-gradient formula showing h1 = ||C_+||_1 is rarely strictly differentiable (Prop 5.6, pp. 14-15)",
+   "polar-cone optimality: -grad f in the polar of cc(R_f U L_f), KKT when it contains the contingent cone (Prop 6.7, p. 19)",
+   "anti-stalling result: a poll center with grad f != 0 cannot stay a mesh isolated filter point forever (Prop 6.8, p. 20)"
+  ],
+  "experiments": "Four purpose-built illustrations: (1) Lewis-Torczon LP where the barrier and an l1 penalty (constant >= 3) stall but the filter converges; (2) l1 vs squared l2 violation, where l1 stalls; (3) a limitation example showing Prop 6.7 is sharp; (4) Boeing planform with 17 variables and 13 constraints, started from a 200-point OA-LH kriging surrogate, first feasible at evaluation 58, 117 evaluations, filter snapshots. Single run, no competitor (pp. 20-27).",
+  "positioning": "Restates filter dominance in multiobjective terms rather than criticizing it; defends weak filter theory with the quasi-Newton history; treats augmented Lagrangian as a legitimate alternative ('we do not claim that our method is to be preferred for every problem'); credits Boeing practitioner Paul Frank (pp. 2, 5-6, 10-11, 27).",
+  "writing": "Feature bullet list (pp. 2-3); each example announced with the point it makes (p. 20); open admissions of weak results (pp. 20, 24); the Search is deliberately under-described with the reason given (p. 4); closing Discussion on how the method is really run (p. 27).",
+  "limits_future": "f-guarantees weaker than h-guarantees; KKT-type results are non-constructive; a feasible descent direction can be missed; a finite number of poll directions is essential, so no dense set of directions (p. 27, the MADS seed). Future work: a multiobjective GPS (pp. 5, 17, 19, 24-25, 27).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Explicit linear constraints by barrier (psi_X) vs blackbox nonlinear constraints by filter on h; variable elimination via linear equalities; failures as inf; l1 vs squared l2 violation chosen by analysis and example.",
+    "pages": "pp. 1-2, 6-7, 14-15, 22-24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Preserving Search/Poll is 'a key feature'; the Poll is rigidly defined for convergence while the Search yields the largest improvements; heuristics fit inside a rigorously convergent algorithm.",
+    "pages": "pp. 1, 3-4, 10, 22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Smoothness-dependent conditions, sharpness examples, and a self-admitted weak-result example. The finite-direction limitation stated here is textual evidence for the MADS origin that SKILL.md marks as inferred.",
+    "pages": "pp. 1, 20-27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Industrial run reported in evaluations with filter snapshots, but a single run and no competitor.",
+    "pages": "pp. 25-26"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Pre-NOMAD dissemination: Abramson's NOMADm MATLAB implementation and use inside Boeing Design Explorer.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "limitation example published alongside the theorem",
+    "evidence": "Section 7.3 exploits the algorithm's freedom to produce a weak outcome, stated openly ('our point is that it can happen').",
+    "pages": "pp. 20, 24-25"
+   },
+   {
+    "pattern": "unify by recovering prior theorems as corollaries",
+    "evidence": "Reduces to linearly constrained GPS and to the results of S002 when m = 0.",
+    "pages": "pp. 11, 19"
+   }
+  ],
+  "transferable": [
+   "Keep the best feasible point outside the filter so the filter holds only infeasible points; this avoids blocking entries and allows crossing infeasible ridges (p. 6).",
+   "Offer two poll centers (feasible and least infeasible) and prove results for any selection rule (pp. 8-9, 22).",
+   "Reject trial points before full evaluation using explicit constraints and partial constraint sums (p. 9).",
+   "Use squared l2 violation rather than l1, and show the difference on a 2-D LP where l1 stalls (pp. 14-15, 22-24).",
+   "Close with a Discussion of how the method would actually be run (which Search, more directions, alternating centers) (p. 27)."
+  ],
+  "coauthors": "J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "The flexibility of our theory ensures that such heuristics can be part of a rigorously convergent algorithm.",
+    "page": 22
+   },
+   {
+    "text": "We admit that the flexibility in the choice of polling directions is exploited to lead to a weak result, but our point is that it can happen.",
+    "page": 24
+   }
+  ]
+ },
+ {
+  "id": "S025",
+  "year": "2004",
+  "title": "Convergence results for generalized pattern search algorithms are tight",
+  "read_level": "unreadable",
+  "contribution": "UNREADABLE as named. The text file is garbled, and the PDF is the precursor CRPC-TR98779 (Nov 1998, 12 pp., 3 examples), not the 2004 journal article (22 pp.; SKILL.md says 6 examples). The TR, read in full via OCR, shows with three small C^1 examples that Torczon's GPS results cannot be strengthened: no second-order conditions (convergence to a maximizer), no lim ||grad f|| = 0 (an accumulation point with nonzero gradient), and infinitely many accumulation points even under Torczon's stronger conditions.",
+  "problem_entry": "[1998 TR] Can Torczon's liminf ||grad f|| = 0 (and lim under stronger conditions) be strengthened without new assumptions? (TR pp. 2-4)",
+  "key_idea": "[1998 TR] Exploit the algorithm's legal freedoms (pattern, Search order, lambda, theta, ties counted as failures) on a minimal C^1 function defined where the iterates go, extended only to make the level sets compact (TR pp. 4-5, 9-10).",
+  "assumptions": "[1998 TR] f is C^1 with compact level sets (via (x^2+y^2-1)^2 or (y+-3)^6 extensions); examples 1-2 are also valid for bound constraints (TR pp. 4-5).",
+  "proof_devices": [
+   "[1998 TR] piecewise objective plus compactifying extension outside the visited region (pp. 4-5)",
+   "[1998 TR] ties exploited so polls fail and iterates never leave a maximizer (p. 5)",
+   "[1998 TR] cycles with closed-form iterates proved by induction (Prop 3.1 pp. 7-8; Prop 4.1 p. 11)",
+   "[1998 TR] exhaustive tables of trial values certifying each step (Tables 1-5, pp. 7-12)"
+  ],
+  "experiments": "none",
+  "positioning": "[1998 TR] Sharpens rather than refutes Torczon (1997) and Lewis-Torczon; 4 references; practical hedge that the Search usually prevents such behavior (TR pp. 3, 5, 12). Cited by S002 (TR98-24; S002 supplements its examples) and S011; S005 cites the GERAD G-2002-56 version.",
+  "writing": "[1998 TR] Single contribution sentence in the introduction; section titles state the negative results; no conclusion section (TR pp. 3-4, 12).",
+  "limits_future": "[1998 TR] No repair proposed; the repairs appear in S002 and S011. The journal version's six examples were not read.",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "[1998 TR] Three minimal counterexamples remove three candidate strengthenings.",
+    "pages": "TR pp. 3-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "Contradicts SKILL.md's signature-work Origin row ('Follows the 2003 GPS analysis'): the counterexamples date from November 1998 and are cited by S002 and S011, so they came before the GPS analysis.",
+    "pages": "TR p. 2; S002 pp. 3, 14; S011 pp. 15, 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "counterexamples before the theory",
+    "evidence": "The 1998 TR probes the limits of Torczon's theorem; the 2002 reanalysis (S002) cites it and supplements its examples.",
+    "pages": "TR p. 2; S002 p. 3"
+   }
+  ],
+  "transferable": [
+   "[1998 TR] To show a convergence result is tight, choose the algorithm's free parameters adversarially but legally, and define the function only where iterates go plus a smooth compactifying extension (pp. 4-5).",
+   "[1998 TR] Present counterexample runs as cycles with closed-form iterates proved by induction, plus a table of all trial values (pp. 6-12)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": []
+ }
+]

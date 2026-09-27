@@ -1,0 +1,122 @@
+[
+ {
+  "id": "S213",
+  "year": "2003",
+  "title": "Pattern search algorithms for mixed variable general constrained optimization problems",
+  "read_level": "full",
+  "contribution": "Abramson's Rice PhD thesis (Aug 2002; co-chairs Dennis and Audet) merges Audet–Dennis filter GPS and mixed-variable GPS into FMGPS, the first pattern search with a convergence hierarchy for categorical-variable problems with general nonlinear constraints. It adds D-regularity to weaken smoothness hypotheses, gradient pruning of poll directions (D={-1,0,1}^n prunes to one direction), the MATLAB solver NOMADm and an extended thermal-insulation design application (pp. 168-169).",
+  "problem_entry": "Categorical variables whose values the simulator rejects outside a list (so discreteness must hold at every iterate), which may change constraints and problem dimension. Functions may be discontinuous or fail to return a value. MINLP needs relaxation and convexity, and heuristics lack theory (pp. 14-16, 24-25, 34-35).",
+  "key_idea": "One algorithm class that reduces to filter GPS without categorical variables and to MGPS without nonlinear constraints. Its parts: a user neighborhood map N on the mesh; an extended poll with f/h triggers and a temporary local filter; a capped filter holding only infeasible points; any extra exploration counted as Search (pp. 67-68, 76-79, 97-104).",
+  "assumptions": "Extended-valued f and C with no global continuity. A1 compact iterates, A2 D=GZ with tangent generators, A3 conforming directions, A4 neighbors on the mesh, N continuous at the limit. Results are tied to local lsc, continuity, Lipschitz or differentiable+D-regular. Under the filter, f results need an extra hypothesis (filtered by the poll center infinitely often), made automatic by choosing the best feasible poll center (pp. 62-63, 82, 111-116).",
+  "proof_devices": [
+   "Clarke bound f°(x̂;(d,0)) ≥ limsup of failed-poll quotients (f(x_k+Δ_k d)-f(x_k))/Δ_k ≥ 0 along a refining subsequence (Thm 5.14, p. 89)",
+   "Torczon lattice argument: rational τ=p/q and D=GZ put all iterates on a translated integer lattice, so liminf Δ_k = 0 (Thm 5.9, pp. 85-86)",
+   "D-regularity lemma: differentiable + D-regular on a positive spanning set implies regular, hence strictly differentiable if Lipschitz (Lemma 3.18, Thm 3.19, pp. 52-53)",
+   "continuity of the set-valued neighbor map N to pass discrete neighbors to the limit (Def 5.2, Thm 5.12, pp. 77, 87-88)",
+   "distance-sweep argument giving infinitely many limit points of extended-poll centers and J_k → ∞ (Thm 5.18, pp. 92-93)",
+   "contradiction through the strong extended poll (Thm 5.19, pp. 94-95)",
+   "non-stalling via an unfiltered trial point built between filter entries (Thm 6.25, p. 117)",
+   "prune-to-singleton: D(v) = {d̂} ∪ A(v) positively spans ℝ^n for D={-1,0,1}^n, two-case proof (Thm 8.8, pp. 152-153)",
+   "positive-basis pruning bound from v and -v (Prop 8.3, p. 148)",
+   "necessity examples: ||x||_∞ stall (Ex 4.7, pp. 64-65), D-regular but not regular (Ex 3.20, p. 53), conjecture refuted (Ex 8.7, p. 152), dense mesh and irrational τ cited from [6] and [4] (pp. 86-87)"
+  ],
+  "experiments": "Thermal insulation with NOMADm (Δ0=10, stop at Δ≤0.15625, triggers 1%/5%). First, published designs are reproduced and discrepancies explained. Then constraints are added in stages: partial model 24.551 and full model 23.768 against 53.2 W/cm (Hilal-Eyssa). Plots of incumbent vs evaluations and filter snapshots (pp. 134-142). CUTE: 20 problems (text says 18) × 8 poll strategies (text says seven), no Search, 1e-4 or 50,000-evaluation cap, f and gradient evaluations counted, perturbed restarts for suspiciously short runs, failures shown (pp. 161-167, 186).",
+  "positioning": "Literature sorted by method family, each ending with a suitability verdict. MINLP and heuristics are ruled out as solvers, but heuristics are placed in the Search step. Critique by mechanism of Lewis-Torczon augmented Lagrangian (no penalty update, no numerics), Coope-Price (must assume mesh → 0) and Hart (only probabilistic analogs). The thesis claims to generalize Torczon, Lewis-Torczon and Audet-Dennis (pp. 24-42, 121, 168).",
+  "writing": "Each chapter states what is restated vs new, and theorems are tagged by origin (due to Audet-Dennis, reworded, new assertion). A sharpness example follows its theorem, and bullet hierarchy summaries close the theory chapters. Limits are flagged plainly (Unfortunately, p. 111; about as close as we can come, p. 96). There are 11 contribution bullets. Some citation and count slips (pp. 61, 74, 162, 161 vs 166-167).",
+  "limits_future": "Filter GPS cannot ensure KKT, needs extra hypotheses and may stall by alternation; derivatives with nonlinear constraints remain open; NOMADm is slow. The ledger lists decreasing h_max, infinitely many directions for KKT, random poll directions, finite differences, off-mesh Search, SA hybrids, GPS computational studies, an engineering blackbox test suite, and C/C++/AMPL interfaces (pp. 117-118, 142, 170-175).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Search is any finite strategy on the mesh, including none, with no effect on theory. Heuristics and polling around other filter points are assigned to the Search. A random 2-point Search finds the global minimizer in Ex 8.19.",
+    "pages": "pp. 39, 42, 58, 68, 135, 163"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Ch. 8 modifies the Poll itself (gradient pruning) and re-proves the first rung for directions evaluated or pruned. The cost of mapping Search points to the mesh is named as a limitation.",
+    "pages": "pp. 144, 160-161, 164, 173"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Linear constraints are never violated (points outside X not evaluated); nonlinear constraints are relaxable via h in a capped filter; categorical discreteness holds at every iterate; failed evaluations are named; equalities are eliminated by the modeler.",
+    "pages": "pp. 14-15, 56-57, 66-67, 130-131"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "The constraint class is set by form (linear vs nonlinear), not by relaxability. Hidden constraints are handled only as f = ∞.",
+    "pages": "pp. 16, 56-57"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Hierarchy of results tied to local smoothness, D-regularity weakening, necessity examples, extra hypotheses surfaced, open nonsmooth question. Audet's tightness examples cited from a 1998 report (TR98-24).",
+    "pages": "pp. 3, 52-55, 64-65, 86-87, 95-96, 111-116, 121-123, 152, 171, 176"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "A joint Audet application extended with realistic stress/mass/contraction constraints; MATLAB source of all problems online; explicit call for an expensive-blackbox engineering test suite. No executable I/O contract.",
+    "pages": "pp. 127-132, 175, 186"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Counts f and gradient evaluations under a fixed cap and uses perturbed restarts for fairness, but compares only within the GPS family, per-problem tables, no profiles. The thesis notes the absence of GPS computational studies.",
+    "pages": "pp. 162-167, 175"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMADm implements all thesis algorithms (cache, LH search, user Search and surrogate hooks, filter plots, derivative options). The instrument also constrains results (refinement schedule not reproducible, too slow for more intercepts). C/C++/AMPL interfaces planned.",
+    "pages": "pp. 124-125, 135-137, 142, 175"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reduction-to-prior-cases design",
+    "evidence": "Every new rule collapses to the earlier algorithm's rule when the new feature is absent, so earlier theorems become corollaries (FMGPS → MGPS / filter GPS → GPS).",
+    "pages": "pp. 69, 97, 116, 121, 168"
+   },
+   {
+    "pattern": "user-defined neighborhood defines optimality",
+    "evidence": "For categorical variables, local optimality is relative to a user map N(x) with a continuity condition, with an explicit cost/globality trade-off in choosing N. Later forms: CatMADS, Workflow C step 2.",
+    "pages": "pp. 76-78, 133"
+   },
+   {
+    "pattern": "derivatives prune, not steer",
+    "evidence": "Exact, approximate (sign-accurate) or partial derivatives delete poll directions; the richer set {-1,0,1}^n makes pruning maximal (one direction).",
+    "pages": "pp. 144-156"
+   },
+   {
+    "pattern": "future-work ledger with named obstacles",
+    "evidence": "Each open problem names its blocking mechanism (e.g., KKT under a filter needs infinitely many directions; decreasing h_max for blocking entries). Several match later MADS, PB and OrthoMADS work listed in SKILL.md (reader's link).",
+    "pages": "pp. 170-175"
+   }
+  ],
+  "transferable": [
+   "Design each new trigger or acceptance rule to reduce to the old rule when the new feature is absent; prove only the new cases (pp. 97, 116).",
+   "First rung of any direct-search ladder: f°(x̂;d) ≥ limsup of failed-poll quotients along a refining subsequence (p. 89).",
+   "With a known gradient sign, poll from {-1,0,1}^n and evaluate only d̂ = sign(-∇f); sign-correct large components of an approximate gradient suffice (pp. 149-156).",
+   "List the algorithmic settings that make an extra hypothesis automatic, as in Remark 6.23 (p. 116).",
+   "Filter bookkeeping: cap h_max and keep the feasible incumbent out of the filter to avoid blocking entries (p. 67).",
+   "Classify any extra exploration as Search so the convergence proof is untouched (p. 68).",
+   "Validate a model by reproducing published designs and explaining discrepancies, then add constraints in stages to price each group (pp. 135-139).",
+   "Eliminate a design variable by monotonicity of the objective plus activity of the bounding constraint at the optimum (pp. 130-131).",
+   "Rerun suspiciously short benchmark runs from a perturbed start before crediting a strategy (p. 163)."
+  ],
+  "coauthors": "Sole author M. A. Abramson (thesis dated August 2002); committee co-chairs J. E. Dennis Jr. and C. Audet (p. 1). Ch. 8 is joint with Audet and Dennis (TR02-10, pp. 143, 176). The batch list names C Audet as author; he is co-chair, not author.",
+  "quotes": [
+   {
+    "text": "in which any finite search strategy (including none) on the mesh may be employed, without adversely affecting the convergence theory.",
+    "page": 39
+   },
+   {
+    "text": "It is not clear that guaranteed convergence is even possible with a filter pattern search approach, since being able to generate the tangent cone at the limit point would typically require the algorithm to use an infinite number of directions.",
+    "page": 170
+   }
+  ]
+ }
+]

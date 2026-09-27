@@ -1,0 +1,132 @@
+[
+ {
+  "id": "S070",
+  "year": "1997",
+  "title": "Optimisation globale structurée: propriétés, équivalences et résolution",
+  "read_level": "full",
+  "contribution": "PhD thesis that links structured global-optimization classes (MIP0-1, disjoint bilinear, BIL, concave QP, QQP, GLCP, linear maxmin, bilevel) through proven reformulations. It uses these links to prove that boundedness of disjoint bilinear programs is strongly NP-complete (PROHIBITION), to build a finite exact algorithm exploiting two symmetric maxmin reformulations, to introduce embedded algorithms (Beale-Small MIP B&B embedded in the Hansen et al. BLP algorithm), to enumerate all extreme Nash equilibria of bimatrix games up to 29x29 and 700x5, and to design a branch-and-cut for nonconvex QCQP with four minimax-error cut classes, applied to eight literature applications including Graham's octagon.",
+  "problem_entry": "Field-level diagnosis: class-specific methods developed in parallel although classes share difficulty, so transfer tools (not only solutions) across classes via reformulations (pp. 19-20). Per-chapter gaps: BILD methods need compactness (p. 53); NP-equivalence hides practical difficulty differences (pp. 86-87); equilibrium enumeration limited to ~8x8 (pp. 114-116); QCQP generality and hardness (p. 129); heuristic answers of unknown precision (p. 173).",
+  "key_idea": "A reformulation is a lens: study which properties survive it and move optimality conditions, bounds and tests across classes. Al(BILD) branches on complementarity of both symmetric maxmin reformulations for a balanced tree (pp. 45, 70-78); EEE specializes it to games (pp. 116-122); Al(QQP) refines outer approximations with cuts whose points minimize the maximum weighted error (pp. 136-156).",
+  "assumptions": "Ch. 2: no compactness of feasible set or optimal value (p. 85); cuts assume X polytope and no PROHIBITION (p. 68). Ch. 1: big-L reformulations need L large enough, with numerical risk (p. 37). Ch. 4: no nondegeneracy needed, simplex vertices (pp. 113, 119). Ch. 5: minimization, no equalities in X, finite positive bounds on all variables, epsilon_r-epsilon_z-optimality target (pp. 130, 152-153).",
+  "proof_devices": [
+   "reformulation defined by polynomial-time transfer of an optimal solution, not by polynomial transformation (Def. 1.2, p. 33)",
+   "integrality forced through a lower level: follower sets v = min{u, 1-u}, leader imposes v = 0 (Props 1.3, 1.11, pp. 35, 42)",
+   "counterexamples to tempting shortcuts: penalized GLCP->BLP fails for every finite L (Ex. 1.12, p. 43); large-L bounding box cannot replace the unboundedness test (p. 84)",
+   "strong NP-completeness of PROHIBITION by reduction from KERNEL (Thm 2.2, pp. 56-58)",
+   "normalization 1'u <= 1 turns a cone-unboundedness test into a bounded bilinear problem with a strict-positivity criterion (Prop. 2.4, pp. 58-59)",
+   "necessity by vertex-plus-ray decomposition of diverging sequences (Thm 2.8, pp. 61-62) with a 1-D example showing vertex-only tests are insufficient (Ex. 2.6, p. 60)",
+   "one-directional local-optimality transfer, counterexample to the converse, stronger hypothesis restoring it (Props 2.9, 2.11, Ex. 2.10, pp. 63-65)",
+   "gamma-extension through an inner minimization reduces to one optimization problem / an LP (Lemma 2.13, Cor. 2.14-2.15, pp. 67-69)",
+   "finiteness by counting variables fixed along each branch plus implicit enumeration of bases via complementarity (Thm 2.20, p. 78; Thm 4.1, pp. 120-122)",
+   "embedding proof by induction on the subproblem index, matching algorithms step by step and showing the richer algorithm's extra steps are redundant (Thm 3.6, pp. 96-97)",
+   "extreme point characterized by a singleton set of tight constraints (Thm 4.1, pp. 120-121)",
+   "minimax error equalization to choose linearization points, root selected by intermediate-value argument (Props 5.14-5.17, pp. 147-152)",
+   "finite convergence to epsilon-optimality because each child linearizes an interval of length epsilon_r/u_i acceptably (Thm 5.19, pp. 155-156)"
+  ],
+  "experiments": "C/CPLEX 2.1 and C++/CPLEX 4.0 on a SPARC SS20 (pp. 79, 125, 167-168). Ch. 2: generators with known optima counts, Floudas-Pardalos concave QPs (optimality of ST and Phillips-Rosen solutions confirmed), random sets of 10 instances with mean/std and real density, same-machine comparison vs a tuned Al(BLP) (about 14-80x more nodes where both rows are readable), sizes to 200+200 variables, ~30% time saved by root-only monotonicity relations, Thieu comparison declined (pp. 79-85). Ch. 4: Winkels' 6x2 example reveals an omitted equilibrium; random games to 29x29 and 700x5 with log-time plot (pp. 125-127). Ch. 5: 8 printed reformulated applications, two runs (cold vs optimum supplied), octagon certified to 4 decimals in 110 h by region exclusion (pp. 157-171).",
+  "positioning": "Unifies bilevel, bilinear, MIP, game-theory and QCQP literatures (pp. 25-46, 50-54, 113-116, 131-133); sorts methods by what they need and guarantee (pp. 53-54); direct technical critiques: Vaish-Shetty's convergence claim called fallacious with the exact Weierstrass error (pp. 53-54), Ivanilov-Mukhamediev unstated hypothesis (p. 53), Mukhamediev redundancy (p. 115), Wen-Yang bound never better than LP relaxation (p. 105), Winkels' missed equilibrium (p. 125).",
+  "writing": "French thesis; epigraph per chapter, Discussion section per chapter, roadmap and source-report pointers in each chapter intro (pp. 25, 49-50, 87, 113, 131); worked examples carry the hard concepts, including a two-column step-matched run with deliberately non-consecutive step letters (pp. 92, 98-100); calibrated hedging (il semble; suggests but does not suffice, p. 107).",
+  "limits_future": "Limits: exponential growth (pp. 79, 82-83, 126-127), random-only game instances (p. 127), proof silent on running time (p. 156), approximate QCQP solutions without subclass structure (p. 172), octagon conditional on Graham's conjecture (pp. 170-171). Future: concavity cuts inside Al(BILD), embeddings for GLCP/cutting planes/Gomory cuts, Nash refinements, nonlinear cuts and fractional/polynomial specializations (pp. 108-109, 128, 174-175).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Proposer/certifier split inside exact B&B: Gauss-Seidel LP alternation gives incumbents while finiteness rests on complementarity branching; two-run protocol prices the incumbent; octagon uses a geometric warm start. Same split as card c01 (S015), which reuses the Ch. 5 solver.",
+    "pages": "pp. 74-78, 168-169"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Problem-class semantics before algorithm; the modeling decision whether the leader may empty the follower's feasible set switches LMM between bilevel and disjoint bilinear (unbounded) interpretations.",
+    "pages": "pp. 25-46, 49-52"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Counterexamples to tempting reformulations and shortcuts, failed converses with restoring hypotheses, necessary-and-sufficient conditions, audits of Vaish-Shetty, Ivanilov-Mukhamediev and Winkels. Variant in form: guarantees are finiteness/exactness/epsilon-optimality, not a stationarity ladder; proof admitted silent on time.",
+    "pages": "pp. 43, 53-54, 60-65, 84, 106-107, 125, 156"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Engineering instances printed in full in the reformulated form solved, with epsilon-optimal solutions and a corrected typo from an earlier formulation; no online release or executable.",
+    "pages": "pp. 157-167"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Currency is CPU time and nodes; fair-comparison moves present: same machine/language/libraries, competitor tuned, cross-machine and tolerance caveats, mean/std over 10 instances, meaningless comparison declined.",
+    "pages": "pp. 79-84, 125-127, 169"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Per-chapter research codes; the Ch. 5 QCQP code later becomes the instrument of the pooling paper (card c01), but no long-lived solver yet.",
+    "pages": "pp. 79, 125, 167"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reformulation as a lens (transfer tests, not just solutions)",
+    "evidence": "Stated aim to adapt tools across classes; Tomlin penalties ported to BLP; both symmetric maxmin reformulations used in one algorithm; conclusion on reformulations as viewpoint.",
+    "pages": "pp. 20, 47, 70, 85, 103, 174"
+   },
+   {
+    "pattern": "algorithm embedding via reformulation",
+    "evidence": "Def. 3.1 and Thm 3.6: Beale-Small MIP B&B generates the same subproblem sequence as the Hansen et al. BLP algorithm on the reformulation; converse left open; difficulty preorder proposed.",
+    "pages": "pp. 88, 96-97, 106-109"
+   },
+   {
+    "pattern": "proposer-certifier protocol",
+    "evidence": "Each application run cold and with an epsilon-optimal solution supplied, motivated by fast heuristics without guarantees; second card with this pattern after S015 (c01).",
+    "pages": "pp. 168-169"
+   },
+   {
+    "pattern": "audit the literature instances",
+    "evidence": "Winkels' degenerate 6x2 example has an omitted extreme equilibrium; typo 9800 -> 98000 in Quesada-Grossmann's alkylation formulation.",
+    "pages": "pp. 125, 160"
+   },
+   {
+    "pattern": "decide boundedness first",
+    "evidence": "Isolate whether a bounded optimum exists, prove it strongly NP-complete (PROHIBITION), answer it with the same engine on normalized auxiliary problems in Phase I.",
+    "pages": "pp. 54-62, 75-77"
+   },
+   {
+    "pattern": "minimax-error parameter choice",
+    "evidence": "Linearization points for four cut classes chosen by equalizing two error terms rather than bisecting; recalled in card c01 as an improvement of the 2000 algorithm.",
+    "pages": "pp. 147-152"
+   },
+   {
+    "pattern": "extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "evidence": "Graham's unit-diameter octagon solved numerically to 4 decimals after 110 h, conditional on the conjectured configuration: the earliest instance of the small-polygon line (cf. card s03, S094).",
+    "pages": "pp. 166-171"
+   }
+  ],
+  "transferable": [
+   "Build a reformulation map between neighboring classes (reformulation = poly-time optimal-solution transfer) and, for each arrow, ask which optimality conditions and tests can be carried along (pp. 33-34, 174).",
+   "Prove two algorithms step-equivalent by induction on the subproblem index, show which steps of the richer one become redundant, then port the stronger test of one to the other (pp. 96-97, 103).",
+   "Turn an unboundedness-along-a-cone test into a bounded problem by adding 1'u <= 1 and testing strict positivity (pp. 58-59).",
+   "Before designing the main algorithm, check whether its precondition (bounded optimum) is itself hard: define the decision problem, reduce from a known NP-complete one, and reuse the main engine on auxiliary problems (pp. 56-58, 75-77).",
+   "Choose cut/linearization points by equalizing maximum weighted errors, e.g. a = (sqrt2-1)x + (2-sqrt2)sqrt(v) for the tangent to x^2, instead of bisecting (pp. 147-148).",
+   "Branch so each child fixes one object from each of two symmetric reformulations, and show the balance effect as a node-count ratio against a same-machine competitor (pp. 70, 82).",
+   "Give a competitor every advantage (same machine/language/libraries, tuned options) and say so (pp. 81-82); report small implementation trade-offs as numbers (p. 79).",
+   "For random instances report nominal and realized density, mean and std over 10 instances, and outliers (pp. 81, 125-126).",
+   "Run the exact method cold and with a known optimum supplied to separate search cost from proof cost (p. 168).",
+   "Certify a hard numeric optimum by a loose bracketing run, region exclusion one bound constraint at a time, then a tight run in the remaining box (pp. 170-171).",
+   "Print each application instance in the exact reformulated form solved, with tolerances and solution vector, and correct typos found in earlier formulations (pp. 157-167, 160).",
+   "Present two step-equivalent algorithms with aligned, deliberately non-consecutive step letters and one example in two parallel columns (pp. 92, 98-100).",
+   "After each correct result, add the smallest counterexample showing why the obvious simplification is invalid (pp. 43, 84)."
+  ],
+  "coauthors": "Sole-authored thesis (directors B. Jaumard and G. Savard, p. 3); chapter results joint with P. Hansen, B. Jaumard and G. Savard (refs [14]-[20], pp. 177-178)",
+  "quotes": [
+   {
+    "text": "Cette preuve de convergence théorique ne donne aucune indication sur le temps réel requis par l’algorithme.",
+    "page": 156
+   },
+   {
+    "text": "Les modélisations actuelles sont souvent trop complexes pour une résolution précise par les méthodes existantes. Fréquemment, les méthodes proposées donnent des solutions approchées ou heuristiques, dont la précision est inconnue.",
+    "page": 173
+   }
+  ]
+ }
+]
