@@ -1,8 +1,10 @@
 <!-- Team template (team README) → product/<team>/README.md.
      T0: scripts/new_team.py fills the double-brace placeholders and the member rows of The Team.
      T2: scripts/workflows/team-layer.js fills the lens column, the scope line, the Use examples and the base-tier Honest Boundary.
-     T3.8: scripts/workflows/team-integrate.js adds the technique-catalog paragraph and the coverage table
-           (from python3 scripts/team_status.py <team dir> --coverage).
+     T3.8: scripts/workflows/team-integrate.js adds the technique-catalog paragraph and the five-column coverage summary.
+           Each cell is summed from the full table of python3 scripts/team_status.py <team dir> --coverage, which goes
+           unchanged into DEEP-READING.md; the two must agree.
+     No TODO item may remain after T2 (base tier: team-layer.js deletes the deep-tier-only parts) or after T3.8 (deep tier).
      Open work: grep -n "TODO" README.md. See product/dfo-team for a worked example (README.md). -->
 
 # {{TEAM_TITLE}} · Personal Research Advisors
@@ -75,8 +77,8 @@ Cost: one agent call per member per turn — about 3 per round with default seat
 ```
 > {{TEAM_TITLE}}, quick: …                          # best-fit 1–2 members, straight to plan
 > {{TEAM_TITLE}}, debate <Surname> vs <Surname>: …  # two lenses argue one decision
-> Use the <Surname> lens on my [TODO: a typical artefact in this field, e.g. draft, design, analysis plan]
-> How would <Surname> handle [TODO: a typical sub-problem]?   # a single member directly
+> Use the <Surname> lens on my [TODO: a typical artefact in this field, e.g. draft, design, analysis plan; team-layer.js (T2)]
+> How would <Surname> handle [TODO: a typical sub-problem; team-layer.js (T2)]?   # a single member directly
 ```
 
 Say "exit" or "end roundtable" to return to normal mode.
@@ -84,7 +86,7 @@ Say "exit" or "end roundtable" to return to normal mode.
 **Technique catalogs.** [TODO: keep this paragraph only once the deep tier (T3) is done; team-integrate.js (T3.8).] Each skill has a `references/technique-catalog.md`. It lists the transferable devices found by reading that researcher's papers in full ([TODO: the catalog's groups, e.g. proof devices, design moves, experiment protocols, writing moves]). Each entry has a one-line "how to use it" and the paper cards, with pages, that it rests on. [TODO: which members' `SKILL.md` steps cite catalog entries by id and which point to catalog sections.] You can also ask for the catalog directly:
 
 ```
-> [TODO: two example requests, each naming a member lens and a catalog group]
+> [TODO: two example requests, each naming a member lens and a catalog group; team-integrate.js (T3.8)]
 ```
 
 ## Resources
@@ -131,8 +133,8 @@ To add a resource later, add a row to that researcher's `RESOURCES.md` and drop 
 
   | Researcher | Works indexed | Read in full / in part | Abstract or metadata only (incl. unreadable) | Skipped (not the author's, or not research) |
   |---|---|---|---|---|
-  | [TODO: one row per member, from `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage`: Distinct works indexed; Read in full / Read in part; Abstract only + Metadata only; Skipped. Delete the table at the base tier.] | | | | |
+  | [TODO: one row per member, from `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage`: Distinct works indexed; Read in full / Read in part; Abstract only + Metadata only; Skipped. Each cell is summed from that full table, never typed. team-integrate.js (T3.8); team-layer.js (T2) deletes the table at the base tier.] | | | | |
 
-  [TODO: after the table: what is not openly available (book bodies, early papers), which openly available parts of books were read (T4 increments), and any special items counted among the full reads (interviews, memoirs). End with: "Each skill's Honest Boundary lists its gaps, and `RESOURCES.md` marks unverified leads ⚠️."]
-- [TODO: historical lenses: for each member with `"living": false` in `team.json`, "<Surname> (d. YYYY) is a historical lens; the skill reflects work up to then." Delete if every member is living.]
+  [TODO: after the table: what is not openly available (book bodies, early papers), which openly available parts of books were read (T4 increments), and any special items counted among the full reads (interviews, memoirs). End with: "Each skill's Honest Boundary lists its gaps, and `RESOURCES.md` marks unverified leads ⚠️." team-integrate.js (T3.8); deleted with the table at the base tier.]
+- [TODO: historical lenses: for each member with `"living": false` in `team.json`, "<Surname> (d. YYYY) is a historical lens; the skill reflects work up to then." Delete if every member is living; team-layer.js (T2).]
 - Treat every recommendation as a hypothesis to test on your problem.

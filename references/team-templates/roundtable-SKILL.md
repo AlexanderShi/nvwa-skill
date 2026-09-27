@@ -12,10 +12,12 @@ type: roundtable
 
 <!-- Team template (roundtable skill) → product/<team>/<roundtable>/SKILL.md.
      T0: scripts/new_team.py fills the double-brace placeholders.
-     T2: scripts/workflows/team-layer.js fills the [TODO: …] items marked team-layer.js from the members' Roundtable Cards
+     T2: scripts/workflows/team-layer.js fills the TODO items marked team-layer.js from the members' Roundtable Cards
          (description, Team table, Problem Card fields, seating table, first fault lines, plan items, Outside the Team,
-         Shared References, Honest Boundary).
-     T3.8: scripts/workflows/team-integrate.js rewrites the fault lines and "Papers behind the documented disagreements" with card evidence.
+         Shared References, Honest Boundary with its pre-T3 wording, research date).
+     T3.8: scripts/workflows/team-integrate.js rewrites the fault lines, "Papers behind the documented disagreements", the
+         Honest Boundary bullets on coverage and on how the fault lines are grounded, and the research date, all from the
+         card evidence. No TODO item may remain after T2 (base tier) or after T3.8 (deep tier).
      Open work: grep -n "TODO" SKILL.md. See product/dfo-team for a worked example (dfo-roundtable/SKILL.md). -->
 
 # {{TEAM_TITLE}} · Roundtable
@@ -96,7 +98,8 @@ you apply the research methods distilled in this skill file: {ABSOLUTE_PATH_TO_M
 Read it first — at least: Activation Rules, Research Integrity Rules, Roundtable Card,
 Core Research Methods, Stage Workflows. Open files under its references/ only if you need them,
 except: before you propose an experiment, a design or a proof, consult references/technique-catalog.md and
-references/research/08-deep-reading-synthesis.md (§3 variants, §7 technique inventory) if they exist.
+references/research/08-deep-reading-synthesis.md (its "Variants and contradictions" and "Technique inventory"
+sections, or their equivalents in the skill's language) if they exist.
 If the skill has a "Student Mode" and the user is in student mode, follow it, and also consult
 references/proof-playbook.md if it exists.
 
@@ -234,11 +237,11 @@ Check every tool name, link, option and paper in the approved plan with tools; m
 
 ## Outside the Team
 
-This team represents [TODO: the tradition(s) of {{FIELD}} that the members cover, as decided at T0]. Say so plainly when another tradition fits better:
+This team represents [TODO: the tradition(s) of {{FIELD}} that the members cover, as decided at T0; team-layer.js (T2)]. Say so plainly when another tradition fits better:
 
 - [TODO: 2–4 bullets, each "problem signal → the neighbouring tradition, method or tool that fits better", saying whether any member partly covers it; from the T0 scope decision and the members' "Blind spots"; team-layer.js (T2). Every tool or paper named is verified.]
 
-## Shared References (verified [TODO: date])
+## Shared References (verified [TODO: month and year; team-layer.js (T2)])
 
 - [TODO: 3–8 field-wide references any member may cite: the standard for comparing methods, a taxonomy of the field's problem types, a survey for orientation, key open-source software. Each is a full reference with DOI or URL, verified with a tool, and ends with one line on why it is here; team-layer.js (T2).]
 
@@ -246,18 +249,18 @@ This team represents [TODO: the tradition(s) of {{FIELD}} that the members cover
 
 Fault line (FL) and the member cards that read each paper; other papers cited above by card id are in that member's `references/research/07-paper-cards.md`.
 
-- [TODO: one bullet per paper cited in a fault line: full reference, DOI or arXiv link, the FL numbers, and the member cards that read it ([<member-slug> card <id>]); a paper that is no member's own is marked "not a member paper, known through [cards]"; team-integrate.js (T3.8) from the cards. Before T3, write "Pending the deep reading (T3)."]
+- [TODO: one bullet per paper cited in a fault line: full reference, DOI or arXiv link, the FL numbers, and the member cards that read it ([<member-slug> card <id>]); a paper that is no member's own is marked "not a member paper, known through [cards]"; team-integrate.js (T3.8) from the cards. Before T3, team-layer.js (T2) writes "Pending the deep reading (T3)."; at the base tier (no deep reading planned) it writes "No deep reading was done (base tier); the fault lines rest on the members' research notes."]
 
 ## Honest Boundary
 
 - The discussion is simulated from methods distilled from public work; it is not what these researchers would actually say.
 - Member agents are separate model instances reading different skill files. That makes their positions more independent than a single-context simulation, but they share one underlying model and can converge for reasons that have nothing to do with the researchers.
-- Full-text reading coverage per member (read in full, in part, abstract or metadata only) is in `../DEEP-READING.md`; each member's own Honest Boundary lists its gaps. [TODO: before T3, say instead: "The members rest on web research only (research notes 01–06); no full text has been read yet."]
-- [TODO: how the fault lines are grounded. After T3.8: "Fault lines rest on paper cards from both sides. N are exchanges in print between members (name them, with years); the rest contrast published methods. None is a recorded debate." Before T3: "Fault lines are drawn from the members' Roundtable Cards and have not been checked against full texts."]
-- [TODO: historical lenses: for each member with `"living": false` in team.json, "<Surname> (d. YYYY) is a historical lens: it reflects work up to then; later developments are others' work." Delete this bullet if every member is living.]
-- [TODO: one line naming the traditions outside this team, matching Outside the Team.]
+- [TODO: coverage. team-layer.js (T2; also the final wording at the base tier): "The members rest on web research only (research notes 01–06); no full text has been read yet." team-integrate.js (T3.8): "Full-text reading coverage per member (read in full, in part, abstract or metadata only) is in `../DEEP-READING.md`; each member's own Honest Boundary lists its gaps."]
+- [TODO: how the fault lines are grounded. team-layer.js (T2; also the base tier): "Fault lines are drawn from the members' Roundtable Cards and research notes and have not been checked against full texts." team-integrate.js (T3.8): "Fault lines rest on paper cards from both sides. N are exchanges in print between members (name them, with years); the rest contrast published methods. None is a recorded debate."]
+- [TODO: historical lenses: for each member with `"living": false` in team.json, "<Surname> (d. YYYY) is a historical lens: it reflects work up to then; later developments are others' work." Delete this bullet if every member is living; team-layer.js (T2).]
+- [TODO: one line naming the traditions outside this team, matching Outside the Team; team-layer.js (T2).]
 - Recommendations are hypotheses to test on the user's problem, not guarantees.
-- Research date: {{DATE}} [TODO: update to the date of the last integration and say what was checked then, e.g. "(fault lines checked against the paper cards)"].
+- Research date: [TODO: the date of the last team-layer.js (T2) or team-integrate.js (T3.8) run, and what was checked then, e.g. "(fault lines checked against the paper cards)"; scaffolded on {{DATE}}].
 
 ---
 
