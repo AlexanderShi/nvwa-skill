@@ -100,5 +100,15 @@
 | 88 | S089 | 2022 | Modeling Hessian-vector products in nonlinear optimization: new Hessian-free methods | IMA Journal of Numerical Analysis | 6 | journal | arXiv | txt | 18 | supplement | — |
 | 89 | S090 | 2013 | Inexact solution of NLP subproblems in MINLP | Journal of Global Optimization | 6 | journal | url | txt | 25 | supplement | — |
 | 90 | S091 | 2025 | A stochastic gradient method for trilevel optimization | arXiv preprint arXiv:2505.06805 | 5 | preprint | arXiv | txt | 47 | supplement | — |
+| 91 | S092 | 2025 | Why is soccer so popular: Understanding underdog achievement and randomness in team ball sports | Journal of Sports Analytics | 5 | journal | arXiv | txt | 26 | supplement | — |
+| 92 | S093 | 2023 | Convergence rates of the stochastic alternating algorithm for bi-objective optimization | Journal of Optimization Theory and Applications | 5 | journal | arXiv | txt | 19 | supplement | — |
+| 93 | S094 | 2021 | The Sharpe predictor for fairness in machine learning | arXiv preprint arXiv:2108.06415 | 5 | preprint | arXiv | txt | 9 | supplement | — |
+| 94 | S095 | 2002 | Local analysis of a new multipliers method | European Journal of Operational Research | 5 | journal | url | txt | 19 | supplement | — |
+| 95 | S096 | 2025 | Pareto sensitivity, most-changing sub-fronts, and knee solutions | arXiv preprint arXiv:2501.16993 | 4 | preprint | arXiv | txt | 29 | supplement | — |
+| 96 | S097 | 2014 | Globally convergent DC trust-region methods | Journal of Global Optimization | 4 | journal | url | txt | 18 | supplement | — |
+| 97 | S098 | 2003 | Updating the multipliers associated with inequality constraints in an augmented Lagrangian multiplier method | Journal of Optimization Theory and Applications | 4 | journal | url | txt | 15 | supplement | — |
+| 98 | S099 | 1999 | Characterization of the smoothness and curvature of a marginal function for a trust-region problem | Mathematical Programming | 3 | journal | url | txt | 17 | supplement | — |
+| 99 | S100 | 1992 | Parametric linear programming techniques for the indefinite quadratic programming problem | IMA Journal of Management Mathematics | 3 | journal | — | no-oa |  | supplement | — |
+| 100 | S101 | 2026 | Stochastic set-valued optimization and its application to robust learning | arXiv preprint arXiv:2603.17691 | 2 | preprint | arXiv | txt | 27 | supplement | — |
 
-90 works · txt 75 · pdf 0 · no-oa 15
+100 works · txt 84 · pdf 0 · no-oa 16
