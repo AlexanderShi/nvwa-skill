@@ -19,3 +19,6 @@ voice_tts/CosyVoice/
 # Transient working files & logs
 voice_tts/passage.txt
 *.log
+
+# Downloaded papers for skill research (copyrighted — keep local)
+product/**/references/sources/papers/*.pdf

@@ -146,7 +146,7 @@ def check_method_steps(content: str) -> tuple[bool, str]:
         return False, "❌ 无研究方法可检查"
     missing = []
     for block in methods:
-        steps = re.search(r'(?:操作步骤|Steps?)[^\n]*\n(.*?)(?=\n\*\*|\Z)', block, re.DOTALL | re.IGNORECASE)
+        steps = re.search(r'\*\*(?:操作步骤|Steps?)\*\*[^\n]*\n(.*?)(?=\n\*\*|\Z)', block, re.DOTALL | re.IGNORECASE)
         if not steps or len(re.findall(r'^\s*\d+[.)、]\s+', steps.group(1), re.MULTILINE)) < 2:
             missing.append(block.split('\n', 1)[0].strip()[:20])
     passed = not missing
