@@ -21,6 +21,7 @@ export const meta = {
 //   args.members  array of member objects copied from team.json (slug, name, surname, living, hint, scholar,
 //                 dblp, orcid, homepage, chase_hints, student_mode); each member runs independently through
 //                 pipeline() (no barrier between members)
+//   args.request  optional: the user's request in their own words; opens every agent prompt (set with make_args.mjs --request)
 // Workflow-specific keys:
 //   args.from, args.to   first / last step to run, each one of: research, review, synthesis, build, test, refine
 //                        (default research .. refine). The root SKILL.md has user checkpoints after review (1.5),
@@ -64,9 +65,15 @@ const FROM = STEPS.indexOf(ARGS.from || 'research')
 const TO = STEPS.indexOf(ARGS.to || 'refine')
 need(FROM >= 0 && TO >= 0 && FROM <= TO, `args.from / args.to must be among ${STEPS.join(', ')} with from <= to`)
 // args keys this workflow reads (all snake_case, like every team workflow); anything else is logged
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'from', 'to', 'tier', 'dims', 'user_context', 'word_budget', 'example_team', 'search_budget']
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'request', 'from', 'to', 'tier', 'dims', 'user_context', 'word_budget', 'example_team', 'search_budget']
 const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
 if (unknownArgs.length) log(`team-base-skills.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
+// args.request (optional): the user's request in their own words. Workflow agents see only their prompt and the
+// user's latest message in the launching session; when that message is a side question they may decline the step,
+// so A() opens every prompt with the request.
+const REQUEST = typeof ARGS.request === 'string' ? ARGS.request.replace(/\s+/g, ' ').trim() : ''
+if (ARGS.request !== undefined && ARGS.request !== null && typeof ARGS.request !== 'string') log(`team-base-skills.js: args.request must be a string (the user's request in their own words), got ${Array.isArray(ARGS.request) ? 'array' : typeof ARGS.request}; ignored`)
+const WHY = REQUEST ? `Why this agent runs: in the session that launched this workflow the user asked: "${REQUEST}". This agent is one step of that work (research-team kit, team-base-skills.js, stage T1). Do the step below.\n\n` : ''
 const on = s => { const i = STEPS.indexOf(s); return i >= FROM && i <= TO }
 
 const REPO = ARGS.repo.replace(/\/+$/, '')
@@ -98,7 +105,7 @@ const HOUSE = `House rules for every agent in this workflow (nuwa research-team 
 
 function A(prompt, opts) {
   if (!opts || !opts.phase || !opts.label) throw new Error('A(): opts.phase and opts.label are required')
-  return agent(`${HOUSE}\n\n${prompt}`, opts)
+  return agent(`${WHY}${HOUSE}\n\n${prompt}`, opts)
 }
 
 function who(m) {

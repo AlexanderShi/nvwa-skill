@@ -18,6 +18,7 @@ export const meta = {
 //   args.members  array of member objects copied from team.json (slug, name, surname, living, hint, scholar,
 //                 dblp, orcid, homepage, chase_hints, student_mode); each member runs independently through
 //                 pipeline() (no barrier between members)
+//   args.request  optional: the user's request in their own words; opens every agent prompt (set with make_args.mjs --request)
 // Workflow-specific keys:
 //   args.chunk_size       works per chase agent (default 20)
 //   args.max_searches     search attempts per work before moving on (default 4)
@@ -54,9 +55,15 @@ need(/^\d{4}-\d{2}-\d{2}$/.test(ARGS.date || ''), 'args.date must be "YYYY-MM-DD
 need(Array.isArray(ARGS.members) && ARGS.members.length > 0, 'args.members must be a non-empty array copied from team.json')
 ARGS.members.forEach((m, i) => need(m && /^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') && m.name, `args.members[${i}] needs a kebab-case slug and a name`))
 // args keys this workflow reads (all snake_case, like every team workflow); anything else is logged
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'chunk_size', 'max_searches', 'skip_ids', 'only_chunks', 'merge', 'search_budget']
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'request', 'chunk_size', 'max_searches', 'skip_ids', 'only_chunks', 'merge', 'search_budget']
 const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
 if (unknownArgs.length) log(`team-chase.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
+// args.request (optional): the user's request in their own words. Workflow agents see only their prompt and the
+// user's latest message in the launching session; when that message is a side question they may decline the step,
+// so A() opens every prompt with the request.
+const REQUEST = typeof ARGS.request === 'string' ? ARGS.request.replace(/\s+/g, ' ').trim() : ''
+if (ARGS.request !== undefined && ARGS.request !== null && typeof ARGS.request !== 'string') log(`team-chase.js: args.request must be a string (the user's request in their own words), got ${Array.isArray(ARGS.request) ? 'array' : typeof ARGS.request}; ignored`)
+const WHY = REQUEST ? `Why this agent runs: in the session that launched this workflow the user asked: "${REQUEST}". This agent is one step of that work (research-team kit, team-chase.js, stage T3.3). Do the step below.\n\n` : ''
 
 const REPO = ARGS.repo.replace(/\/+$/, '')
 const TEAM_REL = ARGS.team.replace(/^\.\//, '').replace(/\/+$/, '')
@@ -98,7 +105,7 @@ const HOUSE = `House rules for every agent in this workflow (nuwa research-team 
 
 function A(prompt, opts) {
   if (!opts || !opts.phase || !opts.label) throw new Error('A(): opts.phase and opts.label are required')
-  return agent(`${HOUSE}\n\n${prompt}`, opts)
+  return agent(`${WHY}${HOUSE}\n\n${prompt}`, opts)
 }
 
 const dirs = m => {

@@ -3,6 +3,7 @@
   "team": "product/example-team",
   "scratch": "$SCRATCH",
   "date": "2026-01-15",
+  "request": "Build a research team for multi-armed bandits from Ada Example and Bo Sample (fictional placeholders) and deep-read their open papers into cards",
   "members": [
     {
       "slug": "ada-example",

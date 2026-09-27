@@ -148,14 +148,15 @@ apt-get update && apt-get install -y tesseract-ocr ghostscript     # OCR；ps2pd
 
 成本列里 T3.1–T3.7 和 T4 是 DFO 的实测（第六节）；T1、T2、T3.8 的 agent 数，以及现版 T4 的数字，按现在的工作流结构估算，DFO 没有单独计量这几步。
 
-**工作流参数。** 五个共用参数（`repo`、`team`、`scratch`、`date`、`members`）和各工作流的特有参数，见 [README 第二节](../scripts/workflows/README.md#二参数约定)。**不要手抄**：`node scripts/workflows/make_args.mjs <工作流> --team $T [--member a,b] [--set KEY=JSON]` 从 `team.json` 生成现成的 `{scriptPath, args}`，每人一个（T2、T3.8 一个），scratch 固定为 `${TMPDIR:-/tmp}/<team>-scratch`，所有阶段都用这一个。参数名一律 `snake_case`（如 `batch_files`、`word_budget`、`max_words`、`target_words`、`max_growth`、`root_readme`、`new_fault_lines`）；早期版本用过的 camelCase 旧名（`batchFiles`、`maxGrowth` 等）仍当别名接受，运行开头记一行日志提醒改名，新旧都给时用新名。按成员跑的工作流，`members` 只放一位（从 `team.json` 原样拷贝），每人起一个，在同一条消息里一起发出。T2 和 T3.8 放**全体**：圆桌要读每个人的卡片；`team-layer.js` 少了谁，圆桌 agent 会在返回值里报 `NOT-IN-RUN <slug>`，日志记一行 `team.json members missing from this run: …`；那人在圆桌里原有的行不删也不更新，要带全体重跑。一个完整的调用：
+**工作流参数。** 五个共用参数（`repo`、`team`、`scratch`、`date`、`members`）、可选的 `request`（用户原话里的请求）和各工作流的特有参数，见 [README 第二节](../scripts/workflows/README.md#二参数约定)。**不要手抄**：`node scripts/workflows/make_args.mjs <工作流> --team $T [--member a,b] [--set KEY=JSON]` 从 `team.json` 生成现成的 `{scriptPath, args}`，每人一个（T2、T3.8 一个），scratch 固定为 `${TMPDIR:-/tmp}/<team>-scratch`，所有阶段都用这一个。参数名一律 `snake_case`（如 `batch_files`、`word_budget`、`max_words`、`target_words`、`max_growth`、`root_readme`、`new_fault_lines`）；早期版本用过的 camelCase 旧名（`batchFiles`、`maxGrowth` 等）仍当别名接受，运行开头记一行日志提醒改名，新旧都给时用新名。按成员跑的工作流，`members` 只放一位（从 `team.json` 原样拷贝），每人起一个，在同一条消息里一起发出。T2 和 T3.8 放**全体**：圆桌要读每个人的卡片；`team-layer.js` 少了谁，圆桌 agent 会在返回值里报 `NOT-IN-RUN <slug>`，日志记一行 `team.json members missing from this run: …`；那人在圆桌里原有的行不删也不更新，要带全体重跑。一个完整的调用：
 
 ```bash
-node scripts/workflows/make_args.mjs team-base-skills --team product/<team> --set to=review
-# → [{"scriptPath": ".../team-base-skills.js", "args": {"repo": …, "team": …, "scratch": …, "date": …, "members": [<一位>], "to": "review"}}, …]
+node scripts/workflows/make_args.mjs team-base-skills --team product/<team> --set to=review --request "<用户的请求原话>"
+# → [{"scriptPath": ".../team-base-skills.js", "args": {"repo": …, "team": …, "scratch": …, "date": …, "request": …, "members": [<一位>], "to": "review"}}, …]
 ```
 
 把每个对象原样交给 Workflow 工具（`Workflow({scriptPath, args})`），同一条消息里一起发出。其余工作流只换名字，再用 `--set` 加上表里括号中的参数。
+每次都用 `--request "<用户的请求原话>"` 把用户的请求传进去：工作流里的 agent 只看得到自己的 prompt 和用户在会话里的最新一条消息，那条是题外话时它们会拒做；有了 `args.request`，每个 prompt 开头都写明这一步是替用户的哪个请求干的（只照抄用户的话，不替用户补写同意）。
 
 **续跑与预览。**
 - 中断以后续跑：同样的调用加上 `resumeFromRunId: "<上次的 runId>"`。
@@ -319,6 +320,7 @@ bash scripts/team_commit.sh $T/$M "increment($M): <label>"   # 之后带全体�
 | 交付前模板闸门还有 `[TODO` | 某一步没清掉模板里标给它的项；轻量档留下了给深读档的项（DEEP-READING.md、RESOURCES.md 第 1 行和深读档占位行） | 每条 TODO 都写明由哪一步、按什么来源填：照它补上，数字只取脚本输出；轻量档照模板里的轻量档（base tier）写法改 |
 | 暂存区里出现 PDF、`.ps`、`.djvu`、`.epub`、幻灯片 | `.gitignore` 排除 `product/` 下成员 `references/sources/` 里任何文件夹的 PDF、PostScript、DjVu、EPUB（不分大小写）和 `papers/txt/`，但幻灯片（`.ppt`、`.pptx`、`.key`）等其他格式不在内，团队目录不在 `product/` 下时也管不到（`new_team.py` 会检查并打印要加的规则） | 用 `scripts/team_commit.sh` 提交（它查整个暂存区）；漏掉的模式补进 `.gitignore` |
 | `@<Surname>` 分不清是谁 | 队里有人同姓 | `surname` 写成 `"N. Higham"`、`"D. Higham"` 这样，队内唯一 |
+| 工作流里的 agent 全部拒做，或者去回答一个不相干的问题 | 子 agent 看得到的是用户在会话里的最新一条消息，那条是题外话（用户中途问了别的） | 用 `make_args.mjs --request "<用户的请求原话>"`（即 `args.request`）把用户的请求传进去，再重新启动 |
 | 工作流中断、被停，或者改了脚本 | — | 用同样的 `scriptPath` 和 `args`，加 `resumeFromRunId` 续跑，没改过的 agent 调用直接取缓存；也可以用 T1 的 `from`、T3.5 的 `overwrite: false` / `only`、T3.3 的 `only_chunks`、T3.6 和 T4 的 `from`（`verify`：人工修好之后只重跑复核和修复） |
 | 改了 `only` / `only_chunks` 却把所有批次都重跑了 | 映射的键（成员 slug）拼错，这一位成员等于没有 `only` | 现在工作流发现键不是这次运行的成员、且有成员没对应的键时直接停下；`dry_run.mjs` 也警告。用 `make_args.mjs --set` 生成参数，slug 不对当场报错 |
 | 书的正文读不到 | 正文不开放 | 读合法开放的部分（目录、勘误、增补、前言、已发表书评），作为 `B###` 条目，用 `team-increment.js`（`find: ["book-parts"]`）；批次名接着已有轮次编（如 `c5-01`；DFO 当时是手工读的，批次叫 `k01`）。书评按书评人的话写。不用影子图书馆 |

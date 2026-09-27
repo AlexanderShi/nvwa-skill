@@ -16,6 +16,10 @@
 //                     scratch for every stage of a team: team-read's default batch files, the chase chunks and the
 //                     SKILL.md backups of T3.6/T3.7/T4 live there, and a stage looking in another folder skips the member.
 //   --repo PATH       repo root (default: this repo)
+//   --request "TEXT"  the user's request in their own words (quote it); set as args.request on every call, and every
+//                     agent prompt opens with it. Recommended: workflow agents see only their prompt and the user's LATEST
+//                     message in the session; when that is a side question they may decline their step as not asked for.
+//                     Without --request a one-line note goes to stderr.
 //   --set KEY=JSON    a workflow-specific arg, e.g. --set round=2 --set 'only={"ada-example":["c01"]}' --set to=review
 //                     (the value is parsed as JSON, else taken as a string). The key must be one the workflow reads
 //                     (its KNOWN_ARGS). A per-member map (only, only_chunks, skip_ids, batch_files, batches, notes, what)
@@ -38,7 +42,7 @@ export const TEAM_LEVEL = new Set(['team-layer', 'team-integrate'])
 // args keyed by member slug in the workflows (the old camelCase alias batchFiles included)
 export const MAP_ARGS = ['only', 'only_chunks', 'skip_ids', 'batch_files', 'batchFiles', 'batches', 'notes', 'what']
 // values in the examples/ args files that describe the fictional example team, not yours
-export const EXAMPLE_ONLY = ['user_context', 'notes', 'what', 'skip_ids', 'batch_files', 'batchFiles', 'batches', 'only', 'only_chunks', 'since', 'label', 'roundtable']
+export const EXAMPLE_ONLY = ['request', 'user_context', 'notes', 'what', 'skip_ids', 'batch_files', 'batchFiles', 'batches', 'only', 'only_chunks', 'since', 'label', 'roundtable']
 
 export function today() {
   const d = new Date()
@@ -107,7 +111,7 @@ export function buildCalls(o) {
     const i = kv.indexOf('=')
     if (i < 1) throw new Error(`--set ${kv}: use KEY=VALUE`)
     const k = kv.slice(0, i)
-    if (['repo', 'team', 'scratch', 'date', 'members'].includes(k)) throw new Error(`--set ${k}: use --${k === 'members' ? 'member' : k} instead`)
+    if (['repo', 'team', 'scratch', 'date', 'members', 'request'].includes(k)) throw new Error(`--set ${k}: use --${k === 'members' ? 'member' : k} instead`)
     if (keys.length && !keys.includes(k) && !aliases.includes(k)) throw new Error(`--set ${k}: ${name} does not read this key; it reads ${keys.join(', ')}`)
     extra[k] = parseValue(kv.slice(i + 1))
   }
@@ -116,7 +120,8 @@ export function buildCalls(o) {
   const date = o.date || today()
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('--date must be YYYY-MM-DD')
   const scratch = path.resolve(o.scratch || defaultScratch(teamName))
-  const base = { repo, team: rel, scratch, date }
+  const request = typeof o.request === 'string' ? o.request.trim() : ''
+  const base = { repo, team: rel, scratch, date, ...(request ? { request } : {}) }
   // team-layer names the roundtable folder in its prompts; give it team.json's so the agents see the real path
   if (keys.includes('roundtable') && tj.roundtable && !('roundtable' in extra)) base.roundtable = tj.roundtable
   const groups = TEAM_LEVEL.has(name) || o.together ? [members] : members.map(m => [m])
@@ -152,6 +157,7 @@ function main() {
     else if (a === '--member') o.member = val().split(',').map(s => s.trim()).filter(Boolean)
     else if (a === '--scratch') o.scratch = val()
     else if (a === '--repo') o.repo = val()
+    else if (a === '--request') o.request = val()
     else if (a === '--set') o.set.push(val())
     else if (a === '--together') o.together = true
     else if (a === '--args-only') o.argsOnly = true
@@ -173,6 +179,7 @@ function main() {
     }
   }
   console.log(JSON.stringify(o.argsOnly ? r.calls[0].args : r.calls, null, 1))
+  if (!(o.request || '').trim()) console.error('make_args: note: no --request; pass the user\'s request in their own words (--request "…") so every agent prompt opens with it (agents otherwise see only the user\'s latest message)')
   if (!o.argsOnly) console.error(`${r.calls.length} ${r.name} call(s)${r.teamLevel ? ' (team-level: all members)' : r.calls.length > 1 ? ', one per member: launch them in one message' : ''}; scratch ${r.scratch}`)
 }
 

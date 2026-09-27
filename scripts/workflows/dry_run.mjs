@@ -5,7 +5,8 @@
 //   node scripts/workflows/dry_run.mjs <workflow.js> --team product/<team> [--member a,b] [options]
 //
 // The second form previews YOUR team with exactly the args make_args.mjs builds for a real launch (repo, team, scratch,
-// today's date, the members from team.json); add workflow options with --set KEY=JSON as in make_args.mjs.
+// today's date, the members from team.json); add workflow options with --set KEY=JSON and the user's request with
+// --request "TEXT", as in make_args.mjs.
 //
 // The workflow runs in a sandbox that mimics the Workflow runtime: agent() returns a fake result shaped by
 // opts.schema instead of spawning an agent; parallel() and pipeline() keep the runtime's semantics (a thunk or item
@@ -27,12 +28,13 @@
 //   --repo PATH       value for $REPO             --scratch PATH   value for $SCRATCH
 //   --team DIR        use <repo>/DIR/team.json: sets args.team and args.members (all, or --member ones). With an
 //                     args file, "roundtable" (when the file has one, and always for team-layer.js) is set from team.json too, and when the file is one of
-//                     examples/*.args.json its example-only values (user_context, notes, what, skip_ids, batch_files,
-//                     batches, only, only_chunks, since, label) are dropped and the date becomes today's (each change
+//                     examples/*.args.json its example-only values (request, user_context, notes, what, skip_ids,
+//                     batch_files, batches, only, only_chunks, since, label) are dropped and the date becomes today's (each change
 //                     is printed as a note). For a real preview write your own args with make_args.mjs.
 //   --member a,b      keep only these member slugs (after --team, or from the args file); a warning for the team-level
 //                     workflows (team-layer.js, team-integrate.js), which must run with every member
 //   --set KEY=JSON    with --team and no args file: a workflow option, as in make_args.mjs
+//   --request TEXT    with --team and no args file: args.request (the user's request), as in make_args.mjs
 // Checks also: per-member map args (only, only_chunks, skip_ids, batch_files, batches, notes, what) keyed by a slug
 // that is not in args.members (a typo would silently turn "only" off) are warnings.
 // Output:
@@ -65,7 +67,7 @@ function usage(code) {
   process.exit(code)
 }
 const argv = process.argv.slice(2)
-const opt = { chars: 500, items: 0, bools: 'happy', full: false, quiet: false, strict: false, out: null, answers: null, forbid: null, repo: null, scratch: null, team: null, member: null, set: [] }
+const opt = { chars: 500, items: 0, bools: 'happy', full: false, quiet: false, strict: false, out: null, answers: null, forbid: null, repo: null, scratch: null, team: null, member: null, set: [], request: null }
 const pos = []
 for (let i = 0; i < argv.length; i++) {
   const a = argv[i]
@@ -85,11 +87,12 @@ for (let i = 0; i < argv.length; i++) {
   else if (a === '--team') opt.team = val()
   else if (a === '--member') opt.member = val().split(',').map(s => s.trim()).filter(Boolean)
   else if (a === '--set') opt.set.push(val())
+  else if (a === '--request') opt.request = val()
   else if (a.startsWith('--')) { console.error(`unknown option ${a}`); usage(1) }
   else pos.push(a)
 }
 if (pos.length !== 2 && !(pos.length === 1 && opt.team)) usage(1)
-if (opt.set.length && pos.length === 2) { console.error('--set goes with --team and no args file (edit the args file instead)'); process.exit(1) }
+if ((opt.set.length || opt.request !== null) && pos.length === 2) { console.error('--set / --request go with --team and no args file (edit the args file instead)'); process.exit(1) }
 if (!['happy', 'true', 'false'].includes(opt.bools)) { console.error('--bools must be happy, true or false'); process.exit(1) }
 if (!Number.isInteger(opt.items) || opt.items < 0 || !Number.isInteger(opt.chars) || opt.chars < 0) { console.error('--items and --chars take a non-negative integer'); process.exit(1) }
 
@@ -109,7 +112,7 @@ let argsLabel
 if (pos.length === 1) {
   // --team without an args file: the same args make_args.mjs builds for a real launch
   try {
-    const r = buildCalls({ workflow: WF_PATH, team: opt.team, repo: REPO, scratch: opt.scratch || undefined, set: opt.set, together: true,
+    const r = buildCalls({ workflow: WF_PATH, team: opt.team, repo: REPO, scratch: opt.scratch || undefined, set: opt.set, request: opt.request || undefined, together: true,
       member: TEAM_LEVEL.has(WF_NAME) ? undefined : opt.member })
     args = r.calls[0].args
   } catch (e) { console.error(`dry_run: ${e.message}`); process.exit(1) }

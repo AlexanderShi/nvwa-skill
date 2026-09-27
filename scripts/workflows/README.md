@@ -22,13 +22,15 @@
 | T3.8 | `team-integrate.js` | 用 `team_status.py` 的覆盖表和各人的 08 刷新团队 README、DEEP-READING.md 和圆桌 fault line（两边都要有卡片证据）；解决模板里写给 T3.8 的全部 TODO | 全体 | 团队 `README.md`、`DEEP-READING.md`、圆桌 SKILL.md（可选：根 README 的一行） | DEEP-READING 覆盖表 = `team_status.py --coverage`，README 五列摘要 = `--coverage --short`；`check_links.py` 0；fault line 双方卡片 ID 都存在；`grep -rn --include='*.md' -e '{{' -e '\[TODO' <team>` 没有输出（还没做完的成员自己文件夹里的除外）；圆桌不跑 `quality_check.py` | 团队一次 6–7 个；DFO 实测 4 个 / 100 万（旧版） |
 | T4 | `team-increment.js` | 以后有新材料时：（可选）找书的开放部分和新论文并登记 → 写卡片 → 保守并入 07/08/09 和 SKILL.md（限制增长）→ 复核 → 修 | 一位 | 新的 `works.json` 行与文件、新卡片、08 的「Increment <label>」一节、SKILL.md 等 | 同 T3.5–T3.7；删改检测用 `check_ledger.py --before … --allow frontmatter-date,activation-numbers` | DFO 实测每位书作者 4 个 / 100 万（旧版；现在多一个复核，一批时每人 5–6 个） |
 
+**实跑状态（2026-09-27）**：`team-read.js` 在一位 DFO 成员的 scratch 副本上对一篇 4 页论文实跑通过：计划 → 读卡 → 闸门，3 个 agent、约 22 万 token、5 分钟，摘录 234/234 逐字通过，还认出这篇论文已在早先批次里读过。其余八个工作流只跑过 `dry_run.mjs` 预览和 `selftest.sh`。上表的「DFO 实测」是它们的前身（DFO 构建时的一次性脚本）实跑时的计量。在新团队上第一次用某个工作流时，先拿一位成员、一小批试跑，看过返回值再放开。
+
 T3.2（`acquire_fulltexts.py`）和 T3.4（`plan_reading_batches.py --out-dir <scratch>`）是脚本，不是工作流。DFO 深读档合计每人约 45 个 agent、1,100 万 token；详见手册第六节。
 
 每个工作流的返回值里都有 `next`：该 commit 什么（`bash scripts/team_commit.sh …`）、下一步跑什么，能写成命令的都写成了命令（例如 T3.1 找到的 Scholar id / DBLP pid 用 `new_team.py --set-member` 记进 `team.json`，T3.5 读卡报的 REOCR / WRONG-TEXT 用 `acquire_fulltexts.py --reocr / --drop` 和 `plan_reading_batches.py --reread`）。
 
 ## 二、参数约定
 
-九个工作流共用 5 个参数，全部必填。**不用手写**：`make_args.mjs` 从 `team.json` 生成（见第三节）。
+九个工作流共用 5 个必填参数和 1 个可选参数 `request`。**不用手写**：`make_args.mjs` 从 `team.json` 生成（见第三节）。
 
 | 参数 | 含义 |
 |---|---|
@@ -37,6 +39,7 @@ T3.2（`acquire_fulltexts.py`）和 T3.4（`plan_reading_batches.py --out-dir <s
 | `scratch` | scratch 目录的绝对路径，放批次计划、补搜分块、备份和中间记录（agent 可写）。放在仓库外；`make_args.mjs` 默认用固定的 `${TMPDIR:-/tmp}/<team>-scratch`，**所有阶段必须用同一个**：T3.5 默认的批次文件、补搜分块、T3.6/T3.7/T4 的 SKILL.md 备份都在里面，换了目录工作流就找不到，会跳过这位成员。一个阶段没做完前别删 |
 | `date` | `"YYYY-MM-DD"`。工作流脚本不能调 `Date.now()`，日期只能传进来 |
 | `members` | 从 `team.json` 原样拷贝的成员对象数组（slug、name、surname、living、hint、scholar、dblp、orcid、homepage、chase_hints、student_mode，可选 family_name）。按成员跑的工作流一般只放一位；T2、T3.8 放全体 |
+| `request` | 可选，建议给。用户原话里的请求（字符串）。给了就放在每个 agent 的 prompt 最前面一小段：`Why this agent runs: … the user asked: "<request>" …`，说明这一步是替用户的哪个请求干的。工作流里的 agent 只看得到自己的 prompt 和用户在会话里的**最新一条**消息，那条是题外话时它们会以「不是用户要的」为由拒做。用 `make_args.mjs --request "…"` 设置；只照抄用户说过的话，不替用户补写没给过的同意。不是字符串时记一行日志、忽略 |
 
 `team.json` 里还有几个工作流会用到的可选键：`card_dimensions`（非数学领域里 D1–D8 各指什么，读卡 agent 照用）、成员的 `family_name`（作者核对和检索用的姓；默认取 `name` 的最后一个词，`surname` 只作圆桌的视角标签，撞姓时可以写成 "N. Higham"）、`source_labels`（`acquire_fulltexts.py` 给手工补来的全文标来源）。见 [team.example.json](../../references/team-templates/team.example.json)。
 
@@ -65,17 +68,18 @@ T3.2（`acquire_fulltexts.py`）和 T3.4（`plan_reading_batches.py --out-dir <s
 工作流只能在有 Workflow 工具的会话里启动，而且要用户同意。**参数用 `make_args.mjs` 生成**，不要手抄 `team.json`：
 
 ```bash
-node scripts/workflows/make_args.mjs team-read --team product/<team> --set round=1        # 每人一个调用
+node scripts/workflows/make_args.mjs team-read --team product/<team> --set round=1 --request "<用户的请求原话>"   # 每人一个调用
 node scripts/workflows/make_args.mjs team-layer --team product/<team>                     # 团队级：一个调用，全体成员
 node scripts/workflows/make_args.mjs team-base-skills --team product/<team> --member a,b --set to=review
 ```
 
-它打印 `[{scriptPath, args}, …]`：按成员的工作流每人一个，`team-layer.js`、`team-integrate.js` 一个（给 `--member` 会报错）。`args` 里是 `repo`、`team`、`scratch`（默认固定的 `${TMPDIR:-/tmp}/<team>-scratch`，没有就建）、`date`（默认今天）、从 `team.json` 原样拷来的 `members`，`team-layer.js` 还有 `team.json` 的 `roundtable`；`--set KEY=JSON` 加特有参数（键必须是这个工作流读的；按成员的映射只能用本队的 slug，每个调用只带自己那一项）。`--args-only` 只打印一个 `args`（配合 `dry_run.mjs`），`--out DIR` 另存成文件。把打印出来的每个对象原样交给 Workflow 工具：
+它打印 `[{scriptPath, args}, …]`：按成员的工作流每人一个，`team-layer.js`、`team-integrate.js` 一个（给 `--member` 会报错）。`args` 里是 `repo`、`team`、`scratch`（默认固定的 `${TMPDIR:-/tmp}/<team>-scratch`，没有就建）、`date`（默认今天）、从 `team.json` 原样拷来的 `members`，`team-layer.js` 还有 `team.json` 的 `roundtable`；`--set KEY=JSON` 加特有参数（键必须是这个工作流读的；按成员的映射只能用本队的 slug，每个调用只带自己那一项）；`--request "…"` 给每个调用加上 `request`（没给时 stderr 提示一行，不报错）。`--args-only` 只打印一个 `args`（配合 `dry_run.mjs`），`--out DIR` 另存成文件。把打印出来的每个对象原样交给 Workflow 工具：
 
 ```js
 Workflow({ scriptPath: "<repo>/scripts/workflows/team-read.js", args: { /* make_args.mjs 打印的 args */ } })
 ```
 
+- **带上用户的原话（`--request`）。** 工作流里的 agent 看不到整段对话，只看得到自己的 prompt 和用户的最新一条消息；用户中途问了别的，所有 agent 都可能拒做或去答那个问题。每次生成参数都加 `--request "<用户的请求原话>"`，每个 prompt 开头就会写明这一步是替用户的哪个请求干的。
 - **`args` 传 JSON 对象。** 传字符串脚本也能解析，但一不小心就会变成整段字符串。
 - **每人一个工作流，并行启动。** 每个工作流的并发上限是 min(16, CPU 数 − 2)，4 核容器只有 2。按成员的工作流（T1、T3.1–T3.7、T4）给每人各起一个，`members` 只放这一位，在同一条消息里一起发出。T2 和 T3.8 要等全体，只起一个。
 - **续跑。** 工作流中断、被停或改了脚本以后，用同样的 `scriptPath` 和 `args` 加上一次结果里的 `runId`：`Workflow({scriptPath, args, resumeFromRunId: "<runId>"})`。没改过的 agent 调用直接返回缓存结果，从第一个改动过的调用开始重新跑。脚本自己也有续跑的办法：T1 的 `from`/`to`，T3.5 的 `overwrite: false` 与 `only`，T3.3 的 `only_chunks`，T3.6 和 T4 的 `from`（人工修好 SKILL.md 后用 `from: "verify"` 只重跑复核和修复，每人省下约 240 万 token 的重新挖卡片）。
@@ -97,7 +101,7 @@ node scripts/workflows/dry_run.mjs scripts/workflows/team-read.js --team product
 # team-layer.js / team-integrate.js 预览时不给 --member：它们要全体成员（给了会警告，少了人 team-layer 连圆桌都不写）
 ```
 
-别拿 `examples/` 的参数文件加 `--team` 当真预览：那些参数描述的是虚构的示例团队。真这么用时，`--team` 会把 `roundtable` 换成 `team.json` 的、删掉示例专用的值（`user_context`、`notes`、`what`、`skip_ids`、`batch_files`、`batches`、`only`、`only_chunks`、`since`、`label`）、把日期换成今天，每一处都打印一行 `note`；但真正启动一定用 `make_args.mjs` 生成的参数。
+别拿 `examples/` 的参数文件加 `--team` 当真预览：那些参数描述的是虚构的示例团队。真这么用时，`--team` 会把 `roundtable` 换成 `team.json` 的、删掉示例专用的值（`request`、`user_context`、`notes`、`what`、`skip_ids`、`batch_files`、`batches`、`only`、`only_chunks`、`since`、`label`）、把日期换成今天，每一处都打印一行 `note`；但真正启动一定用 `make_args.mjs` 生成的参数。
 
 输出依次是：`meta`（名称、说明、阶段）；每个 agent 调用的编号、阶段、label、schema 字段和 prompt 开头（和前面某个 prompt 相同的前缀，比如共同的规矩，缩成一行）；`log()` 的每一行；返回值；最后是汇总（agent 数、按阶段分布、prompt 总长、没走到的阶段、警告）。
 
@@ -110,7 +114,7 @@ node scripts/workflows/dry_run.mjs scripts/workflows/team-read.js --team product
 | `--items N` | 假结果里每个数组放 N 项，字符串换成 `<字段>` 占位符（默认数组为空、字符串为空） |
 | `--bools MODE` | `happy`（默认：布尔值为 true，但 blocked、skipped、failed、missing 这类字段为 false，走正常路径）、`true`、`false`（走「没通过」「没准备好」的分支） |
 | `--answers FILE` | 按 label 指定假结果：`{"<label 正则>": 值}`，第一个匹配的键生效。值是对象时按 schema 合并进假结果（没给的字段自动补齐）；`null` 表示 agent 死了；数组表示依次调用的结果（最后一个重复用）。以 `_` 开头的键是注释 |
-| `--team DIR` / `--member a,b` | 从 `<repo>/DIR/team.json` 读成员并设置 `args.team`；`--member` 只留这几位。不给参数文件时参数由 `make_args.mjs` 生成（可加 `--set KEY=JSON`） |
+| `--team DIR` / `--member a,b` | 从 `<repo>/DIR/team.json` 读成员并设置 `args.team`；`--member` 只留这几位。不给参数文件时参数由 `make_args.mjs` 生成（可加 `--set KEY=JSON`、`--request "…"`） |
 | `--repo PATH` / `--scratch PATH` | args 里字符串 `$REPO`、`$SCRATCH` 替换成什么（默认：本仓库，以及 `<tmpdir>/nuwa-dry-run/<team>`） |
 | `--forbid RE` | prompt 匹配这个正则就警告，如 `--forbid 'dfo\|powell\|/home/'`，查有没有漏掉的旧团队内容 |
 | `--strict` | 有警告时退出码为 2（工作流抛错或语法错误是 1） |
@@ -170,7 +174,7 @@ bash scripts/workflows/selftest.sh product/dfo-team    # 参数是一支已完�
 
 写工作流的规矩：
 - 用纯 JavaScript，开头是纯字面量的 `export const meta = {...}`；
-- 每个 agent 调用都经过 `A()`，带 `opts.phase` 和 `opts.label`，都用 schema；
+- 每个 agent 调用都经过 `A()`（它在 prompt 前面加上 `request` 那一段和共同的规矩），带 `opts.phase` 和 `opts.label`，都用 schema；
 - 跳过或丢掉的东西都要 `log()`；
 - 不用 `Date.now()`、`Math.random()`、`new Date()`，不用文件系统 API；
 - 不写死路径、团队、研究者或领域；

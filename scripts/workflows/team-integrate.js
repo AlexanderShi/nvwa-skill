@@ -22,6 +22,7 @@ export const meta = {
  *   args.members  array of member objects copied from team.json (slug, name, surname, living, hint, scholar,
  *                 dblp, orcid, homepage, chase_hints, student_mode). This step is team-level: it needs all
  *                 members together, so it runs once for the team (no per-member pipeline); pass every member.
+ *   args.request  optional: the user's request in their own words; opens every agent prompt (set with make_args.mjs --request)
  *
  * Args specific to team-integrate:
  *   args.root_readme      default false: also refresh this team's one row/line in <repo>/README.md (nothing else there)
@@ -53,7 +54,7 @@ a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '
 if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-integrate: args.repo and args.scratch must be absolute paths')
 if (String(a.team).startsWith('/')) throw new Error('team-integrate: args.team must be relative to args.repo, e.g. "product/<team>"')
 // args keys this workflow reads (all snake_case); anything else is logged. Old camelCase names still work as aliases.
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'root_readme', 'new_fault_lines']
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'request', 'root_readme', 'new_fault_lines']
 const RENAMED = { rootReadme: 'root_readme', newFaultLines: 'new_fault_lines' } // old camelCase name -> current name
 const ALIAS_OF = Object.fromEntries(Object.entries(RENAMED).map(([o, k]) => [k, o]))
 function arg(key) { return a[key] !== undefined ? a[key] : ALIAS_OF[key] ? a[ALIAS_OF[key]] : undefined }
@@ -65,6 +66,12 @@ for (const [old, key] of Object.entries(RENAMED)) {
 }
 const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k) && !(k in RENAMED))
 if (unknownArgs.length) log(`team-integrate.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
+// args.request (optional): the user's request in their own words. Workflow agents see only their prompt and the
+// user's latest message in the launching session; when that message is a side question they may decline the step,
+// so A() opens every prompt with the request.
+const REQUEST = typeof a.request === 'string' ? a.request.replace(/\s+/g, ' ').trim() : ''
+if (a.request !== undefined && a.request !== null && typeof a.request !== 'string') log(`team-integrate.js: args.request must be a string (the user's request in their own words), got ${Array.isArray(a.request) ? 'array' : typeof a.request}; ignored`)
+const WHY = REQUEST ? `Why this agent runs: in the session that launched this workflow the user asked: "${REQUEST}". This agent is one step of that work (research-team kit, team-integrate.js, stage T3.8). Do the step below.\n\n` : ''
 
 const REPO = String(a.repo).replace(/\/+$/, '')
 const TEAM_REL = String(a.team).replace(/^\.\//, '').replace(/\/+$/, '')
@@ -78,7 +85,7 @@ const MEMBERS = a.members
 
 function A(prompt, opts) {
   if (!opts || !opts.phase || !opts.label) throw new Error('A() needs opts.phase and opts.label')
-  return agent(prompt, opts)
+  return agent(`${WHY}${prompt}`, opts)
 }
 function bk(name) { return `${SCR}/${TEAM_NAME}-${name}.before-integrate-${DATE}.md` }
 const memberLine = MEMBERS.map(m => `${m.name} (${m.slug}${m.student_mode ? ', student_mode' : ''})`).join('; ')
