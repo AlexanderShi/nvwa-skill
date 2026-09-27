@@ -1,0 +1,78 @@
+[
+ {
+  "id": "S143",
+  "year": "2009",
+  "title": "OPTIMA 79: Geometry in model-based algorithms for derivative-free unconstrained optimization (feature article)",
+  "read_level": "full",
+  "contribution": "Single-author expository essay (OPTIMA 79, May 2009) that states, in Scheinberg's own words, the minimal-geometry position of model-based DFO: sample-set geometry is necessary for convergence (shown by a hand-checkable counterexample on the Fasano-Nocedal-Morales geometry-free method), but extra sample points are needed only when the model gradient becomes small, thanks to the self-correcting property of the trust-region framework (Scheinberg-Toint algorithm).",
+  "problem_entry": "Theory-practice gap: the CSV convergence theory strongly depends on model-improvement steps, while the geometry-free Fasano-Nocedal-Morales code was 'least wasteful' with 'quite encouraging' results; asked outright whether geometry matters (pp. 3-4).",
+  "key_idea": "A failed trust-region step implies a large model error, which by the Lagrange error bound (3.3) implies a far point or a large |l_j(x+)|, so swapping in x+ repairs geometry for free; dedicated geometry work is confined to a criticality step with a shrinking threshold (pp. 4-5).",
+  "assumptions": "Unconstrained, Lipschitz gradient, derivatives unavailable or too costly, exact f (noise only as motivation), poised set with Lambda > 1; convergence 'under the usual and reasonable conditions' left unspecified (pp. 1-5).",
+  "proof_devices": [
+   "Lagrange representation m(x)=sum f(y_j) l_j(x) and error bound |m-f| <= M sum ||y_j-x||^{d+1}|l_j(x)| (3.2)-(3.3), p. 2",
+   "Lambda-poisedness and finite-termination swap lemma (Lemma 3.3), p. 2",
+   "fully-linear / fully-quadratic model abstraction with a finite certify-or-construct requirement, p. 3",
+   "Cauchy decrease condition as the only step requirement, p. 3",
+   "hand-checkable 2-D counterexample: six points around (10,0), model degenerates to x1^2, stops at (0,0) where grad f = (0,10*alpha), p. 4",
+   "contrapositive reading of the error bound: unsuccessful step => far point or large Lagrange value => improving swap (self-correction), p. 4",
+   "order-independence of the counterexample => criticality step is the irreducible safeguard, p. 5",
+   "cost-accounting argument: Lagrange-polynomial upkeep costs the same as model upkeep, p. 5"
+  ],
+  "experiments": "none of her own; Fasano et al. results reported only qualitatively, with the caveat that they used full quadratic models; Figure 1 only illustrates the counterexample (pp. 4-5).",
+  "positioning": "History told along the geometry axis (Nelder-Mead adapts and collapses; pattern search fixes shape, gains convergence, loses curvature; model-based methods must maintain geometry); credits then refutes Fasano-Nocedal-Morales; presents the new algorithm as the closest convergent algorithm to NEWUOA and DFO; Moré-Wild not cited (pp. 1-6).",
+  "writing": "Question-driven section titles, a necessary-however-not-necessary-unless contribution sentence, intuition paragraph before the algorithm with rigour delegated to [20], abstraction before instantiation, light hedging, zero proofs, some newsletter-level typos (pp. 1-5).",
+  "limits_future": "Only a first-order limit-point result; 'It remains to be seen' whether stronger theory holds; no numerics for the new algorithm; noise and constraints untreated; why inaccurate quadratic models work is left to Nocedal's column (pp. 1-5).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Stated, first person: geometry necessary; extra points only when model gradient small; criticality step irreducible; Lagrange bookkeeping at no extra cost. Say-do consistent with S030 (c01). Correction: the Moré-Wild framing and 'only minimal quality controls' wording in SKILL.md are Nocedal's (column, p. 6), not Scheinberg's; title now verified; she was co-editor of Optima (p. 10).",
+    "pages": "pp. 2-5; p. 6 (Nocedal); p. 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Self-correction credited to the trust-region framework; new algorithm differs from the CSV framework only in Steps 1, 4b and 5; closeness to practical codes offered as merit.",
+    "pages": "pp. 3-5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Deterministic precursor of the oracle contract: fully-linear models tie gradient error to kappa_eg*Delta on the ball, and the algorithm only needs a finite certify-or-construct procedure; no probability yet (BSV 2014 later makes it probabilistic).",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "explain the practitioners' anomaly",
+    "evidence": "Stated form: credits the geometry-free code's efficiency and results, asks whether geometry matters, answers with a counterexample plus the self-correcting mechanism and an algorithm that pays for geometry only at criticality; practiced form in S030 (c01).",
+    "pages": "pp. 3-5"
+   },
+   {
+    "pattern": "closest convergent relative of the practical code",
+    "evidence": "New algorithm sold as the closest theoretically convergent algorithm to NEWUOA and DFO; SKILL.md reports the same framing for the 2026 Powell-style preprint.",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Tell the field's history along one design axis (here sample-set geometry) so each prior method is a success and a failure on that axis and your contribution is the next point (pp. 1-2).",
+   "Write the algorithm against an abstract quality property (fully linear: ||grad f - grad m|| <= kappa_eg*Delta on the ball) plus a finite certify-or-construct requirement, then instantiate (p. 3).",
+   "Read the error bound backwards: failed step => large error => large controllable quantity => a free repair move (p. 4).",
+   "Hand-checkable 2-D counterexample, non-stationarity verified by direct differentiation, plus an argument that the outcome is independent of the replacement rule, which isolates the irreducible safeguard (pp. 4-5).",
+   "Answer a cost objection by showing the added bookkeeping costs the same as the model update, so per-iteration cost matches the heuristic competitor except on rare criticality iterations (p. 5).",
+   "Credit a competitor's efficiency before refuting its guarantee, and name what its experiments relied on (full quadratic models) (p. 4).",
+   "One contribution sentence pairing necessity with minimal sufficiency: X is necessary for G; however, X is not needed unless Y (p. 4)."
+  ],
+  "coauthors": "none (single author); issue co-edited with A. Caprara under editor A. Lodi",
+  "quotes": [
+   {
+    "text": "it turns out that it is not necessary to compute extra sample points unless the gradient of the model becomes small.",
+    "page": 4
+   },
+   {
+    "text": "We also note that in fact this new algorithm is the closest theoretically convergent algorithm to the practical implementations in [19] and [6] that exist so far.",
+    "page": 5
+   }
+  ]
+ }
+]

@@ -1,0 +1,897 @@
+[
+ {
+  "id": "S039",
+  "year": "1996",
+  "title": "Extension of Karmarkar's algorithm onto convex quadratically constrained quadratic problems",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Extension of Karmarkar's projective LP method to convex QCQP (metadata). Secondary, unverified: Semantic Scholar TLDR (machine summary of the elided abstract) says projective transformation and log-barrier analogues extend the method word by word with a polynomial iteration bound.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "[inferred from title] Builds on Karmarkar (LP); earliest listed journal paper, with Nemirovskii (metadata).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "LP-to-conic transplant",
+    "evidence": "secondary evidence only (Semantic Scholar TLDR): Karmarkar's LP method re-derived for QCQP; check in full text",
+    "pages": "metadata / secondary summary"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "A. Nemirovskii",
+  "quotes": []
+ },
+ {
+  "id": "S134",
+  "year": "1997",
+  "title": "Issues related to interior point methods for linear and semidefinite programming",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] PhD thesis (Columbia 1997) on interior-point methods for LP and SDP; advisor D. Goldfarb per a search summary of Wikipedia (paraphrase). Likely root of S027/S040/S091 and the Goldfarb-Scheinberg IPM linear-algebra line (inferred).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author (advisor D. Goldfarb, search summary)",
+  "quotes": []
+ },
+ {
+  "id": "S027",
+  "year": "1998",
+  "title": "Interior point trajectories in semidefinite programming",
+  "read_level": "abstract",
+  "contribution": "Existence and convergence of primal and dual SDP central paths to analytic centres of the optimal faces under strict feasibility; a class of central-path-like trajectories through any interior (feasible or infeasible) point, with convergence of the trajectories and their derivatives (abstract).",
+  "problem_entry": "Carries Megiddo's LP-trajectory work to SDP interior-point trajectories, including the central path (abstract).",
+  "key_idea": "Generalise the central path to a family of trajectories indexed by an arbitrary interior starting point and study limits and derivatives (abstract).",
+  "assumptions": "Primal and dual strict feasibility (abstract).",
+  "proof_devices": [],
+  "experiments": "none stated (abstract)",
+  "positioning": "Explicitly inspired by Megiddo (1989) on LP trajectories (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Methods 1-6",
+    "relation": "none",
+    "note": "deterministic conic theory; no oracle, estimator or DFO model",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "LP-to-conic transplant",
+    "evidence": "named LP result (Megiddo trajectories) re-proved for SDP",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When analysing a path-following method, define a family of central-path-like trajectories indexed by the starting point (feasible or infeasible) and prove convergence for the whole family, so warm and infeasible starts are covered (abstract)."
+  ],
+  "coauthors": "D. Goldfarb",
+  "quotes": [
+   {
+    "text": "This work was inspired by the seminal work of Megiddo on linear programming trajectories",
+    "page": "abstract"
+   },
+   {
+    "text": "Under an assumption of primal and dual strict feasibility, we show that the primal and dual central paths exist and converge to the analytic centers of the optimal faces of, respectively, the primal and the dual problems.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S040",
+  "year": "1999",
+  "title": "On parametric semidefinite programming",
+  "read_level": "abstract",
+  "contribution": "Parametric SDP (objective linear in a scalar): properties of the optimal value function, extension of the LP optimal partition and its range to SDP, a sensitivity-analysis approach, and extension to parametric right-hand side (abstract).",
+  "problem_entry": "SDP whose objective depends linearly on one scalar parameter (abstract).",
+  "key_idea": "Transplant the LP optimal partition and its range to SDP (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "none stated (abstract)",
+  "positioning": "Positions as extension of LP parametric analysis (optimal partition) to SDP (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Methods 1-6",
+    "relation": "none",
+    "note": "no direct link",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "LP-to-conic transplant",
+    "evidence": "LP optimal partition and its range extended to SDP; optimal-partition-along-a-scalar device reappears in S059 POKER (card s2-01)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "D. Goldfarb",
+  "quotes": [
+   {
+    "text": "We study the properties of the optimal objective function value as a function of that parameter and extend the concept of the optimal partition and its range in linear programming to SDP.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S045",
+  "year": "1999",
+  "title": "A modified barrier-augmented Lagrangian method for constrained minimization",
+  "read_level": "abstract",
+  "contribution": "MBAL method: modified barrier for inequalities plus augmented Lagrangian for equalities, alternating primal minimisation and multiplier updates; Q-linear convergence for large fixed parameter under standard second-order conditions, Q-superlinear with increasing parameter; MBAL-based dual with a basic duality theorem and properties the classical Lagrangian dual lacks (abstract).",
+  "problem_entry": "Constrained minimisation with inequality and equality constraints (abstract).",
+  "key_idea": "Treat each constraint type with the classical device suited to it inside one merit function (abstract).",
+  "assumptions": "Standard second-order optimality conditions (abstract).",
+  "proof_devices": [
+   "two-tier rate: Q-linear at fixed barrier-penalty parameter, Q-superlinear by increasing it after each multiplier update (abstract)"
+  ],
+  "experiments": "not stated in abstract",
+  "positioning": "Combines modified barrier (Polyak) and augmented Lagrangian methods; contrasts its dual with the classical Lagrangian dual (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "keeps and combines two classical methods; no weaker oracle, so only the keep-the-classical-method half",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "State convergence in two tiers: linear rate at a fixed penalty parameter, then superlinear by increasing the parameter after each multiplier update (abstract)."
+  ],
+  "coauthors": "D. Goldfarb, R. Polyak, I. Yuzefovich",
+  "quotes": [
+   {
+    "text": "For a large enough fixed barrier-penalty parameter the MBAL method is shown to converge Q-linearly under the standard second-order optimality conditions.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S034",
+  "year": "2000",
+  "title": "Duality and optimality conditions",
+  "read_level": "metadata",
+  "contribution": "[inferred from title and TOC] Handbook of SDP ch. 4: section 4.1 (Shapiro) duality, optimality conditions, perturbation analysis, pp. 67-91; section 4.2 (Scheinberg) Parametric Linear SDP, pp. 92-110, with subsections optimality conditions, parametric objective function, optimal partition, sensitivity analysis, conclusions (TOC, gbv.de PDF).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "[inferred] Scheinberg's part is a handbook treatment of the S040 material (TOC).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. Shapiro",
+  "quotes": []
+ },
+ {
+  "id": "S065",
+  "year": "2000",
+  "title": "Derivative free optimization method",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] 2000 McMaster report/talk on a derivative-free optimization method, contemporaneous with the Conn-Scheinberg-Toint DFO code (S133, S019); content not determinable (metadata).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": []
+ },
+ {
+  "id": "S091",
+  "year": "2000",
+  "title": "Parametric linear semidefinite programming",
+  "read_level": "metadata",
+  "contribution": "[inferred from title and TOC] Section 4.2 of the S034 Handbook chapter, sole-authored, pp. 92-110 (same pages as the TOC entry); probably a duplicate listing of part of S034; topics: optimality conditions, parametric objective, optimal partition, sensitivity analysis (TOC).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": []
+ },
+ {
+  "id": "S097",
+  "year": "2000",
+  "title": "Efficient implementation of interior point methods for quadratic problems arising in support vector machines",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] IPM implementation for SVM quadratic programs; likely an early version of Fine-Scheinberg JMLR 2001 (S003, low-rank kernel representations, card c2-01) (metadata).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Fine",
+  "quotes": []
+ },
+ {
+  "id": "S080",
+  "year": "2001",
+  "title": "The COIN-OR initiative: accelerating operations research progress through open-source software",
+  "read_level": "metadata",
+  "contribution": "[inferred from title/venue] ORMS Today piece announcing the IBM-led COIN-OR open-source initiative (not a research paper). From the open INFORMS web text (section \"The Open-Source Alternative\", located by grep, paraphrase): Derivative Free Optimization is listed as one of two packages contributed since COIN-OR's debut, for expensive objectives without usable derivatives.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Links Scheinberg's authorship to the DFO package contributed to COIN-OR (web text, paraphrase).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. Lougee-Heimer, F. Barahona, B. L. Dietrich, J. P. Fasano, J. J. Forrest, et al.",
+  "quotes": []
+ },
+ {
+  "id": "S071",
+  "year": "2002",
+  "title": "INCAS: An incremental active set method for SVM",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Incremental active-set SVM solver (IBM tech report 2002); by title, coauthor and date it sits between S059 (NIPS 2001, card s2-01) and S022 (JMLR 2006, card c2-01) (metadata).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Fine",
+  "quotes": []
+ },
+ {
+  "id": "S069",
+  "year": "2005",
+  "title": "Solving structured convex quadratic programs by interior point methods with application to support vector machines and portfolio optimization",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] IPMs for structured convex QP with SVM and portfolio applications; probably the earlier version of S077, whose abstract ends with the same two applications (metadata + S077 abstract).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "D. Goldfarb",
+  "quotes": []
+ },
+ {
+  "id": "S128",
+  "year": "2007",
+  "title": "Assisted seismic matching: Joint inversion of seismic, rock physics and basin modeling",
+  "read_level": "abstract",
+  "contribution": "Application: numerical optimization for joint inversion of basin-modelling, rock-physics and seismic-attribute parameters, including seismic amplitude, to match seismic data (abstract).",
+  "problem_entry": "Inverse estimation of unknown subsurface parameters (abstract).",
+  "key_idea": "Joint inversion across three model layers against seismic data (abstract); optimizer not stated (not read).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "Companion of S102 (EAGE 2007, card s2-01) (metadata).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "Methods 1-6",
+    "relation": "none",
+    "note": "abstract does not name the optimizer; DFO use inferred from coauthors (Conn, Zhang) only",
+    "pages": "metadata"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "U. T. Mello, V. Lopez, A. Conn, H. Zhang, M. Henderson, L. Xu, et al.",
+  "quotes": [
+   {
+    "text": "In this study, we apply numerical optimization techniques to jointly invert parameters for basin modeling, rock physics, and seismic attributes, including seismic amplitude to match seismic data.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S077",
+  "year": "2008",
+  "title": "Numerically stable LDLT factorizations in interior point methods for convex quadratic programming",
+  "read_level": "abstract",
+  "contribution": "Extends the product-form Fletcher-Powell LDLT update (Goldfarb-Scheinberg 2004, LP) to convex QP IPMs with diagonal-plus-low-rank Hessians; stability via uniformly bounded unit-lower-triangular factor entries as the duality gap goes to zero; practicable versions for SVM and portfolio QPs (abstract).",
+  "problem_entry": "IPM linear algebra for convex QP whose Hessian is (or is approximated by) diagonal plus low rank (abstract).",
+  "key_idea": "Prove factor entries uniformly bounded as the duality gap is driven to zero (abstract).",
+  "assumptions": "Hessian diagonal plus low rank (exactly or approximately) (abstract).",
+  "proof_devices": [
+   "uniform boundedness of LDLT factor entries along the IPM path as the duality gap goes to zero (abstract)"
+  ],
+  "experiments": "not stated in abstract",
+  "positioning": "Builds on Fletcher and Powell (1974) and the authors' own 2004 Math. Program. paper (S050) (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "diagonal-plus-low-rank structure of SVM/portfolio QPs exploited in the IPM linear algebra",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "classical Fletcher-Powell update kept and carried to a new class; deterministic, no oracle",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "stability as uniform boundedness in the limit",
+    "evidence": "same proof target stated for the QP case (from s2-01 S050/S058)",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "extend own result to a harder class and list what breaks",
+    "evidence": "LP (2004) to QP stated in abstract; list-what-breaks part not read",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "To certify numerical stability of a factorisation inside an IPM, make the proof target a uniform bound on the triangular factor entries along the path as the duality gap goes to zero (abstract)."
+  ],
+  "coauthors": "D. Goldfarb",
+  "quotes": [
+   {
+    "text": "Our new results are based on showing that the elements of the unit lower triangular matrix in the LDLT factorizations that arise in this context are uniformly bounded as the duality gap is driven to zero.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S126",
+  "year": "2008",
+  "title": "PREFACE: Special section on mathematical programming in data mining and machine learning",
+  "read_level": "metadata",
+  "contribution": "[inferred from title + OpenAlex snippet, paraphrase] Guest-editors' preface to an OMS special section from the workshop Mathematical Programming in Data Mining and Machine Learning at McMaster University; not a research paper.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Community-bridging role between optimization and ML, 2007-2008 (compare S129, card s2-01) (inferred).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. Peng",
+  "quotes": []
+ },
+ {
+  "id": "S127",
+  "year": "2008",
+  "title": "O PTIMA",
+  "read_level": "metadata",
+  "contribution": "[inferred from title and coauthors] An issue of Optima, the MPS newsletter, credited to its editors (Caprara, Lodi, Scheinberg; co-editor from 2007 per a search summary, paraphrase); issue number not identifiable; not a research paper.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. Caprara, A. Lodi",
+  "quotes": []
+ },
+ {
+  "id": "S001",
+  "year": "2009",
+  "title": "Introduction to derivative-free optimization",
+  "read_level": "abstract",
+  "contribution": "First contemporary comprehensive textbook on DFO: Part I sampling and modelling tools (linear, interpolating, regression, underdetermined models; well-poisedness), Part II frameworks and algorithms (directional and simplicial direct search, simplex-gradient line search, DFO and interpolation-based trust-region methods), Part III reviews (surrogates, constraints); convergence analyses for modified Nelder-Mead, implicit filtering, wedge and minimum-Frobenius-norm model methods; software appendix (abstract).",
+  "problem_entry": "Optimization without derivatives, often with noise or non-smoothness (abstract).",
+  "key_idea": "Tools-first organisation: sampling and model tools explain convergence and let the reader compare algorithm families (abstract, contents list).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "not stated in abstract",
+  "positioning": "Claims to be the first contemporary comprehensive treatment of optimization without derivatives (abstract).",
+  "writing": "Organised tools-first (Part I) then by method class (Part II); audience stated broadly (engineers to computer scientists) plus course use (abstract).",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "whole chapter on well-poisedness (Chapter 6) and poisedness-based model tools in Part I",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "comparative framing (identify differences and similarities) without stated head-to-head experiments",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "organize by the user's problem features, not by method class",
+    "evidence": "contrast: this book is organised tools-first, then by method class",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "In a survey or thesis, put the shared analytical toolkit (sample-set geometry, model error bounds) in Part I and present each algorithm family in Part II as a user of it, so convergence arguments can be compared across families (abstract, contents list)."
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "This book explains how sampling and model techniques are used in derivative-free methods and how these methods are designed to efficiently and rigorously solve optimization problems.",
+    "page": "abstract"
+   },
+   {
+    "text": "It contains a comprehensive description of the sampling and modeling tools needed for derivative-free optimization; these tools allow the reader to better understand the convergent properties of the algorithms and identify their differences and similarities.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S038",
+  "year": "2009",
+  "title": "Intensive optimization of masks and sources for 22nm lithography",
+  "read_level": "abstract",
+  "contribution": "Application study: source-mask optimization (SMO) for 22nm lithography; complex source designs give superior solutions to mask-only optimization; programmable sources open process-engineering options (abstract). Scheinberg's role not identifiable.",
+  "problem_entry": "Traditional OPC is edge-by-edge feedback; true optimization adjusts mask (and in SMO source) variables collectively (abstract).",
+  "key_idea": "Few source variables couple directly across the whole mask, many mask variables couple only via neighbour chains, so large-area SMO needs long-range communication; trade-offs among source structure, pattern diversity, design regularity (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "none",
+    "note": "coupling structure described but its exploitation by the optimizer is not stated; needs full text",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. E. Rosenbluth, D. O. Melville, K. Tian, S. Bagheri, J. Tirapu-Azpiroz, K. Lai, et al.",
+  "quotes": [
+   {
+    "text": "SMO's exploitation of complex source designs is shown to provide superior solutions to those obtained by mask optimization alone.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S064",
+  "year": "2009",
+  "title": "Map approach to learning sparse Gaussian Markov networks",
+  "read_level": "abstract",
+  "contribution": "MAP approach with priors on the regularisation parameter for l1-regularised sparse Markov network learning; promising empirical results on synthetic and fMRI data (abstract).",
+  "problem_entry": "l1-regularised ML is convex and efficient but accuracy is very sensitive to the regularisation parameter, whose selection is open (abstract).",
+  "key_idea": "Treat the regularisation parameter via priors and MAP estimation (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "synthetic data and fMRI (abstract); details not read",
+  "positioning": "Extended to a vector of parameters in S079 (abstract of S079).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Methods 1-6",
+    "relation": "none",
+    "note": "no link",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "N. B. Asadi, I. Rish, D. Kanevsky, B. Ramabhadran",
+  "quotes": [
+   {
+    "text": "However, the accuracy of such methods can be very sensitive to the choice of regularization parameter, and optimal selection of this parameter remains an open problem.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S124",
+  "year": "2009",
+  "title": "Sparse Modeling in fMRI Analysis",
+  "read_level": "metadata",
+  "contribution": "[inferred from title and coauthors] Short NeuroImage item (likely conference supplement) from the IBM group on sparse modelling for fMRI; a search summary (paraphrase, unverified) places it at vol. 47 Suppl. 1, pp. S39-S41 and says it summarises sparse regression and sparse Markov network learning for fMRI.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "I. Rish, M. K. Carroll, G. A. Cecchi, R. Garg, A. R. Rao, N. B. Asadi",
+  "quotes": []
+ },
+ {
+  "id": "S042",
+  "year": "2010",
+  "title": "Learning sparse Gaussian Markov networks using a greedy coordinate ascent approach",
+  "read_level": "abstract",
+  "contribution": "SINCO, a greedy coordinate-ascent method for sparse inverse covariance selection that preserves sparsity and parallelises easily; comparable to or better than glasso and COVSEL on structure-reconstruction error (esp. false positives) and time; reproduces regularisation-path behaviour from one small lambda (abstract).",
+  "problem_entry": "Sparse inverse covariance selection = learning a sparse Gaussian Markov network (abstract).",
+  "key_idea": "Greedy coordinate ascent whose iterates at one small lambda trace the regularisation path (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "simulated networks plus biological and neuroimaging data; baselines glasso and COVSEL; metrics structure-reconstruction error and time (abstract)",
+  "positioning": "Compared against glasso and COVSEL; conference version of the SINCO preprint S049 (card s2-02).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "head-to-head vs standard solvers on recovery error and time, not equal-accuracy/evaluation count",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "sparsity-preserving coordinate choice; exploitation not detailed in abstract",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "solver path as model-selection path",
+    "evidence": "stated in the abstract: one small lambda reproduces regularisation-path behaviour, giving a desired number of links without tuning lambda",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "If your solver is greedy, check whether its iterates at one small regularisation value trace the same sparsity/accuracy trade-off as a full regularisation path; if so, report stopping at a target number of links as a tuning-free alternative to a lambda sweep (abstract)."
+  ],
+  "coauthors": "I. Rish",
+  "quotes": [
+   {
+    "text": "Finally, we show that SINCO’s greedy nature allows reproduction of the regularization path behavior by applying the method to one (sufficiently small) instance of the regularization parameter λ only; thus, SINCO can obtain a desired number of network links directly, without having to tune the λ parameter.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S079",
+  "year": "2010",
+  "title": "Sparse Markov net learning with priors on regularization parameters.",
+  "read_level": "abstract",
+  "contribution": "Bayesian MAP formulation treating regularisation parameter(s) as random variables with priors, estimating the inverse covariance and parameters jointly; allows a vector of parameters suited to structured (e.g. scale-free) graphs; better false-positive/false-negative balance on synthetic and real data (abstract).",
+  "problem_entry": "Structure recovery in Gaussian Markov networks is sensitive to the regularisation parameter (abstract).",
+  "key_idea": "Vector of regularisation parameters with priors, jointly estimated by MAP (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "synthetic and real-life datasets (abstract); details not read",
+  "positioning": "Extends S064 (scalar prior) to a vector of parameters (abstracts of S064 and S079).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Methods 1-6",
+    "relation": "none",
+    "note": "no link",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "I. Rish, N. B. Asadi",
+  "quotes": [
+   {
+    "text": "Herein, we adopt a Bayesian approach, treating the regularization parameter(s) as random variable(s) with some prior, and using MAP optimization to find both the inverse covariance matrix and the unknown regularization parameters.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S096",
+  "year": "2011",
+  "title": "17 Optimization Methods for Sparse Inverse Covariance Selection",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] MIT Press book chapter (Optimization for Machine Learning, ch. 17, pp. 455-478) surveying optimization methods for sparse inverse covariance selection; with Ma (coauthor of S010, card c01), probably covering alternating linearization and SINCO-type methods (inferred from title and coauthor only).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Ma",
+  "quotes": []
+ },
+ {
+  "id": "S101",
+  "year": "2012",
+  "title": "Fast first-order methods for composite convex optimization with large steps",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] A version of the Scheinberg-Goldfarb accelerated composite-methods paper (same title stem as S067 \"with line search\" 2011 and S028 \"with backtracking\" FoCM 2014, card s2-02); \"large steps\" suggests the version letting the prox step grow (inferred from title only).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "D. Goldfarb",
+  "quotes": []
+ },
+ {
+  "id": "S090",
+  "year": "2015",
+  "title": "A scalable solution for group feature selection",
+  "read_level": "abstract",
+  "contribution": "Group-penalised logistic regression at scale: L-BFGS quadratic approximation of the logistic loss plus block coordinate descent per group, Spark/Python implementation; scalable approaches keyed to data regime; bottlenecks for many points/few groups; synthetic and manufacturing experiments (abstract).",
+  "problem_entry": "Classifier with fewer features where features come in predefined groups and data may not fit in memory (abstract).",
+  "key_idea": "Quasi-Newton quadratic model of the smooth loss plus group-wise block coordinate descent, chosen per data regime (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "synthetic data and real manufacturing data (abstract); details not read",
+  "positioning": "",
+  "writing": "Contributions enumerated (1)-(4) in the abstract (abstract).",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "group structure dictates solver: quasi-Newton model plus block coordinate descent over groups (cf. LHAC, S011)",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "organize by the user's problem features, not by method class",
+    "evidence": "approaches keyed to data regime (many points / many features / many groups)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "In a scalability paper, lay out solutions as a case split on data shape (n large, p large, many groups) and name the bottleneck for each case (abstract)."
+  ],
+  "coauthors": "P. Govindan, R. Chen, S. Srinivasan",
+  "quotes": [
+   {
+    "text": "we discuss different scalable approaches, depending on characteristics of the dataset, such as, large number of data points or large number of features or large number of groups",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S120",
+  "year": "2015",
+  "title": "Derivative Free Optimization of Complex Systems with the Use of Statistical Machine Learning Models",
+  "read_level": "abstract",
+  "contribution": "AFOSR project report: DFO methods using local models built from randomly sampled points, accurate only with some probability; focus on the new convergence theory this requires (abstract).",
+  "problem_entry": "DFO for complex systems using statistical-learning techniques and models (abstract).",
+  "key_idea": "Random sampling gives fairly accurate models with few samples, but only with known probability, not known when (abstract).",
+  "assumptions": "Only the probability of an accurate model is known (abstract).",
+  "proof_devices": [],
+  "experiments": "not stated in abstract",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "stated by the PI (2015): models accurate only with some high probability, only that probability known",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "random sampling replaces deterministic sampling geometry",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 3",
+    "relation": "none",
+    "note": "abstract says only novel convergence theory",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole PI",
+  "quotes": [
+   {
+    "text": "The key difference with the deterministic sampling approaches is that these accurate models are constructed with some high probability, but not always.",
+    "page": "abstract"
+   },
+   {
+    "text": "Only the probability of an accurate model occurring is known.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S118",
+  "year": "2016",
+  "title": "Continuous Optimization: Challenges and Applications",
+  "read_level": "metadata",
+  "contribution": "[inferred from metadata] Alphabetical many-author list (Attouch, Bach, Barzilai, Bauschke, Ben-Israel, Bertsimas, ...) suggests a collective community document rather than a research paper; Scheinberg's role not determinable.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "H. Attouch, F. Bach, J. Barzilai, H. Bauschke, A. Ben-Israel, D. Bertsimas, ...",
+  "quotes": []
+ },
+ {
+  "id": "S119",
+  "year": "2016",
+  "title": "AF: Small: New classes of optimization methods for nonconvex large scale machine learning models.",
+  "read_level": "abstract",
+  "contribution": "NSF CCF-1618717 (2016-2020, Lehigh): planned research on (1) approximate second-order information inside stochastic methods, (2) set within trust-region frameworks, (3) parallel/distributed trust-region subproblem solvers, for nonconvex ML (NSF award abstract, paraphrase; not in abstracts.json). Output list in the NSF record includes Cartis-Scheinberg, STORM, the stochastic line search, SARAH and Adaptive Stochastic Optimization.",
+  "problem_entry": "Nonconvex ML models: known methods may stall or need tiny steps, often lack convergence guarantees and do not always work in practice (award abstract, paraphrase).",
+  "key_idea": "Second-order information plus trust-region frameworks for stochastic nonconvex ML, with distributed subproblem solvers (award abstract, paraphrase).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Lay abstract built on one analogy (hikers with a light) mapped to the three thrusts (award abstract).",
+  "limits_future": "plan, not results (award abstract)",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "stated: trust region kept as the frame, second-order/stochastic information added inside it",
+    "pages": "NSF award abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "For a public grant abstract, use one lay analogy and map each research thrust onto one element of it (award abstract)."
+  ],
+  "coauthors": "co-PIs M. Takac, F. E. Curtis (former)",
+  "quotes": []
+ },
+ {
+  "id": "S062",
+  "year": "2017",
+  "title": "On the construction of quadratic models for derivative-free trust-region algorithms",
+  "read_level": "abstract",
+  "contribution": "Two conditions on quadratic models for DFO trust-region methods on convex-constrained problems: sample-set poisedness and bounded model error at sample points; the second holds for SVR models; together they give O(delta_k) gradient error and global convergence of a two-radius trust-region method; preliminary experiments with and without noise (abstract).",
+  "problem_entry": "Which model conditions ensure global convergence of sampling-based DFO trust-region methods for convex-constrained problems (abstract).",
+  "key_idea": "Split model quality into poisedness (algorithm-controlled) and error-at-sample-points (model-class property); prove the latter for SVR (abstract).",
+  "assumptions": "Convex constraints; sample-set diameter controlled by delta_k separately from the trust-region radius (abstract).",
+  "proof_devices": [
+   "conditions (i) poisedness + (ii) error at sample points imply gradient error O(delta_k), which feeds standard trust-region convergence (abstract)"
+  ],
+  "experiments": "preliminary, functions with and without noise (abstract); details not read",
+  "positioning": "Precursor in Portuguese: S121 (card s2-03).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "poisedness kept as certificate; separate sampling radius delta_k decoupled from trust-region radius",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "deterministic contract: gradient error O(delta_k) scaled to a controlled radius",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import",
+    "evidence": "SVR (ML regressor) admitted as DFO model builder once condition (ii) holds",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "convergence by embedding in an existing framework",
+    "evidence": "conditions give O(delta_k) gradient error, the standard input to trust-region convergence",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "To admit a new model class into a model-based DFO method, split the quality requirement into sample-set poisedness (algorithm-controlled) and bounded model error at the sample points (model-class property), then prove only the latter for the new class (abstract)."
+  ],
+  "coauthors": "A. Verdério, E. W. Karas, L. G. Pedroso",
+  "quotes": [
+   {
+    "text": "The first condition requires the poisedness of the sample sets, as usual in this context, while the other one is related to the error between the model and the objective function at the sample points.",
+    "page": "abstract"
+   },
+   {
+    "text": "Although the second condition trivially holds if the model is constructed by polynomial interpolation, since in this case the model coincides with the objective function at the sample set, we show that it also holds for models constructed by support vector regression.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S116",
+  "year": "2017",
+  "title": "Chapter 39: Volumetric Alignment of Protein-Binding Cavities",
+  "read_level": "metadata",
+  "contribution": "[inferred from title, coauthors and the first paragraph of section 39.1 via OpenAlex, paraphrase] Book-chapter version of the protein binding-cavity alignment work (S085 BIBM 2012, card s2-02; S094 BIBM 2015, card s2-03); section 39.1 motivates by protein binding specificity; optimization method not read.",
+  "problem_entry": "[section 39.1 opening, paraphrase] Understanding why proteins bind some partners, via shape, charge and other biophysical properties.",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. Chen, B. Y. Chen",
+  "quotes": []
+ }
+]

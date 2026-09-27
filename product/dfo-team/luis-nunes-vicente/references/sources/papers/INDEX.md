@@ -10,129 +10,129 @@
 
 | # | ID | Year | Title | Venue | Cites | Kind | Source | Full text | Pages | Role | Read |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | S001 | 2009 | Introduction to Derivative-Free Optimization | Society for Industrial and Applied Mathematics | 2876 | book | — | no-oa |  | core | — |
-| 2 | S002 | 1994 | Bilevel and multilevel programming: A bibliography review | Journal of Global optimization | 930 | journal | url | txt | 23 | core | — |
-| 3 | S003 | 2011 | Direct multisearch for multiobjective optimization | SIAM Journal on Optimization | 540 | journal | url | txt | 33 | core | — |
-| 4 | S004 | 1994 | Descent approaches for quadratic bilevel programming | Journal of Optimization Theory and Applications | 483 | journal | — | no-oa |  | core | — |
-| 5 | S005 | 2007 | A particle swarm pattern search method for bound constrained global optimization | Journal of Global Optimization | 460 | journal | url | txt | 31 | core | — |
-| 6 | S006 | 2009 | Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points | SIAM Journal on Optimization | 321 | journal | url | txt | 29 | core | — |
-| 7 | S007 | 2004 | A globally convergent primal-dual interior-point filter method for nonlinear programming | Mathematical Programming | 313 | journal | url | txt | 32 | core | — |
-| 8 | S008 | 2007 | Using sampling and simplex derivatives in pattern search methods | SIAM Journal on Optimization | 240 | journal | url | txt | 20 | core | — |
-| 9 | S009 | 1996 | Discrete linear bilevel programming problem | Journal of Optimization Theory and Applications | 225 | journal | — | no-oa |  | core | — |
-| 10 | S010 | 2008 | Geometry of interpolation sets in derivative free optimization | Mathematical Programming | 210 | journal | url | txt | 26 | core | — |
-| 11 | S011 | 1998 | Trust-region interior-point SQP algorithms for a class of nonlinear programming problems | SIAM Journal on Control and Optimization | 204 | journal | url | txt | 48 | core | — |
-| 12 | S012 | 2010 | Incorporating minimum Frobenius norm models in direct search | Computational Optimization and Applications | 201 | journal | url | txt | 17 | core | — |
-| 13 | S013 | 2002 | Analysis of inexact trust-region SQP algorithms | SIAM Journal on Optimization | 192 | journal | url | txt | 18 | core | — |
-| 14 | S014 | 2014 | Convergence of trust-region methods based on probabilistic models | SIAM Journal on Optimization | 181 | journal | arXiv | txt | 29 | core | — |
-| 15 | S015 | 2019 | Complexity of gradient descent for multiobjective optimization | Optimization Methods and Software | 164 | journal | url | txt | 10 | core | — |
-| 16 | S016 | 2022 | Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach | Computational Management Science | 160 | journal | arXiv | txt | 18 | core | — |
-| 17 | S017 | 2024 | The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning | Annals of Operations Research | 157 | journal | arXiv | txt | 30 | core | — |
-| 18 | S018 | 2009 | PSwarm: A hybrid solver for linearly constrained global derivative-free optimization | Optimization Methods and Software | 157 | journal | url | txt | 22 | core | — |
-| 19 | S019 | 2015 | Direct search based on probabilistic descent | SIAM Journal on Optimization | 133 | journal | url | txt | 29 | core | — |
-| 20 | S020 | 2008 | Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation | IMA Journal of Numerical Analysis | 132 | journal | url | txt | 28 | core | — |
-| 21 | S021 | 1994 | A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables | Mathematics of Computation | 128 | journal | — | no-oa |  | core | — |
-| 22 | S022 | 2006 | Multicriteria approach to bilevel optimization | Journal of Optimization Theory and Applications | 126 | journal | url | txt | 14 | core | — |
-| 23 | S023 | 2013 | Worst case complexity of direct search | EURO Journal on Computational Optimization | 118 | journal | url | txt | 11 | core | — |
-| 24 | S024 | 2012 | Analysis of direct searches for discontinuous functions | Mathematical Programming | 117 | journal | url | txt | 31 | core | — |
-| 25 | S025 | 2004 | Pattern search methods for user-provided points: Application to molecular geometry problems | SIAM Journal on Optimization | 101 | journal | url | txt | 21 | core | — |
-| 26 | S026 | 1994 | Generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software (TOMS) | 100 | journal | manual | txt | 17 | supplement | — |
-| 27 | S027 | 2018 | Complexity and global rates of trust-region methods based on probabilistic models | IMA Journal of Numerical Analysis | 99 | journal | url | txt | 18 | supplement | — |
-| 28 | S028 | 2008 | Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity | European Journal of Operational Research | 98 | journal | url | txt | 27 | supplement | — |
-| 29 | S029 | 2012 | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | Mathematical Programming | 96 | journal | arXiv | txt | 31 | supplement | — |
-| 30 | S030 | 2008 | Using simplex gradients of nonsmooth functions in direct search methods | IMA Journal of Numerical Analysis | 96 | journal | manual | txt | 14 | supplement | — |
-| 31 | S031 | 1997 | On the convergence theory of trust-region-based algorithms for equality-constrained optimization | SIAM Journal on Optimization | 76 | journal | url | txt | 25 | supplement | — |
-| 32 | S032 | 2016 | Trust-region methods without using derivatives: Worst case complexity and the non-smooth case | SIAM Journal on Optimization | 73 | journal | url | txt | 27 | supplement | — |
-| 33 | S033 | 1993 | Generating linear and linear-quadratic bilevel programming problems | SIAM Journal on Scientific Computing | 70 | journal | — | no-oa |  | supplement | — |
-| 34 | S034 | 2013 | Smoothing and worst case complexity for direct-search methods in non-smooth optimization | IMA Journal of Numerical Analysis | 69 | journal | url | txt | 21 | supplement | — |
-| 35 | S035 | 2017 | Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models | PloS one | 62 | journal | unpaywall | txt | 13 | supplement | — |
-| 36 | S036 | 2018 | On the optimal object orientation in additive manufacturing | The International Journal of Advanced Manufacturing Technology | 60 | journal | url | txt | 16 | supplement | — |
-| 37 | S037 | 1996 | Trust-region interior-point algorithms for minimization problems with simple bounds | Applied Mathematics and Parallel Computing, Festschrift for Klaus Ritter | 58 | chapter | url | txt | 10 | supplement | — |
-| 38 | S038 | 2017 | Methodologies and software for derivative-free optimization | Advances and Trends in Optimization with Engineering Applications (MOS-SIAM Series on Optimization), SIAM | 52 | chapter | url | txt | 21 | supplement | — |
-| 39 | S039 | 1999 | Two-step algorithms for nonlinear optimization with structured applications | SIAM Journal on Optimization | 51 | journal | url | txt | 26 | supplement | — |
-| 40 | S040 | 1996 | Trust-Region Interior Point Algorithms for a Class of Nonlinear Programming Problems | PhD Thesis, Rice University | 51 | thesis | url | txt | 182 | supplement | — |
-| 41 | S041 | 2016 | On the optimal order of worst case complexity of direct search | Optimization Letters | 50 | journal | url | txt | 9 | core | — |
-| 42 | S042 | 2025 | Inexact bilevel stochastic gradient methods for constrained and unconstrained lower-level problems | Journal of Global Optimization | 49 | journal | arXiv | txt | 45 | core | — |
-| 43 | S043 | 2016 | Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation | SIAM/ASA Journal on Uncertainty Quantification | 49 | journal | url | txt | 29 | supplement | — |
-| 44 | S044 | 2005 | Space mapping for optimal control of partial differential equations | SIAM Journal on Optimization | 45 | journal | url | txt | 24 | supplement | — |
-| 45 | S045 | 2019 | Direct search based on probabilistic feasible descent for bound and linearly constrained problems | Computational Optimization and Applications | 43 | journal | url | txt | 32 | supplement | — |
-| 46 | S046 | 2016 | Worst case complexity of direct search under convexity | Mathematical Programming | 43 | journal | url | txt | 24 | core | — |
-| 47 | S047 | 2012 | Bilevel derivative-free optimization and its application to robust optimization | Optimization Methods and Software | 42 | journal | url | txt | 24 | supplement | — |
-| 48 | S048 | 1999 | An interface optimization and application for the numerical solution of optimal control problems | ACM Transactions on Mathematical Software (TOMS) | 41 | journal | url | txt | 28 | supplement | — |
-| 49 | S049 | 2014 | A merit function approach for direct search | SIAM Journal on Optimization | 40 | journal | url | txt | 19 | core | — |
-| 50 | S050 | 2015 | Globally convergent evolution strategies | Mathematical Programming | 39 | journal | url | txt | 22 | core | — |
-| 51 | S051 | 2011 | On partially sparse recovery | Preprint 11-13, Dept. Mathematics, Univ. Coimbra | 39 | preprint | arXiv | txt | 6 | supplement | — |
-| 52 | S052 | 1995 | Geometry and local optimality conditions for bilevel programs with quadratic strictly convex lower levels | Minimax and applications | 39 | chapter | — | no-oa |  | supplement | — |
-| 53 | S053 | 1993 | A new technique for generating quadratic programming test problems | Mathematical Programming | 39 | journal | manual | txt | 15 | supplement | — |
-| 54 | S054 | 2002 | Local convergence of a primal-dual method for degenerate nonlinear programming | Computational Optimization and Applications | 38 | journal | url | txt | 16 | supplement | — |
-| 55 | S055 | 2001 | Bilevel programming: Introduction, history and overview | Encyclopedia of optimization | 38 | chapter | url | txt | 3 | supplement | — |
-| 56 | S056 | 2001 | Algorithms for Solving Non-Linear Constrained and Optimization Problems: The State of The Art | — | 38 | report | manual | txt | 223 | supplement | — |
-| 57 | S057 | 2015 | Globally convergent evolution strategies for constrained optimization | Computational Optimization and Applications | 35 | journal | url | txt | 23 | supplement | — |
-| 58 | S058 | 2019 | Trust-region methods for the derivative-free optimization of nonsmooth black-box functions | SIAM Journal on Optimization | 33 | journal | url | txt | 27 | supplement | — |
-| 59 | S059 | 2008 | SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization | Departamento de Matemática, Universidade de Coimbra | 32 | report | manual | txt | 22 | supplement | — |
-| 60 | S060 | 2020 | A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds | Mathematical Programming | 30 | journal | url | txt | 29 | supplement | — |
-| 61 | S061 | 2014 | Efficient cardinality/mean-variance portfolios | System Modeling and Optimization, Springer series IFIP Advances in Information and Communication Technology | 29 | conference | url | txt | 22 | supplement | — |
-| 62 | S062 | 2003 | Space mapping: Models, sensitivities, and trust-regions methods | Optimization and Engineering | 29 | journal | url | txt | 15 | supplement | — |
-| 63 | S063 | 1992 | Generation of disjointly constrained bilinear programming test problems | Computational Optimization and Applications | 29 | journal | — | no-oa |  | supplement | — |
-| 64 | S064 | 2012 | Optimizing radial basis functions by DC programming and its use in direct search for global derivative-free optimization | TOP | 28 | journal | url | txt | 36 | supplement | — |
-| 65 | S065 | 2022 | A Stochastic Alternating Balance k-Means Algorithm for Fair Clustering | International Conference on Learning and Intelligent Optimization | 25 | conference | arXiv | txt | 15 | supplement | — |
-| 66 | S066 | 2007 | Optimization in Medicine | Springer Verlag | 24 | book | — | no-oa |  | supplement | — |
-| 67 | S067 | 2024 | Stochastic trust-region and direct-search methods: A weak tail bound condition and reduced sample sizing | SIAM Journal on Optimization | 21 | journal | arXiv | txt | 30 | core | — |
-| 68 | S068 | 2016 | A parallel evolution strategy for an earth imaging problem in geophysics | Optimization and Engineering | 21 | journal | url | txt | 23 | supplement | — |
-| 69 | S069 | 1994 | On the solution and complexity of a generalized linear complementarity problem | Journal of Global Optimization | 21 | journal | — | no-oa |  | supplement | — |
-| 70 | S070 | 2024 | Bilevel optimization with a multi-objective lower-level problem: Risk-neutral and risk-averse formulations | Optimization Methods and Software | 20 | journal | arXiv | txt | 23 | core | — |
-| 71 | S071 | 2014 | A surrogate management framework using rigorous trust-region steps | Optimization Methods and Software | 20 | journal | url | txt | 20 | supplement | — |
-| 72 | S073 | 2023 | Full-low evaluation methods for derivative-free optimization | Optimization Methods and Software | 19 | journal | arXiv | txt | 27 | core | — |
-| 73 | S074 | 2016 | A second-order globally convergent direct-search method and its worst-case complexity | Optimization | 19 | journal | url | txt | 27 | supplement | — |
-| 74 | S075 | 2011 | Modelling nearby FGK population I stars: A new form of estimating stellar parameters using an optimization approach | Astronomy & Astrophysics | 18 | journal | url | txt | 10 | supplement | — |
-| 75 | S076 | 2003 | Numerical behavior of a stabilized SQP method for degenerate NLP problems | International Workshop on Global Optimization and Constraint Satisfaction | 18 | conference | url | txt | 19 | supplement | — |
-| 76 | S077 | 2008 | A globally convergent primal-dual interior-point filter method for nonlinear programming: new filter optimality measures and computational results | Preprint 08-49, Dept. Mathematics, Univ. Coimbra | 16 | report | url | txt | 34 | supplement | — |
-| 77 | S078 | 2022 | Optimal 3D printing of complex objects in a 5-axis printer | Optimization and Engineering | 15 | journal | url | txt | 27 | supplement | — |
-| 78 | S079 | 2026 | The limitation of neural nets for approximation and optimization | Journal of Global Optimization | 14 | journal | arXiv | txt | 31 | core | — |
-| 79 | S080 | 2023 | An integrated assignment, routing, and speed model for roadway mobility and transportation with environmental, efficiency, and service goals | Transportation research part C: emerging technologies | 14 | journal | arXiv | txt | 29 | supplement | — |
-| 80 | S081 | 1996 | A comparison between line searches and trust regions for nonlinear optimization | Investigação Operacional | 13 | journal | url | txt | 8 | supplement | — |
-| 81 | S082 | 2012 | Modeling binary stars: age, helium abundance, and convection parameters | Monthly Notices of the Royal Astronomical Society | 12 | journal | url | txt | 9 | supplement | — |
-| 82 | S083 | 2009 | Implicitly and densely discrete black-box optimization problems | Optimization Letters | 11 | journal | url | txt | 9 | supplement | — |
-| 83 | S084 | 2000 | Local convergence of the affine-scaling interior-point algorithm for nonlinear programming | Computational Optimization and Applications | 11 | journal | manual | txt | 13 | supplement | — |
-| 84 | S085 | 2008 | Local analysis of the feasible primal-dual interior-point method | Computational Optimization and Applications | 9 | journal | url | txt | 16 | supplement | — |
-| 85 | S086 | 2024 | Match score dataset for team ball sports | Data in brief | 7 | journal | url | txt | 10 | core | — |
-| 86 | S087 | 2011 | Estimation of risk-neutral density surfaces | Computational Management Science | 7 | journal | url | txt | 34 | supplement | — |
-| 87 | S088 | 2024 | Full-low evaluation methods for bound and linearly constrained derivative-free optimization | Computational Optimization and Applications | 6 | journal | arXiv | txt | 33 | core | — |
-| 88 | S089 | 2022 | Modeling Hessian-vector products in nonlinear optimization: new Hessian-free methods | IMA Journal of Numerical Analysis | 6 | journal | arXiv | txt | 18 | supplement | — |
-| 89 | S090 | 2013 | Inexact solution of NLP subproblems in MINLP | Journal of Global Optimization | 6 | journal | url | txt | 25 | supplement | — |
-| 90 | S091 | 2025 | A stochastic gradient method for trilevel optimization | arXiv preprint arXiv:2505.06805 | 5 | preprint | arXiv | txt | 47 | core | — |
-| 91 | S092 | 2025 | Why is soccer so popular: Understanding underdog achievement and randomness in team ball sports | Journal of Sports Analytics | 5 | journal | arXiv | txt | 26 | core | — |
-| 92 | S093 | 2023 | Convergence rates of the stochastic alternating algorithm for bi-objective optimization | Journal of Optimization Theory and Applications | 5 | journal | arXiv | txt | 19 | supplement | — |
-| 93 | S094 | 2021 | The Sharpe predictor for fairness in machine learning | arXiv preprint arXiv:2108.06415 | 5 | preprint | arXiv | txt | 9 | supplement | — |
-| 94 | S095 | 2002 | Local analysis of a new multipliers method | European Journal of Operational Research | 5 | journal | url | txt | 19 | supplement | — |
-| 95 | S096 | 2025 | Pareto sensitivity, most-changing sub-fronts, and knee solutions | arXiv preprint arXiv:2501.16993 | 4 | preprint | arXiv | txt | 29 | core | — |
-| 96 | S097 | 2014 | Globally convergent DC trust-region methods | Journal of Global Optimization | 4 | journal | url | txt | 18 | supplement | — |
-| 97 | S098 | 2003 | Updating the multipliers associated with inequality constraints in an augmented Lagrangian multiplier method | Journal of Optimization Theory and Applications | 4 | journal | url | txt | 15 | supplement | — |
-| 98 | S099 | 1999 | Characterization of the smoothness and curvature of a marginal function for a trust-region problem | Mathematical Programming | 3 | journal | url | txt | 17 | supplement | — |
-| 99 | S100 | 1993 | Parametric linear programming techniques for the indefinite quadratic programming problem | IMA Journal of Management Mathematics | 3 | journal | — | no-oa |  | supplement | — |
-| 100 | S101 | 2026 | Stochastic set-valued optimization and its application to robust learning | arXiv preprint arXiv:2603.17691 | 2 | preprint | arXiv | txt | 27 | core | — |
-| 101 | S102 | 2025 | Sequential test sampling for stochastic derivative-free optimization | arXiv preprint arXiv:2509.14505 | 2 | preprint | arXiv | txt | 25 | core | — |
-| 102 | S104 | 2017 | An indicator for the switch from derivative-free to derivative-based optimization | Operations Research Letters 45 (4), 353-361 | 2 | journal | url | txt | 17 | supplement | — |
-| 103 | S106 | 2001 | Pattern search methods for user-provided points | Lecture Notes in Computer Science, 95-98 | 2 | conference | url | txt | 4 | supplement | — |
-| 104 | S107 | 2025 | Non-smooth stochastic gradient descent using smoothing functions | arXiv preprint arXiv:2507.10901 | 1 | preprint | arXiv | txt | 37 | core | — |
-| 105 | S108 | 2019 | Optimization by space transformation and decomposition | — | 1 | other | manual | txt | 107 | supplement | — |
-| 106 | S109 | 2006 | Matemática industrial em Portugal. Análise e perspectivas | Fundação Calouste Gulbenkian, Tema Ciência e Sociedade | 1 | chapter | manual | txt | 8 | supplement | — |
-| 107 | S110 | 2026 | Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization | arXiv preprint arXiv:2609.11567 | — | preprint | arXiv | txt | 29 | core | — |
-| 108 | S111 | 2026 | Stochastic block coordinate and function alternation for multi-objective optimization and learning | arXiv preprint arXiv:2605.12432 | — | preprint | arXiv | txt | 22 | core | — |
-| 109 | S112 | 2022 | A package for optimization based on space decomposition | — | — | other | — | no-oa |  | supplement | — |
-| 110 | S113 | 2020 | A Review of Multi-Objective Optimization: Theory and Algorithms | — | — | other | manual | txt | 46 | supplement | — |
-| 111 | S116 | 2012 | Facultés universitaires Notre-Dame de la Paix Faculté des Sciences—Département de Mathématique | — | — | other | — | no-oa |  | supplement | — |
-| 112 | S117 | 2012 | Special issue on nonlinear and global optimization, dedicated to Professor Joaquim João Júdice on the occasion of his sixtieth anniversary | Top 20 (1), 1-3 | — | other | — | no-oa |  | supplement | — |
-| 113 | S120 | — | The Effects of Travel Distance on MLB Performance | — | — | journal | url | txt | 10 | supplement | — |
-| 114 | S121 | 2025 | SIAG on Optimization Views and News | — | — | other | manual | txt | 15 | core | — |
-| 115 | S122 | 2023 | SIAG on Optimization Views and News | — | — | other | manual | txt | 24 | core | — |
-| 116 | D001 | 1994 | Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software 20(1), 120-123 | — | journal | manual | txt | 4 | supplement | — |
-| 117 | H001 | 2004 | Editorial | Optimization and Engineering 5 (2004) 99-100 (Special Issue on Optimization and Engineering) | — | other | url | txt | 4 | supplement | — |
-| 118 | H002 | 1999 | An analysis of Newton’s method for equivalent Karush-Kuhn-Tucker systems | Investigación Operativa 7 (1999) 17-28 | — | journal | url | txt | 10 | supplement | — |
-| 119 | H003 | 1998 | On interior-point Newton algorithms for discretized optimal control problems with state constraints | Optimization Methods & Software 8 (1998) 249-275 | — | journal | url | txt | 20 | supplement | — |
-| 120 | H004 | 1998 | Derivative computations for a class of optimal control problems | School of Finite Elements and Applications, Centro Internacional de Matemática, n. 6, Coimbra, September 1998 | — | other | url | txt | 9 | supplement | — |
-| 121 | H005 | 1998 | Nonlinear least squares estimation of MQW laser parameters from IM response measurements | Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 30-35, Telecommunications Institute, 1998 | — | conference | — | no-oa |  | supplement | — |
-| 122 | H006 | 1998 | Application of the least squares boundary residual method to the study of step discontinuities in dielectric planar waveguides | Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 99-108, Telecommunications Institute, 1998 | — | conference | — | no-oa |  | supplement | — |
-| 123 | H007 | 1997 | Métodos de optimização para controlo óptimo e projecto de engenharia | Actas da I Conferência Nacional de Telecomunicações, pp. 437-440, 1997 | — | conference | url | txt | 4 | supplement | — |
-| 124 | H008 | 1991 | Efficient vehicle routing algorithms for municipal waste collection (written in portuguese) | Investigação Operacional 10 (1991) 47-58 | — | journal | — | no-oa |  | supplement | — |
+| 1 | S001 | 2009 | Introduction to Derivative-Free Optimization | Society for Industrial and Applied Mathematics | 2876 | book | — | no-oa |  | core | abstract |
+| 2 | S002 | 1994 | Bilevel and multilevel programming: A bibliography review | Journal of Global optimization | 930 | journal | url | txt | 23 | core | carded |
+| 3 | S003 | 2011 | Direct multisearch for multiobjective optimization | SIAM Journal on Optimization | 540 | journal | url | txt | 33 | core | carded |
+| 4 | S004 | 1994 | Descent approaches for quadratic bilevel programming | Journal of Optimization Theory and Applications | 483 | journal | — | no-oa |  | core | abstract |
+| 5 | S005 | 2007 | A particle swarm pattern search method for bound constrained global optimization | Journal of Global Optimization | 460 | journal | url | txt | 31 | core | carded |
+| 6 | S006 | 2009 | Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points | SIAM Journal on Optimization | 321 | journal | url | txt | 29 | core | carded |
+| 7 | S007 | 2004 | A globally convergent primal-dual interior-point filter method for nonlinear programming | Mathematical Programming | 313 | journal | url | txt | 32 | core | carded |
+| 8 | S008 | 2007 | Using sampling and simplex derivatives in pattern search methods | SIAM Journal on Optimization | 240 | journal | url | txt | 20 | core | carded |
+| 9 | S009 | 1996 | Discrete linear bilevel programming problem | Journal of Optimization Theory and Applications | 225 | journal | — | no-oa |  | core | abstract |
+| 10 | S010 | 2008 | Geometry of interpolation sets in derivative free optimization | Mathematical Programming | 210 | journal | url | txt | 26 | core | carded |
+| 11 | S011 | 1998 | Trust-region interior-point SQP algorithms for a class of nonlinear programming problems | SIAM Journal on Control and Optimization | 204 | journal | url | txt | 48 | core | carded |
+| 12 | S012 | 2010 | Incorporating minimum Frobenius norm models in direct search | Computational Optimization and Applications | 201 | journal | url | txt | 17 | core | carded |
+| 13 | S013 | 2002 | Analysis of inexact trust-region SQP algorithms | SIAM Journal on Optimization | 192 | journal | url | txt | 18 | core | carded |
+| 14 | S014 | 2014 | Convergence of trust-region methods based on probabilistic models | SIAM Journal on Optimization | 181 | journal | arXiv | txt | 29 | core | carded |
+| 15 | S015 | 2019 | Complexity of gradient descent for multiobjective optimization | Optimization Methods and Software | 164 | journal | url | txt | 10 | core | carded |
+| 16 | S016 | 2022 | Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach | Computational Management Science | 160 | journal | arXiv | txt | 18 | core | carded |
+| 17 | S017 | 2024 | The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning | Annals of Operations Research | 157 | journal | arXiv | txt | 30 | core | carded |
+| 18 | S018 | 2009 | PSwarm: A hybrid solver for linearly constrained global derivative-free optimization | Optimization Methods and Software | 157 | journal | url | txt | 22 | core | carded |
+| 19 | S019 | 2015 | Direct search based on probabilistic descent | SIAM Journal on Optimization | 133 | journal | url | txt | 29 | core | carded |
+| 20 | S020 | 2008 | Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation | IMA Journal of Numerical Analysis | 132 | journal | url | txt | 28 | core | carded |
+| 21 | S021 | 1994 | A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables | Mathematics of Computation | 128 | journal | — | no-oa |  | core | abstract |
+| 22 | S022 | 2006 | Multicriteria approach to bilevel optimization | Journal of Optimization Theory and Applications | 126 | journal | url | txt | 14 | core | carded |
+| 23 | S023 | 2013 | Worst case complexity of direct search | EURO Journal on Computational Optimization | 118 | journal | url | txt | 11 | core | carded |
+| 24 | S024 | 2012 | Analysis of direct searches for discontinuous functions | Mathematical Programming | 117 | journal | url | txt | 31 | core | carded |
+| 25 | S025 | 2004 | Pattern search methods for user-provided points: Application to molecular geometry problems | SIAM Journal on Optimization | 101 | journal | url | txt | 21 | core | carded |
+| 26 | S026 | 1994 | Generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software (TOMS) | 100 | journal | manual | txt | 17 | supplement | carded |
+| 27 | S027 | 2018 | Complexity and global rates of trust-region methods based on probabilistic models | IMA Journal of Numerical Analysis | 99 | journal | url | txt | 18 | supplement | carded |
+| 28 | S028 | 2008 | Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity | European Journal of Operational Research | 98 | journal | url | txt | 27 | supplement | carded |
+| 29 | S029 | 2012 | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | Mathematical Programming | 96 | journal | arXiv | txt | 31 | supplement | skimmed |
+| 30 | S030 | 2008 | Using simplex gradients of nonsmooth functions in direct search methods | IMA Journal of Numerical Analysis | 96 | journal | manual | txt | 14 | supplement | carded |
+| 31 | S031 | 1997 | On the convergence theory of trust-region-based algorithms for equality-constrained optimization | SIAM Journal on Optimization | 76 | journal | url | txt | 25 | supplement | skimmed |
+| 32 | S032 | 2016 | Trust-region methods without using derivatives: Worst case complexity and the non-smooth case | SIAM Journal on Optimization | 73 | journal | url | txt | 27 | supplement | skimmed |
+| 33 | S033 | 1993 | Generating linear and linear-quadratic bilevel programming problems | SIAM Journal on Scientific Computing | 70 | journal | — | no-oa |  | supplement | abstract |
+| 34 | S034 | 2013 | Smoothing and worst case complexity for direct-search methods in non-smooth optimization | IMA Journal of Numerical Analysis | 69 | journal | url | txt | 21 | supplement | carded |
+| 35 | S035 | 2017 | Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models | PloS one | 62 | journal | unpaywall | txt | 13 | supplement | carded |
+| 36 | S036 | 2018 | On the optimal object orientation in additive manufacturing | The International Journal of Advanced Manufacturing Technology | 60 | journal | url | txt | 16 | supplement | carded |
+| 37 | S037 | 1996 | Trust-region interior-point algorithms for minimization problems with simple bounds | Applied Mathematics and Parallel Computing, Festschrift for Klaus Ritter | 58 | chapter | url | txt | 10 | supplement | carded |
+| 38 | S038 | 2017 | Methodologies and software for derivative-free optimization | Advances and Trends in Optimization with Engineering Applications (MOS-SIAM Series on Optimization), SIAM | 52 | chapter | url | txt | 21 | supplement | carded |
+| 39 | S039 | 1999 | Two-step algorithms for nonlinear optimization with structured applications | SIAM Journal on Optimization | 51 | journal | url | txt | 26 | supplement | carded |
+| 40 | S040 | 1996 | Trust-Region Interior Point Algorithms for a Class of Nonlinear Programming Problems | PhD Thesis, Rice University | 51 | thesis | url | txt | 182 | supplement | carded |
+| 41 | S041 | 2016 | On the optimal order of worst case complexity of direct search | Optimization Letters | 50 | journal | url | txt | 9 | core | carded |
+| 42 | S042 | 2025 | Inexact bilevel stochastic gradient methods for constrained and unconstrained lower-level problems | Journal of Global Optimization | 49 | journal | arXiv | txt | 45 | core | carded |
+| 43 | S043 | 2016 | Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation | SIAM/ASA Journal on Uncertainty Quantification | 49 | journal | url | txt | 29 | supplement | skimmed |
+| 44 | S044 | 2005 | Space mapping for optimal control of partial differential equations | SIAM Journal on Optimization | 45 | journal | url | txt | 24 | supplement | carded |
+| 45 | S045 | 2019 | Direct search based on probabilistic feasible descent for bound and linearly constrained problems | Computational Optimization and Applications | 43 | journal | url | txt | 32 | supplement | skimmed |
+| 46 | S046 | 2016 | Worst case complexity of direct search under convexity | Mathematical Programming | 43 | journal | url | txt | 24 | core | carded |
+| 47 | S047 | 2012 | Bilevel derivative-free optimization and its application to robust optimization | Optimization Methods and Software | 42 | journal | url | txt | 24 | supplement | carded |
+| 48 | S048 | 1999 | An interface optimization and application for the numerical solution of optimal control problems | ACM Transactions on Mathematical Software (TOMS) | 41 | journal | url | txt | 28 | supplement | carded |
+| 49 | S049 | 2014 | A merit function approach for direct search | SIAM Journal on Optimization | 40 | journal | url | txt | 19 | core | carded |
+| 50 | S050 | 2015 | Globally convergent evolution strategies | Mathematical Programming | 39 | journal | url | txt | 22 | core | carded |
+| 51 | S051 | 2011 | On partially sparse recovery | Preprint 11-13, Dept. Mathematics, Univ. Coimbra | 39 | preprint | arXiv | txt | 6 | supplement | carded |
+| 52 | S052 | 1995 | Geometry and local optimality conditions for bilevel programs with quadratic strictly convex lower levels | Minimax and applications | 39 | chapter | — | no-oa |  | supplement | abstract |
+| 53 | S053 | 1993 | A new technique for generating quadratic programming test problems | Mathematical Programming | 39 | journal | manual | txt | 15 | supplement | carded |
+| 54 | S054 | 2002 | Local convergence of a primal-dual method for degenerate nonlinear programming | Computational Optimization and Applications | 38 | journal | url | txt | 16 | supplement | skimmed |
+| 55 | S055 | 2001 | Bilevel programming: Introduction, history and overview | Encyclopedia of optimization | 38 | chapter | url | txt | 3 | supplement | carded |
+| 56 | S056 | 2001 | Algorithms for Solving Non-Linear Constrained and Optimization Problems: The State of The Art | — | 38 | report | manual | txt | 223 | supplement | skimmed |
+| 57 | S057 | 2015 | Globally convergent evolution strategies for constrained optimization | Computational Optimization and Applications | 35 | journal | url | txt | 23 | supplement | carded |
+| 58 | S058 | 2019 | Trust-region methods for the derivative-free optimization of nonsmooth black-box functions | SIAM Journal on Optimization | 33 | journal | url | txt | 27 | supplement | skimmed |
+| 59 | S059 | 2008 | SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization | Departamento de Matemática, Universidade de Coimbra | 32 | report | manual | txt | 22 | supplement | carded |
+| 60 | S060 | 2020 | A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds | Mathematical Programming | 30 | journal | url | txt | 29 | supplement | skimmed |
+| 61 | S061 | 2014 | Efficient cardinality/mean-variance portfolios | System Modeling and Optimization, Springer series IFIP Advances in Information and Communication Technology | 29 | conference | url | txt | 22 | supplement | carded |
+| 62 | S062 | 2003 | Space mapping: Models, sensitivities, and trust-regions methods | Optimization and Engineering | 29 | journal | url | txt | 15 | supplement | carded |
+| 63 | S063 | 1992 | Generation of disjointly constrained bilinear programming test problems | Computational Optimization and Applications | 29 | journal | — | no-oa |  | supplement | abstract |
+| 64 | S064 | 2012 | Optimizing radial basis functions by DC programming and its use in direct search for global derivative-free optimization | TOP | 28 | journal | url | txt | 36 | supplement | carded |
+| 65 | S065 | 2022 | A Stochastic Alternating Balance k-Means Algorithm for Fair Clustering | International Conference on Learning and Intelligent Optimization | 25 | conference | arXiv | txt | 15 | supplement | carded |
+| 66 | S066 | 2007 | Optimization in Medicine | Springer Verlag | 24 | book | — | no-oa |  | supplement | abstract |
+| 67 | S067 | 2024 | Stochastic trust-region and direct-search methods: A weak tail bound condition and reduced sample sizing | SIAM Journal on Optimization | 21 | journal | arXiv | txt | 30 | core | carded |
+| 68 | S068 | 2016 | A parallel evolution strategy for an earth imaging problem in geophysics | Optimization and Engineering | 21 | journal | url | txt | 23 | supplement | skimmed |
+| 69 | S069 | 1994 | On the solution and complexity of a generalized linear complementarity problem | Journal of Global Optimization | 21 | journal | — | no-oa |  | supplement | abstract |
+| 70 | S070 | 2024 | Bilevel optimization with a multi-objective lower-level problem: Risk-neutral and risk-averse formulations | Optimization Methods and Software | 20 | journal | arXiv | txt | 23 | core | carded |
+| 71 | S071 | 2014 | A surrogate management framework using rigorous trust-region steps | Optimization Methods and Software | 20 | journal | url | txt | 20 | supplement | carded |
+| 72 | S073 | 2023 | Full-low evaluation methods for derivative-free optimization | Optimization Methods and Software | 19 | journal | arXiv | txt | 27 | core | carded |
+| 73 | S074 | 2016 | A second-order globally convergent direct-search method and its worst-case complexity | Optimization | 19 | journal | url | txt | 27 | supplement | carded |
+| 74 | S075 | 2011 | Modelling nearby FGK population I stars: A new form of estimating stellar parameters using an optimization approach | Astronomy & Astrophysics | 18 | journal | url | txt | 10 | supplement | carded |
+| 75 | S076 | 2003 | Numerical behavior of a stabilized SQP method for degenerate NLP problems | International Workshop on Global Optimization and Constraint Satisfaction | 18 | conference | url | txt | 19 | supplement | carded |
+| 76 | S077 | 2008 | A globally convergent primal-dual interior-point filter method for nonlinear programming: new filter optimality measures and computational results | Preprint 08-49, Dept. Mathematics, Univ. Coimbra | 16 | report | url | txt | 34 | supplement | skimmed |
+| 77 | S078 | 2022 | Optimal 3D printing of complex objects in a 5-axis printer | Optimization and Engineering | 15 | journal | url | txt | 27 | supplement | skimmed |
+| 78 | S079 | 2026 | The limitation of neural nets for approximation and optimization | Journal of Global Optimization | 14 | journal | arXiv | txt | 31 | core | carded |
+| 79 | S080 | 2023 | An integrated assignment, routing, and speed model for roadway mobility and transportation with environmental, efficiency, and service goals | Transportation research part C: emerging technologies | 14 | journal | arXiv | txt | 29 | supplement | carded |
+| 80 | S081 | 1996 | A comparison between line searches and trust regions for nonlinear optimization | Investigação Operacional | 13 | journal | url | txt | 8 | supplement | carded |
+| 81 | S082 | 2012 | Modeling binary stars: age, helium abundance, and convection parameters | Monthly Notices of the Royal Astronomical Society | 12 | journal | url | txt | 9 | supplement | carded |
+| 82 | S083 | 2009 | Implicitly and densely discrete black-box optimization problems | Optimization Letters | 11 | journal | url | txt | 9 | supplement | carded |
+| 83 | S084 | 2000 | Local convergence of the affine-scaling interior-point algorithm for nonlinear programming | Computational Optimization and Applications | 11 | journal | manual | txt | 13 | supplement | carded |
+| 84 | S085 | 2008 | Local analysis of the feasible primal-dual interior-point method | Computational Optimization and Applications | 9 | journal | url | txt | 16 | supplement | carded |
+| 85 | S086 | 2024 | Match score dataset for team ball sports | Data in brief | 7 | journal | url | txt | 10 | core | carded |
+| 86 | S087 | 2011 | Estimation of risk-neutral density surfaces | Computational Management Science | 7 | journal | url | txt | 34 | supplement | carded |
+| 87 | S088 | 2024 | Full-low evaluation methods for bound and linearly constrained derivative-free optimization | Computational Optimization and Applications | 6 | journal | arXiv | txt | 33 | core | carded |
+| 88 | S089 | 2022 | Modeling Hessian-vector products in nonlinear optimization: new Hessian-free methods | IMA Journal of Numerical Analysis | 6 | journal | arXiv | txt | 18 | supplement | carded |
+| 89 | S090 | 2013 | Inexact solution of NLP subproblems in MINLP | Journal of Global Optimization | 6 | journal | url | txt | 25 | supplement | skimmed |
+| 90 | S091 | 2025 | A stochastic gradient method for trilevel optimization | arXiv preprint arXiv:2505.06805 | 5 | preprint | arXiv | txt | 47 | core | carded |
+| 91 | S092 | 2025 | Why is soccer so popular: Understanding underdog achievement and randomness in team ball sports | Journal of Sports Analytics | 5 | journal | arXiv | txt | 26 | core | carded |
+| 92 | S093 | 2023 | Convergence rates of the stochastic alternating algorithm for bi-objective optimization | Journal of Optimization Theory and Applications | 5 | journal | arXiv | txt | 19 | supplement | carded |
+| 93 | S094 | 2021 | The Sharpe predictor for fairness in machine learning | arXiv preprint arXiv:2108.06415 | 5 | preprint | arXiv | txt | 9 | supplement | carded |
+| 94 | S095 | 2002 | Local analysis of a new multipliers method | European Journal of Operational Research | 5 | journal | url | txt | 19 | supplement | skimmed |
+| 95 | S096 | 2025 | Pareto sensitivity, most-changing sub-fronts, and knee solutions | arXiv preprint arXiv:2501.16993 | 4 | preprint | arXiv | txt | 29 | core | carded |
+| 96 | S097 | 2014 | Globally convergent DC trust-region methods | Journal of Global Optimization | 4 | journal | url | txt | 18 | supplement | carded |
+| 97 | S098 | 2003 | Updating the multipliers associated with inequality constraints in an augmented Lagrangian multiplier method | Journal of Optimization Theory and Applications | 4 | journal | url | txt | 15 | supplement | skimmed |
+| 98 | S099 | 1999 | Characterization of the smoothness and curvature of a marginal function for a trust-region problem | Mathematical Programming | 3 | journal | url | txt | 17 | supplement | carded |
+| 99 | S100 | 1993 | Parametric linear programming techniques for the indefinite quadratic programming problem | IMA Journal of Management Mathematics | 3 | journal | — | no-oa |  | supplement | abstract |
+| 100 | S101 | 2026 | Stochastic set-valued optimization and its application to robust learning | arXiv preprint arXiv:2603.17691 | 2 | preprint | arXiv | txt | 27 | core | carded |
+| 101 | S102 | 2025 | Sequential test sampling for stochastic derivative-free optimization | arXiv preprint arXiv:2509.14505 | 2 | preprint | arXiv | txt | 25 | core | carded |
+| 102 | S104 | 2017 | An indicator for the switch from derivative-free to derivative-based optimization | Operations Research Letters 45 (4), 353-361 | 2 | journal | url | txt | 17 | supplement | carded |
+| 103 | S106 | 2001 | Pattern search methods for user-provided points | Lecture Notes in Computer Science, 95-98 | 2 | conference | url | txt | 4 | supplement | carded |
+| 104 | S107 | 2025 | Non-smooth stochastic gradient descent using smoothing functions | arXiv preprint arXiv:2507.10901 | 1 | preprint | arXiv | txt | 37 | core | carded |
+| 105 | S108 | 2019 | Optimization by space transformation and decomposition | — | 1 | other | manual | txt | 107 | supplement | skimmed |
+| 106 | S109 | 2006 | Matemática industrial em Portugal. Análise e perspectivas | Fundação Calouste Gulbenkian, Tema Ciência e Sociedade | 1 | chapter | manual | txt | 8 | supplement | carded |
+| 107 | S110 | 2026 | Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization | arXiv preprint arXiv:2609.11567 | — | preprint | arXiv | txt | 29 | core | carded |
+| 108 | S111 | 2026 | Stochastic block coordinate and function alternation for multi-objective optimization and learning | arXiv preprint arXiv:2605.12432 | — | preprint | arXiv | txt | 22 | core | carded |
+| 109 | S112 | 2022 | A package for optimization based on space decomposition | — | — | other | — | no-oa |  | supplement | abstract |
+| 110 | S113 | 2020 | A Review of Multi-Objective Optimization: Theory and Algorithms | — | — | other | manual | txt | 46 | supplement | carded |
+| 111 | S116 | 2012 | Facultés universitaires Notre-Dame de la Paix Faculté des Sciences—Département de Mathématique | — | — | other | — | no-oa |  | supplement | metadata |
+| 112 | S117 | 2012 | Special issue on nonlinear and global optimization, dedicated to Professor Joaquim João Júdice on the occasion of his sixtieth anniversary | Top 20 (1), 1-3 | — | other | — | no-oa |  | supplement | metadata |
+| 113 | S120 | — | The Effects of Travel Distance on MLB Performance | — | — | journal | url | txt | 10 | supplement | carded |
+| 114 | S121 | 2025 | SIAG on Optimization Views and News | — | — | other | manual | txt | 15 | core | carded |
+| 115 | S122 | 2023 | SIAG on Optimization Views and News | — | — | other | manual | txt | 24 | core | carded |
+| 116 | D001 | 1994 | Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software 20(1), 120-123 | — | journal | manual | txt | 4 | supplement | carded |
+| 117 | H001 | 2004 | Editorial | Optimization and Engineering 5 (2004) 99-100 (Special Issue on Optimization and Engineering) | — | other | url | txt | 4 | supplement | carded |
+| 118 | H002 | 1999 | An analysis of Newton’s method for equivalent Karush-Kuhn-Tucker systems | Investigación Operativa 7 (1999) 17-28 | — | journal | url | txt | 10 | supplement | carded |
+| 119 | H003 | 1998 | On interior-point Newton algorithms for discretized optimal control problems with state constraints | Optimization Methods & Software 8 (1998) 249-275 | — | journal | url | txt | 20 | supplement | carded |
+| 120 | H004 | 1998 | Derivative computations for a class of optimal control problems | School of Finite Elements and Applications, Centro Internacional de Matemática, n. 6, Coimbra, September 1998 | — | other | url | txt | 9 | supplement | carded |
+| 121 | H005 | 1998 | Nonlinear least squares estimation of MQW laser parameters from IM response measurements | Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 30-35, Telecommunications Institute, 1998 | — | conference | — | no-oa |  | supplement | metadata |
+| 122 | H006 | 1998 | Application of the least squares boundary residual method to the study of step discontinuities in dielectric planar waveguides | Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 99-108, Telecommunications Institute, 1998 | — | conference | — | no-oa |  | supplement | metadata |
+| 123 | H007 | 1997 | Métodos de optimização para controlo óptimo e projecto de engenharia | Actas da I Conferência Nacional de Telecomunicações, pp. 437-440, 1997 | — | conference | url | txt | 4 | supplement | carded |
+| 124 | H008 | 1991 | Efficient vehicle routing algorithms for municipal waste collection (written in portuguese) | Investigação Operacional 10 (1991) 47-58 | — | journal | — | no-oa |  | supplement | metadata |
 
 124 works · txt 108 · pdf 0 · no-oa 16

@@ -1,0 +1,505 @@
+[
+ {
+  "id": "S233",
+  "year": "1978",
+  "title": "DIRECT APPROACHES FOR THE MINIMAX PROBLEM",
+  "read_level": "full",
+  "contribution": "Synthesises the Charalambous-Conn nonlinear and Bartels-Conn-Charalambous linear minimax algorithms into one stable, projection-based direct method that works on M_f(x)=max f_i(x) itself, with horizontal/vertical directions, QR updating that exploits linear f_i, and a breakpoint line search.",
+  "problem_entry": "Nonsmoothness of max_i f_i at ties blocks gradient methods; instead of solving the equivalent NLP P* (Waren-Lasdon-Suchman), use P* only to get a direction and move directly on M_f (pp. 1, 3).",
+  "key_idea": "d = -Pe with P the projector onto the null space of active-constraint gradients in (z,x)-space; horizontal step keeps the eps-near-active set, vertical least-squares step levels it; drop by sign of w = R^{-1}Q1^T e (pp. 2-6).",
+  "assumptions": "f_i in C^2; active gradients linearly independent, degeneracy handled by negligible perturbations; convergence under some fairly natural assumptions (paraphrase) proved elsewhere [5] (pp. 1, 7).",
+  "proof_devices": [
+   "local Taylor argument that -Pe decreases all active functions in the linear/concave case (7)-(9) and in the convex case (10)-(11) (pp. 2-3)",
+   "restating the rival (Barrodale-Phillips dual) algorithm stage by stage in primal/projection terms (pp. 8-9)"
+  ],
+  "experiments": "none here; delegated to reports [3], [5] and to the microwave-network application paper [6] (p. 9)",
+  "positioning": "Improves on [5] (stability, exploiting linearity); detailed comparison with Bartels-Conn-Charalambous [3], Cline [10] (Haar only), Barrodale-Phillips dual (no well-documented evidence of superiority) and Zangwill (drops vertical step, tolerance to zero) (pp. 7-9).",
+  "writing": "Informal-first exposition with contour figures, then a numbered algorithm; ends the positioning with a rhetorical question on dual vs direct methods; frank about missing numbers and the non-obvious second-order extension (pp. 1, 9).",
+  "limits_future": "No numbers or proofs in the paper; steepest-descent-like in subspaces; second-order generalisation 'not obvious, even assuming it is desirable'; constraints can be added naturally (p. 9).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "works on the components f_i of the max, singles out linear f_i and stores their factorisation",
+    "pages": "pp. 1-2, 7"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "gradient-projection machinery from constrained NLP transplanted into nonsmooth minimax (active functions = active constraints)",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "synthesis paper; theory and numbers live in companion reports [3],[5],[6]",
+    "pages": "pp. 7, 9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "weak: minimax tied to microwave-network design application by 1975 (ref. [6])",
+    "pages": "pp. 9-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Horizontal/vertical step split",
+    "evidence": "horizontal direction keeps near-active set, vertical least-squares direction levels near-active functions; orthogonal in the limit",
+    "pages": "pp. 3, 6"
+   },
+   {
+    "pattern": "eps-active working set with automatic tolerance reduction",
+    "evidence": "eps <- eps/10 when n+1 functions enter the projection",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "approach built 'based on three properties' of the minimax solution (KKT characterisation 2a-2d)",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "Answer an old question from one's own early work",
+    "evidence": "1978 question whether dual l_inf methods beat direct ones reappears as Bartels-Conn-Li 'Primal methods are better than dual methods...?' (cited in S130 ref [5])",
+    "pages": "p. 9; S130 p. 33"
+   },
+   {
+    "pattern": "Factorization-first algorithm design",
+    "evidence": "QR with Givens add/drop drives direction, optimality test and dropping; Bartels credited for the NLA emphasis",
+    "pages": "pp. 4-5, 9"
+   }
+  ],
+  "transferable": [
+   "For max-type objectives lift to (z,x), take d=-Pe, and read optimality / the index to drop from the sign of least-squares multipliers R^{-1}Q1^T e (pp. 2, 5).",
+   "Breakpoint line search for piecewise-smooth merit functions: predict breakpoints by linearising inactive functions against the current max, test the best, fall back to cubic search (pp. 6-7).",
+   "Put constant (linear) columns first in the factorisation and store that block so only the nonlinear part is updated (pp. 4, 7).",
+   "Contest a rival's claimed advantage by rewriting its algorithm in your own method's language, stage by stage (pp. 8-9)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "It then seems natural to ask the question that if the dual approach to the minimax problem is superior to the direct approach, when is a dual approach indirect?",
+    "page": 9
+   },
+   {
+    "text": "R. Bartels impressed on me the importance of numerical linear algebra in the context of mathematical programming",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "D001",
+  "year": "1981",
+  "title": "Erratum",
+  "read_level": "full",
+  "contribution": "Corrects condition (iii) of Corollary 3 of Coleman & Conn, 'Second-order conditions for an exact penalty function' (Math. Programming 19, 1980), after Ben-Tal and Zowe pointed out the error.",
+  "problem_entry": "External readers (A. Ben-Tal, J. Zowe) found an incorrectly stated second-order condition (p. 1).",
+  "key_idea": "Corrected test-direction set is defined case by case: equality for multipliers strictly inside (-1,1) or lambda_i>0, one-sided inequalities at w_i=+-1 or lambda_i=0 (p. 1; last line garbled).",
+  "assumptions": "not stated in the notice (those of the 1980 paper, not read)",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Erratum to Coleman & Conn 1980, which S030 cites for its strict second-order point terminology (p. 1; S030 pp. 17, 27).",
+  "writing": "Minimal one-paragraph notice naming the finders and restating only the corrected condition (p. 1).",
+  "limits_future": "Only one corollary corrected; final part of the formula unreadable in the text file (p. 1).",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Public erratum crediting the finder",
+    "evidence": "erratum names Ben-Tal and Zowe as the finders; S059 does the same for Moré and Toraldo",
+    "pages": "p. 1; S059 p. 4"
+   }
+  ],
+  "transferable": [
+   "For second-order conditions with multipliers that can sit on the boundary of their range, write the test-direction set case by case (equality for interior multipliers, one-sided inequality for boundary ones) (p. 1)."
+  ],
+  "coauthors": "Thomas F. Coleman",
+  "quotes": [
+   {
+    "text": "It has been brought to the authors' attention by A. Ben-Tal and J. Zowe that condition (iii) of Corollory 3 (see top of page 182) is incorrectly stated.",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "S030",
+  "year": "1982",
+  "title": "Nonlinear programming via an exact penalty function: Global analysis",
+  "read_level": "full",
+  "contribution": "A second-order exact l1-penalty method for inequality-constrained NLP (projected Newton horizontal step, least-squares vertical step, multiplier-based dropping, breakpoint line search, mu reduction) with a global convergence proof, Gill-Murray-style implementation and preliminary numbers; the rate is in a twin report.",
+  "problem_entry": "Conn-Pietrzykowski's first-order projected penalty method converges globally but only linearly; nondifferentiability of p(x,mu) is the obstacle (pp. 4-6).",
+  "key_idea": "Minimise the second-order change in p subject to zero second-order change in eps-active constraints, approximated via a min-max Lagrangian with lagged multipliers: h=-Z(Z^T B Z)^{-1} Z^T grad p, plus v=-A(A^T A)^{-1}Phi and a dropping step when lambda_j not in [0,1/mu] (pp. 6-9).",
+  "assumptions": "C^2; iterates in compact W; finitely many stationary points; first-order points strict second-order; linear independence of eps-active gradients; sufficient-decrease line search; consistent projected-Hessian approximation (pp. 17-18, 22).",
+  "proof_devices": [
+   "Lemma 1: p(x+h+v)-p(x) <= -delta(||Z^T grad p||^2+||Phi||_1) near a strict second-order point, via separate Taylor expansions of the smooth part and the active constraints (pp. 18-22)",
+   "six-part global proof; contradiction p(x^k) -> -infinity from the sufficient-decrease condition rules out infinitely many drops (pp. 23-26)",
+   "finiteness of non-optimal stationary points gives a uniform descent constant (Part 3, p. 24)"
+  ],
+  "experiments": "8 classic problems (Rosen-Suzuki, Wong, Powell, Colville 1-3, Chamberlain 1-2), 11 problem/start runs; best and worst penalty-function evaluation counts over a parameter box; accuracy digits (p. 26)",
+  "positioning": "Upgrades Conn-Pietrzykowski [9] to second order; borrows Gill-Murray linearly-constrained techniques and Bartels-Conn-Sinclair perturbation for degeneracy; Murray-Overton cited for an alternative piecewise line search (pp. 6, 12, 15-16).",
+  "writing": "Motivation section derives each direction from a 'minimise change subject to zero change' principle; admits the direction-choice rule is 'somewhat arbitrary' while stressing the theory covers 'any number of selection rules' (pp. 5-10).",
+  "limits_future": "Scaling and parameter choice not addressed; mu-safeguards not guaranteed; future: full projected quasi-Newton implementation and scaling (pp. 13, 15, 27).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "theory + implementation + numbers in one paper, with a twin asymptotic-analysis report",
+    "pages": "pp. 4, 15-16, 26-27"
+   },
+   {
+    "method": "Research Taste 2",
+    "relation": "evidence",
+    "note": "theory said to cover a class of direction-selection rules, not only the coded one",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "counts penalty-function evaluations and reports best and worst over a parameter box, but on a pre-CUTE handful of named problems",
+    "pages": "p. 26"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Gill-Murray linearly-constrained NLA transplanted into a nonlinear penalty method; first-order direction upgraded to its second-order analogue",
+    "pages": "pp. 7, 15-16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Horizontal/vertical step split",
+    "evidence": "projected Newton horizontal step h plus vertical step v=-A(A^T A)^{-1}Phi; Newton step h+v",
+    "pages": "pp. 5-10"
+   },
+   {
+    "pattern": "eps-active working set with automatic tolerance reduction",
+    "evidence": "eps and Lambda halved when a drop or Newton step fails",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "linear constraints always precede nonlinear ones in the QR partition",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "Factorization-first algorithm design",
+    "evidence": "QR gives multipliers and vertical step, LDL^T of Z^T B Z gives horizontal step",
+    "pages": "pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "Get a second-order projected method by posing the subproblem of minimising the second-order change in the merit function subject to zero second-order change in the active constraints, and approximating its Lagrangian with lagged multipliers (pp. 6-7).",
+   "Gate multiplier use on a projected-gradient threshold Lambda and halve Lambda and eps whenever a gated step fails (pp. 7, 10).",
+   "Report best and worst evaluation counts over a stated parameter box, not a tuned setting (p. 26).",
+   "Split global and asymptotic analyses into self-contained twin reports (pp. 4, 27)."
+  ],
+  "coauthors": "T. F. Coleman",
+  "quotes": []
+ },
+ {
+  "id": "S048",
+  "year": "1982",
+  "title": "Generalizing the LINPACK condition estimator",
+  "read_level": "full",
+  "contribution": "Two O(n^2) generalisations of the LINPACK condition estimator for triangular factors, 'look-behind' (rotating the earlier right-hand side) and divide-and-conquer, in L2 and L1 versions, with an empirical reliability study.",
+  "problem_entry": "Reliable condition estimation in O(n^2) after factorisation; LINPACK relies on an unproven greedy heuristic and has counterexamples (pp. 5-9, 21).",
+  "key_idea": "Choose at each step a rotation (c,s) that rescales the previous d and sets the new component, maximising a quadratic (L2, closed form via phi'(a)=0) or convex (L1, endpoint check) growth measure; or combine subsystems recursively by the same rotation (pp. 11-16).",
+  "assumptions": "A already factored, T lower triangular; fixed nonnegative weights; no reliability theorem (pp. 10-11).",
+  "proof_devices": [
+   "SVD argument ||z||/||w|| >= ||A^{-1}|| cos(v_n,d) motivating a large-norm solution (p. 8)",
+   "closed-form 1-D maximisation over a rotation angle giving two sine-cosine candidates (pp. 12, 15)",
+   "convexity in lambda implies only endpoints lambda in {0,1} need checking (p. 13)"
+  ],
+  "experiments": "1000 random and 1000 pivoted-QR triangular matrices (n=5..50) plus 250 L1 cases; binned distributions of true/estimated singular-value ratios for three variants (pp. 18-20)",
+  "positioning": "Extends Cline-Moler-Stewart-Wilkinson (LINPACK); compares Forsythe-Moler and Karasalo; cites Cline's counterexamples to LINPACK (pp. 6-7, 21-22).",
+  "writing": "Conclusion refuses to rank estimators on experiments, admits an easy counterexample to its own divide-and-conquer method, and names provable reliability as the goal (p. 21).",
+  "limits_future": "No proofs; sigma_1 estimates consistently inferior with no explanation; future: a rigorous result for T from pivoted QR (pp. 19, 21).",
+  "method_links": [
+   {
+    "method": "Taste warning sign 6",
+    "relation": "evidence",
+    "note": "declines to claim superiority from experiments; names the counterexample to its own method",
+    "pages": "p. 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "two instance tiers (random, pivoted-QR) reported as full distributions including the worst bin; synthetic ensembles, not a public set",
+    "pages": "pp. 18-20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "algorithms and numbers but no theorem; provable reliability named as the missing piece",
+    "pages": "p. 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Factorization-first algorithm design",
+    "evidence": "pure NLA paper: estimators computed from an existing triangular factor in O(n^2)",
+    "pages": "pp. 11-17"
+   }
+  ],
+  "transferable": [
+   "Report estimator quality as binned distributions of true/estimate ratios on a random and a structured ensemble, including the minimum observed ratio (pp. 18-20).",
+   "Parametrise a one-parameter mixing choice as a rotation (c,s); phi'(a)=0 gives two closed-form candidates, pick by substitution (pp. 12, 15).",
+   "If the objective is convex in a mixing parameter on [0,1], check only the endpoints (pp. 13-14).",
+   "In the conclusion, separate what experiments suggest from what is proved and name the theorem needed (p. 21)."
+  ],
+  "coauthors": "A. K. Cline, C. F. Van Loan",
+  "quotes": []
+ },
+ {
+  "id": "S096",
+  "year": "1984",
+  "title": "On the location of directions of infinite descent for nonlinear programming algorithms",
+  "read_level": "full",
+  "contribution": "Characterises existence of solutions to equality-constrained QPs by inertia and shows how null-space, Lagrangian and range-space methods can extract directions of linear infinite descent or negative curvature from the generalised Cholesky factors they already compute, with operation counts and a small experiment.",
+  "problem_entry": "EQP subproblems in SQP/active-set methods may have no finite solution; a direction of infinite descent then signals a bad estimate or active set and can repair both (pp. 1-2).",
+  "key_idea": "One factorisation for existence and step: inertia identities In(K)=In(Z^T H Z)+(t,t,0) decide the case; dolids are projections of the rhs onto null spaces, doncs combinations of conjugate negative vectors read off the block-diagonal D (pp. 4-11).",
+  "assumptions": "A full rank t <= n; n small enough for dense direct solves; H nonsingular for range-space methods (pp. 1, 4, 8, 12).",
+  "proof_devices": [
+   "inertia identity In(K)=In(Z^T H Z)+(t,t,0) turning existence into counting (Lemma 1.2, p. 4)",
+   "Fredholm-type alternative: Nx=b solvable or exists y with Ny=0, b^T y=1 (Lemma 2.1, p. 6)",
+   "counting: k>t conjugate negative vectors admit a combination satisfying t homogeneous constraints (p. 8)",
+   "structural-zero argument that N is lower triangular-like, so elimination has no structural fill-in (p. 11)"
+  ],
+  "experiments": "pseudo-random EQPs, n=30, t=1..29, H diagonal with 6 negative eigenvalues, A full; measures columns processed, share of superdiagonals eliminated, multiplications; residuals ~1e-16 (pp. 14-16)",
+  "positioning": "Null-space version basically Bunch-Kaufman 1980; Lagrangian and range-space extensions new; negative-curvature lineage Fletcher-Freeman, Sorensen, More-Sorensen, Goldfarb; relies on Gould 1983 (pp. 2, 6).",
+  "writing": "Coins acronyms (dolid, donc); equivalence theorems with one-line proofs; explicitly hedged experiments ('by no means exhaustive') (pp. 2, 5, 14).",
+  "limits_future": "Open: how triangular N is, how many range-space columns are needed; future: Ap=d, sparse variants trading stability for structure via threshold pivoting, factor updating (pp. 14, 17).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "certificate built from matrices the EQP method already factors; structure preservation prioritised for sparse problems",
+    "pages": "pp. 1, 3, 17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "negative-curvature machinery from unconstrained optimisation carried to three constrained-QP method families",
+    "pages": "pp. 2, 6"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "controlled synthetic instances swept over t to measure the structural property the cost depends on; no public set",
+    "pages": "pp. 14-15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "theory + construction + operation counts + small experiment, no code release",
+    "pages": "pp. 5-16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Make the subproblem's failure informative",
+    "evidence": "when EQP has no finite solution, return a dolid/donc used to decrease the merit function and fix the active set",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "Factorization-first algorithm design",
+    "evidence": "existence (inertia) and certificate from one generalised Cholesky factorisation",
+    "pages": "pp. 5-11"
+   }
+  ],
+  "transferable": [
+   "Decide existence and compute the step with one factorisation: inertia from the block-diagonal D, certificate from the same factors (pp. 5-7).",
+   "If Nx=b is inconsistent, the normalised projection of b onto null(N) is a direction of linear infinite descent at no extra cost (pp. 6-7).",
+   "When cost depends on an unknown structural property, measure that property directly across a parameter sweep (Table 2, pp. 14-16).",
+   "Quick unboundedness test: fewer constraints than negative eigenvalues of H implies a direction of negative curvature (p. 16)."
+  ],
+  "coauthors": "N. I. M. Gould",
+  "quotes": [
+   {
+    "text": "We take the point of view that it is important that our method of determining p is not disjoint from our method of determining existence.",
+    "page": 1
+   },
+   {
+    "text": "The numerical experiments are by no means exhaustive; it is merely intended that they illustrate that the approaches discussed in 3 are viable.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S130",
+  "year": "1988",
+  "title": "The computational structure and characterization of nonlinear discrete Chebyshev problems",
+  "read_level": "full",
+  "contribution": "Generalises linear Chebyshev concepts (reference, levelled reference) to nonlinear discrete Chebyshev and minimax problems via cadres and cadre multipliers, proves every local minimiser carries a levelled reference set, and shows the levelling (vertical) direction is a descent direction, enabling multiple dropping.",
+  "problem_entry": "Existing nonlinear minimax methods lean on the underlying NLP; linear Chebyshev algorithms succeed by exploiting the solution's characterisation, while classical nonlinear theory is not computable for discrete problems (pp. 4-5, 10).",
+  "key_idea": "Characterise-then-compute: locate a cadre, sign-correct it into a reference set, level it with v=-A(A^T A)^{-1}Phi, which decreases all active functions; negative cadre multipliers yield multiple dropping (pp. 12-31).",
+  "assumptions": "f_i in C^1; local minima; stationary points nondegenerate for working-set equivalence; Lemma 37 exact only in the linear case (pp. 3, 18, 20, 25).",
+  "proof_devices": [
+   "Gordan's theorem (Lemma 34, p. 22)",
+   "write grad f_mu as a convex combination of gradient differences via cadre multipliers so grad f_mu^T v = -sum lambda_j (f_mu - f_ij) < 0 (Lemma 35, pp. 22-23)",
+   "sign-flip construction (7.5) of a reference set from a non-reference cadre (p. 24)",
+   "normalised-multiplier identity (7.16) ordering decrease rates (Lemmas 39-40, pp. 28-30)"
+  ],
+  "experiments": "none; the algorithm is in companion report [10] (p. 32)",
+  "positioning": "Contrasts NLP-based minimax methods (Murray-Overton, Womersley-Fletcher, Hald-Madsen, Han, Watson); builds on Descloux's cadre, Brannigan's minimum H-set, Rice's nonlinear theory, the Remez algorithm and the authors' linear l_inf work (pp. 4, 12-13, 19-20, 33).",
+  "writing": "Definition-heavy; hedged ('We feel', 'we believe that'); new multipliers named differently from Lagrange multipliers on purpose (pp. 3, 14, 16).",
+  "limits_future": "Ideal working set expensive and may not exist; nonlinear levelling only approximate; numbers deferred to [10] (pp. 21, 25, 32).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "exploit the structure of the problem and of its solution instead of reducing to the generic NLP",
+    "pages": "pp. 4-5, 19-20"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "linear Chebyshev theory (references, levelling, Remez) transplanted to nonlinear minimax; NLP dropping reinterpreted as multiple dropping",
+    "pages": "pp. 11-18, 31"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "theory-only report; algorithm and numbers in companion report [10] and thesis [15]",
+    "pages": "p. 32"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "cadre -> reference set -> level recipe read off Theorem 31",
+    "pages": "pp. 17-18"
+   },
+   {
+    "pattern": "Horizontal/vertical step split",
+    "evidence": "vertical levelling direction v=-A(A^T A)^{-1}Phi is a descent direction",
+    "pages": "pp. 21-23"
+   },
+   {
+    "pattern": "eps-active working set with automatic tolerance reduction",
+    "evidence": "working set includes all eps-active functions with full-rank difference matrix",
+    "pages": "p. 20"
+   },
+   {
+    "pattern": "Answer an old question from one's own early work",
+    "evidence": "ref [5] Bartels-Conn-Li 'Primal methods are better than dual methods ... l_inf sense?' takes up S233's 1978 question",
+    "pages": "p. 33"
+   }
+  ],
+  "transferable": [
+   "Restate first-order conditions as a constructible object and design one algorithmic step per property (find, sign-correct, level) (pp. 17-18).",
+   "Prove a restoration step also descends by writing the maximal gradient as a convex combination of gradient differences using the dependency multipliers (pp. 22-23).",
+   "Name multipliers that exist away from stationarity differently from Lagrange multipliers (p. 14)."
+  ],
+  "coauthors": "Yuying Li",
+  "quotes": []
+ },
+ {
+  "id": "S046",
+  "year": "1989",
+  "title": "An introduction to the structure of large scale nonlinear optimization problems and the LANCELOT project",
+  "read_level": "full",
+  "contribution": "Tutorial on (group) partial separability via invariant subspaces and internal variables, plus the design statement of the LANCELOT project (structure, theory-code agreement plus testing, scope, SDIF input, modularity, portability).",
+  "problem_entry": "Counters the view that nonlinear problems with more than 20 variables are risky to model; the view was justified ten years earlier but no longer (p. 2).",
+  "key_idea": "Describe structure by element functions with large invariant subspaces and small internal variables (sparsity follows from structure, not the reverse); group them for least squares and Lagrangians; build LANCELOT around it (pp. 4-8, 11-13).",
+  "assumptions": "C^2 element and group functions; smooth problems only (pp. 7, 12).",
+  "proof_devices": [
+   "Theorem 1 (sparse Hessian implies partial separability), cited to Griewank-Toint (p. 7)",
+   "storage count O[3(m+1)^2] vs O[5(m+1)^2] on the minimum-surface problem (pp. 4-5)"
+  ],
+  "experiments": "none; pilot LANCELOT solved SDIF-specified practitioner problems with more than 1000 variables in under an hour (p. 12); detailed experiments promised (p. 13)",
+  "positioning": "Builds on Griewank-Toint partial separability; discusses McCormick factorable functions, AD (Griewank), higher derivatives (Schnabel), More's problem collection; cites the CGT 1988 paper together with its correction (pp. 3, 8, 10, 13).",
+  "writing": "Declared 'personnal (and maybe biased)' viewpoint; worked example before definition; LANCELOT acronym banner; numbered design requirements each with an admitted cost (pp. 3-13).",
+  "limits_future": "No numbers yet; inefficiency on unstructured problems accepted; nonsmooth problems not planned; development ongoing (pp. 11-13).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "stated: implementations and analysed algorithms should differ as little as possible; theory necessary but not sufficient, backed by intensive testing",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "stated: exploiting structure is the only reasonable way for large problems; black boxes embedded as element functions",
+    "pages": "pp. 3, 8-9, 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "standard input format (SDIF) and a sizeable set of large problems; practical and academic test problems both required",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "weak: test problems from energy-modelling and finite-element practitioners; end-users judge efficiency",
+    "pages": "pp. 11-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Design the new standard as a superset of the incumbent",
+    "evidence": "partial separability presented as extending sparsity (every sparse-Hessian function is partially separable)",
+    "pages": "pp. 5, 7"
+   }
+  ],
+  "transferable": [
+   "Describe structure by invariant subspaces and internal variables, store element derivatives in internal coordinates, and count the storage saving on a model problem (pp. 4-6).",
+   "Open a software paper with numbered design requirements, each with its admitted cost (pp. 11-13).",
+   "Give a usability metric from users' problems: time from specification to validated solution (p. 12)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S059",
+  "year": "1989",
+  "title": "Correction to the paper on global convergence of a class of trust region algorithms for optimization with simple bounds",
+  "read_level": "full",
+  "contribution": "Repairs the proof of Theorem 14 (finite identification of the active set) of CGT 1988 SINUM, keeping the statement and assumptions.",
+  "problem_entry": "An inference in the original proof used {169}, valid only for successful iterates, for all k (p. 1).",
+  "key_idea": "Restrict to successful iterates in a neighbourhood isolating a connected set of limit points, show they are all successful iterates, force Delta_k -> 0, then show all iterations are eventually successful, a contradiction (pp. 1-4).",
+  "assumptions": "(AS.1)-(AS.7) and {155} of the original paper, not restated (p. 1).",
+  "proof_devices": [
+   "successful-iterate subsequence inside N(X_*,delta) around an isolated connected set of limit points (eq. 6, pp. 1-2)",
+   "trapping: steps too short to leave the neighbourhood, so the subsequence equals all successful iterations (eq. 13, p. 2)",
+   "pair argument: unsuccessful k followed by successful k+1 yields rho_k >= eta, contradiction (eqs. 16-35, pp. 3-4)",
+   "decomposition of gradient and step difference into C(x_*) and its complement with a sign argument (eqs. 25-29, pp. 3-4)"
+  ],
+  "experiments": "none",
+  "positioning": "Explicitly limited to correcting one error in [1]; notation and equation numbers borrowed (p. 1).",
+  "writing": "Minimal-scope correction: equations of the original in braces, new proof only; credits Moré and Toraldo as finders (pp. 1, 4).",
+  "limits_future": "Depends entirely on the original paper; no new results (p. 1).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "the theory half of the flagship CGT 1988 twin needed a public repair a year later, found by outside readers",
+    "pages": "pp. 1, 4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Public erratum crediting the finder",
+    "evidence": "thanks J. J. Moré and G. Toraldo for pointing out the error; CGT later cite the correction beside the original (S046 p. 13)",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "When a lemma holds only on successful iterations, take successful iterates inside a neighbourhood isolating a connected set of limit points and show steps cannot leave it (p. 2).",
+   "Prove eventual success of all iterations by a pair argument: unsuccessful k followed by successful k+1 gives rho_k >= eta (pp. 3-4).",
+   "Write corrections that keep the theorem statement and original equation numbering and replace only the broken inference (p. 1)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "As a consequence, {176}, and hence {177}, only holds for successful iterates, which is not enough to obtain the desired contradiction.",
+    "page": 1
+   },
+   {
+    "text": "We now wish to show that all iterations are successful for k sufficiently large.",
+    "page": 3
+   }
+  ]
+ }
+]

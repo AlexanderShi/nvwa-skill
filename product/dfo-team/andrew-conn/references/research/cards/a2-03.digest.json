@@ -1,0 +1,321 @@
+[
+ {
+  "id": "S076",
+  "year": "2014",
+  "title": "Reservoir uncertainty quantification using probabilistic history matching workflow",
+  "read_level": "abstract",
+  "contribution": "Two-step 'probabilistic history matching' (PHM) workflow that yields a small set of geologically realistic models preserving flow-relevant uncertainty and conditioned to production data; shown on a real field example (abstract).",
+  "problem_entry": "Single-model or three-case (high-mid-low) industry practice cannot describe subsurface uncertainty and forecasts poorly; a spanning ensemble is needed but full exploration means millions of models (abstract).",
+  "key_idea": "Step 1: screen 10^3-10^5 geostatistically constrained local-heterogeneity realizations by dynamic fingerprinting (short-window streamline time of flight/drainage time), cluster by principal flow pattern via SVD, keep one representative per cluster. Step 2: per representative, DoE + proxy response surfaces over global parameters and MCMC conditioning to history (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Real-world field example; details not read (abstract).",
+  "positioning": "SPE ATCE paper SPE-170893-MS (27 Oct 2014), 14 references; Shell (Girardi, Gelderblom) and IBM (Horesh, Conn) affiliations; author lists differ between Crossref (8 authors, 'Long Jin' in the affiliation field) and Semantic Scholar (9, incl. Long Jin) (Crossref; S2).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "IBM-Shell workflow published in the users' venue (SPE) and applied to a field case.",
+    "pages": "abstract; Crossref affiliations"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Simulator physics (streamline time of flight) used to cut cost before black-box sampling, but for ensemble screening/UQ rather than derivative-based optimization.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "flow-equivalence screening",
+    "evidence": "Cluster ensemble realizations by cheap dynamic-response signatures (streamline fingerprints, SVD) and keep one representative per cluster before expensive conditioning; same device in S142.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Split a mixed uncertainty space by type: reduce the high-dimensional cell-based part by clustering cheap short-horizon dynamic signatures (one representative per cluster), then spend proxy-plus-MCMC sampling only on the few global parameters per representative (abstract)."
+  ],
+  "coauthors": "Tzu-hao Yeh, Eduardo A. Jimenez, Gijs van Essen, Chaohui Chen, Alejandro Girardi, Paul Gelderblom, Lior Horesh (Crossref; S2 adds Long Jin)",
+  "quotes": [
+   {
+    "text": "The concept behind this methodology is that for each distinct property realization, a given production schedule will generate a flow pattern which, like a fingerprint, is unique to that realization.",
+    "page": "abstract"
+   },
+   {
+    "text": "Each cluster aggregates a set of model realizations that despite their apparent difference in the model space, all correspond to similar principal flow trends.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S147",
+  "year": "2014",
+  "title": "Decision Support for Daily Production Optimization: In Genuine Real-Time",
+  "read_level": "abstract",
+  "contribution": "Discussion paper on challenges and opportunities of online decision-support tools for daily production optimization, arguing that fast response times enable instant re-optimization in a well-optimization decision meeting; supported by two IO Center contributions (abstract).",
+  "problem_entry": "Complex bottleneck structure makes the best production strategy non-trivial; per-well flow rates are not easily measured, effects of changes (e.g. choke valves) on bottlenecks are complex, and optimization tools have been too slow for the engineer's workflow (abstract).",
+  "key_idea": "Fast (genuine real-time) recommendation times change the workflow: re-optimize live in the decision meeting (abstract). The two IO Center contributions are not named in the abstract; SmartOpt/SmartX in the references are likely candidates (inferred, not confirmed).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "SPE-167861-MS (1 Apr 2014); NTNU (Ursin-Holm, Sandnes, Gunnerud, Foss), SINTEF ICT (Zenith), Petrobras (Teixeira), IBM Research (Conn); 9 references incl. the CSV 2009 book and Gunnerud et al. 2013 on embedding structural information (Crossref).",
+  "writing": "",
+  "limits_future": "Not read.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Problem framed from the production engineer's workflow and decision meeting; SPE venue with NTNU/SINTEF/Petrobras coauthors.",
+    "pages": "abstract; Crossref"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Name the meeting or decision cadence in which the user acts on recommendations, make time-to-recommendation short enough to re-optimize live inside it, and report that latency as a result (abstract)."
+  ],
+  "coauthors": "S. Ursin-Holm, A. Sandnes, V. Gunnerud, B. A. Foss, F. Zenith, A. F. Teixeira",
+  "quotes": [
+   {
+    "text": "These effects could be complex, and only relying on human interpretation when searching for the best production strategy is clearly suboptimal, and indeed, sometimes dangerous.",
+    "page": "abstract"
+   },
+   {
+    "text": "It highlights the potential of fast response times that enables totally different workflows, as a result of the fact that instant re-optimizations could be conducted in a well optimization decision meeting.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S063",
+  "year": "2015",
+  "title": "Solving air traffic conflict problems via local continuous optimization",
+  "read_level": "abstract",
+  "contribution": "B-spline trajectory model, semi-infinite programming formulation of the separation constraint, and a continuous formulation of tactical conflict resolution with one variable per aircraft; local continuous optimization shown to improve the overall global optimization (abstract).",
+  "problem_entry": "Conflict resolution is traditionally tackled by discretized combinatorial approaches; the paper shows a continuous formulation is viable on realistic problems (abstract).",
+  "key_idea": "One-variable-per-aircraft B-spline trajectories plus a semi-infinite separation constraint make the problem a small continuous NLP; local methods need fewer iterations and fewer costly function evaluations inside a global search (abstract). HAL keyword 'genetic algorithms' suggests a GA global layer (HAL notice; inferred).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Encouraging experiments on realistic test problems; sizes, baselines and local solver not read (abstract).",
+  "positioning": "EJOR 241(2):502-512; 23 references incl. Conn 1987 exact penalty for semi-infinite programming, CSV 2009, BOBYQA 2009, Stein 2012 SIP, and GA/ant-colony/MILP conflict-resolution work (Crossref).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Continuous/semi-infinite NLP machinery carried into a combinatorial/metaheuristic domain; Conn's 1987 SIP exact-penalty paper in the reference list.",
+    "pages": "abstract; Crossref"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Application with air-traffic researchers (ENAC HAL deposit), already listed in SKILL.md Method 4 practice.",
+    "pages": "Crossref; HAL notice"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Step 1 only: cost counted in costly function evaluations.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Give each agent's path a smooth one-variable parameterization (B-spline) and write pairwise separation as a semi-infinite constraint over continuous time, turning a combinatorial problem into a small continuous NLP that a local solver can polish inside a global search (abstract)."
+  ],
+  "coauthors": "Clément Peyronne, Marcel Mongeau, Daniel Delahaye",
+  "quotes": [
+   {
+    "text": "It involves very few optimization variables in that one needs only one optimization variable to determine each aircraft trajectory.",
+    "page": "abstract"
+   },
+   {
+    "text": "Not only does one not need to rely on the traditional, discretized, combinatorial optimization approaches to this problem, but, moreover, local continuous optimization methods, which require relatively fewer iterations and thereby fewer costly function evaluations, are shown to improve the performance of the overall global optimization of this non-convex problem.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S142",
+  "year": "2015",
+  "title": "Reduced space dynamics-based geo-statistical prior sampling for uncertainty quantification of end goal decisions",
+  "read_level": "abstract",
+  "contribution": "Reduced-space hierarchical clustering of flow-relevant indicators to aggregate flow-equivalent prior samples in history matching, plus structure-exploiting numerical linear algebra; demonstrated on synthetic and field-scale data (abstract).",
+  "problem_entry": "Large-scale ill-posed inversion (history matching) where geostatisticians propose large prior sets that are almost entirely flow equivalent, leaving the posterior intractable (abstract).",
+  "key_idea": "Mitigate uncertainty at the prior-sampling stage by clustering samples in a reduced space of flow-relevant indicators; indicators and linear-algebra techniques not read (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Synthetic and field-scale data; details not read (abstract).",
+  "positioning": "NAO-III proceedings pp. 191-221; 59 references incl. two IBM patent disclosures by Horesh, two IP.com prior-art disclosures by Horesh, Conn et al., and van Essen et al. SPE 154375 adjoint-based history matching with Conn (Crossref).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure-exploiting numerical linear algebra named as a contribution.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "IBM industrial research whose outputs include patent/prior-art disclosures (cited as references) rather than a deployed tool.",
+    "pages": "Crossref"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "flow-equivalence screening",
+    "evidence": "Aggregate geologically distinct but flow-equivalent prior samples by hierarchical clustering of flow-relevant indicators in a reduced space; same device as S076.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "Lior Horesh, Eduardo A. Jimenez, Gijs M. van Essen",
+  "quotes": [
+   {
+    "text": "In particular, geo-statisticians may often propose large sets of prior samples that regardless of their apparent geological distinction are almost entirely flow equivalent.",
+    "page": "abstract"
+   },
+   {
+    "text": "As an antidote, a reduced space hierarchical clustering of flow relevant indicators is proposed for aggregation of these samples.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S091",
+  "year": "2018",
+  "title": "Efficient solution of quadratically constrained quadratic subproblems within the mesh adaptive direct search algorithm",
+  "read_level": "abstract",
+  "contribution": "Three structure-exploiting solvers for the QCQP subproblems of the MADS quadratic-model search step (l1 exact penalty, augmented Lagrangian, and a new combination), implemented in NOMAD and tested on 65 analytical problems and 4 simulation-based engineering applications (abstract).",
+  "problem_entry": "MADS's optional quadratic-model search step produces a series of quadratically constrained quadratic subproblems that should be solved efficiently by exploiting their structure (abstract).",
+  "key_idea": "Compare l1 exact penalty, augmented Lagrangian and a new combined algorithm (abstract). Related thesis (not the paper): the l1 augmented Lagrangian optimizes a piecewise quadratic rather than a quartic, with the Coleman-Conn l1 exact-penalty inner loop and a standard-AL-like outer iteration (Amaioua thesis pp. vi, 28).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "65 analytical test problems + 4 simulation-based engineering applications in NOMAD (abstract); thesis ch. 4 (declared as the EJOR work) lists performance and data profiles, AIRCRAFT_RANGE, LOCKWOOD, SIMPLIFIED_WING, WELDED and '200 instances' of industrial applications (thesis pp. xi, 30).",
+  "positioning": "EJOR 268(1):13-24; GERAD G-2016-45 (June 2016, revised Nov 2016, 17 pp.); 59 references incl. Conn 1973, Coleman-Conn 1980/1982, Conn-Gould-Toint 1994 slack variables, LANCELOT experiments 1996, Conn-Le Digabel 2013, CSV 2009, Moré-Wild 2009, Hestenes 1969, Powell 1969 (Crossref).",
+  "writing": "",
+  "limits_future": "Not read.",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Conn's l1 exact penalty (1973, Coleman-Conn 1980/82) and augmented-Lagrangian ideas reused inside MADS; reference list and thesis confirm the Coleman-Conn inner loop is reused.",
+    "pages": "abstract; Crossref; thesis p. 28"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two tiers: 65 analytical problems and 4 simulation-based engineering applications.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Algorithms delivered as NOMAD code.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "For quadratically constrained subproblems, put an l1 penalty on the constraints inside an augmented Lagrangian so the merit function stays piecewise quadratic rather than quartic, and reuse an existing l1 exact-penalty inner solver (Amaioua thesis pp. vi, 28; related document, not the paper)."
+  ],
+  "coauthors": "Nadir Amaioua, Charles Audet, Sébastien Le Digabel",
+  "quotes": [
+   {
+    "text": "One of the optional MADS features is a versatile search step in which quadratic models are built leading to a series of quadratically constrained quadratic subproblems.",
+    "page": "abstract"
+   },
+   {
+    "text": "These methods are implemented within the NOMAD software package and their impact are assessed through computational experiments on 65 analytical test problems and 4 simulation-based engineering applications.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S135",
+  "year": "2022",
+  "title": "A derivative-free exact penalty algorithm: basic ideas, convergence theory and computational studies",
+  "read_level": "abstract",
+  "contribution": "Derivative-free trust-region method on the l1 exact penalty for constrained problems without objective or constraint gradients, with convergence to a constrained optimum once the penalty is large enough and numerical comparisons on analytical problems plus a simulation-based problem (abstract).",
+  "problem_entry": "Constrained optimization where gradients of objective and constraints are unavailable and constraints need not be known explicitly (abstract).",
+  "key_idea": "Exact l1 penalty inside a DFO trust region with constraint models built during the run; infeasible iterates accepted; steps along directions with guaranteed descent because the l1 penalty is nondifferentiable near active constraints (abstract).",
+  "assumptions": "Convergence 'under certain conditions for feasible problems' once a sufficiently high penalty is selected; conditions not read (abstract).",
+  "proof_devices": [],
+  "experiments": "Comparison with other algorithms on analytical test problems (good performance reported) and results on a simulation-based problem; baselines not read (abstract).",
+  "positioning": "Comput. Appl. Math. 41, art. 56, published 22 Jan 2022 (after Conn's death; Views-and-News 27(2), Nov 2019, has 'In memory of Andy Conn'); 28 references incl. Coleman-Conn 1980/1982, CST 1997, CSV 2008 x2, CSV 2009, Amaioua et al. 2018, Audet-Dennis 2009, Powell 1994, Sampaio-Toint 2016, CUTEst, NOMAD (Crossref).",
+  "writing": "Title spells out the triad 'basic ideas, convergence theory and computational studies' (abstract/title).",
+  "limits_future": "Scope stated in the abstract: modestly sized problems where computing the search direction is not too expensive (abstract).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Conn's own l1 exact-penalty line (Coleman-Conn 1980/1982 in the references) carried into a model-based DFO trust region.",
+    "pages": "abstract; Crossref"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Theory and computation packaged in one paper, as the title triad says.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Analytical test set plus a simulation-based problem.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Coauthor group works on oil-production optimization with Petrobras support (inferred from references and Giuliani 2019 thesis acknowledgements).",
+    "pages": "Crossref; thesis PDF p. 9"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Where an l1 merit function has kinks near active constraints, accept only steps along directions with certified descent for the penalty, and give the method's scope in cost terms (suited when computing the direction is cheap) (abstract)."
+  ],
+  "coauthors": "Caio Merlini Giuliani, Eduardo Camponogara",
+  "quotes": [
+   {
+    "text": "By the use of an exact penalty, under certain conditions for feasible problems, the method converges directly to a constrained optimum, once a sufficiently high penalty is selected.",
+    "page": "abstract"
+   },
+   {
+    "text": "To address the fact that the ℓ1-penalty used is not in general differentiable near the active constraints, steps are computed in directions with guaranteed descent.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S236",
+  "year": "2007",
+  "title": "SIAG/OPT Views-and-News",
+  "read_level": "metadata",
+  "contribution": "Identified as SIAG/OPT Views-and-News vol. 18 no. 2 (October 2007), theme 'Optimizers in Industry', opening with Conn's first-person essay 'My Experiences as an Industrial Research Mathematician' (pp. 1-7); body not read (issue p. 1).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Issue contents: Conn p. 1; Resende 'An Optimizer in the Telecommunications Industry' p. 8; Bulletin p. 20; Chairman's Column (Anstreicher) p. 22; Comments from the Editor (Vicente) p. 23, matching the Scholar author string. Same title as S152 (SIAM News 44(4), 2011), possibly a reprint; not compared (issue p. 1; inferred from title).",
+  "writing": "Section headings only: 1 Setting the scene (p. 1); 2 The environment at IBM research (p. 2); 3 Projects at IBM research: an application (p. 3); 4 ... not primarily an application (p. 4); 5 ... the present (p. 5); 6 A few concluding remarks (p. 7); Acknowledgement (p. 7). Page 1 sets the scene in 1989 (Waterloo since 1968 as PhD student, 1971 Hebrew University postdoc, two sabbaticals in France) (issue p. 1).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Headings show a first-person account of IBM work split into application and non-application projects; section 6 opens by saying he works in an area rich in problems (phrase SKILL.md cites only via the MAM 2015 profile). Headings only.",
+    "pages": "issue pp. 1-7"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "Newsletter issue; other contributors M.G.C. Resende, K.M. Anstreicher (chair), L.N. Vicente (editor)",
+  "quotes": []
+ }
+]

@@ -1,0 +1,519 @@
+[
+ {
+  "id": "S086",
+  "year": "1993",
+  "title": "Large-scale nonlinear constrained optimization",
+  "read_level": "full",
+  "contribution": "A 1992 survey of large-scale constrained NLP that explains why small-scale methods fail at scale, classifies approaches by their parent technology (large-scale LP, small-scale NLP, interior point) and uses LANCELOT as the worked example.",
+  "problem_entry": "Ten years of progress in constrained NLP meet considerable obstacles at large scale, visible in the paucity of software even for large general QPs; framed as a personal response to why/what difficulties/what progress (pp. 1-3).",
+  "key_idea": "Difficulties first (structure, scaling, global vs local convergence, input, test sets, evaluation; pp. 4-6), then approaches grouped by parent technology (p. 6), with LANCELOT (trust region on bounds + augmented Lagrangian + group partial separability) as the extended example (pp. 10-16); invariant subspaces matter more than sparsity (p. 14).",
+  "assumptions": "Problem (1.1)-(1.4) with twice continuously differentiable f and c_j, possibly infinite bounds; only local minimizers sought (pp. 1-2).",
+  "proof_devices": [],
+  "experiments": "None; Figure 1 lists 19 LANCELOT applications with n and m only (n up to 15625), analysis promised separately (p. 15).",
+  "positioning": "Broad citation (137 references); MINOS described as a bridge from LP to NLP (p. 7), SQP as promising but short of computational experience (p. 10); own LANCELOT given most space, with the caveat that length signals novelty, not importance (p. 1).",
+  "writing": "First-person plural, persuasive (the authors' task is to convince readers to solve nonlinear models, p. 3), Beale's aphorism as motto (p. 3); no proofs, results summarised with pointers (pp. 11-13).",
+  "limits_future": "Overview not complete (p. 1); degeneracy needs research (p. 16); interfaces neglected (p. 18); future: Lagrangian barrier, structured trust regions, interior points for linear constraints, more testing (pp. 15-16).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Stated: much of the joint effort went into writing software, preparing input and testing; theory [31],[38],[42], code [41] and test set [40] presented as one package.",
+    "pages": "pp. 2-3, 12-15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Test sets named a primary requirement; over 900 instances in the standard input format and a call for more; input format treated as a research problem.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Large problems are solvable only because they are structured; exploit more than sparsity (invariant subspaces).",
+    "pages": "pp. 5, 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Survey as a research agenda (existing)",
+    "evidence": "The LANCELOT section ends with the group's own next projects (Lagrangian barrier, structured trust region, interior points, more testing).",
+    "pages": "pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "Define the survey's key notion (here, what counts as large) along explicit axes (machine, nonlinearity, structure, frequency of solves) with two anchor examples (p. 2).",
+   "Organise a survey as difficulties -> approach classes by parent technology -> one worked system in depth -> other issues -> short conclusion (pp. 4-18).",
+   "Separate a concept from its proxy with a two-function example: sparse and dense Hessians sharing one invariant subspace (p. 14)."
+  ],
+  "coauthors": "Nick Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "The fact that we are able to solve large problems at all is because they are structured.",
+    "page": 5
+   },
+   {
+    "text": "Prefering to solve linear models, only because we understand how to solve large linear programs, should no longer be the normal practice.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S061",
+  "year": "1994",
+  "title": "Large-scale nonlinear constrained optimization: a current survey",
+  "read_level": "full",
+  "contribution": "An updated survey that adds background, a formal statement of group partial separability, the CUTE testing environment and the CGT group's 1993 further developments (Lagrangian barrier, element merging, iterated subspace minimization, linear constraints outside the augmented Lagrangian), told through concrete runs.",
+  "problem_entry": "Same progress-vs-obstacle entry as S086, now naming software, numerical linear algebra and testing as topics; adds the question whether algorithms unsuitable for large problems are still worthwhile (yes, e.g. for very expensive function evaluations) (pp. 1-3).",
+  "key_idea": "A field map plus agenda: background (pp. 4-7), existing methods incl. SBMIN and group partial separability (pp. 7-12), CUTE (pp. 12-14), and further developments motivated by a 117-hour LANCELOT run on HAIFAL (pp. 15-22), then colleagues' work (pp. 22-26).",
+  "assumptions": "Twice continuously differentiable f and c_j, possibly infinite bounds, local minimizers only (pp. 1-2).",
+  "proof_devices": [
+   "augmented Lagrangian derived as the classical Lagrangian of a shifted quadratic-penalty reformulation, and the same shift applied to the log barrier (pp. 15-17)",
+   "block factorisation reducing the slack augmented-Lagrangian Newton system to one system in B (5.17)-(5.19) (p. 18)"
+  ],
+  "experiments": "Reported experience, not a controlled study: HAIFAL (343 vars, 8958 inequalities) LANCELOT default 117 h vs tuned 4 h 24 min, modified barrier 31 min 54 s, MINOS 5.3/5.4 2 h 36 min / 1 h 30 min (pp. 15, 17); iterated subspace minimization vs default LANCELOT on 39 CUTE problems: >=2x faster 11 times, >=10x twice, 2x slower 5 times (pp. 20-21).",
+  "positioning": "Separate section for colleagues' work (pp. 22-26); records Eldersveld et al.'s conclusions unfavourable to MINOS but flags own expertise bias and MINOS's older technology in the MINOS-LANCELOT comparison (p. 25); admits own biases (p. 27).",
+  "writing": "Tale-based motivation of further developments (p. 15); openly self-critical (LANCELOT A's major defect is linear constraints, p. 21); strong normative close on testing (p. 27).",
+  "limits_future": "Self-critique: linear-constraint handling (p. 21), quadratic model poor for log barrier (p. 18), naive preconditioners possibly over-credited by limited testing (p. 6); agenda: barrier methods, structured trust regions, merging, subspace minimization, explicit linear constraints, parallel LANCELOT-like work at British Gas (pp. 15-22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Normative rule: practical algorithms need evidence of competitiveness on significant problems; LANCELOT tested with all options on about 1000 instances.",
+    "pages": "pp. 25, 27"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Requirements for a testing environment (managed database, comparison with best packages, facilities to test ideas, free availability); CUTE interfaces to nine external codes; CUTE made testing iterated subspace minimization quick.",
+    "pages": "pp. 13-14, 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Cost unit is CPU time; the subspace-minimization comparison excludes runs over 30 minutes; no noisy tier.",
+    "pages": "p. 21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Exact second derivatives through structure; preferring quasi-Newton to exact second derivatives is very seldom necessary in the authors' experience.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Shift idea carried from the quadratic penalty to the log barrier (Lagrangian barrier); Conn's 1982/84 reduced-Hessian method reused by Biegler et al.",
+    "pages": "pp. 15-17, 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Self-audit of one's own solver starts a research line (existing)",
+    "evidence": "A 117-hour default LANCELOT run on HAIFAL motivates handling inequalities by barrier functions.",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "Survey as a research agenda (existing)",
+    "evidence": "Further Developments section lists the group's 1993 follow-up papers.",
+    "pages": "pp. 15-22"
+   },
+   {
+    "pattern": "benchmark tale with disclosed tuning",
+    "evidence": "Default run, tuned run of own code and two versions of the rival reported together, with the expertise bias named.",
+    "pages": "pp. 15, 17, 25"
+   }
+  ],
+  "transferable": [
+   "Open a further-developments section with one concrete failed run (problem, size, hours), then show how each idea changes that number, including the tuned run of your own code (pp. 15-17).",
+   "When comparing against a rival while owning one of the codes, state your expertise bias and the rival's age in the same paragraph (p. 25).",
+   "Report a win/loss tally against the default at fixed ratios (>=2x, >=10x, <=0.5x) with the exclusion rule in a footnote (pp. 20-21).",
+   "Motivate a new merit function by showing it is the classical Lagrangian of a reformulated (shifted) constraint set (pp. 15-17)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "nobody should be publishing papers whose main purpose is to describe an algorithm that is intended to be practically useful, unless they also provide evidence that the algorithm is competitive on significant problems.",
+    "page": 27
+   },
+   {
+    "text": "relatively innocuous seeming changes, like changing the initial trust region size from one to two, may change the solution time by several orders of magnitude.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S188",
+  "year": "1994",
+  "title": "A Comparison for Small-Scale Software Nonlinear Optimization Software (CSSNOS) preliminary project outline",
+  "read_level": "full",
+  "contribution": "A project outline for an open, automated, bias-controlled comparison of small-scale NLP software on CUTE, specifying governance, submission format, cost measures, harness, analysis and cross-platform normalisation.",
+  "problem_entry": "Too little is known about the relative merits of small-scale NLP codes and new ideas cannot be compared with the best results; Hock-Schittkowski is 13 years old; the idea was raised at the Il Ciocco NATO conference (Sept 1993) and CUTE makes it realistic (p. 2).",
+  "key_idea": "Two-level governance (core group runs tests, council referees them), automated CUTE harness handed to submitters, a test list fixed in advance, at most 5 variants per code with the default compulsory, and reliability/efficiency measured in solved problems, CPU time and evaluations, not iterations (pp. 3-9).",
+  "assumptions": "Small problems, Fortran, sequential machines, IEEE double precision; iterations not comparable across codes, so time limits replace iteration limits; timing noise handled by repetition or aggregation (pp. 4-8).",
+  "proof_devices": [],
+  "experiments": "Protocol only, no results: CUTE problems at three sizes (<10, ~50, <100), starting points also x10 and x100, STATS.d records with f/g/H counts, crash detection, ranking by counts of best/second best, frozen reference solver as time yardstick (pp. 5-10).",
+  "positioning": "Positions against the 1981 Hock-Schittkowski comparison (p. 2); builds on the LANCELOT testing reports [3], [4] (pp. 8, 11); names popular codes to include (UNCMIN, NPSOL) (p. 3).",
+  "writing": "Deliberately tentative (question marks in parameters, e.g. 50%?, p. 9) as an invitation to debate; ends with a list of open issues and thanks to Biggs, Buckley, Fourer, Gould, Nocedal (pp. 10-11).",
+  "limits_future": "Not complete (p. 3); open issues: test set, C codes (f2c), stopping conditions, CPU benchmark, timing, starting points, presentation, workload (pp. 7, 10-11); possible public performance database (p. 10). Whether the project ran is not in the text.",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Community test bed with a public protocol as a research product; cost in evaluations and CPU, not iterations; variants submitted separately with the default compulsory.",
+    "pages": "pp. 3-9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Hard variants come from distant starting points (x10, x100), not noise; no engineering tier.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Protocol reuses the harness of the LANCELOT testing reports.",
+    "pages": "pp. 8, 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bias-controlled open benchmark",
+    "evidence": "Core group plus a council writing internal referee's reports, automated harness to minimise personal intervention, test list fixed in advance, cap of 5 variants per code with the default compulsory.",
+    "pages": "pp. 3-7"
+   },
+   {
+    "pattern": "solver-agnostic evaluation layer (existing)",
+    "evidence": "All codes run through CUTE interfacing tools or an equivalent interface on SIF problems.",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Fix and publish the test-problem list before accepting submissions (p. 5).",
+   "Cap variants per code (5) and make the default configuration compulsory (p. 7).",
+   "Detect crashes automatically: missing stats file + CPU below the limit + core file present (p. 9).",
+   "Use a time limit, not an iteration limit, when iterations are not comparable across codes (pp. 5, 8).",
+   "Normalise across machines by timing a frozen reference solver on a fixed problem set (p. 10).",
+   "Summarise by counts of best, second best, ..., with failures in the worst class (p. 9)."
+  ],
+  "coauthors": "Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "the amount of personal intervention (and thus of bias) during the testing procedure would be kept to a minimum",
+    "page": 3
+   },
+   {
+    "text": "This possible comparison should be extremely helpful for authors in evaluating the relevance of their algorithmic ideas, and for referees in their task to assess that relevance.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S085",
+  "year": "1994",
+  "title": "Improving the decomposition of partially separable functions in the context of large-scale optimization: a first approach",
+  "read_level": "full",
+  "contribution": "Introduces element merging and expansion for partially separable functions, gives closed-form flop rules and a greedy merging pass, and shows reduced Hessian-vector product cost (and often storage) on CUTE problems.",
+  "problem_entry": "Reverses the assumption that the user's structure is given and only exploited: modify the structure to cut the cost of Hessian-vector products in CG inside truncated Newton (LANCELOT) (p. 2).",
+  "key_idea": "Expand an element if n_i^2 <= 2 d_i + p_i^2; merge two elements if the overlap area is at least the off-diagonal zero blocks; greedy variable-by-variable merging repeated to a fixed point instead of the set-covering optimum; also merge trivial groups (pp. 5-8).",
+  "assumptions": "Convex C^2 f for motivation (questions valid in the nonconvex case); dense v; cost = flop count (add-multiply pairs) as an a-priori criterion; only aggregation, never disaggregation (pp. 3-5).",
+  "proof_devices": [
+   "closed-form flop comparison read off block pictures (overlap area vs off-diagonal zero blocks) (pp. 5-6)",
+   "exact problem identified as set covering, replaced by a greedy fixed-point pass (p. 7)"
+  ],
+  "experiments": "Fortran code on CUTE; most problems unchanged; ten changed problems tabulated: e.g. NCB20B 1981 -> 6 elements, 393400 -> 209025 flops per product, storage 207010 -> 105060; flop gains >10% except HILBERTB; expansion can triple storage; no solver timings (pp. 8-10).",
+  "positioning": "Analogy to Chang & McCormick's sparser sparse matrices; builds on Griewank-Toint partial separability; Toint (1987) for effects on partitioned updating (pp. 2, 11).",
+  "writing": "Modest title (a first approach) and a closing admission of very limited scope; the assumption reversal is stated in the first paragraph (pp. 2, 11).",
+  "limits_future": "Flops-only criterion; ordering dependence unknown; effects on partitioned quasi-Newton and parallel granularity left open; hopes to encourage research on improving structural descriptions (p. 11).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Extends exploiting the user's given structure to improving that structure.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "CUTE as test bed; reports that most problems were unaffected before tabulating the changed ones.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Idea + Fortran code + CUTE numbers, but no theory and only a-priori flop counts, no end-to-end solver timings.",
+    "pages": "pp. 5, 8-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "treat a given structure as a design variable",
+    "evidence": "Instead of exploiting the user's partially separable decomposition as given, modify it (merge/expand) to reduce arithmetic.",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Before rewriting a solver, test an idea with an a-priori cost model (flops and storage) on a public test set (p. 5).",
+   "Turn a data-structure choice into a one-sentence geometric rule (merge when overlap area >= zero off-diagonal area) (p. 6).",
+   "When the exact version is combinatorial, name it (set covering) and use a simple greedy pass with a fixed-point stop (p. 7).",
+   "Say how many test problems were unaffected, then tabulate before/after for the affected ones (p. 8)."
+  ],
+  "coauthors": "Nick Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "However, it is frequently assumed that the problem's structure is given, and that a good algorithm has to exploit it.",
+    "page": 2
+   },
+   {
+    "text": "Despite its direct practical interest, we of course realize that the research described in this paper is very limited in scope.",
+    "page": 11
+   }
+  ]
+ },
+ {
+  "id": "S082",
+  "year": "1994",
+  "title": "A note on using alternative second-order models for the subproblems arising in barrier function methods for minimization",
+  "read_level": "partial",
+  "contribution": "Shows that the standard Newton step after a barrier-parameter update is an asymptotically poor member of a primal-dual family and proposes an alternative first step (dual estimate from the previous weights and shifts), adopted as default in HSL VE14.",
+  "problem_entry": "Warm-starting each barrier subproblem at the previous minimizer makes a full Newton step likely infeasible (Wright 1993); the paper explains why and repairs it (p. 3).",
+  "key_idea": "Write barrier stationarity as a primal-dual system with a free multiplier lambda; the Newton matrix depends on lambda; choose lambda from the old weights/shifts (3.9) instead of the new (3.8), for the first step of each inner iteration only (pp. 5-6, 16).",
+  "assumptions": "f and c_i at least C^2; openly non-rigorous: all square systems assumed nonsingular; method-specific weight and shift sequences (pp. 2-3, 7, 12).",
+  "proof_devices": [
+   "first-order Taylor estimate of active constraints after the step: c_A(x+dx^N) ~ (2 - mu_k/mu_{k+1}) c_A vs c_A(x+dx^A) ~ (mu_{k+1}/mu_k) c_A (p. 8)",
+   "order estimate of the barrier gradient O(mu_k^2/mu_{k+1}) and condition mu_k = o(mu_{k+1}^{3/4}) for one-step termination (p. 9)"
+  ],
+  "experiments": "HSL VE14 on four large CUTE bound-constrained QPs (BQPGAUSS n=2003, JNLBRNGA, OBSTCLBM n=15625, TORSION1 n=14884), three barrier variants, standard vs alternative first step; iterations, CPU, factorizations, backtracks; up to ~25% gains, fewer backtracks for unshifted methods, but TORSION1 LBF backtracks rise 79 -> 115; first reported Lagrangian-barrier results (pp. 14-17).",
+  "positioning": "Explains Wright (1993); transplants Gould (1989) quadratic-penalty starting-point idea; related to McCormick (1991) primal-dual methods (pp. 3, 5-6).",
+  "writing": "Short note dedicated to J. Stoer, disclaiming rigor up front (pp. 1, 3).",
+  "limits_future": "No rigorous theory; four bound-constrained QP test problems; extra alternative steps less successful and not reported; similar signs in the unfinished general QP code VE19 (pp. 3, 16-17).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Derivation + HSL code option (made default) + CUTE numbers in one note.",
+    "pages": "pp. 5-6, 14-17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Gould's warm-start device for the quadratic penalty carried to barrier functions.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Only four CUTE problems, other large ones dismissed as variants; a less successful extension mentioned without numbers.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "embed the standard method in a family, then pick another member",
+    "evidence": "Standard Newton is one member of a lambda-parametrized family of Newton corrections; a different member avoids infeasible full steps.",
+    "pages": "pp. 3, 5-6"
+   }
+  ],
+  "transferable": [
+   "Rewrite a primal Newton system as primal-dual with a free dual estimate; pick the estimate that makes the residual vanish asymptotically and use it only for the first step after a parameter change (pp. 5-6, 16).",
+   "Diagnose warm-start failures with a first-order Taylor estimate of active constraints after the step (p. 8).",
+   "Report factorizations and backtracks as well as iterations and time to show where a step-quality change acts (pp. 14-17)."
+  ],
+  "coauthors": "Nick Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "the standard Newton method is actually an asymptotically inappropriate member of a whole class of Newton methods for the subproblem.",
+    "page": 3
+   },
+   {
+    "text": "Our intention here is not to produce a completely rigorous theory, merely to indicate the possible advantages of viewing Newton's method",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S113",
+  "year": "1993",
+  "title": "Global convergence of two augmented Lagrangian algorithms for optimization with a combination of general equality and linear constraints",
+  "read_level": "partial",
+  "contribution": "Proves global convergence to first-order points of augmented Lagrangian methods that keep general linear inequalities in the subproblem, for several practical inner stopping rules and for partitioned penalty parameters.",
+  "problem_entry": "LANCELOT keeps only bounds outside the augmented Lagrangian; putting general linear inequalities inside is inefficient when specialised linear-constraint solvers exist, especially at large scale (pp. 3-4).",
+  "key_idea": "Minimize the augmented Lagrangian over the linear-constraint polyhedron, stop when a criticality measure (best linearized decrease over feasible set and unit ball) is below omega_k, and show cheaper tests (projected gradient on the tangent cone of dominant constraints, sign-checked least-squares multipliers, reduced gradient) imply it; allow separate penalties per constraint subset (pp. 5-8, 14-22).",
+  "assumptions": "AS1 nonempty feasible polyhedron; AS2 C^2; AS3 iterates in a closed bounded domain; AS4 J(x*)Z* of column rank >= m at limit points; l2 norm only for exposition (pp. 4, 9, 25).",
+  "proof_devices": [
+   "reuse of 1991 Lemmas 4.1-4.2 unchanged because their proofs avoid the changed parts (p. 9)",
+   "feasible direction along ZZ^T grad Phi scaled by min{1, delta/alpha} to bound the reduced gradient by the criticality measure (Lemma 4.3, pp. 9-11)",
+   "continuity of the optimal value of a convex parametric problem (Fiacco) (Lemma 4.4-4.5, pp. 11-12)",
+   "Moreau decomposition to relate criticality tests (Theorem 5.7, p. 19)",
+   "proof by revisiting the two places where the stopping test is used (Theorem 5.3, p. 17)"
+  ],
+  "experiments": "none",
+  "positioning": "Extends Conn et al. (1991) from bounds to linear constraints; cites Fletcher (1987) for the advantage; contrasts with Powell's multiple-penalty scheme (pp. 3-4, 20).",
+  "writing": "Formal lemma-theorem style; lemma headers credit the source result; the least-squares multiplier flagged as an analytical device (pp. 6, 9).",
+  "limits_future": "No numerical results; local analysis (rate, penalty boundedness) deferred to the companion report S107 (p. 25).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Theory for a class (two algorithms, several stopping tests) tied to tests already used in LSNNO, VE09, VE14, VE19; LANCELOT parameter values quoted.",
+    "pages": "pp. 8, 18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Cheap linear constraints handled exactly outside the penalty function, keeping the augmented Lagrangian's Hessian sparsity.",
+    "pages": "pp. 4, 25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "1991 proof machinery and the 1993 convex-constraint trust-region algorithm reused.",
+    "pages": "pp. 8-9, 14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Pre-DFO form: the condition that carries the theorem is a computable inner criticality test, and cheaper tests are shown to imply it.",
+    "pages": "pp. 5, 14-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory for a device practitioners already use (existing)",
+    "evidence": "Global convergence proved for the reduced-gradient stopping test implemented in LSNNO, VE09, VE14 and VE19.",
+    "pages": "p. 18"
+   },
+   {
+    "pattern": "assumption audit -> single-lemma extension (existing)",
+    "evidence": "Only the counterpart of Lemma 4.3 is new; Lemmas 4.1-4.2 and Theorem 4.7's proof carried over from 1991; Theorem 5.3 proved by revisiting the two uses of the stopping test.",
+    "pages": "pp. 9, 14, 17"
+   },
+   {
+    "pattern": "inexact subproblem with a checkable certificate (existing)",
+    "evidence": "Sign-checked least-squares multipliers give both an inner stopping test and a bound on tolerated inexactness.",
+    "pages": "pp. 17-18"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment (existing)",
+    "evidence": "Linear constraints handled in the subproblem, nonlinear ones in the augmented Lagrangian.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "Measure subproblem criticality as the best linearized decrease over feasible set and unit ball, then prove cheaper practical tests imply it (pp. 5, 14-19).",
+   "Treat constraints within kappa*omega of being active as dominant in the stopping test (p. 14).",
+   "When extending a published convergence proof, list which lemmas stay valid and why, and prove only the counterpart lemma (pp. 9, 14).",
+   "Give separate penalty parameters to constraint subsets that behave differently, with per-subset multiplier updates (pp. 20-22)."
+  ],
+  "coauthors": "Nick Gould, A. Sartenaer, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "In the worst case, global convergence is ensured by driving the penalty parameter to zero, in which case the algorithms essentially reduce to the quadratic penalty function method",
+    "page": 8
+   },
+   {
+    "text": "It is merely introduced as an analytical device.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S107",
+  "year": "1993",
+  "title": "Local convergence properties of two augmented Lagrangian algorithms for optimization with a combination of general equality and linear constraints",
+  "read_level": "partial",
+  "contribution": "For the S113 algorithms with multiple penalty parameters, proves identification of strongly active linear constraints, boundedness of all penalty parameters, R-linear convergence and, under a second-order condition, convergence to an isolated local solution.",
+  "problem_entry": "Complete the global theory of the companion report with local results (rate, boundedness of the potentially troublesome penalty parameters), closing the gap to the 1991 bounds-only theory (pp. 2, 4).",
+  "key_idea": "Inner stopping by the projected gradient on the tangent cone of dominant constraints (covers LSNNO/VE09/VE14/VE19 tests), gradual penalty balancing across constraint subsets (tau_{k,j}), and a local analysis via strongly active constraints and a reduced KKT system (pp. 6-16).",
+  "assumptions": "AS1-AS4 as S113; AS5 Lipschitz second derivatives at limit points; AS6 nonsingular reduced KKT matrix for every choice of weakly active constraints; single limit point (cannot be relaxed, 1991 counterexample); AS7 uniformly positive definite reduced Hessian for the second-order result (pp. 4, 10, 13, 24).",
+  "proof_devices": [
+   "strongly vs weakly active constraints and Moreau decomposition for active-set identification (Theorem 4.2, p. 12)",
+   "finitely many dominant index sets, so fix one along a subsequence (p. 14)",
+   "Taylor expansion into a KKT-like system split into null-space and range-space parts, one block removed by the stopping rule, reduced KKT matrix inverted (Lemma 4.4, pp. 14-16)",
+   "contradiction: the multiplier-update branch is eventually always executed, so penalties stay bounded away from zero (Theorems 4.7-4.8, pp. 19-23)"
+  ],
+  "experiments": "none (preliminary experiments with general linear constraints only mentioned, p. 4)",
+  "positioning": "Local companion of S113; Theorem 4.2 called the direct generalization of Theorem 5.4 of Conn et al. (1991); penalty-boundedness technique and counterexample reused from 1991; balancing contrasted with Powell (1969) (pp. 10, 12, 19, 24).",
+  "writing": "Formal; explicit statements of which earlier results are generalized; conclusion argues practical relevance through coverage of existing packages' tests (pp. 12, 25).",
+  "limits_future": "Needs a single limit point and non-degeneracy for implementable least-squares multipliers; no numbers; fuller tests promised once a robust linearly constrained code exists (pp. 4, 23-24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Global/local companion pair with theory tied to real codes' stopping tests.",
+    "pages": "pp. 4, 25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and test legs deferred until a robust linearly constrained algorithm is implemented; theory published ahead of code.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Cheap linear constraints handled exactly outside the penalty function; no effect on the Hessian structure.",
+    "pages": "pp. 4, 25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "1991 technique reused for penalty boundedness and 1991 counterexample reused to show necessity of an assumption.",
+    "pages": "pp. 19, 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "promise-then-deliver sequel (existing)",
+    "evidence": "S113's conclusion names the local analysis as the next step; S107 carries the same date.",
+    "pages": "S113 p. 25; S107 p. 2"
+   },
+   {
+    "pattern": "Show an assumption is needed by a constructed counterexample (existing)",
+    "evidence": "Single-limit-point assumption cannot be relaxed, by the 1991 counterexample (reused rather than newly built).",
+    "pages": "p. 24"
+   },
+   {
+    "pattern": "theory for a device practitioners already use (existing)",
+    "evidence": "Stopping rule (3.5) covers optimality tests of available linearly constrained packages.",
+    "pages": "pp. 7, 25"
+   }
+  ],
+  "transferable": [
+   "When the active-set pattern can vary, use that there are finitely many index sets and fix one along a subsequence (p. 14).",
+   "Define strongly active constraints (removal destroys criticality) to get identification results without strict complementarity (p. 12).",
+   "Justify a restrictive assumption by pointing to an existing counterexample (p. 24).",
+   "Prove penalty-parameter boundedness by contradiction: show the multiplier-update branch must eventually always be taken (p. 19)."
+  ],
+  "coauthors": "Nick Gould, A. Sartenaer, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "the theory presented is directly relevant to practical computation, as the inner iteration stopping rule (3.5) covers the type of optimality tests used in available packages for linearly constrained problems.",
+    "page": 25
+   },
+   {
+    "text": "To conclude this section, we note that the conclusions of Theorems 4.7, 4.8 and 4.9 require that the complete sequence of iterates converges to a unique limit point. This assumption cannot be relaxed.",
+    "page": 24
+   }
+  ]
+ },
+ {
+  "id": "S049",
+  "year": "1994",
+  "title": "Performance of a multifrontal scheme for partially separable optimization",
+  "read_level": "unreadable",
+  "contribution": "not read (image-only scan; text file has 22 empty page markers)",
+  "problem_entry": "not read",
+  "key_idea": "not read",
+  "assumptions": "not read",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "not read; secondary context only: S086 cites it as [43], a multifrontal application in the LANCELOT context, and adds that the authors' experience so far favours an iterative approach (S086 p. 13); S061 cites it for multifrontal details (S061 p. 6).",
+  "writing": "not read",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "Nick Gould, M. Lescrenier, Ph. L. Toint",
+  "quotes": []
+ }
+]

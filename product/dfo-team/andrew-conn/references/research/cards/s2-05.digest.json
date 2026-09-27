@@ -1,0 +1,502 @@
+[
+ {
+  "id": "S036",
+  "year": "1996",
+  "title": "Optimization of custom MOS circuits by transistor sizing",
+  "read_level": "full",
+  "contribution": "First published account of JiffyTune: gradient-based transistor sizing that couples the fast simulator SPECS (direct and adjoint time-domain sensitivities) with a noise-adapted LANCELOT, behind Cadence/SLED interfaces, reporting use by 41 designers on 168 circuits (pp. 1-6).",
+  "problem_entry": "User pain: manual sizing is slow, tedious, iterative and intuition-driven with simulation in the loop; static-timing methods are inaccurate or inapplicable to full-custom circuits and SPICE-in-the-loop is too expensive (p. 1).",
+  "key_idea": "Dynamic simulation plus efficient exact sensitivities (direct or adjoint, chosen automatically by a 5x parameters/functions rule) feeding a general NLP solver (LANCELOT), with minimax recast via an extra variable and slack resets that keep satisfied inequalities exact (pp. 1-5).",
+  "assumptions": "Piecewise-constant device models give about +/-5% timing accuracy (symbol displaced in extraction) and exact gradients of that model; function and gradient values are noisy but small-error; area = sum of widths; continuous widths only (pp. 2-6).",
+  "proof_devices": [
+   "none (no theorem); convergence inherited from CGT 1988/1991 and the inner-iterations paper [28] (p. 4)",
+   "cost count: direct method = one sensitivity-circuit solve per parameter, adjoint = one per function plus convolution (p. 3)"
+  ],
+  "experiments": "Gradient benchmark (144 MOSFETs, 6,048 gradients, <= about 5 ms each; Table 1, p. 3); 12-way priority decoder with Manual/HOT/COLD/DELAY/MINIMAX runs, delays re-measured by AS/X on final designs (Table 2, p. 6); adoption: 41 designers, ~1,200 sessions, 168 circuits, >2,200 runs (p. 6); no optimizer baseline reported (MINOS only for sanity checks, p. 2).",
+  "positioning": "Contrasts static-timing sizing (posynomial/Elmore; Fishburn-Dunlop) and SPICE-based dynamic tuning (DELIGHT.SPICE, ECSTASY), calling them complementary stages; published at ICCAD, the designers' venue (p. 1).",
+  "writing": "Abstract ends on deployment evidence and the claim that designers' focus shifts from solving to specifying; confidential delays normalized to 500 units (pp. 1, 6).",
+  "limits_future": "Not for discrete cell libraries; accuracy capped by SPECS; recovery from non-working circuits open; future: event-driven convolution, parallel sensitivities, semi-infinite constraints, group partial separability, mixed-integer ordering, manufacturability (pp. 3, 6-7).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "User pain stated in designers' terms, interface inside their design systems, adoption as success metric, designers' venue; predates the 1998 TCAD paper cited in SKILL.md.",
+    "pages": "pp. 1, 5-6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Gradients from simulator sensitivities instead of DFO (Heuristic 1); minimax reformulation, ratioing/grouping and planned group partial separability exploit structure.",
+    "pages": "pp. 1-3, 5, 7"
+   },
+   {
+    "method": "Research Taste mark 4 / Workflow D step 4",
+    "relation": "evidence",
+    "note": "Noise forced changes to LANCELOT: initial trust-region radius relative to the 0.001 micron physical resolution, looser tolerances, step-based stopping.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and numbers without a new theorem; theory acts as a constraint on engineering changes (slack update only when consistent with the convergence theory).",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Validate with a higher-fidelity simulator than the one in the loop",
+    "evidence": "SPECS drives the optimization; reported delays are AS/X predictions on the final design.",
+    "pages": "pp. 2, 6"
+   },
+   {
+    "pattern": "Make tacit requirements explicit because the optimizer exploits every gap",
+    "evidence": "Tool greedily exploits unspecified aspects; area constraint needed or result depends on start point; requirements stored with the circuit.",
+    "pages": "pp. 2, 6"
+   }
+  ],
+  "transferable": [
+   "Choose direct vs adjoint sensitivities by the ratio of parameters to functions with one fixed threshold (5x) and let the tool decide automatically (p. 3).",
+   "Recast minimax as a smooth NLP with an extra variable z and constraints z >= f_i(x) (p. 5).",
+   "For noisy simulators, set initial trust-region radius, tolerances and stopping step length in the application's physical units, not machine precision (p. 5).",
+   "Report one benchmark as a matrix of runs (manual, warm start, cold start, reweighted, alternative formulation), all re-evaluated by the reference simulator (Table 2, p. 6).",
+   "Report adoption as users, sessions, distinct problems and runs (p. 6)."
+  ],
+  "coauthors": "P. K. Coulman, R. A. Haring, G. L. Morrill, C. Visweswariah",
+  "quotes": [
+   {
+    "text": "The designers’ focus shifts from solving the optimization problem to specifying it correctly and completely.",
+    "page": 1
+   },
+   {
+    "text": "A trivial example is if movement of less than 0.001 microns in transistor width is considered negligible, it may be disastrous if an automatic choice of the initial trust region size produces a radius that is much smaller.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S047",
+  "year": "1996",
+  "title": "Convergence properties of minimization algorithms for convex constraints using a structured trust region",
+  "read_level": "partial",
+  "contribution": "Introduces trust-region algorithms for partially separable objectives over convex sets with one trust-region radius per element function, and proves global convergence (liminf and, under AS.8, lim over successful iterates) for the whole class, including inexact gradients and equivalent norms (pp. 2, 5-28).",
+  "problem_entry": "Gap in the literature: every trust-region method uses a single radius even when several functions are modelled, so a few highly nonlinear elements cap all steps; norm-scaling fixes are blocked by the bounded-condition-number assumption of existing theory (pp. 2-3).",
+  "key_idea": "Element trust regions restrict only the projection of the step on each element's range subspace; overall region = intersection; sufficient decrease (2.36) uses max[Delta_min,k, ||s_k||]; per-element radius updates with meaningful/negligible elements whose misfit is measured against the overall predicted decrease divided by p; reduces to the classical method when p = 1 (pp. 5-14).",
+  "assumptions": "Closed convex X with nonempty interior; f bounded below, partially separable, bounded element gradients; element gradient error <= kappa1*Delta_min,k; reciprocal curvature bounds not summable-finite (AS.5); abstract criticality measure continuous in the gradient; problem-independent compatibility condition (2.41) (pp. 4-8, 11, 16, 21).",
+  "proof_devices": [
+   "coherence lemma: all meaningful elements pass their fit test and negligible elements change little => iteration successful (Lemma 2, pp. 14-15)",
+   "element model error <= c1*(curvature bound)*Delta_i,k^2 (Lemma 3, pp. 16-17)",
+   "minimal-counterexample argument: first iteration breaking Delta_min,k >= c3/(curvature bound) leads to a contradiction via the element achieving the minimum radius (Lemma 5, pp. 17-20)",
+   "counting split F1 (k <= r*S(k)) vs F2 with geometric bound from the product of radii shrinking at unsuccessful iterations, contradicting divergence of the reciprocal curvature bounds (Theorem 6, pp. 20-21; inspired by Powell)"
+  ],
+  "experiments": "None in the paper; one sentence reports preliminary tests of a modified LANCELOT on unconstrained CUTE problems (comparable, sometimes substantial improvements) (p. 28).",
+  "positioning": "Direct generalization of unstructured trust-region theory (CGST 1993 [14], Toint 1988 [41], Powell [35]); rejects the norm-scaling alternative on theoretical grounds (pp. 3, 16, 20).",
+  "writing": "Each new rule is justified by explaining why the intuitive alternative fails (2.61) and by its p = 1 reduction; limits stated bluntly (active-set identification 'mainly of theoretical interest') (pp. 13-14, 26).",
+  "limits_future": "Practical efficiency unproven; active-set identification rarely seen before the last iterations; Theorem 9 not provable under weaker decrease (5.5); group partial separability left out; future: next LANCELOT release, augmented Lagrangians, separate trust regions for objective and constraints (pp. 26-29).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Partial separability exploited inside the globalization device (one radius per element), not only in the linear algebra.",
+    "pages": "pp. 3, 5-6"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Pre-DFO root: model accuracy as an explicit condition tied to the trust-region radius (gradient error <= kappa1*Delta_min,k, value error O(Delta^2)); theorem uses only this property.",
+    "pages": "pp. 5, 16-17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Framework theorem for a class plus a LANCELOT prototype, but the numerical companion is one sentence and deferred to a future release.",
+    "pages": "pp. 2, 28-29"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Reduce to the classical case as a built-in check",
+    "evidence": "Every generalized rule is stated with its p = 1 reduction to the classical trust-region rule.",
+    "pages": "pp. 10, 14"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Each element function gets its own trust-region radius and fit test (existing candidate from s01).",
+    "pages": "pp. 5-6, 11-12"
+   }
+  ],
+  "transferable": [
+   "When a scalar mechanism becomes one per component, state each rule's one-component reduction and prove that the component tests jointly imply the global test (Lemma 2, pp. 14-15).",
+   "Measure each component's misfit against the total predicted decrease divided by the number of components, not its own predicted change, to avoid cancellation (pp. 13-14).",
+   "Liminf proofs with many radii: split iterations by k <= r*(successes so far); bound one part by repeated successful indices and the other by a geometric series from the product of radii (pp. 20-21).",
+   "Accept a slightly stronger compatibility condition to keep algorithm constants problem-independent ((2.41) vs (2.71), p. 16).",
+   "Before adopting the obvious alternative, check whether existing theory's assumptions (bounded condition numbers) exclude the behaviour you want (p. 3)."
+  ],
+  "coauthors": "N. Gould, A. Sartenaer, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "allowing large steps in directions in which the model has proved to be adequate while restricting the movement in directions where the model seems unreliable.",
+    "page": 3
+   },
+   {
+    "text": "Tests on unconstrained problems from the CUTE collection [1] have shown that the new method, although very comparable to LANCELOT in many cases, sometimes produces substantial improvements.",
+    "page": 28
+   }
+  ]
+ },
+ {
+  "id": "S058",
+  "year": "1996",
+  "title": "On iterated-subspace minimization methods for nonlinear optimization",
+  "read_level": "partial",
+  "contribution": "Proposes iterated-subspace minimization (ISM): at each iteration minimize f over a low-dimensional subspace built from preconditioned CG byproducts (steepest descent, conjugate or extreme-Rayleigh directions, truncated Newton), gives inherited global convergence conditions, and tests 8 variants against LANCELOT, truncated Newton and L-BFGS-B on 32 large CUTE problems (pp. 5-16).",
+  "problem_entry": "LANCELOT experience: linear-algebra cost dominates when functions are cheap; linesearch/trust-region methods probe the true function in one dimension, which is 'wasteful' given the information gathered in the model minimization (pp. 3-4).",
+  "key_idea": "A multi-dimensional analogue of the linesearch: subspace must contain a gradient-related and a Newton-related direction; dimension fixed (10) or set by the first rise of the CG Rayleigh quotient; inner BFGS started from the exact reduced Hessian (diagonal or arrowhead), so the first inner step equals truncated Newton (pp. 5-10).",
+  "assumptions": "f in C2, large n, exact second derivatives, evaluations cheap relative to linear algebra; bounded below with Lipschitz gradient; Goldstein and angle conditions on the subspace step; preconditioner with bounded condition number (pp. 3, 6-7).",
+  "proof_devices": [
+   "no new theorem: global convergence inherited from Dennis-Schnabel Thm 6.3.3 after rewriting Goldstein and angle conditions in subspace variables (2.3)-(2.4) (p. 6)",
+   "relaxation: conditions only at an intermediate inner iterate plus a fraction-tau-of-decrease rule for the final point (2.5)-(2.7), stated as 'easy to show' (p. 7)"
+  ],
+  "experiments": "FMINSURF dimension sweep (flat for s in [9,40]); 34 large/hard unconstrained CUTE problems chosen, 32 reported; 8 ISM variants vs LANCELOT (n/p), truncated Newton (n/p), L-BFGS-B; total evaluations and CPU time plus rank tables with ties at 5% or 0.5 s; appendix per-problem tables (pp. 11-16, 21-33).",
+  "positioning": "Relates to Cragg-Levy supermemory gradient, Dixon et al., Saad's Krylov least squares and Kaporin-Axelsson; dog-leg ingredients acknowledged; LANCELOT used as yard-stick with a footnote conceding it is more mature (pp. 3-4, 7, 16).",
+  "writing": "Six research questions listed up front, with 'preliminary attempts to answer all of these questions'; contrarian stance ('popular misconception', 'wasteful'); conclusion admits understanding is 'far from complete' (pp. 3-5, 17).",
+  "limits_future": "Needs more function evaluations than LANCELOT; theory light; future: linearly constrained ISM, nonlinear constraints only via penalty/barrier subproblems, trust-region inner solvers and radius interactions, better subspace choice (pp. 16-17).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Mature small-scale unconstrained software reused inside a large-scale method; dog-leg ingredients acknowledged.",
+    "pages": "pp. 4, 7, 16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Public CUTE set, own and outside baselines, rank tables, full appendix; but the cost unit is CPU time by design because evaluations are cheap in this regime (principle of step 1 applied to linear algebra).",
+    "pages": "pp. 3, 13-16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and numbers heavy, convergence inherited rather than proved.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Reuse the inner solver's byproducts",
+    "evidence": "CG directions discarded by truncated Newton become the subspace; conjugacy yields a free exact starting Hessian for BFGS.",
+    "pages": "pp. 8, 10"
+   },
+   {
+    "pattern": "Self-audit note on one's own solver",
+    "evidence": "Entry is LANCELOT's own linear-algebra cost (existing candidate from s01).",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Keep the directions and curvature an inner CG solver produces and use them to build a search subspace or starting Hessian (pp. 8, 10).",
+   "Write global-convergence conditions in the subproblem's own variables and relax them to an intermediate iterate plus a fraction-of-decrease rule so any inner solver can be plugged in ((2.3)-(2.7), pp. 6-7).",
+   "Adaptive subspace dimension: stop at the first rise of the CG Rayleigh quotient after its initial decrease (p. 9).",
+   "Code-name variants by design switches (e.g. ISM(p,f,a)) and report all combinations with totals and rank tables with stated tie tolerances (pp. 12-16).",
+   "Disclose baseline tuning (TN exponent footnote) and concede when a comparator is more mature (pp. 14, 16)."
+  ],
+  "coauthors": "N. Gould, A. Sartenaer, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "In this paper, we take the view that the above schemes are quite wasteful, given the amount of information that may have been accrued during the (approximate) minimization of the model.",
+    "page": 4
+   },
+   {
+    "text": "LANCELOT is a much more sophisticated code than our ISM variants, because it is designed for solving generally constrained in addition to unconstrained problems, has been extensively tested and refined, and contains a number of safeguards that are not included in the simpler ISM codes.",
+    "page": 16
+   }
+  ]
+ },
+ {
+  "id": "S080",
+  "year": "1996",
+  "title": "Methods for nonlinear constraints in optimization calculations",
+  "read_level": "full",
+  "contribution": "Invited state-of-the-art survey (IMA York 1996) reassessing Powell's 1987 SQP verdict: catalogues SQP variants and their difficulties, interior-point and optimality-condition methods, penalty/augmented-Lagrangian and SLP methods, linear/convex constraints, AD, inexact information and software, and ends with an agenda (pp. 1-17).",
+  "problem_entry": "Re-assess Powell's 1987 prediction that SQP is the future after a 'slightly sobering' decade for implementers and the interior-point wave (p. 2).",
+  "key_idea": "Grade method families by coherence between step and merit function; contrast active-set (hides complementarity nonlinearity in combinatorics) with interior-point (confronts it); credit penalty/AL methods with three advantages explaining large-scale success (pp. 9-11).",
+  "assumptions": "Survey; smooth problems; equalities and inequalities treated separately 'For simplicity' (p. 2).",
+  "proof_devices": [
+   "none (survey); first-person critique of positive-definite SQP secant 'contortions' (p. 4)"
+  ],
+  "experiments": "none",
+  "positioning": "Continues Powell (1987); critical of positive-definite-Hessian SQP; balanced toward MINOS ('pre-eminent' for large linearly constrained problems); places CGT/CGST work (1988, 1991, 1992b, 1993, 1994, 1995) in the map; names CONOPT, LSGRG2, MINOS, LANCELOT, ETR (pp. 2, 4, 12, 14-16).",
+  "writing": "Opinionated first-person survey ('in our opinion', 'Frankly'), organised by one evaluative lens, with a software section and an agenda-style conclusion (pp. 4, 9, 16-17).",
+  "limits_future": "Selective (no network, optimal control, parallel, infinite-dimensional); agenda: IP for nonconvex, second-derivative reappraisal via AD, strong nonlinearity, algorithm comparisons, noise, MINLP/global, factorization-free methods (pp. 16-17).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Stated (co-authored): software is the main purpose of algorithm design/analysis; explicit criticism of papers with no numerical results. Candidate correction for the SKILL.md warning-signs preamble, which says no explicit critique by Conn was found.",
+    "pages": "p. 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Stated: growth in solvable size due to better exploitation of problem structure; AD will revitalize second-derivative methods.",
+    "pages": "pp. 15-16"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "evidence",
+    "note": "Stated: noise understudied although many industrial problems are noisy.",
+    "pages": "p. 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Stated: little is known about how modern algorithms compare; followed a year later by the LANCELOT-MINOS comparison (S102).",
+    "pages": "p. 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Survey as a research agenda",
+    "evidence": "Conclusion lists understudied areas tied to practice (existing candidate from c02/S009).",
+    "pages": "pp. 16-17"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Methods treat difficult (nonlinear) and easy (linear/convex) constraints differently, easy ones directly in the subproblem.",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "Organize a survey around one evaluative criterion (coherence of step and merit function) and grade each family against it (pp. 9-11).",
+   "Characterize rival paradigms by which optimality conditions each keeps satisfied and which it drives to satisfaction (p. 10).",
+   "End a survey with a concrete list of understudied, practice-driven problems (pp. 16-17).",
+   "Include a software section naming available codes by algorithm class (p. 16)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "Frankly, we were surprised when researching this paper quite how few papers contained numerical results",
+    "page": 16
+   },
+   {
+    "text": "We have many preconceptions but, as the resurrection of barrier methods shows, folklore should not necessarily be trusted.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S126",
+  "year": "1996",
+  "title": "A primal-dual algorithm for minimizing a nonconvex function subject to bounds and nonlinear constraints",
+  "read_level": "partial",
+  "contribution": "TITLE MISMATCH: the file is Report 96/9 'A primal-dual algorithm for minimizing a nonconvex function subject to bound and linear equality constraints' (same line of work as S054). It proposes a primal-dual interior-point method for nonconvex f with bounds and linear equalities that alternates a primal-dual step and a Newton step on a shifted penalty under one logarithmic merit function, proves convergence of the barrier-reduction subsequence, and reports preliminary CUTE QP results (pp. 1-30).",
+  "problem_entry": "Two LANCELOT drawbacks (augmenting linear constraints; Cauchy-point active-set prediction fails under degeneracy) plus the gap that primal-dual methods had hardly been extended to nonconvex problems (pp. 2-3).",
+  "key_idea": "Artificial scalar theta with Ax - b = theta*r0 allows infeasible starts; merit function f + (rho/2)(theta+1)^2 - mu<log x, e>; primal-dual step if its slope test holds, otherwise a Newton step from a rank-one perturbation of the same KKT system; convexify only N^T G N, detected by inertia (pp. 4-14).",
+  "assumptions": "f in C2; f - mu<log x,e> bounded below for all mu > 0; bounded gradient and Hessian on the positive orthant; A full rank; strictly interior feasible point exists (p. 4).",
+  "proof_devices": [
+   "Wilkinson perturbation bound: smallest eigenvalue of N^T G N >= smallest positive eigenvalue of the KKT matrix (Lemma 1, pp. 7-8)",
+   "3x3 footnote counterexample showing Lemma 2 fails under second-order necessity only (p. 8)",
+   "theta bounded via monotone merit function (1.71)-(1.75) (Lemma 3, p. 15)",
+   "contradiction on mu bounded away from zero with case split rho bounded / rho -> infinity and primal-dual / Newton steps (Theorem 7, pp. 15-16, 23-24)"
+  ],
+  "experiments": "Fortran 90 QP prototype with MA27 inertia and naive G + ||G||I modification; all larger CUTE QPs without preprocessing vs active-set VE09 (MINOS similar, not reported); per-problem type labels (C/SOS/NC), Newton and modification counts, failures listed; good on convex, disappointing on nonconvex (pp. 27-29).",
+  "positioning": "Builds on primal-dual LP practice (OSL, CPLEX; Shanno), contrasts Simantiraki-Shanno (local), Forsgren-Gill (merit function) and Bonnans-Pola (needs interior start and convex model); relates variant to Gill et al. 1995 (pp. 3, 24).",
+  "writing": "Honest self-assessment of numbers ('somewhat disappointing' on nonconvex problems), numbered comments after the algorithm explaining each design choice, variants section separating proven from untested options (pp. 13-14, 24-26, 29).",
+  "limits_future": "Naive negative-curvature handling slow under massive indefiniteness; ill-conditioned KKT matrix; future: predictor-corrector, why primal-dual beats primal globally for nonconvex problems, role of the central path (pp. 29-30).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "LP primal-dual interior-point machinery carried to nonconvex NLP and hybridized with a Newton step on a shifted quadratic penalty; inertia test borrowed from KKT theory.",
+    "pages": "pp. 3-7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Framework, convergence theorem, prototype and CUTE numbers with failures in one report.",
+    "pages": "pp. 11-29"
+   },
+   {
+    "method": "Method 2 / Workflow C step 5",
+    "relation": "evidence",
+    "note": "All larger CUTE QPs without preprocessing, active-set baseline, type labels and explicit failures.",
+    "pages": "pp. 27-29"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Self-audit note on one's own solver",
+    "evidence": "Entry is two named drawbacks of LANCELOT (existing candidate from s01).",
+    "pages": "pp. 2-3"
+   },
+   {
+    "pattern": "Necessity by constructed counterexample",
+    "evidence": "3x3 footnote example shows the lemma needs second-order sufficiency (existing candidate from c02/S007).",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Bounds via log barrier, linear equalities explicitly, nonlinear constraints (future) via augmented Lagrangian.",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "transferable": [
+   "Allow infeasible starts for linear equalities with one scalar theta (Ax - b = theta*r0) driven to zero; a unit step then gives exact feasibility thereafter ((1.11)-(1.12), p. 5).",
+   "When one direction does not always descend on the merit function, compute a second from a rank-one perturbation of the same KKT system and switch by a slope test (pp. 12, 14).",
+   "Convexify only the null-space Hessian, detected by inertia of the factorization, so no modification is needed near a locally convex minimizer (pp. 7, 14, 27).",
+   "Label each test problem convex / second-order sufficient / nonconvex and report fallback-step and modification counts so failures can be attributed (pp. 27-29).",
+   "Test whether a lemma needs its strong hypothesis with a tiny counterexample in a footnote (p. 8)."
+  ],
+  "coauthors": "N. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "Considering the vast literature on primal-dual methods for convex problems, there has been remarkably little work on extending these methods to the non-convex case.",
+    "page": 3
+   },
+   {
+    "text": "Thus we were motivated to consider an interior point method in which linear constraints Ax = b are handled explicitly and simple bounds are handled via a logarithmic barrier term.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S074",
+  "year": "1997",
+  "title": "On the number of inner iterations per outer iteration of a globally convergent algorithm for optimization with general nonlinear inequality constraints and simple bounds",
+  "read_level": "partial",
+  "contribution": "Proves that, under strict complementarity and nondegeneracy assumptions, the Lagrangian barrier algorithm with the CGT 1988 bound-constrained trust-region inner solver eventually needs only one inner iteration per outer iteration, with the previous inner solution serving as the next starting point (pp. 1, 14, 25).",
+  "problem_entry": "Analyses of sequential penalty/barrier methods ignore inner-iteration effort; the authors often observed a single SBMIN iteration per outer iteration when testing a LANCELOT Release B prototype (p. 3).",
+  "key_idea": "Mesh outer Lagrangian-barrier updates (shifts s_i = mu*lambda_i^alpha) with an inner trust-region method whose warm start moves significantly dominated variables to their bounds and whose initial radius is tied to the projected gradient, so the asymptotic regime is reached immediately (pp. 3, 6-7).",
+  "assumptions": "AS1-AS9: C2 and Lipschitz second derivatives; full-rank active Jacobian on free variables; nonsingular KKT matrices for admissible active sets; two strict complementarity conditions; single limit point; Dennis-More-type Hessian approximation accuracy; perturbed KKT matrix inertia; tolerance-rate condition (4.13) (pp. 2, 10, 12-14).",
+  "proof_devices": [
+   "imported outer results (Theorems 4.1-4.2 from Conn et al. 1992b) and relabelling so the penalty parameter is at its final value (pp. 10, 12)",
+   "six-item checklist of events that hold for all large k (status unchanged, Cauchy point before first breakpoint, one CG pass, step accepted, test met, warm start redundant) (p. 14)",
+   "strict-complementarity pairing: one of x_j and its gradient component -> 0, the other -> positive limit; threshold (4.21) separates them and fixes variable status (p. 15)"
+  ],
+  "experiments": "none (motivated by prototype testing, p. 3)",
+  "positioning": "Contrasts Fiacco-McCormick and Bertsekas (outer-only analyses); extends Gould 1989 and the equality-constrained CGT 1992a; reference list misattributes Conn et al. 1992b to the structured-trust-region report 92/11 (pp. 3, 26).",
+  "writing": "Separates proved from observed behaviour explicitly and calls the assumptions 'relatively strong' but 'probably about as weak as is possible'; very short conclusion tied to the next software release (pp. 3, 25).",
+  "limits_future": "Strong assumptions, single limit point, no numbers; AS9 assumed but could be encouraged algorithmically; extension to general bounds in section 5; expected ingredient of LANCELOT Release B (pp. 3, 13, 25).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Theory written to explain behaviour observed in the authors' own code and aimed back at the next release (code -> observation -> theorem -> code).",
+    "pages": "pp. 3, 25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Analysis of how two mature algorithms (Lagrangian barrier outer loop, bound-constrained trust-region inner loop) mesh together.",
+    "pages": "pp. 3, 6-11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "anomaly-driven theory",
+    "evidence": "Variant: a favourable regularity seen in the LANCELOT B prototype (one inner iteration per outer) is turned into a theorem (existing candidate from c01/S010).",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "Self-audit note on one's own solver",
+    "evidence": "Problem comes from observing the authors' own package.",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Bounds handled directly, general inequalities by the Lagrangian barrier.",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "For nested methods, analyze inner iterations per outer iteration and design the warm start and initial radius so the asymptotic regime is reached at once (pp. 3, 7).",
+   "Structure a long asymptotic proof as a numbered checklist of events that must all hold for large k, then prove each (p. 14).",
+   "Under strict complementarity, pair each variable with its gradient/multiplier component and use a separating threshold to fix the active set for large k (p. 15).",
+   "State which behaviour is proved and which is only observed, including observations outside the assumptions (p. 3)."
+  ],
+  "coauthors": "N. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "It was often apparent that only a single iteration of the inner iteration subroutine SBMIN was ultimately required for every outer iteration of our sequential Lagrangian barrier program.",
+    "page": 3
+   },
+   {
+    "text": "While the conditions required in this paper to turn this observation to a proven result are relatively strong (and we feel probably about as weak as is possible), the package frequently exhibits the same behaviour on problems which violate our assumptions.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S102",
+  "year": "1997",
+  "title": "A numerical comparison between the LANCELOT and MINOS packages for large-scale constrained optimization",
+  "read_level": "full",
+  "contribution": "Benchmarks the default versions of LANCELOT A and MINOS 5.5 on 913 CUTE/NETLIB problems for reliability, function evaluations and CPU time, stratified by problem class and degrees of freedom, concluding that the packages complement each other (pp. 2-18).",
+  "problem_entry": "Little published on MINOS's numerical performance and even less on how the two packages compare; the difficulty of a fair comparison (test set, measures, options, stopping/memory, presentation) is made the explicit problem (p. 3).",
+  "key_idea": "Comparison protocol: large varied public set with two sizes per variable-dimension problem, no iteration counts, printed default spec files, symmetric failure accounting against known solutions, efficiency only on coherently solved problems, win/tie/loss plus quartiles, stratification by degrees of freedom (pp. 7-18).",
+  "assumptions": "Smooth problems; first and second derivatives available (CUTE); defaults only; iteration caps effectively infinite; LPs and QPs excluded from evaluation counts (pp. 3, 10-11, 14).",
+  "proof_devices": [
+   "none (empirical study)"
+  ],
+  "experiments": "913 problems (112 LP, 225 QP, 300 BC, 58 LC, 218 NC) on a DEC Alphastation; reliability LANCELOT/MINOS: LP 65/100, QP 93/90, BC 97/88, LC 97/97, NC 87/79 %; LANCELOT wins on evaluations, MINOS on CPU for LPs and few degrees of freedom; full results in Report 97/14 (S120) (pp. 7-18).",
+  "positioning": "Co-authored with MINOS's author (Saunders); neutral description of both algorithms; plausible cause of MINOS's NC unreliability (unproven step-length heuristic); builds on the LANCELOT options study (pp. 2-6).",
+  "writing": "Opens by listing five difficulties of fair comparison, reports own package's LP weakness first, and words the conclusion as complementarity with advice to try both (pp. 3, 12, 17-18).",
+  "limits_future": "Defaults only; variant-by-variant comparison would be a major exercise; conclusions hold only for defaults (p. 18).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Large public set, evaluations and CPU (not iterations) as cost units, class-by-class reporting, failures by cause.",
+    "pages": "pp. 7-13"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Benchmark co-authored with the rival package's author; both schools described fairly.",
+    "pages": "pp. 2-6"
+   },
+   {
+    "method": "Research Taste warning sign 6",
+    "relation": "evidence",
+    "note": "Claim worded as 'complement each other'; own weakness on LPs stated plainly.",
+    "pages": "pp. 12, 17"
+   },
+   {
+    "method": "Method 2 step 5",
+    "relation": "variant",
+    "note": "Defaults only; per-option analysis delegated to the earlier LANCELOT options study.",
+    "pages": "p. 18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Rival's author as co-author of the benchmark",
+    "evidence": "M. A. Saunders (MINOS) co-authors the LANCELOT-MINOS comparison.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "Symmetric failure accounting against known solutions",
+    "evidence": "Reported failures at correct solutions counted as successes, reported successes at wrong points as failures; efficiency only on coherently solved problems.",
+    "pages": "pp. 12-14"
+   }
+  ],
+  "transferable": [
+   "Check reported outcomes against known solutions: false failures count as successes, false successes as failures; give both counts per package (p. 12).",
+   "Restrict efficiency comparisons to coherently solved problems (optimal values within 1%) and state how many remain (pp. 13-14).",
+   "Report win/tie/loss plus min, quartiles and max of per-problem differences, and show how one outlier changes totals (pp. 14-15).",
+   "Stratify by a structural feature the algorithms' design says should matter (degrees of freedom < 50 vs >= 50) (pp. 15-18).",
+   "Print each solver's exact spec file and make iteration caps effectively infinite when iteration definitions differ (p. 11).",
+   "Use one small and one large instance per variable-dimension problem to avoid overweighting families (p. 7)."
+  ],
+  "coauthors": "I. Bongartz, N. I. M. Gould, M. A. Saunders, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "In our experience, this is essential for a valid assessment of software reliability and performance. Smaller test sets are more likely to introduce unwanted bias and make the statistical results less useful.",
+    "page": 7
+   },
+   {
+    "text": "One immediately notices the disappointing reliability of LANCELOT on linear programs, especially given the perfect reliability of MINOS on such problems.",
+    "page": 12
+   }
+  ]
+ }
+]

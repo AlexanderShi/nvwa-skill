@@ -1,0 +1,1097 @@
+[
+ {
+  "id": "S134",
+  "year": "1972",
+  "title": "A gradient type method of locating constrained minima",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Conn's PhD thesis (University of Waterloo) on a gradient-type method for constrained minimisation; likely root of S024 (1973). Citing works date it 1971 (search summary, unverified). No open copy found.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S024",
+  "year": "1973",
+  "title": "Constrained optimization using a nondifferentiable penalty function",
+  "read_level": "abstract",
+  "contribution": "Modified gradient-type method applied to a perturbation of the exact (l1-type) penalty p0 = mu f - sum min(0,phi_i) + sum |psi_j|, solving the original constrained problem; main theorem gives necessary and sufficient conditions for a minimum of the perturbed problem; some numerical experience (abstract).",
+  "problem_entry": "p0 has minimiser x0 for small mu but first derivatives not everywhere defined, excluding gradient-type unconstrained methods (abstract).",
+  "key_idea": "Perturb the nondifferentiable penalty so a modified gradient-type approach applies, and recover the constrained solution from it (abstract).",
+  "assumptions": "mu sufficiently small (abstract); others not read.",
+  "proof_devices": [],
+  "experiments": "some numerical experience (abstract); details not read",
+  "positioning": "Addresses the known drawback of the nondifferentiable penalty (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Origin point of the 1973 penalty machinery that Method 6 says is reused later: gradient machinery made to work on a nondifferentiable exact penalty.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theorem plus numerical experience in one paper; no code mentioned.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Headline theorem is an optimality characterisation (necessary and sufficient conditions) of the perturbed problem.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": [
+   {
+    "text": "However, until recently, a serious drawback to this particular penalty function was that its first order derivatives are not everywhere defined.",
+    "page": "abstract"
+   },
+   {
+    "text": "The main theorem consists of necessary and sufficient conditions for x to be a minimum of the perturbed problem.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S097",
+  "year": "1975",
+  "title": "Optimization of Microwave Networks (Short Papers)",
+  "read_level": "abstract",
+  "contribution": "Application of a new minimax algorithm to microwave network design; N-section transmission-line transformer as test problem (abstract).",
+  "problem_entry": "Minimax design of microwave networks (abstract).",
+  "key_idea": "Exploit that the first-derivative discontinuities of the minimax function can be characterised by projections (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "N-section transmission-line transformer test problem (abstract)",
+  "positioning": "Contrasted with most previously published minimax algorithms, which do not use this property (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Engineering venue (IEEE MTT), EE coauthor, engineering test case; 1975, pre-IBM. Venue/test-problem evidence only.",
+    "pages": "abstract; metadata"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Max-function structure (kinks characterised by projections) exploited rather than smoothed.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Kink-manifold projection",
+    "evidence": "Discontinuities of the minimax gradient characterised by projections.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "C. Charalambous",
+  "quotes": [
+   {
+    "text": "Unlike most of the previously published algorithms the new algorithm uses to its advantage certain obvious properties of the minimax function, namely, that the discontinuities in the first derivatives can be characterized by projections.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S053",
+  "year": "1976",
+  "title": "Linear programming via a nondifferentiable penalty function",
+  "read_level": "abstract",
+  "contribution": "Numerically stable penalty-function algorithm for LP, related to Gill-Murray and Conn's earlier work; efficiency claimed comparable with and generally better than the standard form; nonsimplex steps allow generalisation to QP (abstract).",
+  "problem_entry": "Penalty approaches had never been viable for LP because they introduce nonlinearities (abstract).",
+  "key_idea": "The nondifferentiable penalty is piecewise linear on LP, so the penalty approach keeps LP-like computational efficiency (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "efficiency claim stated; measurement not read",
+  "positioning": "Closely related to Gill and Murray and to Conn (1973) (abstract).",
+  "writing": "",
+  "limits_future": "not stated in abstract; generalisation to QP named as enabled (abstract)",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "1973 nonlinear penalty machinery transplanted to LP.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Works because the l1-type penalty is piecewise linear on LP (structural fact).",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Recast as an instance of a solvable class",
+    "evidence": "LP solved as minimisation of a piecewise-linear penalty function.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Pick a penalty that is closed over the problem class: on LP the l1-type penalty stays piecewise linear, so the penalised subproblem costs no more per step than the method it replaces (abstract)."
+  ],
+  "coauthors": "",
+  "quotes": [
+   {
+    "text": "Among other reasons, the penalty function approach has never been available for linear programming in a viable sense because of the inherent nonlinearities introduced.",
+    "page": "abstract"
+   },
+   {
+    "text": "The method admits nonsimplex steps, and this feature enables it to be readily generalized to quadratic programming.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S038",
+  "year": "1977",
+  "title": "A penalty function method converging directly to a constrained optimum",
+  "read_level": "abstract",
+  "contribution": "A method constructing a single sequence that minimises the nondifferentiable penalty p and converges directly to the constrained optimum x0; convergence proof for the convex problem; encouraging numerical results on convex and nonconvex problems (abstract).",
+  "problem_entry": "p = mu f - sum min(0,phi_i) has unconstrained minimum at x0 under natural assumptions but is not everywhere differentiable (abstract).",
+  "key_idea": "One sequence both minimises p and converges to x0, continuing earlier results that were only approximate (abstract).",
+  "assumptions": "'some natural assumptions' for exactness; convexity for the convergence proof (abstract).",
+  "proof_devices": [],
+  "experiments": "numerical results for convex and nonconvex problems (abstract)",
+  "positioning": "Continuation of earlier (unnamed in abstract) approximate results (abstract).",
+  "writing": "",
+  "limits_future": "Convergence proved only for the convex problem (abstract).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theorem and tests in one paper; tests go beyond the proven convex class.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Continues the nondifferentiable-penalty line of S024.",
+    "pages": "abstract; metadata"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Prove convergence for the class you can handle (convex) and deliberately test outside it (nonconvex), reporting both so readers see how far the method goes past the theorem (abstract)."
+  ],
+  "coauthors": "T. Pietrzykowski",
+  "quotes": [
+   {
+    "text": "The method is a continuation of earlier results, which were, however, only approximate in nature.",
+    "page": "abstract"
+   },
+   {
+    "text": "The paper also provides a proof of convergence of the method for the convex problem along with some encouraging numerical results, for both convex and nonconvex problems.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S116",
+  "year": "1977",
+  "title": "Least absolute value regression: a special case of piecewise linear minimization",
+  "read_level": "abstract",
+  "contribution": "Shows that the breakpoint-skipping advantage of the Bartels-Conn approach holds for general piecewise-linear minimisation, and expresses LAV regression, restricted LAV, general LP and least-maximum-absolute-value regression as piecewise-linear minimisation problems (abstract, OpenAlex; not in abstracts.json).",
+  "problem_entry": "Simplex-type LAV codes pivot at every breakpoint; Barrodale-Roberts and Bartels-Conn can skip across such points (abstract, OpenAlex).",
+  "key_idea": "Recast several regression/LP problems as one piecewise-linear minimisation class served by one skipping algorithm (abstract, OpenAlex).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "none stated",
+  "positioning": "Compared with Barrodale-Roberts and conventional simplex LAV codes (abstract, OpenAlex).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "One algorithm carried across problem classes by recasting them in a common form.",
+    "pages": "abstract (OpenAlex)"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Recast as an instance of a solvable class",
+    "evidence": "LAV, restricted LAV, LP and Chebyshev regression written as piecewise-linear minimisation.",
+    "pages": "abstract (OpenAlex)"
+   }
+  ],
+  "transferable": [
+   "Write each target problem (LAV, constrained LAV, LP, Chebyshev) explicitly as min of one piecewise-linear function so a single breakpoint-skipping line search serves all of them (abstract, OpenAlex)."
+  ],
+  "coauthors": "R. H. Bartels",
+  "quotes": []
+ },
+ {
+  "id": "S014",
+  "year": "1978",
+  "title": "An efficient method to solve the minimax problem directly",
+  "read_level": "abstract",
+  "contribution": "Direct algorithm for nonlinear minimax with two search directions (horizontal and vertical) and a line search; numerical results to date suggest it is very efficient (abstract).",
+  "problem_entry": "Circuit and system designers' interest in minimax; M_f = max f_i has discontinuous first derivatives where f_i tie, so gradient methods do not apply directly; contrasts with Bandler-Charalambous least-pth limit (abstract).",
+  "key_idea": "Horizontal direction reduces M_f while keeping near-active f_i approximately equal; vertical direction reduces by linearisation the error within which they equal M_f; line search after the horizontal direction (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "numerical results to date (abstract); details not read",
+  "positioning": "Direct approach versus Bandler and Charalambous's least-pth limiting approach (abstract).",
+  "writing": "",
+  "limits_future": "no convergence theory stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Stated entry is demand from circuit and system designers, with an EE coauthor (academic, pre-IBM form of the user's door).",
+    "pages": "abstract; metadata"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Max-function structure exploited directly instead of least-pth smoothing.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Algorithm plus numerical evidence; no theorem announced in abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Kink-manifold projection",
+    "evidence": "Horizontal/vertical split of the step for a max-type objective; same h+v construction in S164 (s2-02).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "For max of smooth f_i, split each iteration into a horizontal step that decreases the max while holding near-active f_i equal and a vertical step that linearises the near-active f_i to close their gap; line-search only along the horizontal step (abstract)."
+  ],
+  "coauthors": "C. Charalambous",
+  "quotes": [
+   {
+    "text": "Over the past few years the circuit and system designers have shown great interest in minimax algorithms.",
+    "page": "abstract"
+   },
+   {
+    "text": "We use two distinct search directions in the algorithm.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S015",
+  "year": "1978",
+  "title": "Minimization Techniques for Piecewise Differentiable Functions: The l1 Solution to an Overdetermined Linear System",
+  "read_level": "abstract",
+  "contribution": "Finite direct algorithm for the l1 solution of an overdetermined linear system, with stable factorisation updating; compares favourably with the best reported l1 methods; easily extended to linear constraints (abstract).",
+  "problem_entry": "l1 fitting of an overdetermined system, of interest for robust fitting of linear models to data (abstract).",
+  "key_idea": "Techniques borrowed from Conn's approach to piecewise differentiable functions: handle gradient discontinuities with the projector onto the null space of A_Z^T (zero-residual columns), maintaining and updating a factorisation of A_Z (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "comparison with best reported l1 algorithms (abstract); details not read",
+  "positioning": "Borrows Conn's piecewise-differentiable minimisation approach (abstract).",
+  "writing": "",
+  "limits_future": "extension to linear constraints named as easy (abstract); realised in S042/S109 (metadata)",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Conn's NLP projection machinery explicitly borrowed for l1 data fitting.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Across papers: 1978 algorithm -> 1980 constrained version with Fortran implementation (S042) and ACM Algorithm 563 (S109).",
+    "pages": "abstract; S042 abstract (OpenAlex); metadata"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Kink-manifold projection",
+    "evidence": "Projector onto the null space of the active (zero-residual) columns handles gradient discontinuities.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Recast as an instance of a solvable class",
+    "evidence": "Title frames l1 fitting as piecewise-differentiable minimisation.",
+    "pages": "title; abstract"
+   }
+  ],
+  "transferable": [
+   "At a kink, let the zero-residual (active) set define A_Z, take descent directions from the projector onto the null space of A_Z^T, and update a factorisation of A_Z as the active set changes instead of refactorising (abstract)."
+  ],
+  "coauthors": "R. H. Bartels, J. W. Sinclair",
+  "quotes": [
+   {
+    "text": "Such solutions are of interest for the “robust” fitting of a linear model to data.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S051",
+  "year": "1978",
+  "title": "On Cline's Direct Method for Solving Overdetermined Linear Systems in the l-infinity Sense",
+  "read_level": "abstract",
+  "contribution": "Finite direct (descent) method for linear l-infinity fitting related to Cline's algorithm, using fast Givens updates of orthogonal factorisations; no Haar condition; linear equality and inequality constraints accommodated (abstract).",
+  "problem_entry": "Minimise ||A^T x - b||_inf for an overdetermined system; improve on direct methods such as Cline's (abstract).",
+  "key_idea": "Fast Givens transformations reduce work per cycle without sacrificing numerical stability (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "comparisons with Stiefel's method and Barrodale-Phillips (abstract)",
+  "positioning": "Builds on Cline's direct algorithm; compared with ascent methods of Stiefel and Barrodale-Phillips (abstract).",
+  "writing": "The abstract itself states the method's disadvantage and the rival class that wins (abstract).",
+  "limits_future": "Stated: like other direct l-infinity methods, often needs many more steps than indirect (ascent) methods on data-fitting problems (abstract).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Baselines from the competing ascent/dual school, with the abstract reporting where the rivals win.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Numerical linear algebra device (fast Givens updating) carried into a descent method.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Self-audit of one's own earlier method",
+    "evidence": "The step-count disadvantage conceded here is reopened and reversed in S072 (1989).",
+    "pages": "abstract; S072 abstract (inferred)"
+   }
+  ],
+  "transferable": [
+   "State in the abstract itself the problem class on which your method loses and to whom (here: direct methods need many more steps than ascent methods on data fitting) (abstract)."
+  ],
+  "coauthors": "R. H. Bartels, C. Charalambous",
+  "quotes": [
+   {
+    "text": "This permits the work per cycle in the algorithm to be reduced without sacrificing numerical stability.",
+    "page": "abstract"
+   },
+   {
+    "text": "Further, the method does not require the Haar condition, and it permits the easy accommodation of linear equality and inequality constraints.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S071",
+  "year": "1979",
+  "title": "An efficient second order method to solve the (constrained) minimax problem",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Second-order successor to the first-order direct minimax method of S014, extended to constrained minimax. Citing works give report CORR 79-5, 48 pp. (search summary, unverified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S041",
+  "year": "1980",
+  "title": "A stable algorithm for solving the multifacility location problem involving Euclidean distances",
+  "read_level": "abstract",
+  "contribution": "A more unified and numerically stable approach to minisum/minimax location problems, analysed in detail for the linearly constrained Euclidean minisum problem in the plane; preliminary computational experience compares favourably (abstract).",
+  "problem_entry": "Growing interdisciplinary interest in location models; current methods computationally inadequate (abstract).",
+  "key_idea": "Mechanism not stated in this abstract; S062 describes the authors' earlier first-order technique as based on non-orthogonal projections (S062 abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "preliminary computational experience (abstract)",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Nondifferentiable-optimisation machinery enters location theory; mechanism from the S062 abstract.",
+    "pages": "abstract; S062 abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Entry via general application interest; no named user.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. H. Calamai",
+  "quotes": [
+   {
+    "text": "Unfortunately, the current methods used to solve the most popular minisum and minimax location problems are computationally inadequate.",
+    "page": "abstract"
+   },
+   {
+    "text": "A more unified and numerically stable approach for solving these problems is proposed.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S042",
+  "year": "1980",
+  "title": "Linearly Constrained Discrete l1 Problems",
+  "read_level": "abstract",
+  "contribution": "Algorithm for min ||A^T x - b||_1 subject to optional linear equality and inequality constraints, with a Fortran implementation; generalises the authors' earlier unconstrained l1 algorithm (abstract, OpenAlex; OCR-damaged, paraphrased; not in abstracts.json).",
+  "problem_entry": "Linearly constrained discrete l1 problems (abstract, OpenAlex).",
+  "key_idea": "Generalise the authors' earlier unconstrained l1 algorithm (presumably S015, inferred) to linear constraints (abstract, OpenAlex).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Follows the authors' own unconstrained l1 algorithm (abstract, OpenAlex).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Algorithm paper and refereed Fortran code (ACM Algorithm 563, S109, pp. 609-614) as twins in one journal issue, 1980.",
+    "pages": "abstract (OpenAlex); metadata"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Publish the algorithm paper and a refereed code paper (an ACM TOMS 'Algorithm') back to back so the implementation is itself reviewed and citable (metadata)."
+  ],
+  "coauthors": "R. H. Bartels",
+  "quotes": []
+ },
+ {
+  "id": "S052",
+  "year": "1980",
+  "title": "Second-order conditions for an exact penalty function",
+  "read_level": "abstract",
+  "contribution": "First- and second-order conditions characterising a local minimiser of an exact penalty function, supporting the close relation between the penalty function and the NLP; demonstration that points with no descent directions need not be minimisers (abstract).",
+  "problem_entry": "Characterise local minimisers of an exact penalty function (abstract).",
+  "key_idea": "Optimality conditions for the merit function whose form mirrors NLP optimality (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "none stated",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Optimality conditions for the exact penalty come first; the Coleman-Conn algorithmic papers S018 (card c2-01) and S030 follow in 1982 (ordering inferred from date and coauthor).",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Show an assumption is needed by a constructed counterexample",
+    "evidence": "Variant: points with no descent direction that are not minimisers show that descent-direction tests do not certify optimality.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Before building a descent method on a nonsmooth merit function, check whether the absence of any descent direction certifies a minimiser; if not, a stopping test based on descent directions is unsafe and a second-order test is needed (abstract)."
+  ],
+  "coauthors": "T. F. Coleman",
+  "quotes": [
+   {
+    "text": "The form of this characterization gives support to the claim that the exact penalty function and the nonlinear programming problem are closely related.",
+    "page": "abstract"
+   },
+   {
+    "text": "In addition, we demonstrate that there exist arguments for the penalty function from which there are no descent directions even though these points are not minimizers.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S109",
+  "year": "1980",
+  "title": "Algorithm 563: A Program for Linearly Constrained Discrete l1 Problems",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Fortran program accompanying S042, on consecutive pages of the same ACM TOMS issue (pp. 609-614, Crossref). OpenAlex's abstract field holds a code-listing legend, not an abstract. ACM bronze-OA PDF blocked by a Cloudflare challenge.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. H. Bartels",
+  "quotes": []
+ },
+ {
+  "id": "S090",
+  "year": "1981",
+  "title": "Penalty function methods",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Report on penalty function methods; probably related to Conn's chapter 'Penalty function methods' in Nonlinear Optimization 1981 (Powell ed., Academic Press 1982, pp. 235-242) (search summary, unverified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S062",
+  "year": "1982",
+  "title": "A second-order method for solving the continuous multifacility location problem",
+  "read_level": "abstract",
+  "contribution": "Unified, numerically stable second-order method for continuous multifacility location, detailed for the unconstrained Euclidean case and said to extend to l_p, mixed norms and constraints; exploits linear substructures; preliminary numerical results and comparisons (abstract).",
+  "problem_entry": "Objective not everywhere differentiable, so classical procedures are infeasible (abstract).",
+  "key_idea": "Second-order extension of the authors' earlier first-order technique based on certain non-orthogonal projections (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "preliminary numerical results and comparisons (abstract)",
+  "positioning": "Extends the authors' own earlier first-order technique (S041 by date; inferred) (abstract).",
+  "writing": "",
+  "limits_future": "extensions to l_p, mixed norms and constraints claimed readily available (abstract)",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Inherent linear substructures exploited in implementation and degeneracy handling.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Own first-order projection technique upgraded to second order.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Kink-manifold projection",
+    "evidence": "Non-orthogonal projections handle the nondifferentiable location objective.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "P. H. Calamai",
+  "quotes": [
+   {
+    "text": "The method presented is an extension of an earlier first-order technique of the authors and is based on certain non-orthogonal projections.",
+    "page": "abstract"
+   },
+   {
+    "text": "For efficiency the linear substructures that are inherent in the problem are exploited in the implementation of the basic algorithm and in the manner of handling degeneracies and near-properties of the problem.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S069",
+  "year": "1982",
+  "title": "An approach to nonlinear l1 data fitting",
+  "read_level": "abstract",
+  "contribution": "Survey of the strategy of a globally and superlinearly convergent algorithm for minimising sums of absolute values of C2 functions, closely related to a piecewise differentiable penalty function for NLP (abstract).",
+  "problem_entry": "Least squares is ideal for good data; with occasional wild values l1 fitting is preferable (abstract).",
+  "key_idea": "Reuse the piecewise differentiable penalty-function approach for NLP to minimise sums of absolute values (abstract).",
+  "assumptions": "C2 component functions (abstract).",
+  "proof_devices": [],
+  "experiments": "not stated in abstract",
+  "positioning": "",
+  "writing": "Motivates the norm by the data regime (good data vs wild values) (abstract).",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NLP penalty machinery reused for nonlinear l1 fitting.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Writing move: justify a nonsmooth formulation by the data regime (least squares for good data with normal errors, l1 for occasional wild values), so the choice of norm reads as a modelling decision (abstract)."
+  ],
+  "coauthors": "R. H. Bartels",
+  "quotes": [
+   {
+    "text": "When the data is bad—contaminated by occasional wild values—then the l1 technique (minimizing sums of absolute values of residuals) has much to recommend it.",
+    "page": "abstract"
+   },
+   {
+    "text": "The approach to be presented is closely related to the use of a certain, piecewise differentiable penalty function to solve nonlinear programming problems.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S214",
+  "year": "1983",
+  "title": "Nondifferential and variational techniques in optimization: D. C. Sorensen and R. J.-B. Wets (Eds.), Mathematical Programming Study 17 (book review)",
+  "read_level": "metadata",
+  "contribution": "[inferred from title/venue] One-page book review (EJOR, p. 203, Crossref) by Conn of Math. Programming Study 17 on nonsmooth optimisation. Non-research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S104",
+  "year": "1984",
+  "title": "Nonlinear programming, exact penalty functions and projection techniques for non-smooth functions",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Synthesis joining NLP, exact penalty functions and projection techniques for nonsmooth functions (the threads of S024, S052, S015, S062). No venue or open copy found.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S044",
+  "year": "1987",
+  "title": "A projected Newton method for l_p norm location problems",
+  "read_level": "abstract",
+  "contribution": "Characterisation of minima and a second-order projected Newton algorithm for l_p (1<p<inf) minisum multifacility location, with a specialised line search, global and quadratic convergence, degeneracy handling, and a structure-exploiting implementation with numerical results (abstract; Argonne report ANL/MCS-TM-56 version).",
+  "problem_entry": "Objective not everywhere differentiable, making the problems potentially difficult (abstract).",
+  "key_idea": "Finite sequence of linearly constrained subproblems; Newton direction projected onto the constraint manifold; line search recognising first-derivative discontinuity and second-derivative unboundedness (abstract).",
+  "assumptions": "1 < p < infinity (abstract).",
+  "proof_devices": [],
+  "experiments": "numerical results; report version lists 35 refs, 7 tables (abstract)",
+  "positioning": "Motivated by Calamai and by Calamai-Conn; related to Overton and Dax (abstract).",
+  "writing": "",
+  "limits_future": "Degeneracy can complicate subproblems; a handling method is outlined (abstract).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Characterisation, algorithm, global and quadratic convergence, implementation and numbers in one paper.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Implementation exploits the intrinsic structure of the location formulation.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Conditions characterising the minimum are developed before the algorithm.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Kink-manifold projection",
+    "evidence": "Newton direction projected onto the constraint manifold of the active kinks.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "In a line search on a function with kinks, precompute the points along the direction where a first derivative jumps (or a second derivative blows up, as for l_p distances at coincident points) and treat them explicitly instead of trusting a smooth line search (abstract)."
+  ],
+  "coauthors": "P. H. Calamai",
+  "quotes": [
+   {
+    "text": "After developing conditions that characterize the minimum of the problems under consideration, a second-order algorithm is presented.",
+    "page": "abstract"
+   },
+   {
+    "text": "Univariate minimization is achieved via a specialized linesearch which recognizes the possibility of first derivative discontinuity (and second derivative unboundedness) at points along the search direction.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S045",
+  "year": "1987",
+  "title": "An exact penalty function for semi-infinite programming",
+  "read_level": "abstract",
+  "contribution": "Global approach to semi-infinite programming via a generalised l1 exact penalty whose penalties are integrals of violations; exact, includes all violations; discretisation enters only through approximate quadrature (abstract).",
+  "problem_entry": "Semi-infinite programming (abstract).",
+  "key_idea": "Integral penalties give a consistent model for the algorithm; discretisation is a quadrature artefact, not an a priori model choice (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "not stated in abstract",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "l1 exact penalty line (S024, 1973) transplanted to semi-infinite programming.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "For infinitely many constraints, penalise the integral of violations over the index set and let discretisation enter only through the quadrature rule, so the algorithm's model stays the continuous problem (abstract)."
+  ],
+  "coauthors": "N. I. M. Gould",
+  "quotes": [
+   {
+    "text": "The merit function requires integrals for the penalties, which provides a consistent model for the algorithm.",
+    "page": "abstract"
+   },
+   {
+    "text": "The discretization is a result of the approximate quadrature rather than an a priori aspect of the model.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S072",
+  "year": "1989",
+  "title": "Primal Methods are Better than Dual Methods for Solving Overdetermined Linear Systems in the l-infinity Sense?",
+  "read_level": "abstract",
+  "contribution": "A primal method for linear l-infinity fitting with evidence that primal beats dual on random problems; shows the best-regarded method owes much of its efficiency to its starting point, explains this with classical minimax theory, and uses it to pick a starting point, after which primal appears preferable on function-approximation problems too (abstract).",
+  "problem_entry": "Challenges the general belief that dual-LP-based methods are superior (abstract; title posed as a question).",
+  "key_idea": "Attribute the rival's advantage to its starting point, derive a good start from classical minimax theory, and give it to the primal method (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "random problems and function-approximation problems (abstract)",
+  "positioning": "Against the received view favouring dual methods, including the method generally considered best (abstract).",
+  "writing": "Question-form title; hedged claim in the abstract (title; abstract).",
+  "limits_future": "Hedged conclusion ('it would appear') for function-approximation problems (abstract).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Baseline from the competing (dual) school; random vs function-approximation tiers reported separately.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Rival's decisive device (starting point) identified and borrowed, derived from classical minimax theory.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Attribute the rival's advantage before competing",
+    "evidence": "Isolates the starting point as the source of the best dual method's efficiency, then grafts a theory-derived start onto the primal method.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Self-audit of one's own earlier method",
+    "evidence": "Reopens the direct-vs-indirect step-count gap conceded in S051 (1978).",
+    "pages": "abstract; S051 abstract (inferred)"
+   }
+  ],
+  "transferable": [
+   "When a rival algorithm wins, test whether its advantage comes from the core iteration or from an auxiliary choice such as the starting point; give your method the same auxiliary advantage (ideally derived from theory) before comparing (abstract)."
+  ],
+  "coauthors": "R. H. Bartels, Y. Li",
+  "quotes": [
+   {
+    "text": "A primal approach is presented along with evidence that for random problems primal methods are to be preferred.",
+    "page": "abstract"
+   },
+   {
+    "text": "This phenomenon is explained with the aid of results from classical minimax theory, which are then used to determine a suitable initial point for a primal method.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S127",
+  "year": "1989",
+  "title": "Large Scale Optimization",
+  "read_level": "metadata",
+  "contribution": "Edited special issue, not an article: Conn, Gould and Toint (eds.), Large-Scale Optimization, Mathematical Programming 45(3), North-Holland 1989 (ConnGoulToin92.pdf ref. [33], PDF p. 20). Contents not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S202",
+  "year": "1989",
+  "title": "Erratum: Primal Methods are Better than Dual Methods for Solving Overdetermined Linear Systems in the l-infinity Sense?",
+  "read_level": "metadata",
+  "contribution": "One-page erratum to S072 (SIAM J. Numer. Anal. 26(5):1266, Crossref). What it corrects: not read. The SIAM landing page attaches a 17-item reference list (metadata). Non-research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. H. Bartels, Y. Li",
+  "quotes": []
+ },
+ {
+  "id": "S043",
+  "year": "1990",
+  "title": "A projection method for the uncapacitated facility location problem",
+  "read_level": "abstract",
+  "contribution": "Exact solution of the condensed dual of the strong LP relaxation of UFLP (a piecewise-linear convex function) by orthogonal projections; per-iteration work of a simplex iteration on an m x m LP vs the mn+m+n-variable LP dual; handles side constraints and cuts; numerical results on classical test problems (abstract).",
+  "problem_entry": "Best UFLP algorithms rely on the strong LP relaxation, whose dual has a condensed piecewise-linear convex form (abstract).",
+  "key_idea": "Minimise the condensed dual exactly via orthogonal projections (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "classical test problems (abstract)",
+  "positioning": "Against existing strong-LP-relaxation-based UFLP algorithms and the full LP dual (abstract).",
+  "writing": "Explicit per-iteration cost comparison with the full LP's dimensions in the abstract (abstract).",
+  "limits_future": "duality gap handled by adding cuts (abstract)",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Continuous piecewise-linear projection machinery carried into a combinatorial problem with an integer-programming coauthor.",
+    "pages": "abstract; metadata"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Condensed m-dimensional dual exploited instead of the full LP.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Classical test problems (weak evidence).",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Recast as an instance of a solvable class",
+    "evidence": "UFLP LP dual recast as minimisation of a piecewise-linear convex function.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Kink-manifold projection",
+    "evidence": "Orthogonal projections on the piecewise-linear condensed dual.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Before attacking a large LP relaxation, look for a condensed dual (a piecewise-linear convex function in far fewer variables) and state your per-iteration cost against the full LP's dimensions explicitly (abstract)."
+  ],
+  "coauthors": "G. Cornuejols",
+  "quotes": [
+   {
+    "text": "The dual of this relaxation has a condensed form which consists of minimizing a certain piecewise linear convex function.",
+    "page": "abstract"
+   },
+   {
+    "text": "In particular, when there is a duality gap, the linear programming formulation can be strengthened by adding cuts.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S117",
+  "year": "1990",
+  "title": "A proposal for a standard data input format for large-scale nonlinear programming problems",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Proposal of the Standard Input Format (SIF) later used by LANCELOT and CUTE; Report CS-89-61, Dept. of Computer Science, University of Waterloo, 1990 (ConnGoulToin92.pdf ref. [36], PDF p. 21). Tutorial companion S149 is carded in s2-02.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S121",
+  "year": "1990",
+  "title": "Large Scale Optimization - Applications",
+  "read_level": "metadata",
+  "contribution": "Edited special issue, not an article: Conn, Gould and Toint (eds.), Large-Scale Optimization - Applications, Mathematical Programming 48(1), North-Holland 1990 (ConnGoulToin92.pdf ref. [35], PDF p. 21); includes Toint-Tuyttens 48(1):125-159 (ref. [126]). Contents otherwise not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S140",
+  "year": "1990",
+  "title": "Solving reactive-power dispatch by a penalty function/linear programming method",
+  "read_level": "abstract",
+  "contribution": "Reactive-power dispatch under three criteria (transmission losses RPL, feasibility enforcement FEC, voltage deviation AVD) solved as a sequence of LPs by a penalty-function/LP algorithm built from sensitivity matrices; tested on IEEE 30-bus and the Mexican 253-node system, compared with a QP technique (abstract, OpenAlex; not in abstracts.json).",
+  "problem_entry": "Nonlinear reactive-power dispatch with controls: generation voltages, transformer turn ratios, switchable shunt susceptances (abstract, OpenAlex).",
+  "key_idea": "Sequential LP with a penalty function; LP models from sensitivity matrices of dependent-variable constraints and objective coefficients (abstract, OpenAlex).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "IEEE 30-bus network and Mexican 253-node longitudinal power system; comparison with a QP technique (abstract, OpenAlex)",
+  "positioning": "Compared with a quadratic-programming technique (abstract, OpenAlex).",
+  "writing": "",
+  "limits_future": "not stated in abstract",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Engineering application with EE coauthors, in an EE venue, on a real national network.",
+    "pages": "abstract (OpenAlex); metadata"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Sensitivities (derivative information) from the network model drive the LP subproblems; not black-box.",
+    "pages": "abstract (OpenAlex)"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two tiers: standard benchmark network (IEEE 30-bus) and a real system (Mexican 253-node).",
+    "pages": "abstract (OpenAlex)"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Penalty/LP pairing of the S053 line deployed in an application (link to S053 inferred from title words).",
+    "pages": "abstract (OpenAlex); title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "V. H. Quintana, M. Santos-Nieto",
+  "quotes": []
+ },
+ {
+  "id": "S078",
+  "year": "1991",
+  "title": "A comprehensive description of LANCELOT",
+  "read_level": "metadata",
+  "contribution": "[inferred from title] Probably the report form of the chapter 'A comprehensive description of the mathematical algorithms used in LANCELOT' in the 1992 LANCELOT book (works.json S139, part of S006); a search summary gives FUNDP Namur report 91/10 (unverified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S114",
+  "year": "1991",
+  "title": "A network penalty method",
+  "read_level": "abstract",
+  "contribution": "Specialises the nonlinear penalty methods of Conn and Bartels to a combinatorial algorithm for minimum-cost network flow; preliminary results show fewer pivots than simplex with comparable work per pivot; finiteness via a modification of Cunningham's strongly feasible basis rule (abstract).",
+  "problem_entry": "Minimum cost network flow (abstract).",
+  "key_idea": "Continuous penalty method specialised to a combinatorial pivoting algorithm (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "preliminary computational results: pivot counts and work per pivot vs simplex (abstract)",
+  "positioning": "Compared with the simplex method; builds on Conn and Bartels penalty methods and Cunningham's pivoting rule (abstract).",
+  "writing": "",
+  "limits_future": "results called preliminary (abstract)",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Continuous penalty machinery becomes a combinatorial network algorithm; anti-cycling device borrowed from the combinatorial school (Cunningham), with a combinatorial coauthor.",
+    "pages": "abstract; metadata"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Finiteness proof and preliminary computation; no code release stated.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When comparing with simplex, report pivot count and work per pivot so fewer pivots cannot hide costlier ones; get finiteness by adapting an anti-cycling rule from the rival school rather than proving it from scratch (abstract)."
+  ],
+  "coauthors": "A. B. Gamble, W. R. Pulleyblank",
+  "quotes": [
+   {
+    "text": "We report on preliminary computational results which show that this method can require fewer pivots than the simplex method while the amount of work required for each pivot is comparable.",
+    "page": "abstract"
+   },
+   {
+    "text": "The algorithm can be proven finite using a modification of Cunningham's strongly feasible basis pivoting rule.",
+    "page": "abstract"
+   }
+  ]
+ }
+]

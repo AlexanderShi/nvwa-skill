@@ -1,0 +1,403 @@
+[
+ {
+  "id": "S137",
+  "year": "2003",
+  "title": "The SIF Reference Report (revised version)",
+  "read_level": "partial",
+  "contribution": "Definitive reference for the Standard Input Format: an MPS-compatible, three-file format (SDIF/SEIF/SGIF) that encodes group partially separable structure (groups, element types, internal variables) of large nonlinear programs so that problems can be exchanged and codes compared validly.",
+  "problem_entry": "Practical bottleneck: entering LANCELOT test problems with thousands of variables was time-consuming and error-prone, and recoding differences undermined valid comparisons between codes (pp. 2-3).",
+  "key_idea": "Structure = invariant subspaces, not sparsity; write functions as group functions of weighted sums of element functions on small variable subsets, with internal variables u = Wv and element/group types, as an MPS superset (pp. 4-7, 10).",
+  "assumptions": "No mathematical assumptions; design constraints: structure mandatory, MPS compatibility (fixed format), OS independence, Fortran six-character names (p. 3).",
+  "proof_devices": [
+   "none (format specification); only chain rule W^T grad_u f, W^T Hess_uu f W for elemental derivatives (p. 44)"
+  ],
+  "experiments": "none",
+  "positioning": "De facto base is MPS; modelling languages (GAMS, AMPL, OMP) handle repetition but not invariant-subspace structure; factorable/functional-form proposals awaited (pp. 3, 61).",
+  "writing": "Requirements listed as bullet considerations with honest costs ('not all of which are pleasant'); three worked examples before syntax; revision keeps early-1990s wording and a wrong section cross-reference (pp. 2-4, 61).",
+  "limits_future": "Rigid fixed format, formidable for small problems, free form shifts responsibility to user; hopes for a true nonlinear modelling language (pp. 2-4, 60).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "input format as research infrastructure, justified by portable testbed and valid comparisons between codes; Heuristic 7",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "exploitable structure (least squares, partial separability via invariant subspaces) is mandatory in the problem description",
+    "pages": "pp. 3-5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "format born from the need to test LANCELOT (weak)",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "superset-of-incumbent standard",
+    "evidence": "SIF is an MPS superset (an LP SIF file is an MPS file); compatibility accepted despite fixed-format costs",
+    "pages": "pp. 3, 10"
+   }
+  ],
+  "transferable": [
+   "Justify infrastructure by the scientific failure it prevents (invalid comparisons from recoding), not only convenience (p. 2)",
+   "Define structure by what the algorithm saves: invariant subspaces need no nonlinear information (p. 4)",
+   "Ask users for derivatives only in internal variables and apply the linear maps in software (p. 44)",
+   "Make a new standard a strict superset of the de facto one and list the costs you accept (p. 3)"
+  ],
+  "coauthors": "N. I. M. Gould, D. Orban, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "These differences could be a major obstacle to valid comparisons between competing optimization codes.",
+    "page": 2
+   },
+   {
+    "text": "The importance of invariant subspaces is that nonlinear information is not required for a function in this subspace.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S136",
+  "year": "2011",
+  "title": "Framework for large-scale modeling and simulation of electricity systems for planning, monitoring, and secure operations of next-generation electricity grids",
+  "read_level": "partial",
+  "contribution": "A 16-author IBM white paper (DOE RFI response) surveying security-constrained unit commitment/economic dispatch, massive grid data processing and large-scale grid simulation, and setting a research agenda of parallel, decomposable, stochastic optimization with convergence guarantees.",
+  "problem_entry": "Operator pain at real scale: aging, congested grid near transfer limits; commercial IP solvers handle about 100 units/24 periods/50 scenarios while real instances have thousands of buses and over 1000 generators (pp. 1, 3-4).",
+  "key_idea": "Survey plus method-choice rules: hybrid computing for parallel scenarios and decomposition (p. 5); DFO only when no derivatives (about 200 variables serially), SA/GA/Nelder-Mead rarely best, no finite differences under noise, use AD (pp. 13-14, 46).",
+  "assumptions": "No formal model; cautions that Benders/GBD on nonconvex AC problems lacks convergence or even local-minimizer guarantees (pp. 10, 19).",
+  "proof_devices": [
+   "none (survey)"
+  ],
+  "experiments": "none (literature figures only, e.g. >10x speedup on 16 processors, p. 11)",
+  "positioning": "Recommends Conn's own Trust-Region Methods, DFO book and LANCELOT next to IPOPT and ALGENCAN; criticises engineers' use of non-state-of-the-art methods (pp. 12-13, 19).",
+  "writing": "Agenda framed by concrete scale counts and numbered challenge lists; explicit rules of thumb with thresholds; inconsistent treatment of AD (p. 13 vs p. 46); a mis-matched reference [87] (pp. 13, 62).",
+  "limits_future": "Future: real-time UC/ED for thousands of generators, joint UC + AC-ED MINLP by decomposition, structured stochastic SCUC/SCED, convergent large-scale optimization, virtual power grid (pp. 15-19, 55-56); no own method or data.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "derivative advice (AD, no finite differences under noise, DFO limits) and exploit structure in stochastic problems",
+    "pages": "pp. 13-14, 17, 46"
+   },
+   {
+    "method": "Research Taste warning sign 1",
+    "relation": "evidence",
+    "note": "explicit co-authored critique that SA, GA and Nelder-Mead are rarely best, citing McKinnon's counterexample; section authorship unknown",
+    "pages": "pp. 13-14, 62"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "entry through a funder's RFI and a large corporate team rather than an engineer's question",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "better-than-known as success criterion",
+    "evidence": "when global optima are unattainable, finding better approximations to local optima than those already known 'can be considered successful'",
+    "pages": "p. 18"
+   }
+  ],
+  "transferable": [
+   "State the gap between literature instance sizes and users' real sizes with concrete counts before proposing methods (pp. 3-4)",
+   "In a practitioner survey, give method-choice rules with explicit thresholds and conditions (derivatives, noise, about 200 variables) (pp. 13-14)"
+  ],
+  "coauthors": "J. Xiong, E. Acar, B. Agrawal, G. Ditlow, P. Feldmann, U. Finkler, B. Gaucher, A. Gupta, F.-L. Heng, J. R. Kalagnanam, A. Koc, D. Kung, D. Phan, A. Singhee, B. Smith",
+  "quotes": [
+   {
+    "text": "If significant noise is present in the formulation, it also affects the choice of the optimization algorithm. For example, in this case, using finite difference gradients is not a good idea.",
+    "page": 14
+   },
+   {
+    "text": "Fortunately, there is anecdotal evidence that the best asymptotic algorithms are also the best in practice.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S065",
+  "year": "2012",
+  "title": "On the local convergence of a derivative-free algorithm for least-squares minimization",
+  "read_level": "full",
+  "contribution": "Proves local quadratic convergence of the DFLS derivative-free least-squares algorithm for zero-residual problems under a local error bound (weaker than Jacobian nonsingularity) and shows in long-budget tests that DFLS beats NEWUOA and finite-difference LMDIF in accuracy and evaluations, with and without noise.",
+  "problem_entry": "Completing an existing algorithm's theory: global convergence and small-budget numerics were in the SIOPT 2010 paper; this adds the local rate and high-accuracy numerics (pp. 1-2).",
+  "key_idea": "Show that, with base point = current iterate, DFLS eventually selects the regularized Hessian J^TJ + k||m||I, safeguards stop firing and the trust region becomes inactive, so DFLS becomes a regularized Levenberg-Marquardt-type method; then reuse Fan-Yuan's SVD local analysis (pp. 4, 9-20).",
+  "assumptions": "Bounded level set; uniformly bounded model Hessians; zero residual with local error bound ||F(x)|| >= a dist(x,X*); base point eventually x_k; iterates assumed to converge to X* (pp. 7-9).",
+  "proof_devices": [
+   "criticality step (Lambda-poised in radius proportional to ||g||) gives model-Jacobian error <= L3 dist(x_k,X*) (Lemma 3.1, p. 10)",
+   "error bound + Taylor show regularized branch eventually chosen, lambda_k proportional to ||F(x_k)|| (Lemma 3.2, pp. 10-12)",
+   "step bound ||d_k|| <= 2 dist(x_k,X*) by comparing with feasible point xbar_k - x_k (Lemma 3.3, pp. 12-13)",
+   "|r_k - 1| -> 0 and Delta_k bounded below, so trust region inactive (Lemma 3.4, pp. 13-16)",
+   "3/2-power contraction for superlinear rate (Thm 3.5, pp. 16-17)",
+   "SVD split of model Jacobian (Fan-Yuan) for quadratic rate (Lemma 3.6, Thm 3.7, pp. 17-20)"
+  ],
+  "experiments": "DFLS vs LMDIF and NEWUOA, 10^5-evaluation cap, stringent stop; 25 zero-residual (HS equality problems recast + collected), 22 nonzero-residual, absolute and relative 1e-2 noise with 10 runs and solver resolution set to noise level; DFLS uses 1/5-1/10 of NEWUOA's evaluations on zero-residual problems (pp. 20-26).",
+  "positioning": "Builds on CSV geometry/framework and Powell's NEWUOA; imports LM error-bound local theory (Tseng, Yamashita-Fukushima, Fan-Yuan); reconciles with the small-budget findings of the SIOPT paper (pp. 2, 9, 17, 26).",
+  "writing": "Contribution stated in abstract's third sentence; constants tabulated up front; proofs detailed but one lemma delegated to [8]; hedges the small test set explicitly (pp. 1, 3, 18, 22).",
+  "limits_future": "Zero residual only, subclass only, convergence to X* assumed, small partly ad hoc test set, O(mn^2) extra storage; future: convergence of bound-constrained DFBOLS (pp. 9, 21-22, 26).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "one interpolation model per residual; gains attributed to structure plus interpolation (Heuristic 2)",
+    "pages": "pp. 2, 26"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "criticality-step certification turns fully-linear accuracy into error O(dist(x,X*)), carrying the local rate",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "theorem plus three-code numerical study, paired with the global-convergence SIOPT paper",
+    "pages": "pp. 1, 20-26"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "LM local-rate theory under error bounds transplanted into DFO",
+    "pages": "pp. 9, 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "evaluations as cost unit and noisy variants, but HS reformulations plus development problems rather than a public DFO collection",
+    "pages": "pp. 21-22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reduce-to-classical local analysis",
+    "evidence": "prove safeguards switch off and TR inactive so the DFO method is a regularized LM iteration, then import its local proof",
+    "pages": "pp. 13-17"
+   },
+   {
+    "pattern": "budget-regime split across companion papers",
+    "evidence": "small-budget study in [20], long-budget high-accuracy study here, with reconciliation of the differing LMDIF behaviour",
+    "pages": "pp. 1, 26"
+   }
+  ],
+  "transferable": [
+   "For a local rate, prove |r_k - 1| -> 0 and a radius bounded below so the TR is inactive and the step is the classical step (pp. 13-17)",
+   "Replace Jacobian nonsingularity by a local error bound to cover non-isolated solutions (p. 9)",
+   "Build zero-residual test problems by recasting equality-constrained NLPs: (objective minus optimum) plus constraints as residuals; add a constant for nonzero residual (pp. 21-22)",
+   "In noisy comparisons set all solvers' final resolution to the noise level and report the best noise-free value over 10 runs (pp. 23-24)"
+  ],
+  "coauthors": "Hongchao Zhang",
+  "quotes": [
+   {
+    "text": "Here we would like to establish the local quadratic convergence of the algorithm for zero residual problems.",
+    "page": 1
+   },
+   {
+    "text": "although a more challenging set of test problems should be tested to confirm the promise.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S060",
+  "year": "2014",
+  "title": "Lagrangian relaxation based decomposition for well scheduling in shale-gas systems",
+  "read_level": "full",
+  "contribution": "A Lagrangian relaxation scheme for field-wide shut-in scheduling of shale-gas multi-well pads (GDP-derived MILP, one subproblem per pad, trust-region-stabilized cutting-plane dual, fix-and-local-branching primal heuristic), with frequency-weighted proxy-model tuning, that beats a same-time full-space MILP on all nine test sets.",
+  "problem_entry": "Application: cyclic shut-ins remove liquid loading, but the single-pad MILP becomes prohibitive field-wide; weak coupling between pads suggests Lagrangian relaxation (pp. 1-3).",
+  "key_idea": "Dualize the single linking constraint on pad reference rates to decompose by pad; stabilize the cutting-plane dual with a 1-norm trust region and actual/predicted ratio test; recover primal feasibility by fixing binaries plus LP and local branching (pp. 16-20).",
+  "assumptions": "Proxy valid only above critical rate; constant regional compressibilities; constant reference rate; Lagrangian feasible set a polytope by assumption; independent wellhead control makes exact tracking impossible (pp. 6-7, 12, 17, 25).",
+  "proof_devices": [
+   "Lagrangian bound at least LP-relaxation tight (Geoffrion) (p. 16)",
+   "trust-region cutting-plane with serious/null steps and ratio-based radius update (Algorithm 1, pp. 18-19)",
+   "bound lambda >= -1 via LP duality and Fourier-Motzkin elimination (Appendix A, pp. 29-30)",
+   "a priori solution for lambda >= 0 seeded into the cutting-plane model (p. 19)"
+  ],
+  "experiments": "Nine sets (3/6/9 pads x 7/14/21 days, six wells per pad), GAMS+CPLEX 12.3, vs full-space MILP given about the same wall time: duality gap 0-22.9% vs 63.3-100%, better upper bound on all nine, dual in 4-9 iterations (pp. 20-24).",
+  "positioning": "Builds on Whitson's cyclic shut-ins and own single-pad MILP/proxy papers; imports boxstep/trust-region stabilization, GDP hull/big-M reformulation, unit-commitment min-up/down inequalities and local branching (pp. 2, 12-20).",
+  "writing": "Engineering-venue structure (model, tuning, formulation, algorithm, results, discussion); candid self-assessment ('only average' by gap) and long, specific future-work list (pp. 22, 25-26).",
+  "limits_future": "Gaps above 10% on several sets, weaker for long horizons, nonconvex tuning, proxy mismatch for short shut-ins; future: augmented Lagrangian or branch-and-price, Lagrangian decomposition, per-well and temporal decomposition, parallelism, quadratic stabilization (pp. 12, 22, 25-27).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "petroleum-operations problem via NTNU/IO center and IBM scholarship, published in a chemical-engineering venue",
+    "pages": "pp. 1, 27"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "trust-region ratio-test logic transplanted to stabilize a Lagrangian cutting-plane dual; MIP devices (GDP, local branching) borrowed",
+    "pages": "pp. 13-20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "exploit block-separable structure with one linking constraint; surrogate tuned to the dynamics the decisions act on",
+    "pages": "pp. 6-9, 16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "algorithm plus numerics but no convergence theory beyond a multiplier bound",
+    "pages": "pp. 19, 29-30"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "instances generated from own proxy, no public test set; same-time monolithic baseline",
+    "pages": "pp. 20-22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fix discrete decisions from a cheap solve, then repair",
+    "evidence": "binaries from Lagrangian subproblems fixed, LP recovers feasible reference rates, local branching polishes",
+    "pages": "pp. 19-20"
+   },
+   {
+    "pattern": "trust-region stabilization outside NLP",
+    "evidence": "1-norm trust region with actual/predicted ratio stabilizes the cutting-plane Lagrangian dual",
+    "pages": "pp. 18-19"
+   }
+  ],
+  "transferable": [
+   "Fit a surrogate by filtering prediction errors with a frequency filter tuned to the decisions' time scale (pp. 7-9)",
+   "Update a locally valid surrogate with a forgetting factor on the prior weight rather than an arrival cost (pp. 10-11)",
+   "Before a cutting-plane dual, derive multiplier bounds that keep subproblems bounded and seed known a priori solutions (p. 19; App. A)",
+   "Compare a decomposition against the monolithic solve at equal wall time and report both bounds (pp. 22-23)",
+   "Stabilize an oscillating dual method with a trust region and actual/predicted ratio test (pp. 18-19)"
+  ],
+  "coauthors": "B. R. Knudsen, I. E. Grossmann, B. Foss",
+  "quotes": [
+   {
+    "text": "For field-wide multi-pad systems, however, the dimensionality of the MILP becomes computationally prohibitive.",
+    "page": 2
+   },
+   {
+    "text": "Hence, if only evaluated by size of the duality gap, the performance of the Lagrangian relaxation scheme applied to these sets may be considered as only average.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S166",
+  "year": "2017",
+  "title": "Solving aircraft conflicts by continuous optimization and mixed-integer nonlinear programming",
+  "read_level": "full",
+  "contribution": "Two-page abstract announcing a MINLP and a continuous exact-l1-penalty formulation for aircraft conflict avoidance by speed and heading changes, plus a separation-maximizing robust variant, solved by couenne (global) and ipopt (local).",
+  "problem_entry": "ATM safety (5 NM separation) and controller workload call for automation; levers are both speed and heading (p. 1).",
+  "key_idea": "Remove the infinite-dimensional separation constraint (Cafieri-Durand) and linearize angle terms; model logical separation either with binaries (MINLP) or with an exact l1 penalty (continuous) (p. 1).",
+  "assumptions": "not stated in the abstract",
+  "proof_devices": [
+   "none in the abstract"
+  ],
+  "experiments": "Unquantified: 'a set of problem instances'; MINLP global via couenne, penalty model local via ipopt 'extremely rapidly'; separation-maximizing variant much faster (pp. 1-2).",
+  "positioning": "Builds on Cafieri-Durand 2014 separation reformulation (pp. 1-2).",
+  "writing": "French-conference abstract, promissory ('will be presented at the conference'), adjectives instead of numbers (pp. 1-2).",
+  "limits_future": "Aim: decision-aid tool for controllers about 20 minutes before conflicts; no limits stated; journal version S099 replaced the l1 penalty by the smooth quadrant penalty and dropped the robust variant (p. 2; S099 pp. 12-13).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "exact-penalty lineage carried into ATM next to a global MINLP (thin, abstract only)",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "framed as a decision-aid tool for air-traffic controllers",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Offer a robust variant that swaps a hard nonlinear deviation objective for a linear separation objective and report its speed separately (pp. 1-2)"
+  ],
+  "coauthors": "S. Cafieri, M. Mongeau",
+  "quotes": [
+   {
+    "text": "where we introduce an exact l1-penalty function, tailored to the problem at hand, to deal with the difficult aircraft separation constraints.",
+    "page": 1
+   },
+   {
+    "text": "The overall proposed optimization approach is expected to serve to design a decision-aid tool for air-traffic controllers to solve conflicts at the tactical level (i.e., 20 minutes before conflicts).",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S099",
+  "year": "2023",
+  "title": "Mixed-integer nonlinear and continuous optimization formulations for aircraft conflict avoidance via heading and speed deviations",
+  "read_level": "full",
+  "contribution": "Two new models for aircraft conflict avoidance with speed and heading deviations (a trigonometry-free MINLP and a continuous quadrant-penalty NLP) and a three-phase local-then-global method that proves global optimality on 14 of 15 30-aircraft instances, including CP instances only locally solved before.",
+  "problem_entry": "Separation is a feasibility problem made optimization by secondary criteria; literature uses speed or heading alone; the earlier continuous model (Peyronne-Conn et al.) was local and used finite differences (pp. 3-4).",
+  "key_idea": "Change variables (q, theta) -> (q, omega, pi) so relative velocity is linear with one quadratic equality per aircraft; model the parabola-based logical separation by complementarity (MINLP) or smooth quadrant penalty (NLP); chain NLP-Penalty -> fixed-binary global solve -> full MINLP with cutoffs (pp. 5-20).",
+  "assumptions": "Same flight level, straight lines, uniform motion, simultaneous maneuvers at t=0, initial separation, speed in [0.94,1.03]v, heading within +-pi/6, no altitude change or recovery (pp. 4-7).",
+  "proof_devices": [
+   "strict convexity of f_ij reduces for-all-t separation to a logical condition on the parabola minimizer (p. 6)",
+   "four sign cases of known heading data give bilinear linking constraints and valid bounds (pp. 8-10)",
+   "feasibility (q=1, theta=0) and zero lower bound of NLP-Penalty (p. 14)",
+   "explicit caveat that the per-term leaning property of the penalty is lost in the nonseparable nonconvex sum (p. 14)"
+  ],
+  "experiments": "Literature CP/RCP instances from [17,26]; AMPL, COUENNE (600 s), IPOPT+MA57; MINLP global for CP up to 19 aircraft (<4 s) and all RCP 10/20, 7/15 RCP 30; NLP-Penalty zero penalty on all RCP; three-phase global on 14/15 RCP 30 (pp. 13-21).",
+  "positioning": "Builds on Cafieri et al. parabola approach and the quadrant-penalty report [11]; claims instances unsolved by Rey-Hijazi and Dias et al.; criticises the earlier Peyronne-Conn-Mongeau-Delahaye continuous model (pp. 3-4, 16).",
+  "writing": "Contributions paragraph with 'main' and 'second' contribution; remarks after each model; honest caveat on penalty non-separability before results; posthumous dedication (pp. 2, 4, 11, 14).",
+  "limits_future": "Local infeasibility of the penalty model, one unsolved instance, simultaneous maneuvers only, no trajectory recovery; future: autonomous vehicles, non-simultaneous maneuvers, dynamic environment (pp. 4, 14, 20-21).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "penalty function reused as engine of a global method: local NLP gives incumbents, cutoffs and integer fixing for MINLP",
+    "pages": "pp. 17-21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "reformulation removes trigonometry and bilinear terms, valid bounds before solving; criticism of finite differences in earlier model",
+    "pages": "pp. 3, 7-10"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "operational practice drives the model (subliminal speed, +-pi/6, controllers prefer heading)",
+    "pages": "pp. 7, 14, 19"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "adopts public literature instances from competing groups rather than building a test bed",
+    "pages": "p. 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fix discrete decisions from a cheap solve, then repair or prove",
+    "evidence": "Phase 1 penalty NLP fixes binaries and gives cutoff, Phase 2 global solve with fixed binaries, Phase 3 unfixes only if needed (also S060 pp. 19-20)",
+    "pages": "pp. 19-20"
+   }
+  ],
+  "transferable": [
+   "Replace angle and speed by velocity components plus one quadratic equality to make relative velocities linear and remove trigonometry (pp. 6-8)",
+   "Use known sign data to turn min/max of trigonometric data into bilinear constraints and valid bounds before branch-and-bound (pp. 8-10)",
+   "Chain solvers: fast smooth penalty model for a feasible point and cutoff, fix implied binaries, solve restricted problem globally, unfix only if needed (p. 20)",
+   "State explicitly when a penalty's per-term property fails for the sum, and use multistart (p. 14)"
+  ],
+  "coauthors": "S. Cafieri, M. Mongeau",
+  "quotes": [
+   {
+    "text": "Moreover, the authors could not achieve computing explicit derivatives, therefore resorting to finite-difference approximations.",
+    "page": 3
+   },
+   {
+    "text": "In particular, the proposed NLP-Penalty model yields efficient computation of good quality upper bounds.",
+    "page": 21
+   }
+  ]
+ }
+]

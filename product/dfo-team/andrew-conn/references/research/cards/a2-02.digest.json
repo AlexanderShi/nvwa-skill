@@ -1,0 +1,1137 @@
+[
+ {
+  "id": "S006",
+  "year": "1992",
+  "title": "LANCELOT: a Fortran package for large-scale nonlinear optimization (Release A)",
+  "read_level": "abstract",
+  "contribution": "Book-length overview of the LANCELOT package: how to present problems, how the algorithm works, implementor issues; contains a proposed standard input format for large-scale problems and reports >500 test examples already written in it (publisher description, i.e. the preface text on the Barnes & Noble page; paraphrased, not in abstracts.json).",
+  "problem_entry": "Give researchers and practitioners a coherent overview of a large-scale NLP package and its use (publisher description).",
+  "key_idea": "A standard input format as the interface between a user's problem and the optimizer; issues framed as general to large-scale algorithm design and implementation (publisher description).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Chapters recorded in works.json as dups of S006: SIF/LANCELOT Primer (S198), Specification File (S194), Subroutines (S193), How LANCELOT Works (S196), Installing (S197), Mathematical algorithms (S139) (works.json). Sits between S005 (1991 theory) and S040/S103 (numerical studies) (works.json).",
+  "writing": "",
+  "limits_future": "Test examples to be made available shortly (publisher description). Algorithm, theory and numbers inside the book not read.",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Input standard plus >500 test problems released with the solver (Heuristic 7 case).",
+    "pages": "publisher description"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Code leg between S005 theory and S040/S103 numerical studies; metadata-level link.",
+    "pages": "works.json"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S029",
+  "year": "1994",
+  "title": "A projection method for l_p norm location-allocation problems",
+  "read_level": "abstract",
+  "contribution": "Projection algorithm for relaxed l_p location-allocation, with local minima at {0,1} allocations and quadratic convergence under mild conditions, a structure-exploiting implementation and results on 36 test problems (abstract).",
+  "problem_entry": "Location-allocation with l_p distances, 1<p<inf; relax the {0,1} allocation constraints and solve for locations and allocations simultaneously (abstract).",
+  "key_idea": "Optimality conditions of the relaxed problem drive an active-subspace method; projected direction with second-order information for locations and first-order information for allocations (abstract).",
+  "assumptions": "'mild conditions' for {0,1} limits and quadratic convergence; not read in detail (abstract).",
+  "proof_devices": [],
+  "experiments": "36 test problems (abstract); details not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Special structure exploited in the numerical linear algebra.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Optimality conditions, rate, implementation and 36 test problems in one paper; test-set publicity not read.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Second-order information for locations, first-order for allocations.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Necessary and sufficient local-minimum conditions are used to develop the algorithm.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "After relaxing binary assignment variables, prove that the algorithm's local minima are integral ({0,1} allocations under mild conditions), so the relaxation needs no rounding step (abstract)."
+  ],
+  "coauthors": "I. Bongartz, P. H. Calamai",
+  "quotes": [
+   {
+    "text": "The descent direction is a projection onto the current subspace of a direction incorporating second-order information for the locations, and first-order information for the allocations.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S186",
+  "year": "1995",
+  "title": "Solving Manufacturing Problems Using Software for Large-Scale Nonlinear Programming.",
+  "read_level": "metadata",
+  "contribution": "Sole-author item with no venue, DOI or abstract; no record found by web search or Crossref. Inferred from title: application of large-scale NLP software to manufacturing problems (inferred from title).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Title only.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S079",
+  "year": "1996",
+  "title": "Estimating component-defect probability from masked system success/failure data",
+  "read_level": "abstract",
+  "contribution": "Two-stage procedure: intensive failure analysis of a sample of masked subsets enables maximum-likelihood estimation of per-component defect probabilities and diagnosis of future masked failures (abstract).",
+  "problem_entry": "A k-component system fails if any component is defective; cost and time only allow tests that narrow the defect to a subset ('masking') (abstract).",
+  "key_idea": "Buy exact diagnoses for a sample of masked cases to make per-component ML estimation possible (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Conn's role in this statistical work not stated (not read).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Problem driven by practical test-procedure constraints; organisational context not stated in the abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When data are only partially labelled (masked), pay for exact labels on a small sample (intensive failure analysis) so the maximum-likelihood estimate becomes identifiable (abstract)."
+  ],
+  "coauthors": "B. Reiser, B. J. Flehinger",
+  "quotes": [
+   {
+    "text": "Due to cost & time constraints it is not feasible to learn exactly which components are defective.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S073",
+  "year": "1997",
+  "title": "Large-scale optimization with applications: optimal design and control",
+  "read_level": "abstract",
+  "contribution": "Part II (Optimal Design and Control) of three IMA volumes from the 1995 IMA three-week Summer Program on large-scale optimization with applications (abstract); Conn is a co-editor (Crossref).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Series blurb only; contents not read (abstract). Scholar lists only 'LT Biegler' (works.json).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "L. T. Biegler, T. F. Coleman, F. N. Santosa (co-editors; Crossref)",
+  "quotes": []
+ },
+ {
+  "id": "S077",
+  "year": "1997",
+  "title": "Circuit optimization via adjoint Lagrangians",
+  "read_level": "abstract",
+  "contribution": "Adjoint Lagrangian method: all gradients needed by augmented-Lagrangian optimization from a single adjoint analysis; implemented in JiffyTune; >35x faster gradients, up to 2.5x overall; 6,900-transistor circuit in under two CPU hours (abstract).",
+  "problem_entry": "Gradient-based NLP is the right tool for circuit tuning, but for large circuits gradient computation is the bottleneck; direct and adjoint methods each need repeated solves in one regime (abstract).",
+  "key_idea": "Write the merit-function gradient as the gradient of a weighted sum of circuit measurements (weights from the nominal solution and multipliers); choose adjoint excitations so one adjoint analysis gives it, independent of the number of measurements and parameters (abstract).",
+  "assumptions": "Requires close integration between optimizer and circuit simulator (abstract).",
+  "proof_devices": [],
+  "experiments": "Speedups >35x (gradients), up to 2.5x (overall); 6,900 transistors in under two CPU hours (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Exact gradients extracted from the simulator by adjoints.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Augmented-Lagrangian merit function reused to cut gradient cost.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Built into JiffyTune; makes tuning of large circuits feasible.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Differentiate the merit function, not the constraints",
+    "evidence": "Earliest statement in the collection: one adjoint analysis for the augmented-Lagrangian merit gradient (see S039, s2-06).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "If the optimizer only needs the gradient of a scalar merit function, write it as a multiplier-weighted sum of simulator outputs and get its gradient in one adjoint solve instead of one solve per output or per parameter (abstract)."
+  ],
+  "coauthors": "R. A. Haring, C. Visweswariah, C. W. Wu (Crossref; pp. 281-288)",
+  "quotes": [
+   {
+    "text": "By suitably choosing the excitations of the adjoint circuit, the gradients of the merit function are computed via a single adjoint analysis, irrespective of the number of measurements and the number of parameters of the optimization.",
+    "page": "abstract"
+   },
+   {
+    "text": "This procedure requires close integration between the nonlinear optimization software and the circuit simulation program.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S181",
+  "year": "1997",
+  "title": "Large-scale Optimization with Applications: Optimization in Inverse Problems and Design",
+  "read_level": "abstract",
+  "contribution": "Edited volume of expository articles on inverse and design problems posed as optimization, each written for optimizers and applied researchers (abstract); Conn co-editor (Crossref).",
+  "problem_entry": "Accurate, commonplace simulators create demand for data analysis and automated design, which leads to large-scale optimization (abstract).",
+  "key_idea": "Each article describes the physical problem in detail; problem features must shape the objective and the strategy (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Articles meant to be accessible to both optimization researchers and applied researchers (abstract).",
+  "limits_future": "Problem-specific structures deserve special treatment; ample scope for parallel computation (abstract). Authorship of the blurb not stated.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Editorial statement that problem-specific structure deserves special treatment.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Volume brings simulation users and optimizers together.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Write for both audiences",
+    "evidence": "Volume articles meant to be accessible to optimizers and applied researchers.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "L. T. Biegler, T. F. Coleman, F. N. Santosa (co-editors; Crossref)",
+  "quotes": [
+   {
+    "text": "In particular there are certain structures peculiar to the problems that deserve special treatment, and there is ample opportunity for parallel computation.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S033",
+  "year": "1998",
+  "title": "JiffyTune: Circuit optimization using time-domain sensitivities",
+  "read_level": "abstract",
+  "contribution": "Circuit-tuning tool coupling a fast simulator with a general-purpose NLP package; minimax/power objectives, transistor and wire tuning, recovery from nonworking circuits, designer-friendly interfaces; extensive results (6900 transistors, 4128 tunable, 60 independent parameters in about 108 CPU minutes) (abstract).",
+  "problem_entry": "Automating transistor and wire sizing is a step toward rapid design of high-performance custom circuits (abstract).",
+  "key_idea": "General-purpose NLP behind a designer-facing tool; gradients by adjoint, direct and adjoint-Lagrangian methods, the latter giving all gradients for one iteration in a single adjoint analysis (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Extensive circuit optimization results; largest: 6900 transistors, 4128 tunable, 60 independent parameters, about 108 min CPU on an IBM RS/6000 model 590 (printed 'Rise/System 6000') (abstract).",
+  "positioning": "Continues S036 (ICCAD 1996, s2-05) (works.json).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Designer-friendly interfaces, back-annotation onto the schematic, recovery from nonworking circuits.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Time-domain sensitivities; single adjoint analysis per iteration.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Tool and results; no convergence theory stated in the abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Differentiate the merit function, not the constraints",
+    "evidence": "Adjoint Lagrangian gives all gradients for one iteration in a single adjoint analysis.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "In an optimization tool for domain users, automate problem specification from the users' own artefact and write results back into it (back-annotation onto the circuit schematic) (abstract)."
+  ],
+  "coauthors": "P. K. Coulman, R. A. Haring, G. L. Morrill, C. Visweswariah, C. W. Wu",
+  "quotes": [
+   {
+    "text": "In addition, the tool makes use of designer-friendly interfaces that automate the specification of the optimization task, the running of the optimizer, and the back-annotation of the results of optimization onto the circuit schematic.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S067",
+  "year": "1998",
+  "title": "Discontinuous piecewise linear optimization",
+  "read_level": "abstract",
+  "contribution": "Theory and an active-set/projected-gradient descent algorithm for discontinuous piecewise linear optimization with known ridges, constrained case via an l1 exact penalty, degeneracy handling, preliminary numbers on industrial-engineering models (abstract).",
+  "problem_entry": "Minimise discontinuous piecewise linear functions whose ridges are known, subject to a wide range of piecewise-linear constraints (abstract).",
+  "key_idea": "Generalise Conn's l1 exact-penalty nonsmoothness treatment; decompose the function into smooth and nonsmooth parts; reduce constraints to an unconstrained piecewise linear l1 penalty (abstract).",
+  "assumptions": "Ridges known (abstract).",
+  "proof_devices": [],
+  "experiments": "Preliminary numerical results on discontinuous problems from industrial-engineering models (abstract).",
+  "positioning": "Continues S155 (INRIA 1992, s2-03); names Conn's l1 exact-penalty work as the source (abstract).",
+  "writing": "",
+  "limits_future": "Theory extends to discontinuous piecewise differentiable functions via standard NLP techniques (abstract).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Conn's own l1 exact-penalty machinery carried to discontinuous problems.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "smooth + single-kink local decomposition",
+    "evidence": "Function decomposed into a smooth and a nonsmooth part (s2-03 candidate).",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Repair the formulation before the solver",
+    "evidence": "Constrained case reduced to unconstrained l1 exact penalty.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "M. Mongeau",
+  "quotes": [
+   {
+    "text": "It is a generalization of the ideas used by Conn to deal with nonsmoothness in the l1 exact penalty function, and it is based on the notion of decomposition of a function into a smooth and a nonsmooth part.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S055",
+  "year": "1999",
+  "title": "Formulation of static circuit optimization with reduced size, degeneracy and redundancy by timing graph manipulation",
+  "read_level": "abstract",
+  "contribution": "Timing-graph manipulation that yields a much more compact static circuit optimization problem with less redundancy and degeneracy, and hence more efficient and effective optimization; numerical results (abstract).",
+  "problem_entry": "Previous static-timing formulations were very large and inherently redundant and degenerate (abstract).",
+  "key_idea": "Fix size, redundancy and degeneracy in the formulation (timing graph), not in the solver (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical results presented; figures not read (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure exploited at formulation time before solving.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Repair the formulation before the solver",
+    "evidence": "Timing-graph manipulation removes redundancy and degeneracy before optimization.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When a model generated from a graph (all timing paths) is large and degenerate, compress the graph first to remove redundant constraints before solving (abstract)."
+  ],
+  "coauthors": "C. Visweswariah",
+  "quotes": [
+   {
+    "text": "Previous methods of formulating static circuit optimization produced problem statements that are very large and contain inherent redundancy and degeneracy.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D002",
+  "year": "2000",
+  "title": "Noise considerations in circuit optimization",
+  "read_level": "abstract",
+  "contribution": "Practical handling of many noise constraints in circuit optimization: semi-infinite constraints rewritten as equality constraints involving time integrals, with all gradients from one adjoint analysis under an augmented-Lagrangian merit function; numerical results (abstract).",
+  "problem_entry": "Noise causes spurious switching and power/timing/reliability effects; noise constraints are semi-infinite in time, hard and numerous (abstract).",
+  "key_idea": "Semi-infinite constraints become ordinary equality constraints on time integrals; single adjoint analysis regardless of the number of noise measurements or dimension (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Same title as S039 (ICCAD 1998, s2-06); presumably its journal version (inferred from title).",
+  "writing": "",
+  "limits_future": "Shown with time-domain simulation; static-timing basis named as future work (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Adjoint gradients.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Augmented-Lagrangian merit function reused.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Designers' noise problem.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Differentiate the merit function, not the constraints",
+    "evidence": "Single adjoint analysis for all gradients regardless of the number of noise measurements.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Repair the formulation before the solver",
+    "evidence": "Semi-infinite constraints rewritten as integral equalities.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "C. Visweswariah, R. A. Haring",
+  "quotes": [
+   {
+    "text": "This paper describes a novel and practical method for incorporating realistic noise considerations during automatic circuit optimization by representing semi-infinite constraints as ordinary equality constraints involving time integrals.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S001",
+  "year": "2000",
+  "title": "Trust-region methods",
+  "read_level": "abstract",
+  "contribution": "Comprehensive monograph on trust-region methods for nonlinear nonconvex optimization, unconstrained and constrained, with a 972-reference commented bibliography (745 authors), practical comments, a software/implementation chapter and nearly 100 figures (abstract).",
+  "problem_entry": "No comprehensive reference on trust-region methods existed (abstract's claim to be the first).",
+  "key_idea": "Unified treatment of unconstrained and constrained problems, including specialised topics and literature reviews (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Commented bibliography of 972 references by 745 authors (abstract). Scholar lists 'L Philippe' for Ph. L. Toint (works.json).",
+  "writing": "Formal, in-depth treatment made accessible with nearly 100 figures; written for postgraduates and researchers (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Software and implementation chapter inside a theory monograph (already cited in SKILL.md).",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Survey as a research agenda",
+    "evidence": "Large commented bibliography; the abstract says nothing about open problems (variant).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "The book also contains several practical comments and an entire chapter devoted to software and implementation issues.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S178",
+  "year": "2000",
+  "title": "Manual for Fortran Software Package DFO v1. 2",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: user manual for version 1.2 of the DFO code (inferred from title). The COIN-OR mirror holds a 13-page v2.0 manual and a FAQ, neither v1.2 and neither read for this card.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Code leg documented as a separate item (metadata only).",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "K. Scheinberg, Ph. L. Toint",
+  "quotes": []
+ },
+ {
+  "id": "S154",
+  "year": "2001",
+  "title": "Overview of continuous optimization advances and applications to circuit tuning",
+  "read_level": "abstract",
+  "contribution": "Survey of continuous NLP advances (trust-region and line-search paradigms, other techniques) and of two circuit-sizing tools, dynamic and static-timing, with emphasis on customising NLP to circuit sizing (abstract).",
+  "problem_entry": "Argues that recent progress lets larger and more complex problems be solved than previously thought possible (abstract).",
+  "key_idea": "Present optimization paradigms to circuit designers through two in-house tools (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Survey delivered at a physical-design symposium (venue metadata).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Optimization survey delivered at the users' own venue.",
+    "pages": "abstract; venue metadata"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Customisation of NLP to the application.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Write for both audiences",
+    "evidence": "Optimization survey addressed to physical-design engineers.",
+    "pages": "abstract; venue metadata"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "C. Visweswariah",
+  "quotes": [
+   {
+    "text": "Particular emphasis has been given to the customization of nonlinear optimization to the circuit sizing application.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S224",
+  "year": "2002",
+  "title": "ISMP2000. Part 2",
+  "read_level": "metadata",
+  "contribution": "Crossref title 'Foreword', Math. Program. 91(3):399-400 (Feb 2002). Inferred from title: guest editors' foreword to part 2 of the ISMP 2000 special issue (inferred from title).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Crossref lists a further untitled Conn-Shepherd item, Math. Program. 92(3):391-392, DOI 10.1007/s101070100291, not in works.json (Crossref).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "F. B. Shepherd",
+  "quotes": []
+ },
+ {
+  "id": "S175",
+  "year": "2003",
+  "title": "ISMP2000-Part 3-Foreword",
+  "read_level": "metadata",
+  "contribution": "Crossref: 'Foreward' (sic), Math. Program. 95(1):1-2, 2003, DOI 10.1007/s10107-002-0338-6. Inferred from title: guest editors' foreword to part 3 of the ISMP 2000 special issue (inferred from title).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "F. B. Shepherd",
+  "quotes": []
+ },
+ {
+  "id": "S176",
+  "year": "2003",
+  "title": "Exploiting Optimality Conditions in Accurate Static Circuit Tuning",
+  "read_level": "abstract",
+  "contribution": "Accurate static-timing transistor sizing with delays and gradients from transient simulation; structure-derived optimality conditions exploited for more effective and efficient tuning; microprocessor results; study of Lagrangian relaxation in the same environment (abstract).",
+  "problem_entry": "Accurate static tuning (transient simulation instead of Elmore/analytical delay models, slews included) gives a large, inherently degenerate NLP (abstract).",
+  "key_idea": "Derive optimality conditions from the problem structure and exploit them in tuning (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Results from optimizing high-performance microprocessor circuits; Lagrangian relaxation implemented in the same environment (abstract). Details not read.",
+  "positioning": "",
+  "writing": "Written to be amenable to both mathematicians and engineers (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure used to derive exploitable optimality conditions.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Optimality conditions derived from structure and exploited in tuning.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Rival-inclusive benchmarking",
+    "evidence": "Competing Lagrangian-relaxation approach implemented in the same environment; head-to-head comparison not read.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "Write for both audiences",
+    "evidence": "Explicitly written for mathematicians and engineers.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "C. Visweswariah, L. G. Silva",
+  "quotes": [
+   {
+    "text": "This paper describes, in a manner that is meant to be amenable to both mathematicians and engineers, the accurate optimization of transistor sizes on a static timing basis.",
+    "page": "abstract"
+   },
+   {
+    "text": "By considering the structure of the problem, optimality conditions are derived and conditions can be exploited to carry out the tuning more effectively and efficiently.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S106",
+  "year": "2005",
+  "title": "Large-scale nonlinear optimization in circuit tuning",
+  "read_level": "abstract",
+  "contribution": "Formulation of circuit tuning as large-scale nonconvex NLP with simulation-based values and derivatives, and a tool in which a new interior-point NLP algorithm improved efficiency and robustness, with potential for parallel/distributed computing (abstract).",
+  "problem_entry": "Choose transistor widths to improve speed, area or power; increase the size of problems solvable in reasonable time (abstract).",
+  "key_idea": "Integrate a state-of-the-art interior-point NLP algorithm into the existing tuning tool; the abstract does not name it (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical results on efficiency, robustness and parallel potential; not read in detail (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Industrial tuning tool; a new solver swapped into the existing tool (Heuristic 8; SKILL.md names LANCELOT -> IPOPT from MAM 2015).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Function values and derivatives from gate simulation.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. Wächter, C. Visweswariah",
+  "quotes": [
+   {
+    "text": "We demonstrate how the integration of a novel state-of-the-art interior point algorithm for nonlinear programming led to considerable improvement in efficiency and robustness.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S098",
+  "year": "2006",
+  "title": "Combining adjoint calculations and Quasi-Newton methods for automatic history matching",
+  "read_level": "abstract",
+  "contribution": "Adjoint derivatives combined with a trust-region quasi-Newton method for history matching; synthetic and real cases, >250 parameters solved efficiently, substantial match improvement (abstract).",
+  "problem_entry": "History matching with many parameters, where DFO or forward-method derivatives limit problem size (abstract).",
+  "key_idea": "Use adjoint gradients plus a trust-region quasi-Newton optimizer instead of DFO or forward sensitivities (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Synthetic and real cases; >250 parameters (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Discusses using the many-parameter capability to assess uncertainty by exhausting the space of possible models (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Adjoints chosen over DFO explicitly, for scale in the number of parameters (Heuristic 1).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Trust-region quasi-Newton carried into reservoir engineering.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. R. P. Rodrigues, A. Wächter, R. J. Moraes, F. P. T. Silva",
+  "quotes": [
+   {
+    "text": "The techniques employed allowed for the resolution of problems with a larger number of parameters, when compared to other approaches, based on derivative free optimization or the forward method for derivative calculation.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S161",
+  "year": "2007",
+  "title": "Rock Physics and Depositional History from Seismic Matching–A Model Study",
+  "read_level": "abstract",
+  "contribution": "Numerical optimization adjusts parameters of chained forward models (basin, petrophysical, seismic acoustic) to match observed seismic data (amplitude as well as timing) and stratigraphy (abstract).",
+  "problem_entry": "Extend Imhof and Sharma (2005, 2006) to integrate geological and geophysical data and infer sedimentary parameters; the inverse problem is ill-posed and computationally difficult (abstract).",
+  "key_idea": "Automatic parameter adjustment of forward models to match seismic data; optimizer not named (not read).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Builds on Imhof and Sharma (2005, 2006) (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Applied geoscience project; method family not read.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. A. Levin, U. Mello, V. Lopez, L. Xu, K. Scheinberg, H. Zhang",
+  "quotes": []
+ },
+ {
+  "id": "S171",
+  "year": "2007",
+  "title": "Assisted seismic matching: Joint inversion of seismic, rock physics and basin modeling",
+  "read_level": "abstract",
+  "contribution": "Numerical optimization for joint inversion of basin-modeling, rock-physics and seismic-attribute parameters, including amplitude (two-sentence abstract).",
+  "problem_entry": "Inverse methods to estimate unknown subsurface parameters (abstract).",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Same project and year as S161 (inferred from coauthors and title).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Thin two-sentence abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "U. T. Mello, V. Lopez, K. Scheinberg, H. Zhang, M. Henderson, L. Xu, et al.",
+  "quotes": []
+ },
+ {
+  "id": "S002",
+  "year": "2009",
+  "title": "Introduction to derivative-free optimization",
+  "read_level": "abstract",
+  "contribution": "First contemporary comprehensive DFO book: sampling and modelling tools (interpolation, regression, underdetermined models, well-poisedness), direct-search and model-based frameworks, reviews of surrogates and constraints, software appendix; convergence analyses for modified Nelder-Mead, implicit filtering, wedge and minimum-Frobenius-norm methods (abstract).",
+  "problem_entry": "Missing derivatives, often with noise or nonsmoothness, are a major challenge (abstract).",
+  "key_idea": "Sampling and modelling tools first (Part I, including a chapter on ensuring well poisedness), then algorithm frameworks (Part II), then reviews (Part III) (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Accessible to readers with modest computational-mathematics background, also aimed at researchers and at course use (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Model classes and a well-poisedness chapter come first as the tools that explain convergence.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Direct search and model-based schools in one framework book.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Software appendix; no numerical study mentioned in the abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Organise a thesis or survey as tools first (model classes and their quality conditions), frameworks second and reviews last, so each algorithm chapter reuses one set of results and can be compared through them (abstract, contents)."
+  ],
+  "coauthors": "K. Scheinberg, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "It contains a comprehensive description of the sampling and modeling tools needed for derivative-free optimization; these tools allow the reader to better understand the convergent properties of the algorithms and identify their differences and similarities.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S101",
+  "year": "2010",
+  "title": "A simulation model for improving the maintenance of high cost systems, with application to an offshore oil installation",
+  "read_level": "abstract",
+  "contribution": "Generalized semi-Markov model with Monte Carlo simulation to assess, compare and improve maintenance plans (production penalty, unplanned shutdowns), capex and process improvements for an offshore installation; tested on installation data and well received by operations staff (abstract).",
+  "problem_entry": "Assess maintenance plans for a high-cost offshore system (abstract).",
+  "key_idea": "Flexible stochastic simulation framework for what-if scenarios (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Tested on data from an offshore oil installation (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Success reported as acceptance by the installation's operators; not an optimization-algorithm paper.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "L. A. Deleris, J. R. M. Hosking, T. A. Thorstensen",
+  "quotes": [
+   {
+    "text": "The simulation model was tested on data from an offshore oil installation, and was well received by the installation's operations personnel.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S152",
+  "year": "2011",
+  "title": "My Experiences as an Industrial Research Mathematician",
+  "read_level": "metadata",
+  "contribution": "Sole-author SIAM News essay (44(4)); search summaries (unverified) give May 2011, pp. 1-3. siam.org returned HTTP 403; Wayback returned 429 and then an empty CDX result. Inferred from title: a first-person essay on industrial research mathematics (inferred from title).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "High-value gap: SKILL.md Method 1 records that no first-person essay was found; fetch this with a browser.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Title only.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S083",
+  "year": "2012",
+  "title": "Integrating mathematical optimization and decision making in intelligent fields",
+  "read_level": "abstract",
+  "contribution": "Decision-making approach that integrates oil-field decisions with simulation-based optimization: well shut-in selection with control optimization, and injector/producer assignment with well placement; up to 50% less produced water while meeting the oil target in the first class (abstract).",
+  "problem_entry": "Oil and gas decisions to be integrated formally with established optimization procedures (abstract).",
+  "key_idea": "Formulate discrete decisions and continuous controls/locations jointly within a realistic simulation-based optimization framework (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Two problem classes; production improvement vs reference case (abstract).",
+  "positioning": "",
+  "writing": "Framework offered as a common language between decision makers and researchers; automated tools framed as an extra information source (abstract).",
+  "limits_future": "Human interpretation and intuition drive crucial decisions (abstract).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Decision makers' framing; common language inside the organisation.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Write for both audiences",
+    "evidence": "Framework as a common language for decision makers and researchers.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "D. Echeverría Ciaurri, U. T. Mello, J. E. Onwunalu",
+  "quotes": [
+   {
+    "text": "It should be stressed that ultimately it is human interpretation and intuition that drives the making of crucial decisions.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S100",
+  "year": "2012",
+  "title": "Adjoint-based history-matching of production and time-lapse seismic data",
+  "read_level": "abstract",
+  "contribution": "Workflow that reuses simulators' existing production-data adjoint to assimilate inverted 4D seismic attributes without adjoint re-programming; synthetic study shows rapid setup, reduced execution and improved saturation match; joint Shell-IBM project (abstract).",
+  "problem_entry": "Joint inversion of 4D seismic and production data is hard (scales, uncertain coupling, localized updates, multiple data), limiting many data-assimilation techniques (abstract).",
+  "key_idea": "Recast inverted seismic attributes so the simulator's existing adjoint path handles them (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Synthetic reservoir model acting as the real, unknown reservoir; synthetic production and 4D seismic data (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Existing simulator adjoint reused instead of going black-box.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Joint Shell-IBM project.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Before writing a new adjoint for a new data type, recast the new data (inverted seismic attributes) so the simulator's existing adjoint path can take it (abstract)."
+  ],
+  "coauthors": "G. M. van Essen, E. A. Jimenez, J. P. Przybysz-Jarnut, L. Horesh, S. G. Douma, et al.",
+  "quotes": [
+   {
+    "text": "In this study we present a workflow that exploits the adjoint functionality that modern simulators offer for production data to consistently assimilate inverted 4D seismic attributes without the need for re-programming of the adjoint code.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S105",
+  "year": "2012",
+  "title": "Target-rate tracking for shale-gas multi-well pads by scheduled shut-ins",
+  "read_level": "abstract",
+  "contribution": "Discrete-time MILP scheduling shut-ins on a shale-gas multi-well pad to track a target rate, with per-well reservoir proxy and well models tuned against a realistic multi-fractured reservoir model; one-month eight-well demonstration (abstract).",
+  "problem_entry": "Rate decline and liquid loading in shale-gas wells on multi-well pads; shut-ins can prevent liquid loading and boost late-life rates (abstract).",
+  "key_idea": "Binary shut-in/produce variables in a MILP with tuned proxy models (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "One-month planning problem for an eight-well pad (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Operational problem for well operators; precursor of the 2014 shale-gas paper cited in SKILL.md.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Simulator replaced by tuned proxies, making the problem an explicit MILP.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Tune a cheap per-unit proxy (one per well) against the high-fidelity simulator, then embed the proxies in a mixed-integer program so scheduling logic stays exact while only physics is approximated (abstract)."
+  ],
+  "coauthors": "B. R. Knudsen, B. Foss, C. H. Whitson",
+  "quotes": [
+   {
+    "text": "The optimization problem is formulated as a discrete time mixed integer linear program (MILP) with binary variables defining at which times the well is either shut-in or producing.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S132",
+  "year": "2012",
+  "title": "Optimization of petroleum production networks–Through proxy models and structural constraints",
+  "read_level": "abstract",
+  "contribution": "Algorithm for network simulation problems that models inter-component relations as explicit structural constraints and within-component relations by simulator-based approximations; RTPO formulation and study on a real application vs a reference case (abstract).",
+  "problem_entry": "Solve network simulation problems to optimality for systems divisible into components (abstract).",
+  "key_idea": "Explicit structural constraints between components, proxy approximations inside components (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Real RTPO application compared to a reference case (abstract).",
+  "positioning": "Conference precursor of S084 (near-identical sentences in both abstracts).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure modelled explicitly; only component internals approximated from simulator data.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Explicit links between components, surrogates inside them.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "S. S. Shamlou, V. Gunnerud",
+  "quotes": [
+   {
+    "text": "Emphasis is put on the system being divisible into components, as this underlying assumption motivates the algorithm in its entirety in that rather simple relations between the system components are modeled as explicit structural constraints, while the significantly more complex relations within each component are approximated based on the underlying simulator data.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S023",
+  "year": "2013",
+  "title": "Use of quadratic models with mesh-adaptive direct search for constrained black box optimization",
+  "read_level": "abstract",
+  "contribution": "Hybrid that integrates model-based quadratic models, to a limited extent, into mesh-adaptive direct search; tests on sets of 48 and 104 problems show significant improvement of MADS (abstract).",
+  "problem_entry": "Constrained black-box DFO; two families available: model-based methods and directional direct search (abstract).",
+  "key_idea": "Use the flexibility of direct search to integrate the other family's models to a limited extent (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Two test sets of 48 and 104 problems (abstract); baselines and cost unit not read.",
+  "positioning": "Precursor of S075 (c2-05).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Hybrid across schools (already cited in SKILL.md; Heuristic 4).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Two test sets with sizes; baselines and cost unit not read.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Le Digabel",
+  "quotes": [
+   {
+    "text": "This work exploits the flexibility of the second type of methods in order to integrate to a limited extent the models used in the first family.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S084",
+  "year": "2013",
+  "title": "Embedding structural information in simulation-based optimization",
+  "read_level": "abstract",
+  "contribution": "Trust-region algorithm with a MINLP formulation for process networks, combining explicit structural constraints between components with simulator-based approximations inside them; limited numbers on one oil and gas example (abstract).",
+  "problem_entry": "Find optimal settings for a process network divisible into components, especially oil and gas production (abstract).",
+  "key_idea": "Decompose, keep analytic inter-component structure (with derivatives), approximate only simulator-based component behaviour, inside a trust-region MINLP approach (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Limited numerical results for one example (abstract).",
+  "positioning": "Journal follow-up of S132; details said to differ significantly from generally available algorithms (abstract).",
+  "writing": "",
+  "limits_future": "Evidence limited to one example (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Derivatives for analytic parts, models only for simulated parts (Method 5 step 4 almost verbatim).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Trust region carried into a MINLP setting.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Analytic inter-component constraints vs simulator-based component models.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Decompose a simulator-based network into components, keep inter-component relations as exact analytic constraints with derivatives, fit surrogates only to within-component simulator responses, and attribute each advantage separately (smaller subproblems from decomposition; derivatives from structure) (abstract)."
+  ],
+  "coauthors": "V. Gunnerud, B. Foss",
+  "quotes": [
+   {
+    "text": "The advantage of the latter is that one can use derivatives for the analytic parts whereas they are unavailable for the simulators.",
+    "page": "abstract"
+   },
+   {
+    "text": "The underlying approach is a trust-region one with a mixed integer nonlinear program formulation.",
+    "page": "abstract"
+   }
+  ]
+ }
+]

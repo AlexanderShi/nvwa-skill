@@ -1,0 +1,357 @@
+[
+ {
+  "id": "S040",
+  "year": "1996",
+  "title": "Numerical experiments with the LANCELOT package (Release A) for large-scale nonlinear optimization",
+  "read_level": "full",
+  "contribution": "Describes every algorithmic option of LANCELOT Release A and tests 21 one-change variants of a documented default on 943 CUTE instances (19803 runs), giving per-option reliability and efficiency, a list of the package's weak points with planned fixes, and separate package-specific and general computational lessons.",
+  "problem_entry": "Engineering question about the authors' own package: report experiments on a sizeable collection and rank the relative merits of its algorithmic options; the rival comparison with MINOS is deferred to a separate paper (p. 5).",
+  "key_idea": "One-factor-at-a-time test design: a printed default specification file plus 20 basic variants that each differ from the default in exactly one option (fdg differs in two), analysed on reliability, minor iterations (= function evaluations), cg-iterations and CPU (pp. 32-34, 39).",
+  "assumptions": "f and c twice continuously differentiable; group partially separable objective, justified because any function with a continuous sparse Hessian can be written so; convergence theory cited from CGT 1988/1991 rather than re-proved; HSL-dependent options cannot be defaults for licensing reasons (pp. 8, 14, 23, 34).",
+  "proof_devices": [
+   "coded failure taxonomy per variant: succ/stall/infs/mem/iters/cpu/error (p. 34)",
+   "same-answer filter: count a run only if its final value matches the best critical value within 0.001% (p. 38)",
+   "averages over problems solved by all variants plus rank histograms (ranks clustered 1-3, 4-6, ...) over problems solved by any, with disagreements traced to outlier problems (pp. 39, 45)",
+   "normalized inner-work metric: cg-iterations per minor iteration per variable, in [0,1], with its approximations stated (p. 42)",
+   "a posteriori diagnostic rerun: raising the GMPS perturbation threshold to eps^(3/4) removes the overflow failures (pp. 36-37)"
+  ],
+  "experiments": "943 CUTE instances (398 problems) plus a 45-problem large subset; 21 variants; limits 1000 iterations and 18000 CPU s on DECstation 5000/200; default 92.5% success, seprc 93.1%, dfp lowest; 919 solved by at least one variant; costs in minor iterations (= evaluations), cg-iterations and CPU (pp. 27-46).",
+  "positioning": "Positions LANCELOT against itself (MINOS comparison deferred to [4]); rival factorization techniques (Schnabel-Eskow vs Gill-Murray-Ponceleon-Saunders) compared head to head, with the weaker one's failure diagnosed and shown avoidable; the incomplete-factorization result is qualified by the test-set make-up (pp. 5, 36-37).",
+  "writing": "Numbered conclusions after each metric (13, 6, 9, 12 points), graded hedging ('perhaps surprisingly', 'admittedly marginal'), final conclusions split into package-specific and general lessons, and a closing request for user feedback (pp. 35-50).",
+  "limits_future": "Weak points listed from detailed runs: slacks inflate problems with many inequalities (fix [14]), no special handling of linear or network constraints, disappointing GCP active-set prediction (barrier [15]); options to remove (l2 norm, diagonal, DFP); test set mostly well scaled; CPU measured without compiler optimization (pp. 34-35, 45, 49-50).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Testing twin of the LANCELOT book; theory cited at each algorithmic step; full data in companion report [16] (S103).",
+    "pages": "pp. 7, 10, 12, 15-16, 34"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Public collection (CUTE, 943 instances), per-option results for 21 variants with coded failures, separately analysed large subset; minor iterations stated to equal function evaluations.",
+    "pages": "pp. 27-39"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "No noisy variants; second tier is large CUTE instances tagged with applications rather than live engineering problems; CPU and cg-iterations used beside evaluations.",
+    "pages": "pp. 30-31, 42, 45"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure exploitation built in (group partial separability, internal variables, partitioned updates); exact second derivatives recommended whenever available, finite differences a measured fallback.",
+    "pages": "pp. 22-26, 38, 50"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Self-audit of one's own solver starts a research line",
+    "evidence": "Weak points 1 and 3 cite the slack-structure note [14] (S089) and the Lagrangian barrier [15] (S007); third paper after S089 and S054.",
+    "pages": "p. 49"
+   },
+   {
+    "pattern": "One-factor-at-a-time variants around a documented default",
+    "evidence": "Default specification file printed; every basic variant changes exactly one option; 21 x 943 runs.",
+    "pages": "pp. 32-34"
+   },
+   {
+    "pattern": "Averages and rank histograms side by side, with outliers traced",
+    "evidence": "semltf best ranking but worst average CPU, traced to a few large indefinite problems; munksg the reverse.",
+    "pages": "pp. 39, 45"
+   },
+   {
+    "pattern": "Prune options on evidence",
+    "evidence": "Authors recommend removing their own l2-norm, diagonal and DFP options.",
+    "pages": "p. 50"
+   }
+  ],
+  "transferable": [
+   "Print the full default specification and define each variant as the default with exactly one change (pp. 32-33).",
+   "Filter runs that converge to a different critical value (0.001%) before comparing efficiency, and report how many were filtered per variant (p. 38).",
+   "Report averages over commonly solved problems and rank histograms over all solved problems; explain every disagreement (pp. 39, 45).",
+   "Diagnose a surprising failure of a rival technique with one targeted a posteriori rerun (pp. 36-37).",
+   "Code every failure type and note when a coded failure is not a failure for the user (p. 34).",
+   "End with separate package-specific and general conclusions and name the options you would remove (p. 50)."
+  ],
+  "coauthors": "N. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We strongly recommend the use of exact second derivatives whenever they are available.",
+    "page": 24
+   },
+   {
+    "text": "The difficulty of solving a problem is more often linked to its degree of nonlinearity than to its size.",
+    "page": 50
+   }
+  ]
+ },
+ {
+  "id": "S013",
+  "year": "1997",
+  "title": "On the convergence of derivative-free methods for unconstrained optimization",
+  "read_level": "full",
+  "contribution": "Defines a broad class of interpolation-based derivative-free trust-region methods and proves global convergence to first-order critical points (every limit point critical) by making an explicit 'adequate geometry' condition carry the Sauer-Xu interpolation error bound.",
+  "problem_entry": "Practitioner demand for minimizing expensive simulations/measurements without derivatives; sorts the user's four options (direct search, AD, finite differences, modelling f) and backs modelling with Powell's 1974 per-evaluation rate argument (pp. 2-3).",
+  "key_idea": "Use Newton fundamental polynomials because they carry the Sauer-Xu error formula; define adequate geometry by bounds on NFP values in a ball; cut the radius only when geometry is adequate, and certify the model in a ball proportional to ||g_k|| whenever ||g_k|| is small (pp. 7, 11, 14-15).",
+  "assumptions": "f in C2 with gradient and Hessian uniformly bounded on R^n, f bounded below, model Hessians uniformly bounded; chosen to keep the analysis simple and intuitive; kappa_n admitted to serve only a theoretical purpose; no noise (pp. 6, 11).",
+  "proof_devices": [
+   "NFP bound under pivot threshold by induction over pivots (Thm 1, p. 10)",
+   "existence by greedy construction: each new point maximizes the current NFP over the ball, giving NFPs bounded by 2^|Y[d]| (Thm 2, pp. 10-11)",
+   "value error bound from the Sauer-Xu path-sum bound and gradient error bound by subtracting Taylor expansions along h = delta (grad f - g_k)/||grad f - g_k|| (Thm 4, pp. 12-13)",
+   "finiteness of the certification loop by geometric shrinking of the radius: an infinite loop gives ||grad f|| <= (1/omega + kappa_eg) omega^i eps_g -> 0 (Lemma 5(iii), pp. 16-17)",
+   "first-k contradiction to bound the radius below while ||g_k|| >= kappa_g (Lemma 7, pp. 18-19)",
+   "model-to-true gradient bridge via certification in a ball of radius <= mu ||g_k|| (Lemma 10, p. 20)",
+   "all-limit-points argument bracketing subsequences t_i < l_i and bounding step lengths by function decrease (Thm 12, pp. 21-22)"
+  ],
+  "experiments": "none; numbers delegated to Conn-Toint 1996, and which members of the class perform best is left open (pp. 5, 22).",
+  "positioning": "Section 2 is a history of Powell's derivative-free work (conjugate directions, NS01, COBYLA, quadratic interpolation) used as the paper's genealogy; mathematical debt to Sauer-Xu, Sauer, De Boor-Ron; criticality idea credited to Carter (1991) and two regions to Powell (1996) (pp. 4-5, 7, 9, 15-16).",
+  "writing": "Candid hedging ('Unfortunately', 'admittedly simplistic', 'of little theoretical use'); seven numbered comments after the algorithm on what practical codes do differently; intuition sentences before and after results (pp. 10, 12, 15-17, 19).",
+  "limits_future": "First order only; kappa_n impractically large; threshold pivoting does not certify adequacy; critical limit may be at infinity; future: which members perform best, extend the class, other error bounds than Sauer-Xu (pp. 11-12, 21-22).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "All of steps 1-4 present: error bounds (Thm 4), geometric condition (adequacy), finite model improvement plus small-gradient certification (forerunner of the criticality step), proof using only adequacy; step 5 absent (no numbers).",
+    "pages": "pp. 11-17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theorem without code or numbers; the triad is completed across papers (S019 numbers, S020 code).",
+    "pages": "pp. 5, 22"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Trust-region machinery (Cauchy decrease, ratio test, all-limit-points argument) transplanted into DFO; error bound imported from multivariate interpolation theory.",
+    "pages": "pp. 7, 9, 18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Known Hessian sparsity exploited by deleting monomials from the initial basis.",
+    "pages": "p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Choose the representation for the proof",
+    "evidence": "Newton polynomials chosen over Lagrange polynomials mainly because they carry the error formula the theorem needs.",
+    "pages": "p. 7"
+   },
+   {
+    "pattern": "use every evaluation twice (continuing c2-02)",
+    "evidence": "Step 5 moves the iterate to the best interpolation point, including geometry points; comment 2 asks that any computed value be exploited.",
+    "pages": "pp. 15, 17"
+   }
+  ],
+  "transferable": [
+   "Allow a radius cut only after the model is certified adequate; otherwise improve geometry and keep the radius (p. 14).",
+   "Add a small-gradient test forcing model certification in a ball proportional to ||g_k|| (p. 14).",
+   "Prove finiteness of a certification loop by geometric shrinking plus the model error bound (pp. 16-17).",
+   "Derive a gradient-error bound from a value-error bound by subtracting Taylor expansions along the error direction (pp. 12-13).",
+   "Specify a subroutine only through the property the proof uses (finite improvement, x_k kept in Y) (p. 13).",
+   "After a theoretical algorithm, list in numbered comments what practical codes do differently (pp. 15-16)."
+  ],
+  "coauthors": "K. Scheinberg, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We recall here that our purpose is merely to explore a framework in which convergence theory can be discussed, and the above will serve that goal.",
+    "page": 15
+   },
+   {
+    "text": "It is clear to the authors that much additional work remains to specify which members of the class provide the best numerical performance.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S020",
+  "year": "1998",
+  "title": "A derivative free optimization algorithm in practice",
+  "read_level": "full",
+  "contribution": "Presents the practical DFO interpolation trust-region code, extends it to easy and 'virtual' (pass/fail) constraints, and reports evaluation counts on CUTE and Hock-Schittkowski problems against PDS, finite-difference LANCELOT and COBYLA, plus repeated runs on a Boeing helicopter rotor problem.",
+  "problem_entry": "Engineering use: expensive, derivative-free, typically noisy simulations with fewer than 100 variables (Boeing helicopter at about a minute per evaluation, so over half an hour per finite-difference gradient; engine nozzle at hours; water-network calibration) (pp. 2-3).",
+  "key_idea": "Quadratic-interpolation trust region with poisedness managed by Newton fundamental polynomials, radius cut only when the model is at least fully linear, minimum-Frobenius-norm underdetermined models, and constraints split into easy (in the subproblem), difficult (future) and virtual (shrink and retry on failed evaluations) (pp. 3-8).",
+  "assumptions": "f in C2 although noise is expected; constraints (even virtual ones) assumed defined by smooth functions; global convergence cited to [5] with only a fully linear model required; noise robustness argued, not tested (pp. 2, 5-6, 8).",
+  "proof_devices": [
+   "none (no proofs); qualitative arguments: 6 points on a line cannot support quadratic interpolation (p. 4)",
+   "noise matters only once the radius is small relative to the noise level (pp. 5-6)",
+   "equality constraints reduce the interpolation dimension (6 points instead of 15 in an affine plane of R^4) (pp. 6-7)"
+  ],
+  "experiments": "26 CUTE unconstrained, 13 HS inequality and 16 HS equality problems vs PDS, LANCELOT with finite differences and COBYLA, counted in function evaluations (CPU excluded); DFO beats PDS on all 26 and COBYLA on 22 but finite-difference LANCELOT uses fewer evaluations on 16 of 26 (my tally); DFO fewest on 12/13 and 15/16 constrained; ten runs each on 11- and 31-variable helicopter instances with 15-20% failed evaluations (pp. 8-11).",
+  "positioning": "Algorithm placed in the authors' lineage ([5] S013, [6] S009, [7] S019) and credited as inspired by Powell's 1994/1996 talks; rivals run as delivered; Boeing surrogate framework [3] cited only for helicopter comparisons (pp. 3, 8, 11).",
+  "writing": "Engineering-audience prose: algorithm in words, no theorems, informal intuition, confident claims on noise, openly drawn flaw of its own heuristic (Figure 1), tables listed without interpretation (pp. 3-10).",
+  "limits_future": "Difficult constraints out of scope; virtual-constraint heuristic may stop at a non-minimizer; local convergence only; no noisy runs; asymmetric tolerances; Table 1 not discussed; future: better virtual-constraint heuristics and difficult constraints (pp. 3, 5, 7-10).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Code-and-numbers member of the triad whose theorem is S013 and prototype S019.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two tiers (CUTE/HS plus Boeing), function evaluations as the unit with CPU explicitly excluded, baselines from direct search, model-based DFO and finite differences.",
+    "pages": "pp. 8-10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Noise robustness claimed but no noisy instances; tolerances not matched across solvers.",
+    "pages": "pp. 6, 10"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Poisedness via NFPs picks geometry points and replacements; radius not cut before the model is fully linear.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Code tests 'fully linear', not S013's adequacy constants: a theory-code gap of the kind Workflow B's checkpoint warns about.",
+    "pages": "p. 5 (vs S013 p. 11)"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Boeing helicopter and nozzle problems and a university water-network user; published at an AIAA MDO symposium.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Cheap constraints handled exactly in the subproblem; equality constraints shrink the interpolation space; separability or variable importance shapes the model.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Split by type, give each block its natural treatment (continuing s01)",
+    "evidence": "Constraints classified as easy, difficult and virtual by the information available, each with its own treatment.",
+    "pages": "pp. 3, 5-8"
+   },
+   {
+    "pattern": "Failed evaluation shrinks the trust region and retries",
+    "evidence": "Virtual-constraint failures trigger a temporary radius cut and re-solve; same move in S027.",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "Draw the failure case of your own heuristic",
+    "evidence": "Figure 1 shows the virtual-constraint heuristic wrongly concluding that x_k is a local minimum.",
+    "pages": "pp. 7-8"
+   }
+  ],
+  "transferable": [
+   "Justify DFO with one line of arithmetic: seconds per evaluation x n per finite-difference gradient (pp. 2-3).",
+   "Put analytic constraints into the trust-region subproblem so that no expensive evaluation is spent on an infeasible point (p. 6).",
+   "Sample inside the feasible affine set of equality constraints to lower the interpolation count (pp. 6-7).",
+   "On a failed evaluation, shrink the radius temporarily and re-solve before declaring convergence (p. 8).",
+   "Count failed evaluations in the budget and report the failure rate (p. 10).",
+   "Report repeated runs that vary one random ingredient on a multimodal industrial problem, and plot them all (pp. 10-11)."
+  ],
+  "coauthors": "K. Scheinberg, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We do not list the CPU time, since it is not relevant in our context.",
+    "page": 10
+   },
+   {
+    "text": "Our algorithm proves to be very robust in case of noise.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S027",
+  "year": "1999",
+  "title": "Gradient-based optimization of custom circuits using a static-timing formulation",
+  "read_level": "full",
+  "contribution": "Formulates static-timing transistor sizing as a smooth large-scale NLP (arrival times as variables, max replaced by inequalities), solves it with LANCELOT using adjoint time-domain sensitivities from the SPECS simulator, and demonstrates the EinsTuner prototype on ISCAS-85-derived benchmarks and real microprocessor designs.",
+  "problem_entry": "Intersection of two existing approaches: dynamic tuning burdens the user with input patterns, static tuning (TILOS, convex methods) relies on crude RC delay models unsuitable for custom high-performance design; keep static path-independence with transistor-level simulation (p. 1).",
+  "key_idea": "Epigraph lifting of the timing graph: every arrival time and slew becomes a variable and each max becomes one-sided inequalities, giving a smooth NLP; gradients by adjoint sensitivities per channel-connected component; LANCELOT with group partial separability, two-step updates of linear variables, aggressive trust region, failure recovery and a noise-aware stopping rule (pp. 1-5).",
+  "assumptions": "Delay and slew functions C1 in widths; lumped linear fanout capacitance; saturated-ramp signals; parameterized combinational library cells with one NFET and one PFET width per CCC; only a local minimum sought because accurate simulation may destroy the convexity of simplified models; simulation data inherently noisy (pp. 2-6).",
+  "proof_devices": [
+   "no theorems; formulation validated on an analytic-delay prototype with exact gradients that converged to arbitrarily small tolerances (p. 5)",
+   "adjoint sensitivity: one adjoint analysis per measurement for any number of parameters; group adjoints for linear combinations (p. 4)",
+   "KKT-based multiplier initialization at 1/n for the epigraph min-max (p. 4)"
+  ],
+  "experiments": "14 combinational circuits (up to 2,796 transistors, 5,643 variables, 5,665 constraints): ISCAS-85-derived benchmarks from heuristic gain-based sizing at equal area, plus real designs at constant area and input loading; delay gains 0.92%-40.1%, constraints within 1.5 ps, at most 160 iterations, up to three days CPU; own TILOS-like tuner on accurate simulation gives 7% vs 11% and 12% vs 16%; profiling 20% simulation, 80% optimizer (pp. 5-7).",
+  "positioning": "Between dynamic tuning (DELIGHT.SPICE, the authors' JiffyTune and adjoint-Lagrangian work) and static convex tuning (TILOS, Sapatnekar et al.); credits RITUAL for a similar timing-constraint formulation; criticizes rivals on model accuracy, not speed; claims uniqueness three times (pp. 1-2, 7).",
+  "writing": "Formulation shown on a three-gate example before full detail; bullet lists of design choices with reasons; opinions flagged ('In our opinion'); unreconciled tension between 'simulation is expensive' (p. 5) and 80% optimizer CPU (p. 6); concrete engineering future-work list (pp. 1-7).",
+  "limits_future": "Combinational parameterized cells only (custom and sequential circuits described, not implemented); long run times; noise and stopping criteria called difficult open research; Table 2 has a duplicated ifti row and a transistor-count mismatch for ioperdf; future: direct sensitivities, adjoint Lagrangian, pruning, parallel CCC simulation, adaptive device tables, two-step on arrival times, noise constraints, process corners (pp. 5-7).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Flagship industrial tool is gradient-based via adjoint time-domain sensitivities; structure exploited through group partial separability, two-step updates of linear variables and internal variables; supports Heuristic 1.",
+    "pages": "pp. 1, 4-5"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Co-written with IBM's EDA group, tested on real microprocessor designs, wired into the design flow by back-annotation, published at DAC.",
+    "pages": "pp. 1, 4, 6, 8"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "LANCELOT, SIF and the two-step update transplanted from the authors' NLP work into circuit tuning.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Two tiers (benchmarks and real designs), but costs in iterations and CPU and the rival comparison covers only two circuits, one untabulated.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and numbers without a theorem; theory lives in the LANCELOT and two-step papers.",
+    "pages": "p. 8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Lift a nonsmooth max into smooth inequalities with auxiliary variables",
+    "evidence": "Arrival times become variables and each max becomes one-sided inequalities, giving a smooth NLP for a standard solver.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "Validate the formulation on a noise-free analytic prototype first",
+    "evidence": "Analytic-delay version with exact gradients converged to arbitrarily small tolerances before the simulation-based version.",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "Failed evaluation shrinks the trust region and retries",
+    "evidence": "Simulator returns a failure code; optimizer skips the iteration, cuts the radius, retries; same move in S020.",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Turn max-plus propagation into a smooth NLP by making intermediate maxima variables bounded below by each argument (p. 2).",
+   "Start deliberately infeasible from a cheap lower-bound run when the solver handles infeasible starts well (p. 4).",
+   "Initialize multipliers from structural KKT facts (1/n for an epigraph min-max) (p. 4).",
+   "Give the simulator a failure return code and let the optimizer skip the iteration and shrink the trust region (p. 5).",
+   "Validate the formulation first with analytic models and exact gradients (p. 5).",
+   "Re-implement the heuristic rival on your own accurate simulator before comparing (p. 6).",
+   "Profile simulation versus optimizer time and report it with the results (p. 6)."
+  ],
+  "coauthors": "I. M. Elfadel, W. W. Molzen Jr., P. R. O'Brien, P. N. Strenski, C. Visweswariah, C. B. Whan",
+  "quotes": [
+   {
+    "text": "In our opinion, failure recovery is a necessary ingredient of efficient circuit tuning.",
+    "page": 5
+   },
+   {
+    "text": "Without a fast, accurate and reliable time-domain sensitivity engine, it would not have been possible to create a tool such as EinsTuner.",
+    "page": 4
+   }
+  ]
+ }
+]
