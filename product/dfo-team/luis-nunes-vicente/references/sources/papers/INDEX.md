@@ -10,35 +10,45 @@
 
 | # | ID | Year | Title | Venue | Cites | Kind | Source | Full text | Pages | Role | Read |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | S001 | 2009 | Introduction to Derivative-Free Optimization | Society for Industrial and Applied Mathematics | 2876 | book | — | no-oa |  | supplement | — |
-| 2 | S002 | 1994 | Bilevel and multilevel programming: A bibliography review | Journal of Global optimization | 930 | journal | url | txt | 23 | supplement | — |
-| 3 | S003 | 2011 | Direct multisearch for multiobjective optimization | SIAM Journal on Optimization | 540 | journal | url | txt | 33 | supplement | — |
-| 4 | S004 | 1994 | Descent approaches for quadratic bilevel programming | Journal of Optimization Theory and Applications | 483 | journal | — | no-oa |  | supplement | — |
-| 5 | S005 | 2007 | A particle swarm pattern search method for bound constrained global optimization | Journal of Global Optimization | 460 | journal | url | txt | 31 | supplement | — |
-| 6 | S006 | 2009 | Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points | SIAM Journal on Optimization | 321 | journal | url | txt | 29 | supplement | — |
-| 7 | S007 | 2004 | A globally convergent primal-dual interior-point filter method for nonlinear programming | Mathematical Programming | 313 | journal | url | txt | 32 | supplement | — |
-| 8 | S008 | 2007 | Using sampling and simplex derivatives in pattern search methods | SIAM Journal on Optimization | 240 | journal | url | txt | 20 | supplement | — |
-| 9 | S009 | 1996 | Discrete linear bilevel programming problem | Journal of Optimization Theory and Applications | 225 | journal | — | no-oa |  | supplement | — |
-| 10 | S010 | 2008 | Geometry of interpolation sets in derivative free optimization | Mathematical Programming | 210 | journal | url | txt | 26 | supplement | — |
-| 11 | S011 | 1998 | Trust-region interior-point SQP algorithms for a class of nonlinear programming problems | SIAM Journal on Control and Optimization | 204 | journal | url | txt | 48 | supplement | — |
-| 12 | S012 | 2010 | Incorporating minimum Frobenius norm models in direct search | Computational Optimization and Applications | 201 | journal | url | txt | 17 | supplement | — |
-| 13 | S013 | 2002 | Analysis of inexact trust-region SQP algorithms | SIAM Journal on Optimization | 192 | journal | url | txt | 18 | supplement | — |
-| 14 | S014 | 2014 | Convergence of trust-region methods based on probabilistic models | SIAM Journal on Optimization | 181 | journal | arXiv | txt | 29 | supplement | — |
-| 15 | S015 | 2019 | Complexity of gradient descent for multiobjective optimization | Optimization Methods and Software | 164 | journal | url | txt | 10 | supplement | — |
-| 16 | S016 | 2022 | Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach | Computational Management Science | 160 | journal | arXiv | txt | 18 | supplement | — |
-| 17 | S017 | 2024 | The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning | Annals of Operations Research | 157 | journal | arXiv | txt | 30 | supplement | — |
-| 18 | S018 | 2009 | PSwarm: A hybrid solver for linearly constrained global derivative-free optimization | Optimization Methods and Software | 157 | journal | url | txt | 22 | supplement | — |
-| 19 | S019 | 2015 | Direct search based on probabilistic descent | SIAM Journal on Optimization | 133 | journal | url | txt | 29 | supplement | — |
-| 20 | S020 | 2008 | Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation | IMA Journal of Numerical Analysis | 132 | journal | url | txt | 28 | supplement | — |
-| 21 | S021 | 1994 | A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables | Mathematics of Computation | 128 | journal | — | no-oa |  | supplement | — |
-| 22 | S022 | 2006 | Multicriteria approach to bilevel optimization | Journal of Optimization Theory and Applications | 126 | journal | url | txt | 14 | supplement | — |
-| 23 | S023 | 2013 | Worst case complexity of direct search | EURO Journal on Computational Optimization | 118 | journal | url | txt | 11 | supplement | — |
-| 24 | S024 | 2012 | Analysis of direct searches for discontinuous functions | Mathematical Programming | 117 | journal | url | txt | 31 | supplement | — |
-| 25 | S025 | 2004 | Pattern search methods for user-provided points: Application to molecular geometry problems | SIAM Journal on Optimization | 101 | journal | url | txt | 21 | supplement | — |
+| 1 | S001 | 2009 | Introduction to Derivative-Free Optimization | Society for Industrial and Applied Mathematics | 2876 | book | — | no-oa |  | core | — |
+| 2 | S002 | 1994 | Bilevel and multilevel programming: A bibliography review | Journal of Global optimization | 930 | journal | url | txt | 23 | core | — |
+| 3 | S003 | 2011 | Direct multisearch for multiobjective optimization | SIAM Journal on Optimization | 540 | journal | url | txt | 33 | core | — |
+| 4 | S004 | 1994 | Descent approaches for quadratic bilevel programming | Journal of Optimization Theory and Applications | 483 | journal | — | no-oa |  | core | — |
+| 5 | S005 | 2007 | A particle swarm pattern search method for bound constrained global optimization | Journal of Global Optimization | 460 | journal | url | txt | 31 | core | — |
+| 6 | S006 | 2009 | Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points | SIAM Journal on Optimization | 321 | journal | url | txt | 29 | core | — |
+| 7 | S007 | 2004 | A globally convergent primal-dual interior-point filter method for nonlinear programming | Mathematical Programming | 313 | journal | url | txt | 32 | core | — |
+| 8 | S008 | 2007 | Using sampling and simplex derivatives in pattern search methods | SIAM Journal on Optimization | 240 | journal | url | txt | 20 | core | — |
+| 9 | S009 | 1996 | Discrete linear bilevel programming problem | Journal of Optimization Theory and Applications | 225 | journal | — | no-oa |  | core | — |
+| 10 | S010 | 2008 | Geometry of interpolation sets in derivative free optimization | Mathematical Programming | 210 | journal | url | txt | 26 | core | — |
+| 11 | S011 | 1998 | Trust-region interior-point SQP algorithms for a class of nonlinear programming problems | SIAM Journal on Control and Optimization | 204 | journal | url | txt | 48 | core | — |
+| 12 | S012 | 2010 | Incorporating minimum Frobenius norm models in direct search | Computational Optimization and Applications | 201 | journal | url | txt | 17 | core | — |
+| 13 | S013 | 2002 | Analysis of inexact trust-region SQP algorithms | SIAM Journal on Optimization | 192 | journal | url | txt | 18 | core | — |
+| 14 | S014 | 2014 | Convergence of trust-region methods based on probabilistic models | SIAM Journal on Optimization | 181 | journal | arXiv | txt | 29 | core | — |
+| 15 | S015 | 2019 | Complexity of gradient descent for multiobjective optimization | Optimization Methods and Software | 164 | journal | url | txt | 10 | core | — |
+| 16 | S016 | 2022 | Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach | Computational Management Science | 160 | journal | arXiv | txt | 18 | core | — |
+| 17 | S017 | 2024 | The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning | Annals of Operations Research | 157 | journal | arXiv | txt | 30 | core | — |
+| 18 | S018 | 2009 | PSwarm: A hybrid solver for linearly constrained global derivative-free optimization | Optimization Methods and Software | 157 | journal | url | txt | 22 | core | — |
+| 19 | S019 | 2015 | Direct search based on probabilistic descent | SIAM Journal on Optimization | 133 | journal | url | txt | 29 | core | — |
+| 20 | S020 | 2008 | Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation | IMA Journal of Numerical Analysis | 132 | journal | url | txt | 28 | core | — |
+| 21 | S021 | 1994 | A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables | Mathematics of Computation | 128 | journal | — | no-oa |  | core | — |
+| 22 | S022 | 2006 | Multicriteria approach to bilevel optimization | Journal of Optimization Theory and Applications | 126 | journal | url | txt | 14 | core | — |
+| 23 | S023 | 2013 | Worst case complexity of direct search | EURO Journal on Computational Optimization | 118 | journal | url | txt | 11 | core | — |
+| 24 | S024 | 2012 | Analysis of direct searches for discontinuous functions | Mathematical Programming | 117 | journal | url | txt | 31 | core | — |
+| 25 | S025 | 2004 | Pattern search methods for user-provided points: Application to molecular geometry problems | SIAM Journal on Optimization | 101 | journal | url | txt | 21 | core | — |
 | 26 | S026 | 1994 | Generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software (TOMS) | 100 | journal | — | no-oa |  | supplement | — |
 | 27 | S027 | 2018 | Complexity and global rates of trust-region methods based on probabilistic models | IMA Journal of Numerical Analysis | 99 | journal | url | txt | 18 | supplement | — |
 | 28 | S028 | 2008 | Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity | European Journal of Operational Research | 98 | journal | url | txt | 27 | supplement | — |
 | 29 | S029 | 2012 | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | Mathematical Programming | 96 | journal | arXiv | txt | 31 | supplement | — |
 | 30 | S030 | 2008 | Using simplex gradients of nonsmooth functions in direct search methods | IMA Journal of Numerical Analysis | 96 | journal | — | no-oa |  | supplement | — |
+| 31 | S031 | 1997 | On the convergence theory of trust-region-based algorithms for equality-constrained optimization | SIAM Journal on Optimization | 76 | journal | url | txt | 25 | supplement | — |
+| 32 | S032 | 2016 | Trust-region methods without using derivatives: Worst case complexity and the non-smooth case | SIAM Journal on Optimization | 73 | journal | url | txt | 27 | supplement | — |
+| 33 | S033 | 1993 | Generating linear and linear-quadratic bilevel programming problems | SIAM Journal on Scientific Computing | 70 | journal | — | no-oa |  | supplement | — |
+| 34 | S034 | 2013 | Smoothing and worst case complexity for direct-search methods in non-smooth optimization | IMA Journal of Numerical Analysis | 69 | journal | url | txt | 21 | supplement | — |
+| 35 | S035 | 2017 | Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models | PloS one | 62 | journal | unpaywall | txt | 13 | supplement | — |
+| 36 | S036 | 2018 | On the optimal object orientation in additive manufacturing | The International Journal of Advanced Manufacturing Technology | 60 | journal | url | txt | 16 | supplement | — |
+| 37 | S037 | 1996 | Trust-region interior-point algorithms for minimization problems with simple bounds | Applied Mathematics and Parallel Computing, Festschrift for Klaus Ritter | 58 | chapter | url | txt | 10 | supplement | — |
+| 38 | S038 | 2017 | Methodologies and software for derivative-free optimization | Advances and Trends in Optimization with Engineering Applications (MOS-SIAM Series on Optimization), SIAM | 52 | chapter | url | txt | 21 | supplement | — |
+| 39 | S039 | 1999 | Two-step algorithms for nonlinear optimization with structured applications | SIAM Journal on Optimization | 51 | journal | url | txt | 26 | supplement | — |
+| 40 | S040 | 1996 | Trust-Region Interior Point Algorithms for a Class of Nonlinear Programming Problems | PhD Thesis, Rice University | 51 | thesis | url | txt | 182 | supplement | — |
 
-30 works · txt 24 · pdf 0 · no-oa 6
+40 works · txt 33 · pdf 0 · no-oa 7

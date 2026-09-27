@@ -1,0 +1,255 @@
+[
+ {
+  "id": "S041",
+  "year": "2024",
+  "title": "First-and second-order high probability complexity bounds for trust-region methods with noisy oracles",
+  "read_level": "full",
+  "contribution": "A trust-region method with a noise-slack acceptance ratio and a cautious radius update, with exponentially decaying tail bounds of O(eps^-2) (first order) and O(eps^-3) (second order) iterations under oracles that have irreducible noise and need not be unbiased (pp. 1, 3, 20-21, 29-30, 37).",
+  "problem_entry": "Prior TR analyses assumed exact function values or oracles whose error can be driven to zero, and gave only expected bounds; the paper recasts all prior oracles as (accuracy, probability) sets S_j and targets the irreducible-noise case (pp. 2-3, 6).",
+  "key_idea": "Keep classical TR and change only two things: add r >= 2 eps_f to the numerator of rho_k, and enlarge the radius only if ||g_k|| >= eta2 delta_k (pp. 11-12).",
+  "assumptions": "L-smooth phi (plus Lipschitz Hessian for second order); zeroth-order noise either bounded or two-parameter subexponential; gradient and Hessian oracles accurate to eps_g + kappa*delta with probability p1, p2 >= 1/2; oracle costs not modelled; scaling Assumption 5.1 (pp. 4-5, 10, 26).",
+  "proof_devices": [
+   "per-path sufficient-acceptance and progress lemmas with noise slack (Lemmas 4.1-4.3, pp. 14-16)",
+   "four-way classification of iterations with indicators I_k, J_k, Theta_k, Lambda_k (p. 16)",
+   "random radius threshold defined from min gradient norm over the horizon (pp. 3, 16)",
+   "radius-walk counting via zeta_k = max{log(Delta_k/Delta'), 0} (Lemma 4.8, pp. 17-18)",
+   "Azuma-Hoeffding on the submartingale sum I_k - p1 t (Lemma 4.9, p. 18)",
+   "inversion by contradiction through a monotone function Q(y) (Theorem 4.11, pp. 20-21)",
+   "two-parameter subexponential MGF bound E exp(lambda|X|) <= exp(lambda b)/(1 - lambda/a) (Prop. 4.15, pp. 22, 40)",
+   "Chernoff plus induction on accumulated errors over accepted steps (Lemma 4.16, p. 23)"
+  ],
+  "experiments": "Adversarial-oracle tightness probe on L1||x||^2/2 (n = 20) comparing gradient plateaus with the theoretical noise floors; sweep of r in {0, 1, 2, 4, 8} x eps_f in the practical DFO-TR code on the More-Wild set with uniform and subexponential noise, 2000-evaluation budget, performance and data profiles; best r = 4 eps_f (pp. 30-37).",
+  "positioning": "Takes its inspiration from Jin-Scheinberg-Xie step search [14]; improvement stated bullet by bullet against [6], [13] and [14], with concessions where its own oracle is stronger (light tails); credits the relaxed TR of Sun-Nocedal and relaxed Armijo (pp. 2-3, 7).",
+  "writing": "Contribution given as a comparison bullet list; every messy theorem is followed by a remark translating it into the O(eps^-2) term, the radius-adjustment term and the noise floor; limits stated inline (pp. 3, 14, 21).",
+  "limits_future": "Oracle cost not accounted for; zeroth-order oracle must be light-tailed; scaling assumption; poisedness out of scope; theory does not explain the observed behaviour for r < 2 eps_f; no explicit future-work list (pp. 3, 7, 10, 26, 33, 37).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Accuracy tied to the radius with a fixed probability, irreducible floors eps_g and eps_H, and implementability derived for ERM and finite differences; floor eps >= O(sqrt eps_f) + O(eps_g) makes Method 1 step 3 precise.",
+    "pages": "pp. 2, 4-5, 8-9, 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Remark 3.2: the only major change to classical TR is the relaxed acceptance test; the cautious radius update is the second small repair. Full-text source for Heuristic 7.",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "High-probability bound by fixed-horizon counting, Azuma-Hoeffding and a random radius threshold, not by a potential/stopping-time supermartingale; deterministic-order parity (O(eps^-2), O(eps^-3)) is met.",
+    "pages": "pp. 16-21, 37"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Experiments sweep one parameter of one practical code rather than compare estimators, but document the protocol: More-Wild set, data and performance profiles, fixed evaluation budget.",
+    "pages": "pp. 33-36"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "adversarial-oracle tightness probe",
+    "evidence": "Noise and gradient errors chosen adversarially within the oracle contract (Bernoulli(p1) good flags); plateaus compared with the theorem's noise floor to report constant slack.",
+    "pages": "pp. 30-33, 40-42"
+   },
+   {
+    "pattern": "one oracle language for all prior work",
+    "evidence": "Definition 1.1 (oracle implementable over a set S_j) and Figure 1 place every prior assumption on the accuracy-probability plane.",
+    "pages": "pp. 2-7"
+   }
+  ],
+  "transferable": [
+   "Oracle-as-set taxonomy: Definition 1.1 plus a figure placing prior assumptions on the accuracy-probability plane (pp. 2, 6).",
+   "Noise slack r = 2 eps_f in the numerator of rho_k and a radius increase gated on ||g_k|| >= eta2 delta_k (p. 11).",
+   "High-probability recipe: classify iterations four ways, bound each count per path, apply Azuma-Hoeffding to the sum of I_k, invert via a monotone Q (pp. 16-21).",
+   "Random radius threshold defined from the min gradient norm over the horizon (p. 16).",
+   "An implementing-the-oracle subsection deriving (eps_g, kappa_eg, p) for mini-batches and finite differences (pp. 8-9).",
+   "An adversarial oracle to test how tight the constants in the noise floor are (pp. 30-33).",
+   "A sweep over multiples of a theory-prescribed hyperparameter in a practical code, with performance and data profiles (pp. 33-36)."
+  ],
+  "coauthors": "L. Cao, A. S. Berahas",
+  "quotes": [
+   {
+    "text": "Algorithms 1 and 2 are very similar to classical TR algorithms [11]. The major difference pertains to the fact that the step acceptance criterion is relaxed.",
+    "page": 11
+   },
+   {
+    "text": "All the algorithms mentioned above are designed to update oracle accuracy (and thus their costs) adaptively, which makes the algorithms more practical, but harder to analyze in terms of the total oracle cost (or work).",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S057",
+  "year": "2025",
+  "title": "Sample complexity analysis for adaptive optimization algorithms with stochastic oracles",
+  "read_level": "full",
+  "contribution": "A high-probability lower bound on the step-size parameter for a general class of adaptive stochastic methods, turned into expected and high-probability total oracle complexity bounds; instantiated for STORM and SASS, it gives the first total sample complexity results, which essentially match the stochastic first-order lower bound (pp. 1-2, 8, 12-13, 16, 19).",
+  "problem_entry": "Adaptive stochastic methods tie oracle accuracy to a step parameter that is not bounded away from zero, so only iteration complexity was known; bounding total cost is recast as lower-bounding alpha (pp. 1-2, 7).",
+  "key_idea": "The log step parameter behaves like a random walk that drifts upward below a threshold; couple it with a one-sided reflected random walk and bound the walk's maximum with high probability (pp. 2, 8-11).",
+  "assumptions": "Assumption 1 on the step process only (factor gamma for both increase and decrease; P(increase | alpha <= alpha-bar, k < T_eps) >= p > 1/2); oracle cost non-increasing in alpha; ERM instantiations with variance bounds (pp. 7, 12, 14, 17).",
+  "proof_devices": [
+   "pathwise coupling of the log step parameter with a one-sided random walk by thinning with probability p/p' (Lemma 1, pp. 9-10)",
+   "hitting-probability bound for the reflected walk via Feller's explicit diagonalization (Prop. 1, pp. 10-11)",
+   "level choice l = ceil((1+omega) log_{1/2q} n) giving min alpha_k >= alpha-bar gamma n^{-(1+omega) log_{1/2q}(1/gamma)} (Theorem 1, pp. 8, 11)",
+   "layer-cake sum over step-parameter levels for expected total oracle cost (Theorem 2, p. 12)",
+   "union bound of the step floor with a high-probability iteration bound (Theorem 3, p. 13)",
+   "Chebyshev-based per-iteration oracle cost tables (pp. 14, 17)"
+  ],
+  "experiments": "none (only an illustrative random-walk simulation, Figure 1, p. 8)",
+  "positioning": "Presents itself as the missing total-cost layer for about ten prior adaptive stochastic methods, mostly the group's own; fences off Adam/BB (different dynamics) and RVZ23/SHP18/RJM17 (no iteration bounds); yardstick is the Arjevani et al. lower bound and SGD, with the definitional mismatch flagged (pp. 2-3, 15-16).",
+  "writing": "Abstract runs gap -> obstacle -> contribution; the contribution bullets name the device; an illustration and four design remarks come before the proof; constants suppressed with pointers to prior papers; targeted hedges (pp. 1-2, 8-9, 13, 16).",
+  "limits_future": "Increase and decrease factors must be equal (unequal case open); lower-bound comparison uses a different complexity definition; STORM's high-probability result has only Markov-level probability; function-value complexity eps^-6; convex case omitted; apply to further methods (pp. 2, 11, 16, 19).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Full-text source for Heuristic 10 and the step-parameter lower-bound template; makes rigorous the claim of Method 3 step 2 that the step parameter is an upward-biased random walk when p > 1/2.",
+    "pages": "pp. 7-13"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The cost of meeting the oracle contract becomes an explicit function oc(alpha) (Method 1 step 4 formalised).",
+    "pages": "pp. 4, 11-12, 14, 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Framework = classical adaptive methods (line search, TR, cubic regularization) under stochastic oracles; motivation contrasts them with the tuning cost of SG (Warning sign 1).",
+    "pages": "pp. 1, 4-7"
+   },
+   {
+    "method": "Taste mark 2 (deterministic parity)",
+    "relation": "variant",
+    "note": "For sample complexity the yardstick becomes the stochastic lower bound and SGD rates, not the deterministic method.",
+    "pages": "pp. 2, 15-16, 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "meta-framework paper (abstract property -> one theorem -> instantiate)",
+    "evidence": "Assumption 1 abstracts the step process shared by all prior methods; Theorems 1-3 are proved once and instantiated for STORM and SASS.",
+    "pages": "pp. 7, 13-19"
+   },
+   {
+    "pattern": "import a classical probability result via a probabilist collaborator",
+    "evidence": "The key hitting-probability bound uses Feller's explicit diagonalization; its proof is credited to J. A. Fill.",
+    "pages": "pp. 10, 20"
+   }
+  ],
+  "transferable": [
+   "A coupling that dominates the log step parameter by a one-sided reflected random walk (pp. 9-10).",
+   "A high-probability bound on the walk's maximum from its explicit transition spectrum, with the level set to l ~ log n (pp. 10-11).",
+   "Total oracle cost = n times the cost at the high-probability step floor, union-bounded with a high-probability iteration bound (p. 13).",
+   "A layer-cake expected-cost bound over step-parameter levels (p. 12).",
+   "A design rule derived from the analysis: raise the decrease factor gamma when the oracle success probability p is low (p. 9).",
+   "Illustration and design remarks placed between the theorem statement and its proof (pp. 8-9)."
+  ],
+  "coauthors": "B. Jin, M. Xie",
+  "quotes": [
+   {
+    "text": "The step size parameters in these methods can increase and decrease based on the perceived progress, but unlike the deterministic case they are not bounded away from zero due to possible oracle failures, and bounds on the step size parameter have not been previously derived.",
+    "page": 1
+   },
+   {
+    "text": "Provide a high probability lower bound on the step size parameter for a wide class of stochastic adaptive methods using a coupling argument between the stochastic process generated by the algorithm and a one-sided random walk.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S068",
+  "year": "2025",
+  "title": "Stochastic ISTA/FISTA adaptive step search algorithms for convex composite optimization",
+  "read_level": "full",
+  "contribution": "Stochastic ISTA and full-backtracking FISTA step-search methods for convex composite problems with possibly biased gradient estimates, with expected iteration complexity of the deterministic orders O(1/eps) and O(1/sqrt(eps)) (pp. 1-2, 13, 21).",
+  "problem_entry": "The probabilistic-oracle framework covered line search, TR and ARC but not accelerated or proximal methods; FISTA's step can only decrease and accelerated analysis lacks per-step decrease (pp. 2, 13-14).",
+  "key_idea": "Stochasticise the authors' own FISTA-BKTR (2014), whose theta_k bookkeeping allows step increases, and recompute the gradient on every attempt (pp. 2, 5, 14-15).",
+  "assumptions": "f convex L-smooth, h proper closed convex with exact prox; exact function values; gradient oracle accurate to kappa ||D_alpha(y)|| with probability p > 1/2 (kappa <= 1/3), not unbiased; expected gradient error decaying like 1/(alpha_k^2 k^{2+beta}) (ISTA) or 1/(alpha_k^2 t_k^2 k^{2+beta}) (FISTA) (pp. 1-2, 4, 11, 20).",
+  "proof_devices": [
+   "generic bound E(N_eps) <= 2p/(2p-1)^2 (2E(N_G) + log term) via the Cartis-Scheinberg 2018 counting lemmas (Theorem 1, pp. 7-9)",
+   "small-step-plus-true-iteration-implies-success lemma using prox nonexpansiveness (Lemma 1, pp. 6-7)",
+   "Schmidt et al. error-accumulation lemma for nonnegative sequences (Lemmas 3 and 7, pp. 10, 19-20)",
+   "FISTA potential m_k = 2 alpha_k^succ t_k^2 v_k + ||u_k||^2, constant on unsuccessful steps (Lemmas 5-6, pp. 16-17)",
+   "growth bound alpha_K^succ t_K^2 >= (sum sqrt(alpha_k)/2)^2 by induction (Lemma 4, pp. 15-16)",
+   "Wald's identity for error sums up to the hitting time (p. 12)",
+   "toy counterexamples separating expected hitting time from expected gap (Appendix, pp. 25-26)"
+  ],
+  "experiments": "none",
+  "positioning": "Explicit extension of Schmidt-Le Roux-Bach 2011, Scheinberg-Goldfarb-Bai 2014 and Cartis-Scheinberg 2018 / Berahas-Cao-Scheinberg 2021; contrasted with the stochastic proximal literature, which assumes unbiasedness; evidence-based critique of Vaswani et al. 2019b and Franchini et al. 2023; candid comparison with Berahas et al. 2021 (pp. 2-3, 13-14).",
+  "writing": "Framed as an open question resolved positively; contributions phrased as extensions of three named papers; a dedicated paragraph, Discussion of Condition (10), on sample cost and unknown optimality; an appendix defending the result type (pp. 2-3, 13, 21, 25-26).",
+  "limits_future": "Exact function values and prox; variance decay implies O(k^2) samples and O(1/eps^3) total for ISTA, possibly not optimal; optimality unknown for biased gradients; expected complexity only. Future: stochastic function values, high-probability bounds via S057, strongly convex case, inexact prox, shuffling momentum (pp. 2, 13, 22).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ISTA/FISTA with backtracking kept; the failing property (monotone step) is located, and the repair (allow alpha to increase, recompute the gradient) is borrowed from the authors' own deterministic FISTA-BKTR.",
+    "pages": "pp. 2, 5, 14-15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The probabilistic norm-type contract is supplemented by an iteration-indexed expected variance decay, effectively an O(k^2) sample-size schedule, not the pure adaptive fixed-probability contract.",
+    "pages": "pp. 4, 11, 13, 20"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Expected hitting-time bounds of deterministic order (O(1/eps), O(1/sqrt eps)); high-probability bounds deferred, consistent with Heuristic 6 sequencing.",
+    "pages": "pp. 7, 13, 21-22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Proof device is a Lyapunov error-accumulation argument (Schmidt) plus Wald's identity rather than a per-step-decrease potential.",
+    "pages": "pp. 9-13, 16-20"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Composite structure kept exact through the prox; only the gradient of f is stochastic.",
+    "pages": "pp. 1, 4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "port the probabilistic-oracle framework across algorithm families",
+    "evidence": "Line search -> proximal and accelerated methods here; step search -> trust region in S041 (S041 p. 3).",
+    "pages": "pp. 1-3"
+   },
+   {
+    "pattern": "relax one oracle at a time",
+    "evidence": "Exact zeroth-order values are treated as a first step, citing the history CS18 -> BCS21 -> JSX24 and BSV14/GRVZ18 -> BCMS19/CMS18.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "defend a nonstandard result type with toy counterexamples",
+    "evidence": "The appendix shows that E[N_eps] bounds and expected-gap rates do not imply each other.",
+    "pages": "pp. 25-26"
+   }
+  ],
+  "transferable": [
+   "Use a deterministic stepping-stone variant (FISTA-BKTR with theta_k) that lets the step grow as the base for the stochastic version (pp. 14-15).",
+   "Two-level proof: generic counting of good iterations, then an algorithm-specific bound on the number of good iterations (pp. 7, 11, 20).",
+   "A potential that is constant on unsuccessful steps, so only successful steps enter the telescoping sum (pp. 16-17).",
+   "Wald's identity to take expectations of error sums up to a hitting time (p. 12).",
+   "A named discussion paragraph computing the sample cost of an extra assumption and stating whether optimality is known (p. 13).",
+   "Toy counterexamples separating the paper's result type from the literature's (pp. 25-26).",
+   "An oracle defined relative to the gradient mapping for composite problems (p. 4)."
+  ],
+  "coauthors": "L. M. Nguyen, T. H. Tran",
+  "quotes": [
+   {
+    "text": "For the stochastic version this increase is essential, therefore we use it here.",
+    "page": 5
+   },
+   {
+    "text": "In summary, whether we attain an optimal complexity with our analysis remains unknown.",
+    "page": 13
+   }
+  ]
+ }
+]

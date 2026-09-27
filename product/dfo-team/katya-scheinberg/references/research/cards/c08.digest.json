@@ -1,0 +1,291 @@
+[
+ {
+  "id": "S083",
+  "year": "2025",
+  "title": "Stochastic adaptive optimization with unreliable inputs: A unified framework for high-probability complexity analysis",
+  "read_level": "full",
+  "contribution": "One adaptive framework covering trust region and line search, with high-probability iteration complexity O(eps^-2) when gradients are arbitrarily corrupted with probability above 1/2 and function values carry heavy-tailed or corrupted noise; the tail of the stopping time is exponential or polynomial depending on the zeroth-order oracle.",
+  "problem_entry": "Weakens the near-universal assumption that oracles are accurate with probability above 1/2 each iteration (only GRVZ18 relaxed it, and it needs exact function values); the regime is justified by arithmetic: 19% clean minibatches, 64% corrupted FD gradients (pp. 1-2, 5).",
+  "key_idea": "Use function-value estimates to guard against badly corrupted gradients, and make the step-size random walk drift upward via asymmetric factors: p ln g_inc + (1-p) ln g_dec > 0, i.e. p > 1/(m+1) (pp. 2, 15).",
+  "assumptions": "L-smooth, bounded below; SZO (bounded mean and q-th centred moment of the error) or CZO (error <= eps_f w.p. 1-delta0, <= eps_f+eps_c always); SFO accurate to r(alpha) w.p. 1-delta1, arbitrary otherwise; algorithm-class Assumptions 2-3 (small+true => successful; large+successful => decrease h(eps)) (pp. 1-4, 12).",
+  "proof_devices": [
+   "deterministic counting of true/successful/large iterations from step-size dynamics (Lemmas 2-3)",
+   "contradiction on the intersection of two events: Azuma-Hoeffding on sum of I_k and concentration of accumulated noise (Theorem 1)",
+   "Fuk-Nagaev inequality for q-th-moment noise, giving a polynomial tail; Chebyshev, Bernstein or Hoeffding for the other cases",
+   "general theorem plus per-method verification lemmas (TR Lemmas 4-5, LS Lemmas 6-7)",
+   "expected complexity and a.s. convergence obtained by summing tail bounds"
+  ],
+  "experiments": "none",
+  "positioning": "Extends the group's own line (CS17, BCS21, PS20, JSX24, JSX25, BCMS19, CBS24, SX23); names GRVZ18's key limitation (exact function values); one sentence criticises ADAM and AdaGrad; recovers JSX24 as a special case (pp. 2, 5, 22).",
+  "writing": "Numeric motivating examples before definitions; three bold contribution bullets with first-ever claims; a discussion paragraph after the main theorem turns the condition p > p_m into a parameter rule; sparse hedging (pp. 1-2, 6, 15).",
+  "limits_future": "p is usually unknown and must be lower-bounded conservatively; the reachable eps is floored at order max{eps_g, sqrt(eps_f)}; no experiments and no future-work list (pp. 15, 22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Explicit SZO/CZO/SFO contracts; accuracy r(alpha) is tied to the step parameter; irreducible eps_f and eps_g fix the neighbourhood",
+    "pages": "pp. 2-5, 15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The probability threshold is p > 1/(m+1), set by the step-size update factors, not a fixed 1/2",
+    "pages": "pp. 15, 22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "TR is CBS24's Algorithm 1 up to the factors; LS is SASS plus an eps_rej gate",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stopping time, indicator variables, high-probability tails, O(eps^-2) matching the deterministic order",
+    "pages": "pp. 10-22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "No combined potential and no supermartingale: plain Z_k with deterministic counting plus Azuma-Hoeffding",
+    "pages": "pp. 11-15"
+   },
+   {
+    "method": "Heuristic 11",
+    "relation": "evidence",
+    "note": "The tail follows the oracle tail: polynomial for q-th moments, exponential for CZO or sub-exponential noise",
+    "pages": "pp. 16-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "unified framework by abstract assumptions",
+    "evidence": "Two algorithm-level assumptions; the general theorem is proved once and then verified for TR and LS",
+    "pages": "pp. 12, 18-21"
+   },
+   {
+    "pattern": "asymmetric step-size update lowers the reliability threshold",
+    "evidence": "p > 1/(m+1), m = -ln g_inc/ln g_dec, lets p < 1/2",
+    "pages": "pp. 15, 22"
+   },
+   {
+    "pattern": "difference-based function-estimate contract",
+    "evidence": "Optional assumption on moments of function-value differences, useful with common random numbers",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Pick g_inc > g_dec so that p ln g_inc + (1-p) ln g_dec > 0 for a conservative lower bound on p; this tolerates p < 1/2",
+   "Counting proof: bound small successful steps via the step-size dynamics and large successful ones via the objective decrease, then intersect concentration events on the sum of I_k and on the accumulated noise",
+   "Keep the noise-accumulation event separate, so a new noise model changes only one concentration inequality",
+   "Block step-size increases when ||g_k|| is below a bias-tied threshold eps_rej",
+   "Motivate an unusual probability regime with one line of arithmetic (0.95^32 = 19%, 0.99^101 = 36%)"
+  ],
+  "coauthors": "Miaolan Xie",
+  "quotes": [
+   {
+    "text": "The key idea is to leverage function value information to ensure reliability when gradient estimates are severely corrupted.",
+    "page": 2
+   },
+   {
+    "text": "In such a regime, the local model provided to the algorithm is more likely to be misleading than helpful in any given iteration.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S088",
+  "year": "2025",
+  "title": "On Complexity of Model-Based Derivative-Free Methods",
+  "read_level": "full",
+  "contribution": "First complexity bounds for Powell-style geometry-correcting model-based trust-region DFO without a criticality step: O(n^2 eps^-2) function evaluations, matching finite-difference TR, with a tightness example on the poisedness dependence, and O(nq eps^-2) in Haar-random subspaces.",
+  "problem_entry": "A practice-theory gap: Powell-style methods are arguably the most effective in practice, but their complexity is unknown and existing theory needs a criticality step that departs from the algorithms (p. 1).",
+  "key_idea": "Replace the criticality step with the acceptance test ||g_k|| >= eta2*Delta_k from stochastic TR; never shrink Delta on geometry-correcting iterations; count those iterations with a combinatorial potential; take Lambda = 1+O(1/n) (pp. 2-3, 7-11).",
+  "assumptions": "C^1 with L-Lipschitz gradient, bounded below; exact or bounded-noise zeroth-order oracle; fraction of Cauchy decrease and bounded model Hessian; the subspace part needs an exact oracle and alignment probability theta > 1/2 (pp. 2-3, 5, 13, 17).",
+  "proof_devices": [
+   "small-radius-implies-success and success-implies-C2*Delta^2 decrease lemmas giving a radius lower bound and counting (Lemmas 2.4-2.8)",
+   "radius decreased only when the model is certified fully linear, which gives the lower bound without fully-linear models at every iteration (Lemma 3.4)",
+   "growth of an orthogonal-set potential bounds consecutive geometry-correcting steps by 3n (Thm 3.6)",
+   "trace(A)+trace(A^-1) eigenvalue bound for ||Y^-T D|| improving the error bound to O(sqrt(n)) scaling (Thm 4.3)",
+   "Sherman-Morrison construction of a Lambda-poised set showing the bound is tight (Thm 4.6)",
+   "volume ratio with Hadamard inequality giving O(p log p) correcting calls for a general basis (Thm 5.1)",
+   "Beta law of the Haar projection with Paley-Zygmund giving alignment probability 243/443 (Lemma 6.7)",
+   "Cartis-Scheinberg 2018 stochastic-process argument for E[K_eps] <= 2theta/(2theta-1)^2 (...) (Thm 6.13)"
+  ],
+  "experiments": "none",
+  "positioning": "DFO taxonomy (direct search, FD/simplex gradient, model-based TR); criticises the criticality step of the IDFO book (co-authored) and improves its poisedness bound; subspace competitors are Cartis-Roberts (O(n^2/eps^2)) and Kozak et al. (O(n/eps^2)) (pp. 1-2, 9, 13).",
+  "writing": "Parity claim flagged as for-the-first-time in the abstract; a ladder of algorithms reusing Lemmas 2.4-2.5; one-line interpretations after theorems; visible drafting traces (leaked label, typos) (pp. 1-3, 11, 19).",
+  "limits_future": "The subspace analysis needs an exact oracle; general-basis kappa_eg may not be optimal; underdetermined models are not analysed; future work: noisy subspaces, JL embeddings with the new bounds, other subspace generators, practical refinements (pp. 9, 13, 16-19).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Geometry is paid only on unsuccessful iterations, the cost is bounded (3n or O(p log p)), and geometry is randomised via subspaces",
+    "pages": "pp. 7-8, 12-19"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Standard TR kept; only the criticality step is swapped for ||g_k|| >= eta2*Delta_k. Tightness Theorem 4.6 is a negative result backing the minimal safeguard (step 4, Taste 5)",
+    "pages": "pp. 2-3, 11-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Subspace method analysed as a stochastic process with theta > 1/2 and an expected stopping time",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Only an expected bound; no high-probability upgrade (Heuristic 6 not applied)",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "FD (delta = Delta or Delta/sqrt(n)) and interpolation compared only by derived complexity; no experiments (Taste 4 not practised)",
+    "pages": "pp. 6, 11"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Powell-style method in Haar random subspaces improves the n-dependence",
+    "pages": "pp. 13-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "back-port stochastic-analysis devices to deterministic DFO",
+    "evidence": "The ||g_k|| >= eta2*Delta_k condition from stochastic TR replaces the criticality step; the proof is a simplification of the stochastic ones",
+    "pages": "pp. 2-3"
+   },
+   {
+    "pattern": "combinatorial potential for counting safeguard steps",
+    "evidence": "Orthogonal-set growth (3n) and volume ratio with Hadamard (O(p log p))",
+    "pages": "pp. 8, 12-13"
+   },
+   {
+    "pattern": "keep safeguard iterations randomness-free",
+    "evidence": "No new Q_k on geometry-correcting iterations, so the probabilistic analysis covers only the other iterations",
+    "pages": "p. 18"
+   }
+  ],
+  "transferable": [
+   "Replace a criticality or safeguard loop with the acceptance condition ||g_k|| >= eta2*Delta_k",
+   "Count safeguard iterations with a monotone combinatorial potential (orthogonal-set size, volume ratio via Hadamard)",
+   "Bound ||A|| through trace(A)+trace(A^-1) and lambda+1/lambda >= 2 instead of multiplying the poisedness constant by n",
+   "Pair each upper bound with a construction that attains it (Sherman-Morrison family of poised sets on a quadratic)",
+   "Show alignment of random subspaces with probability above 1/2 via the Beta law and Paley-Zygmund, then use the theta > 1/2 process analysis",
+   "Draw new randomness only on radius-changing iterations so the geometry-fixing iterations stay deterministic"
+  ],
+  "coauthors": "A. Chaudhry",
+  "quotes": [
+   {
+    "text": "We establish, for the first time, that these methods can have the same worst case complexity than any other known DFO method.",
+    "page": 1
+   },
+   {
+    "text": "Thus nothing is lost by employing Algorithm 2, aside from additional linear algebra costs of maintaining the Lagrange polynomials.",
+    "page": 11
+   }
+  ]
+ },
+ {
+  "id": "S098",
+  "year": "2025",
+  "title": "ProxSTORM--A Stochastic Trust-Region Algorithm for Nonsmooth Optimization",
+  "read_level": "full",
+  "contribution": "ProxSTORM extends STORM to f+phi (smooth nonconvex f, convex prox-friendly phi) with a.s. limit convergence and O(eps^-2) expected complexity; it also sharpens STORM by contracting only reduction differences, so O(Delta^-2) samples suffice under common random numbers; tested on l1-regularised HIGGS training and stochastic topology optimisation.",
+  "problem_entry": "Merges a deterministic inexact proximal TR (whose errors must vanish deterministically, while real inexactness is stochastic) with STORM (stochastic, but smooth only) (pp. 1-2).",
+  "key_idea": "Keep STORM's logic, swap the gradient for the proximal-gradient step h_k, keep phi exact, and state the function-value contract as |ared - cred| <= eta*pred (pp. 3-7).",
+  "assumptions": "phi proper closed convex with an exact prox; f L-smooth; bounded model curvature; P(accurate model) >= alpha; P(accurate reduction | half-step filtration) >= beta; Assumption 5 on expected increase; alpha*beta > 1/2 (pp. 1-8, 15).",
+  "proof_devices": [
+   "potential Psi_k = nu(f+phi) + (1-nu)Delta^2 with expected decrease -Theta*Delta^2 (Lemma 10)",
+   "partition on B_k and the accuracy events; offset the worst-case positive ||h||Delta term with the best-case negative term (weight alpha*beta)",
+   "half-step filtration F_{k-1/2} separating model and reduction randomness",
+   "submartingale W_k with +-1 increments compared with log_gamma Delta_k for liminf convergence (Thm 19)",
+   "Lipschitz continuity of the prox-gradient map via nonexpansiveness, giving the lim result (App. A)",
+   "BCMS19 stopping-time theorem for E[T_eps] (Thm 21)",
+   "Taylor expansion of ared-cred under common random numbers plus Markov gives N = O(Delta^-2) (Sec. 5)"
+  ],
+  "experiments": "100 realisations each: l1-regularised 2-layer network on HIGGS vs Adam (same seeds, 150 vs 50 iterations; Adam wins as lambda -> 0); topology optimisation d = 20,000 vs deterministic proximal TR on SAA; histograms of test error and trust-region radius curves (pp. 23-28).",
+  "positioning": "Extends STORM/BCMS19 and generalises Baraldi-Kouri; claims simpler assumptions than stochastic SQP and interior-point methods (convex constraints only); STORM chosen as the most general stochastic TR (pp. 1-3, 8-9).",
+  "writing": "Abstract claims both recovery and simplification of STORM; Table 1 and Remarks 11-15 interpret the constants; explicit list of theory-vs-experiment deviations; conclusion contrasts stochastic and deterministic radius behaviour (pp. 1, 15-16, 24, 27-28).",
+  "limits_future": "Convex phi with exact prox only; fixed TR update; alpha and beta not computable; experiments deviate from the assumptions; no high-probability bound; future: design rigorous yet practical stochastic inexactness conditions (pp. 2, 5, 16, 24, 28).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "STORM kept; reduces exactly to STORM when phi = 0",
+    "pages": "pp. 1, 5, 27"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "The known cheap nonsmooth part phi is kept exact in the subproblem and in pred/ared; only f is stochastic (step 2)",
+    "pages": "pp. 2, 4, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Sufficiently accurate, sufficiently often contract",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Function-value contract on reduction differences scaled by pred_k instead of Delta^2; per-iteration samples drop from O(Delta^-4) to O(Delta^-2) under CRN",
+    "pages": "pp. 7, 9, 23"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Potential nu*f + (1-nu)Delta^2, expected decrease, stopping-time bound O(eps^-2)",
+    "pages": "pp. 11-20"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "No high-probability upgrade; only expected complexity and a.s. convergence",
+    "pages": "pp. 17-20, 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "difference-based function-estimate contract",
+    "evidence": "Function estimates are used only via differences; J_k = {|A_k - C_k| <= eta*P_k}; O(Delta^-2) samples under CRN (also S083 eqs. (6)-(7))",
+    "pages": "pp. 3, 7, 21-23"
+   },
+   {
+    "pattern": "generalise and recover",
+    "evidence": "The new method reduces to STORM, and the rework simplifies and sharpens STORM's analysis (also S083 recovers JSX24)",
+    "pages": "pp. 1, 3, 7, 16"
+   },
+   {
+    "pattern": "explicit theory-vs-experiment deviation list",
+    "evidence": "Items i-ii list how the fixed-sample experiments depart from Assumptions 4-5",
+    "pages": "p. 24"
+   }
+  ],
+  "transferable": [
+   "State the function-estimate contract on |ared - cred| <= eta*pred_k; with common random numbers, N = O(Delta^-2) samples suffice",
+   "Use a half-step filtration to condition model and reduction randomness separately so the probabilities multiply",
+   "In the expected-decrease lemma, offset the worst-case positive term with the best-case negative term, then take alpha and beta close to 1",
+   "For composite problems, get the Lipschitz continuity of the prox-gradient map from nonexpansiveness to carry over the smooth liminf-to-lim argument",
+   "Experiments: 100 seeded realisations, test-error histograms against a baseline with the same seeds and a work-adjusted budget, and report where the baseline wins",
+   "Provide a constants table and a remark on how each constant affects complexity"
+  ],
+  "coauthors": "Robert J. Baraldi, Aurya Javeed, Drew P. Kouri",
+  "quotes": [
+   {
+    "text": "Via an improved analysis (which applies both to ProxSTORM and STORM) we make it evident that function estimates are utilized only via their differences - that is what we need to estimate if a function change rather than the function itself.",
+    "page": 3
+   },
+   {
+    "text": "The value of λ is fixed in Figure 1, but we find that as the regularization parameter λ → 0, Adam outperforms ProxSTORM in the test error metric.",
+    "page": 24
+   }
+  ]
+ }
+]

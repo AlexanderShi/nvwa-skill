@@ -1,0 +1,303 @@
+[
+ {
+  "id": "S047",
+  "year": "2020",
+  "title": "Adaptive stochastic optimization: a framework for analyzing stochastic optimization algorithms",
+  "read_level": "full",
+  "contribution": "States one analysis template for adaptive methods: a progress measure Φ_k that decreases on every iteration in the deterministic case (Condition 4.1) and in conditional expectation in the stochastic case (Condition 5.1). Shows that stochastic TR (STORM) and LS (Paquette–Scheinberg) fit it with deterministic-order expected complexity, and names what blocks cubic regularization and TRACE.",
+  "problem_entry": "Starts from a practice cost: SG and variance-reduced methods are non-adaptive and need per-application tuning that can take weeks or months (pp. 1–2), illustrated by an MNIST logistic-regression example (§3, p. 2).",
+  "key_idea": "Put trust region, line search and cubic regularization in one algorithm box (Alg. 1, p. 4), with a stochastic twin that adds only the probabilities 1−δ1 (models) and 1−δ2 (function estimates) (Alg. 2, p. 7). Analyse both with a potential that decreases on every iteration (p. 3).",
+  "assumptions": "Gradient is L-Lipschitz (Lipschitz Hessian added for cubic regularization); Taylor-like accuracy κ_fΔ², κ_gΔ, κ_H holding with probability conditioned on F_k (pp. 3, 8–9); κ_f must be small; α_k ≤ τ‖∇f‖ imposed for consistency with the stochastic case (p. 4); the presentation is simplified (p. 7).",
+  "proof_devices": [
+   "all-iteration potential Φ_k = ν(f−f*) + (1−ν)α_k² for TR, ν(f−f*) + (1−ν)α_k‖∇f‖² for LS, α‖∇f‖^{3/2} for cubic regularization, with ν near 1 (pp. 4–6)",
+   "deterministic template T ≤ Φ_0/(Θh_ε(α_ε)) (eq. 1, p. 3)",
+   "expected stopping-time bound E[T_ε] ≤ (1−δ)/(1−2δ)·Φ_0/(Θh_ε(α_ε)) + 1 (Thm 5.2, p. 8)",
+   "four-case good/bad model × good/bad estimates analysis; only bad–bad (prob ≤ δ1δ2) can increase Φ (Fig. 3, p. 10)",
+   "separate control sequence Δ_k tracking α_k‖∇f‖² for function-estimate accuracy (eq. 7, p. 11)",
+   "convex potential ν(1/ε − 1/(f−f*)) + (1−ν)α and a log version for strongly convex (p. 6)"
+  ],
+  "experiments": "One illustrative run on MNIST binary logistic regression (digit 5 vs rest), λ=1e-4: SG with batch 64 and fixed α ∈ {1, 0.01} vs an adaptive step/batch method, test accuracy over 10 epochs; factors and seeds not reported (pp. 2–3, Fig. 1).",
+  "positioning": "Builds on Cartis–Scheinberg [8] and Blanchet et al. [2] (p. 7). Direct criticism: exponential batch growth is not adaptive (p. 8); ε-substitution methods [28, 30] are too conservative and reduce to SAA (pp. 9, 12); interpolation assumption of [29] unreasonably strong; probabilistic Wolfe [18] has no guarantees (p. 11).",
+  "writing": "Magazine register: intuition and a practice-cost anecdote first (p. 1); one figure before the math (pp. 2–3); each method written as the same three moves (define T_ε, define Φ, verify the condition); algebra in the appendix (pp. 15–16).",
+  "limits_future": "Expected bounds only (p. 8). Open: stochastic cubic regularization (T_ε defined through x_{k+1} is not F_k-measurable) and stochastic TRACE (needs the exact multiplier) (p. 12). Future: tailored error bounds for work complexity; separate expansion/contraction factors; practical batch rules (p. 12).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "SG criticised as non-adaptive and tuned per application; the stochastic algorithm has the same structure as the deterministic one",
+    "pages": "pp. 1–2, 7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Condition 5.1 + Theorem 5.2 expected stopping-time bound; STORM matches the deterministic complexity up to a (1−δ1)(1−δ2) factor",
+    "pages": "pp. 7–8, 10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "accuracy requirements scaled to Δ_k or α_k‖g_k‖ with conditional probability 1−δ; ε-substitution criticised",
+    "pages": "pp. 8–9, 12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Deterministic framework first",
+    "evidence": "deterministic TR/LS/cubic analyses rewritten around an all-iteration potential (called new for the deterministic literature) before generalising to the stochastic case",
+    "pages": "pp. 3–7"
+   },
+   {
+    "pattern": "Name the measurability obstacle",
+    "evidence": "open problem for stochastic cubic regularization stated as: T_ε defined via x_{k+1} is not a stopping time w.r.t. F_k",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "Potential Φ_k = ν·gap + (1−ν)·(step term shaped like the per-step decrease) with ν near 1, so that every iteration decreases Φ (pp. 4–6)",
+   "Four-outcome table (model good/bad × estimate good/bad) to locate the only case that can increase Φ and to size δ1δ2 (p. 10)",
+   "Decouple the function-accuracy target from ‖g_k‖ with a separate control sequence Δ_k (p. 11)",
+   "Replace unknowable ‖∇f‖ in accuracy conditions with Δ_k = α_k‖g_k‖ plus a guess-and-increase sampling loop, not with ε (p. 9)"
+  ],
+  "coauthors": "F. E. Curtis",
+  "quotes": [
+   {
+    "text": "This article summarizes recent research and motivates future work on adaptive stochastic optimization methods, which have the potential to offer significant computational savings when training large-scale systems.",
+    "page": 1
+   },
+   {
+    "text": "By contrast, in the framework presented here, the analysis is structured around a measure in which progress is made in all iterations.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S017",
+  "year": "2021",
+  "title": "Optimal decision trees for categorical data via integer programming",
+  "read_level": "full",
+  "contribution": "A MILP for training a maximum-training-accuracy binary decision tree of fixed topology, with subset branching on categorical features. The formulation is strengthened (aggregated inequalities, anchor symmetry breaking, relaxation of provably integral variables) so that the number of integer variables does not depend on N. Computational evidence against CART.",
+  "problem_entry": "Greedy CART/C4.5 may miss a small accurate tree, with no bound on the gap (p. 2); interpretability demands (p. 1); one-hot encoding loses the one-value-per-group structure (p. 2).",
+  "key_idea": "Model group choice (v), feature subset (z) and leaf routing (c) per node for a fixed topology, fix leaf labels by symmetry, choose the topology by cross-validation, then engineer the formulation until the solver can close it (pp. 6–14).",
+  "assumptions": "Binary classification; one-hot grouped binary features; numerical features binned into deciles; fixed topologies of at most 4 levels; optimality = training accuracy (pp. 3, 5–7, 15).",
+  "proof_devices": [
+   "correctness propositions for the routing encoding (Props 1–2, pp. 8–9)",
+   "explicit fractional LP point (z=c=1/2) attaining the trivial bound to show relaxation weakness (pp. 11–12)",
+   "valid inequalities by aggregating routing constraints over the leaves below a node (p. 12)",
+   "extreme-point integrality by two-sided perturbation / convex combination (Prop 3, pp. 13–14)",
+   "anchor-feature symmetry breaking that removes no distinct tree (pp. 12–13)",
+   "minor-monotonicity of the optimal training error across topologies (pp. 7, 11)"
+  ],
+  "experiments": "10 binary datasets (LIBSVM, UCI, FICO heloc), CPLEX 12.6.1; ablation of enhancements (time and #LPs); scaling in topology and N; combinatorial vs simple branching; vs depth-3 and cross-validated CART over 5 splits with 30/5-minute limits; losses reported (ttt, krkp; heloc at 5 min); heloc depth-2 case study; sensitivity/specificity trade-off (pp. 16–26).",
+  "positioning": "Against greedy induction (Breiman 1984), 1990s relaxations, an SGD surrogate [15], and mainly Bertsimas–Dunn [3] (no categorical structure; regularisation tuning with unknowable effect on topology); DNF rule learning by IP; coauthor's column generation [7] as the benchmark (pp. 2, 4–5, 25–26).",
+  "writing": "Contribution stated as a conditional claim (if a small accurate tree exists, it is found) (p. 3); each device gets a motivation paragraph and then a proposition; explicit bolding rule (>1%) (p. 21); uneven hedging (p. 19 vs p. 25).",
+  "limits_future": "Continuous variables and difficulty grow with N (p. 26); large topologies time out (p. 18); claim restricted to data where small trees suffice (p. 25). Caveats from my reading: printed constraint (15) looks like a typo (p. 16); the CART comparison uses unequal data (pp. 21, 24).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "categorical group structure modelled directly; integer variable count independent of N",
+    "pages": "pp. 3, 7–8, 14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "head-to-head vs CART with ablations and reported losses, but unequal data budgets and accuracy/size metrics rather than evaluation counts",
+    "pages": "pp. 17–25"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Formulation engineering for exact MILP training",
+    "evidence": "weak-LP witness, aggregated inequalities, anchor symmetry breaking, proof that v and leaf-adjacent z can be relaxed",
+    "pages": "pp. 11–14"
+   },
+   {
+    "pattern": "Scope correction: integer programming is present, but as exact model training rather than an integer black box",
+    "evidence": "entire paper is a MILP method for ML training; SKILL lists integer black boxes as a weak spot",
+    "pages": "pp. 7–16"
+   }
+  ],
+  "transferable": [
+   "Before strengthening an IP, exhibit an explicit fractional point attaining the trivial LP bound (pp. 11–12)",
+   "Prove extreme-point integrality for part of the variables by a two-sided perturbation argument and declare only the rest integer (pp. 13–14)",
+   "Break symmetry with a canonical representative (anchor feature always goes left) (pp. 12–13)",
+   "Ablation grid switching off one enhancement at a time, reporting time and #LPs, including where switching off helps (pp. 17–18)",
+   "Use the cheap heuristic as a feature pre-selector for the exact model and report with and without it (pp. 19, 21–23)",
+   "Constrain one metric (sensitivity) and optimise the other, then plot training vs test for the constrained metric (pp. 16, 25–26)"
+  ],
+  "coauthors": "O. Günlük, J. Kalagnanam, M. Li, M. Menickelly",
+  "quotes": [
+   {
+    "text": "The purpose of this paper is to show that if an accurate small (interpretable) tree exists for a given data set, it can be obtained in a reasonable time by our proposed model, while popular heuristic methods such as C4.5 [16] and random forests [6] tend to produce less accurate and less interpretable trees.",
+    "page": 3
+   },
+   {
+    "text": "Thus we have a formulation for training optimal decision trees, where the number of integer variables is independent of the number of samples.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S026",
+  "year": "2021",
+  "title": "Global convergence rate analysis of a generic line search algorithm with noise",
+  "read_level": "full",
+  "contribution": "Extends the Cartis–Scheinberg expected-complexity analysis of line search to function values with bounded (possibly adversarial) noise, using an Armijo test relaxed by 2ε_f. Gives expected complexity for convex, strongly convex and nonconvex φ, with the convergence neighbourhood stated explicitly in terms of ε_f.",
+  "problem_entry": "Prior analyses assume exact function values [6] or noise reducible to arbitrary accuracy [3, 18]; here the noise is bounded but not controllable (pp. 1–3). Motivated by smoothing gradient estimators used with fixed steps in RL (pp. 2–3).",
+  "key_idea": "Keep Armijo backtracking and add a +2ε_f slack to the acceptance test (eq. 2.1, p. 4). Generalise the counting argument so that successful iterations may increase φ by a bounded amount r(ε_f) (Assumption 3.3, p. 7).",
+  "assumptions": "∇φ L-Lipschitz, φ bounded below; |e| ≤ ε_f with ε_f known, not controllable; gradient accurate w.p. 1−δ under the norm condition θ‖∇φ‖ or max{ζε_g, κα‖g‖}; bounded iterates in the convex case (admitted strong); ε ≳ √ε_f (pp. 3, 14–17, 23, 26).",
+  "proof_devices": [
+   "progress process z_k with gain h(α) on true successful steps and loss ≤ r(ε_f) on other successful steps, with r(ε_f)/h(ᾱ) ≤ γ < 1 (Assumption 3.3, p. 7)",
+   "counting true/false × successful/unsuccessful × large/small-step iterations (p. 9)",
+   "Wald-type lemma E[Σ W_k I_k] ≥ (1−δ)E[Σ W_k] (Lemma 3.4, p. 8)",
+   "step-size up/down counting (Lemma 3.6, pp. 9–10)",
+   "gain-minus-loss ≤ Z (Lemma 3.9, p. 11)",
+   "solving a linear inequality in E[N] to get E[N] ≤ 2(1−δ)/((1−2δ)²−γ)·(2Z/h(ᾱ) + (1−γ)log_τ(ᾱ/α0)) for δ < 1/2 − √γ/2 (Thm 3.13, p. 13)",
+   "class-specific progress measures: 1/Δ_k − 1/Δ_0, a log ratio, φ(X_0)−φ(X_k) (Table 3.1, p. 7)",
+   "1/Δ_{k+1} − 1/(Δ_k + 4ε_f) bound with Δ_k ≥ ε > 4ε_f (pp. 18–19)"
+  ],
+  "experiments": "none",
+  "positioning": "Explicit continuation of Cartis–Scheinberg [6]; contrasted with Blanchet et al. [3] and Paquette–Scheinberg [18] (unbounded reducible noise, more complicated algorithm, worse constants); Berahas–Byrd–Nocedal [1] used the same relaxed Armijo but only for strongly convex φ with bounded gradient error; norm condition credited to Carter [5] (pp. 2, 5, 13).",
+  "writing": "Results summarised in the introduction (p. 3); most theorems are followed by a remark recovering the deterministic bound when δ=θ=ε_f=0 (pp. 13, 20, 22, 23, 28); candid hedging on strong assumptions (pp. 1, 17); minor cross-reference slips (pp. 26, 28).",
+  "limits_future": "Expected bounds only; a hitting-time bound with no guarantee of staying in the neighbourhood (p. 29); §4.3 results stated without proof (p. 26); noise–neighbourhood link for the reducible-noise setting left open (p. 2).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "contract: norm condition with probability 1−δ plus a known noise bound ε_f; irreducible noise sets the neighbourhood",
+    "pages": "pp. 3, 14, 17, 23"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "the only change to Armijo is the 2ε_f slack; the deterministic method is recovered at zero noise",
+    "pages": "pp. 4–5, 16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "counting/renewal argument with explicit δ- and γ-dependence; deterministic-order ε-rates",
+    "pages": "pp. 7–13, 20–23"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "estimators enter only through the norm condition; no numerical comparison (counterexample to Taste mark 4)",
+    "pages": "pp. 3, 28"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Analysis-only trade-off knob",
+    "evidence": "γ is not an algorithmic parameter; it trades the allowed failure probability δ against the neighbourhood radius",
+    "pages": "pp. 8, 13"
+   },
+   {
+    "pattern": "Zero-parameter sanity remark after each theorem",
+    "evidence": "remarks set δ=θ=ε_f=0 to recover the deterministic line-search/GD bounds",
+    "pages": "pp. 13, 20, 22, 23, 28"
+   }
+  ],
+  "transferable": [
+   "Relax a sufficient-decrease test by exactly 2ε_f; the true decrease on accepted steps is then the model decrease minus 4ε_f (pp. 15–16)",
+   "Collect all noise damage in r(ε_f), require r(ε_f)/h(ᾱ) ≤ γ < 1, and read off the neighbourhood condition on ε for each function class (pp. 7, 17, 20, 23)",
+   "For convex rates with non-monotone f, bound 1/Δ_{k+1} − 1/(Δ_k + 4ε_f) using Δ_k ≥ ε > 4ε_f (pp. 18–19)",
+   "After each theorem, zero the noise and probability parameters and check that the deterministic bound comes back (pp. 20, 22, 23)"
+  ],
+  "coauthors": "A. S. Berahas, L. Cao",
+  "quotes": [
+   {
+    "text": "This modification causes significant changes in the analysis of the expected complexity rates, as the analysis in [6] heavily relies on the fact that objective function can never be increased by the algorithm.",
+    "page": 2
+   },
+   {
+    "text": "In other words, γ is not an algorithmic parameter, it is simply a parameter whose value implies a particular bound on the neighborhood of convergence.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S043",
+  "year": "2021",
+  "title": "High probability complexity bounds for line search based on stochastic oracles",
+  "read_level": "full",
+  "contribution": "High-probability (subexponential-tail) iteration-complexity bounds for an adaptive step-search method (SASS) under biased probabilistic first-order oracles and one-sided subexponential zeroth-order oracles, for nonconvex, convex and strongly convex/PL functions, with no step-size cap. The text read is arXiv v5 (2023), the extended version of the NeurIPS 2021 paper.",
+  "problem_entry": "Earlier step-search analyses had exact, bounded, or reducible-variance function noise, ε_g=0 and τ=∞ oracles forcing a step cap, and only expected bounds; the ML competitor SLS relies on unrealistic assumptions (pp. 2–4).",
+  "key_idea": "Keep the relaxed-Armijo step search of [3] (fresh gradient estimate at every iteration) and move the novelty into oracle definitions SZO(ε_f, ν, b) and SFO(ε_g, τ, κ, δ), whose constants the algorithm never needs; only ε'_f is input (pp. 1, 4–5).",
+  "assumptions": "∇φ L-Lipschitz, φ bounded below, L unknown; the error of the difference f(x)−f(x⁺) is subexponential; the gradient error is ≤ max{ε_g, min{τ, κα}‖g‖} w.p. 1−δ; bounded iterates in the convex case; ε ≳ max{ε_g/η, c√ε'_f}; the text is internally inconsistent on whether independence of the noise is needed (pp. 1, 4–5, 10, 12, 15, 17, 22).",
+  "proof_devices": [
+   "Azuma–Hoeffding on the submartingale Σ I_k − pt (Lemma 3.1, p. 7)",
+   "large/small-step indicator U_k and step-size up/down counting (Def. 4, Lemmas 3.2–3.4, pp. 7–8)",
+   "deterministic key lemma: not stopped + enough true iterations ⇒ enough good iterations (probability-0 complement) (Lemma 3.5, p. 9)",
+   "Bernstein-type bound on accumulated damage Σ r(ε'_f, E_k+E_k⁺) (Prop. 1, pp. 11–12)",
+   "subexponential calculus: sums and affine maps (Prop. 2, p. 14); log of a subexponential variable ≥ 1 (Prop. 5, p. 21)",
+   "PL inequality instead of strong convexity (p. 18)",
+   "FD oracle bias ε_g = 2(√n Lσ + √n ε_f/σ), minimised at σ = O(√ε_f) (p. 25)"
+  ],
+  "experiments": "RBF kernel logistic regression on 64 PMLB datasets (5 trials) and MLP/CNN on MNIST and ResNet18 on FashionMNIST; SASS vs SLS vs ADAM (5 learning rates) at equal work (inner products / network passes); ε'_f from the std of 30 oracle calls, sensitivity plot; fixed batch 128, so oracle properties not ensured; SASS beats SLS on 32/64 and ADAM except at lr 1e-1 (ADAM wins 47/64) (pp. 26–28).",
+  "positioning": "Extends Berahas–Cao–Scheinberg [3] and Cartis–Scheinberg [5]; improves on Paquette–Scheinberg [16] (O(L) vs O(L³), simpler method); tail-bound idea from Gratton et al. [7]; direct critique of SLS [20]; coins the name 'step search' (pp. 1–4, 17, 28–29).",
+  "writing": "Oracle definitions on page 1, each parameter justified by practice (p. 2); contribution bullets (p. 3); the proof engine is explained in words before the lemmas (pp. 7–8); remarks translate the tail bound into an order statement and recover the deterministic case (p. 17).",
+  "limits_future": "Experiments do not implement adaptive oracles; adaptive mini-batch, γ and ε'_f choices are future work (p. 26); ε'_f is fixed in theory but re-estimated in practice (p. 29); convex case needs bounded iterates (p. 22); oracle-construction proofs are in [9, Appendix A], not in this text.",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "SZO/SFO oracle contract with intrinsic parameters, bias allowed, accuracy adapting with α; oracles built from mini-batches and randomized finite differences",
+    "pages": "pp. 1–2, 4, 24–25"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Armijo-type step search kept; only a 2ε'_f relaxation; algorithm identical to [3]",
+    "pages": "pp. 4–5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "expected → high-probability tail bound via Azuma–Hoeffding + deterministic counting lemma + Bernstein on damage (Heuristic 6)",
+    "pages": "pp. 7–13, 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "equal-work comparison with ADAM/SLS, but fixed-batch oracles do not meet the theory and ADAM gets a learning-rate sweep",
+    "pages": "pp. 26–27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Oracle parameters unknown to the algorithm",
+    "evidence": "theory stated in oracle constants (ε_f, ν, b, ε_g, τ, κ, δ) that the method never uses; only an upper bound ε'_f is input",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "Calibrate the noise slack empirically",
+    "evidence": "ε'_f set to a multiple of the empirical std of 30 zeroth-order calls, re-estimated each epoch, with a sensitivity plot",
+    "pages": "p. 26"
+   },
+   {
+    "pattern": "Deterministic sample-path lemma + one concentration inequality",
+    "evidence": "Lemma 3.5 shows that a bad event has probability 0 given enough true iterations; all randomness is handled by Lemma 3.1 and Prop. 1",
+    "pages": "pp. 7–13"
+   }
+  ],
+  "transferable": [
+   "High-probability template: Azuma–Hoeffding on Σ I_k, a deterministic good-iteration counting lemma, and a union with a concentration bound on accumulated damage (pp. 7–13)",
+   "Classify steps as large/small relative to ᾱ and count step-size up/down moves (pp. 7–8)",
+   "Oracle accuracy max{ε_g, min{τ, κα}‖g‖}: ε_g is the oracle's floor, and τ removes the need for α_max (pp. 1–3)",
+   "Give every method the same budget in the dominant unit (inner products, network passes), not iterations (p. 27)",
+   "For finite-difference oracles, write the bias ε_g(σ) and choose σ = O(√ε_f) to minimise the neighbourhood (p. 25)"
+  ],
+  "coauthors": "B. Jin, M. Xie",
+  "quotes": [
+   {
+    "text": "The idea of the analysis is to show that with high probability, the progress made by the good iterations dominates the damage caused by the other iterations.",
+    "page": 7
+   },
+   {
+    "text": "Thus we do not check or ensure that these oracles actually satisfy the properties that our theory requires.",
+    "page": 26
+   }
+  ]
+ }
+]

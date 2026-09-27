@@ -1,0 +1,341 @@
+[
+ {
+  "id": "S004",
+  "year": "1997",
+  "title": "Recent progress in unconstrained nonlinear optimization without derivatives",
+  "read_level": "full",
+  "contribution": "Survey and framing paper (ISMP97 semi-plenary) that defines a class of interpolation-model trust-region DFO methods and makes the geometry (poisedness) of the interpolation set the central design issue, contrasting Powell's Lagrange-polynomial and the authors' Newton-polynomial geometry controls.",
+  "problem_entry": "Practitioner demand for expensive black-box simulations; direct search, AD and finite differences each ruled out for the cost model; Powell's secant-vs-Newton rate-per-function-value argument motivates modelling f itself (pp. 3-4).",
+  "key_idea": "Trust region + quadratic interpolation model + an explicit geometry-adequacy test that decides whether a failed step shrinks the radius or triggers geometry improvement (pp. 7-10).",
+  "assumptions": "Smooth unconstrained f, no derivatives, function cost dominates linear algebra; poised interpolation set, well-poisedness via pivot threshold / bounded Newton polynomials (pp. 3, 8, 12, 15).",
+  "proof_devices": [
+   "poisedness as nonzero interpolation determinant delta(Y) (p. 8)",
+   "Powell's basis-independent determinant ratio |L(y+,y-)| for point exchange (p. 11)",
+   "Sauer-Xu path-sum interpolation error bound via Newton polynomials (p. 15)",
+   "existence of well-poised set with |N_j(x)| <= kappa0 on the trust region (Theorem 1, p. 15; proof deferred to Conn-Scheinberg-Toint 1997)"
+  ],
+  "experiments": "none (points to preliminary numerics in Conn-Toint 1996 and Powell 1996, pp. 6, 12)",
+  "positioning": "Credits Powell as systematic pioneer and Winfield as an overlooked early trust-region statement; presents own Newton approach as complement to Powell's (elegant but expensive vs provably convergent) (pp. 5-6, 17).",
+  "writing": "Survey voice, hedged ('hopefully'), admits 'broad and simplistic' outline, abstract predicates first and concrete realizations later (pp. 4, 10, 11-16).",
+  "limits_future": "Open: geometry-vs-computation trade-off, initial underdetermined models, meaning of pivot values, larger n via Hessian sparsity / partial separability, noise via approximation plus sufficient sampling, software (pp. 17-18).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Geometry is the defining ingredient of modern model-based DFO; its cost framed as a trade-off to minimize (1997 origin of 'pay only the minimum').",
+    "pages": "pp. 8-9, 17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Explicit co-authored STATEMENT of structure exploitation (Hessian sparsity, partial separability, element models) as the route to larger n; SKILL.md currently says no explicit statement was found.",
+    "pages": "p. 17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Deterministic precursor: for noisy f, geometry conditions must be combined with sufficient sampling (no probability yet).",
+    "pages": "p. 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Methods compared by convergence rate per function value (Powell's secant argument) - evaluation-count criterion in embryo; weak.",
+    "pages": "p. 4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "abstract algorithm class with pluggable quality predicates",
+    "evidence": "Algorithm outline uses undefined predicates (adequate / improve geometry); Lagrange and Newton realizations plugged in later",
+    "pages": "pp. 8-16"
+   }
+  ],
+  "transferable": [
+   "Walk through the practitioner's alternatives and give each one's failure mode for the cost model before introducing your method (pp. 3-4)",
+   "Justify a design choice by a rate-per-function-evaluation calculation, e.g. secant 1.618 vs Newton-with-FD sqrt(2) (p. 4)",
+   "Show why a condition is needed with the smallest degenerate configuration (six points on a circle cannot determine a 2-D quadratic) (pp. 7-8)",
+   "State the algorithm with abstract quality predicates and give concrete measures in separate sections so alternatives can be swapped (pp. 9-16)"
+  ],
+  "coauthors": "A. R. Conn, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "In this case, one expects that interpolation will be replaced by approximation in the model’s definition, and the conditions on geometry will have then to be combined with that of sufficient sampling.",
+    "page": 17
+   },
+   {
+    "text": "thinks of exploiting any structure present in the problem as efficiently as possible.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S020",
+  "year": "2006",
+  "title": "IBM Research TRECVID-2006 Video Retrieval System.",
+  "read_level": "full",
+  "contribution": "Team system report for the TRECVID-2006 benchmark (feature detection, search, rushes) whose gains come from ensemble learning and fusion; the only optimization content is a multiple-kernel-learning SOCP solved with SeDuMi, and Scheinberg's individual contribution is not identifiable from the text.",
+  "problem_entry": "Benchmark-driven: TRECVID tasks; MKL entered by the drawbacks of early fusion and late fusion (no kernel weighting, k trainings) (pp. 1, 4-5).",
+  "key_idea": "Fuse many SVM models (partitions, ground-truth interpretations, modalities), learn kernel weights by MKL, and learn query-class-dependent fusion weights by exhaustive search (pp. 3-6, 13-14).",
+  "assumptions": "Imbalance ratio N/P < 10 from [AKJ04]; pseudo-relevance feedback assumes top-ranked documents relevant; MKL trace normalization (pp. 5, 9, 11).",
+  "proof_devices": [],
+  "experiments": "TRECVID-2006 official evaluation (inferred MAP, precision@100, MAP): ~22% over visual baseline, 13-14% from query-dependent fusion, top automatic runs MAP 0.0855/0.0867; reports negatives (MKL concepts not evaluated, Waterscape no gain, precision@100 discrepancy, interactive cut-off error) (pp. 1, 6-7, 13-14, 18).",
+  "positioning": "Builds on the team's prior TRECVID systems; MKL attributed to Bach-Lanckriet-Jordan; critique limited to named drawbacks of early/late fusion (pp. 5, 7, 10).",
+  "writing": "Engineering report with relative-percentage gains, some loose wording ('we have proved' for empirical findings), conclusion calls results preliminary (pp. 12, 18).",
+  "limits_future": "MKL component unevaluated; future: context-based negative sampling and up-sampling positives; details deferred to workshop (pp. 7, 12, 18).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Multi-kernel structure modelled directly with learned weights, but solved by a generic conic solver (SeDuMi) - no structure-specific algorithm; weak link. Mainly trajectory evidence for IBM applied-ML exposure.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Report operational failures and evaluation discrepancies alongside scores (cut-off error, precision@100 mismatch) (pp. 7, 18)",
+   "Replace early/late fusion with a single learned-weight combination with interpretable weights and early-fusion parameter count (p. 5)"
+  ],
+  "coauthors": "M. Campbell, A. Haubold, S. Ebadollahi, D. Joshi, M. R. Naphade, A. Natsev, J. Seidl, J. R. Smith, J. Tešić, L. Xie",
+  "quotes": [
+   {
+    "text": "This problem can in turn be converted into a standard form of second-order-cone programming, and we obtain its solutions with the convex solver Sedumi [Stu99].",
+    "page": 5
+   },
+   {
+    "text": "but the four concepts for which we used this idea were not among the twenty concepts evaluated this year.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S010",
+  "year": "2010",
+  "title": "Sparse inverse covariance selection via alternating linearization methods",
+  "read_level": "full",
+  "contribution": "An alternating linearization method (symmetric ADAL with a skipping safeguard) for the primal sparse inverse covariance selection problem, with closed-form eigendecomposition/shrinkage subproblems, an O(1/eps) iteration bound, and experiments showing it beats PSM and VSM.",
+  "problem_entry": "Competitors each lack something: IPMs too costly per iteration; BCD/glasso/SINCO/PSM/VSM/Yuan-ADAL lack iteration complexity bounds; smoothing-based Nesterov variants slow in practice (p. 2).",
+  "key_idea": "Symmetric multiplier updates make ADAL an alternating linearization method; a skipping step falls back to the provable step when the linearized upper bound fails; both SICS subproblems are closed-form (pp. 3-6).",
+  "assumptions": "Theory needs grad f Lipschitz and beta/L <= mu <= 1/L; SICS violates this, handled via Lu's bound X* >= alpha I, so rate holds only near the solution; practical version drops Y in C and uses mu continuation (pp. 4-7).",
+  "proof_devices": [
+   "three-point inequality generalizing Beck-Teboulle Lemma 2.3 for a prox step on the linearization of the other function (Lemma 5.1, p. 10)",
+   "telescoping ||y^n - x*||^2 over regular and skipped iterations (pp. 10-11)",
+   "monotonicity of F(x^n), F(y^n) via the same lemma with u = x^{n+1}, u = y^n (p. 11)",
+   "bound ||x0-x*||^2 / (2 mu (k + k_n)) with k_n = number of non-skipping iterations (p. 4)"
+  ],
+  "experiments": "MATLAB; ALM vs PSM and VSM at defaults, iterations justified by equal per-iteration cost plus CPU; synthetic (Scheinberg-Rish generator, n 200-2000, rho 0.1/0.5/1) and 5 gene-expression sets; sparsity compared via complementary slackness; ALM Dgap 1.73e-3 above the 1e-3 target at n=1500, rho=0.1 not commented (pp. 6-8).",
+  "positioning": "Acknowledges close relation to Yuan's independently developed method and differentiates by complexity bound and interpretation; baselines chosen transitively (PSM/VSM beat BCD/glasso); own SINCO listed among methods without bounds (p. 2).",
+  "writing": "Explicit 'Our contribution.' and organization paragraphs, a learning-intuition (Gaussian prior) paragraph for the NIPS audience, hedged theory claim, no conclusion section (pp. 2, 5-6, 8).",
+  "limits_future": "Theory only in a small neighbourhood of the solution; Y iterates may be non-PD until late; accelerated version did worse on SICS and is omitted; no future directions stated (pp. 4-6, 8).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Both subproblems closed-form (eigendecomposition, shrinkage) at gradient cost; confirms Heuristic 9.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Keeps ADAL/augmented Lagrangian, reinterprets it, adds a single skipping safeguard exactly where smoothness fails; classical method here is convex splitting, not adaptive stochastic.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic analogue: value criterion is having an iteration complexity bound (rivals faulted for lacking one); order matches ISTA O(1/eps).",
+    "pages": "pp. 2, 4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Iteration counts used only after arguing equal per-iteration cost; discloses gap-check cost; fair sparsity comparison via complementary slackness.",
+    "pages": "pp. 7-8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "safeguard test with fallback to the analysable step",
+    "evidence": "If F(x^{k+1}) exceeds the linearized model value, set x^{k+1} := y^k (skipping step); bound counts non-skipping steps",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "state the theory-practice parameter gap explicitly",
+    "evidence": "Theoretical mu <= alpha^2 impractically small; practical continuation rule used; rate claimed only near the solution",
+    "pages": "pp. 5-7"
+   },
+   {
+    "pattern": "complexity bound as the differentiator against faster heuristics",
+    "evidence": "Related work organized by which methods lack iteration complexity bounds",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Organize related work as a deficit ledger (no bound / slow / problem-size blow-up) so the contribution sentence fills the missing cell (p. 2)",
+   "Check whether a symmetric multiplier update makes the multiplier a gradient; then prox-gradient proofs transfer to the splitting method (p. 3)",
+   "Add a one-line upper-bound test and fall back to the provable step when it fails; count good steps in the bound (pp. 4, 10-11)",
+   "Read a dual method's primal support from complementary slackness instead of thresholding (p. 8)",
+   "Justify iteration-count comparisons by equal per-iteration cost and disclose avoided metric costs (p. 7)"
+  ],
+  "coauthors": "S. Ma, D. Goldfarb",
+  "quotes": [
+   {
+    "text": "All of these BCD and CD approaches lack iteration complexity bounds.",
+    "page": 2
+   },
+   {
+    "text": "Hence, for a practical approach we can only claim that the theoretical convergence rate bound holds in only a small neighborhood of the optimal solution.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S030",
+  "year": "2010",
+  "title": "Self-correcting geometry in model-based algorithms for derivative-free unconstrained optimization",
+  "read_level": "full",
+  "contribution": "Shows by two counterexamples that model-based DFO cannot ignore interpolation-set geometry and still converge globally, and gives a trust-region algorithm without geometry-improving iterations (geometry enforced only in the criticality test) whose convergence rests on a self-correction property of unsuccessful iterations.",
+  "problem_entry": "Unexplained empirical anomaly: Fasano-Nocedal-Morales observed that ignoring geometry works well in practice; question whether geometry steps are truly necessary (pp. 3-4, 18).",
+  "key_idea": "Reuse unsuccessful trial points to replace far points or points with large Lagrange-polynomial value, shrink the radius only when no such exchange exists, and build a Lambda-poised model only at criticality; when Delta_k is small relative to ||g_k||, every unsuccessful iteration improves geometry (pp. 12, 14-15).",
+  "assumptions": "f C^1 with Lipschitz gradient, bounded below, uniformly bounded model Hessians, models of degree >= 1 eventually; Cauchy decrease; examples in infinite precision (pp. 7-9, 13).",
+  "proof_devices": [
+   "2-D hand-computable counterexamples converging to non-stationary points (pp. 8-11)",
+   "volume (determinant) potential: each swap with |l_j| >= Lambda > 1 multiplies a bounded volume, so finitely many swaps (Lemma 2.4, p. 6)",
+   "counting lemma: if sum|a_i| > 2 sum a_i then the second-largest |a_j| >= (sigma_abs - 2 sigma)/(2p) (Lemma 5.1, p. 13)",
+   "self-correction: step failure + Lagrange error bound + Cauchy decrease give sum|l_j(x+)| >= 2(p Lambda + 1); partition of unity sum l_j = 1 yields a non-maximal |l_j| >= Lambda (Lemma 5.2, pp. 14-15)",
+   "standard trust-region skeleton (radius bounded below away from criticality; finite vs infinite successes) with epsilon_i -> 0 criticality restarts, liminf ||grad f|| = 0 (Lemmas 5.3-5.7, Theorem 5.8, pp. 15-18)"
+  ],
+  "experiments": "none; figures only illustrate the counterexamples; mechanism offered as explanation of Fasano et al.'s numerics, to be verified (pp. 10-11, 18).",
+  "positioning": "Extends own earlier geometry-based algorithms ('at variance with' CST 1997a, CSV 2008b); both refutes (convergence cannot be ensured) and explains Fasano et al.; aligns features with DFO and NEWUOA practical codes (pp. 4, 11, 18).",
+  "writing": "Negative-then-positive contribution announcement; modest objective (understanding rather than a new practical scheme); plain-language paragraph after the key lemma; hedged explanatory claims (pp. 4, 15, 18).",
+  "limits_future": "No rate/complexity and no numerical test; linear algebra for Lagrange polynomials remains; future: second-order criticality, unbounded Hessians, convex constraints via projections, noisy objectives (p. 18).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Establishes the minimum geometry: cannot be dropped (counterexamples) but dedicated geometry evaluations confined to criticality, with self-correction elsewhere; confirms Heuristic 4 and Taste mark 5.",
+    "pages": "pp. 3, 8-15, 18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Trust-region method and standard lemmas (Conn-Gould-Toint) kept; only the point-replacement and radius rule changed.",
+    "pages": "pp. 12, 16-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "explain the practitioners' anomaly (necessity counterexample + rarity mechanism)",
+    "evidence": "Takes the observation that ignoring geometry works, proves geometry is necessary in the worst case, finds the self-correction mechanism that makes it rarely needed, and designs the algorithm around it; notes this 'disciplines and vindicates' practice within one 2010 paper",
+    "pages": "pp. 4, 8-15, 18"
+   },
+   {
+    "pattern": "volume/determinant potential for finite termination of point exchanges (proof-playbook device)",
+    "evidence": "Lemma 2.4 and its reuse in Lemma 5.4",
+    "pages": "pp. 6, 15-16"
+   }
+  ],
+  "transferable": [
+   "Turn a colleague's surprising empirical observation into a necessity/sufficiency question (p. 4)",
+   "Prove necessity with a 2-D example whose iterates can be computed by hand, and plot them (pp. 8-11)",
+   "For finite termination of a swap procedure, find a bounded quantity each swap multiplies by a factor > 1 (p. 6)",
+   "Use basis identities (sum of Lagrange polynomials = 1) to turn a failed step's large residual into an improving exchange (pp. 14-15)",
+   "Recycle rejected trial points as geometry repairs before shrinking the radius (p. 12)",
+   "When there are no experiments, state the objective as understanding rather than a new practical scheme (p. 4)"
+  ],
+  "coauthors": "Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We show that such geometry improvements cannot be completely eliminated if one wishes to ensure global convergence, but also provide an algorithm where such steps only occur in the final stage of the algorithm where criticality of a putative stationary point is verified.",
+    "page": 3
+   },
+   {
+    "text": "Hence, the main objective of this paper is to advance the understanding of the role of geometry in model based DFO methods, rather than to suggest a new practical optimization scheme.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S005",
+  "year": "2013",
+  "title": "Fast alternating linearization methods for minimizing the sum of two convex functions",
+  "read_level": "full",
+  "contribution": "Basic (O(1/eps)) and accelerated (O(1/sqrt(eps))) Gauss-Seidel alternating linearization methods for min f+g, with skipping-step variants needing only one smooth function, constants a factor 2 / sqrt(2) better than ISTA / FISTA, and experiments on deblurring, RPCA and corrupted matrix completion.",
+  "problem_entry": "Problems where both prox subproblems cost about one gradient (CS, NNM, RPCA, SICS); ADMs lack iteration complexity; ISTA/FISTA treat f and g asymmetrically and fail on RPCA/SICS (pp. 1-5).",
+  "key_idea": "Symmetric ADAL equals alternating linearization when both functions are smooth; a skipping test makes it work with one nonsmooth function; FISTA-type extrapolation with t_k recursions adjusted to the skipping/regular pattern gives the fast versions (pp. 6-8, 12).",
+  "assumptions": "grad f Lipschitz and mu <= 1/L(f) (both Lipschitz for ALM/FALM); backtracking can replace known L; convex constraints allowed; nonsmooth terms via Nesterov smoothing at an order penalty; no bound when both nonsmooth (pp. 7, 9, 11, 15-18, 20-21).",
+  "proof_devices": [
+   "three-point inequality generalizing Beck-Teboulle Lemma 2.3 (Lemma 2.2, pp. 8-9)",
+   "telescoping with count of non-skipping steps k_n in the denominator (Theorem 2.3, pp. 9-11)",
+   "potential 2 mu t_k^2 v_k + ||u^k||^2 with mode-dependent weight v_k (2(F-F*) regular, F-F* skipping) and four-case transition analysis (Lemma 3.2, pp. 12-14)",
+   "t_k lower bounds by induction over blocks of regular/skipping steps (Lemma 3.3, pp. 14-15)",
+   "smoothing-parameter calculation turning eps/2-optimality of the smoothed problem into eps-optimality (Theorems 4.1, 5.1, pp. 17-21)"
+  ],
+  "experiments": "Wavelet deblurring vs ISTA, FISTA, SALSA, SADAL at default settings, 1000 iterations, objective at checkpoints plus CPU/iterations to threshold, skip counts reported, per-iteration cost conceded; RPCA video vs EADM/IADM (ALM slightly worse than IADM); corrupted matrix completion; theory-violating mu and continuation disclosed (pp. 16-25).",
+  "positioning": "Differentiates precisely from Kiwiel-Rosa-Ruszczynski (same approximations, different prox terms, no complexity) and Goldfarb-Ma (Jacobi type); frames as extension of ISTA/FISTA with better constants; claims first complexity for Gauss-Seidel ADM, footnotes Monteiro-Svaiter (pp. 5-6).",
+  "writing": "'Our contribution.' paragraph; a Remark after each theorem quantifying constants vs the classical baseline; disclosed theory violations and negative findings; summary-only conclusion (pp. 5, 11, 16, 18, 23, 26).",
+  "limits_future": "No bound for both-nonsmooth case; smoothing worsens order; SICS theory only near the solution; acceleration no help with continuation or on SICS; no future directions stated (pp. 7, 18, 21, 23, 25-26).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Keeps the trusted splitting method (ADAL / Peaceman-Rachford), reruns ISTA/FISTA proofs, adds one safeguard (skip test) only where the smooth-g inequality can fail.",
+    "pages": "pp. 7-8, 12"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Problem class defined by cheap closed-form prox subproblems (SVD, shrinkage, linear system) at gradient cost.",
+    "pages": "pp. 1-3, 21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic ancestor of 'deterministic parity': match optimal first-order order O(sqrt(L/eps)) with constants no worse than the classical method.",
+    "pages": "pp. 5, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Iteration comparisons paired with CPU time; per-iteration cost gap vs FISTA conceded; competitors at downloaded defaults.",
+    "pages": "pp. 18-19, 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "safeguard test with fallback to the analysable step",
+    "evidence": "Skipping step (x^{k+1} := y^k, an ISTA step) when F exceeds the augmented Lagrangian value; second paper in this batch with the device (also S010)",
+    "pages": "pp. 7-8, 12"
+   },
+   {
+    "pattern": "state the theory-practice parameter gap explicitly",
+    "evidence": "mu = 1 and mu continuation violate mu <= 1/L(g_sigma), disclosed in text (also S010)",
+    "pages": "pp. 18, 23"
+   },
+   {
+    "pattern": "method paper + application paper split sharing one core lemma",
+    "evidence": "General ALM on arXiv / Math. Program.; SICS application at NIPS re-proving the same lemma (S010 Lemma 5.1 = S005 Lemma 2.2)",
+    "pages": "pp. 8, 25-26"
+   }
+  ],
+  "transferable": [
+   "When a safeguard switches between step types, give the potential a mode-dependent weight and adjust the momentum recursion per transition; prove all transitions case by case (pp. 12-14)",
+   "Put the count of good steps in the bound's denominator so the theorem rewards an idle safeguard (pp. 9, 15)",
+   "After each theorem add a Remark quantifying the constant vs the classical method and when per-iteration costs match (pp. 11, 16)",
+   "Report how often the safeguard fired (891 of 1000 steps skipped) (p. 19)",
+   "Concede per-iteration cost differences when iteration counts win but CPU time does not (p. 19)",
+   "For a nonsmooth term, compute the smoothing parameter that converts eps/2-optimality to eps-optimality and state the order penalty (pp. 17-18)"
+  ],
+  "coauthors": "D. Goldfarb, S. Ma",
+  "quotes": [
+   {
+    "text": "To the best of our knowledge, the complexity results in this paper are the first ones that have been given for a Gauss-Seidel type alternating direction method",
+    "page": 6
+   },
+   {
+    "text": "We have also applied the FALM method to the SICS problem, but we have not observed any advantage over ALM for this particular application.",
+    "page": 26
+   }
+  ]
+ }
+]
