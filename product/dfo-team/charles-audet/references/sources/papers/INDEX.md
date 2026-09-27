@@ -10,86 +10,86 @@
 
 | # | ID | Year | Title | Venue | Cites | Kind | Source | Full text | Pages | Role | Read |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | S001 | 2006 | Mesh adaptive direct search algorithms for constrained optimization | SIAM Journal on optimization | 1952 | journal | — | no-oa |  | core | — |
-| 2 | S002 | 2002 | Analysis of generalized pattern searches | SIAM Journal on optimization | 1573 | journal | — | no-oa |  | core | — |
+| 1 | S001 | 2006 | Mesh adaptive direct search algorithms for constrained optimization | SIAM Journal on optimization | 1952 | journal | manual | txt | 27 | core | — |
+| 2 | S002 | 2002 | Analysis of generalized pattern searches | SIAM Journal on optimization | 1573 | journal | manual | txt | 15 | core | — |
 | 3 | S003 | 2017 | Derivative-free and blackbox optimization | Springer International Publishing | 969 | book | — | no-oa |  | core | — |
-| 4 | S004 | 2021 | Performance indicators in multiobjective optimization | European journal of operational research | 720 | journal | — | no-oa |  | core | — |
-| 5 | S005 | 2004 | A pattern search filter method for nonlinear programming without derivatives | SIAM Journal on Optimization | 466 | journal | — | no-oa |  | core | — |
-| 6 | S006 | 2009 | OrthoMADS: a deterministic MADS instance with orthogonal directions | SIAM Journal on Optimization | 380 | journal | — | no-oa |  | core | — |
-| 7 | S007 | 2009 | A progressive barrier for derivative-free nonlinear programming | SIAM Journal on optimization | 328 | journal | — | no-oa |  | core | — |
+| 4 | S004 | 2021 | Performance indicators in multiobjective optimization | European journal of operational research | 720 | journal | manual | txt | 27 | core | — |
+| 5 | S005 | 2004 | A pattern search filter method for nonlinear programming without derivatives | SIAM Journal on Optimization | 466 | journal | manual | txt | 28 | core | — |
+| 6 | S006 | 2009 | OrthoMADS: a deterministic MADS instance with orthogonal directions | SIAM Journal on Optimization | 380 | journal | manual | txt | 23 | core | — |
+| 7 | S007 | 2009 | A progressive barrier for derivative-free nonlinear programming | SIAM Journal on optimization | 328 | journal | manual | txt | 34 | core | — |
 | 8 | S008 | 2000 | A surrogate-model-based method for constrained optimization | 8th symposium on multidisciplinary analysis and optimization | 297 | conference | — | no-oa |  | core | — |
 | 9 | S009 | 2008 | Nonsmooth optimization through mesh adaptive direct search and variable neighborhood search | Journal of Global Optimization | 286 | journal | — | no-oa |  | core | — |
-| 10 | S010 | 2000 | A branch and cut algorithm for nonconvex quadratically constrained quadratic programming | Mathematical Programming | 282 | journal | — | no-oa |  | core | — |
-| 11 | S011 | 2001 | Pattern search algorithms for mixed variable programming | SIAM Journal on Optimization | 267 | journal | — | no-oa |  | core | — |
+| 10 | S010 | 2000 | A branch and cut algorithm for nonconvex quadratically constrained quadratic programming | Mathematical Programming | 282 | journal | manual | txt | 30 | core | — |
+| 11 | S011 | 2001 | Pattern search algorithms for mixed variable programming | SIAM Journal on Optimization | 267 | journal | manual | txt | 22 | core | — |
 | 12 | S012 | 2011 | The NOMAD project | Software available at http://www. gerad. ca/nomad | 257 | other | — | no-oa |  | core | — |
-| 13 | S013 | 2021 | Two decades of blackbox optimization applications | EURO Journal on Computational Optimization | 245 | journal | — | no-oa |  | core | — |
+| 13 | S013 | 2021 | Two decades of blackbox optimization applications | EURO Journal on Computational Optimization | 245 | journal | manual | txt | 14 | core | — |
 | 14 | S014 | 1997 | Links between linear bilevel and mixed 0–1 programming problems | Journal of optimization theory and applications | 237 | journal | — | no-oa |  | core | — |
 | 15 | S015 | 2004 | Pooling problem: Alternate formulations and solution methods | Management science | 233 | journal | unpaywall | txt | 16 | core | — |
-| 16 | S016 | 2006 | Finding optimal algorithmic parameters using derivative-free optimization | SIAM Journal on Optimization | 224 | journal | — | no-oa |  | core | — |
+| 16 | S016 | 2006 | Finding optimal algorithmic parameters using derivative-free optimization | SIAM Journal on Optimization | 224 | journal | manual | txt | 32 | core | — |
 | 17 | S017 | 2009 | Mesh adaptive direct search algorithms for mixed variable optimization | Optimization Letters | 215 | journal | — | no-oa |  | core | — |
 | 18 | S018 | 2008 | Multiobjective optimization through a series of single-objective formulations | SIAM Journal on optimization | 215 | journal | — | no-oa |  | core | — |
 | 19 | S019 | 2009 | NOMAD user guide | Technical report G-2009-37, Les cahiers du GERAD | 199 | report | url | txt | 121 | core | — |
-| 20 | S020 | 2006 | Convergence of mesh adaptive direct search to second-order stationary points | SIAM Journal on Optimization | 181 | journal | — | no-oa |  | core | — |
+| 20 | S020 | 2006 | Convergence of mesh adaptive direct search to second-order stationary points | SIAM Journal on Optimization | 181 | journal | manual | txt | 17 | core | — |
 | 21 | S021 | 2022 | Algorithm 1027: NOMAD Version 4: Nonlinear Optimization with the MADS Algorithm | ACM Transactions on Mathematical Software (TOMS) | 160 | journal | arXiv | txt | 22 | core | — |
-| 22 | S022 | 2008 | Comparison of derivative-free optimization methods for groundwater supply and hydraulic capture community problems | Advances in Water Resources | 157 | journal | — | no-oa |  | core | — |
+| 22 | S022 | 2008 | Comparison of derivative-free optimization methods for groundwater supply and hydraulic capture community problems | Advances in Water Resources | 157 | journal | manual | txt | 35 | core | — |
 | 23 | S023 | 2014 | A survey on direct search methods for blackbox optimization and their applications | Mathematics without boundaries: Surveys in interdisciplinary research | 144 | chapter | url | txt | 24 | core | — |
 | 24 | S024 | 2010 | Globalization strategies for mesh adaptive direct search | Computational Optimization and Applications | 142 | journal | — | no-oa |  | core | — |
-| 25 | S025 | 2004 | Convergence results for generalized pattern search algorithms are tight | Optimization and Engineering | 142 | journal | — | no-oa |  | core | — |
+| 25 | S025 | 2004 | Convergence results for generalized pattern search algorithms are tight | Optimization and Engineering | 142 | journal | manual | txt | 12 | core | — |
 | 26 | S026 | 2010 | A mesh adaptive direct search algorithm for multiobjective optimization | European Journal of Operational Research | 124 | journal | — | no-oa |  | supplement | — |
-| 27 | S027 | 2008 | Parallel space decomposition of the mesh adaptive direct search algorithm | SIAM Journal on Optimization | 119 | journal | — | no-oa |  | supplement | — |
-| 28 | S028 | 2001 | Mixed variable optimization of the number and composition of heat intercepts in a thermal insulation system | Optimization and Engineering | 119 | journal | — | no-oa |  | supplement | — |
-| 29 | S029 | 2004 | Generalized pattern searches with derivative information | Mathematical Programming | 109 | journal | — | no-oa |  | supplement | — |
+| 27 | S027 | 2008 | Parallel space decomposition of the mesh adaptive direct search algorithm | SIAM Journal on Optimization | 119 | journal | manual | txt | 30 | supplement | — |
+| 28 | S028 | 2001 | Mixed variable optimization of the number and composition of heat intercepts in a thermal insulation system | Optimization and Engineering | 119 | journal | manual | txt | 26 | supplement | — |
+| 29 | S029 | 2004 | Generalized pattern searches with derivative information | Mathematical Programming | 109 | journal | manual | txt | 19 | supplement | — |
 | 30 | S030 | 2007 | New branch-and-cut algorithm for bilevel linear programming | Journal of Optimization Theory and Applications | 103 | journal | — | no-oa |  | supplement | — |
-| 31 | S031 | 2007 | Filter pattern search algorithms for mixed variable constrained optimization problems | Pacific Journal of Optimization 3(3), 477-500 | 91 | journal | — | no-oa |  | supplement | — |
-| 32 | S032 | 2017 | Stochastic short-term hydropower planning with inflow scenario trees | European Journal of Operational Research | 90 | journal | — | no-oa |  | supplement | — |
+| 31 | S031 | 2007 | Filter pattern search algorithms for mixed variable constrained optimization problems | Pacific Journal of Optimization 3(3), 477-500 | 91 | journal | manual | txt | 24 | supplement | — |
+| 32 | S032 | 2017 | Stochastic short-term hydropower planning with inflow scenario trees | European Journal of Operational Research | 90 | journal | manual | txt | 36 | supplement | — |
 | 33 | S033 | 2019 | The mesh adaptive direct search algorithm for granular and discrete variables | SIAM Journal on Optimization | 88 | journal | — | no-oa |  | supplement | — |
-| 34 | S034 | 2016 | Blackbox and derivative-free optimization: theory, algorithms and applications | Optimization and Engineering | 81 | journal | — | no-oa |  | core | — |
+| 34 | S034 | 2016 | Blackbox and derivative-free optimization: theory, algorithms and applications | Optimization and Engineering | 81 | journal | manual | txt | 2 | core | — |
 | 35 | S035 | 2016 | Self-scheduling short-term unit commitment and loading problem | IEEE Transactions on Power Systems 31(1), 133-142 | 78 | journal | — | no-oa |  | supplement | — |
 | 36 | S036 | 2012 | Calculating optimal conditions for alloy and process design using thermodynamic and property databases, the FactSage software and the Mesh Adaptive Direct Search algorithm | Calphad | 77 | journal | — | no-oa |  | supplement | — |
-| 37 | S037 | 2002 | The largest small octagon | Journal of Combinatorial Theory, Series A | 75 | journal | — | no-oa |  | supplement | — |
+| 37 | S037 | 2002 | The largest small octagon | Journal of Combinatorial Theory, Series A | 75 | journal | manual | txt | 15 | supplement | — |
 | 38 | S038 | 2014 | Reducing the number of function evaluations in mesh adaptive direct search algorithms | SIAM Journal on Optimization | 71 | journal | — | no-oa |  | core | — |
-| 39 | S039 | 2010 | A method for stochastic constrained optimization using derivative-free surrogate pattern search and collocation | Journal of Computational Physics | 71 | journal | — | no-oa |  | supplement | — |
-| 40 | S040 | 2007 | Extremal problems for convex polygons | Journal of Global Optimization | 70 | journal | — | no-oa |  | supplement | — |
+| 39 | S039 | 2010 | A method for stochastic constrained optimization using derivative-free surrogate pattern search and collocation | Journal of Computational Physics | 71 | journal | manual | txt | 19 | supplement | — |
+| 40 | S040 | 2007 | Extremal problems for convex polygons | Journal of Global Optimization | 70 | journal | manual | txt | 20 | supplement | — |
 | 41 | S041 | 1999 | A symmetrical linear maxmin approach to disjoint bilinear programming | Mathematical programming | 70 | journal | — | no-oa |  | supplement | — |
 | 42 | S042 | 2011 | Calculating all local minima on liquidus surfaces using the FactSage software and databases and the Mesh Adaptive Direct Search algorithm | The Journal of Chemical Thermodynamics | 69 | journal | — | no-oa |  | supplement | — |
 | 43 | S043 | 2018 | Mesh-based Nelder–Mead algorithm for inequality constrained optimization: C. Audet, C. Tribes | Computational Optimization and Applications | 67 | journal | — | no-oa |  | supplement | — |
 | 44 | S044 | 2008 | Spent potliner treatment process optimization using a MADS algorithm | Optimization and Engineering | 66 | journal | — | no-oa |  | supplement | — |
 | 45 | S045 | 2014 | Improving process representation in conceptual hydrological model calibration using climate simulations | Water Resources Research | 64 | journal | — | no-oa |  | supplement | — |
-| 46 | S046 | 2018 | Order-based error for managing ensembles of surrogates in mesh adaptive direct search | Journal of global optimization | 61 | journal | — | no-oa |  | supplement | — |
+| 46 | S046 | 2018 | Order-based error for managing ensembles of surrogates in mesh adaptive direct search | Journal of global optimization | 61 | journal | manual | txt | 30 | supplement | — |
 | 47 | S047 | 2007 | Disjunctive cuts for continuous linear bilevel programming | Optimization Letters | 60 | journal | — | no-oa |  | supplement | — |
-| 48 | S048 | 2006 | Enumeration of all the extreme equilibria in game theory: bimatrix and polymatrix games | Journal of Optimization Theory and Applications | 56 | journal | — | no-oa |  | supplement | — |
+| 48 | S048 | 2006 | Enumeration of all the extreme equilibria in game theory: bimatrix and polymatrix games | Journal of Optimization Theory and Applications | 56 | journal | manual | txt | 24 | supplement | — |
 | 49 | S049 | 2007 | The small octagon with longest perimeter | Journal of Combinatorial Theory, Series A | 53 | journal | — | no-oa |  | supplement | — |
-| 50 | S050 | 2001 | Concavity cuts for disjoint bilinear programming | Mathematical Programming | 53 | journal | — | no-oa |  | supplement | — |
+| 50 | S050 | 2001 | Concavity cuts for disjoint bilinear programming | Mathematical Programming | 53 | journal | manual | txt | 27 | supplement | — |
 | 51 | S051 | 2005 | Essays and surveys in global optimization | Springer Science & Business Media | 51 | book | — | no-oa |  | supplement | — |
 | 52 | S052 | 2001 | Enumeration of all extreme equilibria of bimatrix games | SIAM Journal on Scientific Computing | 51 | journal | — | no-oa |  | supplement | — |
 | 53 | S053 | 2021 | Stochastic mesh adaptive direct search for blackbox optimization using probabilistic estimates | Computational Optimization and Applications | 50 | journal | arXiv | txt | 31 | core | — |
 | 54 | S054 | 2003 | Catalytic combustion kinetics: using a direct search algorithm to evaluate kinetic parameters from light‐off curves | The Canadian Journal of Chemical Engineering | 49 | journal | — | no-oa |  | supplement | — |
 | 55 | S055 | 2018 | Robust optimization of noisy blackbox problems using the mesh adaptive direct search algorithm | Optimization Letters | 41 | journal | — | no-oa |  | supplement | — |
 | 56 | S056 | 2004 | The minimum diameter octagon with unit-length sides: Vincze's wife's octagon is suboptimal | Journal of Combinatorial Theory, Series A | 41 | journal | — | no-oa |  | supplement | — |
-| 57 | S057 | 2010 | Algorithmic parameter optimization of the DFO method with the OPAL framework | Software automatic tuning: from concepts to state-of-the-art results | 40 | chapter | — | no-oa |  | supplement | — |
+| 57 | S057 | 2010 | Algorithmic parameter optimization of the DFO method with the OPAL framework | Software automatic tuning: from concepts to state-of-the-art results | 40 | chapter | manual | txt | 23 | supplement | — |
 | 58 | S058 | 2023 | A general mathematical framework for constrained mixed-variable blackbox optimization problems with meta and categorical variables | Operations Research Forum | 39 | journal | arXiv | txt | 30 | supplement | — |
 | 59 | S059 | 2014 | Optimization of algorithms with OPAL | Mathematical Programming Computation | 38 | journal | url | txt | 19 | supplement | — |
-| 60 | S060 | 2017 | Scenario-tree modeling for stochastic short-term hydropower operations planning | Journal of Water Resources Planning and Management | 35 | journal | — | no-oa |  | supplement | — |
+| 60 | S060 | 2017 | Scenario-tree modeling for stochastic short-term hydropower operations planning | Journal of Water Resources Planning and Management | 35 | journal | manual | txt | 14 | supplement | — |
 | 61 | S061 | 2016 | Dynamic scaling in the mesh adaptive direct search algorithm for blackbox optimization | Optimization and Engineering | 35 | journal | url | txt | 21 | supplement | — |
-| 62 | S062 | 2006 | A note on the definition of a linear bilevel programming solution | Applied mathematics and computation | 34 | journal | — | no-oa |  | supplement | — |
-| 63 | S063 | 2018 | A progressive barrier derivative-free trust-region algorithm for constrained optimization: C. Audet et al. | Computational Optimization and Applications | 33 | journal | — | no-oa |  | core | — |
-| 64 | S064 | 2015 | Linear equalities in blackbox optimization | Computational Optimization and Applications | 33 | journal | — | no-oa |  | supplement | — |
+| 62 | S062 | 2006 | A note on the definition of a linear bilevel programming solution | Applied mathematics and computation | 34 | journal | manual | txt | 7 | supplement | — |
+| 63 | S063 | 2018 | A progressive barrier derivative-free trust-region algorithm for constrained optimization: C. Audet et al. | Computational Optimization and Applications | 33 | journal | manual | txt | 27 | core | — |
+| 64 | S064 | 2015 | Linear equalities in blackbox optimization | Computational Optimization and Applications | 33 | journal | manual | txt | 24 | supplement | — |
 | 65 | S065 | 2011 | A short proof on the cardinality of maximal positive bases | Optimization Letters | 33 | journal | — | no-oa |  | supplement | — |
-| 66 | S066 | 2014 | PSEUDOMARKER 2.0: efficient computation of likelihoods using NOMAD | BMC bioinformatics | 32 | journal | — | no-oa |  | supplement | — |
-| 67 | S067 | 2010 | On Proper Refinement of Bimatrix Games Extreme Nash Equilibria | Groupe d'études et de recherche en analyse des décisions | 32 | report | — | no-oa |  | supplement | — |
+| 66 | S066 | 2014 | PSEUDOMARKER 2.0: efficient computation of likelihoods using NOMAD | BMC bioinformatics | 32 | journal | manual | txt | 9 | supplement | — |
+| 67 | S067 | 2010 | On Proper Refinement of Bimatrix Games Extreme Nash Equilibria | Groupe d'études et de recherche en analyse des décisions | 32 | report | manual | txt | 7 | supplement | — |
 | 68 | S068 | 2018 | Locally weighted regression models for surrogate-assisted design optimization | Optimization and engineering | 31 | journal | url | txt | 24 | supplement | — |
 | 69 | S069 | 2016 | Optimal adaptive sequential designs for crossover bioequivalence studies | Pharmaceutical Statistics | 31 | journal | url | txt | 22 | supplement | — |
-| 70 | S070 | 1997 | Optimisation globale structurée: propriétés, équivalences et résolution | École Polytechnique de Montréal | 30 | thesis | — | no-oa |  | core | — |
+| 70 | S070 | 1997 | Optimisation globale structurée: propriétés, équivalences et résolution | École Polytechnique de Montréal | 30 | thesis | manual | txt | 195 | core | — |
 | 71 | S071 | 2025 | Solar: a solar thermal power plant simulator for blackbox optimization benchmarking: N. Andrés-Thié et al. | Optimization and Engineering | 27 | journal | arXiv | txt | 36 | core | — |
 | 72 | S072 | 2020 | Binary, unrelaxable and hidden constraints in blackbox optimization | Operations Research Letters | 27 | journal | url | txt | 12 | supplement | — |
-| 73 | S073 | 2019 | A hybrid optimization approach for efficient calibration of computationally intensive hydrological models | Hydrological Sciences Journal | 27 | journal | — | no-oa |  | supplement | — |
-| 74 | S074 | 2013 | Snow water equivalent estimation using blackbox optimization | Pacific Journal of Optimization | 27 | journal | — | no-oa |  | supplement | — |
+| 73 | S073 | 2019 | A hybrid optimization approach for efficient calibration of computationally intensive hydrological models | Hydrological Sciences Journal | 27 | journal | manual | txt | 42 | supplement | — |
+| 74 | S074 | 2013 | Snow water equivalent estimation using blackbox optimization | Pacific Journal of Optimization | 27 | journal | manual | txt | 26 | supplement | — |
 | 75 | S075 | 2013 | Identifying optimal conditions for magnesium based alloy design using the Mesh Adaptive Direct Search algorithm | Thermochimica Acta | 26 | journal | — | no-oa |  | supplement | — |
-| 76 | S076 | 2009 | A new sequence form approach for the enumeration and refinement of all extreme Nash equilibria for extensive form games | International Game Theory Review | 26 | journal | — | no-oa |  | supplement | — |
+| 76 | S076 | 2009 | A new sequence form approach for the enumeration and refinement of all extreme Nash equilibria for extensive form games | International Game Theory Review | 26 | journal | manual | txt | 15 | supplement | — |
 | 77 | S077 | 2005 | Nonlinear programming by mesh adaptive direct searches | — | 26 | other | — | no-oa |  | supplement | — |
 | 78 | S078 | 2012 | Trade-off studies in blackbox optimization | Optimization Methods and Software | 25 | journal | — | no-oa |  | supplement | — |
 | 79 | S079 | 2018 | Efficient solution of quadratically constrained quadratic subproblems within the mesh adaptive direct search algorithm | European Journal of Operational Research | 24 | journal | — | no-oa |  | supplement | — |
-| 80 | S080 | 2009 | Isoperimetric polygons of maximum width | Discrete & Computational Geometry | 24 | journal | — | no-oa |  | supplement | — |
+| 80 | S080 | 2009 | Isoperimetric polygons of maximum width | Discrete & Computational Geometry | 24 | journal | manual | txt | 16 | supplement | — |
 | 81 | S081 | 2014 | A variance-based method to rank input variables of the mesh adaptive direct search algorithm | Optimization Letters | 23 | journal | — | no-oa |  | supplement | — |
 | 82 | S082 | 2009 | Extremal problems for convex polygons-an update | Lectures on Global Optimization | 22 | chapter | — | no-oa |  | supplement | — |
 | 83 | S083 | 2008 | Exact L2-norm plane separation | Optimization Letters | 22 | journal | — | no-oa |  | supplement | — |
@@ -98,24 +98,24 @@
 | 86 | S086 | 2009 | The mesh adaptive direct search algorithm for periodic variables | Groupe d'études et de recherche en analyse des décisions | 19 | report | — | no-oa |  | supplement | — |
 | 87 | S087 | 2013 | Efficient use of parallelism in algorithmic parameter optimization applications | Optimization Letters | 18 | journal | — | no-oa |  | supplement | — |
 | 88 | S089 | 2003 | Optimisation des stratégies de maintenance intégration à la production | Groupe d'études et de recherche en analyse des décisions | 17 | report | — | no-oa |  | supplement | — |
-| 89 | S090 | 2022 | Escaping unknown discontinuous regions in blackbox optimization | SIAM Journal on Optimization | 15 | journal | — | no-oa |  | supplement | — |
+| 89 | S090 | 2022 | Escaping unknown discontinuous regions in blackbox optimization | SIAM Journal on Optimization | 15 | journal | manual | txt | 28 | supplement | — |
 | 90 | S091 | 2011 | A new multi-objective approach for the portfolio selection problem with skewness | Advances in Quantitative Analysis of Finance and Accounting | 15 | journal | — | no-oa |  | supplement | — |
 | 91 | S092 | 2025 | A distance for mixed-variable and hierarchical domains with meta variables | Neurocomputing | 12 | journal | arXiv | txt | 33 | core | — |
-| 92 | S093 | 2013 | Maximal perimeter, diameter and area of equilateral unit-width convex polygons | Journal of Global Optimization | 12 | journal | — | no-oa |  | supplement | — |
+| 92 | S093 | 2013 | Maximal perimeter, diameter and area of equilateral unit-width convex polygons | Journal of Global Optimization | 12 | journal | manual | txt | 12 | supplement | — |
 | 93 | S094 | 2021 | Using symbolic calculations to determine largest small polygons | Journal of Global Optimization | 11 | journal | url | txt | 10 | supplement | — |
 | 94 | S095 | 2018 | Tuning Runge-Kutta parameters on a family of ordinary differential equations | International Journal of Mathematical Modelling and Numerical Optimisation | 11 | journal | url | txt | 11 | supplement | — |
 | 95 | S096 | 2011 | The small hexagon and heptagon with maximum sum of distances between vertices | Journal of Global Optimization | 11 | journal | — | no-oa |  | supplement | — |
-| 96 | S098 | 2004 | An exact method for fractional goal programming | Journal of Global Optimization | 11 | journal | — | no-oa |  | supplement | — |
+| 96 | S098 | 2004 | An exact method for fractional goal programming | Journal of Global Optimization | 11 | journal | manual | txt | 8 | supplement | — |
 | 97 | S099 | 2022 | Quantifying uncertainty with ensembles of surrogates for blackbox optimization: C. Audet et al. | Computational Optimization and Applications | 10 | journal | arXiv | txt | 36 | supplement | — |
 | 98 | S100 | 1998 | Complete enumeration of equilibria for two-person games in strategic and sequence forms | Groupe d'études et de recherche en analyse des décisions | 10 | report | — | no-oa |  | supplement | — |
 | 99 | S101 | 2025 | Benchmarking constrained, multi-objective and surrogate-assisted derivative-free optimization methods | Les Cahiers du GERAD ISSN 711, 2440 | 9 | report | url | txt | 17 | core | — |
 | 100 | S102 | 2013 | Metamaterial design by mesh adaptive direct search | Numerical Methods for Metamaterial Design, 71-96 | 9 | chapter | — | no-oa |  | supplement | — |
-| 101 | S103 | 2009 | Simple polygons of maximum perimeter contained in a unit disk | Discrete & Computational Geometry 41 (2), 208-215 | 9 | journal | — | no-oa |  | supplement | — |
-| 102 | S104 | 2009 | Ranking small regular polygons by area and by perimeter | Journal of Applied and Industrial Mathematics 3 (1), 21-27 | 9 | journal | — | no-oa |  | supplement | — |
+| 101 | S103 | 2009 | Simple polygons of maximum perimeter contained in a unit disk | Discrete & Computational Geometry 41 (2), 208-215 | 9 | journal | manual | txt | 8 | supplement | — |
+| 102 | S104 | 2009 | Ranking small regular polygons by area and by perimeter | Journal of Applied and Industrial Mathematics 3 (1), 21-27 | 9 | journal | manual | txt | 9 | supplement | — |
 | 103 | S105 | 2004 | Exact solution of three nonconvex quadratic programming problems | Frontiers in Global Optimization, 25-43 | 9 | chapter | — | no-oa |  | supplement | — |
 | 104 | S106 | 1998 | On the linear maxmin and related programming problems | Multilevel Optimization: Algorithms and Applications, 181-208 | 8 | chapter | — | no-oa |  | supplement | — |
-| 105 | S107 | 2023 | Methodology for the redesign of compressor blades undergoing nonlinear structural interactions: Application to blade-tip/casing contacts | Journal of Engineering for Gas Turbines and Power 145 (5), 051002 | 7 | journal | — | no-oa |  | supplement | — |
-| 106 | S108 | 2005 | Quatre petits octogones | Groupe d'études et de recherche en analyse des décisions | 7 | report | — | no-oa |  | supplement | — |
+| 105 | S107 | 2023 | Methodology for the redesign of compressor blades undergoing nonlinear structural interactions: Application to blade-tip/casing contacts | Journal of Engineering for Gas Turbines and Power 145 (5), 051002 | 7 | journal | manual | txt | 22 | supplement | — |
+| 106 | S108 | 2005 | Quatre petits octogones | Groupe d'études et de recherche en analyse des décisions | 7 | report | manual | txt | 21 | supplement | — |
 | 107 | S109 | 2005 | Robust optimization of chemical processes using a MADS algorithm | Groupe d'études et de recherche en analyse des décisions | 7 | report | — | no-oa |  | supplement | — |
 | 108 | S110 | 2003 | Generalized Pattern Search Algorithms: unconstrained and constrained cases | IMA Workshop, 56 | 7 | talk | — | no-oa |  | skip | — |
 | 109 | S111 | 2002 | Optimization using surrogates for engineering design | IMA Postdoctoral Fellowship Lecture Series | 7 | talk | — | no-oa |  | skip | — |
@@ -124,8 +124,8 @@
 | 112 | S114 | 2019 | Dynamic improvements of static surrogates in direct search optimization: C. Audet, J. Côté-Massicotte | Optimization Letters 13 (6), 1433-1447 | 6 | journal | url | txt | 15 | supplement | — |
 | 113 | S115 | 2017 | Maximal area of equilateral small polygons | The American Mathematical Monthly 124 (2), 175-178 | 6 | journal | — | no-oa |  | supplement | — |
 | 114 | S116 | 2016 | A derivative-free trust-region augmented Lagrangian algorithm | GERAD HEC Montréal | 6 | report | url | txt | 13 | supplement | — |
-| 115 | S117 | 2013 | The small octagons of maximal width | Discrete & Computational Geometry 49 (3), 589-600 | 6 | journal | — | no-oa |  | supplement | — |
-| 116 | S118 | 2012 | Construction of sparse signal representations with adaptive multiscale orthogonal bases | Signal Processing 92 (6), 1446-1457 | 6 | journal | — | no-oa |  | supplement | — |
+| 115 | S117 | 2013 | The small octagons of maximal width | Discrete & Computational Geometry 49 (3), 589-600 | 6 | journal | manual | txt | 12 | supplement | — |
+| 116 | S118 | 2012 | Construction of sparse signal representations with adaptive multiscale orthogonal bases | Signal Processing 92 (6), 1446-1457 | 6 | journal | manual | txt | 21 | supplement | — |
 | 117 | S119 | 2010 | A note on diameters of point sets | Optimization Letters 4 (4), 585-595 | 6 | journal | — | no-oa |  | supplement | — |
 | 118 | S120 | 2025 | The cosine measure relative to a subspace | Computational Optimization and Applications 92 (1), 125-153 | 5 | journal | arXiv | txt | 23 | core | — |
 | 119 | S121 | 2025 | CatMADS: Mesh Adaptive Direct Search for constrained blackbox optimization with categorical variables | arXiv preprint arXiv:2506.06937 | 5 | preprint | arXiv | txt | 29 | core | — |
@@ -138,9 +138,9 @@
 | 126 | S128 | 2026 | A summary of benchmarking constrained, multi-objective and surrogate-assisted optimization methods | Optimization Letters, 1-20 | 4 | journal | url | txt | 17 | core | — |
 | 127 | S129 | 2025 | Adaptive direct search algorithms for constrained optimization | arXiv preprint arXiv:2507.23054 | 4 | preprint | arXiv | txt | 30 | core | — |
 | 128 | S130 | 2025 | Cat-Suite: A collection of optimization problems with categorical and quantitative variables for benchmarking | Les Cahiers du GERAD ISSN 711, 2440 | 4 | report | url | txt | 45 | core | — |
-| 129 | S132 | 2022 | Correction to: Numerical certification of Pareto optimality for biobjective nonlinear problems | Journal of Global Optimization, 909-910 | 4 | journal | — | no-oa |  | supplement | — |
+| 129 | S132 | 2022 | Correction to: Numerical certification of Pareto optimality for biobjective nonlinear problems | Journal of Global Optimization, 909-910 | 4 | journal | manual | txt | 2 | supplement | — |
 | 130 | S133 | 2021 | Combining cross-entropy and MADS methods for inequality constrained global optimization | Operations Research Forum 2 (3), 33 | 4 | journal | arXiv | txt | 22 | supplement | — |
-| 131 | S134 | 2014 | A note on bimatrix game maximal Selten subsets | Arabian Journal of Mathematics 3(3), 299-311 | 4 | journal | — | no-oa |  | supplement | — |
+| 131 | S134 | 2014 | A note on bimatrix game maximal Selten subsets | Arabian Journal of Mathematics 3(3), 299-311 | 4 | journal | manual | txt | 13 | supplement | — |
 | 132 | S135 | 2008 | Localisation de stations de mesure automatisée du couvert nival | Proceedings of the Second Montreal Industrial Problem Solving Workshop, CRM… | 4 | report | — | no-oa |  | supplement | — |
 | 133 | S137 | 2025 | Convergence towards a local minimum by direct search methods with a covering step: C. Audet et al. | Optimization Letters 19 (1), 211-231 | 3 | journal | arXiv | txt | 19 | core | — |
 | 134 | S138 | 2024 | Counterexample and an additional revealing poll step for a result of "analysis of direct searches for discontinuous functions" | Mathematical Programming 208 (1), 411-424 | 3 | journal | arXiv | txt | 10 | core | — |
@@ -149,8 +149,8 @@
 | 137 | S142 | 2022 | The equilateral small octagon of maximal width | Mathematics of Computation 91 (336), 2027-2040 | 3 | journal | arXiv | txt | 13 | supplement | — |
 | 138 | S143 | 2020 | Monotonic grey box direct search optimization: C. Audet et al. | Optimization Letters 14 (1), 3-18 | 3 | journal | url | txt | 17 | supplement | — |
 | 139 | S144 | 2019 | Constraint scaling in the Mesh Adaptative Direct Search algorithm | Groupe d'études et de recherche en analyse des décisions | 3 | report | url | txt | 18 | supplement | — |
-| 140 | S145 | 2014 | Replacement scheduling of a fleet of hydroelectric generators: a case study | International Journal of Performability Engineering 10 (6), 615 | 3 | journal | — | no-oa |  | supplement | — |
-| 141 | S146 | 2010 | Optimization problems in planar geometry | GLOBAL OPTIMIZATION WORKSHOP, 3-6 | 3 | conference | — | no-oa |  | supplement | — |
+| 140 | S145 | 2014 | Replacement scheduling of a fleet of hydroelectric generators: a case study | International Journal of Performability Engineering 10 (6), 615 | 3 | journal | manual | txt | 16 | supplement | — |
+| 141 | S146 | 2010 | Optimization problems in planar geometry | GLOBAL OPTIMIZATION WORKSHOP, 3-6 | 3 | conference | manual | txt | 4 | supplement | — |
 | 142 | S148 | 1999 | On the convergence of mixed integer pattern search algorithms | Technical Report CRPC-TR98785, CRPC, Rice University | 3 | report | — | no-oa |  | supplement | — |
 | 143 | S150 | 2025 | Risk averse constrained blackbox optimization under mixed aleatory/epistemic uncertainties | Computational Optimization and Applications 92, 375-435 | 2 | journal | arXiv | txt | 46 | core | — |
 | 144 | S151 | 2021 | A derivative-free approach to optimal control problems with piecewise constant Mayer cost function | arXiv preprint arXiv:2112.00413 | 2 | preprint | arXiv | txt | 20 | supplement | — |
@@ -160,9 +160,9 @@
 | 148 | S156 | 2026 | Benchmarking Bilevel Derivative-Free Optimization Algorithms | arXiv preprint arXiv:2605.30531 | 1 | preprint | arXiv | txt | 22 | core | — |
 | 149 | S157 | 2026 | Surrogate-based categorical neighborhoods for mixed-variable blackbox optimization | arXiv preprint arXiv:2603.27839 | 1 | preprint | arXiv | txt | 29 | core | — |
 | 150 | S158 | 2026 | A penalty-interior point method combined with MADS for equality and inequality constrained optimization | arXiv preprint arXiv:2601.20811 | 1 | preprint | arXiv | txt | 30 | core | — |
-| 151 | S159 | 2025 | Cesogen: cellular solid generator | Science and Technology of Advanced Materials: Methods | 1 | journal | — | no-oa |  | core | — |
+| 151 | S159 | 2025 | Cesogen: cellular solid generator | Science and Technology of Advanced Materials: Methods | 1 | journal | manual | txt | 21 | core | — |
 | 152 | S160 | 2025 | Blackbox optimization for origami-inspired bistable structures | Optimization Methods and Software | 1 | journal | arXiv | txt | 15 | core | — |
-| 153 | S163 | 2023 | Hierarchically constrained multi-fidelity blackbox optimization | Groupe d'études et de recherche en analyse des décisions | 1 | report | — | no-oa |  | supplement | — |
+| 153 | S163 | 2023 | Hierarchically constrained multi-fidelity blackbox optimization | Groupe d'études et de recherche en analyse des décisions | 1 | report | manual | txt | 24 | supplement | — |
 | 154 | S166 | 2019 | Low-cost and representative surrogate hydrological models. Part II-Use within calibration frameworks | Groupe d'études et de recherche en analyse des décisions | 1 | report | url | txt | 18 | supplement | — |
 | 155 | S167 | 2019 | Low-cost and representative surrogate hydrological models. Part I-Construction of surrogates | Groupe d'études et de recherche en analyse des décisions | 1 | report | url | txt | 22 | supplement | — |
 | 156 | S168 | 2018 | Review of the quality of approximated Pareto fronts in multiobjective optimization, Journées de l'optimisation | JOpt | 1 | talk | — | no-oa |  | skip | — |
@@ -177,9 +177,9 @@
 | 165 | S179 | 2024 | Optimizing a cellular solid compression problem via the NOMAD blackbox optimizer | Mathematical Optimization Society (MOS) | — | talk | — | no-oa |  | skip | — |
 | 166 | S180 | 2024 | Blackbox optimization for origami-inspired multistable structures | Mathematical Optimization Society (MOS) | — | talk | — | no-oa |  | skip | — |
 | 167 | S181 | 2024 | Hierarchically constrained multi-fidelity blackbox optimization | Mathematical Optimization Society (MOS) | — | talk | — | no-oa |  | skip | — |
-| 168 | S184 | 2023 | Two-Way Blade Modeling Method for Structural Redesign of Compressor Blades | AIAA Journal | — | journal | — | no-oa |  | supplement | — |
+| 168 | S184 | 2023 | Two-Way Blade Modeling Method for Structural Redesign of Compressor Blades | AIAA Journal | — | journal | manual | txt | 38 | supplement | — |
 | 169 | S185 | 2023 | Sequential stochastic blackbox optimization with zeroth order gradient estimators | MOPTA 2023 | — | talk | — | no-oa |  | skip | — |
-| 170 | S186 | 2022 | Second order sliding mode twisting controller tuning based on two-level optimization process | 2022 IEEE 61st Conference on Decision and Control (CDC) | — | conference | — | no-oa |  | supplement | — |
+| 170 | S186 | 2022 | Second order sliding mode twisting controller tuning based on two-level optimization process | 2022 IEEE 61st Conference on Decision and Control (CDC) | — | conference | manual | txt | 7 | supplement | — |
 | 171 | S187 | 2022 | Combining Cross Entropy and MADS methods for inequality constrained global optimization | JOPT 2022 | — | talk | — | no-oa |  | skip | — |
 | 172 | S188 | 2022 | Risk-adverse optimization by Conditional Value-at-Risk and stochastic approximation | Journées de l'Optimisation 2022 | — | talk | — | no-oa |  | skip | — |
 | 173 | S190 | 2021 | Optimisation continue: Problèmes linéaires et non linéaires | Les Presses de l'Université de Montréal | — | book | — | no-oa |  | supplement | — |
@@ -200,15 +200,15 @@
 | 188 | S209 | 2008 | Algorithms for Blackbox Optimization using Surrogate Function | — | — | other | — | no-oa |  | supplement | — |
 | 189 | S211 | 2003 | The algorithmic infrastructure for the surrogate management framework | — | — | talk | — | no-oa |  | skip | — |
 | 190 | S212 | 2003 | Pattern Search for Mixed Variable Optimization Problems | — | — | other | — | no-oa |  | supplement | — |
-| 191 | S213 | 2003 | Pattern search algorithms for mixed variable general constrained optimization problems | PhDT | — | thesis | — | no-oa |  | supplement | — |
+| 191 | S213 | 2003 | Pattern search algorithms for mixed variable general constrained optimization problems | PhDT | — | thesis | manual | txt | 193 | supplement | — |
 | 192 | S214 | 2003 | Modelling and optimization of the automotive catalytic converter | Canadian Mathematical Society (CMS) | — | talk | — | no-oa |  | skip | — |
 | 193 | S215 | 2003 | Optimisation et intégration à la production des stratégies de maintenance | Journal européen des systèmes automatisés | — | journal | — | no-oa |  | supplement | — |
 | 194 | S216 | 2001 | Industrial Strength Derivative-Free Optimization | — | — | talk | — | no-oa |  | skip | — |
 | 195 | S218 | — | Third Derivative-Free Optimization Symposium | — | — | other | — | no-oa |  | supplement | — |
 | 196 | S221 | — | Three little octagons | — | — | other | — | no-oa |  | supplement | — |
-| 197 | D001 | 2008 | Erratum: Mesh adaptive direct search algorithms for constrained optimization | SIAM Journal on Optimization 18(4), 1501-1503 | — | journal | — | no-oa |  | supplement | — |
-| 198 | D002 | 2012 | On proper refinement of Nash equilibria for bimatrix games | Automatica | — | journal | — | no-oa |  | supplement | — |
-| 199 | D003 | 2022 | Numerical certification of Pareto optimality for biobjective nonlinear problems | Journal of Global Optimization 83(4), 891-908 | — | journal | — | no-oa |  | supplement | — |
+| 197 | D001 | 2008 | Erratum: Mesh adaptive direct search algorithms for constrained optimization | SIAM Journal on Optimization 18(4), 1501-1503 | — | journal | manual | txt | 2 | supplement | — |
+| 198 | D002 | 2012 | On proper refinement of Nash equilibria for bimatrix games | Automatica | — | journal | manual | txt | 7 | supplement | — |
+| 199 | D003 | 2022 | Numerical certification of Pareto optimality for biobjective nonlinear problems | Journal of Global Optimization 83(4), 891-908 | — | journal | manual | txt | 27 | supplement | — |
 | 200 | D004 | 2020 | Model-based methods in derivative-free nonsmooth optimization | Numerical Nonsmooth Optimization: State of the Art Algorithms (A.M. Bagirov et al., eds.), Springer | — | chapter | — | no-oa |  | supplement | — |
 | 201 | D005 | 2026 | Derivative-Free and Blackbox Optimization (2nd edition) | Springer Series in Operations Research and Financial Engineering, Springer Cham | — | book | — | no-oa |  | core | — |
 | 202 | D006 | 2026 | Micro-PRIAD: A power utility simulator for blackbox optimization benchmarking | Les Cahiers du GERAD G-2026-45 | — | report | url | txt | 33 | core | — |
@@ -221,6 +221,6 @@
 | 209 | D013 | 2001 | Notes de cours, MTH6404, Programmation en nombres entiers | Course notes, Polytechnique Montréal | — | other | — | no-oa |  | supplement | — |
 | 210 | D014 | 2011 | Notes de cours, MTH1101, Calcul I | Course notes, Polytechnique Montréal | — | other | — | no-oa |  | supplement | — |
 | 211 | D015 | 2015 | Direct search airfoil optimization using far-field drag decomposition results | 53rd AIAA Aerospace Sciences Meeting (AIAA 2015-1720) | — | conference | — | no-oa |  | supplement | — |
-| 212 | D016 | 2004 | Optimization tools for engineering design using surrogate functions | DTIC technical report ADA420453 | — | report | — | no-oa |  | supplement | — |
+| 212 | D016 | 2004 | Optimization tools for engineering design using surrogate functions | DTIC technical report ADA420453 | — | report | manual | txt | 19 | supplement | — |
 
-212 works · txt 57 · pdf 0 · no-oa 155
+212 works · txt 116 · pdf 0 · no-oa 96

@@ -1,0 +1,150 @@
+[
+ {
+  "id": "S236",
+  "year": "2007",
+  "title": "SIAG/OPT Views-and-News",
+  "read_level": "full",
+  "contribution": "Conn's single-author, first-person essay My Experiences as an Industrial Research Mathematician (issue pp. 1-7): the first primary, quotable statement of how industrial problems reached him, what made the IBM circuit-tuning project succeed (state-of-the-art optimization + domain experts + familiar interfaces, with derivatives as the deciding technical argument), how he chose later topics (MINLP with CMU, petroleum), and how he weighs an industrial research lab against a university. Other items in the issue (Resende pp. 8-19, Bulletin, Chairman's Column, Editor's comments) are by other authors.",
+  "problem_entry": "Commissioned by the editor for an issue themed Optimizers in Industry (pp. 1, 23); within it, three entry routes: a colleague's minimax question led to an internal circuit-tuning workshop where Conn said the users ran 1960s algorithms (p. 3); a management call for IBM-CMU projects plus foreseen discrete variables in circuits led to MINLP (p. 4); after circuit tuning became routine he moved deliberately into petroleum via small first-of-a-kind customer projects (pp. 5-6).",
+  "key_idea": "Industrial research labs and universities are complementary (p. 2); applied success needs state-of-the-art optimization, domain experts and familiar interfaces together, and software users are comfortable with outranks a twice-as-good algorithm (p. 4); derivatives, not approximation order, decide the simulator (p. 3); intimate collaboration with end-users and domain experts is required (p. 5); applying optimization is almost a duty (p. 5).",
+  "assumptions": "Explicitly IBM-Watson-specific: an atypical industrial position (p. 2), investment and breadth of skills unavailable in academia (p. 4, p. 5), world-class engineers and supportive immediate management (pp. 3-4), an in-house simulator with derivatives (p. 3), a large DARPA grant (p. 2); costs named: hierarchy, IP/legal issues, short-term variance, worse computing support, harder travel (pp. 2-3).",
+  "proof_devices": [
+   "no proofs; case-based argument organised by how application-driven each project is (sections 3-5, pp. 3-7)",
+   "highlights and lowlights listed side by side (pp. 2-3)",
+   "claims backed by concrete figures: grant sizes, ~70x simulator speed-up, 18-month survival fight, millions gained (pp. 2-3)",
+   "simulation-based stochastic formulation: expert-estimated failure distributions -> simulated scenarios -> predictive cost distribution -> derivative-free optimization of the schedule (p. 7)",
+   "forward and adjoint derivatives derived in one algebraic framework for history matching (p. 6)"
+  ],
+  "experiments": "No experiments; reported outcomes: circuit tool deployed for all IBM custom circuits (p. 4); respectable seismic fit on a deliberately right-sized synthetic model, less successful on a West Africa deltaic model (p. 6); history-matching benchmark of three tools on a partner-supplied synthetic set applied identically plus a near-real water-flooding case, good to excellent matches and results qualitatively similar to commercial software (p. 6); maintenance scheduling in progress (pp. 6-7).",
+  "positioning": "Argues for industrial research labs against their decline (pp. 2, 7); criticises outside CAD vendors' promised tools (no derivatives, IP disclosure) (p. 3); credits engineers, Jon Lee (MINLP; he calls his own contribution minimal) and geophysics and petroleum partners (pp. 4-6); cites his LANCELOT, TRM and IDFO books, JiffyTune, BONMIN, IPOPT, and CST 1997 next to Powell's NEWUOA for DFO (pp. 4-8).",
+  "writing": "First-person, candid and self-deprecating, with explicit personal hedges (p. 1, p. 5), balanced positives and negatives (pp. 2-3, 6), lessons stated as aphorisms (pp. 3-5), footnotes for non-specialists (pp. 4-6), and a closing call to action (p. 7).",
+  "limits_future": "Personal and IBM-specific; silent on convergence theory, model geometry, the DFO programme, CUTE, supervision and paper writing; MINLP credited mostly to others; petroleum work early, some results weaker (pp. 1-7). Future: petroleum projects, maintenance scheduling generalised to multiple dependent facilities, finishing the third book, strengthening industrial research centres (pp. 6-7).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "First-person 2007 version of the minimax question -> approachable mathematician -> workshop story, plus the 1960s-algorithms remark, slow/tedious/manual/error-prone tuning, standard tool for all custom circuits, an area rich in problems; adds the 18-month survival fight, practitioners' early mistrust, first-of-a-kind pilots; confirms the limitation that it could not have happened in academia.",
+    "pages": "pp. 3-7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Derivatives were the decisive argument for the in-house simulator, and management's failure to see this was the obstacle; forward/adjoint derivatives in history matching.",
+    "pages": "p. 3, p. 6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "DFO (CST 1997, NEWUOA) chosen for maintenance scheduling with a Monte Carlo predictive-cost objective under random failures, a case SKILL.md lists as a blind spot; no results reported.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "For industrial work the stated triad is optimization + domain experts + familiar interfaces, not theorem + code + numbers; convergence theory is never mentioned; software as research product supported (BONMIN, three books).",
+    "pages": "p. 4, p. 5, p. 7"
+   },
+   {
+    "method": "Method 1 say-do line / Honest Boundary",
+    "relation": "contradiction",
+    "note": "SKILL.md says no first-person methodology essay was found; this is one, and it partly recovers how Conn handled IBM engineers and management.",
+    "pages": "pp. 1-7"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Open-source MINLP package released with test problems as fast as possible (H7); two-tier history-matching benchmark (identical-treatment synthetic set + near-real case) vs commercial tools; weaker result reported; right-sized synthetic model.",
+    "pages": "p. 5, p. 6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "MINLP project built to join IBM's linear and nonlinear sides with CMU; BONMIN hybrid of two classical algorithms (Conn's own contribution minimal); 1990s algorithms carried into circuit tuning; cites Powell's NEWUOA with his own survey.",
+    "pages": "pp. 3-5, p. 7"
+   },
+   {
+    "method": "Heuristic H8",
+    "relation": "evidence",
+    "note": "LANCELOT replaced by IPOPT in the circuit tool; he remarks that age is often a negative attribute.",
+    "pages": "p. 4, p. 5"
+   },
+   {
+    "method": "Heuristic H9",
+    "relation": "evidence",
+    "note": "The minimax question led to the circuit-tuning workshop, in Conn's own words.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Research Taste mark 3 / warning sign 6",
+    "relation": "evidence",
+    "note": "Wanted problems whose answers people were extremely interested in; claims calibrated as qualitatively similar to commercial software and as reasonable confidence in feasibility.",
+    "pages": "p. 2, p. 6"
+   },
+   {
+    "method": "How to Use: weak spots (integer variables)",
+    "relation": "variant",
+    "note": "Conn initiated and chose the IBM-CMU MINLP project, though he calls his own contribution minimal.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "interface outranks algorithm factor",
+    "evidence": "Adoption needed software in the users' familiar environment; without it a twice-as-good algorithm would have failed; the project would not have got off the ground without the engineers and familiar interfaces.",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "right-sized synthetic model",
+    "evidence": "Seismic synthetic model designed realistic enough to expose the challenges but small enough that progress would not slow to a crawl; then a real deltaic case, reported as less successful.",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "topic choice by explicit criteria",
+    "evidence": "MINLP chosen for in-house strength on both sides, a complementary partner (CMU), applications, being under-researched and of rising importance; petroleum chosen for significance, complexity, investment, experts and contacts.",
+    "pages": "p. 4, p. 6"
+   },
+   {
+    "pattern": "advocacy is part of the project",
+    "evidence": "18-month fight for survival after the prototype; promises can matter more than delivery; domain experts eventually convinced higher management.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "pattern": "move on after adoption",
+    "evidence": "Once circuit tuning was an accepted daily tool he wanted to make a splash in a new area (petroleum).",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "low-stake exploratory pilot",
+    "evidence": "IBM first-of-a-kind projects: small initial customer investment, exploratory, not all continue; used for seismic matching and history matching.",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "inner tension: craftsmanship vs good enough",
+    "evidence": "Pressure to finish adequate-but-improvable work is his largest lowlight, yet he values applications where even suboptimal solutions help a great deal.",
+    "pages": "p. 2, p. 4, p. 6"
+   }
+  ],
+  "transferable": [
+   "In a users' meeting, date the algorithms they run against the current state of the art and offer to present the newer ones (p. 3).",
+   "Choose the next topic from the structural change coming in your partner's problem, e.g. discrete variables entering a continuous tuning problem (p. 4).",
+   "Write explicit selection criteria before entering a new application area (p. 4, p. 6).",
+   "Choose the simulator by what the optimizer needs (derivatives, speed, reliability) and let domain experts argue it to decision makers (pp. 3-4).",
+   "Put the solver behind interfaces the users already know and count that as project work (p. 4).",
+   "Size the synthetic test model deliberately, then run a real case and report where it did worse (p. 6).",
+   "Benchmark against commercial tools on a partner-supplied synthetic set applied identically plus one near-real case; word the claim as similar when that is what you see (p. 6).",
+   "For schedules under random failures, simulate scenarios from expert-estimated distributions to get a predictive cost distribution and optimize with DFO (p. 7).",
+   "Seed a new area by releasing an open-source package with test problems early (p. 5)."
+  ],
+  "coauthors": "none (single-author essay); the Scholar record's other names (Resende, Anstreicher, Vicente) are authors of other items in the same newsletter issue",
+  "quotes": [
+   {
+    "text": "I said it was very interesting but it was too bad that they were using 1960s algorithms in the 1990s and so I was asked to tell them about 1990 algorithms.",
+    "page": 3
+   },
+   {
+    "text": "It also impressed upon me the importance of having good software that worked in an environment in which those who had to use it were comfortable. Without which, algorithms twice as good would not have succeeded.",
+    "page": 4
+   }
+  ]
+ }
+]
