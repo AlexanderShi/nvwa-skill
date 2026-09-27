@@ -1,0 +1,328 @@
+[
+ {
+  "id": "S018",
+  "year": "1982",
+  "title": "Nonlinear programming via an exact penalty function: asymptotic analysis",
+  "read_level": "full",
+  "contribution": "Proves local convergence and a 2-step superlinear rate for the local phase of the Coleman-Conn exact-penalty method, obtained by removing the Z^T B v term from the RQP step and restoring with constraint values re-evaluated at x+h; also shows by construction that the RQP direction can increase the exact penalty at points arbitrarily close to x*. (Read from the Waterloo report CS-80-30, June 1980, via page images; the text file is empty.)",
+  "problem_entry": "RQP is fast locally but not robustly global, and no globalization is yet satisfactory; the authors' own global exact-penalty method [4] has numbers and a global proof, and this paper is meant to prove its superlinear rate and compare it with RQP; a geometric reading of the RQP step reveals unnecessary computation and storage (pp. 4-5).",
+  "key_idea": "Split the RQP step into a vertical step v (Newton on the active constraints, exact information) and a horizontal step h (approximate projected Newton step); following Powell, drop the Z^T B v term, take h first and v after it with constraint values re-evaluated at x+h, so that only the projected Hessian is needed and no refactorization occurs; this is exactly what the global method reduces to near x* (pp. 5-8).",
+  "assumptions": "f and phi_i C^2, second-order sufficiency, iterates in a compact W, linearly independent active gradients, active set identified, uniform bounds on Z^T B Z, x_k -> x*, and for the rate Z^T B Z -> Z*^T G_L Z*, which is admitted to require gradient differencing near x* (pp. 5, 8-9, 11, 15).",
+  "proof_devices": [
+   "orthogonal error split x - x* = A w + Z u with a separable 2-step superlinear criterion (Lemma 4, p. 10)",
+   "tangential step changes constraint values only at O(||h||^2), giving ||v|| <= L2||x - x*|| (Lemma 2, p. 9)",
+   "mean-value form phi_j(x_k) = grad phi_j(xi_j)^T (x_k - x*) with an error matrix E_k -> 0 (Theorem 1, pp. 10-11)",
+   "2-step contraction: 1/4 bounds on each error component give ||x^2 - x*|| <= 1/2 ||x^0 - x*|| (Lemmas 5-6, Theorem 4, pp. 12-13)",
+   "local counterexample for RQP: p(x'+d) - p(x') = -1/2 d^T[G_f + sum(1/mu - 2 lambda_i)G_phi_i]d + o(||d||^2), negative definite bracket for lambda_i in (0, 1/(2mu)) (pp. 14-15)"
+  ],
+  "experiments": "none in this paper; numerical results are in the companion global-analysis report [4], whose implementation uses rank-2 updates far from x* and switches to gradient differencing near it (pp. 4, 15).",
+  "positioning": "Continues the authors' own [3], [4] and the Conn-Pietrzykowski penalty line [7]; uses Powell [15] as setting and tool; credits Murray-Wright; criticizes Han directly: global and superlinear properties do not mesh without an unsafe switch (pp. 4-7, 14, 16).",
+  "writing": "12 printed pages; the algorithm is derived from a geometric reading of the rival's step; lettered assumptions; a one-word proof of the combination lemma; the conclusion is a question about the rival answered by construction; one slip (a reference to an Algorithm 2 that does not appear) (pp. 4-15).",
+  "limits_future": "The rate needs projected-Hessian convergence, which needs expensive differencing near x*; future work: a full quasi-Newton version, justified by Powell's result that accuracy along the search directions suffices; delivered in S021 (p. 15).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The triad is split over two reports: global analysis with numbers in [4], local theory here. The theorem is tied to the code by the global-to-local reduction, and the implementation's switch to gradient differencing is what satisfies Theorem 2's hypothesis. This paper itself has no code or numbers.",
+    "pages": "pp. 4, 7, 11, 14-16"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Conn's exact penalty (1977 line) is combined with the RQP school's fast local step, and Powell's RQP result is reused as a proof tool.",
+    "pages": "pp. 4-7, 14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Weak evidence: constraint-manifold structure is used so that only the projected Hessian is approximated and A is not refactorized.",
+    "pages": "pp. 4, 7, 15"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Precursor: the rate is carried by an explicit model-accuracy condition (projected-Hessian convergence) that the code enforces by switching to finite differences near x*; it concerns Hessian accuracy, not geometry.",
+    "pages": "pp. 11, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "global-to-local reduction",
+    "evidence": "The global exact-penalty method automatically reduces to Algorithm 1 near a solution, so only the simple local algorithm is analysed for the rate.",
+    "pages": "pp. 7, 14"
+   },
+   {
+    "pattern": "counterexample against the rival in the conclusion",
+    "evidence": "By construction, the RQP direction can increase the exact penalty arbitrarily close to x*, even in convex examples.",
+    "pages": "pp. 14-15"
+   },
+   {
+    "pattern": "promise-then-deliver sequel",
+    "evidence": "Future work names a full quasi-Newton version and the Powell result supporting it; S021 (1984) delivers it as a direct extension.",
+    "pages": "p. 15; S021 p. 6"
+   },
+   {
+    "pattern": "rate first, convergence second",
+    "evidence": "The 2-step superlinear rate is proved assuming x_k -> x* (Theorems 1-3); local convergence is proved afterwards (Lemmas 5-6, Theorem 4).",
+    "pages": "pp. 8-13"
+   }
+  ],
+  "transferable": [
+   "Write the competitor's step as range-space plus null-space parts, sort the terms by exact vs approximate information, and drop the term the theory says is unimportant (pp. 5-7).",
+   "Prove 2-step superlinear convergence separably: a one-step rate on the range component and a two-step rate on the null component (Lemma 4, p. 10).",
+   "Prove local convergence by 2-step contraction: 1/4 bounds on each component give 1/2 overall, and a linear bound handles the odd iterates (pp. 12-13).",
+   "Build a local negative result for a rival by expanding your merit function along its step and choosing multipliers that make the quadratic form negative definite (pp. 14-15).",
+   "End with a future-work paragraph that names the next theorem and the published result that makes it plausible (p. 15)."
+  ],
+  "coauthors": "T. F. Coleman",
+  "quotes": []
+ },
+ {
+  "id": "S021",
+  "year": "1984",
+  "title": "On the local convergence of a quasi-Newton method for the nonlinear programming problem",
+  "read_level": "full",
+  "contribution": "A local quasi-Newton method for equality-constrained nonlinear programming that recurs a positive-definite approximation to the projected Lagrangian Hessian by a projected DFP/BFGS update, proved locally 2-step Q-superlinearly convergent without convexity. (Read from the Cornell report TR 82-509, August 1982, via page images; the text file is empty.)",
+  "problem_entry": "DFP/BFGS are Q-superlinear and positive definite in the unconstrained case, but no truly Q-superlinear quasi-Newton method is known for nonconvex constrained problems; Powell (R-superlinear only), Han (convex only), Boggs-Tolle-Wang (conditions without an update) and Tanabe (no theory) each leave a gap; earlier methods keep a full n x n positive-definite matrix although only the projection must be positive definite (pp. 5-6).",
+  "key_idea": "Update an (n-t)x(n-t) SPD matrix B approximating Z*^T grad^2 L Z* from reduced secant pairs built from the horizontal step (s = Z^T(x+ - x), y = Z^T[(grad f(x+) - C(x+)lambda) - grad f]); restore with v = -C(C^T C)^{-1} c(x+h); a direct extension of the Coleman-Conn local Newton method (pp. 6-7, 13).",
+  "assumptions": "Equality constraints; f and c C^2 on an open convex D; singular values of C bounded above and below; Lipschitz orthonormal null-space basis Z(x); second-order sufficiency; Lipschitz Hessians on a small D; no finite convergence; x^0 near x* and B_0 near H* in the weighted norm; no convexity (pp. 8-10, 24, 26).",
+  "proof_devices": [
+   "algorithm-independent sufficient condition: ||r_L|| + ||r_c|| = o(||Z^T grad f|| + ||c||) implies 2-step Q-superlinear (Theorem 2.1, p. 10)",
+   "range/null error split with a four-term T1-T4 bound on the null component (pp. 10-12)",
+   "verify the bounded-deterioration hypothesis ||My - M^{-1}s|| <= 1/3 ||M^{-1}s||, M = H*^{-1/2} (Lemma 3.3, pp. 15-16), then apply Dennis-More Lemma 3.1 in the weighted Frobenius norm ||MQM||_F (pp. 16-17)",
+   "Dennis-More-type condition along the steps under summability sum ||x_k - x*|| < infinity (Theorem 3.5, pp. 17-18)",
+   "2-step contraction: quadratic range component (Lemma 3.11) and a 1/4 null-component bound give ||x^{k+1} - x*|| <= 1/2 ||x^{k-1} - x*|| (pp. 21-23)",
+   "induction with the Banach perturbation lemma keeping ||B_k^{-1}|| <= 2 gamma and a geometric sum of deterioration increments (Theorem 3.14, pp. 24-25)"
+  ],
+  "experiments": "none; the practical performance is declared unknown (p. 26).",
+  "positioning": "Extends the authors' 1982a,b papers; places Powell, Han, Boggs-Tolle-Wang and Tanabe by precise gap statements; credits Gill-Murray for linear constraints; openly borrows the Broyden-Dennis-More and Dennis-More machinery; claims conditions slightly more general than Powell's (pp. 5-7, 12, 16-17, 23).",
+  "writing": "The abstract names the pivotal feature (projection, in bold); a roadmap; standing assumptions in bold; the diagnosis flagged as opinion; a design choice whose justification is unproven is disclosed; borrowed proofs are labelled; a half-page conclusion with open problems; about 19 pages of theory, no numbers (pp. 3, 6-10, 16-17, 23, 26).",
+  "limits_future": "Local only; 2-step rather than 1-step; no numerical experience; unknown how to update projected approximations when the active set changes; penalty decrease unproven for quasi-Newton B; future: implementation, practical tests, a line search and globalization (pp. 7, 26).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "contradiction",
+    "note": "Partial contradiction: a theorem-only paper whose practical performance is declared unknown, against the Research Taste claim that a theorem with no code and no numbers never occurs in the confirmed record; the triad is typical of the CGT period, not of the early Coleman-Conn period.",
+    "pages": "p. 26"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Step 1 and Taste mark 2: Theorem 2.1 is an algorithm-independent sufficient condition covering a class of methods.",
+    "pages": "pp. 7, 10, 12"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "The unconstrained Dennis-More / Broyden-Dennis-More quasi-Newton theory is transplanted into the null space of a constrained problem.",
+    "pages": "pp. 7, 16-17, 23"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Exploits the fact that only the projected Hessian must be positive definite, so a smaller matrix is approximated.",
+    "pages": "p. 6"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "The rate is carried by a model-accuracy condition along the steps (3.11), obtained from bounded deterioration; this weakens S018's requirement that the whole projected Hessian converge.",
+    "pages": "pp. 17-18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "two-layer rate analysis",
+    "evidence": "An algorithm-independent sufficient condition on step residuals (Theorem 2.1), then a separate verification for the specific method (Lemma 3.6).",
+    "pages": "pp. 10, 18-19"
+   },
+   {
+    "pattern": "promise-then-deliver sequel",
+    "evidence": "This paper is the quasi-Newton version announced in S018's future work, presented as a direct extension of Coleman-Conn 1982a,b.",
+    "pages": "p. 6; S018 p. 15"
+   },
+   {
+    "pattern": "rate first, convergence second",
+    "evidence": "Theorem 3.7 (rate, assuming summability and a linear bound) precedes the local-convergence results (Theorems 3.14-3.15).",
+    "pages": "pp. 20-26"
+   }
+  ],
+  "transferable": [
+   "State the rate result as an algorithm-independent condition on the residuals of the step equations, then verify it for your method in a separate lemma (pp. 10, 18-19).",
+   "To reuse Dennis-More bounded deterioration in a new setting, prove the single hypothesis it needs for your secant pair (Lemma 3.3, pp. 15-16).",
+   "Prove local convergence by induction, keeping ||B_k - H*||_M <= 2 Delta and ||B_k^{-1}|| <= 2 gamma via the Banach perturbation lemma, with geometrically summable increments (pp. 24-25).",
+   "Build the secant pair in reduced coordinates from the tangential step, with a multiplier-shifted gradient difference (p. 13).",
+   "Build the gap statement as a list of prior methods, each paired with the exact property it lacks (pp. 5-6).",
+   "If a design choice is motivated by a property proven only in a simpler case, say so, and state that the theorems also hold without the choice (p. 7)."
+  ],
+  "coauthors": "T. F. Coleman",
+  "quotes": []
+ },
+ {
+  "id": "S008",
+  "year": "1988",
+  "title": "Global convergence of a class of trust region algorithms for optimization with simple bounds",
+  "read_level": "full",
+  "contribution": "Extends unconstrained trust-region global convergence theory to bound-constrained nonconvex problems by generalizing the Cauchy point to the projected gradient path, under the weakest Hessian-growth condition, and proves finite active-set identification under strict complementarity and second-order convergence results.",
+  "problem_entry": "Bound constraints are among the most common in practice and carry a combinatorial active-set part; Bertsekas's projection method has theory only for convex problems, while trust regions give global convergence on nonconvex unconstrained problems; the paper merges the two (pp. 1-2).",
+  "key_idea": "Any feasible step that achieves a fixed fraction of the model decrease at the generalized Cauchy point (the first minimizer along P[x - t w] inside the trust region) and stays in an enlarged trust region is admissible; there is no quasi-Newton-step requirement, and diagonal scaling allows preconditioned CG (pp. 3-5).",
+  "assumptions": "A graded ladder: AS.1 compact feasible level set; AS.2 f C^2; AS.3 diagonal scalings with bounded inverses; AS.4 sum 1/b_k = infinity (the weakest possible, by Powell's example); AS.5-AS.6 for a true limit; AS.7 plus (155) for active-set identification; AS.8-AS.10 for second order; the algorithm is openly theoretical (pp. 2, 5-7, 17, 19, 25).",
+  "proof_devices": [
+   "piecewise-quadratic slope bound between breakpoints, dq/dt <= -alpha^2 + 2t c2^2 ||B|| (Lemma 4, eq. 75, p. 11)",
+   "bound-constrained Cauchy decrease f - m >= 1/2 c3 h^2 min(h^2/b_k, Delta_k) with criticality h_k = ||P[x_k - w_k] - x_k|| (eq. 79, p. 11; eq. 29, p. 6)",
+   "minimal-counterexample radius bound Delta_k >= c4/b_k (Lemma 7, pp. 14-15)",
+   "counting argument J1 = {k <= pS(k)}, J2 = {k > pS(k)} showing sum 1/b_k < infinity, contradicting AS.4 (Theorem 8, pp. 15-16)",
+   "finite active-set identification via connected sets of limit points and bound persistence (Lemmas 12-13, Theorem 14, pp. 20-22)",
+   "Rayleigh-quotient model-accuracy condition for a second-order limit point (Theorem 17, pp. 25-27)"
+  ],
+  "experiments": "none here; preliminary numerical results are reported in the companion paper [5] (S011) (p. 2).",
+  "positioning": "Builds on Bertsekas (bounds), More (trust-region framework) and Powell (weak Hessian condition); says its proof of the first result differs from Powell's; contrasts with Gay on cost per step; praises a Harwell bound-constrained code as efficient but lacking theory (pp. 2, 7, 14, 27).",
+  "writing": "Figures for the GCP and h_k; a comment after every assumption; warns against reading lim inf as convergence and says the second-order point need not be a minimizer; a list-style conclusion ('interesting for several reasons'); light, attributed hedging (pp. 3, 6, 16, 27).",
+  "limits_future": "A theoretical algorithm with no stopping rule; a true limit needs AS.5-AS.6; a_k is discontinuous; second-order results do not ensure minimizers; future: linear and nonlinear constraints, large-scale use with partial separability (pp. 5, 17, 19, 27-28).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Theory/testing twin with S011, cross-cited ('reported elsewhere [5]'), submitted six months apart and published in the same month.",
+    "pages": "pp. 1-2, 28; S011 pp. 2-3"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Step 1 and Taste mark 2: the theorem covers a class (any step with a fraction of the GCP decrease; free B_k under AS.4; free scaling under AS.3).",
+    "pages": "pp. 4, 6-7, 27"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Unconstrained trust-region theory (More, Powell) transplanted to bounds and merged with Bertsekas's projection.",
+    "pages": "pp. 2, 14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Bounds handled exactly by projection, feasible iterates for hard constraints, structure-preserving diagonal scalings, partial separability for large problems.",
+    "pages": "pp. 4-5, 27"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Precursor: the theorem is carried by a checkable certificate (a fraction of the GCP decrease) that the code enforces; it certifies the step, not the model, which stays almost free under AS.4.",
+    "pages": "pp. 4, 7, 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "generalize the Cauchy point (step certificate)",
+    "evidence": "A cheap reference step whose decrease every admissible step must match up to a constant; all of the convergence theory rests on that inequality.",
+    "pages": "pp. 3-4, 7, 11"
+   },
+   {
+    "pattern": "graded assumption ladder",
+    "evidence": "AS.1-AS.10 are introduced one result at a time, each only where a stronger conclusion needs it.",
+    "pages": "pp. 2, 5-6, 17, 19, 25"
+   }
+  ],
+  "transferable": [
+   "Define the generalized Cauchy point as the first model minimizer along the projected scaled-gradient path in the trust region, and accept any feasible step with a fixed fraction of its decrease (pp. 3-4).",
+   "Justify a weak condition as the weakest possible by citing the counterexample that breaks any weaker one, and list which common updates satisfy it (p. 7).",
+   "Minimal-counterexample radius bound: take the first iteration where radius x curvature falls below a threshold and show the previous iteration was very successful (Lemma 7, pp. 14-15).",
+   "Counting argument for sum 1/b_k: split iterations by k <= pS(k), bounding one part by monotonicity and the other by a geometric radius bound (pp. 15-16).",
+   "Use the projected-step length h_k = ||P[x_k - w_k] - x_k|| as the criticality measure, and draw it (p. 6).",
+   "Prove finite active-set identification under strict complementarity, then import the unconstrained rate theory unchanged (pp. 19-22)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "This last result is important because it shows that, under very mild conditions, the asymptotic behaviour of the algorithm is that of a purely unconstrained method, restricted to the subspace of variables that are not at their bounds at the solution.",
+    "page": 22
+   },
+   {
+    "text": "This extension is obtained by generalizing the now classical notion of a Cauchy point in what seems to us a natural way.",
+    "page": 27
+   }
+  ]
+ },
+ {
+  "id": "S011",
+  "year": "1988",
+  "title": "Testing a class of methods for solving minimization problems with simple bounds on the variables",
+  "read_level": "full",
+  "contribution": "Implements the S008 class as GCP-by-breakpoint-recurrence plus truncated CG, tests five Hessian options on 25 problems in unconstrained and constrained forms against NAG line-search codes, and finds that exact Hessians are best and that SR1, not BFGS, is the best update inside a trust region.",
+  "problem_entry": "The testing companion of the theory paper, meant to 'demonstrate the viability' of the analysed class; active-set methods change the active set slowly, bent-line-search theory covers convex problems only, and there is no experience with SQP-type subproblem methods (pp. 2-3).",
+  "key_idea": "An l_inf box trust region intersected with the bounds; a GCP redefined to continue along the trust-region boundary (checked to be covered by the theory); breakpoint recurrences needing one sparse mat-vec per breakpoint; CG on the free variables stopped at a bound; a growth safeguard ||B_k|| <= c1 + k c2; no line search (pp. 3, 5-8).",
+  "assumptions": "f smooth; strict complementarity for active-set identification (violated on purpose in the DEGEN problems); well-scaled problems; skip thresholds 1e-8 and 1e8 arbitrary in theory but meant to reflect problem scaling in practice (pp. 2, 5, 11, 22).",
+  "proof_devices": [
+   "no new proofs: algorithmic deviations (a new GCP definition, CG restarts that enlarge the active set) are checked to stay inside the S008 theory (pp. 5, 19-20)",
+   "an explicit unproven conjecture on why SR1 wins: trust regions need model accuracy on a larger subspace than the Newton direction (p. 20)"
+  ],
+  "experiments": "25 problems (23 families, n = 8-45, generalized from More-Garbow-Hillstrom, Hock-Schittkowski and Toint), each run in U (box) and C (bounds around the U solution) form, plus degenerate variants; 5 Hessian options (exact, BFGS, DFP, PSB, SR1); reports it (= f evals), de (= gradient evals), cg, gradient norm, cas, usk and time; failures marked; ratio-to-exact and rank-count tables; NAG E04LAF/KAF baselines compared on function and gradient calls; the DEGENSING failure diagnosed and rerun with CG restarts (pp. 10-23).",
+  "positioning": "The testing twin of the authors' theory [3]; uses More, Steihaug and Toint; credits Brayton-Cullum for SR1 in a line search; challenges the line-search wisdom that BFGS is the best update; baseline from the rival active-set/line-search school (NAG) (pp. 3, 6, 12, 20, 22-23).",
+  "writing": "Modest abstract ('The results are encouraging'); surprises flagged as such; the explanation labelled a conjecture with its difficulty stated; explicit recommendations and a research programme at the end; tables take 10 of 32 journal pages (pp. 2-3, 13-24).",
+  "limits_future": "Small dense problems only; prototype timings; no theory for SR1's advantage; degeneracy slows convergence; future: large-scale problems via partial separability and preconditioning, then general nonlinear programming via augmented-Lagrangian bound-constrained subproblems (the LANCELOT plan) (pp. 3, 11-12, 20, 23-24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Strong: its stated purpose is to test the analysed class; deviations are checked against the theory; a failure is fixed within what the theory allows (Table 5.10); it ends with the next theory-and-code programme.",
+    "pages": "pp. 3, 5, 19-20, 22, 24"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Cost unit of function and gradient calls; every option reported in full; failures flagged and counted; baseline from the competing school (NAG line-search, active-set codes).",
+    "pages": "pp. 11-12, 13-19, 22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Pre-CUTE: the collection is built by generalizing classic small problems to n variables and generating constrained and degenerate variants; no noise tier and no application tier.",
+    "pages": "p. 11; appendix pp. 24-31"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Exact second derivatives recommended whenever available; partial separability planned for large scale.",
+    "pages": "pp. 12, 23"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Trust region combined with truncated CG (Steihaug/Toint) and Bertsekas-style projection; SR1 carried from line-search use (Brayton-Cullum) into a trust region.",
+    "pages": "pp. 5-6, 20"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "anomaly harvested as an explicit conjecture",
+    "evidence": "SR1's unexplained advantage and its accurate free-variable Hessian approximations are written up as an open question, which S010 (1991) later proves; the origin of c01's anomaly-driven-theory candidate.",
+    "pages": "p. 20"
+   },
+   {
+    "pattern": "controlled test-variant generation",
+    "evidence": "Constrained variants from bounds x*_i + 0.1 <= x_i <= x*_i + 1.1 on odd i around the unconstrained solution, and degenerate variants that break strict complementarity on purpose.",
+    "pages": "p. 11; appendix pp. 24-25"
+   }
+  ],
+  "transferable": [
+   "Generate constrained test variants from an unconstrained problem with bounds x*_i + 0.1 <= x_i <= x*_i + 1.1 on odd i, starting from the projection of the original start (p. 11).",
+   "Add variants that deliberately violate one theoretical assumption (strict complementarity) to show where the theory's promises end (appendix pp. 24-25; p. 12).",
+   "Vary one design factor only, report every variant fully, and summarize with ratios to the ideal variant and rank counts, with failures counted separately (pp. 10, 12, 18-19).",
+   "Report diagnostics tied to the theory's claims: the last iteration at which the active set changed, and the number of skipped updates (p. 11).",
+   "When a failure traces to a violated assumption, rerun with a fix the theory permits and publish that table (Table 5.10, pp. 19-20, 22).",
+   "Compare with library codes on function and gradient calls, and state wins as counts out of the total (pp. 22-23).",
+   "Present an observed but unproven mechanism as an explicit open conjecture, with a reason why it is hard (p. 20)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We believe that the important figures in such a comparison are the number of function and gradient calls required to solve the problem.",
+    "page": 22
+   },
+   {
+    "text": "Moreover, they indicate that updating schemes which are held in good repute for line-search based methods are not necessarily the best within a trust-region context.",
+    "page": 23
+   }
+  ]
+ }
+]

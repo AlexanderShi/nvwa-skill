@@ -1,0 +1,177 @@
+[
+ {
+  "id": "S137",
+  "year": "2009",
+  "title": "On nonlinear optimization since 1959",
+  "read_level": "full",
+  "contribution": "A personal history of nonlinear optimization from Davidon (1959) to NEWUOA, organized as a chain of methods each removing a named disadvantage of its predecessor, ending with the symmetric Broyden (least Frobenius change) update and its derivative-free use with about 2n+1 interpolation points.",
+  "problem_entry": "Algorithms that work without good starting points (abstract, p. 1); classical Newton, damped Newton, steepest descent and Newton-Raphson failures shown on tiny examples (pp. 2-4).",
+  "key_idea": "Each advance (variable metric/CG, penalty to augmented Lagrangian, SQP, trust regions, symmetric Broyden) removes one disadvantage of the previous method; the DFO view keeps the least-change principle and swaps gradient secant conditions for interpolation conditions with m ~ 2n+1 and one point replaced per iteration (pp. 5-17).",
+  "assumptions": "Survey: smooth F; exact line searches for quadratic termination (p. 5); interior points for barrier theory (p. 8); LICQ and grad F(x*) != 0 for penalty error (p. 9); second-order sufficiency for augmented Lagrangian (p. 10); F quadratic in the symmetric Broyden argument (p. 17).",
+  "proof_devices": [
+   "closed-form steepest-descent iterates on m x1^2 + M x2^2 contracting by theta=(M-m)/(M+m) (p. 3)",
+   "invariance of DFP under z=Sx: scaling irrelevant, WLOG Hessian = I (p. 5)",
+   "KKT comparison giving c_i(x[mu]) ~ -mu lambda*_i/2, error O(mu), with counterexample x1^4+x1x2+x2 s.t. x2=0 (p. 9)",
+   "dual bound Lambda(x[lambda,mu],lambda,mu) <= F(x*) motivating maximization over lambda (3.11) (p. 10)",
+   "Powell 1978 damped secant gamma = theta gammahat + (1-theta) B delta with delta^T gamma >= 0.1 delta^T B delta (p. 13)",
+   "least-squares projection identity ||H - B_{k+1}||_F^2 = ||H - B_k||_F^2 - ||B_{k+1} - B_k||_F^2 giving monotone error and ||B_{k+1}-B_k||_F -> 0, hence Broyden-Dennis-More condition (6.7) (pp. 17-18)"
+  ],
+  "experiments": "No new experiments; recalls 1962 Ferranti Mercury runs of Davidon's method (p. 4) and reports NEWUOA average #F 931, 1809, 3159, 6013 for n=20,40,80,160 (m=2n+1, random trigonometric instances), versus > n^2/2 for a careful quadratic model (p. 18).",
+  "positioning": "Credits Davidon as source (p. 2), Fletcher (DFP, p. 5), Hestenes (independent augmented Lagrangian, p. 9), Broyden-Dennis-More as a breakthrough (p. 18); admits not understanding Davidon's relativity-style argument (p. 5); defers to textbooks and Kolda-Lewis-Torczon (p. 19); cites no other group's model-based DFO work (pp. 19-20).",
+  "writing": "First-person anecdotes inside 'we' exposition; every method gets formula then a disadvantage by tiny example (pp. 3, 8, 9, 13); the one explicit maxim (does the method work well when F is quadratic?) is placed in the last section (pp. 16-17).",
+  "limits_future": "Explicitly a personal, non-comprehensive view weighted to his own work (p. 19); future: constrained derivative-free optimization needs new algorithms giving high accuracy efficiently (p. 19).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stated preference m ~ 2n+1 with one interpolation point changed per iteration; NEWUOA #F roughly proportional to n vs > n^2/2; theoretical rationale via projection identity (6.6) and BDM condition (6.7).",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "O(n^2) vs O(n^3) work as key advantage; Cholesky updating keeps positive definiteness under rounding; damping device necessary to provide software.",
+    "pages": "pp. 5, 6, 13"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Field history written as a chain in which each method removes a named disadvantage of its predecessor (field level, not his solver lineage).",
+    "pages": "pp. 4, 9, 11, 14, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "First response to Davidon's report was to program it and experiment; NEWUOA evidence as averages over random instances per n.",
+    "pages": "pp. 4, 18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Generic trust region described with a single radius, thresholds 0.2/0.8 and factors 2 and 1/2 as an example; no RHO/DELTA split, so the two-radius discipline is specific to his DFO codes.",
+    "pages": "p. 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "quadratic-case test as the first design question",
+    "evidence": "Stated as the question most useful to his development of unconstrained algorithms; used for DFP quadratic termination, CG design, steepest-descent slowness and symmetric Broyden monotone error.",
+    "pages": "pp. 3, 5, 6, 16-18"
+   },
+   {
+    "pattern": "minimal analytic counterexample per failure mode",
+    "evidence": "x^3 s.t. x=1 (unbounded penalty); x1^4+x1x2+x2 s.t. x2=0 (O(mu) error exception; stationary never minimum); F=-||x||^2/2 with linear constraints (delta^T gammahat < 0); m x1^2+M x2^2 (slow steepest descent).",
+    "pages": "pp. 3, 8, 9-10, 13"
+   }
+  ],
+  "transferable": [
+   "Ask what a new update does when F is quadratic (termination, monotone error, rate) before general theory (pp. 5, 16-18).",
+   "When an update is a Frobenius projection onto an affine set containing the truth, write the Pythagorean identity to get monotone error and summable changes (pp. 17-18).",
+   "Use theta-damped secant gamma with a 0.1 threshold to keep positive curvature instead of skipping the update (p. 13).",
+   "Expose each failure mode with the smallest closed-form example (pp. 8, 9-10, 13).",
+   "Report #evaluations vs n as averages over random instances and compare against the model's parameter count n^2/2 (p. 18).",
+   "Use invariance z_k = S x_k to claim scale independence and to simplify analysis to Hessian = I (p. 5)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "A device of this kind was necessary in order to provide software.",
+    "page": 13
+   },
+   {
+    "text": "Some successes of the symmetric Broyden method in minimization without derivatives are stunning.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S167",
+  "year": "2014",
+  "title": "The Lagrange method and SAO with bounds on the dual variables",
+  "read_level": "full",
+  "contribution": "Shows under continuity and compactness only that dual-function properties give solutions of NLP when x(lambda) is unique, and proves that the box-bounded dual maximizer yields the unique minimizer of the l1 exact penalty Psi with parameter Lambda, which supplies an acceptance rule and trust-region design for SAO methods.",
+  "problem_entry": "SAO needs separable subproblems for huge n, which rules out augmented-Lagrangian fixes; the bounded dual method of Wood-Groenwold-Etman caps lambda in a box, and the question is what maximizing the dual over the box delivers under minimal assumptions (pp. 3-4).",
+  "key_idea": "Theorem 4: box-bounded dual maximizer lambda-dagger with unique x(lambda-dagger) gives the unique minimizer of Psi = f0 + Lambda*sum|eq viol| + Lambda*sum max[0, ineq]; so Psi is the SAO merit function, combined with an infinity-norm trust region that preserves separability (pp. 7-8, 16).",
+  "assumptions": "f_j continuous only, X compact (admits integer constraints) (pp. 2, 4); x(lambda) unique (p. 7); global minimization of L in secs. 2-4, local in sec. 5 (p. 12); gradients of f*_j for SAO (p. 15); majorization needs m'=0 and bounded second derivatives (pp. 16-17).",
+  "proof_devices": [
+   "Lipschitz continuity of a min-value function by evaluating L at the other point's minimizer: phi(lambda)-phi(mu) <= sum (lambda_j-mu_j) f_j(x(mu)) (2.1)-(2.4) (p. 5)",
+   "concavity and differentiability cited to Bazaraa et al. (2006) instead of own proofs (pp. 4-5)",
+   "one-sided directional derivatives at a sign-constrained dual maximizer give feasibility and complementarity (2.6)-(2.7) (p. 6)",
+   "sandwich f0(x_inf) = L(x_inf,lambda_inf) <= L(x*,lambda_inf) <= f0(x*) plus uniqueness (2.8) (p. 6)",
+   "sign pattern of box-maximizer components (-Lambda, 0, Lambda) gives L(x+,lambda+) = Psi(x+) and L(x,lambda+) <= Psi(x) (3.3)-(3.7) (pp. 7-8)",
+   "localization: replace X temporarily by X intersect N so a strict local minimizer is the unique global one (pp. 12, 17)",
+   "majorization gives Psi(x^k) > Psi(x_inf^k) >= Psi*(x_inf^k), strict monotone decrease (p. 17)"
+  ],
+  "experiments": "No numerical experiments (stated, p. 17); a hand-computed 2-D example (f0 = x^2+y^2, piecewise-quadratic f1, three choices of X) with closed-form paths of x(lambda) and dual functions in two figures (pp. 8-15); numerical SAO results deferred to Groenwold and Etman (2010) (p. 17).",
+  "positioning": "Builds on the Stellenbosch SAO group (pp. 3-4, 17); notes Gill and Robinson (2010) similar relation for differentiable functions (p. 4); discloses that Bazaraa et al. ch. 6 already contains his proofs, pointed out by Burdakov (p. 4).",
+  "writing": "Third-person 'the author' narrating the work's history (assumption dropped, prior art found, p. 4; example changed after unexpected degeneracy, pp. 14-15); practical value hedged as likely and argued, not measured (p. 17).",
+  "limits_future": "Needs unique x(lambda) (p. 7); global minimization can keep all x(lambda) far from the constraint (p. 12); local minimization can make phi discontinuous (p. 14); Lagrange method with local minimization fails for nonconvex QP with linear constraints (p. 18); future: SAO with quadratic approximations giving positive-curvature Lagrangian for every lambda, with dual bounds (p. 18).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Separability (n one-variable problems) is treated as a first-class design constraint; augmented-Lagrangian squares and direct minimization of Psi rejected because they destroy it; infinity-norm trust region chosen to keep it.",
+    "pages": "pp. 3, 16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Single-radius trust region transplanted to the SAO outer loop, radius set to half the rejected step, success judged by actual vs predicted reduction; no RHO/DELTA split.",
+    "pages": "pp. 16-17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Keeps working machinery (separable subproblems, bounded dual) and changes only the acceptance rule, but applied to another group's method, not his own solver lineage.",
+    "pages": "pp. 3, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Theory-first paper with no experiments, but keeps honest scope: declines to specify an SAO version without experiments and names a failing problem class.",
+    "pages": "pp. 17-18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "strip hypotheses to the minimum to shorten proofs",
+    "evidence": "First assumed differentiability, then found continuity sufficient; proofs became much shorter.",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "merit function derived from the subproblem's own duality theorem",
+    "evidence": "Theorem 4 identifies the dual bound Lambda with an l1 penalty parameter and Psi becomes the acceptance test for SAO outer iterations.",
+    "pages": "pp. 7, 16"
+   },
+   {
+    "pattern": "disclose prior art and replace own proofs by citations",
+    "evidence": "After Burdakov pointed to Bazaraa et al. ch. 6, own proofs of concavity and differentiability replaced by references, with the story told in the introduction.",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "minimal hand-built example chosen to be typical, not degenerate",
+    "evidence": "Quadratic f1 rejected because the Lagrangian Hessian would be singular; piecewise-quadratic f1 used; original y=0 boundary changed after an unexpected degeneracy.",
+    "pages": "pp. 8, 14-15"
+   }
+  ],
+  "transferable": [
+   "After a proof works, delete every hypothesis no step uses (continuity + compactness replaced differentiability) (p. 4).",
+   "Prove a min-value function Lipschitz by evaluating L at the other point's minimizer (p. 5).",
+   "Treat box bounds on dual variables as an exact-penalty parameter and use the penalty as the merit function for outer iterations (pp. 7-8, 16).",
+   "Intersect the feasible set with a small neighbourhood so a strict local minimizer satisfies a global-uniqueness theorem (pp. 12, 17).",
+   "Use an infinity-norm trust region so the subproblem stays separable under simple bounds (p. 16).",
+   "Build illustrative examples to be typical and check them for accidental degeneracy (pp. 8, 14-15)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "By removing the unnecessary assumptions, his proofs became much shorter than before.",
+    "page": 4
+   },
+   {
+    "text": "The author is not trying to specify a particular version of the SAO method, because he has not run any numerical experiments himself that investigate possible options.",
+    "page": 17
+   }
+  ]
+ }
+]

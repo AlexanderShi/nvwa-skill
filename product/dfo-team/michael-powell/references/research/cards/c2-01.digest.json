@@ -1,0 +1,400 @@
+[
+ {
+  "id": "S001",
+  "year": "1963",
+  "title": "A rapidly convergent descent method for minimization",
+  "read_level": "full",
+  "contribution": "Introduces the DFP variable metric method: a simplified version of Davidon's 1959 method whose rank-two update of H keeps positive definiteness and makes H equal G⁻¹ after n exact line searches on a quadratic, with tests up to n = 100.",
+  "problem_entry": "Revives a little-publicized method (Davidon 1959). The filter is derived from Taylor asymptotics: only methods that minimize a general quadratic quickly can converge fast, and Newton is ruled out on cost and robustness (p. 1).",
+  "key_idea": "s = −Hg with a line minimization. H is updated by σσᵀ/σᵀy − Hyyᵀ H/yᵀHy, both terms derived from the quadratic-termination invariant. One line search per iteration, with better termination tests than Davidon's (pp. 1-3).",
+  "assumptions": "Analytic gradient; f computable everywhere; H⁰ positive definite; exact line minimization in the theory, although the line search is 'not central to the theory'; the termination proof is for quadratics only (pp. 1-2).",
+  "proof_devices": [
+   "positive definiteness by induction via H^{1/2} coordinates and Schwarz's inequality, with σᵀy > 0 from the exact line search (p. 2)",
+   "two-invariant induction: G-conjugacy (10) plus H^kGσ^i = σ^i (11), giving H^n = G⁻¹ and a zero gradient after n steps (pp. 2-3)",
+   "update derived from conjugacy: SᵀGS diagonal gives G⁻¹ = sum of the A terms; B is the simplest symmetric term satisfying (9) (p. 3)"
+  ],
+  "experiments": "Rosenbrock (18 iterations; comparison in equivalent line searches), Powell's quartic, a 2-D quadratic versus Davidon, a helical valley (time comparison), and random trigonometric equations with n = 5..100 (19..318 evaluations, roughly linear in n; 5 of 15 runs reached another minimum) (pp. 3-5).",
+  "positioning": "Credits Davidon generously while naming two defects (alternatives that break H → G⁻¹, manual termination). Demotes Powell's own 1962 method. Dismisses Newton (p. 1, pp. 3-4).",
+  "writing": "Strong superlatives ('probably the most powerful general procedure', p. 1). Bra-ket notation borrowed from physics (p. 1). Step-list algorithm, then theory, then numbers, with the line search in an appendix (pp. 2-6).",
+  "limits_future": "The abstract claims 'it always converges', but only descent and quadratic termination are proved (pp. 1-3). The first n iterations are slow, so a good H⁰ is advised (p. 5). No explicit future work.",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Keeps Davidon's core and changes two named components (orthogonality-preserving simplification, convergence criterion).",
+    "pages": "pp. 1, 3"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Precursor: curvature is accumulated from gradient differences rather than evaluated. No least-change norm yet.",
+    "pages": "pp. 2-3, 5"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Cheap iterations are part of the claim; comparisons charge line searches or time.",
+    "pages": "pp. 1, 3-4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Known test functions, n swept to 100, wrong-minimum runs kept in the table; but the tone is superlative rather than scoped.",
+    "pages": "pp. 1, 3-5"
+   },
+   {
+    "method": "Research Taste warning sign 2",
+    "relation": "contradiction",
+    "note": "The abstract claims convergence always, beyond what is proved (descent plus quadratic termination). Early, co-authored paper.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Research Taste mark 2",
+    "relation": "evidence",
+    "note": "Evaluation counts are reported against n, roughly linear.",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "derive the update from the invariant the proof needs",
+    "evidence": "A from conjugacy (sum of A = G⁻¹); B as the simplest symmetric form satisfying the eigenvector condition",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "return the algorithm's by-products for user diagnostics",
+    "evidence": "H ≈ G⁻¹ gives the curvature at the minimum for convergence tests and variance estimates (also S019 p. 12, AJINV for sensitivity)",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "cost-normalized comparison",
+    "evidence": "Table 1 in equivalent line searches; the helical valley compared by time",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "Use an asymptotic necessary condition (quadratic termination) to filter competing methods before proposing one (p. 1).",
+   "Derive a matrix update from what it must reconstruct on quadratics, choosing the simplest symmetric correction (p. 3).",
+   "Prove inherited positive definiteness in H^{1/2} coordinates with Cauchy–Schwarz, and line-search orthogonality for σᵀy > 0 (p. 2).",
+   "Keep wrong-answer runs in the main table with a Yes/No column and a one-line explanation (p. 5)."
+  ],
+  "coauthors": "R. Fletcher",
+  "quotes": [
+   {
+    "text": "Because, near the minimum, the second-order terms in the Taylor series expansion dominate, the only methods which will converge quickly for a general function are those which will guarantee to find the minimum of a general quadratic speedily.",
+    "page": 1
+   },
+   {
+    "text": "The conclusion to be drawn from this behaviour is that for many applications of the method a substantial number of the iterations required will be spent on setting up the inverse of the matrix of second derivatives.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S019",
+  "year": "1968",
+  "title": "A FORTRAN subroutine for solving systems of nonlinear algebraic equations.",
+  "read_level": "full",
+  "contribution": "Documents and lists Harwell routine NS01A. It solves nonlinear equations without derivatives, using a dogleg step between Newton and steepest descent under an adaptive step bound Δ, Broyden updates of J and J⁻¹ at O(n²) per iteration, and a device that keeps successive steps spanning the space.",
+  "problem_entry": "Failure analysis: 'asking when certain useful algorithms would fail'. Newton fails on singular Jacobians and poor starts, and a 2-equation example shows singular Jacobians are common (pp. 5-8).",
+  "key_idea": "Newton step if ‖v‖ ≤ Δ, else steepest descent to Δ, else the point on the segment at distance Δ. Δ is reduced when the actual reduction is below 0.1 of the predicted one, never below DSTEP, and enlarged cautiously (≤ ×2, only after two estimates). One function evaluation per iteration (pp. 9, 18-23).",
+  "assumptions": "Continuous first derivatives. Convergence theory is deferred to a companion paper in exact arithmetic. The user must scale variables and functions and pick DSTEP between the nonlinearity and rounding limits (pp. 4, 10-11, 16, 24, 33, 43).",
+  "proof_devices": [
+   "Broyden error identity: the Jacobian error is multiplied by (I − δδᵀ/‖δ‖²), so its Frobenius norm is non-increasing, strictly decreasing unless the prediction is exact (pp. 24-25)",
+   "projection identity (50): the J − H⁻¹ discrepancy is projected at each update, so rounding does not accumulate (p. 25)",
+   "Rosenbrock analysis: the exact Newton step reduces F only for 0.9 < x₁ < 1.1, which justifies a small DSTEP (pp. 33-34)",
+   "invariance argument: the badly scaled example is intrinsically slow because Newton's change in F is invariant under linear transformations of the variables (p. 42)",
+   "mean-gradient test F > 2·DMAX·‖g‖² suggesting there is no solution within distance DMAX (p. 34)"
+  ],
+  "experiments": "IBM 360/65, single precision, CALFUN calls counted. Rosenbrock 28 calls against published counts of 30-90 for other methods; trigonometric equations n = 5-30, 11-47 calls against 24-135; Chebyquad against Fletcher's own figures, including a no-solution n = 8 case; a local-minimum example; a deliberately badly scaled case (223 calls, Δ oscillates) (pp. 35-42).",
+  "positioning": "Justifies 'yet another algorithm'. Prefers Levenberg–Marquardt over the majority Haselgrove approach. Adopts Broyden's one-evaluation advice against his own earlier line searches. Concedes Marquardt's theorem and Fletcher's no-solution handling. Uses competitors' published numbers and test problems (pp. 5-9, 19, 37-39).",
+  "writing": "User-first order (parameters in §2). Design statements tied to Fortran instruction numbers. Error messages quoted with likely causes. Arbitrary constants labelled ('chosen intuitively', 'chosen empirically', 'rather contentious decision', 'tenuous') (pp. 9-23).",
+  "limits_future": "DSTEP and scaling are left to the user, and the routine may stop at a non-solution stationary point. Future: assign DSTEP and the metric automatically, and apply the Δ strategy to 'many calculations' (pp. 8-9, 42-43).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Ancestor: step bound Δ with a rounding floor DSTEP, cap DMAX, and a 0.1 actual/predicted reduction test. The floor is fixed rather than a decreasing resolution, and increases use λ-extrapolation.",
+    "pages": "pp. 20-23"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "O(n²) instead of O(n³); rounding floors; safeguarded denominators; a projection identity against error accumulation; a named geometry device triggered at 30°.",
+    "pages": "pp. 9, 19, 21, 23, 25-30, 33"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Precursor: one evaluation per iteration updates an n×n model, with a Frobenius-norm error decrease (Broyden).",
+    "pages": "pp. 9, 24-25"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "No-solution, local-minimum ('severer test') and deliberately badly scaled cases; every call listed.",
+    "pages": "pp. 36, 39-42, 45"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Listing, driver, CALFUN and output shipped in the report, with parameters explained in user terms.",
+    "pages": "pp. 9-13, 45"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The interface NS01A(N,X,…,MAXFUN,IPRINT,W) plus CALFUN(N,X,F) prefigures the 1992-2013 codes. Keeps Newton and removes its singular-Jacobian failure.",
+    "pages": "pp. 5-6, 10, 12"
+   },
+   {
+    "method": "Heuristic 1",
+    "relation": "evidence",
+    "note": "Scale variables because one DSTEP and the Euclidean metric are used; the badly scaled demonstration.",
+    "pages": "pp. 10, 40-42"
+   },
+   {
+    "method": "Heuristic 4",
+    "relation": "variant",
+    "note": "Rebuild the Jacobian by differences before accepting a stationary-point exit.",
+    "pages": "p. 35"
+   },
+   {
+    "method": "Workflow B",
+    "relation": "evidence",
+    "note": "Each error return names its likely causes (DSTEP too large, programming mistakes, rounding).",
+    "pages": "p. 13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "failure-mode entry: ask when a useful algorithm fails",
+    "evidence": "The algorithm is derived from asking when Newton/Haselgrove fail; a singular-Jacobian example",
+    "pages": "pp. 5-8"
+   },
+   {
+    "pattern": "safeguard designed so that the proof goes through",
+    "evidence": "No interchange after a special independence step, to keep the bounded-iterates theorem ('rather contentious decision')",
+    "pages": "p. 16"
+   },
+   {
+    "pattern": "adversarial test-case construction for one's own fast method",
+    "evidence": "A deliberately badly scaled system, a no-solution Chebyquad n = 8, a local-minimum appendix example",
+    "pages": "pp. 39-42, 45"
+   },
+   {
+    "pattern": "benchmark on the competitor's own test problem with their published numbers",
+    "evidence": "Chebyquad chosen because Fletcher used it; Rosen's and Fletcher's figures quoted",
+    "pages": "pp. 37-39"
+   },
+   {
+    "pattern": "return the algorithm's by-products for user diagnostics",
+    "evidence": "AJINV returned to estimate the error in x and its sensitivity to changes in f",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "Dogleg: Newton if within Δ; else a Cauchy step to Δ; else the Cauchy–Newton segment at Δ; O(n²) given J⁻¹ (pp. 18-19).",
+   "Enlarge the radius only after two extrapolation estimates since the last reduction, capped at ×2, to stop oscillation (p. 22).",
+   "Keep an orthonormal recency basis plus span counts, and insert a special step when a new step is within 30° of the recent span (pp. 25-27).",
+   "Put a floor on the step bound at the finite-difference step, and never update a secant model from a shorter displacement (pp. 21, 33).",
+   "Make each error message a diagnosis that lists its likely causes (pp. 11, 13)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "The number (2n+1) was chosen intuitively, and numerical experiments show that the extra programming that is needed to obtain \"sufficient independence\" is worthwhile.",
+    "page": 17
+   },
+   {
+    "text": "Finally we wish to state the opinion that our main strategy could provide very good algorithms for many calculations that involve searching in many variable space.",
+    "page": 43
+   }
+  ]
+ },
+ {
+  "id": "S139",
+  "year": "1983",
+  "title": "On the rate of convergence of variable metric algorithms for unconstrained optimization",
+  "read_level": "full",
+  "contribution": "Builds an extreme-precision numerical procedure that shows Ritter's rate is the usual one for BFGS with perfect line searches. Proves a slightly weaker rate without Ritter's extra assumption, and constructs examples: the rate attained for n = 2, Q-order below R-order, a linear rate when n = ∞, and deterioration with unit steps.",
+  "problem_entry": "Little is known about VM rates even for convex F. The published rate theorems rest on an assumption about search directions that 'should be questioned' because easy counterexamples exist (pp. 1, 3).",
+  "key_idea": "Observe asymptotic rates numerically by treating the quadratic part analytically, updating the error matrix H − I, rotating coordinates onto recent directions (Givens), and splitting mantissa and exponent; then prove what survives without the extra hypothesis (pp. 4-8).",
+  "assumptions": "F three times differentiable; x_k → x* with ∇²F(x*) positive definite; WLOG ∇²F(x*) = I and x* = 0 by affine invariance; perfect line searches (§§2-5); BFGS; boundedness from Dennis–Moré (pp. 1-3, 6-7).",
+  "proof_devices": [
+   "Lemma 1: induction on i for asymptotic bounds (3.1)-(3.2) linking δ_k to later iterates and to the error matrix (pp. 6-7)",
+   "continuity/compactness argument over n+1 directions in Rⁿ giving a uniform constant for some pair (p. 7)",
+   "iterates reverse-engineered by a functional equation (4.14) with an infinite-product solution, giving Q-order 1.5 below the R-order (pp. 9-10)",
+   "quadratic case with B₁ = I recast as polynomial best approximation; Legendre polynomials give a linear R-rate for a continuous spectrum (pp. 10-12)",
+   "angle/eigenvalue recurrences for unit steps with n = 2, giving a log-ratio that tends to 1 (pp. 12-14)",
+   "WLOG normalization by affine invariance (p. 3)"
+  ],
+  "experiments": "Basic on a TRS-80 micro-computer, 2 ≤ n ≤ 4. Single versus double precision agree to under 5 units in the sixth decimal. Stop when the log-ratio is stable to 6 digits. The observed rate equals the root of Ritter's polynomial; with unit steps the log-ratio tends to 1 (pp. 5-6, 12).",
+  "positioning": "Endorses Ritter's rate as usual while questioning Ritter's and Schuller's assumptions. Reviews Burmeister, Winther and Stoer. Motivates n = ∞ by finite-element practice. §5 is joint with Griewank (pp. 1, 3, 10-11, 14).",
+  "writing": "The abstract leads with the instrument and states what could not be proved. Failures are admitted ('but it was unsuccessful'), the surprise is named, and the suggestion is hedged ('Perhaps…') (pp. 1, 6, 14).",
+  "limits_future": "The gap between the observed (1.12) and proved (1.13) rates is open for n ≥ 3, and the experiments reach only n ≤ 4. Future: the least Q-order for smooth uniformly convex F; an update with quadratic termination without perfect line searches (pp. 6, 14).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Experiments first, but in service of theory; honest scope (n ≤ 4).",
+    "pages": "pp. 4-8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Rounding control engineered into the experimental instrument (analytic quadratic, error matrix, rotations, exponent split, precision cross-check).",
+    "pages": "pp. 4-6"
+   },
+   {
+    "method": "Research Taste mark 5",
+    "relation": "evidence",
+    "note": "Theory exposes the mismatch between unit steps in practice and perfect line searches in theory, and proposes an algorithmic change.",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Research Taste warning sign 1",
+    "relation": "variant",
+    "note": "Failure cases are constructed analytically rather than collected from practice.",
+    "pages": "pp. 9-14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "numerics → conjecture → proof or counterexample",
+    "evidence": "The numerical rate is Ritter's; the theorem proves a weaker bound; examples show attainment and Q < R",
+    "pages": "pp. 4-10"
+   },
+   {
+    "pattern": "construct the objective from the iterates you want",
+    "evidence": "Functional equation (4.14) forces the alternating iterates (4.15)",
+    "pages": "pp. 9-10"
+   },
+   {
+    "pattern": "precision cross-check of numerical evidence",
+    "evidence": "Single versus double precision on the TRS-80; mantissa/exponent split to pass underflow",
+    "pages": "pp. 5-6"
+   },
+   {
+    "pattern": "question the extra hypothesis of a published theorem with an easy construction",
+    "evidence": "Examples where variables never change undermine the assumption that the directions stay nonsingular",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "WLOG normalization by invariance",
+    "evidence": "Affine invariance gives ∇²F(x*) = I and x* = 0",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Carry only the error matrix H − I in asymptotic experiments and treat the known quadratic analytically (p. 4).",
+   "Rotate onto the recent search directions with n−1 Givens rotations so each update touches one row and column (p. 5).",
+   "Store mantissa and exponent separately to follow superlinear sequences past underflow (pp. 5-6).",
+   "Extract a uniform constant from n+1 directions in Rⁿ by compactness, then combine it with stepwise lemmas (pp. 7-8).",
+   "Recast the quadratic case as polynomial best approximation and bound it with orthogonal polynomials (pp. 10-12)."
+  ],
+  "coauthors": "none (sole author); §5 joint work with A. Griewank",
+  "quotes": [
+   {
+    "text": "However, because one can easily construct examples where one or more variables are not altered during the calculation, these assumptions should be questioned.",
+    "page": 3
+   },
+   {
+    "text": "It is surprising that Section 6 shows a strong deterioration in the rate of convergence when step-lengths of one are preferred to perfect line searches",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S050",
+  "year": "1986",
+  "title": "A recursive quadratic programming algorithm that uses differentiable exact penalty functions",
+  "read_level": "full",
+  "contribution": "Shows that Fletcher's differentiable exact penalty function can serve as the SQP line-search function without second derivatives, by interpolating the multiplier function along the trial step. Proves global convergence and acceptance of unit steps (no Maratos effect), and reports 60 random test problems.",
+  "problem_entry": "SQP is superlinear if unit steps are accepted, and Fletcher's differentiable penalty is a suitable line-search function, but its gradient needs second derivatives (pp. 1-2).",
+  "key_idea": "Replace λ(x_k + αβd_k) by linear interpolation between λ(x_k) and λ(x_k + βd_k), giving a line-search function with a first-derivative-only initial slope. Keep the QP direction, Armijo acceptance and damped BFGS; σ stays or at least doubles (pp. 2-3, 10).",
+  "assumptions": "f, c ∈ C²; bounded x_k, d_k, B_k; A(x) of full column rank; B_k uniformly positive definite on the null space of A_kᵀ (admitted to be 'a severe restriction'); equality constraints only; superlinear x_k + d_k assumed for the local result (pp. 1, 4, 8-9, 13).",
+  "proof_devices": [
+   "Lemma 2.1: QP optimality contradiction, so the σ update never divides by zero (p. 4)",
+   "range/null-space split d = e + h with a two-case sufficient-descent bound Φ′(0) ≤ −η‖d‖² (pp. 4-5)",
+   "penalty parameter eventually constant via the multiplier comparison (3.14): O(‖d‖‖c‖) (pp. 6-7)",
+   "monotone merit sequence once σ is fixed, with step length bounded below, giving d_k → 0 (pp. 7-8)",
+   "trapezoid expansion Φ(1) − Φ(0) = ½Φ′(0) + o(‖d‖²) with μ < ½: no Maratos effect (pp. 8-9)"
+  ],
+  "experiments": "Powell's random generator: n = 4, m = 1-4, ρ = 0.01/0.1/1, 5 cases, 60 problems; IBM 3081 double precision; untuned parameters; 4-92 evaluations. σ stayed at 10 in 38 of 60 runs. Four error returns, each diagnosed (2 rounding, 2 singular constraint Jacobian) (pp. 9-12).",
+  "positioning": "SQP lineage (Wilson, Biggs, Han, Powell, Schittkowski). Weighs the ℓ₁ direction choice. Criticizes Di Pillo–Grippo for losing the 'sharp restrictions' of linearized constraints. Attributes singular-Jacobian failures to Newton itself (pp. 1, 12).",
+  "writing": "A one-sentence purpose statement opens the Discussion. Sign-posted lemma chain. Status disclosed ('no empirical tuning', 'provisional'). Maratos claim stated flatly (pp. 6-12).",
+  "limits_future": "Equality constraints only, line search only, a severe B_k condition, a provisional program. Future: inequality constraints, and trust regions to remove Condition 3.1(iii) (pp. 12-13).",
+  "method_links": [
+   {
+    "method": "Heuristic 6",
+    "relation": "evidence",
+    "note": "Each constraint is linearized in the QP; the penalty is used only to accept steps; the Discussion defends the sharp linearized restrictions.",
+    "pages": "pp. 2-3, 12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Keeps the SQP direction, damped BFGS and acceptance rule, and removes only the second-derivative dependence.",
+    "pages": "pp. 2-3, 10"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The difference approximation of ∇λ is justified because it is multiplied by vanishing constraints; rounding hurts only 2 of 60 runs.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Untuned parameters, every failure diagnosed, provisional status declared; scope narrow (n = 4).",
+    "pages": "pp. 9-12"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Line-search paper; trust regions proposed only as future work to weaken a proof assumption.",
+    "pages": "p. 13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "safeguard designed so that the proof goes through",
+    "evidence": "The stay-or-at-least-double σ rule guarantees that σ becomes eventually constant",
+    "pages": "pp. 3, 6"
+   },
+   {
+    "pattern": "difference approximation justified by a vanishing multiplier",
+    "evidence": "The ∇λ change is approximated or dropped because it multiplies c(x) → 0",
+    "pages": "pp. 2, 10, 12"
+   },
+   {
+    "pattern": "separate method-caused from problem-caused failures",
+    "evidence": "Rounding versus singular A_k versus near-dependent gradients, each backed by terminal numbers",
+    "pages": "pp. 11-12"
+   },
+   {
+    "pattern": "state the tuning status of experimental parameters",
+    "evidence": "'no empirical tuning'; B-update choice 'deserve careful investigation'",
+    "pages": "pp. 9-10"
+   }
+  ],
+  "transferable": [
+   "Interpolate the multiplier function along the trial step to get a first-derivative-only merit slope (p. 2).",
+   "Prove sufficient descent for SQP by splitting d into range and null parts and using the two halves of a combined test (pp. 4-5).",
+   "Show unit-step acceptance with the trapezoid expansion and μ < ½ (pp. 8-9).",
+   "Backtrack by minimizing the quadratic through Φ(0), Φ′(0), Φ(β), clipped to [β₁β, β₂β] (p. 10)."
+  ],
+  "coauthors": "Y. Yuan",
+  "quotes": [
+   {
+    "text": "The main purpose of this paper is to show that Fletcher's differentiable exact penalty function can be used as a line search function without the calculation of any second derivatives.",
+    "page": 12
+   },
+   {
+    "text": "The numerical results of Section 5 are quite favourable, but many of the details of the computer program should be regarded as provisional.",
+    "page": 12
+   }
+  ]
+ }
+]

@@ -1,0 +1,374 @@
+[
+ {
+  "id": "S160",
+  "year": "2025",
+  "title": "Blackbox optimization for origami-inspired bistable structures",
+  "read_level": "full",
+  "contribution": "Couples a validated compliant-crease FEM model of the waterbomb origami (Abaqus) with NOMAD/MADS to maximize bistability phi = dU/Umax under a stress limit, roughly doubling phi and showing how fixing a crash-driving variable, relaxing bounds and adding a Umax floor reshape the design (read from arXiv v1).",
+  "problem_entry": "Application gap: fabricated bistable origami loses bistability, earlier optimization covered only beam structures or geometric incompatibility; DFO justified by a 30% simulation failure rate and ~110 s per successful call (pp. 1-2, 8-9).",
+  "key_idea": "No new algorithm: 5 scaled design variables, symmetry-reduced two-step FEM (forming then actuation) as blackbox, NOMAD via PyNOMAD, stress-violating points discarded as failed evaluations (pp. 4-5, 8-9).",
+  "assumptions": "Linear elastic S4 shells, Ef/Ec = 21.67; sigma_max below yield of face or crease; bounds from a 0.4 mm nozzle; n=4 and ri/ro=1/6 fixed; crashes tied to tall folds (large h/ro) (pp. 4-6, 8, 10).",
+  "proof_devices": [
+   "none (application paper); modelling devices only: dimensionless bistability ratio phi = dU/Umax (p. 3)",
+   "1/2n sector with cyclic boundary conditions to cut FEM cost (p. 4)",
+   "energy from integrating reaction force over displacement (eq. 2, p. 7)"
+  ],
+  "experiments": "FEM validated on 3 contrasting designs vs 5 printed specimens each (Umax errors 5.5/2.9/25.7%, worst explained); 5 NOMAD runs of 1000 evaluations from Design I: phi 64.8% (30% fails), 58.4% with h/ro fixed (1% fails), 77.7%/76.8% with relaxed bounds (Umax collapse), 62.3% with Umax >= U0max; no seeds, repeats or competing solvers (pp. 6-11).",
+  "positioning": "Placed in origami-engineering literature; DFO side cites only MADS/NOMAD/textbook/Alarie et al. 2021, Audet-Orban 2006, Chen-Kelley 2016; prior optimization described factually as limited in scope (pp. 2, 8).",
+  "writing": "Physical-science style with author-contribution and data statements, gains as multiples ('two-fold'), MADS explained to engineers with a 2D poll picture (pp. 9-12).",
+  "limits_future": "Future: bar-and-hinge surrogate, categorical material variable, curved creases, higher-resolution fabrication, multistable structures; code on GitHub (OriMads) but Abaqus-based and data on request (pp. 4, 12).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Hidden constraints (30% crashes) named; quantifiable stress constraint described as a discard/barrier, PB not discussed.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Code public and x0/final designs printed, but blackbox needs commercial Abaqus and data only on request.",
+    "pages": "pp. 4, 9-10, 12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation-count convergence plots, but single run per scenario, no seeds, no competing solver.",
+    "pages": "pp. 9-11"
+   },
+   {
+    "method": "Workflow B",
+    "relation": "evidence",
+    "note": "Run-diagnose-reformulate loop: fix h/ro to cut failures, relax active bounds, add Umax floor after degenerate optimum.",
+    "pages": "p. 10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "validate the blackbox physically before optimizing it",
+    "evidence": "3 contrasting designs, 5 printed specimens each, per-design errors and a mechanism for the worst case",
+    "pages": "pp. 6-8"
+   },
+   {
+    "pattern": "price a constraint by relaxing it",
+    "evidence": "optimum on theta bounds -> rerun with relaxed bounds to show what finer fabrication buys (phi 77.7% vs 64.8%)",
+    "pages": "p. 10"
+   }
+  ],
+  "transferable": [
+   "Justify DFO with measured failure rate and time per successful evaluation (pp. 8-9).",
+   "Fix the crash-driving variable and report both objective loss and failure-rate drop (p. 10).",
+   "After optimizing a ratio, audit numerator and denominator and add a floor constraint if the denominator collapses (p. 10).",
+   "Validate the simulator on deliberately contrasting designs, including a poor one, before optimizing (pp. 6-8)."
+  ],
+  "coauthors": "L. Boisneault, D. Melancon",
+  "quotes": [
+   {
+    "text": "In the present case, derivatives are difficult to obtain due to the numerous fails in the computation, therefore derivative-free optimization techniques [5] are required.",
+    "page": 8
+   },
+   {
+    "text": "To reduce the number of failed evaluations, a second optimization is launched with the initial height fixed to h/ro = 0.6 along the process.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S174",
+  "year": "2025",
+  "title": "A novel sequential Benders-semidefinite framework with dual feasible proxy for multi-stage transmission expansion planning with contingencies",
+  "read_level": "full",
+  "contribution": "Integrates multistage TNEP+RPP with N-1 security in a generalized Benders loop over SDP-relaxed AC-OPF subproblems, accelerated by dual-feasible-proxy cuts, periodic exact Magnanti-Wong cuts and adaptive contingency screening, reporting e.g. 231.4 -> 38.9 min on IEEE-300.",
+  "problem_entry": "TNEP and RPP solved separately, classical Benders gives weak/invalid cuts on nonconvex AC subproblems, and the authors' prior Benders-then-SDP paper lacked N-1 modelling and was dominated by SDP solve time (pp. 4-5).",
+  "key_idea": "Any dual-feasible point of the SDP slave gives a valid cut: build one cheaply (K=3-5 IPM iterations or a small NN, then closed-form cone/PSD projection), use it when k mod r != 0 and solve exactly with MW strengthening otherwise (pp. 6-8).",
+  "assumptions": "Binary investments; convex recourse via SDP relaxation; eps*tr(W) low-rank term asserted not to affect decisions; 'standard convex GBD assumptions' invoked but not listed (pp. 5-7).",
+  "proof_devices": [
+   "informal validity argument: dual-feasible cuts never overestimate theta, so the master lower bound is nondecreasing (p. 7)",
+   "closed-form dual repair: max{0,.} for inequality duals, symmetrize and shift by lambda_min for the PSD block (p. 7)",
+   "Magnanti-Wong Pareto-optimal cut at core point xbar = alpha x^k + (1-alpha) xhat with ||g||_1 = 1 (pp. 7-8)",
+   "cut-acceptance threshold 1e-5 against flat planes (p. 7)",
+   "termination certified by full AC N-1 validation with re-entry on new violators (p. 8)"
+  ],
+  "experiments": "RTS-24, IEEE-118, IEEE-300, 3 stages; baselines are only ablations (BDSDP, +DFP, +Pareto); runtime/iterations, exact vs inexact SDP counts (548 -> 172 exact on IEEE-300), rank-1 rate 80.6%, 'final master gap' 5-12% vs a 0.1% stopping rule, zero N-1 violations; proxy training not described, promised MILP baseline absent (pp. 5-12).",
+  "positioning": "Sorts rival families by weakness (heuristics, classical Benders, metaheuristics, monolithic multistage); credits Qiu-Tanneau-Van Hentenryck for the dual conic proxy; self-cites a PowerTech 2025 paper without Audet and Hydro-Quebec tools (pp. 4-5, 13-14).",
+  "writing": "Numbered contributions, bold run-in labels ('Goal.', 'Key idea.'), adjectives in place of evidence, guarantees asserted without proof; abstract's exact-duals claim conflicts with Sec. 3.2 (pp. 3, 5, 7).",
+  "limits_future": "No limitation stated; future work: renewable/demand uncertainty via stochastic or robust formulations (p. 13).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Cheap always-valid step (DFP cuts) plus scheduled exact step carrying convergence, transplanted to Benders; not shown robust to a poor cheap step.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "Convergence claimed under unlisted 'standard convex GBD assumptions' with no proof; abstract says cuts always from exact duals while Sec. 3.2 uses inexact DFP cuts.",
+    "pages": "pp. 3, 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Only self-ablations in CPU minutes; promised MILP-based baseline missing; no variability reported.",
+    "pages": "pp. 5, 9-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "cheap valid bound + scheduled exact refresh",
+    "evidence": "DFP cuts in most iterations, exact SDP + MW every r=3 iterations; Method 1 logic outside DFO in a paper Audet did not lead",
+    "pages": "p. 7"
+   }
+  ],
+  "transferable": [
+   "Obtain a valid Benders cut without solving the slave: few IPM iterations, project duals onto the dual cone, evaluate the dual objective (p. 7).",
+   "Screen scenarios with a cheap relaxation, promote top-M violators, certify with the full model at termination and re-enter on new violators (p. 8).",
+   "Reject cuts whose violation is below a threshold (1e-5) to avoid numerically flat cuts (p. 7)."
+  ],
+  "coauthors": "E. Fathipasandideh, H. Supreme, H. Dagdougui, D. Asber",
+  "quotes": [
+   {
+    "text": "Any dual-feasible point of the slave SDP yields a valid lower bound and hence a valid Benders cut.",
+    "page": 7
+   },
+   {
+    "text": "Optimality cuts are always derived from exact dual solutions, preserving convergence guarantees.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S175",
+  "year": "2025",
+  "title": "Benchmarking derivative-free optimization solvers for CSP plant design using the solar simulator",
+  "read_level": "full",
+  "contribution": "Shows how the public SOLAR suite can be used to choose a DFO solver and compares NOMAD, HEXALY, PRIMA (COBYLA) and CMA-ES on solar2/3/4/7/10 with data profiles, including constraint-violation profiles for infeasible starts.",
+  "problem_entry": "Benchmark gap: realistic blackboxes are proprietary or hard to interface, so DFO solvers are benchmarked on problems that miss the field's difficulties; CSP design lacks standard benchmarks (pp. 3-4).",
+  "key_idea": "A benchmarking procedure: select SOLAR problems by the property to test, form instances from LHS starting points (and seeds), run solvers with defaults and 100*n_p evaluations, compare with data profiles on f or on h (pp. 7-11).",
+  "assumptions": "f, c valued in R U {inf}; a priori vs simulated constraints; artificial upper bound 1e5 for solvers needing bounds; linear constraints passed to HEXALY/PRIMA; replication, fidelity and seed settings of the runs not stated (pp. 4, 6-8).",
+  "proof_devices": [
+   "tau-solved test (f0 - fN)/(f0 - f*) >= 1 - tau with kappa in groups of n_p+1 (p. 8)",
+   "constraint-violation data profile on h(x) = sum max{c_j,0}^2 (inf outside X) for infeasible starts (p. 11)"
+  ],
+  "experiments": "LHS census of 1e4 points per problem (a priori infeasible / simulated infeasible / feasible); 30 feasible starts for solar10 and solar7, 21 for solar2/3/4, 30 infeasible (a priori feasible) starts for solar3/4; feasibility counts show NOMAD 3/20 vs CMA-ES 5/20 on solar3 and NOMAD alone on solar4 (4/10); profile curves only in figures; no repeats or seeds reported (pp. 9-11).",
+  "positioning": "SOLAR set against oversimplified analytic benchmarks; each competitor described with its home ground (smooth problems for HEXALY/PRIMA, noisy ill-conditioned for CMA-ES); methodology cited to More-Wild, Beiranvand-Hare-Lucet, Audet-Hare-Tribes (pp. 4, 8-9).",
+  "writing": "Didactic figure pairing a data profile with instance convergence graphs; hedged results but strong discussion ('first freely available and open source suite', NOMAD 'reliably performs better'); NOMAD win read as evidence SOLAR is realistic; CMA-ES mislabelled model-based (pp. 8-12).",
+  "limits_future": "Tuned parameters and larger budgets declared out of scope; smooth-problem claim untested; future is a hope that realistic benchmarks spread (pp. 11-12).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Use-case layer of a public artifact: versioned repo, selection guide, LHS starts, seeds, replication and fidelity parameters.",
+    "pages": "pp. 7, 9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Evaluation currency, data profiles, four solver families incl. a commercial one, defaults, h-profiles for infeasible starts.",
+    "pages": "pp. 8, 11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Competitors' smooth home ground described but not tested; seeds/replications not reported.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "A priori vs simulated constraints drive the LHS census and the choice of infeasible starts that let the simulator run.",
+    "pages": "pp. 6, 9-10"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Benchmark built by NOMAD developers and NOMAD's win used as evidence of realism (single-codebase bias).",
+    "pages": "p. 12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "LHS feasibility census",
+    "evidence": "1e4 LHS points per problem tabulated as a priori infeasible / simulated infeasible / feasible to grade difficulty and draw starts",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "a priori constraints checked by the solar code, simulation skipped when violated",
+    "pages": "p. 10"
+   }
+  ],
+  "transferable": [
+   "Run an LHS census and publish the three-way feasibility table before benchmarking (p. 9).",
+   "Draw infeasible starts that satisfy the cheap constraints so the simulator is exercised (p. 10).",
+   "Use h-based data profiles when f-based ones are uninformative (p. 11).",
+   "Pair a data profile with the per-instance convergence plots behind it (Fig. 4, p. 9).",
+   "Publish a guide mapping solver requirements to benchmark instances (p. 7)."
+  ],
+  "coauthors": "X. Lebeuf, S. Le Digabel, P. Brillon, M. Diago, C. Tribes",
+  "quotes": [
+   {
+    "text": "As a result, DFO solvers are too often benchmarked on problems that do not fully capture the challenges of the field.",
+    "page": 4
+   },
+   {
+    "text": "This is a sign that solar successfully captures the difficulties encountered with real BBO problems.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "S177",
+  "year": "2025",
+  "title": "Optimal sorting with comparisons involving three elements",
+  "read_level": "full",
+  "contribution": "Introduces worst-case sorting with three-element comparisons and gives constructive upper bounds t_n for n <= 1000 as the minimum of six lemma-backed heuristics, with hand-built certificates for n = 13 (16 comparisons) and n = 21 (34).",
+  "problem_entry": "Change the oracle of the classical minimum-comparison sorting problem from pairwise (2 outcomes) to three-way (6 outcomes); the counting bound ceil(log6 n!) seems tight only for n = 3 (p. 4).",
+  "key_idea": "Portfolio recurrence t_n = min{s_n, p_n, f_n, v_n, m_n, g_n}, where chain-based heuristics enumerate group partitions and add merge costs from Theorem 2.2, computed bottom-up (pp. 5-8).",
+  "assumptions": "Distinct reals; each comparison returns the full order of three elements; worst-case only (p. 4).",
+  "proof_devices": [
+   "induction on n for two chains plus a v-chain sorted in n-2 comparisons (Thm 2.2(i), pp. 4-5)",
+   "reduction of (ii)/(iii) to (i) after one or two comparisons with a case split on a singleton (p. 5)",
+   "pivot-based case analysis by number of elements on each side, closed by Thm 2.2, with symmetry halving the cases (Props 3.1-3.2, pp. 8-11)",
+   "information-theoretic lower bound ceil(log6 n!) (p. 4)"
+  ],
+  "experiments": "Table of alpha_n, beta_n, six heuristic values, lower bound and t_n for n <= 40 and n in {50,100,200,500,1000}, with best/unique-best marking and accounting rows (f best for all 23 <= n <= 1000); gap t_n - l_n grows to 1053 at n = 1000 (pp. 11-12).",
+  "positioning": "Builds on the pairwise minimum-comparison literature (Ford-Johnson, Peczarski, Cheng et al.) and on the author's own 2014 three-tray-balance paper; claims a new class of problems (pp. 4, 12).",
+  "writing": "Short proof-driven paper with named heuristics and pseudo-code; abstract claims 'optimal or near-optimal' while the discussion says many t_n are likely not optimal; typo 14 for 13 in Prop. 3.1's proof (pp. 3, 9, 12).",
+  "limits_future": "Only n = 6-15 studied in detail, enumeration impractical from n = 9, optimality unconfirmed; future: prove or disprove optimality, generalize to p-way comparisons (pp. 12-13).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Every upper bound has a constructive proof and the discussion admits optimality is unproven, but no tightness beyond n = 3 and the abstract overstates ('optimal or near-optimal').",
+    "pages": "pp. 3-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "min-over-constructions recurrence",
+    "evidence": "six lemma-backed constructions enumerated over partitions, pointwise minimum computed bottom-up, with accounting rows of which construction wins",
+    "pages": "pp. 5-8, 12"
+   },
+   {
+    "pattern": "puzzle-to-family generalization",
+    "evidence": "2014 15-marble puzzle generalized to all n <= 1000 with an open p-way extension",
+    "pages": "pp. 4, 13"
+   }
+  ],
+  "transferable": [
+   "Print the information-theoretic lower bound as a column next to your upper bounds (p. 12).",
+   "Turn structural finishing lemmas into heuristics by enumerating partitions and combining by pointwise minimum (pp. 7-8).",
+   "Add accounting rows (times best, uniquely best, largest instance where best) to a best-of-k table (p. 12).",
+   "Use symmetry to halve pivot-based case analyses (pp. 8-9)."
+  ],
+  "coauthors": "none (solo)",
+  "quotes": [
+   {
+    "text": "We report optimal or near-optimal results for all values up to n = 40 elements, and for selected instances up to n = 1000.",
+    "page": 3
+   },
+   {
+    "text": "Larger instances have not been studied as thoroughly, and many of the reported values of tn are likely not optimal.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "D006",
+  "year": "2026",
+  "title": "Micro-PRIAD: A power utility simulator for blackbox optimization benchmarking",
+  "read_level": "full",
+  "contribution": "Releases Micro-PRIAD, an open-source Julia simulator with ten stochastic Monte Carlo blackbox instances (nine constrained, realistic power-grid maintenance problems plus one fast unconstrained one) that mimics Hydro-Quebec's PRIAD blackbox, including intermediate outputs with solver-side interrupters and sub-sampling hooks.",
+  "problem_entry": "Realistic BBO benchmarks are scarce and single-instance, analytic suites lack real difficulties; Hydro-Quebec's PRIAD blackbox needs up to 145 days per evaluation (pp. 4-5).",
+  "key_idea": "Build a scaled-down public twin: keep the block structure (degradation, grid generation, MC unavailability simulator in eta groups of s draws, cost block), drop power flow, expose interrupters, a subsampler and a fidelity parameter to the solver (pp. 6-7, 16-18).",
+  "assumptions": "Geometric failures, uniform failure times, lognormal repair/maintenance times (variance 0.25), analytic degradation curves, static outage prices; constraints classified QRAK/QRSK and rescaled to [-500, .] with threshold 0; seed fixes all randomness (pp. 10-15).",
+  "proof_devices": [
+   "horn plot: 100 evaluations at x_best per N, choose smallest N with 3*sigma/mean <= 0.1% (N = 1e4) (pp. 13-14)",
+   "second vector of per-component sample counts N_i returned with each intermediate output (p. 18)",
+   "linear fidelity map, 1e-4 fidelity = one MC draw (p. 29)"
+  ],
+  "experiments": "2D slices on 200x200 grids at N = 500 (>10 h each) and at N = 1..1e4 (a week for 1e4); 1D cuts showing feasibility flips at low N; 32 instances, five anonymized solvers, 32 h budgets, tau = 0.005, data profiles vs n+1 evaluation groups and vs hours (rank shifts explained by sampled regions), and a same-solver comparison with a static surrogate (N = 1e3, 10 calls = 1 evaluation) (pp. 19-22).",
+  "positioning": "Against analytic suites (CUTEst, BBOB) and single-instance realistic problems (STYRENE, wing, groundwater); credits SOLAR as the only collection covering both gaps; novelty hedged 'to the author’s knowledge' (pp. 4-5).",
+  "writing": "Twofold contributions, honest about features kept only 'to mimic' PRIAD, a third of the report is a user guide; overreaching inference from the surrogate test to intermediate outputs; several default/name inconsistencies between Sec. 3 and the guide (pp. 5, 17-31).",
+  "limits_future": "Limits given as simplifications (no power flow, analytic degradation, static prices, negligible sub-sampling gain); results called illustrative; no future work stated (pp. 3, 6, 10, 12, 18, 22).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Executable with x.txt input and one-line output, constraint classification, seeds, fidelity, multiple instances, open code and user guide.",
+    "pages": "pp. 6, 13, 23-31"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Starting points and best-known values are not printed (x_best used but not given).",
+    "pages": "pp. 13, 20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Le Digabel-Wild labels per constraint; deterministic a priori constraints available via -N 0 and a deterministic-info interrupter.",
+    "pages": "pp. 13, 15, 26"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Profiles on evaluations and on time, surrogate calls charged at cost ratio, seeds in instance definition.",
+    "pages": "pp. 20-22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Solvers anonymized, no cross-family identities.",
+    "pages": "p. 21"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Benchmark co-designed with the group's intermediate-output algorithms (Inter-DS, multi-fidelity constraints) and evaluated with RunnerPost.",
+    "pages": "pp. 5, 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "scaled-down public twin of a proprietary blackbox",
+    "evidence": "PRIAD (145 days/eval) reproduced at small scale with its block structure; features kept only to mimic are flagged",
+    "pages": "pp. 4, 18, 22"
+   },
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "countEvalFlag = 0 when a priori constraints fail, N = 0 mode, power-grid interrupter after c1-c5",
+    "pages": "pp. 13, 17, 30"
+   },
+   {
+    "pattern": "Solver-agnostic blackbox wrapper",
+    "evidence": "interrupter and subsampler functions at the blackbox interface, with a text-file protocol for non-Julia solvers",
+    "pages": "p. 26"
+   },
+   {
+    "pattern": "common evaluation currency with explicit cost weights",
+    "evidence": "10 static-surrogate calls count as one evaluation",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "Choose the default Monte Carlo size with a horn plot at the best-known point and a stated precision threshold (pp. 13-14).",
+   "Rescale all constraints to a common range before aggregating them in h (p. 15).",
+   "Return per-component sample counts with every partial output (p. 18).",
+   "Draw data profiles against both evaluations and wall-clock time and explain rank changes (pp. 21-22).",
+   "Put a flag in the output saying whether the evaluation counts against the budget (p. 30)."
+  ],
+  "coauthors": "F. Gentile, X. Lebeuf, S. Le Digabel, M. Diago",
+  "quotes": [
+   {
+    "text": "This blackbox requires up to 145 days for an evaluation with a single CPU [21].",
+    "page": 4
+   },
+   {
+    "text": "Micro-PRIAD offers this feature to mimic the behaviour of the PRIAD blackbox, which has an electrical cost computation block that is extremely costly to evaluate.",
+    "page": 18
+   }
+  ]
+ }
+]

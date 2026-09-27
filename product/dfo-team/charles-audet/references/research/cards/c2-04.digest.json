@@ -1,0 +1,295 @@
+[
+ {
+  "id": "S063",
+  "year": "2018",
+  "title": "A progressive barrier derivative-free trust-region algorithm for constrained optimization",
+  "read_level": "full",
+  "contribution": "Transfers the progressive barrier from MADS to a derivative-free trust-region method (PBTR) with two incumbents, two trust regions and ratio tests on both f and h, proves that at least one trust-region radius sequence goes to zero, and shows PBTR competitive with COBYLA on 40 smooth CUTEst problems and with NOMAD on two MDO blackboxes.",
+  "problem_entry": "Constraint class stated first via the Le Digabel-Wild taxonomy (quantifiable, relaxable, simulation, known; no hidden constraints); model-based constrained DFO inventoried; goal is to adapt the PB to the DFTR framework (pp. 2-3).",
+  "key_idea": "Keep the DFTR skeleton, replace the single iterate by the PB's feasible/infeasible (primary/secondary) incumbents, each with its own trust region and constrained subproblem; add a ratio rho_h for the violation h; retune the borrowed h_max update (0.9 h_max^orig + 0.1 h(x*)) and filter the point set because DFTR spends more evaluations per iteration than MADS (pp. 11-14, 20).",
+  "assumptions": "f, c in C2, f bounded below, uniformly bounded model Hessians, fraction of Cauchy decrease for f (feasible subproblem) and h (infeasible subproblem), certifiably fully linear models every iteration ('To simplify'), no hidden constraints, feasibility tolerance h < 1e-14 (pp. 2, 5, 14-15, 17).",
+  "proof_devices": [
+   "radius-does-not-vanish contradiction: infinitely many non-decreased iterations give uniform Cauchy decrease C = eta0 (kCauchy/2) min{mu/kH,1} mu eps^2/gamma_inc^2 against a lower bound (Thm 3.1 on f, p. 15)",
+   "same argument on the violation h bounded below by 0 when no feasible point is ever found (Thm 3.2, p. 16)",
+   "induction over iteration types (dominating/improving/unsuccessful) to show the infeasible incumbent is always defined (p. 16)",
+   "explicit statement of the open mixed case: nothing can be said about Delta_I when both feasible and infeasible points are generated (p. 16)"
+  ],
+  "experiments": "40 CUTEst problems (n=2-9, 18 feasible/22 infeasible x0; unscaled problems excluded for lack of dynamic scaling) plus AIRCRAFT_RANGE and SIMPLIFIED_WING; budget 100(n+1); constrained data profiles (tau=1e-3, feasible points only) and performance profiles; 6-variant ablation, then vs COBYLA (NLopt) and NOMAD 3.7.2 at defaults; one run per solver, no seeds (pp. 6, 17-23).",
+  "positioning": "Continuation of the authors' PB (2009) and the Conn-Scheinberg-Vicente DFTR framework; prior constrained DFTR methods listed neutrally; claims to be the first algorithm after MADS to deploy the PB; 16 of 45 references include an author (pp. 2-4, 23-27).",
+  "writing": "About seven pages of recap before the new algorithm (pp. 4-10); plain goal sentence (p. 3); hedged 'competitive'/'suggest' claims; two-sided verdict: better than NOMAD on smooth problems, better than COBYLA on nonsmooth blackboxes (pp. 1, 23).",
+  "limits_future": "Authors name missing dynamic scaling, no overdetermined models, geometry-improvement frequency, penalty subproblem treatment, PB in other nonlinear algorithms (pp. 23-24); unnamed: no stationarity result, open mixed case, single runs; reader notes typos in Assumption 1 and rho_h and an unexplained infeasible-x_bar case in the Thm 3.1 proof (pp. 13-15).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Constraint class fixed via the QRSK taxonomy before the algorithm; PB for relaxable quantifiable constraints.",
+    "pages": "pp. 2, 8-10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "100(n+1) budget, data/performance profiles, COBYLA on its smooth home ground and NOMAD on MDO blackboxes at defaults; single-run protocol falls short of step 5.",
+    "pages": "pp. 6, 17-23"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Realistic layer is the group's recurring AIRCRAFT_RANGE and SIMPLIFIED_WING blackboxes.",
+    "pages": "p. 17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "No Search/Poll split; what travels from MADS is the PB module and the speculative search, not the architecture.",
+    "pages": "pp. 10-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Outside MADS the guarantee is only that one radius sequence goes to zero; no stationarity rung, no counterexamples.",
+    "pages": "pp. 14-16"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Python prototype; NOMAD integration not mentioned.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Port a module across algorithm families and retune its implicit rates",
+    "evidence": "PB moved into DFTR; h_max update after improving iterations and the filtered point set changed because DFTR spends more evaluations per iteration than MADS; original vs revised rule ablated.",
+    "pages": "pp. 13, 20-22"
+   }
+  ],
+  "transferable": [
+   "When transplanting a mechanism, list parameters that encode the donor's evaluations per iteration, retune them, and publish the original-vs-retuned ablation (pp. 13, 20-22).",
+   "Two incumbents with two trust regions and asymmetric model effort: full quadratic interpolation around the primary, cheap model around the secondary (pp. 11-12, 19-20).",
+   "For an infeasible trial point, require the ratio test on both f and h before enlarging the radius (p. 14).",
+   "Constrained data profiles: score only points with h below a stated tolerance and declare that problems with no feasible point found count as unsolved (p. 17).",
+   "Disclose instance-selection filters with their reason (unscaled CUTEst problems dropped, p. 17)."
+  ],
+  "coauthors": "A.R. Conn, S. Le Digabel, M. Peyrega",
+  "quotes": [
+   {
+    "text": "Given a very badly behaved function we would use a direct-search method. If the function can be adequately approximated by a smooth function we would prefer a model-based approach unless it is essential to exploit some parallel architecture.",
+    "page": 2
+   },
+   {
+    "text": "After MADS, it is the first algorithm to deploy the progressive barrier.",
+    "page": 23
+   }
+  ]
+ },
+ {
+  "id": "S004",
+  "year": "2021",
+  "title": "Performance indicators in multiobjective optimization",
+  "read_level": "full",
+  "contribution": "Invited review that classifies 63 multiobjective performance indicators into cardinality, convergence, distribution-and-spread and convergence-and-distribution groups, audits each for monotonicity, compatibility/completeness, cost and required reference data, and recommends Pareto-compliant indicators (hypervolume, or cheaper IGD+/DOA and others) for comparing algorithms.",
+  "problem_entry": "Measurement question: single-objective quality is trivial but Pareto-front-approximation quality is not, and it matters for comparison, stopping and algorithm design; earlier surveys cover only specific properties and Li-Yao (2019) targets the evolutionary community (pp. 2-3).",
+  "key_idea": "One entry template per indicator (definition, better direction, counterexample-backed drawbacks, cost, need for true front/reference, continuous vs discontinuous fronts) and appendix property tables built on Zitzler et al.'s monotonicity and compatibility/completeness framework (pp. 6-19, 22-24).",
+  "assumptions": "Continuous multiobjective minimization with conflicting objectives (non-singleton Pareto set, stated in a Remark), approximations are mutually non-dominated feasible sets, iteration counter starts at the first feasible point, nadir approximated from single-objective minimizers (pp. 3, 6-7).",
+  "proof_devices": [
+   "small counterexample per indicator showing a ranking that contradicts dominance (ONVG, error ratio, GD, MPFE, additive epsilon with (0,1,1) vs (1,0,0), spacing gaps, HV reference-point flip; pp. 7-10, 13, 18)",
+   "classification against R-compatibility/R-completeness and (strict) monotonicity (Defs. 6-9, Tables 4-5; pp. 6-7, 23-24)",
+   "per-indicator complexity accounting, e.g. HV O(|Y_N|^{m/3} polylog) with no available implementation, IGD+/DOA O(m|Y_N||Y_P|) (pp. 10, 16-17)"
+  ],
+  "experiments": "none (review); prescribes comparison practice: Pareto-compliant indicators in data/performance profiles, attainment functions for stochastic solvers, budget-based stopping in blackbox optimization (pp. 19-20).",
+  "positioning": "Cross-references every indicator against nine earlier surveys (Table 1); frames Li and Yao (2019) as a useful complement; directly criticizes Custodio et al. (2011) multiobjective profiles and GD/IGD use in two benchmarking papers (pp. 3-5, 19-20).",
+  "writing": "Definitions, catalogue, uses, verdict; rigid per-entry template that balances each drawback with a merit; hedged recommendations ('We believe', HV 'until now' the most relevant) (pp. 8, 20-21).",
+  "limits_future": "Named: HV cost exponential in the number of objectives and reference-point dependence; future indicators fixing HV drawbacks and indicators embedded in algorithms (p. 21); unnamed: no empirical indicator comparison, borrowed counterexamples, minimal treatment of constraints (p. 7).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Measurement methodology published as a contribution; recommends Pareto-compliant indicators; criticizes a competitor's multiobjective profiles; source of the four indicator groups in step 4.",
+    "pages": "pp. 7, 19-21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Counterexample audit applied to measuring instruments instead of theorems; counterexamples mostly borrowed (Knowles and Corne).",
+    "pages": "pp. 7-10, 13, 18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Weak: fronts contain only feasible vectors and indicator traces start at the first feasible point.",
+    "pages": "p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Audit the instrument before measuring",
+    "evidence": "Property table (parameters, reference data, cost, monotonicity, compatibility/completeness) plus counterexamples for every indicator, published before the group's own multiobjective solver work (DMultiMads link inferred).",
+    "pages": "pp. 7-24"
+   }
+  ],
+  "transferable": [
+   "Property table for measures: parameters, reference data needed, complexity, monotonicity, compatibility/completeness (pp. 22-24).",
+   "Four requirements for a distribution/spread indicator: scaled objectives, not nearest-neighbour based for discontinuous fronts, no external parameters, interpretable (p. 21).",
+   "Use a (weakly) Pareto-compliant indicator (HV, IGD+, DOA) as t_{p,s} in multiobjective data/performance profiles, not GD/IGD or cardinality (pp. 19-20).",
+   "Start indicator traces at the first feasible iterate (p. 7).",
+   "With many objectives, fall back from HV to IGD+ or DOA at O(m|Y_N||Y_P|) (pp. 10, 16, 20)."
+  ],
+  "coauthors": "J. Bigeon, D. Cartier, S. Le Digabel, L. Salomon",
+  "quotes": [
+   {
+    "text": "Stopping at a predetermined number of function evaluations is often used in the context of blackbox optimization (Audet et al., 2008). The use of performance indicators also is not relevant.",
+    "page": 20
+   },
+   {
+    "text": "We believe that the use of monotonic performance indicators or binary ones that capture the dominance property seems to be the most efficient one in the years to come to follow the behavior of population-based algorithms along iterations.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S013",
+  "year": "2021",
+  "title": "Two decades of blackbox optimization applications",
+  "read_level": "full",
+  "contribution": "Reviews twenty years of MADS/NOMAD applications in energy (Hydro-Quebec), materials science (FactSage) and engineering design plus road design, cardiovascular geometry, astrophysics and patents, maps NOMAD's reach through Web of Science categories of citing journals, and records how application failures produced NOMAD features and NOMAD 4.",
+  "problem_entry": "Problem class where the structure of f and Omega is unknown, unexploitable or non-existent, with quantified pathologies (60% and 43% simulation failures, costs from seconds to days, rounding, stochastic outputs, variable dimension); gap: no survey devoted exclusively to applications (pp. 2-3).",
+  "key_idea": "Organize the survey around one algorithm justified by six reasons (search/poll, constraint and variable types, surrogates, Clarke-based hierarchical analysis, breadth) and present application vignettes that each pair a pathology with the feature or research line it triggered (groups of variables, NOMAD 4, adaptive-precision MADS) (pp. 3-7).",
+  "assumptions": "Failed evaluations encoded as +inf; local Lipschitz gives a Clarke-derivative stationarity result along hypertangent directions; extensions inherit it, stochastic extensions do not (pp. 2-3).",
+  "proof_devices": [
+   "bibliometric aggregation of JCR categories of journals citing the NOMAD paper (328 citations as of Oct 27, 2020; Table 2, pp. 3, 5-6)",
+   "patent query summarized as a table (Table 3, p. 11)",
+   "reported application techniques: exclusion constraint ||x-x0||^2 >= eps with restarts to enumerate local minima; >2 objectives as sequences of biobjective problems; staged fidelity (pp. 6, 8)"
+  ],
+  "experiments": "none new; reports cited outcomes (decomposition 36x faster, calibration +33% shipped in MATLAB R2018a, insulation +65%, 7 to 15 network nodes, 40-64% time saving with staged fidelity) and mixed results (dds complementary, NOMAD higher variance than interior point, SA not repeatable) (pp. 6-10).",
+  "positioning": "NOMAD as a standard tool; heuristics lack convergence analysis; DFO/BBO the only option when gradients are unreliable; third-party endorsements quoted (search step unique to Mads; 'quite indispensable in practice'); no comparison with other DFO families' application records (pp. 2, 8-11).",
+  "writing": "Numbered reasons, acronym table, vignettes ending in a number, few hedges ('far from being exhaustive', 'It can be argued'), promotional tone (pp. 2-4, 11).",
+  "limits_future": "Named: non-exhaustive selection, stochastic variants lack guarantees; future: deep-network hyperparameter optimization and continued growth (pp. 3-4, 11); unnamed: selection bias to own software, citing-journal counts measure publication field not use, no failure census.",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "MADS/NOMAD improved mainly through lessons from applications; groups of variables from GMON, NOMAD 4 from cluster parallelism, tuned calibrator shipped in MATLAB.",
+    "pages": "pp. 4, 6-7"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Real blackboxes with pathologies documented, but nothing released; partner blackboxes stay with partners.",
+    "pages": "pp. 2-10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Search/poll split as reason (i); third parties use the search step for surrogates of model errors; dds-Mads global-plus-local hybrid.",
+    "pages": "pp. 3, 6, 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Failures as +inf; EB/PB/linear equalities listed; hidden constraints handled in air-transport case.",
+    "pages": "pp. 2-3, 9"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stated hierarchical Clarke-based analysis with the caveat that stochastic variants lack the same guarantees.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Failure-to-feature ledger kept with partners",
+    "evidence": "Application survey co-written with industrial/domain users pairs each application failure with the NOMAD feature or research line it produced (groups of variables, NOMAD 4, adaptive-precision MADS).",
+    "pages": "pp. 4-7"
+   }
+  ],
+  "transferable": [
+   "Map a software package's reach by counting the Web of Science categories of journals citing its reference paper, with the date of the count (p. 3, Table 2).",
+   "Enumerate local minima with a local blackbox solver by adding ||x - x0||^2 >= eps after each solution and restarting (p. 8).",
+   "Handle more than two objectives as a sequence of biobjective problems with the rest as constraints (p. 8).",
+   "Staged fidelity: combine model reductions for the global phase, then run the full model with the remaining budget (p. 6).",
+   "Group variables by physical device or rule type when the domain is fragmented or discontinuous (pp. 4, 7)."
+  ],
+  "coauthors": "S. Alarie, A.E. Gheribi, M. Kokkolaras, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "It is also important to note that Mads and NOMAD have been improved throughout the years, mainly thanks to the lessons learned by their utilization in different applications.",
+    "page": 4
+   },
+   {
+    "text": "This work led to the conclusion that a new (fourth) version of NOMAD had to be developed.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S159",
+  "year": "2025",
+  "title": "Cesogen: cellular solid generator",
+  "read_level": "full",
+  "contribution": "Introduces Cesogen, an open-source (MIT) signed-distance-function processor with a stack-oriented command-line DSL that generates TPMS-like and hierarchical cellular solids without user intervention, measures its robustness and speed, and demonstrates a NOMAD-driven optimization of a cellular-solid-filled block.",
+  "problem_entry": "Application gap (a dearth of mathematical optimization of cellular solids) whose bottleneck is tooling: optimizers need a generator they can drive in batch, which rules out all but three free generators (p. 4).",
+  "key_idea": "SDF pipeline (convert meshes, combine SDFs, contour) behind a mixfix stack DSL derived from three principles (suitability for blackbox optimization, ergonomics, composability); hierarchical solids by direct rather than sequential intersection (pp. 5, 7-9, 11-12).",
+  "assumptions": "Nodal Fourier approximations of TPMS-like surfaces, approximate SDFs after operations, blackbox outputs in R union {+inf}, categorical kind handled by one NOMAD run per value, no mesh-convergence analysis (qualitative demonstration) (pp. 5-6, 16).",
+  "proof_devices": [
+   "roundtrip serialize/deserialize test that should be repeatable indefinitely but fails at the 28th trip (pp. 12-13)",
+   "four error measures (L2 and max distance of points and cell centres to the reference SDF, relative to the grid diagonal) (p. 12)",
+   "root-cause trace of failures to unstable point-to-narrow-triangle distances from unsmoothed marching cubes (p. 12)"
+  ],
+  "experiments": "Robustness (sequential intersection fails at step 2; ASLI crashes; roundtrip stops at 27), speed (800^3 samples: 16.2M cells in 79 s), and a demo: minimize solid fraction of an hourglass block with Cesogen+Gmsh+MFEM and NOMAD 4 at defaults, 20 LHS points, 50 evaluations per kind; IWP/FRD alpha=0.31, gyroid 0.38; infeasible points can exceed 50%; no competitor, one run per kind (pp. 10, 13-18).",
+  "positioning": "Table 1 compares 18 free generators (features from 'a cursory inspection'); competitors eliminated by the three principles; the metaheuristic workflow is described and set aside (pp. 4, 9-10).",
+  "writing": "Principle-first design narrative, strong impact claim ('peerless'), informal voice ('And it is catchy.'), read-aloud example of the DSL, limitations listed twice, bulleted roadmap (pp. 3, 7, 9, 14, 18).",
+  "limits_future": "Named: explicit contouring grid, fragile mesh-to-SDF on narrow triangles, fine grids for hierarchical solids, no tetrahedral output, no graded/heterogeneous solids; roadmap of strut-based solids, contouring algorithms, GUI, universal interface (pp. 7, 14, 18).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Non-physical meshes and generation errors left to NOMAD as infeasible/failed evaluations; outputs in R union {+inf}.",
+    "pages": "pp. 16-18"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD 4 at defaults with an LHS initial design; parallelism at the solver level citing PSD-MADS.",
+    "pages": "pp. 14, 16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Released artifact is the blackbox front end (generator, DSL, Zenodo results), not a benchmark instance with I/O contract, starting points and best-known solution.",
+    "pages": "pp. 7, 16, 19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Demonstration without competitor or replication, declared qualitative.",
+    "pages": "pp. 16, 18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Build the missing blackbox-callable tool to open a new application field to DFO",
+    "evidence": "Batch-drivable generator designed from principles so that non-metaheuristic blackbox optimization of cellular solids becomes possible; co-supervised with a domain professor.",
+    "pages": "pp. 4, 9, 19"
+   }
+  ],
+  "transferable": [
+   "State design principles, derive each interface choice from one, and reuse them as the competitor filter (pp. 9-10).",
+   "Roundtrip serialize/deserialize test with errors relative to the grid diagonal to expose numerical fragility (pp. 12-13).",
+   "Argue for solver-level parallelism (concurrent evaluations) instead of parallelizing a serial blackbox component (p. 14).",
+   "Pick the direct-search starting point from a 20-point LHS design, counting the LHS in the budget (p. 16).",
+   "Omit infeasible points from convergence plots but report their share and causes (pp. 17-18)."
+  ],
+  "coauthors": "P.A. Patience, B. Blais",
+  "quotes": [
+   {
+    "text": "The original impetus for developing Cesogen was the desire to solve cellular solid problems via blackbox optimization algorithms not based on metaheuristics.",
+    "page": 9
+   },
+   {
+    "text": "Infeasible solutions are omitted from the graph, and they can account for more than 50 % of the total evaluations",
+    "page": 17
+   }
+  ]
+ }
+]

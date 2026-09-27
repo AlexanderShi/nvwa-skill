@@ -1,0 +1,279 @@
+[
+ {
+  "id": "S031",
+  "year": "2017",
+  "title": "Optimization methods for supervised machine learning: From linear models to deep learning",
+  "read_level": "full",
+  "contribution": "INFORMS tutorial that derives supervised-learning optimization problems for OR readers and surveys first-order, variance-reduced, quasi-Newton, Hessian-free and subsampled/random-model methods, ending with Scheinberg's random-model framework as the route for adaptive second-order methods in ML.",
+  "problem_entry": "Community gap: barriers of terminology, goals and collaboration between statistics, CS and optimization; the tractable problem is derived as a chain from maximizing the probability of a correct prediction to regularized empirical risk (pp. 1, 3-7).",
+  "key_idea": "For each classical deterministic method, name the ML cost that breaks it (full-data passes, dense Hessians, nonconvexity) and present the stochastic repair; random-model results keep deterministic rates if estimates are accurate enough with some positive probability, with sample size tied to step length or radius (pp. 8-22).",
+  "assumptions": "Convex loss and regularizer in Sec. 2, strong convexity/L-smoothness for quoted rates, 'sample indefinitely' for the SGD trade-off argument (flagged as only a theoretical guideline for fixed data sets); two-moment condition (mu1, mu2) for stochastic quasi-Newton (pp. 7-11, 15-16).",
+  "proof_devices": [
+   "Bousquet-Bottou error-budget split: estimation error <= eps/2 and optimization error <= eps/2 so n >= O(1/eps^2) (eqs. 17-18, p. 10)",
+   "complexity tables with a common iteration measure in n, kappa, eps (Tables 2-3, p. 13)",
+   "generic two-inequality sufficient condition for a preconditioned stochastic step to keep SGD rates (p. 15)"
+  ],
+  "experiments": "none (points to a Lehigh thesis comparison of Hessian-free trust-region solvers, p. 21)",
+  "positioning": "Builds on Bottou-Curtis-Nocedal and Bousquet-Bottou; fair to SGD in theory, critical in practice; groups her random-model papers with Gratton-Royer-Vicente-Zhang as one framework; STORM ref lists first author as 'C. Chen' (pp. 10-11, 21-23).",
+  "writing": "Tutorial voice: glossary table and business toy example before formulas, boxed pseudocode, explicit hedges ('to the best of our knowledge', 'In truth, we cannot be sure.'), no theorems (pp. 2, 11, 19).",
+  "limits_future": "No conclusion section (ends in Sec. 3.4, p. 22); open questions: stochastic momentum guarantees, provably better practical second-order methods, avoiding saddles/poor minima in DNNs, learning bounds useless when C >> n, negative-curvature experiments (pp. 11, 15, 20, 21).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Stated (2017): random-model results require |S_k| large relative to the step length / trust-region radius; accuracy hierarchy Hessian < gradient < function value.",
+    "pages": "pp. 21-22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Stated: line search well known to perform well; SGD very sensitive to parameter choices; for nonconvex problems evaluating F is essential (trust-region accept/reject). Earlier than the 2020 IEEE SPM statement cited in SKILL.md.",
+    "pages": "pp. 8, 11, 21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stated deterministic parity: random-model methods 'retain their convergence rates'; subsampled Newton rates 'similar to their deterministic counterparts'.",
+    "pages": "p. 21"
+   },
+   {
+    "method": "Research Taste mark 6",
+    "relation": "variant",
+    "note": "Explicit community bridging, but ML <-> OR for first/second-order methods rather than DFO <-> zeroth-order.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "accuracy hierarchy across oracles",
+    "evidence": "Sampled Hessians need much looser sample sizes than sampled gradients; F estimates need even stronger ones (also S012 p. 9: estimates tighter than models).",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "Open a cross-community paper with a glossary table mapping their terms to yours, including an a.k.a. column (Table 1, p. 2).",
+   "Derive the optimization problem as a chain of named relaxations from the true goal and state what each step loses (pp. 3-7).",
+   "Error-budget argument: split eps between statistical and optimization error and compare algorithms by total cost to meet both (eqs. 17-18, p. 10).",
+   "Justify a necessary ingredient with a one-line degenerate case (separable data: unregularized logistic loss -> 0 along an unbounded ray, no minimizer) (p. 8).",
+   "Summarize competitors in a complexity table with one common measure (Tables 2-3, p. 13).",
+   "Check a new preconditioned stochastic step against the generic (mu1, mu2) two-inequality condition and watch for correlation between B_k and the gradient sample (pp. 15-16)."
+  ],
+  "coauthors": "F. E. Curtis",
+  "quotes": [
+   {
+    "text": "In practice, however, standard SGD is not necessarily the most effective approach to solve optimization problems in ML.",
+    "page": 10
+   },
+   {
+    "text": "the results simply require that |Sk| has to be chosen sufficiently large with respect to the length of the step taken by the algorithm.",
+    "page": 21
+   }
+  ]
+ },
+ {
+  "id": "S009",
+  "year": "2018",
+  "title": "SGD and Hogwild! convergence without the bounded gradients assumption",
+  "read_level": "full",
+  "contribution": "Shows the bounded-stochastic-gradient assumption contradicts strong convexity, replaces it with a bound derived from per-sample L-smoothness (and convexity), proves a.s. convergence and O(1/t) rates for SGD with a larger admissible step, and gives the first diminishing-step O(1/t) analysis of Hogwild! with inconsistent reads via a general filtered recursion.",
+  "problem_entry": "A standard assumption (E||grad f(w;xi)||^2 <= sigma^2) is shown in three lines to contradict strong convexity, plus a 1-D counterexample along SGD iterates; Bottou et al.'s (M, N) alternative has unknown constants that set the step (p. 2).",
+  "key_idea": "In expected-risk minimization each realization is L-smooth (and convex), so E||grad f(w;xi)||^2 <= 4L[F(w)-F*] + 2E||grad f(w*;xi)||^2 with computable constants; SGD/Hogwild! unchanged except diminishing steps (pp. 2, 4-6).",
+  "assumptions": "F mu-strongly convex; each f(.;xi) L-smooth; each f(.;xi) convex (droppable at cost kappa); xi i.i.d.; Hogwild!: consistency with delay tau, atomic entry reads/writes (pp. 2-4, 6).",
+  "proof_devices": [
+   "||a||^2 <= 2||a-b||^2 + 2||b||^2 with b = grad f(w*;xi) plus generalized Johnson-Zhang co-coercivity bound (Lemmas 1, 3, pp. 4, 10)",
+   "Robbins-Siegmund supermartingale convergence + contradiction with sum eta_t = infinity (Thm 1, pp. 11-12)",
+   "induction E||w_t-w*||^2 <= NG/(mu^2 (t+E)) with G = max{I, J}, then restart from w_T (Thm 2, pp. 12-13)",
+   "random diagonal filter matrices with d_xi E[S|xi] = D_xi unifying Hogwild! and coordinate updates (pp. 5, 13-14)",
+   "0/1 masks Sigma_{t,j} for inconsistent reads and collision probability Delta for cross terms (pp. 14-16)",
+   "unrolled linear recursion Y_{t+1} <= beta_t Y_t + gamma_t and telescoping product prod(1-2/(j+E)) (pp. 18-19)",
+   "bootstrap induction on a decreasing envelope Z_t (pp. 20-21)"
+  ],
+  "experiments": "L2-logistic regression (lambda = 1/n) on ijcnn1 and covtype; single-core simulation of Hogwild! recursion, 10 runs averaged, filter fraction sweep with tau = 10 and tau in {1, 10, 100}; x-axes coordinate updates and epochs; no baselines (pp. 7-8).",
+  "positioning": "Bounded-gradient literature called 'clearly false' under strong convexity; corrects Bottou et al. 2016 constants (step larger by L/mu); credits Moulines-Bach; Mania et al.'s removal 'only mentioned as a remark without proof'; Leblond et al. 2018 as closest, differences listed (pp. 2-5).",
+  "writing": "Nested contribution bullets; 'Here we make an important observation'; remarks compare constants and explain surprises with a thought experiment; one loose intro claim of probability-one convergence for the diminishing-step analysis while Hogwild! result is only in expectation (pp. 2-7).",
+  "limits_future": "Conclusion is summary only with no future directions (p. 8); visible limits: strong convexity of F required, step needs mu, bounded delay, no multi-core timing (pp. 2, 4, 6, 7).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Oracle property (second-moment bound) derived from per-sample structure instead of assumed, but in expectation rather than a probability-p accuracy contract.",
+    "pages": "pp. 2, 4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Exploits structure of ML expected risk (each realization smooth/convex) to replace a generic noise assumption.",
+    "pages": "pp. 2, 4"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Practitioner method (SGD, Hogwild!) kept unchanged, only the analysis changes; but non-adaptive with pre-specified diminishing steps.",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "method": "Research Taste warning sign 1",
+    "relation": "variant",
+    "note": "Step schedule is pre-specified but computed from known mu and L, not hand-tuned; sold as the advantage over unknown M or sigma.",
+    "pages": "pp. 2, 5, 13"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Supermartingale (Robbins-Siegmund) for a.s. convergence and induction for O(1/t); no adaptive step parameter or stopping-time argument.",
+    "pages": "pp. 11-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "assumption-contradiction audit",
+    "evidence": "Three-line proof that bounded stochastic gradients contradict strong convexity plus a 1-D counterexample along SGD iterates, then replacement by a derived bound; similar minimal-counterexample moves in S031 (separable data, p. 8) and S004 (six points on a circle, pp. 7-8).",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Before relaxing a standard assumption, prove it contradicts your setting (three lines) and add a 1-D counterexample along the algorithm's actual iterates (p. 2).",
+   "Derive the stochastic-gradient noise bound from per-sample smoothness, E||grad f(w;xi)||^2 <= 4L[F(w)-F*] + 2E||grad f(w*;xi)||^2, so step sizes use only known constants (pp. 4, 10, 13).",
+   "Prove O(1/(t+E)) by induction with G = max{initial-gap term, alpha^2/(alpha-1)}, then restart from w_T to separate transient and asymptotic regimes (pp. 12-13).",
+   "Unify algorithm variants as one recursion with a random filter satisfying an unbiasedness identity; read variants off as parameter extremes and keep leading constants explicit to rank them (pp. 5-6).",
+   "Validate an asynchrony theorem by a single-core simulation injecting delay tau explicitly, plotting against both coordinate updates and epochs (pp. 7-8).",
+   "Pair a counter-intuitive theorem feature (independent of delay tau) with a thought experiment explaining it (p. 7)."
+  ],
+  "coauthors": "L. M. Nguyen, P. H. Nguyen, M. van Dijk, P. Richtarik, M. Takac",
+  "quotes": [
+   {
+    "text": "However, this assumption is clearly false if F is strongly convex.",
+    "page": 2
+   },
+   {
+    "text": "Here we make an important observation: if we view (1) not as a general stochastic problem but as the expected risk minimization problem, where ξ corresponds to a random data sample pulled from a distribution, then (1) has an additional key property",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S012",
+  "year": "2018",
+  "title": "Stochastic optimization using a trust-region method and random models",
+  "read_level": "full",
+  "contribution": "STORM: a standard trust-region method whose models and function estimates are only required to be accurate (errors proportional to delta_k and delta_k^2) with fixed probabilities alpha, beta conditioned on the past, arbitrary otherwise; proves almost-sure convergence to first-order stationarity via martingale arguments, shows how to build such models under unbiased noise and biased computation-failure noise, and tests it on CUTEr and logistic regression.",
+  "problem_entry": "Gap between deterministic DFO and derivative-based stochastic optimization; SG methods need tuned parameters, SA methods need tuned sampling, fail under biased noise and outliers; motivated by randomized numerical processes that can fail (pp. 1-4, 25-26).",
+  "key_idea": "Keep the trust-region algorithm; replace f by fresh random estimates f0_k, fs_k in the ratio test, add ||g_k|| >= eta2 delta_k, and require only alpha-probabilistically fully linear models and beta-probabilistically eps_F delta_k^2-accurate estimates (pp. 2, 7-9).",
+  "assumptions": "Fixed (not increasing) probabilities conditioned on past sigma-algebras; arbitrary failures; f bounded below and f, grad f L-Lipschitz on an algorithm-dependent enlarged region (admitted in Remark 4.2); bounded model Hessians; eta2 step restriction used in proof but not in practice; no hidden constraints (pp. 3, 8-10, 21, 27).",
+  "proof_devices": [
+   "potential Phi_k = nu f(X_k) + (1-nu) Delta_k^2 with E[Phi_{k+1}-Phi_k | F] <= -sigma Delta_k^2 giving sum Delta_k^2 < infinity a.s. (Thm 4.11, pp. 14-19)",
+   "2 x 4 case split on ||grad f|| >= zeta delta_k and outcomes of (I_k, J_k); nu chosen so all but 'both bad' are no worse than an unsuccessful step (pp. 15-19)",
+   "worst case bounded by Taylor + Lipschitz (C3 = 1 + 3L/(2 zeta)) and made rare via (1-alpha)(1-beta) small (pp. 16, 19-20)",
+   "log-radius submartingale R_k = log_gamma(delta_k/b) bounded below by +-1 walk W_k = sum(2 1_I 1_J - 1), alphabeta >= 1/2 (Thm 4.16, pp. 21-22)",
+   "submartingale dichotomy with bounded increments (Thm 4.4, Durrett, p. 10)",
+   "sum over ||grad f|| > eps of Delta_k < infinity for lim-type result (Lemma 4.17, p. 23)",
+   "Chebyshev sample size p >= V/(kappa'^2 (1-alpha') delta^4) and alpha = (alpha')^{n+1} by independence over n+1 points (p. 24)",
+   "true vs false successful iterations (p. 7)",
+   "plugging textbook constants into probability conditions: (1-alpha)(1-beta) <= 1/440 (Remark 4.13, pp. 20-21)"
+  ],
+  "experiments": "53 CUTEr sum-of-squares problems with multiplicative/additive uniform noise vs own TR-SAA and TR-SAA-resample, performance profiles on function evaluations (tau = 1e-3, budget 1000(n+1), 10 runs); garbage-value computation-failure noise (30 runs, budget 10000(n+1)); theory-threshold sweep on a quadratic (n = 2, 10); logistic regression vs Adagrad on 4 datasets with one data pass (pp. 27-35).",
+  "positioning": "Compares Deng-Ferris, SPSA, SCSR by assumptions (probabilities -> 1, tuned decaying parameters, unique minimizer); acknowledges Billups-Larson as 'a very similar method', lists differences, concedes their advantage, skips empirical comparison; credits Larson-Billups for estimate definition and Phi (pp. 4-6, 9, 14).",
+  "writing": "Novelty sentence framed as weaker assumptions with bullets on what is not assumed; plain-language proof outline before Thm 4.11; remarks flag proof artefacts; early admission that probability bounds are 'far from tight', later tested; no conclusion section (pp. 3, 15, 18-21, 35).",
+  "limits_future": "No rates ('a subject for future research'); probabilities hard to know and far from tight; eta2 forces small steps, decoupling left as more complex analysis; Lipschitz assumption on algorithm-dependent region; hidden constraints out of scope (pp. 3, 10, 18-21, 25, 27).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Two events I_k, J_k with accuracy proportional to delta_k and delta_k^2, fixed conditional probabilities, arbitrary failures; also evidence for the limitation that p is hard to know.",
+    "pages": "pp. 3, 8-9"
+   },
+   {
+    "method": "Method 1 (step 5)",
+    "relation": "variant",
+    "note": "Correction: a.s. convergence needs alpha, beta close to 1 (Cor. 4.12; (1-alpha)(1-beta) <= 1/440 for textbook constants), alphabeta >= 1/2 only for the liminf step; experiments succeed with alpha ~ 0.27.",
+    "pages": "pp. 20-21, 31"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Standard trust region with standard parameters; single proof-driven repair ||g_k|| >= eta2 delta_k (not used in practice, so a proof device rather than an algorithmic change).",
+    "pages": "pp. 5, 7, 21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stochastic-process analysis: Phi_k expected decrease and log-radius submartingale.",
+    "pages": "pp. 14-22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Only almost-sure convergence; complexity/rates explicitly deferred.",
+    "pages": "p. 25"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Fully linear models from well-poised sets; Algorithm 4 changes the interpolation set minimally but recomputes values afresh so garbage values do not persist.",
+    "pages": "pp. 24, 30"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Function-evaluation budgets and performance profiles on 53 CUTEr sum-of-squares problems (verifies a test set used by the group).",
+    "pages": "pp. 27-29"
+   },
+   {
+    "method": "Heuristic 2",
+    "relation": "evidence",
+    "note": "Function values under the same radius-tied contract.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Research Taste warning sign 2",
+    "relation": "evidence",
+    "note": "Biased computation-failure noise makes Monte-Carlo averaging 'not a correct approach'.",
+    "pages": "p. 26"
+   },
+   {
+    "method": "Signature Work Anatomy (STORM)",
+    "relation": "evidence",
+    "note": "Origin is stated, not speculative: BSV [2] assumed exact function values; assumptions inspired by early Billups-Larson. Abandoned paths: eta2 restriction and 1/delta^4 sampling dropped in implementation.",
+    "pages": "pp. 5, 8, 21, 28"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory-threshold sweep",
+    "evidence": "Compute the theorem's minimal success probability on a toy quadratic and plot empirical success across it with the threshold marked; theory needs (1-sigma) > 0.9990 for n = 10, yet 100% success at 0.998 with alpha ~ 0.27.",
+    "pages": "pp. 3, 30-32"
+   },
+   {
+    "pattern": "accuracy hierarchy across oracles",
+    "evidence": "Function-value estimates need tighter accuracy (eps_F <= kappa_ef and a further bound) than models; also stated in S031 p. 22.",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "adversarial noise model that defeats averaging",
+    "evidence": "Garbage value V = -10000 with probability sigma when |f_i| < eps; averaging optimizes the wrong function, so no averaging is done.",
+    "pages": "pp. 26, 30"
+   }
+  ],
+  "transferable": [
+   "Write the oracle contract as two events (model good, estimates good) with fixed conditional probabilities and no assumption on failures; condition the estimate event on the sigma-algebra that already includes the current model (pp. 8-9).",
+   "Draw fresh estimates of f at both current and trial points every iteration, independent of the model data, so a lucky low value cannot lock in (pp. 7, 28).",
+   "Potential Phi_k = nu f(X_k) + (1-nu) Delta_k^2 with a 2 x 4 case split; choose nu so all but the worst case do no worse than an unsuccessful step, then make the worst case rare (pp. 14-19).",
+   "For liminf, show log_gamma(delta_k/b) is a submartingale bounded below by a +-1 walk counting good iterations (pp. 21-22).",
+   "Plug textbook parameter values into the probability conditions to show readers the size of the constants (Remark 4.13, pp. 20-21).",
+   "Theory-threshold sweep: plot empirical success vs probability of success with the theoretical threshold drawn as a line (pp. 30-32).",
+   "When a baseline violates your assumptions, build a variant removing one violation (TR-SAA-resample) to isolate the effect (p. 28).",
+   "If a concurrent paper has a near-identical method, say so, list assumption differences, concede its advantage and explain why you do not compare (pp. 5-6)."
+  ],
+  "coauthors": "R. Chen, M. Menickelly",
+  "quotes": [
+   {
+    "text": "In other words, if a model or estimate is inaccurate, it can be arbitrarily inaccurate, i.e. the noise in the function values can have nonconstant bias.",
+    "page": 3
+   },
+   {
+    "text": "In other words, even though the models are eventually only accurate on roughly 27% of the iterations, we still see satisfactory performance.",
+    "page": 31
+   }
+  ]
+ }
+]

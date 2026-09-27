@@ -1,0 +1,276 @@
+[
+ {
+  "id": "S092",
+  "year": "2025",
+  "title": "Why is soccer so popular: Understanding underdog achievement and randomness in team ball sports",
+  "read_level": "full",
+  "contribution": "Builds a scraped match-score dataset for 12 international team ball sports, defines an underdog achievement score (UAS) from decayed historical rankings, and relates UAS to a 14-factor 'randomness model' by PCA and correlation. Water polo, soccer, field hockey and ice hockey have the highest UAS; no optimization is involved.",
+  "problem_entry": "A popular claim that soccer is the most random (hence most popular) sport, confirmed only for a few sports; earlier studies covered a limited range of sports and did not systematically identify randomness factors (pp. 1–2).",
+  "key_idea": "Weak team = ranked more than a per-sport median threshold τ below its opponent in a λ-decayed ranking built only from previous editions; UAS = share of such matches that the weak team wins or draws; 14 min–max-normalized factors are related to UAS via PCA and Pearson correlation (pp. 5–7, 12–18).",
+  "assumptions": "Strength inferred only from results; λ = 1 used for tests 'For simplicity'; draws count as underdog achievement; factors assumed to increase randomness; judgement-coded categorical factors and averaged imputations for cricket; 12 sports as observations; men's events only (pp. 2, 6, 9, 12–15).",
+  "proof_devices": [
+   "none (no theorems; checked pp. 1–26)",
+   "leakage-free labelling: weak teams judged by the ranking up to the previous edition (p. 6)",
+   "per-sport median rank difference as threshold τ (p. 7)",
+   "three UAS definitions (3.2)–(3.4), three λ values, and a Laney p′-chart as cross-checks (pp. 7–9)",
+   "Kruskal–Wallis (p = 2.47·10⁻¹⁰) then Dunn with Bonferroni, significant pairs only (p. 9, Table 4 p. 11)",
+   "PCA (first two components 56% of variance) and a Pearson heatmap (pp. 16, 18)"
+  ],
+  "experiments": "Wikipedia-scraped scores of all editions of 12 men's international competitions (Table 7, p. 22; soccer World Cups 1930–2014); UAS at λ ∈ {1, 0.5, 0} with CIs and control chart; nonparametric tests; PCA and correlation on a 12×14 normalized factor table (pp. 7–18, 23–24); code on GitHub (p. 3).",
+  "positioning": "Distinct from the sports-medicine literature; agrees with Ben-Naim et al. and Sally–Anderson on soccer and with Lopez et al. on ice hockey; contrasts its static factors with the in-match dynamic variables of Wunderlich et al. and Lames; cites no optimization work (pp. 1–2, 9, 19–20).",
+  "writing": "Four contribution bullets (data, score, model, analysis); an optimization-style notation table for a sports dataset; strong 'can explain' claim in the abstract resting on 12-point correlations; numbered observations (Observation 1–4) reading the PCA plot (pp. 1–4, 16).",
+  "limits_future": "No limitations section; future work replicates on professional and collegiate competitions and team non-ball sports (p. 19). Unstated: 12 observations, assumed factor signs reinterpreted post hoc, popularity not measured, and (3.1) as printed points the wrong way (pp. 6, 12, 18).",
+  "method_links": [
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Informal notions 'underdog' and 'randomness' are formalized into a computable score and a factor table, though restrictions are not stated up front",
+    "pages": "pp. 5–7, 12–15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Partial: code released on GitHub and dataset as a technical report (Taste mark 5); profiles and solvers do not apply",
+    "pages": "pp. 3, 19"
+   },
+   {
+    "method": "Methods 1–4",
+    "relation": "variant",
+    "note": "Not applicable: no algorithm, acceptance test or complexity; widens SKILL.md's DFO-core-vs-ML-pivot inner tension to empirical sports analytics",
+    "pages": "pp. 1–26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "negative example for the rejected alternative",
+    "evidence": "The top/bottom-p% definition of weakness is reported and the reason it fails (bottom teams rarely beat top ones; mid-table noise at p = 50) is given",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "robustness over definitional choices",
+    "evidence": "Same ranking of sports under three UAS definitions, three λ values and a control chart",
+    "pages": "pp. 7–9"
+   },
+   {
+    "pattern": "formalize an informal notion into a computable score",
+    "evidence": "Weak team (3.1) and underdog achievement (3.2)–(3.4) turned into formulas",
+    "pages": "pp. 6–7"
+   }
+  ],
+  "transferable": [
+   "Leakage-free labels: define the 'weak' label from the ranking up to the previous edition only (p. 6)",
+   "Exponentially decayed aggregate ranking wr(i) = (N − c(i,R)) + λ·wr_prev(i), results reported at λ = 0, 0.5, 1 (p. 5, Table 3 p. 9)",
+   "Per-group median threshold for when a team counts as ranked significantly lower, so groups of different size compare fairly (p. 7)",
+   "Kruskal–Wallis then Dunn–Bonferroni, tabulating only significant pairs (p. 9, Table 4 p. 11)",
+   "Report a ranking under several metric definitions and nuisance-parameter values to show it is not an artefact (pp. 7–9)"
+  ],
+  "coauthors": "T. N. Alleck, T. Giovannelli, R. Mitchell, O. Remen",
+  "quotes": [
+   {
+    "text": "Note that in (3.2), weak teams are identified using a weighted team ranking that incorporates all past editions except the current one to avoid biasing the results.",
+    "page": 6
+   },
+   {
+    "text": "The negative correlations observed with UAS may appear surprising because they suggest that higher values of the factors decrease the underdog achievement, while we would expect that higher values of the factors increase randomness in match outcomes.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S096",
+  "year": "2025",
+  "title": "Pareto sensitivity, most-changing sub-fronts, and knee solutions",
+  "read_level": "full",
+  "contribution": "Defines Pareto knee solutions quantitatively as minimizers over the weight simplex of a maximal-change function built from sensitivities ∇_λ f_i(x(λ)) of weighted-sum solutions (the 'snee' approach), derives these sensitivities for unconstrained and constrained problems, and introduces ellipsoidal neighbourhoods that give most-changing Pareto sub-fronts. It is illustrated on small synthetic problems with no theorem.",
+  "problem_entry": "Knee solutions have only a verbal definition, and existing angle-, utility- and NBI-based methods need two objectives, a precomputed front or user thresholds, or return merely intermediate points (pp. 2–4).",
+  "key_idea": "Replace the unavailable front slopes |df_i/df_j| by ratios of sensitivity norms ‖∇_λ f_i‖/‖∇_λ f_j‖ computed by the implicit function theorem, minimize their maximum over λ ∈ Λ with a DFO method (NM, DIRECT), and use a pseudo-inverse-Jacobian ellipsoid for sub-fronts (pp. 8–12, 19–20).",
+  "assumptions": "f_i twice continuously differentiable; nonsingular weighted Hessian at weighted-sum stationary points (strong convexity sufficient); LICQ, SCS and SOSC with constraints; restricted to scalarized methods, needs 1st/2nd derivatives, weighted sums need convexity for full coverage; stochastic/nonconvex ML settings out of scope (pp. 1, 9, 12, 20, 24).",
+  "proof_devices": [
+   "no theorems or convergence results (checked; 'Theorem' appears only in citations, pp. 12, 19–20)",
+   "implicit-function sensitivity ∇_λF = −Gᵀ(Σλ_i∇²f_i)⁻¹G, symmetric and singular (pp. 11–12)",
+   "KKT-system sensitivity ∇w = −∇_λK ∇_wK⁻¹ with extraction matrix L (pp. 19–20)",
+   "κ/β link showing the steepest-ascent neighbourhood (4.2) implies the ellipsoidal one (4.1) (p. 10)",
+   "Example 5.1: non-uniqueness of λ_c when n < q − 1 (p. 13)"
+  ],
+  "experiments": "Synthetic unconstrained (ZLT1, GRV1, VFM1, ZLT1_q, GRV2) and constrained (DAS1, DO2DK with r ∈ {0.5,1}, VFM1constr) problems; SciPy NM and DIRECT as outer solvers, BFGS or SLSQP inner; MCF/MCM histories and three-space plots; neighbourhood comparison with size-matched ball, E_α, E_β (E_α best MCM on all four); no competing knee method run (pp. 13–24).",
+  "positioning": "Claims the term 'Pareto sensitivity' over 1980s MOO sensitivity analysis; builds on the group's bilevel hypergradient work; uses Deb–Gupta both as source and foil; NBI (Das, Das–Dennis) as main contrast; renames 'overall Pareto spread' as MCM (pp. 4–5, 8, 10–11).",
+  "writing": "Six-item advantage list; restriction stated in the abstract; coined names (snee, MCF, MCM); definitions, derivations and remarks instead of theorems; one strong 'is guaranteed' claim (pp. 1, 4–5).",
+  "limits_future": "Stated: scalarization, derivatives, convexity for weighted sums, stochastic gradients, cost of inner solves, neighbourhoods analysed only numerically; future: ε-constraint version and techniques not relying on scalarized methods (pp. 1, 9, 24).",
+  "method_links": [
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Verbal knee definition formalized as min_λ MCF(λ), restrictions stated in the abstract",
+    "pages": "pp. 1, 3–4, 7–8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "No acceptance test is generalized; weighted-sum scalarization kept and derivatives required (confirms SKILL.md's note). Not a contradiction of warning sign 2: λ is swept and optimized, not fixed a priori",
+    "pages": "pp. 1, 4–5, 24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "DFO is the outer solver of a derived q-dimensional nonsmooth problem, not a wrapper around a heuristic",
+    "pages": "pp. 8–9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Partial: synthetic problems and ablations only, no competing knee method, no collection or profiles; the v3 text gives no repository link despite SKILL.md's 'snee' GitHub mention",
+    "pages": "pp. 6, 13–24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "negative example for the rejected alternative",
+    "evidence": "Remark 5.1 rejects minimizing MCM instead of MCF; VFM1constr later shows the MCF minimizer is not the MCM minimizer because of an ill-conditioned Jacobian",
+    "pages": "pp. 16, 23–24"
+   },
+   {
+    "pattern": "DFO as the outer solver of a low-dimensional derived problem",
+    "evidence": "The q-dimensional, nonsmooth, nonconvex knee problem is solved by Nelder–Mead and DIRECT, with derivatives used only inside each evaluation",
+    "pages": "pp. 8–9, 14"
+   },
+   {
+    "pattern": "formalize an informal notion into a computable score",
+    "evidence": "Knee defined as argmin of a maximal-change function (Definition 4)",
+    "pages": "pp. 7–8"
+   },
+   {
+    "pattern": "robustness over definitional choices",
+    "evidence": "Three size-matched neighbourhood shapes and two outer solvers compared",
+    "pages": "pp. 16–19"
+   }
+  ],
+  "transferable": [
+   "Sensitivity of a scalarized MOO solution map: ∇_λF = −Gᵀ(Σλ_i∇²f_i)⁻¹G, or −∇_λK ∇_wK⁻¹L·G with constraints (pp. 12, 20)",
+   "Turn equal trade-off slopes into min over λ ∈ Λ of max_{i≠j} ‖∇_λf_i‖/‖∇_λf_j‖, with the denominator floored at machine eps (p. 8)",
+   "Solve a low-dimensional nonsmooth outer problem by DFO, running a local (NM) and a global (DIRECT) solver to expose nonconvexity (pp. 8, 16, 23)",
+   "Compare region shapes at matched size: report the fraction of a fixed discretization each region contains next to the quality metric (p. 17, Table 2 p. 19)",
+   "Scale-free coverage metric: product over objectives of (sub-front range)/(full-front range) (p. 11)",
+   "Adaptive neighbourhood size: γ times the mean ‖J^†(λ_i − λ_c)‖ over a discretization, γ chosen for a target inclusion fraction (pp. 11, 16)"
+  ],
+  "coauthors": "T. Giovannelli, M. M. Raimundo",
+  "quotes": [
+   {
+    "text": "Our approach is still restricted to scalarized methods, in particular to the weighted-sum or epsilon-constrained methods, and requires the computation or approximations of first- and second-order derivatives.",
+    "page": 1
+   },
+   {
+    "text": "However, a widely accepted (quantitative) definition for such solutions is lacking, and identifying knee solutions in high-dimensional objective spaces remains challenging.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S102",
+  "year": "2025",
+  "title": "Sequential test sampling for stochastic derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Recasts the stochastic sufficient-decrease check as a hypothesis test on the sign of a mean, solves it with a two-boundary sequential test (SPRT in the Gaussian case) whose expected sample size falls from Θ(δ⁻⁴) to O(δ^{−2−r}) when the decrease is Θ(δ^r), and proves an O(n/ε²) expected iteration bound for single-direction probabilistic-descent direct search via a generalized renewal–reward argument.",
+  "problem_entry": "All stochastic DFO methods pay Θ(δ⁻⁴) samples per iteration with fixed sampling, and the group's own tail-bound reduction need not lower total cost; fixed-sampling schemes always pay the worst-case cost (pp. 2–3).",
+  "key_idea": "Accept a step iff a C-accurate sequential test on Y = cδ² − (F(x) − F(x+δd)) declares E[Y] ≤ 0, with asymmetric errors (≤ 1/2 for wrong rejection, ≤ C/µ for wrong acceptance); fixed sampling is the degenerate case of the test; keep probabilistic descent's step logic unchanged (pp. 5–7, 11).",
+  "assumptions": "Unbiased noise; f C¹ with Lipschitz gradient, bounded below; independent samples at x and x+δd; Gaussian Y and Wald's approximation for the sample-size result; a C-accurate properly-ending test exists for every C (Assumption 3.1); known variance; 3 log γ + 11 log θ > 0 (pp. 2, 5, 9–10, 13, 16, 18–19).",
+  "proof_devices": [
+   "shifted-boundary coupling proving monotonicity of acceptance probabilities in µ (Lemma 2.1, p. 8)",
+   "worst case at µ = 0 and symmetric boundaries give error exactly 1/2 (Lemmas 2.2–2.3, pp. 8–9)",
+   "Wald's SPRT bound exp(−2c′µ/σ²) ≤ C/µ via 1/t^x ≤ 1/x iff t ≥ e^{1/e} (pp. 9, 22)",
+   "merit function Φ_k = f(X_k) − f* + η∆_k², η = c/(γ² − θ²), E[Φ_k − Φ_{k+1} | F_k] ≥ ν∆_k² via half-step σ-algebra F_{k+1/2} (Lemma 3.1, pp. 11–13)",
+   "C/µ error form caps expected wrong-acceptance loss at C_k (p. 12)",
+   "uniform direction is 1/(7√n)-descent w.p. ≥ 3/7, success w.p. ≥ 3/14 below δ_ε (Lemmas 3.2–3.4, pp. 13–14)",
+   "thinned Bernoulli W_k ∈ {log γ, log θ} dominated by log step ratio (pp. 15–16)",
+   "renewal–reward supermartingale theorem of Blanchet et al. extended to any p and steps a > 0 > b with positive drift; return time via martingale and Wald's identity (App. B, pp. 22–25)"
+  ],
+  "experiments": "91 CUTEst instances (38 problems, n = 2–100) with additive Gaussian noise σ² ∈ {0.01, 1}, 10 000-sample budget, 10 runs each, data and performance profiles at τ = 0.1; sequential vs fixed-sample test inside the same algorithm (θ = 0.95, γ = 1.3); sequential wins, gap grows with variance; robustness sweeps reported in one sentence; no external solver (pp. 16–18).",
+  "positioning": "Reviews stochastic trust-region methods (tracing them to the group's probabilistic trust-region paper) and stochastic direct search; criticizes own tail-bound paper on total cost; imports Wald/Siegmund sequential analysis; reframes fixed sampling as a restricted sequential test (pp. 2–6, 19).",
+  "writing": "Contribution section mirrors the paper's structure; plain-language flexibility paragraph; proof idea before Lemma 2.1; prose reading of Proposition 2.1's regimes; hedged belief about non-Gaussian noise in the conclusion (pp. 3–4, 8, 10, 19).",
+  "limits_future": "Stated: Gaussian noise, known variance (variance estimation left to future implementation) (p. 19). Unstated: sample-size result approximate, no total sample complexity, theorem conditional on Assumption 3.1, only one algorithm treated, no external baseline (pp. 1, 10, 16–18).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Correctness of the accept/reject decision required only in probability given the past, turned into a concrete stopping rule",
+    "pages": "pp. 6, 11, 18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Step 4: guarantee is a bound on the expected iteration count via renewal–reward, not almost-sure convergence plus a high-probability bound",
+    "pages": "p. 16; pp. 22–25"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Step 5 and the Using-1-random-direction anti-pattern: one random direction per iteration (success prob. ≥ 3/14) suffices because the threshold is carried by 3 log γ + 11 log θ > 0",
+    "pages": "pp. 11, 14, 16–17"
+   },
+   {
+    "method": "Heuristic 3",
+    "relation": "evidence",
+    "note": "Controls the estimated decrease and lets the data decide the sample size (also Workflow D step 3)",
+    "pages": "pp. 5, 10"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Probabilistic-descent skeleton kept; only the acceptance test redefined",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "O(n/ε²) matches the deterministic bound and per-iteration samples are compared with Θ(δ⁻⁴), but the count is in iterations; no total sample count to ε",
+    "pages": "pp. 2, 10, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Partial: CUTEst collection and profiles, but only an internal fixed-sample ablation as baseline and no code link",
+    "pages": "pp. 16–19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "Fixed-sample Test 2.2 is an instance of sequential Test 2.1; Blanchet et al.'s theorem generalized from p > 1/2 and ±1 steps to arbitrary p, a, b",
+    "pages": "pp. 7, 22–25"
+   },
+   {
+    "pattern": "critique of one's own previous result as the entry point",
+    "evidence": "The group's tail-bound paper reduced per-iteration samples but not necessarily total cost",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "import a classical external theory together with its bounds",
+    "evidence": "Wald's SPRT operating characteristic and approximate average sample number used directly",
+    "pages": "pp. 9–10"
+   },
+   {
+    "pattern": "robustness over definitional choices",
+    "evidence": "Budgets, τ, variances, θ and γ varied without change in relative performance, reported in one sentence",
+    "pages": "p. 18"
+   }
+  ],
+  "transferable": [
+   "Pose a noisy accept/reject decision as a test of the sign of a mean, not an estimation problem, and stop sampling when a random walk crosses a boundary (pp. 5, 7)",
+   "Show the standard fixed-sample scheme is a degenerate case of your sequential test (p. 7)",
+   "Asymmetric accuracy: P(reject | acceptable) ≤ 1/2 and P(accept | unacceptable) ≤ C/µ with C = Θ(δ²), so expected damage µ·P ≤ C fits the merit decrease (pp. 6, 12)",
+   "Condition on a half-step σ-algebra F_{k+1/2} containing the random direction but not the test outcome (pp. 11–14)",
+   "Renewal–reward with success probability p < 1/2: require drift p log γ + (1 − p) log θ > 0 (pp. 16, 22–25)",
+   "Ablation design: same algorithm and parameters, only the acceptance test swapped, two noise levels, data and performance profiles (pp. 17–18)"
+  ],
+  "coauthors": "A. Ding, F. Rinaldi",
+  "quotes": [
+   {
+    "text": "It is finally important to highlight that all the methods mentioned above are fixed-sampling schemes, which always pay the worst-case cost.",
+    "page": 3
+   },
+   {
+    "text": "From this point of view, a test with a fixed sample size is some form of a restricted sequential hypothesis test.",
+    "page": 19
+   }
+  ]
+ }
+]

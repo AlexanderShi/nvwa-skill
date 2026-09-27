@@ -1,0 +1,78 @@
+{
+  "_comment": [
+    "Team template (team config, schema 1) → product/<team>/team.json. Step T0: draft it with python3 scripts/new_team.py --init <team> --field \"...\" --members \"Name One;Name Two;Name Three\", complete it by hand following these notes, then run python3 scripts/new_team.py product/<team>/team.json, which scaffolds the team from it and the templates in this folder; every later workflow and script (team_status.py, the scripts/workflows/*.js runs) reads it.",
+    "All values below are fictional placeholders (the same fictional team, product/example-team, that scripts/workflows/examples/ uses for dry runs; its first two members are the dry-run members). Real team.json files carry no _comment key. See product/dfo-team for a worked example (team.json).",
+    "schema: always 1. team: folder name under product/ (lowercase, hyphenated). title: display name used in the README, the roundtable and the triggers.",
+    "field: the field and the tradition within it that the team covers; name the neighbouring traditions that are not represented.",
+    "language: language of the member skills and their paper cards (cards for a researcher who writes in English are written in English).",
+    "created: ISO date of T0. roundtable: slug of the roundtable skill folder inside the team folder.",
+    "chase_hints (team level): field-wide legitimate open-access repositories that team-chase.js searches first (preprint servers, open proceedings, report series).",
+    "card_dimensions (optional): what the paper-card dimensions D1–D8 mean in this field when it is not mathematical or computational, e.g. {\"D3\": \"sources and archives: what evidence the argument rests on\", \"D4\": \"the interpretive or analytical moves\", \"D5\": \"how claims are tested against counter-evidence\"}. Every read agent (team-read.js, team-increment.js) uses these meanings; digest field names stay the same. Leave it {} for mathematical and computational fields.",
+    "source_labels (optional): {\"<keyword in a work's URL>\": \"<Source label>\"} for full texts supplied by hand from a known report series, e.g. {\"damtp\": \"DAMTP report\"}; acquire_fulltexts.py writes the label into INDEX.md's Source column instead of \"manual\".",
+    "members: 3-6 researchers chosen for complementary lenses and documented disagreements. Per member:",
+    "  slug: skill folder name (lowercase, hyphenated full name). name: display name. surname: used for lens labels (@Surname, [Surname lens], add/drop Surname), so it must be unique within the team: when two members share a surname, write e.g. \"N. Higham\" and \"D. Higham\". family_name (optional): the family name used in author checks and searches when the last word of name is not it (e.g. a name written family-name first); defaults to that last word.",
+    "  living: false marks a historical lens (its skill reflects work up to the researcher's death).",
+    "  hint: one line that disambiguates the researcher in searches (institutions, years, signature work).",
+    "  scholar: Google Scholar user id (the user= value in the profile URL), or empty if there is none: the harvest then searches Scholar by name once and otherwise builds the list from DBLP and the homepage (find the DBLP pid with python3 scripts/dblp_works.py --name \"<name>\"). dblp: DBLP pid if known. orcid, homepage: empty if unknown. python3 scripts/new_team.py product/<team>/team.json --lookup fills dblp / orcid / homepage from DBLP (a Scholar-link match is certain; a name-only match is flagged for checking), and --set-member <slug> KEY=VALUE records a value, e.g. the Scholar id the harvest found.",
+    "  chase_hints: member-specific open sources (institutional report series, homepage paper pages), with any access quirks (e.g. a host that only works over http).",
+    "  student_mode: true gives the skill a Student Mode plus references/proof-playbook.md, open-problems.md and reading-path.md."
+  ],
+  "schema": 1,
+  "team": "example-team",
+  "title": "Example Team",
+  "field": "multi-armed bandits (FICTIONAL example: stochastic and contextual bandits; reinforcement learning at large and Bayesian optimisation are not represented)",
+  "language": "English",
+  "created": "2026-01-01",
+  "roundtable": "example-roundtable",
+  "chase_hints": [
+    "the field's main preprint server (name and URL)",
+    "technical-report series of the members' institutions",
+    "free proceedings of the field's main conferences"
+  ],
+  "card_dimensions": {},
+  "members": [
+    {
+      "slug": "ada-example",
+      "name": "Ada Example",
+      "surname": "Example",
+      "living": false,
+      "hint": "FICTIONAL placeholder, not a real person: bandit theorist at an example university (1931-2009); regret lower bounds and index policies",
+      "scholar": "",
+      "dblp": "",
+      "orcid": "",
+      "homepage": "",
+      "chase_hints": [
+        "her department's technical-report series (fictional; check the author on page 1, the series holds other authors' reports)"
+      ],
+      "student_mode": false
+    },
+    {
+      "slug": "bo-sample",
+      "name": "Bo Sample",
+      "surname": "Sample",
+      "living": true,
+      "hint": "FICTIONAL placeholder, not a real person: experimentalist at an example institute; contextual bandits, A/B-testing practice and open-source benchmarks",
+      "scholar": "EXAMPLE_SCHOLAR_ID",
+      "dblp": "00/0000",
+      "orcid": "0000-0000-0000-0000",
+      "homepage": "https://example.org/~sample",
+      "chase_hints": [
+        "papers page on the homepage (fictional)"
+      ],
+      "student_mode": true
+    },
+    {
+      "slug": "cleo-placeholder",
+      "name": "Cleo Placeholder",
+      "surname": "Placeholder",
+      "living": true,
+      "hint": "FICTIONAL placeholder, not a real person: applied researcher at an example laboratory; bandits in clinical-trial design",
+      "scholar": "",
+      "dblp": "",
+      "orcid": "",
+      "homepage": "",
+      "chase_hints": [],
+      "student_mode": false
+    }
+  ]
+}

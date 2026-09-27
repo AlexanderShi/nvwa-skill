@@ -1,0 +1,99 @@
+[
+ {
+  "id": "S040",
+  "year": "1996",
+  "title": "Trust-Region Interior Point Algorithms for a Class of Nonlinear Programming Problems",
+  "read_level": "full",
+  "contribution": "Introduces trust-region interior-point (TRIP) reduced SQP algorithms for smooth problems with nonlinear equality (state) constraints and bounds on controls. It proves first- and second-order global convergence, a q-quadratic local rate, and first-order convergence under inexact linear solves with tolerances tied to the trust radius and infeasibility, and tests Fortran 77 code on two PDE optimal control problems (pp. 3-4, 17-18, 165-166).",
+  "problem_entry": "Enters through an application-defined class (discretized optimal control) whose structure rules out QR factorizations but supplies linearized state/adjoint solvers. The gap is combining that structure with global convergence, bound handling and inexactness, which had been treated only locally or with line searches (pp. 15-17, 88, 137).",
+  "key_idea": "Compose three proven components (reduced SQP with the nonorthogonal null-space basis W=[-Cy^-1 Cu; I], trust regions as globalizer and regularizer, Coleman-Li affine scaling for bounds) and change only the interacting pieces: a y-only quasi-normal step, a D-scaled tangential subproblem with strict-interiority damping, and decoupled vs coupled trust regions (pp. 16-17, 73-74, 94-97).",
+  "assumptions": "C2 f and C with bounded derivatives, Cy nonsingular with Cy^-1 uniformly bounded, bounded W_k, H_k, lambda_k and u_k. Tiered step conditions (Cauchy decrease -> first order; optimal decrease + exact Hessian + adjoint multipliers -> second order; take the damped Newton step -> q-quadratic). Nondegeneracy for second-order limits; no state bounds; inexactness only in derivatives of C (pp. 15, 84, 105-107, 135).",
+  "proof_devices": [
+   "contradiction skeleton from Dennis-El-Alem-Maciel: assume ||D_k g_k||+||C_k||>tol, split on ||C_k||<=alpha*delta_k, pred>=kappa*delta_k, penalty bounded, delta_k bounded away from 0, summed ared contradicts bounded merit function (pp. 62-67, 112-115)",
+   "Powell's fraction-of-Cauchy-decrease lemma re-proved for a scaled, box-damped Cauchy step (Lemma 2.3.1 p. 28; Lemma 5.3.3 pp. 109-110)",
+   "fraction of optimal decrease via the Gay-Sorensen characterization giving pred >= kappa*gamma_k*delta_k^2 for second-order points (pp. 31-32, 101)",
+   "ared-pred consistency |ared-pred| <= kappa(||s||^2 + rho(||s||^3 + ||C|| ||s||^2)) (Lemma 3.5.4 p. 59; Lemma 5.3.6 p. 111)",
+   "structure makes Ch. 3's extra conditions free: y-only quasi-normal step + adjoint multiplier give grad_x l^T s^q = 0 (Remark 5.2.1, p. 107)",
+   "Newton on the nonsmooth scaled system C=0, D^2 W^T grad f=0 with Coleman-Li scaling; |sigma_k-1|=O(||x_k-x*||) damping keeps q-quadratic rate (pp. 90-93, 125-126)",
+   "backward-error representation of inexact solves as perturbed operators A_k, B_k with E = e r^T/||r||^2; tolerances O(min{delta_k,||C_k||}) and O(||C_k||) (pp. 136, 139-141, 150-154)"
+  ],
+  "experiments": "Two discretized optimal control problems (nonlinear heat boundary control n=2100, m=2000; semilinear elliptic distributed control up to 33282 variables). Internal ablations: decoupled/coupled x reduced/full L-BFGS Hessian, Coleman-Li vs Dikin-Karmarkar scaling (the latter reached a wrong bound), exact vs GMRES inexact solves, mesh refinement. Cost counted in iterations and state/adjoint solves; no external baseline or profiles (pp. 130-134, 157-164).",
+  "positioning": "Presents itself as simultaneously generalizing Powell/More-Sorensen (unconstrained), Dennis-El-Alem-Maciel/Dennis-Vicente (equality) and Coleman-Li (bounds) via the diagrams of Figs. 1.1-1.2. Surveys TR-SQP around four design questions and critiques QR-based decompositions and unanalysed penalty schemes by reformulation (pp. 19-20, 46-47, 54, 78, 90).",
+  "writing": "Numbered ingredient and result lists up front (pp. 16-17), a stated contract that each chapter opens with a justified summary (p. 21), tiered Conditions mapped to theorems (pp. 106-107), Remarks separating needed from unneeded conditions (pp. 107, 121), plain scope statements (pp. 87, 135), historical footnotes (pp. 24, 27, 40, 80).",
+  "limits_future": "Ranked open questions: state bounds first (the multiplier depends on unknown bound multipliers; affine scaling may be the wrong interior-point device), then infinite-dimensional formulation, better step solvers, practical inexactness control (oversolving, local rates), coupled approach under inexactness. The inexact theory is first order only; numerics cover two problems (pp. 136, 166-167).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Fast local step (damped Newton, Condition 5.4) used when inside the trust region and meeting Cauchy decrease, with convergence from the ared/pred ratio test. Newton rather than a heuristic, and a TR ratio rather than sufficient decrease.",
+    "pages": "pp. 103-107, 125-126"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Cost counted in expensive oracle calls (state/adjoint solves), but no worst-case complexity: only lim inf stationarity and a local q-quadratic rate (era effect).",
+    "pages": "pp. 114, 125-126, 129, 164"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic ancestor: exact solves relaxed to inexact ones with accuracy tied to trust radius and infeasibility (O(min{delta_k,||C_k||}), O(||C_k||)); no probability.",
+    "pages": "pp. 136, 166"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Skeleton reuse strongly evidenced (same merit function, ared/pred, penalty update; proofs follow [35]; inexact proof virtually the same), but the object changed for the new class is the stationarity measure and TR scaling, not the acceptance test.",
+    "pages": "pp. 103, 112, 141"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Solver with switchable design choices used as the ablation and prepared for distribution (F77 + Matlab). Benchmark half is a variant: two applied problems, no collection, baselines or profiles.",
+    "pages": "pp. 18, 132-134, 157-164, 166"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "special-case reduction as positioning and correctness check",
+    "evidence": "The theorem is stated to reduce to named results for unconstrained, equality- and box-constrained classes, with assumptions reducing to the weakest known ones, and drawn as a contribution map (Figs. 1.1-1.2).",
+    "pages": "pp. 17-20, 90, 165"
+   },
+   {
+    "pattern": "design around the user's existing oracle",
+    "evidence": "The algorithm needs only linearized state/adjoint solves and matrix-vector products that the application already provides; QR rejected as work of no value except to the optimizer; bounds handled with no extra user information.",
+    "pages": "pp. 17, 77-78, 88"
+   },
+   {
+    "pattern": "inner accuracy tied to trust radius and infeasibility",
+    "evidence": "Residuals of state solves O(min{delta_k,||C_k||}), adjoint O(||C_k||), implemented as min{eps, 1e-2 min{||C_k||,delta_k}}. Possible deterministic root of Method 3 and radius-dependent model accuracy (interpretation).",
+    "pages": "pp. 136, 157, 166"
+   },
+   {
+    "pattern": "backward-error representation of inexactness",
+    "evidence": "Inexact products and solves rewritten as exact operations with perturbed operators A_k, B_k (rank-one E = e r^T/||r||^2) so the exact convergence proof carries over with bounded perturbations.",
+    "pages": "pp. 139-141, 150-154"
+   }
+  ],
+  "transferable": [
+   "Set inner-solver tolerances from quantities known at iteration start: tol_state = min{eps, 1e-2 min{||C_k||, delta_k}}, tol_adjoint = min{eps, 1e-2 ||C_k||} (pp. 136, 157).",
+   "Represent inexact computations as exact ones with rank-one perturbed operators, assume only boundedness and vanishing error on feasible subsequences, then reuse the exact proof (pp. 139-141, 150-154).",
+   "Split the step into a feasibility and an optimality component and impose only fraction of Cauchy decrease on each, so any dogleg, CG or GMRES solver fits the theory (pp. 95, 99, 129, 144-149).",
+   "Trust-region contradiction skeleton: measure > tol, case split on ||C_k|| vs alpha*delta_k, pred >= kappa*delta_k, bounded penalty, delta_k bounded below, sum of decreases contradicts bounded merit function (pp. 62-67, 112-115).",
+   "Contribution-map figure in the introduction showing which prior results on simpler classes the theorem generalizes (pp. 19-20).",
+   "When a variant loses, add the diagnostic plot your explanation predicts (distance of the step from the null space of J_k); report a faster alternative that converges to a wrong solution (pp. 133-134, 158-163).",
+   "Mesh-refinement table with iterations and counts of expensive solves to support a polynomial-growth claim (p. 164)."
+  ],
+  "coauthors": "Single-author thesis (L. N. Vicente); adviser J. E. Dennis; main collaborator M. Heinkenschloss; results shared with Dennis-Heinkenschloss-Vicente [36], Dennis-Vicente [41], [42], Heinkenschloss-Vicente [76], [77].",
+  "quotes": [
+   {
+    "text": "Thus as the iterates approach feasibility the accuracy with which the linear systems are solved has to increase.",
+    "page": 136
+   },
+   {
+    "text": "The coupled approach did not perform as well as the decoupled approach. This is explained by the accumulation of errors due to inexactness.",
+    "page": 158
+   }
+  ]
+ }
+]

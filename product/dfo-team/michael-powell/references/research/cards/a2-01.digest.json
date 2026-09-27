@@ -1,0 +1,865 @@
+[
+ {
+  "id": "S063",
+  "year": "1960",
+  "title": "Ground-State Splitting for d5 6S Ions in a Cubic Field",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: two-page PRL letter (pp. 145-146 per Crossref) on the same problem and by the same three authors as S061 (1961); plausibly its short announcement, not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. R. Gabriel, D. F. Johnston",
+  "quotes": []
+ },
+ {
+  "id": "S061",
+  "year": "1961",
+  "title": "A Calculation of the Ground-State Splitting for Mn Ions in a Cubic Field",
+  "read_level": "abstract",
+  "contribution": "Parametric calculation of the ground-state splitting and optical absorption spectrum; results as functions of Racah, crystal-field, spin-orbit and spin-spin parameters (abstract); results not read.",
+  "problem_entry": "Calculate ground-state splitting and optical absorption spectrum of a (d5)6S ion in a cubic host crystal (abstract).",
+  "key_idea": "Simplest crystal-field approximation with a complete (d5) configuration (abstract); computational method not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Trajectory: pre-optimization physics phase; memoir: early Harwell work was calculations in atomic physics and chemistry (R007 p. 5).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. R. Gabriel, D. F. Johnston",
+  "quotes": [
+   {
+    "text": "The ground-state splitting and optical absorption spectrum for a (d5)6S ion in a cubic host crystal are calculated",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S091",
+  "year": "1961",
+  "title": "The Crystalline Field Parameters for Dysprosium Ethyl Sulphate",
+  "read_level": "abstract",
+  "contribution": "Fitted crystal-field parameter values with slight temperature variation; serious disagreement with the Elliott-Stevens extrapolation; empirical variation with atomic number contrasting with their prediction (abstract).",
+  "problem_entry": "Determine the four crystal-field parameters of Dy3+ in the ethyl sulphate (abstract).",
+  "key_idea": "Fit the parameters at 4.2 K and 58 K to the known level splittings and g values (abstract); fitting procedure not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Contradicts Elliott and Stevens; agrees with Judd's earlier work on europium ethyl sulphate (abstract). Trajectory (inferred): parameter fitting to data is the problem shape of his later least-squares work (S012); the fitting method is not stated.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. Orbach",
+  "quotes": [
+   {
+    "text": "These values are, however, in serious disagreement with those obtained by the extrapolation procedure of Elliott and Stevens.",
+    "page": "abstract"
+   },
+   {
+    "text": "An empirical variation of V_n^m with atomic number is given which is in marked contrast to that predicted by Elliott and Stevens.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S034",
+  "year": "1962",
+  "title": "An iterative method for finding stationary values of a function of several variables",
+  "read_level": "abstract",
+  "contribution": "New iterative method for stationary values with second-order convergence (abstract); no experiments mentioned.",
+  "problem_entry": "Find stationary values of a function of several variables (abstract).",
+  "key_idea": "Iteration similar in many ways to steepest descents but with second-order convergence (abstract); mechanism not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Fletcher and Powell (1963) list 'a method due to Powell (1962)' among gradient methods (S001 p. 1).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "keeps the shape of a classical method (steepest descents) and removes its weakness (rate); base is a textbook method, not his own predecessor",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "In many ways it is similar to the method of steepest descents; however this new method has second order convergence.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S101",
+  "year": "1963",
+  "title": "Crystalline-field splittings in cerous magnesium nitrate",
+  "read_level": "abstract",
+  "contribution": "Six-coefficient C3v crystal-field fit suggests the simple ionic model is incomplete; omitted factors listed but undecided; estimate of first excited doublet energy agreeing with spin-lattice relaxation measurements (abstract).",
+  "problem_entry": "Low-temperature susceptibility measurements on single crystals to find low-lying state energies and crystal-potential coefficients (abstract).",
+  "key_idea": "Fit six coefficients of a C3v crystal field on one 4f electron; a similar analysis of Hellwege's wider-temperature data reaches the same conclusion (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "More detailed calculations are required to decide which omitted factors matter (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "hedged, scoped conclusion, but with four authors the writing cannot be attributed to Powell",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. J. M. Leask, R. Orbach, W. P. Wolf",
+  "quotes": [
+   {
+    "text": "the relative magnitudes of the six coefficients which fit the data suggest that a simple ionic crystal field model does not in fact describe the properties completely",
+    "page": "abstract"
+   },
+   {
+    "text": "A number of factors generally omitted from the theory of rare-earth salts are considered, but more detailed calculations are required to decide which, if any, are important here.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S002",
+  "year": "1964",
+  "title": "An efficient method for finding the minimum of a function of several variables without calculating derivatives",
+  "read_level": "abstract",
+  "contribution": "Derivative-free conjugate-direction method; satisfactory practical applications; numerical examples up to twenty variables (abstract); no convergence theorem mentioned.",
+  "problem_entry": "Derivative-free minimization, entering from the well-known one-parameter-at-a-time method (abstract).",
+  "key_idea": "Two variations of the classical method: one makes it choose conjugate directions on a quadratic (fast ultimate rate), a further one makes convergence from a bad approximation efficient (abstract). Secondary: cycles of n or n+1 line searches; the dropped direction maximizes the determinant 'natural measure' (S014 pp. 20-21).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical examples with functions of up to twenty variables (abstract); details not read.",
+  "positioning": "Secondary: improved on a conjugate-direction method of Smith (R007 p. 6).",
+  "writing": "",
+  "limits_future": "Secondary: Powell later worried that the direction choice may drop directions already conjugate (S014 pp. 44-45); cited by him as successful without good theoretical justification (X001 p. 17).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "claim rests on practical use and numerical examples with a stated size range (up to 20 variables)",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "minimal variations of a classical method rather than of his own predecessor",
+    "pages": "abstract"
+   },
+   {
+    "method": "determinant-ratio (Lagrange-function) geometry control",
+    "relation": "evidence",
+    "note": "early instance: 1964 direction exchange maximizes a determinant (secondary)",
+    "pages": "S014 p. 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "two-part design: model-case change for the local rate plus a separate change for progress from a bad start",
+    "evidence": "conjugacy on quadratics gives fast ultimate rate; a further variation handles bad starting approximations; same split stated for the 1968 hybrid method (S019 p. 6)",
+    "pages": "abstract; S019 p. 6"
+   }
+  ],
+  "transferable": [
+   "Present a new method as named, separate changes to a well-known method: one change gives the right behaviour on the quadratic model problem (conjugate directions), the other handles starts far from the solution, so each can be judged on its own (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "This variation is such that when the procedure is applied to a quadratic form, it causes conjugate directions to be chosen, so the ultimate rate of convergence is fast when the method is used to minimize a general function.",
+    "page": "abstract"
+   },
+   {
+    "text": "Practical applications of the procedure have proved to be very satisfactory, and numerical examples are given in which functions of up to twenty variables are minimized.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S012",
+  "year": "1965",
+  "title": "A method for minimizing a sum of squares of non-linear functions without calculating derivatives",
+  "read_level": "abstract",
+  "contribution": "Derivative-free sum-of-squares method with convergence comparable to the classical least-squares generalization; evaluations roughly proportional to n; 50 equations in 50 unknowns solved with fewer than 200 evaluations (abstract).",
+  "problem_entry": "The classical generalization of linear least squares (Gauss-Newton) is efficient for sums of squares but needs derivatives (abstract).",
+  "key_idea": "An original method with comparable convergence that needs no derivatives (abstract); mechanism not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "One large concrete test: fifty nonlinear equations in fifty unknowns, fewer than two hundred evaluations (abstract).",
+  "positioning": "Secondary: Powell (2005) says the 1965 least-squares method without derivatives is also used often in practice (X001 p. 12).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "cost measured in function evaluations against n (about O(n)), as Method 3 step 5 prescribes",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "headline claim is one concrete large test with an exact evaluation count",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "keeps the classical procedure's convergence and removes one requirement (derivatives); base is a classical method",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "same benefit as the classical technique, one requirement fewer",
+    "evidence": "comparable convergence to the classical procedure without derivatives; second instance S062",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "State a derivative-free method's efficiency as evaluations relative to n and back it with one large concrete instance and its exact budget (n = 50, fewer than 200 evaluations), not an average over small problems (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The number of times the individual terms of the sum of squares have to be calculated is approximately proportional to the number of variables.",
+    "page": "abstract"
+   },
+   {
+    "text": "Finding a solution to a set of fifty non-linear equations in fifty unknowns required the left-hand sides of the equations to be worked out fewer than two hundred times.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S062",
+  "year": "1966",
+  "title": "Weighted uniform sampling—a Monte Carlo technique for reducing variance",
+  "read_level": "abstract",
+  "contribution": "Variance-reduction technique with gains comparable to importance sampling without non-uniform distributions; analysed, and illustrated by numerical examples (abstract).",
+  "problem_entry": "Monte Carlo variance reduction; importance sampling is the benchmark and needs non-uniform distributions (abstract).",
+  "key_idea": "Weighted uniform sampling, presented and analysed (abstract); construction not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Some numerical examples illustrate the theory (abstract).",
+  "positioning": "Benchmark: importance sampling (Hammersley & Handscomb, 1964) (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "analysis first; numerical examples only illustrate the theory",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "same benefit as the classical technique, one requirement fewer",
+    "evidence": "accuracy gains comparable to importance sampling without non-uniform distributions; second instance after S012",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "J. Swann",
+  "quotes": [
+   {
+    "text": "It obtains gains in accuracy comparable to those realized by importance sampling (Hammersley & Handscomb, 1964), without requiring the use of non-uniform probability distributions.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S128",
+  "year": "1966",
+  "title": "Necessary conditions for a minimax approximation",
+  "read_level": "abstract",
+  "contribution": "More general necessary conditions for a minimax approximation (abstract); conditions not read.",
+  "problem_entry": "Rice (1960) characterized minimax approximations only for a limited class of approximating functions (abstract).",
+  "key_idea": "A simple example shows more general conditions are required; some are derived (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Extends Rice (1960) (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "tiny counterexample against a popular default",
+    "relation": "variant",
+    "note": "the small example exposes the limited scope of an existing theory, not a default setting",
+    "pages": "abstract"
+   },
+   {
+    "method": "extend a quadratic-only theorem to the class that practice already covers",
+    "relation": "variant",
+    "note": "widening motivated by an example rather than by practical success",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Motivate a generalization by one simple example the existing characterization cannot handle, placed before the new conditions (abstract)."
+  ],
+  "coauthors": "A. R. Curtis",
+  "quotes": [
+   {
+    "text": "A simple example serves to illustrate that more general conditions are required—some are derived in this paper.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S168",
+  "year": "1966",
+  "title": "The general theory of linear approximation",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: jointly written summer-school lecture chapter (pp. 61-71 per Crossref) on the general theory of linear approximation.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "D. C. Handscomb, D. F. Mayers",
+  "quotes": []
+ },
+ {
+  "id": "S177",
+  "year": "1966",
+  "title": "On the convergence of exchange algorithms for calculating minimax approximations",
+  "read_level": "abstract",
+  "contribution": "Theorems on first and second derivatives of the minimax error on a point set and of the optimal parameters, giving insight into exchange-algorithm convergence (abstract); whether a rate is proved not read.",
+  "problem_entry": "Exchange algorithms seek the n+1 points of maximum error iteratively, solving a best approximation on n+1 points each iteration (abstract).",
+  "key_idea": "Treat the point-set minimax error eta and optimal parameters mu as functions of the points and differentiate them (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "explain an iteration's convergence by differentiating its subproblem value with respect to the iterate",
+    "evidence": "derivatives of the reference-set minimax error give insight into exchange-algorithm convergence (single work, weak)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "To analyse an iteration that re-solves a subproblem on a changing reference set, treat the subproblem's optimal value as a function of that set; its first and second derivatives describe how the outer iteration converges (abstract)."
+  ],
+  "coauthors": "A. R. Curtis",
+  "quotes": [
+   {
+    "text": "In this paper we present theorems on the first and second derivatives of η and μt.",
+    "page": "abstract"
+   },
+   {
+    "text": "They provide much insight into the convergence of exchange algorithms.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S178",
+  "year": "1966",
+  "title": "Theory of general non-linear minimax approximations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: summer-school lecture chapter (pp. 155-162 per Crossref) on nonlinear minimax approximation theory; same year and topic as S128, overlap not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S181",
+  "year": "1966",
+  "title": "The exchange algorithm for calculating minimax linear approximations over a discrete point set",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: lecture chapter (pp. 73-81 per Crossref) on the exchange algorithm for discrete linear minimax; plausibly the algorithmic counterpart to S177, not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S182",
+  "year": "1966",
+  "title": "An introduction to ε-entropy",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: introductory summer-school lecture (pp. 183-190 per Crossref) on epsilon-entropy; the Scholar title 'S-ENTROPY' is an OCR error for 'ε-ENTROPY'. Content not known.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S210",
+  "year": "1966",
+  "title": "A comparison of weighted least squares and minimax polynomial approximations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: SIAM Review item with open page range (575-&), probably a meeting abstract (not verified); topic matches S054 (1967).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S054",
+  "year": "1967",
+  "title": "On the maximum errors of polynomial approximations defined by interpolation and by least squares criteria",
+  "read_level": "abstract",
+  "contribution": "Interpolation and least-squares maximum errors are within f-independent factors of the minimax error; factors evaluated for Chebyshev truncation and Chebyshev-zero interpolation; e.g. degree 20 interpolation within a factor of four (abstract).",
+  "problem_entry": "How far are cheap polynomial approximation criteria (interpolation, least squares) from the least achievable maximum error on [a, b] (abstract).",
+  "key_idea": "Prove data-independent factors relative to the minimax error, give expressions for them and evaluate them for practical choices (abstract).",
+  "assumptions": "f approximated by a polynomial of degree n or less over a <= x <= b (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "S210 (1966, SIAM Review) may be a meeting-abstract precursor (inferred from title).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bound the cheap method against the optimal one by a data-independent factor, then headline one concrete number",
+    "evidence": "factors independent of f; degree-20 interpolation guaranteed within a factor of four of minimax",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When the optimal method is expensive, prove a cheap one is within an f-independent factor of it, evaluate the factor for the choices practitioners use, and end the abstract with one concrete guarantee (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "It is proved that the maximum errors of approximations defined by interpolation and by least squares criteria are within factors, independent of f(x), of the least maximum error that can be achieved.",
+    "page": "abstract"
+   },
+   {
+    "text": "The resultant numbers are not large: for example, if interpolation is used to evaluate a polynomial approximation of degree 20 it may be guaranteed that the resultant maximum error does not exceed the minimax error by more than a factor of four.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S100",
+  "year": "1967",
+  "title": "Curve fitting by cubic splines",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on cubic-spline curve fitting; cited in S117's reference list (SIAM landing page via OpenAlex) as Rep. T.P. 307 (1967), to appear in Numerical Approximations to Functions and Data (J. G. Hayes, ed.), plausibly S053 (not verified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S127",
+  "year": "1967",
+  "title": "Using cubic splines to approximate functions of one variable to prescribed accuracy",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report AERE-R-5602 (OSTI 4537312) on cubic-spline approximation meeting a prescribed accuracy; knot strategy not known.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. R. Curtis",
+  "quotes": []
+ },
+ {
+  "id": "S208",
+  "year": "1967",
+  "title": "Error analysis for equal-interval interpolation by cubic splines",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on the error analysis of cubic-spline interpolation on equally spaced points; no OSTI record found.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. R. Curtis",
+  "quotes": []
+ },
+ {
+  "id": "D001",
+  "year": "1968",
+  "title": "A comparison of spline approximations with classical interpolation methods",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: four-page IFIP paper (pp. 95-98) comparing spline approximation with classical polynomial interpolation. Secondary: considers norms of univariate polynomial spline operators and the deterioration of Lagrange-function localisation as polynomial degree grows (R007 p. 19).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S056",
+  "year": "1968",
+  "title": "On applying Householder transformations to linear least squares problems.",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: conference paper on Householder-transformation methods for linear least squares (117 cites); possible Method 4 link rests on the title only, not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. K. Reid",
+  "quotes": []
+ },
+ {
+  "id": "S080",
+  "year": "1968",
+  "title": "On the calculation of orthogonal vectors",
+  "read_level": "abstract",
+  "contribution": "O(n^2) computation of a new orthonormal basis for Rosenbrock's procedure, reducing its computer time, with proof that errors do not grow under repeated application (abstract).",
+  "problem_entry": "Rosenbrock's (1960) procedure needs a new orthonormal basis whose k-th vector is a combination of d0,...,dk-1 (abstract); Secondary: Rosenbrock regenerates directions by Gram-Schmidt every n iterations (S014 p. 4).",
+  "key_idea": "Compute the new orthonormal basis in O(n^2) operations from the old basis and one extra vector d0 not orthogonal to dn (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "operation count and error non-growth under repetition are the two stated results",
+    "pages": "abstract"
+   },
+   {
+    "method": "self-correcting maintained basis",
+    "relation": "variant",
+    "note": "property shown is non-growth of errors, not active correction",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "For any update an outer algorithm applies many times, state its operation count and prove errors do not accumulate over repeated applications, not only that one application is accurate (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The method is useful because it reduces the amount of computer time that is needed by Rosenbrock's (1960) minimisation procedure.",
+    "page": "abstract"
+   },
+   {
+    "text": "We show that any errors do not grow if the method is applied many times.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S123",
+  "year": "1968",
+  "title": "On best L 2 spline approximations",
+  "read_level": "abstract",
+  "contribution": "Properties of best free-knot L2 splines, a necessary condition for optimal knots under weak hypotheses, stronger theorems for f with monotonic n-th derivative, comments on knot-adjustment algorithms (abstract).",
+  "problem_entry": "Best L2 approximation by a degree-n spline with N free knots; free knots make the problem nonlinear (abstract).",
+  "key_idea": "Theory directed towards computing the best approximation: necessary condition needing only f square-integrable and bounded; stronger theorems for monotonic n-th derivative, motivated by best quadrature formulae (Sard) (abstract). Secondary: error functional minimized by the method of the 1963 DFP paper (R007 p. 20).",
+  "assumptions": "f square integrable and bounded for the necessary condition; monotonic n-th derivative for the stronger theorems (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Motivated by Sard's best quadrature formulae (abstract).",
+  "writing": "",
+  "limits_future": "Comments on algorithms for adjusting the knot positions (abstract); not read.",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "two-tier theorem: necessary condition under minimal hypotheses, then stronger results on an application-motivated class",
+    "evidence": "square-integrable bounded f for the necessary condition; monotone n-th derivative class motivated by best quadrature (single work)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Separate the result that needs almost nothing (square-integrable, bounded f) from stronger results on a structured class, and name the application that justifies the structured class (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The speciality of this paper is that the knot positions are variable, so we do not have a linear problem.",
+    "page": "abstract"
+   },
+   {
+    "text": "The theory is directed towards calculating the best approximation, and we obtain a useful necessary condition for optimal knot positions, that just requires f(x) to be square integrable and bounded.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S206",
+  "year": "1968",
+  "title": "A review of methods for unconstrained optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: SIAM Review item with open page range (483-&), probably a meeting abstract of a review talk (not verified); precedes the 1970 SIAM Review survey S041, continuity not checked.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S004",
+  "year": "1969",
+  "title": "A method for non-linear constraints in minimization problems",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: book chapter giving a method for nonlinearly constrained minimization (2709 cites). Secondary: source of the augmented Lagrangian method: a shift of origin in the constraint function instead of a growing penalty, related to Lagrange multipliers (R007 p. 7); proposed independently of Hestenes (1969) (S137 p. 9); his pick as most gratifying paper (X002 pp. 6-7).",
+  "problem_entry": "",
+  "key_idea": "Secondary (Powell's 2009 retrospective, not S004 itself): adjust lambda_i <- lambda_i - 2 mu^-1 c_i(x[lambda, mu]) and keep mu fixed once small enough (S137 pp. 9-10).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: Hestenes (1969) proposed the same method independently (S137 p. 9).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "penalty framework kept, one limitation removed (need to drive mu to zero, which creates cliffs); secondary evidence only",
+    "pages": "S137 p. 9; R007 p. 7"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a penalty parameter must go to an extreme to enforce a condition, add a shift parameter updated from the observed violation at the subproblem solution and keep the penalty moderate (from S137 p. 10, not from S004)."
+  ],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S092",
+  "year": "1969",
+  "title": "Rank one methods for unconstrained optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report TP-372 (OSTI 4775720) on quasi-Newton methods with rank-one updates (44 cites); same year as S118 on rank-one inverse modifications, link not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S117",
+  "year": "1969",
+  "title": "The local dependence of least squares cubic splines",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: journal paper on how a least-squares cubic spline depends locally on the data; SIAM landing-page metadata gives submission 26 October 1967 and a reference list including Birkhoff-de Boor and Powell's T.P. 307 (S100). Secondary: analyses localisation of spline approximations in weighted least squares, improved by augmenting the error norm with a weighted discrete l2-norm of the coefficients (R007 p. 19).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S118",
+  "year": "1969",
+  "title": "A theorem on rank one modifications to a matrix and its inverse",
+  "read_level": "abstract",
+  "contribution": "Theorem identifying an O(n^2) expression for (J + uv^T)^-1 that tends to suppress errors in the given J^-1 (abstract); the expression not read.",
+  "problem_entry": "Algorithms need (J + uv^T)^-1 given J^-1; many O(n^2) ways exist, but an error in J^-1 usually propagates (abstract).",
+  "key_idea": "Among algebraically equivalent expressions, pick the one that damps errors already present in J^-1 (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "choice among equivalent formulas made by rounding-error behaviour",
+    "pages": "abstract"
+   },
+   {
+    "method": "self-correcting maintained basis",
+    "relation": "evidence",
+    "note": "update formula tends to correct errors in the maintained inverse",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When an algorithm keeps an inverse or factorization current by updates, compare equivalent update formulas by what each does to an error already present in the stored matrix, and choose the one that damps it (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "This calculation can be carried out in many ways using only of order n^2 computer operations, but if the inverse of J is wrong, then the resultant expression for the inverse of (J + uv^T) is usually wrong also.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S143",
+  "year": "1969",
+  "title": "Nonlinear Programming—Sequential Unconstrained Minimization Techniques",
+  "read_level": "metadata",
+  "contribution": "Inferred from title and length: one-page item (p. 207 per Crossref) titled like a monograph; most likely Powell's review of the SUMT book (Fiacco and McCormick, 1968), identification not verified; non-research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S180",
+  "year": "1969",
+  "title": "A Fortran subroutine to invert a rectangular matrix of full rank",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report AERE-R-6072 (OSTI 4799109) documenting a Fortran routine for the (generalized) inverse of a full-rank rectangular matrix.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code released with a report in numerical linear algebra, alongside S019 (1968)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ }
+]

@@ -19,3 +19,17 @@ voice_tts/CosyVoice/
 # Transient working files & logs
 voice_tts/passage.txt
 *.log
+
+# Downloaded papers, books and slides for skill research (copyrighted — keep local): every PDF, PostScript, DjVu
+# and EPUB anywhere under a member's references/sources/ (papers/, talks/, essays/, …), plus the extracted texts.
+# scripts/new_team.py prints these same lines when a team folder is not covered.
+product/**/references/sources/**/*.[pP][dD][fF]
+product/**/references/sources/**/*.[pP][sS]
+product/**/references/sources/**/*.[pP][sS].[gG][zZ]
+product/**/references/sources/**/*.[dD][jJ][vV][uU]
+product/**/references/sources/**/*.[eE][pP][uU][bB]
+product/**/references/sources/papers/txt/
+
+# Private materials from people you know (supervisor feedback, meeting notes) — never publish
+product/**/references/sources/private/*
+!product/**/references/sources/private/README.md

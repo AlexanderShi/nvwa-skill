@@ -1,0 +1,233 @@
+[
+ {
+  "id": "S002",
+  "year": "1994",
+  "title": "Bilevel and multilevel programming: A bibliography review",
+  "read_level": "full",
+  "contribution": "A living, classified bibliography of bilevel and multilevel programming (175 references). It defines the BPP vocabulary and sorts solution methods into five classes by the structural property each one exploits. It points readers to the Calamai–Vicente test-problem generators as a common testbed.",
+  "problem_entry": "The entry point is a gap in literature infrastructure, not an open theorem. The bibliography is offered as a 'dynamic and permanent contribution' with a reader correction channel, and the formal BPP statement and named objects (Omega, Omega(x), M(x), v(x), IR) come before any citation (pp. 1–3).",
+  "key_idea": "Classify bilevel methods by the property they exploit: extreme-point optimality for linear BPPs, KKT complementarity (branch and bound, pivoting), descent in the induced region, and exact penalties. Record the assumption history of each property and where it fails (pp. 3, 6–8).",
+  "assumptions": "Continuous BPPs are the main case. A convex lower level allows KKT replacement under a CQ, but the induced region is still nonconvex and possibly disconnected. The extreme-point property holds for linear BPPs (assumptions weakened from Candler–Townsley to Savard) and fails for linear–quadratic BPPs (pp. 3, 6).",
+  "proof_devices": [
+   "no original proofs (survey)",
+   "catalogued: KKT replacement of a convex lower level to obtain a one-level program (p. 3)",
+   "catalogued: global optimum at an extreme point of Omega for linear BPPs (p. 6)",
+   "catalogued: problem-class reductions (bilinear to linear BPP; QP to quadratic BPP in Vicente's thesis) (p. 5)",
+   "catalogued: NP-hardness chain; checking local optimality in a linear BPP is NP-hard (p. 4)",
+   "catalogued: a counterexample to Bard's optimality conditions makes the algorithms built on them nonconvergent (p. 4)"
+  ],
+  "experiments": "None. It points to the Calamai–Vicente generators for linear, linear–quadratic and quadratic BPPs, and to a construction with exponentially many local minima, as benchmark infrastructure (pp. 4, 6, 13–14).",
+  "positioning": "Credits Bracken–McGill, Candler–Norton and Stackelberg. Critiques earlier work by counterexample (Bard's conditions, the Bialas–Karwan–Shaw pivot method) and for ignoring the geometry of the BPP. Places Vicente's own works (8 of 175 references) in every section (pp. 3–7, 13–14, 22).",
+  "writing": "Formal definitions and history come first, then the taxonomy. Opinion is marked openly ('It is our opinion', 'We believe'). Inclusion and exclusion criteria are explicit, and an ftp transcript is given for the LaTeX/BibTeX sources (pp. 4, 9–10).",
+  "limits_future": "No explicit limitations section and no performance comparison of its own. Future directions: bilevel analysis of trust-region step selection (Celis–Dennis–Tapia), the discriminant problem, and harder problems with more than two levels (pp. 8–9).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Earliest form of shipping artefacts. The test-problem generators are offered as the common testbed, and the bibliography sources are distributed by ftp with a standing invitation for corrections (an errata-channel analogue). There are no solver, no profiles and no experiments.",
+    "pages": "pp. 1, 6, 9–10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "controlled-difficulty test-problem generators",
+    "evidence": "Calamai–Vicente generators for linear, linear–quadratic and quadratic BPPs (SIAM J. Sci. Stat. Comput. 1993; ACM TOMS Algorithm 728), and a technique for linear BPPs with exponentially many local minima",
+    "pages": "pp. 4, 6, 13–14"
+   },
+   {
+    "pattern": "exploit the problem's own geometry",
+    "evidence": "Generic nonsmooth optimality analyses 'mostly ignored the special geometry of the BPP'. Geometry-based first- and second-order conditions (Vicente–Calamai) and extreme induced-region points and directions (Vicente–Savard–Júdice) are presented as the remedy.",
+    "pages": "pp. 4, 6"
+   },
+   {
+    "pattern": "counterexample as verdict on optimality theory (reader's lens)",
+    "evidence": "The review foregrounds the counterexample to Bard's conditions, which makes two algorithms nonconvergent, and the examples showing the pivot method is not global. This relates to Taste warning sign 6 and Heuristic 10.",
+    "pages": "pp. 4, 7"
+   }
+  ],
+  "transferable": [
+   "Build or cite a problem generator with controlled structure (known extreme-point solutions, a known number of local minima) so that algorithm classes can be compared fairly (pp. 4, 6).",
+   "Organize a review by the structural property each method exploits, and state the assumptions under which each property holds (pp. 6–8).",
+   "For each optimality theory in a review, name the algorithms that depend on it, so that a counterexample propagates to them (p. 4).",
+   "Publish a survey as a maintained artefact: source files plus a correction channel, announced in the abstract (pp. 1, 9–10)."
+  ],
+  "coauthors": "P. H. Calamai",
+  "quotes": [
+   {
+    "text": "these aforementioned contributions have mostly ignored the special geometry of the BPP.",
+    "page": 4
+   },
+   {
+    "text": "In most cases these algorithms can be tested and compared using the test problem generators proposed by P. Calamai and L. Vicente [46], [48], [47]",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S011",
+  "year": "1998",
+  "title": "Trust-region interior-point SQP algorithms for a class of nonlinear programming problems",
+  "read_level": "full",
+  "contribution": "A family of matrix-free trust-region interior-point SQP algorithms for equality-constrained problems with bounds on the controls, of the kind that arises in PDE-governed optimal control. It combines a composite quasi-normal/tangential step with Coleman–Li affine scaling. It proves first-order and second-order global convergence and a local q-quadratic rate, which contain the equality-only and bounds-only theories as special cases. It ships the TRICE solver.",
+  "problem_entry": "Entry from the application's linear algebra. Jacobian factorizations are infeasible for PDE control, but products with C_y and C_u (and transposes) and linearized-state/adjoint solves are available. Only local analyses without bounds existed (pp. 2–4).",
+  "key_idea": "Split the step into a quasi-normal part (a Newton step on the state equation, y-components only) and a tangential part W s_u (Newton on the reduced problem). Handle the bounds with the Coleman–Li scaling D(x), derived as Newton on C=0, D^2 W^T grad f=0. Globalize with the Dennis–El-Alem–Maciel trust region and augmented-Lagrangian merit function, using a decoupled or a coupled trust region (pp. 5, 10–20).",
+  "assumptions": "A.1–A.6: f and c_i are C2; C_y is nonsingular with uniformly bounded inverse; functions and derivatives are bounded; W_k, H_k, lambda_k and u_k are bounded. Step conditions form a ladder: C.1 (fraction of Cauchy decrease) gives first order; adding C.2 and C.3 (fraction of optimal decrease, exact Hessian, Lipschitz second derivatives) gives second order; C.1, C.3 and C.4 (Newton step when it fits) give the q-quadratic rate. Nondegeneracy is needed for the local rate only (pp. 10, 21–22).",
+  "proof_devices": [
+   "scaled Cauchy decrease: 1-D quadratic minimization along D^2 g capped by trust-region length and distance to the bounds, T_k (Lemma 6.2, pp. 23–24)",
+   "|ared - pred| <= kappa(||s||^2 + rho(||s||^3 + ||C|| ||s||^2)) consistency (Lemma 6.5, pp. 25–26)",
+   "contradiction on ||D g|| + ||C|| > tol with the case split ||C_k|| <= const*delta_k (penalty frozen, pred >= kappa delta) versus ||C_k|| > const*delta_k (normal decrease dominates) (Thm 7.1, pp. 26–28)",
+   "import of the penalty/merit/radius boundedness lemmas from Dennis–El-Alem–Maciel by lemma number (p. 28)",
+   "active-index indicator function h and trust-region multiplier gamma_k -> 0 for second-order necessary conditions in the degenerate case (Thm 8.2, pp. 31–33)",
+   "compatibility lemma: the damped Newton step satisfies fraction of Cauchy decrease, so the global safeguard never blocks the q-quadratic step (Cor. 9.1, pp. 36–37)",
+   "Powell's Cauchy-decrease result for CG/Lanczos quasi-normal steps (p. 38)"
+  ],
+  "experiments": "TRICE (FORTRAN 77) on one boundary-control problem for a nonlinear heat equation (n=2200, m=2100). Four variants (decoupled/coupled x reduced/full L-BFGS) take 14–20 iterations with no rejected steps; cost is counted in linear solves per trial step. An ablation shows Dikin–Karmarkar scaling converging to the wrong bound (pp. 40–44).",
+  "positioning": "Claims to extend Coleman–Li (bounds) and Dennis–El-Alem–Maciel / Dennis–Vicente (equality) at the same time. Restates the black-box and all-at-once approaches rather than attacking them. The only negative verdict is the numerical one on Dikin–Karmarkar scaling (pp. 3–6, 44).",
+  "writing": "The abstract lists the results by the strength of assumptions needed. Long motivation (structure, nonstandard KKT, Newton) precedes the algorithm. Remarks carry the generality claims. Hedging is low and some sentences are promotional (pp. 2–13, 4).",
+  "limits_future": "Stated limits: the decoupled trust region fails for ill-conditioned C_y; the local rate needs nondegeneracy and the exact Hessian; scaling theory is out of scope. Future work: bounds on the states, an inexact analysis for iterative linear solves (which became S013), and an infinite-dimensional formulation (pp. 4, 16, 22, 45).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The step generator is free (any iterative method, e.g. truncated CG) under fraction of Cauchy decrease. The fast Newton step is taken when it fits, with a proof that the safeguard accepts it. Here the safeguard is a trust region plus a merit ratio test, not sufficient decrease in f.",
+    "pages": "pp. 2, 16–17, 22, 36–39"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Reuses the Dennis–El-Alem–Maciel skeleton, and the proof follows its structure, importing its lemmas. What changes is the metric of the tangential subproblem (affine scaling) plus interior damping, not the definition of success.",
+    "pages": "pp. 14–15, 19–20, 26–28"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The solver is shipped (TRICE, FORTRAN 77, via the internet), but evaluation is one application problem with four configurations plus a scaling ablation, with no collection and no profiles.",
+    "pages": "pp. 4, 41–44"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Pre-complexity era: lim inf, second-order and q-quadratic results only. The cost unit is linear solves with C_y and C_y^T per trial step, an analogue of counting evaluations.",
+    "pages": "pp. 2, 39–40, 44"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "The results include the equality-only and bounds-only theories as special cases. This is stated in the abstract, the outline and the conclusion.",
+    "pages": "pp. 2, 6, 44"
+   },
+   {
+    "pattern": "minimal application oracle / matrix-free interface",
+    "evidence": "The algorithm requires only products with C_y, C_u and their transposes, plus linearized-state and adjoint solves, i.e. information the user already provides for a black-box Newton approach.",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "pattern": "negative example for the rejected alternative",
+    "evidence": "Dikin–Karmarkar scaling converges in 11 iterations but to the wrong solution, with variables at the wrong bound and negative multipliers. This justifies Coleman–Li scaling, which carries gradient-sign information.",
+    "pages": "p. 44"
+   }
+  ],
+  "transferable": [
+   "State the minimal oracle the application supplies, express every algorithmic quantity through it, and count cost per trial step in oracle calls (pp. 3, 39–40, 44).",
+   "Derive the local step as Newton on a reformulated KKT system, globalize it, and prove that the Newton step eventually satisfies the global acceptance conditions (pp. 11–13, 36–37).",
+   "Grade the step conditions by the result they buy (first order, second order, local rate) and note that a higher rung does not imply a lower one (p. 22).",
+   "Offer a cheap and a faithful trust-region shape and give the quantity that decides between them, kappa(W_k) (p. 16).",
+   "Ablate one design component against a plausible alternative, and report convergence to a wrong point, not only iteration counts (p. 44)."
+  ],
+  "coauthors": "J. E. Dennis, M. Heinkenschloss",
+  "quotes": [
+   {
+    "text": "The results given here include as special cases current results for only equality constraints and for only simple bounds.",
+    "page": 2
+   },
+   {
+    "text": "In the presence of bound constraints, this task goes well beyond the mere replacement of matrix factorizations by black-box solvers.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S013",
+  "year": "2002",
+  "title": "Analysis of inexact trust-region SQP algorithms",
+  "read_level": "full",
+  "contribution": "Extends composite-step trust-region SQP and its first-order global convergence theory to inexact derivatives and inexact linearized-state/adjoint solves. The accuracy requirements adapt to feasibility and optimality gains, can be enforced from quantities already available, and recover the exact theory and the unconstrained inexact-gradient theory as special cases.",
+  "problem_entry": "In PDE-governed control and design, C_y z = d and C_y^T z = d must be solved iteratively (Krylov, multigrid, DD). Existing trust-region SQP theories assume exact solves, and the global effect of inexactness on trust-region SQP was not yet studied (pp. 1–2).",
+  "key_idea": "Split the predicted decrease into a computable pred(s^n, s_u) and a residual rpred(r^t). Accept on pred alone, and bound |rpred| <= xi0*pred and ||r^t|| <= xi3*delta*||s_u||. Require reduced-gradient error <= xi1*min{||g_hat||, delta} with xi1 unrestricted. Keep inexact quantities out of the penalty update (pp. 8–12).",
+  "assumptions": "A.1–A.4: f and c_i are C2; C_y is nonsingular with uniformly bounded inverse; functions and derivatives are bounded; H_k, W_k and lambda_k are bounded. The user can adjust the inexactness, and multipliers need only be bounded (pp. 7–8, 11).",
+  "proof_devices": [
+   "reuse of the Dennis–El-Alem–Maciel proof with pred replaced by pred(s^n, s_u): 'Only a very few steps in the convergence analysis change' (p. 12)",
+   "new consistency bounds |ared - pred - rpred| <= k9 delta||s|| + k10 rho||s||^3 + k11 rho||s||^2||C|| and <= k12 rho delta ||s|| ((4.18)–(4.19), pp. 12–14)",
+   "threshold shift: |rpred| <= xi0*pred turns the rejection inequality into one with constant 1 - xi0 - eta1 > 0 (p. 14)",
+   "gradient error <= xi1*min{||g_hat||, delta} makes the error term O(delta*||s||) ((4.24), p. 14)",
+   "truncation-rule lemma: residual <= min{zeta1*||C_u^T z + d_u||, zeta2*delta} implies (4.3), with no norm estimate needed (Lemma 5.1, p. 16)",
+   "spacer-step reading of C_y^{-1} r^t, bounded by a constant times delta (Remark 4.2, p. 10)"
+  ],
+  "experiments": "none (§5 is an implementation discussion: Krylov/GMRES quasi-normal steps, adjoint truncation rule, Steihaug–Toint CG safeguard; pp. 15–17)",
+  "positioning": "Recovers Dennis–El-Alem–Maciel when exact, and relates to Carter and Conn–Gould–Toint at feasible iterates. Differentiates itself from Jäger–Sachs by avoiding Lipschitz constants. Openly critiques the authors' own earlier approach [20, 36] (stringent accuracy, penalty blow-up) (pp. 1–4, 10–11).",
+  "writing": "The abstract states the extension, the adaptation rule, implementability and the two special-case recoveries. The three design criteria are enumerated. Hedging is moderate ('seems to be closely aligned'). The exact method is reviewed first to show what can go wrong (pp. 1, 4, 7–8, 10).",
+  "limits_future": "First-order only. One problem class and a limited class of algorithms are chosen for clarity. The extension to the affine-scaling interior-point method (S011) is called straightforward but tedious. Future work: a broader range of problems and global SQP algorithms (pp. 12, 17).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Skeleton kept (Algorithm 3.1 to 4.3). Only the acceptance quantity pred is redefined and the residual is controlled separately. The proof carries over with one changed constant, 1 - xi0 - eta1.",
+    "pages": "pp. 9–14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic precursor: exactness is relaxed to adaptive accuracy tied to delta_k and to pred. Condition (4.3) has the error <= const*delta shape later required only with probability p (this link is an interpretation; the paper is not probabilistic). The reviewed condition (2.5), function error <= eta0*pred, is the deterministic form of Heuristic 3.",
+    "pages": "pp. 3–4, 8, 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Pre-complexity era: lim inf first-order convergence only, with no iteration or solve counts.",
+    "pages": "p. 12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "Exact information recovers Dennis–El-Alem–Maciel, and feasible iterates recover the unconstrained inexact-gradient theory. S011 makes the same move.",
+    "pages": "pp. 1–2"
+   },
+   {
+    "pattern": "calibrate new conditions against the reduced (black-box) problem",
+    "evidence": "§2 reviews the unconstrained inexact trust-region conditions, and the new conditions are required to be comparable to them. Remark 4.1 checks this in the reverse direction.",
+    "pages": "pp. 3–4, 7–9"
+   },
+   {
+    "pattern": "implementable accuracy conditions",
+    "evidence": "The bounds avoid Lipschitz constants and derivative bounds. The truncation rules use only quantities monitored during the inner solve.",
+    "pages": "pp. 2, 7–8, 16–17"
+   },
+   {
+    "pattern": "report your own failed first design",
+    "evidence": "The initial approach [20, 36] with condition (4.14) often led to very stringent accuracy requirements and large penalty increases near feasibility.",
+    "pages": "pp. 10–11"
+   }
+  ],
+  "transferable": [
+   "Write down the known conditions for the equivalent black-box problem and require yours to reduce to them when the extra structure is trivial (pp. 3–4, 7–8).",
+   "Split pred into a computable part and a residual part, accept on the computable part, bound the residual by xi0 times it, and rerun the old proof with the threshold moved from eta1 to eta1 + xi0 (pp. 9–10, 14).",
+   "Scale the allowed inexactness with the feasibility and optimality gain achieved (p. 10).",
+   "Turn the accuracy condition into an inner-solver stopping rule that uses only monitored quantities, keeping the constant unrestricted (Lemma 5.1, p. 16).",
+   "If the model Hessian is applied inexactly, return whichever of the first (Cauchy) and final Steihaug–Toint CG iterates has the lower model value (p. 16).",
+   "Keep inexact quantities out of monotone parameter updates, such as the penalty parameter (pp. 10–11)."
+  ],
+  "coauthors": "M. Heinkenschloss",
+  "quotes": [
+   {
+    "text": "In particular, our bounds on the inexactness do not rely on Lipschitz constants, derivative bounds, and other quantities that are difficult to obtain in practice.",
+    "page": 2
+   },
+   {
+    "text": "Our criterion also seems to be closely aligned with the SQP philosophy which allows to trade gains in feasibility for gains in optimality.",
+    "page": 10
+   }
+  ]
+ }
+]

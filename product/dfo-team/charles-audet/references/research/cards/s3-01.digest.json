@@ -1,0 +1,166 @@
+[
+ {
+  "id": "S028",
+  "year": "2001",
+  "title": "Mixed variable optimization of the number and composition of heat intercepts in a thermal insulation system",
+  "read_level": "full",
+  "contribution": "Applies the Audet-Dennis MVP pattern search (card S011) to a variable-dimension thermal-insulation design in which the number of intercepts and the insulator types are optimization variables. The result is a 65% lower refrigeration power than the literature design (pp. 1, 17), plus a documented trade-off between knowledge-restricted neighbors and evaluations (p. 18).",
+  "problem_entry": "A whole cryogenics literature fixed the number of intercepts and the insulator types by parametric studies because gradient methods cannot treat categorical variables, which the model cannot evaluate at relaxed values such as 1.5 intercepts (pp. 1-4).",
+  "key_idea": "MVP Poll = continuous mesh poll + user-defined discrete neighbors (constructive add/remove/change-insulator rules) + an ε-triggered extended poll, framed as an incomplete local parametric study. The Search is deliberately minimal, and domain knowledge (insulator sequence set Z) restricts the neighbor set (pp. 9-13, 16, 18).",
+  "assumptions": "Bounds kept explicit, other constraints handled by f = +inf (p. 7). Spline-fitted conductivity data and a discontinuous cycle-efficiency coefficient (pp. 10, 14). No smoothness or finite-value assumptions; the blackbox may return no value (pp. 23-24). No theorem in the paper; the theory is in [4], [3] (pp. 4, 8).",
+  "proof_devices": [
+   "Referee-prompted Remark: add/remove oscillation with off-mesh neighbors could converge to a non-stationary point; repaired by adding finitely many mesh-generator columns that are never polled (p. 13; acknowledgment p. 24)",
+   "Cycling four positive spanning sets ([I,-1], regular simplex, and their negatives) to enlarge the set of directions covered by the convergence result (p. 10)"
+  ],
+  "experiments": "Matlab 5.3; reproduction of the Hilal-Boom designs with the baseline recomputed by the authors' evaluator (Tables 2-3, pp. 14-15); a landscape zoom revealing a discontinuity-induced local optimum (p. 15); single runs for unrestricted neighbors (221,399 evals, P = 23.51), Z-restricted (18,310, 24.85), n_max = 10 (2,350, 25.36) and cost terms γ = 0.1/0.5/1% (Tables 4-8, pp. 19-23); objective-vs-evaluation plots; no competing solver; counts called qualitative (p. 19).",
+  "positioning": "Positions against six thermal-insulation application papers that treat categorical choices as parameters (pp. 2-3). Within optimization it continues Torczon, Lewis-Torczon and the authors' own [4], [3], [2] (p. 8). It faults Hilal-Boom only for missing start and evaluation information, 'making comparison impossible' (p. 15), and explains their constraint handling charitably (p. 6).",
+  "writing": "Written for engineers: categorical variables are defined operationally twice (pp. 1-2), the Poll is translated into the reader's term 'parametric study' (p. 10), the conclusion is a bulleted lessons-learned list (pp. 22-24) and the referee's contribution is acknowledged (p. 24). Two inconsistencies: p. 17 calls the recomputed 68.6 the value 'reported by Hilal and Boom' although their printed figure was 71.9 (p. 14), and the ε trade-off is said to be 'demonstrated here' (p. 24) while every run uses ε = 1% (p. 17).",
+  "limits_future": "Stated limits: local optima and dependence on the start (pp. 15, 18); qualitative evaluation counts (no Search, no mesh coarsening, no cache) (pp. 18-19); the model needs refining once n is free (pp. 20-23). Future work: cross-section area as a variable, cost and weight terms (p. 23), earlier termination (p. 20), filter and derivative versions, parallelism (p. 24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Search/Poll roles stated classically and the Search left almost empty on purpose, but the performance lever (domain knowledge) goes into the Poll's neighbor set, which also redefines local optimality",
+    "pages": "pp. 9-10, 24"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Categorical variables get their own semantics because relaxed values cannot be evaluated; bounds explicit, other constraints by f = +inf; the blackbox may return no value",
+    "pages": "pp. 4, 7, 23-24"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "A referee-found convergence hole (add/remove oscillation off the mesh) is repaired by enlarging the mesh generator; spanning sets are cycled to widen the directions covered by the theory",
+    "pages": "pp. 10, 13, 24"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "A real literature engineering problem with documented physical data, not released as an artifact here; reused by the next thesis (card b2-02, S213, pp. 133-137)",
+    "pages": "pp. 10, 14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluations as currency, objective-vs-evaluation plots and a baseline recomputed by a common evaluator; but single runs, no solver from another family, and counts called qualitative",
+    "pages": "pp. 14-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "user-defined neighborhood defines optimality",
+    "evidence": "The user defines local optimality for the discrete variables; speed and quality 'depends on the user-defined set of neighbors'; knowledge-restricted neighbors cost about 90% fewer evaluations for about 5.7% worse f (existing candidate: b2-02 S213; c2-01 S011)",
+    "pages": "pp. 9, 13, 18"
+   },
+   {
+    "pattern": "certify or improve the published solutions of literature instances",
+    "evidence": "Published Hilal-Boom designs are re-evaluated with the authors' routine, reproduced, then improved by 65% (existing candidate: c01 S015; c2-01)",
+    "pages": "pp. 14-15, 17"
+   },
+   {
+    "pattern": "new decision freedom exposes the model's missing costs",
+    "evidence": "With n free and a shrinking mesh, the optimizer would add ever more closely spaced intercepts, imitating a multilayer insulator; the authors fix the model (n_max cap, a γ cost term) rather than the algorithm and tabulate the loss vs evaluations",
+    "pages": "pp. 20-21, 23"
+   }
+  ],
+  "transferable": [
+   "Re-evaluate a published baseline solution with your own evaluator and print both the reported and the recomputed values before claiming an improvement (p. 14).",
+   "Validate a new method by restricting it to the old method's setting and recovering the published solutions before freeing the new variables (pp. 14-15).",
+   "For variable-dimension categorical problems, write each neighbor move as a constructive rule that also sets the new component's continuous values (split a layer, copy its type, halve its thickness; redistribute on removal) (pp. 12-13).",
+   "Encode domain knowledge as a restriction of the neighbor set and report its price in evaluations and in objective value (p. 18).",
+   "If a mesh-based argument needs heuristic trial points on the mesh, add finitely many generator directions that are never polled (p. 13).",
+   "Plot and zoom into a low-dimensional slice of the objective to find discontinuity-induced local optima (p. 15)."
+  ],
+  "coauthors": "M. Kokkolaras, J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "A way to view this step is that the POLL on the categorical variables is an incomplete local parametric study controlled by the user.",
+    "page": 10
+   },
+   {
+    "text": "In retrospect, it is to be expected that the model objective will have to be refined when used with additional optimization variables.",
+    "page": 23
+   }
+  ]
+ },
+ {
+  "id": "S050",
+  "year": "2001",
+  "title": "Concavity cuts for disjoint bilinear programming",
+  "read_level": "full",
+  "contribution": "Adds a budget-capped concavity-cut phase (from both symmetric linear maxmin reformulations) in front of the exact branch and bound of Audet et al. 1999, with an easier unboundedness test and a degeneracy-removal procedure. The resulting CBA solves random instances up to 500 + 500 variables (sparse) and 60 + 60 (dense) (abstract, p. 2; pp. 11-21).",
+  "problem_entry": "Earlier cutting-plane and polyhedral-annexation methods lack finite convergence, need costly cuts or assume bounded X and U; the question is whether concavity cuts help the authors' own exact BB, which assumes no boundedness (pp. 3-5, 11).",
+  "key_idea": "CBA = CC (Konno mountain climbing + concavity cuts in both X and U, reflection restarts, stopping rules C1-C5) + a diverse subset of cuts (cosine rule) passed to the unchanged BB; CBA+ with incumbent 0 over truncated cones answers FORBIDDANCE; degenerate vertices are cut at a non-degenerate neighbor (pp. 9-16).",
+  "assumptions": "X and U are polyhedra with no boundedness assumption (pp. 3-4); cuts at non-degenerate vertices, degenerate ones handled separately (pp. 5, 15); the BILD and LMM boundedness assumptions are shown to be non-equivalent (pp. 6-7); Prop. 3.3 assumes X bounded (p. 9).",
+  "proof_devices": [
+   "γ-extension computed by one LP: for fixed θ, the bound on the minimum of b'y over Y(x+θλ) is replaced by the existence of a feasible y meeting the bound, so θ and y are optimized jointly (Prop. 2.2, pp. 5-6)",
+   "Cut depth vs boundedness: bounded U gives deep cuts in X; three γ-extension types, with a one-variable example of a finite non-deep one (Prop. 3.2, p. 8)",
+   "Unboundedness decided by the sign of an optimum over a truncated cone {u >= 0: u'B <= 0, 1 <= u'1 <= 2}, via a ray/linearity argument (Prop. 3.3, p. 9)",
+   "FORBIDDANCE recast as nonemptiness of a d.c. set (Prop. 3.4, pp. 10-11)",
+   "Each cut eliminates a local optimum (Lemma 4.1, Prop. 4.2, pp. 12-13)",
+   "Finite exactness from the cap on cuts + BB finiteness + validity of cuts (Thm. 4.3, p. 14; Thm. 4.4, p. 15)"
+  ],
+  "experiments": "C + CPLEX 5.0 on a SUN Ultra 1/167 with [4]'s BB and generator; 10 random instances per series, mean/std of time, cuts, nodes; BB alone vs CBA (Table 2); bounded, one-unbounded and two-unbounded domains (Tables 3-9); time-outs (2 h, 6 h) reported; an anomalous cell re-run with 15 extra instances (pp. 18-26).",
+  "positioning": "Classifies the literature into cutting-plane (Konno; Vaish-Shetty; Sherali-Shetty) and polyhedral-annexation (Vaish-Shetty; Gallo-Ulkucu; Thieu) methods with a concrete weakness for each (p. 3); builds on its own [4] and on Tuy / Horst-Tuy (pp. 4-5); compares assumptions with Falk's LMM (p. 7); frames CC as complementing BB, which [4] found faster on BILD than on F_U (p. 22).",
+  "writing": "GERAD report with a bilingual abstract (p. 2); results as short propositions with proofs; a worked 2-D example with figures (pp. 16-18); anomalies explained in the results prose (p. 23); no conclusion or future-work section (the text ends at p. 26).",
+  "limits_future": "Limits stated in the results: time grows very rapidly once BB is called (p. 20); kept cuts enlarge BB subproblems (pp. 19-20); raising the cut cap to 1000 leaves instances unsolved at about 42,500 s (p. 20); degeneracy removal fails systematically on F_XU for D <= 30% (p. 24). No future directions are stated in this report version.",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Analogy outside DFO: a free, budget-capped heuristic cutting phase does most of the work and the exact BB carries the guarantee; finiteness follows from the cap plus BB's finiteness",
+    "pages": "pp. 11-14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Results stated relative to explicit, shown-to-be-non-equivalent boundedness hypotheses, with a one-variable example of a non-deep cut; no counterexample to a published theorem",
+    "pages": "pp. 6-8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Disciplined ablation (BB vs CBA, same generator, mean and std over 10 instances, time-outs and anomalies reported), but the currency is CPU time and there is no competitor from another family",
+    "pages": "pp. 18-23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "proposer–certifier protocol",
+    "evidence": "CC always found the optimal solution in the Table 4 instances and BB was only called to confirm optimality (existing candidate: c01 S015; b2-01 S070)",
+    "pages": "p. 20"
+   },
+   {
+    "pattern": "report cost-to-find vs cost-to-certify",
+    "evidence": "CC and BB times are tabulated separately; where CC found the optimum, the BB column is the price of certification (existing candidate: c2-01 S011)",
+    "pages": "pp. 19-25"
+   },
+   {
+    "pattern": "reformulation as a lens (transfer tests, not just solutions)",
+    "evidence": "The two symmetric maxmin reformulations each supply a family of concavity cuts; FORBIDDANCE is re-read as a d.c.-set question (existing candidate: a2-01 S041, S127)",
+    "pages": "pp. 2, 4, 10-11"
+   }
+  ],
+  "transferable": [
+   "Put a heuristic phase with a hard cap in front of an exact method; prove finiteness from the cap plus the exact method's finiteness and show that the heuristic never removes the optimum (Thm. 4.3, p. 14).",
+   "Select a diverse subset of generated cuts: keep the cut that removes the incumbent and lies farthest from it and the nearest one that does not, then add cuts only while their average cosine with the kept set stays below 1/2 (pp. 13-14).",
+   "In a decision version (is there a positive value?), set the incumbent to 0 to get deeper cuts and stop at the first positive point (pp. 14-15).",
+   "If an auxiliary problem over a cone is degenerate at the apex, intersect the cone with the slab 1 <= 1'u <= 2 and decide by the sign of the bounded optimum (Prop. 3.3, p. 9).",
+   "At a degenerate vertex, cut at a non-degenerate neighbor reached by single pivots instead of enumerating every neighbor (pp. 15-16).",
+   "When a table cell looks anomalous, generate extra instances and report the revised statistic next to the original (p. 23)."
+  ],
+  "coauthors": "S. Alarie, B. Jaumard, G. Savard",
+  "quotes": [
+   {
+    "text": "The aim of this paper is to study the usefulness of incorporating concavity cuts in a branch and bound procedure for the disjoint bilinear program.",
+    "page": 5
+   },
+   {
+    "text": "For all instances, CC has however found the optimal solution and BB is only called to rigorously confirm its optimality.",
+    "page": 20
+   }
+  ]
+ }
+]

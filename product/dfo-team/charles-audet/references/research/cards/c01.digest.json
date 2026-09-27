@@ -1,0 +1,106 @@
+[
+ {
+  "id": "S015",
+  "year": "2004",
+  "title": "Pooling problem: Alternate formulations and solution methods",
+  "read_level": "full",
+  "contribution": "Shows on refinery pooling instances that the choice among flow, proportion and hybrid bilinear formulations, and the availability of a good heuristic incumbent (alternating LP, VNS over LP vertices), largely decide how fast the authors' branch-and-cut QCQP algorithm solves the problem; reduces some literature instances to LPs or closed forms and solves larger instances exactly or approximately.",
+  "problem_entry": "Industry-funded (Ultramar Canada) nonconvex bilinear problem; entry is 'how best to apply' the authors' own 2000 branch-and-cut QCQP code, motivated by the local-only guarantees of Haverly's recursion and SLP, the bound sensitivity of Al-Khayyal-Falk B&B and the need for heuristic incumbents (pp. 1-3, 15).",
+  "key_idea": "Treat formulation as the main lever (proportion model has |W|-nP+|Y| nonlinear variables independent of attributes vs nA*nP+|Y| for flow; crossover nA=|W|/nP-1; hybrid for pools feeding pools) and build heuristics from the bilinear block structure: ALT alternates LPs over the two blocks, VNS shakes by k basis exchanges in one LP polyhedron and restarts ALT in the other (pp. 4-6, 11-12).",
+  "assumptions": "Linear (volume-weighted) blending, more precise octane/distillation models excluded for complexity; pools with >=2 inflows and >=2 outflows; bounded feasible region and unique LP solutions for Prop. 4.1; absolute tolerance 1e-6 (pp. 3-4, 9, 11).",
+  "proof_devices": [
+   "monotone-plus-bounded argument for alternating LPs, with the optimality notion (no improvement varying (x,y) or (x,z)) defined inside the proposition (Prop. 4.1, p. 11)",
+   "without-loss-of-generality flow rerouting to fix variables to zero and merge pools, reducing RT1 to an LP (pp. 7-8)",
+   "unit-cost decomposition (cost 30-10*alpha per unit of blend independent of feeds) giving an analytic optimum for F3-F5 (pp. 8-9)",
+   "symmetry-breaking constraint (larger pool carries at least the flow of the smaller) for RT2 (appendix, p. 15)",
+   "formulation-size accounting: bilinear variables per block, bilinear terms, L<=/Q<=/Q= counts and a crossover formula (pp. 6-7)",
+   "VNS neighborhood metric = symmetric difference of basic sets; |N_1(s)| <= 2n1+n2+n3, equality when nondegenerate (p. 12)"
+  ],
+  "experiments": "Exact: 12 literature instances + GP1 on a Sun Ultra-60, each run cold and warm (optimum + objective cut) to price the optimality proof, failures shown (memory limit, AST4 proof slower, objective cut hurting outer approximation); cross-study CPU table with raw and CPU-speed-adjusted ratios conceding easy instances to Adhya et al.; heuristics MSLP vs MALT vs VNS with % error vs exact, per-instance parameters, feasible-start rate (0/10,000 -> ~25% on RT2), and 19 random instances (nA up to 30); no seeds/replications or profiles reported (pp. 9-15).",
+  "positioning": "Two-page review sorted by guarantee (local: Haverly recursion, SLP/distributive recursion, Benders; epsilon-global: GOP, Al-Khayyal-Falk; proportion/duality: Ben-Tal et al.; latest: Adhya et al. with BARON); factual, mechanism-based critique; industrial lineage (Shell, Exxon, Texaco) cited; self-citation for reformulation as a research tool (pp. 2-4).",
+  "writing": "Core claim in the introduction's second paragraph before notation; roadmap previews results; systematic hedging (suggest/appears/seems); bounded novelty claim for ALT ('to our best knowledge' first computational experience); one proposition vs many tables with a worked count to decode Table 1; no conclusion, ends with observation bullets (pp. 1, 3, 6, 9-11, 15).",
+  "limits_future": "Limits stated concretely: memory limit of the current exact implementation, degeneracy defeating VNS shaking on AST, open theory for the solution-dependent extreme-point discretization, linear blending only, hard feasibility of starting points; no future-work section (pp. 4, 9, 12, 15).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Heuristics (MALT, VNS) propose incumbents and branch-and-cut certifies global optimality; the certifier is B&C rather than a Poll; the cold/warm protocol prices the proposer and AST4 shows a good incumbent can slow the certifier; this VNS precedes the VNS Search in MADS (JOGO 2008).",
+    "pages": "pp. 3, 9-11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Model-before-algorithm applied to variable choice (flow/proportion/hybrid) and pool elimination rather than constraint classification.",
+    "pages": "pp. 1, 6-10"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Weak guarantee stated precisely (block-wise local optimum under unique LP solutions) and the missing VNS theory admitted; no counterexamples or necessity tests.",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Industry-funded problem; all instance data online at www.gerad.ca/Charles.Audet; privately communicated RT2 printed in the appendix; random-instance family with size ranges.",
+    "pages": "pp. 5, 15-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Concedes easy instances to the state-of-the-art competitor, adjusts cross-machine times by CPU speed, reports failures, tests against the industrial default SLP.",
+    "pages": "pp. 9-15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Currency is CPU time, heuristic parameters set per instance, no profiles, no replications or seeds reported; AST4 omitted from the text's speed-up claim though present in Table 5.",
+    "pages": "pp. 10-13"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Own C++ branch-and-cut code (2000) reused as the instrument; its memory limits reported as limits of the current implementation; no long-lived product.",
+    "pages": "pp. 8-9, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "formulation-size accounting",
+    "evidence": "Counts bilinear variables, terms and constraints per formulation, derives the crossover nA=|W|/nP-1, then checks against solve times and notes where counts mislead (BT5).",
+    "pages": "pp. 6-7, 9"
+   },
+   {
+    "pattern": "audit the literature instances",
+    "evidence": "Shows RT1 reduces to an LP and F3-F5 have analytic solutions before benchmarking on them.",
+    "pages": "pp. 7-9"
+   },
+   {
+    "pattern": "proposer-certifier protocol",
+    "evidence": "Runs the exact method cold and warm (optimum + objective cut) to measure what a heuristic incumbent buys; reports cases where it hurts.",
+    "pages": "p. 9"
+   }
+  ],
+  "transferable": [
+   "Before benchmarking on inherited instances, apply rerouting/dominance arguments to fix variables and merge nodes, and publish which instances collapse to an LP or closed form (pp. 7-9).",
+   "Compare formulations with a size table (linear vars; bilinear vars per block; bilinear terms; L<=/Q<=/Q=), give the crossover formula, then validate by solving and report where counts mislead (pp. 6-7, 9).",
+   "Price a heuristic by running the exact method cold and warm (optimum + objective cut); explain the cases where warm is slower (pp. 9-10).",
+   "For bilinear problems: local search = alternating LP solves over the two blocks; shaking = random extreme point k basis exchanges away, alternating subspaces; distance = symmetric difference of basic sets (pp. 11-12).",
+   "Report the feasible-start rate and the tricks that raised it (sparse random starts with P(zero)=0.5, random choice of which block to fix) (pp. 12, 15).",
+   "In cross-paper timing tables give raw and CPU-speed-adjusted ratios and concede the instances the competitor wins (p. 10).",
+   "When a heuristic seeds another method, include its time in that method's reported time (p. 13).",
+   "Define the weak optimality notion inside the proposition statement so the guarantee cannot be over-read (p. 11)."
+  ],
+  "coauthors": "J. Brimberg, P. Hansen, S. Le Digabel, N. Mladenović",
+  "quotes": [
+   {
+    "text": "The results clearly show that the type of model formulation chosen and initial heuristic used may significantly affect the performance of the exact method.",
+    "page": 1
+   },
+   {
+    "text": "This seems to justify the joint use of a heuristic to obtain a good incumbent solution.",
+    "page": 9
+   }
+  ]
+ }
+]

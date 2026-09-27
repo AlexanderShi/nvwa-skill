@@ -1,0 +1,330 @@
+[
+ {
+  "id": "S012",
+  "year": "2009",
+  "title": "Global convergence of general derivative-free trust-region algorithms to first-and second-order critical points",
+  "read_level": "full",
+  "contribution": "Proves lim-type global convergence to first- and second-order critical points for a whole class of derivative-free trust-region methods. The only requirements on the models are fully-linear or fully-quadratic Taylor-like bounds plus the existence of a finite model-improvement procedure. The algorithm is also relaxed towards practice: simple-decrease acceptance, a single trust region, and uncertified models allowed to move the iterate.",
+  "problem_entry": "Gap between practical trust-region DFO codes that have no theory (Marazzi-Nocedal, Powell 2003) and convergent but impractical methods, among them the authors' own CGT book and CST 1997 (p. 2); three new issues are named in the abstract (p. 1).",
+  "key_idea": "Abstract model quality into fully-linear and fully-quadratic classes, i.e. error bounds plus a finite, uniformly bounded model-improvement algorithm (Def. 3.1, 3.3, p. 7-9). A criticality step keeps Delta_k <= mu*||g_k|| at small gradients and forces Delta_k -> 0 (Alg. 4.1-4.2, p. 13-14).",
+  "assumptions": "f C^1 (or C^2) with Lipschitz gradient (or Hessian) on the enlarged level set, bounded below, uniformly bounded model Hessians (the last for simplicity); no local rates; fully-quadratic models need O(n^2) points (p. 3, 7, 9, 16).",
+  "proof_devices": [
+   "'small radius => successful' lemma: fully linear and Delta_k <= min{1/kappa_bhm, kappa_fcd(1-eta1)/(4kappa_ef)}||g_k|| gives rho_k >= eta1 (Lemma 5.2, p. 16-17)",
+   "criticality-step coupling ||grad f - g|| <= kappa_eg*mu*||g||, which transfers model-gradient convergence to the true gradient (Lemma 5.7, p. 18-19)",
+   "Delta_k -> 0 from summable decreases on successful iterations plus the lower bound ||g_k|| >= min{eps_c, Delta_k/mu} from the criticality step (Lemma 5.5, p. 18)",
+   "at most N consecutive model-improving iterations, so the radius shrinks at least every N iterations (Lemma 5.4, p. 17)",
+   "Thomas-style lim argument with subsequences k_i < l_i and path length <= sum Delta_j <= 2/(eta1*kappa_fcd)*(f(x_ki)-f(x_li)) (Thm 5.9, p. 19-21)",
+   "ball-enlargement lemma by integrating the derivative error along the ray from theta*s to s (Lemma 3.4, p. 9-10)",
+   "Rayleigh-quotient eigenvalue perturbation |lambda_min(Hf)-lambda_min(Hm)| <= kappa_eh*Delta (Prop. 7.1, p. 23)",
+   "second-order lim result via forced radius increases on S+ and a geometric series gamma_inc/(gamma_inc-1)*Delta_j* (Thm 7.11, p. 28)"
+  ],
+  "experiments": "none; practicality argued in prose only: one point replaced per iteration, O(n^6) pivot linear algebra vs O(n^4) for Powell's scheme, 2n+1-point MFN models can be kept fully linear (p. 11-13).",
+  "positioning": "Continues CST 1997 (criticality step, p. 15) and corrects the CGT book's claim that second-order DFO analysis follows simply (p. 3); credits Powell for a criticality analogue and for three improvements (p. 15, 28); classifies rather than criticizes (p. 2).",
+  "writing": "Contributions listed as design features (p. 2-3), roadmap (p. 3), table of kappa constants with mnemonic subscripts (p. 4), light attributed hedging (p. 3, 13), candid naming of impractical members of the class (p. 8); proofs take pp. 13-28.",
+  "limits_future": "No local rates, blind to the number of sample points, O(n^2) points for fully quadratic, O(n^6) linear algebra for n around 100, bounded model Hessians assumed (p. 3, 12, 16); no future-work section.",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The defining paper: the model-improvement algorithm is part of the definition of a model class, and the analysis is independent of the sampling technique.",
+    "pages": "pp. 1, 7-9, 13"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory-only; the code and numbers are in the companion geometry papers and the book [4-6]. Implementation costs are discussed but no runs are reported.",
+    "pages": "pp. 2, 11-13"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Derivative-based trust-region convergence machinery (CGT book, Thomas, Yuan) transplanted into DFO, with the non-triviality stressed.",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "close the theory-practice gap from the theory side",
+    "evidence": "Relax the analysed algorithm to what codes do (simple decrease, one radius, uncertified models allowed to move, one point replaced per iteration) and pay in proof complexity.",
+    "pages": "pp. 2-3, 12, 15"
+   },
+   {
+    "pattern": "delimit an abstraction by naming its trivial members",
+    "evidence": "M={f} and finite-difference Taylor models satisfy the definition but are impractical; the paper then shows practical classes exist.",
+    "pages": "pp. 8, 11-13"
+   }
+  ],
+  "transferable": [
+   "Define the model interface as error bounds plus existence of a finite, uniformly bounded improvement procedure (Def. 3.1, p. 7-8).",
+   "Classify iterations (successful, acceptable, model-improving, unsuccessful) so uncertified iterations can still move (p. 15).",
+   "Couple Delta_k <= mu*||g_k|| at small gradients to transfer model-gradient convergence to the true gradient (Lemma 5.7, p. 18-19).",
+   "Prove Delta_k -> 0 and use it as the stopping test (Lemma 5.5, p. 18).",
+   "Extend error bounds to larger balls by integrating along a ray (Lemma 3.4, p. 9-10).",
+   "Give a table of constants with mnemonic subscripts before the analysis (p. 4)."
+  ],
+  "coauthors": "K. Scheinberg, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "In this paper we are trying to bridge the gap by describing an algorithmic framework in the spirit of the first category of methods, while retaining all the same global convergence properties of the second category.",
+    "page": 2
+   },
+   {
+    "text": "The abstraction highlights, in our opinion, the fundamental requirements for obtaining the appropriate convergence results.",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "S025",
+  "year": "2010",
+  "title": "A derivative-free algorithm for least-squares minimization",
+  "read_level": "full",
+  "contribution": "DFLS builds one minimum-Frobenius-norm interpolation model per residual on a shared 2n+1-point sample set and combines them into a regime-switching Gauss-Newton/Levenberg-Marquardt trust-region model. It proves liminf global convergence and beats NEWUOA and LMDIF on the Moré-Wild smooth and noisy least-squares sets.",
+  "problem_entry": "Least squares with expensive residuals from simulations or legacy codes; direct search needs many evaluations, finite differences are not robust to noise, and unstructured model-based codes ignore structure; the paper models each residual, as CST 1998 did for constraints (p. 1-2).",
+  "key_idea": "Interpolate every f_i on one sample set, which costs O(mn^2) work but no extra evaluations. The Hessian model is J^TJ, J^TJ + kappa3*||m||*I, or the full second-order model, chosen by gradient and residual size (p. 2, 5-6, 16-17).",
+  "assumptions": "F C^2 with a bounded level set; Lambda-poisedness restorable in at most |Y|-1 substitutions; uniformly bounded model Hessians, enforced by a code safeguard and automatic for MFN models (p. 4, 10-11).",
+  "proof_devices": [
+   "residual-weighted model error Phi(s)-phi(y,s-y) <= ||F(y)|| ||gradF(y)-J(y)|| ||s-y|| + c1||s-y||^2 (Lemma 4.3, p. 12-13)",
+   "radius bounded away from zero by contradiction using the interlocking updates rho_{k_i}=rho_{k_i-1}/10, Delta=rho/2 (Lemma 4.4, p. 13-14)",
+   "criticality step transfers g_phi -> 0 to grad Phi -> 0 (Lemma 4.5, p. 14-15)",
+   "plug-in reuse of the framework lemmas: Cauchy decrease (Powell) and termination of the criticality step (CSV 2009) (p. 12)",
+   "bounded Hessian of minimum-Frobenius-norm models (Lemma 3.4, p. 11)"
+  ],
+  "experiments": "Moré-Wild set of 53 problems from 22 CUTEr least-squares types, smooth and with deterministic Chebyshev noise (eps=1e-3); budget 50 simplex gradients; data profiles at tau=1e-1..1e-7; baselines NEWUOA (no structure) and LMDIF (finite differences); DFLS built inside NEWUOA; DFLS best, about 88% at tau=1e-7 within about 22 simplex gradients, least affected by noise; no CPU times (p. 16-20).",
+  "positioning": "Among three DFO classes (p. 1-2); builds on the CSV framework and poisedness papers and on Powell's NEWUOA/MFN (praised as carefully and intelligently chosen, p. 16); Moré-Wild benchmarking (p. 17); local-convergence literature cited for error-bound conditions (p. 3).",
+  "writing": "Framework-for-a-class claim in the first sentence (p. 1), constants table (p. 3), rationale paragraphs after the algorithm (p. 8-9), hedged results and experiments called preliminary (p. 18-20), conclusion argued from two features (interpolation plus structure) (p. 21).",
+  "limits_future": "Only a liminf global result, local convergence deferred to a companion paper; O(mn^2) extra storage; solver ranking depends on noise and accuracy; bound-constrained DFBOLS already developed (p. 3, 17, 20-21).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Primary case of Research Heuristic 2: one model per residual.",
+    "pages": "pp. 2, 5, 16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Uses Lambda-poisedness, the criticality step and fully-linear bounds from CSV; successful iterations skip poisedness checks, which the 2009 framework allows.",
+    "pages": "pp. 4, 6, 9, 12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Theorem, code and data profiles in one paper, plus a companion local-convergence paper and the follow-on code DFBOLS.",
+    "pages": "pp. 3, 16-21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Moré-Wild data profiles, deterministic noise, budget in simplex gradients; only one tier (no engineering instance).",
+    "pages": "pp. 17-19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Derivative-based Gauss-Newton/LM model transplanted to DFO and combined with Powell's NEWUOA machinery.",
+    "pages": "pp. 5-6, 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "baselines as ablations",
+    "evidence": "NEWUOA lacks structure and LMDIF lacks interpolation, so the comparison isolates each ingredient; the conclusion argues from the two features.",
+    "pages": "pp. 16, 21"
+   },
+   {
+    "pattern": "implement inside the strongest baseline's code base",
+    "evidence": "DFLS is built on the NEWUOA framework to make the comparison meaningful.",
+    "pages": "p. 16"
+   },
+   {
+    "pattern": "plug-in convergence",
+    "evidence": "Criticality and Cauchy lemmas cited from the framework; only the structure-specific ratio lemma is proved.",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "transferable": [
+   "Interpolate all components of a composite objective on one shared sample set (p. 2, 16-17).",
+   "Switch Hessian model by regime with explicit thresholds (p. 5-6).",
+   "Do not shrink the radius for failures that may come from geometry; use a safety step without evaluation for tiny steps (p. 7-9).",
+   "In the ratio lemma split the model error into residual norm times Jacobian error plus O(||s||^2) (p. 12-13).",
+   "Moré-Wild protocol with deterministic noise, budget in simplex gradients, stopping tolerance set to the noise level (p. 17-19).",
+   "Report the storage and arithmetic overhead of exploiting structure as a formula (p. 17)."
+  ],
+  "coauthors": "H. Zhang, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "This is the essential cost of exploiting the structure.",
+    "page": 17
+   },
+   {
+    "text": "Therefore, for a method to be both efficient and reliable for least-squares minimization, the polynomial interpolation-based methods which also exploit the problem structure are recommended.",
+    "page": 21
+   }
+  ]
+ },
+ {
+  "id": "S066",
+  "year": "2012",
+  "title": "Bilevel derivative-free optimization and its application to robust optimization",
+  "read_level": "full",
+  "contribution": "First derivative-free method for bilevel problems. It minimizes the reduced upper-level function with trust-region interpolation methods at both levels, and saves lower-level evaluations by solving the lower level inexactly and by reusing perturbed evaluations, with tolerances derived from fully-linear/fully-quadratic error bounds. It is applied to robust (min-max) DFO and to robust Omega-portfolio optimization.",
+  "problem_entry": "Bilevel problems with no derivatives at either level, motivated by robust optimization of simulation-based functions (the robust counterpart is bilevel); reduced formulation chosen over all-at-once (p. 1-3, 16-17).",
+  "key_idea": "Treat the reduced upper-level function as an inexactly evaluated function whose error is controlled by the lower-level solve; derive inner tolerances (||grad m^l|| = O((Delta^u)^2), Delta^l = O(Delta^u)) and a reuse radius O((Delta^l)^3) from the accuracy the upper model needs (p. 8-9, 14).",
+  "assumptions": "Unique lower-level minimizer, reduced upper-level function C^1, fully-quadratic lower-level models, nonsingular lower Hessian near the solution, controllable function-value error; unconstrained theory, linear constraints handled in code only (p. 2-3, 5, 8, 14).",
+  "proof_devices": [
+   "controlled inexactness: max{eps_x, eps_x+s} <= eta0' * predicted decrease with eta0' < eta0/2 keeps the true ratio >= eta0 - 2*eta0' (CGT book 10.6, p. 5-6)",
+   "interpolation of values with O(Delta^3)/O(Delta^2) errors stays fully quadratic/fully linear (Thms 4.1-4.2, p. 6-7)",
+   "inverse-function-theorem bound ||x^l - x^l_dfo|| <= c||grad_l m^l|| + c c_g (Delta^l)^2 chained by Lipschitz continuity to the upper value error (eq. 8, p. 8)",
+   "reuse criterion ||x^u - x^u_pert|| = O((Delta^l)^3) via Lipschitz continuity in the upper variables (eq. 9, p. 9)"
+  ],
+  "experiments": "Matlab; two synthetic bilevel examples (n^u=n^l=5, one also with 20), a 2-D robust example from Bertsimas-Nohadani-Teo, and robust Omega portfolio (8 assets); three variants (basic, inexact, inexact+reuse) plotted against lower-level evaluations; no baselines (none exist); plotted values not in the text file (p. 14-19, captions p. 21-24).",
+  "positioning": "Bilevel books (p. 2); DFO trust-region lineage Winfield/Powell -> CST criticality -> CSV fully linear -> Powell MFN (p. 4-5); practical algorithm from Fasano-Morales-Nocedal and Bandeira-Scheinberg-Vicente (p. 10); inexact-Newton/SQP analogy (p. 14, 18); self-described first contribution (p. 18).",
+  "writing": "Modest framing (as far as possible, first contribution), first-person reasons for choices (p. 3), candid about cost (p. 19), dry-humour disclosure of missing baselines (p. 19); derivations about 3 pages (p. 5-9).",
+  "limits_future": "No general constraints, no upper-level constraints on lower-level variables, point reuse less robust (use only when lower-level evaluations are relatively expensive), total lower-level effort still high, nonconvexity of the reduced upper function is the main difficulty; future: Omega portfolio DFO study (p. 3, 14, 18-19).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Primary case of Research Heuristic 3: the nested structure is exploited to save lower-level evaluations.",
+    "pages": "pp. 1, 8-9, 16-19"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Geometry error bounds serve as a design calculus for tolerances, but the implemented algorithm has no explicit model-improvement iterations (the Fasano-Morales-Nocedal line that SKILL.md lists as a limitation of Method 3).",
+    "pages": "pp. 6-10"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Inexact-function-value trust-region theory (CGT 10.6) and the inexact-Newton tolerance idea transplanted.",
+    "pages": "pp. 5-6, 14, 18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and illustrations without a new theorem; the paper argues that existing theory suffices.",
+    "pages": "pp. 3, 14-19"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "Small hand-built examples, no public collection, no baselines; excused by novelty.",
+    "pages": "pp. 16-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "error-budget propagation across nested solves",
+    "evidence": "Inner tolerances and a reuse radius derived from the outer model's required accuracy.",
+    "pages": "pp. 8-9, 14"
+   },
+   {
+    "pattern": "plug-in convergence",
+    "evidence": "States that no new analysis is needed because existing DFO trust-region theory provides all the tools.",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "explicit no-baseline disclosure",
+    "evidence": "Says openly that no competing methods exist rather than inventing a weak baseline.",
+    "pages": "p. 19"
+   }
+  ],
+  "transferable": [
+   "Recast robust min-max as a bilevel problem with lower level min -f (p. 16-17).",
+   "Propagate outer accuracy requirements inward to set inner stopping tolerances (p. 8, 14).",
+   "Accept inexact values when errors <= eta0' * predicted decrease with eta0' < eta0/2 (p. 5-6).",
+   "Reuse evaluations at perturbed parameters within O(Delta^3) (p. 9, 14).",
+   "Warm-start inner solves from a linear surrogate of the solution map (p. 12-13).",
+   "With linear constraints use an l-infinity trust region (QP subproblem) and an LP projection for stationarity (p. 15)."
+  ],
+  "coauthors": "L. N. Vicente",
+  "quotes": [
+   {
+    "text": "An astute reader will notice that there are no comparisons with competing methods — this is because such methods appear not to exist.",
+    "page": 19
+   },
+   {
+    "text": "One of the reasons being that a good understanding of the unconstrained case seems to be necessary to tackle the constrained one.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S075",
+  "year": "2018",
+  "title": "A progressive barrier derivative-free trust-region algorithm for constrained optimization",
+  "read_level": "full",
+  "contribution": "PBTR brings MADS's progressive barrier and speculative search into a derivative-free trust region. It keeps feasible and infeasible incumbents with separate radii and models of f and c, and retunes the barrier update for trust-region evaluation economics. It is competitive with COBYLA on 40 CUTEst problems and with NOMAD on two MDO blackboxes; the theory shows only that one radius sequence tends to zero.",
+  "problem_entry": "Nonlinear inequality constraints from blackbox simulations (QRSK) remain a challenge; few direct treatments exist, and the progressive barrier existed only in MADS (p. 2-3).",
+  "key_idea": "Two incumbents (feasible and infeasible within h_max) with primary/secondary evaluation effort, two constrained trust-region subproblems, radius rules on the f and h ratios gated by ||grad model|| >= mu*Delta, and the barrier threshold updated on non-dominated points with h_max = 0.9*h_orig + 0.1*h(x*) (p. 8-14, 20).",
+  "assumptions": "f, c C^2, f bounded below, fraction of Cauchy decrease for f (feasible subproblem) and h (infeasible subproblem), bounded model Hessians; blackbox values may be +infinity; no hidden constraints (p. 2, 14-15).",
+  "proof_devices": [
+   "radius-to-zero by contradiction: if the radius does not tend to zero, infinitely many non-decreased iterations each give decrease >= C = eta0*(kappa_C/2)*min{mu/kappa_H,1}*mu*eps^2/gamma_inc^2 > 0, contradicting boundedness below (Thms 3.1-3.2, p. 15-16)",
+   "case split on whether a feasible point is ever generated (p. 15-16)",
+   "criticality folded into the radius update: shrink after success when Delta > mu*||g|| (Alg. 1, p. 6-7)"
+  ],
+  "experiments": "Python; 40 CUTEst problems (n 2-9, m 1-13; unscaled problems excluded) with budget 100(n+1), constrained data profiles counting only feasible solutions (h <= 1e-14) at tau=1e-3 plus performance profiles; 6-variant internal study; NOMAD 3.7.2 and COBYLA defaults; MDO AIRCRAFT RANGE and SIMPLIFIED WING convergence plots; PBTR comparable to COBYLA on smooth problems and competitive with NOMAD on MDO; model-building time not counted (p. 16-23).",
+  "positioning": "Neutral survey of both schools' constrained methods (p. 2-3); claims the first progressive-barrier algorithm after MADS (p. 23); builds on the authors' CGT 1991, Conn-Le Digabel 2013, CSV 2009 and the CSV book (p. 25).",
+  "writing": "Explicit rule for choosing between the schools (p. 2, 22); competitive wording, preferable only where supported (p. 1, 23); illustrative figure of iteration types (p. 10); theory about 2 pages vs numerics about 7 (p. 14-23).",
+  "limits_future": "No stationarity result; nothing known about Delta_I when both point types appear; model time ignored; no dynamic scaling. Future: scaling, regression models, measuring how often geometry improvement fires, penalty subproblems, progressive barrier in other algorithms (p. 16-17, 21, 23-24).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Progressive barrier and speculative search moved from MADS into a trust region and retuned; but the hybrid has weaker theory than either parent (variant of step 4).",
+    "pages": "pp. 3, 10, 13, 15-16, 20, 23-24"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two tiers (CUTEst plus MDO), baselines from both schools, evaluations as the cost unit, data and performance profiles.",
+    "pages": "pp. 17-23"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theorem, code and numbers are present, but the theorem only gives radius -> 0, not stationarity.",
+    "pages": "pp. 15-16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Certification enforced in the algorithm but unused in the theorems; measuring geometry-improvement frequency is left as future work.",
+    "pages": "pp. 8, 12, 15-16, 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "retune an imported device to the host's evaluation economics",
+    "evidence": "Non-dominated filtering and a 0.9/0.1 barrier rule, because a trust region spends more evaluations per iteration than MADS.",
+    "pages": "pp. 13, 20"
+   },
+   {
+    "pattern": "factorial study of own variants before external comparison",
+    "evidence": "3 sample-set options x 2 barrier rules compared first; only the best is benchmarked against NOMAD and COBYLA.",
+    "pages": "pp. 19-22"
+   }
+  ],
+  "transferable": [
+   "When importing a device, retune the parameter tied to the parent's evaluations per iteration (p. 13, 20).",
+   "Fold the criticality step into the radius update and gate increases on ||grad model|| >= mu*Delta (p. 6-7, 13).",
+   "Keep feasible and infeasible incumbents with a relative trigger favouring feasibility (p. 9, 11).",
+   "Adapt data profiles to constraints by counting only feasible solutions under a stated tolerance (p. 17).",
+   "Disclose excluded benchmark problems and why, and tabulate the feasibility of each starting point (p. 17-18).",
+   "Run your own variant grid first, then compare the best variant against one baseline per school (p. 19-22)."
+  ],
+  "coauthors": "C. Audet, S. Le Digabel, M. Peyrega",
+  "quotes": [
+   {
+    "text": "Given a very badly behaved function we would use a direct-search method. If the function can be adequately approximated by a smooth function we would prefer a model-based approach unless it is essential to exploit some parallel architecture.",
+    "page": 2
+   },
+   {
+    "text": "At least one trust region radii sequences converges to 0.",
+    "page": 16
+   }
+  ]
+ }
+]

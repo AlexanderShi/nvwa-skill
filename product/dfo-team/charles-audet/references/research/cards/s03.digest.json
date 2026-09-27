@@ -1,0 +1,414 @@
+[
+ {
+  "id": "S167",
+  "year": "2019",
+  "title": "Low-cost and representative surrogate hydrological models. Part I-Construction of surrogates",
+  "read_level": "full",
+  "contribution": "Builds three reduced-fidelity surrogates of the HYDROTEL hydrological model (fewer meteorological stations, shorter calibration period, fewer RHHU sub-basins) and their combination, and evaluates each by rank/value correlation with the original on 5,000 LHS points and by a binned CPU-time ratio, as Part I of a DDS-MADS calibration project.",
+  "problem_entry": "Application cost: one HYDROTEL run can exceed a minute and calibration needs thousands; reduced-fidelity surrogates are underused in water resources; a good surrogate is defined by two mandatory conditions, representativeness and CPU-time decrease (pp. 4-6, 8).",
+  "key_idea": "Simplify the simulator itself (checkerboard station removal, 12-month period, coarser discretization), judge surrogates by Spearman rank correlation and optimal-zone alignment alongside R2, and bin the speed-up ratio r into unusable/poor/medium/superior/ideal (pp. 8-10, 17).",
+  "assumptions": "Objective 1-NSE; HYDROTEL 10 and 19 formulations on three Quebec watersheds; 0.9 threshold for R2 and Rs borrowed from Toal (2015) with the caveat that it was meant for response-surface surrogates; CPU time averaged over 1,000 runs (pp. 6-8, 10-11).",
+  "proof_devices": [
+   "none (no theorems); mechanistic explanation of speed-ups from the simulator's three-step computing pipeline and hydrograph recomputation (pp. 7, 10, 16)"
+  ],
+  "experiments": "5,000 LHS points per surrogate; best/worst instances per reduction level on the worst watershed (Toulnustouc); failures reported (Rs 0.638/R2 0.411 worst station instance, 6-month periods <= 0.512/0.392); combined ratios 44/16/32 for HYDROTEL 10 vs about 2 for HYDROTEL 19; 3/6 combined surrogates below 0.9 (pp. 12-19). Tables and figures not in extracted text.",
+  "positioning": "Builds on Razavi et al.'s four avenues and surveys (adds hardware progress as a fifth), Le Digabel's adaptive/non-adaptive surrogate distinction and Audet & Hare's surrogate definition; fills the water-resources gap on reduced-fidelity models (pp. 5-6).",
+  "writing": "Operational definitions first (two mandatory conditions, five named ratio bands), predictions of each surrogate's ratio stated before results, open questions explicitly deferred to Part II (pp. 8-10, 20).",
+  "limits_future": "HYDROTEL 19 ratios poor and half the combined surrogates below 0.9; Part II to test whether R2>0.9 and an ideal ratio are needed; reduced models might serve as operational models (pp. 18-20).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "real partner blackbox (DEH/Hydro-Quebec data) but the output is a surrogate protocol; no public release mentioned",
+    "pages": "pp. 4, 10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "surrogates destined for DDS-MADS, which merges MADS convergence and local refinement with DDS global heuristic exploration (indirect)",
+    "pages": "p. 20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "currency is the CPU-time ratio; quality judged by rank correlation, not optimization runs",
+    "pages": "pp. 8-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged and used as rankers",
+    "evidence": "Spearman rank correlation and alignment of optimal zones preferred over value fit (hypothetical Fig. 1)",
+    "pages": "p. 8"
+   }
+  ],
+  "transferable": [
+   "Before building a surrogate, fix two measurable acceptance criteria (rank-fidelity threshold and a speed-up band) and bin the speed-up into named classes.",
+   "Judge a surrogate for optimization by Spearman rank correlation next to R2 and zoom the original-vs-surrogate scatter on the best-known region.",
+   "Report the worst instance of each reduction level and the problem where surrogates do worst, not only averages."
+  ],
+  "coauthors": "P.-L. Huot, A. Poulin, S. Alarie",
+  "quotes": [
+   {
+    "text": "However, as can be seen in Figure 1, a high R2 value does not guarantee a high representativeness near the optimal zones.",
+    "page": 8
+   },
+   {
+    "text": "Hence, sharing similarities does not mean that the objective function values obtained on the surrogate versus the original must be as similar as possible.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "D008",
+  "year": "2020",
+  "title": "Proceedings of the Edge Intelligence Workshop, Montréal, Canada, March 2-3, 2020",
+  "read_level": "partial",
+  "contribution": "Edited proceedings (Audet one of five editors) of the first GERAD/Huawei-sponsored Edge Intelligence Workshop; contains 14 ML/edge-AI contributions, none authored by Audet.",
+  "problem_entry": "Editorial frames edge AI by hardware limits (kilobytes of memory, ~50 MHz, milliwatts), privacy/GDPR and bandwidth, and invites optimization including blackbox and derivative-free (pp. 4-5).",
+  "key_idea": "not applicable (no research content by Audet; contributions on quantization, pruning, compact architecture search, distillation, compressed distributed SGD; TOC p. 8).",
+  "assumptions": "not applicable",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "not applicable; sponsors CRM, CERC Data Science for Real-Time Decision Making, GERAD and Huawei; chairs Lodi and Partovi Nia (pp. 6-7).",
+  "writing": "Editorial is a call to an interdisciplinary community, listing fields (pp. 4-5); not Audet's research prose.",
+  "limits_future": "No research-method evidence; only service/community and industrial-channel context (pp. 5-7).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "contextual only (Huawei sponsor and co-chair, an industrial channel); not research-method evidence and should not be counted",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Le Digabel, A. Lodi, D. Orban, V. Partovi Nia (co-editors)",
+  "quotes": [
+   {
+    "text": "Research on edge intelligence is still in its early stages, and a dedicated venue for exchanging the recent advances of edge intelligence is highly appealing especially in Canada which is one of the birthplaces of deep learning.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S072",
+  "year": "2020",
+  "title": "Binary, unrelaxable and hidden constraints in blackbox optimization",
+  "read_level": "full",
+  "contribution": "Merges unrelaxable and hidden constraints into one binary constraint, models binary constraints with weighted kNN (Epanechnikov kernel) classification surrogates, and uses seven surrogate constraint-violation functions (unscaled and max-violation-scaled) to order MADS trial points, improving data profiles over the extreme barrier default in NOMAD 3.8.0 (read as GERAD G-2019-76).",
+  "problem_entry": "Semantic/mechanism mismatch: binary constraints are relaxable by definition yet MADS treats them with the extreme barrier like unrelaxable/hidden ones, discarding information (p. 5).",
+  "key_idea": "Replace x in X by a single unquantifiable binary b0, build kNN surrogates b~_i, and use surrogate h~ (h~1-h~7) with surrogate f~ only to reorder candidates under the opportunistic strategy, leaving PB acceptance and theory unchanged (pp. 6-9).",
+  "assumptions": "No smoothness assumptions; h uses squared violations to avoid adding nonsmoothness; b0 unquantifiable by construction (pp. 6-7).",
+  "proof_devices": [
+   "no theorem; claim that changing the evaluation order leaves the PB convergence analysis intact (p. 6)",
+   "binary identity max(0,b_i)^2 = b_i to simplify h (p. 7)",
+   "scaling by largest violation observed so far a_i^k (p. 8)"
+  ],
+  "experiments": "STYRENE (4 binary + hidden, ~14% failures, 7 relaxable), MDO and Lockwood with constraints converted to binary/unrelaxable; 30 instances each (difference not stated); NOMAD 3.8.0 OrthoMADS + quadratic models, 1500 evals; data profiles tau=1e-2,1e-4 vs own default only (pp. 9-11).",
+  "positioning": "Uses Le Digabel-Wild constraint taxonomy; cites Choi et al. for hidden constraints and a modified DIRECT (Na et al.) as the other treatment; builds on PB and on the companion constraint-scaling report (pp. 5-6, 8, 11).",
+  "writing": "Short letter; honest hedging of effect sizes ('minimal', 'not significant') and a concrete recommendation (h~7) (p. 11).",
+  "limits_future": "Differences between variants minimal, weighting gain not significant; future: use surrogate probability of binary relaxable constraints inside the true h (p. 11).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "refines the taxonomy (binary = relaxable but unquantifiable; unrelaxable+hidden merged into an unquantifiable binary) and gives the class its own mechanism",
+    "pages": "pp. 5, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "new idea inserted in the evaluation order under opportunism (neither Search nor Poll), a theory-free slot",
+    "pages": "p. 6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "data profiles but only against NOMAD's own default; replications not reported",
+    "pages": "p. 9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged and used as rankers",
+    "evidence": "surrogate f~ and h~ used only to order trial points (dominance rule), not to accept or reject them",
+    "pages": "pp. 6, 8"
+   }
+  ],
+  "transferable": [
+   "Confine an unprovable mechanism to the evaluation order of an opportunistic solver; the candidate set and convergence proof are untouched.",
+   "To test a new constraint class, convert constraints of an existing realistic benchmark into that class and say so.",
+   "Normalize heterogeneous constraint surrogates by the largest violation observed so far, which needs no user input."
+  ],
+  "coauthors": "G. Caporossi, S. Jacquet",
+  "quotes": [
+   {
+    "text": "Despite the binary constraints, as defined in the optimization problem being relaxable, Mads handles them as if they were unrelaxable or hidden.",
+    "page": 5
+   },
+   {
+    "text": "It has an impact on the ordering strategy, thus on the order in which elements will be evaluated. This has no impact on the convergence analysis from [4].",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S143",
+  "year": "2020",
+  "title": "Monotonic grey box direct search optimization: C. Audet et al.",
+  "read_level": "full",
+  "contribution": "Defines monotonic grey-box optimization, develops cone-monotonicity results for extended-real functions, encodes user knowledge in a trend matrix with strict and relaxed trend directions, and uses them to order MADS poll points (with a parameter-free switch to model ordering) to reach feasibility faster, tested on analytic problems, MDO and Rio Tinto's Kemano blackbox (read as GERAD G-2019-15 'Monotonic grey box optimization').",
+  "problem_entry": "Rio Tinto engineers reached feasibility on Kemano faster by hand than NOMAD from an infeasible start, because they knew which variables to move; formalized as known sign / unknown magnitude of constraint variation (pp. 4-5, 12-14).",
+  "key_idea": "Trend matrix T (entries -1, 1, 0, N/A) -> trend cones -> strict trend direction d_T (zero on any N/A) and trend direction d~_T (ignores N/A); order poll candidates by angle with -d_T, switch to models once n+1 affinely independent nearby points exist (pp. 7-10).",
+  "assumptions": "Cone-monotonicity for functions into R with +-infinity (failed evaluations = infinity); no differentiability or continuity; Prop. 3 needs -d_T feasible for X and upper semicontinuous satisfied constraints; sampled T only a conjecture (pp. 5-6, 9, 11).",
+  "proof_devices": [
+   "two-step chaining to extend monotonicity from cones K1, K2 to conv{K1,K2} (Prop. 2, p. 6)",
+   "bridge cone-monotonicity -> Clarke derivative g°(x;d) >= 0 (Cor. 2, p. 6)",
+   "componentwise case analysis placing d_T in every violated constraint's trend cone (Cor. 4, p. 8)",
+   "split h = S_J + S_Jbar: violated part monotone along the cone, satisfied part zero nearby by upper semicontinuity (Prop. 3, p. 9; yields non-increase)"
+  ],
+  "experiments": "NOMAD 3.9.1, quadratic-model search off, 2n directions, minimize h until feasible; 8 analytic problems x 10 infeasible starts x 10 seeds; MDO with T sampled from 200 LHS points; Kemano (90 s/eval, budget 100, 20 starts, engineer vs sampled T); data profiles of feasibility; negative result on strict direction (d_T(x0)=0 for 18/20) reported (pp. 10-13).",
+  "positioning": "Extends Van Dyke et al.'s cone-monotonicity to extended reals; cites Borwein-Burke-Lewis and Rubinov-Tuy-Mays; places itself among grey-box works (min-max, l1 manifold sampling) (pp. 5-6).",
+  "writing": "Motivating industrial story withheld until experiments/discussion; candid labels ('most dangerous' intuition technique); negative results explained from logs (pp. 11, 13-14).",
+  "limits_future": "Feasibility phase only; strict direction can vanish; sampled T not guaranteed; future: exploit objective trends and balance feasibility vs objective in PB (pp. 11, 13-14).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "insertion slot is poll ordering, with parameter-free fallback to model ordering; poll directions and PB unchanged",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "per-constraint structure modeled; failures kept as +infinity in extended-real definitions",
+    "pages": "pp. 5, 7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "theory certifies a property of the heuristic direction (weak descent for h), no new convergence theorem and no counterexamples",
+    "pages": "pp. 6-9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "industrial Kemano blackbox used but not described as released",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged and used as rankers",
+    "evidence": "trend direction used only to order poll candidates, replaced by models when buildable",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "encode practitioner intuition as a typed solver input",
+    "evidence": "trend matrix with N/A entry filled analytically, by sampling or from engineer intuition; engineer matrix vs sampled matrix compared",
+    "pages": "pp. 7, 11, 13"
+   }
+  ],
+  "transferable": [
+   "When practitioners beat your solver by hand, write down the qualitative information they use and give it a typed input format with an explicit 'unknown' value and three ways to fill it.",
+   "Use a parameter-free switch from a structural heuristic to a data-driven model triggered by the model becoming buildable (n+1 affinely independent points).",
+   "Prove a heuristic direction helps feasibility by splitting the violation function into violated and strictly satisfied parts (monotonicity for the first, semicontinuity for the second).",
+   "Keep a strict and a relaxed version of the heuristic and report where the strict one degenerates."
+  ],
+  "coauthors": "P. Côté, C. Poissant, C. Tribes",
+  "quotes": [
+   {
+    "text": "Finally, the third technique is certainly the most dangerous one and consists in trusting the intuition of the blackbox simulation designer.",
+    "page": 11
+   },
+   {
+    "text": "The present work proposes a way to mechanize this process, by supplying the engineers with a tool to translate their intuition about the monotonic behavior of some functions.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S084",
+  "year": "2021",
+  "title": "Optimization of stochastic blackboxes with adaptive precision",
+  "read_level": "full",
+  "contribution": "Introduces MpMads (monotone precision) and DpMads (dynamic precision), MADS variants for blackboxes whose noise level can be tuned at a cost, proves almost-sure Clarke stationarity for any precision-update rule satisfying a minimal condition CDp, redefines profiles in Monte-Carlo draws, and shows DpMads needs about 100x fewer draws than Robust-MADS on an EDF asset-management simulator (read as arXiv 1911.05846v1, 'Optimization of noisy blackboxes with adaptive precision').",
+  "problem_entry": "Adaptive-precision blackboxes (Monte-Carlo, sigma ~ 1/sqrt(N), cost ~ 1/sigma^2); literature sorted into fixed, monotone and dynamic noise control, with one algorithm placed in each of the last two (pp. 2-3, 5).",
+  "key_idea": "Inverse-variance ML estimates over a cache; every comparison is a p-value of f(x_c) < f(x_s); precision raised when p is in [beta_l, beta_u] (CDp), kept otherwise for MpMads (CMp); variants differ only in UpdateR so one proof covers both (pp. 4-9).",
+  "assumptions": "Additive Gaussian noise with x-independent sigma; for the analysis D_f = R^n, bounded level sets, sigma_min = 0, 0 < beta_l <= 0.5, sigma_max finite, CDp; unconstrained (pp. 3, 10-11, 19).",
+  "proof_devices": [
+   "strong law of large numbers -> true minimizer on a finite set eventually minimizes the estimates (Lemma 3.2, p. 12)",
+   "p-value convergence via sigma^k <= sigma_max/sqrt(k) (Lemma 3.4, pp. 13-14)",
+   "Borel-Cantelli with a max-sum-of-products bound (Lemma 3.1) to keep incumbents in a bounded level set (Thm 3.7, pp. 15-16)",
+   "contradiction on finite mesh-intersect-ball, ties handled as random walk on frame sizes (Thm 3.8, pp. 16-17)",
+   "refining-direction argument for Clarke stationarity almost surely (Thm 3.9, p. 18)"
+  ],
+  "experiments": "Python DpMads/MpMads vs Robust-MADS (NOMAD 3.9.1); currency = Monte-Carlo draws 1/sigma^2 with rebuilt performance/data/accuracy profiles; Norm2 and Moustache (500 runs each); EDF VME asset management (5 integer dates, sigma=1800 at 2^10 draws, sigma_min set to 50) with deterministic MADS and Robust-MADS at fixed draws (32 min to 25.3 days) (pp. 19-27).",
+  "positioning": "Generalizes Polak-Wetter's monotone-precision GPS (MpMads) and joins Picheny et al.-style dynamic precision (DpMads); contrasts with Robust-MADS, StoMADS, ASTRO-DF, SNOWPAC (pp. 2-3, 5).",
+  "writing": "Paradigm taxonomy in the introduction; hypotheses gathered in a bullet summary after the last theorem; plain statement of the theoretical equivalence vs practical difference (pp. 2-3, 19, 27).",
+  "limits_future": "Ad hoc parameters; monotone strategy can explode cost; dynamic strategy weak on flat objectives; per-iteration precision updates; future: constraints with adaptive-precision noise, non-Gaussian noise, models (p. 28).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "currency fixed first and taken to its conclusion: evaluation counts called irrelevant; all profile types rebuilt in Monte-Carlo draws",
+    "pages": "pp. 19-20"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Clarke-type ladder carried to noise with an explicit hypothesis list and an argued need for sigma_min=0, but no counterexamples; probabilistic steps loosely stated",
+    "pages": "pp. 10, 15-19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "weak: new methods as Python prototypes vs NOMAD 3.9.1 comparator, consistent with features lagging NOMAD",
+    "pages": "p. 19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "EDF industrial problem used; no release mentioned",
+    "pages": "pp. 24-26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "hypothesis-test acceptance with explicit p-value",
+    "evidence": "all accept/expand/shrink decisions driven by the p-value of f(x_c) < f(x_s) with thresholds; variants differ only in the precision-update function so one proof covers the family",
+    "pages": "pp. 7-9"
+   }
+  ],
+  "transferable": [
+   "Make every accept/reject/expand/shrink decision in a noisy method a hypothesis test with an explicit p-value and two thresholds, and let compared variants differ in one function so a single proof covers all.",
+   "To port a deterministic direct-search proof to noise, first prove that estimates eventually order any finite set correctly; then reduce the rest to finite mesh-intersect-ball sets.",
+   "When evaluation cost depends on a chosen precision, redefine the x-axis of performance, data and accuracy profiles in cost units (draws = 1/sigma^2) and justify it.",
+   "Classify the literature by how it controls the resource (fixed, monotone, dynamic) and place each proposed algorithm in one cell."
+  ],
+  "coauthors": "S. Alarie, P.-Y. Bouchet, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "This metric is irrelevant in adaptive precision context, as a few calls with great precision can be more expensive than many calls with low precision.",
+    "page": 19
+   },
+   {
+    "text": "A noticeable point is the theoretical equivalence of these two strategies, as they share the same convergence analysis.",
+    "page": 27
+   }
+  ]
+ },
+ {
+  "id": "S094",
+  "year": "2021",
+  "title": "Using symbolic calculations to determine largest small polygons",
+  "read_level": "full",
+  "contribution": "Re-derives the largest small hexagon via a complex-plane formulation that factors a degree-14 (not 40) polynomial, re-proves its axial symmetry by symmetrization, and, under the axial-symmetry conjecture, obtains the first algebraic value of the largest small octagon as a root of a degree-42 integer polynomial extracted from a degree-344 discriminant (read as GERAD G-2019-57).",
+  "problem_entry": "Classic extremal geometry with known cases (odd n, n=4, n=6 via Graham's degree-40 factorization) and only numerical octagon values; entry is a new formulation lowering algebraic degree (pp. 4-5).",
+  "key_idea": "Fix the pending edge at 0 and i in the complex plane, write area and cycle closure as polynomials, and eliminate variables by resultants and discriminants (Maple), isolating the root with regular-polygon and circle bounds (pp. 6-9).",
+  "assumptions": "Foster-Szabo diameter-graph theorem and Reinhardt's perpendicularity; octagon result conditional on axial symmetry conjecture (pp. 4-6, 8).",
+  "proof_devices": [
+   "symmetrization-by-averaging contradiction: replace asymmetric angles by their mean, keep diameter 1, strictly gain a triangle's area (Thm 2.1, p. 6)",
+   "critical value A of polynomial t => discriminant of t(x)-A vanishes (p. 7)",
+   "successive resultant/discriminant elimination to a univariate polynomial in A, then factorization (pp. 7, 9)",
+   "root isolation with a priori bounds [0.6, pi/4] and [0.7, pi/4] (pp. 7, 9)"
+  ],
+  "experiments": "none beyond computing effort: negligible (hexagon), ~90 s and 100 MB (octagon), decagon failed with 100 GB (p. 9).",
+  "positioning": "Improves on Graham/Johnson and Lazard for the hexagon; re-proves Yuan's symmetry; turns the 2002 Audet-Hansen-Messine-Xiong numeric octagon and Henrion-Messine bounds into an algebraic value (pp. 5, 9-10).",
+  "writing": "Very short; conjecture stated inside the theorem; first-analytical-solution claim bounded by the symmetry assumption (pp. 8-9).",
+  "limits_future": "Conditional on the symmetry conjecture; does not scale to the decagon (memory) (p. 9).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "outside DFO; result stated relative to a named conjecture and known results re-proved by a different route; no counterexamples",
+    "pages": "pp. 6-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "evidence": "2002 numeric largest small octagon -> 2019 algebraic value; series of small-polygon papers in references",
+    "pages": "pp. 5, 10"
+   }
+  ],
+  "transferable": [
+   "For the exact optimum of a low-dimensional polynomial program, use critical value => zero discriminant of t(x)-A, eliminate variables by resultants, and isolate the right root with cheap a priori bounds.",
+   "Symmetrization-by-averaging: average the two asymmetric parameters of a putative optimizer, check feasibility, and show strict improvement.",
+   "Report the computational wall at which the method fails for the next case."
+  ],
+  "coauthors": "P. Hansen, D. Svrtan",
+  "quotes": [
+   {
+    "text": "The latter is the first analytical solution for the octagon, as only numerical approximations of the optimal area were known.",
+    "page": 9
+   },
+   {
+    "text": "We have applied the same methodology to the symmetrical decagon using a larger computer, but 100 gygabytes of memory was insufficient to compute the discriminant.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S133",
+  "year": "2021",
+  "title": "Combining cross-entropy and MADS methods for inequality constrained global optimization",
+  "read_level": "partial",
+  "contribution": "Adds a cross-entropy (CE) Search step to MADS with progressive barrier, drawing elites from the whole cache ranked by PB dominance, triggering the step when elite spread shrinks; calibrated on 100 analytic problems and shown better than GA/DE/CMA-ES/PSO on 19 unconstrained problems and than MADS, LH-MADS and VNS-MADS on MDO, STYRENE and LOCKWOOD (read as arXiv 2012.10173v2).",
+  "problem_entry": "Two blackbox difficulties (cost, multiple local minima); global heuristics need many evaluations and lack constraint handling, MADS add-ons improve efficiency but not escape; CE is fast to promising regions but unguaranteed and slow to refine (p. 2).",
+  "key_idea": "CE as a mesh-projected MADS Search: elites from the cache ranked by a PB-dominance Best() function, initialization at poll centre with sigma = 2(u - l) and artificial bounds, truncated normal with alpha = 0.7 smoothing, launched only when ||sigma^k|| < ||sigma^p||, restart when infeasible (pp. 8-10).",
+  "assumptions": "Bound plus inequality constraints, extended-real f and c; convergence inherited from MADS-PB (bounded trial points -> Clarke stationarity on hypertangent directions if feasible limit) (pp. 2, 4-5).",
+  "proof_devices": [
+   "none new: convergence inherited because the CE Search proposes finitely many mesh points (p. 1, p. 3)"
+  ],
+  "experiments": "Calibration on 100 analytic problems (69 unconstrained, 25 constrained, 6 large; 1000(n+1) evals, 3 seeds; NOMAD 3.9.1 + NM, no models); vs pymoo GA/DE/CMA-ES/PSO on 19 unconstrained problems (5 seeds, 3000 evals); MDO, STYRENE, LOCKWOOD with 20 starts x 3 seeds vs MADS, LH-MADS, VNS-MADS; data profiles; feasibility counts (LOCKWOOD 60/60 vs 41/60 and 46/60) (pp. 10-17).",
+  "positioning": "Contrasts guarantee-free global heuristics (CMA-ES, GA, DE, PSO) with MADS add-ons (VNS, LHS, surrogates, quadratic models, NM); adapts Kroese et al.'s continuous CE, replacing its penalty by PB dominance (pp. 2, 8).",
+  "writing": "Two aims stated in the introduction (global exploration, preserved guarantees); candid self-assessment that beating heuristics on engineering problems is 'not particularly relevant' (pp. 2, 18).",
+  "limits_future": "CE not useful at large n (50-60) and unconfirmed on large engineering problems; future: link mesh size to CE standard deviation (pp. 11, 18).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "textbook case: guarantee-free heuristic admitted as Search, combination said to retain MADS convergence",
+    "pages": "pp. 1, 3, 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "constraint handling carried into the heuristic via PB dominance and h instead of a penalty",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "cross-family competitors, seeds, data profiles in (n+1) groups; caveat: heuristics compared only on unconstrained analytic problems (and MDO with pymoo penalty), populations tuned informally",
+    "pages": "pp. 10-16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "reuse of realistic benchmark artifacts STYRENE, MDO, LOCKWOOD",
+    "pages": "pp. 15-17"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When grafting a population heuristic onto a solver, draw its elite set from the solver's cache and rank it with the solver's constraint-dominance rule so the heuristic inherits constraint handling without a penalty.",
+   "Gate an expensive exploration step by a data-driven trigger (elite spread shrinking) plus a restart rule for the infeasible case.",
+   "Calibrate new hyper-parameters on separate unconstrained, constrained and large-n subsets and report where the method stops helping.",
+   "Report per-competitor counts of runs reaching feasibility on a hard realistic problem, not only profile curves."
+  ],
+  "coauthors": "J. Bigeon, R. Couderc",
+  "quotes": [
+   {
+    "text": "The result of this combination retains the convergence properties of Mads and allows an efficient exploration in order to move away from local minima.",
+    "page": 1
+   },
+   {
+    "text": "Second, CE-Mads outperforms the heuristic on the engineering problems, which is not particularly relevant because it benefits to the Mads ability of performing well on this kind of problems.",
+    "page": 18
+   }
+  ]
+ }
+]

@@ -1,0 +1,303 @@
+[
+ {
+  "id": "S001",
+  "year": "2006",
+  "title": "Mesh adaptive direct search algorithms for constrained optimization",
+  "read_level": "full",
+  "contribution": "Introduces the MADS class, which decouples the mesh size from the poll size so that poll directions can become asymptotically dense; proves a hierarchy of Clarke-type (and contingent/KKT) stationarity results for extreme-barrier constrained nonsmooth problems under a nonempty-hypertangent CQ; and gives the randomized LTMADS instance with probability-one density and a four-problem comparison against GPS.",
+  "problem_entry": "Own previous method's limitation: GPS polls finitely many directions, so its hierarchy gives f°(x̂;d)≥0 only on a finite set (Example F of the 2004 tightness paper), and with bound constraints no smoothness, penalty or filter fixes this; the goal is stated as inequality (1.4) (pp. 1-2).",
+  "key_idea": "Split GPS's single Δ into mesh size Δm and poll size Δp with Δm≤Δp and Δm→0 iff Δp→0, so frames on ever finer lattices can use ever more directions; keep mesh, simple decrease and free SEARCH from GPS; apply to f_Ω with constraints tested before f (pp. 4-5).",
+  "assumptions": "x0∈Ω, f(x0) finite, iterates in a compact set; f Lipschitz (or strictly differentiable) near x̂; nonempty hypertangent cone (equivalent to a Gould-Tolle-type condition for C1 constraints, Thm 3.4); refining directions dense in T^H, which LTMADS delivers with probability 1 and only when the iterates converge to a single x̂ (pp. 1, 7-8, 12-13, 19).",
+  "proof_devices": [
+   "minimal-frame inequality f(x_k+Δm d_k)≥f(x_k) read as one difference quotient of Jahn's constrained Clarke derivative with y=x_k, t=Δm‖d_k‖ (Thm 3.12, p. 12)",
+   "Jahn's Ω-restricted Clarke derivative so results depend on f, not the discontinuous f_Ω; not evaluating f outside Ω is needed by the proof (pp. 2, 4, 12)",
+   "Lipschitz continuity of f° across hypertangent directions and continuity onto the Clarke cone (Lemma 3.8, Prop 3.9, pp. 9-11), with Example 3.10 showing failure when T^H is empty (pp. 11-12)",
+   "Torczon lattice argument x_N = x0 + Σ Δm_k D z_k for liminf Δ = 0 (Prop 3.1, p. 7)",
+   "probability lower bound (ε/4)^(n-1)/(2n), independent of k, by counting integers for the reused direction b(ℓ) (Thm 4.3, p. 18)",
+   "integrality/determinant bookkeeping |det B|=2^(ℓn) to verify frame conditions (Prop 4.2, pp. 16-17)",
+   "hypertangent ⇔ ∇c_i^T v<0 on active constraints via the mean value theorem (Thm 3.4, p. 8)"
+  ],
+  "experiments": "4 purpose-labelled problems vs GPS (NOMAD) with empty/simple SEARCH to isolate the POLL, objective vs #evaluations, 5 LTMADS runs: a 2-D GPS-stagnation function, catalytic-combustion fitting where GPS is known good (500-eval budget; MADS dynamic n+1 best), a hypersphere LP for four values of n (600n budget), and a hypothesis-violating narrowing region run to Δm<1e-323; no profiles, no other-family solver (pp. 4, 19-25).",
+  "positioning": "Between GPS and Coope-Price frame methods, deliberately less general than Coope-Price for implementability; sharpest criticism aimed at the authors' own GPS hierarchy, tightness examples and filter GPS; Lewis-Torczon barrier reframed by what it needs to know (pp. 1-4, 26).",
+  "writing": "Abstract states the main result and its two limits; first-person motivation ('in our opinion'); roadmap previews each example's point; pauses for intuition at the hypertangent definition; Newton/SQP analogy for hypotheses; discussion invites other instances (pp. 1, 3, 8, 13, 26).",
+  "limits_future": "Probability-one only and needs whole-sequence convergence; feasible x0 required (filter planned); four examples not conclusive; stalls on narrowing feasible regions; GPS+random SEARCH similar at small n; deterministic instance and implicit-filtering templates left open (pp. 7, 19, 25-26).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "SEARCH free but unusable in the analysis except for counterexamples; dynamic ordering recast as a one-point SEARCH; experiments empty the SEARCH to isolate the POLL",
+    "pages": "pp. 4, 17"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Clarke/contingent/KKT hierarchy tied to f's smoothness and Ω's cones; Example 3.10 bounds Prop 3.9; §5.4 deliberately violates hypotheses; abstract names the limitation",
+    "pages": "pp. 1, 11-13, 25"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "randomness chosen deliberately in 2006 because deterministic strategies spread directions poorly at finite termination; OrthoMADS (Heuristic 8) later answers this",
+    "pages": "pp. 14, 26"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "early form: only unrelaxable yes/no-oracle constraints by extreme barrier, cheapest-first testing; relaxable constraints deferred to the filter",
+    "pages": "pp. 2, 4, 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "evaluation currency, budgets, competitor's home ground conceded, 5 runs; but 4 problems, same-family baseline only, no profiles",
+    "pages": "pp. 19-25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD C++ implements both GPS and MADS; baselines run in it",
+    "pages": "pp. 19, 26"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "weak: own catalytic-combustion application reused as a test problem, nothing released",
+    "pages": "p. 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Framework theorem with plug-in instance",
+    "evidence": "all theory under one instance-level assumption (dense refining directions); instances only need to verify it",
+    "pages": "pp. 13, 26"
+   },
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "GPS is the MADS case Δp=Δm",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "Purpose-labelled test problems",
+    "evidence": "each example announced with the single point it makes, including a competitor-home-ground and a hypothesis-violating problem",
+    "pages": "pp. 3, 19, 25"
+   },
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "constraints tested cheapest first, f skipped outside Ω, and the proof needs it",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "Split an overloaded step-size parameter into lattice (mesh) and reach (poll) parameters coupled only by 'one →0 iff the other →0'; recover the old method as the equal case (pp. 4, 15).",
+   "Make a rejected trial point equal one difference quotient of the generalized derivative, then take limsup along refining subsequences (p. 12).",
+   "Use an Ω-restricted derivative definition so theorems depend on f, not on the barrier function; re-prove needed calculus facts and give the failing example (pp. 2, 9-12).",
+   "Prove probabilistic density of directions by counting integers in intervals for a reused special direction per mesh level (pp. 14, 18).",
+   "Re-implement a speed-up that would break the lattice as a one-point SEARCH on the current mesh (p. 17).",
+   "In experiments, empty the SEARCH to isolate the changed POLL, run random variants several times, and include a hypothesis-violating stress test explained in theory terms (pp. 4, 19, 25).",
+   "Tie a new CQ to a textbook one by an equivalence theorem for smooth constraints and explain hypotheses via a Newton/SQP analogy (pp. 8, 13)."
+  ],
+  "coauthors": "J. E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "This is the primary drawback of GPS algorithms in our opinion, and our main motivation in defining MADS was to overcome this restriction.",
+    "page": 1
+   },
+   {
+    "text": "One only need to show that the new instance generates a dense set of refining directions.",
+    "page": 26
+   }
+  ]
+ },
+ {
+  "id": "S016",
+  "year": "2006",
+  "title": "Finding optimal algorithmic parameters using derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Proposes a general framework that treats an algorithm's performance over an instance set as a blackbox function of its parameters, minimized by MADS with a surrogate built from easier instances, and uses it to find trust-region update constants that cut total CPU time on 55 large CUTEr problems by about 25% relative to the classical values (preprint read: 'Finding optimal algorithmic parameters using a mesh adaptive direct search', Dec 2004).",
+  "problem_entry": "Folklore defaults: the classical trust-region constants (1/4, 3/4, 1/2, 2) recommended in six references are claimed 'arbitrary'; prior discretized sensitivity study cannot compare many variants since performance profiles are unclear beyond five or six, so comparison is delegated to an optimizer (pp. 2-3, 18).",
+  "key_idea": "ψ(p) = aggregate performance (CPU time or evaluations) of algorithm A on a representative hard set; σ(p) = same measure on an easy set; MADS uses σ to warm start, to order POLL/SEARCH candidates and to prune SEARCH candidates only (threshold v=0.1), with LHS and random screened SEARCH (pp. 5-9, 15-16, 20).",
+  "assumptions": "Compact iterates and finite start (Assumption 1); polyhedral/bound Ω with η1<η2 hard-coded as barrier; α2≤10 added partly to satisfy Assumption 1; scaling (1000,100,100,10); admitted that optimality is ill-defined and ψ is not a function because CPU time is noisy (pp. 3-4, 8, 16-18).",
+  "proof_devices": [
+   "no new proofs: MADS hierarchy specialized to bounds with an added lower-semicontinuity rung (Thm 2.5, p. 10) and used as a design rule (POLL candidates may be ordered but never pruned, pp. 6, 10)",
+   "barrier encoding of a linear parameter constraint so the theory sees only bounds (p. 18)",
+   "failure → +∞ convention for iteration limits, memory errors and floating-point exceptions (pp. 17-18)"
+  ],
+  "experiments": "163 CUTEr unconstrained problems → surrogate list (54 problems, n<1000, 68 s) and objective list (55 problems, n≥1000, 13461 s per evaluation) by explicit rules; phase 1 on σ2 (310 evals, truth 13461→11498 s, ≈1% re-evaluation noise), phase 2 on ψ2 with 150 truth evals ≈3 weeks (→10192 s, −25%); performance profiles in CPU time and evaluations on the same list used for tuning; outlier analysis (GENHUMPS, CRAGGLVY) (pp. 19-25).",
+  "positioning": "Reframes the discretized sensitivity study of Gould-Orban-Sartenaer-Toint (a co-author's) by its scaling problem; addresses smooth-optimization readers with a trust-region review and DFO readers with a MADS review; blackbox motivation drawn from the authors' network (helicopter rotor, maintenance) (pp. 3-4, 11, 18).",
+  "writing": "'Twofold' abstract; one strong claim ('Our contention...') then hedged discussion; counterintuitive result attributed to the measure, not the optimizer; noise caveat in a footnote; humor in the literature review (pp. 1, 11, 16, 18, 23-24).",
+  "limits_future": "Result depends on the chosen measure; global sums ignore slow failures and variability; noise; continuous bounded parameters only; future: outlier-aware objectives, MADS scaling strategies, integer/categorical/constrained parameters (pp. 21, 23, 25-26).",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "source case: algorithm treated as blackbox ψ(p) and tuned by MADS",
+    "pages": "pp. 15-20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "surrogate lives in SEARCH (LHS, random screened points, pruning); POLL only reordered; convergence independent of surrogate and SEARCH",
+    "pages": "pp. 6, 10, 20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "failures (iteration limit, memory, FP exceptions) → +∞; linear constraint enforced as barrier; unrelaxable constraints only",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "profiles in two currencies and stated wall-clock budget, but no competing tuner, tuning set reused for judging, single noisy run per point",
+    "pages": "pp. 19-25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "downloadable NOMAD coupled to public GALAHAD/CUTEr pipeline",
+    "pages": "pp. 16, 18, 20"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "ladder restated with lsc rung; admits hypotheses fail for a noisy measure and settles for a refined point",
+    "pages": "pp. 4, 10, 16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "no engineering blackbox, but explicit list-selection rules and full per-problem baseline tables make the tuning problem reproducible",
+    "pages": "pp. 19, 28-29"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "order-first surrogate use / surrogates judged and used as rankers",
+    "evidence": "σ orders POLL and SEARCH candidates; prunes only SEARCH",
+    "pages": "pp. 6, 20"
+   },
+   {
+    "pattern": "easy-instance surrogate",
+    "evidence": "surrogate = same performance measure on a cheap instance subset chosen by size/runtime rules",
+    "pages": "pp. 16, 19"
+   },
+   {
+    "pattern": "blame the measure, not the optimizer",
+    "evidence": "counterintuitive tuned result traced to GENHUMPS slow failure and attributed to aggregate-objective design",
+    "pages": "pp. 23-24"
+   },
+   {
+    "pattern": "train/held-out split for tuned algorithmic parameters (contradiction)",
+    "evidence": "tuned parameters judged only on the tuning (objective) list; the later Runge-Kutta paper adds a split",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "Cast parameter tuning as blackbox optimization: aggregate measure over a representative set, failures = +∞, parameter linear constraints as a barrier so the theory sees only bounds (pp. 15-18).",
+   "Build the surrogate as the same measure on easy instances; run two phases (optimize σ from the default, then the truth from {default, σ-optimum}) with σ ordering all candidates and pruning only SEARCH ones (pp. 5-6, 20).",
+   "Scale parameters so a mesh step changes each comparably; add a mild bound for compactness and say which reason is the proof's (pp. 17-18).",
+   "Select test lists by explicit rules on dimension and baseline runtime and publish per-problem baseline tables (pp. 19, 28-29).",
+   "Re-evaluate the default once to measure noise before interpreting gains (p. 21).",
+   "Report incumbent trajectories and total wall-clock tuning cost (pp. 21-23).",
+   "When aggregate and profile disagree, decompose per instance, find outliers, and state whether optimizer or measure is at fault (pp. 23-25)."
+  ],
+  "coauthors": "D. Orban",
+  "quotes": [
+   {
+    "text": "Our contention is to show that the values (11) are arbitrary and that much better options are available.",
+    "page": 18
+   },
+   {
+    "text": "We circumvent this issue in the present paper by delegating this task to another optimization algorithm.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S020",
+  "year": "2006",
+  "title": "Convergence of mesh adaptive direct search to second-order stationary points",
+  "read_level": "full",
+  "contribution": "Extends Abramson's second-order GPS analysis to MADS: derives set-constrained second-order necessary and sufficient conditions in terms of feasible directions, proves that with dense refining directions a C^{1,1} limit point satisfies the necessary condition and (under twice strict differentiability, local convexity and a nonsingular Hessian) is a strict local minimizer, and shows by an explicit GPS instance that GPS can converge to a saddle point that MADS excludes (preprint read: 'Second-Order Convergence of Mesh-Adaptive Direct Search', Aug 2005).",
+  "problem_entry": "Extension of a special-case result (GPS second order) to the general class, hooked on a failure mode: GPS cannot converge to a local maximizer in infinitely many steps but can converge to a saddle; barrier gives no constraint gradients, so Lagrangian conditions are unavailable (pp. 1-2, 9).",
+  "key_idea": "Dense refining directions plus C^{1,1} smoothness and the Hiriart-Urruty-Strodiot-Nguyen generalized Hessian yield second-order conditions along all feasible directions; no algorithmic change, GPS recovered as Δp=Δm (pp. 4, 8-13).",
+  "assumptions": "Feasible finite x0, compact iterates; f C^{1,1} near x̂, T^H≠∅, Ω regular near x̂ (Thm 4.8); f twice strictly differentiable, Ω convex near x̂, ∇²f nonsingular (Thm 4.9); f's smoothness assumed independent of Ω so Taylor applies in any direction; density only almost sure in practice (pp. 5, 9, 12-13, 15-16).",
+  "proof_devices": [
+   "central second difference: add Taylor expansions at x_k±t d_k, merge Hessian elements by convexity of ∂²f, + side ≥0 by minimal frame forces − side ≤γ<0, contradiction with ∇f^T v=0; mirror point never evaluated (Thm 4.8, pp. 12-13)",
+   "set-constrained second-order conditions via the cone of feasible directions, each bounded by an example (Thm 4.4 + Ex 4.5; Thm 4.6 + Ex 4.7; pp. 9-11)",
+   "local boundedness and closedness of the generalized Hessian mapping to pass to limits (pp. 8-11)",
+   "adversarial GPS instance (τ=2, w-=-4, w+=3, iteration-dependent poll order) proved by induction over a period-3 table to converge to a saddle (Ex 4.10, Prop 4.11, pp. 13-15)"
+  ],
+  "experiments": "none (illustrative examples and one figure of GPS iterates only, p. 14)",
+  "positioning": "Builds on Abramson (GPS second order) and Hiriart-Urruty et al.; contrasts barrier with penalty and filter approaches; claims stronger results than GPS backed by two GPS failure examples; cites S016 as a SEARCH example (pp. 2-3, 8-9, 13).",
+  "writing": "'important and surprisingly strong' next to an 'unfortunately' negative; 'main contributions' label; each optimality theorem followed by a limiting example; pre-empts the '2n directions' misreading; conclusion admits density is not implementable (pp. 2, 10-13, 15-16).",
+  "limits_future": "Density not implementable, results almost sure through LTMADS; regularity/local convexity required; future: clever deterministic enumeration of directions (the OrthoMADS problem); reader's check: Thm 4.9 as printed fails at boundary points (f=ab on R²₊ from 0), not stated in the paper (pp. 13, 15-16).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "two second-order rungs, each bounded by an example (Ex 4.5, 4.7) and a GPS saddle counterexample; reader's check shows a boundary gap in Thm 4.9's strictness step",
+    "pages": "pp. 10-15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "SEARCH 'adds nothing to the convergence theory' but improves performance; all results from the POLL",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "almost-sure convergence called weaker; deterministic enumeration named as future work, later OrthoMADS",
+    "pages": "pp. 15-16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "barrier treatment dictates which theory is possible: feasible-direction conditions replace Lagrangian ones; unrelaxable only",
+    "pages": "p. 9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "GPS is the MADS instance Δp=Δm; GPS failure examples separate the classes",
+    "pages": "pp. 4, 13-15"
+   },
+   {
+    "pattern": "Rival-failure toy examples",
+    "evidence": "hand-tuned GPS instance proved by induction to converge to a saddle",
+    "pages": "pp. 13-15"
+   },
+   {
+    "pattern": "Algorithm-visible optimality conditions",
+    "evidence": "derive second-order conditions in feasible-direction terms because the barrier hides constraint gradients",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "Never-evaluated mirror point",
+    "evidence": "proof reasons about f(x_k − t d_k) without the algorithm evaluating it, removing the need for 2n directions or feasibility",
+    "pages": "p. 13"
+   }
+  ],
+  "transferable": [
+   "Central-difference symmetrization for zeroth-order methods: sum the two Taylor expansions, bound the known side by the poll failure, derive a first-order contradiction from the other (pp. 12-13).",
+   "When a barrier hides constraint gradients, first prove feasible-direction optimality conditions and pair each with an example showing which cone it cannot extend to (pp. 9-11).",
+   "Show a rival fails by fixing all its free parameters adversarially and proving convergence to a bad point by induction over a periodic block of iterations (pp. 13-15).",
+   "Audit strict-inequality steps on cones: nonsingularity gives strictness only on subspaces; test a boundary example such as f=ab on R²₊ (p. 13, reader's check).",
+   "After a proof using an unusual device, add a paragraph ruling out the natural misreading (p. 13).",
+   "End a theory paper with why the idealized hypothesis is unimplementable and the direction that would recover the stronger guarantee (pp. 15-16)."
+  ],
+  "coauthors": "M. A. Abramson",
+  "quotes": [
+   {
+    "text": "We show here that it may, unfortunately, converge in an infinite number of steps to a saddle point.",
+    "page": 2
+   },
+   {
+    "text": "In practice, this is not possible because, as the algorithm converges, it would require increasingly more poll directions; in fact, an infinite number in the limit.",
+    "page": 15
+   }
+  ]
+ }
+]

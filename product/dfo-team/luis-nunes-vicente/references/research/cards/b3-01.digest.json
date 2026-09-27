@@ -1,0 +1,72 @@
+[
+ {
+  "id": "S056",
+  "year": "2001",
+  "title": "Algorithms for Solving Non-Linear Constrained and Optimization Problems: The State of The Art",
+  "read_level": "partial",
+  "contribution": "COCONUT Deliverable D1, a multi-community state-of-the-art survey covering local NLP, automatic differentiation, global optimization, constraint propagation, symbolic-interval cooperation and exhaustive CSP search. Vicente contributed only the three-page §2.1 overview, which maps local NLP as a set of algorithm components (pp. 1, 5-9).",
+  "problem_entry": "The report is organized by community and assumes the techniques are complementary (p. 6). Vicente enters local NLP by stating that its methods are assemblies of components (step direction, globalization, feasible-set handling, parametrized sequences, performance factors) rather than by history or a single algorithm (pp. 7-9).",
+  "key_idea": "Vicente's component taxonomy: step directions (Newton, quasi-Newton, gradient or reduced gradient, CG; SLP and SQP as frameworks); globalization by line search or trust region, both needing a merit function, with the filter as a multicriteria alternative; active-set, interior-point or projection handling of the feasible set; penalty, barrier or augmented Lagrangian sequences (pp. 7-9). Around it: Spellucci's catalogue of methods by constraint type (pp. 13-43) and Neumaier's classification of global methods by guarantee (pp. 67-68).",
+  "assumptions": "Deterministic data, with stochastic optimization explicitly excluded (p. 7). C2 data; nonsmooth out of scope (p. 10). Constraint qualifications are placed on the representation (f,g,h), and MFCQ is also needed at infeasible points (pp. 11-13). Global systematic guarantees hold in exact arithmetic with known constants; black boxes need heuristic stopping (p. 68).",
+  "proof_devices": [
+   "none new (survey); recorded acceptance devices: sufficient decrease with f(x^k)-f(x^{k+1})->0 => grad f->0, angle condition and Armijo backtracking (p. 15)",
+   "trust-region ratio test with eta (e.g. 1e-3) and radius update (p. 15)",
+   "filter envelope test theta(x^{k+1}) <= (1-gamma_theta) theta_j or f(x^{k+1}) <= f_j - gamma_theta theta_j, plus ratio test for the radius and filter purge (p. 38)",
+   "MFCQ-failure counterexample at infeasible starts: f=-x1-x2, feasible set = quarter circle of radius sqrt(2), g(x)=x (p. 13)",
+   "roundoff estimate showing premature termination of gradient projection for mildly ill-conditioned Hessians (pp. 19-20)"
+  ],
+  "experiments": "Not the authors' own: an excerpt of the COPS study (Dolan-More 2000) with LANCELOT, LOQO, MINOS and SNOPT on default settings and AMPL models, reporting CPU time and final objective at the smallest and largest sizes, with F for failures. Verdict: no clear winner, and large-scale reliability lags (pp. 44-46). Neumaier lists test collections and MPS reporting guidelines (pp. 112-113).",
+  "positioning": "Vicente separates local from global optimization and sets good global-to-local behaviour as the yardstick (p. 8). His only citation in the book is Vicente-Calamai 1994, which Neumaier uses for bilevel linear complementarity constraints (pp. 103-104, 222).",
+  "writing": "§2.1 has no citations. It is a thesis sentence followed by paired contrasts (local/global, line search/trust region, merit function/filter, active set/interior point/projection), then lists of problem and application classes, ending with a pointer to derivative-free methods, response surfaces, surrogates and space mapping (pp. 7-9). Spellucci and Neumaier write opinionated first-person prose (pp. 19, 57).",
+  "limits_future": "Specific open problems from Spellucci: which local solution is found is hard to control; restoration does not scale; infeasibility and nonconvexity detection are unreliable; nonconvex regularization for interior-point methods is open (pp. 46-47). Also: interval-derivative overestimation (p. 55), budgeting symbolic vs numeric work (p. 174), nonconvex set covering (p. 190).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Early stated precursor. NLP methods are written as separable components, and the filter replaces the merit function with a multicriteria (dominance) acceptance rule, the device DMS later generalizes.",
+    "pages": "pp. 7-9, 37-38"
+   },
+   {
+    "method": "Research Taste mark 1",
+    "relation": "evidence",
+    "note": "The overview's one normative requirement: converge globally from any start, then show a fast (superlinear or quadratic) local rate.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Scope marker: in 2001 Vicente assumes deterministic data and sets stochastic optimization aside. The probabilistic program came later.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Context, not Vicente-authored. Neumaier gives heuristics a service role inside systematic global methods and notes that heuristic efficiency comparisons are missing.",
+    "pages": "pp. 67-68, 72"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Context, not Vicente-authored. The 2001 norm is a multi-solver comparison on a named AMPL collection with failures reported, plus test collections and reporting guidelines. No performance profiles yet.",
+    "pages": "pp. 44-46, 112-113"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "component-taxonomy field map",
+    "evidence": "Vicente surveys local NLP as interchangeable algorithm components with 2-3 options each (directions, globalization/acceptance, feasible-set handling, parametrization, performance factors), with no citations, before any contribution. Check against S038 (2017).",
+    "pages": "pp. 7-9"
+   }
+  ],
+  "transferable": [
+   "Open a related-work section by stating that the field's methods are assemblies of components, then give one paragraph per component with its competing options, so each paper can be placed as changing X and keeping Y (pp. 7-9).",
+   "State the global-to-local requirement (convergence from any start, then a fast local rate) as the yardstick for your own method (p. 8).",
+   "Use the filter envelope test (theta reduced by (1-gamma) or f reduced by gamma*theta_j against every entry, plus a ratio test) as a template for two-criterion acceptance (p. 38).",
+   "Stress-test constrained solvers from infeasible starts where MFCQ fails but the feasible set is benign, e.g. the quarter-circle example (p. 13).",
+   "For scalable problems, tabulate the smallest and largest sizes per solver with time, final objective and an explicit F for failure (pp. 45-46).",
+   "Classify rival methods by the guarantee they give (heuristic / approximation / systematic) and place your method in that grid (pp. 67-68)."
+  ],
+  "coauthors": "C. Bliek, P. Spellucci, A. Neumaier, L. Granvilliers, E. Monfroy, F. Benhamou, E. Huens, P. Van Hentenryck, D. Sam-Haroud, B. Faltings (Vicente authored only §2.1)",
+  "quotes": []
+ }
+]

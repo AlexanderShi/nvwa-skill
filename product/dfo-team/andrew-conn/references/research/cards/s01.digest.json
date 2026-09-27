@@ -1,0 +1,322 @@
+[
+ {
+  "id": "S089",
+  "year": "1994",
+  "title": "A note on exploiting structure when using slack variables",
+  "read_level": "full",
+  "contribution": "Shows that, when inequalities are converted with slack variables and solved by an augmented-Lagrangian method, the Newton/model linear algebra can be reduced from order n+m to order n by eliminating the slacks in closed form, and that reduced-space descent lifts to full-space descent for iterative solvers.",
+  "problem_entry": "Weakness in the authors' own code: LANCELOT's SBMIN treats slacks like problem variables, so linear algebra is O(n+m) when m >> n, e.g. discretized semi-infinite constraints (pp. 3-4).",
+  "key_idea": "Block-triangular factorization (3.4) of the free-variable Newton system cancels the A_{Iy,Ix} terms, so only the n_i x n_i matrix B_{Ix,Ix} + rho A_{Ay,Ix}^T A_{Ay,Ix} is factorized (3.8) and the slack step is recovered explicitly (3.9); for iterative solvers the reduced descent condition (3.10) suffices (pp. 7-8).",
+  "assumptions": "Augmented Lagrangian with bounds kept out of Phi; structured Hessian approximation (1.7); active set fixed at the base point (its choice out of scope); derivatives evaluated at (x,y); convex model needs the reduced matrix positive definite (pp. 3-8).",
+  "proof_devices": [
+   "block elimination whose Schur complement after the slack pivots is exactly the reduced matrix (4.1), so rho A^T A terms cancel in exact arithmetic (pp. 7-9)",
+   "descent lift: full directional derivative = reduced one - mu ||lambda^b_Iy||^2 (3.11); convexity of Psi with Psi(0)=0 gives the reduced descent condition for any descent method started at 0, e.g. truncated CG (3.12)-(3.13) (p. 8)",
+   "cost comparison via eigenvalue interlacing after block elimination (spectrum of (3.4) wider than that of (4.1)) (p. 9)"
+  ],
+  "experiments": "none; the LANCELOT speed-up is stated as a belief (p. 9)",
+  "positioning": "Slacks standard in LP (Dantzig, Murtagh, Chvatal) and NLP (Murtagh-Saunders); the trick apparently used but unpublicized in MINOS; compares work per iteration with barrier / Lagrangian-barrier methods (pp. 3-4, 9).",
+  "writing": "Short 'note' genre: one-sentence abstract, derivation chosen to 'emphasize the reduction in computational effort', an itemized Discussion of costs of not exploiting structure, and thanks to a referee whose report was almost as long as the manuscript (pp. 3, 7-9).",
+  "limits_future": "No numerical results; active-set strategy deferred to the literature; future: exploit the structure in LANCELOT, especially when m >> n (pp. 6, 9).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure of slack variables exploited in the linear algebra; structured Hessian approximation keeps first-derivative structure and approximates only second-order terms.",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Algebra tied to the authors' released code (SBMIN options) but no numbers; the performance claim is a stated belief; a self-review of the package rather than a triad.",
+    "pages": "pp. 8-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Self-audit note on one's own solver",
+    "evidence": "Short note names a specific inefficiency of the authors' released LANCELOT/SBMIN linear algebra and gives the fix.",
+    "pages": "pp. 4, 8-9"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Slack variables separated from problem variables and eliminated in closed form; also in S032 (Boolean/continuous/integer) and S141 (logical vs ordinary constraints); overlaps Method 5 step 4.",
+    "pages": "pp. 4-7"
+   }
+  ],
+  "transferable": [
+   "Eliminate auxiliary variables that enter the Hessian through an identity block by block-triangular factorization; factorize only the Schur complement in the original variables and recover the auxiliary step by formula (p. 7).",
+   "Justify a reduced-space inexact inner solver by showing the full directional derivative of the recovered step equals the reduced one plus a nonpositive term (p. 8).",
+   "Argue a reduction on four separate costs: dimension, symbolic-factorization memory (exact cancellations invisible to symbolic analysis), Krylov convergence via eigenvalue interlacing, and finite-termination count (pp. 8-9)."
+  ],
+  "coauthors": "N. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "However, if slack variables are handled explicitly, we shall show that the linear algebra need only involve matrices of order O(n).",
+    "page": 4
+   },
+   {
+    "text": "The description given here is intended to emphasize the reduction in computational effort possible when the structure inherent in the linear system (3.3) is properly exploited.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S057",
+  "year": "2016",
+  "title": "Removing clouds and recovering ground observations in satellite image sequences via temporally contiguous robust matrix completion",
+  "read_level": "full",
+  "contribution": "Proposes a two-stage cloud-removal method (dark-channel cloud detection, then TECROMAC: l1 data fit on detected clear pixels + nuclear norm + temporal smoothness) with two ALM-based solvers, and shows it recovers frames that are entirely cloud-covered, where MC and RMC fail.",
+  "problem_entry": "Application limit: clouds limit satellite imagery; MC/RMC need some clear pixels in every image and fail on fully covered frames (tropics up to 90% of the time); prior methods need masks or non-optical sensors (pp. 1-2, 4).",
+  "key_idea": "Start from an ideal rank-minimization model with a disagreement budget and a temporal-smoothness budget and replace each piece by a convex surrogate: ||P_Omega(Y-X)||_1 + lambda1 ||X||_* + (lambda2/2)||XR||_F^2, solved by ALM with inexact proximal gradient (SVT) or SVD-free alternating factorized gradients (pp. 3-6).",
+  "assumptions": "Low rank (few land types), sparse detector errors, temporal continuity (p. 3); majorizer needs cI >= AA^T = H (p. 5); no convergence or recovery guarantee stated; heuristic white-background post-processing, fails with heavy snow (p. 3).",
+  "proof_devices": [
+   "majorize-minimize: Q(X, Xhat) = F(X) + (c/2)||X - Xhat||^2 - (1/2)||(X - Xhat)A||^2 >= F(X), completing the square gives an SVT step on a gradient step (p. 5)",
+   "nuclear-norm factorization identity ||X||_* = min (1/2)(||U||^2 + ||V||^2) for an SVD-free scheme (p. 6)",
+   "closed-form E-update by soft thresholding (eq. 9, p. 6)"
+  ],
+  "experiments": "Synthetic clouds on 3 background-modelling videos, relative reconstruction error vs MC, RMC, interpolation and TECMAC (ablation), one fixed parameter set; IPG vs ALT time/accuracy; real MODIS 181 images judged visually (pp. 6, 8).",
+  "positioning": "Origin in RPCA and matrix completion; property table vs interpolation, MC, RMC; RPCA/SPCP directly on cloudy data said to usually fail under dense cloud; footnote contrasts ML-style ALM updates with optimizers' practice citing CGT 1991 (pp. 2, 4-5).",
+  "writing": "Numbered improvement list in the introduction, property table (Table 1), ideal formulation before convex surrogate, strong conclusion wording (superior performance) (pp. 1, 3-4, 8).",
+  "limits_future": "Heuristic detector and snow limitation admitted; real-data evaluation visual only; no future work stated (pp. 3, 8).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Augmented-Lagrangian machinery (CGT 1991 cited) carried into robust matrix completion; variant: ML-style ALM updating both multipliers and penalty each iteration, flagged in a footnote.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak: application-first paper in the users' venue (CVPR); no account of a user or partner in the text.",
+    "pages": "pp. 1, 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Weak: low-rank and temporal-smoothness structure encoded in the model.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "Three synthetic videos, one visual real case and one parameter setting support a 'superior performance' claim (also Taste warning signs 3 and 6); Conn is a middle author, so not attributable to him.",
+    "pages": "pp. 6, 8"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Write the ideal combinatorial model (rank, counting budget, smoothness budget) first, then replace each nonconvex piece by its convex surrogate term by term (pp. 3-4).",
+   "Use a method-by-assumption property table to show which baselines violate which modelling assumption (Table 1, p. 4).",
+   "Include the model minus one term as a baseline (TECMAC) to justify that term (p. 8).",
+   "Derive a proximal step for quadratic + nuclear norm objectives from a majorizer with cI >= H and completion of the square (p. 5)."
+  ],
+  "coauthors": "J. Wang, P. A. Olsen, A. C. Lozano",
+  "quotes": [
+   {
+    "text": "Mathematical optimizers would only update one or the other",
+    "page": 5
+   },
+   {
+    "text": "Tropical regions for example can be completely covered by clouds as often as 90% of the time.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S123",
+  "year": "2019",
+  "title": "Automated machine learning via ADMM",
+  "read_level": "partial",
+  "contribution": "Same work as S032 (the text file is arXiv 1905.00424v5, byte-identical to S032's file): ADMM decomposition of AutoML pipeline configuration into continuous black-box HPO, integer projection and combinatorial algorithm selection, with black-box constraints.",
+  "problem_entry": "Same as S032: AutoML as mixed continuous-integer black-box optimization with black-box constraints (pp. 1-3).",
+  "key_idea": "Same as S032: projection surrogate plus consensus equality enables ADMM splitting; slacks put black-box constraints into the augmented Lagrangian (pp. 3-5).",
+  "assumptions": "Same as S032: no convergence guarantee, explicitly acknowledged (p. 5).",
+  "proof_devices": [
+   "none beyond S032 (no theorems; derivations in App. 1-2, pp. 10-12, skimmed)"
+  ],
+  "experiments": "Same as S032: 30 datasets, 1 hour, 10 trials vs Auto-sklearn, TPOT50, random search (pp. 5-6).",
+  "positioning": "Same as S032.",
+  "writing": "Same as S032.",
+  "limits_future": "Same as S032. The named CoRR 2019 version (earlier arXiv versions under this title) was not available; differences between versions unknown.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Duplicate of S032; count once.",
+    "pages": "pp. 2-4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Duplicate of S032; count once.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Liu, P. Ram, D. Bouneffouf, G. Bramble, H. Samulowitz, ... (per list entry)",
+  "quotes": [
+   {
+    "text": "arXiv:1905.00424v5 [cs.LG] 6 Dec 2019",
+    "page": 1
+   },
+   {
+    "text": "We propose a customized combinatorial multi-armed bandit (CMAB) algorithm as a query-efficient alternative by interpreting problem (A23) through combinatorial bandits",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "S032",
+  "year": "2020",
+  "title": "An ADMM based framework for automl pipeline configuration",
+  "read_level": "full",
+  "contribution": "Formulates joint algorithm selection and hyper-parameter optimization as a mixed continuous-integer black-box program and uses ADMM to split it into small continuous black-box HPO, closed-form integer projection and bandit-based algorithm selection, with black-box constraints handled by slacks in the augmented Lagrangian; outperforms Auto-sklearn and TPOT on 15/30 datasets.",
+  "problem_entry": "AutoML CASH seen as mixed continuous-integer black-box NLP with coupled algorithm choice and hyper-parameters, no gradients, plus deployment/fairness black-box constraints that penalty approaches cannot guarantee (pp. 1-3).",
+  "key_idea": "Explicit Boolean selection variables and a projection-based continuous surrogate with a consensus equality let ADMM decompose the problem so that black-box search runs only over the small active set of continuous variables (<15 vs about 100), since DFO cost grows with dimension; black-box inequalities become equalities with bounded slacks (pp. 2-5).",
+  "assumptions": "No convergence guarantee (ADMM theory needs convexity/smoothness, violated here); conditional hyper-parameters flattened; artificial objective encodes assumed properties: deterministic, nonconvex, possibly discontinuous, conditional, locally stable in theta, sequential (pp. 2, 5, 27).",
+  "proof_devices": [
+   "projection surrogate f~(theta~) = f(P_D(theta~)) plus consensus constraint theta~ = delta in D to make operator splitting over mixed variables well defined (p. 3)",
+   "bounded slack reformulation g_i - eps_i + u_i = 0, u_i in [0, eps_i] for black-box constraints (p. 4)",
+   "Thompson sampling for combinatorial bandits with probabilistic (Bernoulli-converted) rewards (Alg. A1, p. 13)"
+  ],
+  "experiments": "30 UCI/OpenML/Kaggle binary datasets, 1 - AUROC, 1 hour x 10 trials, vs vanilla Auto-sklearn, TPOT50, random search with parity rules; constrained Kaggle case (CST vs post-hoc-filtered UCST); splitting ablation vs joint BO (up to 153x speedup); sensitivity and cheap artificial objective; cost unit wall-clock time (pp. 5-8, 20-27).",
+  "positioning": "Against SMBO (SMAC, TPE, GP-BO), Hyperband/BOHB, meta-learning and toolkits (Auto-WEKA, Auto-sklearn, TPOT, ML-Plan, AlphaD3M); differs from prior ADMM + gradient-free work (ZO ADMM, ADMMBO); cites Conn-Scheinberg-Vicente 2009 as a possible sub-solver (pp. 1-2, 4-5).",
+  "writing": "Numbered contributions with section pointers and quantified claims; 'not a single algorithm but a framework' framing; explicit parity section in appendix; two numerical inconsistencies (27%/20% swapped between p. 1 and p. 6; d_I 0.07 vs 0.7) (pp. 1, 5-6, 21).",
+  "limits_future": "No convergence theory; binary classification only; no single best sub-solver; comparison acknowledged to favour TPOT; no future work stated (pp. 5, 7, 15, 21).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Variables separated by type and each block given its natural solver; only the active set enters black-box HPO, justified by DFO's dimension-dependent evaluation cost.",
+    "pages": "pp. 2-4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Augmented Lagrangian/operator splitting carried into AutoML; slack + AL treatment of black-box constraints mirrors S089; DFO book cited as sub-solver.",
+    "pages": "pp. 3-5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and numbers without a convergence theorem, openly stated.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Public datasets, parity protocol, ablations and 10 trials, but cost unit is wall-clock time, not evaluations; cheap artificial objective isolates optimizer overhead.",
+    "pages": "pp. 5-6, 21, 27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Boolean selection, continuous and integer hyper-parameters split by ADMM, each block with its own solver (BO, projection, bandit); same move in S089 and S141; overlaps Method 5 step 4.",
+    "pages": "pp. 2-5"
+   }
+  ],
+  "transferable": [
+   "Split a mixed-integer black-box problem with a projection surrogate f~ = f(P_D(.)) and a consensus variable delta in D, alternating continuous black-box solves and closed-form projections (pp. 3-4).",
+   "Handle black-box inequality constraints by bounded slacks inside the augmented Lagrangian rather than penalty terms in the objective (pp. 3-5).",
+   "Write an explicit benchmark-parity section: same search space, single-threaded runs, disabled baseline pre/post-processing, worst score before first result, and say which baseline the setup favours (p. 21).",
+   "Build a cheap artificial objective matching a listed set of properties of the real problem to separate optimizer overhead from evaluation cost (p. 27).",
+   "Show constraints are non-trivial by running the unconstrained optimizer and filtering post hoc (UCST vs CST) (p. 6)."
+  ],
+  "coauthors": "S. Liu, P. Ram, D. Vijaykeerthy, D. Bouneffouf, G. Bramble, H. Samulowitz, D. Wang, A. Gray",
+  "quotes": [
+   {
+    "text": "We highlight that our ADMM based scheme is not a single AutoML algorithm but rather a framework that can be used to mix and match different existing black-box solvers.",
+    "page": 5
+   },
+   {
+    "text": "these schemes are very sensitive to the choice of the penalty function and do not guarantee feasible solutions.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S141",
+  "year": "2023",
+  "title": "The continuous quadrant penalty formulation of logical constraints",
+  "read_level": "full",
+  "contribution": "Replaces binary big-M/complementary formulations of a conditional constraint by a smooth nonconvex piecewise-quadratic penalty on the open fourth quadrant of (t(x), f(x)), proves it is an S-repulsive penalty after impossibility results fix its minimal form, and shows local NLP solves find conflict-free aircraft maneuvers on 35 benchmark instances in seconds.",
+  "problem_entry": "Logical constraints normally need a binary per constraint (big-M instability, complementary nonlinearity); asks whether continuous optimization can handle them, explicitly answering Conn's 1981 question on penalty functions in discrete/global optimization (pp. 2-4, 13).",
+  "key_idea": "Map t > 0 => f >= 0 to (t,f) outside the open fourth quadrant S and penalize only S with a function that is zero off S, positive on S, continuous and 'leans outwards' (every descent direction exits S); unique 3-piece PL g_alpha is nonsmooth, so construct a 4-piece smooth piecewise quadratic g_beta (beta = 3) (pp. 4-10).",
+  "assumptions": "t, f real-valued functions of x; only logical constraints penalized, others to NLP solver; nonconvex penalty and feasible set, so local infeasibility possible and global guarantees need global optimization; feasibility problems only (pp. 2-4, 11, 13).",
+  "proof_devices": [
+   "impossibility results bound the design space: no convex S-violation dipstick when complement nonconvex (Prop. 2), no two-piece PL dipstick unless S is a half-space (Prop. 3), at least four pieces for a smooth piecewise quadratic (pp. 4-7)",
+   "uniqueness via the Conn-Mongeau 1998 lemma that gradient jumps across a PL ridge are multiples of the ridge normal (Prop. 4, p. 5)",
+   "'leans outwards' by case analysis on the active gradient piece with explicit threshold step gamma = -t/d1 or -f/d2 (Props. 7-8, pp. 6, 9)",
+   "positivity by restriction to transverse lines f = t - 2X and endpoint evaluation of a concave quadratic, 4X^2/(beta+1)^2 > 0 (pp. 8-9)",
+   "C^1 by gradient matching on the four boundary lines (p. 9)"
+  ],
+  "experiments": "Aircraft conflict avoidance (speed + heading), 35 Random Circle Problem instances with 10-30 aircraft, AMPL + IPOPT 3.12 with multistart: zero penalty on all instances, second start on 2, mean CPU 0.23/1.05/3.68 s, max 20.06 s; no direct MINLP comparison, bounds help B&B in [5] (pp. 10-12).",
+  "positioning": "Against big-M and complementary MINLP formulations (Belotti et al.); relaxations out of scope; lineage from Conn's 1971 thesis, 1973 l1 penalty, Pietrzykowski, 1981 NATO question, Gamble-Conn-Pulleyblank 1991 and Conn-Mongeau 1998; Pinar-Zenios smoothing rejected (convex only) (pp. 3-7).",
+  "writing": "Abstract opens with a question; evocative named definitions ('S-violation dipstick', 'leans outwards'); figures of restrictions to lines; honest 'not directly comparable' framing of results; posthumous dedication (pp. 2, 4-6, 12).",
+  "limits_future": "Only feasibility problems; penalty weight vs original objective left open; local solutions via multistart; one application; future: other problems with many binaries (pp. 12-13).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Conn's penalty-function machinery (1971-1981) and Conn-Mongeau PL theory carried into logical/discrete constraints; the paper's own framing.",
+    "pages": "pp. 3-5, 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Only logical constraints penalized, others handled exactly by IPOPT; closest-approach reformulation exploits problem structure.",
+    "pages": "pp. 4, 10"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Air-traffic application in the variant closest to operational constraints; instance sizes compared with controllers' practice.",
+    "pages": "pp. 10-12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory + numbers with off-the-shelf AMPL/IPOPT instead of a new code (consistent with Heuristic 8).",
+    "pages": "pp. 11-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Answer an old question from one's own early work",
+    "evidence": "Conn's 1981 NATO question on penalty functions in discrete/global optimization is the stated motivation and closing of a 2023 paper.",
+    "pages": "pp. 4, 13"
+   },
+   {
+    "pattern": "Impossibility-first design",
+    "evidence": "Props. 2-3 and the four-piece count fix the minimal form before the penalty is constructed and its uniqueness proved.",
+    "pages": "pp. 4-7"
+   },
+   {
+    "pattern": "Split by type, give each block its natural treatment",
+    "evidence": "Logical constraints penalized, ordinary constraints left to the NLP solver; same move in S089 and S032.",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "Prove short impossibility results (no convex, no two-piece, at least four pieces) to fix the minimal complexity before constructing a function, then construct the minimal one and prove uniqueness (pp. 4-7).",
+   "Encode a disjunction as the complement of an open set in the 2-D image (t(x), f(x)) and penalize only membership in that set (pp. 4, 11).",
+   "Name the behavioural property a penalty needs ('leans outwards') and prove it by case analysis on gradient pieces with an explicit threshold step (pp. 6, 9).",
+   "Study a 2-D piecewise function through its restrictions to transverse lines, and use the same restriction to choose the parameter (beta = 3) (pp. 7-10).",
+   "For a nonconvex penalty model with known global value zero, report the number of multistart runs needed as the failure measure (p. 11)."
+  ],
+  "coauthors": "S. Cafieri, M. Mongeau",
+  "quotes": [
+   {
+    "text": "Conn concludes his 1981 NATO-conference paper on penalty function methods [9] by asking “whether penalty functions have any significant contributions to make to discrete or global optimization”.",
+    "page": 4
+   },
+   {
+    "text": "This work is in the spirit of the questioning of Conn as to whether penalty functions can have a significant impact in discrete or global optimization.",
+    "page": 13
+   }
+  ]
+ }
+]

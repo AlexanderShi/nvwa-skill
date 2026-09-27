@@ -1,0 +1,351 @@
+[
+ {
+  "id": "S022",
+  "year": "2008",
+  "title": "Comparison of derivative-free optimization methods for groundwater supply and hydraulic capture community problems",
+  "read_level": "full",
+  "contribution": "Compares six derivative-free codes (APPS, Boeing Design Explorer, DIRECT-L, IFFCO, NOMAD with n+1/2n directions, NSGA-II) at default settings on two MODFLOW-based water-resources community problems (well-field supply, hydraulic capture), diagnoses failures, derives starting-point guidance and publishes a download page.",
+  "problem_entry": "Application-community benchmark: the Mayer et al. community problems had not yet brought optimization experts' method classes into water resources or compared many methods on one problem; the field relies on GAs/simulated annealing (pp. 3-4).",
+  "key_idea": "No new algorithm: the design goes into the comparison (heterogeneous portfolio described through one search-poll lens) and the formulation (inactive-well threshold, grid rounding, gradient-control constraints, linear-constraint violations returned as evaluation failures, stopping at the simulator's grid resolution) (pp. 9-16).",
+  "assumptions": "Homogeneous unconfined aquifer, MODFLOW-96, 5-year horizon, cost model (9) with Table 1-2 data; author-chosen interpretations (200 m from Dirichlet boundaries, plume contour 5e-5 kg/m3, |Q|<1e-6 threshold) declared specific to this work; no convergence assumptions stated (pp. 5-10, 29).",
+  "proof_devices": [
+   "no theorems; unproved feasibility claim that at least five wells are needed (p. 17)",
+   "landscape-mechanism argument: removing a well from a feasible six-well start requires a move that raises the objective beyond 'high frequency, low amplitude noise', motivating a starting-point rule (p. 21)",
+   "code-by-code status of barrier theory for linear vs nonlinear constraints (p. 14)"
+  ],
+  "experiments": "Best cost and evaluations to termination per code (Tables 3, 6), cost-vs-evaluations profiles (Figs. 2, 4), no run times, defaults only; 135 and 65 clustered feasible starts (DIRECT on feasibility, 50,000 evals, ~5,000 feasible points, AGNES) mostly fail; mechanism-based starts succeed; GA fails on 9 of 10 seeds; finite-difference interior-point code FDNIPS fails; no common budget (pp. 17-28).",
+  "positioning": "Introduces deterministic 'sampling methods' with rigorous convergence to a GA/SA-dominated field, GA included for completeness; credits each code to its developers and concedes newer versions may be better (pp. 1, 4, 11).",
+  "writing": "15-author applied paper for a water audience; defines black-box formulation and surrogate-vs-approximation; places caveats next to results (1% spread vs 80% fixed cost); closes as 'a preliminary attempt' (pp. 9, 15, 19, 29).",
+  "limits_future": "Global solutions unknown, no tuning, NOMAD stopped early on capture, fixed costs defeat surrogates/thresholds, interpretation specific; future: hybrid local-global methods, choosing the number of wells, handling fixed costs (pp. 3, 17, 26, 28-29).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Six codes from several families on the same realistic problems, measured in function evaluations; gradient-based baseline tried",
+    "pages": "pp. 11, 17, 28"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "No common evaluation budget (termination points 94-930 evals), plain cost profiles instead of data/performance profiles, one run per deterministic code",
+    "pages": "pp. 17, 24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Search-poll paradigm used as the lens to describe other groups' codes (NOMAD, IFFCO, DE, APPS)",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Constraints classified by mathematical form (bounds/linear/nonlinear), not relaxability; failure mechanism reused to skip the simulator on linear violations",
+    "pages": "pp. 13-14"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Real simulator-based problems with a public download page; benchmark originates from the water community, not Audet's group",
+    "pages": "pp. 3, 29"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Deterministic sampling methods return the same result from the same start, unlike the GA",
+    "pages": "p. 25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD (GPS-based C++ at the time) is the GERAD contribution to a multi-lab study (weak)",
+    "pages": "pp. 11, 35"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "starting-point engineering as a reported result",
+    "evidence": "Feasible-start pools from DIRECT feasibility runs + AGNES clustering (135 and 65 starts), success counts, and a mechanism-derived starting rule",
+    "pages": "pp. 21, 26-27"
+   },
+   {
+    "pattern": "cheap-constraint short-circuit",
+    "evidence": "Linear net-pumping violations declared evaluation failures so MODFLOW is not called",
+    "pages": "p. 14"
+   }
+  ],
+  "transferable": [
+   "Build a pool of feasible starts by running a global sampler on the feasibility problem and clustering (AGNES); report per-solver success counts (p. 21)",
+   "Derive a starting-point rule from the landscape mechanism of failure (p. 21)",
+   "Return an evaluation failure when a cheap explicit constraint fails, without calling the simulator (p. 14)",
+   "Tie the stencil stopping tolerance to the simulator's grid resolution (p. 16)",
+   "Probe the stochastic competitor's seed and population sensitivity (p. 27)",
+   "Decompose the metric (fixed vs operating cost) next to any sub-1% difference claim (p. 19)"
+  ],
+  "coauthors": "K.R. Fowler, J.P. Reese, C.E. Kees, J.E. Dennis Jr., C.T. Kelley, C.T. Miller, C. Audet (7th of 15), A.J. Booker, G. Couture, R.W. Darwin, M.W. Farthing, D.E. Finkel, J.M. Gablonsky, G. Gray, T.G. Kolda",
+  "quotes": [
+   {
+    "text": "Such analysis can assist in evaluation, tuning, and debugging by eliminating possible failure modes.",
+    "page": 14
+   },
+   {
+    "text": "If viewed in terms of the total cost, the optimal solutions differed by less than 1%. This is a bit misleading because the fixed cost represented about 80% of the total cost.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S006",
+  "year": "2009",
+  "title": "OrthoMADS: a deterministic MADS instance with orthogonal directions",
+  "read_level": "full",
+  "contribution": "Introduces OrthoMADS, a MADS instance whose 2n poll directions are built deterministically (Halton vector, scale-and-round, scaled Householder) so they are integer, orthogonal and asymptotically dense, inheriting all MADS convergence results deterministically instead of with probability one; on 45 problems it scores at least as well as 30 LTMADS runs on most problems.",
+  "problem_entry": "Two drawbacks of the authors' own LTMADS: random directions give convergence only with probability one, and Custodio-Vicente observed undesirably large angles / missed cones between poll directions (pp. 2, 22).",
+  "key_idea": "Replace random poll construction by Halton u_t (from t=n+1) -> q = round(alpha(2u_t-e)/||2u_t-e||) with alpha by bisection so ||q|| <= 2^{|l|/2} -> H = ||q||^2 I - 2qq^T, D_k=[H -H]; index bookkeeping t_k = l_k+n+1 at the finest poll size so failed iterations run through the Halton tail; everything else identical to LTMADS (pp. 3-12).",
+  "assumptions": "All MADS hypotheses inherited from [4]; extreme barrier for constraints; no new parameters; obligations reduce to the four MADS-instance properties (pp. 2, 14, 22).",
+  "proof_devices": [
+   "framework-instance theorem: verify the four MADS-instance axioms and inherit all convergence results (Theorem 2.8, p. 14)",
+   "density chain: Halton dense (Prop. 2.1) + lower bound on alpha (Lemma 2.3) + rounding perturbation bound < eps/2 (Prop. 2.4) -> normalized q dense (Prop. 2.7) (pp. 5-14)",
+   "density transfer through Householder via explicit reflection vector d = (e_i - w)/sqrt(2(1-w_i)) with e_i - 2 d d_i = w (Prop. 2.6, pp. 9-10)",
+   "scaled Householder H = ||q||^2 I - 2qq^T gives an integer orthogonal basis (Prop. 2.5, pp. 8-9)",
+   "det(normalized H) = -1 for positive-spanning limits (p. 14)"
+  ],
+  "experiments": "45 problems (21 CUTEr smooth, 13 nonsmooth, 9 constrained, 2 real applications MDO/STY); LTMADS run 30 times, GPS/OrthoMADS scored by how many LTMADS runs they match or beat within 1%; 2n bases, opportunistic poll, optimist search only, stop at Delta^p < 1e-12 or 1000n evals; OrthoMADS average score 22.3 vs 13.5/14.2 for GPS; Rosenbrock direction-spread plots; final-value scoring, same-family competitors, no profiles (pp. 15-21).",
+  "positioning": "Self-correction of LTMADS building on MADS [4] and its erratum [2]; reuses the critics' (Custodio-Vicente) test sets; Halton, Householder, Matousek cited as tools; no other DFO family cited (pp. 2, 14-15, 22-23).",
+  "writing": "Abstract states the two advantages first; one running n=2 example threaded through all construction steps; tables of intermediate sequences; light hedging ('do seem', 'at least as competitive'); two-paragraph discussion without limitations (pp. 1-7, 22).",
+  "limits_future": "No limitations or future work stated; reader: always 2n directions (minimal basis rejected), 'minimal' missed cones only illustrated, several inconsistencies between text, Figure 2 and Table 3 (pp. 10-12, 21-22).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Deterministic rather than probability-one convergence at no extra cost (Method 3 step 5); certificate via instance axioms, no counterexamples",
+    "pages": "pp. 1, 14, 22"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Only the Poll is changed; Search optional; tests use only an optimist Search",
+    "pages": "pp. 3, 15"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Repeatability as explicit design goal, now verified in full text",
+    "pages": "pp. 1, 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Layered problem set including real applications, but final-value scoring against randomized replicates, same-family competitors, no profiles",
+    "pages": "pp. 15, 20"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "STY (styrene) and MDO applications reused as test problems (weak)",
+    "pages": "pp. 15, 20"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "replicate-rank scoring",
+    "evidence": "Score of a deterministic run = number of 30 LTMADS runs it matches or beats within 1%, binned bad/acceptable/good",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "framework-instance theorem",
+    "evidence": "Theorem 2.8 proves OrthoMADS satisfies the MADS-instance axioms and inherits all results",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "minimal-diff variant",
+    "evidence": "LTMADS and OrthoMADS identical except for P_k and D_k (same D, tau, w-, w+); also S007 h^max_0=0 recovers MADS-EB",
+    "pages": "p. 10"
+   }
+  ],
+  "transferable": [
+   "Integer orthogonal basis from any integer vector q: H = ||q||^2 I - 2qq^T (pp. 8-9)",
+   "Derandomize with a low-discrepancy sequence and prove each transformation preserves density (pp. 5-14)",
+   "Density transfer by constructing the exact reflection that maps e_i to the target w (pp. 9-10)",
+   "Tie the sequence index to the finest poll size so the iterations the theory uses consume consecutive sequence elements (p. 11)",
+   "Replicate-rank scoring of a deterministic method against R randomized runs (p. 15)",
+   "Plot normalized poll directions as a coverage diagnostic (p. 21)",
+   "Carry one tiny worked example through every construction step (pp. 4-7)"
+  ],
+  "coauthors": "M.A. Abramson, J.E. Dennis Jr., S. Le Digabel",
+  "quotes": [
+   {
+    "text": "The convergence results for ORTHOMADS follow directly from those already published for MADS, and they hold deterministically, rather than with probability one, as for LTMADS, the first MADS instance.",
+    "page": 1
+   },
+   {
+    "text": "Because of the random component of LTMADS, we felt that numerical experiments had to be performed on series of several runs to show the reader the variations in the results.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S007",
+  "year": "2009",
+  "title": "A progressive barrier for derivative-free nonlinear programming",
+  "read_level": "full",
+  "contribution": "Proposes MADS-PB: squared constraint violations aggregated into h, a non-increasing barrier h^max_k, feasible and infeasible incumbents with filter-style dominance, and polling around both; proves a hierarchy of Clarke-type results for f and h, gives a counterexample motivating a new constraint qualification, and shows faster progress than two-phase MADS-EB from infeasible starts.",
+  "problem_entry": "Own GPS-filter has weak theory and MADS-EB needs feasible starts; four user situations (no feasible start in aircraft planform, sensitivity information, failing/Boolean industrial codes, disjoint domains) justify keeping infeasible points (pp. 2-4).",
+  "key_idea": "Progressively tighten a threshold on aggregated violation, keeping best feasible and best undominated infeasible incumbents; iterations classified dominating/improving/unsuccessful; h^max_0 = 0 with a feasible start recovers MADS-EB; closed (always) vs open (at solution) constraints (pp. 2-13).",
+  "assumptions": "A1 initial point in X with finite f and h < h^max_0; A2 bounded trial points; A3 external CQ (h°(x;v) < 0 near x-hat for hypertangent v) introduced after a counterexample, sufficient not necessary; local Lipschitz, nonempty hypertangent cone, dense refining directions (LTMADS, with probability 1) (pp. 5, 12, 14, 21, 24).",
+  "proof_devices": [
+   "three-case analysis: feasible refining subsequence, infeasible subsequence (results on h), infeasible converging to feasible (pp. 15-23)",
+   "standard MADS Clarke-derivative argument with t_k = Delta^m_k||d_k|| and y_k = x_k + t_k(d_k/||d_k|| - v) plus limsup split (Thm 3.3, pp. 16-17)",
+   "mirror proof swapping (f, Omega) for (h, X) (Thm 3.5, p. 18)",
+   "adversarial but legal Search step producing a bad limit on a 1-D C^1 constraint built from a rescaled quintic (Example 3.7, Prop. 3.8 by induction, pp. 19-21)",
+   "A3 related to smooth CQs via h° = 2 v^T C'(x)^T W(x) C(x) (Thm 3.10, pp. 21-22)",
+   "Clarke mean-value contradiction (Lemma 3.11, pp. 22-23)",
+   "unsuccessful iteration + decreasing h forces feasible poll points -> infinitely many feasible points (Thm 3.12, p. 23)",
+   "hierarchical convergence ladder (i)-(x) (pp. 24-25)"
+  ],
+  "experiments": "GPS-EB, GPS-filter, LTMADS-EB, LTMADS-PB with 1 or 2 secondary directions; 5 seeds averaged; feasible and infeasible starts; two-phase EB evaluations counted; 600n budget; convex hypersphere and nonconvex problems n=5..50, h^max_0 sweep giving a default rule, Table 1 first-feasible vs best (n=50: EB 1004 evals f=-22.2, PB 2401.9 evals f=-46.0), STYRENE (8 vars, 4 closed, 7 open, may fail); no spread, no profiles (pp. 25-32).",
+  "positioning": "Continues Fletcher-Leyffer filter via own GPS-filter and MADS-EB; uses dominance but no filter; relates CQ to Gould-Tolle/MFCQ and SQP assumptions; calls earlier GPS approaches noncompetitive; credits Paul Frank (Boeing) for the frame-center trigger (pp. 2-3, 14, 21, 33).",
+  "writing": "Abstract positions by 'As in... As in... unlike...'; four-bullet motivation answering 'why not keep the barrier'; plain-words promise before definitions; (h,f)-plane figures; theory summarized as a ladder; discussion more cautious than abstract ('We need more tests') (pp. 1-4, 14, 24, 32-33).",
+  "limits_future": "Not better from feasible starts, wasted infeasible evaluations in one case, more tests needed, A3 not necessary, proofs (v)-(x) omitted; only future hint: surrogates (pp. 24-25, 32-33).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Closed/open constraint split (forerunner of EB/PB), Boolean constraints under barrier, quantifiable ones in h, promotion from open to closed, h^max_0 default rule; STYRENE 4 closed yes-no + 7 open",
+    "pages": "pp. 2-4, 28, 31"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Hierarchy (i)-(x) tied to smoothness and cone regularity; counterexample shows A3 needed; A3 placed relative to classical CQs",
+    "pages": "pp. 19-25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Free Search, rigidly defined Poll; theory uses only minimal frame centers; Search freedom also makes adversarial counterexample legal",
+    "pages": "pp. 8, 15-23"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation-count plots, 5 seeds, two-phase accounting, but three problems, same-family competitors, averages only, no profiles",
+    "pages": "pp. 25-32"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "STYRENE code freely available with constraint types and feasible/infeasible starts",
+    "pages": "p. 31"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Default h^max_0 = infinity 'implemented in our code' (weak)",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Signature Work Anatomy (progressive barrier)",
+    "relation": "contradiction",
+    "note": "SKILL.md's inferred 'Why then: NOMAD 3 needed a default' is not stated; the paper's motivations are the four user situations; 'details not read' can now be filled",
+    "pages": "pp. 3-4, 31"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "adversarial Search counterexample",
+    "evidence": "A valid MADS instance whose Search (at k=3l+2) is chosen to drive infeasible frame centers to a boundary point where all hypertangent directions are descent",
+    "pages": "pp. 19-21"
+   },
+   {
+    "pattern": "nest the old method as a parameter setting",
+    "evidence": "h^max_0 = 0 with a feasible start reduces MADS-PB to MADS-EB, and the sweep shows it is among the best from feasible starts",
+    "pages": "pp. 12, 28"
+   }
+  ],
+  "transferable": [
+   "Dual incumbents (best feasible, best undominated infeasible under a barrier) with dominance-driven monotone barrier updates (pp. 6, 9-12)",
+   "Squared-violation aggregation with h = infinity outside the closed set (p. 5)",
+   "Adversarial but legal Search to build counterexamples (pp. 19-21)",
+   "Mirror proof with (h, X) for (f, Omega) (p. 18)",
+   "Two-phase baseline accounting and a first-feasible/best table (pp. 25, 31)",
+   "Sweep a new parameter over orders of magnitude and state a one-sentence default (p. 28)",
+   "Explain an anomalous average from run logs (p. 27)",
+   "Prove where a new CQ sits relative to classical smooth CQs (p. 21)"
+  ],
+  "coauthors": "J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "An extreme barrier algorithm rejects all infeasible trial points. A progressive barrier algorithm places a threshold on the constraint violation it allows, and progressively tightens this threshold as the algorithm progresses.",
+    "page": 3
+   },
+   {
+    "text": "We need more tests, but we tentatively conclude that since LTMADS-PB is better from infeasible starts and about the same from feasible starts, it is the better choice.",
+    "page": 33
+   }
+  ]
+ },
+ {
+  "id": "S034",
+  "year": "2016",
+  "title": "Blackbox and derivative-free optimization: theory, algorithms and applications",
+  "read_level": "full",
+  "contribution": "Two-page special-issue editorial that defines blackbox vs derivative-free optimization, positions DFO as a fallback to gradient methods and as more rigorous than heuristics, orders the issue from applications to theory, and lists anticipated research topics.",
+  "problem_entry": "Definitional and timing-based: growing interest over the last decade justifies a special issue; blackbox = structure cannot be exploited, DFO = only function values (p. 1).",
+  "key_idea": "DFO algorithms are not competitors of gradient methods but a fallback; rigorous DFO with convergence properties beats heuristics whose solutions cannot be characterized (pp. 1-2).",
+  "assumptions": "No formal model; scope is expensive simulation-based design where reliable gradients are unavailable (p. 1).",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Two foils: gradient-based methods (to be used when gradients are available) and heuristics (popular but uncharacterizable); historical anchors Fermi-Metropolis 1952 and Nelder-Mead 1965 (pp. 1-2).",
+  "writing": "Short declarative sentences, one 'It is obvious that' concession, hedged 'crystal ball' forecast, persuasion aimed at engineers ('modest investment') (pp. 1-2).",
+  "limits_future": "No limits stated; anticipated topics: stochastic/noisy problems, parallelism for large problems, multifidelity models and surrogates, explicit analytical equality/inequality constraints, hybrid strategies for escaping local solutions (p. 2).",
+  "method_links": [
+   {
+    "method": "Warning sign 5",
+    "relation": "evidence",
+    "note": "DFO is a fallback when gradient-based algorithms cannot be used",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Warning sign 6 / Research Taste 3",
+    "relation": "evidence",
+    "note": "Heuristics' solutions rarely characterizable vs algorithms with convergence properties",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Applications first in the issue; applications on a par with theory and algorithms",
+    "pages": "pp. 1-2"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Rigor advocated as a selling point, but no ladder or counterexample (editorial; weak)",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "editorial agenda-setting",
+    "evidence": "Dated list of anticipated topics that later SKILL.md trajectory entries largely cover (cross-check against SKILL.md only; one data point)",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Separate 'blackbox' (problem property) from 'derivative-free' (algorithm property) in the first paragraph (p. 1)",
+   "Concede the dominant alternative's home ground in one sentence before the pitch (p. 1)",
+   "End an editorial or survey with an itemized forecast (p. 2)"
+  ],
+  "coauthors": "M. Kokkolaras",
+  "quotes": [
+   {
+    "text": "Blackbox and derivative-free algorithms are not competitors of gradient-based methods; they are a fallback when gradient-based algorithms cannot be used.",
+    "page": 1
+   },
+   {
+    "text": "The latter are popular because they are easy to understand and implement, but their solutions can rarely be characterized in terms of optimality or quality.",
+    "page": 2
+   }
+  ]
+ }
+]

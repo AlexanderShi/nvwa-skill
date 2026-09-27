@@ -1,0 +1,295 @@
+[
+ {
+  "id": "S008",
+  "year": "2007",
+  "title": "Using sampling and simplex derivatives in pattern search methods",
+  "read_level": "full",
+  "contribution": "Pattern search that reuses stored evaluations: at each iteration it finds a Lambda-poised subset of past points, computes simplex gradients (or diagonal simplex Hessians), and uses them to order the poll and to decide mesh expansion, at no extra evaluations and without touching the lattice-based convergence theory; order (store-all) cuts evaluations by about 51% on 27 CUTEr problems.",
+  "problem_entry": "Observed L-shaped f-vs-evaluations curve of pattern search (slow near stationarity) plus a gap: little work on efficient serial implementations (p. 1).",
+  "key_idea": "Fill the free procedures [order], [mesh], [store] of Audet-Dennis GPS with simplex-derivative information from a Lambda-poised subset of past points inside B(x_k; sigma_k alpha_{k-1} max||b||); poll in decreasing cos(d_k, b) (pp. 3-9, 13-14).",
+  "assumptions": "Compact level set; strict differentiability / C1 for stationarity; rational tau and finite positive bases for the lattice; Lipschitz gradient for simplex-gradient accuracy. Pruning condition (6.2) admitted to be unverifiable asymptotically (pp. 4-6, 12-13).",
+  "proof_devices": [
+   "free-slot argument: [search]/[order] carry no convergence requirements; mesh-sd keeps integer powers of tau (pp. 3-4, 13)",
+   "geometry for free: after an unsuccessful poll, S_k/Delta_k = B/(sigma_k max||b||) is independent of alpha, so Lambda is a max over finitely many bases (Thm 5.1, pp. 10-11)",
+   "positive spanning set minus one vector still spans linearly (Davis), for the |B|-1 case (pp. 10-11)",
+   "epsilon-approximation to large gradient components via simplex-gradient error bound plus sign agreement when error <= half the largest component (Thm 6.1, pp. 11-12)",
+   "cosine-measure bound ||grad f(x_k)|| <= gamma kappa(B_k)^-1 max||b|| alpha_k at unsuccessful iterations (pp. 12-13)"
+  ],
+  "experiments": "Matlab, 27 CUTEr problems (n=6-20), 120 versions vs basic, dynamic polling and mesh-HKT; tables of average % change in evaluations, 75th percentile, % poised iterations, cumulative optimal gaps; no profiles; extra n=40,80, random quadratics (77% acute angles), pruning test that violates the theory (pp. 13-18).",
+  "positioning": "Builds on Audet-Dennis GPS and Kolda-Lewis-Torczon; gap-spotting critique ('Most papers do not address the issue of poll ordering at all'); imports CSV Lambda-poisedness (pp. 1, 3, 5-6, 11-12).",
+  "writing": "Opens with an observed curve shape; contribution as two checkable properties; algorithm changes marked in italics; open procedures in [brackets]; local, concrete hedges (pp. 1-3, 7, 13, 18).",
+  "limits_future": "Pruning condition not guaranteed and violated in tests; model search step not developed. Future: parallel pattern search, simplex gradients for nonsmooth f, model-based search step (pp. 12-13, 18-19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Efficient add-ons sit in proof-free slots, but the glue is the rational-lattice mesh with simple decrease; sufficient decrease is used only to decide mesh expansion. The model search step is deferred (correction for SKILL.md Signature Work Anatomy), and the paper does not name SID-PSM.",
+    "pages": "pp. 2-4, 13-14"
+   },
+   {
+    "method": "Research Heuristic 7",
+    "relation": "evidence",
+    "note": "Reuse of paid-for evaluations via simplex gradients to order the poll; the largest gain in the paper (-51%).",
+    "pages": "pp. 7-9, 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Stated collection and strongest published heuristics as baselines, but tables instead of profiles, full results in a separate report, no code release mentioned.",
+    "pages": "pp. 13-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "zero-extra-evaluation add-ons in the proof's free slots",
+    "evidence": "Contribution stated as (i) no extra function evaluation and (ii) no interference with global convergence; mesh-sd keeps lattice rules.",
+    "pages": "pp. 2, 13"
+   },
+   {
+    "pattern": "import model-geometry theory into direct search",
+    "evidence": "Lambda-poisedness and CSV error bounds control the simplex gradients used in the poll.",
+    "pages": "pp. 6, 10"
+   }
+  ],
+  "transferable": [
+   "Rewrite the base algorithm with its theory-free slots as named procedures, put each contribution into a slot, and show the slot requirements still hold (pp. 3-4, 13).",
+   "Choose the sampling radius proportional to the previous step size so the scaled geometry of the last poll is step-size independent (Thm 5.1, pp. 10-11).",
+   "Ablation table with average % change vs baseline, its 75th percentile, % of iterations where the add-on was active, and cumulative optimal-gap thresholds; full grid in a companion report (pp. 14, 16).",
+   "Mechanism diagnostic on random quadratics: how often the surrogate direction is a true descent direction (77%, p. 18).",
+   "Mark changes to the algorithm box in italics against the base algorithm (Fig. 4.1, p. 7)."
+  ],
+  "coauthors": "A. L. Custódio",
+  "quotes": [
+   {
+    "text": "The curve representing the objective function value as a function of the number of function evaluations frequently exhibits an L-shape for pattern search runs.",
+    "page": 1
+   },
+   {
+    "text": "More importantly, these strategies (i) require no extra function evaluation and (ii) do not interfere with existing requirements for global convergence.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S010",
+  "year": "2008",
+  "title": "Geometry of interpolation sets in derivative free optimization",
+  "read_level": "full",
+  "contribution": "A geometric definition of Lambda-poisedness (Lagrange polynomials as the coefficients expressing phi(x) in terms of phi(y^i)), its two-sided equivalence with the condition number of the scaled natural-basis Vandermonde matrix, Taylor-like error bounds with explicit constants for linear and quadratic (and sketched cubic) interpolation, and LU/QR pivot-threshold algorithms that certify or repair interpolation sets one point at a time.",
+  "problem_entry": "Theory gap under existing practice: DFO sampling methods need Taylor-like bounds with a uniformly bounded geometry constant, but Powell's updates have no uniform-bound proof, CST's method needs full replacement, and Ciarlet-Raviart's stretchedness can mislead (pp. 2-6, 18-19).",
+  "key_idea": "Recast Lambda-poisedness as a bound on the coefficients lambda(x) with sum lambda_i phi(y^i) = phi(x), tie it to ||M^-1|| in the scaled natural basis, and maintain it by factorization pivots above a threshold xi < 1/4 (pp. 6-8, 19-23).",
+  "assumptions": "WLOG smallest enclosing ball centred at the origin, y0 = 0 the current iterate; C1 with Lipschitz gradient (linear) or C2 with Lipschitz Hessian (quadratic); natural basis fixed by choice; degree <= 2 in algorithms (pp. 6, 10-12, 14).",
+  "proof_devices": [
+   "two-sided equivalence ||M^-1|| <= Lambda => sqrt(p1) Lambda-poised; Lambda-poised => ||M^-1|| <= theta Lambda (Thm 3.3, pp. 8-9)",
+   "norm-equivalence trick: psi(v) = max_{x in B(1)} |v^T phi(x)| is a norm, so psi(v) >= sigma ||v|| (p. 9)",
+   "polynomial vanishing on a ball is zero, giving nonsingularity (p. 8)",
+   "case enumeration: quadratic with ||v||_inf = 1 has max >= 1/4 on the unit ball, so theta <= 4 sqrt(p1) and threshold xi < 1/4 is always attainable (Lemma 3.4, pp. 9-10, 21)",
+   "scale invariance of Lagrange polynomials vs scale dependence of ||M^-1|| (Lemma 3.5, p. 11)",
+   "error bound by subtracting Taylor expansions at x from the interpolation conditions and the y0 = 0 equation, giving an x-independent matrix, then diagonal Delta-scaling (Thms 4.1-4.2, pp. 12-16)"
+  ],
+  "experiments": "One Matlab test: 100 random points in the unit cube; Powell's Lagrange maximization vs LU vs QR selection; ||M^-1|| mostly 10-100, never above 1000; no optimization runs (p. 24).",
+  "positioning": "Same critique for Powell and the authors' own earlier CST: reasonable in practice but no proof of uniform poisedness; Ciarlet-Raviart bound re-derived in optimization terms; de Boor distinguished by motivation (pp. 3, 5-6, 17-19).",
+  "writing": "Openly disclaims novelty of the bounds in favour of usefulness and simplicity; counterexample-motivated definition; concedes the algorithms may not beat Powell's (pp. 6, 11, 17, 23).",
+  "limits_future": "Polynomials recomputed per update; O(n^6) LU cost; untested inside a DFO code. Future: prove uniform poisedness for Powell-type algorithms; regression and underdetermined cases (pp. 2, 19, 21, 23-24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Keeps practitioners' one-point updates and adds a pivot-threshold certificate so the uniform bound is provable ('both practical and theoretically sound'); the kept element is a point-management rule, not a trial-point generator.",
+    "pages": "p. 19"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Explicit constants and dimension factors (sqrt(n), sqrt(p1), O(n^6)), but for approximation error and linear-algebra cost, not evaluation complexity.",
+    "pages": "pp. 13, 16, 21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "No solver, no collection; one 100-point random test (era/genre).",
+    "pages": "p. 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "two-sided equivalence between a classical measure and a computable one",
+    "evidence": "Lambda-poisedness vs condition number of scaled M, up to constants; recurs in S020 (Thms 2.7, 2.8, 5.6, 5.7).",
+    "pages": "pp. 8-9"
+   },
+   {
+    "pattern": "certify-and-repair component abstraction",
+    "evidence": "Threshold test certifies quality or replaces only the offending point; reused as model-improvement algorithm in S006 and extended in S020.",
+    "pages": "pp. 19-23"
+   }
+  ],
+  "transferable": [
+   "When a quality measure depends on the basis, fix a well-scaled basis, scale data to the unit ball, and prove two-sided equivalence with the classical measure (Thm 3.3, pp. 8-9).",
+   "Lower-bound a max over the ball by showing it is a norm and computing its constant by restricting to <= 2 variables and enumerating a few points (Lemma 3.4, pp. 9-10).",
+   "Error bounds: Taylor-expand at the evaluation point and subtract the centre-point equation so the unknown function error cancels; the matrix is then x-independent (pp. 12-15).",
+   "Set a repair algorithm's acceptance threshold below a proven attainable value (1/4) so a repair point always exists (Algs. 5.1-5.2, pp. 20-23)."
+  ],
+  "coauthors": "A. R. Conn, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "We would like to emphasize that the goal of this section is not so much the novelty of the bounds, in general, but their usefulness for the reader with primarily optimization motivations, not to mention the simplicity of the derivation of these bounds.",
+    "page": 17
+   },
+   {
+    "text": "In practice, it is more efficient to maintain well-poisedness throughout the algorithm, not just when it is necessary to pass the criterion needed for the convergence proof.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S020",
+  "year": "2008",
+  "title": "Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation",
+  "read_level": "full",
+  "contribution": "Extends Lambda-poisedness, the condition-number equivalence and Taylor-like error bounds from complete interpolation to least-squares regression and minimum-norm underdetermined interpolation, relates them to interpolation on subsets or sub-bases up to explicit constants, and argues (with toy tests) for regression and minimum-norm models.",
+  "problem_entry": "Practice ahead of theory: regression (implicit filtering, regression simplex gradients) and underdetermined models (DFO code, Powell's min-Frobenius) are used, but lack supporting theory; approximation-theory definitions are ill-suited for optimization (pp. 1-2).",
+  "key_idea": "Keep S010's lambda-system and change only which generalized solution defines lambda(x): minimum-norm for regression, least-squares for underdetermined (a 'duality'); choose minimum-norm over sub-basis because of robustness to perturbation (pp. 8-9, 19-22).",
+  "assumptions": "Same WLOG scaling and y0 = 0 as S010; C1/C2 with Lipschitz derivatives; minimum-norm definition is basis-dependent, fixed to the natural basis; extension fails for l1/linf regression (pp. 8, 10, 14-15, 20, 23).",
+  "proof_devices": [
+   "max-determinant subset plus Cramer's rule gives coefficients <= 1 and hence (m - n + 1) Lambda on the subset (Lemma 1.1, p. 4; credited to Coppersmith, p. 27)",
+   "Lagrange regression polynomials as min-norm solution of M^T lambda = phi(x) (Lemma 2.4, p. 9); min-norm Lagrange polynomials as least-squares solution (Lemma 5.4, p. 22)",
+   "condition-number equivalence with Sigma of the reduced SVD via the S010 norm-equivalence argument with extra steps (Thm 2.8, pp. 11-13)",
+   "sub-basis vs min-norm poisedness equivalence up to (q - p + 1) sqrt(p1 q1) theta (Thm 5.6, pp. 22-23)",
+   "underdetermined error bound only on the projection V^T of the error (Thm 5.8, pp. 25-26)"
+  ],
+  "experiments": "Toy 2-D tests: f1 reported (f2, f3 said to follow the same pattern); best-subset vs regression and best-basis vs minimum-norm over 200 random sample sets, lattice errors E1/E2, wins counted only above 0.001; unexplained 5-point row in Fig. 5.1 (pp. 16-17, 26-27).",
+  "positioning": "Direct sequel of S010; approximation theory restated 'in simple terms'; Powell's min-Frobenius Lagrange polynomials related to their definition; Deng-Ferris repeated sampling as contrast for noise (pp. 1, 7, 23-24, 27).",
+  "writing": "Examples before definitions; admits a 'definition defect' but keeps it; labels numerics 'very limited'; omits adapted proofs; hedges with 'in our opinion' (pp. 1, 10, 14, 18-20, 26).",
+  "limits_future": "Separate computational study needed; theta grows most likely exponentially with degree; spiky-function benefit unverified. Future: algorithms maintaining regression sets directly; regression on random points for noisy f; algorithms in the book (pp. 3, 13-14, 17, 27).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Same move at the level of model theory: keep the skeleton (lambda-system, Lambda-poisedness, condition-number equivalence, Taylor bounds) and change one object (which generalized solution defines lambda) to reach two new cases.",
+    "pages": "pp. 8-9, 22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Toy 2-D tests only; authors state a separate computational study would be required.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "choose between competing definitions with a robustness-to-perturbation example",
+    "evidence": "Example 5.2: best-sub-basis models jump as epsilon -> 0 while min-norm models converge.",
+    "pages": "pp. 19-20"
+   },
+   {
+    "pattern": "two-sided equivalence between a classical measure and a computable one",
+    "evidence": "Thms 2.7, 2.8, 5.6, 5.7 relate regression, sub-basis and min-norm poisedness to interpolation poisedness and condition numbers.",
+    "pages": "pp. 10-13, 22-24"
+   }
+  ],
+  "transferable": [
+   "Pass from a large set to a well-conditioned subset by picking the max-|det| subset; Cramer's rule bounds expansion coefficients by 1 (Lemma 1.1, p. 4).",
+   "Decide between candidate definitions with a pair of converging inputs where one definition's output jumps and the other's converges (Example 5.2, pp. 19-20).",
+   "Extend a definition by picking the matching generalized inverse: min-norm lambda for overdetermined data, least-squares lambda for underdetermined data (pp. 9, 22).",
+   "Toy-comparison protocol: 200 random sample sets, win only above a fixed margin in two error measures, repeat on a shrunken region (pp. 17, 26-27)."
+  ],
+  "coauthors": "A. R. Conn, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "Hence, we see that the sub-basis approach suffers from a lack of robustness with respect to small perturbations in the sample set.",
+    "page": 20
+   },
+   {
+    "text": "To fully show the benefit of regression models, however, a separate computational study would be required.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S006",
+  "year": "2009",
+  "title": "Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points",
+  "read_level": "full",
+  "contribution": "A general derivative-free trust-region framework built on abstract fully linear / fully quadratic model classes with a model-improvement algorithm, a criticality step, simple-decrease acceptance and a single trust region, with lim-type global convergence to first-order and (claimed first comprehensive) second-order critical points.",
+  "problem_entry": "Literature split into practical TR-DFO methods without theory (Powell, wedge) and provable ones at the expense of practicality (CGT, CST 1997); aim to bridge (p. 2).",
+  "key_idea": "Abstract model building into classes defined by Taylor-like bounds plus a finite certify-or-improve algorithm; tie the radius to the model gradient through a criticality step so Delta_k -> 0, which lets simple decrease be accepted and still yields lim results (pp. 2-3, 7-9, 13-14, 18).",
+  "assumptions": "C1 (C2) with Lipschitz gradient (Hessian) on the enlarged level set; f bounded below; uniformly bounded model Hessians 'for simplicity of the presentation'; constants WLOG large; abstraction admits impractical members (M = {f}, finite differences) (pp. 7-9, 16).",
+  "proof_devices": [
+   "criticality-loop termination unless grad f = 0: ||grad f|| <= (kappa_eg + 1/mu) alpha^{i-1} Delta -> 0 (Lemma 5.1, pp. 15-16)",
+   "fully linear + Delta <= c ||g|| implies success via |rho - 1| bound (Lemma 5.2, pp. 16-17)",
+   "uniform bound N on consecutive model-improving iterations (Lemma 5.4, pp. 17-18)",
+   "Delta_k -> 0 from ||g_k|| >= min{c, Delta_k/mu} plus Cauchy decrease on successes (Lemma 5.5, p. 18)",
+   "interleaved subsequences k_i < l_i with telescoping displacement bound ||x_{k_i} - x_{l_i}|| <= 2/(eta1 kappa_fcd) [f(x_{k_i}) - f(x_{l_i})] (Thm 5.9, pp. 19-21)",
+   "monotonicity of full linearity/quadraticity in the radius via integral mean value theorem (Lemma 3.4, pp. 9-10)",
+   "eigenvalue perturbation |lambda_min(Hf) - lambda_min(Hm)| <= kappa_eh Delta and |sigma - sigma^m| <= kappa_sigma Delta (Prop. 7.1, Lemma 7.2, pp. 23-24)",
+   "forced radius increase on S+ and geometric-series displacement bound gamma_inc/(gamma_inc - 1) Delta_{j*} (Thm 7.11, pp. 27-28)"
+  ],
+  "experiments": "none",
+  "positioning": "Builds on CGT Trust-Region Methods and the CST criticality step; Powell as the practical model with two trust regions; Yuan's example motivates radius rules; hedged priority claim for second order and rebuttal that the derivation is 'not as trivial as one might expect' (pp. 2-3, 15).",
+  "writing": "Features listed against prior methods; mnemonic constant table; plain scope statement ('We provide no analysis for local rates of convergence'); practicality argued in prose without numbers (pp. 2-4, 12).",
+  "limits_future": "No local rates; different fully-linear models treated alike; fully quadratic models need O(n^2) points; O(n^6) linear algebra at n ~ 100; forcing Delta -> 0 would hurt local rates with derivatives; no future-work section found (pp. 2-3, 12).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Same bridging stance (framework in the spirit of practical methods, theory retained), but the glue is the criticality step plus certified model quality, with simple decrease accepted, not sufficient decrease.",
+    "pages": "pp. 2, 14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic precursor: the model need not be fully linear at every iteration, only makeable fully linear within a finite uniformly bounded number of iterations; later papers make this probabilistic.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Keeps the TR skeleton; changes what counts as an acceptable model (fully linear/quadratic class) and as success (simple decrease with certified model); re-derives lim and second-order results.",
+    "pages": "pp. 7-9, 14-15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "No rates or complexity (era).",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "No numerics and no code (genre).",
+    "pages": "pp. 1-29"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "criticality step ties radius to stationarity so Delta -> 0 is the stopping test",
+    "evidence": "Radius forced below mu ||g|| when the model gradient is small; Lemma 5.5 shows Delta_k -> 0.",
+    "pages": "pp. 2, 14, 18"
+   },
+   {
+    "pattern": "certify-and-repair component abstraction",
+    "evidence": "Fully linear class defined by uniform Taylor-like bounds plus a finite certify-or-improve algorithm; shared with S010 and S020.",
+    "pages": "pp. 7-8"
+   }
+  ],
+  "transferable": [
+   "Abstract a component by the property the proof needs plus a finite certify-or-repair clause, then test the abstraction on degenerate members (M = {f}, finite differences) (pp. 7-8).",
+   "Criticality step: when the model gradient is small, improve the model on shrinking balls until Delta <= mu ||g||, giving ||g_k|| >= min{c, Delta_k/mu} and Delta_k -> 0 (Alg. 4.2, p. 14; Lemma 5.5, p. 18).",
+   "Four-way iteration classification (successful/acceptable/model-improving/unsuccessful) with a uniform bound N on consecutive model-improving iterations (pp. 15, 17).",
+   "Monotonicity lemma: accuracy on a small ball carries over to larger balls with the same (WLOG enlarged) constants, via the integral mean value theorem order by order (Lemma 3.4, pp. 9-10).",
+   "For second order, increase the radius only when Delta_k < beta sigma^m_k and bound the displacement by a geometric series (pp. 22, 28).",
+   "Put a mnemonic table of constants before the analysis (p. 4)."
+  ],
+  "coauthors": "A. R. Conn, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "In this paper we are trying to bridge the gap by describing an algorithmic framework in the spirit of the first category of methods, while retaining all the same global convergence properties of the second category.",
+    "page": 2
+   },
+   {
+    "text": "This modification slightly complicates the convergence analysis, but it reflects much better the typical implementation of a trust-region derivative-free algorithm.",
+    "page": 3
+   }
+  ]
+ }
+]

@@ -1,0 +1,419 @@
+[
+ {
+  "id": "S072",
+  "year": "2004",
+  "title": "On the use of quadratic models in unconstrained minimization without derivatives",
+  "read_level": "full",
+  "contribution": "First report that pairs least-Frobenius-norm updating of quadratic models with a working UOBYQA-derived trust-region code. With m=2n+1 it solves a random trigonometric test family up to n=160 in at most about 60n evaluations, fewer than UOBYQA needs just to build its first model (13041). The status is explicitly provisional.",
+  "problem_entry": "Transfers the symmetric-Broyden least-change idea from gradient conditions to interpolation conditions, motivated by UOBYQA's measured O(n^4) cost per iteration, 'tolerable for n≤25' (pp. 3, 5, 7).",
+  "key_idea": "Minimize the Frobenius norm of the change to the model Hessian subject to m in [n+2, (n+1)(n+2)/2] interpolation conditions. Keep UOBYQA's Δ/ρ machinery, and replace only the model-adequacy tests (last three errors ≤ ½ηρ²) and the linear algebra (explicit H=W⁻¹ updated in O(m²)) (pp. 5-12).",
+  "assumptions": "Interpolation conditions solvable for any right-hand side and points not in a hyperplane (p. 5). The theorem assumes F quadratic (p. 4). Conclusions are admittedly drawn from experiments, not theory (p. 6). Designed to be robust to noise (p. 7).",
+  "proof_devices": [
+   "orthogonal projection in the semi-norm ||∇²Q||_F gives a Pythagorean identity for the Hessian error (1.11) (p. 4)",
+   "telescoping: lim ||∇²Q_{k+1}-∇²Q_k||_F = 0 gives the Broyden-Dennis-Moré condition via identity (1.15), so superlinear convergence for quadratic F without an accurate Hessian (pp. 4-5)",
+   "minimal counterexample n=2, m=4 with collinear points: the update leaves the Hessian unchanged (pp. 6-7)",
+   "KKT form of least-Frobenius Lagrange functions and a rank-two change of W, giving an O(m²) inverse update (pp. 10-12)"
+  ],
+  "experiments": "One random trigonometric sum-of-squares family; n=10..160; m ∈ {2n+1, geometric mean, (n+1)(n+2)/2}; five instances per cell; min-max of #F, final F and time on a Sun Ultra 10. The n=40, m=861 spread 3205-11335 is reported as 'embarrassing' and rounding-sensitive (pp. 13-15).",
+  "positioning": "Continues symmetric Broyden (Dennis-Schnabel) and Broyden-Dennis-Moré, plus his own UOBYQA and S045. Keeps simple decrease, noting that sufficient reduction was introduced to assist proofs (pp. 2-4, 7-8).",
+  "writing": "Dated development narrative (Kyoto 2001, January 2002, one week before Hangzhou). Explicit status labels: 'still under development', 'crude and provisional', 'embarrassing'. Hedged forecast in the last sentence (pp. 7-8, 12, 14-15).",
+  "limits_future": "Rounding errors sometimes damage efficiency severely, the origin shift is provisional, and only one test problem was tried. Future: reduce rounding damage; hundreds of variables may be reachable because parameter count may not matter for convergence (pp. 8, 12-13, 15).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Origin paper of the 2n+1 + least-Frobenius pairing, with the first #F-versus-n table.",
+    "pages": "pp. 5-6, 13-15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The UOBYQA O(n^4) limitation is named. The outer machinery is kept and only the model update and dependent tests change.",
+    "pages": "pp. 7-9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ρ is a never-increased lower bound on Δ, reduced by about ten. No F evaluation when ||d||<½ρ. The ρ-completion test uses three small model errors.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "The constants differ from released NEWUOA (½ηρ² and a half-reduction step test here, versus ⅛ρ²·CRVMIN and RATIO 0.1 in S018), so they were tuned between versions.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Origin shifts reduce rounding in the Lagrange-function Hessians. Tiny steps are not evaluated because of rounding.",
+    "pages": "pp. 8, 10, 12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "The embarrassing spread and the non-final status are reported.",
+    "pages": "pp. 14-15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The test set is a single random family, narrower than the 1-10 problems of step 1, with the scope stated.",
+    "pages": "p. 13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "publish preliminary results with explicit status",
+    "evidence": "Labels 'still under development', 'crude and provisional', 'not in its final form'; only one test problem tried.",
+    "pages": "pp. 8, 12, 13, 15"
+   },
+   {
+    "pattern": "judge a model by the steps it produces, not by its accuracy",
+    "evidence": "Fast convergence may occur even if the Hessian error does not become small. Seeking accuracy in ∇²Q≈∇²F may be less efficient than least-Frobenius updating.",
+    "pages": "pp. 5, 15"
+   },
+   {
+    "pattern": "question devices that exist only to assist proofs",
+    "evidence": "Keeps simple decrease (1.3); sufficient reduction 'was introduced to assist proofs of convergence'.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "tiny explicit counterexample to justify a design choice",
+    "evidence": "n=2, m=4 collinear points: the update yields an unchanged Hessian, which motivates keeping points well separated.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "transferable": [
+   "Prove the Pythagorean projection identity for a least-change update in the idealized case, then telescope it into a Dennis-Moré condition (pp. 4-5).",
+   "Random test family with a known minimizer (b chosen so F(x*)=0), log-uniform scaling for conditioning, perturbed start, five instances per (n, m), min-max reporting (pp. 13-14).",
+   "Compare the new method's total cost with the predecessor's startup cost (evaluations needed for its first model) (p. 15).",
+   "Find the smallest configuration in which the update does nothing, and design a mechanism against it (pp. 6-7)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "because we welcome every decrease that occurs in the value of the objective function.",
+    "page": 2
+   },
+   {
+    "text": "This remark is embarrassing to the author, because he has found that these figures are highly sensitive to changes in the Fortran implementation of the algorithm, even when the changes would not alter the results in exact arithmetic",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S124",
+  "year": "2004",
+  "title": "On updating the inverse of a KKT matrix",
+  "read_level": "full",
+  "contribution": "Shows that storing the leading block Ω of H=W⁻¹ as ZSZᵀ with exactly n̂−m̂ rank-one terms forces the zero trailing block of H⁻¹ even under rounding (Lemma 3). The factorization can be updated in O(n̂²) with Givens rotations. Together with a determinant interpretation of the update denominator and a closed-form rounding analysis, this cured the rounding-induced inefficiency that delayed NEWUOA by 18 months.",
+  "problem_entry": "A failure in his own software: occasional huge efficiency losses from rounding in the O(m²) update of the inverse KKT matrix, restated as a general KKT-inverse updating problem (pp. 1-3).",
+  "key_idea": "XΩ=0 implies rank Ω ≤ n̂−m̂, so Ω is stored as a sum of exactly n̂−m̂ signed rank-one terms. The S045 update formula (w-form) is kept, and Z is updated by Givens rotations plus one closed-form column (pp. 3, 13-14, 17-19).",
+  "assumptions": "A_ij=½(x_iᵀx_j)² has no negative eigenvalues and W is nonsingular (p. 4). The stability analysis assumes the current iteration is exact while H carries old errors (p. 10). Signs s_j are +1 in exact arithmetic (p. 20).",
+  "proof_devices": [
+   "two rank-one steps through a singular intermediate H̃, then analytic elimination of the division by H_tt (pp. 5-7)",
+   "Lemma 1: σ = det W⁺/det W via W⁺=(I−e_tuᵀ)W(I−ue_tᵀ)+βe_te_tᵀ and the determinant product rule (pp. 7-8)",
+   "Lemma 2: changing β alters only the t-th diagonal of the inverse (p. 9)",
+   "stability property: the update zeroes the t-th row and column of H⁻¹−W and leaves the other errors unchanged, so errors in the bottom-right block persist (p. 10)",
+   "closed-form rounding example with a cluster of radius η at distance ξ: σ error of order (ξ/η)^8 ε (pp. 11-12)",
+   "Lemma 3 by cofactors: a rank-limited Ω forces a zero bottom-right block of H⁻¹ (p. 14)",
+   "XZ=0 cancellation reduces the σ̂ error to (ξ/η)^6 ε (pp. 15-16)",
+   "Lemmas 4-5: factor-update formulas proved by matching outer-product coefficients (pp. 18-22)"
+  ],
+  "experiments": "One table: n=40, five random trigonometric problems, UOBYQA versus the Powell (2003) code versus NEWUOA at m=81 and m=861. The m=861 case is a control that should match UOBYQA in exact arithmetic (3205-11335 versus 2028-3035; NEWUOA 1996-2216). The signs of diag Ω were monitored (3 violations in 10473 updates) (pp. 22-24).",
+  "positioning": "Faces the standard advice to factorize W rather than update inverses, and declines to test it because NEWUOA works (p. 25). Modest novelty claim ('As far as the author knows', p. 2). Five references (p. 25).",
+  "writing": "Research-history narrative with candid words ('performed brilliantly', 'frustrated for 18 months', 'failed miserably', 'With the benefit of hindsight'). Explicit statement of the release habit. An abandoned technique kept in print as Lemma 2 (pp. 9, 22-24).",
+  "limits_future": "Negative signs can still arise from rounding. Parameter repairs are not recommended. Factorizing W is not investigated. The research on least-Frobenius updating 'may be nearly complete' (pp. 20, 24-25).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The whole paper treats rounding as part of the algorithm. The storage form guarantees a structural property, and origin-shift cost is weighed against rounding damage.",
+    "pages": "pp. 3, 12, 14"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Rejects symptom-triggered arithmetic patches (modifying β or σ) in favour of self-correcting stability plus an invariant-preserving representation. Geometry repairs remain.",
+    "pages": "pp. 9, 24-25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Three stages (UOBYQA → Powell 2003 → NEWUOA), each removing one measured problem.",
+    "pages": "pp. 22-24"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The (m+n+1)-unknown system replaces ½(n+1)(n+2) parameters; O((m+n)²) per update.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Control configuration m=m*, runtime monitoring of the diag Ω sign invariant, and a declaration of unreported experiments.",
+    "pages": "pp. 23-24"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "States that important discoveries are always turned into general-use Fortran; NEWUOA is free.",
+    "pages": "p. 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "store factors so a theoretical invariant survives rounding",
+    "evidence": "Ω=ZSZᵀ with n̂−m̂ columns forces the zero trailing block of H⁻¹ (Lemma 3).",
+    "pages": "pp. 3, 14"
+   },
+   {
+    "pattern": "exact-arithmetic-equivalence control run",
+    "evidence": "m=(n+1)(n+2)/2 makes least-Frobenius updating redundant, so the code should match UOBYQA; the gap measures rounding damage.",
+    "pages": "pp. 23-24"
+   },
+   {
+    "pattern": "self-correcting maintained basis",
+    "evidence": "Relies on the stability property to remove old errors instead of parameter modification.",
+    "pages": "pp. 10, 24-25"
+   },
+   {
+    "pattern": "publish the rejected alternative",
+    "evidence": "Lemma 2 comes from an abandoned β-modification technique; device (6.2) was 'highly unfavourable'.",
+    "pages": "pp. 9, 24"
+   },
+   {
+    "pattern": "tiny explicit counterexample to justify a design choice",
+    "evidence": "The n=2, m=5 cluster example quantifies (ξ/η)^8 ε error and motivates the origin-shift threshold.",
+    "pages": "pp. 11-12"
+   }
+  ],
+  "transferable": [
+   "If exact arithmetic guarantees rank r or a zero block, store the matrix as ZSZᵀ with exactly r columns and update Z with Givens rotations plus one closed-form column (pp. 14, 17-19).",
+   "Prove the update denominator equals det W⁺/det W, so choosing the dropped point by |σ| means keeping the system nonsingular (pp. 7-8, 12).",
+   "Analyse rounding on a two-parameter geometric example (cluster radius η, distance ξ) and set thresholds from the power of ξ/η (pp. 11-12, 15-16).",
+   "Run the new code in a configuration where it must equal the old one in exact arithmetic (pp. 23-24).",
+   "Monitor a theoretical sign or rank invariant during runs and report violation counts and lifetimes (p. 24)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "Whenever the author has discovered techniques of this importance to practical algorithms on previous occasions, he has developed Fortran software that makes the discoveries available for general use.",
+    "page": 22
+   },
+   {
+    "text": "if a need for the modification of parameters is detectable, then substantial errors must have occurred already that require attention.",
+    "page": 25
+   }
+  ]
+ },
+ {
+  "id": "X001",
+  "year": "2005",
+  "title": "An interview with Michael J. D. Powell (SIAM oral history, conducted by Philip Davis, 6 April 2005)",
+  "read_level": "full",
+  "contribution": "First-person account, just after NEWUOA, of how Powell chooses problems (uncrowded, neglected fields such as DFO; better methods that are as easy to use as primitive ones), where ideas come from (algorithms that misbehave), and why he publishes without waiting for proof. It also gives his candid credit statements (DFP) and his working style (loner).",
+  "problem_entry": "Choose uncrowded, neglected areas (DFO, because most people assume derivatives) and target the gap between primitive methods practitioners use (simulated annealing) and sophisticated ones that are hard to use (pp. 20-22).",
+  "key_idea": "Ideas come from thinking about questions and from algorithms that do not behave as expected; theorems follow numerical results (pp. 13, 17).",
+  "assumptions": "Algorithm developers should not wait for theoretical support; good practical results matter; open theoretical questions are stated as open (pp. 17-18).",
+  "proof_devices": [
+   "explains quasi-Newton success by the information the model picks up for the step, not by Hessian accuracy (p. 11)",
+   "studies the simplest cases first (RBF boundary effects 'only in very simple cases') (p. 13)"
+  ],
+  "experiments": "No experiments. Practice advice: try a range of starting points for local minima; slow runs are often wrongly attributed to local minima when the method is unsuitable; his software is rarely used beyond 200-300 variables (pp. 12, 21).",
+  "positioning": "Candid credit (the F and P part of DFP 'could almost' be called plagiarism of Davidon's report) and admits being overtaken (BFGS, NAG/IMSL/MATLAB). Fewer than half of his papers are coauthored, and he avoids putting his name on students' papers (pp. 8, 10, 14-15).",
+  "writing": "Duty to write papers on discoveries, but prefers the mathematics. Usability matters: methods must be as easy to use as primitive ones. Hedges on when a problem is solved (pp. 11, 15, 20, 22).",
+  "limits_future": "Admits failing to build a numerical analysis group at Cambridge and regrets the success of primitive methods. Wants to make better techniques easily available but must be selective (pp. 16, 20-21).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Scope stated in n (two or three hundred variables) and multiple-start advice for local minima.",
+    "pages": "pp. 12, 21"
+   },
+   {
+    "method": "Research Heuristic 5",
+    "relation": "evidence",
+    "note": "Try a range of starting points for local minima.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Research Heuristic 5",
+    "relation": "variant",
+    "note": "Adds that slow runs are often wrongly blamed on local minima when the method is unsuitable for the objective (belongs in Workflow B).",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Stated motive: make better techniques easily available, as easy to use as primitive ones; pride in starting HSL.",
+    "pages": "pp. 8, 20"
+   },
+   {
+    "method": "Research Taste warning sign 1",
+    "relation": "evidence",
+    "note": "Simulated annealing is called horrible and used too often.",
+    "pages": "pp. 12, 20"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "judge a model by the steps it produces, not by its accuracy",
+    "evidence": "DFP does not generate an accurate Hessian but picks up the information it needs; convergence comes in far fewer than n steps.",
+    "pages": "p. 11"
+   },
+   {
+    "pattern": "publish algorithms without waiting for proof; state open questions",
+    "evidence": "'I don’t think people who develop algorithms should wait to provide theoretical support'; he does not delay publication while waiting for proof.",
+    "pages": "pp. 17-18"
+   },
+   {
+    "pattern": "numerics -> conjecture -> proof or counterexample",
+    "evidence": "An algorithm that does not behave as expected is the basis of an idea; results are crystal clear numerically before proofs.",
+    "pages": "pp. 13, 17"
+   },
+   {
+    "pattern": "self-derivation over literature study; work alone on uncrowded topics",
+    "evidence": "Prefers to crack problems himself; avoids crowded fields and funded 'important fields'.",
+    "pages": "pp. 14-15, 22"
+   }
+  ],
+  "transferable": [
+   "Name the primitive method practitioners use, why they use it (ease), and what a better method must match in ease of use (pp. 20-21).",
+   "Keep a log of runs that did not behave as expected; each entry is a bug, a design flaw or a paper (p. 17).",
+   "In stalled-run diagnosis, test the hypothesis that the method is unsuited to this objective alongside the local-minimum hypothesis (p. 12)."
+  ],
+  "coauthors": "interviewer Philip Davis",
+  "quotes": [
+   {
+    "text": "If I try an algorithm and it doesn’t behave in the way I expect then there’s a basis of an idea, and I try to explain it.",
+    "page": 17
+   },
+   {
+    "text": "So, I don’t delay publication while waiting for proof.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S018",
+  "year": "2006",
+  "title": "The NEWUOA software for unconstrained optimization without derivatives",
+  "read_level": "full",
+  "contribution": "Complete description of NEWUOA: a 15-box flowchart shared with UOBYQA, least-Frobenius updating with m=2n+1, the factored inverse KKT matrix, the closed-form initial matrices (proved in an appendix), BIGLAG/BIGDEN geometry steps, all numerical constants, and a post-release Q_int fix. Nine test problems up to n=160 show #F below the number of quadratic parameters and about O(n²) work per iteration.",
+  "problem_entry": "Full quadratic models need ½(n+1)(n+2) evaluations, 'prohibitively expensive' for large n. The paper delivers the details withheld from S072 because of instabilities that the Ω factorization later cured (pp. 2-3).",
+  "key_idea": "Least-Frobenius updating as a 'win/win situation', where a small model error means a good prediction and a large one means a big model improvement. Implementation keeps UOBYQA's outline and adds a factored H, an implicit Hessian, truncated CG, BIGLAG/BIGDEN, sixth-power distance weights and origin shifts (pp. 2-5, 11-29).",
+  "assumptions": "F computable anywhere; ρ protects against spurious errors in F; intended to cope with first-derivative discontinuities through Δ≥ρ; an infinite loop is possible in theory; no convergence theorem (pp. 4, 7, 33).",
+  "proof_devices": [
+   "KKT form of the least-Frobenius change: an (m+n+1) linear system (p. 9)",
+   "Lagrange-function link τ = ℓ_t(x_opt+d), with the determinant ratio equal to ℓ_t when m=m* (pp. 21-22)",
+   "stability identity (4.13) plus the factorization guaranteeing a zero trailing block (4.14) (p. 13)",
+   "origin-shift error magnitude M^8 ε reduced to M^6 ε cos²θ (p. 29)",
+   "magnitude estimate |σ_t| = O(Δ^4/dist^4) justifying sixth-power weights (pp. 27-28)",
+   "BIGDEN: σ(θ) as a degree-4 trigonometric polynomial with 9 coefficients, 50-point search plus quadratic refinement (pp. 24-26)",
+   "appendix: closed-form initial Ξ, Υ, Z proved via Lagrange functions and divided differences (pp. 37-41)"
+  ],
+  "experiments": "Nine problems (VARDIM, TRIGSSQS, TRIGSABS, SPHRPTS, ARWHEAD, CHROSEN, PENALTY1-3), n=20..160, three m values, five random instances averaged. Variable-permutation reruns expose rounding sensitivity (PENALTY3 n=160: 629582 versus 16844 evaluations). Failures marked '?'. Effort profile (first F ≤ 1.001 F_fin). time/(n²·#F) ≈ 8-9e-6 constant. No external solver baseline (pp. 30-37).",
+  "positioning": "Builds on symmetric Broyden, truncated CG (Conn-Gould-Toint; Fletcher-Reeves) and his own 2001-2004 chain. Test problems credited to Buckley and Conn et al.; extra experiments to discussion with Nick Gould. Openly doubts his own explicit-inverse choice (pp. 2, 17-18, 30-31, 37, 41-42).",
+  "writing": "Flowchart-first outline shared with the predecessor, then one section per box. Every constant printed, with a reason or the label 'empirical'. Candid development history ('very frustrating'). Free-software invitation (pp. 3, 5, 19, 27-28, 37).",
+  "limits_future": "Results remain highly sensitive to rounding; PENALTY2/3 fail at n=160; theoretical infinite loop; BIGDEN step criticized; explicit inverse doubted. No future work listed beyond requests for the code (pp. 7, 24, 36-37).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Primary source of the SKILL.md constants: ρ's role, Δ rule (7.1), ρ schedule (7.6), Box 14 ⅛ρ²·CRVMIN test.",
+    "pages": "pp. 4, 27-29"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Corrects the SKILL.md claim that the rationale is undocumented: the schedule balances ρ_old/ρ_new = ρ_new/ρ_end, the 1.5ρ snap sharpens Box 10, BIGLAG's radius has three reasons, and the sixth power comes from a magnitude estimate. Only the CG truncation is called empirical. ρ's stated purpose is noise robustness.",
+    "pages": "pp. 4, 19, 23, 27-28"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "m=2n+1 gives #F below the number of quadratic parameters.",
+    "pages": "pp. 2-3, 33-34"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Origin-shift error analysis, factorization, dropping the constant term to work with differences, measured per-iteration cost.",
+    "pages": "pp. 13, 15-16, 29, 37"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Exact-arithmetic-neutral permutation reruns and reported failures.",
+    "pages": "pp. 32, 36"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "No comparison with any other solver.",
+    "pages": "pp. 30-37"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The flowchart outline applies to UOBYQA too; only the model update changes.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Free Fortran on request; the released code was re-tested and modified after Erice.",
+    "pages": "pp. 30-31, 37"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "judge a model by the steps it produces, not by its accuracy",
+    "evidence": "The algorithm achieves the model features that give suitable steps while ||∇²Q−∇²F||_F stays big.",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "exact-arithmetic-equivalence control run",
+    "evidence": "Reordering the variables makes no difference in theory; both results are reported to expose rounding sensitivity.",
+    "pages": "pp. 32, 36"
+   },
+   {
+    "pattern": "empirical complexity check by normalized time",
+    "evidence": "time/(n²·#F) is roughly constant across n=20..160.",
+    "pages": "p. 37"
+   },
+   {
+    "pattern": "effort profile: first evaluation within 0.1% of final value",
+    "evidence": "SPHRPTS reports the index of the first F ≤ 1.001 F(x_fin) beside #F.",
+    "pages": "pp. 34-35"
+   },
+   {
+    "pattern": "publish the rejected alternative",
+    "evidence": "The σ_new rule (4.21) was abandoned and β_new (4.22) tested but not preferred, both reported.",
+    "pages": "p. 15"
+   }
+  ],
+  "transferable": [
+   "Verify claimed per-iteration complexity by dividing wall time by n²·#F across n (p. 37).",
+   "Rerun with inputs transformed so the method is invariant in exact arithmetic (variable permutation) and report both results (pp. 32, 36).",
+   "Report #F with the first evaluation index reaching F ≤ 1.001 F_final (pp. 34-35).",
+   "Store and update only differences (drop the constant term; use F(x_opt+d)−F(x_opt)) to avoid swamping by absolute values (pp. 15-16).",
+   "Guard a least-change update against a bad initial model by comparing with the minimum-norm interpolant and switching after three consecutive flags (pp. 31-32).",
+   "Choose initial points so that the inverse KKT matrix has a closed sparse form, and prove it in an appendix (pp. 10-11, 37-41)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "The author resisted pressure from the editor and referees of that paper to include a detailed description of the algorithm",
+    "page": 3
+   },
+   {
+    "text": "the algorithm seems to achieve automatically the features of the quadratic model that give suitable changes to the variables, without paying much attention to other features of the approximation Q≈F.",
+    "page": 3
+   }
+  ]
+ }
+]

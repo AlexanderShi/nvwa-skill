@@ -1,0 +1,306 @@
+[
+ {
+  "id": "S089",
+  "year": "2022",
+  "title": "Modeling Hessian-vector products in nonlinear optimization: new Hessian-free methods",
+  "read_level": "full",
+  "contribution": "Two Hessian-free recoveries built from DFO interpolation: a least-change model Hessian enriched by one Hessian-vector product, and a least-change Newton direction enriched by p products. Each comes with monotone-error and accuracy theorems and CUTEst profiles showing fewer Hessian-vector products than inexact Newton (pp. 1-4, 10-14).",
+  "problem_entry": "Inexact Newton methods pay one Hessian-vector product per CG step, and existing Hessian estimators are not entirely satisfactory. Entry: treat the products as extra interpolation data so that fewer are needed without losing convergence (pp. 2-3).",
+  "key_idea": "Enrich quadratic interpolation conditions with curvature data. Recover H by min ||H - H_prev|| (at most one product, Remark 2.1), or recover the Newton direction d directly from (z_l)^T d = -f(y_l) + f(x) + 0.5 (y_l - x)^T z_l, which admits p products (pp. 3-4, 10).",
+  "assumptions": "f is C2 and the oracle gives f, grad f and Hessian-vector products (p. 1). The theorems assume a quadratic f with an underdetermined feasible system (pp. 4, 11), a determined nonsingular M (p. 6), or p >= n with full-rank M_L^z, invertible Hessian and Lipschitz Hessian (p. 11).",
+  "proof_devices": [
+   "least-change projection / Pythagoras: ||H*-C||^2 = ||H_prev-C||^2 - ||H*-H_prev||^2 via m(theta) minimized at 0 along feasible direction C-H* (Powell's argument; pp. 4-5, 11)",
+   "rank-deficiency check by cross-multiplying enriched conditions (Remark 2.1, p. 3)",
+   "fully quadratic model via Taylor expansion and scaled inverse of M (CSV Thm 4.2; p. 6)",
+   "direction error Lambda_z O(Delta_y^3/Delta_z) and ||R_y|| O(Delta_y^2) (pp. 11-12)",
+   "KKT-based recovery cost count (pp. 9-10)"
+  ],
+  "experiments": "CUTEst sets of 48 very small, 12 sparse small and 26 small problems; baseline inexact Newton with the same truncated CG and cubic line search; performance profiles for Hessian-vector products, iterations and function evaluations. About 50% fewer products for the Hessian recovery, at order n^2 function evaluations per iteration (pp. 6-16).",
+  "positioning": "Builds on inexact-Newton theory (Dembo-Eisenstat-Steihaug, Eisenstat-Walker) and finds sparse Hessian estimation ([9], [17], [2]) not entirely satisfactory. Imports Powell's least-Frobenius-norm update and Conn-Scheinberg-Vicente fully-quadratic theory from DFO (pp. 2, 4, 6).",
+  "writing": "Modest framing (illustrative numerical results, quite encouraging, promising); costs named in the abstract; each recovery gets a theoretical-motivation subsection before its numerics (pp. 1, 3-4, 10, 13).",
+  "limits_future": "At most one product in approach (i) and a dense linear system in (ii); only small problems, dense algebra and high function-evaluation counts. Future work: medium/large-scale versions with an iterative solve and row-wise parallel storage. A third, worse approach is left for the first author's thesis (pp. 3, 15).",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Old Hessian-vector products are reused through a gradient-difference correction (18); one new product and one new f-evaluation per iteration.",
+    "pages": "pp. 12-13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "The counted unit is the expensive oracle call (Hessian-vector products), and the price in f-evaluations and linear algebra is named; but there is no worst-case bound, only profiles.",
+    "pages": "pp. 1, 7, 9-10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The recovered direction is a heuristic inside a standard sufficient-decrease line search with a cosine safeguard; no convergence theorem is proved.",
+    "pages": "pp. 6-7, 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "CUTEst collections and performance profiles against inexact Newton; no code release mentioned; n <= 200.",
+    "pages": "pp. 7-16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import",
+    "evidence": "DFO interpolation (least-change models, fully quadratic theory) exported to derivative-based Hessian-free optimization.",
+    "pages": "pp. 4, 6, 15"
+   },
+   {
+    "pattern": "design around the user's existing oracle",
+    "evidence": "The method uses only f, grad f and Hessian-vector products, the oracle of the Hessian-free setting.",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "change the unknown to escape a degeneracy",
+    "evidence": "Remark 2.1 limits Hessian recovery to one product; recovering the Newton direction instead admits p products.",
+    "pages": "pp. 3, 10"
+   },
+   {
+    "pattern": "disclose omitted experiments",
+    "evidence": "A third approach (joint direction and inverse-Hessian recovery) performed worst and its details are withheld.",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Function-evaluation and linear-algebra costs stated in the abstract and the experiments.",
+    "pages": "pp. 1, 3, 7"
+   }
+  ],
+  "transferable": [
+   "Least-change monotonicity lemma: if the truth satisfies the affine data conditions, the minimum-norm-change solution obeys ||new-truth||^2 = ||old-truth||^2 - ||new-old||^2; prove it by minimizing m(theta) along truth-new (pp. 4-5, 11).",
+   "Check new interpolation conditions for degeneracy by multiplying each by the others' vectors (p. 3).",
+   "Recycle expensive oracle outputs with a first-order correction z_prev + grad f(x_prev) - grad f(x); refresh the farthest point each iteration; restart when cond >= 1e8 (pp. 12-13).",
+   "Make a model direction descent with a fixed angle: d = d_N - beta grad f with cos(d, -grad f) = 0.95 (p. 13).",
+   "Tie the sampling radius to the last step: r_k = min{1e-2, max{1e-4, ||x_k - x_{k-1}||}} (p. 7).",
+   "Profile both the saved resource and the resource spent more of (pp. 7-8)."
+  ],
+  "coauthors": "L. Song (Coimbra, PhD student)",
+  "quotes": [
+   {
+    "text": "These techniques can lead to a significant reduction in the overall number of Hessian-vector products when compared to the inexact or truncated Newton method, although simple implementations may pay a cost in linear algebra or number of function evaluations.",
+    "page": 1
+   },
+   {
+    "text": "We aimed at presenting new, refreshing ideas, laying down the theoretical groundwork for future more elaborated algorithmic developments.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S080",
+  "year": "2023",
+  "title": "An integrated assignment, routing, and speed model for roadway mobility and transportation with environmental, efficiency, and service goals",
+  "read_level": "full",
+  "contribution": "A trilevel multi-objective architecture for vehicle routing with speed decisions, a congestion-based speed constraint that links transportation components, and an alternating algorithm (auxiliary complete-graph VRP plus speed NLP on the road network) that yields approximate Pareto fronts on New York City instances (pp. 3-4, 7-9, 19-23).",
+  "problem_entry": "Smart-city autonomous vehicles need joint assignment, routing and speed decisions with conflicting environmental, efficiency and service goals. Services are modelled separately, and complete-graph VRP assumptions fail on road networks (pp. 1-5).",
+  "key_idea": "State a general trilevel template, reduce it to a bilevel problem, solve assignment-routing on a shortest-path complete graph with existing VRP tools, map the routes back, solve speed by NLP, and alternate until a fixed point; the congestion constraint is enforced by penalty re-solves (pp. 7, 14, 17-19).",
+  "assumptions": "Other components' routes are parameters; a volume-delay speed bound (pessimistic); the speed on a repeated edge equals the first traversal's; in the experiments demands are 0 and costs are set arbitrarily to $100 (pp. 7-9, 20, 24).",
+  "proof_devices": [
+   "none (no theorems); feasibility transfer: auxiliary constraints (5.23)-(5.28) imply original constraints (5.11)-(5.16) at the mapped solution (p. 17)"
+  ],
+  "experiments": "Two NYC road-network instances (269 nodes/10 customers; 1130 nodes/30 customers); 0% and 50% background congestion and Poisson stochastic traffic; OR-Tools plus IPOPT; weighted-sum sweeps filtered for dominance; CPU 408.58 s and 2995.91 s per weight vector; no baseline (pp. 20-23).",
+  "positioning": "Extends the bilevel assignment-routing model of Marinakis et al. (2007) to a trilevel multiobjective one; contrasts with Vidal et al. (2014), whose unified model still treats services separately; places itself among pollution-routing problems (Bektas-Laporte 2011); adopts the shortest-path completion of Zografos-Androutsopoulos (pp. 3, 5).",
+  "writing": "Three bold-headed contributions in the introduction; repeated use of innovative (pp. 1, 3, 4, 24); smart-city motivation; results reported as percentage trade-offs between named Pareto points (pp. 1-4, 22).",
+  "limits_future": "PDP and PFITP components to be formulated; drop the same-speed-on-repeated-edges assumption; speed optimization is slow with only local guarantees and needs real-time heuristics; a user app is envisaged (pp. 22, 24).",
+  "method_links": [
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Anchored in urban transport (named in the Lagrange citation) with real traffic data.",
+    "pages": "pp. 1-3, 20"
+   },
+   {
+    "method": "Heuristic 4",
+    "relation": "contradiction",
+    "note": "Objectives are aggregated by normalized weighted sums before the front is known; dominance is used only as an afterwards filter.",
+    "pages": "pp. 18, 21-22"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "The existing VRP solver machinery is kept and one object is changed (the graph), with a map back and a penalty repair; the change is to problem data, not to an acceptance test.",
+    "pages": "pp. 4, 14, 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Real-data instances and off-the-shelf solvers, but no baseline, no profiles and no code release.",
+    "pages": "pp. 20-23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reformulate to reuse existing DFO solvers",
+    "evidence": "Generalized beyond DFO: an auxiliary complete graph exists so that existing VRP methods apply, and the constraint they cannot handle becomes a penalty.",
+    "pages": "pp. 4, 14, 17"
+   },
+   {
+    "pattern": "check objective conflict before going multiobjective",
+    "evidence": "Checked afterwards: the service-quality terms were observed not to conflict and were dropped from the plots.",
+    "pages": "p. 22"
+   },
+   {
+    "pattern": "architecture first, instance second",
+    "evidence": "The general trilevel multiobjective template is stated first; the freight-VRP problems are derived as particular cases.",
+    "pages": "pp. 6-7, 12, 17"
+   }
+  ],
+  "transferable": [
+   "When a standard solver's structural assumption fails on your data, solve on an auxiliary instance that satisfies it, map back, prove the constraints that carry over, and enforce the rest by penalty re-solves (pp. 14, 17).",
+   "Normalize each weighted-sum term by its value at the initial solution (p. 21).",
+   "Turn a published empirical relation (volume-delay curve) into a parametric bound that couples subsystems (pp. 8-9).",
+   "Report trade-offs as percentage changes between named Pareto points (p. 22)."
+  ],
+  "coauthors": "T. Giovannelli (Lehigh)",
+  "quotes": [
+   {
+    "text": "The advantage of considering first such a complex trilevel formulation is to comprehensively understand the overall problem complexity and guide the development of subproblems",
+    "page": 7
+   },
+   {
+    "text": "In the formulation of problem (5.22), we do not include a constraint enforcing (5.17) because it would not allow solving problem (5.22) by using existing VRP methods, which are not designed to handle such a constraint.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S093",
+  "year": "2023",
+  "title": "Convergence rates of the stochastic alternating algorithm for bi-objective optimization",
+  "read_level": "full",
+  "contribution": "Proves that alternating n_a stochastic (sub)gradient steps on f^a and n_b on f^b minimizes the weighted sum with weight n_a/(n_a+n_b) at O(1/T) under strong convexity and O(1/sqrt T) under convexity, smooth or not, matching single-objective SGD; sweeping the effort split traces the Pareto front (pp. 1, 3, 6, 11, 14-16).",
+  "problem_entry": "Arises from fair clustering (SAfairKM), where a convex combination could not be optimized but each objective could be optimized separately. Question: what do alternating blocks converge to, and how fast (pp. 3-4).",
+  "key_idea": "The effort split is an implicit scalarization; an IVT bundling of the inner steps shows that the iteration behaves like SGD on (n_a f^a + n_b f^b)/(n_a+n_b), up to O(alpha_t^2) drift (pp. 3, 6-10, 17).",
+  "assumptions": "Compact convex X with diameter Theta; Lipschitz gradients or Lipschitz functions; strong convexity (or convexity); unbiased stochastic (sub)gradients with bounded second moment (pp. 5-6, 10-11, 14-15).",
+  "proof_devices": [
+   "IVT bundling: sum_r phi(y_r) = n phi(w) with w in the convex hull of inner iterates (Proposition A.1, p. 17; used pp. 6-8)",
+   "drift bound ||x_t - w|| <= alpha_t (n_a+n_b) sqrt(G + Gbar M), giving an O(alpha_t^2) error absorbed by diminishing steps (pp. 8-10)",
+   "weighted telescoping (multiply by t and sum) (p. 9)",
+   "nonsmooth case: IVT applied after strong convexity to psi(x) = f(x) - f(x*) + (c/2)||x-x*||^2 (pp. 12-14)",
+   "Jensen for averaged iterates (p. 15)"
+  ],
+  "experiments": "Illustration only: four deterministic DMS problems, full-batch gradients, 201 effort splits vs 201 weighted-sum weights, 300 iterations each; visual front comparison (pp. 15-16).",
+  "positioning": "Places alternating methods in the a priori class with weighted-sum and epsilon-constraint; contrasts with a posteriori multi-gradient methods and with the unparameterized stochastic multi-gradient method [29, 36]; takes the single-objective counterparts from Beck's book (pp. 2-4, 11, 14).",
+  "writing": "The contribution paragraph gives the rates and then names the proof device; the IVT use is self-described as ingenious (pp. 3, 17); proofs are split into Parts I-III, with post-proof remarks on why the step decay matters (pp. 10, 14).",
+  "limits_future": "Nonconvex case (needed by the fair-clustering application) open; any step order, random interleaving and more than two objectives claimed without proof; the experiment is deterministic and includes nonconvex fronts outside the theory (pp. 15-17).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Explicit yardstick: recover the single-objective SGD and subgradient rates.",
+    "pages": "pp. 3, 11, 14, 16-17"
+   },
+   {
+    "method": "Taste #3",
+    "relation": "evidence",
+    "note": "Analyzes the practitioner's alternating scheme exactly as used in SAfairKM, with no safeguard added.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Heuristic 4",
+    "relation": "contradiction",
+    "note": "An a priori, scalarizing method; weighted-sum and epsilon-constraint are recommended whenever possible; the front is obtained by sweeping the effort weight, not by a nondominated list.",
+    "pages": "pp. 3-4, 15-16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "The SGD skeleton and step rule are unchanged; the new object (an implicit weighted sum) appears in the analysis, not in an acceptance test.",
+    "pages": "pp. 4, 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "implicit scalarization in the analysis only",
+    "evidence": "IVT bundling reveals the weight n_a/(n_a+n_b), which is never formed by the algorithm.",
+    "pages": "pp. 3, 17"
+   },
+   {
+    "pattern": "theory paper / application paper split",
+    "evidence": "SAfairKM [28] is the application; this paper supplies the rates.",
+    "pages": "pp. 3, 15"
+   },
+   {
+    "pattern": "disclosed theory-implementation gap",
+    "evidence": "Deterministic and partly nonconvex test problems; the deterministic choice is flagged, the convexity gap is not.",
+    "pages": "pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "IVT bundling for multi-step inner loops: reduce to scalar terms via the inner product with (x_t - x*), replace sum_r phi(y_r) by m phi(w) with w in the convex hull, and bound ||x_t - w|| by alpha_t times the step count times the gradient bound, so the error is O(alpha_t^2) (pp. 6-10, 17).",
+   "Without Lipschitz gradients, apply strong convexity first, then the IVT to the quadratic surrogate psi (pp. 12, 14).",
+   "Trace a front with an unweighted method by sweeping the split of a fixed step budget, and compare with a weighted-sum sweep at the same resolution (pp. 15-16).",
+   "Write a when-to-use-our-method paragraph that names where the standard alternative is better (pp. 3-4)."
+  ],
+  "coauthors": "S. Liu (Lehigh)",
+  "quotes": [
+   {
+    "text": "In this application we could not find a reasonable way to optimize a convex linear combination of the two functions. Rather, we were faced with a situation where we knew how to optimize them separately.",
+    "page": 3
+   },
+   {
+    "text": "We ingeniously applied the Intermediate Value Theorem to bundle all steps taken on each of the functions, a process that led to an implicit scalarization",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S120",
+  "year": "—",
+  "title": "The Effects of Travel Distance on MLB Performance",
+  "read_level": "full",
+  "contribution": "An empirical MLB study (2014-2023 Retrosheet) finding no significant effect of raw travel distance, a U-shaped travel shock and recovery over consecutive road moves, and a jet-over-bus advantage (pp. 1, 5-8).",
+  "problem_entry": "Asks to what extent travel-related fatigue affects MLB win probability, given mixed prior findings and the jet-lag direction result of Song et al. (pp. 2-3).",
+  "key_idea": "Control for talent with matchup subsets (Top 10 vs Top 10, Top 10 vs Bottom 10) and a rank-difference covariate; then test distance, consecutive moves, distance thresholds and a 200-mile bus/jet proxy (pp. 4-8).",
+  "assumptions": "Travel mode inferred from a 200-mile cutoff; great-circle distance ignoring direction and time zones; the ranking behind the Top 10 and Bottom 10 subsets is not specified (pp. 4, 8-9).",
+  "proof_devices": [
+   "none (no theorems); logistic regression with rank-difference control; two planned two-proportion Z-tests without multiplicity correction (pp. 4, 6)"
+  ],
+  "experiments": "Distance p = 0.8115 and 0.69860 (n.s.); U-curve 53.7/46.9/47.2/50.7% with p < 0.0001 and p = 0.0012; threshold r from -0.0229 to -0.0576; jet 50.3% vs bus 47.9%, p = 0.0240 (pp. 5-8).",
+  "positioning": "Positioned against mixed findings in reviews (Janse van Rensburg et al. 2021; Benito et al. 2026), Diaz et al. 2023 (distance not determining) and Song et al. 2017 (eastward jet lag) (pp. 2-3, 8).",
+  "writing": "Undergraduate-report structure (sections I-VII); coined labels (travel shock, jet advantage, resource gap) defined in the text; statistical detail placed in the figure captions; strong conclusions drawn from null results (pp. 2, 6-9).",
+  "limits_future": "Stated: Haversine distance ignores travel direction and time zones. Future: college athletes' resource gap, academic stress, richer performance metrics (pp. 8-9).",
+  "method_links": [
+   {
+    "method": "Taste #6",
+    "relation": "variant",
+    "note": "Application-anchored (sports scheduling), but the anchor is data analysis; optimization appears only as motivation. None of Methods 1-5 applies.",
+    "pages": "pp. 1, 9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "supervisor-role authorship on student-led artefacts",
+    "evidence": "The two undergraduates come first; Vicente is listed third as the endowed-chair professor.",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Null results reported with their p-values; the distance limitation named together with the study that exposes it.",
+    "pages": "pp. 5, 7-9"
+   }
+  ],
+  "transferable": [
+   "Isolate a weak effect from a dominant confounder with confounder-matched subsets plus the confounder difference as a covariate, reporting predictions at difference 0 (pp. 4-5).",
+   "Pre-declare a few pairwise tests and state in the caption why no multiplicity correction is applied (p. 6).",
+   "Run a threshold-sensitivity sweep and report the effect size at each threshold (p. 7)."
+  ],
+  "coauthors": "R. Khromchenko, S. Parlett (Lehigh undergraduates)",
+  "quotes": [
+   {
+    "text": "Because the analysis consisted of only two planned pairwise comparisons designed to test the study hypotheses, no multiple-comparison correction was applied.",
+    "page": 6
+   },
+   {
+    "text": "One limitation of the present study is that travel distance was calculated using the Haversine formula, which measures the great circle distance between two points on a sphere but does not account for travel direction or the number of time zones crossed.",
+    "page": 8
+   }
+  ]
+ }
+]

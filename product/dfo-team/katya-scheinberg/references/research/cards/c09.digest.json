@@ -1,0 +1,276 @@
+[
+ {
+  "id": "S087",
+  "year": "2026",
+  "title": "Function-free optimization via comparison oracles",
+  "read_level": "full",
+  "contribution": "A function-free framework for optimising a preference relation from pairwise comparisons alone: level-set optimality gap and regularity radius as invariant measures, a deterministic O(d log(d/eps)) normal-direction estimator matching an Omega(d log(1/eps)) lower bound, and NDD/adaNDD reaching an eps level-set gap with O~(dD^2/eps^2) comparisons over O(D^2/eps^2) normal steps, matching a span-method lower bound.",
+  "problem_entry": "Modelling objection: prior comparison-oracle work treats comparisons as a weak interface to a latent objective and states guarantees in function terms, yet preference-equivalent functions (Figure 1) give identical trajectories, so guarantees must depend only on the preference relation (pp. 2-3, 10-11).",
+  "key_idea": "Replace gradient, f-f* and stationarity by the outward normal of the preference sublevel set, dist(X*, L_x) and the tangent-ball regularity radius; estimate the normal via its orthogonal complement with d-1 planar bisections; run normalized-gradient descent / KT coin-betting on the estimated normals (pp. 3-4, 14-16, 28-36).",
+  "assumptions": "Complete, transitive, plateau-free preference; convex sublevel sets for global results; r-regularity (two-sided tangent balls); noiseless comparison oracle; projections onto C; local growth r_x >= min{g1*Delta_LS, g2} to convert stationarity to optimality (pp. 7-9, 11, 32).",
+  "proof_devices": [
+   "halfspace certificate with margin tau = h/(2 r_x) from tangent-ball geometry (Lemma 3.1)",
+   "planar bisection bracket invariant (Lemma 3.3)",
+   "orthonormal decomposition separating geometry bias from bisection error (Thm 3.5)",
+   "Haar anti-concentration plus randomly rotated dyadic grid for a high-probability halving count (Lemmas 3.8-3.9, Thm 3.11)",
+   "adversarial halving of spherical cells plus cap volume and Wendel's inequality for Omega(d log(1/eps)) (Thm 3.14)",
+   "supporting-halfspace bound Delta_LS(x) <= <n_x, x - x*> and monotonicity of Delta_LS (Lemmas 4.2-4.3)",
+   "Shor normalized-subgradient telescoping with accumulated estimation error, two-case guarantee (Thm 4.4)",
+   "KT coin-betting regret with projection-correction inequality and budget-exhaustion certificate via union bound (Lemmas 4.15-4.18, Thm 4.19)",
+   "zero-chain max_i x_i instance smoothed by convolution with an ordered-simplex kernel (Thm 4.23)"
+  ],
+  "experiments": "none",
+  "positioning": "Reframes rather than attacks comparison-based DFO (Hooke-Jeeves, Nelder-Mead, three-point, GLD, Jamieson et al., dueling optimization); translates competing normalized-gradient estimators into its notation and compares admissible comparison radius and count; acknowledges concurrent Tao et al.; cites no Scheinberg paper (pp. 2, 5-6, 17-18, 26, 44-46).",
+  "writing": "Three numbered Questions mapped to sections and contributions; one motivating figure; two named principles (optimality, adaptivity); interpretation paragraph after each theorem ('price of adaptivity'); rare flagged hedging; minor typos (pp. 2-4, 17, 23, 32, 44).",
+  "limits_future": "Global guarantees need convexity; noiseless oracle; lower bounds only for direction estimation and span-method step count, the minimax comparison complexity is open; nonconvex function-free theory open; no experiments (pp. 8, 11, 44).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Contract is exactness of a sign oracle, not accuracy w.p. p; the Method 1 move survives in the derived oracle: normal accuracy eps_k scheduled to the iterate and comparison radius h tied to local geometry r_x",
+    "pages": "pp. 7, 11, 17, 36"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Keeps Shor's normalized subgradient proof and KT coin-betting; only the direction oracle is new; backtracking reappears on the comparison radius (Alg. 3)",
+    "pages": "pp. 19, 32, 36"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Randomness only internal to the estimator; high probability claimed for the comparison count (log(1/delta) tail); yardstick is matching minimax lower bounds rather than deterministic parity",
+    "pages": "pp. 4, 20-26, 41-43"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Head-to-head estimator comparison on admissible radius and comparison count, but theory only",
+    "pages": "pp. 17-18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "invariance-first formulation",
+    "evidence": "Preference-equivalent functions give identical trajectories, so guarantees are stated only in quantities invariant under monotone reparameterisation",
+    "pages": "pp. 2-3, 10-11"
+   },
+   {
+    "pattern": "lower bound for every layer",
+    "evidence": "Normal estimator matched to Omega(d log(1/eps)); outer span method matched to Omega(D/sqrt(K))",
+    "pages": "pp. 23-26, 41-43"
+   },
+   {
+    "pattern": "two-case guarantee: near-optimal or certified near-stationary",
+    "evidence": "NDD either reaches small Delta_LS or passes an iterate with small regularity radius; adaNDD's early stop certifies r_x < r* w.p. 1-delta",
+    "pages": "pp. 29-31, 38-40"
+   }
+  ],
+  "transferable": [
+   "Invariance test before choosing an optimality measure: discard measures not invariant under transformations the oracle cannot detect (Prop. 2.9, p. 10)",
+   "Estimate a unit direction from sign-only feedback via its orthogonal complement: d-1 planar bisections plus one sign query (Algs. 1-2, pp. 14-16)",
+   "Split estimator error into geometry bias + truncation error and set each to eps/2 (Thm 3.5, Cor. 3.6, pp. 16-17)",
+   "Randomly rotate a dyadic query grid to turn a worst-case smallest inner product into a high-probability log cost (pp. 21-22)",
+   "Budget an adaptive subroutine at its good-regime high-probability cost; exhaustion certifies the near-stationary regime (Thm 4.19, pp. 35, 40)",
+   "Smooth a zero-chain hard instance by convolution with an order-preserving kernel to satisfy regularity (Lemma 4.22, Thm 4.23, pp. 41-43)"
+  ],
+  "coauthors": "Zikai Xiong",
+  "quotes": [
+   {
+    "text": "In summary, prior work aims to optimize a scalar function through weaker oracles. In contrast, our central goal is to formulate an optimization problem when the preference relation itself is the basic object defining optimality.",
+    "page": 2
+   },
+   {
+    "text": "Optimality matters because we seek worst-case complexity guarantees that cannot be substantially improved in general.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S093",
+  "year": "2026",
+  "title": "First-and Second-Order Stochastic Adaptive Regularization with Cubics: High-Probability Iteration and Sample Complexity",
+  "read_level": "full",
+  "contribution": "First high-probability (and expected) iteration complexity O(eps^-3/2) for first- and second-order stochastic ARC under stochastic zeroth-, first- and second-order oracles, matching deterministic ARC, plus high-probability sample complexity O(eps^-3.5) gradient, O(eps^-2.5) Hessian and O(eps^-4.5) function samples, with a noise floor O(eps_f^(2/3)).",
+  "problem_entry": "ARC is the deterministic winner (eps^-3/2 vs eps^-2), but stochastic ARC analyses give only expected bounds with exact or bounded zeroth-order oracles, or are non-adaptive with bounds holding only on an accuracy event (TSJ+18) (p. 2).",
+  "key_idea": "Keep ARC; tie oracle accuracy inputs to the regularisation parameter (mu/sigma_k for gradients, sqrt(mu/sigma_k) for Hessians), add a 2eps'_f slack to the acceptance ratio, and read alpha_k = 1/sigma_k as a step parameter so the JSX24 process framework applies (pp. 4, 10-11).",
+  "assumptions": "C^2, L-Lipschitz gradient and L_H-Lipschitz Hessian, bounded below; SZO sub-exponential error with mean <= eps_f; SFO/SSO accurate to kappa*mu w.p. 1-delta, implementable for arbitrarily small mu (stronger than JSX24/CBS22); p > 1/2; unbiased bounded-variance minibatches for sample complexity (pp. 1-3, 9, 16).",
+  "proof_devices": [
+   "per-realisation lemmas: model decrease sigma|s|^3/6, large sigma => success or tiny step, step-norm lower bound via gradient at trial point (Lemmas 1-5)",
+   "hypothesis-checklist theorem verifying JSX24 properties (i)-(v) with one-line glosses (Theorem 2)",
+   "imported JSX24 tail bound with stopping time shifted to T_eps <= t+1 (Theorem 3)",
+   "Borel-Cantelli for a.s. finite stopping time and expectation from exponential tail (Remark 3)",
+   "second-order step lower bound via Hessian Lipschitz, SSO accuracy and relaxed Nesterov-Polyak condition (Lemma 9)",
+   "one-sided geometric random walk bound on sigma_k via JSX25 Theorem 3 plus Chebyshev minibatch sizes for sample complexity (Theorems 6-7)"
+  ],
+  "experiments": "none (explicitly: numerical performance not discussed because ARC efficiency depends on the subproblem solver, p. 3)",
+  "positioning": "Extends JSX24 and CBS22 to the CS18 framework; presents SZO/SFO/SSO as a shared standard across group and others' papers; concrete critique of TSJ+18 and an even-handed sample-complexity comparison with it (pp. 2-3, 19).",
+  "writing": "Abstract claims SARC outperforms other stochastic adaptive methods from complexity alone; 'first comprehensive analysis' contributions; stronger assumption disclosed upfront with a why-it-rarely-binds argument; roadmap paragraph before lemmas; glosses on theorem items (pp. 1, 3, 5, 10).",
+  "limits_future": "Stronger SFO/SSO assumption; relaxed step-dependent oracle inputs left open; no numerics; dimension ignored in sample counts; function-sample complexity worse than methods without function values (pp. 3, 5, 16, 19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Explicit SZO/SFO/SSO contracts with accuracy tied to sigma_k; irreducible eps_f fixes the O(eps_f^(2/3)) neighbourhood",
+    "pages": "pp. 1-2, 4, 9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ARC with CGT11 step conditions kept; only oracle inputs and 2eps'_f slack changed; second order adds only a relaxed exact-solution property",
+    "pages": "pp. 3-4, 11-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Sub-exponential stopping-time tail; expected and high-probability O(eps^-3/2) match deterministic ARC",
+    "pages": "pp. 3, 10-11, 15"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "High-probability step-parameter lower bound (JSX25) converted into total sample complexity",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Taste 4",
+    "relation": "contradiction",
+    "note": "No numerical results accompany the guarantee, yet the abstract claims SARC outperforms other stochastic adaptive methods",
+    "pages": "pp. 1, 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation",
+    "evidence": "New method certified by checking the hypotheses (i)-(v) of the published JSX24 abstract process, then importing its tail bound",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "noise-floor exponent as a comparison axis",
+    "evidence": "Higher-order method sold partly on reaching eps ~ eps_f^(2/3) versus sqrt(eps_f) for SASS and stochastic TR",
+    "pages": "p. 9"
+   }
+  ],
+  "transferable": [
+   "Hypothesis-checklist theorem that plugs a new algorithm into an existing tail-bound framework (Theorem 2, p. 10)",
+   "Oracle accuracy inputs tied to the adaptive parameter with derivative-order-specific powers (Alg. 1, p. 4; Alg. 2, p. 11)",
+   "+2eps'_f acceptance slack with eps'_f any upper bound on the mean zeroth-order error (eq. (8), p. 4)",
+   "Shift the stopping time by one when progress is measured at the trial point (Def. 2, p. 9)",
+   "Relax an exact-subproblem property by eta2 in (0,1) to get an implementable termination test (eq. (30), p. 12)",
+   "Iteration-to-sample complexity: Chebyshev minibatch at the w.h.p. smallest step parameter times the iteration bound (pp. 17-18)"
+  ],
+  "coauthors": "Miaolan Xie",
+  "quotes": [
+   {
+    "text": "This is because function value estimates have an irreducible error, so without this correction term, the algorithm may always reject improvement steps.",
+    "page": 4
+   },
+   {
+    "text": "We do not discuss the numerical performance of our method in this paper.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S104",
+  "year": "2026",
+  "title": "Powell-Style Model-Based Derivative-Free Optimization with Complexity Guarantees",
+  "read_level": "full",
+  "contribution": "Complexity O(n^{3/2} log n eps^-2) function evaluations for a Powell-style geometry-correcting trust-region method that keeps all sample points and fits quadratic models, noisy random-subspace bounds O(nq/eps^2) and O(nq log q/eps^2), and a practical GC-YZ-LIN implementation with a hedge model that matches NEWUOA on CUTEst.",
+  "problem_entry": "Practice-theory gap: Powell's methods (revived in PDFO/PRIMA) work well but existing complexity covers simplified methods that rebuild models and abandon Powell's geometry handling; even [11] discards useful points; since all methods are O(eps^-2), target the n-dependence and noise floor (pp. 1-3).",
+  "key_idea": "Split samples into a certified core Y (n points, linear Lagrange polynomials, Lambda-poised) and a reuse pool Z fitted by least squares; replace the criticality step by ||g_k|| >= eta2*Delta_k with eta2 = sqrt(n); count geometry steps with a determinant potential; in noisy subspaces add +2eps_f and an explicit Delta_min (pp. 4, 7, 10-18).",
+  "assumptions": "Bounded below, L-Lipschitz gradient; deterministic bounded noise |f - phi| <= eps_f; fraction of Cauchy decrease and bounded model Hessian; subspace alignment w.p. theta > 1/2 (243/443 for uniform subspaces); Assumption 6.1 for practical gates; theory for linear Lagrange polynomials only (pp. 2, 4, 20, 24).",
+  "proof_devices": [
+   "TR counting: small Delta + fully linear => success, success => C2 Delta^2 - 2eps_f decrease, radius lower bound, |U| <= |S| + log (Lemmas 2.3-2.7, Thm 2.8)",
+   "explicit n-tracking of constants C1, C2 giving the eta2 = sqrt(n) gain (Cor. 2.10)",
+   "Lambda-poised error bound with quadratic term and noise via linearity of Lagrange polynomials (Thms 3.3, 3.5)",
+   "-log|det Y| potential: Hadamard, Cramer's rule, AM-GM on singular values give (1-1/n) contraction (Lemma 4.2)",
+   "induction on subspace dimension for 14^n-poisedness after 2n steps (Lemma 4.3)",
+   "indicator processes I_t, A_t, B_t with A_t >= I_t(1-B_t) and Cartis-Scheinberg renewal lemmas for E[T_eps] <= 4theta/(2theta-1)^2 (...) (Thm 5.12)"
+  ],
+  "experiments": "CUTEst via S2MPJ: 174 problems with n in [2,5] and 95/101/92 problems at n = 30/100/200; GC-YZ-LIN, GC-YZ-V, NEWUOA (PRIMA), DFOTR, GC-sub (q = 5); data profiles at tau in {1e-2,1e-4,1e-6} with AUC, averaged over random rotations of initial sets; hedge model given to all solvers; negative subspace result reported (pp. 26-30).",
+  "positioning": "Sequel to [11] (Chaudhry-Scheinberg, ICM 2026) with an error corrected in a footnote; criticises Garmanjani-Judice-Vicente's simplified methods; credits Zhang's PDFO/PRIMA; comparative subspace lineage (GRVZ18, Cartis-Roberts, Dzahini-Wild); sends readers to Cartis-Roberts for subspace experiments (pp. 1-2, 5, 10, 16, 30).",
+  "writing": "Abstract hedges 'what we believe to be nearly tight'; bullet recap of [11] and bullet list of extensions; 'Let us pause' constants paragraph; 'We state upfront' numbered findings incl. negative; admits surprise; scopes down subspace contribution; some drafting inconsistencies (pp. 1-2, 6-7, 12, 26, 29-30).",
+  "limits_future": "Theory for linear Lagrange polynomials only (best performer GC-YZ-V uncovered); practical subspace not competitive; practical parameters far from theory; subspace restarts expensive; future: quadratic Lagrange theory, adaptive eta2 and Lambda, patience theory, small subspace sets and point reuse (pp. 22, 24-25, 27, 29-30).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Geometry certified on only n points; trial points drive self-correction; practical Lambda = 1000 corrects geometry only when exceedingly bad; random subspaces with noise; benchmarked against NEWUOA via PRIMA",
+    "pages": "pp. 10-12, 16-23, 27"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Powell's method kept; criticality step swapped for ||g|| >= eta2*Delta; in subspaces the first broken piece (radius lower bound) repaired minimally with +2eps_f and Delta_min; practical gates re-verified via Assumption 6.1",
+    "pages": "pp. 4, 18, 24-25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Bounded deterministic noise fixes the floor eps >= Omega(sqrt(n * eps_f)), i.e. order sqrt(n)*sqrt(eps_f) (Cor. 4.4, p. 16; p. 22) with Delta_min = Theta(sqrt(eps_f))",
+    "pages": "pp. 2-3, 8, 22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Subspace method analysed as a stochastic process with theta > 1/2 but only an expected bound, no high-probability upgrade (as in S088)",
+    "pages": "p. 21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Equal-footing benchmark (same hedge model, rotations, initial sets), Powell-family and group baselines, failures reported; resolves the Honest Boundary item on test sets for this paper (CUTEst/S2MPJ, data profiles)",
+    "pages": "pp. 26-30"
+   },
+   {
+    "method": "Taste 4",
+    "relation": "evidence",
+    "note": "Guarantee paired with extensive numerical comparison",
+    "pages": "p. 1; §6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "determinant potential for counting geometry steps",
+    "evidence": "-log|det Y| contracts by (1-1/n) per correction; same family as pool entries 'volume/determinant potential for finite termination of point exchanges' (S030) and 'combinatorial potential for counting safeguard steps' (S088)",
+    "pages": "pp. 13-14"
+   },
+   {
+    "pattern": "explicit theory-vs-experiment deviation list",
+    "evidence": "eta2 = 5e-9, Lambda = 1000, K = 1e100 each justified against the worst-case theory",
+    "pages": "p. 27"
+   },
+   {
+    "pattern": "certify a minimal core, reuse the rest",
+    "evidence": "Y (n points) carries the poisedness certificate; Z (up to n(n-1)/2 points) only improves the least-squares quadratic fit",
+    "pages": "pp. 10-12"
+   },
+   {
+    "pattern": "dimension-scaled safeguard constants",
+    "evidence": "eta2 = sqrt(n) instead of a constant improves n^2 to n^{3/2}",
+    "pages": "pp. 7-8, 16"
+   }
+  ],
+  "transferable": [
+   "Y/Z split: certified core plus least-squares reuse pool (Alg. 2, eqs. (4.1)-(4.3), pp. 10-12)",
+   "-log|det Y| potential with Cramer's rule and AM-GM for a guaranteed (1-1/n) contraction (Lemma 4.2, pp. 13-14)",
+   "Scale a safeguard constant with n and re-derive constants to gain sqrt(n) (Cor. 2.10, pp. 7-8)",
+   "Explicit radius floor Delta_min tuned to the noise floor, Delta_min = Theta(sqrt(eps_f)) (Thm 5.13, p. 22)",
+   "Hedge model: switch MFN/MCFN models by EWMA of relative prediction error at the trial point (Alg. 5, pp. 25-26)",
+   "Benchmark protocol: give all solvers the new generic component, average profiles over random rotations of the initial set, run to budget, report AUC (p. 27)",
+   "Open the experiment section with numbered findings including negative ones and justify every theory-deviating parameter (pp. 26-27)"
+  ],
+  "coauthors": "Abraar Chaudhry, Scholar Sun (text lists three authors; batch metadata lists only Chaudhry and Scheinberg)",
+  "quotes": [
+   {
+    "text": "The main goal of this paper is to narrow the gap between theory and practice in model based derivative free optimization (DFO).",
+    "page": 1
+   },
+   {
+    "text": "In conclusion, our contribution in terms of subspace TR method in this paper is mainly theoretical while practical approaches require further investigation.",
+    "page": 30
+   }
+  ]
+ }
+]

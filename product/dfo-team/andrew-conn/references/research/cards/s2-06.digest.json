@@ -1,0 +1,449 @@
+[
+ {
+  "id": "S120",
+  "year": "1997",
+  "title": "A numerical comparison between the LANCELOT and MINOS packages for large-scale nonlinear optimization: the complete results",
+  "read_level": "partial",
+  "contribution": "Data companion to Report 97/13: tabulates the dimensions of 913 CUTE test problems and the per-problem function evaluations, CPU times and coded failures of the default LANCELOT and MINOS packages.",
+  "problem_entry": "Transparency: the comparison paper (97/13) gives only statistical summaries, so this report makes the complete per-problem data accessible (p. 2).",
+  "key_idea": "Two table sets: problem descriptors with identities n = nfr + nfx + nb and m = nle + nne + nli + nni, from which the classes LP/QP/BC/LC/NC are derived (p. 3); then evaluations and CPU time per problem with failure codes P/T/E/F/W (pp. 27-50).",
+  "assumptions": "Default options of both packages only; 12000-second CPU limit; one machine, a 333 MHz DEC Alphastation 500 (p. 27).",
+  "proof_devices": [],
+  "experiments": "913 CUTE problems. My tally of 912 parsed rows (not in the report): LANCELOT failed on 94 and MINOS on 105; where both succeeded (744), LANCELOT used fewer evaluations on 609 but MINOS less CPU on 563 (pp. 28-50).",
+  "positioning": "Companion of Bongartz-Conn-Gould-Saunders-Toint Report 97/13; uses CUTE (1995) and LANCELOT (1992) (pp. 2, 51). Co-authored with Saunders, a MINOS author (p. 1; MINOS attributed to Murtagh and Saunders in S054 p. 29).",
+  "writing": "Two-paragraph report, 'intended mostly for reference'; tables declared self-explanatory (pp. 2, 27).",
+  "limits_future": "Defaults only, no discussion (it is in 97/13), machine-specific CPU times; no future directions (pp. 2, 27).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Public 913-problem CUTE set, reproducible problem descriptors, failure taxonomy including a code for optimality wrongly reported (W), complete per-problem results published separately.",
+    "pages": "pp. 2-3, 27"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Companion-report structure: discussion in 97/13, full data in 97/14.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Step 1 (fix one cost unit): the report gives evaluations and CPU time, and my tally shows the two units rank the packages in opposite directions.",
+    "pages": "pp. 28-50"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Rival-inclusive benchmarking",
+    "evidence": "The LANCELOT-MINOS comparison is co-authored by M. A. Saunders, co-author of the rival package MINOS.",
+    "pages": "p. 1 (S054 p. 29 for MINOS authorship)"
+   },
+   {
+    "pattern": "Complete-results companion report",
+    "evidence": "Per-problem data published as a separate report so the summaries in 97/13 can be checked.",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Publish every per-problem number (both cost units plus a coded failure reason) in a companion technical report cited from the main paper (pp. 2, 27).",
+   "Use a failure taxonomy with a separate code for optimality wrongly reported, to catch false successes (p. 27).",
+   "Tabulate structural descriptors with consistency identities and derive class labels from them, so labels are reproducible (p. 3).",
+   "Report two cost units (evaluations and CPU); the ranking can reverse between them (pp. 28-50)."
+  ],
+  "coauthors": "I. Bongartz, N. I. M. Gould, M. A. Saunders, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "Since we believe that complete data should be accessible to interested readers, the present companion report provides full details of the performance of each package on each problem.",
+    "page": 2
+   },
+   {
+    "text": "It is intended mostly for reference.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S039",
+  "year": "1998",
+  "title": "Noise considerations in circuit optimization",
+  "read_level": "full",
+  "contribution": "Makes noise constraints (semi-infinite in time) tractable in simulation-based circuit tuning by mapping each to a time-integral equality constraint and computing all merit-function gradients in a single adjoint analysis inside JiffyTune.",
+  "problem_entry": "Industrial trend: lower voltages, denser packing, faster edges and dynamic logic make noise a design criterion; noise checks are semi-infinite constraints with many signals and time windows, and no practical solution existed (p. 1).",
+  "key_idea": "Replace v(x,t) >= NMH for all t by c(x) = integral of max{NMH - v, 0} dt = 0; its gradient is the integral of -dv/dx over the violation intervals, since the boundary terms vanish; gradients of the scalar Lagrangian merit function come from one adjoint analysis, whatever the number of constraints (pp. 2-4).",
+  "assumptions": "Waveform continuously differentiable in x and t (p. 2); simple bounds kept satisfied so z >= 0 (p. 4); simulator and optimizer must cooperate closely (p. 4).",
+  "proof_devices": [
+   "Equivalence: the integral of the positive-part violation is zero exactly when the semi-infinite constraint holds (p. 2)",
+   "Differentiation with x-dependent limits via unit steps and Dirac impulses; boundary terms cancel because the integrand is zero at the crossing times (eqs. (5)-(8), p. 3; (16)-(19), p. 5)",
+   "Adjoint excitation u(t-ts) - u(t-te) at the measurement node, weighted by the multipliers, to get the gradient of the merit function in one adjoint solve (pp. 3-4)"
+  ],
+  "experiments": "Dynamic AND gate tuned in 9 iterations (p. 6); delay-noise tradeoff sweep over a 50-300 mV noise margin (p. 7); branch-scan circuit (144 MOSFETs, 36 delays, 1-104 parameters, 1-459 noise functions): gradient overhead 3-18% of nominal simulation, flat in the number of noise functions (p. 7); no baseline.",
+  "positioning": "Semi-infinite programming (Hettich; Hettich-Kortanek) and the Conn-Gould exact penalty for semi-infinite programming; adjoint network sensitivities (Director-Rohrer); built on JiffyTune, LANCELOT and SPECS (pp. 1-3, 6, 8).",
+  "writing": "Concept demonstrated on a one-constraint example (§2) before generalizing (§3); exclamation-marked key claims about one adjoint analysis (pp. 4, 7).",
+  "limits_future": "Future: static timing, wire spacing, package design, electromigration; automate generation of noise-constraint lists, which is tedious (p. 8). No convergence discussion; reader's note: the equality constraint has zero gradient at feasible points (inferred, not stated).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Simulator adjoints give derivatives; scalar merit-function structure exploited so one adjoint gives all gradients (Heuristic 1).",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Problem from IC design trends; delivered inside the designers' tool with a schematic GUI; future work on usability.",
+    "pages": "pp. 1, 6, 8"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Semi-infinite exact-penalty lineage (Conn-Gould) and LANCELOT's augmented Lagrangian reused in circuit tuning.",
+    "pages": "pp. 3, 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Differentiate the merit function, not the constraints",
+    "evidence": "Adjoint excitations weighted by the Lagrange multipliers give the gradient of the merit function in one analysis instead of one sensitivity computation per constraint.",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "Replace a semi-infinite constraint by the equality: integral of max{-g, 0} dt = 0, computed from the existing simulation; differentiate over the violation intervals, since the boundary terms vanish (pp. 2-3).",
+   "When the optimizer only needs the gradient of a scalar merit function, weight the adjoint excitations by the multipliers and run one adjoint analysis (p. 4).",
+   "Scaling protocol: vary #parameters and #constraints independently and plot derivative overhead as a percentage of nominal simulation (p. 7)."
+  ],
+  "coauthors": "R. A. Haring, C. Visweswariah",
+  "quotes": [
+   {
+    "text": "Thus a large number of noise considerations can be incorporated with a very small impact on run time.",
+    "page": 7
+   },
+   {
+    "text": "The generation of the list of noise constraints for a large circuit can be a tedious job.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S056",
+  "year": "1999",
+  "title": "Two-step algorithms for nonlinear optimization with structured applications",
+  "read_level": "partial",
+  "contribution": "Adds a cheap second step (in variables of known functional form) to trust-region methods, keeps global convergence by redefining the predicted reduction, shows a two-step Newton method stays q-quadratic, and applies it to slack and minimax variables in LANCELOT with CUTE and circuit results.",
+  "problem_entry": "Expensive evaluations call for maximal progress per iteration; slack and minimax variables appear in a known algebraic form in LANCELOT's augmented Lagrangian, so they can be updated cheaply after each step (pp. 1, 3).",
+  "key_idea": "pred = model decrease of the TR step + actual decrease of the second step (eqs. (3)-(4)); greedy (Alg. 2.2) and conservative (Alg. 2.3) variants; closed-form slack update (27) and O(m) minimax update (34)-(36) (pp. 4-5, 13-15).",
+  "assumptions": "Unconstrained analysis, f in C2; bounded H_k; fraction of Cauchy decrease; for the lim-type result, uniformly continuous gradient and second step bounded by Delta or by its own decrease ((12) or (13)); extension to bounds (SBMIN) stated, not proved (pp. 2, 5, 7, 13).",
+  "proof_devices": [
+   "pred inherits the Cauchy bound because the second step only adds actual decrease; |ared - pred| equals the first step's Taylor error, so Moré's argument gives liminf ||grad f|| = 0 without restricting the second step (pp. 6-7)",
+   "Acceptance-ratio monotonicity rho_hat = (t + rho)/(t + 1): the standard test's accepted steps stay accepted (Remark 3.1, p. 7)",
+   "Quadratic decrease of the second step, >= kappa ||s_hat||^2, by convexity of the slack quadratic (Prop. 5.1, pp. 13-14), then scaling so (12) or (13) holds (Alg. 3.1, p. 10)",
+   "Two-step Newton q-quadratic rate via the perturbation lemma and Lipschitz continuity of the partial gradient (Cor. 4.1, pp. 11-12)"
+  ],
+  "experiments": "Modified LANCELOT/SBMIN (3 versions) on 56 CUTE problems (26 non-minimax, 30 minimax): about 15% fewer iterations with named exclusions; JiffyTune dynamic-simulation circuits and static-timing minimax circuits of growing size; failure analysis of the bad minimax cases with two tested fixes (pp. 15-24).",
+  "positioning": "The conservative line-search version is the Bertsekas/Luenberger spacer step; slack updates also appear in NPSOL/SNOPT; variable elimination (Golub-Pereyra) named as the alternative; analysis follows Moré's TR framework (pp. 2, 6-8, 13).",
+  "writing": "Remarks that liminf convergence without a size condition may seem surprising (p. 7); states that the hoped-for Theorem 3.2 with (21) instead of (12) is unlikely to be true (p. 11); dedicated failure section §6.3.",
+  "limits_future": "Unlikely to help asymptotically on small cheap problems (p. 17); on some minimax problems the second step worsens Hessian ill-conditioning (pp. 21-22); fixes tested (Table 8); general strategies left for future research (p. 23).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Variables of known functional form (slacks, minimax z) updated in closed form.",
+    "pages": "pp. 13, 15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Class-level theorem, modified LANCELOT code and CUTE plus circuit numbers in one paper.",
+    "pages": "pp. 4-23"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two tiers reported separately (CUTE; industrial circuits) plus a size-scaling family.",
+    "pages": "pp. 16-23"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Circuit evaluations taking over ten minutes justify the extra cheap step; used in JiffyTune.",
+    "pages": "pp. 17-18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Dedicated failure-analysis section",
+    "evidence": "§6.3 isolates the minimax problems where two-step updating is much worse, explains the Hessian ill-conditioning mechanism and tests fixes.",
+    "pages": "pp. 19-24"
+   },
+   {
+    "pattern": "Credit cheap extra decrease in the acceptance ratio",
+    "evidence": "Actual decrease of the cheap second step is added to the model's predicted decrease.",
+    "pages": "pp. 4, 7"
+   }
+  ],
+  "transferable": [
+   "Add a cheap bonus step to a TR method by defining pred = model decrease of the TR step + actual decrease of the bonus step; for lim-type convergence bound the bonus step by Delta or by its own decrease (pp. 4-7).",
+   "Show the modified acceptance ratio increases with the bonus gain so every standard-accepted step is still accepted (p. 7).",
+   "Update slack/minimax variables of an augmented-Lagrangian subproblem in closed form after each step (pp. 13-15).",
+   "Report averages with exclusions named in both directions, then give the bad cases their own section (pp. 16, 19-24)."
+  ],
+  "coauthors": "L. N. Vicente, C. Visweswariah",
+  "quotes": []
+ },
+ {
+  "id": "S054",
+  "year": "2000",
+  "title": "A primal-dual algorithm for minimizing a non-convex function subject to bound and linear equality constraints",
+  "read_level": "partial",
+  "contribution": "A line-search primal-dual interior-point framework for non-convex objectives with bounds and linear equalities, alternating a primal-dual step and a modified barrier step on one merit function, with first-order global convergence of a subsequence and preliminary CUTE QP results.",
+  "problem_entry": "Self-audit of LANCELOT: augmentation may be the wrong treatment of linear constraints, and Cauchy-point active-set prediction in SBMIN fails under degeneracy; interior-point methods are less sensitive to degeneracy; little prior non-convex primal-dual work (pp. 2-3).",
+  "key_idea": "Single artificial variable xi with Ax - b = xi r0; merit phi = f + rho(xi+1)^2/2 - mu<log x, e>; use the primal-dual step if it passes the descent test, else a modified barrier step; modify only N^T G N when G is not second-order sufficient (pp. 5-11).",
+  "assumptions": "f in C2; iterates remain in a convex bounded subset of the positive orthant (an assumption on the iterates); A full rank; a strictly interior feasible point exists; no feasible start required (pp. 2-4).",
+  "proof_devices": [
+   "Second-order sufficiency of the augmented matrix [G 0; 0 rho] w.r.t. (A r) when rho >= lambda + 2||r||^2/lambda (Lemmas 1-2, pp. 7-8)",
+   "Monotone merit function bounds the artificial variable xi (Lemma 4, (2.9)-(2.12), pp. 15-16)",
+   "Contradiction on mu bounded away from zero, with cases rho bounded / rho -> infinity (Theorem 3, p. 15; Lemmas 6-7, pp. 18, 23)"
+  ],
+  "experiments": "Prototype Fortran 90 QP code (MA27, pivot threshold 1e-6, G + ||G||I modification) on larger CUTE QPs vs HSL active-set VE09 (MINOS similar, not reported); reports counts of modified-barrier steps and Hessian modifications; good on convex, disappointing on non-convex (pp. 27-29).",
+  "positioning": "Transplants LP primal-dual ideas (OSL, CPLEX, Shanno) to non-convex NLP; contrasts Simantiraki-Shanno (local), Forsgren-Gill (merit), Bonnans-Pola (needs interior start, convex model); linearly constrained subproblem lineage Rosen-Kreuser, Robinson, Murtagh-Saunders/MINOS (pp. 2-3).",
+  "writing": "Emphasis on theory with 'preliminary' numbers; ten numbered comments on the algorithm; candid verdicts ('somewhat disappointing', 'too naive') (pp. 12-14, 29).",
+  "limits_future": "Naive negative-curvature handling; KKT-matrix ill-conditioning and unsuitability of normal equations; future: trust-region variant, why primal-dual beats primal globally, role of the central path, predictor-corrector (pp. 9, 29-30).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Theory, prototype and CUTE numbers together; the non-convex failure drives the trust-region successor S026 (step 5).",
+    "pages": "pp. 28-29; S026 p. 33"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "LP primal-dual interior-point machinery transplanted into non-convex NLP, keeping LANCELOT's augmented Lagrangian for nonlinear constraints.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Linear constraints and bounds handled explicitly rather than by augmentation.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Self-audit of one's own solver starts a research line",
+    "evidence": "Named LANCELOT drawbacks (augmentation for linear constraints; Cauchy-point active-set prediction under degeneracy) motivate the method; also S089 (s01) and S124.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "Prototype-subclass testing",
+    "evidence": "General NLP method tested first on non-convex QPs from CUTE, where baselines exist; repeated in S026.",
+    "pages": "p. 27"
+   }
+  ],
+  "transferable": [
+   "Carry all linear-constraint infeasibility in one scalar xi with Ax - b = xi r0; a unit step removes it permanently (p. 5).",
+   "Compute a guaranteed-descent fallback direction from the same factorization and switch by a slope test (pp. 6-11, 14).",
+   "Modify only the reduced Hessian N^T G N so no modification is needed near a minimizer (pp. 9, 14).",
+   "Report per-problem counts of safeguard activations next to iterations and time (p. 29)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "In the non-convex case, the merit function is an essential ingredient of any successful algorithm and the choice of merit function was a considerable concern in the present paper.",
+    "page": 3
+   },
+   {
+    "text": "On the other hand, its performance on the non-convex (NC) ones is somewhat disappointing.",
+    "page": 29
+   }
+  ]
+ },
+ {
+  "id": "S026",
+  "year": "2000",
+  "title": "A primal-dual trust-region algorithm for non-convex nonlinear programming",
+  "read_level": "partial",
+  "contribution": "A primal-dual log-barrier trust-region method for non-convex objectives with linear equalities and nonlinear inequalities, globally convergent to weak second-order points even with unbounded scaling matrices, implemented as HSL VE12 and tested on CUTE QPs against the active-set VE09.",
+  "problem_entry": "Redesign of the authors' own line-search method S054: assume a strictly feasible start to remove feasibility balancing, use trust regions for second-order guarantees, and separate inner and outer iterations (pp. 1-2).",
+  "key_idea": "Inner TR in the null space of A with the primal-dual Hessian term J^T C^-1 Z J, trust-region norm scaled by M = W + B, step rejected without evaluation if it leaves the interior (test (22)), and a safeguarded dual update by projection (pp. 6-9, 24).",
+  "assumptions": "Strictly feasible x0; f, c in C2; A full rank; barrier bounded below; bounded derivatives on a region containing the iterates; dual bounds; bounded Hessian approximations; uniformly second-order-sufficient scalings; AS.9-AS.10 for second-order results (pp. 2-4, 12, 21).",
+  "proof_devices": [
+   "Barrier level-set argument keeps inner iterates a fixed distance from the boundary, so radius-to-zero arguments stay inside P (Lemma 1, p. 13)",
+   "Uniform equivalence of all scaled norms within one inner minimization (Lemma 2, p. 14)",
+   "Step condition = max(Cauchy decrease, negative-curvature decrease) (19) giving first- and second-order convergence (pp. 8, 19-22)",
+   "Partition of outer iterates into finitely many 'consistently active' subsequences, and of constraints into 'eager' / 'reluctant' by z_i/c_i (pp. 26-27)"
+  ],
+  "experiments": "Non-convex QPs only (deliberate): VE12 with GLTR and automatic preconditioner switching, VE13 analytic-centre start, larger CUTE QPs unpreprocessed, vs VE09 with 1800 s limit; wins most small problems, non-convex as good as convex, named losses and rank-deficient failures, instances up to 100001 variables (pp. 30-34).",
+  "positioning": "Direct successor of S054 (at variance with its non-convex results, p. 33); compared with Yamashita-Yabe-Tanabe, Forsgren-Gill, El-Bakry et al., Vanderbei-Shanno, Gay-Overton-Wright, Byrd-Hribar-Nocedal by merit function, indefiniteness handling and globalization (pp. 2-3).",
+  "writing": "Festschrift paper for Davidon; motivations stated per design choice; assumptions defended in place (AS.4 'might at first seem strong'); explicit 'we do not pretend' on preprocessing (pp. 1-4).",
+  "limits_future": "Only QPs tested; rank-deficient A unsupported; memory limits at ~1e5 variables; future: more general models agreeing to first order, general nonlinear equalities (pp. 30, 33-35).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Analysed algorithm shipped as HSL VE12 and tested; the redesign answers S054's numerical failure.",
+    "pages": "pp. 30, 33"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "LP-style primal-dual interior-point ideas combined with the trio's trust-region machinery.",
+    "pages": "pp. 2, 6-9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "CUTE QPs, rival from the active-set school (VE09), iteration counts declared not comparable, named losses.",
+    "pages": "pp. 32-33"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Geometry made explicit outside DFO: trust-region norm built from the model Hessian to reflect the problem's geometry; theory tolerates unbounded scalings.",
+    "pages": "pp. 9, 12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Prototype-subclass testing",
+    "evidence": "Non-convex QP chosen deliberately as the prototype of linearly constrained NLP because test examples and earlier results exist; also S054.",
+    "pages": "p. 30"
+   },
+   {
+    "pattern": "Evaluation-free rejection",
+    "evidence": "Trial points that fail the cheap interiority test are rejected and the radius cut without evaluating the (undefined) barrier.",
+    "pages": "p. 8"
+   }
+  ],
+  "transferable": [
+   "Reject a trial point by a cheap interiority test c(x+s) >= varsigma c(x) and shrink the radius before evaluating an undefined barrier (pp. 8-9).",
+   "Require the step to achieve the larger of a Cauchy-type and a negative-curvature decrease so one condition serves first- and second-order proofs (pp. 8-9).",
+   "Safeguard dual updates by componentwise projection onto an interval built from the iterate and mu, and prove it preserves asymptotic centrality (pp. 24-25).",
+   "Prove outer convergence on each of finitely many consistently active subsequences (p. 26).",
+   "Against an active-set code, show iterations for information only and compare CPU time with a hard limit counted as failure (p. 32)."
+  ],
+  "coauthors": "N. I. M. Gould, D. Orban, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "This was quite deliberate since we have a large number of test examples in this case, and since we already have numerical results for these examples using other QP algorithms.",
+    "page": 30
+   },
+   {
+    "text": "We believe that this is likely because negative curvature is better handled in the trust-region subproblem than through the ad-hoc matrix modification strategy which lays at the heart of our previous linesearch algorithm.",
+    "page": 33
+   }
+  ]
+ },
+ {
+  "id": "S111",
+  "year": "1999",
+  "title": "A primal-dual trust-region algorithm for minimizing a non-convex function subject to general inequality and linear equality constraints",
+  "read_level": "partial",
+  "contribution": "Technical-report version (Report 99/04, 16 Aug 1999) of S026 with the same algorithm, theory and tables; differences are in assumptions placement, initial-point code, hedging and abstract wording.",
+  "problem_entry": "Same as S026: strictly feasible start, trust region for second-order guarantees, cleaner inner/outer split (pp. 2-3).",
+  "key_idea": "Same Algorithms 3.1-3.2 as S026 (pp. 5-10).",
+  "assumptions": "Report AS.3 bounds Hessians and Jacobian over the whole feasible set (p. 4); the journal replaces it with AS.5 on a region containing the iterates (S026 p. 12). Report uses ri{P}; journal strict{P}.",
+  "proof_devices": [
+   "Same as S026; report Theorems 4.4 and 4.8-4.12 correspond to journal Theorems 1-6 (pp. 13-22)"
+  ],
+  "experiments": "Same Tables 5.1-5.3 as S026 (pp. 26-28); initial point from HSL LA07 (p. 26) instead of VE13 in the journal.",
+  "positioning": "Same as S026; the journal adds Wright (1992) and an explicit exclusion of nonlinear equalities (S026 pp. 1-2).",
+  "writing": "Report says the interior-point advantages are 'now most obvious' (p. 28); the journal softens to 'clear' (S026 p. 34); abstract says 'Preliminary numerical results' (p. 2).",
+  "limits_future": "Same as S026 (p. 29).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Report-then-journal pipeline: full algorithm, theory and HSL-code numbers circulated as a technical report before publication.",
+    "pages": "pp. 1, 25-28"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Report-to-journal revision localizes assumptions and softens claims",
+    "evidence": "Derivative bounds moved from the feasible set to a region containing the iterates; 'most obvious' became 'clear' (one instance).",
+    "pages": "pp. 4, 28; S026 pp. 12, 34"
+   }
+  ],
+  "transferable": [
+   "If the proofs use derivative bounds only along the iterates, assume them on a region containing the iterates rather than on the whole feasible set (p. 4 vs S026 p. 12)."
+  ],
+  "coauthors": "N. I. M. Gould, D. Orban, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We include these simply to show that the advantages of interior-point methods over conventional active-set approaches are now most obvious.",
+    "page": 28
+   }
+  ]
+ },
+ {
+  "id": "S124",
+  "year": "2003",
+  "title": "Error estimates and poisedness in multivariate polynomial interpolation",
+  "read_level": "partial",
+  "contribution": "Defines a geometric, basis-independent Lambda-poisedness of interpolation sets, derives Taylor-like error bounds for the function and all derivatives (linear, quadratic, cubic), relates the condition to Lagrange-polynomial bounds, and gives a Gaussian-elimination algorithm to build or repair well-poised sets.",
+  "problem_entry": "DFO trust-region theory needs Taylor-like interpolation models; existing conditions (Powell, Sauer-Xu, Waldron) are basis-tied, hard to read, or cover only function values; condition numbers are basis-dependent and can be misleading (pp. 1-2, 6).",
+  "key_idea": "Y is Lambda-poised if every phi(x) - phi(0) is a combination of the phi(y_i) - phi(0) with ||lambda|| <= Lambda; equivalent to ||L^-1|| <= Lambda/Delta in the linear case and, up to constants, to bounded Lagrange polynomials; one linear system gives all derivative errors (pp. 6-10, 12-19, 24-25).",
+  "assumptions": "Y in a ball centred at the origin with y0 = 0 (true in TR use, where the centre is the best point); Lipschitz gradient/Hessian/third derivatives for the linear/quadratic/cubic cases; fully determined interpolation (pp. 3-5, 19, 23).",
+  "proof_devices": [
+   "Subtract the first interpolation equation from the others to cancel the function error, leaving an x-independent system L e_g = O(Delta^2) (eqs. (8)-(10), p. 8)",
+   "Equivalence of Lambda-poisedness with ||L^-1|| <= Lambda via the maximizer of ||L^-T x|| over the unit ball (Lemma 2.2, p. 9), then diagonal rescaling for radius Delta (Lemma 2.3, p. 10)",
+   "Derivative errors first, function error a posteriori (Theorem 2.4, p. 10; Theorem 3.4, p. 19)",
+   "Lower bound on the maximum of a normalized quadratic over the unit ball guarantees the pivot threshold is achievable in the repair algorithm (Lemma 3.3, p. 17; pp. 28-29)"
+  ],
+  "experiments": "none",
+  "positioning": "Builds on Powell (Lagrange), Sauer-Xu (Newton) and Waldron; says the CST 1997 analysis can now be simplified and its O(Delta) gradient bound is clearly inferior; links good sets and the optimal uniform simplex to positive bases in pattern search (Audet-Dennis, Torczon, Alberto et al.) (pp. 2, 26-27, 31).",
+  "writing": "Stresses intuition (calls the condition more natural; geometric reading as a 'fat' simplex); concluding remarks separate uncontrollable (smoothness) from controllable (geometry) error sources (pp. 2, 7, 31-32).",
+  "limits_future": "Function-error bound does not vanish at the sample points; all-pairs system may give better constants; Newton-polynomial analysis omitted; growth-factor-dependent constants; no convergence theorem or numerics (pp. 11, 26, 29).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Model quality becomes an explicit basis-independent constant in every error bound, with a repair algorithm; steps 1-3 present, step 4 promised, step 5 absent.",
+    "pages": "pp. 2, 6-10, 27-29, 31-32"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Interpolation geometry linked to positive bases and the uniform minimal positive basis of pattern search.",
+    "pages": "pp. 27, 31"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory and algorithm without code or numbers.",
+    "pages": "pp. 27-32"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Geometric definition first, then prove equivalence to the algebraic one",
+    "evidence": "Lambda-poisedness defined geometrically, shown equivalent to ||L^-1|| bounds and (up to constants) to Lagrange-polynomial bounds.",
+    "pages": "p. 9; pp. 24-25"
+   },
+   {
+    "pattern": "Explicitly improve one's own earlier analysis",
+    "evidence": "States that the new gradient bound supersedes the O(Delta) bound of CST 1997, which gave only first-order convergence.",
+    "pages": "pp. 26-27"
+   }
+  ],
+  "transferable": [
+   "Bound all derivative errors of an interpolation model at once: Taylor-expand around the evaluation point, subtract one interpolation equation from the others, invert the x-independent matrix; get the function error from any single equation (pp. 8-10, 13-19).",
+   "Prove bounds on the unit ball, then recover Delta-dependence by diagonal rescaling (p. 10; p. 19).",
+   "Build or repair a sample set by Gaussian elimination with a pivot threshold, replacing a point by the maximizer of the pivot polynomial when needed (pp. 17, 28-29).",
+   "Check whether a condition-number quality measure depends on the basis; if so, define a basis-invariant one (p. 6)."
+  ],
+  "coauthors": "K. Scheinberg, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "To ensure the quality of the model one has to guarantee the well-poisedness of the interpolation set before seeking further accuracy by shrinking the size of the trust region (see, e.g., [3], [4]).",
+    "page": 2
+   },
+   {
+    "text": "In practical situations only the geometry of the interpolation set is controllable.",
+    "page": 32
+   }
+  ]
+ }
+]

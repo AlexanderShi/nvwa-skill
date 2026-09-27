@@ -1,0 +1,83 @@
+[
+ {
+  "id": "S049",
+  "year": "1994",
+  "title": "Performance of a multifrontal scheme for partially separable optimization",
+  "read_level": "full",
+  "contribution": "A controlled numerical study (text read: FUNDP Report 88/4, revised January 1989) showing when a multifrontal direct factorisation (MA27) beats conjugate gradients as the trust-region subproblem solver in partially separable bound-constrained optimization: with convex models and low fill-in, not with frequent negative curvature or random sparsity.",
+  "problem_entry": "CG had 'usually been used' to minimise the trust-region model in partially separable problems; the paper tests this default against a direct multifrontal scheme, after stating CG's reasons (truncation, assembly-free matvecs) (p. 2, p. 7).",
+  "key_idea": "Freeze the CGT [3] outer algorithm (inf-norm trust region, GCP, free-subspace minimisation, partitioned updating) and swap only the inner solver (cg, pcg, MA27 multifrontal), exploiting that a partially separable Hessian has finite-element form; handle indefinite and singular cases from one Bunch-Parlett LDL^T (pp. 5-9).",
+  "assumptions": "Simple bounds; f = sum of element functions with low-rank element Hessians and internal variables y_i = U_i x; no convergence theorem of its own (inherits the CGT [3] class); superlinear rate if the restricted-gradient ratio tends to zero and Dennis-More holds (pp. 3-5, 7).",
+  "proof_devices": [
+   "negative-curvature direction from the Bunch-Parlett LDL^T: z = L^{-T} v, with v the eigenvector of the most negative eigenvalue of D, curvature lambda ||v||^2 (pp. 8-9)",
+   "cycling through the negative eigenvalues of D across successive iterations to avoid negative-curvature directions stuck in one subspace (p. 9)",
+   "superlinear-rate condition: ratio of restricted model gradients tends to zero plus the Dennis-More condition on restricted Hessian approximations (p. 7)",
+   "mechanism explanations of anomalies: SR1 quadratic termination on constant 3x3 element Hessians; BFGS losing definiteness in floating point once element conditioning reaches about 10^17 (pp. 14-15)"
+  ],
+  "experiments": "13 problems (8 from Toint's partially separable set plus 5 new in an appendix, one with random sparsity from HSL FA04BS with the default seed) at n = 100, and a subset scaled to n = 5000; full 3x3 factorial {cg, pcg, multif} x {exact, BFGS, SR1}; SBMIN in Fortran 77 on a CRAY 2; f-calls, g-calls, linear-system stats and CPU s with a >1200 s cap; '*' marks rounding-induced trust-region stops (pp. 10-19).",
+  "positioning": "Builds on Griewank-Toint partial separability and the CG trust-region line (Toint, Steihaug, Stoer); imports Duff-Reid MA27, Bunch-Parlett and Irons's frontal method; compares only the authors' own options; qualifies CGT [4]'s SR1-over-BFGS finding (pp. 3, 7-8, 19, 21).",
+  "writing": "Heavily hedged claims ('seems to be really competitive ... in some cases', p. 14; 'can sometimes lead to', p. 19); each anomaly singled out in the text gets a mechanism; own shortcomings named ('quick fix', 'clearly inefficient') (pp. 14-15, 19).",
+  "limits_future": "Negative-curvature strategy of the direct method 'clearly inefficient'; BFGS reset a 'quick fix'; MA27 forces an assembled Hessian; fill-in from random sparsity kills the direct method; future: a code offering a choice of methods through the Harwell library (pp. 9, 15, 19-20).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Numerical study of options inside a class with class-level theory (CGT [3]); the conclusion promises a code with a choice of solvers; LANCELOT A later ships an MA27 option (S040, per the c2-03 card).",
+    "pages": "pp. 5, 10, 20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Pre-CUTE, small author-chosen 'representative' set (13 problems, subset to n = 5000), but new problems published in an appendix, random instance reproducible from named generator and seed, failures and CPU cap marked; cost unit includes CPU time because the question is linear algebra.",
+    "pages": "pp. 10, 15-18, 20-21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Partial separability exploited via internal-variable element storage without assembly, element-wise matvecs for CG, and the choice of multifrontal elimination because the Hessian has finite-element form; the limit (MA27 needed assembly) is named.",
+    "pages": "pp. 4-5, 7-9"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Frontal/multifrontal elimination transplanted from finite-element analysis (Irons) and sparse linear algebra (Duff-Reid) into trust-region optimization; Bunch-Parlett pivoting reused to extract negative-curvature directions.",
+    "pages": "pp. 8-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "anomaly harvested as an explicit conjecture",
+    "evidence": "Variant (existing, from S011/S010): CGT [4]'s SR1-over-BFGS result does not carry over to partial separability; conjectured mechanism is near linear dependence of element-projected search directions, the property S010 (1991) later assumes away as uniformly linearly independent steps (per the c01 digest).",
+    "pages": "p. 19"
+   },
+   {
+    "pattern": "factorial study of own variants before external comparison",
+    "evidence": "Existing candidate (S075): here a full 3x3 factorial of inner solver x Hessian source on every problem, with no external comparison at all.",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "win/lose regime conclusion",
+    "evidence": "New: the conclusion states when the new option wins (convex model, regular sparsity) and when it loses (negative curvature, random-sparsity fill-in), each tied to a table.",
+    "pages": "p. 19"
+   }
+  ],
+  "transferable": [
+   "Freeze the outer algorithm and its convergence class, vary only the component under test crossed with the other main option, and report the component's own work (CG iterations, factorisations by inertia) beside f-calls, g-calls and CPU (pp. 10-11).",
+   "Add test problems built to stress the studied property (other sparsity structures, a random one) and publish them in an appendix with starting points and the generator and seed of the random instance (pp. 10, 20-21).",
+   "With a factorisation-based step under repeated indefiniteness, cycle through the negative eigenvalues of D instead of always using the most negative, so successive negative-curvature directions do not stay in one subspace (p. 9).",
+   "Mark numerical-precision stops separately from genuine failures in results tables and state the cause (rounding in the trust-region ratio at small projected gradients) (p. 10).",
+   "For each anomalous table entry, give a mechanism (SR1 quadratic termination, pp. 14-15) or label the repair a quick fix and explain why a principled fix is hard (p. 15)."
+  ],
+  "coauthors": "N. I. M. Gould, M. Lescrenier, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We are well aware that this technique is merely a “quick fix”, and that a more sophisticate procedure is desirable.",
+    "page": 15
+   },
+   {
+    "text": "The proposed strategy seems to be clearly inefficient and other strategies must definitely be found to handle such cases, if direct methods are to be used.",
+    "page": 19
+   }
+  ]
+ }
+]

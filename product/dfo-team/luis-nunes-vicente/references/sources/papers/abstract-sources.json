@@ -1,0 +1,12 @@
+{
+ "S001": "https://api.openalex.org/works/doi:10.1137/1.9780898718768 (abstract_inverted_index; SIAM publisher book description, https://epubs.siam.org/doi/book/10.1137/1.9780898718768)",
+ "S004": "https://link.springer.com/article/10.1007/BF02191670 (same abstract also at GERAD Cahier G-92-36: https://www.gerad.ca/en/papers/G-92-36)",
+ "S009": "https://link.springer.com/article/10.1007/BF02275351 (report version: GERAD Cahier G-94-12, https://www.gerad.ca/en/papers/G-94-12)",
+ "S021": "https://api.openalex.org/works/doi:10.1090/s0025-5718-1994-1250776-4 (abstract_inverted_index of the AMS Mathematics of Computation abstract, https://www.ams.org/journals/mcom/1994-63-208/S0025-5718-1994-1250776-4/)",
+ "S033": "https://api.crossref.org/works/10.1137/0914049 (publisher-deposited abstract, SIAM J. Sci. Comput.)",
+ "S052": "https://link.springer.com/chapter/10.1007/978-1-4613-3557-3_10",
+ "S063": "https://link.springer.com/article/10.1007/BF00249639",
+ "S066": "https://link.springer.com/book/10.1007/978-0-387-73299-2 (About this book)",
+ "S069": "https://link.springer.com/article/10.1007/BF01099266",
+ "S100": "https://academic.oup.com/imaman/article-abstract/4/4/343/665106"
+}

@@ -1,0 +1,2722 @@
+{
+ "researcher": "Luis Nunes Vicente",
+ "scholar_user": "TLkN5_AAAAAJ",
+ "harvested": "2026-09-27",
+ "source_note": "Google Scholar profile + DBLP + Crossref",
+ "works": [
+  {
+   "id": "S001",
+   "title": "Introduction to Derivative-Free Optimization",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "Society for Industrial and Applied Mathematics",
+   "year": 2009,
+   "cites": 2876,
+   "doi": "10.1137/1.9780898718768",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/"
+   ],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "crossref",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S002",
+   "title": "Bilevel and multilevel programming: A bibliography review",
+   "authors": "LN Vicente, PH Calamai",
+   "venue": "Journal of Global optimization",
+   "year": 1994,
+   "cites": 930,
+   "doi": "10.1007/bf01096458",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01096458",
+    "https://www.mat.uc.pt/~lnv/papers/bilevel.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S003",
+   "title": "Direct multisearch for multiobjective optimization",
+   "authors": "AL Custódio, JFA Madeira, AIF Vaz, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2011,
+   "cites": 540,
+   "doi": "10.1137/10079731x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/10079731X",
+    "https://www.mat.uc.pt/~lnv/papers/dms.pdf",
+    "https://www.mat.uc.pt/~lnv/papers/errata-dms.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S004",
+   "title": "Descent approaches for quadratic bilevel programming",
+   "authors": "LN Vicente, G Savard, J Júdice",
+   "venue": "Journal of Optimization Theory and Applications",
+   "year": 1994,
+   "cites": 483,
+   "doi": "10.1007/bf02191670",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S005",
+   "title": "A particle swarm pattern search method for bound constrained global optimization",
+   "authors": "AIF Vaz, LN Vicente",
+   "venue": "Journal of Global Optimization",
+   "year": 2007,
+   "cites": 460,
+   "doi": "10.1007/s10898-007-9133-5",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10898-007-9133-5",
+    "https://www.mat.uc.pt/~lnv/papers/PSwarm.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S006",
+   "title": "Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2009,
+   "cites": 321,
+   "doi": "10.1137/060673424",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/060673424",
+    "https://www.mat.uc.pt/~lnv/papers/csv3.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S007",
+   "title": "A globally convergent primal-dual interior-point filter method for nonlinear programming",
+   "authors": "M Ulbrich, S Ulbrich, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 2004,
+   "cites": 313,
+   "doi": "10.1007/s10107-003-0477-4",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-003-0477-4",
+    "https://www.mat.uc.pt/~lnv/papers/ipfilter.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S008",
+   "title": "Using sampling and simplex derivatives in pattern search methods",
+   "authors": "AL Custódio, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2007,
+   "cites": 240,
+   "doi": "10.1137/050646706",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/050646706",
+    "https://www.mat.uc.pt/~lnv/papers/sid-psm.pdf",
+    "https://www.mat.uc.pt/~lnv/papers/sid-psm-complete.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S009",
+   "title": "Discrete linear bilevel programming problem",
+   "authors": "L Vicente, G Savard, J Judice",
+   "venue": "Journal of Optimization Theory and Applications",
+   "year": 1996,
+   "cites": 225,
+   "doi": "10.1007/bf02275351",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S010",
+   "title": "Geometry of interpolation sets in derivative free optimization",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 2008,
+   "cites": 210,
+   "doi": "10.1007/s10107-006-0073-5",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-006-0073-5",
+    "https://www.mat.uc.pt/~lnv/papers/csv.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S011",
+   "title": "Trust-region interior-point SQP algorithms for a class of nonlinear programming problems",
+   "authors": "JE Dennis, M Heinkenschloss, LN Vicente",
+   "venue": "SIAM Journal on Control and Optimization",
+   "year": 1998,
+   "cites": 204,
+   "doi": "10.1137/s036012995279031",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/tripcu.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S012",
+   "title": "Incorporating minimum Frobenius norm models in direct search",
+   "authors": "AL Custódio, H Rocha, LN Vicente",
+   "venue": "Computational Optimization and Applications",
+   "year": 2010,
+   "cites": 201,
+   "doi": "10.1007/s10589-009-9283-0",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10589-009-9283-0",
+    "https://www.mat.uc.pt/~lnv/papers/mfn.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S013",
+   "title": "Analysis of inexact trust-region SQP algorithms",
+   "authors": "M Heinkenschloss, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2002,
+   "cites": 192,
+   "doi": "10.1137/s1052623499361543",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/S1052623499361543",
+    "https://www.mat.uc.pt/~lnv/papers/itrice_c.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S014",
+   "title": "Convergence of trust-region methods based on probabilistic models",
+   "authors": "AS Bandeira, K Scheinberg, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2014,
+   "cites": 181,
+   "doi": "10.1137/130915984",
+   "arxiv": "1304.2808",
+   "urls": [
+    "https://doi.org/10.1137/130915984",
+    "https://www.mat.uc.pt/~lnv/papers/random_tr.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S015",
+   "title": "Complexity of gradient descent for multiobjective optimization",
+   "authors": "J Fliege, AIF Vaz, LN Vicente",
+   "venue": "Optimization Methods and Software",
+   "year": 2019,
+   "cites": 164,
+   "doi": "10.1080/10556788.2018.1510928",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556788.2018.1510928",
+    "https://www.mat.uc.pt/~lnv/papers/wcc-moo.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S016",
+   "title": "Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach",
+   "authors": "S Liu, LN Vicente",
+   "venue": "Computational Management Science",
+   "year": 2022,
+   "cites": 160,
+   "doi": "10.1007/s10287-022-00425-z",
+   "arxiv": "2008.01132",
+   "urls": [
+    "https://doi.org/10.1007/S10287-022-00425-Z",
+    "https://www.mat.uc.pt/~lnv/papers/fairness-smoo.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S017",
+   "title": "The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning",
+   "authors": "S Liu, LN Vicente",
+   "venue": "Annals of Operations Research",
+   "year": 2024,
+   "cites": 157,
+   "doi": "10.1007/s10479-021-04033-z",
+   "arxiv": "1907.04472",
+   "urls": [
+    "https://doi.org/10.1007/S10479-021-04033-Z",
+    "https://www.mat.uc.pt/~lnv/papers/smg-moo.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S018",
+   "title": "PSwarm: A hybrid solver for linearly constrained global derivative-free optimization",
+   "authors": "AIF Vaz, LN Vicente",
+   "venue": "Optimization Methods and Software",
+   "year": 2009,
+   "cites": 157,
+   "doi": "10.1080/10556780902909948",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556780902909948",
+    "https://www.mat.uc.pt/~lnv/papers/PSwarm-lin.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S019",
+   "title": "Direct search based on probabilistic descent",
+   "authors": "S Gratton, CW Royer, LN Vicente, Z Zhang",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2015,
+   "cites": 133,
+   "doi": "10.1137/140961602",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/140961602",
+    "https://www.mat.uc.pt/~lnv/papers/ds-random.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S020",
+   "title": "Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2008,
+   "cites": 132,
+   "doi": "10.1093/imanum/drn046",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/csv2.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S021",
+   "title": "A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables",
+   "authors": "LF Portugal, JJ Judice, LN Vicente",
+   "venue": "Mathematics of Computation",
+   "year": 1994,
+   "cites": 128,
+   "doi": "10.1090/s0025-5718-1994-1250776-4",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S022",
+   "title": "Multicriteria approach to bilevel optimization",
+   "authors": "J Fliege, LN Vicente",
+   "venue": "Journal of Optimization Theory and Applications",
+   "year": 2006,
+   "cites": 126,
+   "doi": "10.1007/s10957-006-9136-2",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/fv.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S023",
+   "title": "Worst case complexity of direct search",
+   "authors": "LN Vicente",
+   "venue": "EURO Journal on Computational Optimization",
+   "year": 2013,
+   "cites": 118,
+   "doi": "10.1007/s13675-012-0003-7",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S13675-012-0003-7",
+    "https://www.mat.uc.pt/~lnv/papers/complex.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S024",
+   "title": "Analysis of direct searches for discontinuous functions",
+   "authors": "LN Vicente, AL Custódio",
+   "venue": "Mathematical Programming",
+   "year": 2012,
+   "cites": 117,
+   "doi": "10.1007/s10107-010-0429-8",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-010-0429-8",
+    "https://www.mat.uc.pt/~lnv/papers/discon.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S025",
+   "title": "Pattern search methods for user-provided points: Application to molecular geometry problems",
+   "authors": "P Alberto, F Nogueira, H Rocha, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2004,
+   "cites": 101,
+   "doi": "10.1137/s1052623400377955",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/S1052623400377955",
+    "https://www.mat.uc.pt/~lnv/papers/psm_mgp.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S026",
+   "title": "Generating quadratic bilevel programming test problems",
+   "authors": "PH Calamai, LN Vicente",
+   "venue": "ACM Transactions on Mathematical Software (TOMS)",
+   "year": 1994,
+   "cites": 100,
+   "doi": "10.1145/174603.174411",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1145/174603.174411"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S027",
+   "title": "Complexity and global rates of trust-region methods based on probabilistic models",
+   "authors": "S Gratton, CW Royer, LN Vicente, Z Zhang",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2018,
+   "cites": 99,
+   "doi": "10.1093/imanum/drx043",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/wcctr-random.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S028",
+   "title": "Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity",
+   "authors": "AM Monteiro, RH Tütüncü, LN Vicente",
+   "venue": "European Journal of Operational Research",
+   "year": 2008,
+   "cites": 98,
+   "doi": "10.1016/j.ejor.2007.02.041",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1016/J.EJOR.2007.02.041",
+    "https://www.mat.uc.pt/~lnv/papers/rn-pdf.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S029",
+   "title": "Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization",
+   "authors": "A Bandeira, K Scheinberg, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 2012,
+   "cites": 96,
+   "doi": "10.1007/s10107-012-0578-z",
+   "arxiv": "1306.5729",
+   "urls": [
+    "https://doi.org/10.1007/S10107-012-0578-Z",
+    "https://www.mat.uc.pt/~lnv/papers/dfol1.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S030",
+   "title": "Using simplex gradients of nonsmooth functions in direct search methods",
+   "authors": "AL Custódio, JE Dennis Jr, LN Vicente",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2008,
+   "cites": 96,
+   "doi": "10.1093/imanum/drn045",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/sid-ns.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S031",
+   "title": "On the convergence theory of trust-region-based algorithms for equality-constrained optimization",
+   "authors": "JE Dennis, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 1997,
+   "cites": 76,
+   "doi": "10.1137/s1052623494276026",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/S1052623494276026",
+    "https://www.mat.uc.pt/~lnv/papers/2order.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S032",
+   "title": "Trust-region methods without using derivatives: Worst case complexity and the non-smooth case",
+   "authors": "R Garmanjani, D Júdice, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2016,
+   "cites": 73,
+   "doi": "10.1137/151005683",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/151005683",
+    "https://www.mat.uc.pt/~lnv/papers/str.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S033",
+   "title": "Generating linear and linear-quadratic bilevel programming problems",
+   "authors": "PH Calamai, LN Vicente",
+   "venue": "SIAM Journal on Scientific Computing",
+   "year": 1993,
+   "cites": 70,
+   "doi": "10.1137/0914049",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/0914049"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S034",
+   "title": "Smoothing and worst case complexity for direct-search methods in non-smooth optimization",
+   "authors": "R Garmanjani, LN Vicente",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2013,
+   "cites": 69,
+   "doi": "10.1093/imanum/drs027",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/sds.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S035",
+   "title": "Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models",
+   "authors": "F Ceccarelli, M Sciandrone, C Perricone, G Galvan, F Morelli, LN Vicente, ...",
+   "venue": "PloS one",
+   "year": 2017,
+   "cites": 62,
+   "doi": "10.1371/journal.pone.0174200",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/PlosOne-2017.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S036",
+   "title": "On the optimal object orientation in additive manufacturing",
+   "authors": "S Pereira, AIF Vaz, LN Vicente",
+   "venue": "The International Journal of Advanced Manufacturing Technology",
+   "year": 2018,
+   "cites": 60,
+   "doi": "10.1007/s00170-018-2218-0",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/slicing.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S037",
+   "title": "Trust-region interior-point algorithms for minimization problems with simple bounds",
+   "authors": "JE Dennis, LN Vicente",
+   "venue": "Applied Mathematics and Parallel Computing, Festschrift for Klaus Ritter",
+   "year": 1996,
+   "cites": 58,
+   "doi": "10.1007/978-3-642-99789-1_7",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/trip.pdf"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S038",
+   "title": "Methodologies and software for derivative-free optimization",
+   "authors": "AL Custódio, LN Vicente, K Scheinberg",
+   "venue": "Advances and Trends in Optimization with Engineering Applications (MOS-SIAM Series on Optimization), SIAM",
+   "year": 2017,
+   "cites": 52,
+   "doi": "10.1137/1.9781611974683.ch37",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/dfo-survey.pdf"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S039",
+   "title": "Two-step algorithms for nonlinear optimization with structured applications",
+   "authors": "AR Conn, LN Vicente, C Visweswariah",
+   "venue": "SIAM Journal on Optimization",
+   "year": 1999,
+   "cites": 51,
+   "doi": "10.1137/s1052623498334396",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/S1052623498334396",
+    "https://www.mat.uc.pt/~lnv/papers/cvv.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S040",
+   "title": "Trust-Region Interior Point Algorithms for a Class of Nonlinear Programming Problems",
+   "authors": "LN Vicente",
+   "venue": "PhD Thesis, Rice University",
+   "year": 1996,
+   "cites": 51,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/thesis.pdf",
+    "https://www.mat.uc.pt/~lnv/papers/revised_thesis.pdf"
+   ],
+   "kind": "thesis",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S041",
+   "title": "On the optimal order of worst case complexity of direct search",
+   "authors": "M Dodangeh, LN Vicente, Z Zhang",
+   "venue": "Optimization Letters",
+   "year": 2016,
+   "cites": 50,
+   "doi": "10.1007/s11590-015-0908-1",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S11590-015-0908-1",
+    "https://www.mat.uc.pt/~lnv/papers/oods.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S042",
+   "title": "Inexact bilevel stochastic gradient methods for constrained and unconstrained lower-level problems",
+   "authors": "T Giovannelli, GD Kent, LN Vicente",
+   "venue": "Journal of Global Optimization",
+   "year": 2025,
+   "cites": 49,
+   "doi": "10.1007/s10898-025-01502-8",
+   "arxiv": "2110.00604",
+   "urls": [
+    "https://doi.org/10.1007/S10898-025-01502-8",
+    "https://www.mat.uc.pt/~lnv/papers/iBSG.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S043",
+   "title": "Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation",
+   "authors": "E Bergou, S Gratton, LN Vicente",
+   "venue": "SIAM/ASA Journal on Uncertainty Quantification",
+   "year": 2016,
+   "cites": 49,
+   "doi": "10.1137/140974687",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/140974687",
+    "https://www.mat.uc.pt/~lnv/papers/LM-random.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S044",
+   "title": "Space mapping for optimal control of partial differential equations",
+   "authors": "M Hinterm?ller, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2005,
+   "cites": 45,
+   "doi": "10.1137/s105262340342907x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/S105262340342907X",
+    "https://www.mat.uc.pt/~lnv/papers/sm2.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S045",
+   "title": "Direct search based on probabilistic feasible descent for bound and linearly constrained problems",
+   "authors": "S Gratton, CW Royer, LN Vicente, Z Zhang",
+   "venue": "Computational Optimization and Applications",
+   "year": 2019,
+   "cites": 43,
+   "doi": "10.1007/s10589-019-00062-4",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10589-019-00062-4",
+    "https://www.mat.uc.pt/~lnv/papers/l-ds-random.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S046",
+   "title": "Worst case complexity of direct search under convexity",
+   "authors": "M Dodangeh, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 2016,
+   "cites": 43,
+   "doi": "10.1007/s10107-014-0847-0",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-014-0847-0",
+    "https://www.mat.uc.pt/~lnv/papers/cds.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S047",
+   "title": "Bilevel derivative-free optimization and its application to robust optimization",
+   "authors": "AR Conn, LN Vicente",
+   "venue": "Optimization Methods and Software",
+   "year": 2012,
+   "cites": 42,
+   "doi": "10.1080/10556788.2010.547579",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556788.2010.547579",
+    "https://www.mat.uc.pt/~lnv/papers/dfbo.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S048",
+   "title": "An interface optimization and application for the numerical solution of optimal control problems",
+   "authors": "M Heinkenschloss, LN Vicente",
+   "venue": "ACM Transactions on Mathematical Software (TOMS)",
+   "year": 1999,
+   "cites": 41,
+   "doi": "10.1145/317275.317278",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1145/317275.317278",
+    "https://www.mat.uc.pt/~lnv/papers/nocp.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S049",
+   "title": "A merit function approach for direct search",
+   "authors": "S Gratton, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2014,
+   "cites": 40,
+   "doi": "10.1137/130917661",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/130917661",
+    "https://www.mat.uc.pt/~lnv/papers/merit.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S050",
+   "title": "Globally convergent evolution strategies",
+   "authors": "Y Diouane, S Gratton, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 2015,
+   "cites": 39,
+   "doi": "10.1007/s10107-014-0793-x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-014-0793-X",
+    "https://www.mat.uc.pt/~lnv/papers/gc-es.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S051",
+   "title": "On partially sparse recovery",
+   "authors": "AS Bandeira, K Scheinberg, LN Vicente",
+   "venue": "Preprint 11-13, Dept. Mathematics, Univ. Coimbra",
+   "year": 2011,
+   "cites": 39,
+   "doi": null,
+   "arxiv": "1304.2809",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/partial.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S052",
+   "title": "Geometry and local optimality conditions for bilevel programs with quadratic strictly convex lower levels",
+   "authors": "LN Vicente, PH Calamai",
+   "venue": "Minimax and applications",
+   "year": 1995,
+   "cites": 39,
+   "doi": "10.1007/978-1-4613-3557-3_10",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S053",
+   "title": "A new technique for generating quadratic programming test problems",
+   "authors": "PH Calamai, LN Vicente, JJ Júdice",
+   "venue": "Mathematical Programming",
+   "year": 1993,
+   "cites": 39,
+   "doi": "10.1007/bf01582148",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01582148"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S054",
+   "title": "Local convergence of a primal-dual method for degenerate nonlinear programming",
+   "authors": "LN Vicente, SJ Wright",
+   "venue": "Computational Optimization and Applications",
+   "year": 2002,
+   "cites": 38,
+   "doi": "10.1023/a:1019798502851",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1023/A:1019798502851",
+    "https://www.mat.uc.pt/~lnv/papers/vw.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S055",
+   "title": "Bilevel programming: Introduction, history and overview",
+   "authors": "LN Vicente",
+   "venue": "Encyclopedia of optimization",
+   "year": 2001,
+   "cites": 38,
+   "doi": "10.1007/978-0-387-74759-0_45",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-0-387-74759-0_45",
+    "https://www.mat.uc.pt/~lnv/papers/EoO.pdf"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S056",
+   "title": "Algorithms for Solving Non-Linear Constrained and Optimization Problems: The State of The Art",
+   "authors": "C Bliek, P Spellucci, LN Vicente, A Neumaier, L Granvilliers, E Monfroy, ...",
+   "venue": null,
+   "year": 2001,
+   "cites": 38,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S057",
+   "title": "Globally convergent evolution strategies for constrained optimization",
+   "authors": "Y Diouane, S Gratton, LN Vicente",
+   "venue": "Computational Optimization and Applications",
+   "year": 2015,
+   "cites": 35,
+   "doi": "10.1007/s10589-015-9747-3",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10589-015-9747-3",
+    "https://www.mat.uc.pt/~lnv/papers/gc-es-lc.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S058",
+   "title": "Trust-region methods for the derivative-free optimization of nonsmooth black-box functions",
+   "authors": "G Liuzzi, S Lucidi, F Rinaldi, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2019,
+   "cites": 33,
+   "doi": "10.1137/19m125772x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/19M125772X",
+    "https://www.mat.uc.pt/~lnv/papers/tr-dfo-nonsmooth.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S059",
+   "title": "SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization",
+   "authors": "AL Custodio, LN Vicente",
+   "venue": "Departamento de Matemática, Universidade de Coimbra",
+   "year": 2008,
+   "cites": 32,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S060",
+   "title": "A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds",
+   "authors": "S Gratton, CW Royer, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 2020,
+   "cites": 30,
+   "doi": "10.1007/s10107-018-1328-7",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-018-1328-7",
+    "https://www.mat.uc.pt/~lnv/papers/decoupled.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S061",
+   "title": "Efficient cardinality/mean-variance portfolios",
+   "authors": "RP Brito, LN Vicente",
+   "venue": "System Modeling and Optimization, Springer series IFIP Advances in Information and Communication Technology",
+   "year": 2014,
+   "cites": 29,
+   "doi": "10.1007/978-3-662-45504-3_6",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-3-662-45504-3_6",
+    "https://www.mat.uc.pt/~lnv/papers/cardMV.pdf"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S062",
+   "title": "Space mapping: Models, sensitivities, and trust-regions methods",
+   "authors": "LN Vicente",
+   "venue": "Optimization and Engineering",
+   "year": 2003,
+   "cites": 29,
+   "doi": "10.1023/a:1023968629245",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/sm.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S063",
+   "title": "Generation of disjointly constrained bilinear programming test problems",
+   "authors": "LN Vicente, PH Calamai, JJ Júdice",
+   "venue": "Computational Optimization and Applications",
+   "year": 1992,
+   "cites": 29,
+   "doi": "10.1007/bf00249639",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF00249639"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S064",
+   "title": "Optimizing radial basis functions by DC programming and its use in direct search for global derivative-free optimization",
+   "authors": "HA Le Thi, AIF Vaz, LN Vicente",
+   "venue": "TOP",
+   "year": 2012,
+   "cites": 28,
+   "doi": "10.1007/s11750-011-0193-9",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/rbf-dc.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S065",
+   "title": "A Stochastic Alternating Balance k-Means Algorithm for Fair Clustering",
+   "authors": "S Liu, LN Vicente",
+   "venue": "International Conference on Learning and Intelligent Optimization",
+   "year": 2022,
+   "cites": 25,
+   "doi": "10.1007/978-3-031-24866-5_6",
+   "arxiv": "2105.14172",
+   "urls": [
+    "https://doi.org/10.1007/978-3-031-24866-5_6",
+    "https://www.mat.uc.pt/~lnv/papers/SAfairKM.pdf"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S066",
+   "title": "Optimization in Medicine",
+   "authors": "CJS Alves, PM Pardalos, LN Vicente",
+   "venue": "Springer Verlag",
+   "year": 2007,
+   "cites": 24,
+   "doi": "10.1007/978-0-387-73299-2",
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S067",
+   "title": "Stochastic trust-region and direct-search methods: A weak tail bound condition and reduced sample sizing",
+   "authors": "F Rinaldi, LN Vicente, D Zeffiro",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2024,
+   "cites": 21,
+   "doi": "10.1137/22m1543446",
+   "arxiv": "2202.11074",
+   "urls": [
+    "https://doi.org/10.1137/22M1543446",
+    "https://www.mat.uc.pt/~lnv/papers/weak-prob-dfo.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S068",
+   "title": "A parallel evolution strategy for an earth imaging problem in geophysics",
+   "authors": "Y Diouane, S Gratton, X Vasseur, LN Vicente, H Calandra",
+   "venue": "Optimization and Engineering",
+   "year": 2016,
+   "cites": 21,
+   "doi": "10.1007/s11081-015-9296-8",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/gc-es-fwi.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S069",
+   "title": "On the solution and complexity of a generalized linear complementarity problem",
+   "authors": "JJ Júdice, LN Vicente",
+   "venue": "Journal of Global Optimization",
+   "year": 1994,
+   "cites": 21,
+   "doi": "10.1007/bf01099266",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01099266"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S070",
+   "title": "Bilevel optimization with a multi-objective lower-level problem: Risk-neutral and risk-averse formulations",
+   "authors": "T Giovannelli, GD Kent, LN Vicente",
+   "venue": "Optimization Methods and Software",
+   "year": 2024,
+   "cites": 20,
+   "doi": "10.1080/10556788.2024.2318707",
+   "arxiv": "2302.05540",
+   "urls": [
+    "https://doi.org/10.1080/10556788.2024.2318707",
+    "https://www.mat.uc.pt/~lnv/papers/bmoll.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S071",
+   "title": "A surrogate management framework using rigorous trust-region steps",
+   "authors": "S Gratton, LN Vicente",
+   "venue": "Optimization Methods and Software",
+   "year": 2014,
+   "cites": 20,
+   "doi": "10.1080/10556788.2012.719508",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556788.2012.719508",
+    "https://www.mat.uc.pt/~lnv/papers/smf-tr.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S072",
+   "title": "COCONUT Deliverable D1, Algorithms for Solving Nonlinear Constrained and Optimization Problems: The State of The Art",
+   "authors": "C Bliek, P Spellucci, L Vicente, A Neumaier, L Granvilliers, E Monfroy, ...",
+   "venue": "The COCONUT Project",
+   "year": 2001,
+   "cites": 20,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S056",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S073",
+   "title": "Full-low evaluation methods for derivative-free optimization",
+   "authors": "AS Berahas, O Sohab, LN Vicente",
+   "venue": "Optimization Methods and Software",
+   "year": 2023,
+   "cites": 19,
+   "doi": "10.1080/10556788.2022.2142582",
+   "arxiv": "2107.11908",
+   "urls": [
+    "https://doi.org/10.1080/10556788.2022.2142582",
+    "https://www.mat.uc.pt/~lnv/papers/full-low-eval.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S074",
+   "title": "A second-order globally convergent direct-search method and its worst-case complexity",
+   "authors": "S Gratton, CW Royer, LN Vicente",
+   "venue": "Optimization",
+   "year": 2016,
+   "cites": 19,
+   "doi": "10.1080/02331934.2015.1124271",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/DSdeterm2.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S075",
+   "title": "Modelling nearby FGK population I stars: A new form of estimating stellar parameters using an optimization approach",
+   "authors": "JM Fernandes, AIF Vaz, LN Vicente",
+   "venue": "Astronomy & Astrophysics",
+   "year": 2011,
+   "cites": 18,
+   "doi": "10.1051/0004-6361/200811182",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/fgk_ialj.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S076",
+   "title": "Numerical behavior of a stabilized SQP method for degenerate NLP problems",
+   "authors": "ESME Mostafa, LN Vicente, SJ Wright",
+   "venue": "International Workshop on Global Optimization and Constraint Satisfaction",
+   "year": 2003,
+   "cites": 18,
+   "doi": "10.1007/978-3-540-39901-8_10",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-3-540-39901-8_10",
+    "https://www.mat.uc.pt/~lnv/papers/MVW.pdf"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S077",
+   "title": "A globally convergent primal-dual interior-point filter method for nonlinear programming: new filter optimality measures and computational results",
+   "authors": "R Silva, M Ulbrich, S Ulbrich, LN Vicente",
+   "venue": "Preprint 08-49, Dept. Mathematics, Univ. Coimbra",
+   "year": 2008,
+   "cites": 16,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/ipfilter2.pdf"
+   ],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S078",
+   "title": "Optimal 3D printing of complex objects in a 5-axis printer",
+   "authors": "B Ramos, D Pinho, D Martins, AIF Vaz, LN Vicente",
+   "venue": "Optimization and Engineering",
+   "year": 2022,
+   "cites": 15,
+   "doi": "10.1007/s11081-021-09624-0",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/3D-5axis.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S079",
+   "title": "The limitation of neural nets for approximation and optimization",
+   "authors": "T Giovannelli, O Sohab, LN Vicente",
+   "venue": "Journal of Global Optimization",
+   "year": 2026,
+   "cites": 14,
+   "doi": "10.1007/s10898-024-01426-9",
+   "arxiv": "2311.12253",
+   "urls": [
+    "https://doi.org/10.48550/ARXIV.2311.12253",
+    "https://doi.org/10.1007/S10898-024-01426-9",
+    "https://www.mat.uc.pt/~lnv/papers/BasesNNApproxForOpt.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S080",
+   "title": "An integrated assignment, routing, and speed model for roadway mobility and transportation with environmental, efficiency, and service goals",
+   "authors": "T Giovannelli, LN Vicente",
+   "venue": "Transportation research part C: emerging technologies",
+   "year": 2023,
+   "cites": 14,
+   "doi": "10.1016/j.trc.2023.104144",
+   "arxiv": "2210.03717",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/TEES.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S081",
+   "title": "A comparison between line searches and trust regions for nonlinear optimization",
+   "authors": "LN Vicente",
+   "venue": "Investigação Operacional",
+   "year": 1996,
+   "cites": 13,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/happens.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S082",
+   "title": "Modeling binary stars: age, helium abundance, and convection parameters",
+   "authors": "JM Fernandes, AIF Vaz, LN Vicente",
+   "venue": "Monthly Notices of the Royal Astronomical Society",
+   "year": 2012,
+   "cites": 12,
+   "doi": "10.1111/j.1365-2966.2012.21516.x",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/astro2.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S083",
+   "title": "Implicitly and densely discrete black-box optimization problems",
+   "authors": "LN Vicente",
+   "venue": "Optimization Letters",
+   "year": 2009,
+   "cites": 11,
+   "doi": "10.1007/s11590-009-0120-2",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S11590-009-0120-2",
+    "https://www.mat.uc.pt/~lnv/papers/idd.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S084",
+   "title": "Local convergence of the affine-scaling interior-point algorithm for nonlinear programming",
+   "authors": "LN Vicente",
+   "venue": "Computational Optimization and Applications",
+   "year": 2000,
+   "cites": 11,
+   "doi": "10.1023/a:1008774924658",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1023/A:1008774924658",
+    "https://www.mat.uc.pt/~lnv/papers/as.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S085",
+   "title": "Local analysis of the feasible primal-dual interior-point method",
+   "authors": "R Silva, J Soares, LN Vicente",
+   "venue": "Computational Optimization and Applications",
+   "year": 2008,
+   "cites": 9,
+   "doi": "10.1007/s10589-007-9075-3",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10589-007-9075-3",
+    "https://www.mat.uc.pt/~lnv/papers/ssv.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S086",
+   "title": "Match score dataset for team ball sports",
+   "authors": "T Alleck, T Giovannelli, LN Vicente, R Mitchell, O Remen",
+   "venue": "Data in brief",
+   "year": 2024,
+   "cites": 7,
+   "doi": "10.1016/j.dib.2024.110625",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/MSD.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S087",
+   "title": "Estimation of risk-neutral density surfaces",
+   "authors": "AM Monteiro, RH Tütüncü, LN Vicente",
+   "venue": "Computational Management Science",
+   "year": 2011,
+   "cites": 7,
+   "doi": "10.1007/s10287-010-0126-3",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10287-010-0126-3",
+    "https://www.mat.uc.pt/~lnv/papers/dynamic.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S088",
+   "title": "Full-low evaluation methods for bound and linearly constrained derivative-free optimization",
+   "authors": "CW Royer, O Sohab, LN Vicente",
+   "venue": "Computational Optimization and Applications",
+   "year": 2024,
+   "cites": 6,
+   "doi": "10.1007/s10589-024-00596-2",
+   "arxiv": "2310.00755",
+   "urls": [
+    "https://doi.org/10.1007/S10589-024-00596-2",
+    "https://www.mat.uc.pt/~lnv/papers/FLE-lin-cons.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S089",
+   "title": "Modeling Hessian-vector products in nonlinear optimization: new Hessian-free methods",
+   "authors": "L Song, LN Vicente",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2022,
+   "cites": 6,
+   "doi": "10.1093/imanum/drab022",
+   "arxiv": "1912.10523",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/model-Hvp.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S090",
+   "title": "Inexact solution of NLP subproblems in MINLP",
+   "authors": "M Li, LN Vicente",
+   "venue": "Journal of Global Optimization",
+   "year": 2013,
+   "cites": 6,
+   "doi": "10.1007/s10898-012-0010-5",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10898-012-0010-5",
+    "https://www.mat.uc.pt/~lnv/papers/minlp.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S091",
+   "title": "A stochastic gradient method for trilevel optimization",
+   "authors": "T Giovannelli, GD Kent, LN Vicente",
+   "venue": "arXiv preprint arXiv:2505.06805",
+   "year": 2025,
+   "cites": 5,
+   "doi": null,
+   "arxiv": "2505.06805",
+   "urls": [
+    "https://doi.org/10.48550/ARXIV.2505.06805",
+    "https://www.mat.uc.pt/~lnv/papers/TSG.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S092",
+   "title": "Why is soccer so popular: Understanding underdog achievement and randomness in team ball sports",
+   "authors": "LN Vicente, TN Alleck, T Giovannelli, R Mitchell, O Remen",
+   "venue": "Journal of Sports Analytics",
+   "year": 2025,
+   "cites": 5,
+   "doi": "10.1177/22150218251324281",
+   "arxiv": "2404.06626",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/UASandR.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S093",
+   "title": "Convergence rates of the stochastic alternating algorithm for bi-objective optimization",
+   "authors": "S Liu, LN Vicente",
+   "venue": "Journal of Optimization Theory and Applications",
+   "year": 2023,
+   "cites": 5,
+   "doi": "10.1007/s10957-023-02253-w",
+   "arxiv": "2203.10605",
+   "urls": [
+    "https://doi.org/10.48550/ARXIV.2203.10605",
+    "https://doi.org/10.1007/S10957-023-02253-W",
+    "https://www.mat.uc.pt/~lnv/papers/SA2GD.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S094",
+   "title": "The Sharpe predictor for fairness in machine learning",
+   "authors": "S Liu, LN Vicente",
+   "venue": "arXiv preprint arXiv:2108.06415",
+   "year": 2021,
+   "cites": 5,
+   "doi": null,
+   "arxiv": "2108.06415",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/Sharpe-predictor-FML.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S095",
+   "title": "Local analysis of a new multipliers method",
+   "authors": "LN Vicente",
+   "venue": "European Journal of Operational Research",
+   "year": 2002,
+   "cites": 5,
+   "doi": "10.1016/s0377-2217(02)00328-4",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1016/S0377-2217(02)00328-4",
+    "https://www.mat.uc.pt/~lnv/papers/mult1.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S096",
+   "title": "Pareto sensitivity, most-changing sub-fronts, and knee solutions",
+   "authors": "T Giovannelli, MM Raimundo, LN Vicente",
+   "venue": "arXiv preprint arXiv:2501.16993",
+   "year": 2025,
+   "cites": 4,
+   "doi": null,
+   "arxiv": "2501.16993",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/snee.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S097",
+   "title": "Globally convergent DC trust-region methods",
+   "authors": "HA Le Thi, HV Ngai, P Dinh Tao, AIF Vaz, LN Vicente",
+   "venue": "Journal of Global Optimization",
+   "year": 2014,
+   "cites": 4,
+   "doi": "10.1007/s10898-014-0170-6",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10898-014-0170-6",
+    "https://www.mat.uc.pt/~lnv/papers/tr-dc.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S098",
+   "title": "Updating the multipliers associated with inequality constraints in an augmented Lagrangian multiplier method",
+   "authors": "CP Avelino, LN Vicente",
+   "venue": "Journal of Optimization Theory and Applications",
+   "year": 2003,
+   "cites": 4,
+   "doi": "10.1023/b:jota.0000005444.50285.4d",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/mult2.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S099",
+   "title": "Characterization of the smoothness and curvature of a marginal function for a trust-region problem",
+   "authors": "DA Andrews, LN Vicente",
+   "venue": "Mathematical Programming",
+   "year": 1999,
+   "cites": 3,
+   "doi": "10.1007/s10107980027a",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107980027A",
+    "https://www.mat.uc.pt/~lnv/papers/marginal.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S100",
+   "title": "Parametric linear programming techniques for the indefinite quadratic programming problem",
+   "authors": "LN Vicente, JJ Judice, PM Pardalos",
+   "venue": "IMA Journal of Management Mathematics",
+   "year": 1993,
+   "cites": 3,
+   "doi": "10.1093/imaman/4.4.343",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage",
+    "crossref"
+   ],
+   "note": "IMA J. Math. Appl. Business & Industry 4 (1993) 343-349 per the author's homepage; Scholar gives 1992."
+  },
+  {
+   "id": "S101",
+   "title": "Stochastic set-valued optimization and its application to robust learning",
+   "authors": "T Giovannelli, J Tan, LN Vicente",
+   "venue": "arXiv preprint arXiv:2603.17691",
+   "year": 2026,
+   "cites": 2,
+   "doi": null,
+   "arxiv": "2603.17691",
+   "urls": [
+    "https://doi.org/10.48550/ARXIV.2603.17691",
+    "https://www.mat.uc.pt/~lnv/papers/SVO-RL.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S102",
+   "title": "Sequential test sampling for stochastic derivative-free optimization",
+   "authors": "A Ding, F Rinaldi, LN Vicente",
+   "venue": "arXiv preprint arXiv:2509.14505",
+   "year": 2025,
+   "cites": 2,
+   "doi": null,
+   "arxiv": "2509.14505",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/Sequential-Sampling-SDFO.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S103",
+   "title": "A weak tail-bound probabilistic condition for function estimation in stochastic derivative-free optimization",
+   "authors": "F Rinaldi, LN Vicente, D Zeffiro",
+   "venue": "arXiv preprint arXiv:2202.11074",
+   "year": 2022,
+   "cites": 2,
+   "doi": null,
+   "arxiv": "2202.11074",
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S067",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S104",
+   "title": "An indicator for the switch from derivative-free to derivative-based optimization",
+   "authors": "S Gratton, N Soualmi, LN Vicente",
+   "venue": "Operations Research Letters 45 (4), 353-361",
+   "year": 2017,
+   "cites": 2,
+   "doi": "10.1016/j.orl.2017.05.003",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1016/J.ORL.2017.05.003",
+    "https://www.mat.uc.pt/~lnv/papers/indicators-dfo.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S105",
+   "title": "Efficient Cardinality/Mean-Variance Portfolios",
+   "authors": "RP Brito, LN Vicente",
+   "venue": "preprint available at http://www. optimization-online. org/DB HTML/2012/03…",
+   "year": 2012,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S061",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S106",
+   "title": "Pattern search methods for user-provided points",
+   "authors": "P Alberto, F Nogueira, H Rocha, LN Vicente",
+   "venue": "Lecture Notes in Computer Science, 95-98",
+   "year": 2001,
+   "cites": 2,
+   "doi": "10.1007/3-540-45718-6_11",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/3-540-45718-6_11",
+    "https://www.mat.uc.pt/~lnv/papers/iccs2001.pdf"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S107",
+   "title": "Non-smooth stochastic gradient descent using smoothing functions",
+   "authors": "T Giovannelli, J Tan, LN Vicente",
+   "venue": "arXiv preprint arXiv:2507.10901",
+   "year": 2025,
+   "cites": 1,
+   "doi": null,
+   "arxiv": "2507.10901",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/smoothing-SGD.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S108",
+   "title": "Optimization by space transformation and decomposition",
+   "authors": "S Gratton, LN Vicente, Z Zhang",
+   "venue": null,
+   "year": 2019,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S109",
+   "title": "Matemática industrial em Portugal. Análise e perspectivas",
+   "authors": "LN Vicente, T Ciência, SC do Quinquagésimo Aniversário",
+   "venue": "Fundação Calouste Gulbenkian, Tema Ciência e Sociedade",
+   "year": 2006,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/industrial.doc"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S110",
+   "title": "Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization",
+   "authors": "A Ding, TH Tran, LN Vicente",
+   "venue": "arXiv preprint arXiv:2609.11567",
+   "year": 2026,
+   "cites": null,
+   "doi": null,
+   "arxiv": "2609.11567",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/non-monotone-DS.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S111",
+   "title": "Stochastic block coordinate and function alternation for multi-objective optimization and learning",
+   "authors": "TH Tran, LN Vicente",
+   "venue": "arXiv preprint arXiv:2605.12432",
+   "year": 2026,
+   "cites": null,
+   "doi": null,
+   "arxiv": "2605.12432",
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/Block-SMOO.pdf"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S112",
+   "title": "A package for optimization based on space decomposition",
+   "authors": "S Gratton, LN Vicente, Z Zhang",
+   "venue": null,
+   "year": 2022,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S113",
+   "title": "A Review of Multi-Objective Optimization: Theory and Algorithms",
+   "authors": "S Liu, LN Vicente",
+   "venue": null,
+   "year": 2020,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S114",
+   "title": "AB1125 Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models",
+   "authors": "F Ceccarelli, M Sciandrone, C Perricone, G Galvan, F Morelli, LN Vicente, ...",
+   "venue": "Annals of the Rheumatic Diseases 76, 1449",
+   "year": 2017,
+   "cites": null,
+   "doi": "10.1136/annrheumdis-2017-eular.5331",
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": "S035",
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S115",
+   "title": "BILEVEL PROGRAMS WITH QUADRATIC STRICTLY CONVEX",
+   "authors": "LN VICENTE",
+   "venue": "Minimax and Applications, 141",
+   "year": 2013,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": "S052",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S116",
+   "title": "Facultés universitaires Notre-Dame de la Paix Faculté des Sciences—Département de Mathématique",
+   "authors": "P Laloyaux, T Carletti, S Gratton, A Lemaitre, A Sartenaer, LN Vicente, ...",
+   "venue": null,
+   "year": 2012,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S117",
+   "title": "Special issue on nonlinear and global optimization, dedicated to Professor Joaquim João Júdice on the occasion of his sixtieth anniversary",
+   "authors": "JM Martínez, LN Vicente",
+   "venue": "Top 20 (1), 1-3",
+   "year": 2012,
+   "cites": null,
+   "doi": "10.1007/s11750-011-0232-6",
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S118",
+   "title": "Pattern Search Methods for Use-Provided Points",
+   "authors": "P Alberto, F Nogueira, H Rocha, LN Vicente",
+   "venue": "Computational Science-ICCS 2001: International Conference, San Francisco, CA…",
+   "year": 2003,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S106",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S119",
+   "title": "Part II High Performance Computational Tools and Environments-Pattern Search Methods for User-Provided Points",
+   "authors": "P Alberto, F Nogueira, H Rocha, LN Vicente",
+   "venue": "Lecture Notes in Computer Science 2073, 95-96",
+   "year": 2001,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S106",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S120",
+   "title": "The Effects of Travel Distance on MLB Performance",
+   "authors": "R Khromchenko, S Parlett, LN Vicente",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/travel-MBL.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "homepage"
+   ]
+  },
+  {
+   "id": "S121",
+   "title": "SIAG on Optimization Views and News",
+   "authors": "J Diakonikolas, LN Vicente, D Drusvyatskiy, M Menickelly, P Belotti, ...",
+   "venue": null,
+   "year": 2025,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ],
+   "note": "SIAG/OPT Views and News 33(1), Dec 2025; Vicente's part is the Chair's Column (p. 14)."
+  },
+  {
+   "id": "S122",
+   "title": "SIAG on Optimization Views and News",
+   "authors": "H Lu, S Cen, Y Chi, LN Vicente, H Lu",
+   "venue": null,
+   "year": 2023,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ],
+   "note": "SIAG/OPT Views and News 31(1), Dec 2023; Vicente's part is the Chair's Column (p. 23)."
+  },
+  {
+   "id": "D001",
+   "title": "Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems",
+   "authors": "Paul H. Calamai, Luís Nunes Vicente",
+   "venue": "ACM Transactions on Mathematical Software 20(1), 120-123",
+   "year": 1994,
+   "cites": null,
+   "doi": "10.1145/174603.174410",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1145/174603.174410"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "dblp",
+    "homepage"
+   ]
+  },
+  {
+   "id": "H001",
+   "title": "Editorial",
+   "authors": "C. Audet, J. E. Dennis, L. N. Vicente",
+   "venue": "Optimization and Engineering 5 (2004) 99-100 (Special Issue on Optimization and Engineering)",
+   "year": 2004,
+   "cites": null,
+   "doi": "10.1023/b:opte.0000033490.65824.89",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/editorial.pdf"
+   ],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "H002",
+   "title": "An analysis of Newton’s method for equivalent Karush-Kuhn-Tucker systems",
+   "authors": "L. N. Vicente",
+   "venue": "Investigación Operativa 7 (1999) 17-28",
+   "year": 1999,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/newton.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ]
+  },
+  {
+   "id": "H003",
+   "title": "On interior-point Newton algorithms for discretized optimal control problems with state constraints",
+   "authors": "L. N. Vicente",
+   "venue": "Optimization Methods & Software 8 (1998) 249-275",
+   "year": 1998,
+   "cites": null,
+   "doi": "10.1080/10556789808805679",
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/frame.pdf"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "homepage",
+    "crossref"
+   ]
+  },
+  {
+   "id": "H004",
+   "title": "Derivative computations for a class of optimal control problems",
+   "authors": "L. N. Vicente",
+   "venue": "School of Finite Elements and Applications, Centro Internacional de Matemática, n. 6, Coimbra, September 1998",
+   "year": 1998,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/finite.pdf"
+   ],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ]
+  },
+  {
+   "id": "H005",
+   "title": "Nonlinear least squares estimation of MQW laser parameters from IM response measurements",
+   "authors": "M. M. Freire, L. N. Vicente, H. J. A. da Silva",
+   "venue": "Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 30-35, Telecommunications Institute, 1998",
+   "year": 1998,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ]
+  },
+  {
+   "id": "H006",
+   "title": "Application of the least squares boundary residual method to the study of step discontinuities in dielectric planar waveguides",
+   "authors": "L. N. Vicente, A. L. Topa, C. R. Paiva, A. M. Barbosa",
+   "venue": "Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 99-108, Telecommunications Institute, 1998",
+   "year": 1998,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ]
+  },
+  {
+   "id": "H007",
+   "title": "Métodos de optimização para controlo óptimo e projecto de engenharia",
+   "authors": "L. N. Vicente",
+   "venue": "Actas da I Conferência Nacional de Telecomunicações, pp. 437-440, 1997",
+   "year": 1997,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/tele97.pdf"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ]
+  },
+  {
+   "id": "H008",
+   "title": "Efficient vehicle routing algorithms for municipal waste collection (written in portuguese)",
+   "authors": "L. N. Vicente",
+   "venue": "Investigação Operacional 10 (1991) 47-58",
+   "year": 1991,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ]
+  },
+  {
+   "id": "B001",
+   "title": "Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2009,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/idfo-table-of-contents.pdf"
+   ],
+   "kind": "book-toc",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Book front matter hosted by the authors; the book itself is not open."
+  },
+  {
+   "id": "B002",
+   "title": "Errata to Introduction to Derivative-Free Optimization (05/17/2015)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2015,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/errata.pdf"
+   ],
+   "kind": "errata",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Author-maintained errata list for the 2009 book."
+  },
+  {
+   "id": "B003",
+   "title": "Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2015,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/errata2.pdf"
+   ],
+   "kind": "errata",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Second author-maintained errata file for the 2009 book."
+  },
+  {
+   "id": "B004",
+   "title": "Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2011,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/quadratic-regression-bounds.pdf"
+   ],
+   "kind": "book-addendum",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Author-hosted addendum supplying a derivation for the book."
+  },
+  {
+   "id": "B005",
+   "title": "Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010)",
+   "authors": "reviewer named in the text (not the authors)",
+   "venue": "book material",
+   "year": 2010,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/mcom2379.pdf"
+   ],
+   "kind": "review",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "External book review, hosted on the authors' book page; evidence for peer view, not the authors' voice."
+  },
+  {
+   "id": "B006",
+   "title": "Review of Introduction to Derivative-Free Optimization (SIAM Review book reviews)",
+   "authors": "reviewer named in the text (not the authors)",
+   "venue": "book material",
+   "year": 2011,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/SIAM_Review.pdf"
+   ],
+   "kind": "review",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "External book review, hosted on the authors' book page; the PDF also carries unrelated reviews on the same pages. Year 2011 (first listed as 2010): Crossref places the Book Reviews section of SIAM Review 53(2), online 5 May 2011, at pp. 375-405 (DOI 10.1137/SIREAD000053000002000375000001); this review is pp. 395-396."
+  }
+ ],
+ "audit": {
+  "date": "2026-09-27",
+  "note": "Re-fetched the Scholar profile sorted by year (122 rows, articles 1-122): every row is present here (difflib ratio >= 0.9 on normalised titles), none missing. All 97 DOIs resolve at doi.org (302) and match their Crossref titles; all 25 arXiv ids match their arxiv.org titles. Corrected where Crossref/DBLP/author homepage agree against Scholar: S043 year 2014->2016, S046 2015->2016, S076 2002->2003, S082 2014->2012; S038 venue (Scholar showed a truncated publisher string); S060 and S078 titles (Scholar appended \": <first author> et al.\")."
+ }
+}

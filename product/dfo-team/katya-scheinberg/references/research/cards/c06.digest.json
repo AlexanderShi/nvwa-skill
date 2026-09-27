@@ -1,0 +1,204 @@
+[
+ {
+  "id": "S006",
+  "year": "2022",
+  "title": "A theoretical and empirical comparison of gradient approximations in derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Puts forward/central finite differences, linear interpolation, Gaussian smoothing and sphere smoothing under one accuracy target (the norm condition ||g - grad phi|| <= theta ||grad phi|| needed by the noisy line search of Berahas-Cao-Scheinberg), derives the sample count N, sampling radius sigma and gradient-norm floor for each, proves N = Omega(n) is necessary for Gaussian smoothing, and confirms empirically (estimator accuracy, More-Wild line-search DFO, RL) that finite differences/interpolation are more efficient than smoothing.",
+  "problem_entry": "ML/RL evolution-strategies practice averages many Gaussian or sphere directional derivatives with an 'obscure' choice of N; no analysis links estimator accuracy to optimization gains; question: can randomized directions beat finite differences? (pp. 2-3)",
+  "key_idea": "Write all estimators as one formula g = sum (f(x+sigma u_i)-f(x))/sigma * u~_i and derive, per estimator, the N and sigma that meet the same norm condition (1.3) required by an unchanged line search (Tables 1-2, pp. 2-5, 26).",
+  "assumptions": "Bounded noise |eps(x)| <= eps_f with eps_f known ('a key assumption', only needed at sample points); L-Lipschitz gradient with known bound; M-Lipschitz Hessian for central variants; n >= 4 for simplified table, n >= 15 and zero noise for lower bound (pp. 1-5, 16).",
+  "proof_devices": [
+   "sigma chosen as minimizer of a sigma + b/sigma bias-noise bound; root-existence condition gives gradient-norm floor (Thm 2.1-2.2, pp. 6-7)",
+   "interpolation error via mean-value theorem on rows of Q_X(g - grad phi) times ||Q_X^{-1}|| (Thm 2.3, p. 8)",
+   "triangle split into smoothing bias ||grad F - grad phi|| and sampling error ||g - grad F|| (2.15, p. 10)",
+   "Loewner-order variance bound using (v1+v2+v3)(.)^T <= 3 sum v_i v_i^T and Gaussian moment identities (Lemma 2.4, pp. 11-12)",
+   "Chebyshev for Gaussian smoothing (Lemma 2.5, p. 13); matrix Bernstein for bounded sphere-smoothing summands, log((n+1)/delta) (Lemma 2.10, pp. 20-21)",
+   "error-budget split lambda/(1-lambda) with lambda = 1/(3 sqrt n) to keep N linear in n (p. 14)",
+   "Petrov second-moment tail lower bound on a linear test function giving necessary N > (1-2 sqrt delta)(n+1)/theta^2, plus simulation of the true threshold (pp. 16-18)",
+   "same-sample identity g_GSG = (1/n) Q^T Q g_LI showing a sigma-independent error term (sec. 2.5, p. 25)"
+  ],
+  "experiments": "Synthetic function with independent knobs (n, L, M, sigma, N), box plots over 100 realizations with/without uniform noise 1e-4; 69 Schittkowski functions at 5,330 trajectory points reporting mean log10 theta and % theta < 1/2; 53 More-Wild problems, 17 variants, best variant per estimator plus DFOTR, performance/data profiles in evaluations/(n+1); RL (Swimmer, HalfCheetah, Reacher) reward vs iterations over 3 seeds, FD failure reported (pp. 25-33, 42).",
+  "positioning": "Supplies the missing theory for RL/ES practice (Salimans et al. 'without any analysis', Choromanski's orthogonal ES); extends Nesterov-Spokoiny from N = 1; places setting between Nesterov-Spokoiny and Duchi et al.; companion to Berahas-Cao-Scheinberg line search whose condition it certifies (pp. 2-4, 10).",
+  "writing": "Strong thesis in intro ('no theoretical or practical advantage', p. 2) but hedged results ('may be more efficient, at least in the setting considered', pp. 5, 25); full summary table before derivations (p. 5); intuition section separate (p. 25); weak bounds flagged as weak (pp. 15, 17); a few typos.",
+  "limits_future": "Needs known bounded noise; lower bound weak and stronger one open (p. 17); a noisy setting where randomization helps is 'yet to be discovered' (p. 2); extension to other symmetric iid direction distributions (pp. 11, 32).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Full-text instance: one accuracy target for all estimators, N and sigma derived per estimator, quality measured against the theory's theta < 1/2, end-to-end runs in the same line search with data profiles in evaluations/(n+1).",
+    "pages": "pp. 4-5, 25-31"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Protocol differs from SKILL.md steps 4-5: best variant per estimator selected among 17 (direction, N, step rule); constant-step variants tuned; RL plotted per iteration over 3 seeds.",
+    "pages": "pp. 30, 33, 42"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Norm condition as contract (with probability 1-delta for randomized estimators); irreducible noise sets a gradient-norm floor (step 3); N, sigma = cost of meeting contract (step 4).",
+    "pages": "pp. 4-7, 13-24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Accuracy is relative to ||grad phi||, not to step or radius; step-scaled kappa alpha_k ||g|| form cited as the alternative of Cartis-Scheinberg and Paquette-Scheinberg.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Research Heuristic 5",
+    "relation": "evidence",
+    "note": "Source case: choose estimator, N and sigma from derived bounds instead of defaulting to Gaussian smoothing.",
+    "pages": "pp. 5, 25, 32"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Weak: for every estimator the best variant used an adaptive line search; line search improves over manually tuned step in RL.",
+    "pages": "pp. 30, 32"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "upper bound + weak lower bound + simulate the true threshold",
+    "evidence": "Necessity bound N > (1-2 sqrt delta)(n+1)/theta^2 is called weak; 10,000-run simulation at n = 32 shows theta < 1/2 only ~half the time at N = 4n.",
+    "pages": "pp. 16-18"
+   },
+   {
+    "pattern": "contract-supplier companion paper",
+    "evidence": "The algorithm paper [5] states the gradient condition; this paper certifies and prices concrete estimators against it (D001 sec. 5 does the same inside one paper).",
+    "pages": "pp. 4-6, 30"
+   }
+  ],
+  "transferable": [
+   "Choose a sampling radius by minimizing an a sigma + b/sigma error bound; the existence condition of the inequality gives the reachable neighbourhood (pp. 6-7).",
+   "Split a relative-error budget lambda/(1-lambda) between bias and sampling error, tuning lambda (1/(3 sqrt n)) to keep the right order in n (p. 14).",
+   "Prove necessity of a sample count with a second-moment tail lower bound on a linear test function, then simulate that instance to measure looseness (pp. 16-18).",
+   "Compare two estimators algebraically on the same sample set to expose a non-vanishing error term (p. 25).",
+   "Use matrix Bernstein instead of Chebyshev when summands are bounded, and say when a 1/delta dependence is an artifact (pp. 15, 20-23).",
+   "Build a synthetic test function with one knob per constant in the bound and vary one knob at a time (p. 26).",
+   "Evaluate estimators at points harvested from optimization trajectories and report the fraction meeting the convergence threshold (pp. 29-30).",
+   "Put the complete comparison table in the introduction, before the derivations (p. 5)."
+  ],
+  "coauthors": "A. S. Berahas, L. Cao, K. Choromanski",
+  "quotes": [
+   {
+    "text": "What we observe is that this number is at least as large as n, and it is thus our conclusion that these new methods offer no theoretical or practical advantage at least in the setting fo standard optimization algorithms, such as line search.",
+    "page": 2
+   },
+   {
+    "text": "A stronger theoretical lower bound supporting this claim remains an open question.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "D001",
+  "year": "2024",
+  "title": "High Probability Complexity Bounds for Adaptive Step Search Based on Stochastic Oracles",
+  "read_level": "full",
+  "contribution": "Proves high-probability (exponentially decaying) tail bounds on the iteration complexity of an unchanged stochastic adaptive step search (SASS, Armijo with a 2 eps'_f slack) for non-convex, convex and strongly convex/PL functions, under a first-order oracle accurate to max{eps_g, min{tau, kappa alpha}||g||} with probability 1-delta and a biased, subexponential zeroth-order oracle, removing the step-size upper bound of earlier analyses.",
+  "problem_entry": "Own prior step-search analyses (Cartis-Scheinberg, Paquette-Scheinberg, Berahas-Cao-Scheinberg) give only expected complexity, need tau = infinity and a step-size cap, and exact or bounded function values; Vaswani et al.'s SGD+Armijo needs very strong assumptions (pp. 2-4).",
+  "key_idea": "Keep the algorithm of [3]; move the novelty into oracle modelling (floor eps_g, cap tau, light-tailed function errors) and into an abstract stochastic-process analysis whose tail bound comes from a deterministic counting lemma plus concentration (pp. 1-9).",
+  "assumptions": "L-Lipschitz gradient, bounded below (L unknown to algorithm); SFO with probability 1-delta; SZO with mean error <= eps_f and one-sided subexponential tail (only the difference needs it); eps'_f >= eps_f; PL for strongly convex; bounded distance D for convex; independence wording not uniform (pp. 1-5, 10, 12, 17-22).",
+  "proof_devices": [
+   "axiomatized process properties Assumption 3 (i)-(v) on I_k, Theta_k, Z_k, A_k, verified per function class (p. 7; Props. 3, 4, 6)",
+   "Azuma-Hoeffding on submartingale sum I_k - p t (Lemma 3.1, p. 7)",
+   "large/small step classification relative to threshold alpha_bar = alpha_0 gamma^m with counting lemmas: large successful >= large unsuccessful - d; small true <= small false (Lemmas 3.2, 3.4, p. 8)",
+   "key deterministic lemma: T > t and sum I_k >= p_hat t imply sum U_k Theta_k I_k >= (p_hat - 1/2)t - d/2 (Lemma 3.5, p. 9)",
+   "Bernstein-type bound on the summed damage via induction on conditional MGFs (Prop. 1, pp. 11-12) and Jensen via concavity of r (p. 13)",
+   "subexponential algebra: r of subexp is subexp, sums/affine maps, ln W for W >= 1 (Lemma 3.7, Props. 2, 5; pp. 11, 14, 21)",
+   "progress measures Z_k = phi - phi*, ln((phi - phi*)/eps), 1/eps_0 - 1/(phi - phi*) (Table 1, p. 6)",
+   "two-case oracle argument turning absolute error eps_g into relative error via eps >= eps_g/eta (p. 16)"
+  ],
+  "experiments": "Fixed mini-batch 128 oracles (not checked against theory); kernel logistic regression on 64 PMLB datasets, eps'_f re-estimated each epoch as 1/5 std of 30 oracle calls with eps'_f = 0 ablation, fixed gamma/theta/alpha_0, SLS with suggested params, ADAM over 5 LRs, 5 starts, equal budget in inner products, median best test loss (SASS beats SLS on 32/64; ADAM LR 1e-1 beats SASS on 47/64); MNIST MLP/CNN and FashionMNIST ResNet18 vs passes (pp. 26-28).",
+  "positioning": "Extends own NeurIPS 2021 version and generalizes [5], [3] (special cases of the new oracles) and [16] (criticized for an artificial modification and O(L^3)); sharp critique of Vaswani et al. SLS ('essentially impractical', no better than fixed-step SGD) while acknowledging its practical results; high-probability idea credited to Gratton-Royer-Vicente-Zhang (pp. 2-4, 17, 29).",
+  "writing": "Bulleted motivation list and end-of-intro contribution summary (pp. 3-4); plain-language sentence before each proof step (pp. 7, 8, 11); parenthetical gloss per axiom (p. 7); bounded case first to inform general case (p. 10); remarks translating theorems to order form vs deterministic and prior work (p. 17); terms in footnotes (pp. 1-2, 4).",
+  "limits_future": "eps'_f fixed in analysis; experiments do not enforce oracle conditions; other finite-difference schemes omitted 'For brevity'; future: practical variants with adaptive mini-batch, choice of gamma and eps'_f; eps'_f can be smaller 'than theory dictates' (pp. 25-26, 29).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Contract per oracle with step-scaled accuracy, probability 1-delta, bias allowed; irreducible eps_g, eps'_f set neighbourhood (Inequality 1); threshold p > 1/2 + r/h(alpha_bar) (step 5); sample sizes for mini-batch and randomized-FD oracles (step 4).",
+    "pages": "pp. 1-2, 7, 15, 24-25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "First-order contract has three regimes (absolute floor eps_g, step-scaled kappa alpha ||g||, cap tau ||g||); zeroth-order contract is a mean bound plus subexponential tail, not a fixed-probability event; algorithm needs only an upper bound eps'_f, never the contract constants.",
+    "pages": "pp. 1-5, 15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Algorithm of [3] kept unchanged; step-size cap removed via an oracle condition (tau < infinity), not an algorithm change.",
+    "pages": "pp. 3-5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stopping-time analysis, expected-to-high-probability upgrade, deterministic-order recovery at p = 1, eps'_f = 0; explicit p- and L-dependence.",
+    "pages": "pp. 3, 10, 17"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Correction to SKILL.md steps 1-2: no joint potential of f and step size and no supermartingale on it; progress measure Z_k alone plus a deterministic counting argument on large/small steps relative to alpha_bar; probability only via Azuma-Hoeffding on true-iteration count and Bernstein on summed damage.",
+    "pages": "pp. 7-13"
+   },
+   {
+    "method": "Research Heuristic 6",
+    "relation": "evidence",
+    "note": "High-probability tail bound instead of expected complexity is an explicit motivation.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Research Heuristic 12",
+    "relation": "evidence",
+    "note": "2 eps'_f Armijo slack is essential; eps'_f = 0 performs badly in experiments.",
+    "pages": "pp. 4-5, 26"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Weak: methods compared at equal budget in inner products / network passes with per-iteration charges stated.",
+    "pages": "p. 27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "axiomatize the process, instantiate per function class",
+    "evidence": "Assumption 3 (i)-(v) proved once to give tail bounds (Theorems 3.6, 3.8); non-convex, strongly convex and convex cases only choose Z_k, h, r (Props. 3, 4, 6).",
+    "pages": "pp. 7, 10-23"
+   },
+   {
+    "pattern": "oracle-side fix for an algorithm-side safeguard",
+    "evidence": "A finite tau in the first-order oracle ('a very minor condition') removes the step-size upper bound the analysis previously needed.",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Prove a high-probability iteration bound as a deterministic counting lemma (not stopped + enough true iterations => enough good iterations) plus one concentration inequality on the true count (pp. 7-9).",
+   "Classify steps as large/small relative to a threshold alpha_bar = alpha_0 gamma^m and count up- vs down-moves in each class (p. 8).",
+   "For unbounded noise, bound the sum of per-iteration damages with a Bernstein inequality proved by induction on conditional MGFs (pp. 11-12).",
+   "Use Z_k = ln((phi - phi*)/eps) for linear convergence and Z_k = 1/eps_0 - 1/(phi - phi*) for the convex case so all classes fit one additive-progress axiom (pp. 6, 19-20).",
+   "Model oracle accuracy as max{floor, min{cap, kappa alpha} ||g||}: the floor is the practical sampling limit, the cap avoids a step-size bound (pp. 1-3).",
+   "Estimate the noise slack online from repeated oracle calls and include the zero-slack ablation (p. 26).",
+   "Give every method the same budget in the underlying unit of work (inner products, passes) and state per-iteration charges (p. 27).",
+   "Write a one-line parenthetical gloss after each axiom of an abstract process assumption (p. 7)."
+  ],
+  "coauthors": "B. Jin, M. Xie",
+  "quotes": [
+   {
+    "text": "The engine of the analysis is a key lemma showing that if the stopping time has not been reached and a large enough number of iterations are true, then there must be a large number of good iterations.",
+    "page": 8
+   },
+   {
+    "text": "Thus we do not check or ensure that these oracles actually satisfy the properties that our theory requires.",
+    "page": 26
+   }
+  ]
+ }
+]

@@ -1,0 +1,560 @@
+[
+ {
+  "id": "S074",
+  "year": "2016",
+  "title": "A second-order globally convergent direct-search method and its worst-case complexity",
+  "read_level": "full",
+  "contribution": "Shows that any sufficient-decrease direct search whose poll sets have a symmetric part and whose forcing function is o(α²) is weakly second-order convergent in terms of a Rayleigh measure. It adds an approximate-Hessian direct search (AHDS) that is second-order globally convergent, and gives the first derivative-free second-order complexity bounds: O(n³ max{ε_g⁻³, ε_H⁻³}) iterations and O(n⁵ max{…}) evaluations with D⊕ (pp. 6–7, 10–13, 17).",
+  "problem_entry": "Second-order results for direct search existed only at limit points along refining directions. The authors want an iteration-level measure analogous to the cosine measure, plus second-order complexity bounds, which existed only for derivative-based methods (pp. 2–3).",
+  "key_idea": "Rayleigh measure rm(D, A) = min dᵀAd over the poll set. AHDS polls D_k, then −D_k, then d_i + d_j. It reuses these values to form H_k by second differences and polls ±eigenvector of λ_min(H_k), paying for curvature only after the first-order poll fails (pp. 6, 10–11).",
+  "assumptions": "f is C² with Lipschitz gradient and Hessian, and bounded below. ρ is nondecreasing and o(α²). The poll sets are unit PSSs with a nonempty symmetric part and cosine measure ≥ κ_g, and σ_min(B_k)² ≥ σ (pp. 4–5, 13).",
+  "proof_devices": [
+   "sum of the failed sufficient-decrease inequalities at d and −d gives a second difference and a curvature lower bound (Lemma 2.1, pp. 5–6)",
+   "entrywise → Frobenius → eigenvalue-perturbation bound for the finite-difference Hessian: vᵀ∇²f v ≤ σ_min(B)²λ + (10ν_H n/3)α (Prop. 3.1, pp. 11–12)",
+   "step-size lower bound at unsuccessful iterations passed to successful ones via α_k ≥ θα_{l(k)} (Thm 4.1, pp. 14–15)",
+   "unsuccessful count from α_{l1} ≤ α_{k0}γ^{|S|}θ^{|U|} (Thm 4.2, pp. 15–16)",
+   "counterexample f₁ = (9x − y)(11x − y) + x⁴/2: the basic method with D⊕ is stuck at a saddle (p. 8)"
+  ],
+  "experiments": "60 CUTEst problems with negative curvature; 4 poll-set types × 10 orderings or rotations; ρ = 10⁻³t³; budget 2000n evaluations; profiles on mean evaluations. The basic method is more efficient, AHDS more robust. The symmetrized control variant (sds) is usually the most efficient, and only ≈10% of AHDS successes come from the eigenvector step (pp. 18–22).",
+  "positioning": "Extends Vicente 2013 (first-order complexity) and generalizes Abramson, Abramson–Audet and Frimannslund–Steihaug second-order results. Compares its bounds with Cartis–Gould–Toint ARC and trust regions (pp. 2, 10, 17–18).",
+  "writing": "Three goals announced in order in the introduction (p. 3). The abstract admits the cost up front ('can be rather expensive to ensure', p. 1). The order gap against trust regions is explained, not hidden (p. 18).",
+  "limits_future": "The n⁵ evaluation dependence is admitted (pp. 17, 24), and sharpness remains to be proved (p. 17). Future: probabilistic strong second order, multilevel, curvilinear search (p. 25).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "iteration and evaluation bounds with n-dependence, set against ARC and trust-region bounds; the exponent gap is traced to the decrease formula; sharpness posed as open",
+    "pages": "pp. 14–18"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "the skeleton and success notion are kept; the forcing-function order (o(α²)) and a staged poll set are what change",
+    "pages": "pp. 4, 10"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "only as the stated follow-up (probabilistic strong second order)",
+    "pages": "p. 25"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "profiles on a CUTEst subset with an ablation variant, but no solver release found",
+    "pages": "pp. 18–22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "iteration-level measure first",
+    "evidence": "define a per-iteration criticality measure (Rayleigh measure) in the role of the cosine measure, prove what it gives, and show by counterexample what it cannot",
+    "pages": "pp. 6–8"
+   },
+   {
+    "pattern": "lazy escalation",
+    "evidence": "expensive curvature polling only after the first-order poll fails",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "mechanism-isolating control variant",
+    "evidence": "sds (Steps 3–4 removed) tests the authors' explanation that symmetric polling already captures curvature",
+    "pages": "pp. 20–21"
+   },
+   {
+    "pattern": "trace an exponent gap to one decrease inequality",
+    "evidence": "ε_g⁻³ instead of ε_g⁻²ε_H⁻¹ attributed to a single decrease formula in α³; cured by the decoupling in S060",
+    "pages": "pp. 17–18"
+   }
+  ],
+  "transferable": [
+   "Add the failed-decrease inequalities at d and −d to get a curvature bound from an unsuccessful iteration at no extra cost (pp. 5–6).",
+   "Build the Hessian estimate only from already-evaluated poll points and bound the eigenvector error entrywise → Frobenius → eigenvalue perturbation (pp. 10–12).",
+   "Pass the step-size lower bound from the most recent unsuccessful iteration to each successful one to count successful iterations (p. 15).",
+   "Profile a stripped variant to test your own explanation of where the gain comes from (pp. 20–21)."
+  ],
+  "coauthors": "S. Gratton, C. W. Royer",
+  "quotes": [
+   {
+    "text": "We are interested in an other proof scheme that reasons at the iteration level.",
+    "page": 2
+   },
+   {
+    "text": "The dependence on the problem dimension is however worsened compared to the first-order case.",
+    "page": 24
+   }
+  ]
+ },
+ {
+  "id": "S104",
+  "year": "2017",
+  "title": "An indicator for the switch from derivative-free to derivative-based optimization",
+  "read_level": "full",
+  "contribution": "Proposes a family of indicators, formed from ratios of the per-iteration decrease lower bounds used in complexity proofs, that signal when to switch from direct search to a gradient method. On 20 CUTEr problems the hybrid indicator switched on 15, stayed put on 4 problems where direct search was better, and failed once (pp. 4–8).",
+  "problem_entry": "Applications such as full-waveform inversion have gradients that are computable but costly. When to switch from DF to DB methods is presented as never addressed (pp. 1–2).",
+  "key_idea": "Compare the DF decrease bound D₁t² and the step-reduction bound ‖∇f‖ ≤ D₂(n)Lt with the gradient-method bound (G/L)‖∇f‖². This gives I¹ = Σt²/Σ‖g‖² and I² = |C_k|‖g_{r_k}‖²/Σ‖g‖². Switch when the scaled indicator exceeds a threshold, with gradients estimated by simplex gradients from the history (pp. 4–8).",
+  "assumptions": "f is C¹ with Lipschitz gradient, unconstrained. Direct search uses ρ = α²/2 and a PSS; the gradient method uses backtracking. No theorem on the switch (pp. 2–3).",
+  "proof_devices": [
+   "ratio of the complexity-proof decrease lower bounds of two methods, (7)–(8), used as a monitored indicator (p. 4)",
+   "informal monotonicity argument: the gradient goes to zero faster than the step size (p. 5)"
+  ],
+  "experiments": "20 CUTEr problems, n = 20; D⊕ cyclic poll; E = 20, E_scaling = 5, C_threshold = 2; 500 evaluations. Switch on 15/20, with 1 failure (integreq). With gradients costed at 5 or n evaluations, the switched method is cheaper on 8/10 crossing problems. The pure I¹ indicator is less predictable (pp. 7–13).",
+  "positioning": "Builds on the authors' own complexity results (Vicente 2013; Dodangeh–Vicente; Garmanjani–Júdice–Vicente) and claims a new question (p. 2).",
+  "writing": "Modest framing ('a first contribution', p. 2). States what the experiment is not trying to show (p. 8) and calls the approach 'of heuristic type' (p. 13).",
+  "limits_future": "Heuristic, and C_threshold is problem dependent (pp. 13, 16). Extends to DFO trust regions and to any gradient method with a decrease bound in ‖∇f‖ (p. 16). A naming slip: 'Ethreshold' in the remarks vs E_scaling in the algorithms (pp. 6, 16).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "complexity decrease inequalities used as online diagnostics rather than cost bounds",
+    "pages": "pp. 2, 4"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "simplex gradients from already-evaluated points (regression, QR with regularization)",
+    "pages": "pp. 7–8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "per-problem plots and tables with a named failure, but no profiles or code",
+    "pages": "pp. 8–13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "complexity inequalities as run-time switches",
+    "evidence": "lower bounds on decrease from WCC proofs of two methods are turned into a monitored ratio that triggers a method change",
+    "pages": "pp. 4–5"
+   }
+  ],
+  "transferable": [
+   "Form the ratio of two methods' per-iteration decrease lower bounds from their complexity proofs, normalize it by its early-run value, and switch methods at a threshold (pp. 4–5).",
+   "Report effort with gradients costed at both 5 (AD) and n (finite differences) function evaluations (p. 8).",
+   "State the properties the experiment tests and what it does not claim (p. 8)."
+  ],
+  "coauthors": "S. Gratton, N. Soualmi",
+  "quotes": [
+   {
+    "text": "a question that to our knowledge has never been addressed is when should one switch from a derivative-free method to a derivative-based one, when the gradient can be computed (or possibly approximated by finite differences).",
+    "page": 2
+   },
+   {
+    "text": "Our approach is certainly also of heuristic type as we compare lower bounds on the decreases attained by the derivative-free method",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "S045",
+  "year": "2019",
+  "title": "Direct search based on probabilistic feasible descent for bound and linearly constrained problems",
+  "read_level": "partial",
+  "contribution": "Extends probabilistic descent to linear constraints through (p, κ)-feasible descent, a cosine measure relative to the projected gradient on an approximate tangent cone. Gives deterministic complexity (previously open) and probabilistic results: almost-sure convergence and O(ε⁻²) complexity with overwhelming probability. Improved dimension dependence for bounds-only (O(n_b n ε⁻²)) and equality-only (O((n − m)ε⁻²)) problems, with numerics favouring subspace-random polling (pp. 3, 7–17, 18–24).",
+  "problem_entry": "Random polling beat positive spanning sets in the unconstrained case, so it is natural to try it with constraints. A complexity bound for linearly constrained direct search was also still open (pp. 1–3).",
+  "key_idea": "Keep the unconstrained algorithm plus feasibility. Replace the positive generators of the approximate tangent cone by a κ-feasible descent set, required only with probability p. Generate directions by random subsets of generators, or by r_s random directions in the largest subspace of the cone plus random generators of its complement (pp. 4–7, 12, 16).",
+  "assumptions": "Lipschitz gradient, f bounded below on F, bounded gradient on F (added for constraints); normalized directions; forcing function with ρ(θα) ≤ θ̄ρ(α); γ > 1 for the probabilistic results; feasible x₀; A of full row rank (pp. 4–5, 8, 13).",
+  "proof_devices": [
+   "κ-feasible descent: cosine normalized by ‖P_{WT(x,α)}[−∇f]‖ (Def. 3.1, p. 7)",
+   "Moreau decomposition of χ into tangent and normal parts, with the normal part bounded by α/η_min (Lemmas 3.3–3.4, pp. 9–10)",
+   "deterministic complexity as a 'verbatim copy' of Vicente 2013 with ‖g‖ replaced by χ (Thm 4.1, pp. 10–11)",
+   "threshold p₀ = ln θ/ln(γ⁻¹θ); Σ[Z ln γ + (1 − Z) ln θ] is a submartingale with bounded increments (pp. 13–14)",
+   "Chernoff-type tail bound giving K ≤ O(ε⁻²) with probability ≥ 1 − exp(−O(ε⁻²)) (Thm 6.1, p. 14)",
+   "direction count r_s = ⌈log₂(1 − ln θ/ln γ)⌉ + 1 in the subspace (Prop. 7.1, p. 16)"
+  ],
+  "experiments": "MATLAB dspfd-0/1/2 (dspfd-0 = all generators in random order); ρ = 10⁻⁴α², γ = 2, θ = 1/2; 2000n evaluations; 10 runs averaged; profiles on 63 + 31 bound-constrained and 106 linearly constrained CUTEst problems. Baselines: MATLAB patternsearch, NOMAD 3.9.1 (models and search off), PSwarm 2.1. dspfd-2 beats patternsearch; PSwarm is the most efficient overall; NOMAD has memory failures on 7 problems (pp. 17–24).",
+  "positioning": "Generalizes GRVZ 2015 [19]. Admits the deterministic convergence result is that of Kolda–Lewis–Torczon [23], under a weaker assumption. Cites the optimality of the n² factor [12] (pp. 2, 8, 12).",
+  "writing": "Candid qualifiers: 'no novelty here' for deterministic convergence (p. 8); the random subset strategy gives no improvement (p. 15); the implementation is 'not as sophisticated' as the competitors' (p. 22).",
+  "limits_future": "The dimension gain holds only for bounds-only and equality-only problems. Constants depend on the polyhedral structure and may be exponential in n in the degenerate case (p. 11). Future: nonlinear constraints via augmented Lagrangian, linearization, barrier or merit function (p. 25).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "p₀ derived from θ and γ and turned into a concrete direction count r_s; submartingale plus Chernoff-type bound",
+    "pages": "pp. 12–16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "skeleton unchanged; only the cosine measure (relative to the approximate tangent cone) and the criticality measure χ are redefined",
+    "pages": "pp. 7–11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "evaluation bounds with n, m and m_I dependence; the (n − m)² factor cannot be improved with PSSs [12]",
+    "pages": "pp. 11–17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "profiles against patternsearch, NOMAD and PSwarm, with losses reported; no code release found",
+    "pages": "pp. 17–24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "weakest per-iteration property first",
+    "evidence": "the deterministic proof is restated with feasible descent sets instead of positive generators so that the probabilistic proof can reuse it ('This relaxation will be instrumental')",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "mechanism-isolating control variant",
+    "evidence": "dspfd-0 polls all generators in random order, a deterministic-analysis control for the random variants",
+    "pages": "p. 17"
+   }
+  ],
+  "transferable": [
+   "Before randomizing, restate the deterministic proof using only a per-iteration property that the random version can meet with probability p (pp. 8–9, 12–13).",
+   "Normalize the cosine measure by the projected gradient, not the full gradient, so that it stays bounded away from zero near active constraints (p. 7).",
+   "Work in null(A) with an orthonormal W so that the bounds-only and equality-only cases fall out of one analysis (pp. 4–6, 11–12).",
+   "Compare against strong solvers with their accelerating components switched off, and say so (p. 22)."
+  ],
+  "coauthors": "S. Gratton, C. W. Royer, Z. Zhang",
+  "quotes": [
+   {
+    "text": "showing that such a random strategy does not lead to an improvement over the deterministic setting.",
+    "page": 15
+   },
+   {
+    "text": "We emphasize that our implementation is not as sophisticated as that of NOMAD and PSwarm, therefore we do not expect to be overwhelmingly superior to those methods.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S058",
+  "year": "2019",
+  "title": "Trust-region methods for the derivative-free optimization of nonsmooth black-box functions",
+  "read_level": "partial",
+  "contribution": "Gives the first convergent derivative-free trust-region methods for black-box nonsmooth f with unknown nonsmoothness. The quadratic model gets a random unit linear term (basic), or a bundle-style max-linear model of random directions plus a quadratic (advanced). Clarke stationarity is proved when the directions are dense, and both methods are competitive with NOMAD on 51 problems (pp. 1–4, 9–16, 20–22).",
+  "problem_entry": "DFO trust regions existed only for smooth or known-composite nonsmooth f. For pure black boxes only directional methods were available, and they rely on dense directions (pp. 1–2).",
+  "key_idea": "Build the random-direction density of directional methods into the trust-region model. Replace the predicted reduction by θ‖s‖^{1+p} (a forcing-function analogue). Replace bundle subgradients by random directions, with displacements from nearby samples and a Δ^{1/2} penalty on older pieces (pp. 3–4, 9–11, 16).",
+  "assumptions": "f locally Lipschitz and bounded below. Model Hessians may be unbounded, bounded by MΔ^{−q} with q ∈ (0, 1) (basic) or (0, 1/2) (advanced). Subproblems solved exactly (inexact said possible). The directions {g_k}_K are dense in the unit sphere (pp. 3–5, 8, 15).",
+  "proof_devices": [
+   "Δ_k → 0 because every non-decrease iteration reduces f by a constant (Lemma 2.1, p. 5)",
+   "s_k = −Δ_k D_k g_k with D_k → I, via two-sided bounds on η_k and Sherman–Morrison–Woodbury (Prop. 2.1, pp. 5–7)",
+   "Clarke derivative ≥ 0 along limits of normalized unsuccessful steps, then contradiction with density (Lemma 2.2, Thm 2.3, pp. 7–8)",
+   "Δ^{1/2} penalty makes old max-linear pieces inactive for large k, so g̃_k = g_k (Thm 3.3, pp. 19–20)"
+  ],
+  "experiments": "51 nonsmooth problems (n = 10–30); 10 000 evaluations; performance and data profiles at τ ∈ {10⁻³, 10⁻⁵, 10⁻⁶} against NOMAD 3.8.1. Layered comparisons: basic with ω = 0 vs NOMAD without models, an ω sweep, basic vs advanced, advanced vs NOMAD with quadratic-model search (pp. 20–22).",
+  "positioning": "Inspired by bundle methods; brings the MADS and Vicente–Custódio directional analysis into trust regions; separates itself from model-based nonsmooth methods that need subgradients (pp. 2, 9).",
+  "writing": "The contribution is stated as the derivation of such methods (abstract); 'for the first time' (p. 25). The loose Hessian bound is highlighted with 'Interestingly' (p. 25).",
+  "limits_future": "No rate, which 'does not seem likely' with dense directions (p. 25). Dense model Hessians limit problem size. Future: constraints, stochastic f, max-linear f. Software available only on request (pp. 1, 25).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "the quadratic term is the efficiency component; convergence comes from the random linear term and the forcing-type ratio, so the Hessian may be unbounded",
+    "pages": "pp. 3–4, 25"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "trust-region skeleton kept; the acceptance test changes (predicted reduction → θ‖s‖^{1+p})",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "randomness used for asymptotic density, not as a probability-p requirement",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "no complexity bound; the authors doubt a rate exists with dense directions",
+    "pages": "p. 25"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "collection plus profiles, but code only on request",
+    "pages": "pp. 1, 20–22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "mechanism-isolating control variant",
+    "evidence": "basic vs advanced (value of the max-linear term); ω = 0 vs NOMAD without models",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "Show that the trust-region step tends to a randomly drawn direction (D_k → I) and then reuse the refining-direction argument of directional methods (pp. 5–8).",
+   "Replace the predicted reduction by a power of the step norm when unsuccessful iterations must give an o(‖s‖) bound (p. 3).",
+   "Penalize old model pieces by Δ^{1/2} so that only the newest is active asymptotically, which recovers the simple proof (pp. 11, 19–20)."
+  ],
+  "coauthors": "G. Liuzzi, S. Lucidi, F. Rinaldi",
+  "quotes": [
+   {
+    "text": "Hence, our trust-region models will have built-in the random generation of their linear terms.",
+    "page": 2
+   },
+   {
+    "text": "Interestingly, we have shown that the Hessian matrix of this quadratic term can be unbounded as long as it does not go to infinity faster than the inverse of a negative power of the trust-region radius.",
+    "page": 25
+   }
+  ]
+ },
+ {
+  "id": "S060",
+  "year": "2020",
+  "title": "A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds",
+  "read_level": "partial",
+  "contribution": "Introduces DESTRESS, a trust-region method with separate first- and second-order models and radii scaled by their own criticality measures. It attains O(max{ε_C⁻², ε_E⁻³}), recovering the first-order exponent that standard second-order trust regions and direct search lose, and performs well with and without derivatives (pp. 3, 6, 13, 15–22).",
+  "problem_entry": "Second-order trust regions and direct search worsen their first-order exponent (O(ε_C⁻²ε_E⁻¹), O(ε_C⁻³)) while cubic regularization does not. The cause is located in one radius serving two criteria, δ_k ≥ θ₂ min{ε_C, ε_E} (pp. 2–5).",
+  "key_idea": "Duplicate the models and trust regions: δ^C = δ‖g^C‖, δ^E = δ[−λ^E]₊. Take the better trial point and accept on min{ρ^C, ρ^E}. A decoupled criticality step handles the DFO case (pp. 5–6, 24).",
+  "assumptions": "f is C² with Lipschitz gradient and Hessian, and bounded below. Model errors of order (δ^C)² and (δ^E)³ with relative errors on the gradient and eigenvalue; bounded H^C; fractions of Cauchy decrease and eigendecrease (pp. 2, 7–8).",
+  "proof_devices": [
+   "radius parameter δ_k bounded below by a constant independent of ε, thanks to measure-scaled radii (Lemma 3.1, p. 10)",
+   "successful count ≤ (f₀ − f_low)/C · max{ε_C⁻², ε_E⁻³} via case analysis on which step was computed (Lemma 3.2, p. 11)",
+   "unsuccessful count via logarithm of the radius updates (Lemma 3.3, p. 12)",
+   "DFO: decoupled criticality step with at most r radius reductions, giving O(r max{…}) (Cor. A.1, pp. 28–29)"
+  ],
+  "experiments": "61 CUTEst problems with negative curvature; trbasic, a coupled control trscaled, and destress; profiles in iterations with tied problems removed. destress is the most efficient and trscaled the least; γ₂ = 1.1 improves destress's robustness. DFO variants profiled in iterations and evaluations, where destress_dfo 'performs extremely well' (pp. 13–22).",
+  "positioning": "Answers the ε_g-exponent gap diagnosed in its own direct-search paper [18] (S074) and in Cartis–Gould–Toint trust regions. A second-order decoupled variant of Fan–Yuan; conjectures decoupling within nonlinear stepsize control (pp. 2, 22).",
+  "writing": "The complexity analysis is framed as 'an indicator of an intrinsic difference in behavior' (p. 3). Notation C/E alludes to Cauchy step and eigenstep (p. 4). The DFO guarantees are called 'somehow weaker' (p. 29).",
+  "limits_future": "The improvement applies only in a tolerance range (ε_E⁻² < ε_C⁻² < ε_E⁻³, p. 22). DFO tolerances are absent from the main algorithm (p. 29). Future: decoupling other algorithms (p. 22).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "recovers the first-order exponent inside a second-order bound and compares it with ARC, trust-region and direct-search bounds",
+    "pages": "pp. 2–5, 13, 22"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "acceptance generalized to the minimum of two ratios by duplicating models and radii rather than by changing problem class",
+    "pages": "pp. 5–6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "collection, profiles in iterations and evaluations, control variant; no code found",
+    "pages": "pp. 13–22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "decouple coupled parameters to recover the base-case rate",
+    "evidence": "a single radius bounded by min{ε_C, ε_E} is the identified cause; separate measure-scaled radii remove it",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "pattern": "mechanism-isolating control variant",
+    "evidence": "trscaled (radius scaled by max of the measures) tests whether scaling alone explains the gain; it does worst",
+    "pages": "pp. 13, 15"
+   }
+  ],
+  "transferable": [
+   "When a second criterion worsens the first-order exponent, find the coupling inequality and give each criterion its own step scaled by its own measure (pp. 5–6).",
+   "Accept on the minimum of ratios computed against each model's own predicted decrease (p. 5).",
+   "Build a control variant that captures the obvious alternative explanation and show that it performs worse (pp. 13, 15).",
+   "Drop problems where all methods tie from the profiles and print the remaining count (p. 13)."
+  ],
+  "coauthors": "S. Gratton, C. W. Royer",
+  "quotes": [
+   {
+    "text": "The introduced decoupling technique consists in duplicating elements of the algorithm that intervene in the treatment of both features, treating each of them separately by means of dedicated step sizes.",
+    "page": 3
+   },
+   {
+    "text": "We believe that the use of a decoupling is most likely necessary to obtain a bound as the one established in Theorem 3.1",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S094",
+  "year": "2021",
+  "title": "The Sharpe predictor for fairness in machine learning",
+  "read_level": "full",
+  "contribution": "Defines the Sharpe predictor, the maximizer of (f_f − loss)/unfairness, as a principled single point on the accuracy/fairness Pareto front. Proves it is Pareto optimal and illustrates it on Adult Income with a disparate-impact proxy (pp. 2–6).",
+  "problem_entry": "Constraint and penalty approaches hide the trade-off, and after the front is computed there is a 'lack of guideline' to pick a predictor (pp. 1–2).",
+  "key_idea": "Transfer the Sharpe ratio from portfolio selection: return = accuracy, risk = unfairness. Solve the ratio problem by SGD with growing batches, i.e. biased but consistent gradients (pp. 3–6).",
+  "assumptions": "Logistic regression with a convex squared-covariance fairness proxy; finite sums. Def. 3.1 requires f_f > max f₁, but the experiment uses f_f = 0.37 < 0.394, justified as a low-risk reference (pp. 4–6).",
+  "proof_devices": [
+   "one-line dominance contradiction showing the ratio maximizer is Pareto optimal (Thm 3.1, p. 4)"
+  ],
+  "experiments": "Adult Income (45 222 samples, 5000 for training, gender as the sensitive attribute). The PF-SMG front (step 0.01, 6500 iterations) and the Sharpe predictor lying on it; no baselines (pp. 5–6).",
+  "positioning": "Builds on the authors' stochastic multi-objective fairness work (PF-SMG, trade-offs, SAfairKM). Contrasts with weights, thresholds and minimax group fairness as selection rules (p. 2).",
+  "writing": "A short note (9 pp.) with a finance analogy and a figure (Fig. 1). Priority claim 'To our knowledge this is the first attempt' (p. 2). Outlook section without a limitations paragraph (pp. 6–7).",
+  "limits_future": "No limitations stated. Future: compare fairness measures, dimensionless benchmarking, information ratio, VaR/CVaR variants (pp. 6–7).",
+  "method_links": [
+   {
+    "method": "Workflow E / Heuristic 4",
+    "relation": "evidence",
+    "note": "compute the front first, then select a point by a principled criterion instead of a priori weights",
+    "pages": "pp. 2, 4"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "variant",
+    "note": "a selection notion imported from finance and formalized, rather than a practitioners' verbal notion",
+    "pages": "pp. 3–4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "a single dataset, no baselines, no code link found",
+    "pages": "pp. 5–6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "cross-domain transfer of a selection criterion",
+    "evidence": "the Sharpe ratio from Markowitz portfolio selection is reused to select a predictor on the accuracy/fairness front",
+    "pages": "pp. 3–4"
+   }
+  ],
+  "transferable": [
+   "To pick a point on a bi-objective front without weights, maximize a return-per-unit-risk ratio relative to a reference level and prove in one line that the maximizer is Pareto optimal (p. 4).",
+   "Replace a nonconvex fairness metric by a convex surrogate (squared covariance with the decision boundary) before optimizing (p. 5)."
+  ],
+  "coauthors": "S. Liu",
+  "quotes": [
+   {
+    "text": "To our knowledge this is the first attempt to identify a prediction data point that could be put in relation to the accuracy/fairness Pareto front, rather than the two front extreme points corresponding to highest accuracy and fairness or any process involving the artificial selection of a weight or a threshold parameter.",
+    "page": 2
+   },
+   {
+    "text": "The ranges of (f1, f2) in ML are not of the same nature of those of (r1, r2) in finance, and one difference forces us to consider ff as the accuracy of a low-risk predictor (instead of a risk-free one).",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S065",
+  "year": "2022",
+  "title": "A Stochastic Alternating Balance k-Means Algorithm for Fair Clustering",
+  "read_level": "full",
+  "contribution": "Poses fair k-means as a bi-objective (cost vs balance) problem and proposes SAfairKM. It alternates n_a mini-batch k-means updates with n_b balance-improving swaps, and a nondominated-list version produces well-spread Pareto fronts on synthetic data, Adult and Bank (pp. 3–4, 6–11).",
+  "problem_entry": "Fair clustering is dominated by pre- and post-processing; the only in-processing trade-off method is a KL penalty. Weighted sums fail because the objectives are nonconvex, one is nonsmooth, and they differ in magnitude (pp. 2–3).",
+  "key_idea": "Use the numbers of updates per objective (n_a, n_b) in place of weights. Swap points between the minimum-balance cluster and a target cluster. Run from every member of a nondominated list for several (n_a, n_b) pairs and prune dominated members (pp. 4, 7–9).",
+  "assumptions": "None stated; no convergence theory. That each swap increases balance is asserted (p. 7). J disjoint demographic groups; balance as defined in [12] (pp. 5–6).",
+  "proof_devices": [],
+  "experiments": "4 synthetic (400 points, J = 2); Adult and Bank subsamples of 5000 with K = 10 and 5. Baselines VfairKM, FairAssign, VanillaKM, MinibatchKM; metric CPU time per nondominated solution; code on GitHub (pp. 8–11).",
+  "positioning": "An in-processing method contrasted with fairlets and coresets (pre-processing) and fair assignment (post-processing). Presented as the only in-processing alternative to Ziko et al. (pp. 2–3).",
+  "writing": "Contribution paragraph explains why weighted sums fail before introducing the method (p. 3). Results claims are mostly qualitative ('more spread-out', 'clearly more computationally efficient') (p. 11).",
+  "limits_future": "No theory. The Adult front has 'slightly lower quality' than VfairKM, and VfairKM is faster on one synthetic set (Table 1) (p. 11). Future: several protected attributes as separate objectives (p. 12).",
+  "method_links": [
+   {
+    "method": "Heuristic 4 / Method 4",
+    "relation": "evidence",
+    "note": "nondominated list with success = nondominance, carried into combinatorial clustering; no aggregation",
+    "pages": "pp. 4, 9"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "mini-batch k-means kept intact and alternated with swaps, but no convergent skeleton or guarantee added",
+    "pages": "pp. 4, 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "no complexity or convergence analysis",
+    "pages": "pp. 1–12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "public GitHub code, real datasets, four baselines",
+    "pages": "pp. 8–10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "weights by effort",
+    "evidence": "the numbers of updates given to each objective, (n_a, n_b), play the role of the weighted-sum weights",
+    "pages": "pp. 4, 8"
+   }
+  ],
+  "transferable": [
+   "Parameterize a trade-off by how many update steps each objective receives instead of by weights when objectives differ in magnitude or smoothness (pp. 4, 8).",
+   "Turn a single-solution method into a front method by running it from each member of a nondominated list under several effort pairs and pruning after each sweep (p. 9).",
+   "Compare front-producing methods by cost per nondominated solution when front sizes differ (p. 11)."
+  ],
+  "coauthors": "S. Liu",
+  "quotes": [
+   {
+    "text": "One can hardly preselect a good set of weights corresponding to decision-makers’ preferences to capture a well-spread Pareto front.",
+    "page": 3
+   },
+   {
+    "text": "the number of k-means updates (denoted by na) and the number of swap updates (denoted by nb) play a role similar to the weights in the weighted-sum method, parameterizing the efforts of optimizing each objective.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S078",
+  "year": "2022",
+  "title": "Optimal 3D printing of complex objects in a 5-axis printer",
+  "read_level": "partial",
+  "contribution": "Proposes a two-level approach for a 5-axis printer. MMLS computes all local or global optimal orientations of each part, and a recursive enumeration heuristic finds collision-free, support-free building sequences over a binary model with black-box constraints. Demonstrated on an 18-part candelabrum (pp. 2–4, 6, 9–12, 14–22).",
+  "problem_entry": "A single optimal orientation per part (the earlier paper [26]) can make the sequencing infeasible through collisions, so all optima are needed (p. 4).",
+  "key_idea": "Multistart multisplit local search: cluster the evaluation history around the run centres, fit an LP quadratic underestimator per cluster, split on poor fit, merge close runs, with probabilistic direct search (2 directions) as the local solver. Then enumerate sequences recursively with early collision pruning (pp. 5–6, 11–12, 23–25).",
+  "assumptions": "Expensive f; smoothness deferred to the local search; convergence inherited from the local search if clustering and splitting are finite (no theorem). NoCollision and NoSupport are printer-specific black boxes (pp. 5–7, 10, 22).",
+  "proof_devices": [
+   "informal inheritance argument: finite clustering and splitting keep the local-search convergence properties (pp. 5–7)",
+   "split test θ > α justified by an O(α) Lipschitz fit heuristic (p. 24)"
+  ],
+  "experiments": "Duct object (2115 evaluations, 2 global and 2 local optima). Candelabrum: 18 parts, 15 190 facets; per-part MMLS table; sequences L1 and L2 simulated in FIBR3DEmul; under 2 min on a laptop. Text and Table 1 disagree for parts 3 and 11 (pp. 7–8, 14–22).",
+  "positioning": "Sequel to Pereira–Vaz–Vicente 2018. Contrasts with MLSL, GLODS and MADS multistarts, which do not share information, and with pVTDirect, APPSPACK and HOPSPACK concurrency (pp. 4–5).",
+  "writing": "Application-first introduction with a four-stage pipeline (p. 3). Candid scope statement that only real printing validates the strategy (p. 4).",
+  "limits_future": "Printer-specific constraint functions; the Support routine was not used in the results; printing validation outside the scope. Future: a collision cache. MATLAB code by email (pp. 4, 18–22).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "probabilistic direct search with two directions chosen as the local engine because it performed best in [11, 12]",
+    "pages": "p. 24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "inverted: a heuristic layer (clustering, split and merge) wraps a convergent local method, and convergence is argued to be inherited",
+    "pages": "pp. 5–7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "real engineering application with simulated prints (Taste mark 6); code only by email",
+    "pages": "pp. 19–22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "no evaluation bound; only evaluation counts per part are reported",
+    "pages": "p. 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "all local optima for a downstream combinatorial problem",
+    "evidence": "a single optimal orientation may make sequencing infeasible, so MMLS returns every local optimum as candidate data for the master problem",
+    "pages": "pp. 4, 9"
+   }
+  ],
+  "transferable": [
+   "When a subproblem feeds a combinatorial master problem with side constraints, return all local optima, not one global optimum (pp. 4, 9).",
+   "Split a multistart run when a quadratic fitted to its cluster has residual larger than the step size, and merge runs whose centres come within the step size (pp. 23–25).",
+   "Enumerate sequences recursively and check feasibility at the moment a part is added, so that infeasible prefixes are pruned early (pp. 11–13, 18)."
+  ],
+  "coauthors": "B. Ramos, D. Pinho, D. Martins, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "However, a single optimum computation reveal itself insufficient, since the computed optimal printing direction may lead to an infeasible sequencing problem",
+    "page": 4
+   },
+   {
+    "text": "In practice, it is only this last stage that can properly validate the proposed strategy and show that a valid path planning is indeed obtained.",
+    "page": 4
+   }
+  ]
+ }
+]

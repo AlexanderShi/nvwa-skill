@@ -1,0 +1,388 @@
+[
+ {
+  "id": "S204",
+  "year": "2012",
+  "title": "Long-Term Fleet Maintenance of Hydroelectric Generators Using Proportional Hazard Model and Nonlinear Programming",
+  "read_level": "full",
+  "contribution": "Builds a statistics-to-NLP pipeline (Kaplan-Meier, Cox PHM with load covariate, renewal-reward cost rates) to plan overhauls of 90 hydro generator units over 50 years, solved by relaying Lindo API (SLP/GRG) for feasibility and NOMAD for polishing, and shows that +50% load moves withdrawals about 10 years earlier.",
+  "problem_entry": "Application-driven: aging fleets reach end of life together, so plant-level resource limits make the standard age-replacement policy infeasible; a mathematical-programming framework is proposed (p. 7).",
+  "key_idea": "Separable fleet cost-rate objective with one replacement period per unit (n=90) under crew/crane/capacity/budget constraints; Lindo finds a feasible plan and NOMAD restarted from it lowers J (7.709->7.566 k$/h) (pp. 14-17).",
+  "assumptions": "All components of a unit replaced together, load the only covariate with constant base hazard 'for the sake of simplicity', Gompertz-Makeham law, approximate costs; EB/PB choice for NOMAD not stated (pp. 7, 11, 16).",
+  "proof_devices": [
+   "renewal-reward cost rate C(tau)/l(tau) and the classical optimal-age condition from Barlow et al. (eqs. 8-11, p. 12)",
+   "hazard-ratio scenario transfer lambda(t,Z2)=psi(Z2)/psi(Z1)*lambda(t,Z1) (eq. 7, p. 11)"
+  ],
+  "experiments": "One run per setting on a workstation: NOMAD from the infeasible 50-year plan finds no feasible point (10^4 evals, then a larger run whose count lost its exponent in extraction); Lindo status 5 feasible; NOMAD from Lindo's plan improves by 143 $/h with 50,000 evals in 33 min; no seeds or profiles (pp. 16-19).",
+  "positioning": "Short review of generator maintenance scheduling (0-1 IP, DP, Benders, stochastic programming) without critique; NOMAD/MADS and Lindo presented as two tools (pp. 8, 15).",
+  "writing": "Engineering application report; claims about solver behaviour descriptive only; internal inconsistencies (3 problems announced, 2 reported; '+50%' later called 'doubling'; Lindo time 17 min vs 6.17) (pp. 16-19).",
+  "limits_future": "'limited only by the ability of nonlinear solvers'; future: whole fleet (300+ units), more general policies and cost structures; NOMAD's feasibility failure not analysed (pp. 16-20).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Quantifiable constraints, infeasible x0, no stated EB/PB choice and no PB or LH-search remedy tried when NOMAD stalls, contrary to the group's manual (S202 p. 74).",
+    "pages": "pp. 15-18"
+   },
+   {
+    "method": "Taste warning sign 5",
+    "relation": "evidence",
+    "note": "n=90 exceeds the ~20 variables where the manual calls NOMAD efficient; SLP/GRG reached feasibility where NOMAD did not in Problem I (inference, not drawn by the paper).",
+    "pages": "pp. 14, 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation counts and wall-clock reported but single runs, no profiles, solvers chained rather than compared.",
+    "pages": "pp. 17-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "feasibility-by-relay warm start",
+    "evidence": "Lindo (SLP/GRG) supplies a feasible plan, NOMAD restarted from it polishes; done for both Problems I and II",
+    "pages": "pp. 17-19"
+   }
+  ],
+  "transferable": [
+   "If direct search cannot reach feasibility from an infeasible start, hand it a feasible point from another solver and report the direct-search gain with its evaluation cost separately (pp. 17-19).",
+   "Report decision-level indicators (reliability at withdrawal AURI, of the remaining fleet AFRI) next to the objective to distinguish near-equal-cost plans (pp. 16-19)."
+  ],
+  "coauthors": "H. Aoudjit, M.-S. Ouali",
+  "quotes": [
+   {
+    "text": "This is an ideal context to the so-called direct search algorithms which uses only functions evaluations to find the best solution.",
+    "page": 15
+   },
+   {
+    "text": "This gain is however obtained at the cost of 50000 function evaluations in 33 minutes (Figure 9).",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S059",
+  "year": "2014",
+  "title": "Optimization of algorithms with OPAL",
+  "read_level": "full",
+  "contribution": "Presents OPAL, a Python modelling layer that turns algorithm-parameter tuning into a constrained blackbox problem solved by NOMAD/MADS, with typed parameters (incl. categorical), composite performance measures, static surrogates, parallelism and a clustering-based representative-subset surrogate (read as GERAD G-2012-08).",
+  "problem_entry": "Autotuning frameworks use heuristics, coordinate search, Nelder-Mead or random search; OPAL enters by using a method with strong convergence theory, non-intrusively (p. 8).",
+  "key_idea": "Formulate tuning as min psi(p) s.t. p in P, phi(p) in M over atomic/composite measures, gate p in P before launching the target, separate model structure from model data, and feed static surrogates to NOMAD (pp. 9-10, 13-15).",
+  "assumptions": "Real/integer/binary/categorical parameters; target may fail or stall; CPU-time objective is not even a function; no convergence hypotheses beyond the summarized MADS ladder (pp. 9-11).",
+  "proof_devices": [
+   "none new; summary of the MADS hierarchy (Clarke on hypertangent directions if Lipschitz, gradient zero / contingent KKT if strictly differentiable, no stagnation at strict maximizers or saddles) (p. 11)"
+  ],
+  "experiments": "No systematic benchmark or rival tuner; IPOPT case (6 params, 730 CUTEr problems): 207,866 -> 198,615 evaluations in 27h55m with 10 concurrent evals; SOM surrogate with 41 problems in 4h17m lands 'close to' it (p. 17).",
+  "positioning": "Positions against heuristic autotuners (ATLAS, PHiPAC, OSKI etc.) by method quality and against its own 2006/2010/2011 predecessors by features (p. 8).",
+  "writing": "Tool paper with code listings for a toy (finite-difference step) and for a CUTEr trust-region tuning; convergence theory used as a selling argument; listing slips (phi>=0 vs (None,get_error,0); undefined 'problems') (pp. 13-16).",
+  "limits_future": "Future: robust parameter values and automatic identification of the most influential parameters; no stated limitation of results (p. 18).",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Algorithm tuned as a blackbox by MADS; lineage 2006 -> 2010 -> 2011 -> 2012.",
+    "pages": "p. 8, p. 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Domain checked before launch, failures modelled, EB/PB/filter/hidden distinguished, no-failure requirement as an explicit constraint.",
+    "pages": "pp. 9-10, 15-18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Surrogates only seed a side problem or order/generate candidates inside the solver.",
+    "pages": "p. 15"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "OPAL's value rests on NOMAD features (variable types, groups, periodic variables, surrogates, constraint types).",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Convergence ladder used as an argument against heuristic tuners, with no proof and no controlled comparison.",
+    "pages": "pp. 8, 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Representativeness over size for test sets",
+    "evidence": "SOM clustering reduces 730 CUTEr problems to 41 representatives used as a static surrogate (27h55m vs 4h17m)",
+    "pages": "p. 17"
+   },
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "p in P verified without launching the target algorithm; infeasible p discarded at no cost",
+    "pages": "p. 10"
+   }
+  ],
+  "transferable": [
+   "When the blackbox is 'run an algorithm over a test set', cluster the test set and keep one representative per cluster as a static surrogate; report full vs surrogate wall-clock and closeness (p. 17).",
+   "Encode 'the tuned algorithm must still solve every problem' as a constraint (#failures <= 0), not a penalty in the objective (pp. 15-17).",
+   "Separate problem structure (objective/constraint form) from data (target, instance list) so variants need one-line changes (p. 14)."
+  ],
+  "coauthors": "K.-C. Dang, D. Orban",
+  "quotes": [
+   {
+    "text": "By contrast, Opal uses a solid optimization method supported by a strong convergence theory, yielding solutions that are local minimizers in a meaningful sense.",
+    "page": 8
+   },
+   {
+    "text": "It is important to stress that our framework does not assume correctness of the target algorithm, or even that it execute at all.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S152",
+  "year": "2014",
+  "title": "Ordering 15 marbles with a three-way scale",
+  "read_level": "full",
+  "contribution": "Shows that 15 distinct marbles can always be sorted with at most 20 weighings of a three-tray ranking scale, against a counting lower bound of 16, leaving the gap open (read as GERAD G-2013-05).",
+  "problem_entry": "A twist on classical balance puzzles: the scale ranks three marbles; minimize worst-case weighings for 15 (pp. 5-6).",
+  "key_idea": "Chains and v-chains plus Lemma 2.2 (two chains + a v-chain of p marbles in p-2 weighings), pivot-partition strategies for small n, and a ladder of improving strategies 25 -> 23 -> 22 -> 20 (pp. 6-13).",
+  "assumptions": "Distinct weights; each weighing returns the full order of three marbles; worst-case count (p. 6).",
+  "proof_devices": [
+   "induction on the number of marbles for Lemma 2.2 (p. 6)",
+   "case analysis on the cardinality split around a pivot marble with symmetry WLOG (pp. 7-13)",
+   "information-theoretic counting bound ceil(log_6 p!) (Prop. 4.1, p. 14)"
+  ],
+  "experiments": "none",
+  "positioning": "Self-contained; only a puzzle website is credited for the 7-marble strategy (p. 7).",
+  "writing": "Short constructive proofs with small graphs; bound improvements presented as a sequence; honest open-question ending; label slips (Lemma 2.6/2.8 for Propositions) (pp. 7-14).",
+  "limits_future": "Gap between 16 and 20 explicitly open; closing it would give the optimal strategy (p. 14). Later generalized by S177 (2025).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Claim bracketed by a constructive upper bound and a counting lower bound, gap stated rather than a smoothness ladder plus counterexamples.",
+    "pages": "p. 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "exposition by successive bound improvement",
+    "evidence": "Strategies giving 25, 23, 22 then 20 weighings, each unlocked by a new lemma",
+    "pages": "pp. 7-8, 13"
+   }
+  ],
+  "transferable": [
+   "Write the counting bound ceil(log_k #outcomes) for your oracle before searching for strategies, then report the construction against it and state the gap (p. 14).",
+   "Present an upper bound as a ladder of improving strategies, each naming the lemma that buys the improvement (pp. 7-8, 13)."
+  ],
+  "coauthors": "none (solo)",
+  "quotes": [
+   {
+    "text": "We do not know the answer to these questions.",
+    "page": 14
+   },
+   {
+    "text": "Bridging the gap between these two bounds would give the optimal strategy.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S202",
+  "year": "2015",
+  "title": "NOMAD User Guide, Version 3.7.2",
+  "read_level": "partial",
+  "contribution": "Duplicate Scholar entry of S019 (byte-identical text file, NOMAD 3.7.2 user guide); only cross-reading notes are added: XMesh from S061 is the 3.7.1 default, and OrthoMADS directions moved from Halton to a seeded PRNG.",
+  "problem_entry": "Same as S019: defined by simulator pathologies and by when not to use NOMAD (p. 11).",
+  "key_idea": "Same as S019; new here: ANISOTROPIC_MESH default yes (XMesh [26]) with the isotropic SMESH kept as a developer switch (pp. 80, 104, 110).",
+  "assumptions": "Same as S019; new here: a single seed controls all random aspects and Halton directions are deprecated (p. 104).",
+  "proof_devices": [],
+  "experiments": "none (see S019)",
+  "positioning": "See S019.",
+  "writing": "See S019.",
+  "limits_future": "See S019 (pp. 103-107).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "S061's March 2014 preprint is the default mesh in the August 2015 guide.",
+    "pages": "pp. 80, 104, 110"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "variant",
+    "note": "OrthoMADS, introduced as deterministic, now draws directions from a seeded PRNG; repeatability rests on the seed, not on determinism.",
+    "pages": "p. 104, p. 113"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Manual remedies (PB for difficult constraints, LH search without x0) serve as the yardstick against which S204 and S069 fall short.",
+    "pages": "p. 74"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a paper changes a solver default, keep the old behaviour behind a named switch (USE_SMESH) so old results stay reproducible (p. 110)."
+  ],
+  "coauthors": "S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "OrthoMads directions are obtained by a pseudo-random number generator on a unit n-sphere. Halton directions are deprecated.",
+    "page": 104
+   },
+   {
+    "text": "Use of a dynamic scaling of the mesh size per variable based on the direction of success during optimization (XMesh) [26].",
+    "page": 104
+   }
+  ]
+ },
+ {
+  "id": "S061",
+  "year": "2016",
+  "title": "Dynamic scaling in the mesh adaptive direct search algorithm for blackbox optimization",
+  "read_level": "full",
+  "contribution": "Replaces MADS's scalar mesh and poll sizes by per-variable vectors that are coarsened only along variables that moved on success, re-presents MADS from scratch, re-proves Clarke stationarity, and shows data-profile gains (about 10% more of 212 problems solved; better on a supersonic business jet MDO problem); became NOMAD's XMesh (read as GERAD G-2014-16).",
+  "problem_entry": "Scaling strongly affects performance, default MADS keeps mesh aspect ratios fixed, and under a finite budget bad scaling makes progress marginal; also a wish to ease the MADS presentation (pp. 5-6).",
+  "key_idea": "Mesh M^k = V^k + diag(delta^k) Z^n with delta_j = min(Delta0_j, Delta_j)^2/(sqrt(n) Delta0_j); on failure halve all Delta_j; on success increment r_j only if |d_j| > ||d||_inf/n, plus a catch-up rule; Householder directions stretched by diag(Delta) and rounded to the mesh (pp. 8-13).",
+  "assumptions": "Extreme barrier only; feasible x0 with finite f; bounded iterates; beta_j^2 rational (defended as necessary via [4]); mechanism (5); dense refining directions, f Lipschitz near x*, nonempty hypertangent cone (pp. 7, 9-10, 18-20).",
+  "proof_devices": [
+   "integer mesh-index representation Delta_j = Delta0_j beta_j^{r_j}, delta_j = delta0_j beta_j^{r_j-|r_j|} (Lemma 2.3, p. 9)",
+   "coordinate-wise frame containment |d_j| <= beta_j^{|r_j|} (Prop. 2.4, p. 10)",
+   "lattice-finiteness contradiction: bounded mesh index + rational beta^2 put all trial points on x0 + (delta0/q^rho)Z, boundedness leaves finitely many points (Prop. A.1, p. 19)",
+   "Clarke derivative lower bound along refining directions by choosing y=x^k, t=||v^k|| in the lim sup (Thm A.4, p. 20)"
+  ],
+  "experiments": "NOMAD 3.7.0 beta, OrthoMADS 2n, quadratic models disabled and a shared direction generator in both variants; 212 More-Wild instances x 10 seeds (4240 runs), data profiles tau=1e-3 in groups of n+1; SBJ MDF problem with 11 free variables, 46 EB constraints, 100 random starts, 20,000 budget, profiles tau=5e-2, paired histogram 53/21/26 and a mesh-anisotropy plot (pp. 13-18).",
+  "positioning": "Continues MADS [6], OrthoMADS [1] and frame-based methods [12]; cites classic scaling texts; the only competitor is its own isotropic version (pp. 6, 12-14).",
+  "writing": "Contribution sentence plus 'the convergence analysis needs to be entirely revisited'; theory deferred to an appendix; worked 2D example of mesh/frame updates (Fig. 1) (pp. 6, 11-12, 18-20).",
+  "limits_future": "Priority: adapt the progressive barrier; link anisotropic mesh sizes to variable sensitivities and decomposition methods (pp. 17-18).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Ladder restated and fully re-proved for vector meshes; rational beta^2 defended as necessary by the author's own 2004 counterexample paper.",
+    "pages": "p. 6, pp. 18-20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The performance idea lives in the Poll/mesh geometry, not the Search, at the price of revisiting the whole analysis; Search stays optional.",
+    "pages": "p. 6, p. 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Budget in n+1 groups, 10 seeds per instance, realistic MDO blackbox with 100 starts and a paired histogram; but same-solver ablation only.",
+    "pages": "pp. 14-17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Implemented and released in NOMAD 3.7.x, default by the 3.7.2 guide.",
+    "pages": "pp. 13, 17; S202 pp. 80, 104"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Theory covers EB only, so 46 engineering constraints run under EB with a phase-one start; PB deferred.",
+    "pages": "pp. 7, 15, 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "same-solver controlled comparison with shared components",
+    "evidence": "Quadratic models disabled in both variants and one random-direction generator shared, to isolate the anisotropic mesh",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "simplify-while-generalizing re-presentation",
+    "evidence": "Generalization used to re-present MADS from scratch and drop the unused direction matrix D",
+    "pages": "pp. 5, 7, 10"
+   }
+  ],
+  "transferable": [
+   "Per-variable scaling from the success direction: after success along d coarsen only coordinates with |d_j| > ||d||_inf/n, with a catch-up rule for lagging coordinates (pp. 11-12).",
+   "Initial per-variable step (u_j - l_j)/10, else |x0_j|/10, else 1 (p. 11).",
+   "To prove liminf of a vector step size is zero, write components as Delta0_j beta_j^{r_j} with integer r_j and rational beta_j^2 so bounded indices force a finite lattice (pp. 9, 19).",
+   "Plot the internal quantity the new mechanism controls (min/max mesh ratio) against evaluations next to the objective (pp. 16-18).",
+   "Complement data profiles with a paired per-start histogram of final-value differences and report better/comparable/worse counts (pp. 16-17)."
+  ],
+  "coauthors": "S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "This requirement imposed on the Mads algorithm is not an artifice of the proof since it cannot be relaxed as demonstrated in [4] on an example.",
+    "page": 19
+   },
+   {
+    "text": "Preliminary tests have shown an influence of the random number generator seed on the data profiles.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S069",
+  "year": "2016",
+  "title": "Optimal adaptive sequential designs for crossover bioequivalence studies",
+  "read_level": "full",
+  "contribution": "Optimizes two-stage adaptive bioequivalence designs (methods E and F, with a futility rule and a sample-size cap) over two ISCV ranges by running NOMAD/MADS on a Monte-Carlo/importance-sampling simulator, keeping type I error <= 0.05 and power >= 0.80 while reducing average sample size versus earlier designs B/C/D (read as GERAD G-2015-70).",
+  "problem_entry": "Sample-size choice under unknown intra-subject CV; earlier designs B, C, D were demonstrations with no optimization and no maximum size (p. 6).",
+  "key_idea": "Four design variables (alpha1, alpha2, n1, futility f), grid simulation over GMR x ISCV with constraint subsets evaluated first, asymmetric quadratic/linear sample-size cost, and MADS search with infeasible designs given an extremely high cost from a feasible start (pp. 7-12).",
+  "assumptions": "Normal log-differences with variance 2 sigma^2, Hauschke-based power formula, GMR symmetry, n1 >= 12 (FDA minimum), nmax 42 (cost-equivalent to the smallest SABE study) or 180 (practical); seed handling across variants not stated (pp. 9-11).",
+  "proof_devices": [
+   "importance-sampling estimator with variance no larger than plain Monte Carlo, one run set for both type I error and power (eq. 2, p. 11)",
+   "active-constraint argument: optimum lies on the feasibility edge (p. 12)",
+   "fold-range argument (5.57x vs 2.95x span of single-stage sizes) explaining n1 over-powering (pp. 15-16)"
+  ],
+  "experiments": "About 100 design variants per optimization, ~3 min each, ~5 h on a 5-6 PC cluster; optimized designs hit type I error 0.050 and power 0.80 exactly; sample-size penalty +1.9 (low ISCV) and -6.1/-6.7 (high ISCV) vs single stage, against 4.8-16.3 for B/C/D; no optimizer comparison or restarts (pp. 13-20).",
+  "positioning": "Extends the same group's Potvin et al. 2008 and Montague et al. 2012 designs; notes Fuglsang's improvements as a different approach; frames ranges around FDA/EMA scaled average BE (pp. 6, 21).",
+  "writing": "Regulatory-statistics style with flowcharts, tables and a worked example; limits stated concretely; one anomalous table value (0.459) and a MADS citation pointing to the PB paper (pp. 14-22).",
+  "limits_future": "Power loss when true ISCV exceeds the design range; 'fundamental limitation' of one sequential design over a wide ISCV span; deliberately conservative comparison (pp. 15, 19-20).",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "A statistical decision procedure's design parameters tuned by MADS with a simulator as blackbox.",
+    "pages": "pp. 9-12"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Eight quantifiable simulation constraints enforced by an extremely high cost (EB-style) from a feasible start; PB not considered although the optimum lies on the boundary.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Research Taste 1",
+    "relation": "evidence",
+    "note": "Real, expensive, noisy blackbox with an irregular feasibility edge shown and explained.",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "Type I error and power grid subsets simulated first; remaining grid skipped for infeasible variants",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "asymmetric aggregate over a scenario grid",
+    "evidence": "Quadratic penalty above the single-stage sample size, linear reward below, averaged over GMR x ISCV so good scenarios cannot buy bad ones",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "When each evaluation is a grid of simulations, evaluate constraint-bearing points first and stop at the first violation (p. 10).",
+   "For scenario-averaged objectives use an asymmetric per-scenario cost: quadratic above the reference, linear below (eq. 3, p. 12).",
+   "Estimate rare-event constraints and power from the same importance-sampled runs, and state where importance sampling fails and what replaces it (p. 11).",
+   "Report out-of-range behaviour of the optimized design, not only in-range performance (Table 5, pp. 19-20)."
+  ],
+  "coauthors": "J. Xu, C.E. DiLiberti, W.W. Hauck, T.H. Montague, A.F. Parr, D. Potvin, D.J. Schuirmann",
+  "quotes": [
+   {
+    "text": "Unacceptable designs were assigned an extremely high cost value in order to keep the search within the acceptable region of the design space.",
+    "page": 12
+   },
+   {
+    "text": "The optimal design will be located on the edge, as otherwise, it can be improved with a larger alpha level or smaller power.",
+    "page": 12
+   }
+  ]
+ }
+]

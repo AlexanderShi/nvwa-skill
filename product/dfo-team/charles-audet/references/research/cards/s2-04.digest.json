@@ -1,0 +1,563 @@
+[
+ {
+  "id": "S093",
+  "year": "2013",
+  "title": "Maximal perimeter, diameter and area of equilateral unit-width convex polygons",
+  "read_level": "full",
+  "contribution": "Solves three open extremal problems: for equilateral unit-width convex polygons with n = 2m+1 sides, the maximal perimeter 2(2m+1)/sqrt3, diameter 2m/sqrt3 and area (2m-1)/sqrt3 are all approached by polygons arbitrarily close to one trapezoid (even n is unbounded).",
+  "problem_entry": "Fills open cells of the group's own survey catalogue of polygon extremal problems after disposing of trivial (non-equilateral, even-n) cases (pp. 2-3).",
+  "key_idea": "One limiting trapezoid (sides 2/sqrt3) solves all three problems; prove perimeter via the equivalent min-width-at-fixed-perimeter problem, diameter as a corollary, area separately (pp. 3, 6-10).",
+  "assumptions": "Convex, equilateral, n = 2m+1 >= 5; width normalized with a side on y = 0; optimum is a supremum not attained (pp. 2-3).",
+  "proof_devices": [
+   "improving perturbation: new polygon with same perimeter and smaller width contradicts minimality (Lemma 2.1, pp. 5-6)",
+   "parity count p+q+2 odd forces q = p+1, i.e. the trapezoid (Thm 2.2, p. 6)",
+   "diameter bound from paths of at most m sides (Cor. 2.3, p. 7)",
+   "side-length bound from Yaglom-Boltyanskii maximal area (2P-pi)/4 (Lemma 3.1, p. 7)",
+   "corner-area subtraction plus concavity/convexity endpoint argument for n >= 7, separate pentagon lemma (pp. 8-10)"
+  ],
+  "experiments": "none",
+  "positioning": "Continues the Audet-Hansen-Messine extremal-polygon series (five of its papers cited) and answers questions its surveys listed as open (pp. 2, 11-12).",
+  "writing": "Very short paper: trivial cases dismissed with one figure, results stated up front (Sec. 1.1), a one-paragraph conclusion plus a solved/open table (pp. 2-3, 10-11).",
+  "limits_future": "No limitations paragraph; Table 1 leaves max width at unit area open (p. 11).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Rigor as closed-form bound plus limiting construction; smallest case (m = 2) proved separately when the general step fails; no counterexamples; outside DFO.",
+    "pages": "pp. 6-10"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "2002-2013 extremal small polygons row; five group polygon papers 2002-2009 cited.",
+    "pages": "pp. 11-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "catalogue open cells, then fill them",
+    "evidence": "takes the open cells of the group's own survey tables and ends with an updated solved/open table",
+    "pages": "pp. 2, 11"
+   },
+   {
+    "pattern": "equivalent-problem swap",
+    "evidence": "max perimeter at unit width proved as min width at fixed perimeter; equivalent problems solved by homothety",
+    "pages": "pp. 2, 6, 10"
+   }
+  ],
+  "transferable": [
+   "Prove structural lemmas by an improving perturbation that keeps the constraint value and strictly improves the objective, then finish with a parity/counting argument (pp. 5-6).",
+   "When the general bound breaks for the smallest instance, prove it separately and say why (p. 10).",
+   "Close with a table of the problem family marking solved cells (shape, value) and open ones (p. 11)."
+  ],
+  "coauthors": "J. Ninin",
+  "quotes": [
+   {
+    "text": "We show that when the number is odd, the optimal solution to these three problems is identical, and arbitrarily close to a trapezoid.",
+    "page": 1
+   },
+   {
+    "text": "The proof consists in constructing a new (2m+1)-unit-sided convex polygon with the same perimeter but with a smaller width than the original one.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S117",
+  "year": "2013",
+  "title": "The small octagons of maximal width",
+  "read_level": "full",
+  "contribution": "Answers Bezdek and Fodor's first open case: the maximal width of a unit-diameter octagon is (1/4)sqrt(10+2sqrt7) ~ 0.9776088, attained by infinitely many octagons, proved by geometric lemmas plus an interval branch-and-bound certificate to 1e-7.",
+  "problem_entry": "Open problem posed by others (Bezdek-Fodor 2000): n = 8 is the first unsolved case of maximal width for small polygons (pp. 1-2).",
+  "key_idea": "Lemmas reduce the configurations to two height graphs and unit pending edges; they become constraints of a 13-variable, 65-constraint nonconvex model that IBBA certifies (pp. 3-10).",
+  "assumptions": "Convex unit-diameter octagon assumed to have width >= w-hat for contradiction; claim holds to certified accuracy 1e-7, relying on IBBA's rounding-safe interval/affine arithmetic and safe LP bounds (pp. 1, 3, 8, 10).",
+  "proof_devices": [
+   "bound chaining from sibling problems (max W|P=1 and max P|D=1) gives W < 0.980693 (pp. 3-4)",
+   "numeric contradictions in side/diagonal lemmas (Lemma 2.3, p. 5)",
+   "height graph with WLOG symmetry steps -> two configurations (Prop. 2.6, p. 6)",
+   "reduction to heptagon contradicting Bezdek-Fodor's cos(pi/14) (Prop. 2.7, p. 7)",
+   "interval branch-and-bound infeasibility certificate plus exclusion constraint w >= w-hat + 1e-7 (p. 10)"
+  ],
+  "experiments": "IBBA runs only: case (3d) infeasible in 1.40 s/742 iterations; case (3e) bracketed to 1.03e-6 in one day; exclusion run infeasible in 7 h 33 min; no competing solver (p. 10).",
+  "positioning": "Solves an open problem of Bezdek-Fodor, cites Mossinghoff's enumeration work, and places itself among three earlier group octagon results also solved with global optimization codes (pp. 2, 11).",
+  "writing": "Main theorem stated in the introduction with a picture and an elementary explanation of non-uniqueness; roadmap sentence; conclusion names the next open case (pp. 2, 10).",
+  "limits_future": "Numerical tolerance 1e-7 rather than exact; octagon proofs in the family differ (no general method); next open case n = 16; no model release (pp. 10-11).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Claim fenced by stated tolerance and explicit certificate; geometric hypotheses; no counterexamples.",
+    "pages": "pp. 1, 10"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "DCG 2013 entry of the extremal small polygons row; earlier octagons also solved with global optimization codes.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "contradiction",
+    "note": "Unlike S142 (2022), no model files or code are released, so the certificate cannot be rerun.",
+    "pages": "pp. 1-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analytic pruning before a global-solver certificate",
+    "evidence": "lemmas turned into bounds, fixed vertices and symmetry orderings until IBBA closes both cases",
+    "pages": "pp. 3-10"
+   },
+   {
+    "pattern": "ε-uniqueness by exclusion constraint",
+    "evidence": "variant for the objective value: w >= w-hat + 1e-7 certified infeasible (epsilon-optimality)",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "catalogue open cells, then fill them",
+    "evidence": "answers Bezdek-Fodor's first open case and names the next (n = 16)",
+    "pages": "pp. 1-2, 10"
+   },
+   {
+    "pattern": "chain sibling extremal results into a new bound",
+    "evidence": "max W at unit perimeter and max P at unit diameter combined into a bound for max W at unit diameter",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "Chain known results for sibling problems into a bound for your problem before computing (pp. 3-4).",
+   "Turn every lemma into a bound or constraint of the global-solver model, fix vertices, add symmetry-breaking orderings, report model size (pp. 9-10).",
+   "Certify an optimal value by bracketing it, then adding objective >= value + epsilon and obtaining an infeasibility certificate (p. 10)."
+  ],
+  "coauthors": "P. Hansen, F. Messine, J. Ninin",
+  "quotes": [
+   {
+    "text": "The proof combines geometric and analytical reasoning as well as the use of a recent version of the deterministic and reliable global optimization code IBBA based on interval and affine arithmetics.",
+    "page": 1
+   },
+   {
+    "text": "Unfortunately, this general formulation of the problem cannot be solved directly in a reasonable amount of time.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S066",
+  "year": "2014",
+  "title": "PSEUDOMARKER 2.0: efficient computation of likelihoods using NOMAD",
+  "read_level": "full",
+  "contribution": "Replaces GPS by NOMAD (library mode) inside the ILINK likelihood maximizer of the PSEUDOMARKER genetics package, giving fewer likelihood evaluations on all 12 test sets, mostly equal or better optima, and 4.1x-6.2x faster genome scans.",
+  "problem_entry": "User bottleneck: run time proportional to expensive pedigree likelihood evaluations; try an algorithm known to beat GPS elsewhere (pp. 2-3).",
+  "key_idea": "NOMAD via a C++ callback, bounds explicit, sum-to-one handled by an implicit frequency plus extreme barrier; called once instead of GPS restarts/multistarts (pp. 4, 6).",
+  "assumptions": "Exact likelihood blackbox (peeling); probability-space variables with bounds; logit transform rejected because boundary MLEs go to -infinity and break convergence assumptions (pp. 3, 7).",
+  "proof_devices": [
+   "none (application/software paper); convergence hypotheses used as a modelling criterion (p. 7)"
+  ],
+  "experiments": "14 data sets (real Finnish pedigrees, simulated); likelihood-evaluation counts on 12 (e.g. 470,517 -> 140,986); 288 problems with win/loss counts at 0.005/0.05/0.5 thresholds (68 better, 7 worse); wall-clock on FHS and FinnTwin12 scans, FinnTwin12 mean of 10 runs (pp. 4-7).",
+  "positioning": "Presents MADS as designed to supersede GPS (Dennis-Torczon) with dense directions; introduces NOMAD to bioinformatics; cites earlier pedigree-optimization difficulties (pp. 3, 7).",
+  "writing": "BMC software-article format (Background/Implementation/Results/Conclusions); candid that invocation protocol differences contribute to the gain and that some evidence is 'data not shown' (p. 6).",
+  "limits_future": "Gain confounds algorithm and invocation; no pattern for when NOMAD wins; robustness from unshown preliminary tests; genome-wide use still needs a cluster (pp. 3, 6).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD library mode inside another group's package, shipped by default in binaries with LGPL rebuild files; Audet and Le Digabel helped integrate and suggested tests.",
+    "pages": "pp. 4, 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Bounds kept as bounds; sum-to-one via implicit variable + extreme barrier; reparametrization pushing optima to infinity refused.",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation counts as currency plus wall-clock and a substantive-difference threshold, but different invocation protocols for GPS and NOMAD and no profiles.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Weak: convergence hypotheses used to reject the logit transform.",
+    "pages": "p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "implicit variable + extreme barrier for a known linear equality",
+    "evidence": "one allele frequency computed implicitly; trial points where it leaves [0,1] rejected by EB (inference: one-equality case of S064's BN converter)",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "For a sum-to-one constraint, optimize n-1 variables, compute the last implicitly and let the evaluator reject out-of-bound points (p. 4).",
+   "Fix a substantive-difference threshold before counting wins/losses and report counts at several thresholds (pp. 6-7).",
+   "Before reparametrizing away bounds, check whether optima lie on the boundary (p. 7)."
+  ],
+  "coauthors": "E.M. Gertz, T. Hiekkalinna, S. Le Digabel, J.D. Terwilliger, A.A. Schäffer",
+  "quotes": [
+   {
+    "text": "As we discuss below, NOMAD is invoked somewhat differently from GPS on the same optimization problems",
+    "page": 6
+   },
+   {
+    "text": "This case breaks the assumptions of the theoretical convergence theory of NOMAD [6], and poses practical problems for the implementation.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S134",
+  "year": "2014",
+  "title": "A note on bimatrix game maximal Selten subsets",
+  "read_level": "full",
+  "contribution": "Adds perfectness to the group's exact enumeration of bimatrix-game equilibria: maximal Nash subsets via maximal cliques, dimensions via rank formulas in exact arithmetic, an LP test for perfect equilibria, and two algorithms (Eχ-MIPerfect, EEE-Perfect) enumerating all extreme perfect equilibria.",
+  "problem_entry": "Extend own enumeration algorithms (EEE, Eχ-MIP) to a refinement; claim that enumerating all maximal Selten subsets was not done before (pp. 2-3, 5).",
+  "key_idea": "Van Damme's no-weak-domination characterization becomes one LP whose zero optimum certifies perfectness, called at every newly enumerated extreme equilibrium (pp. 5-11).",
+  "assumptions": "Bimatrix games; big-M constants adequately chosen; A,B > 0 by shifting for the Selten dimension formula; exact arithmetic (pp. 2, 4, 6).",
+  "proof_devices": [
+   "LP characterization with always-feasible trivial solution (x = x-hat, zero slack) (p. 6)",
+   "maximal Nash subsets as maximal cliques of the interchangeability graph (p. 3)",
+   "relative-interior point as convex combination of extreme points for Jansen's rank-dimension formula (p. 4)",
+   "finite enumeration by exhaustive complementarity branching (Thms 4.1, 4.2, pp. 9, 11)"
+  ],
+  "experiments": "30 random games per size (2x2 to 7x7) and density (25-100%): equilibria counts, % perfect, Selten subsets, dimension, times; EEE-Perfect much faster (7x7 at 25%: 17,402 s vs 2,411 s) (pp. 11-12).",
+  "positioning": "Builds on the group's EEE (2001), Eχ-MIP (2006), sequence-form (2009) and Automatica 2012 papers; contrasts with von Stengel et al.'s tracing of one normal-form perfect equilibrium (pp. 5, 13).",
+  "writing": "Note format: each concept illustrated on the Borm et al. example with tables; algorithms given as step-by-step pseudo-code (pp. 3-10).",
+  "limits_future": "Validated on one textbook example plus random games; Eχ-MIP slower but only method for polymatrix games; future: extend EEE to polymatrix, improve implementation (pp. 3-7, 11).",
+  "method_links": [
+   {
+    "method": "Research Trajectory",
+    "relation": "variant",
+    "note": "The game-equilibria line of the 1997-2002 row continues to 2014 with the same GERAD coauthors.",
+    "pages": "pp. 1, 13"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Correctness as finite-enumeration theorems with path-existence proofs and exact arithmetic; no hypothesis audit or counterexamples.",
+    "pages": "pp. 4, 9, 11"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Algorithms shipped as a separate C++ package (XGame1.0), not NOMAD.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "definition-to-LP certificate",
+    "evidence": "perfectness (no weakly dominating strategy) tested by one always-feasible LP with zero-optimum criterion",
+    "pages": "pp. 5-7"
+   }
+  ],
+  "transferable": [
+   "Turn a non-existence definition into an always-feasible LP with a zero-optimum test (p. 6).",
+   "Evaluate rank-based dimension formulas at a strict convex combination of known vertices in exact arithmetic (p. 4).",
+   "Encode all branching fixings in two aggregated rows to avoid slack variables and degeneracy (p. 8)."
+  ],
+  "coauthors": "S. Belhaiza, P. Hansen",
+  "quotes": [
+   {
+    "text": "To the best of our knowledge, the implementation of computational methods to enumerate all maximal Selten subsets of bimatrix games was not achieved before.",
+    "page": 5
+   },
+   {
+    "text": "The results also show that the percentage of extreme perfect equilibria increases with an increase in the bimatrix games density.",
+    "page": 11
+   }
+  ]
+ },
+ {
+  "id": "S145",
+  "year": "2014",
+  "title": "Replacement scheduling of a fleet of hydroelectric generators: a case study",
+  "read_level": "full",
+  "contribution": "Builds a fleet overhaul-planning framework (regression load model, time-dependent proportional hazards, age-replacement cost rate, NLP with organisational constraints, reliability indices) and plans 90 Hydro-Québec generators over 50 years using Lindo API to reach feasibility and NOMAD to improve.",
+  "problem_entry": "Practitioner problem: many units age together so standard age replacement is infeasible under resource limits; current heuristic plans lack optimality assessment (pp. 1-2).",
+  "key_idea": "Formulate the objective independently of the solver (separable renewal-reward cost rate) and treat it as a black box; relay Lindo (SLP/GRG) then NOMAD (pp. 2, 8-13).",
+  "assumptions": "Unit-level replacement of all components, cumulative load as only covariate with constant base hazard, approximate costs, 50-year horizon; x0 infeasible; EB/PB treatment of constraints not stated (pp. 7, 11-12).",
+  "proof_devices": [
+   "none (application); renewal-reward cost rate and first-order condition (eqs. 9-10, p. 8)"
+  ],
+  "experiments": "Two scenarios on 90 units, single runs: NOMAD finds no feasible plan (1e4, 5e5 evals), Lindo gives feasible plan, NOMAD from it improves 7.709 -> 7.566 k$/h (5e4 evals, 33 min); +50% load 9.799 -> 9.562 k$/h (pp. 12-13).",
+  "positioning": "Reviews power-plant maintenance scheduling (integer programming, DP, stochastic programming, fuzzy, Cox PHM) and criticises restrictive formulations with relaxed constraints (pp. 2-4).",
+  "writing": "Case-study style with tables of constraint status and indices; one inconsistency: 'doubling the load' for a +50% scenario (p. 14).",
+  "limits_future": "Sample of 90 units; solver capability as bottleneck; future: whole fleet, other policies and costs, biobjective cost vs AFRI, other fleets (p. 14).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Quantifiable constraints and infeasible x0, no stated EB/PB choice and no PB or LH-search remedy when NOMAD cannot reach feasibility.",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Taste warning sign 5",
+    "relation": "evidence",
+    "note": "Inference: 90 variables; gradient-based SLP/GRG reached feasibility where NOMAD did not.",
+    "pages": "pp. 9, 12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation counts and times reported but solvers chained, single runs.",
+    "pages": "pp. 12-13"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Hydro-Québec data, nothing released.",
+    "pages": "p. 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "feasibility-by-relay warm start",
+    "evidence": "Lindo supplies a feasible plan, NOMAD restarted from it polishes, in both problems (same as S204)",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "transferable": [
+   "Cache the terms of a separable expensive objective and recompute only those of changed variables (p. 9).",
+   "If direct search cannot reach feasibility, relay from a derivative-based NLP solver's feasible point and report both stages (pp. 12-13).",
+   "Report interpretable quality indices alongside cost to compare plans (p. 11)."
+  ],
+  "coauthors": "H. Aoudjit, M.-S. Ouali",
+  "quotes": [
+   {
+    "text": "Constraints satisfaction is done column-wise (-1 is returned whenever a constraint is met).",
+    "page": 11
+   },
+   {
+    "text": "This feasible solution is then taken as starting point for the NOMAD algorithm.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "S064",
+  "year": "2015",
+  "title": "Linear equalities in blackbox optimization",
+  "read_level": "full",
+  "contribution": "Extends MADS to linear equalities Ax = 0 by running it on a reformulated problem through a surjective linear converter (projection, QR, SVD, basic/nonbasic), proves that hypertangent cones are preserved so Clarke stationarity carries over, and shows on CUTEst that an SVD-then-BN two-phase strategy works best.",
+  "problem_entry": "Gap in own method: MADS supports equalities neither in theory nor practice; splitting into two inequalities empties the hypertangent cone and fails numerically (pp. 1, 4).",
+  "key_idea": "Wrapper + converter phi: R^nz -> null(A); MADS unchanged on z; bounds on phi(z) checked before the simulation; two-phase SVD:50-BN:50 with partition and scaling learned from phase 1 (pp. 5-7, 11-13, 20-23).",
+  "assumptions": "A known with full row rank; F, C may be +infinity (failures); bounded iterates; asymptotically dense normalized poll directions; F locally Lipschitz near x* (pp. 1-2, 10).",
+  "proof_devices": [
+   "hypertangent cones commute with a surjective linear converter (double inclusion; continuity and open mapping theorem, Thm 4.3.5, pp. 8-9)",
+   "transport of the MADS refined-point Clarke result to the nullspace (Thm 4.3.6, p. 10)",
+   "empty-hypertangent-cone argument against splitting equalities (p. 4)"
+  ],
+  "experiments": "10 CUTEst problems (n 2-40), 100 random feasible starts each, budget 100(n+1), data profiles at 1%, NOMAD 3.6.0 (models off) vs HOPSPACK 2.0.2 GSS; exhaustive study of all 12,464 BN partitions of HS119; two-phase ratios compared (pp. 14-23).",
+  "positioning": "Reviews linearly constrained DFO (May; Lewis-Torczon GPS; Coope-Price; GSS with nullspace directions; augmented Lagrangian GSS in HOPSPACK; Powell's LINCOA; Sampaio-Toint trust-funnel; Martinez-Sobral) and says its approach is close to ref. [49]'s manifold treatment of general equalities, restricted here to linear ones (pp. 2-4).",
+  "writing": "Rejects the naive baseline with a theory argument and a numeric one before presenting the method; converters described in a uniform template (map, proof that Ax = 0, nz) (pp. 4, 11-13).",
+  "limits_future": "Linear equalities only, 10 analytic problems, similar to HOPSPACK on small/medium problems; future: NOMAD integration, linear inequalities, inexact restoration (p. 24).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Equalities as a separate class with their own mechanism; a priori bound checks skip the simulation.",
+    "pages": "pp. 4, 6"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Naive reformulation rejected by an empty-hypertangent-cone argument; Clarke ladder transported with a KKT corollary; no counterexamples.",
+    "pages": "pp. 4, 10-11"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Algorithm untouched but the idea lives in a problem wrapper, so the proof is transported by a linear map rather than protected by the Poll.",
+    "pages": "pp. 6, 10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Budget in groups of n+1, data profiles, 100 starts per problem, GSS competitor with aligned tolerance, log inspection of the crossover.",
+    "pages": "pp. 14-19"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Known linear structure exploited while keeping the direct-search backbone.",
+    "pages": "pp. 1, 24"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "NOMAD integration listed as future work; today's NOMAD route (EQPB, Mads-PIP) differs.",
+    "pages": "p. 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "exhaustive enumeration on a small instance as ground truth",
+    "evidence": "all 12,464 feasible (B,N) partitions of HS119 run; final value vs cond(B), stratified by |I_N ∩ A|",
+    "pages": "pp. 16-18"
+   },
+   {
+    "pattern": "phase-1 run as a diagnostic for phase-2 configuration",
+    "evidence": "SVD phase used to rank variables by movement toward bounds and to set scaling for the BN phase",
+    "pages": "pp. 20-22"
+   }
+  ],
+  "transferable": [
+   "For a linear-surjection reformulation, prove the needed tangent cone maps onto its counterpart and transport the existing theorem (pp. 8-10).",
+   "Check cheap a priori constraints in the wrapper and return +infinity without calling the simulator (p. 6).",
+   "Enumerate a discrete design choice on one instance, plot quality against a diagnostic, then stratify by a structural quantity (pp. 16-18).",
+   "Use part of the budget with a robust configuration and read its trajectory to configure the rest (pp. 20-22)."
+  ],
+  "coauthors": "S. Le Digabel, M. Peyrega",
+  "quotes": [
+   {
+    "text": "Currently, MADS does not support equalities, neither in theory nor in practice.",
+    "page": 1
+   },
+   {
+    "text": "In addition, with such reformulations, MADS fails to find a feasible point for all the problems tested in Section 4.5.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S032",
+  "year": "2017",
+  "title": "Stochastic short-term hydropower planning with inflow scenario trees",
+  "read_level": "full",
+  "contribution": "Extends a head-dependent two-phase short-term hydropower model (loading NLP, unit commitment IP) to multistage stochastic inflows using nonparametric nested-distance scenario trees built from forecast-driven inflow fans, and backtests it on three Rio Tinto plants against a rolling median scenario.",
+  "problem_entry": "Short-term hydropower models are usually deterministic or ignore head variation; few stochastic short-term studies; only inflow uncertainty matters in Quebec (pp. 2-5).",
+  "key_idea": "3,038-scenario inflow fan from analog forecasts + history + CEQUEAU, reduced to a tree by kernel-density sampling and stochastic approximation (Pflug-Pichler), fed to the two-phase multistage model (pp. 6-18).",
+  "assumptions": "Independent forecast errors between day groups, no forecast value after 7 days, relaxation yields integer surface choices, SA convergence and probability consistency asserted from cited results (pp. 6, 11-12, 16).",
+  "proof_devices": [
+   "none (convergence delegated to Pflug-Pichler refs [24, 28], pp. 7, 11)"
+  ],
+  "experiments": "31-day rolling-horizon backtest on 6 monthly cases, 5-7 stages x 16/32/48 scenarios vs rolling median; stochastic better in 4 cases (0.025-0.16%, ~10.9 M$ for June); in-sample stability with 6 random trees; <42 s per day; one reported variance inconsistent with its table (pp. 19-25).",
+  "positioning": "Contrasts SDP/SDDP (medium/long term), two-stage stochastic programs, robust and chance-constrained approaches; extends Séguin-Côté-Audet 2016 deterministic model (pp. 2-5).",
+  "writing": "Illustrates the tree algorithm on a 3-path toy figure; converts small percentage gains into dollars; explains the losing October case with forecast plots (pp. 9-11, 22, 27-28).",
+  "limits_future": "No gain when median forecast is accurate (October); scaling to 50 plants ~350 min needs decomposition; future: tree complexity and scenario fans (pp. 21-22, 27-29).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Real partner system and data (Rio Tinto), nothing released.",
+    "pages": "pp. 18-19, 29"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Rolling-horizon backtest against the simplest operational baseline with end-water valuation and an in-sample stability test, but one tree per configuration in Table 1.",
+    "pages": "pp. 20-26"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "Rio Tinto as funder/partner in the 2017-2022 row; no DFO in this paper.",
+    "pages": "p. 29"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "challenge the sophisticated model with the simplest operational baseline",
+    "evidence": "stochastic trees compared with a rolling median scenario, losing case explained",
+    "pages": "pp. 19-20, 27-28"
+   }
+  ],
+  "transferable": [
+   "Backtest a stochastic planning model on a rolling horizon, implementing only the first stage and valuing leftover resources (pp. 19-20, 26).",
+   "Run an in-sample stability test by regenerating the random input several times (p. 24).",
+   "Explain the case where the method loses using the data (pp. 27-28)."
+  ],
+  "coauthors": "S. Séguin, S.-E. Fleten, P. Côté, A. Pichler",
+  "quotes": [
+   {
+    "text": "Few papers have looked specifically into short-term hydropower models with uncertain inflows.",
+    "page": 2
+   },
+   {
+    "text": "Despite the low percentages, this represents huge savings for the producer.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S060",
+  "year": "2017",
+  "title": "Scenario-tree modeling for stochastic short-term hydropower operations planning",
+  "read_level": "full",
+  "contribution": "Treats the whole 31-day rolling-horizon hydropower pipeline as a stochastic blackbox and tunes scenario-tree structure and stage aggregation with NOMAD, finding tuned trees beat the median scenario but scenario fans with more than 15 scenarios give comparable energy at lower cost.",
+  "problem_entry": "The scenario-tree generator of S032 has parameters; is tree complexity needed in a rolling horizon? (pp. 1-3)",
+  "key_idea": "Blackbox RH(alpha, kappa, D) = tree generation + loading + unit commitment + reservoir updates over 31 days; NOMAD tunes child nodes and aggregation, validated by a noise census and exhaustive enumeration (pp. 3-9).",
+  "assumptions": "Stochastic blackbox; evaluation cost grows with tree size (32 min to 1 h); integer variables with an equality and a product constraint whose NOMAD treatment is not stated; constraint (8) typo (pp. 7-8).",
+  "proof_devices": [
+   "noise census: 100 replications at one point, sigma 7.46 GWh (p. 8)",
+   "exhaustive enumeration of 331 points as ground truth vs NOMAD's 57 evaluations (p. 8)",
+   "2-sigma significance band on all comparisons (pp. 11-12)"
+  ],
+  "experiments": "6 data series, D = 5-9; tuned structure vs structure+aggregation vs median; fans of 3-25 scenarios; boxplots with +/-16 GWh band; NOMAD 57 evals (best at 23, 7 h) vs enumeration 27 h (pp. 8-12).",
+  "positioning": "Frames tree generation methods (moment matching, reduction, copulas, nested distance) and prior tree-reduction studies; follows OPAL-style algorithm tuning by blackbox optimization (pp. 2-3).",
+  "writing": "High-level block descriptions without model equations, stated as deliberate (p. 3); function-composition notation UC(LP(STG(...))) (pp. 4-5); some slips (minimum/decreased in a maximization, pp. 8-9).",
+  "limits_future": "Fans make only the first node meaningful; noise prevents confirming global optimality; one three-plant system; t-test reading ambiguous (pp. 8-9, 12-13).",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Parameters of a data-to-decision pipeline tuned by NOMAD, explicitly following OPAL.",
+    "pages": "pp. 3, 5-7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Noise measured before optimizing and used as significance band; exhaustive enumeration as ground truth; evaluation counts and times reported; no other solver.",
+    "pages": "pp. 7-9, 11-12"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "An equality and a product constraint in the blackbox problem with no stated treatment (contrast S064).",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Research Taste",
+    "relation": "evidence",
+    "note": "Concedes that the simpler scenario fans match the tuned complex trees.",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "exhaustive enumeration on a small instance as ground truth",
+    "evidence": "331-point enumeration (27 h) vs NOMAD (7 h) on a 5-stage case",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "replicate-at-a-point noise census, then 2σ band",
+    "evidence": "100 evaluations at fixed parameters; +/-16 GWh band drawn on all boxplots",
+    "pages": "pp. 7-8, 11-12"
+   },
+   {
+    "pattern": "challenge the sophisticated model with the simplest operational baseline",
+    "evidence": "tuned trees compared with median scenario and scenario fans; fans suffice",
+    "pages": "pp. 9-13"
+   }
+  ],
+  "transferable": [
+   "Before optimizing a stochastic blackbox, replicate one point ~100 times and draw +/-2 sigma on every later comparison (pp. 7-8, 11).",
+   "On a sub-case small enough to enumerate, compare the DFO answer and cost with the exhaustive optimum (p. 8).",
+   "Treat the whole operational loop as one blackbox whose inputs are the modelling choices (pp. 3-7)."
+  ],
+  "coauthors": "S. Séguin, P. Côté",
+  "quotes": [
+   {
+    "text": "Numerical experiments on three hydropower plants in series suggest that using a set of scenario trees is preferable to using the median scenario, but using a fan of scenarios yields a comparable solution with less computational effort.",
+    "page": 1
+   },
+   {
+    "text": "Computational time required to evaluate the blackbox increases with the complexity of the scenario trees, rather than with the number of optimization variables.",
+    "page": 7
+   }
+  ]
+ }
+]

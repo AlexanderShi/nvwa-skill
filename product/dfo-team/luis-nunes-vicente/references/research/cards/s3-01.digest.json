@@ -1,0 +1,438 @@
+[
+ {
+  "id": "S053",
+  "year": "1993",
+  "title": "A new technique for generating quadratic programming test problems",
+  "read_level": "full",
+  "contribution": "A unified, subproblem-free generator of convex, strictly concave, bilinear and indefinite QP test problems with known minima, built from separable two-variable blocks and disguised by a sparse Householder-diagonal change of variables.",
+  "problem_entry": "Existing QP generators need LPs, convex programs or linear systems and put the global minimum at a vertex, which favours vertex-visiting algorithms; none produce jointly constrained bilinear problems (pp. 1-2).",
+  "key_idea": "Direct sum of m two-variable blocks whose minima are read off their geometry; block data select the class; separability hidden by M = DH (random sparse Householder H, diagonal D with chosen conditioning) (pp. 3-9).",
+  "assumptions": "Linear constraints, quadratic objective; distinct local-minimum values need certain powers of 4 built from l and L to stay machine-distinguishable from 0 and 1, which bounds L (pp. 4, 12); active gradients linearly independent at all minima (pp. 5, 7, 9).",
+  "proof_devices": [
+   "per-block minima from 2-D geometry, combined by separability (pp. 3-9)",
+   "induction on value gaps: next block's smallest gap exceeds the sum of earlier blocks' largest gaps via geometric scaling (Property 3.2, p. 5)",
+   "one-to-one correspondence of strong local minima under a nonsingular linear transformation (Propositions 4.1-4.3, pp. 9-10)",
+   "nonzero counts and condition number of the transformed data from v and D (Propositions 4.4-4.5, pp. 10-11)"
+  ],
+  "experiments": "none; worked example with m = 3, n = 6, 18 local minima incl. 2 global, before and after transformation (pp. 12-13).",
+  "positioning": "Reviews Rosen-Suzuki, Rosen, Sung-Rosen, Kalantari-Rosen, Pardalos, Hager et al. and Kalantari by their computational cost and minimum location, and claims to be the only bilinear generator (pp. 1-2).",
+  "writing": "Numbered 'Property' statements after each construction; the contribution is stated as the list of hard features the generator can produce (p. 2); the conclusion opens with a benchmarking-care sentence (p. 14).",
+  "limits_future": "Concrete: removing constraints makes the region non-closed; the floating-point bound on L caps the number of minima (two remedies sketched); the full transform destroys bilinearity unless M is block diagonal (pp. 11-12); no algorithm is run on the problems.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Early release of benchmark infrastructure (generator + Fortran code on request), not a solver; no profiles.",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Taste warning sign #5",
+    "relation": "evidence",
+    "note": "Conclusion stresses care in testing, benchmarking and interpreting results.",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Construction-level analogue: the block-plus-transformation skeleton is reused from the bilevel generator; only block data change per class.",
+    "pages": "pp. 2-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "controlled-difficulty test-problem generators (existing c01 candidate)",
+    "evidence": "Generator with a selectable number and type of minima, nonextreme global minima and exponentially many local minima; code released.",
+    "pages": "pp. 1-2, 14"
+   },
+   {
+    "pattern": "ground truth first (existing s01 candidate)",
+    "evidence": "Every minimum of every generated instance is known by construction.",
+    "pages": "pp. 4-9"
+   }
+  ],
+  "transferable": [
+   "Build known-minimum test problems as a direct sum of 2-D blocks, then disguise with z = W z_bar, W = M^-1 = H D^-1, M = DH (sparse random Householder H, diagonal D with chosen condition number); sparsity of v sets density, D sets conditioning (pp. 3, 9-11).",
+   "Scale block l geometrically so each block's smallest value gap exceeds the sum of all earlier blocks' largest gaps; all local minima then have distinct values (p. 5).",
+   "Place global minima at nonextreme points so vertex-enumerating methods cannot exploit the generator (pp. 2, 7, 9)."
+  ],
+  "coauthors": "P. H. Calamai, J. J. Júdice",
+  "quotes": [
+   {
+    "text": "Unlike most existing methods our construction technique does not require the solution of any subproblems or systems of equations.",
+    "page": 1
+   },
+   {
+    "text": "Care must be exercised in the testing and benchmarking of algorithms and in the interpretation and dissemination of the corresponding results [4, 5, 14].",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "D001",
+  "year": "1994",
+  "title": "Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems",
+  "read_level": "full",
+  "contribution": "Portable FORTRAN 77 suite implementing the Calamai-Vicente quadratic bilevel test-problem generator, with an evaluator, a solution checker against all known minimizers, an installation test and usage examples.",
+  "problem_entry": "No other technique generates quadratic bilevel test problems; the codes are offered for testing, verifying and comparing methods (p. 1).",
+  "key_idea": "Central generator qbpgen with user knobs (level sizes, solution characteristics m1-m4, transformation condition and nonzeros) plus qbpchk, which checks a candidate against all minimizers in the untransformed space (pp. 2-3).",
+  "assumptions": "Not applicable (software); ANSI FORTRAN 77, level-1 BLAS, Schrage random number generator; maxn = 2000 (pp. 2, 4).",
+  "proof_devices": [],
+  "experiments": "none; installation test program 'verify' and example program 'usage' (pp. 3-4).",
+  "positioning": "Companion to Calamai and Vicente (1994) in the same TOMS issue; claims no competing generator (p. 1).",
+  "writing": "Short ACM algorithm note: routine list, usage notes, installation notes, limitations (pp. 1-4).",
+  "limits_future": "Concrete: maximum problem size fixed at maxn = 2000 in parameter statements (p. 4); no future work.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Earliest instance of the release habit: a citable software paper with installation test; ships a generator, not a solver.",
+    "pages": "pp. 1-4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "infrastructure as a stand-alone citable publication (existing c2-02 candidate)",
+    "evidence": "Separate ACM TOMS algorithm paper for the generator code.",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "controlled-difficulty test-problem generators (existing c01 candidate)",
+    "evidence": "User-controlled number and type of minima and conditioning/sparsity of the disguise.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "theory paper / application paper split (existing c05 candidate), variant",
+    "evidence": "Split into method paper (S026) and software paper (D001) in the same issue.",
+    "pages": "p. 1"
+   }
+  ],
+  "transferable": [
+   "Ship a solution checker with a generator: map the candidate back to the untransformed space and return the nearest known minimizer, the distance and its type (p. 3).",
+   "Expose the difficulty knobs (number and type of minima, conditioning and sparsity of the disguising transformation) as generator arguments (p. 2).",
+   "Include a verification program and a usage program with annotated example calls (pp. 3-4)."
+  ],
+  "coauthors": "P. H. Calamai",
+  "quotes": [
+   {
+    "text": "Our hope is that these codes will be used for testing, verifying, and comparing new (and established) solution methods.",
+    "page": 1
+   },
+   {
+    "text": "To encourage the use of these codes, every effort has been made to keep them as flexible as possible.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S026",
+  "year": "1994",
+  "title": "Generating quadratic bilevel programming test problems",
+  "read_level": "full",
+  "contribution": "A subproblem-free generator of sparse or dense quadratic bilevel test problems with a selectable number of known global and local solutions, whose global solutions differ from the relaxed-QP solution in a selectable number of variables and which satisfy the assumptions of three solution-method families.",
+  "problem_entry": "No standardized quadratic bilevel test problems exist although many methods are proposed; most methods start from the relaxed QP (pp. 1-2).",
+  "key_idea": "Separable parametric QBP of two-variable one-parameter blocks with four cases in rho_k; combine block solutions; disguise with a block-diagonal Householder-diagonal transformation that keeps the upper/lower split (pp. 3-13).",
+  "assumptions": "Upper level convex quadratic, lower level strictly convex in y, linear constraints, no upper-level constraints (pp. 15-16).",
+  "proof_devices": [
+   "KKT case analysis showing the induced region is a union of three segments, with contradictions from multiplier signs (Proposition 1, pp. 5-6)",
+   "level-circle argument around the relaxed minimizer (1,0) to identify global and local block minimizers (pp. 8-9)",
+   "combinatorial counting over blocks: 2^{m3} global and 2^{m2+m3+m4} - 2^{m3} additional local solutions (Properties 1-2, pp. 9-10)",
+   "equivalence under nonsingular transformation (Proposition 2, pp. 12-13)"
+  ],
+  "experiments": "none; §8 example (nx = 4, ny = 2) with global value 0.3125 and 3 extra local solutions (pp. 13-15); §9 checks the assumptions of branch-and-bound, steepest-descent and exact-penalty methods (pp. 15-16).",
+  "positioning": "Cites NLP generators (Floudas-Pardalos, Kalantari-Rosen, Lenard-Minkoff) as not addressing bilevel problems; positions against the requirements of Edmunds-Bard, Gauvin-Savard and Bi-Calamai-Conn (pp. 2, 15-16).",
+  "writing": "Abstract lists the controllable features; numbered PROPERTY statements with one-paragraph reasons; conclusion opens with a criterion for useful test problems (pp. 1, 9-10, 15).",
+  "limits_future": "Few limits stated (a bounded region needs x_k >= 0, p. 16); future: generators for linear and linear-quadratic bilevel problems (p. 16).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Early benchmark infrastructure with code released separately (D001); no solver, no profiles.",
+    "pages": "pp. 1, 16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "The same block-plus-transformation skeleton moves from bilevel (S026) to single-level QP (S053).",
+    "pages": "pp. 3-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "controlled-difficulty test-problem generators (existing c01 candidate)",
+    "evidence": "Selectable numbers of global and local solutions and control of sparsity and conditioning.",
+    "pages": "pp. 1, 9-10, 16"
+   },
+   {
+    "pattern": "aim the benchmark at the solvers' first move and certify it against their assumptions",
+    "evidence": "Global solution made to differ from the relaxed-QP solution most methods compute first; §9 proves the instances meet three method families' assumptions.",
+    "pages": "p. 1, p. 10, pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "Make the global solution differ from the obvious warm start (the relaxation's solution) in a controlled number of variables (p. 1; Property 3, p. 10).",
+   "Before releasing a benchmark, list each target solver family's standing assumptions and verify them item by item for the generated instances (pp. 15-16).",
+   "Keep structure through a random disguise by making the transformation block-diagonal along the structure (separate Householder factors for upper- and lower-level variables) (p. 12)."
+  ],
+  "coauthors": "P. H. Calamai",
+  "quotes": [
+   {
+    "text": "the global solutions are constructed to be different than the global solution of this relaxed problem in a selectable number of upper- and lower-level variables.",
+    "page": 1
+   },
+   {
+    "text": "Test problems are only useful when they can be used to test solution techniques.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S084",
+  "year": "2000",
+  "title": "Local convergence of the affine-scaling interior-point algorithm for nonlinear programming",
+  "read_level": "full",
+  "contribution": "Local q-linear, q-superlinear (Dennis-More) and q-quadratic convergence of the Coleman-Li affine-scaling interior-point algorithm for nonlinear programming, with quasi-Newton Hessians and inexact linear solves.",
+  "problem_entry": "Local theory exists for primal-dual IPMs but not, in general, for affine-scaling IPMs; the paper fills this gap and excludes global convergence and polynomiality (pp. 1-2).",
+  "key_idea": "Eliminate bound multipliers with the Coleman-Li scaling D(x, lambda); freeze the scaling's branch by the limit point so the step is a quasi-Newton step for a Lipschitz-differentiable system; then reuse the classical quasi-Newton theory (pp. 3, 6-7).",
+  "assumptions": "f, g twice Lipschitz continuously differentiable; regular x*, strict complementarity, second-order sufficiency; bounded deterioration of H_k for q-linear; parameter and residual decay in powers of ||F(w_k)|| per rate (pp. 4, 10-11).",
+  "proof_devices": [
+   "Lemma 3.1: bound |1 - alpha_k| <= |1 - tau_k| + tau_k(c2||dw_k|| + c3||s1_k||) by splitting inactive (distance to boundary) and active (strict complementarity, (E_k)_ii >= (E*)_ii/2) indices (pp. 7-8)",
+   "Lemma 3.2: A_k nonsingular and close to grad F(w*) via add-and-subtract in the Frobenius norm (p. 9)",
+   "error decomposition (21) of w_{k+1} - w* feeding the Broyden-Dennis-More / Yamashita-Yabe argument; proofs omitted as similar (pp. 8, 10)",
+   "Dennis-More condition for q-superlinear convergence (p. 10)"
+  ],
+  "experiments": "none",
+  "positioning": "Follows Yamashita-Yabe's primal-dual analysis and Broyden-Dennis-More / Dennis-More quasi-Newton theory; surveys primal-dual and affine-scaling IPM literature, noting Heinkenschloss-Ulbrich-Ulbrich avoid strict complementarity for bounds (pp. 1-2, 10).",
+  "writing": "Gap statement in the author's voice (no general affine-scaling analysis), explicit scope exclusion, three rate theorems in parallel form; no conclusion section (pp. 2, 10-11).",
+  "limits_future": "Local only: no global convergence or polynomiality (p. 2); strict complementarity assumed; no future work (paper ends at Theorem 4.3, p. 11).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Quasi-Newton local-theory skeleton kept; only the Newton system changes to the affine-scaled one; technical lemmas obtained differently from Yamashita-Yabe.",
+    "pages": "pp. 2, 5, 10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bridge inequality to a classical proof (existing s01 candidate)",
+    "evidence": "Two lemmas plug into the Yamashita-Yabe / Dennis-More argument whose proofs are then omitted as similar; now also in S037, S031, S039, S085.",
+    "pages": "pp. 7-10"
+   },
+   {
+    "pattern": "deterministic inexactness tied to the step (existing s2-03 candidate), variant",
+    "evidence": "Residual of the inexact linear solve must decay as a power of ||F(w_k)||, one tolerance per target rate.",
+    "pages": "pp. 6, 10-11"
+   },
+   {
+    "pattern": "branch-freezing to smooth a piecewise map near the solution",
+    "evidence": "Modified scaling D[x*, lambda*, k] coincides with D near the solution and is Lipschitz differentiable, so smooth quasi-Newton theory applies.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "transferable": [
+   "If a reformulated KKT map is nondifferentiable where a component of the Lagrangian gradient vanishes, define a surrogate whose branch is fixed by the limit point and current iterate; near the solution it equals the algorithm's map and is Lipschitz differentiable (pp. 6-7).",
+   "State one rate theorem per level (linear, superlinear, quadratic), each with the required decay of every algorithm parameter written in ||F(w_k)|| (pp. 10-11).",
+   "Bound a fraction-to-boundary step deficit by treating inactive and active indices separately, using strict complementarity for the active ones (pp. 7-8)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "The proofs are similar and are omitted.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S109",
+  "year": "2006",
+  "title": "Matemática industrial em Portugal. Análise e perspectivas",
+  "read_level": "full",
+  "contribution": "A policy essay (in Portuguese) diagnosing industrial mathematics in Portugal in research and teaching, graduate careers and academia-industry collaboration, with concrete academic and national proposals.",
+  "problem_entry": "Mathematics is used in all sciences and technologies (SIAM 1998 report); the essay asks how industrial mathematics stands in Portugal under three stated aspects (pp. 1-2).",
+  "key_idea": "The pure/applied split is artificial; applications come from the researcher's own internationally demanding research portfolio and personal contacts; training in industrial mathematics needs mathematics, scientific computing and other disciplines' language; problems arrive unformulated (pp. 2, 4-6).",
+  "assumptions": "Evidence base: SIAM report (200+ industrial staff), 2002 Coimbra study of firms in the Centro region, 2005 Coimbra Industrial Workshop, 2002-2004 evaluation panel (pp. 1-2, 4).",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Measures Portugal against the SIAM report and other countries' institutes (ZIB, IMA, ECMI study groups); credits the Portuguese OR community as more dynamic than mathematics (pp. 2-3).",
+  "writing": "Numbered contents, diagnosis before prescription, each institutional option weighed by impact vs feasibility, frank judgments of academic culture (pp. 1, 4, 6-7).",
+  "limits_future": "Concedes the proposals are not original; weighs a cheaper option as lacking the needed energy; agenda of national initiatives (pp. 6-7).",
+  "method_links": [
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Stated: industrial applications come from the academic's own research portfolio and personal contacts, not goodwill.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Stated: mastery of scientific-computing tools is an essential part of industrial-mathematics training; a second stated source beside the 2018 Lehigh quote.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Research Heuristic 8",
+    "relation": "evidence",
+    "note": "Stated background: industrial problems arrive unformulated, with blurred borders and diffuse goals, so formulation is part of the work.",
+    "pages": "p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "applications through one's own research network",
+    "evidence": "Stated belief that applications grow from the researcher's own demanding research portfolio and personal contacts over years; practice evidence must come from the application papers.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Open a perspective or policy piece by stating the aspects to be analysed and back each with a cited survey or report (p. 2).",
+   "Weigh each proposed option by impact against feasibility and name the cheaper option's weakness (pp. 6-7)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "Elas estão agregadas a uma carteira profissional de investigação dos professores e investigadores académicos, exigente no plano internacional e aberta na ligação às demais ciências.",
+    "page": 5
+   },
+   {
+    "text": "Os problemas na Matemática Industrial não aparecem formulados, prontos a serem submetidos a uma intervenção retirada à pressa de um livro de receitas.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S030",
+  "year": "2008",
+  "title": "Using simplex gradients of nonsmooth functions in direct search methods",
+  "read_level": "full",
+  "contribution": "Shows that limits of simplex gradients along refining subsequences of GPS/MADS give estimates of Clarke generalized directional derivatives (and converge to the gradient under strict differentiability), and confirms numerically that simplex-gradient poll ordering saves evaluations on nonsmooth problems.",
+  "problem_entry": "Simplex-gradient poll ordering was shown to help for smooth problems and simplex-gradient accuracy is known only for smooth f, while GPS/MADS have nonsmooth convergence theory (pp. 1-3).",
+  "key_idea": "Analyse simplex gradients built from Lambda-poised subsets of the poll points at unsuccessful iterates with alpha_k -> 0, compare their limits with Clarke derivatives, and use them for poll ordering and a stopping test (pp. 3-10).",
+  "assumptions": "f Lipschitz near x*; iterates in a compact set; |D_k| bounded; alpha_k||d_k|| -> 0; strict differentiability at x* for the gradient-convergence result (pp. 3-5, 8).",
+  "proof_devices": [
+   "boundedness of simplex gradients from Lipschitz continuity and Lambda-poisedness (Lemma 3.1, p. 4)",
+   "limit comparison with Clarke's generalized directional derivative f°(x*; v) >= grad_s f*^T v, plus a least-squares residual term in the overdetermined case (Theorems 3.2-3.3, pp. 5-7)",
+   "Lipschitz mean value theorem with Clarke subgradients, closedness and local boundedness of the subdifferential (Theorem 3.5, pp. 8-9)",
+   "poisedness bounded by the cosine measure ||Sigma^-1|| <= 1/(d_min kappa(D)) via Courant-Fischer (Proposition 1, p. 10)",
+   "LTMADS poisedness Lambda = n 2^{n-1} from a triangular-inverse norm bound (pp. 11-12)"
+  ],
+  "experiments": "14 nonsmooth problems (n = 5-50); coordinate search with and without simplex-gradient ordering; per-problem evaluations and final values; about 27% fewer evaluations on average, small increases on some problems (pp. 12-13).",
+  "positioning": "Extends Custódio-Vicente [8] from smooth to nonsmooth; builds on Audet-Dennis GPS/MADS refining-subsequence analysis and Conn-Scheinberg-Vicente Lambda-poisedness (pp. 1-4).",
+  "writing": "Twofold purpose stated in the abstract; theorems followed by candid remarks on their scope ('a first step'); explicit comparison with the smooth-case gain (pp. 1, 7, 13).",
+  "limits_future": "Overdetermined result only a first step; underdetermined case of little interest; no gradient convergence with fewer than n+1 points; simplex-gradient stopping behaves like the mesh-size test; no future work (pp. 5, 7, 9, 13).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The ordering heuristic lives in the poll-ordering slot not used by the convergence theory; the paper supplies theory for why it stays informative for nonsmooth f.",
+    "pages": "pp. 1, 10, 13"
+   },
+   {
+    "method": "Taste #4",
+    "relation": "evidence",
+    "note": "Theory that explains the numerics: Clarke-derivative estimates justify the observed savings.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "method": "Research Heuristic 7",
+    "relation": "evidence",
+    "note": "All previously evaluated points are candidates for the simplex gradient (store-all).",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Stated collection and ablation against the same method without ordering; no profiles, no external baseline, no code mention.",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose (existing c05 candidate)",
+    "evidence": "The new stopping test is reported as no better than the mesh-size test; the gain (27%) is compared with the larger smooth-case gain (50%); increases are shown.",
+    "pages": "pp. 9, 13"
+   },
+   {
+    "pattern": "import model-geometry theory into direct search (existing c03 candidate)",
+    "evidence": "Lambda-poisedness tied to the cosine measure of positive spanning sets.",
+    "pages": "pp. 3, 10"
+   }
+  ],
+  "transferable": [
+   "Validate a sample-based gradient surrogate at nonsmooth points by taking its limit along refining subsequences and comparing with Clarke's generalized directional derivative (pp. 5-7).",
+   "Bound the poisedness of a poll set by its cosine measure, ||Sigma^-1|| <= 1/(d_min kappa(D)), to reuse interpolation error bounds in any method with a cosine-measure guarantee (p. 10).",
+   "Use the Lipschitz mean value theorem with Clarke subgradients plus closedness and local boundedness of the subdifferential to pass finite-difference quantities to the limit (pp. 5, 8-9).",
+   "Report an add-on ablation with per-problem evaluations and final values so cheaper-but-worse runs are visible (p. 13)."
+  ],
+  "coauthors": "A. L. Custódio, J. E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "Theorem 3.3 should be primarily regarded as a first step to understand the use of overdetermined simplex gradients in the nonsmooth setting.",
+    "page": 7
+   },
+   {
+    "text": "Our numerical experience has shown, however, that the use of this stopping criterion has an effect similar to the use of a stopping criterion in which the algorithm would stop if the size of αk follows below a prescribed tolerance.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S059",
+  "year": "2008",
+  "title": "SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization",
+  "read_level": "full",
+  "contribution": "User manual of the SID-PSM v1.3 MATLAB solver (LGPL): generalized pattern search with simplex-derivative poll ordering, MFN-model search step, simplex-gradient stopping and mesh options, with installation, running and parameter documentation.",
+  "problem_entry": "Derivative-free minimization of black-box f over R^n or {c_i(x) <= 0} with constraint gradients supplied; distinguishing feature vs NOMAD/NOMADm and APPSPACK is reuse of past evaluations (pp. 2-3).",
+  "key_idea": "GPS with italicized additions: Lambda-poised sets from stored points give simplex derivatives and a descent indicator for ordering/pruning/stopping/mesh update; MFN quadratic models drive the search step (pp. 3-8).",
+  "assumptions": "Theory for global convergence to stationary points except in the nonlinear constrained case; mesh projection of the model minimizer not implemented; pruning conditions untested (pp. 2, 6, 8).",
+  "proof_devices": [],
+  "experiments": "no benchmark; demonstration on (x2 - x1^2)^2 from (-1.2, 1): 145 evaluations unconstrained, 129 with bounds (pp. 11, 17-19).",
+  "positioning": "Contrasted with NOMAD/NOMADm (dynamic polling; NOMADm 4.6 adopts a simplified SID-PSM strategy) and APPSPACK (pp. 2-4).",
+  "writing": "Algorithm box with the additions to GPS in italic; per-option parameter table with defaults and ranges; citation request in the abstract (pp. 1, 4-5, 20-22).",
+  "limits_future": "Concrete: MATLAB only, constraint gradients required, no theory for nonlinear constraints, missing mesh projection, prudent use of pruning, degenerate constraint gradients halt the run (pp. 2, 6, 8-9, 13); no future work.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "The released artefact: LGPL, install notes, drivers, parameters file, per-file documentation, citation request; every strategy is a switchable option, matching Step 1.",
+    "pages": "pp. 1-2, 9-15, 20-22"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Search step free of rules hosts the MFN model and the poll carries convergence, but the glue is the mesh with simple decrease; sufficient decrease is only a mesh-update option (c03 correction).",
+    "pages": "pp. 3-7"
+   },
+   {
+    "method": "Research Heuristic 7",
+    "relation": "evidence",
+    "note": "Past evaluations feed simplex derivatives and MFN models at no extra evaluation cost.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "disclosed theory-implementation gap (existing c04 candidate)",
+    "evidence": "No theory for nonlinear constraints; mesh projection not implemented; pruning conditions never tested.",
+    "pages": "pp. 2, 6, 8"
+   }
+  ],
+  "transferable": [
+   "Typeset in the algorithm box exactly what differs from the base method whose theory you inherit (Fig. 2.1, pp. 4-5).",
+   "Expose each heuristic as a numbered option with default and range in one parameters file, so users and later papers can run ablations (pp. 20-22).",
+   "Put a citation request naming the method papers in the software manual's abstract (p. 1).",
+   "Cache evaluated points and match candidates with an l1 prefilter then an l-infinity tolerance before evaluating (pp. 8, 14).",
+   "Ship unconstrained and constrained toy drivers and print their expected output in appendices (pp. 11, 17-19)."
+  ],
+  "coauthors": "A. L. Custódio",
+  "quotes": [
+   {
+    "text": "The search step is free of any rules as long as only a finite number of (feasible) trial points in the current mesh is considered.",
+    "page": 3
+   },
+   {
+    "text": "Note that for global convergence purposes the minimizer should be projected onto the mesh. However, this projection is not implemented in SID-PSM.",
+    "page": 6
+   }
+  ]
+ }
+]

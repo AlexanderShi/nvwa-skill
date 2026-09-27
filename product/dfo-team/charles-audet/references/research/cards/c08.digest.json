@@ -1,0 +1,356 @@
+[
+ {
+  "id": "S128",
+  "year": "2026",
+  "title": "A summary of benchmarking constrained, multi-objective and surrogate-assisted optimization methods",
+  "read_level": "full",
+  "contribution": "Formally extends convergence plots and accuracy, performance and data profiles to constrained problems with infeasible starts, multi-objective problems (hypervolume-based accuracy) and surrogate-assisted methods (effective evaluation count N = Nt + w*Ns), with RunnerPost as the open-source implementation (text read = GERAD G-2025-36 preprint).",
+  "problem_entry": "Classical benchmarking tools implicitly assume feasible points are free, a single objective and no surrogates (p. 10); effort is measured in simulation calls (p. 4).",
+  "key_idea": "Keep the four classical tools and change only their inputs: two-phase h-then-f convergence plots and a common f0 over first feasible values (pp. 10-11); normalized hypervolume s_acc (pp. 12-13); effective count N = Nt + w*Ns or CPU time (pp. 14-15).",
+  "assumptions": "f: X -> R U {inf}, quantitative constraints c <= 0, hidden-constraint failures logged as inf/NaN, comparable stopping criteria across algorithms (pp. 4-5); h definition as extracted uses Omega where X seems meant (p. 10).",
+  "proof_devices": [
+   "accuracy value f_acc = (f(x^N)-f0)/(f*-f0) in [0,1] (Def. 2.1, p. 5)",
+   "-log10(1-f_acc) >= d <=> f_acc >= 1-10^-d turns accuracy into correct decimals (p. 7)",
+   "(np+1) grouping justified by simplex-gradient cost (p. 9)",
+   "closed-form two-objective hypervolume sum (p. 13)",
+   "explicit handling of degenerate instances: drop and flag when no algorithm improves f0 (p. 6)"
+  ],
+  "experiments": "None on real solvers; anonymized designed data plotted with RunnerPost to show time-vs-evaluation reversal, tau-dependent reversal, switching phenomenon, f0-choice robustness and w = 0 vs 1/10 (pp. 4, 6, 10-16).",
+  "positioning": "Extends Dolan-More, More-Wild, Beiranvand-Hare-Lucet and Gould-Scott without criticism; borrows h from filter methods and the constraint taxonomy of Le Digabel-Wild (pp. 7-10, 12).",
+  "writing": "Uniform template per tool (definition, example figure, axis conventions, worked reading) and prescriptive should-rules with little hedging (pp. 6-8).",
+  "limits_future": "Methodology + software; combination of extensions asserted not shown (p. 16), hypervolume hard beyond two objectives (p. 13), w left to the user (p. 15); no concrete future work.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Is the benchmarking summary cited in Method 5; formalizes evaluation currency, several tau, whole-set profiles; the SKILL.md limitation about not having read it in full can be lifted.",
+    "pages": "pp. 4-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Bounds step 3: do not compare DFO with derivative-based algorithms and keep the number of algorithms very low because of switching.",
+    "pages": "p. 5, p. 9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Hidden-constraint failures logged as inf/NaN; h over quantifiable constraints only; two-phase plots for infeasible starts.",
+    "pages": "p. 5, pp. 10-11"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "RunnerPost as the group's shared benchmarking instrument, reused by S156 and S157.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Common evaluation currency with explicit cost weights",
+    "evidence": "Effective count N = Nt + w*Ns with w the surrogate/true cost ratio; also in S155 (1+tau) and S156 (lambda*N_UL + N_LL).",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "Representativeness over size for test sets",
+    "evidence": "A small set of road-construction problems preferred to a large unrelated set.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Draw profiles of surrogate-assisted methods against N = Nt + w*Ns for at least two weights at equal budget (p. 15).",
+   "For infeasible starts, plot h up to the first feasible point and then the best feasible f (pp. 10-11).",
+   "Define f0 identically for all algorithms (min or max of first feasible values) and check the conclusion under the other choice (p. 11).",
+   "Remove the best solver and replot performance profiles to detect the switching phenomenon (p. 9, pp. 13-14).",
+   "Drop and flag instances where no solver improves f0 instead of dividing by zero (p. 6).",
+   "Log evaluation number, f (inf/NaN on failure) and a feasibility flag for every evaluation (p. 5)."
+  ],
+  "coauthors": "W. Hare, C. Tribes",
+  "quotes": [
+   {
+    "text": "Of course, having a large test set is preferable to a smaller one, but having a test set that is representative of the ultimate goal is crucial.",
+    "page": 4
+   },
+   {
+    "text": "Moreover, comparing DFO algorithms to algorithms that explicitly use derivatives should be avoided.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S155",
+  "year": "2026",
+  "title": "A partitioned optimization framework for structure-aware problems",
+  "read_level": "full",
+  "contribution": "Introduces the partitioned optimization framework (reformulate min phi over Y as min Phi(x) = phi(gamma(x)) over a low-dimensional partition index) and proves that DFO with a covering step on the reformulation yields (generalized) local solutions of the original, possibly infinite-dimensional and discontinuous, problem.",
+  "problem_entry": "Problems where fixing a few combinations of variables makes the rest easy, motivated by optimal control with discontinuous Mayer cost (parachute landing on rings) and composite greybox problems (pp. 1-3).",
+  "key_idea": "Partition Y into Y(x), let an oracle gamma(x) solve each restricted problem, and run a covering-step DFO method on Phi(x) = phi(gamma(x)) so the solver sees dim(X) <= 10 instead of dim(Y) ~ 100 or infinity (pp. 5-8, 19-20).",
+  "assumptions": "Continuous index map chi and piecewise uniformly continuous gamma on a locally finite partition (Assumption 1, p. 6), plus boundedness/ample continuity sets (Assumption 2, p. 7); exact global oracle and infinite runs admitted unrealistic (p. 7, p. 26).",
+  "proof_devices": [
+   "generalized local solution: neighborhood infimum of the barrier function equals the least accumulation value (Def. 1, p. 6)",
+   "pointwise bound phi(y) >= Phi(chi(y)) for all feasible y (p. 10)",
+   "neighborhood pull-back via continuity of chi (Lemma 3, p. 9)",
+   "finite accumulation set ACC(gamma;x) from locally finite partition + uniform continuity + completeness (Lemma 4, p. 9)",
+   "inf ACC(Phi;x) >= min over ACC(gamma;x) of inf ACC(phi_Omega;y) (Lemma 6, p. 10)",
+   "Theorem 2 = covering-step convergence (Prop. 1 from [3]) + assumption transfer (Prop. 2) + Theorem 1 (p. 11)"
+  ],
+  "experiments": "Four 2-3 variable problems from 8 starting points with first-iteration-to-tolerance tables (pp. 14-19); 100-variable variants vs NOMAD and PRIMA/BOBYQA from 6 random starts with cost model 1 unit per phi and 1+tau per Phi (pp. 19-25); failures and local-minimizer convergence reported (pp. 17, 22, 23).",
+  "positioning": "Between parametric and bilevel optimization; complementary to high-dimensional DFO (active subspaces, random directions) and composite greybox methods; competitors explicitly not discredited (p. 4, p. 20).",
+  "writing": "Illustrative 2D example solved in the introduction, fourfold contribution with section roadmap, a Remark after each assumption arguing it is mild in practice, one-sentence purpose before each lemma, self-audit of tightness (pp. 2-10, 26).",
+  "limits_future": "Oracle gamma is the stringent requirement, no generic check of assumptions, covering step absent from popular solvers, useful only if N_ref*tau < N_ini (pp. 26-27); future: approximate local oracles, progressive barrier on the reformulation, learned partitions, counterfactuals (pp. 27-28).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Guarantee ladder global/local/generalized local and explicit audit of which hypotheses each rung uses; no necessity counterexamples, only examples where the sufficient condition fails but the conclusion holds.",
+    "pages": "p. 6, p. 14, p. 26"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The proof-carrying component is a covering step placed before any core algorithm rather than a Poll; Search skipped in experiments; covering step said likely optional in practice.",
+    "pages": "pp. 7-8, p. 27"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Grey-box structure (explicit f and phi-tilde, blackbox sigma and epsilon) exploited with a direct-search outer loop.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Extreme barrier on the reformulation; plan to switch to a progressive barrier with an infeasibility measure inherited from the subproblems.",
+    "pages": "p. 21, p. 27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Best-value-vs-cost curves on constructed problems rather than profiles, but the inner solve is charged (1+tau) and the claim is narrowed to POf-suited problems.",
+    "pages": "pp. 19-25"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Partition-and-oracle reformulation",
+    "evidence": "Min over a partition index of the value of an inner solver restricted to that partition set, with optimality transferred back by Theorem 1.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "pattern": "Common evaluation currency with explicit cost weights",
+    "evidence": "Each reformulated evaluation costs 1+tau units; largest winning tau reported; break-even rule N_ref*tau < N_ini.",
+    "pages": "p. 19, p. 25, p. 27"
+   },
+   {
+    "pattern": "Framework theorem with plug-in instance",
+    "evidence": "Algorithm 1 accepts any iterative algorithm A; Theorem 1 accepts any solution of the reformulation (shared with S157).",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "transferable": [
+   "Reformulate over the few variable combinations that make the problem easy: Phi(x) = phi(gamma(x)) with gamma an inner solver (pp. 5-6, 13-14).",
+   "Transfer optimality from a reformulation with the bound phi(y) >= Phi(chi(y)) and a neighborhood pull-back via continuity of chi (p. 10).",
+   "State results for generalized local solutions when the objective is discontinuous and the feasible set is not closed (p. 6).",
+   "Charge the inner solve as 1+tau units per outer evaluation and report the largest tau at which the method still wins, plus a break-even rule (pp. 19, 25, 27).",
+   "Report local convergence as the first iteration within +-5E-3, +-5E-6, +-5E-9 of x* over several starts (pp. 14-19).",
+   "When a naive implementation fails, name the missing ingredient and show a stronger solver on the same reformulation does better (pp. 23, 25).",
+   "Solve the running example informally in the introduction before the formal framework (p. 2)."
+  ],
+  "coauthors": "P.-Y. Bouchet (first author), L. Bourdin",
+  "quotes": [
+   {
+    "text": "What makes the DFPOm efficient is the sheer dimension reduction provided by the POf.",
+    "page": 20
+   },
+   {
+    "text": "Yet, the proof of Theorem 1 actually shows that our analysis is not tight.",
+    "page": 26
+   }
+  ]
+ },
+ {
+  "id": "S156",
+  "year": "2026",
+  "title": "Benchmarking Bilevel Derivative-Free Optimization Algorithms",
+  "read_level": "full",
+  "contribution": "Proposes a bilevel DFO benchmarking methodology: an a-posteriori refereeing procedure (End-Point, Complete, Reverse) that revokes non-admissible points, a scaled effort N = lambda*N_UL + N_LL with (nx+1)(ny+1) data-profile groups, and the open-source BOLIB.jl test set.",
+  "problem_entry": "Existing bilevel DFO benchmarks do not validate lower-level optimality and miscount effort, so an inefficient lower-level solver can look best with falsely admissible points (pp. 1-3).",
+  "key_idea": "Re-solve the lower level at claimed-admissible points with a referee and revoke those it beats by more than eps_obj, then profile the filtered logs against a cost-weighted effort (pp. 11-14).",
+  "assumptions": "Optimistic bilevel form; inexact eps-feasibility/rationality/admissibility (Defs. 1-2, p. 5); constraints scaled to one tolerance; referees refute but never certify and use identical settings across algorithms (pp. 11-13).",
+  "proof_devices": [
+   "cost analysis of referee strategies: End-Point proportional to |P|, Complete to history length, Reverse in between (p. 12)",
+   "deterministic Complete and Reverse referees find the same final admissible point (claim without proof, p. 12)",
+   "(nx+1)(ny+1) grouping reduces to np+1 when ny = 0 and equals one failed bilevel poll with minimal positive bases (p. 14)"
+  ],
+  "experiments": "67 BOLIB instances in Julia, N_UL = 300, N_LL = 100*ny, eps = (1e-9, 0), tau in {1e-1,1e-2,1e-4}, anonymized Algo1-3; effort-currency test with lambda = 60; external referee test; internal referee test with CS / MADS / MADS+quad from NOMAD recovering the expected hierarchy; refereeing CPU times reported (pp. 15-19).",
+  "positioning": "Tabulated review of 20 bilevel DFO methods by upper-level scheme, lower-level exactness and benchmarking type (Table 1, p. 10); specific critiques of undefined accuracy values, upper-level-only counting (including coauthor Diouane's prior work) and nx*ny+1 grouping (pp. 8-9, 14).",
+  "writing": "Four contribution bullets, a short failure story as motivation, an In-summary paragraph after each test; conclusion recommends Reverse although Section 4.4 found End-Point best in its example (pp. 3-4, 17, 19).",
+  "limits_future": "Referee cost can exceed the optimization cost, End-Point is myopic, referee start at y_k may revoke almost everything, only analytic problems (pp. 11-15, 19); no future-work section.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Evaluation currency made explicit for two levels, data profiles at several tau with dimension-normalized groups, benchmarking CPU cost reported.",
+    "pages": "pp. 13-19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Competitors anonymized as Algo1-3 rather than named with settings, as in S128's anonymized data.",
+    "pages": "p. 15"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Counterexample logic moved from theorems to benchmark logs: revocation needs an explicit witness y_r and the referee never certifies.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "BOLIB ported to the open-source Julia package BOLIB.jl.",
+    "pages": "p. 4, p. 15"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD's CS, MADS and MADS with quadratic search used as a controlled ladder of lower-level solvers.",
+    "pages": "p. 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Refute-don't-certify referee",
+    "evidence": "A posteriori re-optimization revokes claimed solutions only with an explicit better lower-level point; never certifies admissibility.",
+    "pages": "pp. 11-12"
+   },
+   {
+    "pattern": "Validate a benchmarking method by recovering a known algorithm hierarchy",
+    "evidence": "Without refereeing CS/MADS/MADS+quad ranking is scrambled; with any referee the expected order is recovered.",
+    "pages": "pp. 17-19"
+   },
+   {
+    "pattern": "Common evaluation currency with explicit cost weights",
+    "evidence": "N = lambda*N_UL + N_LL with lambda from CPU ratio; verdict changes with currency (Fig. 1).",
+    "pages": "pp. 13-16"
+   },
+   {
+    "pattern": "Degenerate-case consistency of new metrics",
+    "evidence": "(nx+1)(ny+1) groups reduce to np+1 when ny = 0; nx*ny+1 rejected because it collapses to 1.",
+    "pages": "p. 14"
+   }
+  ],
+  "transferable": [
+   "Before profiling methods that report inner-problem solutions, re-solve the inner problem at those points with an independent referee and discard points it beats by more than eps_obj (p. 11).",
+   "Use a Reverse referee (walk the history backward to the first non-revoked point) to match Complete-referee conclusions at about half the cost (pp. 12, 17).",
+   "Validate a new benchmarking protocol on a nested algorithm family with a known ranking (p. 17-19).",
+   "Choose generalized normalizations that reduce to the classical unit in the degenerate case and have an algorithmic meaning (p. 14).",
+   "Plot the same runs under several effort currencies side by side to show how the verdict depends on the currency (pp. 15-16).",
+   "Make the literature-review table's columns the gaps the paper fills (p. 10)."
+  ],
+  "coauthors": "V. Dijon, Y. Diouane",
+  "quotes": [
+   {
+    "text": "A referee does not certify the admissibility of a point (x, y).",
+    "page": 11
+   },
+   {
+    "text": "The Reverse Referee is our recommended approach, as it leads to conclusions similar to those of the Complete Referee while requiring a least computational cost.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S157",
+  "year": "2026",
+  "title": "Surrogate-based categorical neighborhoods for mixed-variable blackbox optimization",
+  "read_level": "full",
+  "contribution": "Builds categorical neighborhoods from GP surrogates of the objective and constraints (kernel-induced distance, feasibility-first constraint pseudo-distance, dominance-based ordering) and plugs them into CatMADS as CatMADSGP, which outperforms CatMADS, Pymoo and Optuna on Cat-Suite data profiles.",
+  "problem_entry": "Neighborhood-based mixed-variable methods use user-defined (MV-MADS) or objective-only (CatMADS) neighborhoods that ignore constraint behavior across categories; BO lacks local guarantees (pp. 4-6).",
+  "key_idea": "Rank candidate categories by a kernel distance d_f and a constraint pseudo-distance d_g that is zero when both are predicted feasible, using Pareto dominance with the primary criterion switching on incumbent feasibility, and use the m first as the categorical poll neighborhood (pp. 12-16).",
+  "assumptions": "Relaxable-quantifiable constraints define Omega, unrelaxable and hidden constraints give f = +inf, finite categories, no meta variables, noiseless GPs; theory inherited from the CatMADS framework (pp. 3, 10, 21).",
+  "proof_devices": [
+   "kernel-induced metric d(u,v) = k(u,u)+k(v,v)-2k(u,v) = ||phi(u)-phi(v)||^2 via Moore-Aronszajn (eq. 11, p. 12)",
+   "pseudo-distances that keep symmetry and triangle inequality but drop identity of indiscernibles by design (pp. 12-14)",
+   "framework-membership argument: the method remains an instance of CatMADS, so convergence results are unchanged (p. 21)"
+  ],
+  "experiments": "Mechanical-part case study (surrogate neighbors find 4 feasible of 6 vs 0 for Gower and objective-based, pp. 16-17); 200-evaluation runs from a common infeasible 40-point DoE over several seeds (pp. 22-23); Cat-Suite 60 problems x 3 seeds, budget 250n, data profiles at tau in {1e-2,1e-3,1e-5} vs CatMADS, Pymoo GA, Optuna (pp. 23-25); no BO baseline and no ablation of the added BO search step.",
+  "positioning": "Defined against CatMADS (objective-only IDW neighborhoods) and MV-MADS (user-defined neighborhoods); metaheuristic operators viewed as neighborhoods; kernels borrowed from BO (p. 6, pp. 9-10).",
+  "writing": "One-sentence research gap and four numbered objectives, a toy supplier/material/shape problem threaded through the paper, a Hamming mini-example; scope explicitly limited to structural information rather than a new optimizer (pp. 5, 7, 12).",
+  "limits_future": "GP construction cost and capped BO step acknowledged (pp. 12, 22); future: adaptive number of neighbors and meta variables (p. 26); missing BO baseline, missing ablation and a 24-vs-32 component inconsistency not addressed (pp. 7, 16, 22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Data-driven intelligence placed in the categorical Poll neighborhood, not only the Search; theory preserved because the CatMADS framework accepts any neighborhood; BO search step is the standard Method 1 move.",
+    "pages": "p. 21, p. 22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Outputs classified as relaxable-quantifiable, unrelaxable, hidden; ranking switches with incumbent feasibility; progressive barrier with feasible and infeasible incumbents.",
+    "pages": "p. 3, pp. 13-15, p. 20"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Purpose-built mechanical-part blackbox plus the 60-problem Cat-Suite, public scripts and data; the illustrative problem is constructed, not a partner simulator.",
+    "pages": "p. 7, p. 23, p. 26"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Other-family competitors, common DoE, seeds, data profiles at three tau, S128 f0 rule; gaps: no BO competitor, no ablation.",
+    "pages": "pp. 4, 22-25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "CatMADS prototype built on NOMAD; GPs via SMT.",
+    "pages": "p. 22"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "Categorical-variable pathology carried from framework to distance, benchmark suite, algorithm and neighborhoods in the Halle-Hannan line.",
+    "pages": "p. 1, refs [6], [7], [16], [17]"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Feasibility-first similarity",
+    "evidence": "Constraint pseudo-distance set to zero whenever both candidates are predicted feasible after an uncertainty relaxation.",
+    "pages": "p. 13"
+   },
+   {
+    "pattern": "Dominance ordering to merge two criteria",
+    "evidence": "Pareto-nondominated components first, zero-primary ties by secondary, rest by primary; primary switches with feasibility.",
+    "pages": "pp. 14-15"
+   },
+   {
+    "pattern": "Framework theorem with plug-in instance",
+    "evidence": "Surrogate-based neighborhoods do not affect convergence because the method remains an instance of CatMADS (shared with S155).",
+    "pages": "p. 21"
+   }
+  ],
+  "transferable": [
+   "Turn a fitted kernel into a categorical distance k(u,u)+k(v,v)-2k(u,v), or fall back to |f_hat(u)-f_hat(v)| (pp. 12-13).",
+   "Make constraint similarity zero when both candidates are predicted feasible after relaxing by lambda*sigma_hat (p. 13).",
+   "Merge two similarity criteria by Pareto dominance then lexicographic tie-breaking, switching the primary criterion with incumbent feasibility (pp. 14-15).",
+   "Show test-problem difficulty with per-category LHS feasibility rates at increasing sample sizes (pp. 7-8).",
+   "Give all solvers the same initial DoE (even with no feasible point) and plot h until feasibility, then best feasible f (pp. 22-23).",
+   "State explicitly why theory is unchanged when plugging a new component into a convergent framework (p. 21)."
+  ],
+  "coauthors": "E. Halle-Hannan (first and corresponding author), Y. Diouane, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "The work does not aim to introduce a new optimization method, but rather to provide additional structural information that facilitates handling categorical variables.",
+    "page": 5
+   },
+   {
+    "text": "The surrogate-based neighborhoods introduced here do not affect the theoretical convergence results, as the proposed method remains an instance of the CatMADS framework.",
+    "page": 21
+   }
+  ]
+ }
+]

@@ -1,0 +1,245 @@
+[
+ {
+  "id": "S038",
+  "year": "2017",
+  "title": "Methodologies and software for derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Invited survey chapter that maps state-of-the-art DFO methods by problem feature (smooth/nonsmooth/noisy, complexity, probabilistic, bound/linear, relaxable/unrelaxable nonlinear constraints, global/parallel/integer/multiobjective) and pairs each method class with released software.",
+  "problem_entry": "A reader's problem, which method fits my problem: the authors restructure their own 2009 book [53] by problem features instead of method classes so that it 'directs the reader to the appropriate DFO algorithm' (p. 2).",
+  "key_idea": "Survey as a routing table: sections by problem feature, paragraphs by how sample points are placed (modeling, simplex, positive spanning sets, directions), each ending with a named solver (pp. 2-13; 12 software URLs as refs [1]-[12], p. 15).",
+  "assumptions": "Defines fully linear/quadratic models (p. 3), positive spanning sets, forcing functions with rho(t)/t -> 0 and cosine measure (p. 5), relaxable/unrelaxable/hidden constraints (pp. 10-11); O(A) with explicit n-dependence (p. 2).",
+  "proof_devices": [
+   "reported, not proved: sufficient decrease forces unsuccessful iterations, so a subsequence of step sizes -> 0; simple decrease needs integer lattices instead (p. 5)",
+   "reported: with sufficient decrease new points are 'free of rules', so poll directions can be random on the sphere (RdDS) vs MADS lattices with dense directions (p. 6)",
+   "reported: asymptotically dense directions plus Clarke / Rockafellar generalized directional derivatives for nonsmooth and discontinuous f (p. 6)",
+   "reported: criticality step and self-correcting geometry in model-based trust regions (pp. 3-4)",
+   "reported complexity table in prose: O(eps^-2) iterations / O(n^2 eps^-2) evaluations for direct search vs gradient method; smoothing O((-log eps) eps^-3); convex O(eps^-1); n^2 approximately optimal; probabilistic descent O(nm eps^-2) evaluations (pp. 8-9)"
+  ],
+  "experiments": "none (survey)",
+  "positioning": "Even-handed toward rival schools: NOMAD 'a reference' for nonsmooth direct search (p. 7); progressive barrier 'The first general approach' with the authors' merit function as 'An alternative' (p. 12); both sides of the geometry debate [70] vs [123] (pp. 3-4); 24 of 133 references coauthored by Vicente (pp. 15-21).",
+  "writing": "One or two sentences per method, inline parenthetical definitions, no theorems, headings named after problem features, the solver named at the end of each paragraph (pp. 2-13).",
+  "limits_future": "Stated limit: only short descriptions of methods (p. 2); gaps named in passing, e.g. model-based DFO with nonlinear constraints 'mostly in implementations and in a relaxable mode' (p. 12); no conclusion or future-work section (text ends at section 37.5, p. 13).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Stated in survey voice: the search step is optional and does not interfere with global convergence and hosts surrogates and global heuristics; modified CMA-ES globally convergent; sufficient decrease frees point generation from lattice rules.",
+    "pages": "pp. 5-6, 12-13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Evaluations counted separately from iterations, n-factor explicit, set beside the gradient method; n^2 approximately optimal.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Probabilistic models and probabilistic descent restated; random directions 'can go down to two'; O(nm eps^-2) evaluations.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Relaxable constraints via merit function, unrelaxable via RdDS extreme barrier, with constraints moved to unrelaxable once feasible; Pareto dominance 'without aggregation'; smoothing for nonsmooth f.",
+    "pages": "pp. 7-8, 12-13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Every method class paired with released software; 'Software' in the title; 12 software URLs head the bibliography.",
+    "pages": "pp. 4-13, 15"
+   },
+   {
+    "method": "Research heuristic 2",
+    "relation": "evidence",
+    "note": "Geometry debate: geometry-free numerics [70] -> counterexample and minimal repair [123] -> sparse/probabilistic models [30, 31].",
+    "pages": "pp. 3-4, 8"
+   },
+   {
+    "method": "Workflow A",
+    "relation": "evidence",
+    "note": "The chapter's structure is a problem-intake -> method routing table.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "survey as a problem-feature routing table",
+    "evidence": "Organised by problem features rather than method classes so the reader is directed to the fitting algorithm; each method paragraph closes with named solvers.",
+    "pages": "p. 2, pp. 4-13, p. 15"
+   },
+   {
+    "pattern": "state where you lose / credit priority in the text",
+    "evidence": "Progressive barrier credited as 'The first general approach' for mixed constraints; the authors' merit-function method introduced as 'An alternative'.",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "[D7] Organise a survey by the reader's problem features (regularity, noise, constraint type), not by method family, and close each method paragraph with a named, linked solver (p. 2, pp. 4-13, p. 15).",
+   "[D6] Tell a methodological dispute in three beats: numerical challenge, counterexample, surviving minimal requirement (pp. 3-4).",
+   "[D4] Summarise complexity with iterations and evaluations as separate numbers, the n-factor explicit, and the gradient method's bound in the same paragraph (p. 8)."
+  ],
+  "coauthors": "A. L. Custodio, K. Scheinberg (file order: Custodio, Scheinberg, Vicente, p. 1)",
+  "quotes": [
+   {
+    "text": "In DFO it becomes also important to measure the effort in terms of the number of function evaluations",
+    "page": 8
+   },
+   {
+    "text": "The search step is optional and does not interfere in the global convergence properties of the underlying methods.",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "S027",
+  "year": "2018",
+  "title": "Complexity and global rates of trust-region methods based on probabilistic models",
+  "read_level": "full",
+  "contribution": "Global rates and worst-case complexity bounds, with overwhelmingly high probability and in expectation, for derivative-free trust-region methods whose models are fully linear (first order) or fully quadratic (second order) only with probability p > p0 conditioned on the past, obtained by transplanting the direct-search probabilistic-descent proof technology.",
+  "problem_entry": "Open item in the group's own programme: [2] (S014) proved almost-sure convergence and [19, Section 6] (S019) sketched the road map; this paper carries it out, resolving its 'delicate issues' and adding expectation and second-order results (pp. 2-3).",
+  "key_idea": "Keep the simple trust-region framework of [2] (radius increased on acceptance only if ||g_k|| >= eta2 delta_k) with separate factors gamma1, gamma2, so that p0 = ln gamma1 / ln(gamma1/gamma2); count good-model iterations realization-wise and bound the count with a conditional Chernoff tail (pp. 5, 8-9).",
+  "assumptions": "f in C1 with Lipschitz gradient, bounded below; bounded model Hessians; fraction of Cauchy decrease; (p)-probabilistically fully linear models conditioned on M_0..M_{k-1} with p > p0; second order adds C2 with Lipschitz Hessian, probabilistic fully quadratic models and eigendecrease; enlarged level set skipped 'for keeping the presentation simple'; exact f (pp. 4-5, 8, 12).",
+  "proof_devices": [
+   "square summability sum delta_k^2 <= beta for every realization, via the counting set K = {accepted and radius increased} and geometric decay of delta between consecutive K indices (Lemma 2.2, pp. 6-7)",
+   "Remark 2.1: in trust regions a step can be taken while the radius shrinks, so K replaces 'successful iterations' of direct search (p. 6)",
+   "indicator decomposition z_l <= (1 - v_l) + v_l y_l bounding the number of fully linear iterations by beta/(min{delta0/gamma2, kappa ||grad f(x~_k)||})^2 + p0 k (Lemma 2.3, p. 8)",
+   "conditional Chernoff lower-tail bound exp(-(p - lambda)^2 k / (2p)) with lambda = (p + p0)/2 (Lemma 2.4, (2.8)-(2.11), p. 9)",
+   "threshold p0 = ln gamma1 / ln(gamma1/gamma2) from the radius update factors (eq. 2.4, p. 8)",
+   "expectation bound via E(K) = sum_k P(K > k) split at c1 eps^-2 (Theorem 2.3, pp. 10-11)",
+   "cube summability sum delta_k^3 for the second-order case (Lemma 3.3, p. 14)",
+   "almost-sure convergence as a corollary of the complexity theory (section 2.5, p. 11)"
+  ],
+  "experiments": "none",
+  "positioning": "Set against deterministic trust-region complexity (O(eps^-2), O(eps^-1) convex, O(-log eps) strongly convex, O(eps^-1.5), O(eps^-3) second order) and deterministic DFO O(kappa_d^-2 eps^-2) (p. 3); matches Cartis-Scheinberg line search with p0 = 1/2 (p. 11); criticises stochastic trust-region approaches for 'unverifiable assumptions' on parameters (p. 16).",
+  "writing": "Abstract concedes results are 'essentially the same as' deterministic ones and that the derivation 'follows closely' the direct-search study (p. 1); a remark and a footnote mark exactly where the transplant differs (Remark 2.1, p. 6; footnote 2, p. 8).",
+  "limits_future": "No lim-type second-order result ('the absence of a rigorous proof', p. 15); smooth unconstrained, exact f (p. 1). Future: stochastic f with guarantees 'without unverifiable assumptions on algorithmic parameters'; better convex and strongly convex rates (pp. 16-17).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Step 3 literally: threshold p0 derived from the radius update factors, with the rule to adjust p or to choose gamma1, gamma2 so that p0 falls below it; step 4: probability-one convergence plus complexity with overwhelmingly high probability. The trust-region rates live here, not in S014.",
+    "pages": "pp. 5, 8-11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Iteration and evaluation bounds with n-dependence compared with deterministic ones; sparse-Hessian random models give O((n log n)^4 eps^-3) evaluations vs O(n^5 eps^-3).",
+    "pages": "pp. 3, 11, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Pure theory paper: no numerics, no code.",
+    "pages": "whole text (pp. 1-17)"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "two-layer proof: realization-wise count + conditional Chernoff",
+    "evidence": "Second paper using it (after S019), now for trust regions: Lemma 2.3 count, Lemma 2.4 Chernoff, Theorems 2.1-2.3.",
+    "pages": "pp. 6-11"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Remark 2.1 names the break (success with shrinking radius) and repairs it with K; the second-order lim-type result is stated as lacking a rigorous proof.",
+    "pages": "pp. 6, 15"
+   },
+   {
+    "pattern": "port a proof to the companion algorithm class via a role dictionary",
+    "evidence": "delta_k and K play the roles of step size and successful iterations of [19]; only the square-summability lemma is re-proved; the abstract names the source.",
+    "pages": "pp. 1, 6-8"
+   }
+  ],
+  "transferable": [
+   "[D4] Transfer a proof between companion methods with an explicit role dictionary (radius <-> step size; accepted-and-enlarged <-> successful), re-prove only the lemma where the analogy breaks, and flag it in a remark (Remark 2.1, pp. 6-8).",
+   "[D4] Choose the counting set as the iterations that provably yield order-delta^2 decrease, then show geometric decay of the radius between them to get sum delta^2 < infinity for every realization (pp. 6-7).",
+   "[D2] Decouple expansion and contraction factors so that the probability threshold p0 = ln gamma1 / ln(gamma1/gamma2) becomes a design knob that can be matched to a fixed model-generation probability (pp. 5, 8).",
+   "[D4] Get a bound in expectation from a tail bound: E(K) = sum_k P(K > k), split at c1 eps^-2, sum the exponential tail (pp. 10-11).",
+   "[D8] Translate an iteration bound into an evaluation bound for one concrete random model generator and compare the power of n with the deterministic one (p. 16)."
+  ],
+  "coauthors": "S. Gratton, C. W. Royer, Z. Zhang",
+  "quotes": [
+   {
+    "text": "Although the road map for our paper was described in [19, Section 6], its actual concretization poses a few delicate issues.",
+    "page": 3
+   },
+   {
+    "text": "these parameters are intimately connected to the minimum probability with which the models are required to be fully linear.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S036",
+  "year": "2018",
+  "title": "On the optimal object orientation in additive manufacturing",
+  "read_level": "full",
+  "contribution": "Models 3D-printing orientation as a two-angle bound-constrained nonsmooth problem, argues that the staircase-effect and support-area objectives do not conflict for symmetric objects, and solves each with the group's global DFO solver PSwarm on two aerospace ducts and one asymmetric toy object.",
+  "problem_entry": "Application-driven: prior work posed orientation multi-objectively (Cheng et al.; Jibin's tri-objective GA); the cut is that symmetric objects need only one objective, which 'will then allow the application of a state-of-the-art solver from derivative-free global optimization' (pp. 2-3, 5-6).",
+  "key_idea": "Mesh-based objectives SE (sum of cusp-height terms), SA (down-facing area) and BT (height along d) over theta = (theta_x, theta_y) in [0,180]^2, minimised separately with PSwarm; non-conflict of SE and SA under facet symmetry (pp. 5-7, 9).",
+  "assumptions": "Constant layer thickness; all down-facing facets need support 'without loss of generality'; facet symmetry (equal number and area for d.n_j > 0 and < 0); BT model 'not appropriate for the type of objects of interest to us' (pp. 6-7).",
+  "proof_devices": [
+   "structural non-conflict argument: facet symmetry makes SE and SA share minimisers (p. 7), checked by minimising each objective separately and comparing minimisers modulo a 180-degree rotation (p. 11)"
+  ],
+  "experiments": "Three objects (Humanoid 96 triangles, asymmetric toy; T-Duct 19,686 and Duct 28,656, aerospace); PSwarm on SE, SA, BT separately; final theta, f, CPU time, 36-88 iterations and 357-644 evaluations reported; full landscapes plotted; no baseline solver, no repeated runs (pp. 7, 9-11).",
+  "positioning": "Descriptive stage-by-stage review of supports, orientation and slicing (pp. 3-6); positioned against multi-objective genetic-algorithm orientation models [12], [29] (p. 6).",
+  "writing": "Contribution sentence at the end of the introduction (p. 2); conclusion claims 'effectiveness and robustness' from three objects (p. 12); BT declared out of scope (p. 7) yet tabulated 'for a matter of completeness' (p. 11).",
+  "limits_future": "Needs constant layer thickness and some symmetry; geometry not modified; orientation does not guarantee removing staircase effect or supports (p. 12). Future: 5-axis printer integration, real aerospace parts, process parameters (layer thickness, overhang cost) (p. 12), accurate building-time measure (p. 7).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Supplies step 6 (one real application, aerospace ducts) with the group's released solver, but the benchmarking half is absent: no collection, baseline, profiles or repeated runs; the solver is consumed, not profiled.",
+    "pages": "pp. 7, 9-11, 16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Downstream use only: PSwarm (particle swarm in the search step of a convergent skeleton) chosen for a nonsmooth multimodal bound-constrained problem; no new wrapper.",
+    "pages": "pp. 7, 9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Avoids aggregation (as Research heuristic 4 asks) but also avoids a front: non-conflict argued under symmetry; for the asymmetric Humanoid, where objectives conflict, two separate minimisers are reported and no Pareto front is computed.",
+    "pages": "pp. 7, 11-12"
+   },
+   {
+    "method": "Taste mark 6",
+    "relation": "evidence",
+    "note": "Anchored in an application: aerospace ducts, FIBR3D project.",
+    "pages": "pp. 7, 12-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reformulate to reuse existing DFO solvers",
+    "evidence": "Second paper after S022: the reduction from a tri-objective model to one objective is justified by the state-of-the-art DFO solver it unlocks.",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "check objective conflict before going multiobjective",
+    "evidence": "Structural reason for shared minimisers (facet symmetry), per-objective verification, and one asymmetric control instance where the objectives do conflict.",
+    "pages": "pp. 7, 11"
+   }
+  ],
+  "transferable": [
+   "[D1] Before choosing a multiobjective method, look for a structural property under which the objectives share minimisers (facet symmetry) and check it by minimising each objective separately and comparing minimisers modulo known symmetries of the decision space (pp. 7, 11).",
+   "[D5] Include one instance that deliberately violates the structural assumption (the asymmetric Humanoid) as a negative control that shows where the simplification stops holding (pp. 11-12).",
+   "[D5] With two decision variables, plot the objective over the whole feasible box before arguing for a global solver (Fig. 4, p. 10); a local-solver comparison would make the argument stronger (p. 11)."
+  ],
+  "coauthors": "S. Pereira, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "However, as we will see in this section, we only need to consider a single objective when building symmetric objects.",
+    "page": 6
+   },
+   {
+    "text": "Our approach does not modify the original object geometry, and the optimal orientation obtained is not guaranteed to entirely remove the staircase effect or the need to support building.",
+    "page": 12
+   }
+  ]
+ }
+]

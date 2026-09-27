@@ -1,0 +1,329 @@
+[
+ {
+  "id": "S014",
+  "year": "2018",
+  "title": "Global convergence rate analysis of unconstrained optimization methods based on probabilistic models",
+  "read_level": "full",
+  "contribution": "A generic framework that bounds the expected hitting time of line-search and cubic-regularization methods whose models are sufficiently accurate only with probability p > 1/2 (exact f), recovering deterministic ε-orders (ε^-2, ε^-1, log 1/ε, ε^-3/2) with a 2p/(2p−1)^2 constant.",
+  "problem_entry": "Gap between deterministic-inexact methods (traditional algorithms, but errors bounded deterministically at every iteration) and stochastic-gradient methods (no deterministic bound, but not counterparts of traditional methods); keep the traditional method and relax the error bound without mean/variance assumptions (p. 2).",
+  "key_idea": "Redraw a random model every iteration, require accuracy scaled to the step it produces (‖G−∇f‖ ≤ κA_k‖G_k‖) with probability ≥ p conditioned on the past, keep the classical accept/reject and step-parameter update, and reduce the analysis to a three-condition process {A_k, F_k} (Def. 2.1 p. 6; Def. 3.1 p. 14; Assumption 2.1 p. 8).",
+  "assumptions": "L-Lipschitz gradient, bounded below (convex: bounded level sets; strongly convex; ARC: Lipschitz Hessian); exact function values; p > 1/2; flagged simplifications: equal increase/decrease factor, C = γ^c α0, simplified ARC σ-update (pp. 2, 9, 13, 15, 18–23).",
+  "proof_devices": [
+   "nondecreasing progress measure F_k with deterministic cap F_ε (f(x0)−f(xk), 1/(f−f*), log(1/(f−f*))) and hitting time N_ε (p. 7)",
+   "three-item Assumption 2.1: true&successful ⇒ F increases by h(α); α ≤ C & true ⇒ successful; F monotone (p. 8)",
+   "predictable-weight lemma E[Σ W_k I_k] ≥ p E[Σ W_k] for past-measurable W_k (Lemma 2.1, pp. 8–9)",
+   "counting argument over true/false × successful/unsuccessful × A_k above/below C (Lemmas 2.2–2.7, pp. 10–13)",
+   "E(N_ε) ≤ 2p/(2p−1)^2 (2F_ε/h(C) + log_γ(C/α0)) (Thm 2.1, p. 13)"
+  ],
+  "experiments": "none",
+  "positioning": "Extends BSV 2014 (limit-only) to rates; cites GRVZ as the only other step-count bound; re-reads Byrd–Chin–Nocedal–Wu's norm condition as a special case; restrained contrast with SGD's expected-error-after-T bounds (pp. 3, 27–28).",
+  "writing": "Contribution bullets phrased as differences from literature; generic section 'to avoid repetition'; each rate theorem followed by a remark on ε-order vs deterministic and p-dependence (pp. 2–3, 16, 19, 20, 26); arXiv rough edge 'Theorem ??' (p. 26).",
+  "limits_future": "Deterministic exact f only, stochastic f named as future work (delivered later by S013/S015); tail bound asserted not proved; sample-complexity comparison and ARC-model sampling left open; Algorithms 5.1/5.2 only sketched (pp. 13, 22, 28–33).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Probabilistic accuracy conditioned on the past, scaled to the step; no mean/variance assumptions.",
+    "pages": "pp. 2, 6, 14, 22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Methods are essentially exact counterparts of deterministic line search/ARC; ARC stated as close as possible to deterministic frameworks.",
+    "pages": "pp. 2–3, 22"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Hitting-time complexity with deterministic ε-order confirmed; mechanism is a counting argument (not supermartingale) with 2p/(2p−1)^2 constant; high-probability tail claimed but not done.",
+    "pages": "pp. 7–16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Random sampled fully-linear/quadratic models with radius tied to the step replace certified geometry (step 4).",
+    "pages": "pp. 28–31"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation",
+    "evidence": "One abstract process theorem (Thm 2.1) instantiated for steepest descent, general descent, convex, strongly convex line search and ARC by computing only C, h, F_ε.",
+    "pages": "pp. 3, 8, 13–26"
+   },
+   {
+    "pattern": "subsume the competitor",
+    "evidence": "Byrd et al.'s adaptive-sampling norm condition shown to be a special case of Def. 3.1; results called a generalization.",
+    "pages": "pp. 27–28"
+   },
+   {
+    "pattern": "knowable-quantity accuracy requirements",
+    "evidence": "Algorithms 5.1/5.2 adapt a sampling parameter ξ_k because the required radius depends on problem constants unknown a priori.",
+    "pages": "pp. 29–31"
+   }
+  ],
+  "transferable": [
+   "State a three-item assumption on an abstract process (progress h(α) on true successful steps, threshold C where true ⇒ successful, monotone progress) and instantiate per algorithm by computing C, h, F_ε (pp. 8, 16–26).",
+   "Choose progress measures f(x0)−f(xk), 1/(f−f*), log(1/(f−f*)) with caps so one hitting-time theorem gives nonconvex, convex and strongly convex rates (p. 7).",
+   "Use E[Σ W_k I_k] ≥ p E[Σ W_k] for past-measurable W_k to convert probability-p accuracy into bounds on counts of iteration types (pp. 8–9).",
+   "Scale model accuracy to the step the model produces so the deterministic descent lemma gives that a small step with a good model succeeds (pp. 15–16, 24).",
+   "When a required radius depends on unknown constants, add a parameter that only decreases when a checkable inequality fails, paying O(log 1/ε) (pp. 29–30)."
+  ],
+  "coauthors": "C. Cartis",
+  "quotes": [
+   {
+    "text": "Our purpose in this paper is to derive a class of methods which inherit the best properties of traditional deterministic algorithms, and yet relax the assumption that the derivative/model error is bounded in a deterministic manner.",
+    "page": 2
+   },
+   {
+    "text": "We believe that, amongst other things, our analysis helps to understand the convergence properties of practical algorithms, that do not always seek to ensure theoretically required model quality.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "D003",
+  "year": "2019",
+  "title": "Linear interpolation gives better gradients than Gaussian smoothing in derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Shows a relaxed-Armijo gradient method with bounded noise converges to a noise neighbourhood under a relative gradient-error condition, and that linear interpolation on n orthonormal directions meets this condition deterministically while Gaussian smoothing needs N ≥ 2n/(δθ^2) samples for probability 1−δ, with synthetic, Schittkowski and RL evidence.",
+  "problem_entry": "Application-driven: RL policy optimization via Gaussian-smoothing 'evolutionary strategies' [Salimans et al.]; orthogonal directions were empirically better but no paper gave convergence results or quantified accuracy vs parameters (pp. 1–2).",
+  "key_idea": "Separate (a) convergence of a relaxed Armijo line search under ‖g−∇φ‖ ≤ θ‖∇φ‖, θ<1/2, from (b) the cost of each estimator to meet it; orthonormal-direction GSG equals scaled linear interpolation (pp. 3, 6–10).",
+  "assumptions": "Bounded (non-stochastic) noise |ε| ≤ ε_f, L-smooth φ; GSG analysed under L_f-Lipschitz f and aligned 'for proper comparison'; orthonormal Q; noise-free estimation experiments; α_k > τᾱ used without stating backtracking start (pp. 1–4, 7–10).",
+  "proof_devices": [
+   "relaxed Armijo with +2ε_f slack and descent lemma under the norm condition (Lemma 2.3, pp. 3–4)",
+   "two-regime (gap large/small vs noise) convex argument and shifted-target strongly convex recursion (pp. 4–5)",
+   "interpolation error via mean value theorem and ‖Q_X^{-1}‖ (Thm 3.1, p. 7)",
+   "quadratic inequality in σ giving admissible radius interval and gradient-norm floor 2√(Lnε_f)/θ (eqs. 3.9–3.11, p. 7)",
+   "GSG variance via Gaussian moment identities then multivariate Chebyshev (Lemma 3.4, Thm 3.5, pp. 9–10)"
+  ],
+  "experiments": "Noise-free gradient-accuracy tests (synthetic function with known gradient, N ∈ {n,4n,32n}, σ grid; 69 Schittkowski problems × 100 points) plus RL (Swimmer, HalfCheetah, Reacher; 3 seeds; reward vs iterations; Adam for fixed-step methods; per-iteration N not stated) (pp. 10–12).",
+  "positioning": "Directly corrects ML practice by name ([20]), declines the 'evolutionary strategies' label, credits [5,6,19] empirically, notes [16] analysed only N=1 and [20] chose N, σ, α without analysis; places interpolation in the Powell/Conn–Scheinberg–Toint lineage; short companion of the FoCM comparison paper (pp. 2–3, 6, 8).",
+  "writing": "Title and abstract state the comparative claim and name the inferior method by citation; contribution bullets are theorem-level; remarks interpret noise floors (pp. 1–6).",
+  "limits_future": "Bounded noise only; GSG sample bound is a Chebyshev sufficient condition (no lower bound); central differences not analysed; RL evidence thin (3 seeds, iterations axis); no future directions stated (pp. 7–12).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Same accuracy target for all estimators; derived N and σ per estimator; equal-N accuracy comparison.",
+    "pages": "pp. 7, 10–11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Downstream RL comparison plotted against iterations, per-iteration N unstated, 3 seeds, Adam for fixed-step baselines — departs from counting function evaluations.",
+    "pages": "pp. 11–12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Irreducible noise ε_f fixes reachable neighbourhood and gradient-norm floor (step 3).",
+    "pages": "pp. 4–7"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Classical Armijo backtracking with only a 2ε_f slack added.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Interpolation error scales with ‖Q_X^{-1}‖; orthonormal directions give best bound (geometry as conditioning).",
+    "pages": "p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "subsume the competitor",
+    "evidence": "The ML Gaussian-smoothing estimator with orthonormal directions is shown to be a scaled classical linear-interpolation gradient.",
+    "pages": "pp. 2, 6–7"
+   },
+   {
+    "pattern": "condition/cost split for estimator papers",
+    "evidence": "Convergence proved once under a generic relative-error condition; each estimator then compared by the samples and radius needed to satisfy it.",
+    "pages": "pp. 3, 6–10"
+   }
+  ],
+  "transferable": [
+   "Split an estimator paper into two parts: the algorithm converges under condition X, and each estimator A/B/C has a cost of satisfying X (pp. 3, 7, 10).",
+   "Add a +2ε_f slack to Armijo under bounded noise and state rates down to an explicit noise neighbourhood (pp. 3–6).",
+   "Pick the sampling radius from the quadratic inequality balancing truncation (∝σ) and noise (∝1/σ) error; its discriminant gives the gradient-norm floor (p. 7).",
+   "Estimator-variance recipe: exact Var formula, Gaussian moment identities, multivariate Chebyshev with r = θ‖∇φ‖ (pp. 8–10).",
+   "Noise-free estimation-accuracy protocol on a synthetic known-gradient function plus 69 Schittkowski problems × 100 points, reporting average log10 relative error over an (N, σ) grid (pp. 10–11)."
+  ],
+  "coauthors": "Albert S. Berahas, Liyuan Cao, Krzysztof Choromanski",
+  "quotes": [
+   {
+    "text": "None of these recent papers presents any convergence result for the proposed algorithms.",
+    "page": 2
+   },
+   {
+    "text": "We will not use this terminology in this paper, since it encompasses a large and different class of optimization methods than those used in [20] and those considered here.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S013",
+  "year": "2019",
+  "title": "Convergence rate analysis of a stochastic trust-region method via supermartingales",
+  "read_level": "full",
+  "contribution": "A renewal-reward/supermartingale framework bounding the expected stopping time of adaptive stochastic methods, applied to give the first global complexity bounds for a stochastic trust-region method (STORM) with random models and random function estimates: O(ε^-2/(2p−1)) first order and O(ε^-3/(2p−1)) second order.",
+  "problem_entry": "Nonconvex stochastic methods either use step/stopping rules unlike practice (SGD), rely on fixed finite sums (SVRG/SARAH), converge only asymptotically (stochastic TR), hold only with probability p^T, or need exact f (Cartis–Scheinberg, Gratton et al.); STORM had only a.s. convergence under restrictive η2 ≥ κ_ef (pp. 2–4, 12).",
+  "key_idea": "Abstract process {Φ_k, Δ_k} with a ±1 walk driving Δ_k below a threshold and E[Φ_{k+1}|F_k] ≤ Φ_k − Θh(Δ_k) gives E[T_ε] ≤ p/(2p−1)·Φ0/(Θh(Δ_ε)) + 1; STORM satisfies it with Φ_k = νf(X_k) + (1−ν)Δ_k^2 (pp. 5–9, 14).",
+  "assumptions": "L-Lipschitz gradient, f ≥ 0; bounded model Hessian; models α-probabilistically fully linear and estimates β-probabilistically ε_F δ_k^2-accurate (no unbiasedness); explicit α, β conditions; second order adds Lipschitz Hessian, δ_max ≤ 1 and a first-moment bound on estimate error (pp. 4, 11–16, 27–28).",
+  "proof_devices": [
+   "birth-death process Z_{k+1} = min(Z_k + W_{k+1}, j_ε) with renewals at Δ_k ≥ Δ_ε; E[τ] = p/(2p−1) by first-step analysis (pp. 6–7)",
+   "nonnegative supermartingale R_k = Φ_{k∧T} + Θ Σ h(Δ_j) plus monotone convergence (Lemma 2.2, pp. 7–8)",
+   "Wald's identity for nonnegative increments without assuming T finite a.s. (pp. 8–9)",
+   "potential Φ_k = νf + (1−ν)Δ_k^2 (Δ_k^3 for second order) with ν large (pp. 14, 16, 26)",
+   "case grid ‖∇f‖ ≥ ζδ_k vs < ζδ_k × (I_k, J_k); bad-case increase bounded via Taylor with step ≤ δ_k, β chosen to halve it (pp. 15–18)"
+  ],
+  "experiments": "none",
+  "positioning": "Claims first global complexity for a stochastic TR; extension of Cartis–Scheinberg and Gratton et al. to stochastic functions; improves STORM by dropping η2 ≥ κ_ef; compares orders with Ghadimi–Lan and variance-reduced methods while never needing a full gradient (pp. 1–4, 12).",
+  "writing": "'novel framework' and 'first' claims in abstract; twofold contribution; prose walk-through of the four (I_k,J_k) outcomes; 'Choosing constants' paragraphs before proofs; limitation (no termination criterion) stated in the introduction (pp. 1, 4, 12, 14, 26).",
+  "limits_future": "No termination criterion; tail of the complexity distribution deferred; second order needs an extra moment assumption; estimates must become progressively more accurate; very large constants (Θ has a 1/1800 factor) (pp. 4, 16, 28, 33).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Full-text confirmation of potential mixing f and radius, upward-biased ±1 walk on Δ_k when αβ > 1/2, supermartingale/renewal-reward stopping-time bound with p/(2p−1) constant.",
+    "pages": "pp. 5–10, 14–15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Separate probabilistic contracts for models (α) and function estimates (β), accuracy tied to δ_k and δ_k^2; unbiasedness not assumed.",
+    "pages": "pp. 4, 11–12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Arbitrary estimate failures tolerated in first order only because the accepted step is bounded by δ_k; second order requires a first-moment bound on estimate errors (δ^2 increase vs δ^3 decrease).",
+    "pages": "pp. 17, 28"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Classical TR kept with one acceptance guard ‖g_k‖ ≥ η2δ_k; restrictive η2 condition removed by better analysis.",
+    "pages": "pp. 3, 10, 12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation",
+    "evidence": "Theorem 2.2 stated once, instantiated for first- and second-order STORM, reused by the line-search paper, and offered for other algorithms.",
+    "pages": "pp. 4, 14–19, 26–33"
+   },
+   {
+    "pattern": "knowable-quantity accuracy requirements",
+    "evidence": "All sample sizes determined by quantities chosen or known by the algorithm.",
+    "pages": "pp. 19–20"
+   }
+  ],
+  "transferable": [
+   "Renewal-reward template: capped step parameter, min(Δe^{λW}, Δ_ε) dynamics with P(W=+1) ≥ p > 1/2, and E[ΔΦ] ≤ −Θh(Δ) give E[T] ≤ p/(2p−1)·Φ0/(Θh(Δ_ε)) + 1 (pp. 5–9).",
+   "Prove the stopping-time bound without assuming T < ∞ a.s., so a.s. convergence is a corollary (pp. 8–9).",
+   "Potential νf + (1−ν)Δ^q with q equal to the per-step decrease order and ν large enough (pp. 14, 16, 26).",
+   "Case grid (large/small gradient vs ζδ_k) × (good/bad model) × (good/bad estimates); bound worst increase via Lipschitz with ‖s‖ ≤ δ_k and pick β to halve it (pp. 16–18).",
+   "Order-mismatch diagnosis: if bad cases raise f by O(δ^2) while good steps give O(δ^3), add an expectation bound of matching order on estimate error (p. 28).",
+   "Write a 'Choosing constants' paragraph explaining parameter trade-offs (small η2 ⇒ larger steps but more accurate estimates) before the proof (p. 14)."
+  ],
+  "coauthors": "Jose Blanchet, Coralia Cartis, Matt Menickelly",
+  "quotes": [
+   {
+    "text": "The key to the analysis lies in the assumption that the accuracy improves in coordination with the perceived progress of the algorithm.",
+    "page": 11
+   },
+   {
+    "text": "It is convenient and useful not to have to prove the convergence result before establishing the convergence rates bounds, since the convergence immediately follows from these bounds.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S015",
+  "year": "2020",
+  "title": "A stochastic line search method with expected complexity analysis",
+  "read_level": "full",
+  "contribution": "An implementable stochastic backtracking Armijo line search with adaptive, knowable-quantity sample sizes for gradients and function values, with expected-complexity bounds matching deterministic GD (ε^-2 nonconvex, ε^-1 convex, log 1/ε strongly convex) via the S013 renewal-reward framework (text read: arXiv v1 titled 'A Stochastic Line Search Method with Convergence Rate Analysis').",
+  "problem_entry": "SGD is step-size sensitive and not always descent; prior sampled-GD methods are convex-only with pre-set steps and sample growth, depend on the unknown true gradient, or use heuristic same-batch line searches (pp. 1–2).",
+  "key_idea": "Keep classical backtracking Armijo on estimates; add one control δ_k (reliable-step test α‖g‖^2 ≥ δ^2) that sets function-estimate variance; contract: gradients κ_g-accurate relative to A_k‖G_k‖ w.p. p_g, function estimates ε_f A_k^2‖G_k‖^2-accurate w.p. p_f, plus a variance condition; potential Φ_k = ν(f−f_min) + (1−ν)A_k‖∇f‖^2/L^2 + (1−ν)θΔ_k^2 (pp. 3–5, 11).",
+  "assumptions": "Iterates in Ω with L-Lipschitz gradient and f ≥ f_min; θ=1/2, γ=2, κ_g ≥ 2; p_g ≥ 16/17 and p_g p_f/√(1−p_f) ≥ 1024(κ_g α_max+1)^2-type bound; variance condition on function estimates (not needed if p_f = 1); convex case assumes bounded Ω, bounded gradients and Δ_k ≤ δ_max; unbiasedness not needed (pp. 3, 5–7, 16, 19–20).",
+  "proof_devices": [
+   "import Thm 2.2 of S013 and re-prove only the expected decrease of Φ_k (pp. 8, 11–16)",
+   "three-case × three-step-type table of ΔΦ (Table 1, p. 11)",
+   "A_k‖∇f‖^2/L^2 term in the potential absorbs gradient-norm growth after accepted steps (Lemma 4.4, p. 10)",
+   "Hölder bound E[1_{J^c}|F−f|] ≤ (1−p_f)^{1/2}·max{…} (Lemma 2.5, p. 6)",
+   "liminf via coupling log A_k ≥ Z_k, a capped upward-drift random walk (Thm 4.9, pp. 17–18)",
+   "convex/strongly convex rates from stopped transforms 1/(νε) − 1/Φ_{k∧T} and log Φ_{k∧T} + log(1/(νε)) with Jensen (pp. 19–22)"
+  ],
+  "experiments": "none in the arXiv v1 text read; published SIOPT version not read",
+  "positioning": "Claims first stochastic line search with rates and first rates for knowable-quantity adaptive sampling; item-by-item contrast with Byrd et al., Friedlander–Schmidt, Tripuraneni et al., Bollapragada et al.; reuses S013 framework; p_f = 1 case extends Cartis–Scheinberg (pp. 2, 6–8, 25).",
+  "writing": "Explicit 'Challenges with randomized line-search' list of two failure modes; analogy remark to deterministic α ≳ 1/L; Table 1 compressing the case proof; 'first' claims; v1 cross-reference slips (pp. 4, 8, 11, 13, 18–21).",
+  "limits_future": "Required probabilities high (p_g ≥ 16/17, p_f tied to κ_g) despite the text saying p_g is not close to 1; bounded-iterate assumption for convex case; expected complexity only; no experiments or future-work paragraph in v1 (pp. 7, 16, 19, 25).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Classical backtracking Armijo kept; exactly one added control δ_k justified by the false-acceptance failure mode.",
+    "pages": "pp. 1, 3–4"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Accuracy relative to A_k‖G_k‖ and A_k^2‖G_k‖^2 with fixed probabilities; no unbiasedness; finite-difference gradients allowed.",
+    "pages": "pp. 5, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Function-estimate failures are not arbitrary: a variance condition is required, and required probabilities are near 1 (p_g ≥ 16/17, p_f depends on κ_g).",
+    "pages": "pp. 5–7, 14, 16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Potential mixing f, step parameter and second control; upward-drift random walk on A_k; hitting-time bound with p_g p_f/(2p_g p_f − 1) constant; stated preference for expected iterations over expected error.",
+    "pages": "pp. 4, 8, 11, 17–19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation",
+    "evidence": "S013's stopping-time theorem imported verbatim; only its expected-decrease assumption re-proved for line search.",
+    "pages": "pp. 7–8, 11"
+   },
+   {
+    "pattern": "knowable-quantity accuracy requirements",
+    "evidence": "Sample sizes stated via α_k, ‖g_k‖, δ_k and variance bounds; competitors criticised for depending on ‖∇f(x_k)‖ or ε.",
+    "pages": "pp. 2, 7, 25"
+   },
+   {
+    "pattern": "subsume the competitor",
+    "evidence": "With p_f = 1 the result is presented as an extension of Cartis–Scheinberg.",
+    "pages": "p. 6"
+   }
+  ],
+  "transferable": [
+   "Give each noise-induced failure mode of a classical adaptive method its own control: step parameter for collapse, a second parameter δ_k (reliable-step test) for false acceptance (pp. 3–4).",
+   "Add A_k‖∇f(X_k)‖^2/L^2 to the potential so gradient-norm growth after accepted steps is paid by the potential (pp. 10–11).",
+   "Hölder trick: E[1_bad·|error|] ≤ P(bad)^{1/2}·(second moment)^{1/2} controls unbounded rare errors (p. 6).",
+   "Get convex and strongly convex rates from one nonconvex expected-decrease inequality via stopped transforms 1/(νε) − 1/Φ and log Φ with Jensen (pp. 19–22).",
+   "Summarize an expected-decrease proof as an (event × step type) → sign of ΔΦ table (p. 11).",
+   "State all sample-size rules in knowable quantities and contrast with rules needing ‖∇f(x_k)‖ or ε (p. 7)."
+  ],
+  "coauthors": "Courtney Paquette",
+  "quotes": [
+   {
+    "text": "This paper offers the first stochastic line search method with convergence rates analysis, and is the first to provide convergence rates analysis for adaptive sample size selection based on knowable quantities.",
+    "page": 2
+   },
+   {
+    "text": "pf will have to depend on κg; hence a looser control of the gradient estimates results in tighter control, i.e. larger sample sets, for function estimates.",
+    "page": 7
+   }
+  ]
+ }
+]

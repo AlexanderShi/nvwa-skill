@@ -1,0 +1,641 @@
+[
+  {
+    "id": "H008",
+    "year": "1991",
+    "title": "Efficient vehicle routing algorithms for municipal waste collection (written in portuguese)",
+    "read_level": "metadata",
+    "contribution": "Inferred from title: earliest listed paper, a sole-author applied combinatorial-OR (vehicle routing for municipal waste collection) article in Portuguese, Investigação Operacional 10 (1991) 47-58 (metadata). Not read.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "Inferred from title: predates the bilevel-programming work (metadata).",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "none (sole author)",
+    "quotes": []
+  },
+  {
+    "id": "S063",
+    "year": "1992",
+    "title": "Generation of disjointly constrained bilinear programming test problems",
+    "read_level": "abstract",
+    "contribution": "A technique that generates disjointly constrained bilinear test problems with known solutions and properties (abstract). COAP 1 (1992) 299-306 (homepage).",
+    "problem_entry": "Bilinear programs with disjoint constraints need test problems with known solutions and properties (abstract).",
+    "key_idea": "Combine disjoint low-dimensional bilinear programs into a separable problem, then apply a simple random transformation of variables to hide the separability (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 5",
+        "relation": "variant",
+        "note": "The testbed is generated with known answers rather than assembled into a collection and profiled.",
+        "pages": "abstract"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "controlled-difficulty test-problem generators",
+        "evidence": "Separable build from low-dimensional bilinear programs plus a random change of variables gives problems with known solutions (S063; see also S033, S026, S053, D001).",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [
+      "To get large test instances with a known optimum, assemble them from tiny subproblems you can solve by hand, then apply a random transformation of variables so the structure is not visible to the solver (abstract)."
+    ],
+    "coauthors": "P. H. Calamai, J. J. Júdice",
+    "quotes": [
+      {
+        "text": "The proposed construction technique applies a simple random transformation of variables to a separable bilinear programming problem that is constructed by combining disjoint low-dimensional bilinear programs.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S100",
+    "year": "1992",
+    "title": "Parametric linear programming techniques for the indefinite quadratic programming problem",
+    "read_level": "abstract",
+    "contribution": "A multiparametric LP technique for the global minimum of an indefinite QP, with an extended parametric procedure for the rank-1 case and an exponential worst-case example (abstract). The homepage gives IMA J. Math. Appl. Business & Industry 4 (1993) 343-349, so the year is 1993.",
+    "problem_entry": "Finding a global minimum of an indefinite quadratic program (abstract).",
+    "key_idea": "Use the spectral decomposition of the quadratic form's matrix. In the rank-1 case the multiparametric LP becomes a single-parameter LP, solved by an extension of the traditional linear parametric procedure (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "An example shows that the technique may take an exponential number of steps (abstract).",
+    "method_links": [
+      {
+        "method": "Method 2",
+        "relation": "variant",
+        "note": "The worst case is stated as a combinatorial step count (an exponential example), not as an evaluation-complexity bound.",
+        "pages": "abstract"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "state where you lose",
+        "evidence": "A worst-case exponential example against the paper's own procedure, stated in the abstract.",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [
+      "Next to a method that works well in practice, publish the instance family on which it is exponential (abstract)."
+    ],
+    "coauthors": "J. J. Júdice, P. M. Pardalos",
+    "quotes": [
+      {
+        "text": "However, an example is presented showing that this technique may take an exponential number of steps.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S033",
+    "year": "1993",
+    "title": "Generating linear and linear-quadratic bilevel programming problems",
+    "read_level": "abstract",
+    "contribution": "A cheap generator of linear and linear-quadratic bilevel test problems with user control over the number and type of minima and over data density (abstract). SISC 14 (1993) 770-782 (homepage).",
+    "problem_entry": "Test problems are needed for linear and linear-quadratic bilevel programs (abstract).",
+    "key_idea": "Combine single-parameter two-variable problems into a separable multivariable problem, then disguise the separability with a simple transformation (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 5",
+        "relation": "variant",
+        "note": "A generated testbed with controllable properties; no performance profiles are mentioned.",
+        "pages": "abstract"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "controlled-difficulty test-problem generators",
+        "evidence": "Second generator in this batch (bilevel), with knobs for the number and type of minima and for data density.",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [
+      "Expose difficulty knobs (number and type of local minima, data density) as generator parameters so that experiments can vary one property at a time (abstract)."
+    ],
+    "coauthors": "P. H. Calamai",
+    "quotes": [
+      {
+        "text": "The separability is then disguised using a simple transformation.",
+        "page": "abstract"
+      },
+      {
+        "text": "The proposed technique, which requires very little computational effort, allows the user control over, among other things, the number and type of minima and the data density.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S004",
+    "year": "1994",
+    "title": "Descent approaches for quadratic bilevel programming",
+    "read_level": "abstract",
+    "contribution": "Two descent methods (pivot-step and modified steepest descent), new exact step-size rules, a hybrid, and a proof that checking local optimality in bilevel programming is NP-hard (abstract). JOTA 81 (1994) 379-399. First appeared as GERAD Cahier G-92-36, Sep 1992, 23 pp. (GERAD/PolyPublie records).",
+    "problem_entry": "Bilevel programs whose inner problem is strictly convex quadratic (abstract).",
+    "key_idea": "A pivot-step method that may miss local optimality is paired with a modified steepest-descent method that fixes this, plus a hybrid of the two (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 1",
+        "relation": "variant",
+        "note": "Early precursor: a fast step generator without a guarantee is combined with a guarantee-restoring method in a hybrid. But the guarantee is local optimality, and there is no poll or sufficient-decrease skeleton.",
+        "pages": "abstract"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "prove the problem hard beside the algorithm",
+        "evidence": "Algorithms are presented together with an NP-hardness result for checking local optimality (S004; also S069).",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [
+      "If your fast method lacks a guarantee, present (i) the fast method, (ii) a guaranteed method and (iii) a hybrid that switches between them, and compare all three (abstract)."
+    ],
+    "coauthors": "G. Savard, J. J. Júdice",
+    "quotes": [
+      {
+        "text": "The first algorithm is based on pivot steps and may not guarantee local optimality.",
+        "page": "abstract"
+      },
+      {
+        "text": "It is proved that checking local optimality in bilevel programming is a NP-hard problem.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S021",
+    "year": "1994",
+    "title": "A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables",
+    "read_level": "abstract",
+    "contribution": "A computational comparison of block principal pivoting and predictor-corrector interior-point methods for large-scale NVLSQ, each implemented with normal equations and with CSNE, with implementation recommendations (abstract). Math. Comp. 63 (1994) 625-643 (homepage).",
+    "problem_entry": "Large-scale linear least squares with nonnegative variables (abstract).",
+    "key_idea": "Compare two algorithm families under two linear-algebra implementations: normal equations for predictor-corrector, and normal equations for block pivoting with a possible switch to CSNE in the last iterations (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "Computational experience shows both methods are quite efficient on large-scale NVLSQ; details not read (abstract).",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 5",
+        "relation": "variant",
+        "note": "A computational comparison with implementation-level advice; the abstract mentions no released solver and no profiles.",
+        "pages": "abstract"
+      }
+    ],
+    "new_pattern_candidates": [],
+    "transferable": [
+      "Compare algorithms x linear-algebra back-ends as a grid, and make the recommendation phase-dependent (for example, switch the linear solver near convergence) (abstract)."
+    ],
+    "coauthors": "L. F. Portugal, J. J. Júdice",
+    "quotes": [
+      {
+        "text": "This type of approach should also be used in the implementation of the block principal pivoting method, but a switch to the CSNE method may be useful in the last iterations of the algorithm.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S069",
+    "year": "1994",
+    "title": "On the solution and complexity of a generalized linear complementarity problem",
+    "read_level": "abstract",
+    "contribution": "Sufficient conditions under which a GLCP can be solved as a pure LCP, and a proof that the GLCP is NP-hard in general (abstract). JOGO 4 (1994) 415-424 (homepage).",
+    "problem_entry": "The generalized linear complementarity problem (abstract).",
+    "key_idea": "Reduce the GLCP to a pure LCP under sufficient conditions (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [
+      {
+        "pattern": "reformulate to reuse existing DFO solvers",
+        "evidence": "Variant: reduce to a class with existing solvers (LCP), not DFO.",
+        "pages": "abstract"
+      },
+      {
+        "pattern": "prove the problem hard beside the algorithm",
+        "evidence": "Reduction conditions paired with NP-hardness of the general GLCP (also S004).",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [],
+    "coauthors": "J. J. Júdice",
+    "quotes": [
+      {
+        "text": "We also establish that the GLCP is in general a NP-Hard problem.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S052",
+    "year": "1995",
+    "title": "Geometry and local optimality conditions for bilevel programs with quadratic strictly convex lower levels",
+    "read_level": "abstract",
+    "contribution": "Necessary and sufficient first- and second-order optimality conditions for bilevel programs with strictly convex quadratic lower levels (abstract). In Minimax and Applications, eds. Du and Pardalos, Kluwer 1995, pp. 141-151 (homepage).",
+    "problem_entry": "Optimality conditions for bilevel programs with strictly convex quadratic lower levels (abstract).",
+    "key_idea": "At a given point the set of feasible directions is a finite union of convex cones. On that basis the conditions are simple generalizations of the one-level first- and second-order conditions (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [
+      {
+        "pattern": "exploit the problem's own geometry",
+        "evidence": "The local feasible-direction geometry (a finite union of convex cones) drives the conditions.",
+        "pages": "abstract"
+      },
+      {
+        "pattern": "nest the known theories as special cases",
+        "evidence": "The bilevel conditions are generalizations of the one-level conditions.",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [],
+    "coauthors": "P. H. Calamai",
+    "quotes": [
+      {
+        "text": "By examining the local geometry of these problems we establish that the set of feasible directions at a given point is composed of a finite union of convex cones.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S009",
+    "year": "1996",
+    "title": "Discrete linear bilevel programming problem",
+    "read_level": "abstract",
+    "contribution": "Properties of discrete linear bilevel programs under different discretizations: feasible-set geometry, existence of optimal solutions, and equivalences with linear multilevel programs through concave penalty functions (abstract). JOTA 89 (1996) 597-614. First appeared as GERAD Cahier G-94-12, Mar 1994, 20 pp. (GERAD/PolyPublie records).",
+    "problem_entry": "Discrete linear bilevel programs under different discretizations of the variables (abstract).",
+    "key_idea": "Equivalences with particular linear multilevel programs via concave penalty functions, usable to design penalty-function methods (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [
+      {
+        "pattern": "reformulate to reuse existing DFO solvers",
+        "evidence": "Variant: an equivalence with a continuous class via an exact concave penalty, offered as a basis for algorithm design.",
+        "pages": "abstract"
+      },
+      {
+        "pattern": "exploit the problem's own geometry",
+        "evidence": "The geometry of the feasible set is studied first.",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [],
+    "coauthors": "G. Savard, J. J. Júdice",
+    "quotes": [
+      {
+        "text": "These equivalences are based on concave penalty functions and can be used to design penalty function methods for the solution of discrete linear bilevel programs.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "H005",
+    "year": "1998",
+    "title": "Nonlinear least squares estimation of MQW laser parameters from IM response measurements",
+    "read_level": "metadata",
+    "contribution": "Inferred from title: a short proceedings note (pp. 30-35, Meeting on Applied Mathematics to Telecommunications, eds. Júdice and Gouveia, Telecommunications Institute, Sep 1998) fitting multi-quantum-well laser parameters to intensity-modulation response data by nonlinear least squares. It is an application with telecom-engineering colleagues. Not read.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "M. M. Freire, H. J. A. da Silva",
+    "quotes": []
+  },
+  {
+    "id": "H006",
+    "year": "1998",
+    "title": "Application of the least squares boundary residual method to the study of step discontinuities in dielectric planar waveguides",
+    "read_level": "metadata",
+    "contribution": "Inferred from title: a proceedings paper (pp. 99-108, same 1998 meeting) applying a least-squares boundary-residual formulation to step discontinuities in dielectric planar waveguides. It is an electromagnetics application. Not read.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "A. L. Topa, C. R. Paiva, A. M. Barbosa",
+    "quotes": []
+  },
+  {
+    "id": "S066",
+    "year": "2007",
+    "title": "Optimization in Medicine",
+    "read_level": "abstract",
+    "contribution": "An edited volume of optimization applications in medicine, grown out of a workshop at the 2005 CIM Thematic Term on Optimization in Coimbra (abstract). Vicente is co-editor (metadata). Whether he wrote a chapter: not read.",
+    "problem_entry": "Optimization as a decision tool in medicine under limited resources (abstract).",
+    "key_idea": "Collects applications: brachytherapy seed reconstruction, optimization-classification for disease prediction, EEG-based seizure prediction, radiation-therapy and Gamma Knife planning, and medical image registration (abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "C. J. S. Alves, P. M. Pardalos (co-editors)",
+    "quotes": [
+      {
+        "text": "This work grew out of a workshop on optimization which was held during the 2005 CIM Thematic Term on Optimization in Coimbra, Portugal.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S001",
+    "year": "2009",
+    "title": "Introduction to Derivative-Free Optimization",
+    "read_level": "abstract",
+    "contribution": "Described as the first contemporary comprehensive treatment of DFO. It covers sampling and modeling tools, directional and simplicial direct search, simplex-derivative line search, and derivative-free trust-region methods, and it gives convergence analysis for modified Nelder-Mead, implicit filtering, wedge methods and minimum-Frobenius-norm models, plus a software appendix (abstract).",
+    "problem_entry": "Missing derivatives, often with noise or nonsmoothness, as the core difficulty (abstract).",
+    "key_idea": "Tools first: Part I covers sampling and modeling, including well-poisedness. Part II covers the algorithm frameworks, and Part III reviews surrogates and constrained extensions. The shared tools explain the algorithms' convergence and their differences and similarities (abstract, contents).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "The audience statement targets engineers, economists, statisticians and others, and suits advanced undergraduate or early graduate courses (abstract).",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 1",
+        "relation": "variant",
+        "note": "Popular heuristics (Nelder-Mead, implicit filtering) receive convergence theory in modified form. The abstract does not say what the modification is.",
+        "pages": "abstract"
+      },
+      {
+        "method": "Method 5",
+        "relation": "evidence",
+        "note": "Metadata level: the book homepage (mat.uc.pt/~lnv/idfo/) posts errata for the first and second printings and a note deriving quadratic-regression error bounds. The book also has a software appendix (abstract).",
+        "pages": "abstract; book homepage"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "component-taxonomy field map",
+        "evidence": "The monograph is organized by shared sampling and modeling tools before algorithm frameworks, so that the tools reveal the algorithms' differences and similarities (cf. b3-01 S056).",
+        "pages": "abstract"
+      }
+    ],
+    "transferable": [
+      "When writing a survey or monograph, put the shared analytical tools (here, sample-set geometry) before the algorithms, so that each algorithm chapter can say which tool it uses and how it differs (abstract, contents)."
+    ],
+    "coauthors": "A. R. Conn, K. Scheinberg",
+    "quotes": [
+      {
+        "text": "It contains a comprehensive description of the sampling and modeling tools needed for derivative-free optimization; these tools allow the reader to better understand the convergent properties of the algorithms and identify their differences and similarities.",
+        "page": "abstract"
+      },
+      {
+        "text": "Introduction to Derivative-Free Optimization is the first contemporary comprehensive treatment of optimization without derivatives.",
+        "page": "abstract"
+      }
+    ]
+  },
+  {
+    "id": "S116",
+    "year": "2012",
+    "title": "Facultés universitaires Notre-Dame de la Paix Faculté des Sciences—Département de Mathématique",
+    "read_level": "metadata",
+    "contribution": "Inferred from title: Scholar has parsed a University of Namur (FUNDP) title-page header as the title. The name list (Laloyaux first, then Namur and CERFACS faculty) looks like a 2012 doctoral-thesis title page with Vicente as a jury member. The thesis title and Vicente's role were not verified. This is not a research item by Vicente.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "P. Laloyaux, T. Carletti, S. Gratton, A. Lemaître, A. Sartenaer, ...",
+    "quotes": []
+  },
+  {
+    "id": "S117",
+    "year": "2012",
+    "title": "Special issue on nonlinear and global optimization, dedicated to Professor Joaquim João Júdice on the occasion of his sixtieth anniversary",
+    "read_level": "metadata",
+    "contribution": "Inferred from title: a three-page guest editors' preface (TOP 20(1):1-3) to a special issue honouring J. J. Júdice, a coauthor of six of Vicente's 1992-1996 papers (metadata). Not read: OpenAlex marks it bronze OA, but the Springer PDF returned a client-challenge page.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "J. M. Martínez",
+    "quotes": []
+  },
+  {
+    "id": "S108",
+    "year": "2019",
+    "title": "Optimization by space transformation and decomposition",
+    "read_level": "abstract",
+    "contribution": "A space-transformation framework for smooth unconstrained optimization, globalized by a trust region, with O(eps^-2), O(eps^-1) and O(log eps^-1) iteration bounds (nonconvex, convex and strongly convex). It specializes to parallel space decomposition (RAS, WRAS, ASH, coarse-space correction) and to trust-region methods with inaccurate gradients, where sharp inaccuracy bounds keep the complexity order (abstract of the open preprint, PDF pp. 1-2; dated 30 Dec 2019).",
+    "problem_entry": "Problems that cannot be solved, or even stored, in the full space need divide-and-conquer. A second use is trust-region methods with inaccurate gradients (abstract, pp. 1-2).",
+    "key_idea": "The gradient is mapped forward to an auxiliary (possibly lifted) space, where a model is built and minimized, and the step is mapped back. A trust region globalizes the scheme, and the analysis checks forward/backward consistency. The scheme extends parallel Schwarz domain decomposition (abstract, p. 1).",
+    "assumptions": "f smooth, not necessarily convex; unconstrained (abstract, p. 1).",
+    "proof_devices": [],
+    "experiments": "The abstract reports that an unsophisticated implementation works well and scales with the number of subspaces under RAS plus coarse space, and that behaviour deteriorates once the gradient inaccuracy exceeds the bounds. Details not read (abstract, pp. 1-2).",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "Beyond the inaccuracy bounds, trust-region behaviour deteriorates dramatically (abstract, p. 2).",
+    "method_links": [
+      {
+        "method": "Method 2",
+        "relation": "evidence",
+        "note": "Iteration complexity under nonconvex, convex and strongly convex classes; gradient inaccuracy within the bounds changes only the constants.",
+        "pages": "abstract, pp. 1-2"
+      },
+      {
+        "method": "Method 1",
+        "relation": "variant",
+        "note": "Step generators from domain decomposition are placed inside a trust-region skeleton rather than a poll and sufficient-decrease skeleton.",
+        "pages": "abstract, p. 1"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "deterministic inexactness tied to the step",
+        "evidence": "Sharp relative-gradient-error bounds tied to the trust-region parameters, with parameters proposed per accuracy level.",
+        "pages": "abstract, p. 2"
+      },
+      {
+        "pattern": "import a neighbouring field's certified tool through a specialist coauthor",
+        "evidence": "Schwarz domain decomposition (RAS/WRAS/ASH, coarse spaces) imported from PDEs. That Gratton is the specialist is inferred from coauthorship.",
+        "pages": "abstract, p. 1"
+      }
+    ],
+    "transferable": [
+      "Derive the largest relative gradient error the method tolerates as a function of its own parameters, show numerically that crossing it breaks the method, and turn the bound into a parameter recommendation for a given accuracy level (abstract, p. 2)."
+    ],
+    "coauthors": "S. Gratton, Z. Zhang",
+    "quotes": []
+  },
+  {
+    "id": "S113",
+    "year": "2020",
+    "title": "A Review of Multi-Objective Optimization: Theory and Algorithms",
+    "read_level": "abstract",
+    "contribution": "A review talk (Lehigh ISE, 21 Apr 2020). The outline divides methods into scalarization for the entire Pareto front (weighted sum, epsilon-constraint) and gradient-based methods for a single Pareto point (MO steepest descent, MO Newton), then outlines algorithmic classes (slides pp. 1-2; pp. 4-46 not read).",
+    "problem_entry": "A tutorial definition of the MOP min F(x) = (f_1,...,f_m) over Omega, with decision space, objective space and image set (slide p. 3).",
+    "key_idea": "Scalarization versus multi-objective extensions of single-objective gradient and Newton methods (outline, p. 2).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 4",
+        "relation": "evidence",
+        "note": "Outline-level only: gradient methods appear as single-objective methods extended to MO, as opposed to scalarization.",
+        "pages": "slide p. 2"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "supervisor-role authorship on student-led artefacts",
+        "evidence": "The talk is co-authored with the PhD student, and the slide footer names Suyun Liu.",
+        "pages": "slide p. 3"
+      }
+    ],
+    "transferable": [],
+    "coauthors": "S. Liu",
+    "quotes": []
+  },
+  {
+    "id": "S112",
+    "year": "2022",
+    "title": "A package for optimization based on space decomposition",
+    "read_level": "abstract",
+    "contribution": "A MATLAB implementation of the space-decomposition framework of S108: (restricted) additive Schwarz synchronization, coarse-space correction and trust-region-style globalization (PolyU IRA record abstract, hdl 10397/92528). The zip holds sdec.m, set_decomp.m (header 'Gratton Zhang 2017') and set_decomp2.m.",
+    "problem_entry": "Unconstrained optimization by space decomposition (repository abstract).",
+    "key_idea": "Software companion to S108 (repository abstract).",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "The option header of sdec.m (lines 13-28) records the authors' ablation verdicts on coarse-space choices, such as pfs good, dfs not good and grad OK/not very good, and notes that the last-successful-step switch made no significant difference.",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [
+      {
+        "method": "Method 5",
+        "relation": "evidence",
+        "note": "The solver is released as a separately citable artefact, with the design alternatives kept as switchable options (AS/RAS, coarse-space type).",
+        "pages": "repository record; sdec.m lines 13-28"
+      }
+    ],
+    "new_pattern_candidates": [
+      {
+        "pattern": "infrastructure as a stand-alone citable publication",
+        "evidence": "The MATLAB package is deposited as its own repository item (2022).",
+        "pages": "repository record"
+      }
+    ],
+    "transferable": [
+      "Keep every design alternative you tried as a named option in the released code, with your verdict next to it, so the ablation stays reproducible (sdec.m lines 13-28)."
+    ],
+    "coauthors": "S. Gratton, Z. Zhang",
+    "quotes": []
+  },
+  {
+    "id": "S121",
+    "year": "2025",
+    "title": "SIAG on Optimization Views and News",
+    "read_level": "metadata",
+    "contribution": "Identified as Views and News 33(1), Dec 2025 (open PDF). Vicente's part is the Chair's Column (p. 14), signed as Chair, SIAG on Optimization. The lead article is Diakonikolas, Open Problems in Optimization (p. 1). This is a service item. Only the contents page and the signature line were read.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "Vicente was also the Views and News editor in 2003-2008 (SIAG/OPT website, Former Editors).",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "J. Diakonikolas, D. Drusvyatskiy, M. Menickelly, P. Belotti",
+    "quotes": []
+  },
+  {
+    "id": "S122",
+    "year": "2023",
+    "title": "SIAG on Optimization Views and News",
+    "read_level": "metadata",
+    "contribution": "Identified as Views and News 31(1), Dec 2023 (open PDF), with articles by H. Lu (First-Order Methods for Linear Programming, p. 1) and S. Cen & Y. Chi (policy-gradient convergence, p. 12). Vicente's part is the Chair's Column (p. 23). This is a service item. Only the contents page and the signature line were read.",
+    "problem_entry": "",
+    "key_idea": "",
+    "assumptions": "",
+    "proof_devices": [],
+    "experiments": "",
+    "positioning": "",
+    "writing": "",
+    "limits_future": "",
+    "method_links": [],
+    "new_pattern_candidates": [],
+    "transferable": [],
+    "coauthors": "H. Lu, S. Cen, Y. Chi",
+    "quotes": []
+  }
+]

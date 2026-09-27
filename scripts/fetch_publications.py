@@ -52,7 +52,7 @@ API = "https://api.openalex.org"
 WORK_FIELDS = ",".join([
     "id", "doi", "title", "publication_year", "publication_date", "type",
     "cited_by_count", "primary_location", "authorships", "primary_topic",
-    "open_access", "ids",
+    "open_access", "ids", "locations",
 ])
 
 

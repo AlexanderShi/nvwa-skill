@@ -1,0 +1,509 @@
+[
+ {
+  "id": "S033",
+  "year": "2012",
+  "title": "Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization",
+  "read_level": "partial",
+  "contribution": "Shows that minimum-l1-Hessian underdetermined quadratic interpolation on O(n (log n)^4) random points yields, with high probability, a fully quadratic model when the Hessian has O(n) nonzeros, and turns the idea into a practical DFO trust-region code that beats NEWUOA on CUTEr tests.",
+  "problem_entry": "Determined quadratic models cost (n+1)(n+2)/2 evaluations and min-Frobenius models are only provably fully linear; known-structure DFO needs the sparsity pattern in advance, so import compressed sensing to recover it automatically (pp. 1-2, 5, 7-8).",
+  "key_idea": "Replace the min-Frobenius criterion by min ||alpha_Q||_1 subject to interpolation (an LP), analysed with random samples in an orthonormal hypercube basis, run in practice with deterministic reused sample sets (pp. 7-8, 13-15, 21-24).",
+  "assumptions": "Lipschitz Hessian; approximate Hessian sparsity in basis psi (Assumption 4.2); uniform random sampling in the l_inf ball, chosen because the basis construction fails in the l2 ball (pp. 4, 16-17).",
+  "proof_devices": [
+   "K-bounded orthonormal quadratic basis on the hypercube with K = 3 (Theorem 4.4, pp. 13-15)",
+   "RIP for random samples from bounded orthonormal systems (Theorem 4.1, p. 11)",
+   "treat f minus the sparse fully quadratic model as measurement noise with eta = sqrt(p) kappa'_ef Delta^3, then noisy partial sparse recovery (proof of Theorem 4.5, p. 20)",
+   "coefficient-to-function error conversion with card(alpha) factors (Lemma 4.1, p. 18; Remark 4.2, p. 19)"
+  ],
+  "experiments": "MATLAB; min-Frobenius vs min-l1 variants vs NEWUOA on 26 CUTEr problems, performance profiles in function evaluations at 1e-4 and 1e-6 with a stop-then-retighten fairness rule; 13 sparse-Hessian problems (n = 20-22) where l1 wins about 8 of 9 cases; failures shown (pp. 25-29).",
+  "positioning": "Extends min-Frobenius models (Conn-Scheinberg-Vicente; Powell) and known-structure DFO [7]; relies on Rauhut-type sparse orthonormal expansions; benchmarks against NEWUOA (pp. 3, 7, 11, 25-26).",
+  "writing": "Contribution stated as twofold at the end of the introduction (pp. 2-3); the gap between the theorem and the practical code is written out twice (p. 6, p. 21).",
+  "limits_future": "Theorem does not validate the practical code; constants impractical (c_total < 17190); LP overhead, no warm start; l2-ball basis open; stochastic TR framework for random models left to future work; sparse gradients as next step (pp. 6, 16, 21-22, 28-29).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Deterministic poisedness certification (O(n^6)) replaced by random sample sets giving fully quadratic models with high probability; practical code keeps geometry minimal and admits it is theoretically weak.",
+    "pages": "p. 5, pp. 22-23"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Early form: model quality stated as a probability, with a stochastic TR framework named as needed future work (seed of BSV 2014).",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Hessian sparsity exploited without knowing the pattern; l1 recovers it, whereas Method 6 assumes identified structure.",
+    "pages": "pp. 1-2, 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Function-evaluation performance profiles against a Powell-family code with a written tolerance fairness rule.",
+    "pages": "pp. 25-26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import",
+    "evidence": "Uses compressed-sensing recovery theory inside a DFO method instead of optimization for compressed sensing.",
+    "pages": "p. 2, p. 28"
+   },
+   {
+    "pattern": "theory as motivation, gap stated",
+    "evidence": "Rigorous theorem for random sampling; deterministic practical algorithm; the gap and impractical constants are stated explicitly.",
+    "pages": "p. 6, p. 21"
+   }
+  ],
+  "transferable": [
+   "Prove accuracy of a sample-efficient model by treating (f - best structured model) as bounded noise at the Taylor-error level and applying a noisy-recovery theorem (p. 20).",
+   "Construct an orthonormal, uniformly bounded basis on a domain where integrals factorise (hypercube) so random-sampling RIP results apply with a dimension-free constant (pp. 13-15).",
+   "Fair DFO benchmarking: default stopping rule first, rerun with tighter tolerances if convergence is not declared, profile function evaluations at two accuracies (pp. 25-26).",
+   "Run both model-selection rules inside the same trust-region code so the comparison isolates the model choice (pp. 24-25)."
+  ],
+  "coauthors": "A. S. Bandeira, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "In this paper we propose a reverse relationship between optimization and compressed sensing — instead of using optimization methods to solve compressed sensing problems we use the results of compressed sensing to improve optimization methods by recovering and exploiting possible structures of the black-box objective functions.",
+    "page": 2
+   },
+   {
+    "text": "Theorem 4.5 cannot strictly validate a practical setting in DFO like the one discussed in the next section.",
+    "page": 21
+   }
+  ]
+ },
+ {
+  "id": "S053",
+  "year": "2013",
+  "title": "On partial sparse recovery",
+  "read_level": "full",
+  "contribution": "Defines partial null-space and partial restricted-isometry properties for l1 recovery when part of the vector is known to be dense, shows they are implied by the ordinary NSP/RIP with the same constant, extends noisy recovery, and shows Gaussian matrices need fewer measurements.",
+  "problem_entry": "Some recovery problems (image reconstruction, sparse Hessian recovery for DFO) have a known dense block; prior sufficient conditions are not simple NSP/RIP extensions (p. 1).",
+  "key_idea": "Project out the dense block with P = I - A2(A2'A2)^{-1}A2' so partial recovery reduces to classical recovery for P A1, then solve for the dense block (pp. 2-3).",
+  "assumptions": "A2 full column rank; i.i.d. Gaussian entries with variance 1/k for the random-matrix result (pp. 2-3, 5).",
+  "proof_devices": [
+   "projection reduction to classical compressed sensing (p. 3)",
+   "NSP implies partial NSP by taking S = T union dense indices (Theorem 4.1, p. 3)",
+   "RIP implies partial RIP with the same constant via x2 = -(A2'A2)^{-1}A2'A1x1 (Theorem 4.2, p. 3)",
+   "coincidence of x1-parts of the partial and projected noisy problems, dense block bounded by ||A1|| and ||A2^+|| (Theorem 5.2, p. 4)",
+   "union bound over sparsity patterns with Gaussian concentration (Theorem 6.1, p. 5)"
+  ],
+  "experiments": "none",
+  "positioning": "Credits Vaswani-Lu, Friedlander et al. and Jacques (found after the results were obtained), and presents its conditions as the simple NSP/RIP extensions they are not (p. 1); mentions Wang-Yin's stronger NSP (p. 2).",
+  "writing": "Short IEEE-style letter; contribution paragraph at the end of the introduction; no hedging beyond the Jacques comparison (p. 1).",
+  "limits_future": "No limitations or future work stated; conclusion restates the reduced measurement count k = O(s + log(N - r)) when s - r = O(1) (p. 5).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Weak: known partial structure lowers the sample count; the sample-count side of the structure exploited in S033.",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "spin off the enabling lemma",
+    "evidence": "The partial-sparse recovery tool needed by S033 is written up as a separate short paper for the compressed-sensing audience.",
+    "pages": "S033 p. 3; S053 p. 1, p. 5"
+   }
+  ],
+  "transferable": [
+   "Project out an unpenalised variable block with P = I - A2(A2'A2)^{-1}A2', solve the classical problem, then recover the block by a linear solve (p. 3).",
+   "When defining a partial/restricted property, prove immediately that the original property implies it with the same constant so existing random-matrix results transfer (p. 3)."
+  ],
+  "coauthors": "A. S. Bandeira, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "His conditions guarantee the same recovery as ours but, as far as we can tell, are not the simple extensions of the NSP and RIP properties.",
+    "page": 1
+   },
+   {
+    "text": "Note that the condition (16) can be asymptotically smaller than the one found in the classical case r = 0.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S100",
+  "year": "2013",
+  "title": "Efficiently Using Second Order Information in Large l1 Regularization Problems",
+  "read_level": "full",
+  "contribution": "Proposes LHAC, a proximal quasi-Newton method for l1-regularized problems that uses an L-BFGS low-rank Hessian approximation to make each coordinate-descent step O(m) and a greedy dual-violation working set, and shows it beats FISTA, GLMNET and QUIC on sparse logistic regression and sparse inverse covariance.",
+  "problem_entry": "First-order methods are cheap but slow locally; existing second-order l1 methods depend on problem-specific Hessian structure and active sets that shrink only near the optimum (pp. 1-3).",
+  "key_idea": "Keep the Tseng-Yun proximal-Newton model with coordinate descent, but use the L-BFGS compact form B = gamma I - Q Qhat so (Bd)_i costs O(m), and pick the working set as nonzeros plus the largest subgradient violations (pp. 3-8).",
+  "assumptions": "L convex and twice differentiable; B_k positive definite via s't > 0 (strong convexity) or damped BFGS (pp. 1, 7).",
+  "proof_devices": [
+   "no rate proved; global convergence inherited from the Tseng-Yun coordinate gradient descent framework with Armijo line search and positive definite B_k (pp. 6-7)"
+  ],
+  "experiments": "Sparse logistic regression on 8 RCV1/GISETTE training sets vs FISTA and GLMNET re-implemented in MATLAB, CPU time at 1e-2 and 1e-5; sparse inverse covariance on 5 gene sets vs QUIC by counted flops (C++ vs MATLAB) at 1e-2 and 1e-6; LHAC not fastest in 2 of 16 logistic runs (pp. 8-13).",
+  "positioning": "Builds on GLMNET (Yuan et al.) and QUIC (Hsieh et al.), criticised as specialised to their Hessian structure; Wright and Olsen et al. give up or limit second-order steps when the subspace is large (pp. 2-3).",
+  "writing": "Twofold contribution paragraph (p. 3); strong comparative wording in results (overwhelmingly faster, p. 9) while Table 1 shows two exceptions, not one (p. 11).",
+  "limits_future": "No limitations or future work stated; conclusion attributes gains to the low-rank approximation and the greedy active set (pp. 12-13).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Low-rank structure of the quasi-Newton matrix makes coordinate steps O(m).",
+    "pages": "p. 3, p. 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Outer framework (Tseng-Yun model, Armijo, L-BFGS compact form) kept; novelty only in Hessian approximation and working set.",
+    "pages": "p. 4, pp. 6-7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Equal footing via re-implementation in one language or flop counts of the dominant step, not function evaluations.",
+    "pages": "pp. 9-11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reuse own working-set rule across problem classes",
+    "evidence": "Largest-violation working set from LP and SVM (Scheinberg 2006) transplanted to l1-regularized problems.",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "With a diagonal-plus-low-rank quasi-Newton matrix, cache dhat = Qhat d and update it per coordinate move so (Bd)_i costs O(m) (p. 8).",
+   "When competitors are coded in different languages, count flops of the dominant step instead of CPU time (pp. 10-11).",
+   "Solve each instance at a loose and a tight tolerance to expose the first-order/second-order trade-off (p. 9)."
+  ],
+  "coauthors": "X. Tang",
+  "quotes": [
+   {
+    "text": "The key observation here is that the Hessian approximation obtained by LBFGS is low rank unlike the true Hessian",
+    "page": 3
+   },
+   {
+    "text": "CPU time, as often used, will not be a reasonable complexity measure in this case, because QUIC is implemented in C++ and LHAC - in MATLAB.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S051",
+  "year": "2017",
+  "title": "Smooth pinball neural network for probabilistic forecasting of wind power",
+  "read_level": "full",
+  "contribution": "Trains a one-hidden-layer multi-quantile neural network with a smoothed pinball loss and a least-squares weight initialization that greatly reduces quantile crossing, and shows lower quantile and interval scores than MQR, SVQR and naive baselines on GEFCom2014 wind data.",
+  "problem_entry": "Multi-quantile wind forecasting suffers from quantile crossing, constrained SVQR is slow, and the pinball loss is not differentiable for gradient training (pp. 2, 4).",
+  "key_idea": "Smooth the pinball loss (tau u + alpha log(1 + exp(-u/alpha))) to use standard backprop, and replace non-crossing constraints by an ELM-style initialization to equally spaced quantiles (pp. 4-5).",
+  "assumptions": "Nonparametric (no distributional assumption); smoothing limit alpha -> 0 cited from Zheng; no training convergence theory (pp. 3-4).",
+  "proof_devices": [
+   "none (gradient formulas for backpropagation only, pp. 4-5)"
+  ],
+  "experiments": "GEFCom2014, 10 zones, 2013 as test (87,600 hourly points), 2-month sliding window, 18 quantiles; baselines uniform, persistence, climatology, MQR, SVQR; QS, IS, ACE and crossing counts; with/without initialization ablation (pp. 5-7).",
+  "positioning": "Extends Zheng's smooth quantile regression to neural networks; contrasts with QRNN (Taylor) and constrained SVQR (Takeuchi) (pp. 2, 4).",
+  "writing": "Numbered four-item contribution list including a first-to-showcase claim (p. 2); results summarised with strong wording (strong prediction ability, p. 7).",
+  "limits_future": "Initialization does not guarantee no crossings (p. 5); future work on other renewables, prices and load, and very-short-term forecasting with recurrent architectures (p. 8).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Keep the standard trainer and change only the loss that breaks it (smoothing), outside the oracle setting.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Head-to-head comparison with proper scoring rules on public data, but hyperparameters hand-tuned on training data and no equal-budget control.",
+    "pages": "pp. 5-7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "initialization as a soft constraint",
+    "evidence": "Non-crossing enforced approximately by symmetric least-squares initialization instead of a constrained solver; residual crossings counted.",
+    "pages": "p. 5; Fig. 2 p. 6"
+   }
+  ],
+  "transferable": [
+   "Smooth a kink loss with tau u + alpha log(1 + exp(-u/alpha)) to use off-the-shelf gradient training and report alpha as a hyperparameter (pp. 4, 6).",
+   "Ablate a heuristic (with/without) and count the violations it is designed to prevent (Table I p. 7, Fig. 2 p. 6).",
+   "Use a public competition data set and its official score for comparability (pp. 3, 5)."
+  ],
+  "coauthors": "K. Hatalis, A. J. Lamadrid, S. Kishore",
+  "quotes": [
+   {
+    "text": "This scheme does not guarantee there are no cross-overs, but it does greatly reduce them as that it is seen in section IV.",
+    "page": 5
+   },
+   {
+    "text": "The goal of our study is not custom feature engineering, which could result in better scores, but to showcase the feasibility of our method as a forecasting model given standard features and compare it with common and advanced benchmarks.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S052",
+  "year": "2017",
+  "title": "Black-box optimization in machine learning with trust region based derivative free algorithm",
+  "read_level": "full",
+  "contribution": "Shows that a practical model-based DFO trust-region method matches or beats Bayesian optimization and random search on smooth benchmarks, direct AUC maximization and SVM hyperparameter tuning at equal evaluation budgets with far less optimizer time, and argues via STORM that expected AUC can be a smooth target.",
+  "problem_entry": "BO and DFO are two separate black-box communities; BO is costly and scales poorly, random search competes, and AUC is piecewise constant so gradient methods do not apply (pp. 1-2).",
+  "key_idea": "Run DFO-TR with local quadratic interpolation models and one new evaluation per iteration; a stochastic variant evaluates AUC on growing subsamples and re-estimates f after unsuccessful steps (pp. 3-4, 7).",
+  "assumptions": "Smoothness of E[AUC] shown only for jointly normal classes, admitted to be too strong in practice; no convergence theory for DFO-TR or STORM on deterministic nonsmooth noisy functions (pp. 3-5).",
+  "proof_devices": [
+   "write AUC as P(w'X+ > w'X-) and compute its expectation under a jointly normal data model as Phi(mu_Z / sigma_Z) (Theorems 1-3, pp. 4-5)"
+  ],
+  "experiments": "Branin/Camelback/Hartmann and AUC on 12 LIBSVM/UCI sets vs TPE, SMAC, SPEARMINT at equal evaluation budgets with optimizer time reported; random search also at 2x budget; S-DFO-TR vs DFO-TR by accessed data points (20 runs); 3-parameter SVM tuning; pairwise-hinge appendix (pp. 5-8, 11).",
+  "positioning": "Frames BO vs DFO as two communities; uses Moré-Wild for DFO practicality, Li et al. and Jamieson-Talwalkar for random search, STORM and Blanchet et al. for theory (pp. 1, 3, 7).",
+  "writing": "Three-bullet contribution list (p. 3); theory claims hedged with we believe (p. 5); losses left visible in tables (p. 7).",
+  "limits_future": "HPO only with three continuous hyperparameters; trouble when dim(w) is very large; jointly normal assumption; timing affected by implementation languages; smoothness of E[AUC] for other distributions left open (pp. 2, 5-7).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Minimal geometry: no model-improvement steps, far points discarded, radius frozen when too few points; same rule as S033 Algorithm 5.1.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "STORM contract (accuracy needed only near the solution) turned into a growing sample-size schedule.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Re-estimate and average f(w_k) after unsuccessful steps so a lucky value does not block progress.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Equal evaluation budgets, optimizer time separated, random search at 2x budget; caveat of mixed implementation languages acknowledged.",
+    "pages": "pp. 6-8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "smooth in expectation",
+    "evidence": "Justifies applying a smooth-model DFO method to discontinuous AUC by proving E[AUC] is smooth under a stated data model.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Before applying a smooth method to a discontinuous metric, write it as a probability and show its expectation is smooth under a tractable model, flagged as illustrative (pp. 4-5).",
+   "For DFO on subsampled objectives, grow the sample with k and re-estimate/average f at the iterate after each unsuccessful step (p. 7).",
+   "Give random search twice the evaluation budget to pre-empt the random-search objection (p. 6, Table 6 p. 8).",
+   "Report optimizer overhead time separately from function-evaluation time at equal budgets (p. 7)."
+  ],
+  "coauthors": "H. Ghanbari",
+  "quotes": [
+   {
+    "text": "We can see that on all three problems DFO-TR reaches the global value accurately and quickly, outperforming BO methods.",
+    "page": 6
+   },
+   {
+    "text": "noisy function evaluations do not need to be accurate far away from the optimal solution.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S082",
+  "year": "2017",
+  "title": "An Empirical Analysis of Constrained Support Vector Quantile Regression for Nonparametric Probabilistic Forecasting of Wind Power.",
+  "read_level": "full",
+  "contribution": "Applies the non-crossing constrained support vector quantile regression of Takeuchi et al. with a sliding training window to wind-power forecasting on one GEFCom2014 zone and reports better reliability and quantile scores than naive benchmarks.",
+  "problem_entry": "Wind uncertainty forecasting; SVMs said to be unexamined for this task, and quantile crossing requires joint estimation with constraints (p. 1).",
+  "key_idea": "Re-purpose CSVQR (primal with non-crossing constraints, dual QP, RBF kernel, SMO) with a 3-month sliding window (pp. 3-4).",
+  "assumptions": "Kernel quantile regression; nonparametric density via quantiles; no theory (pp. 2-3).",
+  "proof_devices": [
+   "none (Lagrangian dual derivation only, pp. 3-4)"
+  ],
+  "experiments": "GEFCom2014 Zone 1, June-November 2013, 13 features; baselines persistence, climatology, uniform; PICP/ACE and Q-score; climatology wins ACE in June and October (pp. 4-7).",
+  "positioning": "Re-purposes Takeuchi et al. (2006); lists QR, gradient boosting, kNN, NN and ELM wind forecasters but compares only with naive benchmarks (pp. 1, 4).",
+  "writing": "Workshop-length empirical note; verbal claims (several magnitudes) stronger than the tables support (p. 5 vs p. 6).",
+  "limits_future": "No limitations stated; future work on electricity prices and load (p. 5).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Only naive baselines, one zone, six months, no advanced competitor or cost comparison; claim outruns Table 1. Advanced baselines only appear in follow-up S051.",
+    "pages": "pp. 4-6; S051 p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "applied side-collaboration with a lighter evidence standard (trajectory note)",
+    "evidence": "Student-led wind-forecasting papers (S082, S051) compare mostly with naive or hand-tuned baselines, unlike the core group papers; Scheinberg's role not stated.",
+    "pages": "S082 pp. 4-6; S051 p. 6"
+   }
+  ],
+  "transferable": [
+   "Evaluate interval forecasts with both coverage (PICP/ACE) and a proper scoring rule, since wide intervals can win coverage alone (p. 5).",
+   "Use sliding-window training to mimic operational forecasting (p. 4)."
+  ],
+  "coauthors": "K. Hatalis, S. Kishore, A. J. Lamadrid",
+  "quotes": [
+   {
+    "text": "This formulation is re-purposed here for probabilistic forecasting.",
+    "page": 1
+   },
+   {
+    "text": "However in all other months CSVQR outperformed all three benchmarks by several magnitudes.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S054",
+  "year": "2018",
+  "title": "Proximal quasi-Newton methods for regularized convex optimization with linear and accelerated sublinear convergence rates",
+  "read_level": "partial",
+  "contribution": "Proves a linear rate for the inexact proximal quasi-Newton method of Scheinberg-Tang under strong convexity with a practical inner-iteration rule, gives an accelerated variant with O(1/k^2) under a weighted Hessian-sequence condition that holds for scaled fixed matrices, and shows by counterexample and experiments that acceleration does not help with L-BFGS Hessians.",
+  "problem_entry": "Existing inexact PQNA has only O(1/k); the accelerated PQNA of Jiang-Sun-Toh needs a monotone Hessian sequence that conflicts with over-approximation and with FISTA's step rule (pp. 3-4).",
+  "key_idea": "Analyse PQNA with epsilon_k-inexact subproblems and a relaxed decrease test; for acceleration, require sigma_{k+1}H_{k+1} <= sigma_k H_k with theta_k = sigma_k/sigma_{k+1} in the momentum update, following full-backtracking FISTA (pp. 7-8, 15-17).",
+  "assumptions": "f convex L-smooth, g proper lsc convex, mI <= H_k <= MI; gamma-strong convexity for the linear rate; sigma_k >= sigma > 0 for acceleration, shown to fail for general H_k (pp. 8, 21-22).",
+  "proof_devices": [
+   "one-step comparison with the segment t x* + (1-t) x_k giving rho = 1 - eta gamma/(gamma + M) (Theorem 3, pp. 9-10)",
+   "error accumulation rho^k sum eps_i/rho^i, so eps_i <= C rho^{i delta} suffices (p. 11)",
+   "inner iteration count r(k) >= k log_{1/alpha}(k/l) guaranteeing the required accuracy without knowing rho, in expectation for randomized coordinate descent (Remark 4 p. 12; Theorem 7 p. 14)",
+   "weighted FISTA energy 2 sigma_k t_k^2 v_k + sigma_k u_k' H_k u_k nonincreasing (Lemma 4, pp. 19-20)",
+   "sigma_k t_k^2 >= (sum sqrt(sigma_i)/2)^2 by induction (Lemma 5, p. 21)",
+   "alternating diag(10,1)/diag(1,10) counterexample forcing sigma_k <= 10^-k (p. 22)"
+  ],
+  "experiments": "Sparse logistic regression (lambda = 1e-3) on a9a, mnist, connect-4, HAPT; APGA, APQNA-FH, PQNA-FH, PQNA-LBFGS, APQNA-LBFGS compared by iterations, function evaluations and time over L-BFGS memory 1-10; accelerated L-BFGS worse in function evaluations (pp. 23-29).",
+  "positioning": "Builds on own prior work (Scheinberg-Tang 2016, Scheinberg-Goldfarb-Bai 2014) and Schmidt et al.; corrects Jiang-Sun-Toh's assumptions as contradictory; notes Drusvyatskiy-Lewis quadratic growth as a route to relax strong convexity (pp. 1-4, 9, 15, 31).",
+  "writing": "Abstract ends on the negative finding; remarks after theorems explain what the bound does and does not say (Remark 3 p. 11, Remark 4 p. 12).",
+  "limits_future": "sigma_k condition may fail for general H_k and could not be enforced practically with L-BFGS; strong convexity maybe relaxable to quadratic growth; other acceleration schemes for proximal quasi-Newton left open (pp. 9, 22, 24, 30).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Keeps PQNA and FISTA; changes only the Hessian-sequence condition, reusing full-backtracking FISTA.",
+    "pages": "p. 4, pp. 15-16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Accuracy contract on the inner solver (eps_k <= C rho^{k delta}) met by an iteration-count rule rather than a probability-p oracle.",
+    "pages": "pp. 11-14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic potential analysis with explicit parity check against PGA/APGA rates.",
+    "pages": "pp. 10-11, 20-22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Accelerated vs plain compared in function evaluations as well as iterations, which changes the verdict.",
+    "pages": "pp. 26-29"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Diagonal-plus-low-rank L-BFGS gives O(m) coordinate steps.",
+    "pages": "p. 12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "negative-result paper",
+    "evidence": "Headline finding is that acceleration does not help proximal quasi-Newton with variable Hessians, supported by a counterexample and experiments; also Taste mark 5 (negative example bounding a safeguard).",
+    "pages": "p. 1, p. 22, p. 29"
+   }
+  ],
+  "transferable": [
+   "Relax sufficient decrease to F(new) - F(old) <= eta (model decrease) and absorb the slack as an error term xi_k <= (1 - 1/eta)(F(x_{k+1}) - F(x_k)) (pp. 7, 9).",
+   "Make inexact inner solves analysable by requiring eps_k <= C rho^{k delta} and implementing it as an inner iteration count that needs no knowledge of rho (pp. 11-12).",
+   "Extend acceleration to a variable metric by weighting the metric in the Lyapunov function and test the monotonicity condition with an alternating two-matrix counterexample (pp. 16, 19-22).",
+   "Compare accelerated methods in function evaluations, not only iterations (pp. 26, 29)."
+  ],
+  "coauthors": "H. Ghanbari",
+  "quotes": [
+   {
+    "text": "Our analysis and computational results show that acceleration may not bring any benefit in the quasi-Newton setting.",
+    "page": 1
+   },
+   {
+    "text": "we believe that the practical experiments support our theoretical analysis in that applying acceleration scheme in the case of variable Hessian estimates may not result in a faster algorithm.",
+    "page": 29
+   }
+  ]
+ },
+ {
+  "id": "S063",
+  "year": "2018",
+  "title": "When does stochastic gradient algorithm work well?",
+  "read_level": "partial",
+  "contribution": "Introduces an assumption that most stochastic gradients are small at the solution, proves that fixed-step SGD then converges at full-gradient-like rates to a neighbourhood set by that property (strongly convex, convex, nonconvex), and verifies the assumption numerically for logistic regression and standard neural networks.",
+  "problem_entry": "Fixed, fairly large step SGD often converges fast to a neighbourhood without variance reduction; a two-regime toy shows success depends on component gradients at the optimum (pp. 2-3).",
+  "key_idea": "Define p = P(||g*||^2 <= eps) and M = E[||g*||^2 | ||g*||^2 > eps] at the solution and state all rates in max{eps, 1 - p} (p. 5; eps glyph lost in extraction).",
+  "assumptions": "Each f(.; xi) L-smooth and convex (plus strong convexity of F for Theorem 1); nonconvex case needs Assumption 1 bounding gradient deviations along the algorithm's own iterates by N times average ||grad F||^2; unbiased i.i.d. minibatches (pp. 4-7).",
+  "proof_devices": [
+   "conditional split of the second moment at the optimum: E||g*||^2 <= eps p + (1 - p) M (eq. (17), p. 13)",
+   "co-coercivity-type bound E||grad f(w;xi) - grad f(w*;xi)||^2 <= 2L[F(w) - F(w*)] (Lemma 6, pp. 13-14)",
+   "standard one-step SGD distance recursion with the split plugged in (proof of Theorem 1, p. 15)",
+   "minibatch variance identity to make 1 - p <= eps hold for smaller eps (Lemma 1, pp. 11-12)"
+  ],
+  "experiments": "Fraction of per-sample gradients below thresholds at an L-BFGS-computed optimum for l2-logistic regression on 8 data sets, SGD vs SVRG vs L-BFGS; for FFN/CNN on MNIST, SVHN, CIFAR10/100 at the Adam solution (minimum over 10 seeds) plus an estimate of N (pp. 8-11).",
+  "positioning": "Contrasts fixed-step SGD with variance-reduction methods (SAG, SAGA, SVRG, SARAH) and adaptive methods (AdaGrad, RMSProp, Adam), arguing SGD applies to the general expectation problem (p. 2).",
+  "writing": "A highlighted Main observation paragraph and conjecture language before the theory (pp. 3-4); contributions as three bullets (p. 4).",
+  "limits_future": "Notes Adam did not converge for two networks (p. 11); unstated: nonconvex checks use Adam solutions, not SGD, and Assumption 1 depends on the algorithm's iterates; no future work listed (pp. 7, 10-12).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Accurate-enough-often-enough form (fraction p small, rates in max{eps, 1-p}) applied to a property of the problem at w*, not a per-iteration oracle.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Step 3: reachable neighbourhood fixed by variance at the solution; full-gradient-like rate until that floor.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Weak: analyses the method practitioners use instead of replacing it, but fixed-step SGD is not adaptive.",
+    "pages": "p. 2, p. 5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Expected-rate bounds after a fixed number of steps, no stopping-time or high-probability analysis.",
+    "pages": "pp. 6-8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "measure the assumption",
+    "evidence": "A full section numerically verifies the new assumption (p close to 1, N bounded) on standard data sets and networks.",
+    "pages": "pp. 8-11"
+   },
+   {
+    "pattern": "two-regime toy example",
+    "evidence": "A 2-D quartic recovery problem with small vs large noise shows the property holding and failing before any theory.",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "transferable": [
+   "Split E||g(w*)||^2 by conditioning on the small-gradient event to get eps p + (1 - p) M and carry max{eps, 1 - p} through the SGD recursion (pp. 13, 15).",
+   "Verify a new structural assumption by computing w* accurately (L-BFGS to 1e-12) and reporting the percentage of per-sample gradients below several thresholds (p. 9).",
+   "For nonconvex models, report the worst case over seeds when checking an assumption (p. 10).",
+   "Open with a two-regime toy example where the property holds in one regime and fails in the other (pp. 2-3)."
+  ],
+  "coauthors": "L. M. Nguyen, N. H. Nguyen, D. T. Phan, J. R. Kalagnanam",
+  "quotes": [
+   {
+    "text": "a simple SGD with a fixed, reasonably large, step size can have a fast convergence rate to some neighborhood of the optimal solutions, without resorting to additional procedures for variance reduction.",
+    "page": 2
+   },
+   {
+    "text": "We have demonstrated that based on the behavior of the stochastic gradient estimates at or near the stationary points, SGD with fixed step size converges with the same rate as full gradient descent of the variance reduction methods, until it reaches the accuracy where the variance in the stochastic gradient estimates starts to dominate and prevents further convergence.",
+    "page": 11
+   }
+  ]
+ }
+]

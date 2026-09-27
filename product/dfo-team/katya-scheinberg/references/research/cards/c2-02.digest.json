@@ -1,0 +1,309 @@
+[
+ {
+  "id": "S025",
+  "year": "2008",
+  "title": "Geometry of sample sets in derivative-free optimization: polynomial regression and underdetermined interpolation",
+  "read_level": "full",
+  "contribution": "Extends Lambda-poisedness, Lagrange polynomials and Taylor-type error bounds from complete interpolation to least-squares regression and minimum-norm underdetermined interpolation, so both model classes can be used in globally convergent model-based DFO.",
+  "problem_entry": "Theory gap under existing practice: regression (implicit filtering, simplex gradients) and underdetermined models (DFO code, Powell's least-Frobenius) were used without supporting theory, and the interpolation theory of [8] does not immediately extend (pp. 1-2).",
+  "key_idea": "Redefine Lagrange polynomials in the least-squares / minimum-norm sense via the system sum lambda_i(x) phi(y^i) = phi(x) (min-norm solution <-> regression, LS solution <-> min-norm: 'a kind of duality'), bound ||lambda(x)|| by Lambda, and tie Lambda to the condition number of the scaled natural-basis matrix (pp. 7-13, 21-24).",
+  "assumptions": "f C^1 with Lipschitz gradient (linear) or C^2 with Lipschitz Hessian (quadratic) near B(Delta); Y scaled to the unit ball with y0 = 0 (WLOG); degree <= 2; natural basis fixed by argument because Lambda is basis-dependent in the underdetermined case (pp. 10, 13-15, 23).",
+  "proof_devices": [
+   "max-|det| subset + Cramer's rule: coefficients bounded by (m-n+1)Lambda (Lemma 1.1, p. 4)",
+   "regression Lagrange polynomials = minimum-norm solution of M^T lambda = phi(x) via reduced SVD (Lemma 2.4, p. 9)",
+   "norm-equivalence: psi(v) = max_{B(1)} |v^T phi(x)| is a norm, giving ||Sigma^{-1}|| <= theta*Lambda with theta <= 4 sqrt(q1) for quadratics (Thm 2.8, Lemma 2.9, pp. 11-13)",
+   "scale invariance of Lagrange polynomials vs non-invariance of the condition number -> rescale to B(1) (Lemma 2.10, pp. 13-14)",
+   "sub-basis vs minimum-norm poisedness equivalence up to constants (Thm 5.6, pp. 22-23)",
+   "underdetermined error bound only on the projection V^T of the scaled error (Thm 5.8, pp. 25-26)",
+   "epsilon-perturbation counterexample showing sub-basis models are discontinuous (Example 5.2, pp. 19-20)"
+  ],
+  "experiments": "Two 2-D model-level studies (only f1 reported): best-subset interpolation vs regression and best-basis vs minimum-norm on identical random sample sets, 200 runs, win only if better by >0.001 in max and l2 lattice error, repeated at radius 0.01; no solver runs; one extracted table entry (Fig. 5.1, p1=5) contradicts the win counts (pp. 16-17, 26-27).",
+  "positioning": "Direct continuation of the authors' Math. Program. 2008 geometry paper; approximation-theory definitions restated for an optimization audience; practice credited (Kelley, Custodio-Vicente, DFO code, Powell); Powell's underdetermined Lagrange definition placed as a variant; regression on random points contrasted with Deng-Ferris repeated sampling (pp. 1-2, 7, 23-24, 27).",
+  "writing": "Extension framing ('essentially have similar properties'), explicit hedges ('in our opinion', 'seems to be ‘neither’', 'has not been verified experimentally'), tiny worked examples motivate definitions, routine proofs omitted as adaptations (pp. 1, 14, 17-20).",
+  "limits_future": "Error-bound proofs omitted; theta grows fast with degree; underdetermined bounds control only a projection; very limited 2-D evidence. Future: maintain regression sets directly, min-Frobenius theory in the book, regression on random points for noisy f (pp. 13-14, 26-27).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Lambda-poisedness as model-quality certificate extended to regression and min-norm underdetermined models (the model classes of Method 4 Step 1); geometry-vs-number-of-points trade-off with no winner.",
+    "pages": "pp. 9, 16-17, 22"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Stated (co-authored): known derivative sparsity 'can be exploited trivially' by deleting columns; partial separability cited.",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Deterministic precursor: noise handled by regression over more (random) points instead of repeated sampling; no probability or per-iteration contract.",
+    "pages": "pp. 17, 27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Model-level head-to-head comparison of constructions on identical sample sets with win counts; approximation error, not evaluations inside a solver.",
+    "pages": "pp. 16-17, 26-27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "approximation-theory concept -> computable optimization certificate",
+    "evidence": "Lagrange/Lebesgue definitions simplified 'in simple terms' and proved equivalent up to constants to the condition number of the scaled Vandermonde-type matrix that pivoting algorithms maintain",
+    "pages": "pp. 2, 7, 10-14, 24"
+   },
+   {
+    "pattern": "perturbation counterexample to choose a definition",
+    "evidence": "Example 5.2: epsilon-close sample sets give sub-basis models differing in a whole coefficient; min-norm models converge -> min-norm adopted",
+    "pages": "pp. 19-20"
+   }
+  ],
+  "transferable": [
+   "Prove a basis-dependent computable measure (condition number after rescaling to the unit ball) is within constants of the basis-independent meaningful one (Lambda) in both directions (pp. 11-14, 24).",
+   "Max-determinant subset + Cramer's rule lemma to pass from over-determined to square systems at factor (m-n+1) (p. 4).",
+   "Norm-equivalence trick max_{x in B(1)} |v^T phi(x)| to turn polynomial-value bounds into coefficient bounds, then compute the constant explicitly for the case used (pp. 12-13).",
+   "Pick between candidate definitions with an epsilon-perturbation discontinuity example (pp. 19-20).",
+   "Model-level comparison protocol: same random sets, 200 runs, win only when better by >0.001 in two error measures, repeat on a 100x smaller region (pp. 17, 26-27)."
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "Approximation theory definitions in their original form are ill-suited for an optimization audience.",
+    "page": 2
+   },
+   {
+    "text": "Hence, we see that the sub-basis approach suffers from a lack of robustness with respect to small perturbations in the sample set.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S007",
+  "year": "2009",
+  "title": "Global convergence of general derivative-free trust-region algorithms to first-and second-order critical points",
+  "read_level": "full",
+  "contribution": "Defines fully linear / fully quadratic model classes (radius-scaled error bounds plus a finite model-improvement algorithm) and proves lim-type global convergence to first- and second-order critical points for a practical-style DFO trust-region framework with one radius, simple-decrease acceptance and a criticality step.",
+  "problem_entry": "Split literature: practical DFO trust-region codes (Powell, Marazzi-Nocedal) without theory vs convergent but impractical methods (CGT book, CST 1997); aim to bridge the gap while covering practical features (pp. 1-3).",
+  "key_idea": "Abstract the model requirement (Taylor-like bounds scaled by Delta + finite certify-or-repair procedure), keep the classical trust-region logic, shrink the radius only for certified models, and use a criticality step that ties Delta to ||g|| so Delta -> 0 (pp. 7-9, 13-15).",
+  "assumptions": "f C^1 (C^2) with Lipschitz gradient (Hessian) on the enlarged level set; f bounded below; uniformly bounded model Hessians 'For simplicity of the presentation'; fraction of Cauchy (and eigenstep) decrease; no local rates (pp. 3, 5-9, 16).",
+  "proof_devices": [
+   "fully-quadratic-on-small-ball implies on larger balls with same constants via integral mean-value theorem (Lemma 3.4, pp. 9-10)",
+   "finite criticality loop: ||grad f|| <= (kappa_eg + 1/mu) alpha^{i-1} Delta (Lemma 5.1, pp. 15-16)",
+   "key lemma: fully linear and Delta <= c||g|| => successful, via |rho-1| <= 4 kappa_ef Delta^2/(kappa_fcd ||g|| Delta) (Lemma 5.2, pp. 16-17)",
+   "four iteration types with x and Delta frozen on model-improving iterations; at most N consecutive (pp. 15, 17)",
+   "Delta_k -> 0 from criticality-step bound ||g|| >= min{c, Delta/mu} and summable decreases (Lemma 5.5, p. 18)",
+   "Thomas-style subsequence argument for the lim result (Thm 5.9, pp. 19-21)",
+   "second-order measure sigma^m = max{||g||, -lambda_min(H)} with eigenvalue perturbation |lambda_min(A)-lambda_min(B)| <= ||A-B|| (Prop. 7.1, Lemma 7.2, pp. 23-24)",
+   "geometric-sum path bound gamma_inc/(gamma_inc-1) Delta using forced radius increases on S+ (Thm 7.11, pp. 27-28)"
+  ],
+  "experiments": "none (practicality argued by linear-algebra cost accounting O(n^6) vs O(n^4) and one-point-per-iteration replacement, pp. 12-13)",
+  "positioning": "Bridges Powell-style practice and CGT/CST theory; one radius instead of Powell's two; says second-order DFO analysis is 'not as trivial as one might expect' despite CGT's remark; credits Powell for the criticality-step analogue and, as referee, for Step 1, Lemma 3.2 and Lemma 5.5 (pp. 2-3, 15, 28).",
+  "writing": "Contribution as a list of practical features; hedged priority claim ('As far as we are aware'); explicit scope ('no analysis for local rates'); mnemonic constant table; candid list of impractical members of the abstraction; no conclusion section (pp. 2-4, 8, 28).",
+  "limits_future": "No rates; fully quadratic models may need O(n^2) points; lim result needs frozen x at model-improving iterations (Remark 5.1); no experiments; no explicit future-work list (pp. 3, 21).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Models need only be certifiable within a finite bounded number of steps and are checked/improved only after a failed ratio test and in the criticality step: the paper source for Method 4 Step 2.",
+    "pages": "pp. 3, 13-14"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Deterministic ancestor of the oracle contract: model accuracy kappa*Delta / kappa*Delta^2 tied to the radius with a finite repair procedure; probability enters only later (BSV 2014).",
+    "pages": "pp. 7-8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Classical trust region kept (Cauchy decrease, ratio test, radius update); only the pieces broken by inexact models changed; key lemma = derivative-based lemma plus model-error term.",
+    "pages": "pp. 5, 13-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation",
+    "evidence": "One convergence theory for an abstract fully linear/quadratic class; polynomial interpolation and regression then shown to be members; formal version of S004's pluggable quality predicates",
+    "pages": "pp. 7-13"
+   },
+   {
+    "pattern": "relax the analysed algorithm toward practice",
+    "evidence": "Lists practical-code features (one radius, simple decrease, no certification every iteration, one point replaced per iteration) and proves convergence for an algorithm that allows them",
+    "pages": "pp. 2-3, 12"
+   }
+  ],
+  "transferable": [
+   "Define the model/oracle class by exactly what the proof needs: radius-scaled error bounds plus a finite uniformly bounded certify-or-repair procedure; prove once, instantiate later (pp. 7-13).",
+   "Enlarge constants WLOG so accuracy on a small ball implies accuracy on all larger balls with the same constants (Lemma 3.4, pp. 9-10).",
+   "Criticality step: when the model gradient is small, shrink geometrically until Delta <= mu||g||; transfers model stationarity to true stationarity and makes Delta -> 0 a stopping test (pp. 13-15, 18-19).",
+   "Key-lemma template |rho-1| <= model error / predicted decrease => successful once Delta <= c||g|| (pp. 16-17).",
+   "Four iteration types with x and Delta frozen on model-improving iterations so they can be counted (pp. 15, 17).",
+   "Remark mapping each algorithmic requirement to the theorem that uses it (Remark 5.1, p. 21)."
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "In this paper we are trying to bridge the gap by describing an algorithmic framework in the spirit of the first category of methods, while retaining all the same global convergence properties of the second category.",
+    "page": 2
+   },
+   {
+    "text": "This modification slightly complicates the convergence analysis, but it reflects much better the typical implementation of a trust-region derivative-free algorithm.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S023",
+  "year": "2010",
+  "title": "A derivative-free algorithm for least-squares minimization",
+  "read_level": "full",
+  "contribution": "DFLS: a model-based DFO trust-region algorithm for nonlinear least squares that interpolates each residual on a shared 2n+1-point set and combines the models through a regime-switching Gauss-Newton/Levenberg-Marquardt Hessian, with a liminf global-convergence proof and More-Wild benchmark evidence against NEWUOA and LMDIF.",
+  "problem_entry": "Structure plus cost model: black-box residuals, goal of fewest function evaluations; per-component modelling borrowed from the authors' constrained DFO work because extra models cost linear algebra, not evaluations (pp. 1-2).",
+  "key_idea": "Model each residual f_i on common sample points (Powell least-Frobenius updates, O(mn^2) per iteration) and form phi with H = J^TJ, J^TJ + kappa||m||I, or full second order depending on gradient and residual size, inside a NEWUOA/CSV-style trust region with criticality and safety steps (pp. 2, 5-9).",
+  "assumptions": "F C^2 with bounded level set; uniformly bounded model Hessians (safeguarded in code, automatic for min-Frobenius models); at most |Y|-1 substitutions give Lambda-poisedness (pp. 4, 10-11).",
+  "proof_devices": [
+   "model accuracy of phi via residual structure: Phi - phi <= F^T[grad F - J](s-y) + c1||s-y||^2 <= c2 Delta||s-y|| + c1||s-y||^2 (Lemma 4.3, pp. 12-13)",
+   "radius bounded away from zero when ||g_phi|| >= delta1, by contradiction along a subsequence where rho_k drops (Lemma 4.4, pp. 13-14)",
+   "criticality step transfers g_phi -> 0 to grad Phi -> 0 (Lemma 4.5, pp. 14-15)",
+   "Powell Cauchy-decrease bound and CSV criticality-step finiteness imported (Lemmas 4.1-4.2, p. 12)"
+  ],
+  "experiments": "DFLS vs LMDIF and NEWUOA on the 53-problem More-Wild set: data profiles with a 50 simplex-gradient budget, tau = 1e-1..1e-7, plus deterministic Chebyshev-noise set with epsilon = 1e-3 and final radius/FD step matched to the noise; DFLS built inside NEWUOA's framework with the same defaults; DFLS best everywhere, least affected by noise (pp. 16-20).",
+  "positioning": "Builds on CSV framework and Powell's NEWUOA/least-Frobenius updating, treating NEWUOA respectfully ('carefully and intelligently chosen'); LM local-convergence literature cited, local analysis deferred to [29]; Powell's two radii first called avoidable then partly adopted via rho_k (pp. 2-3, 6, 8, 16).",
+  "writing": "'Promising numerical results'; long prose justification of each algorithm step after the pseudocode; explicit O-notation cost accounting; hedged interpretations ('perhaps not surprising', 'reasonable to believe'); conclusion turned into a recommendation (pp. 1, 8-9, 16-21).",
+  "limits_future": "Only liminf; local convergence deferred; O(mn^2) extra storage named 'the essential cost of exploiting the structure'; results 'can vary considerably' with noise/accuracy. Future: bound-constrained DFBOLS, l1-norm trust region for bounds (pp. 6, 15-17, 20-21).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Canonical per-residual modelling; conclusion states the principle as a recommendation (co-authored), partly filling SKILL.md's missing stated side.",
+    "pages": "pp. 2, 5, 17, 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Reuses NEWUOA framework and CSV criticality step, changes only the model of Phi; keeps NEWUOA defaults so the comparison isolates the structural change (Method 2 Step 5).",
+    "pages": "pp. 6, 16-17"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Radius reduced only when failure is not due to poor geometry; poisedness not checked after successful steps.",
+    "pages": "p. 9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Verifies the group's benchmark protocol: More-Wild 53-problem set, data profiles in simplex gradients, four accuracy levels, deterministic noise set, tolerances matched to noise.",
+    "pages": "pp. 17-19"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Noise floor sets the final trust-region radius and FD step (a deterministic form of stopping at the noise floor); no probabilistic contract.",
+    "pages": "p. 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "build on the baseline's code to isolate the new ingredient",
+    "evidence": "DFLS implemented inside NEWUOA's framework with the same interpolation machinery and defaults so the comparison measures only structure exploitation",
+    "pages": "pp. 16-17"
+   }
+  ],
+  "transferable": [
+   "Model each output component of a structured black box on one shared sample set; pay in linear algebra/memory, not evaluations, and state the O-costs (pp. 2, 16-17).",
+   "Regime-switching model Hessian (Gauss-Newton / J^TJ + kappa||m||I / full) with published default constants 1, 1, 0.01 (p. 5).",
+   "Bound the outer-function model error of h(F(x)) through the component-model gradient error times ||F|| plus a quadratic term (Lemma 4.3, pp. 12-13).",
+   "More-Wild benchmark protocol with data profiles in simplex gradients, tau 1e-1..1e-7, deterministic Chebyshev noise, tolerances set to the noise level (pp. 17-19).",
+   "Implement the new method inside the strongest baseline's code with the same defaults (pp. 16-17).",
+   "Safety step: skip the function evaluation when the trial step is tiny relative to the sampling radius and shrink radii instead (pp. 7-8)."
+  ],
+  "coauthors": "H. Zhang, A. R. Conn",
+  "quotes": [
+   {
+    "text": "This is the essential cost of exploiting the structure.",
+    "page": 17
+   },
+   {
+    "text": "Otherwise, the trust region radius will be reduced too quickly for the wrong reasons, consequently allowing only very small step sizes, making the algorithm, at best, very inefficient.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S011",
+  "year": "2013",
+  "title": "Efficient block-coordinate descent algorithms for the group lasso",
+  "read_level": "full",
+  "contribution": "An exact block coordinate descent for the Group Lasso without orthonormal blocks (block subproblem solved as a trust-region subproblem by Newton on the secular equation), a per-block-step-length ISTA (ISTA-BC/ISTA-MS), a size-based hybrid, an MMV specialization, and convergence via embedding into Tseng-Yun BCGD, with equal-accuracy benchmarks.",
+  "problem_entry": "Earlier BCD required the 'restrictive assumption' A_j^T A_j = I or solved subproblems inexactly; gradient methods (SLEP/FISTA) have closed-form steps but lose in practice (pp. 2-3).",
+  "key_idea": "The block subproblem 1/2 x^T M x + p^T x + lambda||x|| is a trust-region subproblem with unknown radius: zero iff ||p|| <= lambda, else x = Delta*y(Delta) with Newton on 1 - 1/||y(Delta)|| using a one-time eigen-decomposition; for large groups switch to ISTA with per-block backtracking (pp. 3-7).",
+  "assumptions": "Convex composite LS + group l2 penalty; given non-overlapping groups (overlap via augmentation); M_j PSD with M_j + delta I fix if singular; lambda = 0.2 lambda_max; rates only for ISTA-MS (pp. 3, 7, 10, 13-14).",
+  "proof_devices": [
+   "Beck-Teboulle O(1/k) proof with a diagonal vector of Lipschitz constants; constant depends on sqrt(R_L) (Thm 1, Lemma 1, pp. 7-9)",
+   "global convergence by embedding each step type into Tseng-Yun BCGD with explicit mapping H_jj = I/t_j, alpha = 1, sigma = 1, gamma = 0.5, or H_jj = M_j + delta I (Thm 2, pp. 9-10)",
+   "hard case excluded because the optimal solution has positive norm (p. 4)"
+  ],
+  "experiments": "Matlab; CPU, Aprods (fractional for block products) and iterations; baselines BCGD, SpaRSA, SLEP, SPG/SPOR-SPG; synthetic sets incl. Nemirovski worst-case-style instances, large-group sets, breast-cancer gene data with pathway groups, MMV sets and scalability sweeps; common reference solution and stop at F - F* <= 1e-5; Dolan-More profiles; losses and null variants reported; figures not in the text file (pp. 13-20).",
+  "positioning": "Removes Yuan-Lin/Meier orthonormality assumption; claims to beat SLEP's FISTA and Tseng-Yun BCGD in practice while using BCGD theory; Nesterov/Richtarik-Takac randomization tested; footnote concedes coincidence with Rakotomamonjy's M-BCD (pp. 1-3, 7, 10, 12).",
+  "writing": "Labelled contribution paragraph; mildly hedged abstract ('very competitive and often outperforms'); metric choice justified; weak spots admitted ('less clear-cut', Nemirovski sets); summary-only conclusion (pp. 1-2, 13, 16, 21).",
+  "limits_future": "No rates for BCD-GL/ISTA-BC/BCD-HYB; sequential; eigen-decomposition cost for large groups; poor on adversarial sets. Open: acceleration in the block framework, Group Lasso logistic regression (pp. 2, 4, 6-7, 16).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Block structure exploited for exact cheap subproblems (one eigen-decomposition + scalar Newton), closed form when block Hessian is a multiple of identity (MMV): a fifth project beyond SKILL.md's four.",
+    "pages": "pp. 3-4, 12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Outside DFO: equal-accuracy comparison with a common reference solution and threshold, cost in Aprods rather than CPU, adversarial instances included.",
+    "pages": "pp. 13-15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Keeps ISTA with backtracking and changes only the step-length rule per block, motivated by structure rather than a weaker oracle; convergence borrowed from a classical framework.",
+    "pages": "pp. 5-6, 9-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation",
+    "evidence": "Global convergence obtained by showing ISTA-BC and BCD-GL steps are instances of Tseng-Yun BCGD with explicit parameter mapping and a delta*I fix",
+    "pages": "pp. 9-10"
+   },
+   {
+    "pattern": "carry the home-field solver into the new field",
+    "evidence": "Group-lasso block subproblem recast as a trust-region subproblem and solved with the secular-equation Newton method (More-Sorensen/Nocedal-Wright)",
+    "pages": "pp. 3-4"
+   },
+   {
+    "pattern": "report the variants that did not help",
+    "evidence": "Uniform randomized selection, FISTA-BC and Jacobi-parallel ISTA-BC reported as giving no advantage; SpaRSA failures noted",
+    "pages": "pp. 6-7, 17, 20"
+   }
+  ],
+  "transferable": [
+   "Recast a regularized block subproblem as a trust-region subproblem with unknown radius; test the zero solution by ||p|| <= lambda, then Newton on 1 - 1/||y(Delta)|| with a one-time eigen-decomposition (pp. 3-4).",
+   "A priori hybrid switch by block size (N_BC = 200) between exact block solves and prox-gradient block steps (pp. 7, 13).",
+   "Get convergence by embedding each new step into an existing convergent framework with an explicit parameter mapping and a degenerate-case patch (pp. 9-10).",
+   "Extend a scalar-L Beck-Teboulle proof to a diagonal L and track the sqrt(R_L) conditioning factor (pp. 7-9).",
+   "Fair-comparison protocol: precomputed reference solution, common F - F* <= 1e-5 stop, Aprods instead of CPU when competitors have compiled kernels, adversarial instances included (pp. 13-15).",
+   "Incremental residual update with periodic full recomputation every J sub-iterations (p. 13)."
+  ],
+  "coauthors": "Z. (Tony) Qin, D. Goldfarb",
+  "quotes": [
+   {
+    "text": "The proofs of the theoretical rates of convergence of the ISTA/FISTA algorithms do not readily extend to ISTA-BC or BCD-GL.",
+    "page": 7
+   },
+   {
+    "text": "Since the SLEP solver has its core sub-routine (the Euclidean projection [14]) implemented in the C language, and so does SPOR-SPG for its one-norm projection [5], the Aprods serves as a better measure of performance than CPU times.",
+    "page": 13
+   }
+  ]
+ }
+]

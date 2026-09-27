@@ -1,0 +1,334 @@
+[
+ {
+  "id": "S067",
+  "year": "2024",
+  "title": "Stochastic trust-region and direct-search methods: A weak tail bound condition and reduced sample sizing",
+  "read_level": "full",
+  "contribution": "A single power-law tail bound on the estimated decrease (not on each function estimate), scaled by the sufficient-decrease power q > 1. It cuts per-iteration samples from O(Delta_k^-4) to O(Delta_k^-2q) for q in (1,2] (O(Delta_k^-2-eps) as q -> 1), or to O(Delta_k^-eps) with common random numbers. It gives almost-sure Clarke stationarity for simple stochastic direct-search and trust-region methods on nonsmooth f.",
+  "problem_entry": "Starts from a cost in the literature: stochastic TR/DS methods need O(Delta^-4) samples per iteration with decrease power 2. A second gap is that model-based stochastic DFO needs accurate gradient estimates, which are unavailable for nonsmooth f (pp. 2-4).",
+  "key_idea": "Put the probabilistic condition on the reduction estimate used in the acceptance test, at scale alpha*Delta_k^q, and couple the sample size to q. The DS and TR skeletons (Basic DFO-TRNS) are kept; exact values become estimates and the power 2 becomes q (pp. 3-6, 10, 15).",
+  "assumptions": "Assumption 2.1: P(|estimate error of the decrease| >= alpha*Delta^q | F_{k-1}) <= eps_q/alpha^{q/(q-1)}, with a known bound on eps_q and theta above a threshold (3.1). Sample bounds need a finite r-th noise moment, r = q/(q-1), and i.i.d. averaging; the CRN route needs a known generator and correlated errors (2.10). Theorems also need f locally Lipschitz, bounded iterates and dense directions on unsuccessful iterations; TR needs ||B_k|| <= ||G_k||/(rho*Delta_k) (pp. 5-8, 11, 13, 15).",
+  "proof_devices": [
+   "potential Phi_k = f(X_k) - f* + eta*Delta_k^q with eta = theta/taubar_q; E[Phi_k - Phi_{k+1} | F_{k-1}] >= eps*Delta_k^q implies sum E[Delta_k^q] < inf (Thm 3.1, pp. 11-12)",
+   "false-success loss bound: write true decrease as (theta - Z_k)Delta_k^q; success implies estimate error >= Z_k*Delta_k^q, so the tail bound caps the expected loss at eps_f*Delta_k^q (p. 12)",
+   "Lemma 2.3: tail bound extended from constant alpha to an F_{k-1}-measurable random threshold via discrete approximation, Beppo Levi and dominated convergence (pp. 6-7)",
+   "Borel-Cantelli on sum P(error >= Delta_k/m) <= m^r eps_q sum E[Delta_k^q] < inf, then Clarke-derivative argument on unsuccessful iterations with dense directions (Lemma 3.2, Thm 3.3, pp. 12-14)",
+   "TR transfer via ||S_k|| >= rho*Delta_k from a Hessian bound (Lemma 4.2, p. 16); asymptotic alignment S_k -> -G_k (Prop. 4.8, p. 18)",
+   "sample sizes via Markov on the r-th moment of an average with Rosenthal (r >= 2) or von Bahr-Esseen (1 < r < 2) inequalities (App. A.1, pp. 26-28)",
+   "rival conditions imply the new one: conditional Chebyshev (Prop. 2.10) and event inclusion (2.14) (Prop. 2.12) (p. 9, pp. 29-30)"
+  ],
+  "experiments": "96 nonsmooth problems x 10 runs (|P| = 960). Data and performance profiles on evaluations built on the true f, budget 10000(n+1), gamma in {1e-2, 1e-4}, Gaussian noise sd 0.1. q = 1.5 beats q = 2. SDS+1.5 and STR1.5 beat StoMADS. Theta = 0.5 was tuned although the theory requires theta > 4 (or about 9), which is disclosed in Remark 5.2 (pp. 19-23, 30).",
+  "positioning": "Re-states the model-based (Larson-Billups, ASTRO-DF, Chen-Menickelly-Scheinberg) and direct-search (Dzahini, StoMADS) lines, and proves their accuracy conditions imply the new one. It borrows Dzahini's supermartingale conclusion and criticizes rivals only for needing gradient estimates unavailable for nonsmooth f (pp. 2-4, 9, 11).",
+  "writing": "Headline sample counts are in the abstract, followed by a contributions subsection and a single priority claim ('first time', p. 4). Proofs go to the appendix. The numerics are hedged and a conjecture is labelled as one. There are editing slips (leftover appendix sentence p. 7, 'common number generator' p. 8) (pp. 1-8, 20-23).",
+  "limits_future": "Stated limits: the eps_q bound must be known, the theoretical theta is unusable in practice, and the iteration-complexity price of q -> 1 is open. There are no rates and no code. Future work: nonsmooth random models (piecewise linear, Bayesian-optimization style), max-of-smooth composites, constraints, global optimization (pp. 6, 20, 23).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Primary source for the tail bound on the estimated decrease, conditioned on the past. The SKILL paraphrase O(delta^-2q) holds for q in (1,2] with i.i.d. averaging. Workflow D should add the known eps_q bound, the theta threshold (3.1) and the CRN route O(Delta^-eps).",
+    "pages": "pp. 5-8, 11"
+   },
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "Step 5 says never go below the threshold, but the experiments run with theta = 0.5, far below the proven theta > 4 or about 9. This is disclosed, with a conjecture that smaller theta still converges in most cases. The threshold is on the acceptance constant, not on a probability.",
+    "pages": "p. 20"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "One acceptance-test change (estimates plus power q) is carried through both the DS and the TR skeleton with the same proof.",
+    "pages": "pp. 10-18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Counts samples per iteration as a function of Delta_k, not evaluations to reach eps. There is no complexity bound, and the iteration-count trade-off for q -> 1 is left open.",
+    "pages": "p. 20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Has a collection (96 problems x 10 runs), data and performance profiles, and the StoMADS baseline, but no solver release is mentioned.",
+    "pages": "pp. 19-23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "Proves that the StoMADS variance condition and beta-probabilistic accuracy imply the new tail bound.",
+    "pages": "p. 9, pp. 29-30"
+   },
+   {
+    "pattern": "disclosed theory-implementation gap",
+    "evidence": "Remark 5.2 on theta; the tested SDS+ variant differs from the analysed Algorithm 1.",
+    "pages": "pp. 20-21"
+   },
+   {
+    "pattern": "condition on the past, not independence",
+    "evidence": "Assumption 2.1 is conditioned on the sigma-algebra F_{k-1}, which covers the past up to the choice of G_k.",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Put the accuracy requirement on the quantity the acceptance test uses and scale it with the sufficient-decrease power q, so that the sample size falls with q (pp. 5-8).",
+   "Potential Phi_k = f - f* + eta*Delta^q plus a false-success loss bound handles successful and unsuccessful steps in one inequality (pp. 11-12).",
+   "Borel-Cantelli on the summable step sizes gives eventually small estimate errors, then run the deterministic Clarke argument on unsuccessful iterations (pp. 12-14).",
+   "Before claiming a weaker assumption, prove that each rival assumption implies it (p. 9).",
+   "Transfer a DS proof to TR through ||S_k|| >= rho*Delta_k from a Hessian bound (pp. 15-17).",
+   "Build profiles on the true f while solvers see noisy f; count repeated runs as separate problems (p. 19).",
+   "Report the gap between the theoretical and the tuned parameter in a numbered remark (p. 20)."
+  ],
+  "coauthors": "F. Rinaldi, D. Zeffiro",
+  "quotes": [
+   {
+    "text": "This probabilistic condition focuses on the reduction estimate, that is the estimate of the difference between the function at the current iterate and at a potential next iterate, used in the acceptance test of those derivative-free algorithms.",
+    "page": 3
+   },
+   {
+    "text": "Finding weaker versions of (3.1) that still guarantee convergence under reasonable assumptions remains of course an open problem to be studied more in depth in future works.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S070",
+  "year": "2024",
+  "title": "Bilevel optimization with a multi-objective lower-level problem: Risk-neutral and risk-averse formulations",
+  "read_level": "full",
+  "contribution": "New risk-neutral and risk-averse formulations (plus a stochastic version of the known optimistic one) for bilevel problems with a multi-objective lower level. Each comes with a bilevel stochastic (sub)gradient algorithm (BSG-OPT, BSG-RN, BSG-RA), obtained by treating the lower-level variable as a parameter.",
+  "problem_entry": "An unfilled cell: lower-level multi-objective bilevel problems have received little attention deterministically and none from a stochastic approximation viewpoint. The ambiguity of 'min' over the lower-level Pareto set is the conceptual core (pp. 1-3).",
+  "key_idea": "Look at y as a parameter. Under strict convexity, parametrize the Pareto set by simplex weights. The optimistic reading makes the weights UL variables, risk-neutral averages over the weights (a companion problem, discretized and mini-batched), and risk-averse maximizes over the lifted set (y, lambda) with a Danskin/Fiacco subgradient. The BSG skeleton is kept throughout (pp. 3-13).",
+  "assumptions": "f_u is C1 and the LL functions are C2. The LL objectives are strictly convex in y with P(x) nonempty, so weighted sums characterize P(x) exactly. y(x, lambda) exists and stochastic Hessian estimates are positive definite. Risk-averse additionally needs KKT and LICQ for (6.6) with P~(x) nonempty and compact. The LL is unconstrained and X is closed convex (pp. 2, 6-7, 12-13).",
+  "proof_devices": [
+   "weighted-sum characterization of weak Pareto minimizers under convexity; strict convexity gives P = P_s (Prop. 3.1, p. 6)",
+   "equivalence of the optimistic BMOLL and a single-objective bilevel problem over (x, lambda), by contradiction (Prop. 4.1, p. 7)",
+   "adjoint gradient w.r.t. x and lambda by the implicit function theorem on sum_j lambda_j grad_y f_l^j = 0, with the mixed block equal to the stacked LL gradients (pp. 8, 10)",
+   "companion problem: expectation over weights lambda in the simplex instead of over P(x), discretized to N points and mini-batched (pp. 9-10)",
+   "lifting the Pareto set to (y, lambda) via weighted stationarity, with an equivalence result (Prop. 6.1, pp. 11-12)",
+   "Danskin-type subdifferential for a max over an x-dependent set (Fiacco Cor. 4.11) under KKT and LICQ (p. 12)"
+  ],
+  "experiments": "Python code on GitHub. Quadratic UL with JOS1, SP1 and a new GKV1 lower level; separable n=1, non-separable n=50, and stochastic with Gaussian noise on gradients and Hessians. Line search vs fixed step, Q-batch ablation with 95% CIs, 10 seeds. All methods solve Problems 1-3; BSG-RN is most robust to noise. No external baseline and no collection (pp. 13-19).",
+  "positioning": "Reframes the deterministic weighted-sum work [1, 9, 29, 30] as 'the known optimistic formulation' and distinguishes Gu et al. [20] in detail. It builds on the group's BSG [19] and Liu-Vicente SMG [27]. Vicente's own 1994 and 2006 bilevel papers are not cited (pp. 3, 6, 21-23).",
+  "writing": "The abstract names the gap then the contribution. Each formulation follows a fixed order: frozen-case intuition, formulation, equivalence proposition, gradient, algorithm box. Theory is deferred in one sentence, and extensions are built 'from known building blocks' (pp. 3, 5, 9, 11, 20).",
+  "limits_future": "No convergence theory: the smooth cases are said to extend BSG, and the nonsmooth risk-averse theory is left for future work. Tests are small and synthetic. Future work: multi-objective UL via an adjoint multi-gradient QP, and both levels multi-objective, which needs further research for the risk-averse case (pp. 5, 13, 20-21).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The BSG skeleton is kept; only the objective and its gradient change with the reading (optimistic, risk-neutral, risk-averse). Extensions are assembled from known blocks.",
+    "pages": "pp. 4-5, 8, 11, 13, 20"
+   },
+   {
+    "method": "Heuristic 4 / Workflow E",
+    "relation": "variant",
+    "note": "Weighted-sum scalarization is used, but never with weights fixed a priori: the weights are variables, averaged over, or maximized over. Strict convexity makes the parametrization exact, so the missed-front risk is removed by assumption rather than by a dominance list.",
+    "pages": "p. 6, pp. 8-13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "No rates or counts; the theory is deferred to an extension of BSG, or to future work for the nonsmooth case.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Code is released, but there are only three synthetic problems, no collection, no profiles and no external baseline.",
+    "pages": "pp. 13-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "enumerate the readings of an ambiguous formulation",
+    "evidence": "Optimistic, risk-neutral and risk-averse versions of min over the LL Pareto set, each with an algorithm.",
+    "pages": "pp. 2-3, 8-13"
+   },
+   {
+    "pattern": "tractable companion problem by changing the sampling space",
+    "evidence": "Average over simplex weights instead of over Pareto points; called a companion problem, with no equivalence claimed.",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "intuition from a frozen special case",
+    "evidence": "Each new formulation is first motivated with P(x) = P for all x.",
+    "pages": "p. 9, p. 11"
+   }
+  ],
+  "transferable": [
+   "For an ambiguous min over a solution set, write out the optimistic, risk-neutral and risk-averse versions and give each an algorithm (pp. 8-13).",
+   "Replace an intractable expectation over a set by an expectation over a parametrization of it, and call it a companion problem (p. 9).",
+   "Differentiate through a weighted-sum lower level by treating the weights as UL variables; the mixed Hessian block is the stacked LL gradients (p. 8).",
+   "For a max over a Pareto set: lift to (y, lambda) with the stationarity equations as constraints, prove equivalence, and use a Danskin-type formula under LICQ (pp. 11-13).",
+   "With n = 1, plot the (x, y) plane with the Pareto sets and LL fronts at each formulation's solution (p. 15)."
+  ],
+  "coauthors": "T. Giovannelli, G. D. Kent",
+  "quotes": [
+   {
+    "text": "Both formulations are inspired by looking at y as a parameter, rather than as a variable.",
+    "page": 3
+   },
+   {
+    "text": "The development of the convergence theory for the non-smooth case (i.e., risk-averse formulation in Section 6) is left for future work.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S086",
+  "year": "2024",
+  "title": "Match score dataset for team ball sports",
+  "read_level": "full",
+  "contribution": "A dataset of 6115 match scores from major international men's competitions in 12 team ball sports. It was scraped from 161 Wikipedia pages, uses one six-field schema, has one CSV per sport, and is deposited at Mendeley Data.",
+  "problem_entry": "A data gap: existing sports datasets cover few sports, cover leagues and college tournaments rather than international competitions, and use formats that differ by sport, which hampers cross-sport analysis (p. 2).",
+  "key_idea": "One minimal common schema (Edition Year, Team 1, Team 2, Score 1, Score 2, Winner) defined formally with sets and a winner function, plus explicit scope and exclusion choices (pp. 2-4).",
+  "assumptions": "Wikipedia is the source. The winner is defined by comparing scores, with Draw for ties. Cricket has no scores (the winner comes from Wikipedia, with No result/Match abandoned cases). How shoot-outs are recorded is not discussed (pp. 3, 5).",
+  "proof_devices": [
+   "no proofs (data article)",
+   "formal set/tuple notation with a notation table fixing each CSV column (pp. 3-4)"
+  ],
+  "experiments": "None. Data collection is by Python web scraping. Tables show per-edition counts, which I checked sum to the Table 1 totals (6115). Undiscussed anomalies in the tables: Rugby 2007 has 8 matches, Soccer 2006 has 33 teams, one lacrosse row reads 45-71, and the DOI version (.2) differs from the URL (/1) (pp. 1, 3-4, 8-9).",
+  "positioning": "Seven references (a sports-dataset list, parity/randomness studies, scoring dynamics, ML prediction, an umbrella review); no optimization literature (pp. 2, 5-6).",
+  "writing": "Follows the Data in Brief template (specifications, value of the data, limitations, ethics, CRediT). Unusually for the genre, it defines the dataset with set notation (pp. 1-5).",
+  "limits_future": "Stated limits: no cricket scores, and water polo 1987/1989/1991/1997 are missing. Intended uses (rankings, rating systems, prediction) are listed but not carried out (pp. 1-2, 5).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The released artefact is a dataset with a DOI rather than a solver: step 2 (make the collection available to others) as a stand-alone publication.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Research Taste mark 5 (usable artefact)",
+    "relation": "evidence",
+    "note": "A public dataset with a DOI.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Research Taste mark 6 (anchored in an application)",
+    "relation": "variant",
+    "note": "The domain is sports analytics, but no method is applied in the paper.",
+    "pages": "pp. 1-2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "infrastructure as a stand-alone citable publication",
+    "evidence": "A dataset paper with a Mendeley DOI; compare the 1994 bibliography (S002) and the c01 test-problem generators.",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "supervisor-role authorship on student-led artefacts",
+    "evidence": "CRediT lists Vicente for conceptualization, review/editing, supervision and funding acquisition only.",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "For a cross-domain dataset, pick the smallest common schema and state what was excluded and why (pp. 2-3).",
+   "Define the dataset formally (sets, tuples, winner function) and add a notation table (pp. 3-4).",
+   "Publish per-edition counts in appendix tables so that readers can cross-check totals and spot incomplete editions (pp. 8-9).",
+   "Name the missing items one by one in the limitations section (p. 5)."
+  ],
+  "coauthors": "T. N. Alleck, T. Giovannelli, R. Mitchell, O. Remen",
+  "quotes": [
+   {
+    "text": "However, such datasets were compiled only for a reduced number of team ball sports, and they are different from our dataset because they cover professional leagues and collegiate tournaments rather than major international competitions.",
+    "page": 2
+   },
+   {
+    "text": "Additionally, such datasets have different formats due to the specificity of each sport, posing challenges for cross-sport analyses.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S088",
+  "year": "2024",
+  "title": "Full-low evaluation methods for bound and linearly constrained derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Extends full-low evaluation to bound and linear constraints. Full-Eval is projected FD-BFGS in the null space with an Armijo search abandoned when beta < gamma*alpha_k; Low-Eval is probabilistic feasible direct search in approximate tangent cones. The paper proves O(eps^-2) successful Full-Eval iterations and Clarke-Jahn stationarity, releases MATLAB code, and benchmarks on smooth, nonsmooth and noisy CUTEst-based sets.",
+  "problem_entry": "An extension gap plus a practical constraint: FLE worked unconstrained, and simulation codes enforce hard bound/linear constraints that must hold for the simulation to run. FD quasi-Newton cost grows with n, while direct search is cheap and robust (pp. 1-3).",
+  "key_idea": "Keep Algorithm 1 of the unconstrained FLE unchanged (only a feasible x0 is required) and change only the step routines: projection for Full-Eval and approximate tangent cones for Low-Eval. The switching condition beta >= gamma*alpha_k ties the two step types together (pp. 5-7, 15-16).",
+  "assumptions": "Smooth case: f bounded below, grad f L-Lipschitz, an angle/norm condition on directions, and gradient accuracy ||grad f - g|| <= u_g ||q^g|| with u_g < kappa(1-c) (new restriction); measure q(x) = ||P_F[x - grad f] - x||. Nonsmooth case: a forcing function, ||q^g|| > eps_g on successful Full-Eval iterations, bounded iterates, Lipschitz near x*, and refining directions dense in T(x*) (pp. 3, 7-8, 11-12).",
+  "proof_devices": [
+   "lower bound beta_min on accepted backtracking steps from Taylor, the angle condition and gradient accuracy (Lemma 4.1, pp. 8-9)",
+   "telescoping over successful Full-Eval iterations only, dropping the other (monotone) iterations: at most ceil(L1 (f0 - flow) eps^-2) successful Full-Eval iterations (Thm 4.1, p. 10)",
+   "switching condition beta >= gamma*alpha_k turns Full-Eval decrease into c*kappa*gamma*eps_g^2*alpha_k/U_p; with rho(alpha_k) on Low-Eval, summability gives alpha_k -> 0 (Lemma 4.2, pp. 11-12)",
+   "Clarke-Jahn refining-direction argument on unsuccessful Low-Eval iterations (Thm 4.2, pp. 12-13)",
+   "criticality-step loop shrinking the FD parameter h until h <= u'_g ||q^h||, with finite termination via the FD error bound 0.5*sqrt(n)*L*h (Alg. 4, Prop. 4.1, pp. 13-14)",
+   "approximate tangent cones: steps of length <= xi along T(x, xi) remain feasible (Lemma 2.1, p. 5)"
+  ],
+  "experiments": "MATLAB code on GitHub. constFLE vs constBFGS (Full-Eval only), dspfd (Low-Eval only), NOMAD and patternsearch. Sets: 41 bound and 76 linear CUTEst problems (40 with inequalities), noisy multiplicative versions, l1-penalty nonsmooth versions (52 + 107), and 14 minimax problems. Performance profiles on evaluations, budget 100(n+1). FLE wins on smooth and l1 sets; it loses to NOMAD on minimax and to NOMAD/patternsearch on noisy sets (pp. 14-24).",
+  "positioning": "Extends Berahas-Sohab-Vicente FLE and imports the Gratton-Royer-Vicente-Zhang dspfd. Draws on Lewis-Torczon / Kolda-Lewis-Torczon constraint handling and on FD quasi-Newton work (Berahas-Byrd-Nocedal, Shi et al.). Critiques are brief and practical: the FD cost, and NOMAD's handling of equality constraints (pp. 2, 4, 16, 19).",
+  "writing": "The abstract frames a two-strategy trade-off and resolves it with a hybrid. The switching conditions are compared in a footnote, and the conclusion claims 'the best of both worlds' with 'overall suggest'. Loose ends: an inconsistent minimax ranking on p. 22 and mismatched figure captions on pp. 26-27 (pp. 1, 6, 22, 24).",
+  "limits_future": "No evaluation complexity, explicitly out of scope. The nonsmooth result rests on an assumption about the run and on direction density. FLE loses on noisy and minimax sets. Future work: trust-region Full-Eval steps, one- or two-point feedback Low-Eval steps, and convex nonlinear constraints (pp. 11-12, 22-24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The efficient FD-BFGS step runs freely in the Full-Eval role and convergence comes from direct search with a forcing function. The switching rule beta >= gamma*alpha_k is Method 1 Step 4 in another form. This is the constrained sequel of the FLE entry already in Method 1.",
+    "pages": "pp. 5-7, 11-13, 15"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The framework is identical to unconstrained FLE; only feasibility handling changes (projection, approximate tangent cones).",
+    "pages": "pp. 5-7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Low-Eval uses probabilistic feasible descent, but the analysis assumes dense refining directions; the almost-sure guarantee is only cited from [22].",
+    "pages": "p. 12, p. 16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Counts successful Full-Eval iterations (O(eps^-2)); the evaluation count is declared outside the scope.",
+    "pages": "pp. 10-11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "GitHub code, CUTEst-based collections in three regularity regimes, performance profiles, an ablation against each half plus external solvers, and losses reported.",
+    "pages": "pp. 14-24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose",
+    "evidence": "NOMAD best on minimax; NOMAD/patternsearch best on noisy sets; FLE between its halves on noisy bound-constrained problems.",
+    "pages": "pp. 22-24"
+   },
+   {
+    "pattern": "implementable accuracy conditions",
+    "evidence": "A criticality-step loop on the FD parameter enforces the gradient-accuracy assumption in finitely many steps.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "pattern": "effort-balancing switch between step types",
+    "evidence": "The number of unsuccessful Low-Eval attempts allowed equals the number of backtracks in the preceding Full-Eval.",
+    "pages": "p. 7"
+   }
+  ],
+  "transferable": [
+   "In a hybrid, abandon the expensive step's line search once its step length falls below gamma times the cheap method's step size; both step types then give summable decreases in alpha_k (p. 6, pp. 11-12).",
+   "With linear equalities, take FD gradients along a null-space basis W (n - m evaluations) and use the direction -W H W^T g (p. 15).",
+   "Bound hybrid iterations by telescoping over the one step type with provable decrease and dropping the monotone others (p. 10).",
+   "Turn a gradient-accuracy assumption into a criticality loop on the FD parameter, with a finite-termination proposition (pp. 13-14).",
+   "Make nonsmooth test sets by moving constraints into an l1 penalty, penalizing only half the bounds (pp. 17-18).",
+   "Benchmark each component of a hybrid as its own solver (p. 17)."
+  ],
+  "coauthors": "C. W. Royer, O. Sohab",
+  "quotes": [
+   {
+    "text": "A key feature of our Full-Low Evaluation methodology that led to rigorous results (see the proof of Lemma 4.2) is to stop the line search once condition (3.3) is violated.",
+    "page": 15
+   },
+   {
+    "text": "This difficulty already arises in the unconstrained setting [9], and accurately calculating such a bound falls outside the scope of this convergence analysis.",
+    "page": 11
+   }
+  ]
+ }
+]

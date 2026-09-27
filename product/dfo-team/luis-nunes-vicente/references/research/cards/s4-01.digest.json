@@ -1,0 +1,200 @@
+[
+ {
+  "id": "S108",
+  "year": "2019",
+  "title": "Optimization by space transformation and decomposition",
+  "read_level": "partial",
+  "contribution": "A trust-region framework for smooth unconstrained optimization in which the gradient is mapped forward to an auxiliary space by R_k and the step is mapped back by T_k. It has global convergence and O(eps^-2), O(eps^-1) and O(log eps^-1) iteration bounds (Thms 3.1-3.4, pp. 24-27). Two instances follow: a parallel space-decomposition method with RAS/ASH and coarse-space correction (Thm 5.1, p. 58), and trust-region methods with inaccurate gradients, for which sharp relative-error bounds tied to eta_1 are proved (Thms 6.1-6.3, pp. 72-77).",
+  "problem_entry": "Two motivations. Domain-decomposition techniques (RAS, coarse grids) are 'little explored' in optimization, and plain Additive Schwarz does not converge (p. 5). Existing trust-region results with inexact gradients are only asymptotic (p. 70). The entry move is to treat the inaccurate gradient as a transformation of the true one, R_k = g_hat g^T/||g||^2 (p. 7).",
+  "key_idea": "Keep the classical trust-region ratio test and radius update, and change only the pair (R_k, T_k), with T_k != R_k^T allowed (pp. 11-13). Convergence then hinges on a consistency condition g^T T R g/||R g||^2 >= lambda > eta_1 (Assumption 3.7, p. 19). Space decomposition, inaccurate gradients and Armijo line search are all instances of this one algorithm (pp. 51, 70, 79-80).",
+  "assumptions": "f bounded below with Lipschitz gradient, global 'For simplicity' (p. 14). Models share a Lipschitz constant; Cauchy-type decrease; an angle condition sin(phi_k) <= beta (Delta_k/||grad h_k(0)||)^p, automatic for Cauchy-decrease steps (Prop. 3.1, p. 19); ||T_k|| <= tau; ||R_k g_k|| >= kappa ||g_k||; consistency lambda > eta_1 (pp. 14-19). Deterministic, unconstrained, first-order, linear R_k and T_k (p. 12).",
+  "proof_devices": [
+   "reduction-ratio lower bound through two angles, phi_k (step vs model gradient) and psi_k (R_k g vs T_k^T g), using the angle inequality <= phi+psi to get the factor (1 - tan phi tan psi); heuristic first-order estimate first, then rigorous version; tight for n=2 (Lemma 3.1, pp. 16-18)",
+   "radius lower bound Delta_k >= mu ||g_tilde_k|| (g_tilde_k = smallest gradient so far) by contradiction at the first violating index (Prop. 3.3, pp. 21-22)",
+   "counting successful iterations from Delta_K <= gamma1^(K-S) gamma2^S Delta_0, giving K <= c|S_K| + log term (Lemma 3.3, pp. 22-23)",
+   "'map of logic reliance': all complexity theorems use only Lemmas 3.2-3.3, which depend on the assumptions only through Prop. 3.3, so variants re-prove just those (p. 23)",
+   "lim ||g_k|| -> 0 without sufficient decrease by forbidding radius expansion when Delta_k > mu_bar ||grad h_k(0)|| (Thm 3.7, p. 33; answers Yuan's example, p. 25)",
+   "inexact oracle encoded as rank-one map R_k = g_hat g^T/||g||^2 with T_k = I (p. 70)",
+   "largest admissible region for inexact gradients, the ball ||g_hat - g/(2 eta_1)|| < ||g||/(2 eta_1) (Thm 6.3, pp. 76-77)",
+   "sharpness example f = ||x||^2/2 with g_hat outside the ball: rho_k <= eta_1 forever, Delta_k <= gamma1^k Delta_0, iterates stall within Delta_0/(1-gamma1) of x0 (Example 6.1, pp. 77-78)",
+   "problem-independent complexity enlargement factor, < 52 for one correct significant digit (pp. 73-74)"
+  ],
+  "experiments": "Tables 2-4 (pp. 63-69): 15 CUTEst/Powell problems at n=10^3/10^4 with m=10/100 subspaces comparing AS vs RAS vs no decomposition; coarse spaces on chrosen (n=6400) and on randomly coupled variants; a 128^2 Plateau problem with generic vs structure-aware partitions and an HEM coarse space. Iterations to ||g|| <= 1e-6||g0|| with a 1e4 cap, failures reported. Also an eta_1 x zeta sweep on 150 perturbed problems scored by a new eps-effectiveness (pp. 80-84), and an audit and patch of GNU Octave fminunc (pp. 97-98). No profiles, no timings, no code release.",
+  "positioning": "Extends Lions' parallel Schwarz method to nonlinear optimization and contrasts with PVD/PGD/PVT-type decompositions (pp. 4-5). Generalizes Carter's zeta < 1 - eta_1 (p. 20). Its condition is looser than Conn-Gould-Toint's by alpha/2 while it concedes that '[30] is indeed much more general' (p. 75). Notes that probabilistic-model trust-region work (including Vicente's own) measures absolute rather than relative errors (p. 87).",
+  "writing": "A long, signposted preprint: a notation table (p. 10), sections 'safely skipped in a first reading' (p. 8), a heuristic picture before each rigorous lemma (pp. 16-17), frank labels ('unsophisticated implementation', p. 62), and a playful closing line about fminunc (p. 98).",
+  "limits_future": "The framework is not a specific algorithm and must be tailored (p. 61). Coarse spaces are problem-dependent (p. 61), RAS is not universal (p. 65), the generic partition fails at m=128 on Plateau (p. 69), and eta_1 = 1/2 is not covered (p. 83). Future work (pp. 85-87): LM and cubic globalization, nonlinear transformations and Banach spaces, preconditioning (ASPIN), asynchronous variants, constraints and nonsmoothness, probabilistic relative errors and random transformations, SGD.",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "O(eps^-2)/O(eps^-1)/O(log eps^-1) by function class, with the aim of preserving standard complexities. The price of gradient inexactness is a problem-independent constant, not an order change. Bounds are in iterations, and no n-dependence appears in the parts read.",
+    "pages": "p. 5; pp. 25-27; pp. 73-75"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "PDE techniques (Additive Schwarz/RAS, coarse correction) are kept as step generators and globalized by a trust-region ratio test rather than a poll with sufficient decrease. The coarse step needs no decrease of its own, like a search step.",
+    "pages": "p. 5; p. 40; p. 58"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "The accuracy requirement is relaxed to the largest tolerable region, and crossing the threshold provably and visibly breaks the method (matches step 5). The relaxation is deterministic (bounded relative error); the probabilistic version is listed as future work.",
+    "pages": "pp. 72-84; p. 87"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Skeleton and ratio test unchanged; the step map changes instead of the notion of success. The price is a compatibility condition on eta_1 (Assumption 3.7; eta_1 < 1/theta for RAS).",
+    "pages": "p. 19; p. 58"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Named collection (CUTEst/Powell) with failures reported, but tables of iteration counts rather than profiles, and no code release. Practical impact comes through a patch to GNU Octave fminunc.",
+    "pages": "pp. 63-65; pp. 97-98"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "lemma-dependency map for reuse across variants",
+    "evidence": "States that Lemmas 3.2-3.3 depend on the assumptions only through Prop. 3.3, and uses this 'map of logic reliance' to re-derive the theory for new radius rules, coarse spaces and alternative assumptions.",
+    "pages": "p. 23"
+   },
+   {
+    "pattern": "nest the known theories as special cases (existing)",
+    "evidence": "R=T=I gives classical TR results; inexact gradients (R_k = g_hat g^T/||g||^2, T_k = I) and Armijo gradient descent are instances of the same algorithm.",
+    "pages": "p. 9; p. 70; pp. 79-80"
+   },
+   {
+    "pattern": "abstract assumptions, then verify per instance (existing)",
+    "evidence": "Assumptions 3.5-3.7 on (R_k, T_k) are verified with explicit tau, kappa, lambda for AS/WRAS/WASH/RASH and for inexact gradients.",
+    "pages": "p. 57; pp. 72-77"
+   },
+   {
+    "pattern": "read the proof's parameter coupling as a finding (existing)",
+    "evidence": "The acceptance threshold eta_1 alone decides the tolerable gradient error, which yields the rule eta_1 < (1+zeta)^-1; for RAS eta_1 < 1/theta.",
+    "pages": "pp. 37-38; p. 58; pp. 84-85"
+   },
+   {
+    "pattern": "negative example for the rejected alternative (existing)",
+    "evidence": "The natural length and angle bounds (3.4)-(3.5)/(6.25) do not ensure convergence (Example 6.1, Figure 6).",
+    "pages": "p. 13; p. 78"
+   },
+   {
+    "pattern": "assumption-boundary test suite (existing)",
+    "evidence": "eta_1 and zeta swept on a 1/50 grid, with the theoretical threshold drawn as a vertical line; effectiveness collapses past it.",
+    "pages": "pp. 80-84"
+   },
+   {
+    "pattern": "audit a fashionable tool and publish the negative result (existing), variant",
+    "evidence": "GNU Octave fminunc/fsolve radius rule shown unstable under inexact gradients, predicted drop at zeta ~ 0.39, patched with eta_1 = 1/10.",
+    "pages": "pp. 97-98"
+   },
+   {
+    "pattern": "state where you lose (existing)",
+    "evidence": "Unsophisticated implementation; coarse spaces problem-dependent; RAS not universal; m=128 failure explained; eta_1 = 1/2 not covered.",
+    "pages": "pp. 61-62, 65, 69, 83"
+   }
+  ],
+  "transferable": [
+   "Encode an inexact oracle as a rank-one linear map of the exact one (R_k = g_hat g^T/||g||^2, T_k = I) so that a structural theory for transformed gradients covers it; the choice of R_k does not matter because only R_k g_k enters (p. 7, p. 72).",
+   "Bound a trust-region ratio through two angles and the inequality angle <= phi + psi, which gives the factor (1 - tan phi tan psi). Add an angle assumption on the step that Cauchy-decrease steps meet automatically with p = 1/2 (pp. 16-19).",
+   "Complexity without a forcing function: lower-bound Delta_k by mu times the smallest gradient so far (contradiction at the first violating index), then count successful iterations from Delta_K <= gamma1^(K-S) gamma2^S Delta_0 (pp. 21-25).",
+   "After the main proof, write the dependency map of which lemmas each theorem uses, so that later variants only re-prove those (p. 23).",
+   "Show a tolerance bound is sharp twice: with an exact analytic failure (f = ||x||^2/2, rho_k <= eta_1 forever) and with a parameter sweep plotting the theoretical threshold as a vertical line (pp. 77-84).",
+   "Score partial success by eps-effectiveness = min{1, log(||grad f(x_out)||/||grad f(x0)||)/log eps} averaged over the set; with an inexact gradient, stop at eps_hat = eps(1-zeta)/(1+zeta) to certify the true-gradient criterion (pp. 81-82).",
+   "To show when a component matters, inject controlled coupling 0.5 x^T V V^T x with dense- or sparse-random V into a benchmark and average over 10 draws (pp. 66-67).",
+   "Turn a threshold theorem into a parameter rule (eta_1 < (1+zeta)^-1 or eta_1 < 1 - zeta), then audit a widely used solver against it and publish the patch (pp. 84-85, 97-98)."
+  ],
+  "coauthors": "S. Gratton, Z. Zhang",
+  "quotes": [
+   {
+    "text": "We, however, take an entirely different perspective: inaccurate gradient is a transformation of the accurate one.",
+    "page": 7
+   },
+   {
+    "text": "It is entertaining to realize that such a behavior is predicted so precisely by the theory derived from Algorithm 2.1, a framework that looks so unrelated to fminunc.",
+    "page": 98
+   }
+  ]
+ },
+ {
+  "id": "S113",
+  "year": "2020",
+  "title": "A Review of Multi-Objective Optimization: Theory and Algorithms",
+  "read_level": "full",
+  "contribution": "A review talk (Lehigh ISE, 21 Apr 2020, co-authored with PhD student Suyun Liu). It covers Pareto dominance, weak and strict Pareto sets, weighted-sum and epsilon-constraint scalarization with their necessary and sufficient conditions and a counterexample, and Fliege-Svaiter steepest descent and Newton's method with their convergence and complexity results (including Fliege-Vaz-Vicente 2019). It closes with a map of a priori vs a posteriori method classes and the purity/Gamma/Delta metrics (pp. 1-46).",
+  "problem_entry": "A tutorial entry: define the MOP and build dominance from a six-point discrete table (no point minimizes both objectives; P = {1,2,4,5}), then the weak and strict Pareto sets with LP examples (pp. 3-10).",
+  "key_idea": "Two routes, 'Scalarization methods (entire Pareto front)' and 'Gradient-based methods (single Pareto point)' (p. 2). Each gradient method is the single-objective method with a min-norm convex-combination direction and a componentwise Armijo test, recovering the single-objective direction at m = 1 (pp. 28-32). The final class map puts list-updating a posteriori methods against a priori scalarizations (pp. 41-42).",
+  "assumptions": "F is C^1 with Lipschitz gradients for steepest descent, and at least one f_i bounded below for the O(1/sqrt k) rate (pp. 26, 33). Newton needs R^m-strongly convex, C^2 F with uniformly positive definite, Lipschitz Hessians and a nearby start (pp. 35, 39). No constraints or noise in the gradient part; stochastic MOO is a classification slide only (p. 43).",
+  "proof_devices": [
+   "none new (review); cited results: dual min-norm problem over the simplex gives d(x) = -sum lambda_i grad f_i(x), and theta(x) = 0 iff x is Pareto stationary (pp. 29-31)",
+   "counterexample: f_i = -x_i on the unit disc, (1,0) in P_s is reached only with mu_2 = 0, so positive weights miss strict Pareto points (pp. 18-19)",
+   "componentwise sufficient-decrease lemma F(x+td) < F(x) + sigma t J_F(x) d (p. 28)"
+  ],
+  "experiments": "none",
+  "positioning": "Relies on Ehrgott, Fliege-Svaiter 2000, Fliege-Drummond-Svaiter 2009, Fliege-Vaz-Vicente 2019 and Fukuda-Drummond 2014 (p. 46). Evolutionary methods are cast as having 'no theoretical convergence guarantee' and mathematical-programming methods as convergent 'for one point on the Pareto front' (p. 41). The DMS paper is not on the reference slide even though purity and Gamma/Delta are presented (pp. 44-46).",
+  "writing": "Build-style slides (duplicate pages 4-5 and 11-12), a six-point table as the running example, and an unlabelled four-panel figure for list updating (p. 42). Two slips: the p. 29 subproblem is unbounded as written and is corrected on p. 30, and Algorithm 2 step 6 uses d_k instead of s_k (p. 38).",
+  "limits_future": "Pedagogical only. No derivative-free multi-objective method is named, the list-updating figure is unattributed (p. 42), and no future directions are given.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Multi-objective descent keeps the single-objective skeleton (direction subproblem + backtracking) and generalizes the acceptance test to a componentwise Armijo condition; the m = 1 collapse is stated.",
+    "pages": "pp. 28-32"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "MO steepest-descent rates presented by class (nonconvex O(1/sqrt k) from Fliege-Vaz-Vicente 2019, convex O(1/k), strongly convex linear), mirroring gradient descent.",
+    "pages": "pp. 33-34"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Class-native front metrics (purity, max hole Gamma, spread Delta) taught with formulas.",
+    "pages": "pp. 44-45"
+   },
+   {
+    "method": "Heuristic 4 / Warning sign #2 / Workflow E checkpoint",
+    "relation": "evidence",
+    "note": "Worked counterexample that positive weights miss strict Pareto points; 'non-convexity is an issue' for weighted sums; list-updating a posteriori methods as the alternative.",
+    "pages": "pp. 18-21, 41-42"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "supervisor-role authorship on student-led artefacts (existing)",
+    "evidence": "Every content slide carries the footer 'Suyun Liu', while the title slide lists both authors.",
+    "pages": "p. 1; pp. 3-46"
+   },
+   {
+    "pattern": "survey as a problem-feature routing table (existing)",
+    "evidence": "Methods are classed by when preferences enter (a priori / a posteriori), with each class's failure mode written beside it.",
+    "pages": "p. 41"
+   },
+   {
+    "pattern": "negative example for the rejected alternative (existing)",
+    "evidence": "Unit-disc example showing positive weighted sums cannot capture all of P_s.",
+    "pages": "pp. 18-19"
+   }
+  ],
+  "transferable": [
+   "Use the unit-disc example f_i = -x_i (all of the quarter circle is strictly Pareto, yet (1,0) needs a zero weight) to show in two lines why positive weighted sums are insufficient (pp. 18-19).",
+   "Compare two solvers' fronts by purity = |P1 cap P_bar|/|P_bar| over the nondominated union, plus the maximum hole Gamma and the spread Delta on sorted objective values with the two extreme points added (pp. 44-45).",
+   "Classify methods by when preferences enter (a priori vs a posteriori) and write each class's failure mode next to it (p. 41)."
+  ],
+  "coauthors": "S. Liu",
+  "quotes": [
+   {
+    "text": "Therefore, just by varying the positive weight combinations, one might not necessarily capture the whole Ps.",
+    "page": 19
+   },
+   {
+    "text": "evolutionary algorithms (e.g., NSGA-II and AMOSA) which have no theoretical convergence guarantee.",
+    "page": 41
+   }
+  ]
+ }
+]

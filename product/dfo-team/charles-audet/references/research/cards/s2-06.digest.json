@@ -1,0 +1,114 @@
+[
+ {
+  "id": "S184",
+  "year": "2023",
+  "title": "Two-Way Blade Modeling Method for Structural Redesign of Compressor Blades",
+  "read_level": "partial",
+  "contribution": "A two-way blade modelling tool (PAR: CAD to interpretable parameters via a NOMAD-solved identification problem; GEN/MSH: parameters to CAD and FE mesh) validated on NASA rotor 37/67 with geometric and dynamic criteria, and used in a 4-variable NOMAD redesign of rotor 37 that improves dynamic clearance by 98 % (pp. 4-5, 15-16, 17-24).",
+  "problem_entry": "Industrial gap: contact-interaction simulations were never integrated into blade design, and few methods both extract intuitive parameters from an existing (confidential, CAD-only) blade and regenerate its CAD model (pp. 2-4).",
+  "key_idea": "Make an existing blade an optimization starting point: fit the conical-section parameterization to the CAD by DFO (min e(x), bounds, 11 vars, 1500 evals), then run a bound-constrained MADS redesign on 4 stacking variables with dynamic clearance as surrogate objective (pp. 5, 15-16, 23).",
+  "assumptions": "Input is a CAD model; bounds only; gradients unavailable (profile discretization; 30 s simulation); CAD/mesh failures act as hidden constraints; dynamic clearance assumed a cheap proxy for contact robustness; no convergence hypotheses stated (pp. 4, 16, 23).",
+  "proof_devices": [
+   "none: no theorem or convergence analysis",
+   "geometric derivation of the cone-origin formula in the change-of-basis appendix (Eq. 17, p. 27, skimmed)",
+   "empirical budget justification: convergence checked on 17 profiles, 1500 evaluations sufficient (p. 16)",
+   "inherited acceptance threshold e(x) <= 0.05 from a prior MSc thesis (p. 19)"
+  ],
+  "experiments": "Fidelity on NASA rotor 37/67 for n_sec in {2,3,5,9,17} (volume, profile error, 10 natural frequencies, dynamic clearance, contact NFRC; n_sec = 5 best); one default-NOMAD redesign run, 400 evals at ~30 s, 3/400 failures, clearance -0.46 to -0.0089 mm, a-posteriori NFRC amplitude -75 %; no competitor, no replicates (pp. 18-24, 33).",
+  "positioning": "Extends Batailly's earlier MADS-based blade optimization [20] (planar-tip simplification removed, extraction step added); cites only MADS [36] and NOMAD 3 [39] from the Audet group; does not cite DiscoMads (pp. 3-5, 38).",
+  "writing": "Engineering framing: states six tool requirements (fidelity, resolution, robustness, interpretability, versatility, efficiency) up front and validates them in Sec. 3 and appendix 5.4; calls the work a proof of concept (pp. 2, 4-5, 17, 33).",
+  "limits_future": "Fidelity limited by the profile parameterization; aerodynamics excluded; only the first bending mode; future: other blades, other criteria, other modes, and an optimizer handling discontinuous quantities (pp. 22, 24-26).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "CAD/mesh generation errors handled as failed simulations by MADS without stopping; 3/400 failures reported; failures reduced at the source by adaptive sewing tolerance and a stress test.",
+    "pages": "pp. 12-13, 23, 33-34"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Bounds-only problems; no EB/PB classification; realism enforced by design-space reduction (frozen profiles, quadratic interpolation of sections) rather than constraints.",
+    "pages": "p. 23"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD 3.9.1 with default parameters used off the shelf twice: inverse identification (1500 evals) and redesign (400 evals).",
+    "pages": "pp. 16, 23"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation counts and per-evaluation time reported, but a single run with no competing solver, replication or profiles; the optimizer is a tool.",
+    "pages": "pp. 16, 22-24, 33"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Uses public NASA rotor 37/67 CAD models; no release of the PAR/GEN/MSH tool or of the dynamic-clearance blackbox is stated.",
+    "pages": "pp. 18, 38"
+   },
+   {
+    "method": "Research Taste mark 1",
+    "relation": "evidence",
+    "note": "Names cost (~30 s), unavailable gradient due to discretization, and simulation failures.",
+    "pages": "pp. 16, 23"
+   },
+   {
+    "method": "Taste quick-check (reduce n)",
+    "relation": "evidence",
+    "note": "14 -> 11 identification variables by reading parameters off data; 4 redesign variables by freezing profiles and interpolating sections.",
+    "pages": "pp. 16, 23"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "Reader's inference via card c03: future work names discontinuous quantities, which the same authors' DiscoMads addresses; this paper does not draw the link.",
+    "pages": "p. 26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Build the missing blackbox-callable tool to open a new application field to DFO",
+    "evidence": "Two-way parameterizer (PAR/GEN/MSH) built so that redesign of existing industrial blades becomes a blackbox optimization problem; co-authored with a structural-dynamics professor.",
+    "pages": "pp. 4-5, 25-26"
+   },
+   {
+    "pattern": "DFO inverse fit seeds DFO redesign",
+    "evidence": "Bound-constrained NOMAD identification fits parameters to the existing blade; the fitted 5-section model is x0 of the redesign.",
+    "pages": "pp. 15-16, 22"
+   },
+   {
+    "pattern": "fidelity judged on the quantity of interest",
+    "evidence": "Parameterized model validated by geometry, natural frequencies, dynamic clearance, then full contact NFRC, over nested n_sec levels.",
+    "pages": "pp. 17-22"
+   },
+   {
+    "pattern": "cheap proxy objective, expensive a-posteriori check",
+    "evidence": "Optimizer minimizes dynamic clearance only; nonlinear contact simulations run once on initial and optimized designs (75 % amplitude reduction).",
+    "pages": "pp. 23-24"
+   }
+  ],
+  "transferable": [
+   "To optimize around an existing design known only as geometry, first fit your parameterization by DFO (data-misfit objective, data-relative x0 and bounds), then start the design optimization from the fitted parameters (pp. 15-17, 22).",
+   "Compute every parameter readable directly from the data and remove it from the variable vector (14 -> 11, p. 16).",
+   "Keep a redesign low-dimensional and realistic by freezing parameters owned by another discipline and interpolating intermediate sections from a few control sections (4 variables, p. 23).",
+   "Justify a fixed evaluation budget by checking convergence on a representative instance set (17 profiles, 1500 evals, p. 16).",
+   "Run model-fidelity studies on nested resolution levels (2, 3, 5, 9, 17) with criteria ordered from cheap to strict, ending with the full downstream simulation (pp. 18-22).",
+   "Report blackbox failure counts and causes next to the optimization result, and module timings against one simulation's cost (pp. 23, 33).",
+   "List the requirements of an optimization-facing model up front and map each to its validation section (pp. 4-5, 17, 33-34)."
+  ],
+  "coauthors": "S. Kojtych, A. Batailly",
+  "quotes": [
+   {
+    "text": "This algorithm is well-suited for time-consuming simulations and can manage failed simulations without stopping the optimization.",
+    "page": 23
+   },
+   {
+    "text": "Other performance criteria could be considered, as well as modification of the optimization algorithm to account for special characteristics of contact simulations, such as the presence of discontinuous quantities.",
+    "page": 26
+   }
+  ]
+ }
+]

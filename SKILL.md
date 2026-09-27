@@ -6,8 +6,9 @@ description: |
   也能蒸馏顶尖研究者的研究方法与研究品味（选题/实验/写作），生成可执行的研究Skill。
   触发词：「造skill」「蒸馏XX」「女娲」「造人」「XX的思维方式」「做个XX视角」「更新XX的skill」。
   研究Skill触发：「蒸馏XX的研究方法」「XX是怎么做研究的」「学XX的研究品味」「做个XX式科研导师」。
+  研究团队触发：「搭一个XX领域的研究顾问团」「几位研究者+圆桌」。
   模糊需求也触发：「我想提升决策质量」「有没有一种思维方式能帮我...」「我需要一个思维顾问」。
-  English triggers: "distill [person]", "nuwa", "create a [person] perspective skill", "how does [person] think", "I need a thinking advisor", "distill [researcher]'s research skills", "research taste of [researcher]".
+  English triggers: "distill [person]", "nuwa", "create a [person] perspective skill", "how does [person] think", "I need a thinking advisor", "distill [researcher]'s research skills", "research taste of [researcher]", "build a research team / roundtable of [field] researchers".
 ---
 
 # 女娲 · Skill造人术
@@ -41,9 +42,10 @@ description: |
 |---------|------|------|
 | 明确的人名/主题 | **直接路径** → Phase 0A | 「蒸馏芒格」「做一个费曼skill」 |
 | 研究者 + 研究方法/研究能力 | **研究路径** → Phase 0A，按「特殊场景 > 研究Skill」变体执行 | 「蒸馏Hamming的研究方法」「学Karpathy怎么做研究」「做个Terence Tao式的科研导师」 |
+| 一个领域的几位研究者，各自能单独调用，还要一起会诊/辩论 | **研究团队路径** → 「特殊场景 > 研究团队Skill」 | 「搭一个无导数优化的研究顾问团」「让这几位研究者组个圆桌帮我看问题」「advisory board of bandit researchers」 |
 | 模糊的需求/困惑 | **诊断路径** → Phase 0B | 「我想提升决策质量」「有没有一种思维方式能帮我看透商业本质」 |
 
-**研究路径判断**：对象是研究者、且用户措辞涉及「研究/科研/选题/实验/论文/research」→ 研究Skill；只说「蒸馏Ilya」这类人名 → 默认人物Skill，在Phase 0A顺带问一句要不要研究Skill。
+**研究路径判断**：对象是研究者、且用户措辞涉及「研究/科研/选题/实验/论文/research」→ 研究Skill；只说「蒸馏Ilya」这类人名 → 默认人物Skill，在Phase 0A顺带问一句要不要研究Skill。对象是多位研究者：只要一份领域方法论（共识+分歧）→ 多研究者研究Skill；用户会说「用X的视角看我的证明」或「让A和B辩一下」→ 研究团队路径。
 
 ---
 
@@ -129,7 +131,7 @@ description: |
 **先判断：人物Skill、主题Skill还是研究Skill？**
 - 用户的需求指向某种具体的思考方式 → 人物Skill（蒸馏某个人的思维框架）
 - 用户的需求指向某个领域的方法论 → 主题Skill（综合多人视角，见「特殊场景 > 主题Skill」）
-- 用户的需求指向研究能力本身（选题、实验、写论文）→ 研究Skill（蒸馏某位研究者的研究方法，或综合多位研究者，见「特殊场景 > 研究Skill」）
+- 用户的需求指向研究能力本身（选题、实验、写论文）→ 研究Skill（蒸馏某位研究者的研究方法，或综合多位研究者，见「特殊场景 > 研究Skill」）；想要一个领域的几位导师轮流或一起给意见 → 研究团队Skill（见「特殊场景 > 研究团队Skill」）
 - 不确定 → 推荐中同时包含不同类型，让用户选
 
 **来源A：本地已有Skill**
@@ -279,7 +281,7 @@ spawn subagent时，用以下结构给任务（以Agent 1著作为例）：
 其他5个Agent按同样结构调整搜索方向和输出文件名即可。
 
 #### 工具辅助（如可用）
-- 书籍：Z-Library/LibGen搜索下载 → 存入 `sources/books/`
+- 书籍：只用合法来源——用户自己提供的PDF/电子书（最优，按本地语料模式处理）、图书馆或开放获取版本（作者主页、机构仓库、出版社开放的书）、出版社或作者公开的部分（目录、勘误、前言/样章、已发表书评）→ 存入 `sources/books/`，受版权保护的文件只留本地、不随Skill发布。不用影子图书馆，不绕付费墙
 - 视频字幕获取（已提供脚本，直接调用）：
   - **Step 1 下载字幕**：`bash [skill目录]/scripts/download_subtitles.sh <YouTube_URL> [输出目录]`
     - 自动优先人工字幕 → 中文 → 英文 → 自动生成字幕
@@ -292,6 +294,14 @@ spawn subagent时，用以下结构给任务（以Agent 1著作为例）：
 - 研究者发表全景（研究Skill · Agent 1用）：`python3 [skill目录]/scripts/fetch_publications.py "<研究者英文名>" --out <skill目录>/references/sources/publications`
   - 从OpenAlex拉取：高被引论文、按5年分段的研究方向变化、一作→末作位次变化、高频合作者（含疑似学生信号）、常投venue、最近论文、代表作候选及摘要
   - 同名消歧：自动列出候选并选被引最高的，不是本人时用 `--author-id` 重跑
+- 研究者论文全文（研究Skill · 深读用）：`python3 [skill目录]/scripts/fetch_fulltexts.py <skill目录>` —— 从 `fetch_publications.py --json` 的结果匹配arXiv、下载全文并抽取文本，维护 `references/sources/papers/INDEX.md`；再按 `references/paper-reading-card.md` 逐篇写论文卡片
+- 全文深读工具链（研究Skill · 深读用，不依赖OpenAlex；脚本都在女娲的 `scripts/` 下，即 `[skill目录]/scripts/`，从女娲仓库根目录跑）：
+  - 发表全表：`scripts/dblp_works.py`（DBLP SPARQL，REST 接口被反爬墙挡住）→ `scripts/validate_works.py`（校验 `works.json`）
+  - 全文：`scripts/acquire_fulltexts.py`（收集开放全文、OCR，维护 INDEX.md；非英文扫描件加 `--ocr-lang`）→ `scripts/merge_chase.py`（并入 agent 补搜到的摘要与全文）
+  - 读卡：`scripts/plan_reading_batches.py`（切阅读批次）→ `scripts/verify_card_quotes.py`（逐字核对卡片摘录）→ `scripts/mark_read_from_cards.py`（回填 Read 列）
+  - 汇总后：`scripts/check_ledger.py`（精简到 `09-evidence-ledger.md` 是否无损）、`scripts/check_links.py`（相对链接与锚点）
+  - 团队：`scripts/new_team.py`（按 `team.json` 铺团队）、`scripts/team_status.py`（进度与覆盖表）；`scripts/workflows/` 里是保存好的 T1–T4 工作流（参数与 `dry_run.mjs` 预览见其 README）
+  - 步骤与参数见 `references/research-extraction-framework.md` 第十二节；团队模式见 `references/research-team-playbook.md`，实例 `product/dfo-team/DEEP-READING.md`
 - 调研摘要生成（Phase 1.5用）：`python3 [skill目录]/scripts/merge_research.py <skill目录>`
   - 自动扫描 `references/research/01-06.md`，统计来源数、一手/二手占比、关键发现
   - 按文件名自动识别人物Skill/研究Skill（也可 `--mode research`），研究模式额外把DOI/arXiv ID计入来源
@@ -624,6 +634,12 @@ Phase 4 验证通过后，自动启动双Agent精炼，进一步提升Skill可�
 
 研究Skill的更新：重跑 `fetch_publications.py` + Agent 1（新论文）+ Agent 6（研究轨迹），有新的方法论演讲/文章时加跑 Agent 2。新论文改变了做法 → 更新对应方法的「实践」证据和言行一致标注。
 
+研究团队的更新（详见 `references/research-team-playbook.md` 第八节）：
+- **看进度**：`python3 scripts/team_status.py product/<team>`（每人到了哪一步；`--coverage` 出覆盖表）
+- **新论文、书的开放部分**：每人跑一个 `scripts/workflows/team-increment.js`（`find: ["new-papers"]`，在世成员每年一次；或 `["book-parts"]`），它登记新材料、写卡片、保守并入（SKILL.md 净增 ≤ `max_growth`）、复核、修；之后带全体成员跑一次 `team-integrate.js`
+- **加成员**：先写进 `team.json`，`python3 scripts/new_team.py product/<team>/team.json --add-member <slug>` 铺目录 → 只为他跑 T1 → 带**全体**成员重跑 `team-layer.js`（圆桌座位表和 fault lines）→ 深读档再为他跑 T3.1–T3.7，最后 `team-integrate.js`
+- **减成员**：从 `team.json` 删掉、移走目录，带剩下的成员重跑 `team-layer.js`（深读档再跑 `team-integrate.js`），`check_links.py` 为 0
+
 ---
 
 ## 品味守则（速查）
@@ -720,9 +736,45 @@ Phase 4 验证通过后，自动启动双Agent精炼，进一步提升Skill可�
 3. **没有证据的研究阶段就空着**：宁可写「此人在该阶段没有可蒸馏的方法」，也不用通用建议冒充X式做法
 4. **标注时代与资源门槛**：大实验室、大算力、成名后才能用的做法，要给出个人研究者/职业早期的调整版本
 
-**多研究者研究Skill**：「ML研究方法论」这类主题，选3-5位研究者，提取共识方法+分歧，每条标注归属（见框架第十节），目录用 `[topic]-research-craft/`。
+**多研究者研究Skill**：「ML研究方法论」这类主题，选3-5位研究者，提取共识方法+分歧，每条标注归属（见框架第十节），目录用 `[topic]-research-craft/`。产出只有一个Skill、不模拟个人；要每位研究者都能单独调用、还能坐到一起会诊，走下面的「研究团队Skill」。
 
 **伦理**：只蒸馏公开的学术产出和公开发言。蒸馏用户的导师、同事等非公众研究者，适用反模式#8：必须由用户提供素材并征得本人同意。
+
+### 研究团队Skill（多位研究者 + 圆桌）
+
+用户要的是一个领域的**研究顾问团**：3–6 位研究者，每人一个研究Skill（可单独调用：「用X的视角看我的证明」），再加一个圆桌Skill把他们请到用户的问题上——每位成员作为独立 agent 发言、就有据可查的分歧辩论，用户在 4 个检查点把关，最后出一份带各人签字或异议的方案。
+
+**必读**：`references/research-team-playbook.md`（选人、网络与依赖、每一步的命令和闸门、失败模式、成本、增删成员）。工作流参数与预览见 `scripts/workflows/README.md`，团队文件模板在 `references/team-templates/`，完整实例是 `product/dfo-team/`（配置 `product/dfo-team/team.json`）。每位成员内部仍走上面的研究Skill流程（Phase 1–5），只是由工作流批量跑。
+
+**先定档**（Phase 0A 的档位确认照做）：**轻量档** = T0–T2，每人一个研究Skill + 圆桌 + README；**深读档** = 再加 T3 全文深读（发表全表、开放全文、论文卡片、07–09、technique catalog、团队 `DEEP-READING.md`），以后按需 T4。
+
+| 步 | 命令 / 工作流 | 闸门 |
+|---|---|---|
+| T0 定义 | `python3 scripts/new_team.py --init <team> --field "…" --members "A;B;C"` → 补 `team.json`（scholar、hint、living、student_mode、chase_hints；`--lookup` 从 DBLP 补 dblp/orcid/homepage，`--set-member` 改字段；非数学领域写 `card_dimensions`）→ `python3 scripts/new_team.py product/<team>/team.json`（确定只做轻量档加 `--base-tier`） | 模板里不剩 `{{`；`surname` 队内唯一（撞姓会警告） |
+| T1 基础Skill | `team-base-skills.js`，每人一个并行；`to: "review"` → `from: "synthesis", to: "synthesis"` → `from: "build"` 对应 Phase 1.5 / 2.5 检查点 | `quality_check.py` 12/12；每人有 `## Roundtable Card` |
+| T2 团队层 | `team-layer.js`，`members` 放**全体**（轻量档 `deep_tier: false`） | `check_links.py` 0；fault line 双方有据；轻量档 `grep -rn --include='*.md' -e '{{' -e '\[TODO' product/<team>` 为空（或 `python3 scripts/team_check.py product/<team> --tier base` 退出码 0）。圆桌不跑 `quality_check.py` |
+| T3.1–T3.4 发表与全文 | `team-harvest.js` → `validate_works.py` → 主会话后台跑 `acquire_fulltexts.py` → `team-chase.js`（含 `merge_chase.py`）→ `plan_reading_batches.py product/<team> --out-dir <scratch>`（每轮一条） | `validate_works.py` 0 errors，条目数与 Scholar（或 DBLP、CV）对得上 |
+| T3.5 读卡 | `team-read.js`（每轮一次）→ `verify_card_quotes.py` → `mark_read_from_cards.py` | 摘录 NOT FOUND = 0；最后一轮后没有未读行 |
+| T3.6–T3.7 汇总、精简 | `team-synthesize.js`；SKILL.md 仍超预算再 `team-tighten.js` | 12/12；`check_ledger.py`（精简加 `--before`，必须无损） |
+| T3.8 整合 | `team-integrate.js`（全体） | `python3 scripts/team_check.py product/<team>` 退出码 0（覆盖表 = `team_status.py --coverage`，README 用 `--short`；`check_links.py` 0；不剩 `{{`、`[TODO`；fault line 两边的卡片 ID 存在；每人 12/12、摘录、账本） |
+| T4 增量 | `team-increment.js`，之后 `team-integrate.js` | 同 T3.5–T3.7 |
+
+工作流要在有 Workflow 工具的会话里、经用户同意后启动（没有就把工作流里的 prompt 当 agent 简报手动派发）。启动参数用 `node scripts/workflows/make_args.mjs <工作流> --team product/<team>` 从 `team.json` 生成（每人一个调用，scratch 固定，不要手抄成员对象）；第一次用先 `node scripts/workflows/dry_run.mjs scripts/workflows/<工作流>.js --team product/<team> --strict` 预览 prompt，不花 token。每人一个工作流并行（并发上限 min(16, CPU−2)），每一步做完就 `bash scripts/team_commit.sh <路径> "<说明>"`；PDF、`txt/`、`private/` 永远不进 git。改过套件后跑 `bash scripts/workflows/selftest.sh product/dfo-team`（参数是一支已完成的团队）。
+
+**目录**（`new_team.py` 按模板生成）：
+
+```
+product/<team>/
+├── team.json  README.md  DEEP-READING.md
+├── <roundtable>/SKILL.md
+└── <member-slug>/
+    ├── SKILL.md                      # T1 写，末尾是 Roundtable Card
+    └── references/
+        ├── research/                 # 01–06；深读档另有 cards/、07–09
+        └── sources/                  # RESOURCES.md、publications/、papers/、talks/、essays/、software/、private/（git 忽略）
+```
+
+**成本**：T1 每人 16–20 个 agent，T2 每人 2 个 + 团队 4–5 个；深读档每人再多约 45 个 agent、1,100 万 token（DFO 实测：5 人、795 张卡片，约 220 agent、5,500 万 token），开跑前报给用户选档。
 
 ### 中国人物 vs 西方人物
 - **中国人物**：B站原始视频/演讲、小宇宙播客、权威媒体采访（36氪/晚点/财新/极客公园）、本人著作/微博。知乎和微信公众号永远排除

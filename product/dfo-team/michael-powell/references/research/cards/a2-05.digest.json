@@ -1,0 +1,951 @@
+[
+ {
+  "id": "S095",
+  "year": "1991",
+  "title": "The minimum sum of squares change to univariate data that gives convexity",
+  "read_level": "abstract",
+  "contribution": "QP algorithm for the least sum-of-squares change giving nonnegative second divided differences, with a convergence proof (special case of Goldfarb–Idnani theory) and numerical results suggesting use for very large n (abstract).",
+  "problem_entry": "Measurements of a convex function that lost convexity through measurement errors (abstract).",
+  "key_idea": "O(n) starting procedure, then a version of Goldfarb–Idnani; B-spline representation makes the matrices banded (abstract).",
+  "assumptions": "Underlying function convex; data from one variable (abstract).",
+  "proof_devices": [
+   "Convergence obtained as a special case of an existing general theory (Goldfarb & Idnani) (abstract)."
+  ],
+  "experiments": "Some numerical results; the O(n) start identifies most active convexity constraints (abstract).",
+  "positioning": "Builds on Goldfarb & Idnani (1983) (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "cost designed in: O(n) start, banded matrices from the B-spline basis",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "cheap structural warm start that guesses the active set before an exact QP method",
+    "evidence": "O(n) starting procedure identifies most active constraints, then Goldfarb–Idnani",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Pick the basis (B-splines) that makes the QP matrices banded, and guess the active constraints with an O(n) heuristic before the exact active-set method starts (abstract)."
+  ],
+  "coauthors": "I. C. Demetriou",
+  "quotes": [
+   {
+    "text": "It is proved that the algorithm converges, the analysis being a special case of the theory of Goldfarb & Idnani.",
+    "page": "abstract"
+   },
+   {
+    "text": "They suggest that the algorithm can be used when n is very large, because the O(n) starting procedure identifies most of the convexity constraints that are active at the solution.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S113",
+  "year": "1991",
+  "title": "Univariate multiquadric interpolation: Some recent results",
+  "read_level": "abstract",
+  "contribution": "For d=1 finite regular grids: numerics show the order falling from O(h^2) to O(h) near the boundaries; theorem guarantees O(h) for Lipschitz f; two end conditions give O(h^2) uniformly but boundary errors stay large (abstract).",
+  "problem_entry": "Infinite-grid theory gives O(h^{d+1}); question: what happens when the grid is finite? (abstract).",
+  "key_idea": "Numerical results first, then a theorem; analysis of quadratic f shows moderate increases in c give large gains on an infinite grid (abstract).",
+  "assumptions": "f Lipschitz continuous for the O(h) theorem; two end conditions for uniform O(h^2) (abstract).",
+  "proof_devices": [],
+  "experiments": "Numerical results on regular finite grids (abstract).",
+  "positioning": "Guided by the author's own work in preparation on error bounds for finite regular grids (abstract).",
+  "writing": "Opens with a one-line question that removes one idealisation of known theory (abstract).",
+  "limits_future": "Techniques that reduce errors near the boundaries of the data range are needed; numerics suggest they are possible for regular grids (abstract).",
+  "method_links": [
+   {
+    "method": "numerics → conjecture → proof or counterexample",
+    "relation": "evidence",
+    "note": "numerical results suggest the deterioration, then a theorem bounds it",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "finite-domain edge effects as the open problem left by infinite-grid theory",
+    "evidence": "infinite-grid O(h^{d+1}) vs finite-grid boundary deterioration; explicit call for boundary techniques; X002 p. 6 calls edge orders frustrating because numerics show them clearly",
+    "pages": "abstract; X002 p. 6"
+   }
+  ],
+  "transferable": [
+   "Frame the paper as one question that drops one idealisation of known theory (infinite grid to finite grid), answer it with numerics then a theorem, and end by naming the residual gap (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "But what happens when the grid is finite?",
+    "page": "abstract"
+   },
+   {
+    "text": "Therefore the usefulness of multiquadric interpolation in the finite case could be improved greatly by the development of techniques that reduce errors near the boundaries of the range of the data.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S155",
+  "year": "1991",
+  "title": "The complexity of Karmarkar's algorithm for linear programming",
+  "read_level": "abstract",
+  "contribution": "Iteration bounds of order m (original Karmarkar) and sqrt(m) log m (log-barrier version) for general inequality constraints without slack variables; bounds already known; numerical example suggests the O(m) bound cannot be improved (zbMATH summary of the Dundee 1991 version).",
+  "problem_entry": "Number of iterations to reach a prescribed accuracy in the objective when inequality constraints are general (zbMATH summary).",
+  "key_idea": "A vector norm that removes the need for projective transformations; same analysis for a log-barrier version (zbMATH summary).",
+  "assumptions": "Bounded feasible region and a suitable starting point, among others (zbMATH summary).",
+  "proof_devices": [],
+  "experiments": "One numerical example on the tightness of the O(m) bound (zbMATH summary).",
+  "positioning": "Concedes the bounds are known; novelty claimed for the technique (zbMATH summary). Memoir: part of a 'distraction' after Karmarkar's 1985 talk (R007 p. 17).",
+  "writing": "Concede that the bound is known, then claim the new device (zbMATH summary).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "pair a theorem with an example that marks its boundary",
+    "relation": "evidence",
+    "note": "upper bound proved, numerical example suggests it is tight",
+    "pages": "abstract (zbMATH author summary, Zbl 0809.65056)"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "concede the known result, claim the new device",
+    "evidence": "bounds known already; new features such as a vector norm that removes projective transformations",
+    "pages": "abstract (zbMATH author summary, Zbl 0809.65056)"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S043",
+  "year": "1992",
+  "title": "Univariate multiquadric approximation: quasi-interpolation to scattered data",
+  "read_level": "abstract",
+  "contribution": "Three quasi-interpolants from multiquadrics plus linear polynomials with irregular centres: O(h^2|log h|) error away from the ends when c=O(h), only O(h) near the ends for L_A and L_B; Buhmann's infinite regular-grid properties preserved on a finite range without equal spacing (abstract).",
+  "problem_entry": "Approximation on [x_0,x_N] with given, possibly very irregular, distinct centres (abstract).",
+  "key_idea": "Explicit quasi-interpolation formulas; L_A and L_B use function values only, L_C also end derivatives; polynomial part zero (L_A) or constant (L_B) explains end loss (abstract).",
+  "assumptions": "f smooth; c = O(h) with h the maximum gap between centres (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Extends Buhmann (1988) from the infinite regular grid to a finite range with scattered centres (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "finite-domain edge effects as the open problem left by infinite-grid theory",
+    "relation": "evidence",
+    "note": "end-of-range accuracy loss traced to the polynomial terms",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "outside software: keep the known infinite-grid results and remove one idealisation at a time (finite range, unequal spacing)",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. K. Beatson",
+  "quotes": [
+   {
+    "text": "These approximations are defined by quasi-interpolation formulas that are shown to give good accuracy even if the distribution of the centers in [x _0, x _N] is very irregular.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S134",
+  "year": "1992",
+  "title": "Univariate interpolation on a regular finite grid by a multiquadric plus a linear polynomial",
+  "read_level": "abstract",
+  "contribution": "Proof that finite-grid convergence drops to first order near the boundaries; new automatic procedures for the added linear polynomial recover superlinear convergence, often cutting maximum error by 10^3, and extend to several variables (abstract).",
+  "problem_entry": "Numerical calculations suggest boundary deterioration to first order on a finite grid (abstract).",
+  "key_idea": "Prove the numerically observed conjecture; show the usual rule for the appended polynomial fails in general; replace the rule (abstract).",
+  "assumptions": "f twice continuously differentiable; regular grid (abstract).",
+  "proof_devices": [],
+  "experiments": "Maximum error often reduced by a factor of 10^3 (abstract).",
+  "positioning": "Appending a polynomial is a standard technique; the usual way of choosing it is shown to fail (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "numerics → conjecture → proof or counterexample",
+    "relation": "evidence",
+    "note": "explicit: numerical calculations suggest the rate, then the conjecture is proved",
+    "pages": "abstract"
+   },
+   {
+    "method": "tiny counterexample against a popular default",
+    "relation": "variant",
+    "note": "usual polynomial choice fails in general; whether via a small example is not stated",
+    "pages": "abstract"
+   },
+   {
+    "method": "finite-domain edge effects as the open problem left by infinite-grid theory",
+    "relation": "evidence",
+    "note": "finite-grid boundary deterioration proved and repaired",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When the standard fix (appending a polynomial) does not deliver the rate, keep the fix but replace the rule that pins its free parameters, and report the gain as an error-reduction factor (abstract)."
+  ],
+  "coauthors": "R. K. Beatson",
+  "quotes": [
+   {
+    "text": "This conjecture is proved.",
+    "page": "abstract"
+   },
+   {
+    "text": "Making such additions is a standard technique, but we find that the usual way of choosing the polynomial fails to provide superlinear convergence in general.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S152",
+  "year": "1992",
+  "title": "Log barrier methods for semi-infinite programming calculations",
+  "read_level": "abstract",
+  "contribution": "Numerical comparison of classical log barrier, Karmarkar's original algorithm and Polyak's shifted log barrier on SIP test problems with up to 10000 linear constraints; recommends Newton–Raphson directions with line searches; exposes weaknesses (zbMATH summary of the HERMIS '92 version).",
+  "problem_entry": "Nonlinearly constrained problems in 2 or 4 variables with each constraint replaced by supporting tangent planes (zbMATH summary).",
+  "key_idea": "Test several barrier methods as the number of linear constraints grows (zbMATH summary).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Up to 10000 linear constraints (author summary); a zbMATH review of the 1993 version says 1000 (Zbl 0801.65062).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Weaknesses exposed; results may help develop new SIP algorithms (zbMATH summary).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "small fully specified problems scaled in one parameter, weaknesses reported",
+    "pages": "abstract (zbMATH author summary, Zbl 0814.90117)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S008",
+  "year": "1994",
+  "title": "A direct search optimization method that models the objective and constraint functions by linear interpolation",
+  "read_level": "abstract",
+  "contribution": "COBYLA: derivative-free method for nonlinear constraints with linear interpolation on a simplex and a trust region; some convergence properties and numerical results up to 9 variables (abstract).",
+  "problem_entry": "Nonlinearly constrained optimization without derivatives (abstract). Secondary: IMSL forcing difference approximations on TOLMIN, and a four-variable Westland Helicopters problem (S029 pp. 2–3).",
+  "key_idea": "Linear models of objective and constraints interpolated at simplex vertices; trust-region bound; new point replaces a vertex for geometry or because it is best under a merit function driven by the greatest constraint violation; rho never increased, reduced only when a well-conditioned simplex fails to improve (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Several numerical results, at most 9 variables (abstract).",
+  "positioning": "Secondary: only one trust-region radius, and the two-radius idea came later from Evan Jones (S014 p. 34); Delta = rho every iteration (S047 p. 5).",
+  "writing": "Abstract states the tested range and the reason for it (abstract).",
+  "limits_future": "Linear approximations can be highly inefficient; the method is easy to use for small numbers of variables (abstract). Secondary: no favourable convergence answer within usual conventions (S029 p. 8).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "first member of the lineage; abstract names the limitation (linear models inefficient) later removed",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "resolution only decreases and only after a well-conditioned model fails",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "a single radius: Delta = rho every iteration; the second radius came later",
+    "pages": "S014 p. 34; S047 p. 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "tested range and reason stated in the abstract",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "released as the COBYLA software",
+    "pages": "S029 p. 3"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Put the tested range and the reason for it in the abstract (abstract).",
+   "Reduce the resolution only after a well-conditioned model has failed, so a bad geometry is not mistaken for convergence (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The trust region radius ρ is never increased, and it is reduced when the approximations of a well-conditioned simplex fail to yield an improvement to the variables, until ρ reaches a prescribed value that controls the final accuracy.",
+    "page": "abstract"
+   },
+   {
+    "text": "Some convergence properties and several numerical results are given, but there are no more than 9 variables in these calculations because linear approximations can be highly inefficient.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S046",
+  "year": "1994",
+  "title": "The uniform convergence of thin plate spline interpolation in two dimensions",
+  "read_level": "abstract",
+  "contribution": "Error bounds for thin plate spline interpolation in R^2 and uniform convergence on any bounded set not contained in a line as the fill distance tends to 0 (abstract).",
+  "problem_entry": "Bounds on |f - s| in the convex hull of the data or near a data point (abstract).",
+  "key_idea": "Inside a triangle of three data points the error is at most a point-independent multiple of the longest side h (abstract).",
+  "assumptions": "f has square integrable second derivatives (abstract).",
+  "proof_devices": [
+   "Integration by parts and Cauchy–Schwarz applied to the second-derivative scalar product of the variational formulation (abstract)."
+  ],
+  "experiments": "",
+  "positioning": "Secondary: earlier results needed Lipschitz boundaries; here any bounded domain, rate within a log h factor, best constants for 2–4 points (R007 p. 23).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "native-norm descent proof",
+    "relation": "variant",
+    "note": "native semi-norm used for an error bound, not for descent",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Bound a pointwise interpolation error by integrating by parts and applying Cauchy–Schwarz to the scalar product that defines the variational problem (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Our method of analysis applies integration by parts and the Cauchy--Schwarz inequality to the scalar product between second derivatives that occurs in the variational calculation of thin plate spline interpolation.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S094",
+  "year": "1994",
+  "title": "Some algorithms for thin plate spline interpolation to functions of two variables",
+  "read_level": "abstract",
+  "contribution": "Truncated Laurent expansions and a preconditioned CG method on an (n-3)x(n-3) positive definite system; substantial savings when n >= 1000 and n >= 100 respectively (zbMATH summary).",
+  "problem_entry": "Interpolation matrix almost entirely nonzero, yet structured enough for far fewer than O(n^3) operations (zbMATH summary).",
+  "key_idea": "Replace far groups of thin-plate terms by one truncated Laurent expansion; reduce to a positive definite system for PCG (zbMATH summary).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical examples with crossover sizes n >= 1000 (Laurent) and n >= 100 (CG) (zbMATH summary).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "cost-driven algorithm design",
+    "pages": "abstract (zbMATH author summary, Zbl 0839.65004)"
+   },
+   {
+    "method": "timing sweep to calibrate hidden constants and the crossover n",
+    "relation": "evidence",
+    "note": "crossover n reported per technique",
+    "pages": "abstract (zbMATH author summary, Zbl 0839.65004)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Report the problem size at which each fast technique starts to pay off, not only its asymptotic order (zbMATH summary)."
+  ],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S163",
+  "year": "1994",
+  "title": "An algorithm that straightens and smooths piecewise linear curves in two dimensions",
+  "read_level": "abstract",
+  "contribution": "Algorithm producing a curve of line segments and circular arcs (continuous direction, radii >= Delta, within about Delta of the data curve) with the fewest fluctuations; one numerical example over a range of Delta (abstract).",
+  "problem_entry": "Piecewise linear curve D and tolerance Delta given (abstract).",
+  "key_idea": "Use the freedom provided by Delta to minimise the number of fluctuations; kinks smaller than Delta not inherited; intermediate curve V from an earlier algorithm, construction of A from V new (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "One example comparing A with D for a range of Delta (abstract).",
+  "positioning": "",
+  "writing": "Hedged usefulness claim (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "weak: one example swept over the tolerance, hedged claim",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "spend the tolerance's freedom on a secondary quality criterion",
+    "evidence": "freedom from Delta used to minimise the number of fluctuations",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When a tolerance leaves freedom, return the admissible fit that is best on a stated second criterion (fewest fluctuations), not the closest fit (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The main original feature of the algorithm is that the freedom in A that is provided by the tolerance Δ is used to minimize the number of fluctuations in A.",
+    "page": "abstract"
+   },
+   {
+    "text": "The comparison suggests that the given algorithm generates curves that may be useful to several applications.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S188",
+  "year": "1994",
+  "title": "Curve fitting by thin plate splines",
+  "read_level": "abstract",
+  "contribution": "Conference abstract (15th ISMP, Ann Arbor 1994): least-distortion curve-to-curve warping posed as a linearly constrained optimisation with O(n^2) objective and gradient (abstract).",
+  "problem_entry": "Image warping (silt in a shipping channel) with too few common points but common curves such as rivers (abstract).",
+  "key_idea": "Thin-plate objective (integral of squared second derivatives); positions of mapped points along target curves as variables; ordering gives simple linear constraints (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical results announced (abstract).",
+  "positioning": "",
+  "writing": "Opens with a concrete application, then names the missing ingredient that forces the new formulation (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "cost stated: O(n^2) per objective and gradient",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "recast an approximation task as a small linearly constrained optimisation for one's own solver",
+    "evidence": "curve positions as variables with ordering as linear constraints; memoir says the CTAC95 version used his algorithm [47] = TOLMIN",
+    "pages": "abstract; R007 pp. 22, 30"
+   }
+  ],
+  "transferable": [
+   "Open with a concrete application and name the missing ingredient (not enough common points) that forces the new formulation (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "In some applications, however, there are insufficient common points and instead there are common curves, for example they may be rivers in satellite photographs.",
+    "page": "abstract"
+   },
+   {
+    "text": "The positions of the transformed points on these curves are the variables of the optimization problem, and the ordering conditions introduce some simple linear constraints.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S125",
+  "year": "1995",
+  "title": "Some convergence properties of the modified log barrier method for linear programming",
+  "read_level": "abstract",
+  "contribution": "Iterates of Polyak's modified log barrier method for LP converge to a solution; objective values and constraint violations converge at R-linear rates, even with many solutions (abstract).",
+  "problem_entry": "Convergence of Polyak's modified log barrier method (abstract).",
+  "key_idea": "Shifted logs stay finite at feasible points; weights are KKT multiplier estimates updated from the zero gradient at the end of each unconstrained minimisation (abstract).",
+  "assumptions": "Only that the feasible region is bounded and nonempty (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Assumption far less restrictive than those usually made for this method (abstract).",
+  "writing": "States the single assumption and contrasts it with the literature (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "clarify–implement–prove someone else's idea",
+    "relation": "evidence",
+    "note": "Polyak's algorithm, Powell's convergence analysis",
+    "pages": "abstract"
+   },
+   {
+    "method": "extend a quadratic-only theorem to the class practice already covers",
+    "relation": "variant",
+    "note": "same weakening-of-assumptions move applied to LP",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "State how many assumptions you use and say how much weaker they are than the ones usually made in the literature (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "These techniques provide a simple and interesting algorithm for linear programming that was proposed by Polyak.",
+    "page": "abstract"
+   },
+   {
+    "text": "Indeed, our only assumption is that the feasible region of the linear programming problem is bounded and nonempty, which is far less restrictive than the assumptions that are usually made in theoretical investigations of the modified log barrier method.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S109",
+  "year": "1996",
+  "title": "A review of algorithms for thin plate spline interpolation in two dimensions",
+  "read_level": "abstract",
+  "contribution": "Review by regime (direct O(n^3) method recommended when tolerable; CG with variationally chosen preconditioners; Laurent expansions; Lagrange-function-based iterations) that identifies a new algorithm reaching 10 decimals in fewer than 15 iterations for large n (abstract).",
+  "problem_entry": "(n+3)x(n+3) linear system; direct solution O(n^3) (abstract).",
+  "key_idea": "Use the variational formulation to choose preconditioners and the localisation of Lagrange functions to build iterations (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Fewer than 15 iterations for 10 decimals, large n (abstract).",
+  "positioning": "",
+  "writing": "Organised by problem-size regime with an explicit recommendation (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "algorithms chosen by operation counts per regime of n",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "local approximate Lagrange functions plus global iterative refinement",
+    "evidence": "iterative methods developed from the localization properties of Lagrange functions; new algorithm < 15 iterations",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Organise a review by problem-size regime and recommend the direct method where its cost is tolerable before presenting the iterative and fast-evaluation tools (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "A particular direct method is recommended, that gives good results when this amount of work is tolerable.",
+    "page": "abstract"
+   },
+   {
+    "text": "Thus we identify a new algorithm that typically requires fewer than 15 iterations to achieve 10 decimals accuracy for large n.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S102",
+  "year": "1997",
+  "title": "A review of methods for multivariable interpolation at scattered data points",
+  "read_level": "abstract",
+  "contribution": "Review of three kinds of method for scattered-data interpolation, with attention to Dirichlet-tessellation algorithms and RBF coefficient calculation (abstract; third kind and emphasis from zbMATH summary Zbl 0881.65003).",
+  "problem_entry": "Interpolation at data points in general positions (abstract).",
+  "key_idea": "Classify methods: polynomial pieces; pointwise algorithms for finitely many evaluation points; radial basis functions (abstract + zbMATH summary).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "abstracts.json text truncated and OCR-damaged ('s(£)'); rest from zbMATH summary.",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "We Study three different kinds of methods for constructing the interpolant when the positions of the data points are general.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S142",
+  "year": "1997",
+  "title": "Least squares fitting to univariate data subject to restrictions on the signs of the second differences",
+  "read_level": "abstract",
+  "contribution": "Structure theorem (k subsets, convex QP on each, alternating convex/concave), counterexample to the authors' earlier assumption, and an assumption-free dynamic programming algorithm costing at most O(kn^3) instead of about O(kn^2) (zbMATH summary).",
+  "problem_entry": "Random errors make second differences change sign too often; least-squares fit with at most k-1 sign changes (zbMATH summary).",
+  "key_idea": "Partition into k disjoint subsets each solved as a convex QP; earlier DP assumption refuted and replaced (zbMATH summary).",
+  "assumptions": "",
+  "proof_devices": [
+   "Counterexample to the authors' own earlier conjecture (zbMATH summary)."
+  ],
+  "experiments": "",
+  "positioning": "Corrects the authors' own work of about twelve years earlier (zbMATH summary); zbMATH's link to Zbl 0726.65009 (S095) may be editorial, while R007 p. 19 places the DP in the monotonicity paper.",
+  "writing": "",
+  "limits_future": "Higher worst-case cost O(kn^3) accepted for correctness (zbMATH summary).",
+  "method_links": [
+   {
+    "method": "tiny explicit counterexample to justify a design choice",
+    "relation": "evidence",
+    "note": "counterexample motivates the assumption-free algorithm",
+    "pages": "abstract (zbMATH author summary, Zbl 1031.65027)"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "extra cost of the safe algorithm stated openly",
+    "pages": "abstract (zbMATH author summary, Zbl 1031.65027)"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "refute your own earlier assumption and state the price of removing it",
+    "evidence": "counterexample to own earlier DP assumption; new algorithm O(kn^3) vs O(kn^2)",
+    "pages": "abstract (zbMATH author summary, Zbl 1031.65027)"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "I. C. Demetriou",
+  "quotes": []
+ },
+ {
+  "id": "S162",
+  "year": "1998",
+  "title": "A 'taut string algorithm' for straightening a piecewise linear path in two dimensions",
+  "read_level": "abstract",
+  "contribution": "Iterative taut-string algorithm to prescribed accuracy, with a convergence proof and numerical evidence of efficiency (abstract).",
+  "problem_entry": "Straighten a piecewise linear path with segments of length at least 3 Delta (abstract).",
+  "key_idea": "Rings of radius Delta around interior points; thread a string through them and pull tight (abstract).",
+  "assumptions": "Each segment at least 3 Delta long (abstract).",
+  "proof_devices": [],
+  "experiments": "Some numerical results on efficiency (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "define the target object by a physical construction",
+    "evidence": "rings plus a string pulled tight define the new path",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "State the problem as a physical construction a reader can picture (rings plus a taut string), then give the optimisation form and algorithm (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The new path is constructed by pulling the string tight.",
+    "page": "abstract"
+   },
+   {
+    "text": "Its convergence is proved and its efficiency is demonstrated by some numerical results.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D002",
+  "year": "2000",
+  "title": "System Modelling and Optimization: Methods, Theory and Applications, 19th IFIP TC7 Conference on System Modelling and Optimization, July 12-16, 1999, Cambridge, UK",
+  "read_level": "abstract",
+  "contribution": "Edited proceedings volume (with S. Scholtes): invited and selected papers of the 19th IFIP TC7 conference, Cambridge 1999 (publisher description).",
+  "problem_entry": "Not a research item (publisher description).",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Editorial service; contents include Gould (SQP), Wright (interior point), Wolkowicz (SDP relaxations), Bixby et al. (MIP) per zbMATH Zbl 0946.00028.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Scholtes (co-editor)",
+  "quotes": [
+   {
+    "text": "This book contains most of the invited papers and a few carefully selected submitted papers that were presented at the 19th IFIP TC7 Conference on System Modelling and Optimization, which was held in Cambridge, England, from July 12 to 16, 1999, and sponsored by the International Federation for Information Processing (IFIP).",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S099",
+  "year": "1993",
+  "title": "Truncated Laurent expansions for the fast evaluation of thin plate splines",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: fast evaluation of thin plate splines by truncated Laurent expansions; cited with S089 as [60, 62] (R007 p. 23). Secondary (zbMATH review Zbl 0790.65010): groups split into two rather than four; coefficients O(m log m), evaluation O(log m). Binary-tree hierarchical evaluator (S078 pp. 19–20).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "secondary only: O(m log m) set-up, O(log m) evaluation",
+    "pages": "zbMATH review Zbl 0790.65010; S078 pp. 19–20"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S104",
+  "year": "1993",
+  "title": "On the number of iterations of Karmarkar's algorithm for linear programming",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: 45-page journal paper counting iterations of Karmarkar's algorithm, probably the journal counterpart of S155 (not verified). Secondary: [61] among the works cited for a famous example that Karmarkar's complexity was not always as good as expected (R007 p. 17).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S189",
+  "year": "1993",
+  "title": "Panel discussion on multivariate problems",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: two-page record (pp. 643–644) of a conference panel on multivariate approximation in Numerical Algorithms 5; not a research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "W. Light, M. von Golitschek, one garbled name (M AB)",
+  "quotes": []
+ },
+ {
+  "id": "S088",
+  "year": "1994",
+  "title": "An iterative method for thin plate spline interpolation that employs approximations to Lagrange functions",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: iterative thin plate spline solver from approximate Lagrange functions. Secondary (zbMATH review Zbl 0795.65004): local clusters augmented by boundary points. Start of the Cambridge iterative RBF line (S055 p. 3); q about 30 local points reused later (S085 pp. 5, 14; S057 pp. 6, 16); Beatson had the original idea (S075 p. 10).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "RBF solver lineage S088 → S087 → S110 → Krylov methods, one change per step",
+    "pages": "S055 p. 7; S085 p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "local approximate Lagrange functions plus global iterative refinement",
+    "evidence": "secondary only: approximate Lagrange functions on q local points plus iterative refinement",
+    "pages": "zbMATH review Zbl 0795.65004; S085 pp. 5, 14"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "R. K. Beatson",
+  "quotes": []
+ },
+ {
+  "id": "S087",
+  "year": "1995",
+  "title": "On multigrid techniques for thin plate spline interpolation in two dimensions",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: multigrid techniques for thin plate spline interpolation. Secondary (zbMATH review Zbl 0862.41007): local estimates fail at square-grid corners; iterative refinement plus fine-to-coarse multigrid sweep; convergence via spectral radii of two operators computed on square grids. Spectral radius considered briefly (S075 p. 4).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R. K. Beatson, G. Goodsell",
+  "quotes": []
+ },
+ {
+  "id": "S110",
+  "year": "1995",
+  "title": "A new iterative algorithm for thin plate spline interpolation in two dimension",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: new iterative thin plate spline solver (journal version Ann. Numer. Math. 4 (1997) 519–527). Secondary: breakthrough for data in general positions, n above 10^4 with Laurent technique (S055 p. 3); 10 decimals in fewer than 10 iterations for n >= 1000 (S075 p. 7); later Goodsell residual saving (S085 p. 5).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "secondary only",
+    "pages": "S055 p. 3; S075 p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "local approximate Lagrange functions plus global iterative refinement",
+    "evidence": "secondary only: fast iterative algorithm for general positions",
+    "pages": "S055 p. 3; S075 p. 7"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S082",
+  "year": "1996",
+  "title": "A thin plate spline method for mapping curves into curves in two dimensions",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: curve-to-curve thin-plate warping (same problem as S188). Secondary (zbMATH review Zbl 0911.65011): repeated calls to the author's descent minimiser; a local minimum shows up as an oversized mapped domain, so failures are detectable and fixed by re-running. Used his algorithm [47] = TOLMIN (R007 pp. 22, 30).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "secondary only: failure mode and detection documented",
+    "pages": "zbMATH review Zbl 0911.65011"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "recast an approximation task as a small linearly constrained optimisation for one's own solver",
+    "evidence": "secondary only: reuse of TOLMIN [47] for the mapping problem",
+    "pages": "R007 pp. 22, 30"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S133",
+  "year": "1997",
+  "title": "Approximation theory and optimization: tributes to MJD Powell",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: 60th-birthday Festschrift (eds. Buhmann and Iserles, CUP 1997); Powell is the honoree. Contents per zbMATH Zbl 1001.00074 include Buhmann & Fletcher on his contributions (pp. 1–30), Conn–Scheinberg–Toint on DFO convergence, Demetriou & Powell (S142).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. Iserles (editor)",
+  "quotes": []
+ },
+ {
+  "id": "S185",
+  "year": "2000",
+  "title": "A quadratic interpolation method for unconstrained minimization without derivatives",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: conference presentation (Vigo 2000) on quadratic-interpolation DFO, the year of the UOBYQA report; plausibly a UOBYQA talk (not verified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "inferred from title: linear (S008, 1994) to quadratic models",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S183",
+  "year": "2008",
+  "title": "Special Issue Dedicated to Professor Michael JD Powell on the Occasion of His 70th Birthday",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: 70th-birthday special issue; Crossref lists a Preface by Toint and Yuan in Optimization Methods and Software 23(2):175–176 (2008, DOI 10.1080/10556780701852596), plausibly this issue (not verified). Not authored research.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Toint, Y. Yuan",
+  "quotes": []
+ },
+ {
+  "id": "S211",
+  "year": "—",
+  "title": "Election of Council",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: society notice naming Martos, Orden, Powell and Wolfe; Crossref suggests Mathematical Programming 5(1):125 (Dec 1973, DOI 10.1007/bf01580114), match not verified. Not a research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "B. Martos, A. Orden, P. Wolfe",
+  "quotes": []
+ }
+]

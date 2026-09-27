@@ -1,0 +1,144 @@
+[
+ {
+  "id": "R007",
+  "year": "2017",
+  "title": "Michael James David Powell. 29 July 1936 — 19 April 2015 (Biographical Memoirs of Fellows of the Royal Society)",
+  "read_level": "full",
+  "contribution": "Full-length biographical memoir (DAMTP NA2017/04 preprint of the Royal Society memoir) that documents Powell's career 1936–2015, frames him as refusing the designer/theoretician split, and supplies dates, named doctoral students, working habits and a list of 83 Powell papers; the DFO era gets only one paragraph (p. 17).",
+  "problem_entry": "Memoir opens with a thesis sentence (Powell refused the theory/practice dichotomy, p. 3); it shows Powell entering problems through Harwell's code-for-others remit and industrial DFO demand (pp. 5–6), a hard-to-read report (Davidon, p. 6), gaps observed in practice (DFP vs BFGS, p. 9), celebrated results to test (Karmarkar, p. 17) and practitioner contact (p. 17).",
+  "key_idea": "Keep a working framework and change one lever: shift of origin instead of growing penalty (augmented Lagrangian, p. 7), variable metric applied to constrained optimality conditions (SQP, p. 14), ratio-controlled trust region (p. 19), cheap models of expensive functions — RBF tried and dropped, then polynomial interpolation (p. 17); positive-definiteness preserved via partial updating (p. 15).",
+  "assumptions": "Memoir rests on the authors' recollections, the Davis 2005 and Vicente 2003 interviews and one non-Powell paper (p. 26); priority claims asserted without external citations (pp. 15, 19); several bracket citations mismatched (pp. 6, 8, 14, 15, 19 vs list pp. 27–28); reports Powell's DFO premise of expensive user-supplied functions with cheap model work (p. 17).",
+  "proof_devices": [
+   "counterexamples to widely held beliefs: coordinate search non-convergence (p. 8), cycling in a feasible point algorithm [28] (p. 16), Karmarkar complexity example (p. 17)",
+   "smallest-case analysis: two-variable quadratic with inexact line search explaining DFP worse than BFGS (p. 9)",
+   "negative-result theorem: CG cannot converge superlinearly without periodic steepest-descent restarts (p. 8)",
+   "proof-enabling safeguards: dog-leg trajectory enabling a Gauss–Newton convergence proof (p. 6); actual/predicted reduction ratio for radius updates aimed at global convergence (p. 19)",
+   "first convergence proof for DFP with exact line search (p. 9); SQP convergence theory (p. 14); trust-region global convergence series 1984–2015 (p. 15)",
+   "counting conditions against degrees of freedom (Powell–Sabin split, nine conditions, p. 20)",
+   "removing a domain-regularity (Lipschitz boundary) assumption while keeping the best rate up to log h, plus best constants on 2-, 3-, 4-point configurations (thin-plate splines, p. 23)",
+   "dynamic programming with recursive data reduction (p. 19); RBF interpolation-matrix nonsingularity (p. 21)"
+  ],
+  "experiments": "none in the memoir; reports Powell's practice: 100-variable DFP demonstrations (p. 7), early DFO beaten by finite-difference gradient methods (p. 8), RBF models dropped after numerical tests (pp. 17, 21), DFP–BFGS gap observed in practice before analysis (p. 9).",
+  "positioning": "Powell credits predecessors and states his added value (SQP after Han and Biggs: clarification, implementation, convergence theory, p. 14; DFP from Davidon's report, pp. 6–7) and critiques rivals by constructed example (pp. 8, 17); memoir concedes his theoretical interest decreased in the DFO years (p. 17).",
+  "writing": "Memoir is chronological, laudatory and low in hedging (p. 14), interleaving interview quotes (pp. 10–12); it reports Powell's style: more explanations and fewer formulae (p. 18), two-page handwritten lecture notes (p. 12), colour-coded slides (p. 18), surveys that improve proofs (p. 22), quality-and-relevance editing (p. 12).",
+  "limits_future": "DFO era covered in one paragraph (p. 17); COBYLA, BOBYQA, LINCOA never named and BOBYQA/LINCOA absent from the reference list (pp. 32–33); retirement-era software unidentified (p. 24); mismatched bracket citations; admitted limits of Powell's work: partial updating loses curvature (p. 15), restarts ineffective for very large problems (p. 9), RBF models failed in optimization (p. 17); no future directions.",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Free dissemination of reports and software decades before funders required it; Harwell remit to write subroutines for others; code-as-report practice from 1970 (Harwell Fortran subroutine reports [9], [12]) and 1982–1989 (VMCWD, ZQPCVX, TOLMIN) predates COBYLA; finished software before death.",
+    "pages": "pp. 5, 12–13, 24, 27–30"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "RBF models for optimization dropped after numerical tests; large-n DFP demonstrations; practice-observed gaps (DFP vs BFGS) precede theory.",
+    "pages": "pp. 7, 9, 17, 21"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "DFO papers progress unconstrained → bound-constrained → linearly constrained with a continuously improving view of second-order model information.",
+    "pages": "p. 17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Relax-one-limitation also at programme and theorem level: SQP transplants variable metric to constraints; sparse Jacobian estimate extended to symmetric Hessians; thin-plate-spline convergence without Lipschitz boundary at the same rate.",
+    "pages": "pp. 14, 15, 23"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "DFO premise of cheap model work vs expensive evaluations; 2011 lecture on a parsimonious way of constructing quadratic models; least-change heritage in quasi-Newton low-rank updates and PSB; Powell's own 2013 title 'Beyond symmetric Broyden' (title only) bears on Method 3's unverified 'other norms' limitation.",
+    "pages": "pp. 7, 9, 16, 17, 33"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Partial: memoir credits Powell with pioneering trust regions (1970) and introducing the actual/predicted ratio test for the radius (DELTA half); silent on RHO.",
+    "pages": "pp. 15, 19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak, from approximation theory: truncated Laurent expansions to minimize costly logarithm evaluations; interest in efficient and accurate computation and implementation; QP solvers treated as necessary for robust SQP codes.",
+    "pages": "pp. 15, 18, 23"
+   },
+   {
+    "method": "Research Taste #5",
+    "relation": "evidence",
+    "note": "The 'refused to follow this dichotomy' characterization, held in SKILL.md only as a snippet paraphrase, is verified as an actual memoir sentence.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Inner Tensions",
+    "relation": "variant",
+    "note": "Memoir confirms theory interest decreased in DFO years, but Powell himself published DFO trust-region convergence papers ([73] 2003, [81] 2012; contents not read), so 'shipped without guarantees' should be limited to complexity guarantees.",
+    "pages": "pp. 15, 17, 32–33"
+   },
+   {
+    "method": "Academic Lineage / Research Trajectory (skill corrections)",
+    "relation": "contradiction",
+    "note": "SKILL.md says doctoral students are unverified; memoir names Toint, Yuan, Gutmann (PhD) and Demetriou (research student). Dates: Harwell 1959–76, Plummer Chair 1976, retired 2001; augmented Lagrangian late 1960s at Harwell; SQP after 1976; RBF models were the abandoned path before polynomial-interpolation DFO.",
+    "pages": "pp. 5, 7, 9, 14, 15–16, 17, 19, 21, 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimal-instance counterexample / smallest-case analysis",
+    "evidence": "coordinate search non-convergence; two-variable quadratic explaining DFP vs BFGS; cycling example [28]; Karmarkar complexity example; memoir names his talent for counter-examples to widely held beliefs",
+    "pages": "pp. 8, 9, 16, 17"
+   },
+   {
+    "pattern": "clarify–implement–prove someone else's idea",
+    "evidence": "DFP developed from Davidon's hard-to-read report; SQP after Han and Biggs with clarification, implementation and convergence theory; surveys that re-prove",
+    "pages": "pp. 6–7, 14, 18, 22"
+   },
+   {
+    "pattern": "safeguard designed so the proof goes through",
+    "evidence": "dog-leg trajectory enabling a Gauss–Newton convergence proof; ratio-controlled radius introduced with the goal of global convergence",
+    "pages": "pp. 6, 19"
+   },
+   {
+    "pattern": "preserve a structural invariant at the cost of information",
+    "evidence": "DFP update always positive definite; SQP partial updating keeps positive definiteness though some curvature is not incorporated (acknowledged 'small blemish')",
+    "pages": "pp. 7, 15"
+   },
+   {
+    "pattern": "survey as re-proof",
+    "evidence": "reviews and textbook offer simplifications and improved proofs; RBF survey [58] among his opera magna",
+    "pages": "pp. 17–18, 22"
+   },
+   {
+    "pattern": "decisive scope pruning to protect solitary deep work (working habit)",
+    "evidence": "avoided committees; announced 'optimization only' after thin-plate papers; retired two years early for research; monthly check-ins with visitors",
+    "pages": "pp. 10–12, 23, 24"
+   }
+  ],
+  "transferable": [
+   "To explain why method A beats method B in practice, build the smallest instance (two variables, quadratic, one specific inexact line search) where the gap appears and analyse it exactly (p. 9).",
+   "Challenge a celebrated convergence or complexity claim with an explicit violating instance rather than general argument (pp. 8, 17).",
+   "When a global convergence proof fails, modify the step (dog-leg path, ratio-controlled radius) so that the proof goes through, and keep the safeguard in the code (pp. 6, 19).",
+   "If a method reaches the answer only as a penalty parameter goes to infinity, look for an additive shift of origin that reaches it at a finite value and identify the shift with multipliers (p. 7).",
+   "Present a new method as a proven mechanism applied to a new problem class (SQP as variable metric for constrained optimization) so readers inherit the intuition and local-rate expectations (p. 14).",
+   "Fix the structural invariant the model must keep (positive definiteness); when data would break it, update partially and state what information is lost (p. 15).",
+   "Test a candidate model class inside the optimization loop before investing in it; drop it for that use if tests disappoint (RBF, pp. 17, 21).",
+   "When improving a theorem, target one regularity assumption and show the rate survives its removal; then compute best constants on the smallest configurations (p. 23).",
+   "Count continuity conditions against degrees of freedom before choosing a piecewise split (Powell–Sabin, p. 20).",
+   "When building on another's idea, name the originators and state your contribution as clarification, implementation and convergence theory (p. 14).",
+   "Write surveys that re-prove the covered results more simply or sharply (pp. 18, 22)."
+  ],
+  "coauthors": "M. D. Buhmann, R. Fletcher, A. Iserles, P. Toint (memoir authors; Powell is the subject)",
+  "quotes": [
+   {
+    "text": "In a subject that roughly divides into practical designers of algorithms and theoreticians who seek to underpin algorithms with solid mathematical foundations, Mike Powell refused to follow this dichotomy.",
+    "page": 3
+   },
+   {
+    "text": "it displays Mike’s remarkable talent for producing intriguing counter-examples to sometimes widely held beliefs",
+    "page": 16
+   }
+  ]
+ }
+]

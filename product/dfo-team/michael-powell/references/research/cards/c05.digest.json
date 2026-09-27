@@ -1,0 +1,302 @@
+[
+ {
+  "id": "S093",
+  "year": "2012",
+  "title": "On the convergence of trust region algorithms for unconstrained minimization without derivatives",
+  "read_level": "full",
+  "contribution": "Proves lim ||grad F(x_k)|| = 0 for a parameterized family of derivative-free trust-region methods that interpolate F at n+1 points, compute one new F per iteration, maintain geometry by single alpha/beta steps and use no sufficient-decrease test; numerically, symmetric-Broyden quadratic models beat linear ones by more than a factor of 5 up to n=320.",
+  "problem_entry": "Conn-Scheinberg-Vicente theory keeps geometry conditions (1.5)-(1.6) by model-improvement phases that may cost many F values; can the COBYLA regime of one F per iteration and one replaced point be proved convergent? (pp. 3-4)",
+  "key_idea": "Interleave cheap geometry-repair steps (alpha: maximize simplex volume when min face distance < alpha*rho; beta: pull in points farther than beta*rho), drop the point with the largest barycentric coordinate after a TR step, and evaluate a TR step only if predicted reduction > gamma * largest observed model error at this rho (pp. 6-8).",
+  "assumptions": "F bounded below, bounded Hessians of F and of models, exact arithmetic, infinite iterations, nonsingular initial simplex; single never-increased radius rho reduced by exactly 10 and other constants fixed for proof convenience (pp. 2, 5-6, 19).",
+  "proof_devices": [
+   "determinant as simplex volume via Gram-Schmidt: prod sigma_i <= |det D_k| <= prod ||y_i - y_0|| (pp. 9-10)",
+   "column-replacement determinant identity |det D_{k+1}| = |theta_t| |det D_k| (p. 10)",
+   "Lagrange functions as determinant ratios giving sum |Lambda_j| <= c4, then Taylor expansion inside sum (F-Q)(y_j) Lambda_j = 0 to get ||grad Q - grad F|| <= c3 rho (pp. 11-13)",
+   "counting with a monotonically shrinking index set B: every 3n+3 iterations without rho reduction contain a successful TR step (pp. 13-14)",
+   "potential Gamma_k = sum ||y_i - y_0|| with per-step increase n*rho and forced beta-step decrease (pp. 15-16)",
+   "small determinant forces an alpha step whose gain exceeds worst-case loss over tau_alpha iterations; induction over rho values (pp. 17-19)",
+   "explicit success threshold c8 = (19/9 c3 + 5/4 Omega + 5/9 Phi) max[gamma,1] (pp. 20-21)",
+   "counterexample F = xi^2 + 3 eta^2 + 0 zeta^2 showing necessity of exact TR steps when model errors vanish (p. 22)",
+   "lim inf to lim upgrade by (l, m) index pairs with 10 eps / eps gradient levels and summed decrease contradicting boundedness (pp. 25-27)"
+  ],
+  "experiments": "Same algorithm with linear vs symmetric-Broyden quadratic models on trigonometric sum of squares and chained Rosenbrock, n=20..320, 5 random instances each, min-max #F and final infinity-norm error; parameters fixed and theory written before any run; no other solvers (pp. 27-30).",
+  "positioning": "Credits Conn-Scheinberg-Vicente with most published DFO trust-region theory and reuses their conditions; calls the contrast (one F per iteration vs model-improvement phases) a major strategic difference, in neutral terms; concedes NEWUOA is much more efficient in practice (pp. 2-4).",
+  "writing": "Theorem in abstract, roadmap at end of section 1, reader told proofs of Lemmas 2-3 can be skipped without losing coherence, each parameter's purpose stated at introduction, algorithm in prose not pseudocode (pp. 1, 4, 6-7, 13, 16, 20).",
+  "limits_future": "Exact arithmetic; rho never increased causes unnecessarily small steps; test functions may be too easy; future: take NEWUOA's radius adjustment so rho becomes a lower bound, extend to linear (straightforward) and nonlinear constraints (pp. 2, 30-31).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Same points and geometry steps; switching to least-Frobenius symmetric Broyden quadratic models cuts #F by more than 5x up to n=320.",
+    "pages": "pp. 27-30"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Theory collapses RHO/DELTA to a single never-increased rho; the resolution is lowered only after an unsuccessful TR step and a beta attempt that changes nothing (also evidence for Heuristic 4); Powell plans to restore the two-radius scheme.",
+    "pages": "pp. 5, 8-9, 30"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Maintaining Z = Y^{-1} in O(n^2) gives alternative steps, face distances and barycentric coordinates by closed formulas.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Parameters untuned and fixed, and theory sections written, before any calculation; surprise and possible weakness of test set stated.",
+    "pages": "pp. 27, 30"
+   },
+   {
+    "method": "Research Taste mark 5",
+    "relation": "variant",
+    "note": "Theory written for a simplified family explicitly less efficient than NEWUOA, not to enable a better code; theory and code decoupled.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "one-evaluation geometry maintenance",
+    "evidence": "Geometry conditions kept by single alpha/beta steps interleaved with TR steps rather than a separate model-improvement phase.",
+    "pages": "pp. 4, 6-8"
+   },
+   {
+    "pattern": "prove for a parameterized family, run one untuned member",
+    "evidence": "Every constant replaceable by any value in an interval; experiments use one member fixed in advance.",
+    "pages": "pp. 5-6, 27"
+   },
+   {
+    "pattern": "tiny explicit counterexample to justify an odd rule",
+    "evidence": "Example (6.10) in R^3 shows why exact TR steps are required when model errors vanish.",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "Bound interpolation-model gradient error by writing Lagrange functions as determinant ratios and sandwiching the determinant between prod sigma_i and prod ||y_i - y_0|| (pp. 9-13).",
+   "Keep a quantity bounded by a potential with a per-step increase bound plus a periodically forced repair step that removes more than the accumulated increase whenever the potential is large (pp. 15-16).",
+   "Use a monotonically shrinking, reset-on-success index set to turn the claim that repairs cannot go on for ever into an explicit count (pp. 13-14).",
+   "Drop the interpolation point with the largest barycentric coordinate of the new point; the volume ratio is then exactly that coordinate (pp. 7-8, 10, 17).",
+   "Evaluate a TR step only if predicted reduction exceeds gamma times the largest observed model error at the current radius; this replaces a sufficient-decrease test in the proof (p. 7, p. 23).",
+   "Fix all parameters and finish the theory before running experiments, and state this in the paper (p. 27).",
+   "Tell the reader which proofs can be skipped and structure lemmas so that this is true (pp. 13, 16, 20)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "These values were chosen before beginning the calculations reported below, so the parameters have not been tuned.",
+    "page": 27
+   },
+   {
+    "text": "The author had not expected the linear and quadratic models to perform so well when there are hundreds of variables. Perhaps the test functions (8.6) and (8.7) are too easy.",
+    "page": 30
+   }
+  ]
+ },
+ {
+  "id": "S108",
+  "year": "2013",
+  "title": "Beyond symmetric Broyden for updating quadratic models in minimization without derivatives",
+  "read_level": "full",
+  "contribution": "Generalizes the least-Frobenius (symmetric Broyden) model update to a semi-norm with a gradient term theta*||grad Q(v)||^2, implements it in BOBYQA in O(n^2) per iteration via truncated CG, and reports that it rarely helps in practice although it speeds asymptotic convergence in extreme-precision tests.",
+  "problem_entry": "Symmetric Broyden works well but its projection property only gives vanishing Hessian changes; a positive gradient weight would also give vanishing gradient changes, potentially enabling convergence theory without extra F values, and a 2-variable example shows theta=0 can yield Lagrange gradients of size M (pp. 1-6).",
+  "key_idea": "Update = least-squares projection in ||Q||_theta = {||Hess Q||_F^2 + 2 theta ||grad Q(v)||^2}^{1/2}, with v = x_{k+1} and theta = eta_k/(2 delta_k) balancing estimated term magnitudes, safeguarded so theta errs small; everything else in BOBYQA unchanged (pp. 2-4, 7-9).",
+  "assumptions": "No theorem; motivating identity needs quadratic F; experiments use BOBYQA with irrelevant bounds, m in {n+6, 2n+1}; section 5 uses homogeneous quadratics so rescaling avoids underflow; O(n^2) cost assumes m = O(n) (pp. 3-4, 10, 15, 24).",
+  "proof_devices": [
+   "Pythagoras identity for projection onto an affine set of quadratics, giving monotone model error and vanishing changes (p. 3)",
+   "closed-form solution of a 3-parameter example via first-order conditions and order-of-magnitude comparison in M (pp. 5-7)",
+   "scale-invariance argument: theta must scale like sigma^{-2} under x -> sigma x (pp. 7-8)",
+   "moving the theta*g term to the right-hand side of the KKT system so the stored inverse is theta-independent (p. 20)",
+   "||G||_F^2 = 2 mu^T A mu proves A PSD, hence I - theta Upsilon_v >= I, strictly convex subproblem and CG error <= gradient norm (pp. 20-21, 23-24)",
+   "base-point shift formula giving Upsilon_v products in O(n^2) without an O(n^3) inverse (pp. 21-23)",
+   "inexact solve followed by a minimum-Frobenius correction that restores interpolation exactly (p. 25)"
+  ],
+  "experiments": "Four versions (m in {n+6,2n+1} x theta in {0,>0}) on 75 problems (trig sum of squares, ARWHEAD with random permutations, chained Rosenbrock with random starts; n=20..320), min-max #F with all baselines rerun on the new code; outliers listed, a surprising cell rerun with 10 more starts; homogeneous quadratics to rho_end=10^-5000 to observe rates and Hessian error; one failure reported and excluded (pp. 10-17).",
+  "positioning": "Extends his own symmetric Broyden/NEWUOA/BOBYQA line; frames Conn-Scheinberg-Vicente neutrally as theory needing extra F values; uses Broyden-Dennis-More 1973 as the analogy for fast convergence without accurate Hessians (pp. 3-4, 13, 18).",
+  "writing": "Negative result stated in the abstract; algebraic example before algorithm; candid verdicts (disappointing, puzzled, world's worst); results flagged as not relevant to practical computation; open conclusion that it is too early to reject the idea (pp. 1, 11-14, 17).",
+  "limits_future": "theta > 0 seldom helps in practice and costs more than BOBYQA's update; no theory proved; section 5 setting artificial; future: automatic choice and adjustment of m, and use of theta > 0 in convergence theory (pp. 3, 13).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Powell tested the alternative norm himself and kept theta=0 for practice; Hessian error barely moves (<0.00025% per update at n=320) while x_fin is accurate, so least-change models work through curvature memory; resolves the unverified remark in Method 3 about other norms.",
+    "pages": "pp. 9, 11-14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "rho_end is a crude accuracy control; BOBYQA requires at least three new F values per rho before reducing it, which Powell notes excludes superlinear convergence.",
+    "pages": "pp. 10, 17"
+   },
+   {
+    "method": "Heuristic 2",
+    "relation": "evidence",
+    "note": "On ARWHEAD, m=n+6 often needs far fewer F values than m=2n+1.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Main difficulty was an accurate O(n^2) implementation; rescaling device against underflow; accuracy loss when ||y_j||/Delta_k > 10^7; stable factored updates retained.",
+    "pages": "pp. 1, 15-16, 22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Full min-max ranges, raw outlier values, extra runs to confirm a surprise, explicit failure report.",
+    "pages": "pp. 11-17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Exactly one change (theta) inside unchanged BOBYQA; theta=0 recovers the predecessor.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "BOBYQA had been sent by e-mail to about 200 people; extension keeps the same user data.",
+    "pages": "p. 10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "embed the incumbent as theta=0 of a one-parameter family and rerun it on the new code",
+    "evidence": "theta=0 recovers symmetric Broyden; all theta=0 results recomputed with the Appendix A procedure.",
+    "pages": "pp. 2, 10"
+   },
+   {
+    "pattern": "extreme-precision asymptotic experiment",
+    "evidence": "Homogeneity-based rescaling reaches ||x|| ~ 10^-5000 to expose rates of convergence.",
+    "pages": "pp. 4, 15"
+   },
+   {
+    "pattern": "publish the rejected alternative",
+    "evidence": "Negative practical result stated in the abstract, with reasons the question stays open.",
+    "pages": "pp. 1, 13"
+   },
+   {
+    "pattern": "tiny explicit counterexample to justify a design choice",
+    "evidence": "2-D examples (2.4) and (3.4) motivate theta > 0 and the lower bound on delta_{k+1}.",
+    "pages": "pp. 5-9"
+   }
+  ],
+  "transferable": [
+   "Use a scale-invariance calculation (x -> sigma x) to decide how a free weight must depend on the current length scale instead of tuning a constant (pp. 7-8).",
+   "Guard adaptive parameters against self-reinforcement: estimate the next theta from the theta=0 solution and damp with max[0.7*old, new] (p. 9).",
+   "Move a parameter-dependent term to the right-hand side of a KKT system so a stored factored inverse stays valid, then solve the small fixed-point system by truncated CG with an a posteriori error bound (pp. 20-21).",
+   "After an inexact solve, add the minimum-norm correction that restores hard constraints exactly (p. 25).",
+   "For rate experiments on homogeneous functions, store (sigma, 10^sigma x) and rescale when the radius drops, enabling accuracy far beyond floating-point range (p. 15).",
+   "When one table cell is surprisingly good, rerun that cell with 10 extra random instances and report both ranges (p. 12).",
+   "Show the raw values behind a suspicious min-max range so readers can tell an outlier from a spread (p. 12).",
+   "Put the negative result in the abstract and end with what could change the verdict (pp. 1, 13)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "A simple example suggests that the extension does bring some advantages, but numerical experiments on three test problems with up to 320 variables are disappointing.",
+    "page": 1
+   },
+   {
+    "text": "Therefore, although BOBYQA achieves good accuracy in xfin, it may be the world’s worst procedure for estimating second derivatives of objective functions.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S067",
+  "year": "2015",
+  "title": "On fast trust region methods for quadratic models with linear constraints",
+  "read_level": "full",
+  "contribution": "Records the design of LINCOA's O(n^2)-per-iteration step for a quadratic model under linear constraints and a trust region (active sets with near-active constraints plus projected truncated CG), proves finite termination of the procedure, and documents why Krylov-subspace steps and boundary searches were rejected.",
+  "problem_entry": "LINCOA must find a feasible point with small model value under linear constraints and a trust region in O(n^2) operations for hundreds of variables; model Hessians are inaccurate, so exact O(n^3) subproblem solves are not worthwhile (pp. 1-3).",
+  "key_idea": "Active-set truncated CG in the original variables with projected gradients; near-active constraints within eta2*Delta define the first direction (TOLMIN device) so blocked steps are long; active constraints imposed on increments; active set changed only away from the TR boundary; Krylov and boundary searches rejected after trial (pp. 8-25).",
+  "assumptions": "F computable at infeasible points; feasible start; possibly indefinite model Hessian available only via O(n^2) matvecs; model updating and model iterations out of scope; no outer convergence theorem (pp. 2-4, 30).",
+  "proof_devices": [
+   "finite CG per active set: failed relative-decrease test forces geometric growth of the model reduction, bounded on the trust region (p. 18)",
+   "finite number of active-set changes: each change multiplies the model reduction by at least (1 + eta1 eta2 / 4), using the guaranteed step length > eta2 Delta (pp. 18-19)",
+   "sign lemma from QP multipliers: d_perp^T grad Q = sum lambda_j r_j <= 0 (pp. 20-21)",
+   "hand-built 2-D and 3-D counterexamples with exact numbers exposing Krylov failures (pp. 11, 14-16)",
+   "shifted trust-region centre and radius after fixing an active set away from x_k, explaining when Krylov is unsuitable (pp. 27-28)",
+   "Krylov dominance over CG-with-boundary-search in the unconstrained case (pp. 25-26)"
+  ],
+  "experiments": "Points-in-triangle problem (3n/2 linear constraints, several local minima), n=10..320, 5 random starts, NPT=n+6 and 2n+1; LINCOA with vs without boundary searches; #F, #TRI and histogram of Hessian-vector products per iteration; boundary searches cost +27%/+7%/+35% #F in key rows (pp. 23-25).",
+  "positioning": "Assembles classical components (Gill-Murray active sets, Goldfarb-Idnani, More-Sorensen, Conn-Gould-Toint, own TOLMIN and NEWUOA) and his 2013 paper on model accuracy; no competing DFO solver discussed; states it is not a description of LINCOA (pp. 3, 7-10, 16, 29-30).",
+  "writing": "Abstract announces rejected techniques; paper structured as a decision record (attractive idea, counterexamples, relief, supporting tables, decision in 2013); worked examples to four decimals; motive for reporting failures stated in the last paragraph (pp. 1, 4, 15-16, 25, 30).",
+  "limits_future": "Model update and model iterations out of scope; one test family; LINCOA undocumented; future: theta-regularized Krylov step to restore monotonicity, Krylov possibly useful when active-set changes occur at the TR centre (pp. 26, 29-30).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Whole subproblem design driven by an O(n^2) budget; named device against tiny steps (eta2*Delta from TOLMIN); cancellation in the projected gradient shown harmless.",
+    "pages": "pp. 1-2, 5, 9-11"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "LINCOA adds active sets to NEWUOA's truncated CG and reuses TOLMIN's near-active set; NEWUOA's boundary search tried and removed rather than carried over.",
+    "pages": "pp. 4, 9, 16, 21, 25"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Mechanism argument for low-accuracy NPT=O(n) models (sub-level set avoids worse interpolation points); small NPT a welcome surprise.",
+    "pages": "pp. 3, 29-30"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Test problem with known local minima, both reported with F values; target regime stated, small n weighted less (also Heuristic 5).",
+    "pages": "pp. 23-25"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Some iterations may evaluate infeasible points, including equalities written as two inequalities.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "publish the rejected alternative",
+    "evidence": "About two years spent on techniques not included in the software, reported to help future research.",
+    "pages": "pp. 1, 30"
+   },
+   {
+    "pattern": "simplicity wins unless the cost is paid back",
+    "evidence": "Boundary search removed from LINCOA because measured #F and matvec counts did not justify it.",
+    "pages": "pp. 21, 25"
+   },
+   {
+    "pattern": "tiny explicit counterexample to justify a design choice",
+    "evidence": "2-D and 3-D examples with exact numbers isolating each Krylov failure mode.",
+    "pages": "pp. 11, 14-16"
+   },
+   {
+    "pattern": "cost histograms instead of totals",
+    "evidence": "Distribution of Hessian-vector products per outer iteration reported in bins [1,3], [4,10], [11,inf).",
+    "pages": "p. 24"
+   }
+  ],
+  "transferable": [
+   "Impose active constraints on step increments rather than positions, so nearly active constraints join the active set without a tiny step onto them (p. 9).",
+   "Build the first search direction from all constraints within eta2*Delta via a small QP, so any blocking constraint allows a step >= eta2*Delta; this also powers the finiteness proof (pp. 9-10, 18-19).",
+   "Prove finiteness of a nested procedure by showing each restart multiplies a bounded achieved reduction by a fixed factor > 1 (pp. 18-19).",
+   "When an attractive method misbehaves, find the smallest exact example that isolates the failure, then the geometric reason that predicts it (pp. 14-16, 27-29).",
+   "Report inner-solver cost as a histogram of expensive operations per outer iteration alongside #F (p. 24).",
+   "Report the different local minima found from different starts with their F values (p. 23).",
+   "Write a design paper as a decision record: what was tried, what killed it, when the decision was taken (pp. 4, 16, 25, 30)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "Most of the efforts of those investigations, which have taken about two years, were spent on promising techniques that have not been included in the software.",
+    "page": 30
+   },
+   {
+    "text": "The reason for giving so much attention to failures of the Krylov method is that our findings may be helpful to future research.",
+    "page": 30
+   }
+  ]
+ }
+]

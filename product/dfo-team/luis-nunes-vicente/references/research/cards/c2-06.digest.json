@@ -1,0 +1,198 @@
+[
+ {
+  "id": "S110",
+  "year": "2026",
+  "title": "Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Replaces the sufficient-decrease test of direct search with a max-M non-monotone test (compare the trial value with the max over the current and M-1 most recent successful iterates, minus c*delta^2) and proves O(eps^-2) iteration bounds for complete polling (worst case, O(n M eps^-2)), probabilistic descent (expectation) and a stochastic variant with independent estimates under a tail bound, via a new ordered-correction merit function and a renewal-reward stopping-time argument; CUTEst profiles show max-2 is most useful on problems with negative curvature (pp. 1, 4, 9-10, 13, 18-21).",
+  "problem_entry": "Monotone acceptance slows progress in narrow curved valleys (max-M line search remedy [21]); non-monotone DFO methods lacked complexity results, and no one had analysed max-M for direct search or any non-monotone method in stochastic DFO; concurrent NoMoDS uses a summable slack that needs tuning (pp. 2-4).",
+  "key_idea": "Change only the acceptance test to max{f(x^{M-1}_succ),...,f(x^1_succ),f(x_k)} - f(trial) >= c*delta_k^2, keep poll and gamma/theta step logic, and carry the analysis with Phi_k = max_i{f(x^i_succ) - c_i*delta_k^2, f(x_k)} - f* + eta*delta_k^2 whose decrease depends only on the current test (pp. 4-6, 10, 14).",
+  "assumptions": "f bounded below with L-Lipschitz gradient; p-probabilistically kappa-descent directions conditioned on the past; for the stochastic case P(eps_k >= 0 | F_{k+1/2}) >= p0 and P(eps_k >= b | F_{k+1/2}) <= beta*Delta_k^2/b on the estimated max-M decrease, with beta fixed by the merit constants; p ln gamma + (1-p) ln theta > 0 (pp*p0 in the stochastic case); sub-Gaussian averaging gives N_k = O(Delta_k^-4) (pp. 6-7, 11, 13, 15, 18, 28). Reader: a single uniform direction has p < 1/2, so the growth condition needs gamma*theta > 1, but experiments use gamma*theta = 1 with the unanalysed +-d poll (pp. 10, 19).",
+  "proof_devices": [
+   "explicit failure display of the naive merit function: Phi-hat increases by eta(gamma^2-1)delta_k^2 on a success (p. 5)",
+   "ordered-correction merit function Phi_k = max{f(x^{M-1}_succ) - c_{M-1}Delta_k^2, ..., f(x^1_succ) - c_1 Delta_k^2, f(x_k)} - f* + eta Delta_k^2 with 0 < c_1 < ... < c_{M-1} < eta (p. 5)",
+   "gap-equalizing constants c_i = (c/gamma^2)(1-gamma^{-2i})/(1-gamma^{-2M}) (probabilistic) and c_i = (i/M)c (complete poll), so every term in the min equals the same decrease (pp. 8-12; equal-gap check is the reader's)",
+   "merit function frozen at the step-size floor theta*delta_eps for the complete poll, so only successes are counted (pp. 7-9)",
+   "max/min algebra: max(a,x) - max(a,y) >= x - y and a - max(b,c) = min(a-b, a-c) (p. 13)",
+   "renewal-reward stopping-time framework of Blanchet et al. [5] as generalized in Ding et al. [12], verified through two listed conditions (p. 13)",
+   "half-step sigma-algebra F_{k+1/2} and tower property to multiply direction and oracle probabilities into p*p0 (pp. 15-16)",
+   "case split on the true decrease H_k with the false-acceptance loss capped by the tail bound, beta = half the unsuccessful decrease (pp. 16-18)",
+   "rejected alternative Psi_k = sum of M window maxima, with window-monotonicity Lemma A.1 and step ratio gamma^{2M-2}, whose decrease needs M past tests (pp. 25-27)",
+   "sample-size lemma: |max(a+e) - max a| <= max|e|, sum of errors, Markov, N_k >= sigma^2 (M+1)^2/(beta^2 Delta_k^4) (p. 28)"
+  ],
+  "experiments": "Two CUTEst sets (38 problems, n in {5,10,100}, from [17]; 53 problems, n 2-50, selected for detected negative curvature), performance profiles, gamma=2, theta=0.5, c=1, M in {2,5,10,20}, 1000 evaluations, 10 seeds, +-d poll; max-2 best among M; deterministic: monotone more efficient on Set 1, max-2 more robust on both; stochastic with Gaussian noise: theoretical (resample all M+1) vs practical (resample candidate only) scenarios, max-2 better on both sets only in the practical scenario; convergence test, noise level and code not given (pp. 18-21, 29).",
+  "positioning": "Non-monotone line-search lineage (Grippo-Lampariello-Lucidi, Dai, Zhang-Hager, Cartis-Sampaio-Toint) and noise-slack variants (Berahas-Byrd-Nocedal, Cao-Berahas-Scheinberg); credits Diniz-Ehrhardt-Martinez-Raydan as the first non-monotone DFO method; separates from concurrent NoMoDS by tuning burden; borrows Blanchet et al.'s stopping-time framework via the group's own sequential-test paper; claims first max-M DS and first stochastic non-monotone DFO analysis (pp. 2-4, 13).",
+  "writing": "Contribution paragraph displays the new inequality, then three settings, one O(eps^-2) bound and the 'main technical challenge'; a theorem-free design section (Sec. 2) shows the naive merit function failing before any algorithm; candid about the gamma^{2M} factor and resampling cost; several typos (pp. 1, 4-6, 14, 21).",
+  "limits_future": "Stated: geometric M-dependence possibly loose, performance degrades with M, resampling can offset gains, no geometry with a provable advantage; future: averaged non-monotone rules and max-M line-search and trust-region methods (pp. 14, 19, 21-22). Unstated: experiments run unanalysed variants with gamma*theta = 1, iteration-only bounds (no evaluation or sample complexity), only a monotone DS baseline, no code link.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Only the acceptance test changes (max-M); poll and step logic fixed; theory re-derived for three settings; price stated (factor M for complete poll, gamma^{2M} for probabilistic).",
+    "pages": "pp. 4, 6, 10, 14"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "SKILL lists this paper under Method 1 practice, but Algorithms 1-3 have no search step and wrap no heuristic; the move belongs to Method 4, so the citation should move.",
+    "pages": "pp. 6, 10, 14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "O(eps^-2) matched to monotone DS with explicit n for the complete poll and an optimality question about the M factor; but bounds are in iterations only (no evaluation/sample conversion) and the yardstick is monotone DS, not the gradient method.",
+    "pages": "pp. 4, 9-10, 13-14, 18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Single random direction with probabilistic descent; accuracy put on the estimated decrease G_k vs H_k, not on each value; growth threshold on (p, gamma, theta). Reader: the experimental gamma*theta = 1 violates the single-direction threshold (Method 3 step 5).",
+    "pages": "pp. 10, 13, 15, 18-19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "CUTEst sets, profiles, 10 seeds and an M ablation, but only an in-house monotone baseline, no code link, unstated convergence test.",
+    "pages": "pp. 18-21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "negative example for the rejected alternative",
+    "evidence": "Naive merit function Phi-hat shown to increase on a success; alternative Psi_k kept in Appendix A and rejected for the stochastic case because its decrease needs M past tests.",
+    "pages": "pp. 5, 14, 25-27"
+   },
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "The +-d 'practical version' and the 'practical scenario' without resampling are labelled as departures from the analysed algorithms; the growth-condition gap (gamma*theta = 1) is not disclosed.",
+    "pages": "pp. 10, 19-20"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Monotone DS more efficient on Set 1 and better in the theoretical stochastic scenario on Set 1; resampling 'can offset its benefits'; performance deteriorates with M.",
+    "pages": "pp. 19-21"
+   },
+   {
+    "pattern": "mechanism-targeted test set",
+    "evidence": "Second CUTEst set chosen because a second-order method detected negative curvature, the property max-M acceptance is meant to exploit.",
+    "pages": "pp. 18-19"
+   },
+   {
+    "pattern": "local-decrease merit function for the stochastic extension",
+    "evidence": "Merit function designed so its decrease depends only on the current acceptance test, which is what makes the stochastic analysis possible.",
+    "pages": "pp. 4, 14"
+   }
+  ],
+  "transferable": [
+   "Lyapunov function for a max-over-memory acceptance test: subtract ordered multiples c_i*Delta^2 from stored values and choose c_i so all gap terms in the min are equal (pp. 5, 11-12).",
+   "Show in one display that the natural merit function increases on a successful step before introducing the corrected one (p. 5).",
+   "When the step size has a deterministic floor, freeze the merit function's step term at that floor so it is constant on failures and only successes are counted (pp. 7-9).",
+   "For stochastic acceptance, split on whether the true decrease exceeds a threshold and cap false-acceptance loss with a tail bound whose constant equals half the unsuccessful decrease (pp. 16-18).",
+   "Reuse a stopping-time theorem as a black box by listing and verifying its two conditions before the theorem (p. 13).",
+   "Add a test set selected for the mechanism the method targets (negative curvature) next to a generic set (pp. 18-19).",
+   "Run the analysed variant and an equal-cost practical variant side by side and say which one the theory covers (p. 20)."
+  ],
+  "coauthors": "A. Ding (Lehigh ISE); Trang H. Tran (Emory; work done as a Lehigh postdoc)",
+  "quotes": [
+   {
+    "text": "Most importantly, this merit function allows for a decrease which only depends on the acceptance condition at the current iteration.",
+    "page": 4
+   },
+   {
+    "text": "The geometric factor is a consequence of the particular feasible correction coefficients used here, not a lower bound for every max-M method; hence, the possibility of sharper coefficients is open.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S111",
+  "year": "2026",
+  "title": "Stochastic block coordinate and function alternation for multi-objective optimization and learning",
+  "read_level": "full",
+  "contribution": "Proposes Block-SMOO, which alternates both variable blocks (outer loop over a block permutation) and objectives (p = sum m_k single-objective stochastic partial-gradient steps per block), shows that it targets the weighted sum F_m = sum (m_k/p) f_k, proves O(1/sqrt(T)) non-convex and convex rates and O(1/T) under PL per outer iteration, and reports reduced-rank regression experiments plus a 231-run Pareto-front comparison with weighted-sum SGD (pp. 3-5, 6-9, 9-13).",
+  "problem_entry": "Stochastic multiobjective learning with block-structured variables; multi-gradient methods need gradients in all variables every iteration; no prior analysis alternates both functions and blocks ([33] only functions, two objectives, convex; [9] scalarizes without theory; stochastic BCD [50] only asymptotic non-convex) (pp. 1-3, 7).",
+  "key_idea": "Step frequencies are scalarization weights: allocating m_k of every p inner SGD steps (on one block, one objective each) to f_k makes a cycle a perturbed gradient step on F_m; the method reduces to stochastic BCD (q=1), function alternation (s=1) and SGD (s=q=1) (pp. 4-5).",
+  "assumptions": "Each f_k L-smooth, F_m bounded below; unbiased stochastic (partial) gradients with E||grad g_k||^2 <= sigma^2 at every x; convex f_k with bounded outer iterates (or projection); PL on F_m over R^n; front guarantee needs all f_k convex (pp. 5-8). Reader: bounded gradients plus global PL force F_m - F* <= sigma^2/(2 mu) everywhere, and the reduced-rank test objectives are non-convex with unbounded gradients.",
+  "proof_devices": [
+   "per-inner-step descent lemma telescoped over (i, j) with error term A_t for evaluating at intermediate instead of cycle-start points (pp. 15-16)",
+   "drift bound E||x^{t,i,j+1} - x^{t,i,j}|| <= alpha_t sigma accumulated along the cycle (Lemma A.1(b), p. 14)",
+   "-a^2 <= -1/2 b^2 + (a-b)^2 to move the gradient from x^{t,i,0} to x^{t,0,0}, with ||sum a_i||^2 <= n sum ||a_i||^2 giving the s^3 p^2 constant (p. 16)",
+   "random output iterate sampled uniformly from outer iterates (p. 6-7)",
+   "distance recursion with drift term B_t <= 1/2 alpha_t sigma (Delta L + sigma) s^2 p^2 and bounded iterates for the convex case (pp. 17-19)",
+   "PL recursion with alpha_t = 2/(mu(t+1)), multiply by t(t+1) and telescope (pp. 8-9)",
+   "reader: factor-p slip in the displayed identity defining A_t (p. 15); fix via -alpha p ||.||^2 <= -alpha ||.||^2, result unaffected"
+  ],
+  "experiments": "Reduced-rank regression as q objectives: synthetic (d=400, q=5, rank 3, noise 0.05) and UCI Beijing air quality (6 pollutants, d=35, chronological 70/30); baselines Weighted-Sum SGD, Function-Alternate (s=1), Block-Alternate (q=1) on the equal-weight sum; m_k=2 from {1,2,4,8}; best block partition per method; batch 512; step size picked by lowest final test loss; fixed wall-clock budgets 2 s/4 s; 10 seeds; Block-SMOO fastest early descent. Pareto: 3 pollutants, 231 runs per method, purity 0.69 vs 0.51, Gamma spread favours Weighted-Sum, Delta similar (pp. 9-13).",
+  "positioning": "a priori / a posteriori taxonomy with the method in both; stochastic multi-gradient bias [34, 41] and non-convex follow-ups; BCD from Beck-Tetruashvili, Nesterov, Xu-Yin to variance-reduced cyclic BCD; every rate stated as recovering SGD/BCD/[34]; closest work is the group's own [33], [34]; DMS [12] supplies metrics; citation slip [34] for [33] on pp. 8-10 (pp. 2-3, 7-10, 13, 21).",
+  "writing": "Contribution paragraph leads with the algorithm, 'recovers the classical convergence rates' and per-iteration cost; proofs in appendix with in-text sketches displaying the key recursion; light hedging ('in a certain sense'); slips including O(1/T^{1/2}) printed for the PL rate on p. 9 and 'an better rate' (pp. 2-3, 6-9, 13).",
+  "limits_future": "Stated: fixed two-loop order (reverse not covered), Gauss-Seidel only (Jacobi parallel future), smooth only (non-smooth MOO future) (p. 13). Unstated: rates per outer iteration with undiscussed p^2 s^3 constants, bounded-gradient assumption with PL, convexity required for the front but non-convex test problem, weighted-sum sweeps miss non-convex front parts, no code link.",
+  "method_links": [
+   {
+    "method": "Heuristic 4",
+    "relation": "contradiction",
+    "note": "Minimizes a weighted sum F_m with weights implemented as step frequencies and builds the front by sweeping m; authors place it in both a priori and a posteriori camps; with S017 and the knee work, the ML-facing MOO line accepts scalarization.",
+    "pages": "pp. 2, 4, 8, 11"
+   },
+   {
+    "method": "Workflow E",
+    "relation": "evidence",
+    "note": "This is the block/function-alternation branch for stochastic gradients, evaluated with purity and spread Gamma/Delta; the Workflow E checkpoint on fixed weights and non-convex fronts applies to its own non-convex test.",
+    "pages": "pp. 4, 9, 12-13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Yardstick is recovering single-objective SGD/BCD rates, but the unit is outer iterations (s*p partial gradients each), constants in s and p are not discussed, and experiments count wall-clock seconds.",
+    "pages": "pp. 1, 6-11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "SGD skeleton kept and the proof carries over, but the changed object is the update schedule (which function, which block), not an acceptance test.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Class-native Pareto metrics, 10 seeds, tuned baselines and a real dataset, but no problem collection, no profiles, no code link and step size selected on test loss.",
+    "pages": "pp. 10-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "Block-SMOO reduces to stochastic BCD (q=1), function alternation (s=1) and SGD (s=q=1).",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Weighted-Sum achieves the better Gamma spread in Table 1.",
+    "pages": "pp. 12-13"
+   },
+   {
+    "pattern": "scalarization weights as step frequencies",
+    "evidence": "Weights m_k/p are realized by allocating inner SGD steps to objectives rather than by combining gradients; the implied weighted function is stated explicitly.",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "Analyse an alternating or cyclic SGD scheme as one aggregate gradient step plus a drift error bounded by (inner steps so far) x alpha x sigma, absorbed as O(alpha^2) per cycle (pp. 15-16).",
+   "Use -a^2 <= -1/2 b^2 + (a-b)^2 to move a descent term from an intermediate point to the cycle start (p. 16).",
+   "Derive the PL rate from the non-convex one-cycle recursion by substituting the PL inequality, alpha_t = 2/(mu(t+1)), multiplying by t(t+1) and telescoping (pp. 8-9).",
+   "Encode preference weights as integer step allocations summing to p and trace the front by enumerating all compositions of p (231 for p=20, q=3), scoring with purity and spread (pp. 4, 11-13).",
+   "List the parameter settings under which the algorithm collapses to known methods, as sanity check and positioning in one paragraph (p. 5).",
+   "When per-iteration costs differ, compare under a fixed wall-clock budget with losses recorded at fixed time intervals (pp. 10-11)."
+  ],
+  "coauthors": "T. H. Tran (Lehigh ISE)",
+  "quotes": [
+   {
+    "text": "The alternating optimization algorithms proposed in this paper belong, in a certain sense, to both categories.",
+    "page": 2
+   },
+   {
+    "text": "Notably, as each update of our method only involves one objective function and one block of variables, it incurs a lower computational cost per iteration compared to standard full-gradient approaches like the weighted-sum methods [21, 34].",
+    "page": 3
+   }
+  ]
+ }
+]

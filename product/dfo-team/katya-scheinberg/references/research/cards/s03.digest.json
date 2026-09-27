@@ -1,0 +1,77 @@
+[
+ {
+  "id": "S073",
+  "year": "2022",
+  "title": "Finding optimal policy for queueing models: New parameterization",
+  "read_level": "full",
+  "contribution": "Proposes a log-scale softmax policy parameterization for model-free RL on a single-server parallel queue, justified by proofs that the optimal c-mu priority policy is reached only by diverging (possibly exponentially growing) linear parameters and that positive parameters lose no policies, and compares finite-difference and REINFORCE gradient estimators at equal sample cost inside the group's noisy Armijo line search (ALOE).",
+  "problem_entry": "Entry from understanding rather than a new method: RL's optimisation process is poorly understood, so use a queueing problem whose optimal policy is known analytically (c-mu rule) to study estimator and parameterization choices; gaps named: prior RL for queueing is model-based, REINFORCE not compared side by side with other estimators, parameterization effects unexplored (pp. 1-3, 6).",
+  "key_idea": "Linear softmax policy pi(A)=softmax(As) can approach the deterministic priority policy only as entries diverge like (Q+1)^i k, so reparameterize A = e^B (log scale), using softmax shift invariance to make A positive; keep standard FD/REINFORCE estimators and the ALOE Armijo-with-2eps_f-slack line search unchanged (pp. 4-7).",
+  "assumptions": "Poisson arrivals, exponential service, one preemptive server with idle action, uniformization, finite buffer (Q = 100); c-mu optimality (Theorem 1) needs infinite buffer and rho < 1, with finite-buffer near-optimality only expected; no smoothness or oracle-accuracy assumptions derived for J or the estimators, ALOE guarantees cited only (pp. 3-4, 7, 11).",
+  "proof_devices": [
+   "base-(Q+1) weighting (Q+1)^{m-i} turns a lexicographic priority rule into a linear score over bounded integer states, then softmax(k*y) -> unit vector as k -> infinity (proof of Theorem 2, p. 10)",
+   "non-attainability with bounded parameters via a softmax denominator bound (m+1)e^{mRQ} forcing wrong-action probabilities away from 0 (proof of Theorem 2, p. 10)",
+   "softmax shift invariance: adding mu to every entry of A adds mu*sum(s) to every logit, so mu = 1 - min A_ij gives an equivalent positive matrix (Theorem 3, p. 11)"
+  ],
+  "experiments": "OpenAI gym, m = 3, Q = 100, four loads rho = 1/3, 2/3, 1, 11/6; ALOE for 2000 iterations from A = 0, T = 100, n = 20 paths, PG given N = [m(m+1)+1]n paths to match FD's 12 directions; grid-searched hyperparameters per setting, 5 seeds; metrics best normalized cost and correct-action rate vs the priority policy; plus a covariance probe of both estimators at the random and priority policies; FD step u, arrival rates and holding costs not reported (pp. 6-9, 11).",
+  "positioning": "Positions against model-based RL for queueing (Liu et al. 2019; Dai-Gluzman 2020), Krishnasamy et al.'s greedy c-mu learning, and TRPO/PPO as more complex methods without guarantees; relies on own group's ALOE [Berahas et al. 2019] and Jin et al. 2021; the FoCM 2022 estimator comparison is not cited (pp. 1-3, 7, 12-14).",
+  "writing": "Three contribution bullets at the end of the introduction (p. 2); each theorem followed by an interpretation paragraph (p. 5); key claims hedged (the smoother-landscape benefit of the log scale and the extension to other queueing systems and RL are stated as possibilities or beliefs) (pp. 3, 5); short workshop-style paper with proofs in an appendix (pp. 10-11).",
+  "limits_future": "No limitations or future-work section, conclusion restates findings (p. 9); unstated: rho = 1 and 11/6 settings lie outside Theorem 1's rho < 1, reported best costs fall below the optimal-policy CI in two settings while figures plot the minimum over noisy estimates, only m = 3, per-setting tuning, ALOE oracle conditions unchecked (pp. 3-4, 7-8, 11).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "FD and REINFORCE compared at equal per-iteration sample cost inside the same outer method, with the reason such comparisons are rare stated (estimators bundled with custom algorithms); weaker than core papers: empirical covariances and best cost, not derived sample-to-accuracy bounds.",
+    "pages": "pp. 6-7, 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "The group's Armijo line search with a noise slack (ALOE) reused unchanged as an estimator-agnostic outer method, chosen over RL-specific TRPO/PPO.",
+    "pages": "pp. 2, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Oracle contract invoked only by citation (ALOE allows biased oracles); no accuracy/probability derived for FD or PG in this setting.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Structure exploited is the known form of the optimal solution (deterministic priority policy) plus softmax shift invariance, used to design the parameterization rather than to model objective components.",
+    "pages": "pp. 1, 5, 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "known-optimum testbed",
+    "evidence": "Studies optimizer and estimator choices on a queueing problem whose optimal policy is known analytically, and reports agreement with it (correct-action rate) besides cost.",
+    "pages": "pp. 1, 3, 8-9"
+   },
+   {
+    "pattern": "reparameterize along the path to the optimum",
+    "evidence": "Proves the optimum is reached only as linear parameters diverge (possibly exponentially in m), then switches to a log-scale parameterization whose path grows like ln k.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Match per-iteration sample budgets across estimators: with d finite-difference directions and n paths per function estimate, give the likelihood-ratio estimator (d+1)n paths (p. 11).",
+   "Probe estimator covariance at the starting point and at the known optimum before running the optimizer (pp. 6-7).",
+   "Use an estimator-agnostic adaptive method (Armijo with noise slack) as a harness so only the estimator changes between runs (pp. 6-7).",
+   "When a softmax policy reaches a deterministic optimum only at infinity, shift weights positive (shift invariance) and reparameterize them as exponentials (pp. 5, 11).",
+   "To show a linear score realizes a lexicographic priority over bounded integer states, weight coordinate i by (Q+1)^{m-i} (p. 10)."
+  ],
+  "coauthors": "T. H. Tran, L. M. Nguyen",
+  "quotes": [
+   {
+    "text": "Applying this method for optimization when the optimal policy is known helps us gain knowledge about different gradient estimators and compare their performance.",
+    "page": 3
+   },
+   {
+    "text": "Both of these gradient estimators have been popular in the literature, however, as far as we know they have not been compared side by side. The main reason for this is that they are typically implemented within algorithms customized the the specific choice of first order oracle.",
+    "page": 6
+   }
+  ]
+ }
+]

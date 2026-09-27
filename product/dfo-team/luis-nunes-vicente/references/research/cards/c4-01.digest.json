@@ -1,0 +1,145 @@
+[
+ {
+  "id": "S122",
+  "year": "2023",
+  "title": "SIAG on Optimization Views and News",
+  "read_level": "full",
+  "contribution": "Vicente's signed opening Chair's Column (Views and News 31(1), Dec 2023, pp. 23-24; the rest of the issue is by other authors and is not attributed to him). It thanks the outgoing board, reports SIOPT 2023 figures, announces an open call to select the SIOPT 2026 site, and asks for structured proposals for on-line mini-courses after the idea of social hours was dropped (pp. 23-24).",
+  "problem_entry": "A new chair's first column. It opens with thanks to the past officers (Scheinberg, Burer, Linderoth, Wild), credits them with the Test of Time prize, then covers three items: the SIOPT 2023 report, how to choose the 2026 site, and which SIAG activities to run besides the conference (pp. 23-24).",
+  "key_idea": "Governance by open call and consultation: a call posted on SIAM Engage and other forums to 'better identify and select' the 2026 location; three activity options discussed, social hours dropped for lack of enthusiasm, mini-course suggestions requested with named fields, and a questionnaire only 'if there is a need to sense a majority of opinions' (pp. 23-24).",
+  "assumptions": "n/a (service column; no mathematical model). Procedural premise: gather proposals first and use a questionnaire only if a majority view is needed (p. 24).",
+  "proof_devices": [],
+  "experiments": "none (the only numbers are SIAM-provided SIOPT 2023 figures: 1,220 attendees against a previous peak of 694, split 3%/16%/81%, 336 minisymposia, 24 sessions in parallel; p. 23)",
+  "positioning": "Credits people by name and role (past and new board, organizers, SIAM staff Gawel and Moore, newsletter editors Belotti, Drusvyatskiy and Menickelly). His only self-reference is his own term as newsletter editor, 2003-2008. No research topic or feature article is mentioned (pp. 23-24).",
+  "writing": "Letter form, framed by gratitude ('my first words go to', p. 23; 'My final words go to', p. 24), with a bulleted statistics block and a call to action in between. Warm, exclamatory register with first-name address and the sign-off 'Luis'; 'I' for thanks, 'we' for decisions (pp. 23-24).",
+  "limits_future": "No limitation stated. Future items: strong proposals for the 2026 site and mini-course ideas (p. 24). The postscript that reproduces the call is announced (pp. 23-24) but is absent from the text file (not read).",
+  "method_links": [
+   {
+    "method": "Methods 1-5",
+    "relation": "evidence",
+    "note": "none evidenced: the service column has no research content",
+    "pages": "pp. 23-24"
+   },
+   {
+    "method": "Research Trajectory (Latest: Service)",
+    "relation": "evidence",
+    "note": "'our new board' and the signature 'Chair, SIAG on Optimization' date the start of the chair term to late 2023; a signed primary statement confirms the 2003-2008 newsletter editorship that a3-01 took from the SIAG/OPT website",
+    "pages": "pp. 23-24"
+   },
+   {
+    "method": "Mentor Voice (register)",
+    "relation": "variant",
+    "note": "service writing is warm, exclamatory and uses first names, unlike the 'formal and precise' register SKILL.md infers from the papers",
+    "pages": "p. 23"
+   },
+   {
+    "method": "Honest Boundary (tacit-knowledge gap)",
+    "relation": "variant",
+    "note": "first primary evidence of how he runs a collective decision (discussion, options, prune, structured request, questionnaire if needed); about a SIAG board, not a research group",
+    "pages": "p. 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "community stewardship record",
+    "evidence": "Chair's Column as first-term agenda; newsletter editor 2003-2008; compare H001 guest editorial (s2-02). Non-research; belongs with the SIAM Fellow citation, not the Methods",
+    "pages": "pp. 23-24"
+   },
+   {
+    "pattern": "consult, prune, then solicit structured proposals",
+    "evidence": "three options from the business meeting; social hours dropped; mini-course suggestions requested with topic, timeliness, instructors, duration and audience; questionnaire only if needed",
+    "pages": "p. 24"
+   }
+  ],
+  "transferable": [
+   "In a call for proposals, list the fields every proposal must contain (topic, why it is timely, instructors, duration, audience) so that the replies come back comparable (p. 24).",
+   "When reporting participation, give a baseline and a breakdown of overlapping populations, not just a total (1,220 against the previous peak of 694; 3%/16%/81%) (p. 23).",
+   "When you consult a group, report the option you dropped and why, and say when a formal vote would be used (p. 24)."
+  ],
+  "coauthors": "none for the column (signed by Vicente alone as SIAG/OPT Chair, p. 24); Scholar-listed H. Lu, S. Cen and Y. Chi wrote the issue's feature articles",
+  "quotes": [
+   {
+    "text": "In our SIOPT 2023 business meeting, we have decided to launch a call to better identify and select the location of our 2026 SIAM Conference on Optimization.",
+    "page": 23
+   },
+   {
+    "text": "Please include the topic, why the topic is timely, potential instructors, approximate duration, and potential interested audience.",
+    "page": 24
+   }
+  ]
+ },
+ {
+  "id": "S121",
+  "year": "2025",
+  "title": "SIAG on Optimization Views and News",
+  "read_level": "full",
+  "contribution": "Vicente's signed closing Chair's Column (Views and News 33(1), Dec 2025, p. 14; the rest of the issue is by other authors and is not attributed to him). It is an end-of-term report on membership, MOPTA and Summer School sponsorship at Lehigh, the permanent $25,000 endowment of the Test of Time Award, nomination counts for the 2026 prizes, and the selection of Edinburgh for SIOPT 2026 after an open international call (p. 14).",
+  "problem_entry": "An end-of-term report. It opens with the verdict 'continued progress and consolidation' and a field-level framing: scalable stochastic methods, MINLP, and the optimization-quantum interface reinforce optimization's role in scientific computing, data science and ML (p. 14).",
+  "key_idea": "Five run-in sections (Membership, Sponsored Events, Prizes, 2026 Conference, Acknowledgements), each stating what the board did with a count. The claimed 'major accomplishment' is the permanent endowment of the Test of Time Award; the open call announced in S122 is closed by the choice of Edinburgh (p. 14).",
+  "assumptions": "n/a (service column; no mathematical model). The membership dip and rebound are asserted without figures (p. 14).",
+  "proof_devices": [],
+  "experiments": "none (counts only: $25,000; 23/14/20 prize nominations; ~140 MOPTA participants per year; close to 1,500 talks; p. 14)",
+  "positioning": "Places SIAG/OPT among neighbouring SIAGs (CSE, Data Science, ACDA, Imaging Science, Mathematics of Planet Earth). Names research priorities only at field level, stochastic methods first, and does not mention DFO. Credits the officers and the SIOPT 2026 leaders (Anjos, Eichfelder, Schewe). Both events named were at Lehigh, his institution (p. 14).",
+  "writing": "Report format with run-in headings; board 'we' throughout, 'I' only in the thanks; counts come before enthusiasm markers ('truly phenomenal response', 'close to 1,500 talks!'); little hedging ('we anticipate') (p. 14).",
+  "limits_future": "No limitation stated. The 2023 on-line mini-course solicitation (S122 p. 24) is not mentioned, so its outcome is undocumented here. Future items: prizes to be awarded at SIOPT 2026 in Edinburgh and the new officers' 2026-2028 term (p. 14).",
+  "method_links": [
+   {
+    "method": "Methods 1-5",
+    "relation": "evidence",
+    "note": "none evidenced: the service column has no research content",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Inner Tension: DFO core vs the ML pivot",
+    "relation": "evidence",
+    "note": "weak and field-level: a signed own-words statement puts 'scalable stochastic methods' first and places optimization's role in data science and ML, but it speaks for the SIAG and does not explain his personal move; SKILL.md's 'no own-words explanation' still stands",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Research Trajectory (Latest: Service)",
+    "relation": "evidence",
+    "note": "'The past three years' and the handover to the '2026-2028 term' confirm the 2023-2025 chair term",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Research Trajectory (Lehigh period)",
+    "relation": "evidence",
+    "note": "weak: Lehigh-hosted MOPTA and a 2023 Gene Golub Summer School on optimization with a quantum-computing focus are part of his SIAG work; a service signal, not research",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Mentor Voice (register)",
+    "relation": "variant",
+    "note": "warm, but in report form; weaker than S122",
+    "pages": "p. 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "community stewardship record",
+    "evidence": "permanent endowment of the Test of Time Award through $25,000 fundraising; site selection by open international call; website and newsletter kept up to date",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "prize as long-horizon quality signal",
+    "evidence": "the term's 'major accomplishment' is the permanent endowment of the award for sustained impact; the 10-year criterion is in an unsigned bulletin (S122 p. 23) and is not attributed to him",
+    "pages": "p. 14"
+   }
+  ],
+  "transferable": [
+   "Write an end-of-term report with one heading per activity, and under each state what was done with a count (p. 14).",
+   "To show that a community is engaged, report counts per category (nominations per prize: 23/14/20) before any adjective (p. 14)."
+  ],
+  "coauthors": "none for the column (signed by Vicente alone as SIAG/OPT Chair, p. 14); Scholar-listed J. Diakonikolas, D. Drusvyatskiy, M. Menickelly and P. Belotti are the lead author and the editors of other items in the issue",
+  "quotes": [
+   {
+    "text": "Optimization continues to evolve through major research developments—ranging from scalable stochastic methods to enhanced capabilities in mixed-integer nonlinear programming, and early progress at the interface of optimization and quantum computing.",
+    "page": 14
+   },
+   {
+    "text": "Through a $25,000 fundraising effort supported by numerous institutions and individuals, we ensured the long-term sustainability of this important recognition for impactful research contributions in optimization.",
+    "page": 14
+   }
+  ]
+ }
+]

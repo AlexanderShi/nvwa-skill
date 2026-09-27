@@ -1,0 +1,2897 @@
+{
+ "researcher": "Katya Scheinberg",
+ "scholar_user": "zbqRbOkAAAAJ",
+ "harvested": "2026-09-27",
+ "source_note": "Google Scholar profile + DBLP + Crossref (DBLP read via sparql.dblp.org because the dblp.org search/pid API is behind an Anubis bot wall; extra arXiv ids from the DataCite arXiv DOI registry). Audited 2026-09-27: re-read the Scholar profile sorted by year (143 rows, all present here); all 65 DOIs checked against Crossref and all 46 arXiv ids against arxiv.org/abs (all correct); venue of S126 and S046 and title of S106 corrected from Crossref+DBLP/Scholar agreement",
+ "works": [
+  {
+   "id": "S001",
+   "title": "Introduction to derivative-free optimization",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "Society for Industrial and Applied Mathematics",
+   "year": 2009,
+   "cites": 2876,
+   "doi": "10.1137/1.9780898718768",
+   "arxiv": null,
+   "urls": [
+    "https://dblp.org/rec/books/daglib/0022247",
+    "https://doi.org/10.1137/1.9780898718768"
+   ],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S002",
+   "title": "SARAH: A novel method for machine learning problems using stochastic recursive gradient",
+   "authors": "LM Nguyen, J Liu, K Scheinberg, M Takáč",
+   "venue": "International conference on machine learning",
+   "year": 2017,
+   "cites": 961,
+   "doi": null,
+   "arxiv": "1703.00102",
+   "urls": [
+    "http://proceedings.mlr.press/v70/nguyen17b.html",
+    "https://dblp.org/rec/conf/icml/NguyenLST17",
+    "https://arxiv.org/abs/1703.00102",
+    "https://dblp.org/rec/journals/corr/NguyenLST17"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S003",
+   "title": "Efficient SVM training using low-rank kernel representations",
+   "authors": "S Fine, K Scheinberg",
+   "venue": "Journal of machine learning research",
+   "year": 2001,
+   "cites": 897,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://jmlr.org/papers/v2/fine01a.html",
+    "https://dblp.org/rec/journals/jmlr/FineS01"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S004",
+   "title": "Recent progress in unconstrained nonlinear optimization without derivatives",
+   "authors": "AR Conn, K Scheinberg, PL Toint",
+   "venue": "Mathematical programming",
+   "year": 1997,
+   "cites": 398,
+   "doi": "10.1007/bf02614326",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/bf02614326",
+    "https://dblp.org/rec/journals/mp/ConnST97"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S005",
+   "title": "Fast alternating linearization methods for minimizing the sum of two convex functions",
+   "authors": "D Goldfarb, S Ma, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 2013,
+   "cites": 340,
+   "doi": "10.1007/s10107-012-0530-2",
+   "arxiv": "0912.4571",
+   "urls": [
+    "https://arxiv.org/abs/0912.4571",
+    "https://dblp.org/rec/journals/corr/GoldfarbMS09",
+    "https://doi.org/10.1007/s10107-012-0530-2",
+    "https://dblp.org/rec/journals/mp/GoldfarbMS13"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S006",
+   "title": "A theoretical and empirical comparison of gradient approximations in derivative-free optimization",
+   "authors": "AS Berahas, L Cao, K Choromanski, K Scheinberg",
+   "venue": "Foundations of Computational Mathematics",
+   "year": 2022,
+   "cites": 327,
+   "doi": "10.1007/s10208-021-09513-z",
+   "arxiv": "1905.01332",
+   "urls": [
+    "https://doi.org/10.1007/s10208-021-09513-z",
+    "https://dblp.org/rec/journals/focm/BerahasCCS22",
+    "https://arxiv.org/abs/1905.01332"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S007",
+   "title": "Global convergence of general derivative-free trust-region algorithms to first-and second-order critical points",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2009,
+   "cites": 321,
+   "doi": "10.1137/060673424",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/060673424",
+    "https://dblp.org/rec/journals/siamjo/ConnSV09"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S008",
+   "title": "On the convergence of derivative-free methods for unconstrained optimization",
+   "authors": "AR Conn, K Scheinberg, PL Toint",
+   "venue": "Approximation theory and optimization: tributes to MJD Powell",
+   "year": 1997,
+   "cites": 301,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S009",
+   "title": "SGD and Hogwild! convergence without the bounded gradients assumption",
+   "authors": "L Nguyen, PH Nguyen, M Dijk, P Richtárik, K Scheinberg, M Takáč",
+   "venue": "International Conference on Machine Learning",
+   "year": 2018,
+   "cites": 293,
+   "doi": null,
+   "arxiv": "1802.03801",
+   "urls": [
+    "http://proceedings.mlr.press/v80/nguyen18c.html",
+    "https://dblp.org/rec/conf/icml/NguyenNDRST18",
+    "https://arxiv.org/abs/1802.03801",
+    "https://dblp.org/rec/journals/corr/abs-1802-03801"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S010",
+   "title": "Sparse inverse covariance selection via alternating linearization methods",
+   "authors": "K Scheinberg, S Ma, D Goldfarb",
+   "venue": "Advances in neural information processing systems",
+   "year": 2010,
+   "cites": 268,
+   "doi": null,
+   "arxiv": "1011.0097",
+   "urls": [
+    "https://arxiv.org/abs/1011.0097",
+    "https://dblp.org/rec/journals/corr/abs-1011-0097",
+    "http://papers.nips.cc/paper/4099-sparse-inverse-covariance-selection-via-alternating-linearization-methods",
+    "https://proceedings.neurips.cc/paper/2010/hash/2723d092b63885e0d7c260cc007e8b9d-Abstract.html",
+    "https://dblp.org/rec/conf/nips/ScheinbergMG10"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S011",
+   "title": "Efficient block-coordinate descent algorithms for the group lasso",
+   "authors": "Z Qin, K Scheinberg, D Goldfarb",
+   "venue": "Mathematical Programming Computation",
+   "year": 2013,
+   "cites": 261,
+   "doi": "10.1007/s12532-013-0051-x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s12532-013-0051-x",
+    "https://dblp.org/rec/journals/mpc/QinSG13"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S012",
+   "title": "Stochastic optimization using a trust-region method and random models",
+   "authors": "R Chen, M Menickelly, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 2018,
+   "cites": 239,
+   "doi": "10.1007/s10107-017-1141-8",
+   "arxiv": "1504.04231",
+   "urls": [
+    "https://doi.org/10.1007/s10107-017-1141-8",
+    "https://dblp.org/rec/journals/mp/ChenMS18",
+    "https://arxiv.org/abs/1504.04231"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S013",
+   "title": "Convergence rate analysis of a stochastic trust-region method via supermartingales",
+   "authors": "J Blanchet, C Cartis, M Menickelly, K Scheinberg",
+   "venue": "INFORMS journal on optimization",
+   "year": 2019,
+   "cites": 229,
+   "doi": "10.1287/ijoo.2019.0016",
+   "arxiv": "1609.07428",
+   "urls": [
+    "https://doi.org/10.1287/ijoo.2019.0016",
+    "https://dblp.org/rec/journals/informsjop/BlanchetCMS19",
+    "https://arxiv.org/abs/1609.07428"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S014",
+   "title": "Global convergence rate analysis of unconstrained optimization methods based on probabilistic models",
+   "authors": "C Cartis, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 2018,
+   "cites": 225,
+   "doi": "10.1007/s10107-017-1137-4",
+   "arxiv": "1505.06070",
+   "urls": [
+    "https://doi.org/10.1007/s10107-017-1137-4",
+    "https://dblp.org/rec/journals/mp/CartisS18",
+    "https://arxiv.org/abs/1505.06070"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S015",
+   "title": "A stochastic line search method with expected complexity analysis",
+   "authors": "C Paquette, K Scheinberg",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2020,
+   "cites": 222,
+   "doi": "10.1137/18m1216250",
+   "arxiv": "1807.07994",
+   "urls": [
+    "https://doi.org/10.1137/18m1216250",
+    "https://dblp.org/rec/journals/siamjo/PaquetteS20",
+    "https://arxiv.org/abs/1807.07994"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S016",
+   "title": "Geometry of interpolation sets in derivative free optimization",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "Mathematical programming",
+   "year": 2008,
+   "cites": 209,
+   "doi": "10.1007/s10107-006-0073-5",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s10107-006-0073-5",
+    "https://dblp.org/rec/journals/mp/ConnSV08"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S017",
+   "title": "Optimal decision trees for categorical data via integer programming",
+   "authors": "O Günlük, J Kalagnanam, M Li, M Menickelly, K Scheinberg",
+   "venue": "Journal of global optimization",
+   "year": 2021,
+   "cites": 181,
+   "doi": "10.1007/s10898-021-01009-y",
+   "arxiv": "1612.03225",
+   "urls": [
+    "https://arxiv.org/abs/1612.03225",
+    "https://dblp.org/rec/journals/corr/MenickellyGKS16",
+    "https://doi.org/10.1007/s10898-021-01009-y",
+    "https://dblp.org/rec/journals/jgo/GunlukKLMS21"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S018",
+   "title": "Convergence of trust-region methods based on probabilistic models",
+   "authors": "AS Bandeira, K Scheinberg, LN Vicente",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2014,
+   "cites": 181,
+   "doi": "10.1137/130915984",
+   "arxiv": "1304.2808",
+   "urls": [
+    "https://doi.org/10.1137/130915984",
+    "https://dblp.org/rec/journals/siamjo/BandeiraSV14",
+    "https://arxiv.org/abs/1304.2808"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S019",
+   "title": "A derivative free optimization algorithm in practice",
+   "authors": "A Conn, K Scheinberg, P Toint",
+   "venue": "7th AIAA/USAF/NASA/ISSMO Symposium on Multidisciplinary Analysis and...",
+   "year": 1998,
+   "cites": 179,
+   "doi": "10.2514/6.1998-4718",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.2514/6.1998-4718"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S020",
+   "title": "IBM Research TRECVID-2006 Video Retrieval System.",
+   "authors": "M Campbell, A Haubold, S Ebadollahi, D Joshi, MR Naphade, A Natsev, ...",
+   "venue": "TRECVID",
+   "year": 2006,
+   "cites": 155,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www-nlpir.nist.gov/projects/tvpubs/tv6.papers/ibm.pdf",
+    "https://dblp.org/rec/conf/trecvid/CampbellHEJNNSS06"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S021",
+   "title": "Least-squares approach to risk parity in portfolio selection",
+   "authors": "X Bai, K Scheinberg, R Tutuncu",
+   "venue": "Quantitative finance",
+   "year": 2016,
+   "cites": 147,
+   "doi": "10.1080/14697688.2015.1031815",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/14697688.2015.1031815"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S022",
+   "title": "An efficient implementation of an active set method for SVMs.",
+   "authors": "K Scheinberg",
+   "venue": "Journal of Machine Learning Research",
+   "year": 2006,
+   "cites": 147,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://jmlr.org/papers/v7/scheinberg06a.html",
+    "https://dblp.org/rec/journals/jmlr/Scheinberg06"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ],
+   "note": "Sole author (JMLR 7, 2006). Google Scholar lists the JMLR issue editors K.P. Bennett and E. Parrado-Hernández as coauthors; corrected from the paper's first page."
+  },
+  {
+   "id": "S023",
+   "title": "A derivative-free algorithm for least-squares minimization",
+   "authors": "H Zhang, AR Conn, K Scheinberg",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2010,
+   "cites": 145,
+   "doi": "10.1137/09075531x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/09075531x",
+    "https://dblp.org/rec/journals/siamjo/ZhangCS10"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S024",
+   "title": "Stochastic recursive gradient algorithm for nonconvex optimization",
+   "authors": "LM Nguyen, J Liu, K Scheinberg, M Takáč",
+   "venue": "arXiv preprint arXiv:1705.07261",
+   "year": 2017,
+   "cites": 135,
+   "doi": null,
+   "arxiv": "1705.07261",
+   "urls": [
+    "https://arxiv.org/abs/1705.07261",
+    "https://dblp.org/rec/journals/corr/NguyenLST17a"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S025",
+   "title": "Geometry of sample sets in derivative-free optimization: polynomial regression and underdetermined interpolation",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "IMA journal of numerical analysis",
+   "year": 2008,
+   "cites": 132,
+   "doi": "10.1093/imanum/drn046",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/imanum/drn046"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S026",
+   "title": "Global convergence rate analysis of a generic line search algorithm with noise",
+   "authors": "AS Berahas, L Cao, K Scheinberg",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2021,
+   "cites": 125,
+   "doi": "10.1137/19m1291832",
+   "arxiv": "1910.04055",
+   "urls": [
+    "https://doi.org/10.1137/19m1291832",
+    "https://dblp.org/rec/journals/siamjo/BerahasCS21",
+    "https://arxiv.org/abs/1910.04055"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S027",
+   "title": "Interior point trajectories in semidefinite programming",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "SIAM Journal on Optimization",
+   "year": 1998,
+   "cites": 124,
+   "doi": "10.1137/s105262349630009x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/s105262349630009x",
+    "https://dblp.org/rec/journals/siamjo/GoldfarbS98"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S028",
+   "title": "Fast first-order methods for composite convex optimization with backtracking",
+   "authors": "K Scheinberg, D Goldfarb, X Bai",
+   "venue": "Foundations of computational mathematics",
+   "year": 2014,
+   "cites": 119,
+   "doi": "10.1007/s10208-014-9189-9",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s10208-014-9189-9",
+    "https://dblp.org/rec/journals/focm/ScheinbergGB14"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S029",
+   "title": "Practical inexact proximal quasi-Newton method with global complexity analysis",
+   "authors": "K Scheinberg, X Tang",
+   "venue": "Mathematical Programming",
+   "year": 2016,
+   "cites": 116,
+   "doi": "10.1007/s10107-016-0997-3",
+   "arxiv": "1311.6547",
+   "urls": [
+    "https://arxiv.org/abs/1311.6547",
+    "https://dblp.org/rec/journals/corr/ScheinbergT13",
+    "https://doi.org/10.1007/s10107-016-0997-3",
+    "https://dblp.org/rec/journals/mp/ScheinbergT16"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S030",
+   "title": "Self-correcting geometry in model-based algorithms for derivative-free unconstrained optimization",
+   "authors": "K Scheinberg, PL Toint",
+   "venue": "SIAM Journal on Optimization",
+   "year": 2010,
+   "cites": 101,
+   "doi": "10.1137/090748536",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/090748536",
+    "https://dblp.org/rec/journals/siamjo/ScheinbergT10"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S031",
+   "title": "Optimization methods for supervised machine learning: From linear models to deep learning",
+   "authors": "FE Curtis, K Scheinberg",
+   "venue": "Leading developments from INFORMS communities",
+   "year": 2017,
+   "cites": 99,
+   "doi": "10.1287/educ.2017.0168",
+   "arxiv": "1706.10207",
+   "urls": [
+    "https://arxiv.org/abs/1706.10207",
+    "https://dblp.org/rec/journals/corr/CurtisS17",
+    "https://doi.org/10.1287/educ.2017.0168"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S032",
+   "title": "New convergence aspects of stochastic gradient algorithms",
+   "authors": "LM Nguyen, PH Nguyen, P Richtárik, K Scheinberg, M Takáč, M van Dijk",
+   "venue": "Journal of Machine Learning Research",
+   "year": 2019,
+   "cites": 97,
+   "doi": null,
+   "arxiv": "1811.12403",
+   "urls": [
+    "https://arxiv.org/abs/1811.12403",
+    "https://dblp.org/rec/journals/corr/abs-1811-12403",
+    "https://jmlr.org/papers/v20/18-759.html",
+    "https://dblp.org/rec/journals/jmlr/NguyenNRSTD19"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S033",
+   "title": "Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization",
+   "authors": "AS Bandeira, K Scheinberg, LN Vicente",
+   "venue": "Mathematical programming",
+   "year": 2012,
+   "cites": 96,
+   "doi": "10.1007/s10107-012-0578-z",
+   "arxiv": "1306.5729",
+   "urls": [
+    "https://doi.org/10.1007/s10107-012-0578-z",
+    "https://dblp.org/rec/journals/mp/BandeiraSV12",
+    "https://arxiv.org/abs/1306.5729"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S034",
+   "title": "Duality and optimality conditions",
+   "authors": "A Shapiro, K Scheinberg",
+   "venue": "Handbook of Semidefinite Programming: Theory, Algorithms, and Applications...",
+   "year": 2000,
+   "cites": 91,
+   "doi": "10.1007/978-1-4615-4381-7_4",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-1-4615-4381-7_4"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S035",
+   "title": "Block coordinate descent methods for semidefinite programming",
+   "authors": "Z Wen, D Goldfarb, K Scheinberg",
+   "venue": "Handbook on semidefinite, conic and polynomial optimization",
+   "year": 2012,
+   "cites": 80,
+   "doi": "10.1007/978-1-4614-0769-0_19",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-1-4614-0769-0_19"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S036",
+   "title": "A stochastic trust region algorithm based on careful step normalization",
+   "authors": "FE Curtis, K Scheinberg, R Shi",
+   "venue": "Informs Journal on Optimization",
+   "year": 2019,
+   "cites": 77,
+   "doi": "10.1287/ijoo.2018.0010",
+   "arxiv": "1712.10277",
+   "urls": [
+    "https://doi.org/10.1287/ijoo.2018.0010",
+    "https://dblp.org/rec/journals/informsjop/CurtisSS19",
+    "https://arxiv.org/abs/1712.10277"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S037",
+   "title": "Inexact SARAH algorithm for stochastic optimization",
+   "authors": "LM Nguyen, K Scheinberg, M Takáč",
+   "venue": "Optimization Methods and Software",
+   "year": 2021,
+   "cites": 74,
+   "doi": "10.1080/10556788.2020.1818081",
+   "arxiv": "1811.10105",
+   "urls": [
+    "https://arxiv.org/abs/1811.10105",
+    "https://dblp.org/rec/journals/corr/abs-1811-10105",
+    "https://doi.org/10.1080/10556788.2020.1818081",
+    "https://dblp.org/rec/journals/oms/NguyenST21"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S038",
+   "title": "Intensive optimization of masks and sources for 22nm lithography",
+   "authors": "AE Rosenbluth, DO Melville, K Tian, S Bagheri, J Tirapu-Azpiroz, K Lai, ...",
+   "venue": "Optical Microlithography XXII",
+   "year": 2009,
+   "cites": 70,
+   "doi": "10.1117/12.814844",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1117/12.814844"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S039",
+   "title": "Extension of Karmarkar's algorithm onto convex quadratically constrained quadratic problems",
+   "authors": "A Nemirovskii, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 1996,
+   "cites": 69,
+   "doi": "10.1007/bf02592093",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/bf02592093",
+    "https://dblp.org/rec/journals/mp/NemirovskiiS96"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S040",
+   "title": "On parametric semidefinite programming",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "Applied Numerical Mathematics",
+   "year": 1999,
+   "cites": 66,
+   "doi": "10.1016/s0168-9274(98)00102-0",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1016/s0168-9274(98)00102-0"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S041",
+   "title": "First-and second-order high probability complexity bounds for trust-region methods with noisy oracles",
+   "authors": "L Cao, AS Berahas, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 2024,
+   "cites": 63,
+   "doi": "10.1007/s10107-023-01999-5",
+   "arxiv": "2205.03667",
+   "urls": [
+    "https://doi.org/10.1007/s10107-023-01999-5",
+    "https://dblp.org/rec/journals/mp/CaoBS24",
+    "https://arxiv.org/abs/2205.03667"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S042",
+   "title": "Learning sparse Gaussian Markov networks using a greedy coordinate ascent approach",
+   "authors": "K Scheinberg, I Rish",
+   "venue": "Joint European Conference on Machine Learning and Knowledge Discovery in...",
+   "year": 2010,
+   "cites": 60,
+   "doi": "10.1007/978-3-642-15939-8_13",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-3-642-15939-8_13",
+    "https://dblp.org/rec/conf/pkdd/ScheinbergR10"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S043",
+   "title": "High probability complexity bounds for line search based on stochastic oracles",
+   "authors": "B Jin, K Scheinberg, M Xie",
+   "venue": "Advances in Neural Information Processing Systems",
+   "year": 2021,
+   "cites": 59,
+   "doi": null,
+   "arxiv": "2106.06454",
+   "urls": [
+    "https://proceedings.neurips.cc/paper/2021/hash/4cb811134b9d39fc3104bd06ce75abad-Abstract.html",
+    "https://dblp.org/rec/conf/nips/JinSX21",
+    "https://arxiv.org/abs/2106.06454"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S044",
+   "title": "Finite difference gradient approximation: To randomize or not?",
+   "authors": "K Scheinberg",
+   "venue": "INFORMS Journal on Computing",
+   "year": 2022,
+   "cites": 58,
+   "doi": "10.1287/ijoc.2022.1218",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1287/ijoc.2022.1218",
+    "https://dblp.org/rec/journals/informs/Scheinberg22"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S045",
+   "title": "A modified barrier-augmented Lagrangian method for constrained minimization",
+   "authors": "D Goldfarb, R Polyak, K Scheinberg, I Yuzefovich",
+   "venue": "Computational optimization and applications",
+   "year": 1999,
+   "cites": 58,
+   "doi": "10.1023/a:1008705028512",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1023/a:1008705028512",
+    "https://dblp.org/rec/journals/coap/GoldfarbPSY99"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S046",
+   "title": "Methodologies and software for derivative-free optimization",
+   "authors": "AL Custódio, LN Vicente, K Scheinberg",
+   "venue": "Advances and Trends in Optimization with Engineering Applications, 495-506",
+   "year": 2017,
+   "cites": 52,
+   "doi": "10.1137/1.9781611974683.ch37",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/1.9781611974683.ch37"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S047",
+   "title": "Adaptive stochastic optimization: a framework for analyzing stochastic optimization algorithms",
+   "authors": "FE Curtis, K Scheinberg",
+   "venue": "IEEE Signal Processing Magazine",
+   "year": 2020,
+   "cites": 50,
+   "doi": "10.1109/msp.2020.3003539",
+   "arxiv": "2001.06699",
+   "urls": [
+    "https://arxiv.org/abs/2001.06699",
+    "https://dblp.org/rec/journals/corr/abs-2001-06699",
+    "https://doi.org/10.1109/msp.2020.3003539",
+    "https://dblp.org/rec/journals/spm/CurtisS20"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S048",
+   "title": "Row by row methods for semidefinite programming",
+   "authors": "Z Wen, D Goldfarb, S Ma, K Scheinberg",
+   "venue": "Industrial Engineering",
+   "year": 2009,
+   "cites": 50,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S049",
+   "title": "SINCO-a greedy coordinate ascent method for sparse inverse covariance selection problem",
+   "authors": "K Scheinberg, I Rish",
+   "venue": "preprint",
+   "year": 2009,
+   "cites": 42,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S050",
+   "title": "A product-form Cholesky factorization method for handling dense columns in interior point methods for linear programming",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 2004,
+   "cites": 41,
+   "doi": "10.1007/s10107-003-0377-7",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s10107-003-0377-7",
+    "https://dblp.org/rec/journals/mp/GoldfarbS04"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S051",
+   "title": "Smooth pinball neural network for probabilistic forecasting of wind power",
+   "authors": "K Hatalis, AJ Lamadrid, K Scheinberg, S Kishore",
+   "venue": "arXiv preprint arXiv:1710.01720",
+   "year": 2017,
+   "cites": 40,
+   "doi": null,
+   "arxiv": "1710.01720",
+   "urls": [
+    "https://arxiv.org/abs/1710.01720"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S052",
+   "title": "Black-box optimization in machine learning with trust region based derivative free algorithm",
+   "authors": "H Ghanbari, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1703.06925",
+   "year": 2017,
+   "cites": 39,
+   "doi": null,
+   "arxiv": "1703.06925",
+   "urls": [
+    "https://arxiv.org/abs/1703.06925",
+    "https://dblp.org/rec/journals/corr/GhanbariS17"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S053",
+   "title": "On partial sparse recovery",
+   "authors": "AS Bandeira, K Scheinberg, LN Vicente",
+   "venue": "arXiv preprint arXiv:1304.2809",
+   "year": 2013,
+   "cites": 39,
+   "doi": null,
+   "arxiv": "1304.2809",
+   "urls": [
+    "https://arxiv.org/abs/1304.2809",
+    "https://dblp.org/rec/journals/corr/abs-1304-2809"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S054",
+   "title": "Proximal quasi-Newton methods for regularized convex optimization with linear and accelerated sublinear convergence rates",
+   "authors": "H Ghanbari, K Scheinberg",
+   "venue": "Computational Optimization and Applications 69 (3), 597-627",
+   "year": 2018,
+   "cites": 38,
+   "doi": "10.1007/s10589-017-9964-z",
+   "arxiv": "1607.03081",
+   "urls": [
+    "https://arxiv.org/abs/1607.03081",
+    "https://dblp.org/rec/journals/corr/GhanbariS16",
+    "https://doi.org/10.1007/s10589-017-9964-z",
+    "https://dblp.org/rec/journals/coap/GhanbariS18"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S055",
+   "title": "Nesterov accelerated shuffling gradient method for convex optimization",
+   "authors": "TH Tran, K Scheinberg, LM Nguyen",
+   "venue": "International Conference on Machine Learning, 21703-21732",
+   "year": 2022,
+   "cites": 33,
+   "doi": null,
+   "arxiv": "2202.03525",
+   "urls": [
+    "https://proceedings.mlr.press/v162/tran22a.html",
+    "https://dblp.org/rec/conf/icml/TranSN22",
+    "https://arxiv.org/abs/2202.03525",
+    "https://dblp.org/rec/journals/corr/abs-2202-03525"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S056",
+   "title": "Feature engineering and forecasting via derivative-free optimization and ensemble of sequence-to-sequence networks with applications in renewable energy",
+   "authors": "M Pirhooshyaran, K Scheinberg, LV Snyder",
+   "venue": "Energy 196, 117136",
+   "year": 2020,
+   "cites": 33,
+   "doi": "10.1016/j.energy.2020.117136",
+   "arxiv": "1909.05447",
+   "urls": [
+    "https://arxiv.org/abs/1909.05447",
+    "https://dblp.org/rec/journals/corr/abs-1909-05447",
+    "https://doi.org/10.1016/j.energy.2020.117136"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S057",
+   "title": "Sample complexity analysis for adaptive optimization algorithms with stochastic oracles",
+   "authors": "B Jin, K Scheinberg, M Xie",
+   "venue": "Mathematical Programming 209 (1), 651-679",
+   "year": 2025,
+   "cites": 31,
+   "doi": "10.1007/s10107-024-02078-z",
+   "arxiv": "2303.06838",
+   "urls": [
+    "https://doi.org/10.1007/s10107-024-02078-z",
+    "https://dblp.org/rec/journals/mp/JinSX25",
+    "https://arxiv.org/abs/2303.06838"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S058",
+   "title": "Product-form Cholesky factorization in interior point methods for second-order cone programming",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "Mathematical Programming 103 (1), 153-179",
+   "year": 2005,
+   "cites": 31,
+   "doi": "10.1007/s10107-004-0556-1",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s10107-004-0556-1",
+    "https://dblp.org/rec/journals/mp/GoldfarbS05"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S059",
+   "title": "Incremental learning and selective sampling via parametric optimization framework for SVM",
+   "authors": "S Fine, K Scheinberg",
+   "venue": "Advances in neural information processing systems 14",
+   "year": 2001,
+   "cites": 30,
+   "doi": "10.7551/mitpress/1120.003.0095",
+   "arxiv": null,
+   "urls": [
+    "http://papers.nips.cc/paper/1978-incremental-learning-and-selective-sampling-via-parametric-optimization-framework-for-svm",
+    "https://proceedings.neurips.cc/paper/2001/hash/405e28906322882c5be9b4b27f4c35fd-Abstract.html",
+    "https://dblp.org/rec/conf/nips/FineS01",
+    "https://doi.org/10.7551/mitpress/1120.003.0095"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S060",
+   "title": "A novel smoothed loss and penalty function for noncrossing composite quantile estimation via deep neural networks",
+   "authors": "K Hatalis, AJ Lamadrid, K Scheinberg, S Kishore",
+   "venue": "arXiv preprint arXiv:1909.12122",
+   "year": 2019,
+   "cites": 23,
+   "doi": null,
+   "arxiv": "1909.12122",
+   "urls": [
+    "https://arxiv.org/abs/1909.12122",
+    "https://dblp.org/rec/journals/corr/abs-1909-12122"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S061",
+   "title": "Stochastic adaptive regularization method with cubics: A high probability complexity bound",
+   "authors": "K Scheinberg, M Xie",
+   "venue": "2023 Winter Simulation Conference (WSC), 3520-3531",
+   "year": 2023,
+   "cites": 22,
+   "doi": "10.1109/wsc60868.2023.10408598",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1109/wsc60868.2023.10408598",
+    "https://dblp.org/rec/conf/wsc/ScheinbergX23"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S062",
+   "title": "On the construction of quadratic models for derivative-free trust-region algorithms",
+   "authors": "A Verdário, EW Karas, LG Pedroso, K Scheinberg",
+   "venue": "EURO Journal on Computational Optimization 5 (4), 501-527",
+   "year": 2017,
+   "cites": 20,
+   "doi": "10.1007/s13675-017-0081-7",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s13675-017-0081-7",
+    "https://dblp.org/rec/journals/ejco/VerderioKPS17"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S063",
+   "title": "When does stochastic gradient algorithm work well?",
+   "authors": "LM Nguyen, NH Nguyen, DT Phan, JR Kalagnanam, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1801.06159",
+   "year": 2018,
+   "cites": 15,
+   "doi": null,
+   "arxiv": "1801.06159",
+   "urls": [
+    "https://arxiv.org/abs/1801.06159",
+    "https://dblp.org/rec/journals/corr/abs-1801-06159"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S064",
+   "title": "Map approach to learning sparse Gaussian Markov networks",
+   "authors": "NB Asadi, I Rish, K Scheinberg, D Kanevsky, B Ramabhadran",
+   "venue": "2009 IEEE international conference on acoustics, speech and signal...",
+   "year": 2009,
+   "cites": 14,
+   "doi": "10.1109/icassp.2009.4959935",
+   "arxiv": null,
+   "urls": [
+    "https://doi.ieeecomputersociety.org/10.1109/icassp.2009.4959935",
+    "https://doi.org/10.1109/icassp.2009.4959935",
+    "https://dblp.org/rec/conf/icassp/AsadiRSKR09"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S065",
+   "title": "Derivative free optimization method",
+   "authors": "K Scheinberg",
+   "venue": "Department Computing and Software, McMaster University",
+   "year": 2000,
+   "cites": 13,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S066",
+   "title": "Alternating direction methods for non convex optimization with applications to second-order least-squares and risk parity portfolio selection",
+   "authors": "X Bai, K Scheinberg",
+   "venue": "Optimization-Online",
+   "year": 2015,
+   "cites": 12,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S067",
+   "title": "Fast first-order methods for composite convex optimization with line search",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "preprint",
+   "year": 2011,
+   "cites": 10,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S068",
+   "title": "Stochastic ISTA/FISTA adaptive step search algorithms for convex composite optimization",
+   "authors": "LM Nguyen, K Scheinberg, TH Tran",
+   "venue": "Journal of Optimization Theory and Applications 205 (1), 10",
+   "year": 2025,
+   "cites": 9,
+   "doi": "10.1007/s10957-025-02621-8",
+   "arxiv": "2402.15646",
+   "urls": [
+    "https://doi.org/10.1007/s10957-025-02621-8",
+    "https://dblp.org/rec/journals/jota/NguyenST25",
+    "https://arxiv.org/abs/2402.15646"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S069",
+   "title": "Solving structured convex quadratic programs by interior point methods with application to support vector machines and portfolio optimization",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "Submitted for publication",
+   "year": 2005,
+   "cites": 9,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S070",
+   "title": "System and method for derivative-free optimization of electrical circuits",
+   "authors": "S Walker, C Visweswariah, K Scheinberg, P Restle",
+   "venue": "US Patent App. 10/626,762",
+   "year": 2005,
+   "cites": 9,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "patent",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S071",
+   "title": "INCAS: An incremental active set method for SVM",
+   "authors": "S Fine, K Scheinberg",
+   "venue": "Tech. rep.",
+   "year": 2002,
+   "cites": 9,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S072",
+   "title": "Error estimates and poisedness in multivariate polynomial interpolation",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": "Centro de Matemática da Universidade de Coimbra",
+   "year": 2003,
+   "cites": 8,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S073",
+   "title": "Finding optimal policy for queueing models: New parameterization",
+   "authors": "TH Tran, LM Nguyen, K Scheinberg",
+   "venue": "arXiv preprint arXiv:2206.10073",
+   "year": 2022,
+   "cites": 7,
+   "doi": null,
+   "arxiv": "2206.10073",
+   "urls": [
+    "https://doi.org/10.48550/arxiv.2206.10073",
+    "https://dblp.org/rec/journals/corr/abs-2206-10073",
+    "https://arxiv.org/abs/2206.10073"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S074",
+   "title": "A novel l0-constrained gaussian graphical model for anomaly localization",
+   "authors": "DT Phan, T Idé, J Kalagnanam, M Menickelly, K Scheinberg",
+   "venue": "2017 IEEE International Conference on Data Mining Workshops (ICDMW), 830-833",
+   "year": 2017,
+   "cites": 7,
+   "doi": "10.1109/icdmw.2017.115",
+   "arxiv": null,
+   "urls": [
+    "https://doi.ieeecomputersociety.org/10.1109/icdmw.2017.115",
+    "https://doi.org/10.1109/icdmw.2017.115",
+    "https://dblp.org/rec/conf/icdm/PhanIKMS17"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S075",
+   "title": "Proximal quasi-Newton methods for convex optimization",
+   "authors": "H Ghanbari, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1607.03081",
+   "year": 2016,
+   "cites": 7,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S054",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S076",
+   "title": "Recovering the structure of sparse markov networks from high-dimensional data",
+   "authors": "NB Asadi, GA Cecchi, D Kanevsky, B Ramabhadran, I Rish, K Scheinberg",
+   "venue": "US Patent 8,326,787",
+   "year": 2012,
+   "cites": 7,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "patent",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S077",
+   "title": "Numerically stable LDLT factorizations in interior point methods for convex quadratic programming",
+   "authors": "D Goldfarb, K Scheinberg",
+   "venue": "IMA journal of numerical analysis 28 (4), 806-826",
+   "year": 2008,
+   "cites": 7,
+   "doi": "10.1093/imanum/drn058",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/imanum/drn058"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S078",
+   "title": "Directly and efficiently optimizing prediction error and AUC of linear classifiers",
+   "authors": "H Ghanbari, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1802.02535",
+   "year": 2018,
+   "cites": 6,
+   "doi": null,
+   "arxiv": "1802.02535",
+   "urls": [
+    "https://arxiv.org/abs/1802.02535",
+    "https://dblp.org/rec/journals/corr/abs-1802-02535"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S079",
+   "title": "Sparse Markov net learning with priors on regularization parameters.",
+   "authors": "K Scheinberg, I Rish, NB Asadi",
+   "venue": "ISAIM",
+   "year": 2010,
+   "cites": 6,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://dblp.org/rec/conf/isaim/ScheinbergRA10"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S080",
+   "title": "The COIN-OR initiative: accelerating operations research progress through open-source software",
+   "authors": "R Lougee-Heimer, F Barahona, BL Dietrich, J Fasano, JJ Forrest, ...",
+   "venue": "ORMS Today 28 (5), 20-22",
+   "year": 2001,
+   "cites": 6,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S081",
+   "title": "Stochastic gradients: Optimization, simulation, randomization, and sensitivity analysis",
+   "authors": "MC Fu, J Hu, K Scheinberg",
+   "venue": "IISE Transactions 58 (2), 240-256",
+   "year": 2026,
+   "cites": 5,
+   "doi": "10.1080/24725854.2025.2469839",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/24725854.2025.2469839"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S082",
+   "title": "An Empirical Analysis of Constrained Support Vector Quantile Regression for Nonparametric Probabilistic Forecasting of Wind Power.",
+   "authors": "K Hatalis, S Kishore, K Scheinberg, AJ Lamadrid",
+   "venue": "AAAI Workshops",
+   "year": 2017,
+   "cites": 5,
+   "doi": null,
+   "arxiv": "1803.10888",
+   "urls": [
+    "https://aaai.org/papers/aaaiw-ws0330-17-15131/",
+    "https://dblp.org/rec/conf/aaai/HatalisKSL17",
+    "https://arxiv.org/abs/1803.10888",
+    "https://dblp.org/rec/journals/corr/abs-1803-10888"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S083",
+   "title": "Stochastic adaptive optimization with unreliable inputs: A unified framework for high-probability complexity analysis",
+   "authors": "K Scheinberg, M Xie",
+   "venue": "arXiv preprint arXiv:2511.19411",
+   "year": 2025,
+   "cites": 4,
+   "doi": null,
+   "arxiv": "2511.19411",
+   "urls": [
+    "https://arxiv.org/abs/2511.19411"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S084",
+   "title": "Efficient quasi-newton proximal method for large scale sparse optimization",
+   "authors": "X Tang, K Scheinberg",
+   "venue": "Conference on Neural Information Processing Systems. NIPS",
+   "year": 2013,
+   "cites": 4,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S085",
+   "title": "Aligning ligand binding cavities by optimizing superposed volume",
+   "authors": "R Chen, K Scheinberg, BY Chen",
+   "venue": "2012 IEEE International Conference on Bioinformatics and Biomedicine, 1-5",
+   "year": 2012,
+   "cites": 4,
+   "doi": "10.1109/bibm.2012.6392629",
+   "arxiv": null,
+   "urls": [
+    "https://doi.ieeecomputersociety.org/10.1109/bibm.2012.6392629",
+    "https://doi.org/10.1109/bibm.2012.6392629",
+    "https://dblp.org/rec/conf/bibm/ChenSC12"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S086",
+   "title": "Detecting Generic Visual Eventswith Temporal Cues",
+   "authors": "L Xie, D Xu, S Ebadollahi, K Scheinberg, SF Chang, JR Smith",
+   "venue": "2006 Fortieth Asilomar Conference on Signals, Systems and Computers, 54-58",
+   "year": 2006,
+   "cites": 4,
+   "doi": "10.1109/acssc.2006.356582",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1109/acssc.2006.356582"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S087",
+   "title": "Function-free optimization via comparison oracles",
+   "authors": "K Scheinberg, Z Xiong",
+   "venue": "arXiv preprint arXiv:2604.26867",
+   "year": 2026,
+   "cites": 3,
+   "doi": null,
+   "arxiv": "2604.26867",
+   "urls": [
+    "https://arxiv.org/abs/2604.26867"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S088",
+   "title": "On Complexity of Model-Based Derivative-Free Methods",
+   "authors": "A Chaudhry, K Scheinberg",
+   "venue": "arXiv preprint arXiv:2510.14935",
+   "year": 2025,
+   "cites": 3,
+   "doi": null,
+   "arxiv": "2510.14935",
+   "urls": [
+    "https://arxiv.org/abs/2510.14935"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S089",
+   "title": "Novel and efficient approximations for zero-one loss of linear classifiers",
+   "authors": "H Ghanbari, M Li, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1903.00359",
+   "year": 2019,
+   "cites": 3,
+   "doi": null,
+   "arxiv": "1903.00359",
+   "urls": [
+    "https://arxiv.org/abs/1903.00359",
+    "https://dblp.org/rec/journals/corr/abs-1903-00359"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S090",
+   "title": "A scalable solution for group feature selection",
+   "authors": "P Govindan, R Chen, K Scheinberg, S Srinivasan",
+   "venue": "2015 IEEE International Conference on Big Data (Big Data), 2846-2848",
+   "year": 2015,
+   "cites": 3,
+   "doi": "10.1109/bigdata.2015.7364098",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1109/bigdata.2015.7364098",
+    "https://dblp.org/rec/conf/bigdataconf/GovindanCSS15"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S091",
+   "title": "Parametric linear semidefinite programming",
+   "authors": "K Scheinberg",
+   "venue": "INTERNATIONAL SERIES IN OPERATIONS RESEARCH AND MANAGEMENT SCIENCE, 92-110",
+   "year": 2000,
+   "cites": 3,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S092",
+   "title": "Derivative free optimization algorithms for constrained problems",
+   "authors": "AR Conn, K Scheinberg, P Toint",
+   "venue": "Presentation at the 1999 SIAM Conference on Optimization",
+   "year": 1999,
+   "cites": 3,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "talk",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S093",
+   "title": "First-and Second-Order Stochastic Adaptive Regularization with Cubics: High-Probability Iteration and Sample Complexity",
+   "authors": "K Scheinberg, M Xie",
+   "venue": "INFORMS Journal on Optimization",
+   "year": 2026,
+   "cites": 2,
+   "doi": "10.1287/ijoo.2025.0123",
+   "arxiv": "2308.13161",
+   "urls": [
+    "https://arxiv.org/abs/2308.13161",
+    "https://doi.org/10.1287/ijoo.2025.0123"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S094",
+   "title": "Superposition of protein structures using electrostatic isopotentials",
+   "authors": "Z Guo, K Scheinberg, J Hong, BY Chen",
+   "venue": "2015 IEEE International Conference on Bioinformatics and Biomedicine (BIBM...",
+   "year": 2015,
+   "cites": 2,
+   "doi": "10.1109/bibm.2015.7359658",
+   "arxiv": null,
+   "urls": [
+    "https://doi.ieeecomputersociety.org/10.1109/bibm.2015.7359658",
+    "https://doi.org/10.1109/bibm.2015.7359658",
+    "https://dblp.org/rec/conf/bibm/GuoSHC15"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S095",
+   "title": "Mathematical Programming",
+   "authors": "D Goldfarb, S Ma, K Scheinberg",
+   "venue": "Fast alternating linearization methods for minimizing the sum of two convex...",
+   "year": 2013,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": "S005",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S096",
+   "title": "17 Optimization Methods for Sparse Inverse Covariance Selection",
+   "authors": "K Scheinberg, S Ma",
+   "venue": "Optimization for machine learning, 455",
+   "year": 2011,
+   "cites": 2,
+   "doi": "10.7551/mitpress/8996.003.0019",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.7551/mitpress/8996.003.0019"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S097",
+   "title": "Efficient implementation of interior point methods for quadratic problems arising in support vector machines",
+   "authors": "S Fine, K Scheinberg",
+   "venue": "NIPS",
+   "year": 2000,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S098",
+   "title": "ProxSTORM--A Stochastic Trust-Region Algorithm for Nonsmooth Optimization",
+   "authors": "RJ Baraldi, A Javeed, DP Kouri, K Scheinberg",
+   "venue": "arXiv preprint arXiv:2510.03187",
+   "year": 2025,
+   "cites": 1,
+   "doi": null,
+   "arxiv": "2510.03187",
+   "urls": [
+    "https://arxiv.org/abs/2510.03187"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S099",
+   "title": "Convergence Rate Analysis of a Stochastic Trust Region Method via Submartingales",
+   "authors": "J Blanchet, C Cartis, M Menickelly, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1609.07428",
+   "year": 2016,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S013",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S100",
+   "title": "Efficiently Using Second Order Information in Large l1 Regularization Problems",
+   "authors": "X Tang, K Scheinberg",
+   "venue": "arXiv preprint arXiv:1303.6935",
+   "year": 2013,
+   "cites": 1,
+   "doi": null,
+   "arxiv": "1303.6935",
+   "urls": [
+    "https://arxiv.org/abs/1303.6935",
+    "https://dblp.org/rec/journals/corr/abs-1303-6935"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S101",
+   "title": "Fast first-order methods for composite convex optimization with large steps",
+   "authors": "K Scheinberg, D Goldfarb",
+   "venue": null,
+   "year": 2012,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S102",
+   "title": "Rock Physics and Depositional History from Seismic Matching–A Model Study",
+   "authors": "SA Levin, U Mello, V Lopez, L Xu, AR Conn, K Scheinberg, H Zhang",
+   "venue": "69th EAGE Conference and Exhibition incorporating SPE EUROPEC 2007, cp-27-00236",
+   "year": 2007,
+   "cites": 1,
+   "doi": "10.3997/2214-4609.201401654",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.3997/2214-4609.201401654"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S103",
+   "title": "On the Convergence of Derivative-Free",
+   "authors": "K Scheinberg, P Toint",
+   "venue": "Approximation Theory and Optimization: Tributes to MJD Powell, 83",
+   "year": 1997,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": "S008",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S104",
+   "title": "Powell-Style Model-Based Derivative-Free Optimization with Complexity Guarantees",
+   "authors": "A Chaudhry, K Scheinberg",
+   "venue": "arXiv preprint arXiv:2609.09441",
+   "year": 2026,
+   "cites": null,
+   "doi": null,
+   "arxiv": "2609.09441",
+   "urls": [
+    "https://arxiv.org/abs/2609.09441"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "S105",
+   "title": "Editor's Comments on the 50th Anniversary of Mathematics of Operations Research",
+   "authors": "K Scheinberg",
+   "venue": "Mathematics of Operations Research 51 (1), iv-viii",
+   "year": 2026,
+   "cites": null,
+   "doi": "10.1287/moor.2026.50th.v51.n1",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1287/moor.2026.50th.v51.n1",
+    "https://dblp.org/rec/journals/mor/Scheinberg26"
+   ],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S106",
+   "title": "Novel and Efficient Approximations for Zero-One and Ranking Losses of Linear Classifiers",
+   "authors": "H Ghanbari, M Li, K Scheinberg",
+   "venue": "Vietnam Journal of Mathematics 53 (4), 815-834",
+   "year": 2025,
+   "cites": null,
+   "doi": "10.1007/s10013-025-00767-6",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/s10013-025-00767-6"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ],
+   "note": "Only the 2019 arXiv version (1903.00359, same text as S089) was found; the 2025 journal version was not read. Count S089/S106 as one paper."
+  },
+  {
+   "id": "S107",
+   "title": "ProxSTORM-A Stochastic Trust Region Method for Nonsmooth Optimization",
+   "authors": "A Javeed, RJ Baraldi, DP Kouri, K Scheinberg",
+   "venue": "Sandia National Laboratories (SNL-NM), Albuquerque, NM (United States)",
+   "year": 2024,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ],
+   "note": "Same text as S098 (arXiv 2510.03187, ProxSTORM); the 2024 Sandia report version was not found. Count S098/S107 as one paper."
+  },
+  {
+   "id": "S108",
+   "title": "Collaborative Research: AF: Small: A Unified Framework for Analyzing Adaptive Stochastic Optimization Methods Based on Probabilistic Oracles",
+   "authors": "K Scheinberg",
+   "venue": "NSF Award Number 2438005",
+   "year": 2024,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S109",
+   "title": "Stochastic Optimization Methods With Momentum",
+   "authors": "TH Tran, L Nguyen, K Scheinberg",
+   "venue": "INFORMS Annual Meeting",
+   "year": 2023,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "talk",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S110",
+   "title": "Shuffling Gradient-Based Methods",
+   "authors": "TH Tran, L Nguyen, Q Tran-Dinh, K Scheinberg",
+   "venue": "INFORMS Annual Meeting",
+   "year": 2021,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "talk",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S111",
+   "title": "Collaborative Research: AF: Small: Adaptive Optimization of Stochastic and Noisy Function",
+   "authors": "K Scheinberg",
+   "venue": "NSF Award Number 2008434",
+   "year": 2020,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S112",
+   "title": "Complexity analysis framework of adaptive optimization methods via martingales",
+   "authors": "K Scheinberg",
+   "venue": "Complexity 17",
+   "year": 2020,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S113",
+   "title": "Knowing What to Know in Stochastic Optimization",
+   "authors": "K Scheinberg",
+   "venue": "Collections 52 (02)",
+   "year": 2019,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S114",
+   "title": "FEATURE ENGINEERING AND FORECASTING VIA INTEGRATION OF DERIVATIVE-FREE OPTIMIZATION AND ENSEMBLE OF SEQUENCE-TO-SEQUENCE NETWORKS: RENEWABLE ENERGY CASE STUDIES",
+   "authors": "M Pirhooshyaran, LV Snyder, K Scheinberg",
+   "venue": "CoRR",
+   "year": 2019,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S056",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S115",
+   "title": "When Does Stochastic Gradient Algorithm Work Well?",
+   "authors": "K Scheinberg",
+   "venue": null,
+   "year": 2018,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S063",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S116",
+   "title": "Chapter 39: Volumetric Alignment of Protein-Binding Cavities",
+   "authors": "R Chen, BY Chen, K Scheinberg",
+   "venue": "Advances and Trends in Optimization with Engineering Applications, 519-528",
+   "year": 2017,
+   "cites": null,
+   "doi": "10.1137/1.9781611974683.ch39",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/1.9781611974683.ch39"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S117",
+   "title": "SARAH: A Novel Method for Machine Learning Problems Using Stochastic Recursive Gradient",
+   "authors": "LMNJ Liu, K Scheinberg, M Takáč",
+   "venue": "arXiv preprint arXiv:1703.00102",
+   "year": 2017,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": "S002",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S118",
+   "title": "Continuous Optimization: Challenges and Applications",
+   "authors": "H Attouch, F Bach, J Barzilai, H Bauschke, A Ben-Israel, D Bertsimas, ...",
+   "venue": null,
+   "year": 2016,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S119",
+   "title": "AF: Small: New classes of optimization methods for nonconvex large scale machine learning models.",
+   "authors": "K Scheinberg",
+   "venue": "NSF Award Number 1618717",
+   "year": 2016,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S120",
+   "title": "Derivative Free Optimization of Complex Systems with the Use of Statistical Machine Learning Models",
+   "authors": "K Scheinberg",
+   "venue": null,
+   "year": 2015,
+   "cites": null,
+   "doi": "10.21236/ada622645",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.21236/ada622645"
+   ],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S121",
+   "title": "Um método de Região de Confiança sem Derivadas com Modelos Construídos por máquinas de Vetores Suporte para Regressão",
+   "authors": "A Verdário, K Scheinberg, EW Karas, LG Pedroso",
+   "venue": "Proceeding Series of the Brazilian Society of Computational and Applied",
+   "year": 2015,
+   "cites": null,
+   "doi": "10.5540/03.2015.003.01.0439",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.5540/03.2015.003.01.0439"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S122",
+   "title": "Recovering the structure of sparse markov networks from high-dimensional data",
+   "authors": "NB Asadi, GA Cecchi, D Kanevsky, B Ramabhadran, I Rish, K Scheinberg",
+   "venue": "US Patent 8,775,345",
+   "year": 2014,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "patent",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S123",
+   "title": "Efficient Algorithms for the Group Lasso",
+   "authors": "D Goldfarb, K Scheinberg, ZT Qin",
+   "venue": null,
+   "year": 2010,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S124",
+   "title": "Sparse Modeling in fMRI Analysis",
+   "authors": "I Rish, MK Carroll, GA Cecchi, R Garg, AR Rao, NB Asadi, K Scheinberg",
+   "venue": "NeuroImage 47",
+   "year": 2009,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S125",
+   "title": "Intensive optimization of masks and sources for 22nm lithography",
+   "authors": "E Gallagher, T Faure, J Tirapu-Azpiroz, M Hibbs, K Scheinberg, ...",
+   "venue": "SPIE Proceedings",
+   "year": 2009,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S038",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S126",
+   "title": "PREFACE: Special section on mathematical programming in data mining and machine learning",
+   "authors": "K Scheinberg, J Peng",
+   "venue": "Optimization Methods and Software 23 (4), 473-474",
+   "year": 2008,
+   "cites": null,
+   "doi": "10.1080/10556780802102362",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556780802102362",
+    "https://dblp.org/rec/journals/oms/ScheinbergP08"
+   ],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S127",
+   "title": "O PTIMA",
+   "authors": "A Caprara, A Lodi, K Scheinberg",
+   "venue": "Mathematical Programming",
+   "year": 2008,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S128",
+   "title": "Assisted seismic matching: Joint inversion of seismic, rock physics and basin modeling",
+   "authors": "UT Mello, V Lopez, A Conn, K Scheinberg, H Zhang, M Henderson, L Xu, ...",
+   "venue": "SEG International Exposition and Annual Meeting, SEG-2007-1903",
+   "year": 2007,
+   "cites": null,
+   "doi": "10.1190/1.2792862",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1190/1.2792862"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S129",
+   "title": "Mathematical Programming in Machine Learning and Data Mining",
+   "authors": "K Scheinberg, J Peng, T Terlaky, D Shuurmans, M Jordan",
+   "venue": null,
+   "year": 2007,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S130",
+   "title": "An Efficient Implementation of an Active Set Method for SVMs (Special Topic on Machine Learning and Optimization)",
+   "authors": "K Scheinberg",
+   "venue": "JOURNAL OF MACHINE LEARNING RESEARCH 7 (2), 2237",
+   "year": 2007,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": "S022",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S131",
+   "title": "AR Conn Department of Mathematical Sciences, IBM TJ Watson Research Center, Route 134, PO Box 218, Yorktown Heights, New York 10598, USA (arconn@ us. ibm. com).",
+   "authors": "K Scheinberg",
+   "venue": null,
+   "year": 2006,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": "S007",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S132",
+   "title": "A. Bandeira Program on Applied and Computational Mathematics, Princeton University, Princeton, NJ 08544, USA (ajsb@ math. princeton. edu).",
+   "authors": "K Scheinberg, LN Vicente",
+   "venue": "Math. Program 91, 201-213",
+   "year": 2002,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": "S018",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S133",
+   "title": "Manual for Fortran Software Package DFO v1. 2",
+   "authors": "AR Conn, K Scheinberg, P Toint",
+   "venue": null,
+   "year": 2000,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S134",
+   "title": "Issues related to interior point methods for linear and semidefinite programming",
+   "authors": "K Scheinberg",
+   "venue": "Columbia University",
+   "year": 1997,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "thesis",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S135",
+   "title": "Stochastic oracles and where to find them",
+   "authors": "K Scheinberg",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "talk",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S136",
+   "title": "ERROR EЫTIMATEЫ AND POIЫEDNEЫЫ IN MULTIVARIATE POLYNOMIAL INTERPOLATION",
+   "authors": "AR CONN, K SCHEINBERG, L VICENTE",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S072",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S137",
+   "title": "High Probability Step Size Lower Bound for Adaptive Stochastic Optimization",
+   "authors": "B Jin, K Scheinberg, M Xie",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S138",
+   "title": "SIAG/OPT Views and News",
+   "authors": "K Scheinberg, J Borwein, A Lewis, R Fletcher, S Leyffer, CA Floudas, ...",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S139",
+   "title": "Save 30% on these SIAM titles",
+   "authors": "AR Conn, K Scheinberg, LN Vicente",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": "S001",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S140",
+   "title": "Efficient active set methods for support vector machines.",
+   "authors": "K Scheinberg",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S141",
+   "title": "A trust-region method with models based in support vector machines regression",
+   "authors": "A Verdário, K Scheinberg, EW Karas, LG Pedroso",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S121",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S142",
+   "title": "SINCO-an Efficient Greedy Method for Learning Sparse INverse COvariance Matrix",
+   "authors": "K Scheinberg, I Rish",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S143",
+   "title": "OPTIMA 79: Geometry in model-based algorithms for derivative-free unconstrained optimization (feature article)",
+   "authors": "K Scheinberg",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://mathopt.zib.de/Optima-Issues/optima79.pdf"
+   ],
+   "kind": "essay",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "D001",
+   "title": "High Probability Complexity Bounds for Adaptive Step Search Based on Stochastic Oracles",
+   "authors": "Billy Jin, Katya Scheinberg, Miaolan Xie",
+   "venue": "SIAM J. Optim. 34, 2411-2439",
+   "year": 2024,
+   "cites": null,
+   "doi": "10.1137/22m1512764",
+   "arxiv": "2106.06454",
+   "urls": [
+    "https://doi.org/10.1137/22m1512764",
+    "https://dblp.org/rec/journals/siamjo/JinSX24",
+    "https://arxiv.org/abs/2106.06454"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "dblp",
+    "arxiv"
+   ]
+  },
+  {
+   "id": "D002",
+   "title": "High Probability Complexity Bounds of Trust-Region Stochastic Sequential Quadratic Programming with Heavy-Tailed Noise",
+   "authors": "Yuchen Fang, Javad Lavaei, Katya Scheinberg, Sen Na",
+   "venue": "CoRR abs/2503.19091",
+   "year": 2025,
+   "cites": null,
+   "doi": null,
+   "arxiv": "2503.19091",
+   "urls": [
+    "https://doi.org/10.48550/arxiv.2503.19091",
+    "https://dblp.org/rec/journals/corr/abs-2503-19091"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "dblp"
+   ]
+  },
+  {
+   "id": "D003",
+   "title": "Linear interpolation gives better gradients than Gaussian smoothing in derivative-free optimization",
+   "authors": "Albert S Berahas, Liyuan Cao, Krzysztof Choromanski, Katya Scheinberg",
+   "venue": "arXiv preprint arXiv:1905.13043",
+   "year": 2019,
+   "cites": null,
+   "doi": null,
+   "arxiv": "1905.13043",
+   "urls": [
+    "https://arxiv.org/abs/1905.13043"
+   ],
+   "kind": "preprint",
+   "dup_of": null,
+   "sources": [
+    "arxiv"
+   ]
+  },
+  {
+   "id": "B001",
+   "title": "Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2009,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/idfo-table-of-contents.pdf"
+   ],
+   "kind": "book-toc",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Book front matter hosted by the authors; the book itself is not open."
+  },
+  {
+   "id": "B002",
+   "title": "Errata to Introduction to Derivative-Free Optimization (05/17/2015)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2015,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/errata.pdf"
+   ],
+   "kind": "errata",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Author-maintained errata list for the 2009 book."
+  },
+  {
+   "id": "B003",
+   "title": "Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2015,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/errata2.pdf"
+   ],
+   "kind": "errata",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Second author-maintained errata file for the 2009 book."
+  },
+  {
+   "id": "B004",
+   "title": "Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2011,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/quadratic-regression-bounds.pdf"
+   ],
+   "kind": "book-addendum",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Author-hosted addendum supplying a derivation for the book."
+  },
+  {
+   "id": "B005",
+   "title": "Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010)",
+   "authors": "reviewer named in the text (not the authors)",
+   "venue": "book material",
+   "year": 2010,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/mcom2379.pdf"
+   ],
+   "kind": "review",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "External book review, hosted on the authors' book page; evidence for peer view, not the authors' voice."
+  },
+  {
+   "id": "B006",
+   "title": "Review of Introduction to Derivative-Free Optimization (SIAM Review 53(2), 2011, book reviews)",
+   "authors": "reviewer named in the text (not the authors)",
+   "venue": "book material",
+   "year": 2011,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/SIAM_Review.pdf"
+   ],
+   "kind": "review",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "External book review, hosted on the authors' book page; the PDF also carries unrelated reviews on the same pages. Year 2011 (SIAM Review 53(2), pp. 395-396) per the authors' book page and Crossref; earlier listed as 2010."
+  }
+ ]
+}

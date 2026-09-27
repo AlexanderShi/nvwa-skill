@@ -1,0 +1,856 @@
+[
+ {
+  "id": "S011",
+  "year": "1970",
+  "title": "A hybrid method for nonlinear equations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: book chapter on a hybrid method for systems of nonlinear algebraic equations (1384 cites); plausibly related to the 1968 Harwell code report S019, not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S015",
+  "year": "1970",
+  "title": "A new algorithm for unconstrained optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: chapter (pp. 31–65 per Crossref, closed access) presenting a new unconstrained minimization algorithm (820 cites); whether it is the 1970 trust-region result cited in SKILL.md is not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S041",
+  "year": "1970",
+  "title": "A survey of numerical methods for unconstrained optimization",
+  "read_level": "abstract",
+  "contribution": "A survey that introduces and relates the more successful numerical methods for unconstrained optimization, and indicates some directions for research (abstract).",
+  "problem_entry": "Introduce and relate the more successful methods for the greatest value of a real function of n variables (abstract).",
+  "key_idea": "Comparative survey that relates methods to one another (abstract); structure and content not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Indicates some directions for research (abstract); the directions themselves not read.",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "It also indicates some directions for research.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S053",
+  "year": "1970",
+  "title": "Curve fitting by splines in one variable",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: book chapter on univariate spline curve fitting; approximation-theory strand alongside optimization.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S176",
+  "year": "1970",
+  "title": "A Fortran Subroutine for Unconstrained Minimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report documenting a Fortran unconstrained minimization code; algorithm unknown.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code documented as a report in 1970 (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S032",
+  "year": "1971",
+  "title": "On the convergence of the variable metric algorithm",
+  "read_level": "abstract",
+  "contribution": "Global convergence of the variable metric (DFP) algorithm when the second-derivative matrix is strictly positive definite everywhere, with a superlinear rate (abstract).",
+  "problem_entry": "Theory–practice gap: success proved only for quadratic objectives, yet the method treats many types of function successfully in practice (abstract).",
+  "key_idea": "Extend the convergence proof from quadratics to objectives with a strictly positive definite Hessian for all x, and show superlinear rate (abstract); proof technique not read.",
+  "assumptions": "Second-derivative matrix strictly positive definite for all values of the variables (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Abstract ordered practice → limited existing proof → extended theorem and rate (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "numerics → conjecture → proof or counterexample",
+    "relation": "evidence",
+    "note": "weak: trigger is observed practical success rather than a numerical conjecture",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "extend a quadratic-only theorem to the class practice already covers",
+    "evidence": "proved only for quadratics though practice succeeds widely; new proof for strictly positive definite Hessian plus super-linear rate",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Three-sentence abstract: where the method is used, the narrow class for which it is proved, the larger class you now prove plus the rate (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "However it has been proved only that the method is successful if the objective function is quadratic, although in practice it treats many types of objective functions successfully.",
+    "page": "abstract"
+   },
+   {
+    "text": "Moreover it is shown that the rate of convergence is super-linear.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S037",
+  "year": "1971",
+  "title": "Recent advances in unconstrained optimization",
+  "read_level": "abstract",
+  "contribution": "Survey of unconstrained optimization algorithms and theory 1967–1970, plus one new explanation of numerical difficulties with Davidon's variable metric algorithm (abstract).",
+  "problem_entry": "Review the development of algorithms and theory for unconstrained optimization during 1967–1970 (abstract).",
+  "key_idea": "Material taken from published papers except one flagged remark explaining numerical difficulties of Davidon's (1959) algorithm (abstract); the difficulties themselves not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Davidon (1959) variable metric algorithm is the one object of new analysis (abstract).",
+  "writing": "Explicitly flags the single unpublished item within the survey (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "weak: the one new item concerns numerical difficulties of DFP; whether rounding-related is not stated",
+    "pages": "abstract"
+   },
+   {
+    "method": "survey as vehicle for recording unpublished (student) work",
+    "relation": "variant",
+    "note": "here the unpublished item is his own remark, flagged as the sole exception",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Therefore (except for one remark) the material is taken from papers that have already been published.",
+    "page": "abstract"
+   },
+   {
+    "text": "This exception is an explanation of some numerical difficulties that can occur when using Davidon's (1959) variable metric algorithm.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S065",
+  "year": "1971",
+  "title": "Some properties of the variable metric algorithm",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on properties of the variable metric (DFP) algorithm, same year as S032; relation unknown.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S073",
+  "year": "1971",
+  "title": "Problems related to unconstrained optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on problems related to unconstrained optimization; content unknown.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S175",
+  "year": "1971",
+  "title": "The differential correction algorithm for rational L∞ approximation",
+  "read_level": "abstract",
+  "contribution": "Conference summary: the original differential correction algorithm (ODC) for minimax rational approximation converges as reliably as the modified version (DC) and usually quadratically versus linearly; numerical examples confirm ODC faster and more accurate (abstract). Full text is S048.",
+  "problem_entry": "ODC was displaced by DC because DC had a convergence proof, although ODC seems much better in practice (abstract).",
+  "key_idea": "Direct attention back to ODC: prove its convergence is equally reliable and its rate usually quadratic, against linear for DC (abstract).",
+  "assumptions": "Discrete data f(x_t), t = 1..N; rational R = P/Q with polynomials of prescribed degrees; minimax (L∞) criterion (abstract).",
+  "proof_devices": [],
+  "experiments": "Numerical examples comparing ODC and DC (abstract); details not read.",
+  "positioning": "Cheney and Loeb (original and modified algorithms) and Cheney (convergence of DC) (abstract).",
+  "writing": "Rate claim hedged as 'usually quadratic' (abstract), unlike the journal abstract S048.",
+  "limits_future": "Only a summary; full text submitted to a SIAM journal (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "weak: numerical examples compare the two versions head-to-head",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "make the theorem admit the practitioner's preferred choice",
+    "evidence": "original differential correction algorithm, abandoned for a modified version that had a proof, is shown to converge as reliably and faster",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "If a modified algorithm replaced an original only because it had a proof, try to prove the original's convergence and rate, then run both on the same examples (abstract)."
+  ],
+  "coauthors": "I. Barrodale, F. D. K. Roberts",
+  "quotes": [
+   {
+    "text": "The purpose of this paper is to direct attention back to the original algorithm, because in practice ODC seems to be much better.",
+    "page": "abstract"
+   },
+   {
+    "text": "Moreover we prove that the rate of convergence of ODC is usually quadratic, but the rate of convergence of DC is only linear.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S048",
+  "year": "1972",
+  "title": "The Differential Correction Algorithm for Rational ℓ_∞-Approximation",
+  "read_level": "abstract",
+  "contribution": "Proof that the original differential correction algorithm has sure convergence properties and quadratic rate, making it superior to the popular modified version; numerical examples compare the two (abstract).",
+  "problem_entry": "The modified version is most used, perhaps only because it had been proved to have sure convergence (abstract).",
+  "key_idea": "Prove convergence and quadratic rate for the original version (abstract); proof not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical examples comparing the two versions (abstract); details not read.",
+  "positioning": "Re-directs attention from the popular modified version back to the original version (abstract).",
+  "writing": "Rate stated as 'quadratic' without the 'usually' hedge of the 1971 summary S175 (abstract of each); conditions not read.",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "weak: final claim rests on numerical examples",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "make the theorem admit the practitioner's preferred choice",
+    "evidence": "original differential correction algorithm, abandoned for a modified version that had a proof, is shown to converge as reliably and faster",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "I. Barrodale, F. D. K. Roberts",
+  "quotes": [
+   {
+    "text": "However, the purpose of this paper is to direct attention back to the original version.",
+    "page": "abstract"
+   },
+   {
+    "text": "Some numerical examples are given to compare the two versions, and these leave little doubt that the original algorithm is much better in practice.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S098",
+  "year": "1972",
+  "title": "Unconstrained minimization algorithms without computation of derivatives",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: 1972 item on derivative-free unconstrained minimization, before the 1975 TOMS view S096; no venue recorded.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S112",
+  "year": "1972",
+  "title": "Unconstrained minimization and extensions for constraints",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on unconstrained minimization and its extension to constraints; content unknown.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S154",
+  "year": "1972",
+  "title": "Quadratic termination properties of minimization algorithms II. Proofs of theorems",
+  "read_level": "abstract",
+  "contribution": "Proofs of the quadratic termination results stated in Powell (1972) for a class of minimization algorithms (abstract).",
+  "problem_entry": "Supply proofs for previously stated quadratic termination theorems (abstract).",
+  "key_idea": "Results cover many gradient methods, unconstrained and with linear constraints (abstract); theorems not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Companion (part II) to Powell (1972) (abstract).",
+  "writing": "Statements and proofs published as separate parts (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "quadratic-case test as the first design question",
+    "relation": "evidence",
+    "note": "weak: quadratic termination analysed for a whole class of gradient methods",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "separate the statement paper from the proof paper",
+    "evidence": "part II gives proofs of results stated by Powell (1972)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "This paper gives proofs of the results stated by Powell (1972), on the quadratic termination properties of a class of minimization algorithms.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S160",
+  "year": "1972",
+  "title": "Quadratic termination properties of a class of double-rank minimization algorithms",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on quadratic termination of a class of double-rank (rank-two) minimization algorithms; same year and topic as S154, whose results were stated in Powell (1972); identity not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S198",
+  "year": "1972",
+  "title": "FORTRAN subroutine for calculating a cubic spline approximation to a given function",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: code report for cubic-spline approximation to a given function.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code released as a report, approximation strand (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S199",
+  "year": "1972",
+  "title": "Numerical methods for unconstrained optimization(Book- Numerical methods for unconstrained optimization.)",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: 150-page multi-author Academic Press volume on unconstrained optimization; Powell one of five listed contributors; his chapter not identified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "W. Murray, C. G. Broyden, R. Fletcher, W. H. Swann",
+  "quotes": []
+ },
+ {
+  "id": "S026",
+  "year": "1973",
+  "title": "On search directions for minimization algorithms",
+  "read_level": "abstract",
+  "contribution": "Counterexamples: differentiable functions of three variables on which cyclic coordinate search tends to a closed loop with gradient bounded away from zero, and a discussion of what this means for convergence theorems of search-direction methods (abstract).",
+  "problem_entry": "Can general convergence theorems be proved for minimization algorithms that use search directions? (abstract)",
+  "key_idea": "Construct smooth 3-variable functions whose coordinate-search path tends to a closed loop where the gradient stays bounded away from zero (abstract); construction not read.",
+  "assumptions": "Differentiable functions of three variables; searches along coordinate directions in sequence (abstract).",
+  "proof_devices": [
+   "explicit low-dimensional counterexample with a limit cycle on which the gradient is bounded away from zero (abstract)"
+  ],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "minimal analytic counterexample per failure mode",
+    "relation": "evidence",
+    "note": "three variables, differentiable, aimed at cyclic coordinate search",
+    "pages": "abstract"
+   },
+   {
+    "method": "minimal-instance counterexample / smallest-case analysis",
+    "relation": "evidence",
+    "note": "three-variable construction",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "To show a convergence theorem needs an extra hypothesis, build a smooth low-dimensional function on which the algorithm's iterates approach a cycle while the gradient stays bounded away from zero (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "On this loop the gradient of the objective function is bounded away from zero.",
+    "page": "abstract"
+   },
+   {
+    "text": "We discuss the relevance of these examples to the problem of proving general convergence theorems for minimization algorithms that use search directions.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S066",
+  "year": "1973",
+  "title": "Piecewise quadratic surface fitting for contour plotting",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell report on piecewise quadratic surface fitting for contour plotting; application-driven approximation (85 cites).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S161",
+  "year": "1973",
+  "title": "FORTRAN subroutine for plotting a cubic spline function",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: code report for plotting a cubic spline function; companion by title to S198.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code released as a report (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Marlow",
+  "quotes": []
+ },
+ {
+  "id": "S021",
+  "year": "1974",
+  "title": "On the estimation of sparse Jacobian matrices",
+  "read_level": "abstract",
+  "contribution": "A technique that uses known constant Jacobian elements to reduce the work of finite-difference estimation of the remaining elements (abstract).",
+  "problem_entry": "Cost of estimating a Jacobian by finite differences (abstract).",
+  "key_idea": "Exploit known constant elements to reduce the work for the rest (abstract); mechanism not read.",
+  "assumptions": "Some Jacobian elements are known constants (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "economy in obtaining derivative information from function values via known structure rather than least-change updating; that 'work' means function evaluations is not stated in the abstract",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. R. Curtis, J. K. Reid",
+  "quotes": [
+   {
+    "text": "We show how to use known constant elements in a Jacobian matrix to reduce the work required to estimate the remaining elements by finite differences.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S052",
+  "year": "1974",
+  "title": "On the modification of 𝐿𝐷𝐿^{𝑇} factorizations",
+  "read_level": "abstract",
+  "contribution": "Comparison of methods for rank-one modification of LDL^T factorizations on efficiency and error propagation, an error analysis with novel features, a worked example of error growth, and extensions to positive semidefinite matrices (abstract).",
+  "problem_entry": "Several methods exist for updating an LDL^T factorization of a positive definite A after a rank-one addition (abstract).",
+  "key_idea": "Judge update methods on both cost and error propagation; a suitable method must be chosen with care (abstract); analysis not read.",
+  "assumptions": "A positive definite; rank-one addition; extensions to positive semidefinite matrices (abstract).",
+  "proof_devices": [
+   "error analysis of some update algorithms described as having novel features (abstract); not read"
+  ],
+  "experiments": "A worked example that illustrates error growth (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Extensions for representing and updating positive semidefinite matrices (abstract).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "efficiency and error propagation are the two comparison criteria; error growth shown on a worked example",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When several update formulas are algebraically equivalent, compare them on operation count and error propagation together, and include one worked example that makes the error growth visible (abstract)."
+  ],
+  "coauthors": "R. Fletcher",
+  "quotes": [
+   {
+    "text": "Both the efficiency and error propagation characteristics are discussed, and it is shown that a suitable method must be chosen with care.",
+    "page": "abstract"
+   },
+   {
+    "text": "A worked example which also illustrates error growth is presented.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S077",
+  "year": "1974",
+  "title": "Introduction to constrained optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: introductory/tutorial Harwell report on constrained optimization; content unknown.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S106",
+  "year": "1974",
+  "title": "The minimax solution of linear equations subject to bounds on the variables",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: algorithm report on the bound-constrained minimax (L∞) solution of linear equations; code companion S157 (1975, with K. Madsen).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "report-then-code pair with S157 (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S028",
+  "year": "1975",
+  "title": "Convergence properties of a class of minimization algorithms",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: chapter (pp. 1–27 of Nonlinear Programming 2 per Crossref, closed access) on convergence properties of a class of minimization algorithms (520 cites); class not named.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S086",
+  "year": "1975",
+  "title": "A view of unconstrained optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Harwell survey/position report on unconstrained optimization; same 'A view of' framing as S096 (1975) and S029 (2007).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S096",
+  "year": "1975",
+  "title": "A view of unconstrained minimization algorithms that do not require derivatives",
+  "read_level": "abstract",
+  "contribution": "Critical view of derivative-free minimization algorithms: quasi-Newton and conjugate-direction classes have fundamental disadvantages, and a 'B-conjugate' class is suggested with comments on constructing good algorithms in it (abstract).",
+  "problem_entry": "Examine existing derivative-free algorithms' merits and defects to identify techniques for better methods (abstract).",
+  "key_idea": "Both existing classes have fundamental disadvantages; a third class, B-conjugate methods, suggests itself (abstract); its definition not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Quasi-Newton and conjugate-direction derivative-free algorithms (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "new direction derived from defects of two existing classes, not from one measured limitation of his own predecessor code",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Existing algorithms are examined, with particular attention given to their merits and defects",
+    "page": "abstract"
+   },
+   {
+    "text": "Some comments are made on the construction of good algorithms within this class.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S147",
+  "year": "1975",
+  "title": "On the convergence of cyclic Jacobi methods",
+  "read_level": "abstract",
+  "contribution": "Report of an actual cyclic Jacobi computation that failed because of rounding errors, showing the angle restriction may be needed in practice, and a new, less severe bound for that restriction (abstract).",
+  "problem_entry": "Convergence of cyclic Jacobi is proved only under Henrici's (1958) angle restriction; unrestricted convergence is open (abstract).",
+  "key_idea": "Show the proof-motivated angle restriction matters in floating point, then relax its bound (abstract); proof not read.",
+  "assumptions": "Symmetric matrix; pivots in a fixed cyclic order; restriction on rotation angle (abstract).",
+  "proof_devices": [],
+  "experiments": "One actual computer calculation where the method failed due to rounding errors (abstract).",
+  "positioning": "Henrici (1958) angle restriction (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "rounding error determines whether a safeguard is needed",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "an actual failure is reported",
+    "pages": "abstract"
+   },
+   {
+    "method": "safeguard designed so the proof goes through",
+    "relation": "variant",
+    "note": "proof-motivated safeguard (Henrici) shown to be needed in practice; its bound is relaxed rather than dropped; opposite of 'question devices that exist only to assist proofs'",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a safeguard seems to exist only for the proof, look for a real computation that fails without it; if one exists, keep the safeguard and weaken its constant as far as the proof allows (abstract)."
+  ],
+  "coauthors": "K. W. Brodlie",
+  "quotes": [
+   {
+    "text": "Now we report an actual computer calculation where a cyclic Jacobi method failed, due to computer rounding errors, so in practice the angle restriction may be needed.",
+    "page": "abstract"
+   },
+   {
+    "text": "A new bound for the angle restriction is given that is less severe than the one proposed originally.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S157",
+  "year": "1975",
+  "title": "A Fortran subroutine that calculates the minimax solution of linear equations subject to bounds on the variables",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: Fortran code for the bound-constrained minimax solution of linear equations; code companion to S106.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code companion to algorithm report S106 (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "K. Madsen",
+  "quotes": []
+ },
+ {
+  "id": "S197",
+  "year": "1975",
+  "title": "Optimization in action: 7th–9th January 1975. University of Bristol, UK. Organized by the Institute of Mathematics and its Applications, Essex, UK",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: one-page item (p. 276 per Crossref) in Computer-Aided Design about the IMA 'Optimization in action' conference, Bristol, January 1975; probably a meeting notice/report, not a research article.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ }
+]

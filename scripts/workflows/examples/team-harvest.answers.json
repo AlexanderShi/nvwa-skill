@@ -1,0 +1,33 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada has no Scholar id (the agent searches for one) and gets her DBLP pid from the name search, so next prints the new_team.py --set-member command; Bo's audit still finds the list incomplete.",
+  "^harvest:ada-example$": {
+    "scholar_user": "",
+    "identity_confirmed": true,
+    "identity_evidence": "fictional: no profile, DBLP + homepage",
+    "scholar_rows": 0,
+    "dblp_only_items": 41,
+    "validate_works": "0 errors",
+    "dblp_pid": "00/1111",
+    "searches_used": 1
+  },
+  "^harvest:bo-sample$": {
+    "scholar_user": "EXAMPLE_SCHOLAR_ID",
+    "identity_confirmed": true,
+    "identity_evidence": "fictional: affiliation matches the hint",
+    "scholar_rows": 118,
+    "pages_fetched": 3,
+    "with_doi": 80,
+    "with_arxiv": 44,
+    "validate_works": "0 errors"
+  },
+  "^audit:bo-sample$": {
+    "complete": false,
+    "scholar_rows_seen": 120,
+    "missing_found": 2,
+    "remaining_concerns": [
+      "fictional: two rows without a year"
+    ],
+    "validate_works": "0 errors",
+    "resources_row_updated": true
+  }
+}

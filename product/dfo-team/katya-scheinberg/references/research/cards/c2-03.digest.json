@@ -1,0 +1,288 @@
+[
+ {
+  "id": "S021",
+  "year": "2016",
+  "title": "Least-squares approach to risk parity in portfolio selection",
+  "read_level": "full",
+  "contribution": "Replaces the exponential family of convex log-barrier orthant problems for risk parity with one nonconvex least-squares model (free level variable theta) that covers long-short portfolios, general bounds (graceful fallback when parity is infeasible), group parity and preference-based selection, and solves it with the authors' alternating linearization method carried from convex to nonconvex problems; read from the Oct 2013 author preprint.",
+  "problem_entry": "Practitioner portfolio construction: mean-variance is input-sensitive, 1/n and 60/40 diversify capital not risk; the long-only log-barrier approach breaks for long-short (up to 2^(n-1) solutions), general bounds (parity may not exist) and groups; Example 2.1 shows projection onto the bounds is worse than optimizing the new model (pp. 2, 5-9).",
+  "key_idea": "min over (x,theta) of sum_i (x_i(Sigma x)_i - theta)^2 under bounds and budget: every parity solution is a zero-residual global minimizer, otherwise the minimizer is closest to parity; n terms instead of the n^2 pairwise terms of Maillard et al.; homotopy on a min-variance term selects among many solutions; ALM with variable splitting y = x gives strictly convex QP half-steps (pp. 8, 12, 14-16).",
+  "assumptions": "Sigma symmetric PSD, volatility as risk measure, no expected returns, box bounds + budget, non-overlapping groups with investment in all; no guarantee for the homotopy (nonconvex) and ALM convergence only asserted, proof deferred to the Bai-Scheinberg report [1] (pp. 3-4, 8, 12, 14).",
+  "proof_devices": [
+   "orthant log-barrier family (2.13): one strictly convex problem per sign vector, s and -s give the same normalized point, so at most 2^(n-1) solutions (Lemma 2.2, p. 6)",
+   "scaling device for existence/uniqueness: sqrt(alpha) x^c solves the barrier problem with constant alpha c (Lemma 2.1, pp. 5-6)",
+   "homogeneity contraction x^T grad_x F = 0 plus theta = mean, reducing to the Cauchy-Schwarz equality case: unconstrained stationary points are zero-residual global minima (Lemma 3.1, p. 10)",
+   "tiny counterexamples locating spurious points: budget equality gives a local max (Ex. 3.1), bounds give a non-global boundary local min (Ex. 3.2) (p. 11)",
+   "variable splitting F(x,y)=sum (x^T M_i y - theta)^2 with linearized-proximal convex QP half-steps and backtracking on mu (Algs 2-3, pp. 15-16)"
+  ],
+  "experiments": "5-asset illustrations (long-only, infeasible tight bounds, long-short with multiple solutions); backtests on 14 asset-class indices 2002-2012 and 17 US industries 1972-2012 with 36/60/120-month rolling windows (mixed Sharpe results shown); group parity on 482 S&P 500 stocks with a 220/24 split; solver efficiency counted in QPs and iterations to KKT violation 1e-4/1e-6, vs MATLAB fmincon SQP (fails) and interior point (partial, 5.061 s vs 0.026 s) on one instance, with starting mu tuned (pp. 16-27).",
+  "positioning": "Restates rather than attacks Maillard-Roncalli-Teiletche [9] (similar model, simpler structure); credits the log-barrier to [9], [8], [10] and keeps it as the exact long-only method; ALM lineage self-cited ([7] Goldfarb-Ma-Scheinberg, [1] Bai-Scheinberg); cited risk-parity algorithms [5], [10] not used as baselines (pp. 2, 5, 7-8, 14, 27-28).",
+  "writing": "Every structural claim gets a 2-3 asset numeric example; contribution sentence early in the introduction; explicit hedge where the guarantee is missing, but 'very robust with respect to the starting point' rests on one small example; roadmap/section mismatch and typos (pp. 2-3, 8-13, 25).",
+  "limits_future": "Stated: bound-induced local minima, no guarantee for Algorithm 1, cardinality excluded, group-model assumptions; the intro claim of no interior local optima is proved only with all constraints dropped; future work is one generic sentence on faster algorithms (pp. 2, 11-14, 27).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Sum of squared bilinear forms recognised; variable splitting makes each half-step a strictly convex QP (Method 6 step 3, nonconvex setting).",
+    "pages": "pp. 14-15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Keeps Scheinberg's own ALM [7] and adds backtracking on mu; the change is forced by a new problem class (convex -> nonconvex), not by a weaker oracle.",
+    "pages": "pp. 14-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Solver comparison counts QPs/iterations/CPU time on one instance vs generic fmincon, with starting mu tuned; not equal-accuracy evaluation counts.",
+    "pages": "pp. 25-27"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "variant",
+    "note": "Numbers without a guarantee in this paper; convergence deferred to a technical report.",
+    "pages": "p. 14, pp. 25-27"
+   },
+   {
+    "method": "Research Taste mark 5",
+    "relation": "evidence",
+    "note": "Positive landscape lemma paired with counterexamples showing which constraints create spurious points (analogue of minimal safeguard + negative result).",
+    "pages": "pp. 10-11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "least-squares residual reformulation with graceful infeasibility",
+    "evidence": "Risk parity (a system of equalities) becomes min sum (x_i(Sigma x)_i - theta)^2: zero set = parity set, minimizer = principled fallback when bounds make parity infeasible ('optimal parity' portfolio).",
+    "pages": "p. 8, p. 17"
+   },
+   {
+    "pattern": "landscape audit",
+    "evidence": "No spurious stationary points in the relaxed problem (Lemma 3.1) plus tiny examples showing the budget equality gives a local max and bounds give a non-global local min; related to 'counterexample-first assumption audit'.",
+    "pages": "pp. 10-11"
+   },
+   {
+    "pattern": "homotopy from a convex anchor",
+    "evidence": "Algorithm 1 adds rho x^T Sigma x with large rho (convex, near min-variance), decreases rho with warm starts, then drops the term to select the least-volatility parity solution among up to 2^(n-1).",
+    "pages": "p. 12"
+   },
+   {
+    "pattern": "carry the home-field solver into the new field",
+    "evidence": "Second instance after S011: ALM from convex splitting (Goldfarb-Ma-Scheinberg) carried into nonconvex portfolio least squares.",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "applied side-collaboration with a lighter evidence standard (trajectory note)",
+    "evidence": "Industry co-author paper with generic fmincon baseline, tuned starting mu, no convergence theory in the paper.",
+    "pages": "pp. 14, 25-27"
+   }
+  ],
+  "transferable": [
+   "Homogeneity contraction: take x^T grad F for an objective built from homogeneous pieces; with optimality in the auxiliary level variable, stationarity reduces to the Cauchy-Schwarz equality case, proving unconstrained stationary points are zero-residual global minima (Lemma 3.1, p. 10).",
+   "Replace pairwise-deviation penalties sum_{i,j}(r_i - r_j)^2 (n^2 terms) by sum_i (r_i - theta)^2 with a free theta whose optimum is the mean (Lemma 2.3, p. 8).",
+   "Variable splitting for squared bilinear forms: F(x,y) = sum (x^T M_i y - theta)^2 with y = x makes each block convex; alternate linearized-proximal QPs with backtracking on mu (Algs 2-3, pp. 15-16).",
+   "Selection homotopy among many global solutions: add rho*(preference) with large rho, decrease geometrically with warm starts, then drop the term and polish in the identified region (Alg. 1, p. 12).",
+   "Motivate a new formulation with a 3-variable example where the naive fix (projection) is measurably worse on the target and on two independent metrics (Example 2.1, pp. 8-9).",
+   "When iteration cost is a subproblem solve, report subproblems solved and iterations to several KKT-violation thresholds, not only time (Table 6.9, p. 26)."
+  ],
+  "coauthors": "Xi Bai (Lehigh ISE), Reha Tutuncu (Goldman Sachs Asset Management)",
+  "quotes": [
+   {
+    "text": "Moreover, no local optima exist on the interior of the feasible set; in other words, all local optima of our proposed formulation occur due to the constraining of the feasible set by bounds on the weights.",
+    "page": 2
+   },
+   {
+    "text": "Note that due to the nonconvexity of the objective function, there is no theoretical guarantee that Algorithm 1 will always converge to the minimum variance risk parity solution.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "S107",
+  "year": "2024",
+  "title": "ProxSTORM-A Stochastic Trust Region Method for Nonsmooth Optimization",
+  "read_level": "full",
+  "contribution": "Generalizes STORM to min f + phi (f smooth nonconvex with random models and estimates, phi convex with exact prox), proving almost-sure lim ||h|| = 0 and O(eps^-2) expected iterations via the STORM/BCMS19 supermartingale machinery, and shows STORM itself needs only difference-based reduction accuracy, giving O(Delta^-2) samples per iteration under common random numbers; text read is arXiv:2510.03187v2 (byte-identical to S098), not the 2024 Sandia report.",
+  "problem_entry": "Merger of two frameworks each missing what the other has: the deterministic inexact proximal trust region [5] needs always-holding, vanishing inexactness while real inexactness is stochastic (sampling, sporadic simulation failures); STORM handles randomness but only smooth f (pp. 1-2).",
+  "key_idea": "STORM with the proximal-gradient map h_k in place of the gradient, phi kept exact in the subproblem and in pred/ared, a generalized fraction-of-Cauchy-decrease condition, and the function-estimate contract rewritten on the reduction difference |ared - cred| <= eta*pred (pp. 3-4, 7).",
+  "assumptions": "phi proper closed convex with exact prox, f L-smooth on dom phi, f+phi bounded below; bounded model curvature; P(I_k|F_{k-1}) >= alpha (gradient error <= kappa*Delta); P(J_k|F_{k-1/2}) >= beta (difference-based reduction accuracy); expected-increase bound on bad successful steps (Assumption 5); alpha, beta close to 1 (alpha*beta > 1/2), admitted to be not computable (pp. 1-2, 6-8, 15-16, 20).",
+  "proof_devices": [
+   "potential Psi_k = nu (f+phi)(X_k) + (1-nu) Delta_k^2 with expected decrease -Theta Delta_k^2 (Lemma 10, pp. 11-15)",
+   "half-step filtration F_{k-1/2} separating model and reduction randomness so success probabilities multiply to alpha*beta (pp. 5-6, 13)",
+   "event partition on B_k = {||h|| >= zeta Delta}: worst-case positive ||h||Delta term cancelled by best-case negative term of weight alpha*beta (pp. 13-15)",
+   "+-1 submartingale W_k = sum[2*1(I and J) - 1] compared with log_gamma Delta_k for liminf convergence (Thm 19, pp. 17-19)",
+   "(2/r + L)-Lipschitz prox-gradient map from prox nonexpansiveness to upgrade liminf to lim (App. A, pp. 29-30)",
+   "stopping-time bound by verifying the three conditions of BCMS19 Thm 2: E[T_eps] <= alpha*beta/(2 alpha*beta - 1) * Psi_0/(Theta delta_eps^2) + 1 (Thm 21, Prop. 22, pp. 19-20)",
+   "Taylor expansion of ared - cred under common random numbers, then Markov: N = O(Delta^-2) samples (eq. 44, pp. 21-23)"
+  ],
+  "experiments": "Two case studies, 100 seeded realizations each with test-error histograms: l1-regularized 2-layer network on HIGGS with fixed n = 100 samples (deviations from theory listed) vs Adam given 150 vs 50 iterations for work parity (Adam wins as lambda -> 0); stochastic topology optimization (d = 20,000, convex constraints as indicator phi) vs the deterministic method [5] on a fixed-sample SAA, plus median trust-region radii with min-max bands; no wall-clock or sample-count plots (pp. 23-28).",
+  "positioning": "Generalizes STORM [15, 11] and Baraldi-Kouri [5]; contrasts with stochastic SQP and interior-point methods (only convex constraints but simpler assumptions); picks STORM among stochastic trust-region methods as most general and complexity-bearing; delegates radius dynamics and total sample complexity to JSX25 [23]; traces Assumption 3 to BSV [4] (pp. 2-3, 8-9, 23).",
+  "writing": "Contribution framed as 'no worse than the theory for STORM when ϕ ≡ 0' (p. 2); a separate paragraph on what the paper teaches about STORM; lemmas announced by the event they cover, constants table and one interpretive remark per constant; conclusion contrasts stochastic vs deterministic trust-region regimes instead of restating results; minor typos (empty eta interval p. 6, W_k definition p. 20) (pp. 2-3, 6, 10-16, 20, 27-28).",
+  "limits_future": "Stated: convex phi with exact prox only, fixed radius update for convenience, alpha/beta not computable, experiments deviate from assumptions, Adam wins for small lambda, Delta_k -> 0 so steps are rejected infinitely often; no high-probability bound; open: verify-until-pass inexactness loops amplify erroneous exits under probabilistic oracles (pp. 2, 5, 16, 24, 27-28).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "STORM kept intact and recovered when phi = 0; new proof touches only where phi enters (descent lemma on f - m_k, prox nonexpansiveness, generalized Cauchy decrease).",
+    "pages": "pp. 1-7, 18, 27"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Known cheap part phi kept exact in subproblem and pred/ared; only f is sampled.",
+    "pages": "pp. 2, 4, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Contract 'sufficiently accurate, sufficiently often' kept, but function side written on the reduction difference scaled by pred_k, lowering samples to O(Delta^-2) under CRN; Remark 11 recovers the alpha >= 1/2 threshold.",
+    "pages": "pp. 2, 7, 16, 23"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Potential nu*objective + (1-nu)Delta^2, expected decrease, stopping-time bound at the deterministic O(eps^-2) order.",
+    "pages": "pp. 11-20"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "No high-probability upgrade; radius lower bound and total sample complexity delegated to [23].",
+    "pages": "pp. 9, 23"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Comparisons use work-adjusted iteration budgets vs Adam and a fixed-sample SAA with a different trust-region update, not equal-accuracy evaluation counts.",
+    "pages": "pp. 24, 27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "avoid verify-until-pass loops under probabilistic oracles",
+    "evidence": "Deterministic inexactness conditions implemented by an inner check-and-refine loop ([5, Alg. 4]) are ill-suited to stochastic settings because each retry amplifies the chance of an erroneous exit; contracts should be checked once per iteration.",
+    "pages": "p. 28"
+   },
+   {
+    "pattern": "difference-based function-estimate contract",
+    "evidence": "SAME TEXT AS S098 (c08) - do not count as independent evidence. J_k = {|A_k - C_k| <= eta P_k}; O(Delta^-2) samples under common random numbers.",
+    "pages": "pp. 3, 7, 21-23"
+   },
+   {
+    "pattern": "generalise and recover",
+    "evidence": "SAME TEXT AS S098 - not independent. ProxSTORM reduces to STORM when phi = 0 and the rework simplifies STORM's analysis.",
+    "pages": "pp. 1, 3; Remark 15, p. 16"
+   },
+   {
+    "pattern": "explicit theory-vs-experiment deviation list",
+    "evidence": "SAME TEXT AS S098 - not independent. Items i-ii list how fixed-sample experiments depart from Assumptions 4-5.",
+    "pages": "p. 24"
+   }
+  ],
+  "transferable": [
+   "For composite f + phi, put all randomness in f and keep phi exact so the pred - ared gap involves only f - m_k and the smooth descent-lemma argument carries over (Lemma 1, p. 7).",
+   "Write the function-estimate contract on the difference |ared - cred| <= eta*pred_k; with common random numbers a Taylor expansion gives O(sigma*Delta/sqrt(N)), so N ~ Delta^-2 suffices instead of Delta^-4 (eq. 44, pp. 22-23).",
+   "Insert a half-step sigma-algebra F_{k-1/2} between model draw and reduction draw so success probabilities multiply cleanly under the tower property (pp. 5-6, 13).",
+   "In the expected-decrease lemma, cancel the positive ||h||Delta term of the both-bad event with the negative term of the both-good event (weight alpha*beta), then push alpha, beta to 1 (Lemma 10, pp. 13-15).",
+   "Upgrade liminf to lim in prox settings by proving the prox-gradient map is (2/r + L)-Lipschitz from nonexpansiveness (App. A, p. 30).",
+   "Get complexity by verifying the conditions of a published stopping-time theorem ([11, Thm 2]) instead of redoing the renewal argument (Thm 21, Prop. 22, pp. 19-20).",
+   "After the key lemma, give a constants table and one remark per constant translating it into complexity or oracle-reliability effects (Table 1, Remarks 11-14, pp. 15-16).",
+   "Run 100 seeded realizations and compare final-objective histograms with a same-seed baseline whose iteration budget is work-adjusted; state where the baseline wins (p. 24)."
+  ],
+  "coauthors": "Robert J. Baraldi, Aurya Javeed, Drew P. Kouri (Sandia National Laboratories)",
+  "quotes": [
+   {
+    "text": "Our contribution is a nonsmooth, stochastic algorithm that accommodates ϕ while recovering theory no worse than the theory for STORM when ϕ ≡ 0.",
+    "page": 2
+   },
+   {
+    "text": "When an inequality does not hold with full probability, iterations like that for the condition above amplify the chances of an erroneous exit in a manner that is impractical to control.",
+    "page": 28
+   }
+  ]
+ },
+ {
+  "id": "S106",
+  "year": "2025",
+  "title": "Novel and Efficient Approximations for Zero-One and Ranking Losses of Linear Classifiers",
+  "read_level": "full",
+  "contribution": "Derives closed-form smooth approximations of the expected 0-1 loss and expected ranking loss of a linear classifier, and their gradients, from first and second class moments under normality of the projection w^T X, so each optimizer iteration costs O(d^2) independent of n; text read is the 2019 arXiv v1 (byte-identical to S089), not the 2025 journal version.",
+  "problem_entry": "The true goals are expected error and expected ranking loss, but their sample averages are step functions, so ERM optimizes surrogates whose cost grows with n (logistic O(n), pairwise surrogates O(n+ n-) or O(n log n)); thesis: the expected losses of a linear classifier are themselves often smooth (pp. 1-4).",
+  "key_idea": "Split F01 by class into CDFs of w^T X; assume w^T X (and w^T(X- - X+)) is normal, giving F_n01 = P(+)(1 - phi(mu+/sigma+)) + P(-)phi(mu-/sigma-) and F_nrank = 1 - phi(mu_Z/sigma_Z) with closed-form gradients; plug in empirical moments and run off-the-shelf L-BFGS with a soft scale penalty (pp. 4-7, 10).",
+  "assumptions": "i.i.d. data; approximate normality of the 1-D projections for the w met in training, argued by CLT for block-dependent features; cross-covariances set to zero; linear classifiers; nonconvex, undefined at w = 0; admitted that normality is not visible on all data sets (pp. 2, 4-8).",
+  "proof_devices": [
+   "event decomposition by class label (Lemma 3.1, p. 4)",
+   "Gaussian closure under linear maps, quoted from Tong (Lemma 3.2, Thm 3.6, pp. 5-6)",
+   "chain rule for phi(g(w)) with g(w) = w^T mu / sqrt(w^T Sigma w) (Lemma 3.4, pp. 5-6)",
+   "symbolic per-iteration cost accounting O(d^2) vs O(nd) vs O(dn log n) with one-time O(nd^2) moments and a matrix-free covariance product for sparse data (p. 10)"
+  ],
+  "experiments": "Normality histograms at early/late iterates (a9a and four weaker sets); 9 synthetic Gaussian sets with exact vs estimated moments (estimated moments only tie logistic regression on data8/data9, where n is small relative to d, and trail exact moments by about 0.06 there); 21 LIBSVM/UCI sets, 5-fold CV x 4, accuracy/AUC, iterations, solve time and separate moment time; baselines logistic, pairwise hinge (unsolved on real-sim in 24 h), LDA, hand-tuned Adam, with asymmetric lambda choices; surrogate-vs-true-loss plots along the path; undiscussed covtype failure, iteration caps, majority-class poker, 'shuttle' missing from the data table, and synthetic tables identical to S078 despite a different optimizer (pp. 8-17).",
+  "positioning": "Argues against surrogate losses (logistic, hinge, Yan et al. sigmoid, Rudin-Schapire, Steck pairwise hinge) and distinguishes itself from LDA's Gaussian-data assumption; 13 references, no self-citation of the 2018 predecessor S078 and no DFO/stochastic-optimization citations (pp. 2-4, 18).",
+  "writing": "Contribution sentence opens the introduction; early claim 'better result faster ... almost no tuning' outruns the results section's 'very similar' accuracy; modest labels ('theoretical justifications', 'theoretical motivation'); one-paragraph conclusion with no limits (pp. 1-3, 13, 15).",
+  "limits_future": "No limits or future work stated; visible in the body: normality fails on some sets, estimated moments poor when n is small relative to d, nonconvex start-point dependence, covtype failure, linear classifiers only (pp. 4, 8, 10-11, 13, 15).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Distributional structure: moments computed once, O(d^2) per iteration regardless of n, moment time reported separately; 'no reason to apply stochastic gradient descent' once n leaves the per-iteration cost.",
+    "pages": "pp. 2, 10, 13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Weak: L-BFGS with Wolfe line search used unchanged; preconditioned CG and Hessian-vector methods tried and dropped.",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Comparisons on test accuracy and CPU time under unequal tuning (own lambda fixed, logistic lambda by rule, Adam hand-tuned); no equal-accuracy target or evaluation counts; only the exact-vs-estimated-moments synthetic design is controlled.",
+    "pages": "pp. 11, 13-14"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "variant",
+    "note": "Numbers without a guarantee; theory is closed-form derivation under a distributional assumption.",
+    "pages": "pp. 4-7, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "smooth true target instead of convex surrogate",
+    "evidence": "SAME TEXT AS S089 (s02) - do not count as independent evidence. Closed-form smooth expected 0-1 and ranking losses optimized directly.",
+    "pages": "pp. 1, 5-7"
+   },
+   {
+    "pattern": "assumption on the statistic the objective uses, checked along the path",
+    "evidence": "SAME TEXT AS S089 - not independent. Normality assumed for w^T X and checked by histograms at early and late iterates.",
+    "pages": "p. 5; Figs 4.1-4.2, pp. 8-9"
+   },
+   {
+    "pattern": "report the variants that did not help",
+    "evidence": "Sampled cross-covariances did worse than zeros; second-order methods did not beat L-BFGS on time; random starts no better than the moment-based start.",
+    "pages": "pp. 8, 10"
+   }
+  ],
+  "transferable": [
+   "Put the distributional assumption on the low-dimensional statistic the objective uses (w^T X), argue it by a CLT for block-dependent features, and show its histogram at early and late iterates (p. 5; Figs 4.1-4.2, pp. 8-9).",
+   "Two-tier synthetic test: solve with exact generating moments and with estimated ones to separate modelling error from estimation error (Table 4.2, p. 11).",
+   "For a scale-invariant objective use a soft penalty lambda(1 - ||w||^2)^2 instead of a sphere constraint (p. 7).",
+   "Start a moment-based nonconvex objective from a data-informed point (mu+ orthogonalized against mu-, normalized) and report that random starts did no better (p. 10).",
+   "Plot the proposed objective and the baseline surrogate against the true empirical loss along the optimization path (100 points) to show whether a surrogate tracks the target or only locates its minimizers (p. 14).",
+   "Report per-iteration complexity symbolically and one-time preprocessing as its own column (p. 10; Table 4.5, p. 13).",
+   "For large sparse data apply the empirical covariance as Sigma v = (X^T(Xv) - n Xbar(Xbar^T v))/(n-1) without forming Sigma (p. 10)."
+  ],
+  "coauthors": "Hiva Ghanbari, Minhan Li (Lehigh ISE)",
+  "quotes": [
+   {
+    "text": "We argue that this assumption is significantly weaker than the Gaussian assumption on the data itself and we support this claim by demonstrating that our new approximation is quite accurate on data sets that are not necessarily Gaussian.",
+    "page": 1
+   },
+   {
+    "text": "Note that there is no reason to apply stochastic gradient descent methods to Fn01(w), since the dependence on n is removed from per-iteration complexity.",
+    "page": 13
+   }
+  ]
+ }
+]

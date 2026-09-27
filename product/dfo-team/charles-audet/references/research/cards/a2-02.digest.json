@@ -1,0 +1,1293 @@
+[
+ {
+  "id": "S209",
+  "year": "2008",
+  "title": "Algorithms for Blackbox Optimization using Surrogate Function",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): algorithms using surrogate functions for blackbox optimization by the Audet-Abramson-Dennis group. Title and author set resemble D016 (DTIC ADA420453, 2004), so it may be a similar sponsor report; unverified. No venue or abstract (Semantic Scholar CorpusId 60057173).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Topic only: SKILL.md places surrogates in the Search step; whether this work does is not read.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. A. Abramson, J. E. Dennis Jr.",
+  "quotes": []
+ },
+ {
+  "id": "S017",
+  "year": "2009",
+  "title": "Mesh adaptive direct search algorithms for mixed variable optimization",
+  "read_level": "abstract",
+  "contribution": "MV-MADS: one algorithm for mixed (incl. categorical) variables with general nonlinear constraints, with a new convergence analysis generalizing GPS and MADS theory (abstract).",
+  "problem_entry": "GPS had been extended to mixed variables under linear constraints, MADS to general nonlinear constraints; neither covered both (abstract).",
+  "key_idea": "Combine the mixed-variable GPS and MADS approaches into one algorithm; analysis in Clarke nonsmooth calculus (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Presented as a generalization of the authors' two earlier works (mixed-variable GPS; MADS) (abstract). Continues the S213 thesis program (card b2-02) with Abramson again first author (metadata).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Clarke-calculus guarantee extended to a larger problem class.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: Generalize-and-recover",
+    "relation": "evidence",
+    "note": "The new analysis generalizes the existing GPS and MADS theory.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "MV-MADS analysis generalizes existing GPS and MADS theory.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "M. A. Abramson (first), J. W. Chrissis, J. G. Walston",
+  "quotes": [
+   {
+    "text": "In the present paper, we generalize both of these approaches by proposing an algorithm for problems with both mixed variables and general nonlinear constraints, called mixed variable-MADS (MV-MADS).",
+    "page": "abstract"
+   },
+   {
+    "text": "A new convergence analysis is presented which generalizes the existing GPS and MADS theory.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S082",
+  "year": "2009",
+  "title": "Extremal problems for convex polygons-an update",
+  "read_level": "abstract",
+  "contribution": "Update of the authors' survey (to 2005) on ten pairs of extremal convex-polygon problems, prompted by several very recent results (abstract).",
+  "problem_entry": "Six quantities of a convex n-gon (perimeter, diameter, area, sum of distances between vertices, width); optimizing one with another fixed gives ten pairs of problems (abstract).",
+  "key_idea": "Survey update; notes that geometric reasoning is increasingly complemented by global optimization methods (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Updates the authors' own earlier survey (by title, S040 in this corpus; metadata).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "Abstract names the geometry-plus-global-optimization trend.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: catalogue open cells, then fill them",
+    "relation": "evidence",
+    "note": "Problem-family survey kept up to date.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Survey chapter in Fields Institute Communications.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "evidence": "Survey update states geometric reasoning is increasingly complemented by global optimization.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "catalogue open cells, then fill them",
+    "evidence": "Ten-pair problem family surveyed to 2005 and updated with new results.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "Survey update chapter (Lectures on Global Optimization).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "Minimizing or maximizing any of these quantities while fixing another defines ten pairs of extremal polygon problems (one of which usually has a trivial solution or no solution at all).",
+    "page": "abstract"
+   },
+   {
+    "text": "It appears that geometric reasoning is increasingly complemented by global optimization methods.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S086",
+  "year": "2009",
+  "title": "The mesh adaptive direct search algorithm for periodic variables",
+  "read_level": "abstract",
+  "contribution": "Periodic variables in MADS handled by mapping trial points into the period interval, with no loss in the convergence analysis under minor algorithmic conditions; published Pacific J. Optim. 8(1):103-119, 2012 (abstract; metadata).",
+  "problem_entry": "Constrained blackbox problems whose defining functions are periodic in some or all variables (abstract).",
+  "key_idea": "Map trial points into the interval defined by the period inside the MADS framework; minor algorithmic conditions keep the convergence analysis intact (abstract). Which conditions: not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "A nonsmooth classification problem and a bi-objective portfolio selection problem where MADS is repeatedly used on mono-objective problems (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Guarantee preserved under stated algorithmic conditions.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Structure classified on the input side (periodic variables) rather than on outputs/constraints.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: MADS-as-subroutine composition",
+    "relation": "evidence",
+    "note": "Bi-objective test solved by repeated mono-objective MADS runs.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "MADS-as-subroutine composition",
+    "evidence": "Bi-objective portfolio problem solved by repeated mono-objective MADS runs.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When a variable has known structure (a period), fold trial points into the fundamental interval and list the algorithmic conditions under which the existing convergence proof still holds (abstract)."
+  ],
+  "coauthors": "S. Le Digabel",
+  "quotes": [
+   {
+    "text": "We show that the natural strategy of mapping trial points into the interval defined by the period in the Mesh Adaptive Direct Search (MADS) framework can be easily done in practice, and the convergence analysis does not suffer any loss if some minor algorithmic conditions are met.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S208",
+  "year": "2009",
+  "title": "La saga des trois petits octogones",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): French popular-science account of small-octagon results by Audet-Hansen-Messine (Pour la Science 380:62-67, 2009 per Audet's publication page; German version S207). Related research: S037 (2002), S108 (2005/2006). Which three octagons: not known.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: popular and historical accounts of the octagon results",
+    "relation": "evidence",
+    "note": "Popular-science venue.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "popular and historical accounts of the octagon results",
+    "evidence": "Pour la Science article 2009 (S208) and its German version (S207); inferred from titles.",
+    "pages": "inferred from title"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": []
+ },
+ {
+  "id": "S024",
+  "year": "2010",
+  "title": "Globalization strategies for mesh adaptive direct search",
+  "read_level": "abstract",
+  "contribution": "Intensive numerical comparison of MADS instantiations (GPS, LTMADS, ORTHOMADS) under EB, PB or mixed constraint handling, from feasible and/or infeasible starts, on three real engineering applications whose codes are public (abstract).",
+  "problem_entry": "Which constraint-handling strategy should a MADS instantiation use on constrained blackboxes (abstract).",
+  "key_idea": "Factorial comparison: instantiation x constraint treatment x starting-point feasibility on real applications (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Styrene production process, MDO mechanical engineering problem, well positioning problem; feasible and/or infeasible starting points; codes publicly available (abstract). Results: not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "EB, PB and a mixture compared as separate treatments.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Three real applications released publicly, incl. the styrene problem (STYRENE in SKILL.md).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Realistic blackboxes, starting point varied.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: same-solver controlled comparison with shared components",
+    "relation": "variant",
+    "note": "Instantiations of one class compared; shared code base not read.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "same-solver controlled comparison with shared components",
+    "evidence": "GPS, LTMADS, ORTHOMADS instantiations of MADS compared (shared implementation not read).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Lay out the comparison as algorithm instance x constraint treatment x feasible/infeasible start on real blackboxes, and release the blackbox codes with the paper (abstract)."
+  ],
+  "coauthors": "J. E. Dennis Jr., S. Le Digabel",
+  "quotes": [
+   {
+    "text": "Constraints are handled by the extreme barrier, the progressive barrier, or by a mixture of both.",
+    "page": "abstract"
+   },
+   {
+    "text": "The applications are the optimization of a styrene production process, a MDO mechanical engineering problem, and a well positioning problem, and the codes are publicly available.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S026",
+  "year": "2010",
+  "title": "A mesh adaptive direct search algorithm for multiobjective optimization",
+  "read_level": "abstract",
+  "contribution": "MultiMads: Pareto-front approximation via NBI-generated single-objective formulations solved by Mads; front satisfies Clarke-based first-order necessary conditions (abstract).",
+  "problem_entry": "Multiobjective optimization of nonsmooth functions under general constraints (abstract).",
+  "key_idea": "Series of single-objective formulations parameterized by a reference point in objective space, generated with NBI, each solved by Mads (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Literature problems with different Pareto front landscapes; styrene production simulation (abstract).",
+  "positioning": "Predecessor: same trio's SIAM J. Optim. 2008 'Multiobjective optimization through a series of single-objective formulations' (metadata, Audet's publication page).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Clarke-based first-order necessary conditions for the front approximation.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Styrene blackbox reused.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: MADS-as-subroutine composition",
+    "relation": "evidence",
+    "note": "Mads solves each single-objective subproblem.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "MADS-as-subroutine composition",
+    "evidence": "MultiMads calls Mads on a series of NBI single-objective formulations.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "G. Savard, W. Zghal",
+  "quotes": [
+   {
+    "text": "MultiMads generates an approximation of the Pareto front by solving a series of single-objective formulations of MOP generated using the NBI (natural boundary intersection) framework.",
+    "page": "abstract"
+   },
+   {
+    "text": "The Pareto front approximation is shown to satisfy some first order necessary optimality conditions based on the Clarke calculus.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S119",
+  "year": "2010",
+  "title": "A note on diameters of point sets",
+  "read_level": "abstract",
+  "contribution": "Upper bounds on the minimal diameter of point sets at mutual distance at least one, for up to 30 points (abstract).",
+  "problem_entry": "Relationships between the diameter of n planar points at mutual distance >= 1, the diameter of an equilateral n-gon, and the radius of a circle containing n unit disks (abstract).",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "variant",
+    "note": "Numerical bounds only; no certificate mentioned.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "X. Fournier, P. Hansen, F. Messine (Audet's page also lists S. Perron; pages 585-595 on Scholar vs 485-495 on Audet's page)",
+  "quotes": [
+   {
+    "text": "Upper bounds on the minimal diameter of a point set at mutual distance at least one are presented for up to 30 points.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S207",
+  "year": "2010",
+  "title": "Die Geschichte von den drei kleinen Achtecken",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): German translation of the popular-science article S208 (Spektrum der Wissenschaft 60-66, 2010; Audet's page: 'Original French version: La saga des trois petits octogones').",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: popular and historical accounts of the octagon results",
+    "relation": "evidence",
+    "note": "Popular-science venue, translation of S208.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": []
+ },
+ {
+  "id": "D014",
+  "year": "2011",
+  "title": "Notes de cours, MTH1101, Calcul I",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): undergraduate Calculus I course notes at Polytechnique Montreal; teaching material, not a research work (bbopt-bib misc entry).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": []
+ },
+ {
+  "id": "S012",
+  "year": "2011",
+  "title": "The NOMAD project",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): citable software record of NOMAD (257 Scholar citations). Author list changes across records: Abramson, Audet, Couture, Dennis, Le Digabel, Tribes (Scholar 2011) vs Audet, Le Digabel, Rochon Montplaisir, Tribes (bbopt-bib 2022).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Long-lived solver cited as a research output in its own right, maintained by a changing team.",
+    "pages": "metadata"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. A. Abramson, G. Couture, J. E. Dennis Jr., S. Le Digabel, C. Tribes (Scholar); 2022 record: S. Le Digabel, V. Rochon Montplaisir, C. Tribes",
+  "quotes": []
+ },
+ {
+  "id": "S042",
+  "year": "2011",
+  "title": "Calculating all local minima on liquidus surfaces using the FactSage software and databases and the Mesh Adaptive Direct Search algorithm",
+  "read_level": "abstract",
+  "contribution": "FactSage coupled with MADS to search for and compute all liquidus minima of multicomponent systems automatically; reported robust and rapid (abstract).",
+  "problem_entry": "Low-melting compositions (liquidus local minima) are slow to find experimentally; a grid of CALPHAD-computed liquidus temperatures is prohibitively time-consuming beyond the simplest systems (abstract).",
+  "key_idea": "Couple the FactSage database computing system with MADS (abstract). How all minima are found: not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "4-component oxide, 7-component chloride and 9-component ferrous alloy systems (abstract).",
+  "positioning": "",
+  "writing": "Entry argues from the cost of the naive grid alternative before introducing the optimizer (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: Build the missing blackbox-callable tool to open a new application field to DFO",
+    "relation": "evidence",
+    "note": "FactSage coupled to MADS.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Partner-domain blackbox; no public benchmark release mentioned.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Build the missing blackbox-callable tool to open a new application field to DFO",
+    "evidence": "FactSage thermochemical databases made callable by MADS for liquidus minima.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Writing move: open with the naive alternative (grid over the simulated quantity) and why its point count explodes, then bring in the optimizer (abstract)."
+  ],
+  "coauthors": "A. E. Gheribi, C. Robelin, S. Le Digabel, A. D. Pelton",
+  "quotes": [
+   {
+    "text": "In practice, such an approach is prohibitively time-consuming for all but the simplest systems since the required number of grid points is extremely large.",
+    "page": "abstract"
+   },
+   {
+    "text": "In the present article, the FactSage database computing system is coupled with the powerful Mesh Adaptive Direct Search (MADS) algorithm in order to search for and calculate automatically all liquidus minima in a multicomponent system.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S065",
+  "year": "2011",
+  "title": "A short proof on the cardinality of maximal positive bases",
+  "read_level": "abstract",
+  "contribution": "Short proof that 2n bounds the cardinality of a positive basis of R^n, via a basic-feasible-solution property from LP theory (abstract).",
+  "problem_entry": "Existing proofs of the 2n upper bound are technical and several pages long; positive bases matter again because of direct search (abstract).",
+  "key_idea": "Rely on a fundamental property of basic feasible solutions in linear programming (abstract). Argument: not read.",
+  "assumptions": "",
+  "proof_devices": [
+   "LP basic-feasible-solution property used to bound positive-basis cardinality (abstract; details not read)"
+  ],
+  "experiments": "",
+  "positioning": "Replaces technical multi-page proofs in the literature by a short one (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Foundation for poll-direction sets, but a proof simplification rather than a ladder or counterexample.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: definition-to-LP certificate",
+    "relation": "variant",
+    "note": "LP theory as proof device (BFS property).",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "definition-to-LP certificate",
+    "evidence": "Positive-basis cardinality bound proved through a basic-feasible-solution property (variant).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Re-prove a technical known bound by casting the object in LP form and invoking a basic-feasible-solution property (abstract)."
+  ],
+  "coauthors": "sole author",
+  "quotes": [
+   {
+    "text": "There are proofs in the literature that 2n is a valid upper bound for the cardinality, but these proofs are quite technical and require several pages.",
+    "page": "abstract"
+   },
+   {
+    "text": "The purpose of this note is to provide a simple demonstration that relies on a fundamental property of basic feasible solutions in linear programming theory.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S091",
+  "year": "2011",
+  "title": "A new multi-objective approach for the portfolio selection problem with skewness",
+  "read_level": "abstract",
+  "contribution": "Mean-variance-skewness portfolio selection reformulated into a lower-dimensional bound-constrained biobjective problem and solved by BiMads on a literature test problem (abstract).",
+  "problem_entry": "Portfolio selection with skewness is tri-objective: maximize expected return and skewness, minimize risk (abstract).",
+  "key_idea": "Rescale onto unit variance (biobjective with a nonlinear equality), then change variables to remove the equality and get a bound-constrained problem; apply BiMads (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Test problem from the literature (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Equality removed by reformulation instead of being classified EB/PB.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: implicit variable + extreme barrier for a known linear equality",
+    "relation": "variant",
+    "note": "Here a nonlinear equality is eliminated by a change of variables.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: MADS-as-subroutine composition",
+    "relation": "evidence",
+    "note": "BiMads.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "implicit variable + extreme barrier for a known linear equality",
+    "evidence": "Variant: nonlinear equality eliminated by a change of variables to reach a bound-constrained biobjective problem.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "MADS-as-subroutine composition",
+    "evidence": "BiMads applied to the reformulated problem.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Before calling a direct-search solver, remove an equality constraint by a change of variables so the solver sees only bounds (abstract)."
+  ],
+  "coauthors": "W. Zghal (first), G. Savard",
+  "quotes": [
+   {
+    "text": "Rescaling on the unit variance space leads to a biobjective problem, but adds a nonlinear equality constraint to the model.",
+    "page": "abstract"
+   },
+   {
+    "text": "Through a change in variables, we reformulate it as a lower dimensional bound constrained biobjective problem.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S096",
+  "year": "2011",
+  "title": "The small hexagon and heptagon with maximum sum of distances between vertices",
+  "read_level": "abstract",
+  "contribution": "Optimal unit-diameter hexagon and heptagon for the sum of vertex distances, plus lower bounds for more vertices (abstract).",
+  "problem_entry": "Unit-diameter hexagon and heptagon maximizing the sum of Euclidean distances between vertices (abstract).",
+  "key_idea": "Enumerate diameter configurations, then branch and cut for nonconvex quadratic programming (abstract). Which B&C code: not read.",
+  "assumptions": "",
+  "proof_devices": [
+   "enumeration of diameter configurations + nonconvex-QP branch and cut (abstract)"
+  ],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: analytic pruning before a global-solver certificate",
+    "relation": "evidence",
+    "note": "Configuration enumeration then global QP.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "Small-polygon line.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analytic pruning before a global-solver certificate",
+    "evidence": "Diameter configurations enumerated, each solved by nonconvex-QP branch and cut.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "evidence": "Hexagon/heptagon sum-of-distances optimum by global QP.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Split a geometric extremal problem by enumerating its combinatorial configurations (diameter configurations), then certify each case by a global nonconvex-QP branch and cut (abstract)."
+  ],
+  "coauthors": "A. Guillou, P. Hansen, F. Messine, S. Perron",
+  "quotes": [
+   {
+    "text": "The hexagon and heptagon with unit diameter and maximum sum of Euclidean distances between vertices are determined by enumerating diameter configurations, and by using a branch and cut algorithm for nonconvex quadratic programming.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S154",
+  "year": "2011",
+  "title": "Remarks on solutions to a nonconvex quadratic programming test problem",
+  "read_level": "abstract",
+  "contribution": "Correction-of-record note: errors in the authors' 2000 reformulation of a signomial GP as a nonconvex QP were typographical, not accumulated termwise approximation errors as Tuy and Hoai-Phuong (2007) interpreted (abstract).",
+  "problem_entry": "Tuy and Hoai-Phuong (JOGO 2007) observed errors in the reformulation in Audet, Hansen, Jaumard and Savard (Math. Program. 2000) (abstract).",
+  "key_idea": "Show that the third party's interpretation of the origin and consequences of the errors is incorrect (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Direct rebuttal of a named JOGO 2007 paper's interpretation (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Audit of a published claim about the authors' own work; outcome is a diagnosis, not a counterexample plus repair.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: audit the literature instances",
+    "relation": "variant",
+    "note": "The instance audited is the authors' own reformulation, in reply to a critique.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "audit the literature instances",
+    "evidence": "Variant: reply establishing that errors in the authors' own test-problem reformulation were typographical.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "P. Hansen, S. Perron",
+  "quotes": [
+   {
+    "text": "The purpose of the present note is to show that Tuy and Hoai-Phuong's interpretation of the origin and consequences of these errors is incorrect: they are not cumulation of termwise approximation errors.",
+    "page": "abstract"
+   },
+   {
+    "text": "The errors are simply typographical.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S206",
+  "year": "2011",
+  "title": "Taking Advantage of Parallelism in Algorithmic Parameter Optimization",
+  "read_level": "abstract",
+  "contribution": "Report version of S087 (abstract identical except 'OPAL' vs 'Opal'); see S087 (abstract).",
+  "problem_entry": "As S087 (abstract).",
+  "key_idea": "As S087 (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "As S087: MADS solver used inside the OPAL framework to tune other algorithms.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "C. K. Dang, D. Orban",
+  "quotes": [
+   {
+    "text": "We consider the OPAL framework in which a nonsmooth optimization problem models the parameter identification task, and is solved by a mesh adaptive direct search solver.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S036",
+  "year": "2012",
+  "title": "Calculating optimal conditions for alloy and process design using thermodynamic and property databases, the FactSage software and the Mesh Adaptive Direct Search algorithm",
+  "read_level": "abstract",
+  "contribution": "Software linked to FactSage that uses MADS to find optimal alloy/process conditions under constraints; numerical results for several examples (abstract).",
+  "problem_entry": "Alloy and process design needs regions of design/process variables where calculated functions (min liquidus, precipitate amount, densities, vapour pressures, viscosities, cost) are optimal under constraints (abstract).",
+  "key_idea": "Link FactSage to MADS; objectives and constraints are simulation outputs (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Several examples (abstract); not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: Build the missing blackbox-callable tool to open a new application field to DFO",
+    "relation": "evidence",
+    "note": "Software linking FactSage to MADS.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Algorithm embedded in the partner's software rather than the partner problem brought into NOMAD; abstract names MADS, not NOMAD.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Build the missing blackbox-callable tool to open a new application field to DFO",
+    "evidence": "Software linked to FactSage for alloy/process design calculations with MADS.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "A. E. Gheribi, S. Le Digabel, E. Bélisle, C. W. Bale, A. D. Pelton",
+  "quotes": [
+   {
+    "text": "The present work reports on the development of software, linked to the FactSage thermodynamic and properties database system, to perform such calculations.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S078",
+  "year": "2012",
+  "title": "Trade-off studies in blackbox optimization",
+  "read_level": "abstract",
+  "contribution": "Framework for trade-off analysis of the optimal objective against tightening/loosening a constraint: a simple post-optimization method and a detailed biobjective method, tested with MADS (abstract).",
+  "problem_entry": "Engineers want the objective-vs-constraint trade-off curve; Lagrange multipliers give only its tangent at the solution (abstract).",
+  "key_idea": "Simple method right after a single optimization (points near the curve); detailed method: biobjective optimization of objective vs chosen constraint (points on the Pareto front) (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "An academic test case and an engineering problem with MADS (abstract).",
+  "positioning": "Contrasted with first-order sensitivity from Lagrange multipliers (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Constraint levels treated as design choices the engineer may move.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: price a constraint by relaxing it",
+    "relation": "evidence",
+    "note": "Trade-off of optimal value with tightening or loosening constraints.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: MADS-as-subroutine composition",
+    "relation": "evidence",
+    "note": "Detailed method runs biobjective MADS.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "price a constraint by relaxing it",
+    "evidence": "Objective-vs-constraint trade-off curve by a cheap post-processing method and a biobjective method.",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "MADS-as-subroutine composition",
+    "evidence": "Biobjective optimization of objective vs constraint with MADS.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Offer a cheap tier (post-process one run's evaluated points) and an exact tier (biobjective objective vs constraint) of the same trade-off answer, and position both against multiplier-based sensitivity (abstract)."
+  ],
+  "coauthors": "J. E. Dennis Jr., S. Le Digabel",
+  "quotes": [
+   {
+    "text": "The simple method provides points near the trade-off curve, which may be all the designer needs.",
+    "page": "abstract"
+   },
+   {
+    "text": "The trade-off information is generally used by engineers rather than the first-order sensitivity estimates provided by the Lagrange multipliers, which only provide the tangent to the Pareto front at the solution found.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S075",
+  "year": "2013",
+  "title": "Identifying optimal conditions for magnesium based alloy design using the Mesh Adaptive Direct Search algorithm",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): four-page application of MADS to magnesium-alloy design (Thermochimica Acta 559:107-110), continuing the Gheribi-Le Digabel-Audet thermochemistry line of S042 and S036. Abstract unavailable (closed; elided by publisher). Whether FactSage is used: not known.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: Build the missing blackbox-callable tool to open a new application field to DFO",
+    "relation": "evidence",
+    "note": "Continuation of S036/S042.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. E. Gheribi, S. Le Digabel, P. Chartrand",
+  "quotes": []
+ },
+ {
+  "id": "S087",
+  "year": "2013",
+  "title": "Efficient use of parallelism in algorithmic parameter optimization applications",
+  "read_level": "abstract",
+  "contribution": "Several strategies for using parallelism in the Opal algorithmic-parameter-optimization framework, evaluated on tuning five parameters of a trust-region method (abstract). Strategies: not read.",
+  "problem_entry": "Each evaluation of trial parameters requires processing many independent tasks, leaving room for better use of computing resources (abstract).",
+  "key_idea": "Opal: parameter identification modeled as a nonsmooth problem solved by a MADS solver; parallelism strategies described and evaluated (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Five parameters of a trust-region method for smooth unconstrained minimization (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "MADS solver used inside a separate framework (Opal) to tune other algorithms; see full-text cards S016, S057, S059.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "C. K. Dang, D. Orban",
+  "quotes": [
+   {
+    "text": "Each evaluation of trial parameters requires the processing of a potentially large number of independent tasks.",
+    "page": "abstract"
+   },
+   {
+    "text": "Our test scenario consists in optimizing five parameters of a trust-region method for smooth unconstrained minimization.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S102",
+  "year": "2013",
+  "title": "Metamaterial design by mesh adaptive direct search",
+  "read_level": "abstract",
+  "contribution": "Tutorial chapter: MADS, the NOMAD implementation and its features, and three NOMAD+FDTD instances for Split Ring Resonator metamaterials (abstract).",
+  "problem_entry": "Some optical-metamaterial design problems require launching a numerical simulation (abstract).",
+  "key_idea": "Present MADS (no derivatives, no continuity/differentiability assumptions), then NOMAD, then three worked instances (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Three instances combining NOMAD with FDTD simulations to tailor broadband spectral response and near-field interactions (abstract).",
+  "positioning": "",
+  "writing": "Chapter ordered method -> software -> applications (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD and its features presented to a new user community.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Book chapter.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "Tutorial chapter on MADS/NOMAD in Numerical Methods for Metamaterial Design.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Writing move: build an application chapter as method -> software -> three worked instances on the reader's own simulator (abstract)."
+  ],
+  "coauthors": "K. Diest, S. Le Digabel, L. A. Sweatlock, D. E. Marthaler",
+  "quotes": [
+   {
+    "text": "The MADS algorithm does not require any derivative information about the problem being optimized, and no continuity or differentiability assumptions are made by MADS on the functions defining the simulation.",
+    "page": "abstract"
+   },
+   {
+    "text": "The final section of the chapter lists three instances of combining NOMAD with Finite-Difference Time-Domain electromagnetic simulations to tailor the broadband spectral response and near-field interactions of Split Ring Resonator metamaterials.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S038",
+  "year": "2014",
+  "title": "Reducing the number of function evaluations in mesh adaptive direct search algorithms",
+  "read_level": "abstract",
+  "contribution": "Framework that dynamically reduces MADS poll points from 2n to exactly n+1 without affecting convergence guarantees; experiments suggest better solutions with fewer evaluations (abstract). Numerical results released as a zip on Audet's page (metadata).",
+  "problem_entry": "Common MADS implementations generate 2n trial points per iteration, each a time-consuming simulation (abstract).",
+  "key_idea": "Dynamically reduce the poll set to exactly n+1 points while keeping the theoretical guarantees (abstract). Construction: not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Several different contexts (abstract); not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The proof-carrying Poll is shrunk with guarantees kept; addresses the n+1 to 2n Poll-cost limitation named in Method 1.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Theoretical guarantees unchanged.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Function evaluations as the currency; numerical results released as a zip (metadata).",
+    "pages": "abstract; metadata"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Make evaluations per iteration an explicit design target: cut the poll to a minimal positive spanning set (n+1) and show the convergence results are untouched (abstract)."
+  ],
+  "coauthors": "A. Ianni, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "Common implementations of Mads generate 2n trial points at each iteration, where $n$ is the number of variables in the optimization problem.",
+    "page": "abstract"
+   },
+   {
+    "text": "We present an algorithmic framework that reduces the number of simulations to exactly $n+1$, without impacting the theoretical guarantees from the convergence analysis.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S045",
+  "year": "2014",
+  "title": "Improving process representation in conceptual hydrological model calibration using climate simulations",
+  "read_level": "abstract",
+  "contribution": "Calibration approach for conceptual hydrological models that imposes constraints from RCM-simulated meteorology and AET annual cycle, compared with reference-AET constraints and discharge-only calibration; HSAMI (Hydro-Quebec) on six snow-dominated basins (abstract).",
+  "problem_entry": "Different calibrated parameter sets yield divergent simulations and decisions; streamflow-only calibration does not secure realistic process representation (abstract).",
+  "key_idea": "Impose constraints during the optimization from RCM-simulated meteorological variables and AET mean annual cycle (abstract). Optimizer not named in the abstract.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Three calibration strategies (RCM-based constraints, reference-data AET constraints, discharge only) on six Canadian snow-dominated basins with HSAMI (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Constraints encode physical-process plausibility of a calibrated model rather than design feasibility.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Operational partner model; no public release mentioned.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "process-realism constraints in calibration",
+    "evidence": "AET cycle from a regional climate model imposed as constraints during calibration.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Experiment protocol: compare discharge-only calibration, calibration with reference-data constraints, and calibration with climate-simulation constraints on several basins (abstract)."
+  ],
+  "coauthors": "M. Minville (first), D. Cartier, C. Guay, L.-A. Leclaire, S. Le Digabel, J. Merleau",
+  "quotes": [
+   {
+    "text": "In order to obtain a more realistic representation of AET, meteorological variables and the AET mean annual cycle simulated by a regional climate model (RCM) driven by reanalysis are used to impose constraints during the optimization procedure.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S081",
+  "year": "2014",
+  "title": "A variance-based method to rank input variables of the mesh adaptive direct search algorithm",
+  "read_level": "abstract",
+  "contribution": "Stats-Mads: variance-decomposition ranking of variables coupled with Mads (full space or important subspaces); significant improvement at a fixed budget on bound-constrained problems up to 500 variables (abstract).",
+  "problem_entry": "Mads is not designed for problems with a large number of variables (abstract).",
+  "key_idea": "Rank variable importance by variance decomposition; optimize either in the entire space or in subspaces of statistically important variables (abstract). Switching rule: not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Bound-constrained test problems with up to 500 variables; fixed budget of function evaluations (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Comparison at a fixed evaluation budget.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Statistical rule for the 'Many variables -> fix some / PSD-MADS' remedy.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "statistical variable screening to choose optimization subspaces",
+    "evidence": "Variance-based ranking selects subspaces for Mads (cf. S027 PSD-MADS, S125).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Rank inputs with a variance-based sensitivity measure and let the direct search work either in the full space or in the subspace of top-ranked variables (abstract)."
+  ],
+  "coauthors": "L. Adjengue, I. Ben Yahia",
+  "quotes": [
+   {
+    "text": "The Mads algorithm is not designed for problems with a large number of variables.",
+    "page": "abstract"
+   },
+   {
+    "text": "This statistical method is then coupled with the Mads algorithm so that the optimization is performed either in the entire space of variables or in subspaces associated with statistically important variables.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D015",
+  "year": "2015",
+  "title": "Direct search airfoil optimization using far-field drag decomposition results",
+  "read_level": "abstract",
+  "contribution": "Direct-search airfoil optimization on net drag (spurious drag excluded via far-field decomposition); NACA0012 Euler Ma 0.85: 74 d.c., -393 d.c.; RAE2822 viscous CL 0.824 Ma 0.734: 104.3 d.c., -83 d.c.; total-drag control yields a different (more rounded) shape (abstract).",
+  "problem_entry": "Optimizing total drag also reduces spurious drag, a configuration-dependent numerical artefact (abstract).",
+  "key_idea": "Objective = net drag only, from far-field drag decomposition; control optimization on total drag (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "NACA0012 in Euler flow at Ma 0.85; RAE2822 in viscous flow at CL 0.824, Ma 0.734; control run on total drag (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Output semantics applied to the objective: separate physical from numerical contributions before optimizing.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "control run with the naive objective to expose a simulation artefact",
+    "evidence": "Net-drag optimization vs total-drag control shows spurious drag changes the optimum shape.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When the simulated objective contains a numerical artefact, optimize the artefact-free component and add a control optimization on the raw output to show the artefact changes the optimum (abstract)."
+  ],
+  "coauthors": "M. Gariépy (first), J.-Y. Trépanier, E. Petro, B. Malouin, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "The optimization process in this research used the net drag only, excluding the spurious drag.",
+    "page": "abstract"
+   },
+   {
+    "text": "An additional control optimization was done, but on the total drag.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S169",
+  "year": "2015",
+  "title": "Planning of the maintenance outages for a set of hydroelectric turbogenerators",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): industrial problem-solving workshop report (CRM-3350, Sixth Montreal Industrial Problem Solving Workshop, ed. O. Marcotte) on scheduling maintenance outages of hydroelectric generators; linked CRM PDF unreachable from sandbox.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "Applications period with hydropower partners (with S204, S145, S199).",
+    "pages": "inferred from title"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Workshop format for partner problems.",
+    "pages": "inferred from venue"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Côté (first), N. Amaioua, E. Bigeon, Q. Desreumaux, A. Ihaddadene, Y. Mir, J. Rodriguez, L. Zéphyr",
+  "quotes": []
+ },
+ {
+  "id": "S201",
+  "year": "2015",
+  "title": "Robust Constrained Blackbox Optimization with Surrogates",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): robust constrained blackbox optimization with surrogates, possibly a talk or unpublished report; no venue or abstract. Relation to the later Opt. Lett. 2018 'Robust optimization of noisy blackbox problems using the MADS algorithm' not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Topic overlap only (surrogates); not checkable.",
+    "pages": "inferred from title"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Topic overlap only (constraints); not checkable.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Le Digabel",
+  "quotes": []
+ },
+ {
+  "id": "S203",
+  "year": "2015",
+  "title": "A lower bound on the sum of the largest components of a nonnegative vector",
+  "read_level": "abstract",
+  "contribution": "Lemma: if x >= 0, ||x||_2 >= 1 and integer k >= ||x||_1, then some k components of x sum to at least one (abstract).",
+  "problem_entry": "The function returning the sum of the k largest-magnitude components of a vector (abstract); motivation not stated.",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": [
+   {
+    "text": "We show that if a nonnegative vector x is such that its Euclidean norm is greater than or equal to one, and if the integer k is an upper bound on the Manhattan norm of x, then there exists k components of x whose sum is greater than or equal to one.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S035",
+  "year": "2016",
+  "title": "Self-scheduling short-term unit commitment and loading problem",
+  "read_level": "abstract",
+  "contribution": "Method for hydropower short-term unit commitment and loading: DP max-power curves feeding a relaxed nonlinear MIP then a linear integer turbine assignment; 30 test cases on two Rio Tinto Alcan plants (abstract).",
+  "problem_entry": "Maximize total power over a one-week hourly horizon with start-up penalties for a hydropower system (abstract).",
+  "key_idea": "DP computes plant maximum power output; phase 1 relaxed nonlinear MIP gives discharge, volume, number of units; phase 2 linear integer problem picks turbine combination (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Thirty test cases for two Rio Tinto Alcan power plants with five turbines each (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Industrial partner problem solved by mathematical programming; not released as a blackbox benchmark per abstract.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "Hydropower applications.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "precompute by DP, then relax-then-assign decomposition",
+    "evidence": "DP plant curves -> relaxed MINLP for aggregate decisions -> linear integer unit assignment.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Decompose a unit-commitment MINLP: precompute plant-level max-power curves by DP, solve a relaxed MINLP for aggregate decisions, then a linear integer problem to assign individual units (abstract)."
+  ],
+  "coauthors": "S. Séguin (first), P. Côté",
+  "quotes": [
+   {
+    "text": "Dynamic programming is used to compute maximum power output generated by a power plant.",
+    "page": "abstract"
+   },
+   {
+    "text": "The second stage solves a linear integer problem to determine which combination of turbines to use at each period.",
+    "page": "abstract"
+   }
+  ]
+ }
+]

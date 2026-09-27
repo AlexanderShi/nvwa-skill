@@ -1,0 +1,217 @@
+[
+ {
+  "id": "S042",
+  "year": "2025",
+  "title": "Inexact bilevel stochastic gradient methods for constrained and unconstrained lower-level problems",
+  "read_level": "full",
+  "contribution": "A bilevel stochastic gradient (BSG) framework for lower levels that are unconstrained or have nonlinear, possibly nonconvex constraints (via the LL KKT Jacobian). Its SG convergence theory (nonconvex, strongly convex 1/k, convex 1/sqrt(k)) covers every kind of inexactness: inexact LL solve, inexact adjoint solve or truncated Neumann series, and noisy derivatives. Two Hessian-free practical methods, BSG-N-FD and BSG-1, come with released code.",
+  "problem_entry": "ML applications (continual learning, NAS, adversarial training, hyperparameter tuning), plus an uncovered class: prior BSG work handles only unconstrained LLs, or constraints that are linear or depend only on y. A third factor is the cost of second-order and Neumann-series information (pp. 3-5).",
+  "key_idea": "Apply SG to f(x) = f_u(x, y(x)) with an inexact adjoint gradient d(D) = -(a - A B^-1 b). A constrained LL only changes B (the Hessian becomes the KKT Jacobian under LICQ/SCS/SOSC), so one analysis covers the constrained/unconstrained and deterministic/stochastic cases. Every error source is budgeted at O(alpha_k) (pp. 7-15).",
+  "assumptions": "Lipschitz and bounded derivatives and stochastic estimates. A strongly convex LL (unconstrained case) or LICQ+SCS+SOSC with bounded inverse KKT matrices (constrained case). Bounded second moment. A sensitivity (Lipschitz-in-data) assumption, called 'not restrictive'. LL error, sampling error and residual all O(alpha_k). Robbins-Monro steps. Strongly convex and convex f are admitted to be impractical (pp. 10-20).",
+  "proof_devices": [
+   "sensitivity of d(D) = -(a - A B^-1 b) from three facts: sums Lipschitz, products of bounded factors Lipschitz, inverses with singular values bounded away from zero Lipschitz (Prop. 3.1, p. 13; App. A pp. 42-43)",
+   "error budget: E||w(x_k) - w~_k||^2 <= (C_w alpha_k)^2, sampling error <= C_D alpha_k, residual <= C_e alpha_k => direction bias <= C_d alpha_k (Lemma 3.2, p. 15)",
+   "descent lemma with the bias at order alpha_k^2: E f(x_{k+1}) - f(x_k) <= -alpha_k ||P_X grad f||^2 + alpha_k^2 C C_d + 0.5 alpha_k^2 L G_d (Lemma 4.2, p. 17)",
+   "Bottou-Curtis-Nocedal Thm 4.10 argument with sum alpha = inf, sum alpha^2 < inf (Thm 4.3, p. 18); O(1/k) strongly convex (Thm 4.4, p. 19); O(1/sqrt k) convex (Thm 4.5, p. 20)",
+   "enforcement recipes: i_k = k^2 inner SG steps with beta_i = gamma/i (p. 20); mini-batch sizes growing as alpha_k shrinks, with Gaussian estimates (p. 21)",
+   "implicit-function/KKT sensitivity for a constrained LL: grad y = -grad_x G grad_v G^-1 L (2.7) (p. 7)"
+  ],
+  "experiments": "Python code on GitHub, 10 seeds. Synthetic quadratic bilevel problem (n = m = 300), with an unconstrained LL, 50 linear constraints, or 5 quadratic constraints. Baselines: DARTS, StocBiO, SIGD; none exist for quadratic constraints. CIFAR-10 continual learning with and without GEM-style LL constraints. Metrics: UL iterations and time. Per-algorithm step-size grids. Failures to tune are reported. There is no collection, no profiles and no UL constraint (pp. 22-36).",
+  "positioning": "Critiques prior BSG work by the restrictive assumptions each needs (solve to optimality, Neumann ||H|| < 1, linear constraints only). Claims to unify the adjoint-equation and Neumann classes and to generalize 'all existing approaches'. Built on the Bottou-Curtis-Nocedal SG theory and on Fiacco/McCormick sensitivity. Only 2 of 66 references are self-citations (pp. 4-5, 8, 10, 37-41).",
+  "writing": "A numbered first/second-main-contribution paragraph with first-of-kind claims (pp. 5, 30, 36). Each assumption gets a purpose sentence, and strong assumptions are admitted where they appear (pp. 19-20). Sparse hedging ('seem to'). Long proofs are in the appendices (pp. 42-45).",
+  "limits_future": "Written: strongly convex/convex regimes impractical; BSG-1 has no theory; slightly slower in time on continual learning. Not written: step-size and FD-parameter mismatch with the theory, no total-work count, no UL-constrained test. Future: NAS with LL constraints, variance reduction (pp. 5, 19-20, 37).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "SG skeleton and proof kept; only the direction object changes (Hessian to KKT Jacobian in the B block of d(D)); nonconvex theorem is the SG theorem plus a bias term",
+    "pages": "pp. 7-8, 18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "the yardstick is single-level SG rates, but the unit is UL iterations; inner LL steps (i_k = k^2) and growing batches are never added up into an oracle count",
+    "pages": "pp. 18-21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "adopts the SA tradition (unbiased Gaussian estimates, Robbins-Monro steps, expectation bounds) that SKILL.md contrasts him with; no probability-p relaxation, only deterministic-in-expectation O(alpha_k) budgets",
+    "pages": "pp. 13-14, 18, 21"
+   },
+   {
+    "method": "Method 1",
+    "relation": "contradiction",
+    "note": "BSG-1 is shipped as a heuristic 'not grounded on theoretical principles' without a safeguard (disclosed)",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "code released and strongest class baselines used, but no collection or profiles; one real instance (CIFAR-10 continual learning)",
+    "pages": "pp. 22-36"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "abstract assumptions, then verify per instance",
+    "evidence": "Sensitivity Assumption 3.8 posed generically and verified for both inverse schemes by Prop. 3.1; enforcement of Assumptions 3.9-3.10 in its own subsections",
+    "pages": "pp. 12-13, 20-21"
+   },
+   {
+    "pattern": "deterministic inexactness tied to the step (stochastic form)",
+    "evidence": "LL error, sampling error and residual all O(alpha_k), so the bias is summable",
+    "pages": "pp. 13-15"
+   },
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "adjoint-solve and truncated-Neumann classes become two residual types of one assumption",
+    "pages": "pp. 5, 10, 13"
+   },
+   {
+    "pattern": "import a formalism and claim the first stochastic version",
+    "evidence": "variant: first method for general nonlinear LL constraints; first experiments of that type",
+    "pages": "pp. 5, 30, 36"
+   },
+   {
+    "pattern": "disclose omitted experiments",
+    "evidence": "no step sizes found for BSG-1/BSG-H at high noise; BSG-H not run on continual learning because of cost",
+    "pages": "pp. 28, 32, 36"
+   },
+   {
+    "pattern": "disclosed theory-implementation gap (partial)",
+    "evidence": "practical variants vs Algorithm 1 are flagged, but the fixed/c-over-k steps, capped inc. acc. and fixed FD epsilon vs Robbins-Monro, i_k = k^2 and residual O(alpha_k) are not discussed",
+    "pages": "pp. 14, 20, 22-23, 26, 37"
+   }
+  ],
+  "transferable": [
+   "Parametrize the direction by a data tuple d(D) = -(a - A B^-1 b); handle constraints by swapping B for the KKT Jacobian, so one proof covers four cases (pp. 7-8).",
+   "Budget every inexactness source at O(alpha_k); the bias then enters the descent lemma at alpha_k^2 and the textbook SG theorem applies (pp. 13-18).",
+   "Pair each abstract budget with an enforcement recipe (i_k = k^2 inner steps, growing batches, solver tolerance) (pp. 13, 20-21).",
+   "Prove the Lipschitz sensitivity of a - A B^-1 b once, from three facts (sum; bounded product; well-conditioned inverse) (p. 13; pp. 42-43).",
+   "Hessian-free adjoint: CG/GMRES with central-difference Hessian-vector products, or a Gauss-Newton rank-1 surrogate with a closed-form adjoint (pp. 23-24).",
+   "Give each compared method its own step-size grid window and state why a shared grid would bias the comparison; report noise levels where a method could not be tuned (pp. 26, 28, 32)."
+  ],
+  "coauthors": "T. Giovannelli, G. D. Kent",
+  "quotes": [
+   {
+    "text": "our paper represents the first work that proposes a method to address the general nonlinear and possibly nonconvex LL constrained case, which has not been covered elsewhere, neither algorithmically nor theoretically",
+    "page": 5
+   },
+   {
+    "text": "Similar to DARTS [34] (which is extremely popular for NAS), BSG-1 is also not grounded on theoretical principles.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S091",
+  "year": "2025",
+  "title": "A stochastic gradient method for trilevel optimization",
+  "read_level": "full",
+  "contribution": "The first stochastic gradient method for unconstrained-ML/LL trilevel problems (TSG). It has a nonconvex rate O(J/sqrt(I)) under K >= O(J^3 I), and the analysis covers inexact ML/LL solves, inexact adjoint computation and noisy derivatives up to third order. Also: Hessian-free variants (TSG-N-FD, TSG-AD), a trilevel formulation of adversarial hyperparameter tuning, and code.",
+  "problem_entry": "Extend the bilevel SG toolkit one level down for ML uses. The gap is that no stochastic trilevel method exists: prior work either lacks guarantees (evolutionary), lacks numerics (proximal), or is deterministic (pp. 1-2).",
+  "key_idea": "Eliminate one level at a time through the solution maps (TLO -> BLO -> single level). The trilevel adjoint gradient is the classical adjoint applied to the reduced bilevel problem. Run three nested warm-started SG loops, with a composite step theta = alpha*beta*gamma that scales all bias assumptions (pp. 2-6).",
+  "assumptions": "f1 C1, f2 C2, f3 C3, with f1, grad f1, f2, grad f2, Hess f2, grad f3, Hess f3, third-order tensor of f3 all Lipschitz. f3 strongly convex in z and f-bar strongly convex in y. Unbiased i.i.d. bounded-variance estimates. Bounded inverse stochastic Hessians with O(theta) bias. Strong convexity is admitted as the main limitation (pp. 5-6, 9).",
+  "proof_devices": [
+   "Lyapunov V = f(x) + ||y - y(x)||^2 + ||z - z(x)||^2 + ||z - z(x,y)||^2, chosen only for telescoping (B.1, p. 14)",
+   "one lemma per Lyapunov difference: UL descent with bias and coupling terms; LL contraction (1 - gamma rho)^K and ^{JK}; auxiliary LL error; ML contraction (1 - psi beta)^J (Lemmas B.1-B.4, p. 16)",
+   "SGD contraction on a strongly convex function via Nesterov Thm 2.1.12, applied by induction over K and J (App. C.2, pp. 17-18)",
+   "bias of the UL/ML directions O(theta) and bounded second moments (Lemmas D.3-D.6, App. D pp. 31-41)",
+   "coefficient-sign analysis (A1 >= 0, A2-A4 <= 0) yielding the loop-length conditions K >= Xi(I,J) = O(J^3 I), then telescoping (App. C.5, pp. 26-30)"
+  ],
+  "experiments": "Code on GitHub. Synthetic quadratic (n = m = t = 50) and quartic (n = m = 5, t = 1) problems with Gaussian noise; 95% t-intervals over 10 runs; hand-picked decaying steps. Adversarial hyperparameter tuning on wine and California housing data, measured by test MSE under feature noise over 100 draws. Comparators are the bilevel formulations obtained by dropping a level, plus the level-swapped formulation of prior work; there is no external trilevel algorithm (pp. 7-9, 44-47).",
+  "positioning": "Claims the first stochastic trilevel method. Sorts prior work by the missing ingredient (guarantees / numerics / stochasticity). Adapts Chen-Sun-Yin's bilevel analysis and benchmarks the rate against it. Disagrees with Sato et al.'s level ordering and tests both. Self-citations: S042, S070, the 1994 bibliography (pp. 1-2, 6, 8, 15, 47).",
+  "writing": "'first-ever' in the abstract. The main theorem is stated in its implementable form and the sharper rate is a remark. A post-theorem paragraph reads K >= O(J^3 I) as upward error propagation across levels and ends with an open question. A specific 'Potential limitations' paragraph. 35 of 47 pages are appendices (pp. 1, 6, 9, 13-47).",
+  "limits_future": "Written: strong convexity at ML/LL; bilevel formulations competitive in runtime; only tabular regression. Future: accuracy relations across levels, penalization for nonconvex lower levels. Not written: no total oracle count; experimental steps differ from the theorem's; quartic test problem violates Assumption 3.2; sharper rate and Lipschitz proofs only in an unpublished thesis (pp. 6, 9, 41, 45).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "trilevel reduced to bilevel and handled by the same adjoint + SG skeleton; one Lyapunov term added per extra level",
+    "pages": "pp. 3, 14-16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "explicit benchmark against the best bilevel rate [11] and a loop-length count K >= O(J^3 I), but the unit is UL iterations, there is no total work, and the matching rate is deferred to a thesis",
+    "pages": "p. 6"
+   },
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "unbiased i.i.d. bounded-variance oracle model and in-expectation rate, i.e. the SA tradition, not probabilistic relaxation",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "code, CIs and real datasets, but no external trilevel baseline (the only competitor is deterministic); a formulation ablation replaces the algorithm race",
+    "pages": "pp. 7-8, 47"
+   },
+   {
+    "method": "Taste mark 1",
+    "relation": "evidence",
+    "note": "prior work criticized both for missing guarantees [40] and for missing numerical validation [39]",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "variant",
+    "note": "asks whether the rate can be sharpened (Remark 3.1, answered in a thesis) but raises no lower-bound question",
+    "pages": "p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "read the proof's parameter coupling as a finding",
+    "evidence": "K >= O(J^3 I) presented as upward error propagation across levels and turned into the open question of the conclusion",
+    "pages": "pp. 6, 9"
+   },
+   {
+    "pattern": "formulation ablation by deleting or swapping a level",
+    "evidence": "the trilevel model is compared with the bilevel models obtained by removing the UL or LL, and with the ML/LL-swapped model of [38], all with the same solver",
+    "pages": "pp. 8-9, 47"
+   },
+   {
+    "pattern": "import a formalism and claim the first stochastic version",
+    "evidence": "'first-ever stochastic gradient descent method' for trilevel problems",
+    "pages": "pp. 1-2"
+   },
+   {
+    "pattern": "disclosed theory-implementation gap (undisclosed here)",
+    "evidence": "horizon-dependent step sizes in Thm 3.1 vs 1/i-type steps and adaptive J, K in the experiments; the quartic LL has two minimizers against Assumption 3.2",
+    "pages": "pp. 6, 7, 45"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "bilevel formulations competitive in runtime; TSG-N-FD excluded on (F.18), with a reason given",
+    "pages": "pp. 8-9, 47"
+   },
+   {
+    "pattern": "supervisor-role authorship on student-led artefacts",
+    "evidence": "sharper rate and Lipschitz proofs deferred to the student's thesis in preparation; code in the student's repository",
+    "pages": "pp. 6-7, 41"
+   }
+  ],
+  "transferable": [
+   "Add a level by eliminating the lowest one through its solution map; the new gradient is the old adjoint formula applied to the reduced problem (p. 3).",
+   "For nested SG loops: a Lyapunov function with one squared-error term per inner level plus a cross term, one lemma per difference, then a coefficient-sign analysis that returns the minimal loop lengths (pp. 14-16, 26-30).",
+   "Tie all bias assumptions to one composite step theta = alpha*beta*gamma (pp. 4, 6).",
+   "State the main theorem with implementable step sizes and put the sharper, constant-dependent rate in a remark; follow it with an interpretation paragraph that ends in an open question (p. 6).",
+   "Formulation ablation: remove each level, and swap levels to match prior work, all with the same solver; read the reduced-model ranking as a diagnosis of the dataset (pp. 8-9, 47).",
+   "Robustness metric: test MSE under Gaussian feature noise (std 5), averaged over 100 draws; 95% t-intervals over 10 runs (pp. 7-8)."
+  ],
+  "coauthors": "T. Giovannelli, G. D. Kent",
+  "quotes": [
+   {
+    "text": "Such a relationship underscores how errors in the LL propagate upward through the levels: greater accuracy at any sub-upper level necessitates significantly higher precision in the LL solution.",
+    "page": 6
+   },
+   {
+    "text": "Potential limitations of our work include the strong convexity assumptions on the ML and LL objective functions, which constrain the applicability of our TSG method.",
+    "page": 9
+   }
+  ]
+ }
+]
