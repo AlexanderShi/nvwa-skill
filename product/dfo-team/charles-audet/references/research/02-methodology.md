@@ -57,8 +57,8 @@ Credibility: **primary** = text written by Audet or a team including Audet; **se
 
 | # | Statement | Wording | Source | Cred. |
 |---|---|---|---|---|
-| X1 | Stated goal of the textbook, as quoted by a reviewer: "providing a clear grasp of the foundational concepts in derivative-free and blackbox optimization". | Verbatim inside a review quotation (search snippet) | Kokkolaras review, Optim. Eng. 20 (2019), 10.1007/s11081-019-09422-9 | secondary quoting primary |
-| X2 | The book is meant for self-learning or an upper-year university course, and assumes multivariate calculus and linear algebra (paraphrase). | (paraphrase) | publisher description via search | primary (blurb) |
+| X1 | Stated goal of the textbook, as quoted by a reviewer: "providing a clear grasp of the foundational concepts in derivative-free and blackbox optimization". | Verbatim inside a review quotation (search snippet). ✅ Checked 2026-09-27 against the primary first-edition preface, reprinted in the 2nd edition: "Our goal is to provide a clear grasp of the foundational concepts in derivative-free and blackbox optimization, in order to push these areas into the mainstream of nonlinear optimization." (B001 p. 13; joint voice of Audet and Hare) | Kokkolaras review, Optim. Eng. 20 (2019), 10.1007/s11081-019-09422-9 | secondary quoting primary |
+| X2 | The book is meant for self-learning or an upper-year university course, and assumes multivariate calculus and linear algebra (paraphrase). | (paraphrase). ✅ Checked 2026-09-27 against the preface: "suitable for self-learning or for teaching an upper-year university course"; expected background multivariate calculus, linear algebra and proof techniques (B001 pp. 14–15) | publisher description via search; preface (B001) | primary |
 | X3 | Teaching also happens in French at Polytechnique: course notes (MTH6404 integer programming, 2001; MTH1101 Calcul I, 2011) and the book *Optimisation continue* (Presses internationales Polytechnique, 2021, 305 pp). | Bib entries | bbopt bibliography.bib | primary (bibliographic) |
 
 ## Layer 7 · Research organisation

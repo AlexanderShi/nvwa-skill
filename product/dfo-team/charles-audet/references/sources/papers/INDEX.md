@@ -86,7 +86,7 @@
 | 74 | S074 | 2013 | Snow water equivalent estimation using blackbox optimization | Pacific Journal of Optimization | 27 | journal | manual | txt | 26 | supplement | carded |
 | 75 | S075 | 2013 | Identifying optimal conditions for magnesium based alloy design using the Mesh Adaptive Direct Search algorithm | Thermochimica Acta | 26 | journal | — | no-oa |  | supplement | metadata |
 | 76 | S076 | 2009 | A new sequence form approach for the enumeration and refinement of all extreme Nash equilibria for extensive form games | International Game Theory Review | 26 | journal | manual | txt | 15 | supplement | carded |
-| 77 | S077 | 2005 | Nonlinear programming by mesh adaptive direct searches | — | 26 | other | — | no-oa |  | supplement | abstract |
+| 77 | S077 | 2005 | Nonlinear programming by mesh adaptive direct searches | — | 26 | other | manual | txt | 17 | core | carded |
 | 78 | S078 | 2012 | Trade-off studies in blackbox optimization | Optimization Methods and Software | 25 | journal | — | no-oa |  | supplement | abstract |
 | 79 | S079 | 2018 | Efficient solution of quadratically constrained quadratic subproblems within the mesh adaptive direct search algorithm | European Journal of Operational Research | 24 | journal | — | no-oa |  | supplement | abstract |
 | 80 | S080 | 2009 | Isoperimetric polygons of maximum width | Discrete & Computational Geometry | 24 | journal | manual | txt | 16 | supplement | carded |
@@ -222,5 +222,6 @@
 | 210 | D014 | 2011 | Notes de cours, MTH1101, Calcul I | Course notes, Polytechnique Montréal | — | other | — | no-oa |  | supplement | metadata |
 | 211 | D015 | 2015 | Direct search airfoil optimization using far-field drag decomposition results | 53rd AIAA Aerospace Sciences Meeting (AIAA 2015-1720) | — | conference | — | no-oa |  | supplement | abstract |
 | 212 | D016 | 2004 | Optimization tools for engineering design using surrogate functions | DTIC technical report ADA420453 | — | report | manual | txt | 19 | supplement | carded |
+| 213 | B001 | 2026 | Derivative-Free and Blackbox Optimization, 2nd edition (2026) — front matter: foreword, prefaces and table of contents (Audet, Hare; Springer Series in Operations Research and Financial Engineering) | book material | — | book-toc | manual | txt | 22 | core | skimmed |
 
-212 works · txt 116 · pdf 0 · no-oa 96
+213 works · txt 118 · pdf 0 · no-oa 95

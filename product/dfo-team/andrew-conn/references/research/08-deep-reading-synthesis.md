@@ -1,6 +1,6 @@
 # Andrew R. Conn · Deep-reading synthesis
 
-> Date: 2026-09-27. Input: every card in `cards/` (20 batch files, 140 card entries for 138 in-scope works; index in `07-paper-cards.md`). Rules applied: `references/paper-reading-card.md` §3 (conservative update: append only, existing methods get evidence first, a new method needs ≥3 distinct papers plus the four checks, reject updates without explanatory power, every claim traceable to a card) and `references/research-extraction-framework.md` §3 (four-way validation) and §11 (quality checklist). This note proposes changes; it does not edit `SKILL.md`.
+> Date: 2026-09-27. Input: every card in `cards/` (20 batch files, 140 card entries for 138 in-scope works; index in `07-paper-cards.md`). §12 adds the book-material batch `k01` (6 cards, B001–B006) and is kept apart from the counts of §1–§11. Rules applied: `references/paper-reading-card.md` §3 (conservative update: append only, existing methods get evidence first, a new method needs ≥3 distinct papers plus the four checks, reject updates without explanatory power, every claim traceable to a card) and `references/research-extraction-framework.md` §3 (four-way validation) and §11 (quality checklist). This note proposes changes; it does not edit `SKILL.md`.
 >
 > Citation form: `[S012 p. 9]` = card S012, page of the extracted text as recorded on the card; `abstract` = abstract-level card. Counts are **distinct papers** after merging same-work pairs: S032 = S123, S093 = S108, S111 = S026 (report version), S126 ~ S054 (same primal-dual line), S102 ~ S120 (analysis and complete-results companion); where noted, also D002 = S039 (journal version) and S166 ~ S099 (conference abstract of the journal paper). S236 and S049 each have two cards (metadata/unreadable superseded by full cards `c3-01` and `s4-01`) and count once.
 >
@@ -219,7 +219,7 @@ Counts are cards proposing the pattern (full/partial weighted papers in brackets
 | One-factor or factorial variants before external comparison | 3 [3]: S040, S049, S075 | Already M2 step 5; E2 |
 | New standard as a superset of the incumbent (SIF ⊃ MPS) | 3 [3]: S046, S137, S149 | One project (SIF) |
 | Answer an old question from one's own early work | 3 [3]: S233, S130, S141 | Two questions only (1978 → 1989; 1981 → 2023, posthumous, framed by coauthors) |
-| Public erratum crediting the finder | 2 [2]: D001, S059 | Integrity positive model (§3 row 26) |
+| Public erratum crediting the finder | 2 [2]: D001, S059 | Integrity positive model (§3 row 26); three works with the book errata, still not promoted (§12.2) |
 | Insurance assumption over all combinatorial branches | 2 [2]: S005, S022 | One project; proof device P9 |
 | Recover a forgotten lesson | 2 [2]: S007, S009 | Writing move W10 |
 | Rate first, convergence second | 2 [2]: S018, S021 | One project; P11 |
@@ -432,7 +432,7 @@ Overall most frequent (all cards): Toint 44 cards (1988–2003), Gould 40 (1984�
 
 ## 11. Open gaps
 
-- **The books** (S001 *Trust-Region Methods*, S002 *Introduction to DFO*, S006 LANCELOT) have no open full text: their organisation, the software chapter and the convergence analyses are known from publisher descriptions only [S001, S002, S006 abstract].
+- **The books** (S001 *Trust-Region Methods*, S002 *Introduction to DFO*, S006 LANCELOT) have no open full text: their organisation, the software chapter and the convergence analyses are known from publisher descriptions only [S001, S002, S006 abstract]. For *Introduction to DFO* the organisation is now read from the contents, with errata, an addendum and two reviews (§12); the chapters are still unread.
 - **1970s work**: only S233 is read in full; the 1973 penalty paper, the 1977 direct penalty method, the minimax and ℓ₁ papers are abstracts [S024; S038; S014; S015; S051 abstract]; the thesis itself is metadata only [S134]; its title and advisor (Pietrzykowski) come from the coauthors' posthumous paper [S141 pp. 3, 13].
 - **2001–2015**: 12 of 33 works read; the petroleum, seismic, maintenance and NTNU papers are abstracts [S098; S161; S171; S101; S083; S100; S105; S132; S084; S076; S147; S142], and the one full text is role-unidentifiable [S060]. M4's energy-era practice rests on these abstracts and the essay [S236 pp. 5–7].
 - **Key hybrid and circuit papers are abstract-level**: Conn–Le Digabel 2013 [S023], the QCQP subproblems in MADS [S091], JiffyTune TCAD [S033], EinsTuner FGCS [S106], the 2022 derivative-free exact penalty [S135]. H4's "significantly improved" rests on the S023 abstract plus S075 p. 19.
@@ -443,3 +443,101 @@ Overall most frequent (all cards): Toint 44 cards (1988–2003), Gould 40 (1984�
 - **Code**: the DFO package, LANCELOT and CUTE sources were not inspected; the DFO v1.2 manual is metadata only [S178].
 - **Supervision and group practice**: the essay says nothing about students, supervision or how he wrote papers [S236 D8]; there are no memoirs, recordings or referee reports. The Mentor Voice remains constructed, now with verified first-person aphorisms available [S236 pp. 3–5].
 - **Figures**: the LANCELOT study's figures and the 2018 profiles survive only as captions and prose [S040 header; S075 header].
+
+
+---
+
+## 12. Book material (batch k01, added 2026-09-27)
+
+Input: `cards/k01.md` and `k01.digest.json`, six items around *Introduction to Derivative-Free Optimization* (IDFO; Conn, Scheinberg and Vicente, SIAM 2009), all read in full:
+- B001, the table of contents (book pp. vii–ix);
+- B002 and B003, the authors' errata lists for the first printing (18 items) and the second printing (3 items), both dated 05/17/2015;
+- B004, the authors' two-page addendum of 01/27/2011 deriving the quadratic-regression error bounds (the book's Theorem 4.13);
+- B005, J. L. Nazareth's review (*Math. Comp.* 79(271), 2010, pp. 1867–1869; DOI 10.1090/S0025-5718-10-02379-3, verified on Crossref);
+- B006, D. Orban's review (*SIAM Review* 53(2), 2011, pp. 395–396).
+
+**Voices and weight.** B001–B004 are the three authors' joint voice; Conn's personal share cannot be separated, so they weigh like the CSV papers. B005 and B006 are external reviewers; they are used only as reception, peer view, blind spots and domain fit, never as evidence of Conn's practice, and book passages they quote are marked *relayed*. The book body (S002) is still unread: claims about chapter content go no further than section titles, the errata's page references and the reviews. These six items are **not** added to the paper counts or say–do tallies of §1–§2; SKILL.md cites them by id.
+
+**Date of B006.** The batch file, INDEX.md and the digest gave 2010. Crossref places the Book Reviews section of *SIAM Review* 53(2) (2011, online 5 May 2011) at pp. 375–405 (DOI 10.1137/SIREAD000053000002000375000001), and its editor's note lists a derivative-free-optimization review. The review is therefore from 2011, which the card had inferred from a same-page review of a 2011 book [B006 p. 1]. Recorded here, in `07-paper-cards.md` and in RESOURCES.md; on review the digest, INDEX.md and `works.json` were also set to 2011 (§12.6); the local text file keeps its 2010 name.
+
+### 12.1 What the book material adds or changes, per SKILL.md item
+
+| SKILL.md item | What the book material shows | Cards (pages) | Change |
+|---|---|---|---|
+| M1 triad | At book level only the theory leg is present: no chapter or section title announces a numerical study; software is a four-page appendix; the named practical methods come after the theory (Ch. 11). Peers: "few numerical illustrations" and no implementation details; the introduction holds "the only comparison between methods"; the pointed-to software is "research grade". The relayed preface aim ties the theory to "what is needed to ensure convergence, how it affects algorithm design". Consistent with M1's "assembled across a line of papers": the code is the DFO package [S020], the numbers are in the papers [S019; S025; S075]. | B001 p. 3; B005 pp. 1, 3; B006 pp. 1–2 | ⚠ variant bullet "Book level" on M1; ledger `#method-1` |
+| M2 test bed | Comparing derivative-free methods "is intricate and is not an objective of the book" (the authors' stance as relayed by Orban); no section title mentions benchmarking. M2 lives in the papers. | B006 p. 1; B001 pp. 1–3 | ⚠ ledger `#method-2` only; SKILL.md unchanged (no new instruction) |
+| M3 certify | **Stated by organisation** (contents, title level): Part I (Chs 2–6, about 100 book pages) of model and geometry theory before every optimization framework of Part II (Part I itself holds the pivotal and geometry-improvement algorithms of §§6.3–6.4, and §1.4 already runs Nelder–Mead); a chapter per sample-set regime (Chs 3–5); Ch. 6 "Ensuring well poisedness and suitable derivative-free models"; Ch. 10 states "Conditions on the trust-region models" (10.2) before the methods and their first- and second-order convergence. **Step 1 in full** for quadratic regression: bounds of fully quadratic form whose geometry dependence is one scale-free norm. **Variant**: 13 of the 18 first-printing errata fall in Part I, including the rewritten linear-regression Theorem 2.13 and the replaced quadratic-regression constants; two of the three errors that survived the reprint are regression statements. **Peer view**: the trust-region chapters are "the centerpiece"; Part I's rigor makes Nelder–Mead "almost a simple and didactic illustration of the direct-search framework". | B001 pp. 1–3; B004 pp. 1–2; B002 pp. 1–3; B003 p. 1; B005 p. 2; B006 p. 2 | "Stated (book organisation, 2009)" line and ⚠ "Step 1's constants are error-prone" on M3; ledger `#method-3` |
+| M3 limitation "Assumes smoothness"; Roundtable blind spots | Nazareth: the DFO/non-differentiable intersection "not adequately addressed" (a flaw). Orban, on the trust-region model-based chapters: the book assumes a Lipschitz-continuous gradient or Hessian, a different context from the 30 nonsmooth pages of *Trust-Region Methods* (not a flaw). ⚠ Neither places nonsmooth problems wholly outside the book: the contents list §7.4 "Global convergence in the nonsmooth case" (B001 p. 2), and Nazareth reports that Ch. 7 covers "both continuously differentiable and nonsmooth cases" (B005 p. 2). | B005 pp. 2–3; B006 p. 2; B001 p. 2 | Cited in the Roundtable blind spots; ledger `#method-3`, `#book-material` |
+| M6 transplant | Both schools in one book, each with framework and convergence sections; rival methods (Powell's methods, wedge methods) beside the authors' "DFO" approach (title level; a survey textbook covers rival methods as a matter of genre, so weak evidence, house rules §3.4). Orban: the "clearly stated similarities and differences" between smooth and derivative-free trust-region methods. | B001 pp. 2–3; B006 p. 2 | Practice item on M6; ledger `#method-6` |
+| M7 | Not engaged: no solver is involved. | — | None |
+| Taste mark 1 | The caveat "rarely in one paper" holds at book level (see M1). | B005 p. 3 | Ledger only |
+| Taste mark 2 | Theory stated for frameworks: section titles 7.2, 9.1, 10.1. | B001 pp. 2–3 | Ledger only |
+| Taste mark 6 | Ch. 6 title; model quality as one computable number ‖M̂†‖. | B001 p. 2; B004 pp. 1–2 | Ledger only (the M3 stated line carries it) |
+| Taste mark 7 | ⚠ The authors correct their own released book in public; the list credits readers who pointed out errors (four named); whether any correction came from the authors' own checking is not stated. | B002 p. 3; B003 p. 1 | Ledger only |
+| Warning sign 7 | (section title only) §1.3 "Limitations of derivative-free optimization" comes before §1.4 "How derivative-free algorithms should work"; Orban praises the account of both families' limitations. | B001 p. 1; B006 p. 1 | Evidence added to sign 7; ledger `#taste-warnings` |
+| Workflow B | Ch. 10's order (framework → conditions on models → first-order → second-order → larger balls → subproblem) is the order of steps 1–4, at title level. | B001 p. 3 | Ledger `#workflow-b` only |
+| Honest Boundary, integrity positive model "public errata keep the statement and credit the finders [D001; S059]" | The book errata credit four named finders (✅) but change statements: Theorem 2.13's statement and constants, several definitions (⚠); a note says when the printed statement would still hold. | B002 pp. 1–3; B003 p. 1 | Qualified in the "Stated vs practised" line; catalog W8 variant |
+| Honest Boundary, books gap | Six open items read in full; the book body still unread. | B001–B006 | Gap sentence extended; coverage bullet notes the six cards sit outside the counts |
+| Domain fit (hyperparameter tuning) | Orban: the introduction's first example, parameter tuning, is "a nonsmooth noisy problem"; in his paragraph on the trust-region model-based chapters, the book assumes a Lipschitz-continuous gradient or Hessian. That the example lies outside the class the theory covers is the card's inference. | B006 pp. 1–2 | Added to Domain fit; ledger `#book-material` |
+| Roundtable "Leads when … dimension in the tens" | Nazareth sizes the book's problems at "say up to a hundred" variables. | B005 p. 1 | Consistent; not changed (§12.4 item 6) |
+| Signature Work 1, Reception | Orban: "bound to become the de facto authoritative text"; Nazareth: the trust-region chapters "the centerpiece", goals met "admirably", nonsmooth overlap "not adequately addressed". | B005 pp. 2–3; B006 pp. 1–2 | Reviewer line in the Reception row; ledger `#signature-work-1` |
+| Research Trajectory | The book was maintained: addendum 2011, errata for two printings 2015. No new edition. | B002 p. 1; B003 p. 1; B004 p. 1 | Ledger `#trajectory` only |
+| Technique catalog | P6 gains its regression form; new P21 (check the model form a borrowed proof assumes); W8 gains the book-errata variant; new writing moves W16–W19 (limitations before prescriptions; parallel chapter templates; tools apart from algorithms; hedge words corrected as claims). | B001–B004, B006 | `technique-catalog.md` |
+
+### 12.2 Candidate pool
+
+| Candidate | Works (pages) | Decision |
+|---|---|---|
+| Public erratum crediting the finder | 3 works, three coauthor groups with only Conn in common: D001 p. 1 (1981, Coleman), S059 pp. 1, 4 (1989, Gould and Toint), the IDFO errata B002 p. 3 / B003 p. 1 (2015, Scheinberg and Vicente; one work) | Reaches the count of three but **stays in the pool**. (i) The third work is book material, and §3 of the house rules does not promote from this material alone. (ii) The four-way validation is not done, and exclusivity is weak: errata lists that thank their finders are ordinary practice for textbooks and journals. (iii) The book case varies the pattern: statements change, not only proofs (§12.1). Kept as catalog W8 (with a variant) and as the Honest Boundary's positive model. |
+| Check what you called straightforward (new) | S012 p. 3 (the CGT book's claim that second-order DFO analysis follows simply, answered as not trivial); B002 p. 2 (item 5 withdraws "It is then obvious"); B004 p. 1 beside B002 p. 3 (a full derivation of regression bounds whose constants were corrected, on a topic S028 p. 14 had called "straightforward adaptations") | **Pool only.** Two papers and one book-material work (B002 and B004 count as one); no stated side; whether the book's Theorem 4.13 is S028's statement cannot be checked without the book body. Its transferable part is catalog P21. |
+
+### 12.3 Changes made to SKILL.md
+
+Net growth 464 words (11177 → 11641, `wc -w`; 11571 before the review corrections of §12.6). Each line cites B ids; full evidence under the ledger anchors named in §12.1.
+1. Intro paragraph: one sentence saying the book's open material was read and the body was not.
+2. Domain fit: the book's first motivating example, parameter tuning, is "a nonsmooth noisy problem" while its model-based (trust-region) theory assumes a Lipschitz-continuous gradient or Hessian (reviewer D. Orban; wording corrected on review, §12.6).
+3. Warning sign 7: the book's own "Limitations" section, and a reviewer's praise.
+4. M1: ⚠ "Book level" bullet (theory leg; reviewers on numbers and software).
+5. M3: "Stated (book organisation, 2009)" line, and ⚠ "Step 1's constants are error-prone".
+6. M6: practice item "both schools in one textbook, rival methods (Powell's, wedge) beside the authors' 'DFO' approach", labelled title level and weak evidence (§12.6).
+7. Signature Work 1, Reception row: one line per reviewer, by name.
+8. Roundtable Card blind spots: the reviewers' two points (overlap with non-differentiable optimization "not adequately addressed"; model-based theory assumes a Lipschitz-continuous gradient or Hessian), with a ⚠ that the contents include §7.4, nonsmooth direct-search convergence. ✗ Corrected on review: the first version said both reviewers place nonsmooth problems outside the book (§12.6).
+9. Honest Boundary: the six cards sit outside the coverage counts; the books-gap sentence says exactly what was read; the errata variant of the positive model.
+10. Appendix: card count, the book page's read items, and the two reviews as secondary sources.
+
+Frontmatter, Activation Rules, Research Integrity Rules, method numbering, heuristics and workflows are unchanged.
+
+### 12.4 Rejected updates (book material)
+
+1. **Promoting "Public erratum crediting the finder"** to a heuristic or method (§12.2).
+2. **A new method from the book's architecture** ("tools before algorithms", "limitations before prescriptions", parallel chapter templates). It is M3's and M1 step 1's order in textbook form, and a textbook's order is also a teaching choice; recorded as M3's stated emphasis and as writing moves W16–W18.
+3. **Rewriting M3 step 1** to require an independent derivation of the constants. One book's errata show the constants were error-prone, not that a check was part of the practice; kept as a variant bullet and catalog P21.
+4. **Counting the reviews as evidence of Conn's practice**, or adding the six items to the say–do tallies. The reviews are peer readings of a joint book; the tallies stay paper counts.
+5. **Nazareth's framing** of the book as "emblematic" of algorithmic science & engineering [B005 p. 3]: it rests on his own SIAM News article; not used.
+6. **Raising the Roundtable's "dimension in the tens"** to "up to a hundred" [B005 p. 1]: a reviewer's sizing of the book's class, not of Conn's practice; consistent, unchanged.
+7. **M7 or Taste mark 7 evidence from the errata**: no solver is involved, and the list credits readers who pointed out errors, without saying whether the authors' own checks found any; a T7 variant in the ledger only.
+8. **The card's reading path in SKILL.md**: useful, but not a Conn method; it stays in `cards/k01.md`.
+9. **Deleting "keeps the statement"** from W8 and from the Honest Boundary: append-only; both are qualified with the book-errata variant.
+10. **A Research Trajectory "Latest" line**: there is no new edition, only errata for a second printing [B003 p. 1]; ledger `#trajectory` only.
+11. **Mapping book theorems to papers beyond titles** (e.g. Theorem 4.13 = S028's regression bound; Ch. 10 = S012): cannot be checked without the book body; kept at title level on the card.
+12. **A new M2 line in SKILL.md** from Orban's "not an objective of the book": it adds no instruction; ledger `#method-2` only.
+13. **Correcting B006's year in INDEX.md and `works.json`**: verified (Crossref, 2011), but those files are harvest outputs; recorded in 07, RESOURCES.md and here, and flagged. *Reversed on review (§12.6)*: the digest is the card's own output, and 07 must agree with it, so the digest, INDEX.md and `works.json` now say 2011.
+14. **Reviewer-derived lessons as catalog entries** ("say where the code and the numbers are" [B005 p. 3]; bare-bones implementations in the exercises [B006 p. 2]): they are critiques of the book, not devices it uses; recorded in `05-peer-critique.md` §6.
+
+### 12.5 Open gaps after the book material
+
+- The IDFO chapters themselves (13 chapters and the software appendix) are unread; the reading path in `k01` is built from titles.
+- *Trust-Region Methods* [S001] and the LANCELOT book [S006]: no open material was read.
+- B004's extracted text writes ‖M†‖ after the scaling and ν for ν2 in the residual bound; extraction loss or a slip of the original is undecided [B004 card].
+- When each erratum was found, and by whom, is not stated [B002 card].
+
+### 12.6 Corrections after review (2026-09-27)
+
+A reviewer checked the book-material integration against the texts. Every finding was confirmed against B001–B006 and applied; nothing was promoted or removed, and each overstatement is kept visible as a ✗ or ⚠ line where it had been stated.
+1. **Nonsmooth scope (major).** ✗ "Both reviewers place nonsmooth problems outside the book" overstated both reviews. The contents list §7.4 "Global convergence in the nonsmooth case" [B001 p. 2], and Nazareth reports that Ch. 7 treats global convergence "for both continuously differentiable and nonsmooth cases" [B005 p. 2]. His criticism is that the overlap with non-differentiable optimization is "not adequately addressed" [B005 p. 3]. Orban's Lipschitz sentence sits in his paragraph on the trust-region model-based chapters [B006 p. 2]. Corrected in SKILL.md (Domain fit, Roundtable blind spots), §12.1 and §12.3 here, ledger `#method-3` and `#book-material`, `05-peer-critique.md` §6, and the k01 card and digest.
+2. **Title-level labels.** The M3 stated line says Part I precedes every *optimization framework* of Part II, not every algorithm (Part I holds the algorithms of §§6.3–6.4, and §1.4 runs Nelder–Mead). The M6 item says rival *methods*, not codes, and is marked weak evidence (survey genre, house rules §3.4). Warning sign 7's "Limitations" citation is marked as a section title only. B001 gains its W7 link (card, digest, 07 row).
+3. **M3 constants bullet.** That errata item 11's constants are Theorem 4.13's, as derived in the addendum, is labelled an inference. The imperative "Derive the constants yourself" is removed from SKILL.md, in line with §12.4 item 3; the lesson stays in catalog P21 and the ledger, labelled as the skill's own.
+4. **Reader credit.** The claim that the corrections came "not from the authors' own testing" is replaced: the list credits readers who pointed out errors; whether any came from the authors' own checking is not stated [B002 p. 3].
+5. **Warning sign 7, errata item 2.** "Sharpen rather than soften" is replaced by a neutral description, consistent with the card's "overstated wording" class and catalog W19.
+6. **Numbers and dates.** Software appendix book pp. 251–254, not 251–255 [B001 p. 3]. B006's year is 2011 in the digest, INDEX.md and `works.json` as well (Crossref re-checked: *SIAM Review* 53(2), pp. 375–405, print 2011-01, online 2011-05-05); this reverses §12.4 item 13.
+7. **Traceability and wording.** SKILL.md's intro sentence now points to `09-evidence-ledger.md#book-material`. "Le Digabel later co-wrote" becomes "also co-wrote" (the 2013 paper predates the 2015 list).

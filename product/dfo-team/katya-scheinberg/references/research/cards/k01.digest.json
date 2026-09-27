@@ -1,0 +1,442 @@
+[
+ {
+  "id": "B001",
+  "year": "2009",
+  "title": "Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009)",
+  "read_level": "full",
+  "contribution": "The authors' own organisation of DFO (TOC only, typeset 2008/11/17): about 100 pages of sampling, model classes and geometry (Part I) before any optimization framework, then direct search, simplex-gradient line search and trust region (Part II, the 34-page trust-region framework chapter the longest), with constraints, surrogates and global/mixed-integer problems compressed into a short Part III; every named guarantee is global convergence (pp. 1-3).",
+  "problem_entry": "Title level: Ch. 1 makes the case for DFO and states its limits before any tool: why DFO, examples, limitations of DFO (section 1.3, book p. 5), how DFO algorithms should work (section 1.4, book p. 7) (p. 1).",
+  "key_idea": "Toolkit first: Part I (book pp. 13-112) is ordered by model class (linear, interpolation, regression, underdetermined) with a reused section skeleton (basic concepts -> Lagrange polynomials -> Lambda-poisedness -> condition number) and ends with a whole chapter on ensuring well poisedness (Ch. 6, incl. fully linear/fully quadratic models, section 6.1); Part II states the trust-region framework and 'conditions on the trust-region models' (sections 10.1-10.2) before the instances 'DFO', Powell's methods and wedge methods (Ch. 11) (pp. 1-3).",
+  "assumptions": "Title level: smoothness is the default; nonsmoothness only in section 7.4 (direct search); noise only in section 9.3; constraints only in Part III (Ch. 13); no title mentions probability or stochastic models (pp. 1-3).",
+  "proof_devices": [
+   "positive spanning sets and positive bases (section 2.1, p. 1; title only)",
+   "Lagrange polynomials and Lambda-poisedness for interpolation, regression and underdetermined models (sections 3.2-3.3, 4.2-4.3, 5.2, pp. 1-2; title only)",
+   "condition number as a measure of well poisedness (sections 3.4, 4.4, p. 1; title only)",
+   "fully linear and fully quadratic models; pivotal algorithms for well poisedness (sections 6.1, 6.3, p. 2; title only)",
+   "integer lattices for simple decrease vs imposed sufficient decrease (sections 7.5, 7.7, p. 2; title only)",
+   "model accuracy in larger concentric balls (section 10.7, p. 3; title only)",
+   "all named guarantees are global convergence: sections 7.3, 7.4, 8.3, 9.2, 10.4, 10.6; no title contains complexity or rate (pp. 2-3)"
+  ],
+  "experiments": "None at title level: no chapter or section on numerical comparison or benchmarking; software only in a 4-page appendix (book pp. 251-254) (p. 3). Reviewer B006 says the introduction holds the only comparison (B006 p. 1).",
+  "positioning": "Named methods get sections: Nelder-Mead (8.1-8.2), MADS (7.6), implicit filtering (9.4), Powell's methods (11.3) next to the 'DFO' approach (11.2), wedge methods (11.4); direct search (48 pp.) and trust region (54 pp.) get comparable space; surrogates get a chapter (Ch. 12) (pp. 2-3).",
+  "writing": "Exercises close every chapter except 1, 11 and 13; notes-and-references sections close Ch. 4-11 only; Ch. 3 and Ch. 4 reuse the same four-section skeleton (pp. 1-3).",
+  "limits_future": "Left out or compressed at title level: complexity/rates, probabilistic or stochastic models, noise beyond section 9.3, one-dimensional methods, problem structure (least squares), ML, constraints (Part III only), global and mixed-integer problems (one section, book pp. 249-250), benchmarking, software beyond an appendix (pp. 1-3). Card includes a reading path through the book for this skill's lens (card writer's suggestion, not the authors').",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Stated at the level of the book's organisation (co-authored): geometry organises Part I, a whole chapter (Ch. 6) and eight section titles on poisedness. Dating agrees with C8: titles speak of ensuring well poisedness (2008 maintain-throughout position); the minimal-safeguard stance is not visible at title level.",
+    "pages": "pp. 1-2"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Weak, title level: trust-region framework kept, the change stated as 'conditions on the trust-region models' (10.2) before DF instances; a globally convergent Nelder-Mead variant (8.3) repairs rather than replaces a trusted method.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Deterministic precursor: fully linear / fully quadratic models (6.1) and model conditions (10.2) are the certified class that BSV 2014 requires only with probability p; no probability in any title.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Dating: all named guarantees are global convergence, no complexity; the first rung of Taste mark 7's progression (complexity arrives with S088, S104).",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "No section compares methods or estimators numerically; software only as an appendix.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 6",
+    "relation": "none",
+    "note": "No structure-specific section (least squares, partial separability) at title level.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Honest Boundary (domain boundary)",
+    "relation": "evidence",
+    "note": "Constraints, global and mixed-integer problems compressed into Part III, nonsmoothness into one direct-search section (7.4); the book body stays unread, its TOC is now verified.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Roundtable Card (Conn lens)",
+    "relation": "evidence",
+    "note": "Title level: Ch. 10 has a section titled 'Conditions on the trust-region models' (10.2); that the chapter is the 1997/2009 shared framework of the Conn lens is an inference from the titles (chapter not read).",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework-then-instantiation (support for the existing S004/S007 candidate; not a promotion)",
+    "evidence": "Ch. 10 framework with explicit conditions on the models, then Ch. 11 instances (DFO, Powell's methods, wedge methods); title level only",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Toolkit first: collect the analytical machinery (sample-set geometry, model error bounds) in one part and present each algorithm family as a user of it (pp. 1-2)",
+   "Give parallel variants the same section skeleton so the differences stand out (Ch. 3 and Ch. 4, p. 1)",
+   "Separate the framework and its conditions on the models (sections 10.1-10.2) from the concrete methods that satisfy them (Ch. 11) (p. 3)",
+   "Put a section on the limitations of the whole approach in the introduction (section 1.3, p. 1)"
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "Ensuring well poisedness and suitable derivative-free models",
+    "page": 2
+   },
+   {
+    "text": "Conditions on the trust-region models",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "B002",
+  "year": "2015",
+  "title": "Errata to Introduction to Derivative-Free Optimization (05/17/2015)",
+  "read_level": "full",
+  "contribution": "Author-maintained errata for the first printing (18 items): one theorem re-proved with new constants and a stated condition under which the original statement holds (Thm 2.13, linear regression bounds), corrected constants of the quadratic-regression bounds (book p. 69), corrected Lambda values and example sets, and precision fixes; 13 of 18 items fall in Part I, none in the convergence chapters 8-11; four readers credited by name (pp. 1-3).",
+  "problem_entry": "Public correction of a published textbook six years after publication, item by item (page, line, old text, corrected text) (pp. 1-3).",
+  "key_idea": "Item 3 re-proves Theorem 2.13 for the free-intercept linear regression model: coefficient error = M-dagger times the Taylor residual, scaling identity (2.9) M-dagger = diag(1, (1/Delta)I) M-hat-dagger, kappa_eg = nu(1 + p^{1/2}||M-hat-dagger||/2), kappa_ef = 2 kappa_eg + nu/2; the book's statement holds for the model anchored at f(y0), whose g is the regression simplex gradient of book p. 33 (pp. 1-2).",
+  "assumptions": "Corrections of stated assumptions/definitions: free intercept vs anchored regression model (items 3-4); a Euclidean ball, not the ball described as squared, in the Lambda examples (item 7); Frobenius norm over the upper or lower triangular part of the Hessian (item 12); finiteness of the positive bases from which poll directions are extracted (item 16) (pp. 1-3).",
+  "proof_devices": [
+   "coefficient error = pseudo-inverse times Taylor residual, |r_i| <= (nu/2)Delta^2, with y0 = 0 without loss of generality (item 3, p. 1)",
+   "diagonal scaling (2.9) separating the radius from the geometry of the scaled matrix (item 3, p. 1)",
+   "bounds on the whole ball B(y0; Delta): gradient kappa_eg Delta, value kappa_ef Delta^2 (item 3, p. 2)",
+   "proof left to the reader reworded: Exercise 10 now asks to show (2.9) first; a claim that a step is obvious replaced by a pointer to arguments already seen (items 5-6, p. 2)"
+  ],
+  "experiments": "Not applicable; corrected computed numbers in examples: Lambda values in the captions of Figs 3.1-3.3 (294, 5324, 492624), Lambda on book p. 98 (5324, with a factor-4 scaling sentence removed), example sets Y1, Y2 on book p. 99 (pp. 2-3).",
+  "positioning": "Acknowledges all readers and names four who reported errors: Griewank, Hare, Le Digabel, Vaz (p. 3).",
+  "writing": "Each item: book page, usually with the line (negative from below), old text in quotation marks where a sentence changes, corrected version; the theorem correction includes a proof sketch, a footnote on the Moore-Penrose inverse and the validity condition of the old statement (pp. 1-3).",
+  "limits_future": "Distribution: Ch. 1: 2 items, Part I: 13 (Ch. 2: 4, Ch. 3: 4, Ch. 4: 1, Ch. 5: 1, Ch. 6: 3), Part II: 1 (Ch. 7), Part III: 2; none in Ch. 8-11. The sheet does not say why the Lambda values changed or which corrections came from readers (pp. 1-3).",
+  "method_links": [
+   {
+    "method": "Honest Boundary (reading-notes lesson: tables, text and theorem statements agree)",
+    "relation": "evidence",
+    "note": "The authors' own published corrections: Theorem 2.13 restated and re-proved for the model form it is used with, the printed statement holding only for the model anchored at f(y0) (item 3; the original proof was not read); corrected Lambda values in three figure captions, reason not stated (items 8-10); a passage reconciling two numbers by an argument replaced by the corrected number (items 13-14). Authors' corrections, not reading notes.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak: corrected Theorem 2.13 has Method 4 step 2's form, error <= constant x radius with constant = Lipschitz constant x ||M-hat-dagger||; 13 of 18 corrections are in Part I's geometry and model machinery.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "variant",
+    "note": "Geometry constants (Lambda) computed on toy sets and printed, hence checkable and corrected; illustrations of Lambda-poisedness, not tests of a theorem's threshold.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Deterministic precursor, weak: the identity simplex gradient = gradient of the linear regression model anchored at f(y0) unifies a direct-search estimate and a model gradient, as S006/D003 later do for estimator families; the identity needs the anchoring condition.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "public, itemised self-correction that states when the original statement remains valid",
+    "evidence": "Errata per printing with page/line/old/new text, theorem re-proved with a validity condition for the old statement, readers credited by name (with B003, B004; one author team, one source)",
+    "pages": "pp. 1-3"
+   }
+  ],
+  "transferable": [
+   "When correcting a theorem, state under which extra condition the original statement remains true, give the corrected constants and the proof sketch (p. 1)",
+   "Replace a claim that a step is obvious by a pointer to the argument that proves it (item 5, p. 2)",
+   "Fix a regression model's form (free intercept vs anchored at the centre) before stating its error bound; the erratum keeps the book's statement for the anchored model and gives a new proof and new constants for the free-intercept model (pp. 1-2)",
+   "When two printed numbers disagree, fix the number at its source rather than adding a reconciling sentence (items 13-14, p. 3)"
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "note, however, that the precise statement of Theorem 2.13 as it stands in the book would be valid if the regression model is of the form",
+    "page": 1
+   },
+   {
+    "text": "Corrected version: It can be proved using arguments already seen",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "B003",
+  "year": "2015",
+  "title": "Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015)",
+  "read_level": "full",
+  "contribution": "Author-maintained errata for the second printing (3 items): two first-printing corrections that the second printing still carried (the simplex-gradient/regression identity on book p. 33; the positive-generators wording on book p. 245) and the missing definition p-bar = n(n+1)/2 for the already corrected quadratic-regression constant on book p. 69 (p. 1).",
+  "problem_entry": "Keeping the correction list current per printing (header identifies the second printing) (p. 1).",
+  "key_idea": "15 of 18 first-printing items do not reappear (consistent with their being fixed; not stated); the second printing carried item 11's corrected kappa_ef but not the definition of p-bar (p. 1).",
+  "assumptions": "",
+  "proof_devices": [
+   "none new; the p. 69 constant kappa_ef = nu2/2 + (1/2 + n^{1/2}/2 + sqrt(2) p-bar^{1/2}/4) nu2 ||Sigma-hat^{-1}|| is completed with p-bar = n(n+1)/2 (p. 1)"
+  ],
+  "experiments": "",
+  "positioning": "Same acknowledgement as B002, naming Griewank, Hare, Le Digabel and Vaz (p. 1).",
+  "writing": "Same item format as B002; line positions updated to the second printing (lines -10, -9 on book p. 33 vs lines 13-14 in the first printing) (p. 1; B002 p. 2).",
+  "limits_future": "Two statements needed correcting twice (book pp. 33, 245) (p. 1).",
+  "method_links": [
+   {
+    "method": "Honest Boundary (reading-notes lesson: tables, text and theorem statements agree)",
+    "relation": "evidence",
+    "note": "Corrections tracked across printings; two statements needed correcting twice.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak: the quadratic-regression error-bound constants (nu2, ||Sigma-hat^{-1}||, p-bar^{1/2}) kept exact across printings.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Research Taste warning sign 6",
+    "relation": "evidence",
+    "note": "Weak: adding p-bar = n(n+1)/2 writes out the dimension dependence of kappa_ef instead of hiding it.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "public, itemised self-correction that states when the original statement remains valid",
+    "evidence": "Same practice as B002 (same source; not an independent instance)",
+    "pages": "p. 1"
+   }
+  ],
+  "transferable": [
+   "Keep one errata list per printing, dated, and repeat an item when a later printing still carries the error (p. 1)"
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "We thank all our readers but we are particularly grateful to those who pointed out errors, namely Andreas Griewank, Warren Hare, Sébastien Le Digabel, and A. Ismael F. Vaz.",
+    "page": 1
+   },
+   {
+    "text": "Page 245, Line 14: “the following is a set of positive generators” Corrected version: the following includes a set of positive generators",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "B004",
+  "year": "2011",
+  "title": "Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization",
+  "read_level": "full",
+  "contribution": "Two-page author note supplying the derivation of the book's Theorem 4.13 (quadratic regression error bounds in terms of the scaled regression matrix): Hessian error O(Delta), gradient O(Delta^2), value O(Delta^3), with constants = nu2 x ||M-dagger|| x explicit dimension factors n^{1/2} and p-bar^{1/2}; B002 item 11 later prints the same constants for book p. 69, with ||Sigma-hat^{-1}|| in place of ||M-dagger|| (pp. 1-2).",
+  "problem_entry": "A printed theorem (4.13) whose derivation the book omitted; the note gives no reason for publishing separately. Context (inference): S025 (2008) stated Lambda-based regression bounds without proofs as straightforward adaptations [card S025, p. 14]; B002 item 11 corrects book p. 69 to exactly these constants (p. 1).",
+  "key_idea": "Least-squares coefficients: the coefficient error equals the pseudo-inverse applied to the Taylor residual (0.1); a diagonal scaling (0.2) gives each block (value, gradient, Hessian) its own power of Delta, with the geometry entering only through the scaled pseudo-inverse; one mean-value step moves the bounds from the centre to the ball (pp. 1-2).",
+  "assumptions": "Lipschitz Hessian (constant nu2 > 0); y0 = 0 without loss of generality (argument at the end of the proof of the book's Theorem 3.16); M full column rank, M-dagger = (M^T M)^{-1} M^T; scaled set in B(0; 1); free-intercept model m(y) = c + g^T y + (1/2) y^T H y (p. 1).",
+  "proof_devices": [
+   "Taylor residual of the second-order Taylor coefficients at the sample points, |r_i| <= (nu/2)Delta^3 (p. 1)",
+   "pseudo-inverse identity (0.1): coefficient error = M-dagger r (p. 1)",
+   "diagonal scaling (0.2): M-dagger = diag(1, (1/Delta)I_n, (1/Delta^2)I_pbar) M-hat-dagger, pbar = n(n+1)/2 (p. 1)",
+   "block bounds: Hessian coefficients O(Delta) with factor pbar^{1/2} nu2/2 ||M-dagger||, sqrt(2) from vec to matrix norm (0.3); gradient at y0 O(Delta^2) with factor n^{1/2} nu2/2 ||M-dagger|| (0.4) (pp. 1-2)",
+   "mean-value transfer from the centre to the ball: gradient bound (nu2 + ((n^{1/2} + sqrt(2) pbar^{1/2})/2) nu2 ||M-dagger||) Delta^2, value bound (nu2/2 + (1/2 + n^{1/2}/2 + sqrt(2) pbar^{1/2}/4) nu2 ||M-dagger||) Delta^3 (p. 2)",
+   "reading note (not a finding): nu printed where nu2 is assumed; ||M-dagger|| printed where the scaled M-hat-dagger appears meant; the step to the factors pbar^{1/2}, n^{1/2} is not written out and was not checked (pp. 1-2)"
+  ],
+  "experiments": "none",
+  "positioning": "No citations; refers only to the book's Theorems 3.16 and 4.13 and equation (3.1) (pp. 1-2).",
+  "writing": "One sentence of motivation, then numbered equations (0.1)-(0.4); the footnote on the Moore-Penrose inverse is word for word the one in B002 item 3 (p. 1; B002 p. 1).",
+  "limits_future": "Deterministic, smooth (Lipschitz Hessian), full-column-rank M; noise not treated although regression is the group's proposed tool for noisy data [card S025, p. 1] (pp. 1-2).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Method 4 step 2 (model error <= poisedness constant x radius) in regression form, with the constant written out as nu2 x ||M-hat-dagger|| x dimension factors.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Deterministic precursor: orders Delta, Delta^2, Delta^3 are the certified fully quadratic accuracy the probabilistic contract later requires with probability p (second-order STORM analysis: E|F - f| <= kappa_F delta_k^3 [card S013, p. 28]).",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Research Taste warning sign 6",
+    "relation": "evidence",
+    "note": "Weak: n and pbar = n(n+1)/2 dependence explicit in every constant; S088 later tracks n the same way and improves the book's Lambda-poisedness gradient bound [card S088, pp. 9-11].",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Technique catalog P1/P3",
+    "relation": "variant",
+    "note": "P1 (Taylor subtraction, invert a scaled matrix) with a pseudo-inverse for least squares; P3 (scale to the unit ball) used as is.",
+    "pages": "pp. 1-2"
+   },
+   {
+    "method": "Honest Boundary (reading-notes lesson: tables, text and theorem statements agree)",
+    "relation": "evidence",
+    "note": "A missing derivation supplied publicly after publication; its constants match the later erratum for book p. 69 term by term, with ||Sigma-hat^{-1}|| in place of the note's ||M-dagger||.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "public, itemised self-correction that states when the original statement remains valid",
+    "evidence": "Omitted derivation published as a dated note on the book page (hosting per works.json); same author team as B002-B003",
+    "pages": "p. 1"
+   }
+  ],
+  "transferable": [
+   "For a least-squares model, write the coefficient error as pseudo-inverse x Taylor residual, factor the radius out block by block with a diagonal scaling, then move from the centre to the ball with one mean-value step (pp. 1-2)",
+   "Keep every dimension factor (n^{1/2}, pbar^{1/2}) visible in the constants; later complexity work depends on them (p. 2)",
+   "If a result was stated without proof, publish the derivation as a short dated note next to the errata (p. 1)"
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "The error bounds for quadratic regression models (based on the condition number of a scaled version of the regression matrix), given in Theorem 4.13, can be derived as follows.",
+    "page": 1
+   },
+   {
+    "text": "without loss of generality (see the argument at the end of the proof of Theorem 3.16)",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "B005",
+  "year": "2010",
+  "title": "Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010)",
+  "read_level": "full",
+  "contribution": "External review by J. L. Nazareth (University of Washington; reviewer's voice, not the authors'): a state-of-the-art, gracefully written, well-organised monograph whose Part I toolkit (poisedness the key notion) serves Part II, with derivative-free trust-region methods the centerpiece; criticised for theory-only exercises, atypical examples, few numerics, no implementation detail (not algorithmic engineering), no one-dimensional theory, and no adequate treatment of the DFO / non-differentiable intersection (pp. 1-3).",
+  "problem_entry": "Reviewer's framing: benign problems (smooth, unconstrained, up to about a hundred variables) made hard by missing derivatives and expensive or noisy evaluations; DFO separated from non-differentiable optimization because its convergence relies on smoothness (p. 1). Second-hand (reviewer quoting the preface, book pp. xi-xii): the aim is theory to the extent needed to understand what ensures convergence and how it affects algorithm design (p. 1).",
+  "key_idea": "Reviewer's reading: Part I is the mathematical toolkit (positive spanning sets, poisedness, Lambda-poisedness, condition numbers, three model-class chapters, set improvement); Part II uses it; two trust-region frameworks with first- and second-order global convergence underlie DFO, Powell's and wedge methods (p. 2).",
+  "assumptions": "Reviewer: the class is reasonably smooth, unconstrained, relatively small n (p. 1).",
+  "proof_devices": [],
+  "experiments": "Reviewer: few numerical illustrations (compared with Kelley), no implementational details (p. 3).",
+  "positioning": "Reviewer places the book in his own framework of algorithmic science and engineering (its theoretical algorithmic science mode), citing his own SIAM News article; useful to practitioners, researchers and software developers (p. 3).",
+  "writing": "Reviewer: gracefully written, well organised, timely; Part I nicely organised and well presented (pp. 2-3).",
+  "limits_future": "Reviewer's criticisms: exercises mostly elaborations of theory (reduces use for an introductory course); introductory examples atypical; few numerics; unidimensional (Brent) theory not covered; DFO / non-differentiable intersection not adequately addressed (pp. 2-3).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Peer view: poisedness is the key notion; comprehensive treatment of interpolation-set quality.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Peer view, weak: trust-region frameworks with global convergence proofs are the basis of several practical algorithms.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "variant",
+    "note": "Agrees with C1: a theory monograph with few numerics and no implementation detail, like the pure-analysis papers.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Inner Tensions (guarantee-first vs Powell's practice-first)",
+    "relation": "evidence",
+    "note": "Peer view: not on the algorithmic-engineering side (Quote 2); theoretical algorithmic science mode.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Honest Boundary / Roundtable blind spots",
+    "relation": "evidence",
+    "note": "Peer view: smooth, unconstrained, small-n class; DFO / nonsmooth intersection not adequately addressed.",
+    "pages": "pp. 1, 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Peer view: few numerical comparisons.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Avoid the two criticisms both reviews share: exercises that only extend the theory, and too few worked numerical examples (pp. 2-3; B006 p. 2)",
+   "Separate your problem class from its neighbour explicitly and name the assumption that separates them (derivative-free vs non-differentiable; smoothness) (p. 1)"
+  ],
+  "coauthors": "none (external review by J. L. Nazareth, University of Washington; not a Scheinberg work)",
+  "quotes": [
+   {
+    "text": "The important intersection between derivative-free optimization and non-differentiable optimization is not adequately addressed.",
+    "page": 3
+   },
+   {
+    "text": "its focus is not on the “algorithmic engineering” side of the subject.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "B006",
+  "year": "2011",
+  "title": "Review of Introduction to Derivative-Free Optimization (SIAM Review 53(2), 2011, book reviews)",
+  "read_level": "full",
+  "contribution": "External review by Dominique Orban (Ecole Polytechnique de Montreal; reviewer's voice, not the authors'): the de facto authoritative DFO text, teaching direct-search and model-based methods with their limitations, Part I/Part II split usable as a course order, clearly stated similarities and differences with classical trust region; shortcomings: the introduction holds the only comparison between methods (comparison reported as not an objective), exercises extend theory, few examples, research-grade software (pp. 1-2). Year corrected from 2010 (batch plan) to 2011: SIAM Review 53(2), 2011, pp. 395-396 per the authors' book page; Crossref lists the 53(2) Book Reviews section as pp. 375-405.",
+  "problem_entry": "Reviewer: the authoritative text for optimization without available derivatives; favourite application in the introduction: tuning algorithmic parameters, a nonsmooth noisy problem (p. 1).",
+  "key_idea": "Reviewer's reading: technical background (Part I) and algorithms (Part II) separated so a reader can start algorithm design after a cursory Part I; positive spanning sets and poisedness make Nelder-Mead a didactic illustration of the direct-search framework; line search is a line-search variant of the trust-region methods with simplex gradients (pp. 1-2).",
+  "assumptions": "Reviewer: Lipschitz-continuous gradient or Hessian and models on a well-poised sample set, unlike the nonsmooth (locally Lipschitz) chapters of Conn-Gould-Toint's Trust-Region Methods (p. 2).",
+  "proof_devices": [],
+  "experiments": "Reviewer: the introduction gives the only comparison between methods in the book; he reports the authors saying comparison is intricate and not an objective (p. 1).",
+  "positioning": "Reviewer: trust-region chapters read against Conn-Gould-Toint (one shared author); surrogates likened to a fortune teller, included in Part II methods while keeping convergence; all three authors central players; essential as text and reference (p. 2).",
+  "writing": "Reviewer: clarity, consistency and rigor of Part I; useful end-of-chapter notes and extensive bibliography (p. 2).",
+  "limits_future": "Reviewer: exercises mostly extensions of theory; few examples; wishes for bare-bones implementations in Part II exercises; listed software research grade, not accessible to non-experts (p. 2).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Peer view: similarities and differences with classical trust region clearly stated (keep the classical method, say what changes).",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Peer view: poisedness and positive spanning sets described with clarity, consistency and rigor.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Peer-reported 2009 position: the only comparison is in the introduction and comparison was not an objective; dates the head-to-head habit to after the book [cards S023, S006].",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "variant",
+    "note": "Agrees with C1: few examples, no bare-bones implementations.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Honest Boundary / Roundtable blind spots",
+    "relation": "evidence",
+    "note": "Peer view: Lipschitz gradient/Hessian assumed; nonsmooth trust-region theory lives elsewhere; research-grade software (blind spot: production-grade software).",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Academic Lineage",
+    "relation": "evidence",
+    "note": "Peer view: the trust-region chapters stand next to Conn-Gould-Toint's Trust-Region Methods, one author in common.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a method is a variant of a classical one, state the similarities and the differences explicitly (p. 2)",
+   "Give each algorithm a bare-bones implementation or exercise so readers see its behaviour, not only its theory (p. 2)"
+  ],
+  "coauthors": "none (external review by Dominique Orban, Ecole Polytechnique de Montreal; not a Scheinberg work)",
+  "quotes": [
+   {
+    "text": "This is, however, the only comparison between methods to be found in the book.",
+    "page": 1
+   },
+   {
+    "text": "the clearly stated similarities and differences between trust-region methods for smooth problems and for derivative-free problems",
+    "page": 2
+   }
+  ]
+ }
+]

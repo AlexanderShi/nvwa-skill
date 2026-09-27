@@ -1,6 +1,8 @@
 # 05 · Peer critique, limits, competing approaches
 
 > Research date: 2026-09-27. No published critique *of* Scheinberg's work (comment paper, failed replication, public review) was found in the searches that could be run. This file therefore records (a) limits visible in Scheinberg's own later papers, (b) methodological positions Scheinberg's papers take against competing practice, and (c) third-party follow-ups whose titles indicate where the framework was extended — authors of those follow-ups are **unverified** (⚠️) and they are not cited as fact about who did what.
+>
+> **Update (k01, 2026-09-27):** ✗ for the book, the sentence above no longer holds: the authors' book page lists three published reviews of the co-authored 2009 book *Introduction to Derivative-Free Optimization* (Conn, Scheinberg, Vicente); the two hosted there (*Mathematics of Computation*, *SIAM Review*) were read in full (§10) [cards B005, B006], and the third (MAA Reviews, 24 June 2009) was not read. For her papers it still holds: no comment paper or public review of a paper was found.
 
 ## 1. Limits made visible by Scheinberg's own later work (primary, self-critique by progression)
 
@@ -84,3 +86,24 @@ Still **no published critique, comment paper, or public review of Scheinberg's w
 - Limits §4.1–4.2 (smoothness, constraints) are **reconfirmed** by talk titles: the Aisenstadt lectures (2025) are explicitly about *unconstrained* continuous optimization.
 - The composite (prox) case is now covered for **convex** problems (JOTA 2025). The nonconvex composite and constrained cases remain outside the verified work.
 - Acceleration/momentum: not in the verified Scheinberg corpus. Third parties are extending it (RAAS 2026).
+
+---
+
+## 10. Published reviews of the 2009 book (batch k01, 2026-09-27; the reviewers' voice)
+
+The authors' book page (http://www.mat.uc.pt/~lnv/idfo/) lists three reviews. Two were read in full from the offprints hosted there (https://www.mat.uc.pt/~lnv/idfo/mcom2379.pdf; https://www.mat.uc.pt/~lnv/idfo/SIAM_Review.pdf). The third, in MAA Reviews (24 June 2009), is only linked, the link returned 404 on 2026-09-27, and it was not read (RESOURCES.md row 93). Everything in this section is the reviewer's view, not the authors'. The book is co-authored, so none of it is a view of Scheinberg's work alone. The book body itself was not read.
+
+| | J. L. Nazareth, University of Washington [card B005] | Dominique Orban, École Polytechnique de Montréal [card B006] |
+|---|---|---|
+| Venue | *Mathematics of Computation* 79(271), July 2010, pp. 1867–1869; published electronically 12 Feb 2010 | *SIAM Review* 53(2), 2011, Book Reviews, pp. 395–396 (volume, issue and year from the authors' book page; not printed on the pages; ✗ earlier listed as 2010) |
+| Problem class as the reviewer frames it | Benign problems (reasonably smooth, unconstrained, up to about a hundred variables) that are hard because derivatives are unavailable and evaluations expensive or noisy; DFO algorithms "remain gradient-related", which separates them from non-differentiable optimization (p. 1) | Problems where derivatives are not available; his favourite application in the introduction is tuning algorithmic parameters, a nonsmooth noisy problem (p. 1) |
+| Strengths | Part I's toolkit "nicely organized and well presented", poisedness "the key notion"; derivative-free trust-region methods the centerpiece, two frameworks with first- and second-order global convergence behind the "DFO" approach, Powell's methods and wedge methods; a useful software list; meets its stated aims "admirably"; "gracefully-written, well-organized, and timely" (pp. 2–3) | Expected to become "the de facto authoritative text"; teaches direct-search and model-based methods with their limitations ("an aspect I particularly appreciated"); Part I / Part II split usable as a course order; Nelder–Mead becomes almost a didactic illustration of the direct-search framework; similarities and differences with classical trust region clearly stated; notes and bibliography useful to researchers (pp. 1–2) |
+| Criticisms | Exercises mostly elaborations of the theory, better embedded in the text; introductory examples atypical of applications; few numerical illustrations (compared with Kelley) and no implementation detail; no one-dimensional (Brent) theory; "The important intersection between derivative-free optimization and non-differentiable optimization is not adequately addressed." (pp. 2–3) | Exercises mostly extensions of the theory and few examples; "This is, however, the only comparison between methods to be found in the book." (the introduction); no bare-bones implementations for Part II; the software pointed to is research grade (pp. 1–2) |
+| Position | The book as an instance of the "theoretical algorithmic science" mode of his algorithmic science and engineering; "its focus is not on the “algorithmic engineering” side of the subject." (p. 3) | Reads the trust-region chapters against Conn–Gould–Toint's *Trust-Region Methods* (one author in common), which treats nonsmooth (locally Lipschitz) functions, while this book assumes a Lipschitz gradient or Hessian (p. 2) |
+
+**What this changes in this file.**
+- §4.1 smoothness and §4.2 constraints: both reviewers confirm the smooth scope, and the book's table of contents puts constraints in a short Part III (Ch. 13, book pp. 241–250) [cards B005, pp. 1, 3; B006, p. 2; B001, pp. 2–3]. The §4.2 remark "only the IDFO book and early DFO code address constraints (content not verified here)" is now verified at title level only; the chapter was not read.
+- §4.5 software maturity: Orban calls the software the book points to research grade and not necessarily accessible to non-experts [card B006, p. 2], a peer view in line with the Roundtable blind spot "production-grade software".
+- §5 Powell and Conn lenses: Orban reads the book's trust-region chapters as stating clearly the similarities and differences between trust-region methods for smooth and for derivative-free problems [card B006, p. 2]. Nazareth's point is different: two trust-region frameworks with first- and second-order global convergence proofs underlie the practical methods (the "DFO" approach, Powell's methods, wedge methods) [card B005, p. 2].
+
+**Shared by both reviewers**: theory-extending exercises and too few worked examples or numerics [cards B005, pp. 2–3; B006, p. 2]. Neither review questions a result of the book; both are favourable overall. Synthesis: `08-deep-reading-synthesis.md` §13.4.

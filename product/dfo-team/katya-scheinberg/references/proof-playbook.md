@@ -6,7 +6,7 @@
 > - **Evidence level.** Every canonical paper below was read in full text (the arXiv version named in each template) and carded; citations like `[card S013, pp. 5–9]` point to the card in `research/07-paper-cards.md` and to the page of the full text. The first version of this file was reconstructed from abstracts; where the full texts changed a template, the change is marked **(corrected)**. Anything still marked **(template, inference)** is a proof form that the cards do not confirm, because the proof was deferred to another paper, the journal version was not read, or the step is the playbook author's reading. Check it against the paper before relying on it.
 > - **The real supervisor wins.** If Scheinberg, or your own reading of the paper, contradicts anything here, this file is wrong.
 > - Never cite a constant or rate from this file in a paper. Cite the paper itself, after reading the theorem.
-> - Named proof devices (P1–P35) and algorithm moves (A1–A21) are listed with pages in `technique-catalog.md`.
+> - Named proof devices (P1–P36) and algorithm moves (A1–A21) are listed with pages in `technique-catalog.md`.
 
 ## 0. The shared skeleton
 
@@ -53,6 +53,7 @@ When a proof breaks at one inequality (Workflow F step 2), find the symptom here
 | The deterministic proof counts successful steps only, and the stochastic version breaks | Rewrite it around a measure that decreases on every iteration | [cards S047, p. 3; S068, pp. 14–15] |
 | The method's step may only decrease (FISTA) | θ_k bookkeeping so the prox parameter may grow (P25, A12) | [cards S028, pp. 8–9; S068, pp. 14–17] |
 | A published framework's hypotheses might already fit | Hypothesis-checklist theorem that imports the bound unchanged (P15) | [cards S093, p. 10; S061, p. 10; S015, pp. 7–8] |
+| You need fully linear / fully quadratic constants for a least-squares (regression) model, not an interpolation model | Coefficient error = pseudo-inverse × Taylor residual; diagonal Δ-scaling puts the geometry into ‖M̂†‖; one mean-value step from the centre to the ball (P36) | [cards B004, pp. 1–2; B002, pp. 1–2] |
 
 If no row matches, you may be on new ground: stop and bring the failing inequality to the supervisor (Workflow F checkpoint (c)).
 
@@ -68,6 +69,7 @@ If no row matches, you may be on new ground: stop and bring the failing inequali
 - **Bound form:** liminf ‖∇f‖ = 0 (and lim, and second order in S007); no rate [cards S030, pp. 17–18; S007, p. 1].
 - **Why it matters for you:** every later template keeps this skeleton, and the 2025–2026 complexity papers count its steps (T13). Knowing where the deterministic proof uses exact geometry tells you where a probabilistic model will break it.
 - **Pitfalls:** the criticality step is where geometry cannot be dropped: a 2-D example converges to a non-stationary point without it, whatever the replacement rule [cards S030, pp. 8–11; S143, pp. 4–5].
+- **Regression variant of the model-error bound (book addendum; co-authored with Conn and Vicente):** for a least-squares model m(y) = c + gᵀy + ½yᵀHy fitted to the sample set Y = {y⁰, …, y^p}, with ∇²f Lipschitz (ν₂), y⁰ = 0 without loss of generality, and the regression matrix M of full column rank: (i) the Taylor coefficients fit the samples up to a residual r with |r_i| = O(Δ³); (ii) the coefficient error equals M†r; (iii) the diagonal scaling M† = diag(1, (1/Δ)I_n, (1/Δ²)I_p̄) M̂†, with M̂ built on the sample set scaled into B(0; 1), gives each block its own power of Δ, so the geometry enters only through ‖M̂†‖; (iv) block bounds at the centre, then one mean-value step to the whole ball, give Hessian, gradient and value errors of order Δ, Δ², Δ³ with explicit factors n^{1/2} and p̄^{1/2}, p̄ = n(n + 1)/2 [card B004, pp. 1–2]. The linear case is the re-proved Theorem 2.13 in the book's errata [card B002, pp. 1–2]. Use it when a model is fitted by regression (noisy data, more points than coefficients) and you need its fully linear or fully quadratic constants. After the scaling, state every constant in terms of the scaled matrix, as the corrected Theorem 2.13 does with ‖M̂†‖ [card B002, p. 2] and the corrected constants for book p. 69 do with ‖Σ̂⁻¹‖ [card B002, p. 3].
 
 ## T1. Probabilistically fully linear models, exact function values
 
@@ -219,6 +221,7 @@ If no row matches, you may be on new ground: stop and bring the failing inequali
 8. Did you reuse a canonical template (T4 renewal-reward; T3 counting; T7/T11 high-probability framework) instead of re-deriving it? If a framework's hypotheses fit, did you write the checklist theorem with one gloss per hypothesis?
 9. Is your stopping time really a stopping time with respect to your filtration? A T_ε defined through x_{k+1} is not, which blocked the first attempt at stochastic cubic regularization [card S047, p. 12]; the fix in T10 was to shift the bound by one iteration [card S093, p. 10].
 10. After each theorem, set the noise and probability parameters to zero: does the deterministic bound come back [card S026, pp. 13, 20, 22–23]?
+11. For a DFO model-error bound, did you fix the model's form before stating the constants? A free-intercept regression model (c + gᵀy) and one anchored at the centre (f(y⁰) + gᵀ(y − y⁰)) do not have the same bound; the book's Theorem 2.13 needed an erratum for exactly this, which gives the new constants and says when the original statement holds [card B002, pp. 1–2].
 
 ## Sanity-check table (fill in for your theorem)
 

@@ -128,8 +128,8 @@ To add a resource later, add a row to that researcher's `RESOURCES.md` and drop 
   | Conn | 183 | 53 / 18 | 67 | 45 |
   | Scheinberg | 132 | 68 / 14 | 42 | 8 |
   | Vicente | 124 | 92 / 16 | 16 | 0 |
-  | Audet | 212 | 108 / 6 | 79 | 19 |
+  | Audet | 212 | 109 / 6 | 78 | 19 |
 
-  Powell's 34 full reads include his two interviews and the Royal Society memoir of him (by Buhmann, Fletcher, Iserles and Toint). Works without an open full text are known from their abstract or metadata only. These include most of Powell's pre-1994 papers and the major books: *Trust-Region Methods*, *LANCELOT*, *Introduction to Derivative-Free Optimization* and Audet–Hare. Each skill's Honest Boundary lists its gaps, and `RESOURCES.md` marks unverified leads ⚠️.
+  Powell's 34 full reads include his two interviews and the Royal Society memoir of him (by Buhmann, Fletcher, Iserles and Toint). Works without an open full text are known from their abstract or metadata only. These include most of Powell's pre-1994 papers and the bodies of the major books: *Trust-Region Methods*, *LANCELOT*, *Introduction to Derivative-Free Optimization* and Audet–Hare. What is openly available of two of those books was also read. For *Introduction to Derivative-Free Optimization* that is the table of contents, the errata, the 2011 addendum and two published reviews (Nazareth, Orban). For Audet–Hare it is the 2nd-edition preface and contents. Each skill's Honest Boundary lists its gaps, and `RESOURCES.md` marks unverified leads ⚠️.
 - Powell (d. 2015) and Conn (d. 2019) are historical lenses; their skills reflect work up to then.
 - Treat every recommendation as a hypothesis to test on your problem.

@@ -142,5 +142,11 @@
 | 130 | D001 | 2024 | High Probability Complexity Bounds for Adaptive Step Search Based on Stochastic Oracles | SIAM J. Optim. 34, 2411-2439 | — | journal | arXiv | txt | 30 | core | carded |
 | 131 | D002 | 2025 | High Probability Complexity Bounds of Trust-Region Stochastic Sequential Quadratic Programming with Heavy-Tailed Noise | CoRR abs/2503.19091 | — | preprint | arXiv | txt | 66 | skip | — |
 | 132 | D003 | 2019 | Linear interpolation gives better gradients than Gaussian smoothing in derivative-free optimization | arXiv preprint arXiv:1905.13043 | — | preprint | arXiv | txt | 14 | core | carded |
+| 133 | B001 | 2009 | Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009) | book material | — | book-toc | manual | txt | 3 | supplement | carded |
+| 134 | B002 | 2015 | Errata to Introduction to Derivative-Free Optimization (05/17/2015) | book material | — | errata | manual | txt | 3 | supplement | carded |
+| 135 | B003 | 2015 | Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015) | book material | — | errata | manual | txt | 1 | supplement | carded |
+| 136 | B004 | 2011 | Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization | book material | — | book-addendum | manual | txt | 2 | supplement | carded |
+| 137 | B005 | 2010 | Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010) | book material | — | review | manual | txt | 3 | supplement | carded |
+| 138 | B006 | 2011 | Review of Introduction to Derivative-Free Optimization (SIAM Review 53(2), 2011, book reviews) | book material | — | review | manual | txt | 2 | supplement | carded |
 
-132 works · txt 85 · pdf 0 · no-oa 47
+132 works + 6 book-material items (B001–B006) · txt 91 · pdf 0 · no-oa 47

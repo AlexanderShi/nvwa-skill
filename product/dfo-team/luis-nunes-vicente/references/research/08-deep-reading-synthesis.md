@@ -1,6 +1,6 @@
 # Deep-reading synthesis · Luís Nunes Vicente
 
-> What this is: the aggregation of all paper cards (`07-paper-cards.md`, `cards/*.md`, `cards/*.digest.json`) into decisions for SKILL.md. It applies the conservative-update rules of `references/paper-reading-card.md` §3 and the four-way validation of `references/research-extraction-framework.md` §3 (cross-project recurrence, say–do consistency, executable steps that differ from standard practice, exclusivity). SKILL.md itself is **not** edited here; §3, §4, §5 and §10 list what should change and what should not. A three-reviewer check of the resulting SKILL.md (2026-09-27) changed some decisions; each is marked "Review outcome" where it applies (§3.1 row 7, §3.2 rows 8 and 16, §3.3, §4.1, §5, §9).
+> What this is: the aggregation of all paper cards (`07-paper-cards.md`, `cards/*.md`, `cards/*.digest.json`) into decisions for SKILL.md. It applies the conservative-update rules of `references/paper-reading-card.md` §3 and the four-way validation of `references/research-extraction-framework.md` §3 (cross-project recurrence, say–do consistency, executable steps that differ from standard practice, exclusivity). SKILL.md itself is **not** edited here; §3, §4, §5 and §10 list what should change and what should not. A three-reviewer check of the resulting SKILL.md (2026-09-27) changed some decisions; each is marked "Review outcome" where it applies (§3.1 row 7, §3.2 rows 8 and 16, §3.3, §4.1, §5, §9). §12 (added 2026-09-27) integrates the open material around the 2009 book (batch k01, B001–B006); its links are tallied there, not in §2.
 >
 > Date: 2026-09-27. Counts come from a script over the 128 card entries (124 works) in the 26 digest files: one card per work; where a work was carded twice, the fuller card counts. Every statement points to card ids, e.g. [S019 p. 20]. Page numbers are those of the text versions read (mostly preprints; see §11).
 >
@@ -20,6 +20,7 @@
 | Metadata-only card | 5 (H005, H006, H008, S116, S117) |
 | Skipped | 0 distinct works |
 | Card entries / batch files | 128 entries in 26 batch files (S108, S113, S121, S122 carded twice) |
+| Book material (added 2026-09-27; not works, not in the counts above) | 6 items around the 2009 book, all read in full: B001–B006 in batch k01 (§12). With them: 134 entries in 27 batch files |
 
 Read levels by period (all 124 works):
 
@@ -287,7 +288,7 @@ Method step refinements (not new heuristics):
 | Case split by mode or iteration type | 5 | 0 | 2004–2023 | proof device | S006 S007 S032 S049 S073 |
 | Implicit weights (analysis weights, effort, step frequencies) | 5 | 0 | 2019–2026 | H4 scope variant | S015 S017 S065 S093 S111 |
 | Supervisor-role authorship on student-led artefacts | 5 | 0 | 2020–2025 | collaboration pattern, not a method | S042 S086 S091 S113 S120 |
-| Survey as a problem-feature routing table / component map | 4 | 1 | 2001–2020 | writing move; Workflow A evidence | S038 S055 S056 S113 (S001) |
+| Survey as a problem-feature routing table / component map | 4 | 1 | 2001–2020 | writing move; Workflow A evidence | S038 S055 S056 S113 (S001; B001 adds title-level evidence for the same work, §12.6) |
 | Exponent balancing | 4 | 0 | 2013–2025 | Method 2 proof device | S023 S032 S034 S107 |
 | Reuse guidance to order the poll; import model geometry into direct search | 4 | 0 | 2001–2008 | H7 evidence/variant | S008 S025 S030 S106 |
 | Two-layer proof (realization-wise count + conditional Chernoff) | 3 | 0 | 2015–2019 | Method 3 step 4 device | S019 S027 S045 |
@@ -438,16 +439,125 @@ Patterns:
 13. Surfacing any reading-note inconsistency (typos, table–text mismatches, parameter mismatches) as a finding about a paper — excluded by rule; only the general lesson in the header is kept.
 14. Replacing Method 5's profile norm by "collections are optional" because of the genre variants — the variants are scoped, the norm holds for algorithm papers (§3.3).
 
+Rejected updates from the book material (batch k01): §12.7.
+
 ---
 
 ## 11. Open gaps
 
-- **The book is unread in full text.** S001 (2,876 citations) is at abstract level only; its stated methodology (why models and direct search, what "modified" Nelder–Mead or implicit filtering means) would strengthen or change the stated side of Methods 1, 4 and 5 [S001].
+- **The book is unread in full text.** S001 (2,876 citations) is at abstract level only; its stated methodology (why models and direct search, what "modified" Nelder–Mead or implicit filtering means) would strengthen or change the stated side of Methods 1, 4 and 5 [S001]. *Update 2026-09-27:* the table of contents, both errata lists, the regression addendum and two external reviews are now read [B001–B006] (§12). The body is still closed, so chapter content is known only from section titles and the reviewers, and the preface only as quoted by a reviewer [B005 p. 1].
 - **1991–1995 is mostly abstracts.** Seven of the twelve works of 1991–1995 are abstract-level [S004; S021; S033; S052; S063; S069; S100] and one is metadata-only [H008]; the 1996 discrete bilevel paper is also abstract-level [S009]. Whether the 1994 hybrid descent method already shows Method 1's "fast step + guarantee" shape rests on one abstract [S004]; whether early computational comparisons already had collection-style protocols rests on one abstract [S021].
 - **Metadata only**: H005, H006 (1998 telecom notes), H008 (1991 vehicle routing), S116 (apparently a 2012 thesis title page; Vicente's role not verified), S117 (a special-issue preface).
 - **Partial reads (16)**: claims for S029, S031, S032, S043, S045, S054, S056, S058, S060, S068, S077, S078, S090, S095, S098 and S108 rest on the sections read.
 - **Versions**: nearly all texts are preprints or arXiv versions; page numbers and abstract wordings may differ from the published papers (e.g. the "matching" wording of [S019 p. 1]).
-- **Code and errata not inspected**: SID-PSM, DMS, PSwarm, FLE and the GitHub repositories named in the cards were not opened; only the S112 package header was inspected [S112]. The "snee" repository (a first-pass link, RESOURCES row 28; the S096 text gives none [S096 p. 6]) was not checked.
+- **Code and errata not inspected**: SID-PSM, DMS, PSwarm, FLE and the GitHub repositories named in the cards were not opened, nor was the DMS errata page (the book's errata were read in 2026-09 [B002; B003]); only the S112 package header was inspected [S112]. The "snee" repository (a first-pass link, RESOURCES row 28; the S096 text gives none [S096 p. 6]) was not checked.
 - **External papers not read**: the 2024 counterexample to [S024] and the 2026 non-convergence analysis of probabilistic direct search; how they bear on [S024 pp. 11, 15] and [S102 p. 16; S110 pp. 13, 18] is open.
 - **Tacit layer still thin**: the only primary evidence of how he runs a collective decision is a SIAG board column [S122 p. 24]; theses of his students (Custódio, Diouane, Royer, Liu, Kent) were not read.
 - **Recent output**: works after 2026-09-27 are not covered.
+
+---
+
+## 12. Book material (batch k01, added 2026-09-27)
+
+**What was read, and whose voice.** The 2009 book *Introduction to Derivative-Free Optimization* (Conn, Scheinberg & Vicente; card S001) has no open full text. Six open items around it are carded in `cards/k01.md`, each read in full:
+- the table of contents (B001);
+- the authors' errata lists for the first and second printings, both dated 05/17/2015 (B002, B003);
+- the authors' addendum deriving the quadratic-regression error bounds, dated 01/27/2011 (B004);
+- two external reviews: J. L. Nazareth in *Mathematics of Computation* 79(271), 2010 (B005), and Dominique Orban in *SIAM Review*, book reviews pp. 395–396 (B006; 2011: the text gives no volume or issue, and the batch file first listed 2010, but Crossref places the Book Reviews section of *SIAM Review* 53(2), online 5 May 2011, at pp. 375–405, DOI 10.1137/SIREAD000053000002000375000001, and the same page reviews a 2011 book).
+
+B001–B004 are the three authors' joint voice. Nothing in them is credited to Vicente alone, and they belong to the same work as S001, so they are not new works. B005–B006 are the reviewers' voices; the authors' words appear there only where a reviewer quotes them. Anything said about chapter content comes from section titles ("title only") or from the reviewers. Pages are the `[[page N]]` markers of the extracted files; "book p. N" is a printed page of the book. The k01 links are **not** added to the §2.1 counts, which stay over the 124 works: B001–B004 would count S001 a second time, and B005–B006 are not Vicente's voice.
+
+### 12.1 Link tally (k01 only)
+
+| SKILL.md item | Evidence | Variant | Contradiction | Cards |
+|---|---|---|---|---|
+| Method 1 | 2 (peer view) | 1 (title only) | 0 | e: B005 p. 2; B006 p. 2 · v: B001 pp. 2–3 |
+| Method 2 | 0 | 2 | 0 | v: B001 pp. 1–3; B004 p. 2 |
+| Method 3 | 0 | 1 (title only) | 0 | v: B001 pp. 2–3 |
+| Method 4 | 1 (weak, title only) | 1 (peer view) | 0 | e: B001 pp. 2–3 · v: B005 pp. 1, 3 |
+| Method 5 | 3 | 3 (genre; two of them peer view) | 0 | e: B002 pp. 1–3; B003 p. 1; B004 pp. 1–2 · v: B001 p. 3; B005 pp. 2–3; B006 pp. 1–2 |
+| Taste mark 7 / H10 | 3 (one peer view) | 0 | 0 | e: B001 p. 1; B002 p. 1 (H10 only); B006 p. 1 |
+| Research Integrity rules 2–4 | 3 (R3: B002; R4: B002, B003) | 1 (R2: B004) | 0 | B002 pp. 1–3; B003 p. 1; B004 pp. 1–2 |
+| Inner Tension "Generality vs correctness" | 0 | 2 | 0 | v: B002 pp. 1–2; B003 p. 1 |
+| Inner Tension "Direct-search skeleton vs borrowed derivatives and models" | 0 | 1 (peer view) | 0 | v: B005 p. 2 |
+| Roundtable Card, Conn lens | 3 (one peer view) | 0 | 0 | e: B001 p. 2; B004 pp. 1–2; B006 p. 2 |
+| How to Use, weak spots | 1 | 0 | 0 | e: B001 p. 3 |
+| Honest Boundary | 0 | 4 | 0 | v: B001 pp. 1–3; B002 pp. 1–3; B005 p. 1; B006 pp. 1–2 |
+
+No contradiction link. Nothing is promoted (§12.6).
+
+### 12.2 What the material adds or changes, per SKILL.md item
+
+| SKILL.md item | What the book material shows | Relation | SKILL.md change |
+|---|---|---|---|
+| Method 1 | Ch. 7 gives the directional framework (§7.2) and then three globalization options as sibling sections: "Simple decrease with integer lattices" (§7.5), "The mesh adaptive direct-search method" (§7.6), "Imposing sufficient decrease" (§7.7) [B001 p. 2]. So the co-authored book already taught sufficient decrease as one option in 2009. The 2013 date for the switch in Vicente's own papers [S023 p. 4] stands: his 2007–2012 algorithm papers run the mesh with simple decrease [S008 pp. 3–4], and the 2011 DMS numerics use integer lattices [S003 p. 20]; sufficient decrease appears there as an alternative analysed beside lattices [S003 pp. 28–31], and becomes the default from 2013 [S023 p. 4]. Heuristics given guarantees get their own sections: the globally convergent Nelder–Mead variant (§8.3, the longest section by page span), implicit filtering (§9.4) and rigorous frameworks for surrogates (§12.2) [B001 pp. 2–3] (title only; convergence content not read). Peer view: Nazareth reads the directional iteration as a search step, a poll step using a positive basis and a parameter update, and the Nelder–Mead chapter as covering "recent modifications that are designed to guarantee convergence" [B005 p. 2]. Orban reports that surrogates are included in the Part II methods "so as to retain their convergence properties" [B006 p. 2]. | variant (dating; joint; title only) + evidence (peer view) | One clause in the ⚠ Glue bullet; detail in 09 `#method-1` |
+| Method 2 | No section title mentions complexity, rates or evaluation counts; every analysis title reads "Global convergence …" (§§7.3, 7.4, 9.2, 10.4, 10.6) [B001 pp. 1–3]. The addendum's explicit constants, with dimension factors n^{1/2} and p̄^{1/2}, bound approximation error, not evaluations [B004 p. 2]. | variant (era) | None: the "Era effect" limitation already covers it; detail in 09 `#method-2` |
+| Method 3 | "Fully linear and fully quadratic models" (§6.1) and "Conditions on the trust-region models" (§10.2) name the deterministic model-quality notion that the probabilistic-model work relaxes [S014]. "Analysis for noise" (§9.3) is the only noise title, and no title is probabilistic [B001 pp. 2–3]. | variant (deterministic baseline; title only) | None; detail in 09 `#method-3` |
+| Method 4 | The nonsmooth case is a section of the same direct-search chapter (§7.4), and constrained and other extensions are reviewed per framework (§§13.1–13.2), not as new families [B001 pp. 2–3]. Peer view: Nazareth places the book's methods in the smooth, "gradient-related" class and finds the overlap with nondifferentiable optimization "not adequately addressed" [B005 pp. 1, 3]; Orban, in his paragraph on the trust-region model-based chapters, contrasts their assumptions (Lipschitz gradient or Hessian, a model built on a well-poised sample set) with the nonsmooth chapter of Conn, Gould and Toint's *Trust-Region Methods* [B006 p. 2]; the book's nonsmooth direct-search section (§7.4) lies outside that remark. Vicente's own nonsmooth and discontinuous direct-search papers run from 2008 to 2013 [S030; S024; S034]. That is chronology only: no source links them to the review. | evidence (weak; title only) + variant (scope; peer view) | None; detail in 09 `#method-4` |
+| Method 5 | Step 5 ("post errata") in practice: two dated errata lists, 18 items for the first printing and 3 for the second, items located by book page and line, most quoting the old text next to a "Corrected version" (first printing: items 3, 11 and 15 give no old text, item 14 is a deletion, item 15 gives no line) [B002 pp. 1–3; B003 p. 1]. There is also a dated addendum (2011) whose constants match in form those corrected by erratum item 11 (inference; neither text links them) [B004 pp. 1–2; B002 p. 3]. Genre: a software appendix, but no section on test collections, comparisons or profiles [B001 p. 3]. Per Orban, the introduction holds the book's only comparison between methods; he reports the authors as saying that comparison is not an objective of the book; and most of the software pointed to is research grade [B006 pp. 1–2]. Per Nazareth, the book has few numerical illustrations and no implementation details [B005 p. 3]. | evidence (step 5; joint) + variant (genre; peer view) | One clause in Practice and one in ⚠ Genre; the Limitations "not inspected" list is narrowed to the DMS errata page; detail in 09 `#method-5` |
+| Taste mark 7 and H10 | The book gives "Limitations of derivative-free optimization" a section of its own in the introduction, before the summary of the book (§1.3) [B001 p. 1]. Orban singles out the treatment of both families' limitations as "an aspect I particularly appreciated" [B006 p. 1]. H10 also appears in a post-publication form: the first-printing errata restate Theorem 2.13 and keep on record the model form for which the old statement "would be valid" [B002 p. 1]. Item 2 names the failure mode ("is trapped at a spurious minimizer") where the book said "failed" [B002 p. 1]. | evidence (joint; one peer view) | One clause each in Taste mark 7 and H10; detail in 09 `#taste-marks` and `#heuristic-10` |
+| Inner Tension "Generality vs correctness" | Theorem 2.13 (linear regression error bounds) was stated for the general linear regression model but, as printed, holds for the model anchored at f(y⁰). The authors found and fixed it themselves: a new statement with new constants and a proof outline, whose final step becomes Exercise 10; they chased its dependent remark and exercise [B002 pp. 1–2]. The remark's correction recurs in the second-printing list [B003 p. 1]. It is a self-found scope error, unlike the external counterexample to [S024]. | variant | One sentence; detail in 09 `#inner-tensions` |
+| Inner Tension "Direct-search skeleton vs borrowed derivatives and models" | Nazareth calls the trust-region model-based methods the book's "centerpiece" [B005 p. 2]; Orban presents two frameworks, each with its background in Part I [B006 p. 2]. In Vicente's own algorithm papers models sit in the search step (Method 1). A three-author book is no evidence of his own weighting. | variant (peer view) | None in SKILL.md; recorded in 09 `#inner-tensions` |
+| Roundtable Card, Conn lens | A whole chapter on ensuring well poisedness, with Lagrange-polynomial and pivotal algorithms and practical considerations (§§6.2–6.4) [B001 p. 2]. The addendum's accuracy constant is the norm of the scaled regression matrix's pseudo-inverse, so sample-set geometry decides model accuracy [B004 pp. 1–2]. Orban reads the book as assuming models built on a well-poised sample set [B006 p. 2]. | evidence | Card id added to the Conn-lens line |
+| Research Integrity rules 2–4 | R4 (posted errata): the book's errata join the DMS errata. R3 (independent proof checking): a printed theorem needed a new statement and a new proof outline, and printed constants needed recomputation; the corrections came from the authors and from four readers named in the list [B002 pp. 1–3]. R2 ("Constants were not checked"): the addendum and the corrected constants agree in form as extracted, but they were not re-derived here, so the caution stands [B004 pp. 1–2; B002 p. 3]. | evidence (R3, R4) + variant (R2) | None: the rules are fixed by instruction; the evidence is kept here |
+| How to Use, weak spots | Integer or categorical variables and global optimization share one review section in the 2009 book (§13.3) [B001 p. 3]. | evidence | None (no gain; the weak spot already stands) |
+| Honest Boundary | "the 2009 book is at abstract level only [S001]" and "Not inspected: … errata pages" are out of date. The preface is known only second-hand, as quoted by Nazareth [B005 p. 1]. | variant | Coverage, Remaining gaps, Not inspected and Stated-but-thinly-verified lines updated |
+| Research Trajectory | The two reviews give the book's reception (peer view) [B005 pp. 1–3; B006 pp. 1–2]. The material read shows no later edition (none was searched for). | reception (peer view) | One "Reception of the 2009 book" line after the trajectory table; no Latest line |
+
+### 12.3 The book's organisation (joint voice; title level)
+
+- **Tools first, algorithms second, extensions last.** Part I "Sampling and modeling" (book pp. 13–112, about 100 pages), Part II "Frameworks and algorithms" (book pp. 113–226, about 114 pages), Part III "Review of other topics" (book pp. 227–250) [B001 pp. 1–3]. Part I opens with the direct-search tools (positive spanning sets, gradient estimates used in direct search) before the interpolation chapters [B001 p. 1].
+- **Why and when before any tool.** Chapter 1 has sections on why DFO, examples, limitations and "How derivative-free algorithms should work" (§§1.1–1.4) [B001 p. 1].
+- **Where the space goes.** The longest chapter is Ch. 10, trust-region methods based on derivative-free models (34 pages). The longest section is §8.3, a globally convergent Nelder–Mead variant (12 pages) [B001 pp. 2–3].
+- **What the titles leave out.** Complexity or rates; stochastic, probabilistic, randomized or multiobjective topics; benchmarking or test collections [B001 pp. 1–3]. Several of these became Vicente's later lines (Methods 2 and 3, H4). That is a chronology, not a stated plan.
+- **What the structure supports.** Jointly and by title only, it supports Method 1 (heuristics given guarantees get sections), Method 4 weakly (extensions inside the same frameworks), the Conn lens (sample-set geometry as a chapter) and Taste mark 7 (a limitations section). It does not show Methods 2, 3 or 5 as 2009 priorities: these are era and genre variants.
+
+### 12.4 The post-publication record (joint voice)
+
+- **First printing** [B002 pp. 1–3]: 18 items.
+  - By kind: 4 theorem and proof (the Theorem 2.13 cluster, book pp. 29–34), 6 constants, 2 example data or regions, 5 statement precision, 1 typo.
+  - By location: 13 in Part I (Chs. 2–6), 2 in Ch. 1, 1 in Ch. 7, 2 in Chs. 12–13, none in Chs. 8–11. The list does not claim those chapters are error-free.
+- **Second printing** [B003 p. 1]: 3 items, each repeating a first-printing correction at the reprint's line numbers. That the other 15 were fixed in the reprint is an inference; neither list says so.
+- **Format** [B002 pp. 1–3]: items located by page and line, most quoting the old text in quotation marks, then "Corrected version:". Four items depart from this: items 3 and 11 give only the new text ("should be changed to the following"; "What should be there is instead"), item 14 deletes a sentence with no replacement, and item 15 gives neither line nor old text. Dependent remarks, exercises and captions are rewritten with the item they depend on. "It is then obvious" is replaced by a pointer to the argument. There is no apology, and one sentence thanks the error-finders by name (Griewank, Hare, Le Digabel, Vaz).
+- **Addendum (2011)** [B004 pp. 1–2]: derives the Theorem 4.13 bounds with the same device, and the same Moore–Penrose footnote, as the corrected proof of Theorem 2.13 [B002 p. 1]. The note does not say why it was posted separately. As a sequence of events, not a stated cause: the 2008 regression paper presented its Λ-poisedness-based regression bounds "without proofs" as "straightforward adaptations" of the interpolation proofs [S020 p. 14]; Theorem 4.13's bounds rest instead on the condition number of a scaled regression matrix [B004 p. 1].
+
+### 12.5 Peer view (two reviews; the reviewers' voices)
+
+- **Where they agree.** Both say the exercises are mostly theory, numerics or examples are few, and implementations or software are weak [B005 pp. 2–3; B006 p. 2].
+- **Where they disagree.**
+  - Textbook use. For Nazareth, the exercise issue "diminishes the book’s usefulness as a textbook for an introductory course" [B005 p. 2]. For Orban, a graduate class is easy to imagine, and the book is "essential both as an introductory text and as a reference volume" [B006 pp. 1–2].
+  - Classification of the simplex-derivative line search. Nazareth places implicit filtering between direct search and trust region; Orban reads it as a line-search variant of trust region [B005 p. 2; B006 p. 2].
+  - Centre of gravity. Trust region is the "centerpiece" for Nazareth; Orban presents two frameworks [B005 p. 2; B006 p. 2].
+- **Lenses.** Nazareth files the book under the "theoretical algorithmic science mode" of a framework from his own 2006 article [B005 p. 3], so the frame is his, not the authors'. Orban's first example of interest is the tuning of algorithmic parameters, "a personal favorite" [B006 p. 1].
+
+### 12.6 Candidate pool (not promoted)
+
+| Candidate | Cards | Why not promoted |
+|---|---|---|
+| Errata that keep the still-valid case of a superseded statement and credit the error-finders by name | B002 pp. 1, 3 (format repeated in B003 p. 1) | One work (the book), in the three authors' voice: below the ≥3-paper threshold. Closest to H10 and Method 5 step 5, where it is recorded as evidence |
+| Post the derivation behind a corrected constant as a dated addendum | B004 pp. 1–2; B002 p. 3 | One work, in the three authors' voice |
+| Survey as a problem-feature routing table / component map (existing §6 entry) | B001 pp. 1–3 | More evidence only: B001 is the same work as S001, so the entry's card count does not rise |
+
+The four-way validation was not run for any of them, because each fails the recurrence test (≥3 papers) first.
+
+### 12.7 Rejected updates (book material)
+
+1. Re-dating Method 1's switch to sufficient decrease to 2009 because of §7.7. The book is joint and read at title level. Vicente's own 2007–2012 algorithm papers run the mesh with simple decrease [S008 pp. 3–4] (the 2011 DMS numerics use integer lattices [S003 p. 20]); sufficient decrease appears there as an alternative analysed beside lattices [S003 pp. 28–31], and becomes the default from 2013 [S023 p. 4]. Recorded as a variant clause instead.
+2. A "Stated" evidence line for any method from the book. The structure is joint and title-level, and the preface is read only as quoted by a reviewer [B005 p. 1], so no own-words statement by Vicente is available.
+3. Counting B001–B006 in the §2.1 say–do tallies. That would count S001 twice and would count non-Vicente voices.
+4. Promoting either new candidate (§12.6). Each rests on one work.
+5. A Research Trajectory "Latest" line. The material read shows no later edition (none was searched for); the errata are 2015 revisions for a 2009 book.
+6. Treating the reviewers' criticisms (few numerics, no implementation details) as a Method 5 contradiction. It is the genre variant SKILL.md already carries ("no numerics in theory-first papers"); the norm holds for algorithm papers (§10 item 14).
+7. Reading Nazareth's "centerpiece" as Vicente's own weighting toward model-based methods. The book is joint and his algorithm papers keep models in the search step; recorded in 09 only.
+8. Editing Research Integrity rule 4 to cite the book's errata. The rules are not edited; the evidence is kept in §12.2.
+9. Adding the book's §13.3 to How to Use, weak spots. No gain.
+10. ~~Changing B006's year.~~ *Reversed on review (2026-09-27)*: Crossref places the Book Reviews section of *SIAM Review* 53(2) (2011; online 5 May 2011) at pp. 375–405 (DOI 10.1137/SIREAD000053000002000375000001), and its editor's note lists a review on derivative-free optimization. B006 is therefore dated 2011 in INDEX.md, works.json, 07, the card and its digest, RESOURCES.md, 05 and 09.
+11. Adding the reviewers' pedagogy wishes (integrated exercises, bare-bones implementation exercises) as Vicente's methods. They are peer views; the technique catalog lists them labelled as such.
+12. Presenting Vicente's later nonsmooth papers as a response to the gap Nazareth names. Chronology only.
+13. Copying numbers from the errata (Λ values, κ constants) into SKILL.md. Reading-note detail; the general reading lesson in this file's header covers it.
+
+### 12.8 Transferable devices (to `../technique-catalog.md`)
+
+- Proof device: least-squares model error through the scaled pseudo-inverse. The coefficient error is M†r, and a Δ-scaling leaves ‖M̂†‖ as the constant [B002 pp. 1–2; B004 pp. 1–2].
+- Writing moves: an errata list per printing, items located by page and line, most quoting the old text next to the corrected text, keeping the still-valid case and chasing dependents [B002 pp. 1–3; B003 p. 1]; a dated addendum for a derivation behind a corrected constant [B004 pp. 1–2]; a monograph that gives the shared tools a part of their own, sets out competing globalizations as sibling sections, and has a limitations section in the introduction [B001 pp. 1–3].
+- Reviewers' wishes (peer view, not the authors' practice): integrate or make practical the exercises, add bare-bones implementation exercises, add numerical illustrations [B005 pp. 2–3; B006 p. 2]. Saying that comparing methods is not an objective is what the authors already did, per Orban [B006 p. 1]; it goes with the monograph architecture, not with the wishes.

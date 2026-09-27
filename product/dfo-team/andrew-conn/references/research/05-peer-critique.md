@@ -38,5 +38,43 @@ Research date: 2026-09-27. No personal disputes were found or are implied. Every
 ## 5. Critiques NOT found (declared)
 
 - No published critique of LANCELOT/CUTE by name was retrieved.
-- No reproduction failures, errata or retractions were found for Conn's papers.
+- No reproduction failures, errata or retractions were found for Conn's papers. *Update 2026-09-27:* the full-text reading and the book material found public errata, none a retraction: D001 (1981, with Coleman), S059 (1989, with Gould and Toint) and the authors' errata for two printings of the 2009 book (B002, B003; 2015). See §6 and `08-deep-reading-synthesis.md` §12.
 - No direct Conn rebuttal to Fasano–Morales–Nocedal was found.
+
+
+## 6. Reviews of *Introduction to Derivative-Free Optimization* (2009) (added 2026-09-27)
+
+Two published reviews of the book, read in full from the copies on the authors' book page (cards B005 and B006 in `cards/k01.md`). Everything below is the **reviewer's voice**, not Conn's; passages of the book that a reviewer quotes are marked *relayed*. The book is joint work with Scheinberg and Vicente, and its body was not read here, so these are readings of the book, not checks of it.
+
+### 6.1 J. L. Nazareth, *Mathematics of Computation* 79(271), July 2010, pp. 1867–1869 (DOI 10.1090/S0025-5718-10-02379-3) [B005]
+
+| Point | The reviewer's words or reading | Page |
+|---|---|---|
+| Problem class | Problems that are "benign": reasonably smooth, unconstrained, with relatively few variables ("say up to a hundred"), hard because derivatives cannot be supplied and evaluations are expensive or noisy | p. 1 |
+| DFO vs nonsmooth optimization | DFO algorithms "remain gradient-related", since their convergence relies on smoothness; non-differentiable optimization uses subgradients | p. 1 |
+| Aim (relayed) | The preface's main aims include "a detailed description of the basic theory to the extent that the reader can well understand what is needed to ensure convergence, how it affects algorithm design, and what kind of success one can expect and where" (book pp. xi–xii) | p. 1 |
+| Structure | Part I "nicely organized and well presented"; the first direct-search chapter considers global convergence "for both continuously differentiable and nonsmooth cases"; the trust-region chapters are "the centerpiece of the monograph", with two frameworks and first- and second-order convergence proofs underlying the "DFO" approach, Powell's methods and wedge methods; Part III brief; the software appendix "a useful list" | pp. 1–2 |
+| Criticisms | Exercises mostly elaborate the theory, which limits use in an introductory course; the introductory examples are, in the book's words (relayed, book p. 3), "atypical of applications of derivative-free optimization but are easy to understand"; "few numerical illustrations" and no implementation details, "its focus is not on the “algorithmic engineering” side of the subject"; no one-dimensional derivative-free methods (Brent); "The important intersection between derivative-free optimization and non-differentiable optimization is not adequately addressed." | pp. 2–3 |
+| Verdict | The authors met their main goals "admirably"; "gracefully-written, well-organized, and timely"; useful guidance to practitioners and theoretical advice to software developers. His framing of the book as "emblematic" of algorithmic science & engineering rests on his own SIAM News article and is not used by the skill | p. 3 |
+
+### 6.2 Dominique Orban, *SIAM Review* 53(2), 2011, Book Reviews, pp. 395–396 [B006]
+
+Year: the batch file and INDEX.md first gave 2010; Crossref dates the Book Reviews section of *SIAM Review* 53(2) to 2011 (pp. 375–405, DOI 10.1137/SIREAD000053000002000375000001), and its editor's note lists a derivative-free-optimization review. INDEX.md, `works.json` and the k01 digest now say 2011.
+
+| Point | The reviewer's words or reading | Page |
+|---|---|---|
+| Standing | "bound to become the de facto authoritative text"; "one of the very few textbooks available on this topic"; "essential both as an introductory text and as a reference volume"; the authors "central players in the field" | pp. 1–2 |
+| Motivating example | The introduction's first application, "the tuning of algorithmic parameters—a nonsmooth noisy problem", is his "personal favorite" | p. 1 |
+| Comparison of methods | The introduction gives a taste of how kinds of method compare, but "This is, however, the only comparison between methods to be found in the book"; relayed stance: comparing derivative-free methods "is intricate and is not an objective of the book" | p. 1 |
+| Limitations and structure | Readers learn both families "as well as about their limitations—an aspect I particularly appreciated"; Part I (background) and Part II (algorithms) are separated, so a reader can start with the algorithms and refer back | p. 1 |
+| Rigor | Part I's "clarity, consistency, and rigor" make Nelder–Mead "almost a simple and didactic illustration of the direct-search framework" | p. 2 |
+| Smooth vs nonsmooth | A reader of *Trust-Region Methods* "will appreciate the clearly stated similarities and differences" between smooth and derivative-free trust-region methods; that book gives 30 pages to nonsmooth trust-region minimization, while this one (in his paragraph on the trust-region model-based chapters) assumes a Lipschitz-continuous gradient or Hessian and a well-poised sample set (a difference of context, not called a flaw) | p. 2 |
+| Surrogates | A surrogate plays "the role of a fortune teller"; to the practitioner a good surrogate "may turn out to be the most important ingredient" | p. 2 |
+| Criticisms | Exercises mostly extend the theory and there are few examples; he wishes the Part II exercises asked for "bare-bones implementations"; the software the book points to is "research grade and not necessarily accessible to the nonexpert" | p. 2 |
+
+### 6.3 What the skill takes from the reviews
+
+- **Agreement between the two**: exercises that extend the theory; few numbers or examples; limited treatment of nonsmooth problems (for Nazareth the overlap with non-differentiable optimization is "not adequately addressed", a flaw; for Orban the model-based chapters assume a Lipschitz-continuous gradient or Hessian, a difference of context); the Part I/Part II split works.
+  - ⚠ Neither places nonsmooth problems wholly outside the book: its contents list §7.4 "Global convergence in the nonsmooth case" [B001 p. 2], and Nazareth reports that Ch. 7 covers global convergence "for both continuously differentiable and nonsmooth cases" [B005 p. 2]. ✗ Corrected on review: the first version of this line said both put nonsmooth problems outside the book.
+- **Disagreement**: Nazareth sees limited use in an introductory course; Orban calls the book appropriate for a graduate class. Nazareth places the simplex-gradient line-search chapter between the two classes; Orban files it under model-based methods.
+- **Used in SKILL.md** (attributed to the reviewer by name): the Reception row of the first Signature Work, the Method 1 "Book level" variant, warning sign 7, the Domain fit caution for hyperparameter tuning, and the Roundtable blind spots. Not used as evidence of Conn's personal practice (`08-deep-reading-synthesis.md` §12.4).

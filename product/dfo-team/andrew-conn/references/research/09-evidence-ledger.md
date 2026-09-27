@@ -6,6 +6,8 @@
 
 **Scope.** Sections exist for every SKILL.md item that was condensed. Items not listed (frontmatter, How to Use, Activation Rules, Research Integrity Rules, the rest of the Research Task Routing and Agentic Protocol, the Taste quick-check, the Research Trajectory table, the Mentor Voice questions, the Roundtable Card, the Honest Boundary and the Appendix) were not condensed and remain complete in SKILL.md.
 
+**Additions after tightening.** Blocks headed *Added 2026-09-27 (book material, batch k01)* are not verbatim copies of an earlier SKILL.md. They hold the full evidence for the lines SKILL.md gained when the open material of *Introduction to Derivative-Free Optimization* was carded (B001–B006, `cards/k01.md`; synthesis in `08-deep-reading-synthesis.md` §12). B001–B004 are the three authors' joint voice; B005 (J. L. Nazareth) and B006 (D. Orban) are external reviewers and are cited only as their reading. The book body was not read. Lines added to the uncondensed parts of SKILL.md (How to Use, Roundtable Card, Honest Boundary, Appendix) are backed in [Book material](#book-material).
+
 ## Contents
 
 - [Taste: marks of good research](#taste-marks)
@@ -46,6 +48,7 @@
 - [Mentor voice (evidence note)](#mentor-voice)
 - [Agentic Protocol, Step 2 (derivative and structure audits) and routing row](#agentic-protocol)
 - [Corrections from the full texts](#corrections)
+- [Book material: How to Use, Roundtable Card, Honest Boundary, sources (added)](#book-material)
 
 <a id="taste-marks"></a>
 
@@ -70,6 +73,13 @@
 7. **Your own released code is the first object of critique.** (new, full texts)
    - Evidence: three weak points of LANCELOT seen in the detailed runs, two with a stated remedy, and options that "could probably be removed from future releases" [S040 pp. 49–50]; LANCELOT A's major defect named as its handling of linear constraints [S061 p. 21]; the authors' own CST 1997 geometry step called "very expensive" and replaced [S016 p. 19]; his own 1979 minimax code benchmarked and beaten by its successor [S108 pp. 17, 21] (M7).
 
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- Mark 1 ⚠ (its caveat "rarely in one paper"): a reader of the 2009 book alone sees only the theory leg; Nazareth counts "few numerical illustrations" and missing implementation details as a weakness [B005 p. 3] (see Method 1). SKILL.md unchanged.
+- Mark 2 ✅: the book states its theory for frameworks, not single codes; section titles "A directional direct-search framework" (7.2), "A line-search framework" (9.1), "The trust-region framework basics" (10.1) [B001 pp. 2–3]. Title level only; SKILL.md unchanged.
+- Mark 6 ✅: "Ensuring well poisedness and suitable derivative-free models" is a chapter title (Ch. 6) [B001 p. 2]; the 2011 addendum reduces model quality to one computable number, the norm of the pseudo-inverse of the scaled regression matrix [B004 pp. 1–2]. Carried in SKILL.md by the M3 "Stated (book organisation)" line.
+- Mark 7 ⚠: the authors publicly correct their own released book. The list credits readers who pointed out errors, four of them named (Andreas Griewank, Warren Hare, Sébastien Le Digabel, A. Ismael F. Vaz); whether any correction came from the authors' own checking is not stated [B002 p. 3; B003 p. 1]. No solver is involved, so Method 7 is not engaged. SKILL.md unchanged.
+
 <a id="taste-warnings"></a>
 
 ## Taste: warning signs of bad research
@@ -86,6 +96,10 @@
 5. A structured problem treated as a pure black box. Counter-examples: least-squares DFO (2010) and bilevel DFO (2012) [S025 pp. 2, 5, 16; S066 pp. 1, 8–9]. "The fact that we are able to solve large problems at all is because they are structured." [S086 p. 5].
 6. Claiming superiority where the data show only competitiveness. The 2018 progressive-barrier paper calibrates by tier: the abstract says "competitive"; the conclusion says competitive with the same-school baseline and "preferable" to the other school's on each tier, each supported by the profiles [S075 pp. 1, 22–23]. Also: "complement each other", with the authors' own weakness on linear programs stated [S102 pp. 12, 17]; where evaluation counts were comparable, a tie broken by a stated per-iteration cost argument and worded as only appearing preferable [S108 pp. 18–22]; industrial results called qualitatively similar to commercial software [S236 p. 6].
 7. Results that hide where the method loses. (new, full texts) Conn's papers give the bad cases their own place: a regime where a strategy "seems to be clearly inefficient" [S049 p. 19]; a dedicated section on bad cases [S056 pp. 19–24]; the failure case of a heuristic drawn [S020 pp. 7–8]; LANCELOT's "disappointing reliability" on linear programs [S102 p. 12].
+
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- Sign 7 ✅ (SKILL.md: the 2009 book's own "Limitations" section, section title only, and a reviewer's praise). Title level: the section's content is unread. The introduction has five sections, and 1.3 "Limitations of derivative-free optimization" comes before 1.4 "How derivative-free algorithms should work", the book's only prescriptive section title [B001 p. 1]. Orban: the reader learns about both direct-search and model-based methods, "as well as about their limitations—an aspect I particularly appreciated" [B006 p. 1]. The errata replace "failed" with the specific failure mode: "The Nelder–Mead method failed for the initial point" becomes "is trapped at a spurious minimizer" (item 2, book p. 10, §1.4) [B002 p. 1]; the k01 card files this item under overstated wording (catalog W19).
 
 <a id="method-1"></a>
 
@@ -111,6 +125,12 @@
 **Different from standard practice**: many groups publish either the theorem or the code. Conn's record repeatedly publishes both as twins within a few years, on shared infrastructure, and builds the abstract theory to cover the stopping tests of existing packages.
 **Limitations**: slow (CSV 2008 took about 18 months from submission to acceptance), and a line can take several papers and years. It relied on long-lived trios (CGT, CST/CSV) [08 §9]. Smooth convergence theory may say little about nonsmooth or noisy engineering blackboxes. In industrial projects Conn himself names a different triad (optimization, domain experts, interfaces) [S236 p. 4].
 
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- ⚠ **Book level** (SKILL.md bullet). The contents have no chapter or section on numerical studies or benchmarking; software is an appendix of four book pages (251–254), and the named practical methods (the authors' "DFO" approach, Powell's methods, wedge methods) come only after the theory, in Ch. 11 [B001 p. 3]. Peer view: "few numerical illustrations—compare, for example, the discussion of derivative-free algorithms in Kelley [2]—and no implementational details, i.e., its focus is not on the “algorithmic engineering” side of the subject" [B005 p. 3]; the introduction holds "the only comparison between methods to be found in the book" [B006 p. 1]; the software the book points to is "research grade and not necessarily accessible to the nonexpert", and Orban wishes the Part II exercises had asked for "bare-bones implementations" of each method [B006 p. 2].
+- Reading: consistent with M1's one line ("assembled across a line of papers"). The code leg of this line is the COIN-OR DFO package [S020] and its numbers are in the papers [S019 pp. 15–18; S025 pp. 17–19; S075 pp. 17–23]. The book is joint work with Scheinberg and Vicente, and a textbook's scope is also a teaching choice, so the variant says where the legs live, not that the triad was dropped.
+- Stated aim, relayed: the preface's main aims include "a detailed description of the basic theory to the extent that the reader can well understand what is needed to ensure convergence, how it affects algorithm design, and what kind of success one can expect and where" (book pp. xi–xii, quoted by Nazareth, who adds his own italics [B005 p. 1]). The authors' text reached second hand; it ties the theory to algorithm design, not to code or numbers.
+
 <a id="method-2"></a>
 
 ## Method 2: Build the test bed as research infrastructure
@@ -135,6 +155,10 @@
 **Applies to stage**: experiment design, results judgement.
 **Different from standard practice**: the test environment is treated as a publishable, reusable research product, not a private script, and a second tier of noisy and industrial instances is required.
 **Limitations**: the 1990s CUTE style predates data profiles. Add Moré–Wild data profiles (2009) for budget-limited DFO, as Conn's own later papers do [S025 pp. 17–19; S075 pp. 17–19]. Building an environment is a large, team-scale effort; individual researchers should adopt one rather than build one.
+
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- ⚠ **Not in the textbook.** Orban reports that the introduction gives a taste of how the kinds of method may compare, adds "This is, however, the only comparison between methods to be found in the book", and relays the authors' stance that "comparing derivative-free methods is intricate and is not an objective of the book" [B006 p. 1]. No section title mentions benchmarking or numerical comparison [B001 pp. 1–3]. M2's practice lives in the papers (noisy tiers in Conn–Toint 1996 [S019 pp. 15–18]; the 2018 two-tier study [S075 pp. 17–23]). SKILL.md unchanged: the variant adds no instruction.
 
 <a id="method-3"></a>
 
@@ -163,6 +187,14 @@
 **Applies to stage**: idea generation, algorithm design, debugging.
 **Different from standard practice**: many practical codes manage geometry by internal heuristics. This method elevates it to the interface between theory and code.
 **Limitations**: Fasano, Morales and Nocedal (2009) showed a code that skips the geometry phase entirely can perform well on smooth problems. Scheinberg and Toint (2010) showed geometry steps can be confined to the criticality stage. Both mean explicit maintenance may cost more evaluations than it saves. Conn's own papers concede this: the new geometry algorithms may not outperform Powell's rule [S016 p. 23]. The noise benefit of regression is argued in the geometry paper (a consistency result), not tested there [S028 p. 17]. The method assumes smoothness and is weak on nonsmooth, discontinuous or strongly noisy blackboxes.
+
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- **Stated (book organisation)** (SKILL.md line; contents, title level). Part I "Sampling and modeling" (Chs 2–6, book pp. 13–112, about 100 pages) comes before Part II "Frameworks and algorithms" (Chs 7–11). Each sample-set regime gets its own chapter (complete interpolation Ch. 3, regression Ch. 4, underdetermined Ch. 5), Chapters 3 and 4 on the same section template (basic concepts → Lagrange polynomials → Λ-poisedness → condition number). Ch. 6, "Ensuring well poisedness and suitable derivative-free models", opens with fully linear and fully quadratic models (6.1). Ch. 10 runs framework basics (10.1) → "Conditions on the trust-region models" (10.2) → first-order methods and their global convergence (10.3–10.4) → second-order methods and convergence (10.5–10.6) → model accuracy in larger concentric balls (10.7) → the subproblem (10.8); the named codes follow in Ch. 11 [B001 pp. 1–3]. Page spans are arithmetic from the contents; chapter contents beyond titles are unread. ⚠ Part I precedes every optimization framework of Part II, not every algorithm: Part I itself has §6.3 "Ensuring well poisedness using pivotal algorithms" and §6.4 "Practical considerations of geometry improvement algorithms" [B001 p. 2], and the introduction already runs Nelder–Mead (§1.4, book p. 10) [B002 p. 1, item 2]. A textbook's order is also a teaching choice (08 §12.4 item 2). The relayed preface aim ("what is needed to ensure convergence, how it affects algorithm design") is under Method 1 [B005 p. 1].
+- **Step 1 in full for regression.** The 2011 addendum derives the bounds of the book's Theorem 4.13 for quadratic regression models: Hessian error O(Δ), gradient error O(Δ²), value error O(Δ³), with the geometry entering only through the norm of the pseudo-inverse of the scaled regression matrix. Device: shift to y0 = 0 by an argument already proved (Theorem 3.16); write the Taylor coefficients as solving the regression system up to a residual r; the coefficient error is M†r; factor M† = diag(1, Δ⁻¹I, Δ⁻²I) M̂† so each block carries its own power of Δ; move from the centre to the ball with one Taylor step [B004 pp. 1–2] (catalog P6, P21). The extracted text writes ‖M†‖ after the scaling and ν for ν2 in the residual bound; whether these are extraction losses or slips of the original cannot be decided [B004 card].
+- ⚠ **Step 1's constants are error-prone** (SKILL.md bullet). Of 18 first-printing errata, 13 fall in Part I. Item 3 rewrites Theorem 2.13 (linear-regression error bounds), statement and constants, with a note that the printed statement "would be valid if the regression model is of the form" m(y) = f(y0) + (y − y0)ᵀg, i.e. a model that interpolates f at y0. Item 11 replaces the three constants κeh, κeg, κef on book p. 69 (§4.4, quadratic regression); their form matches the addendum's. That they are Theorem 4.13's constants, the ones the addendum derives, is an inference [B002 card D2; B004 card D1]. Items 8–10 and 13 correct Λ values in worked examples; one printed value (21296) was exactly four times the corrected one (5324), and a sentence that had explained the gap by rescaling is removed (item 14) [B002 pp. 1–3]. Two of the three errors that survived into the second printing are regression statements (the simplex-gradient remark and κef) [B003 p. 1]. No item falls in Chs 8–11, which hold the algorithms' convergence theory [B002 pp. 1–3, with B001's page ranges]; the list says nothing about unreported errors. Lesson drawn by this skill, not stated by the authors, and kept out of step 1 (08 §12.4 item 3): derive the constants yourself, and when a regression proof borrows from the interpolation case, check whether the model has a free constant term (catalog P21).
+- **Peer view** ✅. The derivative-free trust-region chapters are "the centerpiece of the monograph" (Nazareth [B005 p. 2]). Part I's "clarity, consistency, and rigor" make the Nelder–Mead discussion "almost a simple and didactic illustration of the direct-search framework" (Orban [B006 p. 2]).
+- **Limitation "Assumes smoothness"** ✅ (for the model-based theory). Nazareth: "The important intersection between derivative-free optimization and non-differentiable optimization is not adequately addressed." [B005 p. 3]. Orban, in his paragraph on the trust-region model-based chapters: the book assumes "a Lipschitz-continuous gradient or Hessian" and a model built on a well-poised sample set, unlike the 30 pages on nonsmooth trust-region minimization in *Trust-Region Methods* [B006 p. 2]. ⚠ Neither reviewer puts nonsmooth problems wholly outside the book: its contents list §7.4 "Global convergence in the nonsmooth case" for directional direct search [B001 p. 2], and Nazareth reports that Ch. 7 "considers their global convergence for both continuously differentiable and nonsmooth cases" [B005 p. 2]. His criticism is that the overlap is not adequately addressed, not that it is absent.
 
 <a id="method-4"></a>
 
@@ -236,6 +268,11 @@
 **Different from standard practice**: the usual move is to defend one's own school. Conn co-authored with the MADS group and with MINOS's author [S102 p. 2], and reused his own 1970s–90s tools decades later.
 **Limitations**: hybrids inherit the weaker parent's assumptions in places. The 2018 hybrid won by tier, not across the board: competitive with the same-school baseline and preferable to the other school's on each tier [S075 pp. 22–23], with a theorem weaker than either parent's [S075 pp. 15–16]. It needs deep fluency in both schools, which is usually a team asset.
 
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- **Practice** (SKILL.md item: both schools in one textbook, rival methods beside the authors' "DFO" approach; contents, title level). Part II gives each family its framework and convergence sections: directional direct search, including the mesh adaptive direct-search method (Ch. 7, §7.6); simplicial direct search with a globally convergent Nelder–Mead variant (Ch. 8); simplex-gradient line search (Ch. 9); derivative-free trust regions (Ch. 10). Ch. 11 then presents rival methods, Powell's methods and wedge methods, beside the authors' own "DFO" approach [B001 pp. 2–3]. ⚠ Weak evidence: the titles name methods, not codes, and a survey textbook covers rival methods as a matter of genre (house rules §3.4), so this item adds little beyond the paper evidence above.
+- **Peer view.** A reader of *Trust-Region Methods* "will appreciate the clearly stated similarities and differences between trust-region methods for smooth problems and for derivative-free problems" [B006 p. 2]; both families draw on the Part I toolkit of positive spanning sets and poisedness [B005 p. 2; B006 p. 2].
+
 <a id="method-7"></a>
 
 ## Method 7: Audit your own released solver; its named weaknesses are the next agenda
@@ -304,6 +341,10 @@
 7. Plan the numerical companion before proving everything (M1 → Workflow C). After the algorithm, add numbered comments on what practical codes do differently and on your own weak spots [S013 pp. 15–16; S019 pp. 13–15] (W1).
 **🔴 Checkpoint**: if the proof needs a property your code cannot check or enforce, redesign. Do not publish a theorem about a different algorithm from the one you run. Positive form: the abstract tests should contain the native tests of the code you run, with a lemma that the native tests imply them [S022 pp. 26–29; S107 p. 25].
 **Output**: algorithm framework, list of assumptions, proof skeleton with the failing link named, and the list of code-enforced conditions.
+
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- Title-level evidence ✅: Ch. 10 of the 2009 book runs "The trust-region framework basics" (10.1) → "Conditions on the trust-region models" (10.2) → first-order methods (10.3) and their global convergence (10.4) → second-order methods (10.5) and convergence (10.6) → model accuracy in larger concentric balls (10.7) → the subproblem (10.8) [B001 p. 3]. This is the order of steps 1–4. SKILL.md unchanged. Reading path through the book for this workflow: `cards/k01.md`, B001.
 
 <a id="workflow-c"></a>
 
@@ -533,6 +574,12 @@ Read in full [S009], with its predecessor Conn–Toint 1996 [S019] and the Powel
 | Reception | A standard DFO reference, leading to CSV 2008–2009 and the 2009 book (2015 Lagrange Prize). Its closing open problems became the next decade's papers [S009 p. 17 → S016; S028; S025; S020]. |
 | Methods shown | M1, M3, M6, M5 (derivative triage [S009 pp. 3–4]), M7 |
 
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- **Reception of the 2009 book** (SKILL.md Reception row; peer voices only). Orban: "bound to become the de facto authoritative text" on numerical methods for problems without available derivatives [B006 p. 1]; "one of the very few textbooks available on this topic", "essential both as an introductory text and as a reference volume", its authors "central players in the field" [B006 p. 2]. Nazareth: the trust-region chapters are "the centerpiece of the monograph" [B005 p. 2]; the authors met their main goals "admirably"; the book is "gracefully-written, well-organized, and timely" [B005 p. 3].
+- **Criticisms.** Nazareth: exercises that elaborate the theory; introductory examples "atypical of applications of derivative-free optimization but are easy to understand" (relayed from book p. 3); few numerical illustrations and no implementation details; no one-dimensional methods (Brent); the intersection with non-differentiable optimization "not adequately addressed" [B005 pp. 2–3]. Orban: exercises that extend the theory, few examples, and pointed-to software that is "research grade" [B006 p. 2].
+- Not used: Nazareth's framing of the book as "emblematic" of algorithmic science & engineering, which rests on his own SIAM News article [B005 p. 3].
+
 <a id="signature-work-2"></a>
 
 ## Signature work: Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points
@@ -660,6 +707,10 @@ Read in full [S004].
 During the IBM years the essay also reports three years of teaching a course at Yale (undated in the essay) [S236 p. 2].
 
 **Why the trajectory has this shape** (full texts): M7 explains much of the 1992–2000 output, a large part of which repairs or extends LANCELOT [S040 p. 49; S061 pp. 15–22] (proportions in 08 §8.1). Constants across all periods: the trust region as the default globalisation device, from bounds (1988) [S008] to DFO [S012] and the progressive barrier [S075]; penalty functions from the thesis to the posthumous papers, one of which answers a question he asked in 1981 [S141 pp. 4, 13]; engineering users, from microwave networks in 1975 [S233 pp. 9–10] to IBM circuits [S036; S027]. Of the stated agendas, most were delivered in later papers (08 §8.4); the exceptions are the numerical study announced in 1984 (warning sign 2), a uniform-bound proof for Powell-like rules [S016 p. 24], and measuring how often geometry improvement is needed [S075 p. 23].
+
+*Added 2026-09-27 (book material, batch k01; not a copy of an earlier SKILL.md):*
+
+- 1996–2010 row, IDFO 2009: the book was maintained after publication. A two-page addendum dated 01/27/2011 derives the quadratic-regression bounds [B004 p. 1]; errata lists for the first and second printings are both dated 05/17/2015 [B002 p. 1; B003 p. 1]. There is no new edition, so the Latest line and the SKILL.md table are unchanged. Reviews: *Math. Comp.* 79(271), published electronically 12 February 2010 [B005 p. 1]; *SIAM Review* 53(2), 2011 [B006; year from Crossref, see `#book-material`].
 
 ### Latest
 - Conn died on 14 March 2019. ✗ Corrected: the first pass said there was no activity after the two 2018 works. Those were his last papers during his lifetime (*COAP* 71:307–329; *EJOR* 268:13–24); co-authored papers kept appearing in 2020–2023 [S032, middle author; S135 abstract; S099 p. 2; S141 p. 2], two of them dedicated "In memory of our dearest friend Andy Conn". They are his coauthors' framing, so this is still a **historical lens** (research date 2026-09-27).
@@ -793,3 +844,16 @@ The first pass used web-search snippets only. Every line of SKILL.md (before tig
 - **Honest Boundary** (line 539 before tightening):
 
   - **Coverage of the full-text reading.** The full-text index has 183 rows: the 155 distinct works on the Google Scholar list (237 rows plus 2 DBLP-only items; `references/sources/publications/scholar.md`) and 28 rows that are not Conn works (11 unresolved title-page fragments; 17 referee or acknowledgement lists, progress-report sections, misattributed rows or an organisers' message). 45 rows are set aside: those 28, plus 13 patents, 2 talks, S153 (authorship doubtful) and S156 (a student's thesis). That leaves 138 in-scope works, each with a paper card: 71 full texts read (53 in full, 18 in part), 50 abstract-level, 16 metadata-only, 1 unreadable (S093, whose file is identical to S108 and is read there) (`references/research/07-paper-cards.md`). Full-text coverage is 51%; per-period counts are in `references/research/01-publications.md` §3. The first pass used web-search snippets only; the MAM 2015 profile, obituaries and IBM pages are still known only from snippets.
+
+<a id="book-material"></a>
+
+## Book material: How to Use, Roundtable Card, Honest Boundary, sources (added 2026-09-27)
+
+*Backs lines added to the uncondensed parts of SKILL.md from batch k01 (B001–B006).*
+
+- **How to Use › Domain fit** (SKILL.md: the book's first motivating example, parameter tuning, is "a nonsmooth noisy problem", while its model-based (trust-region) theory assumes a Lipschitz-continuous gradient or Hessian). Orban names the introduction's first application, "the tuning of algorithmic parameters—a nonsmooth noisy problem", as his "personal favorite" [B006 p. 1], and, in his paragraph on the trust-region model-based chapters, states that the book assumes "a Lipschitz-continuous gradient or Hessian" and a model built on a well-poised sample set [B006 p. 2]. Putting the two together (the motivating example lies outside the class the theory covers) is the card's inference, not Orban's sentence [B006 card]. It supports the existing caution that M3 must be translated or down-weighted for hyperparameter tuning.
+- **Roundtable Card › Blind spots** (SKILL.md: the overlap with non-differentiable optimization "not adequately addressed"; the model-based theory assumes a Lipschitz-continuous gradient or Hessian; ⚠ the contents include §7.4). ✗ Corrected: the first integration said both reviewers place nonsmooth problems outside the book, which overstates both reviews. Nazareth calls the overlap with non-differentiable optimization "not adequately addressed", giving two reasons: DFO algorithms serve as heuristics for nonsmooth problems, and by Rademacher's theorem a Lipschitz function is differentiable almost everywhere [B005 p. 3]. For Orban it is a difference of context from *Trust-Region Methods*, not a flaw, stated for the trust-region model-based chapters [B006 p. 2]. ⚠ The contents list §7.4 "Global convergence in the nonsmooth case" [B001 p. 2], and Nazareth reports that Ch. 7 covers global convergence "for both continuously differentiable and nonsmooth cases" [B005 p. 2].
+- **Roundtable Card › Leads when** (unchanged): Nazareth sizes the book's problems as reasonably smooth, unconstrained, with "say up to a hundred" variables [B005 p. 1]. Consistent with "dimension in the tens"; a reviewer's sizing of the book's class, not of Conn's practice, so not used to change the card.
+- **Honest Boundary › Coverage and Remaining gaps.** Read in full: the table of contents (book pp. vii–ix) [B001]; the authors' errata for the first printing (18 items) and the second printing (3 items), both dated 05/17/2015 [B002; B003]; the authors' addendum of 01/27/2011 deriving the quadratic-regression bounds [B004]; Nazareth's review [B005] and Orban's review [B006]. Not read: the book's chapters, so the reading path and every claim about chapter content rest on section titles, errata page references and the reviews [k01 batch header]. *Trust-Region Methods* [S001] and the LANCELOT book [S006] have no open material in this batch.
+- **Honest Boundary › Stated vs practised** (SKILL.md: the 2009 book's errata also credit named finders but rewrite a theorem's statement and constants). The earlier positive model, public errata that keep the statement and credit the finders [D001 p. 1; S059 pp. 1, 4], holds for the crediting half: "We thank all our readers but we are particularly grateful to those who pointed out errors, namely Andreas Griewank, Warren Hare, Sébastien Le Digabel, and A. Ismael F. Vaz." [B002 p. 3]. It does not hold for the keeping half: item 3 rewrites Theorem 2.13's statement and constants, and items 7, 12 and 16 make definitions more precise [B002 pp. 1–3]. Where a statement narrows, the errata say when the printed version still holds [B002 p. 1]. The three errata works (1981 with Coleman, 1989 with Gould and Toint, 2015 with Scheinberg and Vicente) share only Conn; the pattern stays in the candidate pool (08 §12.2).
+- **Appendix › sources.** Nazareth's review is verified on Crossref: DOI 10.1090/S0025-5718-10-02379-3, *Math. Comp.* 79(271), pp. 1867–1869, published electronically 12 February 2010. Orban's review: Crossref places the Book Reviews section of *SIAM Review* 53(2) (2011; online 5 May 2011) at pp. 375–405 (DOI 10.1137/SIREAD000053000002000375000001), and its editor's note lists a derivative-free-optimization review, so the review on pp. 395–396 is from 2011. The batch file gave 2010; the card had already inferred "2011 or later" from a same-page review of a 2011 book [B006 p. 1]. The k01 digest, INDEX.md and `works.json` now say 2011 (the local text file keeps its 2010 name).

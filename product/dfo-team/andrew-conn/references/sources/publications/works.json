@@ -4063,6 +4063,120 @@
    "sources": [
     "dblp"
    ]
+  },
+  {
+   "id": "B001",
+   "title": "Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2009,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/idfo-table-of-contents.pdf"
+   ],
+   "kind": "book-toc",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Book front matter hosted by the authors; the book itself is not open."
+  },
+  {
+   "id": "B002",
+   "title": "Errata to Introduction to Derivative-Free Optimization (05/17/2015)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2015,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/errata.pdf"
+   ],
+   "kind": "errata",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Author-maintained errata list for the 2009 book."
+  },
+  {
+   "id": "B003",
+   "title": "Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015)",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2015,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/errata2.pdf"
+   ],
+   "kind": "errata",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Second author-maintained errata file for the 2009 book."
+  },
+  {
+   "id": "B004",
+   "title": "Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization",
+   "authors": "A. R. Conn, K. Scheinberg, L. N. Vicente",
+   "venue": "book material",
+   "year": 2011,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/quadratic-regression-bounds.pdf"
+   ],
+   "kind": "book-addendum",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Author-hosted addendum supplying a derivation for the book."
+  },
+  {
+   "id": "B005",
+   "title": "Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010)",
+   "authors": "reviewer named in the text (not the authors)",
+   "venue": "book material",
+   "year": 2010,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/mcom2379.pdf"
+   ],
+   "kind": "review",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "External book review, hosted on the authors' book page; evidence for peer view, not the authors' voice."
+  },
+  {
+   "id": "B006",
+   "title": "Review of Introduction to Derivative-Free Optimization (SIAM Review book reviews)",
+   "authors": "reviewer named in the text (not the authors)",
+   "venue": "book material",
+   "year": 2011,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/idfo/SIAM_Review.pdf"
+   ],
+   "kind": "review",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "External book review, hosted on the authors' book page; the PDF also carries unrelated reviews on the same pages."
   }
  ]
 }

@@ -134,5 +134,11 @@
 | 122 | H006 | 1998 | Application of the least squares boundary residual method to the study of step discontinuities in dielectric planar waveguides | Proceedings of the Meeting on Applied Mathematics to Telecommunications, pp. 99-108, Telecommunications Institute, 1998 | — | conference | — | no-oa |  | supplement | metadata |
 | 123 | H007 | 1997 | Métodos de optimização para controlo óptimo e projecto de engenharia | Actas da I Conferência Nacional de Telecomunicações, pp. 437-440, 1997 | — | conference | url | txt | 4 | supplement | carded |
 | 124 | H008 | 1991 | Efficient vehicle routing algorithms for municipal waste collection (written in portuguese) | Investigação Operacional 10 (1991) 47-58 | — | journal | — | no-oa |  | supplement | metadata |
+| 125 | B001 | 2009 | Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009) | book material | — | book-toc | manual | txt | 3 | supplement | carded |
+| 126 | B002 | 2015 | Errata to Introduction to Derivative-Free Optimization (05/17/2015) | book material | — | errata | manual | txt | 3 | supplement | carded |
+| 127 | B003 | 2015 | Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015) | book material | — | errata | manual | txt | 1 | supplement | carded |
+| 128 | B004 | 2011 | Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization | book material | — | book-addendum | manual | txt | 2 | supplement | carded |
+| 129 | B005 | 2010 | Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010) | book material | — | review | manual | txt | 3 | supplement | carded |
+| 130 | B006 | 2011 | Review of Introduction to Derivative-Free Optimization (SIAM Review book reviews) | book material | — | review | manual | txt | 2 | supplement | carded |
 
-124 works · txt 108 · pdf 0 · no-oa 16
+130 rows = 124 works + 6 book-material items (B001–B006) · txt 114 · pdf 0 · no-oa 16

@@ -1,0 +1,395 @@
+[
+ {
+  "id": "B001",
+  "year": "2026",
+  "title": "Derivative-Free and Blackbox Optimization, 2nd edition (2026) — front matter: foreword, prefaces and table of contents (Audet, Hare; Springer Series in Operations Research and Financial Engineering)",
+  "read_level": "partial",
+  "contribution": "Front matter of the Audet–Hare textbook, 2nd edition (Springer 2026): Dennis's foreword to the first edition, the 2026 and reprinted 2017 prefaces (the authors' stated teaching methodology) and the table of contents, which shows benchmarking promoted from a 2017 appendix to Chapter 4 of Part 1, constraints moved into the direct-search part, model quality split from model construction, and a new appendix of five real blackbox test problems with software (all 22 pages read; chapter bodies not available).",
+  "problem_entry": "Authors' voice: one goal (a clear grasp of the foundations, to push DFO/BBO into the mainstream of nonlinear optimization) and one belief (the foundations are mature enough for senior undergraduates) (p. 13); two audiences: newcomers get foundations, elementary nonsmooth analysis and rigorous convergence theory, not the state of the art, which is left to papers (p. 13); practitioners who fell back on ad hoc methods with many incremental papers are offered methods with convergence results, supported stopping criteria and a track record (p. 14). 2026 entry: teaching effectiveness (expanded exercises, notation, modular design; p. 9). Dennis's voice: legacy codes will not be rewritten for adjoints, engineers distrust gradient-based optima, one evaluation cost three weeks on four SGI processors, but he would use derivatives if he had them (p. 6).",
+  "key_idea": "Book architecture (TOC pp. 18-22): Part 1 intro, background, naive algorithms and Ch. 4 Comparing Optimization Methods (test sets, data collection, data analysis, extensions); Part 2 heuristics (GA, Nelder-Mead with the McKinnon example); Part 3 direct search (positive bases and nonsmooth optimality, GPS, MADS with dense polling directions, variables and constraints with two-phase extreme barrier and progressive barrier); Part 4 model-based (model quality with order-N accuracy, generalised simplex gradients and Hessians, model-based descent, model-based trust region); Part 5 surrogates (surrogate management framework) and biobjective; Appendix A with RHEOLOGY, RUNGE-KUTTA, STYRENE, SIMPLIFIED-WING, SOLAR. Heuristics set apart as not meeting the authors' DFO definition yet popular and effective (p. 15); algorithms presented as hindsight wishes, not as discovered (p. 14); naive Chapter 3 methods as building blocks of later analyses (p. 15); one real blackbox (RHEOLOGY) threaded through five algorithm chapters (pp. 20-21); modular chapters of about three hours with a preparation tree and three syllabi (pp. 10-11, 17). Reader comparison with the reprinted 2017 preface: benchmarking moved from appendix to Ch. 4 (pp. 16-17, 19); Variables and Constraints moved from Part 5 to Part 3 (pp. 16, 20); the model-building chapter split in two (pp. 10, 16).",
+  "assumptions": "Expected background: multivariate calculus, linear algebra, proof techniques (pp. 14-15). The authors' definition of a DFO method is referred to but not given in the front matter (p. 15; probably in §1.2, inference). Dennis's voice: a theorem proves correctness on the class satisfying its hypotheses, which need not be checked before running the algorithm (Cholesky analogy) (p. 8).",
+  "proof_devices": [
+   "Titles only: seven algorithm chapters have a convergence section (coordinate search §3.5, GA §5.6, NM §6.3, GPS §8.4, MADS §9.4, MBD §13.4 after 'The MBD Algorithm Has Successful Iterations' §13.3, MBTR §14.4) (pp. 18-21); Ch. 10 (progressive barrier), 15 (surrogate management framework) and 16 (biobjective algorithm) show none in their titles (pp. 20-21)",
+   "Nonsmooth toolkit taught as a chapter: positive bases, descent directions, unconstrained and constrained optimality conditions (§7.1-7.5); dense sets of polling directions (§9.5) (pp. 19-20); MSC 49J52 listed (p. 5)",
+   "A counterexample with its own section: the McKinnon example for Nelder-Mead (§6.4, p. 19); Dennis: it shows pure NM can fail analytically, not just numerically (p. 8)",
+   "Model accuracy in the language of order-N accuracy (§11.2) and generalised simplex gradients and Hessians via pseudo-inverses (§12.3-12.5), called elegant and easy to implement (p. 10)",
+   "No title on rates, worst-case complexity or probabilistic analysis (pp. 18-22)"
+  ],
+  "experiments": "No numerical results in the front matter. Appendix A: five real BBO problems with software by Le Digabel, integrated into end-of-chapter exercises (pp. 9, 12, 21); Tribes supplied numerical logs for exercises (p. 12); RHEOLOGY experiments in §8.5, §9.6, §13.5, §14.5, §15.4 (pp. 20-21); at least 20 exercises per chapter, answers to every fourth (p. 9); 2017 tags for computer and harder exercises (p. 17), exercises checked for doability (p. 14); class testing in winter 2017 (Kelowna, Montreal; p. 14) and with the 2025 Polytechnique DFO class (p. 12). Dennis's voice: MADS adopted in industry for reliability (never more than 15 minutes) where an interior-point code sometimes failed; a failure value of 2.6 inside the meaningful range misled a team; hidden constraints violated at about two-thirds of trial points (p. 7).",
+  "positioning": "Against research papers (state of the art belongs there, p. 13), ad hoc practice (p. 14), and as a bridge to nonsmooth analysis (p. 13). The 2026 preface honours Powell and Dennis as pioneers, closing with Powell's 1994 report of Dennis's muddy-lake description of direct search (p. 12). Contributors: Le Digabel (2017 TOC design; 2026 appendix and software), Tribes, Custodio (feedback on the biobjective chapter), Lucet, Poissant, Planiden, Rochon Montplaisir (pp. 12, 14); Hare's origin: UBC sabbatical at GERAD (p. 14); Audet's: joint work with Dennis and notes from past projects (p. 14). Dennis's foreword (not independent): avoids the encyclopedic trap, Hare's fresher eye, theory plus practical details, Audet's Quebec snowfall-sensor application (pp. 7-8).",
+  "writing": "Short first-person-plural prefaces with bulleted, named changes tied to chapters (pp. 9-10); scope hedge on the Remarks as by no means a complete historical overview (p. 17); humour about optimized octagonal whiskey glasses (p. 14; possible nod to the octagon side line, inference). Stale cross-references: the reprinted 2017 preface keeps 2017 chapter numbers (pp. 15-17) and Dennis places the McKinnon example in Chapter 5 (p. 8), now §6.4 (p. 19); typos 'Backgound' (p. 11) and 'supporting out idiosyncrasies' (p. 12).",
+  "limits_future": "Authors: not the state of the art (p. 13); not the only possible approaches (p. 14); Remarks high-level (p. 17). Reader: only titles are visible, so no chapter content is verified; the 16 end-of-chapter projects of the publisher's abstract (D005) are not visible as sections (only 'exercises and projects', p. 11; one large project in the 2017 appendix, p. 17); chapter and page counts agree with D005 (16 chapters plus one appendix, index at book p. 423; p. 22). No title covers noise, parallelism, software/NOMAD, Bayesian optimization or complexity (pp. 18-22).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Stated, titles verified from the primary text: Comparing Optimization Methods is Chapter 4 of Part 1, after only the naive algorithms of Chapter 3 and before the heuristic, direct-search and model-based parts, in all three sample syllabi (the practical course ends with it); benchmarking sections added for constrained, surrogate-based and biobjective problems. Chapter body unread; accuracy-profile warning still secondary.",
+    "pages": "pp. 9, 11, 19-21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Labelling: the ledger and Method 5 limitations speak of the textbook chapter and attach the accuracy-profile quotation to Audet & Hare (2017); in 2017 the material was an appendix described as a very brief overview; it became a chapter only in 2026.",
+    "pages": "pp. 16-17, 19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Appendix A packages five real blackboxes (RHEOLOGY, RUNGE-KUTTA, STYRENE, SIMPLIFIED-WING, SOLAR) with software and an origin section, used in exercises.",
+    "pages": "pp. 9, 12, 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Ch. 10 Variables and Constraints (types of constraints, constraint violation function, two-phase extreme barrier, progressive barrier for relaxable constraints), moved from Part 5 (2017) into the direct-search Part 3 (reader comparison); Dennis's voice: a BBO routine must treat nonnumerical constraints.",
+    "pages": "pp. 7, 16, 20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Titles: opportunistic strategy, search step and starting points sections in both GPS and MADS chapters; surrogate chapter relies on Part 3's mechanism (2017) and includes the surrogate management framework (2026).",
+    "pages": "pp. 16, 19-21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stated aims: rigorous convergence theory and elementary nonsmooth analysis; a convergence section in seven algorithm chapters (none in the titles of Ch. 10, 15, 16); McKinnon counterexample as its own section.",
+    "pages": "pp. 5, 13, 18-21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Dennis's voice, not Audet's: hypotheses need not be checked before running an algorithm, a different emphasis from the pool candidate 'prefer hypotheses checkable or enforceable a priori'.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 7",
+    "relation": "variant",
+    "note": "Teaching analogue: algorithms presented as hindsight wishes, naive Chapter 3 methods as building blocks of later analyses, MADS advancing from GPS, Part 4 reorganised to simplify later chapters; no instance proof visible in titles.",
+    "pages": "pp. 10, 14-16"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "The front matter never names NOMAD; the software shipped with the book is the test-problem repository, not the solver.",
+    "pages": "pp. 1-22 (9, 12)"
+   },
+   {
+    "method": "Research Taste warning sign 6",
+    "relation": "evidence",
+    "note": "Stated: GA and Nelder-Mead do not meet the authors' DFO definition; ad hoc practice produced many incremental papers.",
+    "pages": "pp. 14-15"
+   },
+   {
+    "method": "Mentor Voice",
+    "relation": "evidence",
+    "note": "Supports its 'Avoid' line (dismissing heuristics or models outright): heuristics called popular and effective and kept as two chapters.",
+    "pages": "p. 15"
+   },
+   {
+    "method": "Weak spots (Bayesian optimization, complexity)",
+    "relation": "evidence",
+    "note": "No chapter or section title names either; title-level only.",
+    "pages": "pp. 18-22"
+   },
+   {
+    "method": "Honest Boundary",
+    "relation": "contradiction",
+    "note": "Outdated clause in 'Stated-but-thinly-verified items': the textbook's stated goals are now read in the primary first-edition preface; the reviewer's phrase (02-methodology X1) is confirmed.",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Honest Boundary / Mentor Voice",
+    "relation": "contradiction",
+    "note": "Scoped: both prefaces are first-person-plural teaching statements (audiences, course design, syllabi, pedagogy), contradicting 'no first-person teaching material'; co-authored with Hare, only one sentence marked as Audet's own point of view.",
+    "pages": "pp. 9-17 (14)"
+   },
+   {
+    "method": "Honest Boundary",
+    "relation": "evidence",
+    "note": "'Key works still unread' still holds for the book body; only the front matter is read.",
+    "pages": "pp. 18-22"
+   },
+   {
+    "method": "Academic Lineage",
+    "relation": "evidence",
+    "note": "Book began from joint work with Dennis (foreword by Dennis); Le Digabel designed the 2017 TOC and wrote the 2026 appendix and software; Tribes, Rochon Montplaisir contributed; Custodio gave feedback on the biobjective chapter (a second cross-lens contact besides D001).",
+    "pages": "pp. 6-8, 9, 12, 14"
+   },
+   {
+    "method": "Research Trajectory (Latest)",
+    "relation": "evidence",
+    "note": "2nd edition now read at front-matter level (was abstract-level D005); class-tested with the 2025 Polytechnique DFO class.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Roundtable Card (vs Powell)",
+    "relation": "evidence",
+    "note": "Direct search effective even for nonsmooth BBO, model-based methods when smoothness is expected, matching the PBTR rule [S063 p. 2]; Powell and Dennis honoured as pioneers.",
+    "pages": "pp. 12, 15-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Dennis's voice: reliability within not too many evaluations matters, not only the evaluation count (MADS 15-minute anecdote).",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Research Anti-patterns (crash wrapped in a finite penalty)",
+    "relation": "evidence",
+    "note": "Dennis's voice: a failure value of 2.6 inside the meaningful range misled a team.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Technique catalog W11",
+    "relation": "variant",
+    "note": "One running example at book scale: RHEOLOGY threaded through five algorithm chapters.",
+    "pages": "pp. 20-21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Separate assessing model quality from constructing models (order-N accuracy as shared language)",
+    "evidence": "2026 Part 4 reorganisation; probably Hare's model-based line more than Audet's (inference); title-level, one source, do not promote.",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "Intensification versus diversification as a cross-cutting frame",
+    "evidence": "New §1.4 and 'interwoven throughout the book'; whether mapped onto Search/Poll is not visible; title-level, one source, do not promote.",
+    "pages": "pp. 9, 18"
+   },
+   {
+    "pattern": "Reference works as a research output (pool, rejected as method)",
+    "evidence": "First card in this pool read beyond abstract level (front matter); still teaching, not a research method.",
+    "pages": "pp. 9-17"
+   }
+  ],
+  "transferable": [
+   "Promote benchmarking from an appendix to a foundational chapter placed after only the naive algorithms and before the main algorithm families, and add a benchmarking section wherever a new problem class is introduced (pp. 9, 15-21).",
+   "Run one real blackbox (RHEOLOGY) through the GPS, MADS, model-based and surrogate chapters (five chapters) so methods are compared on the same problem (pp. 20-21).",
+   "Ship real test problems with software alongside teaching material and draw exercises from them (pp. 9, 21).",
+   "Present a family of methods in reconstructed order: the naive ancestor with its convergence proof first, successors as modifications, history in separate remarks (pp. 14-15, 17).",
+   "Give the counterexample that bounds a popular method its own section next to its convergence study (p. 19).",
+   "Separate assessing how good a model must be from the techniques that build it, with one shared accuracy language (p. 10).",
+   "Design a course as skippable modules of about three hours with a dependency tree and example syllabi for different aims (pp. 10-11, 15-17).",
+   "State a programme's goal and the belief that makes it feasible separately, and name each audience with what it gets and does not get (pp. 13-14)."
+  ],
+  "coauthors": "W. Hare; foreword by J.E. Dennis Jr.; new appendix and software by S. Le Digabel",
+  "quotes": [
+   {
+    "text": "Our goal is to provide a clear grasp of the foundational concepts in derivative-free and blackbox optimization, in order to push these areas into the mainstream of nonlinear optimization.",
+    "page": 13
+   },
+   {
+    "text": "Finally, we remark that, for pedagogical purposes, we will present our algorithms not necessarily as they were discovered, but as hindsight makes us wish they had been.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S077",
+  "year": "2005",
+  "title": "Nonlinear programming by mesh adaptive direct searches",
+  "read_level": "full",
+  "contribution": "Expository 2005 introduction to MADS by Abramson, Audet and Dennis for a multi-issue DFO special feature: the Search/Poll split (the source of the two Search/Poll sentences the NOMAD guide carries), three kinds of constraint behaviour (yes/no set X, open constraints C, failed evaluations as +infinity), the Clarke-calculus ladder with second-order rungs, and an agenda drawn from users (categorical variables, multiple objectives, more variables).",
+  "problem_entry": "Scope by exclusion: DFO excludes finite-difference Newton/SQP methods, which should be used whenever possible (p. 2); not a survey (pp. 1-2); topic came from users, whose interaction remains the strongest influence (p. 2); nonsmooth analysis belongs in the curriculum (p. 2). Problem min f over {x in X: c_j(x) <= 0} with +infinity values; X is a yes/no (oracular) set that every trial point must satisfy, C open constraints needed only at the solution (users want to know what a slight relaxation buys), evaluations may fail even in Omega and are set to +infinity (pp. 2-3). Expensive, few correct digits, no usable difference quotients (p. 3); 'global optimizer' read as robust broad-valley solutions (p. 3).",
+  "key_idea": "MADS iterates on a tower of meshes never generated explicitly; mesh-free frames need sufficient decrease, and mesh vs no mesh is called a matter of taste with no experience without the mesh on real problems (p. 4). MADS came from GPS weaknesses exposed by nonsmooth analysis (pp. 4, 7). Search (flexible, hard for theory, where global aspirations live) then Poll (rigid, basis of the analysis) (pp. 4-5); Poll lineage Lewis-Torczon -> Coope-Price frames -> dense directions (p. 5). Search menu with verdicts: empty, repeat last direction (limited value), random (first iteration only), surrogates not required to approximate, Boeing DACE+SQP, Marsden EA on DACE with a cheaper model checking X, Audet-Orban tuning (pp. 5-6). Poll: mesh local optimizer, dense normalized directions, derivatives prune ascent directions (pp. 6-7); opportunistic ordering by last success, surrogate or simplex gradient, not always faster (p. 7).",
+  "assumptions": "No differentiability needed to run (p. 2); bounded iterates, true if the initial level set is bounded (p. 9); strict differentiability and a full-dimensional tangent cone at the top rung (p. 9); directions used infinitely often dense in the hypertangent cone, obtained by random choice, so most results hold with probability one (p. 10). Smoothness cannot be measured for blackbox codes (pp. 8-9). Admissions: a violation function still weights constraints (p. 3); noise exists but no noise model (p. 8).",
+  "proof_devices": [
+   "Hierarchy by smoothness: bounded iterates -> limit of mesh local optimizers; Clarke derivative nonnegative on hypertangent, Clarke tangent or contingent cone; strict differentiability -> no feasible strict descent (KKT), gradient zero unconstrained (p. 9)",
+   "Second-order rungs: twice strictly differentiable -> second-order Clarke-KKT necessary condition via a generalized Hessian; with more assumptions sufficient, so convergence to a local minimizer [5] (pp. 9-10)",
+   "Tool import from nonsmooth analysis: Clarke calculus because directional derivatives are undefined for nonsmooth functions (p. 9)",
+   "Mesh as proof device: allows simple rather than sufficient decrease (p. 4)",
+   "Density by random selection of positive spanning directions -> probability-one results (p. 10)",
+   "Counterexamples only cited: GPS fixed-direction failures [9] (p. 6)"
+  ],
+  "experiments": "None in the paper. Practice claims rest on citations (pp. 5-7, 11). Costs of minutes to weeks per evaluation; failures roughly twice in three calls in one project [18]; failing multidisciplinary analyses by nonlinear Gauss-Seidel; noise on repeated evaluations (p. 8). Reader: 'first to solve them' (p. 8) and 'excellent computational results' (p. 5) are unsupported inside the paper.",
+  "positioning": "Credits Lewis-Torczon (crucial spanning observation), Coope-Price, Price-Coope (neutral), Fletcher-Leyffer, Kelley (hidden constraints), Custodio-Vicente (with a convergence caveat), Booker et al., Marsden (pp. 3-8); seconds the other special-issue authors and uses its space for other points (p. 8); finite differences respected but out of scope (p. 2), heuristic searches too costly (p. 8), weighted sums not recommended (p. 12). 23 of 47 references include an author (pp. 13-17). Reference [25] carries the title and venue of [22] (pp. 14-15).",
+  "writing": "Conversational first-person plural with an invitation into the field (p. 12). Specific hedges naming missing experience (pp. 4, 5, 7, 12); one unhedged priority claim (p. 8). Sections: problem, what MADS is, why study it (practice, theory), what is still needed (itemized agenda from users, pp. 10-12), conclusions. Theorems described in words (p. 9). Deliberate terminology: surrogate not approximation (p. 5), SEARCH-POLL methods (p. 4), open and yes/no constraints (pp. 2-3). Anecdotes: ten then a hundred variables as 'a sure sign of progress' (p. 10), 25.3 oil wells (p. 10), a bound 'as small as possible' (pp. 11-12).",
+  "limits_future": "Stated: global optimum cannot be guaranteed (p. 3); mesh-free route untried on real problems (p. 4); ordering not always faster (p. 7); evaluations grow much faster than n (p. 12); filter hard to adapt to multiple objectives (p. 12); MVP a very new field (p. 11). Agenda from users after a first success (p. 10): categorical variables with a user-supplied neighbourhood function and a Poll augmented with discrete neighbours (pp. 10-11); multiple objectives, where bounds are often objectives and clients want trade-offs, i.e. a Pareto surface (pp. 11-12); hundreds of variables beyond parallelism (p. 12).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Stated 2005 by named authors: Search flexible but hard for theory, Poll the basis of the analysis, global aspirations in the Search; earliest named-author source of the two sentences the NOMAD guide carries [S019 pp. 16-17] and the SKILL.md epigraph quotes.",
+    "pages": "pp. 4-6"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Evaluation order as a theory-free slot already in 2005: dynamic, surrogate and simplex-gradient poll ordering, not always faster (root of the [S072 p. 6] item).",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Categorical handling is Poll-side from the start: the MVP Poll is augmented with discrete neighbours, as in the 'CatMADS is Poll-side' item [S121 p. 6].",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Yes/no constraints at every trial point, open constraints only at the solution, failures as +infinity (2005 forms of unrelaxable, relaxable, hidden); user-supplied neighbourhood defines local optimality for categorical inputs.",
+    "pages": "pp. 2-3, 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "A bound constraint may really be an objective: an intake question not in Method 2's steps or Workflow A.",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stated ladder by smoothness with three Clarke cones and second-order rungs, tool imported from nonsmooth analysis, results conditional because smoothness cannot be measured; counterexamples only by citation [9].",
+    "pages": "pp. 6, 9-10"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "variant",
+    "note": "In 2005 randomness is the chosen route to density, most results with probability one; determinism arrives with OrthoMADS 2009 [S006 p. 1].",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Stated: issues users raise after a first success become the agenda (Method 6 step 4); implementations cited to encourage use.",
+    "pages": "pp. 1, 10, 12"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "In 2005 pointers go to several codes (NOMADm, NOMAD, GADS, APPSPACK, SID-PSM, DACE), not one solver.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Heuristic 2",
+    "relation": "evidence",
+    "note": "A cheaper turbulence model checks membership in X before the accurate simulation.",
+    "pages": "p. 6"
+   },
+   {
+    "method": "Heuristic 3 / Research Taste warning sign 7",
+    "relation": "evidence",
+    "note": "Stated 2005: 'surrogate' chosen so no approximation quality is implied; ordering poll points by surrogate value recommended.",
+    "pages": "pp. 5, 7"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Algorithm tuning with MADS and an easy-problem surrogate (Audet-Orban).",
+    "pages": "p. 6"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Full or partial derivatives prune poll directions without losing convergence.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Research Taste mark 1 / warning sign 1",
+    "relation": "evidence",
+    "note": "Minutes-to-weeks evaluations, hidden constraints failing after a full run, about two failures in three calls, failing multidisciplinary analyses, noise.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Research Taste warning sign 5",
+    "relation": "evidence",
+    "note": "Stated: finite-difference Newton/SQP methods preferred whenever usable.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Inner Tensions (mesh foundation vs limitation)",
+    "relation": "variant",
+    "note": "2005 calls mesh vs no mesh a matter of taste, untried without mesh on real problems; ADS drops the mesh in 2025 [S129 p. 1].",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Inner Tensions (small-n vs scale)",
+    "relation": "evidence",
+    "note": "Stated 2005 goal: slow the growth of evaluations with n, parallelism alone insufficient.",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Roundtable Card (vs Vicente)",
+    "relation": "variant",
+    "note": "2005 neutral on sufficient decrease and favourable to Custodio-Vicente ordering with a caveat; the 2025 contrast [S129 pp. 5-6] is sharper.",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "method": "Signature Work Anatomy (MADS)",
+    "relation": "evidence",
+    "note": "Origin in GPS weaknesses exposed by nonsmooth analysis, consistent with [S001 p. 1].",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "method": "Signature Work Anatomy (progressive barrier)",
+    "relation": "evidence",
+    "note": "2005 root of the constraint-sensitivity user situation [S007 pp. 3-4]: users want to know what a slight relaxation of open constraints buys.",
+    "pages": "pp. 3, 12"
+   },
+   {
+    "method": "Honest Boundary",
+    "relation": "variant",
+    "note": "'Guide sentences are collectively authored': the two Search/Poll sentences now have a 2005 named-author source (co-authored with Abramson and Dennis).",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Honest Boundary / Mentor Voice",
+    "relation": "contradiction",
+    "note": "Scoped: first-person-plural advice to researchers (topic origin from users, nonsmooth analysis in the curriculum, build that background and learn to work with users) contradicts 'no first-person teaching material'; co-authored, so not Audet's voice alone.",
+    "pages": "pp. 2, 12"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "Inference: the 2005 agenda (categorical, multiobjective, more variables) precedes the mixed-variable, BiMADS and PSD-MADS work of 2003-2009.",
+    "pages": "pp. 10-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Ask whether a bounded constraint is really an objective",
+    "evidence": "A client's bound that should be as small as possible is another objective; one source, do not promote.",
+    "pages": "pp. 11-12"
+   },
+   {
+    "pattern": "Price a constraint by relaxing it (pool)",
+    "evidence": "Users want to know how much optimality a slight relaxation buys and how the objective changes if a constraint is relaxed or tightened.",
+    "pages": "pp. 3, 12"
+   },
+   {
+    "pattern": "Give a menu or interval, not a single optimum (pool)",
+    "evidence": "Give the client a notion of the Pareto surface rather than a weighted-sum optimum.",
+    "pages": "p. 12"
+   },
+   {
+    "pattern": "Read the user's 'global' as 'robust'",
+    "evidence": "A robust optimizer lies in a broad valley, easier to find than a narrow deeper basin; one source, do not promote.",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Split constraints by who can check them and when: a yes/no membership routine before the simulation, a quantifiable violation needed only at the solution, failed runs as +infinity; set the aggregate violation to +infinity outside the evaluable set (pp. 2-3).",
+   "Put global aspirations in the free step, keep the Poll local, and record for each free-step strategy when it pays (pp. 4-6).",
+   "Use a cheaper model to reject points that cannot be evaluated before paying for the accurate simulation (p. 6).",
+   "Reorder poll points (last success first, surrogate value, simplex-gradient angle) without touching the proof, and check that it actually saves time (p. 7).",
+   "If some derivatives are available, use them to skip poll directions that are ascent directions (pp. 6-7).",
+   "When a client gives a bound, ask for its value; if 'as small as possible', treat it as an objective and offer a trade-off curve (pp. 11-12).",
+   "When smoothness cannot be measured, state results conditionally on local smoothness at the limit point, one rung per level (p. 9).",
+   "Hedge by naming the missing experience rather than in general (p. 4).",
+   "End an expository paper with the issues users raised after the first success, as the research agenda (pp. 10-12)."
+  ],
+  "coauthors": "M.A. Abramson, J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "The SEARCH step is crucial in practice because it is so flexible, but it is a difficulty for the theory for the same reason.",
+    "page": 4
+   },
+   {
+    "text": "Our interest in the topic of direct search methods came directly from users, and our interaction with users continues to be our strongest influence.",
+    "page": 2
+   }
+  ]
+ }
+]

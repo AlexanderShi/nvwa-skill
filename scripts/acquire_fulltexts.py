@@ -266,7 +266,12 @@ def write_index(path: Path, researcher: str, rows: list[dict]) -> None:
     for i, r in enumerate(rows, 1):
         r["#"] = str(i)
         lines.append("| " + " | ".join(md(r.get(h, "")) for h in INDEX_HEADER) + " |")
-    lines += ["", f"{len(rows)} works · txt {counts['txt']} · pdf {counts['pdf']} · no-oa {counts['no-oa']}", ""]
+    # 书的周边材料（目录、勘误、评论；Venue = "book material"，ID 以 B 开头）不是独立作品，单独计数
+    book = [r["ID"] for r in rows if r.get("Venue") == "book material"]
+    head = f"{len(rows)} works"
+    if book:
+        head = f"{len(rows)} rows = {len(rows) - len(book)} works + {len(book)} book-material items ({book[0]}–{book[-1]})"
+    lines += ["", f"{head} · txt {counts['txt']} · pdf {counts['pdf']} · no-oa {counts['no-oa']}", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
 
 

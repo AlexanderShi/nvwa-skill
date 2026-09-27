@@ -4815,6 +4815,25 @@
     "semanticscholar",
     "crossref"
    ]
+  },
+  {
+   "id": "B001",
+   "title": "Derivative-Free and Blackbox Optimization, 2nd edition (2026) — front matter: foreword, prefaces and table of contents (Audet, Hare; Springer Series in Operations Research and Financial Engineering)",
+   "authors": "C. Audet, W. Hare",
+   "venue": "book material",
+   "year": 2026,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.gerad.ca/Charles.Audet/PUB/FrontMatter.pdf"
+   ],
+   "kind": "book-toc",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Front matter hosted on Audet's page; the book (DOI 10.1007/978-3-032-00906-7, 425 pp.) is not open."
   }
  ]
 }

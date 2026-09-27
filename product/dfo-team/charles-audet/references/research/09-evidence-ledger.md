@@ -6,6 +6,8 @@
 
 **Scope.** Sections exist for every SKILL.md item that was condensed. Items not listed (frontmatter, epigraphs, How to Use, Activation Rules, Research Integrity Rules, Research Task Routing, Agentic Protocol Steps 1 and 3, the Taste quick-check, the workflow checkpoints and the proof-debugging checklist, the Research Trajectory table, Mentor Voice, the Roundtable Card, the Honest Boundary and the Sources appendix) were not condensed and remain complete in SKILL.md. The Honest Boundary's "Stated-but-thinly-verified items" bullet gained one sentence pointing here, because several of the quotes it lists now appear only in this ledger.
 
+**Later additions.** Blocks headed *Added 2026-09-27 (batch k01, book material)* come from the cards B001 (the open front matter of the Audet–Hare 2nd edition: foreword, prefaces, table of contents) and S077 (the 2005 MADS article with Abramson and Dennis), synthesized in `08` §12. They are not pre-tightening text; the text above each block is unchanged. Three sections (#mentor-voice, #roundtable, #honest-boundary) exist only for these additions.
+
 ## Contents
 
 - [Taste: marks of good research](#taste-marks)
@@ -44,6 +46,9 @@
 - [Research trajectory: prose and Latest](#trajectory)
 - [Academic lineage](#lineage)
 - [Inner tensions](#tensions)
+- [Mentor Voice](#mentor-voice) (batch k01 only)
+- [Roundtable Card](#roundtable) (batch k01 only)
+- [Honest Boundary](#honest-boundary) (batch k01 only)
 - [Corrections from the full texts](#corrections)
 
 <a id="taste-marks"></a>
@@ -70,6 +75,10 @@
 7. **Losses and reversals are reported next to wins.**
    - Evidence: "four examples are not conclusive evidence" and a deliberately hypothesis-violating run [S001 pp. 19, 25]; surrogate-to-truth reversals [S074 pp. 20, 22]; the losing case explained with data [S032 pp. 27–28]; a test set admitted to favour a competitor [S129 pp. 21–22].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Mark 1 ✅ [S077 p. 8]: evaluations that take minutes to weeks, hidden constraints that fail after a full run, about two failures in every three calls in one project, failing multidisciplinary analyses, noise (co-authored with Abramson and Dennis, 2005).
+
 <a id="taste-warnings"></a>
 
 ## Taste: warning signs of bad research
@@ -85,6 +94,14 @@
 5. **DFO used where gradients or convexity are available**, or at large n. (NOMAD preface: "If the optimization problem is convex, or if the functions are smooth and easy to evaluate, or if the number of variables is large, then NOMAD is not the solution that you should use." [S019 p. 11]; blackbox and DFO methods "are not competitors of gradient-based methods; they are a fallback when gradient-based algorithms cannot be used" [S034 p. 1].)
 6. **A pure heuristic sold as an optimizer, with no convergence backbone.** (The corpus wraps heuristics: mesh-based NM 2018, cross-entropy + MADS [S133 pp. 1, 3].) The backbone is usually direct search; in the stochastic-approximation line it is an ODE argument [S150 pp. 14–17].
 7. **A surrogate chosen by fit error when the algorithm only needs it to rank or filter points.** Fit-based and order-based metrics pick different models, and the classical metric can pick a model with the wrong minimizer [S046 pp. 13–15]; hyperparameters tuned by order error [S068 pp. 12–13]; rank correlation next to R² [S167 p. 8].
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Sign 1 ✅ [S077 pp. 2–3, 8]: evaluations may fail even for points in Ω and are modelled as f = +∞. Dennis's foreword to the textbook: hidden constraints were violated at about two-thirds of the trial points in one application [B001 p. 7] (Dennis's voice).
+- Sign 3 ⚠ labelling note: if the "Audet & Hare 2017, as quoted in a citing text" item above comes from the benchmarking material, that material was an *appendix* in 2017, "a very brief overview of good practices" [B001 pp. 16–17]; it became Chapter 4 only in 2026 [B001 p. 19]. Where the accuracy-profile warning sits in either edition is still unknown (secondary quotation).
+- Sign 5 ✅ [S077 p. 2]: finite-difference Newton or SQP methods are "well established and valuable" and should be used in place of really derivative-free methods whenever one can.
+- Sign 6 ✅ (stated, textbook, joint voice with Hare): "While these methods do not meet our definition of a DFO method, they are nonetheless popular and effective methods for solving optimization problems without using gradients." [B001 p. 15]; ad hoc practice produced "a plethora of papers publishing incremental improvements to solution quality" [B001 p. 14]. The heuristics keep two chapters in a skippable Part 2 [B001 pp. 15, 19], which also supports Mentor Voice's "Avoid" line.
+- Sign 7 ✅ [S077 pp. 5, 7]: the word *surrogate* is chosen over *approximation* so that no approximation quality is implied, and ordering poll points by surrogate value is called a wise choice when a surrogate exists.
 
 <a id="methods-intro"></a>
 
@@ -130,6 +147,13 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 
 **Limitations**: the Poll costs n+1 to 2n evaluations per failed iteration, which is expensive when n is large (the 2014 paper cuts it to n+1 [S038 abstract]). Asymptotic Clarke-type guarantees say little about finite-budget performance. The mesh restricts trial points, which mesh-free ADS (2025) addresses [S129 pp. 4, 9, 14]. The split does not describe the stochastic-approximation line [S150; S140].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Stated ✅ (2005, co-authored with Abramson and Dennis): "The SEARCH step is crucial in practice because it is so flexible, but it is a difficulty for the theory for the same reason." [S077 p. 4]; the Poll "is the basis of the convergence analysis" and so "the part of the algorithm where most research has been concentrated" [S077 pp. 4–5]. This is the earliest named-author source found for the two sentences the NOMAD guide carries [S019 pp. 16–17] (SKILL.md epigraph). Global aspirations are concentrated in the Search [S077 p. 4].
+- Practice ✅: a menu of Search strategies, each with a verdict: an empty Search when a local minimizer is enough; repeating the last successful direction (others found it of limited value); random search (useful only at the first iteration); surrogates, the best in the authors' experience (Boeing's Design Explorer, Marsden's evolutionary algorithm on DACE surrogates, Audet–Orban tuning) [S077 pp. 5–6].
+- ⚠ Variants (2005 roots): evaluation order (last success first, surrogate value, simplex-gradient angle), with the caveat that none always reduces computing time [S077 p. 7], a root of "other theory-free slots" [S072 p. 6]; categorical handling augments the Poll with discrete neighbours [S077 p. 11], a root of "CatMADS is Poll-side" [S121 p. 6].
+- Textbook (titles only): both the GPS and the MADS chapters have a section on the opportunistic strategy, the search step and starting points (§8.2, §9.3); the surrogate chapter contains the surrogate management framework (§15.3) [B001 pp. 19–21].
+
 <a id="method-2"></a>
 
 ## Method 2: Constraint semantics first
@@ -165,6 +189,12 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 
 **Limitations**: it depends on the user knowing the constraint physics, and misclassification (e.g., an EB constraint that should have been PB) can stall the search. Hidden constraints give no gradient of feasibility at all, and the 2022 discontinuity work shows this is still an open area [S090 pp. 8–10]. The classification must be revisited when the evaluation scheme changes [S123; S173].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Stated ✅ (2005, co-authored): X is the set where f and C can be evaluated; the user supplies a routine that says whether x is in X ("yes/no" or oracular constraints), which every trial point must satisfy; C(x) ≤ 0 need hold only at the solution (open constraints, treated by a filter); evaluations may fail even for x in Ω, modelled as f(x) = +∞ [S077 pp. 2–3]. These are the 2005 forms of unrelaxable, relaxable and hidden constraints. For categorical variables the user supplies the neighbourhood that defines local optimality [S077 p. 11].
+- ⚠ Variant (one source; pool): a bound constraint whose value the client wants "as small as possible" is "really another objective", and the client needs "a notion of the Pareto surface", not a weighted sum [S077 pp. 11–12]. Not added to the steps.
+- Textbook ✅ (structure): *Variables and Constraints* moved from Ch. 12 in Part 5 (2017, [B001 p. 16]) to Ch. 10, the last chapter of the direct-search part (2026, [B001 p. 20]), with the constraint violation function, a two-phase extreme barrier (§10.4), the progressive barrier for relaxable constraints (§10.5) and constrained benchmarking (§10.6). In 2017 the chapter offered "a more subtle approach to handle relaxable constraints than the simple strategy of rejecting any infeasible point" [B001 p. 16]. The reading of the move as a promotion is the reader's; the 2026 preface does not mention it. Dennis's foreword: "it is pointless to advertise a DFO routine as a BBO routine if it cannot treat nonnumerical constraints" [B001 p. 7] (Dennis's voice).
+
 <a id="method-3"></a>
 
 ## Method 3: Guarantee ladder, bounded by counterexamples
@@ -199,6 +229,12 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 
 **Limitations**: the MADS-line results are asymptotic and say nothing about rates; complexity-style results appear only outside that line [S140; S120; S124]. Crafting counterexamples is tacit skill: this lens can prompt it but not supply the insight. The counterexample half is thinner in the recent algorithm papers, which often state a ladder without necessity examples [S053 pp. 11–20; S121 pp. 12–15; S158 pp. 13–16].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Stated ✅ (textbook, joint voice with Hare): rigorous convergence theory and an elementary introduction to the parts of nonsmooth analysis used to design and analyse the methods are stated aims; "Nonsmooth analysis is not covered often enough outside the nonsmooth research community" [B001 p. 13]. Seven algorithm chapters have a convergence section by title (coordinate search, GA, Nelder–Mead, GPS, MADS, model-based descent, trust region); Ch. 10 (progressive barrier), 15 (surrogate management framework) and 16 (biobjective algorithm) show none in their titles; the McKinnon counterexample has its own section, §6.4 [B001 pp. 18–21]; MSC 49J52 [B001 p. 5]. Titles only.
+- Stated ✅ (2005, co-authored): a ladder by smoothness, from bounded iterates through Clarke conditions on the hypertangent, Clarke and contingent cones to strict differentiability, plus a second-order rung [S077 pp. 9–10]; Clarke's calculus imported because directional derivatives are undefined for nonsmooth functions [S077 p. 9]; results stated conditionally because a blackbox's smoothness cannot be measured [S077 pp. 8–9]. ⚠ The counterexample half appears only by citation [S077 p. 6].
+- ⚠ Variant (Dennis's voice, not Audet's): "It is not that the hypotheses should be checked before the algorithm is used" (the Cholesky example) [B001 p. 8]. A different emphasis from step 3's "Prefer hypotheses checkable a priori" [S031 p. 20].
+
 <a id="method-4"></a>
 
 ## Method 4: Turn real blackboxes into public benchmark artifacts
@@ -231,6 +267,10 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 **Different from standard practice**: most DFO papers test on analytic functions (CUTEst, Moré–Wild) only. Here the application is also a durable research asset that the whole community can compete on.
 
 **Limitations**: it needs industrial partners willing to release code, plus sustained engineering time (the group has a research software engineer). Lags are long: nine years from the SOLAR thesis to the paper [S071 pp. 3, 35]. Proprietary simulators often cannot be released; for most partner problems read, no release is mentioned [S013; S032; S084]. Benchmark and solver come from the same group [S071 pp. 3, 24; S175 p. 12].
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Practice ✅ (textbook, 2026): a new Appendix A, *Blackbox Test Problems*, with five real problems (RHEOLOGY, RUNGE-KUTTA, STYRENE, SIMPLIFIED-WING, SOLAR) and a section on their origin; Le Digabel "also supplied software for these test problems", which are "integrated throughout the book, particularly in the end-of-chapter exercises" [B001 pp. 9, 12, 21]. RHEOLOGY runs through five algorithm chapters (§8.5, §9.6, §13.5, §14.5, §15.4) [B001 pp. 20–21]. Real blackboxes enter the curriculum, not only the papers.
 
 <a id="method-5"></a>
 
@@ -267,6 +307,12 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 
 **Limitations**: realistic blackboxes are expensive, so the number of problems is small and statistical power is limited. Profile choices remain judgment calls, and the weight w is left to the user [S128 p. 15]. The textbook chapter is still unread (no open full text).
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Stated ✅ (textbook, joint voice with Hare; titles): in 2026 *Comparing Optimization Methods* is Chapter 4 of Part 1, after only the naive algorithms of Chapter 3 and before the heuristic, direct-search and model-based parts, with §4.1 Test Sets, §4.2 Data Collection, §4.3 Data Analysis, §4.4 Extensions [B001 pp. 15, 18–19]; it is in all three sample syllabi, and the practical course ends with it [B001 p. 11]; benchmarking sections are added for constrained (§10.6), surrogate-based (§15.5) and biobjective (§16.4) optimization, which "provides a more comprehensive framework that reflects best practices" [B001 p. 9].
+- ✗ Labelling contradiction: the text above (before tightening) and SKILL.md call the 2017 material the textbook *chapter* "Comparing Optimization Methods". In 2017 it was an appendix: "This appendix provides a very brief overview of good practices when performing numerical tests to compare optimization algorithms", plus "a large project" [B001 pp. 16–17]. SKILL.md now marks this in Method 5's Limitations. The accuracy-profile quotation is still secondary; which edition and which part holds it is unknown.
+- ⚠ Variant (Dennis's voice): "Reliability in finding an optimizer with not too many evaluations is also important" — an industrial group chose MADS because it never took more than 15 minutes, where its interior-point code sometimes failed [B001 p. 7].
+
 <a id="method-6"></a>
 
 ## Method 6: The solver as research instrument
@@ -299,6 +345,11 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 
 **Limitations**: it requires a stable team and funding (at least one dedicated research software engineer). Features lag behind papers [S021 p. 18]. A single codebase can bias the benchmarks it defines, and the benchmarks come from the same group [S071 p. 24; S175 p. 12].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Stated ✅ (2005, co-authored): "Our interest in the topic of direct search methods came directly from users, and our interaction with users continues to be our strongest influence." [S077 p. 2]; the issues users raise "after an initial success" become the research agenda (categorical variables, multiple objectives, more variables) [S077 pp. 10–12] (step 4). Implementations are cited to encourage use [S077 pp. 1, 12].
+- ⚠ Variants: in 2005 the software pointers go to several codes (NOMADm, NOMAD, APPSPACK, SID-PSM, DACE, the MATLAB GADS toolbox) [S077 p. 12], not one solver; the textbook's front matter never names NOMAD, and the software shipped with the book is the test-problem repository [B001 pp. 9, 12].
+
 <a id="method-7"></a>
 
 ## Method 7: Generalize, then inherit
@@ -329,6 +380,10 @@ Full evidence lists, counts and every recorded variant per method: `references/r
 **Different from standard practice**: framework theorems and collapse checks are common, and the Conn and Vicente lenses share them. What differs is that the corpus re-hosts its own previous flagship inside each successor framework, treats finitely many adaptive changes as the admission ticket for adaptive heuristics, and writes fresh proofs only where membership cannot give the result [S053 pp. 12–19; S084 pp. 12–18].
 
 **Limitations**: a method inherits only what the parent class proves: asymptotic, Clarke-type results [S023 p. 7]. Stochastic variants and wrappers do not inherit automatically [S013 p. 3; S112 p. 14; S173 pp. 10–16]. Instance proofs must be written in the paper's final notation [D001 p. 1]. Method 1 covers ideas that sit in the Search; Method 7 covers ideas that change the Poll, the mesh or the acceptance rule; Method 3 audits the guarantee Method 7 builds.
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- ⚠ Variant (teaching analogue, textbook): "we will present our algorithms not necessarily as they were discovered, but as hindsight makes us wish they had been" [B001 p. 14]; the naive Chapter 3 algorithms "provide the building blocks for many other methods and their analyses" [B001 p. 15]; the MADS chapter "advances from" the GPS chapter [B001 p. 16]; after the Part 4 reorganisation "Chapters 13 and 14 are simpler and more flexible" [B001 p. 10]. Rational reconstruction at book level; no instance proof is visible in titles.
 
 <a id="agentic-protocol"></a>
 
@@ -499,6 +554,10 @@ Check, in this order:
 2. **If some outputs are cheaper than the full simulation, or earlier in its pipeline, then evaluate them first, stop as soon as the point can no longer become the incumbent, flag a-priori rejections as not counted, and mine the cache before paying for a new evaluation** (seed x0 and initial mesh sizes, sensitivities, re-scoring after a merit change).
    - Case: gating [S001 p. 4; S019 pp. 51, 64; S123 p. 3]; cache [S019 pp. 98–99; S073 pp. 22–23; S158 p. 20].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- ✅ [S077 p. 6]: Marsden checks membership in X with a cheaper turbulence model before running the accurate simulation.
+
 <a id="heuristic-3"></a>
 
 ## Heuristic 3: ideas in the Search, models for ordering
@@ -509,6 +568,10 @@ Check, in this order:
 
 3. **If you want a faster direct search, then add the idea as a Search step and leave the Poll untouched.** Full-text refinement: **if a model is not trustworthy enough to accept points, then use it only to order candidates under opportunism and judge it by order error, not fit error; if it must shape the Poll, re-prove the instance properties (Method 7).**
    - Case: VNS search (JOGO 2008, 10.1007/s10898-007-9234-1); order-error metrics and the 1-D example where fit error picks the wrong model [S046 pp. 12–15]; the Poll reordered but never pruned [S016 pp. 6, 10]; the default model-chosen (n+1)th poll direction [S019 pp. 55, 83]. ✗ The first pass also cited the 2014 quadratic-model paper (SIAM J. Optim., 10.1137/120895056) as a Search case; it reduces the Poll to n+1 points [S038 abstract].
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- ✅ [S077 pp. 5, 7]: *surrogate* rather than *approximation*, so no approximation quality is implied; ordering poll points by surrogate value "would also be a wise choice" when a surrogate exists.
 
 <a id="heuristic-4"></a>
 
@@ -554,6 +617,10 @@ Check, in this order:
 7. **If an algorithm has tunable parameters, then treat the algorithm itself as a blackbox and tune it with direct search on one subset of problems, and report on held-out problems.**
    - Case: Audet & Orban (SIAM J. Optim. 2006, 10.1137/040620886) cast tuning as blackbox optimization, with failures as +∞ and a surrogate built from easy instances [S016 pp. 5–6, 15–18]; later work tunes on every k-th problem and reports on the rest [S057 p. 18], or on held-out instances [S095 p. 9; S073 p. 6], and fixes first the parameters the objective could game, such as stopping tolerances [S057 p. 17].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- ✅ [S077 p. 6]: Audet and Orban tune a trust-region method with MADS, using the same method on easy problems as the surrogate.
+
 <a id="heuristic-8"></a>
 
 ## Heuristic 8: deterministic unless the guarantee needs randomness
@@ -565,6 +632,10 @@ Check, in this order:
 8. **If randomness is not needed for the guarantee, then make the method deterministic, or seeded, so runs are repeatable; add randomness only where a guarantee needs dense, non-shrinking probes.**
    - Case: OrthoMADS replaced randomized LTMADS (SIAM J. Optim. 2009, 10.1137/080716980) [S006 pp. 1, 3]; seeded OrthoMADS directions since NOMAD 3.7.1 [S202 p. 104]; a random revealing poll, with almost-sure results [S138 pp. 7–9].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- ⚠ Variant (2005): "our selection of positive spanning directions is done randomly. Consequently, most of our convergence results are with probability one." [S077 p. 10]. The deterministic preference arrives with OrthoMADS in 2009 [S006 p. 1], as the MADS anatomy's "Abandoned paths" row records. No change to the heuristic.
+
 <a id="heuristic-9"></a>
 
 ## Heuristic 9: exploit exposed structure, keep a convergence backbone
@@ -575,6 +646,10 @@ Check, in this order:
 
 9. **If the "blackbox" exposes some structure (monotonicity, linear equalities, hierarchy, fidelities), then exploit it while keeping a convergence backbone (direct search in most of the corpus; stochastic approximation in one doctoral line). Put cost-saving ideas in a wrapper around the blackbox so any solver runs unchanged, and pay for one true evaluation before a cheap verdict changes the incumbent. If only a few variables carry the pathology, give those to DFO and the rest to a specialized or certified inner solver.** (The first-pass wording, "keeping the direct-search backbone", was widened because two coauthored papers use other backbones [S150; S140].)
    - Case: linear equalities (COAP 2015) [S064 pp. 4–10]; wrappers and the incumbent guard [S112 pp. 7–8, 14; S173 pp. 6–8]; nested splits [S151 pp. 3–8; S155 pp. 5–6].
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- ✅ [S077 pp. 6–7]: with a full gradient all but one poll direction are ascent directions and can be skipped; partial derivatives cut poll evaluations without losing the convergence properties.
 
 <a id="heuristic-10"></a>
 
@@ -617,6 +692,11 @@ Heading before tightening: ### Mesh adaptive direct search algorithms for constr
 | Reception | Erratum with Custódio (2008): the proposition was correct, and the LTMADS instance proof was restated in the final notation [D001 pp. 1–2]. The core of NOMAD 3/4 [S021 pp. 4, 14]; ADS later proves OrthoMADS an instance of its own class [S129 pp. 16–19]. The most-cited work on the Scholar list (1952 citations at harvest). |
 | Methods shown | Method 1, Method 3, Method 6, Method 7 |
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Origin ✅ (2005, co-authored): MADS was discovered "as a direct result" of GPS weaknesses on nonsmooth problems, exposed by analysing GPS with nonsmooth analysis [S077 pp. 4, 7]; agrees with [S001 p. 1].
+- Reception ✅ (reported by a co-author of MADS, not independent): Dennis's foreword says one industrial group used MADS in its in-house software "because it never took more than 15 minutes to find an answer for instances of a recurring problem" [B001 p. 7]. The MADS chapter of the 2026 textbook (§9.1–9.6) includes dense sets of polling directions (§9.5) [B001 p. 20] (titles only).
+
 <a id="signature-work-2"></a>
 
 ## Signature work: A progressive barrier for derivative-free nonlinear programming
@@ -636,6 +716,10 @@ Heading before tightening: ### A progressive barrier for derivative-free nonline
 | Abandoned paths | "We do not use a filter, but we do use the notion of dominance fundamental to filters" [S007 p. 3]. The filter survives as NOMAD's `F` option [S019 p. 53]. |
 | Reception | Exported to a trust-region method with Conn: "After MADS, it is the first algorithm to deploy the progressive barrier." [S063 p. 23]; reused for discontinuity escape [S090 pp. 8–10] and in mesh-free ADS-PB [S172]; PB is the `CSTR` default [S019 p. 53]. |
 | Methods shown | Method 2, Method 1, Method 3, Method 7 |
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Why then ✅ (2005 root): users want to know "how much optimality is possible with a slight relaxation" of the open constraints [S077 p. 3; again p. 12], the situation later cited as constraint-sensitivity information [S007 pp. 3–4].
 
 <a id="signature-work-3"></a>
 
@@ -721,6 +805,11 @@ Heading before tightening: ### Convergence results for generalized pattern searc
 | Tuning and reporting on the same problems | Tune on every k-th problem, report on the rest [S057 p. 18]; disjoint held-out instances [S095 p. 9] | Held-out split (Heuristic 7) |
 | Benchmarking on inherited instances without checking them | Literature instances that reduce to an LP or a closed form [S015 pp. 7–9]; published solutions re-evaluated [S028 p. 14]; SOLAR's non-triviality certificate [S071 pp. 11, 24–32] | Audit instances and publish the audit (Workflow D, step 3) |
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Row "Accuracy-only or final-value comparisons" ✗ labelling note: "Book ch." fits only the 2026 edition, where *Comparing Optimization Methods* is Chapter 4 [B001 p. 19]; in 2017 it was an appendix [B001 pp. 16–17].
+- Row 1 ✅ (Dennis's voice): a programmer returned 2.6 whenever the objective routine failed, a value "well within the range of meaningful function values", and the team "scratched our heads for an hour or so over some strange optimization steps" [B001 p. 7].
+
 <a id="trajectory"></a>
 
 ## Research trajectory: prose and Latest
@@ -744,6 +833,11 @@ Twelve months to 2026-09-27, verified via bibliography and/or search; card ids m
 - *A summary of benchmarking constrained, multi-objective and surrogate-assisted optimization methods* (Opt. Lett. 2026, 10.1007/s11590-026-02302-z) [S128]; *A partitioned optimization framework for structure-aware problems* (JOTA 2026, 10.1007/s10957-026-03042-x) [S155].
 - Micro-PRIAD v1.0 (Aug 2026), a stochastic power-utility maintenance benchmark (https://github.com/bbopt/Micro-PRIAD) [D006].
 
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Latest, rewritten in SKILL.md: the 2nd edition is now read at front-matter level [B001] (it was abstract-level [D005]): benchmarking promoted from a 2017 appendix to Chapter 4 [B001 pp. 16–17, 19]; constraints moved into the direct-search part [B001 pp. 16, 20]; model quality separated from model construction [B001 p. 10]; Chapters 15–16 roughly doubled; at least 20 exercises per chapter; a new appendix of five real test problems with software [B001 pp. 9–10, 21]; class-tested with the 2025 DFO class of Polytechnique Montréal [B001 p. 12]. The chapters are unread.
+- ✅ (inference): the 2005 agenda (categorical variables, multiple objectives, more variables) [S077 pp. 10–12] precedes the mixed-variable, BiMADS and PSD-MADS work of 2003–2009.
+
 <a id="lineage"></a>
 
 ## Academic lineage
@@ -757,6 +851,12 @@ Joint-work counts below are distinct non-talk entries of `works.json` after merg
 - **Peers and co-leads**: S. Le Digabel (54 joint works, 2004–2026; NOMAD co-lead; first pass: 48 BibTeX entries), C. Tribes (NOMAD research software engineer; 19 joint works), V. Rochon Montplaisir, W. Hare (textbook; theory notes [S120; S124]; benchmarking summary [S128]), M. Kokkolaras (engineering design), D. Orban (algorithm tuning), F. Messine (geometry side line, 2002–2025), Y. Diouane (ADS, Mads-PIP, categorical, 2024–; ✗ first pass: 2023–, but the 2023 framework paper [S058] has no Diouane; the first joint work is the mixed-variable distance, arXiv 2024 / Neurocomputing 2025 [S092]).
 - **Cross-lens collaborations**: A.R. Conn (PBTR and a QCQP-subproblem paper, 2018 [S063]); A.L. Custódio (2008 erratum [D001]); L.N. Vicente (co-editor with Audet and Dennis of a 2004 *Optimization and Engineering* special issue on surrogate optimization [D012, metadata]).
 - **Downstream** (co-authoring group students at Polytechnique; supervision role not verified unless cited): M. A. Abramson (Rice PhD 2002; committee co-chaired by Dennis and Audet [S213 pp. 1, 5]); Le Digabel (PhD 2008), Peyrega (PhD 2016), Amaioua (PhD 2018), Dzahini (PhD 2020; later lead author of a 2025 direct-search survey), Lakhmiri (PhD 2021), Salomon (PhD 2022, DMultiMads); MScs Béchard, Ihaddadene, Lemyre Garneau, Bouchet, Hallé-Hannan, Lebeuf. The late papers are student-led: Hallé-Hannan [S121 p. 1; S157], Brilli [S158 p. 1], Lebeuf [S173 p. 1], Bouchet [S151; S155], Kojtych [S107; S184], Bingane [S113; S142], Couderc [S140; S150].
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Upstream ✅: "From Charles Audet's point of view, this book began through joint work with John Dennis" [B001 p. 14]; Dennis wrote the foreword to the first edition, reprinted in the second [B001 pp. 6–8]. S077 (2005) is co-authored with Abramson (Air Force Institute of Technology) and Dennis [S077 p. 1].
+- Peers ✅: Le Digabel helped design the 2017 table of contents [B001 p. 14] and wrote the 2026 appendix and its software repository [B001 pp. 9, 12]; Tribes helped with numerical examples (2017) and provided exercise logs (2026) [B001 pp. 12, 14]; Rochon Montplaisir proofread the 2017 edition [B001 p. 14]; Hare's side of the origin is a UBC sabbatical year spent largely at GERAD [B001 p. 14].
+- Cross-lens ✅: A. Custódio gave "targeted feedback to the chapter on biobjective optimization" of the 2nd edition [B001 p. 12], a second contact besides the 2008 erratum [D001].
 
 <a id="tensions"></a>
 
@@ -773,6 +873,49 @@ Joint-work counts below are distinct non-talk entries of `works.json` after merg
 - **Tension: auditing others vs being audited.** The group published a counterexample to a peer's theorem, with a repair (2024) [S138]; its own flagship needed an erratum (2008), which corrected a proof written in outdated notation, not the statement [D001 p. 1]. The lens should apply the same scrutiny to its own recommendations.
 - **Tension: public benchmarks vs partner problems.** Method 4 says to release real blackboxes, but for most partner blackboxes read no public release is mentioned [S013 pp. 2–10; S032 pp. 18–19; S084 pp. 24–26]; the public artifacts are purpose-built benchmarks or, once, a scaled-down twin [S071; D006 pp. 4, 6, 22].
 - **Tension: "cross-community" stated vs same-solver comparisons practiced.** Most algorithm papers compare variants inside NOMAD, and 16 full cards compare across families (Method 5); the group's own benchmarking summary advises few algorithms at a time and no derivative-based competitors [S128 pp. 5, 9].
+
+*Added 2026-09-27 (batch k01, book material; cards B001 and S077 in `cards/k01.md`; synthesis in `08` §12). Not pre-tightening text:*
+
+- Mesh ⚠ (2005 root, neutral verdict): "Our suspicion is that whether or not to use the mesh is a matter of taste, not of algorithmic effectiveness, though we have no actual experience without the mesh on real problems." [S077 p. 4] (co-authored with Abramson and Dennis).
+- Small n ✅: the stated 2005 goal is direct search that slows the growth of evaluations with n, where parallelism alone is not enough [S077 p. 12].
+
+<a id="mentor-voice"></a>
+
+## Mentor Voice
+
+*Not condensed at tightening; this section exists only for the batch k01 change.*
+
+*Added 2026-09-27 (batch k01, book material; `08` §12):*
+
+- Text before k01 (verbatim): "The full texts (110 works) contain no first-person teaching or feedback material either; the only personal note is a student's acknowledgment [S213 p. 5], which is not Audet's voice."
+- ✗ Scoped contradiction: both textbook prefaces are first-person-plural teaching statements (audiences, course design, sample syllabi, pedagogy) [B001 pp. 9–17], joint with Hare; only one sentence is marked as Audet's own point of view [B001 p. 14]. S077 gives first-person-plural advice to researchers, joint with Abramson and Dennis: where the topic came from [S077 p. 2], that nonsmooth analysis belongs in the curriculum of nonlinear-optimization researchers [S077 p. 2], and "The experience of helping a user formulate and solve a problem thought to be intractable is the ultimate validation for an applied mathematician." [S077 p. 12].
+- Why the voice stays constructed: no passage except the p. 14 origin sentence is Audet's alone, so no quote is put in his mouth. The "Avoid" line (dismissing heuristics or models outright) gains evidence: the textbook keeps two heuristic chapters and calls GA and Nelder–Mead "popular and effective" while excluding them from its definition of a DFO method [B001 p. 15].
+
+<a id="roundtable"></a>
+
+## Roundtable Card
+
+*Not condensed at tightening; this section exists only for the batch k01 change.*
+
+*Added 2026-09-27 (batch k01, book material; `08` §12):*
+
+- vs Powell ✅ (stated, textbook, joint voice with Hare): direct search methods "can be effective in BBO even when the objective and constraint functions are nonsmooth" [B001 p. 15]; model-based methods "are effective when the objective function is expected to be smooth (although gradients are not analytically available)" [B001 p. 16]. The same division as the PBTR rule [S063 p. 2]. The relation is honouring, not adversarial: the 2026 preface closes by calling Powell and Dennis pioneers and quoting Powell's 1994 report of Dennis's muddy-lake description of direct search [B001 p. 12].
+- vs Vicente ⚠ (2005): sufficient decrease in mesh-free frame methods is treated neutrally ("a matter of taste" [S077 p. 4]), and Custódio–Vicente's simplex-gradient ordering is cited favourably, with the caveat that its convergence needs local proximity to the limit point [S077 p. 7]. The 2025 contrast [S129 pp. 5–6] is sharper. No change to the card.
+
+<a id="honest-boundary"></a>
+
+## Honest Boundary (and the other coverage statements)
+
+*Not condensed at tightening; this section exists only for the batch k01 change. Each changed clause is given as it stood before k01.*
+
+*Added 2026-09-27 (batch k01, book material; `08` §12):*
+
+- **Coverage** (before: "of 212 listed works (196 Scholar + 16 others), 108 were read in full, 6 in part and 2 were unreadable as named [...]; 57 are known only from abstracts and 20 from metadata"): now 213 works (196 + 17; B001 added from Audet's homepage), 109 full, 7 partial, 2 unreadable, 56 abstract, 20 metadata. B001 is the front matter of D005, so the book appears in two rows (B001 partial, D005 abstract); SKILL.md's Coverage clause says so. The SKILL.md intro line changed from "212 works, 193 paper cards; 110 distinct works read in full or in part, 108 of them authored by Audet" to 213, 194, 112 and 110.
+- **Guide sentences** (before: "Guide sentences are collectively authored and cannot be attributed to Audet alone."): ⚠ the two Search/Poll sentences have a 2005 named-author source, co-authored with Abramson and Dennis [S077 pp. 4–5]; they remain unattributable to Audet alone. The epigraph's source note says the same.
+- **Key works still unread** (before: "The textbook, first and second editions [S003; D005], so the "Comparing Optimization Methods" chapter and the accuracy-profile warning still come from secondary quotations"): ✅ still true for the body. Read: the 2nd edition's front matter only — Dennis's foreword to the first edition (pp. 6–8), the 2026 preface (pp. 9–12), the reprinted 2017 preface (pp. 13–17), the table of contents (pp. 18–22) [B001]. Not read: all 16 chapters, the appendix, the part-end Remarks, the exercises. No errata or addenda for either edition, and no external review, were read.
+- **Tacit-knowledge gap** and **How to Use › Weak spots** (before: "the full texts contain no first-person teaching material"): ✗ scoped contradiction, as under #mentor-voice. The same clause in `../sources/RESOURCES.md` row 47 is updated.
+- **Stated-but-thinly-verified items** (before: "The textbook's stated goals and the accuracy-profile warning come via a reviewer's and a citing author's quotations."): ✗ outdated for the goal. "Our goal is to provide a clear grasp of the foundational concepts in derivative-free and blackbox optimization, in order to push these areas into the mainstream of nonlinear optimization." [B001 p. 13] confirms the reviewer's quotation (`02-methodology.md` X1). The accuracy-profile warning is still a citing author's quotation.
+- **Weak spots** ✅ consistent: no chapter or section title names Bayesian optimization or worst-case complexity [B001 pp. 18–22] (titles only).
 
 <a id="corrections"></a>
 

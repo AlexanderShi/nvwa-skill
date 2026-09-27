@@ -193,5 +193,11 @@
 | 181 | S237 | — | ARNE FRANStN | — | — | other | — | no-oa |  | skip | — |
 | 182 | D001 | 1981 | Erratum | Math. Program. | — | journal | manual | txt | 1 | supplement | carded |
 | 183 | D002 | 2000 | Noise considerations in circuit optimization | IEEE Trans. Comput. Aided Des. Integr. Circuits Syst. | — | journal | — | no-oa |  | supplement | abstract |
+| 184 | B001 | 2009 | Introduction to Derivative-Free Optimization — table of contents (Conn, Scheinberg, Vicente; SIAM MPS-SIAM Series on Optimization 8, 2009) | book material | — | book-toc | manual | txt | 3 | supplement | carded |
+| 185 | B002 | 2015 | Errata to Introduction to Derivative-Free Optimization (05/17/2015) | book material | — | errata | manual | txt | 3 | supplement | carded |
+| 186 | B003 | 2015 | Errata to Introduction to Derivative-Free Optimization, second list (05/17/2015) | book material | — | errata | manual | txt | 1 | supplement | carded |
+| 187 | B004 | 2011 | Derivation of Error Bounds for Quadratic Regression (01/27/2011) — addendum to Introduction to Derivative-Free Optimization | book material | — | book-addendum | manual | txt | 2 | supplement | carded |
+| 188 | B005 | 2010 | Review of Introduction to Derivative-Free Optimization (Mathematics of Computation 79(271), 2010) | book material | — | review | manual | txt | 3 | supplement | carded |
+| 189 | B006 | 2011 | Review of Introduction to Derivative-Free Optimization (SIAM Review book reviews) | book material | — | review | manual | txt | 2 | supplement | carded |
 
-183 works · txt 72 · pdf 0 · no-oa 111
+189 works · txt 78 · pdf 0 · no-oa 111

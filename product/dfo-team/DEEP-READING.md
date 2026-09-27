@@ -7,9 +7,14 @@ This is the record of how `michael-powell`, `andrew-conn`, `katya-scheinberg`, `
 **Complete.** The deep reading covered every researcher's publication list:
 
 - Every work on each researcher's Google Scholar profile is indexed.
-- 414 of the 420 open full texts were read in full or in part. Five files turned out to be unreadable (each card says why) and one row was skipped.
-- Every indexed research work of the researcher has at least one paper card, at full, partial, abstract or metadata level: 775 cards on 766 works in 112 batch files (9 works have two cards). The 72 skipped rows (patents, talks and rows that are not the researcher's work) have none.
-- All 1,099 verbatim quotes on the cards were checked against the extracted text, and all of them pass.
+- 415 of the 421 open full texts were read in full or in part. Five files turned out to be unreadable (each card says why) and one row was skipped.
+- Every indexed research work of the researcher has at least one paper card, at full, partial, abstract or metadata level. In total there are 795 cards on 785 items in 116 batch files: 766 research works plus 19 book-material items (10 works have two cards). The 72 skipped rows (patents, talks and rows that are not the researcher's work) have none.
+- All 1,139 verbatim quotes on the cards were checked against the extracted text, and all of them pass.
+- The openly available book material was read and carded (batch `k01` in each of the four book authors' skills):
+  - for *Introduction to Derivative-Free Optimization*: the table of contents, both errata lists (05/17/2015), the 2011 addendum on quadratic-regression bounds, and the reviews by J. L. Nazareth (*Math. Comp.* 2010) and Dominique Orban (*SIAM Review* 2011);
+  - for Audet–Hare, *Derivative-Free and Blackbox Optimization*: the 2nd-edition front matter (preface and contents, 22 pp).
+
+  The book bodies are not open and were not read. Each skill's `08-deep-reading-synthesis.md` has a "Book material" section, and each `09-evidence-ledger.md` has a `#book-material` anchor.
 - The cards were then distilled into each `SKILL.md`.
 
 What changed in the skills:
@@ -58,7 +63,7 @@ In `dfo-roundtable`, fault line 4 (globalization in direct search) now records V
 
    The script ran in several rounds as new full texts turned up. The last round emitted the abstract batches. Batch IDs are `c01`, `s02`, … in round 1 and `c2-01`, `a2-03`, `s4-01`, … in later rounds.
 5. **Cards.** One agent per batch wrote `references/research/cards/<batch>.md` and `<batch>.digest.json` using the brief below. `07-paper-cards.md` indexes every card.
-6. **Quote check.** `scripts/verify_card_quotes.py` looked up every quoted passage (`quotes[].text` in the digests) in the extracted text or abstract. All 1,099 are exact matches.
+6. **Quote check.** `scripts/verify_card_quotes.py` looked up every quoted passage (`quotes[].text` in the digests) in the extracted text or abstract. All 1,139 are exact matches.
 7. **Read column.** `scripts/mark_read_from_cards.py` filled INDEX.md's Read column from each card's `read_level`:
    - `full` → `carded`
    - `partial` → `skimmed`
@@ -104,19 +109,20 @@ python3 scripts/quality_check.py product/dfo-team/$R/SKILL.md
 
 These counts are exact and were computed from each researcher's `references/sources/papers/INDEX.md`.
 
-| Researcher | Scholar rows | Distinct works indexed | Open full text | Read in full | Read in part | Abstract only | Metadata only (incl. unreadable) | Skipped (not the author's / non-research) | Quotes verified |
-|---|---|---|---|---|---|---|---|---|---|
-| M. J. D. Powell | 211 | 187 | 39 | 34 | 5 | 73 | 75 | 0 | 193 |
-| Andrew R. Conn | 237 | 183 | 72 | 53 | 18 | 50 | 17 | 45 | 188 |
-| Katya Scheinberg | 143 | 132 | 85 | 68 | 14 | 19 | 23 | 8 | 184 |
-| Luís Nunes Vicente | 122 | 124 | 108 | 92 | 16 | 11 | 5 | 0 | 220 |
-| Charles Audet | 222 | 212 | 116 | 108 | 6 | 57 | 22 | 19 | 314 |
-| **Total** | 935 | 838 | 420 | 355 | 59 | 210 | 142 | 72 | 1099 |
+| Researcher | Scholar rows | Distinct works indexed | Open full text | Read in full | Read in part | Abstract only | Metadata only (incl. unreadable) | Skipped (not the author's / non-research) | Book material carded | Quotes verified |
+|---|---|---|---|---|---|---|---|---|---|---|
+| M. J. D. Powell | 211 | 187 | 39 | 34 | 5 | 73 | 75 | 0 | 0 | 193 |
+| Andrew R. Conn | 237 | 183 | 72 | 53 | 18 | 50 | 17 | 45 | 6 | 200 |
+| Katya Scheinberg | 143 | 132 | 85 | 68 | 14 | 19 | 23 | 8 | 6 | 196 |
+| Luís Nunes Vicente | 122 | 124 | 108 | 92 | 16 | 11 | 5 | 0 | 6 | 232 |
+| Charles Audet | 222 | 212 | 117 | 109 | 6 | 56 | 22 | 19 | 1 | 318 |
+| **Total** | 935 | 838 | 421 | 356 | 59 | 209 | 142 | 72 | 19 | 1139 |
 
 Notes:
 
 - *Distinct works indexed* = Scholar rows minus duplicates, plus items found only in DBLP or on a homepage. For Powell it also includes the two interviews and the Royal Society memoir. Powell's open full texts include those three non-Scholar sources and one duplicate report, and his 34 full reads include the two interviews and the memoir.
 - *Read in part* means the supplement reading: abstract, introduction, algorithm, main theorem, experimental setup and conclusion. For a multi-author volume it means only the researcher's own section.
+- *Book material carded* counts the `B` rows in INDEX.md: openly available parts of a book (table of contents, errata, addendum, preface, published reviews). They are not counted in the research-work columns. The three IDFO authors share the same six items.
 - *Skipped* rows have Role `skip` in INDEX.md and no card. They are rows that are not the researcher's work, such as referee lists, report sections, misattributed rows and unresolved fragments, plus patents, talks and conference duplicates of journal papers. Each skill's `08-deep-reading-synthesis.md` §1 counts them.
 - Page references on cards are pages of the text version that was read, often a technical report or preprint. Check the journal page before citing one in a paper.
 
@@ -142,12 +148,12 @@ Report: cards written, method links, new-pattern candidates, papers you could no
 
 ## What is still missing
 
-- **Works with no open full text** have abstract or metadata cards only. There are 347 in scope: Powell 148, Conn 66, Scheinberg 40, Vicente 16 and Audet 77. Their evidence carries less weight in the syntheses.
-- **Books** have abstract- or metadata-level cards only:
-  - Conn–Gould–Toint, *Trust-Region Methods* (SIAM 2000) and *LANCELOT* (Springer 1992);
-  - Conn–Scheinberg–Vicente, *Introduction to Derivative-Free Optimization* (SIAM 2009), which appears on three lists;
-  - Audet–Hare, *Derivative-Free and Blackbox Optimization* (Springer 2017, metadata-level; 2nd edition 2026, abstract-level);
-  - Powell, *Approximation Theory and Methods* (CUP 1981).
+- **Works with no open full text** have abstract or metadata cards only. There are 346 in scope: Powell 148, Conn 66, Scheinberg 40, Vicente 16 and Audet 76. Their evidence carries less weight in the syntheses.
+- **Book bodies** are not openly available, so no book chapter was read:
+  - Conn–Gould–Toint, *Trust-Region Methods* (SIAM 2000) and *LANCELOT* (Springer 1992): abstract or metadata cards only. The SIAM front matter of *Trust-Region Methods* was refused with 403.
+  - Conn–Scheinberg–Vicente, *Introduction to Derivative-Free Optimization* (SIAM 2009), which appears on three lists: the table of contents, both errata lists, the 2011 addendum and two published reviews were read (cards `k01`). The chapters themselves were not. A third review (MAA Reviews, 2009) returned 404 and is logged as a lead.
+  - Audet–Hare, *Derivative-Free and Blackbox Optimization* (Springer 2017, metadata-level): for the 2nd edition (2026), the front matter (preface and contents) was read (card `k01`). The chapters were not.
+  - Powell, *Approximation Theory and Methods* (CUP 1981): metadata only.
 - **Powell's pre-1994 papers.** 129 of his 148 no-oa works are from before 1994. They include:
   - the 1964 conjugate-direction method;
   - the 1969 augmented-Lagrangian paper;
