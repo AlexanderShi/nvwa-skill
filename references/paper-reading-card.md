@@ -3,6 +3,8 @@
 > 研究Skill深读阶段：每读一篇论文写一张卡片，追加到 `references/research/07-paper-cards.md`。卡片是「他怎么做研究」的逐篇证据，最后汇总回 SKILL.md 的研究方法。
 >
 > 结构改编自 [AppleCG/academic-research-workflow](https://github.com/AppleCG/academic-research-workflow) 的 `research-distiller`（MIT License）：借用了「先声明意图」「材料角色」「每个维度都写可迁移手法」「只追加、冲突标为变体」「保守更新」五个做法。原版的8个维度面向社科人文并明确排除数学推导；这里换成数学/计算类研究（优化、数值分析、理论CS等）的维度。
+>
+> **实际布局**（`product/dfo-team` 五个研究Skill的深读，2026-09，775张卡片）：卡片按阅读批次写在 `references/research/cards/<批次>.md`，旁边配一个机读的 `<批次>.digest.json`；`07-paper-cards.md` 只做索引。见第四节。
 
 ---
 
@@ -24,6 +26,8 @@
 | **background** | 不单独写 | 只在其他卡片里被引用 |
 
 角色记录在 `references/sources/papers/INDEX.md` 的 Role 列（`scripts/fetch_fulltexts.py` 默认被引前20篇为 core，其余 supplement，可手改）。
+
+用 `scripts/acquire_fulltexts.py` 建索引时，core 与 supplement 由 `scripts/plan_reading_batches.py` 写入：被引前25篇、SKILL.md 已提到的、近年的、访谈/回忆录/随笔为 core；其余有全文的为 supplement。skip（不写卡片）不由它判断：专利、talk 由 acquire_fulltexts.py 按 works.json 的 kind 设为 skip；非本人作品用 plan_reading_batches.py --skip-ids 或手改 INDEX 的 Role 列；已有的 skip 会保留。它同时把论文切成阅读批次，一批交给一个深读 agent。
 
 ---
 
@@ -75,3 +79,72 @@
 5. **来源可追溯**：SKILL.md 里每条新增证据都指向卡片序号
 
 汇总完成后重跑 `python3 scripts/quality_check.py <SKILL.md>`，并更新 `references/sources/RESOURCES.md`。
+
+---
+
+## 四、卡片文件布局（实际采用）
+
+`product/dfo-team` 五个研究Skill的深读（2026-09）用的是下面的布局，后续深读照此执行：
+
+```
+references/research/
+├── cards/
+│   ├── <批次>.md                 # 一个阅读批次的全部卡片（给人读）
+│   └── <批次>.digest.json        # 同一批卡片的机读版（给脚本读）
+├── 07-paper-cards.md             # 卡片索引：每篇作品一行（阅读深度、所在批次文件、方法关联、一句话贡献）
+└── 08-deep-reading-synthesis.md  # 汇总：第三节的保守更新先在这里写成提案，再改 SKILL.md
+```
+
+- **批次名**由 `plan_reading_batches.py` 生成，首字母是批次类型：
+  - `c`：core
+  - `s`：supplement
+  - `b`：book，超过150页，按章读
+  - `a`：abstract，没有全文，只写摘要级或元数据级卡片
+
+  第1轮的批次名形如 `c01`，之后各轮形如 `c2-01`、`a2-03`、`s4-01`……
+- **批次文件开头**写第一节的三行意图，再加一行「文件页码与印刷页码的对应」。页码一律用抽取文本里的 `[[page N]]` 标记。
+- **卡片**按第二节的格式写，一篇一张。标题行后注明这篇读到什么深度：全文、部分、摘要、元数据，或无法读取。
+- **`07-paper-cards.md`** 只做索引，每张卡片一行，内容取自 digest 字段（id、year、title、read_level、批次文件、method_links、contribution）。DFO团队的索引是深读时用一次性脚本从 digest 生成的，仓库里没有附生成脚本；后续新增卡片时，照相邻行的格式按 digest 手写一行，卡片改了就同步改这一行。第三节的「只追加」在这种布局下，指的是往 `cards/` 追加新的批次文件，不改旧卡片。
+
+### digest.json 字段
+
+每个 `<批次>.digest.json` 是一个数组，每张卡片对应一个对象：
+
+| 字段 | 类型 | 含义 |
+|------|------|------|
+| `id` | 字符串 | INDEX.md 里的 ID（如 `S012`） |
+| `year`、`title` | 字符串 | 年份、标题 |
+| `read_level` | 字符串 | `full` / `partial` / `abstract` / `metadata` / `unreadable` |
+| `contribution` | 字符串 | 一句话贡献（07索引用） |
+| `problem_entry` | 字符串 | D1 问题与切口 |
+| `key_idea` | 字符串 | D2 核心想法 |
+| `assumptions` | 字符串 | D3 假设与模型 |
+| `proof_devices` | 字符串数组 | D4 证明手法，每条带页码 |
+| `experiments` | 字符串 | D5 数值实验 |
+| `positioning` | 字符串 | D6 文献定位 |
+| `writing` | 字符串 | D7 写作与修辞 |
+| `limits_future` | 字符串 | D8 局限与未来方向 |
+| `method_links` | 对象数组 | `{method, relation, note, pages}`。relation 为 `evidence`（佐证）、`variant`（变体）或 `contradiction`（矛盾） |
+| `new_pattern_candidates` | 对象数组 | `{pattern, evidence, pages}`，进候选池 |
+| `transferable` | 字符串数组 | 可迁移手法 |
+| `coauthors` | 字符串 | 合作者 |
+| `quotes` | 对象数组 | `{text, page}`，原文摘录，最多2条 |
+
+没读到的维度留空字符串或空数组，不猜。
+
+`python3 scripts/mark_read_from_cards.py <skill目录>` 按 `read_level` 回填 INDEX.md 的 Read 列。同一篇有多张卡片时，取读得最深的一张。对应关系：
+
+| `read_level` | Read 列 |
+|---|---|
+| `full` | `carded` |
+| `partial` | `skimmed` |
+| `abstract` | `abstract` |
+| `metadata` | `metadata` |
+| `unreadable` | `unreadable` |
+
+### 摘录规则（硬性）
+
+- `quotes[].text` 必须逐字取自抽取文本 `references/sources/papers/txt/<ID>-*.txt` 或 `abstracts.json`。`page` 用 `[[page N]]` 的页码。
+- 每写完一批，就跑 `python3 scripts/verify_card_quotes.py <skill目录>`。脚本比较前会统一 Unicode、连字、行末断词、引号、破折号和空白。
+- 报 `NOT FOUND` 的摘录，要么改成原文，要么去掉引号改为转述。
+- **全部通过才进入第三节的汇总。** DFO团队的1,099条摘录全部逐字通过。

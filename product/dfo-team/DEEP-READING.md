@@ -1,62 +1,174 @@
-# Deep reading plan · all five DFO team skills
+# Deep reading · all five DFO team skills
 
-Goal: deepen `michael-powell`, `andrew-conn`, `katya-scheinberg`, `luis-nunes-vicente` and `charles-audet` by reading each researcher's articles in full text, not search snippets.
+This is the record of how `michael-powell`, `andrew-conn`, `katya-scheinberg`, `luis-nunes-vicente` and `charles-audet` were deepened. Each researcher's Google Scholar publications were read in full or in part wherever an open copy exists, and not just as search snippets.
 
 ## Status (2026-09-27)
 
-**Blocked on network access.** The session that built this plan could not reach `api.openalex.org`, `export.arxiv.org` or `arxiv.org` (egress policy denial). Google Scholar is not usable either: it offers no API and blocks automated access. The publication list therefore comes from OpenAlex, and the full texts come from arXiv.
+**Complete.** The deep reading covered every researcher's publication list:
 
-To unblock:
+- Every work on each researcher's Google Scholar profile is indexed.
+- 414 of the 420 open full texts were read in full or in part. Five files turned out to be unreadable (each card says why) and one row was skipped.
+- Every indexed research work of the researcher has at least one paper card, at full, partial, abstract or metadata level: 775 cards on 766 works in 112 batch files (9 works have two cards). The 72 skipped rows (patents, talks and rows that are not the researcher's work) have none.
+- All 1,099 verbatim quotes on the cards were checked against the extracted text, and all of them pass.
+- The cards were then distilled into each `SKILL.md`.
 
-1. In the cloud environment settings (session title bar → environment menu → Edit → Network access), allow `api.openalex.org`, `export.arxiv.org` and `arxiv.org`. Optional: `www.damtp.cam.ac.uk` (Powell's technical reports).
-2. Start a **new session** on branch `claude/sharp-ritchie-6wmwie` and say: *"Run the DFO deep reading in product/dfo-team/DEEP-READING.md."*
+What changed in the skills:
 
-Papers that are not on arXiv (most of Conn's and Powell's pre-2005 work) will show `no-oa` in each researcher's index. Their PDFs have to come from you: drop them into `<researcher>/references/sources/papers/` (git-ignored) and re-run step 2.
+| Skill | Core methods | Change from the deep reading |
+|---|---|---|
+| `michael-powell` | 7 | New **M7 · Settle claims with the smallest decisive case** |
+| `andrew-conn` | 7 | New **M7 · Audit your own released solver; its named weaknesses are the next agenda** |
+| `katya-scheinberg` | 6 | Unchanged count. A proposed M7 was demoted to Heuristic 8 on review |
+| `luis-nunes-vicente` | 5 | Unchanged count. A proposed M6, "publish the boundary", was demoted to H10 |
+| `charles-audet` | 7 | New **M7 · Generalize, then inherit** |
 
-## Steps, per researcher
+Each skill also gained the following files:
 
-Order: Scheinberg → Vicente → Audet → Conn → Powell (open-access coverage falls in that order).
+- `references/technique-catalog.md`: transferable proof, design, experiment and writing devices, each with card references.
+- `references/research/08-deep-reading-synthesis.md`: patterns, promotions and corrections.
+- `references/research/09-evidence-ledger.md`: the full evidence, moved out of `SKILL.md` when it was tightened. `SKILL.md` links to its anchors.
+
+In `dfo-roundtable`, fault line 4 (globalization in direct search) now records Vicente's own history from the cards.
+
+## Pipeline actually used
+
+1. **Publication list.** The Google Scholar profiles were read page by page with a fetch tool (WebFetch). Scholar blocks `curl` and has no API, and OpenAlex was rate-limited, so `scripts/fetch_publications.py` was not used.
+   - Each list was cross-checked with DBLP through its SPARQL endpoint, because the DBLP REST API was behind a bot wall. Crossref and DataCite/arXiv were also used, plus author homepages, zbMATH, the GERAD Cahiers and Audet's own bibliography where they helped.
+   - The outputs are `references/sources/publications/works.json` (all records, including duplicates marked `dup_of`) and `scholar.md` (the readable list and audit notes).
+   - IDs: `S` = Scholar row · `D` = DBLP or other index only · `H` = author homepage only · `X` = Powell's two interviews · `R` = the Royal Society biographical memoir of Powell (by Buhmann, Fletcher, Iserles and Toint).
+2. **Open full texts.** `scripts/acquire_fulltexts.py` tries the following sources in order:
+   1. arXiv, by ID or by title search on arxiv.org/search.
+   2. Unpaywall open-access copies.
+   3. Author or repository links listed in `works.json`.
+
+   It checks that each download is a PDF and that its first pages carry the title. Otherwise the file is dropped as a mismatch. It extracts the text with `[[page N]]` markers and falls back to tesseract OCR for scans and garbled font layers. The results go into `references/sources/papers/INDEX.md` and `abstracts.json`.
+3. **Agent search of open repositories.** For works that were still `no-oa`, agents searched legitimate open sources:
+   - author homepages;
+   - RAL ePubs;
+   - Namur (FUNDP), Waterloo, Cornell, Rice, Columbia and GERAD technical reports;
+   - DAMTP NA reports (over http);
+   - Optimization Online, HAL, JMLR/NeurIPS/PMLR, OSTI and CORE.
+
+   Files found this way were saved under the index naming scheme and re-indexed by `acquire_fulltexts.py`, which records `Source = manual` (or `DAMTP report`). **Never Sci-Hub, never paywall circumvention.**
+4. **Reading batches.** `scripts/plan_reading_batches.py` sets each row's Role and splits the papers into batches:
+   - **core**: full read, at most 5 papers or 110 pages per batch;
+   - **supplement**: selective read, at most 8 papers or 220 pages;
+   - **book**: over 150 pages, read chapter by chapter;
+   - **abstract**: no full text, so an abstract or metadata card only, 30 per batch.
+
+   The script ran in several rounds as new full texts turned up. The last round emitted the abstract batches. Batch IDs are `c01`, `s02`, … in round 1 and `c2-01`, `a2-03`, `s4-01`, … in later rounds.
+5. **Cards.** One agent per batch wrote `references/research/cards/<batch>.md` and `<batch>.digest.json` using the brief below. `07-paper-cards.md` indexes every card.
+6. **Quote check.** `scripts/verify_card_quotes.py` looked up every quoted passage (`quotes[].text` in the digests) in the extracted text or abstract. All 1,099 are exact matches.
+7. **Read column.** `scripts/mark_read_from_cards.py` filled INDEX.md's Read column from each card's `read_level`:
+   - `full` → `carded`
+   - `partial` → `skimmed`
+   - `abstract` → `abstract`
+   - `metadata` → `metadata`
+   - `unreadable` → `unreadable`
+8. **Synthesis.** Each researcher went through four steps, with the conservative-update rules of `references/paper-reading-card.md` §3:
+   1. One agent mined the cards into `08-deep-reading-synthesis.md`.
+   2. A conservative edit of `SKILL.md` followed. Existing methods get evidence first. A new method needs 3 or more distinct papers plus the four checks.
+   3. Three read-only skeptics reviewed the edit.
+   4. The verified objections were fixed.
+
+   `SKILL.md` was then tightened, with the long evidence moved to `09-evidence-ledger.md`, and `quality_check.py` was re-run.
+
+### Commands, per researcher
+
+Run these from the repository root. Needs network access to arxiv.org, api.unpaywall.org and api.crossref.org, plus `pypdfium2` and Pillow; `tesseract` is needed for OCR.
 
 ```bash
-R=katya-scheinberg; NAME="Katya Scheinberg"
-# 1. Complete publication list (check the candidate table; rerun with --author-id if the wrong profile was picked)
-python3 scripts/fetch_publications.py "$NAME" --json --out product/dfo-team/$R/references/sources/publications
-# 2. arXiv full texts + index (PDFs and text are git-ignored; INDEX.md is committed)
-python3 scripts/fetch_fulltexts.py product/dfo-team/$R --core 20
+R=katya-scheinberg   # also: michael-powell, andrew-conn, luis-nunes-vicente, charles-audet
+# (works.json + scholar.md were built by hand from Google Scholar, DBLP SPARQL, Crossref, DataCite/arXiv)
+
+# 1. Open full texts + INDEX.md (PDFs and txt/ are git-ignored; INDEX.md and abstracts.json are committed)
+#    Rows whose PDF/txt is not on disk keep their committed txt/pdf status, but re-extraction and the
+#    quote check need the original files. An older copy of the script reset those rows to no-oa; if that
+#    happens, restore with: git checkout -- product/dfo-team/$R/references/sources/papers/INDEX.md
+python3 scripts/acquire_fulltexts.py product/dfo-team/$R
+
+# 2. Roles + reading batches (plan JSON kept outside the repo); one round per wave of new full texts
+python3 scripts/plan_reading_batches.py product/dfo-team/$R --no-abstract > /tmp/$R-round1.json
+python3 scripts/plan_reading_batches.py product/dfo-team/$R --round 2 --exclude /tmp/$R-round1.json > /tmp/$R-round2.json
+#    ... last round without --no-abstract, so the remaining works get abstract/metadata batches
+
+# 3. After the cards are written: check every quote, then fill the Read column
+python3 scripts/verify_card_quotes.py product/dfo-team/$R
+python3 scripts/mark_read_from_cards.py product/dfo-team/$R
+
+# 4. After synthesis
+python3 scripts/quality_check.py product/dfo-team/$R/SKILL.md
 ```
 
-3. **Read in batches.** One agent per batch of about 10 papers, using the brief below. Core papers get full cards; supplement papers get short cards (abstract, introduction, contribution and conclusion only).
-4. **Synthesise.** One agent per researcher applies the conservative-update rules in `references/paper-reading-card.md` §3 to `SKILL.md`, then runs `python3 scripts/quality_check.py product/dfo-team/$R/SKILL.md` and updates `RESOURCES.md` and the Roundtable Card.
-5. **Commit** the cards, `INDEX.md`, the updated `SKILL.md` and `RESOURCES.md`. Never commit PDFs or extracted text.
+## Coverage
 
-## Scale and cost
+These counts are exact and were computed from each researcher's `references/sources/papers/INDEX.md`.
 
-Paper counts are only known after step 1. Assume roughly 100–250 works per researcher, several hundred in total. Reading every paper in full would cost tens of millions of tokens. The plan is therefore tiered:
+| Researcher | Scholar rows | Distinct works indexed | Open full text | Read in full | Read in part | Abstract only | Metadata only (incl. unreadable) | Skipped (not the author's / non-research) | Quotes verified |
+|---|---|---|---|---|---|---|---|---|---|
+| M. J. D. Powell | 211 | 187 | 39 | 34 | 5 | 73 | 75 | 0 | 193 |
+| Andrew R. Conn | 237 | 183 | 72 | 53 | 18 | 50 | 17 | 45 | 188 |
+| Katya Scheinberg | 143 | 132 | 85 | 68 | 14 | 19 | 23 | 8 | 184 |
+| Luís Nunes Vicente | 122 | 124 | 108 | 92 | 16 | 11 | 5 | 0 | 220 |
+| Charles Audet | 222 | 212 | 116 | 108 | 6 | 57 | 22 | 19 | 314 |
+| **Total** | 935 | 838 | 420 | 355 | 59 | 210 | 142 | 72 | 1099 |
 
-| Tier | Which papers | Reading | Rough cost per paper |
-|------|-------------|---------|----------------------|
-| core | Top 20 by citations per researcher, plus signature works and the last 3 years | Full text, full card | ~30–50k tokens |
-| supplement | Everything else with full text | Abstract, introduction, contributions, conclusion; short card | ~5–10k tokens |
-| no-oa | No open full text | Metadata and abstract only until you supply PDFs | — |
+Notes:
 
-Raise `--core` to read more papers in full.
+- *Distinct works indexed* = Scholar rows minus duplicates, plus items found only in DBLP or on a homepage. For Powell it also includes the two interviews and the Royal Society memoir. Powell's open full texts include those three non-Scholar sources and one duplicate report, and his 34 full reads include the two interviews and the memoir.
+- *Read in part* means the supplement reading: abstract, introduction, algorithm, main theorem, experimental setup and conclusion. For a multi-author volume it means only the researcher's own section.
+- *Skipped* rows have Role `skip` in INDEX.md and no card. They are rows that are not the researcher's work, such as referee lists, report sections, misattributed rows and unresolved fragments, plus patents, talks and conference duplicates of journal papers. Each skill's `08-deep-reading-synthesis.md` §1 counts them.
+- Page references on cards are pages of the text version that was read, often a technical report or preprint. Check the journal page before citing one in a paper.
 
-## Reading-batch brief (fill in and send to each agent)
+## Reading-batch brief (as used, shortened)
 
 ```
 You are deepening the research-craft skill at product/dfo-team/{R}/ by reading full texts.
-Read first: references/paper-reading-card.md (card format, roles, rules) and {R}/SKILL.md (Core Research Methods).
-Batch intent: {one line, e.g. "how Scheinberg turns a deterministic method into a stochastic-oracle method"}
-Focus dimensions: {e.g. D1, D2, D4, D8}
-Papers (from references/sources/papers/INDEX.md): {rows with role}; texts are in references/sources/papers/txt/.
-For each paper: write a card (full for core, short for supplement) and append it to references/research/07-paper-cards.md;
-set its Read column in INDEX.md to carded or skimmed.
-Rules: page or section numbers on every claim; quote only verbatim text; write "not read" rather than guess;
-link each card to a Method N (evidence / variant / new-pattern candidate). Do not edit SKILL.md — synthesis is a separate step.
-Report: cards written, method links found, new-pattern candidates, papers you could not read.
+Read first: references/paper-reading-card.md (card format, roles, rules) and {R}/SKILL.md
+(methods, heuristics, taste marks, workflows — you link cards to their numbers).
+Batch {bid} ({core | supplement | book | abstract}): {papers from the plan JSON: ID, year, title, venue,
+role, pages, txt path}. Texts are in references/sources/papers/txt/, abstracts in abstracts.json.
+Write references/research/cards/{bid}.md. Open it with: batch intent (one line), focus dimensions (D1–D8),
+material roles, and how file pages map to printed pages. Then one card per paper:
+  core → every dimension from the whole text; supplement → abstract, introduction, algorithm, main theorem,
+  experimental setup, conclusion; book → chapter level; abstract → from the abstract, or metadata only — say which.
+Write references/research/cards/{bid}.digest.json: one object per card (fields: see paper-reading-card.md §四).
+Rules: a page reference ([[page N]] markers) on every claim; at most two quotes per card, verbatim, with page —
+they must pass scripts/verify_card_quotes.py; write "not read" rather than guess; say when the researcher's role
+is unclear (middle author, team paper); link each card to Method N / heuristic as evidence, variant or contradiction;
+note new-pattern candidates. Do not edit SKILL.md, INDEX.md or other batches — synthesis is a separate step.
+Report: cards written, method links, new-pattern candidates, papers you could not read and why.
 ```
 
-## What this does not change
+## What is still missing
 
-- Private materials stay in `katya-scheinberg/references/sources/private/` and are never read into public files.
-- The integrity rules in each skill still apply: no claim without a page reference, no invented quotes.
+- **Works with no open full text** have abstract or metadata cards only. There are 347 in scope: Powell 148, Conn 66, Scheinberg 40, Vicente 16 and Audet 77. Their evidence carries less weight in the syntheses.
+- **Books** have abstract- or metadata-level cards only:
+  - Conn–Gould–Toint, *Trust-Region Methods* (SIAM 2000) and *LANCELOT* (Springer 1992);
+  - Conn–Scheinberg–Vicente, *Introduction to Derivative-Free Optimization* (SIAM 2009), which appears on three lists;
+  - Audet–Hare, *Derivative-Free and Blackbox Optimization* (Springer 2017, metadata-level; 2nd edition 2026, abstract-level);
+  - Powell, *Approximation Theory and Methods* (CUP 1981).
+- **Powell's pre-1994 papers.** 129 of his 148 no-oa works are from before 1994. They include:
+  - the 1964 conjugate-direction method;
+  - the 1969 augmented-Lagrangian paper;
+  - the 1977 conjugate-gradient restarts paper;
+  - the 1978 paper "A fast algorithm for nonlinearly constrained optimization calculations".
+
+  The 1994 COBYLA paper is also closed. His derivative-free period is read far better than his earlier work: 31 of the 49 dated index rows from 1994 on have open text (28 of his 46 works, plus the two interviews and the memoir; one undated society notice, S211, has none), against 8 of 137 before 1994.
+- **Five unreadable files** are listed on their cards: Conn S093, Scheinberg S067 and S133, Audet S025 and S067.
+
+### How to extend
+
+1. **Get a legitimate copy.** Sources are a library, publisher access or the author.
+2. **Name the file like the index.** Use `<ID>-<year>-<first eight title words, lowercased, hyphenated>.pdf`, the stem `acquire_fulltexts.py` uses. For example, `S025-2002-uobyqa-unconstrained-optimization-by-quadratic-approximation.pdf`.
+3. **Put it in `<researcher>/references/sources/papers/`.** This folder is git-ignored. Check by hand that the file is the paper, because the title check only runs on downloads.
+4. **Re-run the acquire script.** Use `python3 scripts/acquire_fulltexts.py product/dfo-team/<researcher> --only <ID>`. It extracts the text, OCRs scans, and sets `Full text = txt` and `Source = manual`. Run it in the checkout that holds the other papers' PDFs and `txt/`: rows without local files keep their committed status, but their quotes cannot be re-verified. If an older copy of the script reset those rows to `no-oa`, restore the index with `git checkout -- <researcher>/references/sources/papers/INDEX.md`.
+5. **Plan a new round.** Use `python3 scripts/plan_reading_batches.py product/dfo-team/<researcher> --round <next> --no-abstract --exclude /tmp/<researcher>-round1.json,… > /tmp/<researcher>-round<next>.json` (`--exclude` takes the earlier rounds' plan files, comma-separated), keeping the plan JSON outside the repository. Works that have text but only an abstract or metadata card are batched again.
+6. **Read with the brief above.** Then run `verify_card_quotes.py` and `mark_read_from_cards.py`, and add the card's row to `07-paper-cards.md` by hand from its digest fields (id, year, title, read_level, batch file, method_links, contribution), in the format of the neighbouring rows (the indexes were first built by one-off scripts; none ships). Then apply the conservative-update rules to `SKILL.md`, `09-evidence-ledger.md` and `technique-catalog.md`.
+
+## Privacy and integrity
+
+- Private materials stay in `katya-scheinberg/references/sources/private/` (git-ignored) and are never read into public files. The deep reading worked only from public sources.
+- PDFs and extracted text are git-ignored for copyright reasons. Only indexes, abstracts, cards and syntheses are committed.
+- Full texts came only from legitimate open copies: arXiv, Unpaywall, author pages, institutional report series and open repositories.
+- The integrity rules in each skill still apply. No claim goes in without a page reference, and no quote is invented: every quote on a card passes `scripts/verify_card_quotes.py`.

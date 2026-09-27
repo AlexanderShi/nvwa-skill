@@ -74,30 +74,62 @@ Cost: one agent call per member per turn — about 3 per round with default seat
 
 Say "exit" or "end roundtable" to return to normal mode.
 
+**Technique catalogs.** Each skill has a `references/technique-catalog.md`. It lists the proof devices, algorithm-design moves, experiment protocols and writing moves found by reading that researcher's papers in full. Each entry has a one-line "how to use it" and the paper cards, with pages, that it rests on. Powell's, Conn's and Audet's `SKILL.md` steps cite entries by id (e.g. E6, P1); Scheinberg's and Vicente's point to catalog sections. You can also ask for the catalog directly:
+
+```
+> Which of Powell's proof devices fit my interpolation-model argument?
+> Audet lens: which experiment protocol should I use to benchmark my blackbox solver?
+```
+
 ## Resources
 
 Each researcher has a folder that keeps track of the resources behind that skill:
 
 ```
 <researcher>/
-├── SKILL.md                         # the research skill
+├── SKILL.md                             # the research skill (links into the evidence ledger)
 └── references/
-    ├── research/                    # six research notes (publications, stated method,
-    │                                #   process evidence, mentorship, critique, trajectory)
+    ├── technique-catalog.md             # transferable devices from the papers, each with card pages
+    ├── research/
+    │   ├── 01- … 06-*.md                # six research notes (publications, stated method, process
+    │   │                                #   evidence, mentorship, critique, trajectory)
+    │   ├── cards/<batch>.md             # paper cards: D1–D8, method links, verified quotes, page refs
+    │   ├── cards/<batch>.digest.json    # the same cards, machine-readable
+    │   ├── 07-paper-cards.md            # card index: one row per work, read level, methods linked
+    │   ├── 08-deep-reading-synthesis.md # patterns, promotions and corrections drawn from all cards
+    │   └── 09-evidence-ledger.md        # full evidence behind each SKILL.md item
     └── sources/
-        ├── RESOURCES.md             # tracker: every source, verified ✅ or lead ⚠️, where it was used
-        ├── publications/            # publication landscape
-        ├── papers/                  # full texts you download (PDFs are git-ignored)
-        ├── talks/                   # transcripts, slides, lecture notes
-        ├── essays/                  # methodology writings, surveys
-        └── software/                # solver notes and links
+        ├── RESOURCES.md                 # tracker: every source, verified ✅ or lead ⚠️, where it was used
+        ├── publications/
+        │   ├── works.json               # complete Google Scholar list, cross-checked (DBLP, Crossref, arXiv)
+        │   └── scholar.md               # the same list, readable, with audit notes
+        ├── papers/
+        │   ├── INDEX.md                 # every work: full-text status, role, read level
+        │   ├── abstracts.json           # abstracts (arXiv / Crossref)
+        │   ├── *.pdf                    # open full texts (git-ignored)
+        │   └── txt/                     # extracted text with [[page N]] markers (git-ignored)
+        ├── talks/                       # transcripts, slides, lecture notes
+        ├── essays/                      # methodology writings, surveys
+        └── software/                    # solver notes and links
 ```
 
-To add a resource later: add a row to that researcher's `RESOURCES.md`, drop any file into the matching folder, and if it changes a method, update the research note and `SKILL.md`.
+`katya-scheinberg/references/` also holds the student-mode files: `proof-playbook.md`, `open-problems.md` and `reading-path.md`. Her git-ignored `sources/private/` folder is never published.
+
+To add a resource later, add a row to that researcher's `RESOURCES.md` and drop the file into the matching folder. If the resource changes a method, update the research note and `SKILL.md`. To add a paper's full text, follow "How to extend" in [DEEP-READING.md](DEEP-READING.md).
 
 ## Honest Boundary
 
 - These are simulated lenses built from public work, not the researchers' own views.
-- Research was done through web search results in 2026-09 without full-text reading; each skill's Honest Boundary lists its gaps and `RESOURCES.md` marks unverified leads ⚠️.
+- The research started from web search results in 2026-09. On 2026-09-27 it was deepened by reading each researcher's Google Scholar publications in full or in part wherever an open copy exists. Coverage, from each `papers/INDEX.md` (details in [DEEP-READING.md](DEEP-READING.md)):
+
+  | Researcher | Works indexed | Read in full / in part | Abstract or metadata only (incl. unreadable) | Skipped (not the author's, or not research) |
+  |---|---|---|---|---|
+  | Powell | 187 | 34 / 5 | 148 | 0 |
+  | Conn | 183 | 53 / 18 | 67 | 45 |
+  | Scheinberg | 132 | 68 / 14 | 42 | 8 |
+  | Vicente | 124 | 92 / 16 | 16 | 0 |
+  | Audet | 212 | 108 / 6 | 79 | 19 |
+
+  Powell's 34 full reads include his two interviews and the Royal Society memoir of him (by Buhmann, Fletcher, Iserles and Toint). Works without an open full text are known from their abstract or metadata only. These include most of Powell's pre-1994 papers and the major books: *Trust-Region Methods*, *LANCELOT*, *Introduction to Derivative-Free Optimization* and Audet–Hare. Each skill's Honest Boundary lists its gaps, and `RESOURCES.md` marks unverified leads ⚠️.
 - Powell (d. 2015) and Conn (d. 2019) are historical lenses; their skills reflect work up to then.
 - Treat every recommendation as a hypothesis to test on your problem.

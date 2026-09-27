@@ -137,7 +137,7 @@
 | 125 | S134 | 1992 | Univariate interpolation on a regular finite grid by a multiquadric plus a linear polynomial | IMA journal of numerical analysis 12 (1), 107-133 | 17 | journal | — | no-oa |  | supplement | abstract |
 | 126 | S136 | 1976 | A Fortran subroutine for plotting the part of a conic that is inside a given triangle | SIS-76-2831 | 16 | report | — | no-oa |  | supplement | metadata |
 | 127 | S137 | 2009 | On nonlinear optimization since 1959 | The Birth of Numerical Analysis, 141-160 | 15 | chapter | DAMTP report | txt | 20 | supplement | carded |
-| 128 | S139 | 1983 | On the rate of convergence of variable metric algorithms for unconstrained optimization | Report DAMTP, 1525-1539 | 15 | report | manual | txt | 15 | core | carded |
+| 128 | S139 | 1983 | On the rate of convergence of variable metric algorithms for unconstrained optimization | Proceedings of the International Congress of Mathematicians, Warszawa 1983, pp. 1525-1539 | 15 | report | manual | txt | 15 | core | carded |
 | 129 | S141 | 1977 | A technique that gains speed and accuracy in the minimax solution of overdetermined linear equations | Mathematical Software 3, 15-32 | 15 | conference | — | no-oa |  | supplement | metadata |
 | 130 | S142 | 1997 | Least squares fitting to univariate data subject to restrictions on the signs of the second differences | Approximation Theory and Optimization. Tributes to MJD Powell, 109-132 | 14 | chapter | — | no-oa |  | supplement | abstract |
 | 131 | S143 | 1969 | Nonlinear Programming—Sequential Unconstrained Minimization Techniques | The Computer Journal 12 (3), 207-a-207 | 14 | other | — | no-oa |  | supplement | metadata |

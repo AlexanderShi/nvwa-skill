@@ -1,6 +1,6 @@
 # Andrew R. Conn · Paper cards (index)
 
-> Date: 2026-09-27. Generated with Python from `cards/*.digest.json`; do not edit rows by hand, edit the card and regenerate. The synthesis of these cards is `08-deep-reading-synthesis.md`.
+> Date: 2026-09-27. Generated from `cards/*.digest.json` by a one-off script that is not shipped; when a card is added or changed, write or update its row by hand from the digest fields, in the format of the other rows. The synthesis of these cards is `08-deep-reading-synthesis.md`.
 
 ## What the cards are
 

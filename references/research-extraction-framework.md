@@ -218,12 +218,31 @@ Agent 3（过程证据）的prompt要额外强调：**找行为而不是找言�
 
 搜索摘要只能支撑「他说过什么」；要看清「他实际怎么做」，最终要读论文全文。
 
-1. `python3 scripts/fetch_publications.py "<姓名>" --json --out <skill目录>/references/sources/publications` —— 完整发表列表（OpenAlex）
-2. `python3 scripts/fetch_fulltexts.py <skill目录>` —— 匹配arXiv、下载全文、抽取文本，生成 `references/sources/papers/INDEX.md`（角色与阅读状态）
-3. 按 `references/paper-reading-card.md` 分批写论文卡片，追加到 `references/research/07-paper-cards.md`
-4. 按卡片模板第三节的保守更新规则汇总回 SKILL.md
+1. **发表列表**。有两种来源：
+   - 用抓取工具（WebFetch 等）逐页读 Google Scholar 个人主页。Scholar 没有 API，也拦 curl。
+   - 或跑 `python3 scripts/fetch_publications.py "<姓名>" --json --out <skill目录>/references/sources/publications`（OpenAlex）。
 
-需要网络可达 api.openalex.org、export.arxiv.org、arxiv.org。不在arXiv上的论文需要用户提供PDF。PDF与抽取文本不提交（版权）。
+   列表要用 DBLP（REST 被拦时走 SPARQL 端点）、Crossref、arXiv 交叉核对，去重后写成 `publications/works.json` + `scholar.md`。
+2. **开放全文**：`python3 scripts/acquire_fulltexts.py <skill目录>`
+   - 依次尝试 arXiv（按 ID 或标题检索）、Unpaywall 开放获取、works.json 里的作者或仓库链接。
+   - 校验下载的 PDF 确实是这篇论文。扫描件或乱码文字层自动用 tesseract 做 OCR。
+   - 生成 `references/sources/papers/INDEX.md`。
+   - PDF 与 `txt/` 不提交，新克隆的仓库里没有。本地没有文件的行会保留 INDEX 里已提交的 txt/pdf 状态，但重新抽取文本和第6步的摘录核对都需要原文件，所以要在存有原 PDF 和 `txt/` 的那份工作区里跑。旧版脚本会把这些行重置为 `no-oa`，遇到时用 `git checkout -- <skill目录>/references/sources/papers/INDEX.md` 恢复。
+   - OpenAlex 与 export.arxiv.org 可达时，旧的 `fetch_fulltexts.py` 也能用。
+3. **agent 补搜**：仍标 `no-oa` 的论文，由 agent 在合法的开放来源里找，比如作者主页、机构技术报告、Optimization Online、HAL、会议官网、OSTI、CORE。
+   - 找到的文件命名为 `<ID>-<年份>-<标题前8词>.pdf`，存进 `papers/`，再重跑第2步。
+   - 不用 Sci-Hub，不绕付费墙。
+4. **切批**：`python3 scripts/plan_reading_batches.py <skill目录> [--round N --exclude /tmp/上一轮.json] > /tmp/batches.json`（批次JSON放在仓库外）
+   - 定角色：core / supplement。skip 不由它判断：专利、talk 由第2步按 kind 设定，非本人作品用 `--skip-ids` 或手改 INDEX 的 Role 列。
+   - 按页数切批：core 精读，supplement 略读，book 按章读，abstract 只写摘要级卡片。
+5. **写卡片**：一批交给一个 agent，按 `references/paper-reading-card.md` 写 `references/research/cards/<批次>.md` 和 `<批次>.digest.json`。`07-paper-cards.md` 做索引，每张卡片按 digest 字段手写一行（仓库里没有生成脚本）。
+6. **核对摘录**：`python3 scripts/verify_card_quotes.py <skill目录>`。全部逐字通过才往下走。
+7. **回填阅读状态**：`python3 scripts/mark_read_from_cards.py <skill目录>`。
+8. **汇总**：按卡片模板第三节的保守更新规则，先写 `08-deep-reading-synthesis.md`，再改 SKILL.md。
+   - DFO 团队的流程是：汇总提案 → 保守修改 → 三个只读质疑者复核 → 修正。
+   - 改完重跑 `quality_check.py`。
+
+需要网络可达 arxiv.org、api.unpaywall.org、api.crossref.org，以及各作者主页和机构仓库。没有开放全文的论文只写摘要级卡片，用户可以按上面的文件名补 PDF。PDF 与抽取文本不提交（版权）。完整实例见 `product/dfo-team/DEEP-READING.md`。
 
 ---
 

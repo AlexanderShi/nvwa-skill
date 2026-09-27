@@ -18,11 +18,11 @@ type: roundtable
 
 | Member skill | Researcher | Lens (shorthand) |
 |--------------|-----------|------------------|
-| `michael-powell` | Michael J. D. Powell | Practical model-based solvers built from interpolation models; relentless numerical testing |
-| `andrew-conn` | Andrew R. Conn | Trust-region framework; model quality (geometry of sample sets) that makes convergence provable |
+| `michael-powell` | Michael J. D. Powell | Practical model-based solvers built from interpolation models; relentless numerical testing; disputed claims settled by the smallest decisive case |
+| `andrew-conn` | Andrew R. Conn | Trust-region framework; model quality (geometry of sample sets) that makes convergence provable; audits of his own released solvers set the next agenda |
 | `katya-scheinberg` | Katya Scheinberg | Model-based and stochastic DFO; probabilistic models; choosing between gradient approximations |
 | `luis-nunes-vicente` | Luís Nunes Vicente | Direct-search theory: sufficient decrease, worst-case complexity, probabilistic descent |
-| `charles-audet` | Charles Audet | Blackbox engineering problems: MADS, constraint handling, NOMAD, benchmarking |
+| `charles-audet` | Charles Audet | Blackbox engineering problems: MADS, constraint handling, NOMAD, benchmarking; new algorithms built to inherit proven framework theory |
 
 The shorthand is only for seating. Each member's own `## Roundtable Card` (inside that member's `SKILL.md`) is authoritative.
 
@@ -85,7 +85,10 @@ You are the {NAME} lens on a derivative-free optimization advisory panel. You ar
 you apply the research methods distilled in this skill file: {ABSOLUTE_PATH_TO_MEMBER_SKILL.md}
 
 Read it first — at least: Activation Rules, Research Integrity Rules, Roundtable Card,
-Core Research Methods, Stage Workflows. Open files under its references/ only if you need them.
+Core Research Methods, Stage Workflows. Open files under its references/ only if you need them,
+except: before you propose an experiment or a proof, consult references/technique-catalog.md and
+references/research/08-deep-reading-synthesis.md (§3 variants, §7 technique inventory); for
+katya-scheinberg in student mode, also references/proof-playbook.md.
 If the skill has a "Student Mode" and the user is in student mode, follow it.
 
 PROBLEM CARD:
@@ -105,11 +108,14 @@ YOUR TASK THIS TURN:
 
 Rules:
 - Stay in the lens. Tie every claim to a method in your skill: (→ {NAME} · Method N).
+- Back each claim about the researcher's practice with your skill's paper-card id and page,
+  e.g. [S093 pp. 3–4] (index: references/research/07-paper-cards.md); no card → say so.
 - Ground disagreements in your skill's documented positions; no personal framing, no invented quotes.
 - Verify any paper, solver or option you name with a tool if you have one; otherwise mark it (unverified).
 - Never invent benchmark numbers; propose the experiment that would measure them.
 - Length: opening ≤150 words; rebuttal or answer ≤120; sign-off ≤50.
 - If only the user can supply something you need, ask ONE question.
+- Nothing from a references/sources/private/ folder goes into your reply.
 
 Return exactly these fields:
 POSITION:
@@ -117,7 +123,7 @@ WHY (method refs):
 FIRST EXPERIMENT / DECIDING TEST:
 RISK — WHERE I COULD BE WRONG:
 QUESTION FOR USER: (optional, one line)
-NOTES FOR MODERATOR: (optional — evidence you checked, arithmetic behind any estimate; not shown unless asked)
+NOTES FOR MODERATOR: (optional — evidence you checked with card ids, arithmetic behind any estimate; not shown unless asked)
 ```
 
 ---
@@ -176,13 +182,13 @@ Launch every seated member with task "Opening statement". Present the replies in
 
 For the chosen disagreement, launch the members on each side in parallel, each with the other side's position quoted and the user's latest input. Each must end with the **deciding test**: the experiment or check that would settle the point. Members not involved sit out unless the user adds them.
 
-Documented fault lines (use before inventing new ones):
+Documented fault lines (use before inventing new ones). Each is checked against the members' paper cards: `[michael-powell card S093 pp. 3–4]` is card S093 in `../michael-powell/references/research/cards/*.md` (index: that member's `references/research/07-paper-cards.md`); card ids are per member.
 
-1. **Model-based vs direct search** (Powell, Conn ↔ Audet, Vicente) — efficiency from interpolation/trust-region models on smooth problems vs robustness of poll/mesh methods on nonsmooth, noisy or crash-prone blackboxes. Audet's lens lets models *propose* points in a free Search step while the Poll carries the guarantee; the progressive-barrier trust-region hybrid (Audet, Conn, Le Digabel & Peyrega, 2018) is the documented middle ground.
-2. **How much geometry control is worth** (Conn ↔ Powell, Scheinberg) — certify model quality every iteration, or spend fewer evaluations on it (Fasano, Morales & Nocedal, 2009; Scheinberg & Toint, 2010).
-3. **Deterministic vs probabilistic model quality** (Conn ↔ Scheinberg, Vicente) — models that are good every iteration vs good "often enough" (Bandeira, Scheinberg & Vicente, 2014).
-4. **Globalization in direct search** (Vicente ↔ Audet) — sufficient decrease vs mesh-based acceptance; Audet, Bouchet & Bourdin (2024) gave a counterexample to a 2012 Vicente–Custódio theorem on discontinuous functions, so claims at the edge of the theory need checking.
-5. **Guarantees vs performance** — provable convergence/complexity vs tuned practical efficiency; settle with an equal-budget comparison, not argument.
+1. **Model-based vs direct search** (Powell, Conn ↔ Audet, Vicente) — efficiency from interpolation/trust-region models on smooth problems vs robustness of poll/mesh methods on nonsmooth, noisy or crash-prone blackboxes. Audet, Conn, Le Digabel and Peyrega state the split (direct search for "a very badly behaved function", models when it "can be adequately approximated by a smooth function"); in that paper both model-based codes beat NOMAD on smooth problems, and COBYLA stalled on an MDO blackbox where NOMAD did not [andrew-conn card S075 pp. 2, 22–23; charles-audet card S063 p. 2]. Still contested is where models sit: driving every step (Powell, who argues that restricting points to a grid costs efficiency even on a quadratic [michael-powell card S014 p. 44]) or proposing points in a free Search while the Poll carries the guarantee (Audet [charles-audet card S019 pp. 16–17, 100], though NOMAD's default also lets a model choose one poll direction [charles-audet card S019 pp. 55, 83]; Vicente, whose model search step still trails NEWUOA on smooth, small-budget problems [luis-nunes-vicente card S012 pp. 2, 8, 10]). The progressive-barrier trust-region hybrid (Audet, Conn, Le Digabel & Peyrega, 2018) is the documented middle ground.
+2. **How much geometry control a model needs** (Conn ↔ Scheinberg ↔ Powell) — three positions in print. *Certify*: a model-improvement algorithm must deliver a fully linear model within a finite, uniformly bounded number of steps; the 2008 paper prefers well-poisedness at every iteration, yet expects its algorithms may not beat Powell's rule [andrew-conn cards S012 pp. 3, 7–8; S016 pp. 18, 23]. *Minimum*: a 2-D run of the geometry-free method of Fasano, Morales & Nocedal (2009) stops at a non-stationary point, so geometry cannot be dropped, but dedicated geometry work can be confined to the criticality step while failed trial points repair the set [katya-scheinberg cards S030 pp. 3, 8–12; S143 pp. 4–5]; the 2026 paper certifies only n points and faults earlier complexity analyses (Garmanjani, Júdice & Vicente, 2016, which keep the certify-or-improve model class [luis-nunes-vicente card S032 pp. 4–5]) for dropping Powell's geometry correction [katya-scheinberg card S104 pp. 1–2, 10–12]. Scheinberg co-wrote the first position and moved to the second in 2009–10 [katya-scheinberg cards S016 p. 18; S143 p. 4]. *One evaluation per iteration*: Powell keeps geometry with cheap alternative steps and calls the extra evaluations of the Conn–Scheinberg–Vicente model-improvement step "a major strategic difference" [michael-powell cards S093 pp. 3–4; S108 p. 3]. The measurement that would settle it, how often geometry steps fire and what they cost, is still future work in the Conn line [andrew-conn card S075 pp. 23–24].
+3. **Deterministic vs probabilistic model quality** (Conn ↔ Scheinberg, Vicente) — a model certified within a finite, uniformly bounded number of iterations, with uncertified models still allowed to move the iterate (Conn, Scheinberg & Vicente, 2009) [andrew-conn card S012 pp. 3, 14], vs a model that is fully linear only with probability p ≥ ½ given the past, not certified, plus an acceptance test ‖g_k‖ ≥ η₂δ_k (Bandeira, Scheinberg & Vicente, 2014) [katya-scheinberg card S018 pp. 2, 7–8; luis-nunes-vicente card S014 pp. 2–3, 7–8]. Scheinberg and Vicente wrote both papers: a turn inside one programme, argued from the cost of certification.
+4. **Globalization in direct search** (Vicente ↔ Audet) — sufficient decrease (Vicente's line since 2013: it makes successes countable for complexity bounds and frees trial points from a mesh [luis-nunes-vicente cards S023 pp. 4, 9; S049 p. 2; S038 pp. 5–6]) vs mesh-based acceptance; his 2001–2012 methods were themselves mesh-based with simple decrease [luis-nunes-vicente cards S106 pp. 1–3; S025 pp. 4–6; S008 pp. 3–4; S018 pp. 5, 10; S064 pp. 7–8], and PSwarm's code even skips the mesh projection [luis-nunes-vicente card S018 p. 7]; his 2011–2012 proofs cover both routes [luis-nunes-vicente cards S003 pp. 4, 28–31; S024 p. 6]. Audet's 2025 ADS keeps simple decrease without a mesh and gives one 1-D failure per rival: sufficient decrease stalls at a saddle, mesh projection wastes a model's step [charles-audet card S129 pp. 1–2, 4–6]. Audet, Bouchet & Bourdin (2024) gave a counterexample to a 2012 Vicente–Custódio theorem on discontinuous functions (Theorem 4.1 and its corollary; the main theorems stand) and located the false proof step [charles-audet card S138 pp. 2, 6–9], so claims at the edge of the theory need checking. Powell's lens takes the simple-decrease side for trust regions: sufficient decrease "was introduced to assist proofs of convergence" [michael-powell cards S072 p. 2; S129 p. 2].
+5. **Guarantees vs performance** (Powell ↔ Scheinberg, Vicente) — provable convergence/complexity vs tuned practical efficiency. Powell presents NEWUOA and BOBYQA as "a counter-example" to the view that theoretical insight is vital, and concedes that his own provable family is much less efficient than NEWUOA [michael-powell cards S007 p. 3; S093 p. 2]; the theory side benchmarks theory-backed codes against NEWUOA [katya-scheinberg card S104 pp. 2, 29] and reports when a worse bound wins in practice [luis-nunes-vicente card S032 p. 22]. Settle with an equal-budget comparison, not argument.
 
 > 🔵 **Checkpoint 3 — after each round.** Show both replies, the deciding tests side by side, and a one-line moderator read of what changed. "`round` for another, `@Name …`, `pursue N`, `add <member>`, or `plan`." After 3 rounds on one point, recommend moving to the plan and running the deciding test instead of arguing further.
 
@@ -249,26 +255,35 @@ This team represents the mathematical-optimization tradition of DFO. Say so plai
 - Larson, J., Menickelly, M. & Wild, S. M. (2019). Derivative-free optimization methods. *Acta Numerica* 28, 287–404. https://doi.org/10.1017/S0962492919000060 — survey for orientation.
 - Cartis, C., Fiala, J., Marteau, B. & Roberts, L. (2019). Improving the flexibility and robustness of model-based derivative-free optimization solvers. *ACM TOMS* 45(3), 32. https://doi.org/10.1145/3338517 — DFO-LS and Py-BOBYQA.
 - PRIMA — reference implementation of Powell's COBYLA, UOBYQA, NEWUOA, BOBYQA and LINCOA, started by Zaikun Zhang in 2020. https://github.com/libprima/prima
-- Audet, C., Le Digabel, S., Rochon Montplaisir, V. & Tribes, C. (2022). Algorithm 1027: NOMAD version 4: Nonlinear optimization with the MADS algorithm. *ACM TOMS* 48(3), 35. https://doi.org/10.1145/3544489
+- Audet, C., Le Digabel, S., Rochon Montplaisir, V. & Tribes, C. (2022). Algorithm 1027: NOMAD version 4: Nonlinear optimization with the MADS algorithm. *ACM TOMS* 48(3), 35. https://doi.org/10.1145/3544489 — read in full as arXiv v2 [charles-audet card S021]
 
 ### Papers behind the documented disagreements
 
-- Audet, C., Conn, A. R., Le Digabel, S. & Peyrega, M. (2018). A progressive barrier derivative-free trust-region algorithm for constrained optimization. *Comput. Optim. Appl.* 71, 307–329. https://doi.org/10.1007/s10589-018-0020-4
-- Fasano, G., Morales, J. L. & Nocedal, J. (2009). On the geometry phase in model-based algorithms for derivative-free optimization. *Optim. Methods Softw.* 24, 145–154. https://doi.org/10.1080/10556780802409296
-- Scheinberg, K. & Toint, Ph. L. (2010). Self-correcting geometry in model-based algorithms for derivative-free unconstrained optimization. *SIAM J. Optim.* 20(6), 3512–3532. https://doi.org/10.1137/090748536
-- Bandeira, A. S., Scheinberg, K. & Vicente, L. N. (2014). Convergence of trust-region methods based on probabilistic models. *SIAM J. Optim.* 24(3), 1238–1264. https://arxiv.org/abs/1304.2808
-- Audet, C., Bouchet, P.-Y. & Bourdin, L. (2024). Counterexample and an additional revealing poll step for a result of "analysis of direct searches for discontinuous functions". *Math. Program.* 208, 411–424. https://doi.org/10.1007/s10107-023-02042-3
+Fault line (FL) and the member cards that read each paper; other papers cited above by card id are in that member's `references/research/07-paper-cards.md`.
+
+- Audet, C., Conn, A. R., Le Digabel, S. & Peyrega, M. (2018). A progressive barrier derivative-free trust-region algorithm for constrained optimization. *Comput. Optim. Appl.* 71, 307–329. https://doi.org/10.1007/s10589-018-0020-4 — FL1 [andrew-conn card S075; charles-audet card S063]
+- Conn, A. R., Scheinberg, K. & Vicente, L. N. (2008). Geometry of interpolation sets in derivative free optimization. *Math. Program.* 111, 141–172. https://doi.org/10.1007/s10107-006-0073-5 — FL2 [andrew-conn card S016; katya-scheinberg card S016; luis-nunes-vicente card S010]
+- Conn, A. R., Scheinberg, K. & Vicente, L. N. (2009). Global convergence of general derivative-free trust-region algorithms to first- and second-order critical points. *SIAM J. Optim.* 20(1), 387–415. https://doi.org/10.1137/060673424 — FL2, FL3 [andrew-conn card S012; katya-scheinberg card S007; luis-nunes-vicente card S006]
+- Fasano, G., Morales, J. L. & Nocedal, J. (2009). On the geometry phase in model-based algorithms for derivative-free optimization. *Optim. Methods Softw.* 24, 145–154. https://doi.org/10.1080/10556780802409296 — FL2; not a member paper, known through [katya-scheinberg cards S030; S143]
+- Scheinberg, K. & Toint, Ph. L. (2010). Self-correcting geometry in model-based algorithms for derivative-free unconstrained optimization. *SIAM J. Optim.* 20(6), 3512–3532. https://doi.org/10.1137/090748536 — FL2 [katya-scheinberg card S030]
+- Powell, M. J. D. (2012). On the convergence of trust region algorithms for unconstrained minimization without derivatives. *Comput. Optim. Appl.* 53, 527–555. https://doi.org/10.1007/s10589-012-9483-x — FL2, FL5 [michael-powell card S093]
+- Chaudhry, A., Scheinberg, K. & Sun, S. (2026). Powell-style model-based derivative-free optimization with complexity guarantees. arXiv:2609.09441. https://arxiv.org/abs/2609.09441 — FL2, FL5 [katya-scheinberg card S104]
+- Bandeira, A. S., Scheinberg, K. & Vicente, L. N. (2014). Convergence of trust-region methods based on probabilistic models. *SIAM J. Optim.* 24(3), 1238–1264. https://doi.org/10.1137/130915984 (arXiv:1304.2808) — FL3 [katya-scheinberg card S018; luis-nunes-vicente card S014]
+- Vicente, L. N. (2013). Worst case complexity of direct search. *EURO J. Comput. Optim.* 1, 143–153. https://doi.org/10.1007/s13675-012-0003-7 — FL4 [luis-nunes-vicente card S023]
+- Vicente, L. N. & Custódio, A. L. (2012). Analysis of direct searches for discontinuous functions. *Math. Program.* 133, 299–325. https://doi.org/10.1007/s10107-010-0429-8 — FL4 [luis-nunes-vicente card S024]
+- Audet, C., Bouchet, P.-Y. & Bourdin, L. (2024). Counterexample and an additional revealing poll step for a result of "analysis of direct searches for discontinuous functions". *Math. Program.* 208, 411–424. https://doi.org/10.1007/s10107-023-02042-3 — FL4 [charles-audet card S138]
+- Audet, C., Denorme, T., Diouane, Y., Le Digabel, S. & Tribes, C. (2025). Adaptive direct search algorithms for constrained optimization. arXiv:2507.23054. https://arxiv.org/abs/2507.23054 — FL4 [charles-audet card S129]
 
 ## Honest Boundary
 
 - The discussion is simulated from methods distilled from public work; it is not what these researchers would actually say.
 - Member agents are separate model instances reading different skill files. That makes their positions more independent than a single-context simulation, but they share one underlying model and can converge for reasons that have nothing to do with the researchers.
-- Member skills were built from web-search results without full-text reading; each member's own Honest Boundary lists its gaps.
-- Disagreements between lenses are inferred from their published methods, not from recorded debates.
+- Full-text reading coverage per member (read in full, in part, abstract or metadata only) is in `../DEEP-READING.md`; each member's own Honest Boundary lists its gaps.
+- Fault lines rest on paper cards from both sides. Three are exchanges in print between members (Powell on the Conn–Scheinberg–Vicente model-improvement step, 2012–13; Audet et al. on Vicente–Custódio 2012, in 2024; Chaudhry–Scheinberg–Sun on Garmanjani–Júdice–Vicente, 2026); the rest contrast published methods. None is a recorded debate.
 - Powell (d. 2015) and Conn (d. 2019) are historical lenses: they reflect work up to then. Later developments (e.g. PRIMA maintaining Powell's solvers) are others' work.
 - Bayesian optimization and evolutionary methods are outside this team.
 - Recommendations are hypotheses to test on the user's problem, not guarantees.
-- Research date: 2026-09.
+- Research date: 2026-09-27 (fault lines checked against the paper cards).
 
 ---
 

@@ -287,6 +287,7 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
     abstracts = json.loads(abs_path.read_text(encoding="utf-8")) if abs_path.exists() else {}
 
     rows = []
+    kept_without_file = 0
     for n, w in enumerate(works, 1):
         prev = kept.get(w["id"], {})
         pdf = papers / f"{slug(w)}.pdf"
@@ -327,6 +328,11 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
                     status, source, pages = st, src, np_ or ""
                     break
 
+        # PDF 与 txt/ 不进 git，新克隆的仓库里没有本地文件：保留已提交的全文状态，不重置为 no-oa
+        if status == "no-oa" and prev.get("Full text") in ("txt", "pdf"):
+            status, source, pages = prev["Full text"], prev.get("Source") or "—", prev.get("Pages") or ""
+            kept_without_file += 1
+
         if w["id"] not in abstracts and todo and w.get("kind") not in ("patent", "talk"):
             a = arxiv_abstract(w["arxiv"]) if w.get("arxiv") else ""
             if not a and w.get("doi"):
@@ -349,6 +355,9 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
     write_index(index_path, researcher, rows)
     abs_path.write_text(json.dumps(abstracts, ensure_ascii=False, indent=1), encoding="utf-8")
     works_path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")  # 回写新找到的 arXiv ID
+    if kept_without_file:
+        print(f"  ⚠️ {kept_without_file} rows keep their committed txt/pdf status without a local file "
+              f"(PDFs and txt/ are git-ignored; restore them before re-extracting or verifying quotes)")
     return {k: sum(1 for r in rows if r["Full text"] == k) for k in ("txt", "pdf", "no-oa")} | {"total": len(rows)}
 
 

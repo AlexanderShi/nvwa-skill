@@ -2,7 +2,7 @@
 
 > What this is: one row per work in Luis Nunes Vicente's publication list (Google Scholar profile + DBLP + author homepage; `../sources/publications/works.json`). Each row points to the batch file that holds the work's paper card. A card records, page by page, how the work was done (problem entry, what was kept and changed, assumptions, proof devices, experiments, positioning, writing, limits) and which SKILL.md methods it supports (evidence), qualifies (variant) or contradicts. Machine-readable digests sit next to each batch file (`cards/<batch>.digest.json`). The synthesis of all cards is `08-deep-reading-synthesis.md`.
 
-> Date: 2026-09-27. Generated from the card digests by a script; do not edit rows by hand.
+> Date: 2026-09-27. Generated from `cards/*.digest.json` by a one-off script that is not shipped; when a card is added or changed, write or update its row by hand from the digest fields, in the format of the other rows.
 
 ## Coverage
 

@@ -9,7 +9,7 @@
 角色规则:
     core       被引前 K 篇、SKILL.md 已提到的、近年（>= --recent）、访谈/回忆录/随笔、--core-ids 指定的 → 全文精读
     supplement 其余有全文的 → 略读（摘要、引言、算法、主定理、实验设置、结论）
-    skip       专利、talk、--skip-ids 指定的（非本人作品等）
+    skip       INDEX.md 里已有的 skip 保留（专利、talk 由 acquire_fulltexts.py 按 kind 设定），再加 --skip-ids 指定的（非本人作品等）
 批次类型:
     core / supplement  按页数装箱（core ≤110页且≤5篇，supplement ≤220页且≤8篇）
     book               >150页的书、学位论文、长报告，单独一批，按章读
