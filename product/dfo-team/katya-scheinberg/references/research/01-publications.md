@@ -103,3 +103,27 @@ Selection: the pivot (BSV 2014), the most-reused algorithm (STORM 2018), the DFO
 
 ## Sources used in this file
 All URLs/IDs are listed inline. Aggregator records (Semantic Scholar, ResearchGate) are secondary; publisher/arXiv records are primary.
+
+---
+
+## Update 2026-09-27 (deepening pass): leads resolved and papers added
+
+**Leads from §1.3 now verified** (title + authors + year + venue confirmed by search; RESOURCES.md rows updated):
+
+| Year | Title | Authors | Venue / ID |
+|---|---|---|---|
+| 2019 | Linear interpolation gives better gradients than Gaussian smoothing in derivative-free optimization | A. S. Berahas, L. Cao, K. Choromanski, K. Scheinberg | arXiv:1905.13043 (Lehigh tech report) |
+| 2021 | Global convergence rate analysis of a generic line search algorithm with noise | A. S. Berahas, L. Cao, K. Scheinberg | SIAM J. Optim. 31, 1489–1518; https://doi.org/10.1137/19M1291832 ; arXiv:1910.04055 |
+| 2025 | Sample complexity analysis for adaptive optimization algorithms with stochastic oracles | B. Jin, K. Scheinberg, M. Xie | Math. Program. 209, 651–679; https://doi.org/10.1007/s10107-024-02078-z |
+| 2025 | Stochastic ISTA/FISTA adaptive step search algorithms for convex composite optimization | L. M. Nguyen, K. Scheinberg, T. H. Tran | J. Optim. Theory Appl. 205, art. 10; https://doi.org/10.1007/s10957-025-02621-8 |
+| 2023 | First- and second-order stochastic adaptive regularization with cubics: high probability iteration and sample complexity | K. Scheinberg, M. Xie | arXiv:2308.13161 (preliminary: WSC 2023) |
+| 2016 | Practical inexact proximal quasi-Newton method with global complexity analysis | X. Tang, K. Scheinberg | Math. Program. 160, 495–529; arXiv:1311.6547 |
+| 2025 | (co-author resolved) Stochastic adaptive optimization with unreliable inputs | K. Scheinberg, **M. Xie** | arXiv:2511.19411 |
+
+**Newly added verified works**: Jin–Scheinberg–Xie, NeurIPS 34 (2021), "High probability complexity bounds for line search based on stochastic oracles"; Nguyen–Liu–Scheinberg–Takáč, ICML 2017, "SARAH"; Curtis–Scheinberg, INFORMS TutORials 2017 and IEEE SPM 37(5) 2020.
+
+**Lead resolved negatively**: arXiv:2604.15526 (RAAS) is by Zhang, Liao, Han, Guo (UCAS), not Scheinberg.
+
+**Still unverified**: arXiv:1703.06925; arXiv:1306.5729 (authors).
+
+The analysis templates behind these papers are in `../proof-playbook.md`; the ordered reading list is in `../reading-path.md`.

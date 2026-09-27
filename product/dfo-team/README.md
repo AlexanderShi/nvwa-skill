@@ -10,7 +10,7 @@ This selection follows the mathematical-optimization tradition of DFO; Bayesian 
 |-------|-----------|-----------|--------|
 | `michael-powell` (Powell.skill) | Michael J. D. Powell | COBYLA, UOBYQA, NEWUOA, BOBYQA, LINCOA; practical model-based DFO | [michael-powell/](michael-powell/) |
 | `andrew-conn` (Conn.skill) | Andrew R. Conn | Trust-region methods; model-based DFO theory; *Introduction to Derivative-Free Optimization* | [andrew-conn/](andrew-conn/) |
-| `katya-scheinberg` (Scheinberg.skill) | Katya Scheinberg | Model-based and stochastic DFO; probabilistic models | [katya-scheinberg/](katya-scheinberg/) |
+| `katya-scheinberg` (Scheinberg.skill) | Katya Scheinberg | Model-based and stochastic DFO; probabilistic models. Has a **student mode** (proof playbook, open problems, reading path, pre-meeting review) | [katya-scheinberg/](katya-scheinberg/) |
 | `luis-nunes-vicente` (Vicente.skill) | Luís Nunes Vicente | Direct search; convergence and worst-case complexity | [luis-nunes-vicente/](luis-nunes-vicente/) |
 | `charles-audet` (Audet.skill) | Charles Audet | MADS, NOMAD; blackbox and constrained optimization | [charles-audet/](charles-audet/) |
 | `dfo-roundtable` | — | Convenes the five to discuss your problem and produce a plan | [dfo-roundtable/](dfo-roundtable/) |

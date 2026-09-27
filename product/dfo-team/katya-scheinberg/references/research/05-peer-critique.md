@@ -45,3 +45,42 @@
 - **Conn lens** (deterministic trust-region DFO; "fully linear" model certification): shared origin (CST 1997; CSV 2008; book 2009). Scheinberg's 2014+ work replaces "certified every iteration" with "good with probability p".
 - **Vicente lens**: co-author on the 2014 pivot; the direct-search side of Vicente's work (not verified in this file) contrasts with Scheinberg's model/gradient-estimate side.
 - **Audet lens** (direct search for nonsmooth, constrained black boxes): contrast on smoothness and oracle assumptions (see §4.1–4.2). No direct exchange between the two was found.
+
+---
+
+## Update 2026-09-27 (deepening pass)
+
+Still **no published critique, comment paper, or public review of Scheinberg's work** was found. The additions are verified parallel and competing lines, which show where others think the framework needs extending, plus Scheinberg's own stated critiques of competing practice.
+
+### 6. Verified parallel / competing lines (authors now confirmed)
+
+| Work | Authors (verified) | Relation to Scheinberg's work |
+|---|---|---|
+| Complexity and global rates of trust-region methods based on probabilistic models, *IMA J. Numer. Anal.* 38(3), 1579–1597 (2018), https://doi.org/10.1093/imanum/drx043 | S. Gratton, C. W. Royer, L. N. Vicente, Z. Zhang | **Parallel** probabilistic trust-region complexity, with high-probability iteration bounds. It appeared the same year as Cartis–Scheinberg (expected bounds). The probabilistic-model idea from BSV 2014 was developed in two groups at once. Scheinberg's group reached high-probability bounds for *adaptive stochastic* (not only random-model) settings later (2021–2024). |
+| Robust Accelerated Adaptive Search: high-probability complexity bounds under bounded-moment stochastic oracles, arXiv:2604.15526 (2026) | S. Zhang, S. Liao, C. Han, T. Guo (UCAS) | **Third-party extension** of the high-probability adaptive-search framework to momentum/acceleration and bounded-moment oracles. Previously listed as possibly related; it is now confirmed **not** Scheinberg's. It fills a gap in the verified corpus (acceleration; open-problems.md row 5). |
+| A note on the complexity of random subspace model-based methods for derivative-free optimization, arXiv:2608.17307 (2026) | C. Cartis, L. Roberts | **Parallel/competing** analysis on the question Chaudhry–Scheinberg(–Sun) address: dimension dependence of random-subspace model-based DFO. Compare the bounds before claiming tightness (open-problems.md row 1). |
+| Derivative-free optimization methods, *Acta Numerica* 28, 287–404 (2019) | J. Larson, M. Menickelly, S. M. Wild | Survey by a Scheinberg PhD graduate with Argonne co-authors. It positions probabilistic-model methods within the whole DFO field and is the neutral reference for "what else exists". |
+| Benchmarking derivative-free optimization algorithms, *SIAM J. Optim.* 20(1), 172–191 (2009) | J. J. Moré, S. M. Wild | The benchmarking standard (data profiles). Scheinberg's Optima 79 essay builds on its findings about Powell's method (search summary). |
+
+### 7. Scheinberg's stated critiques of competing practice (primary)
+
+- **Tuned step schedules in SG methods.** Curtis–Scheinberg, *IEEE SPM* 2020: non-adaptive SG approaches need prescribed parameters tuned for each application. Adaptive methods may save substantial computation (paraphrase).
+- **Expectation-only model correctness.** BSV 2014 (via search summary): contrasted with stochastic-gradient approaches in which the model is assumed correct only in expectation.
+- **Assuming unbiased gradients.** Nguyen–Scheinberg–Tran, JOTA 2025, analyse stochastic ISTA/FISTA without assuming an unbiased stochastic gradient. Jin–Scheinberg–Xie 2024 allow biased oracles.
+- **"Model-based DFO has no competitive worst-case theory."** Chaudhry–Scheinberg 2025 state that complexity analysis lagged behind practice and show that these methods can match any known DFO method in the worst case.
+- **Over-engineering model quality.** Optima 79 (≈2009): only minimal quality controls are needed (paraphrase of search summary), citing the Moré–Wild experiments on Powell's method. This is an implicit critique of certifying model quality at every iteration.
+
+### 8. Self-critique through the gaps each paper names (primary)
+
+| Paper | Gap it names in earlier work (abstract-level, paraphrase) |
+|---|---|
+| Jin–Scheinberg–Xie, Math. Program. 2025 | The step parameter is not bounded away from zero, and bounds on it had not been derived, so earlier iteration bounds did not yield sample complexity. |
+| Scheinberg–Xie, arXiv:2511.19411 | Earlier high-probability frameworks did not cover arbitrarily corrupted gradients or heavy-tailed values. This is the first analysis giving high-probability stopping-time bounds in that setting. |
+| Chaudhry–Scheinberg–Sun, arXiv:2609.09441 | The 2025 companion analysed a *simplified* version of Powell's methods. The 2026 paper incorporates Powell's full geometry handling. |
+| Berahas–Cao–Scheinberg, SIOPT 2021 | The earlier stochastic-process framework assumed exact function values and random gradients. This paper extends it to noisy functions. |
+
+### 9. Updated structural limits
+
+- Limits §4.1–4.2 (smoothness, constraints) are **reconfirmed** by talk titles: the Aisenstadt lectures (2025) are explicitly about *unconstrained* continuous optimization.
+- The composite (prox) case is now covered for **convex** problems (JOTA 2025). The nonconvex composite and constrained cases remain outside the verified work.
+- Acceleration/momentum: not in the verified Scheinberg corpus. Third parties are extending it (RAAS 2026).

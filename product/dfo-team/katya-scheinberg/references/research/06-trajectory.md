@@ -37,3 +37,50 @@ Entry timing: Scheinberg entered model-based DFO early (1997, before the field h
 ## 4. Not covered
 
 - Exact years for Lehigh start and IBM departure; Farkas Prize year; PhD advisor; full list of recent talks.
+
+---
+
+## Update 2026-09-27 (deepening pass)
+
+### 5. Corrections and filled gaps
+
+| Item | Previous status | Now | Source |
+|---|---|---|---|
+| Lehigh start | "≈2010s" ⚠️ | Joined Lehigh ISE in **2010**. Harvey E. Wagner Chair from **2014**. Left for Cornell ORIE in July 2019 | Lehigh ISE newsletter / Cornell welcome page (search summaries): https://engineering.lehigh.edu/news/article/postdocs-lehigh-ise-tradition-excellence ; https://www.engineering.cornell.edu/spotlights/welcome-katya-scheinberg |
+| Farkas Prize year | ⚠️ | **2019** (INFORMS Optimization Society; Scheinberg was at Cornell at the time) | https://connect.informs.org/optimizationsociety/prizes/farkas-prize/2019 |
+| SIAM Fellow | undated | **Class of 2025**. Cited for foundational contributions to DFO and optimization applications in data science, and for service (paraphrase) | https://www.isye.gatech.edu/news/coca-cola-foundation-chair-katya-scheinberg-selected-2025-class-siam-fellows |
+| Co-author of arXiv:2511.19411 | ⚠️ | **Miaolan Xie** (verified) | https://arxiv.org/abs/2511.19411 |
+| ICM 2026 | ⚠️ one snippet | Scheinberg is an ICM 2026 **section lecturer (Control Theory and Optimization)** (Georgia Tech news summary). arXiv:2510.14935 is listed as ICM 2026 proceedings on the co-author's homepage | https://math.gatech.edu/news/school-mathematics-professor-john-etnyre-speak-icm-2026 ; https://chaudhrya.github.io/ |
+| arXiv:2604.15526 (RAAS) | "may or may not involve Scheinberg" | **Not Scheinberg's** (Zhang, Liao, Han, Guo; UCAS) | https://arxiv.org/abs/2604.15526 |
+
+### 6. Invited-talk timeline (verified titles/dates)
+
+| Date | Venue | Title | Signal |
+|---|---|---|---|
+| 24 May 2017 | SIAM Conference on Optimization (OP17), Vancouver, plenary | Using Second-order Information in Training Large-scale Machine Learning Models | Lehigh-era ML optimization (LHAC 2016, SARAH 2017) |
+| 2017 | INFORMS TutORials (with F. E. Curtis) | Optimization Methods for Supervised Machine Learning: From Linear Models to Deep Learning | Teaching ML optimization to OR |
+| 2020 | IEEE Signal Processing Magazine (with Curtis) | Adaptive Stochastic Optimization (overview) | Consolidates the adaptive-methods programme |
+| 2021 | INFORMS Annual Meeting, Anaheim | Stochastic First Order Oracles and Where to Find Them | Oracle-first programme becomes the headline talk |
+| 2022 | MICDE Winter seminar (video); later MIT ORC, Princeton, Cornell CAM (Feb 2023), NC State (Mar 2023) | Overview of Adaptive Stochastic Optimization Methods | Martingale / stopping-time view stated |
+| 2022 | NeurIPS OPT workshop, plenary | Stochastic Oracles and Where to Find Them | ML audience |
+| 17 May 2024 | Waterloo, Distinguished Tutte Lecture | Stochastic Oracles and Where to Find Them | — |
+| 10 Apr 2025 | Lehigh ISE Spencer C. Schantz Technical Talk | Stochastic Oracles and Where to Find Them | — |
+| 20–30 May 2025 | CRM Montréal, Aisenstadt Chair lectures | Introduction to derivative-free and zeroth order optimization I–II; A study of stochastic and noisy oracles in unconstrained continuous optimization | Course-length synthesis of both arcs |
+| 2026 | ICM, section lecture | (title not retrieved; companion paper arXiv:2510.14935) | Powell-style complexity presented to the whole mathematics community |
+
+*Reading (inference):* between 2021 and 2025 one talk title was reused at four venues, which marks it as the core message of this period. By 2025–2026 the public emphasis widened from stochastic oracles to bringing model-based DFO (Arc 1) into that framework, as the Aisenstadt course and the ICM paper show.
+
+### 7. Group generations (from 04-mentorship.md, verified records)
+
+| Period | Students / postdocs (verified) | Line |
+|---|---|---|
+| Lehigh 2010–2019 | R. Chen (PhD 2015), X. Tang, M. Menickelly (PhD 2017), X. Bai, A. Yektamaram, H. Ghanbari, L. Cao (PhD 2021), M. Li; postdocs C. Paquette (2018), A. S. Berahas (2018–2020) | Random models / STORM; proximal quasi-Newton for ML; stochastic line search; estimators and noise |
+| Cornell 2019–2024 | M. Xie (PhD 2019–2024) | High-probability and sample complexity; unreliable inputs |
+| Georgia Tech 2024– | A. Chaudhry (Butler postdoctoral fellow) | Powell-style model-based DFO complexity |
+
+### 8. Latest 12 months, updated
+
+- **Aug 2026 (third party):** Cartis & Roberts, "A note on the complexity of random subspace model-based methods for DFO" (arXiv:2608.17307), on the same question as Chaudhry–Scheinberg(–Sun).
+- **2026:** ICM section lecture; arXiv:2510.14935 in ICM proceedings (co-author's page).
+- **May 2025:** Aisenstadt Chair lectures (just outside the window; recorded on YouTube).
+- **2025:** JOTA stochastic ISTA/FISTA (Nguyen–Scheinberg–Tran) and Math. Program. sample-complexity paper (Jin–Scheinberg–Xie) published.
