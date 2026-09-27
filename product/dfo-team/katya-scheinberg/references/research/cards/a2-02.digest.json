@@ -1,0 +1,331 @@
+[
+ {
+  "id": "S113",
+  "year": "2019",
+  "title": "Knowing What to Know in Stochastic Optimization",
+  "read_level": "metadata",
+  "contribution": "Sole-author SIAM News essay (vol. 52, issue 02, March 2019 per web search); body not read (siam.org returned HTTP 403). Inferred from title: an essay on what an algorithm must know about its stochastic estimates (inferred from title).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Scholar venue string 'Collections 52 (02)'; SIAM News placement from a search result (metadata).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Title only; already cited in SKILL.md as 'title and summary only'; no content could be read to strengthen it.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S111",
+  "year": "2020",
+  "title": "Collaborative Research: AF: Small: Adaptive Optimization of Stochastic and Noisy Function",
+  "read_level": "abstract",
+  "contribution": "NSF CCF Algorithmic Foundations award 2008434 (Cornell, PI Scheinberg, 10/2020-09/2024, $101,000 obligated). Outcomes report: adaptive step search, trust region and cubic-regularized Newton analysed under biased, bounded-irreducible, arbitrarily-corrupted (with positive probability) and biased light-tailed estimators; convergence at fast rates to a neighbourhood of stationary points with explicit neighbourhood bounds; 3 PhD students; REU on standard and robust gradient estimators that found theory-practice gaps (NSF outcomes report).",
+  "problem_entry": "SG and its variants are nonadaptive and need expensive data-dependent hyperparameter tuning per task; goal is adaptive algorithms with theoretical guarantees (NSF abstract).",
+  "key_idea": "Base stochastic adaptive methods on deterministic line search and trust region; since these lack optimal worst-case complexity, focus on adaptive cubic regularization, analysed through a framework viewing adaptive minimization as a renewal-reward stochastic process (NSF abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Seven award publications listed: Jin-Scheinberg NeurIPS 2021; Scheinberg-Xie WSC 2023; Berahas-Cao-Choromanski-Scheinberg FoCM; Jin-Scheinberg-Xie SIOPT 2024 and Math. Program. 2024; Cao-Berahas-Scheinberg Math. Program.; Berahas-Cao-Scheinberg SIOPT 2021 (NSF record).",
+  "writing": "",
+  "limits_future": "Outcomes report names gaps between theory and practice found in the REU robust-gradient-estimation work as future work (NSF outcomes report).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Renewal-reward stochastic-process framework stated as the analytic basis in a PI-written grant abstract.",
+    "pages": "NSF abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Adaptive stochastic methods built from deterministic line search, trust region and cubic regularization, motivated by avoiding hyperparameter tuning.",
+    "pages": "NSF abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Report enumerates oracle failure types (bias, bounded irreducible noise, arbitrary corruption with positive probability, light tails) and states convergence to a noise-determined neighbourhood (Method 1 step 3).",
+    "pages": "NSF outcomes report"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S112",
+  "year": "2020",
+  "title": "Complexity analysis framework of adaptive optimization methods via martingales",
+  "read_level": "abstract",
+  "contribution": "Talk (Scholar venue 'Complexity 17' unexplained). Abstract read is that of the same-family Cornell ORIE Colloquium talk of 20 Sep 2018 ('Convergence analysis of adaptive stochastic optimization methods via martingales'); claimed results: a general framework plus stronger rates for stochastic trust region and the first stochastic line search with convergence guarantees (talk abstract).",
+  "problem_entry": "A very general framework for unconstrained adaptive stochastic optimization covering line search and trust region with random models (talk abstract).",
+  "key_idea": "Keep step acceptance, trust-region adjustment, second-order models and adaptive sampling; bound the expected stopping time of a stochastic process satisfying stated assumptions, then derive each method's rate by verifying that its process satisfies them (talk abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Claimed results match the topics of S013 (stochastic trust region via supermartingales) and S015 (stochastic line search with expected complexity) (inferred from titles).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Stopping-time framework for adaptive methods stated in a talk abstract.",
+    "pages": "talk abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Framework retains the classical acceptance criterion and trust-region adjustment.",
+    "pages": "talk abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Split a complexity proof into a process-level theorem (expected stopping time under abstract assumptions on the process) and a per-algorithm lemma set verifying those assumptions, so a new algorithm needs only the verification (talk abstract)."
+  ],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S044",
+  "year": "2022",
+  "title": "Finite difference gradient approximation: To randomize or not?",
+  "read_level": "abstract",
+  "contribution": "Short sole-author position piece (IJOC 34(5):2384-2388, 5 pp., 12 references per Crossref) arguing that randomized finite-difference gradients have no clear advantage over classical finite differences inside optimization methods, and posing the open question of a setting where they would; names scaling of black-box methods with dimension as the larger challenge (abstract).",
+  "problem_entry": "Against a trend: randomized FD schemes are popular, but it is unclear they beat classical FD when employed inside an optimization method (abstract).",
+  "key_idea": "Point to theoretical and practical evidence that the opposite holds in a general optimization setting, then ask whether any particular setting shows the randomized method's advantage, at least numerically (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Crossref references include the group's FoCM 2022 comparison (S006), Nesterov-Spokoiny (FoCM), Duchi et al. (IEEE TIT 2015), Ghadimi-Lan (SIOPT 2013), Spall 1992/2000, More-Wild (TOMS 2012), Larson-Menickelly-Wild (Acta Numerica 2019), Maggiar et al. (SIOPT 2018), the Conn-Scheinberg-Vicente book, Shamir (JMLR 2017), Snoek et al. 2012 (Crossref).",
+  "writing": "Question-form title; abstract closes a critique with an explicit open question rather than a verdict (abstract).",
+  "limits_future": "Larger challenge named: black-box optimization methods that scale well with problem dimension (abstract); stated limits otherwise not read.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Estimator choice judged by performance inside the outer optimization method, not in isolation; builds on the cited FoCM comparison S006.",
+    "pages": "abstract; Crossref"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "close a critique with a falsifiable open question",
+    "evidence": "Position piece against randomized FD ends by asking for a setting where the new method's advantage can be shown, at least numerically.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Close a critique of a popular method with an explicit, testable open question (in which setting would it clearly win, even only numerically?) so the piece invites a counter-example instead of only dismissing the method (abstract)."
+  ],
+  "coauthors": "",
+  "quotes": [
+   {
+    "text": "Despite of the popularity of the latter, we argue that it is unclear whether the randomized schemes have an advantage over the traditional methods when employed inside an optimization method.",
+    "page": "abstract"
+   },
+   {
+    "text": "The larger underlying challenge is a development of black box optimization methods that scale well with the problem dimension.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S108",
+  "year": "2024",
+  "title": "Collaborative Research: AF: Small: A Unified Framework for Analyzing Adaptive Stochastic Optimization Methods Based on Probabilistic Oracles",
+  "read_level": "abstract",
+  "contribution": "NSF CCF award 2438005 (Georgia Tech, PI Scheinberg, 07/2024-12/2025, $108,000 obligated, listed FY 2022). Outcomes report: high-probability complexity bounds for trust-region, cubic-regularization and step-search methods with noisy/unreliable inputs; adaptive stochastic ISTA/FISTA and proximal trust region for convex composite problems; zero-one and ranking loss approximations; accelerated shuffling methods; stochastic methods for nonsmooth and constrained problems (NSF outcomes report).",
+  "problem_entry": "Algorithms are launched with a prescribed trajectory, so parameters are tuned and the target is hit only after many expensive misses; assumptions are restrictive (e.g. uncorrupted data) (NSF abstract).",
+  "key_idea": "Adaptive self-tuning methods with rigorous guarantees, extended to imperfect information (biased function values, corrupted data, novel objective approximations) and to constrained learning, packaged as a unified analysis framework with easy-to-use tools (NSF abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Two award publications listed: Ghanbari-Li-Scheinberg (Vietnam J. Math. 2025); Nguyen-Scheinberg-Tran (JOTA 2025) (NSF record). 2024 start with FY2022 funds suggests a transferred award (inferred from dates).",
+  "writing": "",
+  "limits_future": "Under review per report: nonsmooth stochastic trust region, unified high-probability framework for unreliable inputs, ARC, sample complexity, stochastic SQP (NSF outcomes report).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Probabilistic oracles, with biased function information and corrupted data as the named extension.",
+    "pages": "NSF abstract; award title"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Unified framework for analyzing adaptive stochastic methods; high-probability complexity bounds reported.",
+    "pages": "NSF abstract; NSF outcomes report"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Adaptive variants of classical ISTA/FISTA and trust-region methods.",
+    "pages": "NSF outcomes report"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S081",
+  "year": "2026",
+  "title": "Stochastic gradients: Optimization, simulation, randomization, and sensitivity analysis",
+  "read_level": "abstract",
+  "contribution": "Multi-perspective survey/perspective article on stochastic gradient estimation across OR/MS, ISE, optimal/stochastic control, statistics and CS/AI/ML (abstract; 'survey' inferred from wording). IISE Transactions 58(2):240-256, online 15 Apr 2025 (Crossref).",
+  "problem_entry": "Big data and high-dimensional optimization in OR and AI have brought stochastic gradients to the forefront (abstract).",
+  "key_idea": "View research and applications in stochastic gradient estimation from multiple perspectives, since seminal advances came from diverse and disparate fields (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "88 references (Crossref); 9 match Scheinberg works by DOI: S001, S006, S013, S014, S015, S026, S041, D001, S044 (Crossref x works.json).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Estimator-level view across communities; whether estimators are compared at equal accuracy was not read.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "cross-community synthesis of one object",
+    "evidence": "Maps stochastic gradient estimation across OR/MS, ISE, control, statistics and CS/ML in one article (single abstract only).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "M. C. Fu, J. Hu",
+  "quotes": [
+   {
+    "text": "Big data and high-dimensional optimization problems in operations research (OR) and artificial intelligence (AI) have brought stochastic gradients to the forefront.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S105",
+  "year": "2026",
+  "title": "Editor's Comments on the 50th Anniversary of Mathematics of Operations Research",
+  "read_level": "metadata",
+  "contribution": "Editor's editorial for MOR's 50th anniversary (51(1):iv-viii); service item, not research (inferred from title/venue). Search-engine summary (unverified paraphrase): 50 papers chosen, one per year; mentions José Blanchet as future leader and former editors-in-chief's comments.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S138",
+  "year": "",
+  "title": "SIAG/OPT Views and News",
+  "read_level": "metadata",
+  "contribution": "Newsletter of the SIAM Activity Group on Optimization; multi-author Scholar record (Scheinberg, Borwein, Lewis, Fletcher, Leyffer, Floudas, ...) likely merges contributors of one or more issues, so the Scheinberg item is unidentified (inferred from title/authors).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J Borwein, A Lewis, R Fletcher, S Leyffer, CA Floudas, ...",
+  "quotes": []
+ },
+ {
+  "id": "S140",
+  "year": "",
+  "title": "Efficient active set methods for support vector machines.",
+  "read_level": "metadata",
+  "contribution": "Probably a talk or report in the S022 (JMLR 2006 active-set SVM) / S071 (INCAS, with S. Fine, 2002) line; identity not confirmed (inferred from title).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ },
+ {
+  "id": "S142",
+  "year": "",
+  "title": "SINCO-an Efficient Greedy Method for Learning Sparse INverse COvariance Matrix",
+  "read_level": "metadata",
+  "contribution": "Probable version or duplicate of S049 (SINCO greedy coordinate ascent for sparse inverse covariance selection, Scheinberg & Rish, Optimization Online 2009) (inferred from title and coauthor).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "I Rish",
+  "quotes": []
+ },
+ {
+  "id": "S143",
+  "year": "2009",
+  "title": "OPTIMA (identified as OPTIMA 79: Geometry in model-based algorithms for derivative-free unconstrained optimization)",
+  "read_level": "abstract",
+  "contribution": "Expository MPS newsletter feature (OPTIMA 79, PDF created 2009-06-02) surveying model-based DFO geometry; abstract credits Conn-Scheinberg-Vicente with the general convergence theory and Scheinberg-Toint with the self-correcting property giving convergence under very mild requirements (OPTIMA p. 1, abstract). Body not read.",
+  "problem_entry": "DFO for nonlinear problems where derivatives are impractical (computational cost or numerical inaccuracy); applications: circuit tuning, aircraft configuration, water-pipe calibration, oil-reservoir modelling (OPTIMA p. 1, abstract).",
+  "key_idea": "Historical framing: sampling methods until the late 1990s, then model-based trust-region DFO (Powell; Conn, Scheinberg, Toint) with linear/quadratic interpolation models; geometry question resolved via convergence theory and the self-correcting property (OPTIMA p. 1, abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Credits Powell as pioneer and Conn, Scheinberg, Toint and Vicente for advances and theory (OPTIMA p. 1, abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Scheinberg's own essay ties interpolation-set geometry to the self-correcting property and convergence under very mild requirements; supplies the article title SKILL.md lists as not retrieved. The Moré-Wild claim in SKILL.md is not checked.",
+    "pages": "OPTIMA p. 1, abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "",
+  "quotes": []
+ }
+]

@@ -1,0 +1,225 @@
+[
+ {
+  "id": "S164",
+  "year": "1989",
+  "title": "An Approach to Nonlinear Approximation",
+  "read_level": "full",
+  "contribution": "Summarises the Conn-Li approach to discrete nonlinear Chebyshev (l-infinity) approximation, which generalises the linear cadre/reference-set characterisation to nonlinear problems and uses it to steer a descent method, and adds the safeguarded line search, a three-type degeneracy treatment (with an NNLS reformulation) and a Maratos safeguard; all proofs are deferred to Li's 1988 thesis.",
+  "problem_entry": "Linear Chebyshev problems have a global, computable characterisation (alternation) that primal/dual codes exploit; nonlinear ones only a local one, and the usual route is an NLP reformulation. The authors instead base the algorithm on local characterisation attempts, motivated by a failure mode of Conn's own 1978 descent method (two activities on one error peak) (pp. 2-5, 21).",
+  "key_idea": "Find a cadre, build a reference set on it and level it: directions d = h + v, where h = -Z B^-1 Z^T grad f_mu descends in the null space of the difference-Jacobian and v = -A(A^T A)^-1 Phi levels the working functions; negative cadre multipliers drop several indices at once (pp. 8-10).",
+  "assumptions": "f_i twice continuously differentiable, local minimum sought; Lipschitz gradients (Assumption 4.1); B positive definite; bounded directions for Lemma 4.2; epsilon small so the epsilon-active and active sets coincide, for simplicity of discussion (pp. 3, 10-12, 15).",
+  "proof_devices": [
+   "optimality restated as a levelled reference set with maximal deviation (Thm 2.3) (p. 8)",
+   "line-search acceptance for a max-function: delta sufficient-decrease condition with the epsilon-active one-sided derivative, plus a beta (curvature) or gamma (gap-closing) condition; existence of an acceptable interval and a lower bound on the step (Lemmas 4.1-4.3, proofs in Li's thesis) (pp. 11-12)",
+   "simplex-constrained least squares min ||sum theta_j grad f_j|| reduced to an NNLS problem, theta* = lambda*/e^T lambda* (Lemma 5.3) (pp. 18-19)",
+   "independence of h and v from the choice of representative index i0 (Thm 3.4) (p. 10)"
+  ],
+  "experiments": "none in this report; initial testing said to indicate efficacy, with details in the companion report [7] (p. 22)",
+  "positioning": "Extends linear Chebyshev theory (Haar condition, alternant, Remez; Descloux's cadre) and the authors' primal linear l-infinity method (Bartels-Conn-Li); calls earlier nonlinear alternant generalisations (Motzkin, Rice, Tornheim) restrictive; uses Maratos corrections in the style of Coleman-Conn and Fletcher (pp. 3-7, 19).",
+  "writing": "Idea-first report: the abstract announces that all proofs are omitted to emphasise the main ideas, and every lemma carries a page pointer into the student's thesis; the conclusion tells the origin story from the first author's own earlier method (pp. 2, 12, 15, 21).",
+  "limits_future": "Type iii degeneracy has no known reference-set construction, so a least-squares steepest-descent direction is used; the Maratos effect is possible but unobserved; convergence only under certain conditions; general minimax and constraints left as a straightforward extension (pp. 18-19, 21-22).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Linear Chebyshev theory (alternation, Remez, Descloux's cadre) carried to the nonlinear case; NLP null-space step and Maratos correction reused.",
+    "pages": "pp. 3-7, 10, 19, 21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The structure exploited is the structure of the solution (levelled reference set), not the composition of the objective; exact gradients are used, so there is no black box.",
+    "pages": "pp. 3, 8, 21"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory, code and tests split across documents: proofs in Li's thesis, details here, numbers in the companion report [7]/S108.",
+    "pages": "pp. 2, 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Optimality is restated as a levelled reference set; every direction is built both to descend and to move toward that structure (find cadre, build reference set, level).",
+    "pages": "pp. 8, 10, 21-22"
+   },
+   {
+    "pattern": "Self-audit of one's own earlier method",
+    "evidence": "Motivated by a named inefficiency of Conn's 1978 descent method (two activities on one error-curve peak), which cannot occur at a solution.",
+    "pages": "p. 21"
+   }
+  ],
+  "transferable": [
+   "For a max-type objective, accept a step by sufficient decrease measured with the epsilon-active one-sided derivative plus either a curvature test on a decreasing active piece or a gap-closing test on a non-decreasing piece; prove that an acceptable interval exists and that steps are bounded below (pp. 11-12).",
+   "Start the line search at the leftmost break point where a non-working function crosses the representative along d, then use cubic/quadratic interpolation with a bisection fallback (p. 13).",
+   "Get the minimum-norm convex combination of gradients (steepest descent at a degenerate point) by solving NNLS min ||A~ lambda - e_{n+1}||, lambda >= 0, and rescaling theta* = lambda*/e^T lambda* (pp. 18-19).",
+   "Anti-Maratos: take the horizontal step first, re-evaluate, and compute the levelling step at x + h, v = -A(A^T A)^-1 Phi(x + h); expose it as a user flag (pp. 19-20)."
+  ],
+  "coauthors": "Yuying Li",
+  "quotes": []
+ },
+ {
+  "id": "S108",
+  "year": "1990",
+  "title": "An efficient algorithm for nonlinear minimax problems",
+  "read_level": "full",
+  "contribution": "Presents and tests a descent algorithm for discrete nonlinear minimax and Chebyshev problems that builds a working set toward a levelled reference set (the generalised alternation characterisation), with horizontal (descent) and vertical (levelling) directions, multiplier-driven multiple dropping, projected quasi-Newton second-order steps and a three-type degeneracy treatment; tested on 22 literature problems plus one application, counting function evaluations.",
+  "problem_entry": "The max-function is nonsmooth at kinks and existing methods go through an equivalent NLP; Remez-type experience and the authors' linear l-infinity work show that enforcing the solution's characterisation pays, and [13] supplied that characterisation for nonlinear minimax (pp. 3-5).",
+  "key_idea": "Build the working set from the maxima across iterations; test for a cadre through the QR null-space projection ||Z^T grad f_mu|| <= tau_c; step d = h + v with h = -Z B^-1 Z^T grad f_mu (equal first-order decrease of all working functions) and v = -A(A^T A)^-1 Phi (levelling), keeping v only if it descends; drop all negative-multiplier indices at once (pp. 5-13).",
+  "assumptions": "f_i twice continuously differentiable; a local minimum exists; A^k numerically full rank (tolerance on smallest singular value); Z^T G Z positive definite; second-order sufficiency near x*; convergence assumptions deferred to Li's thesis [23] (pp. 3, 9, 11, 14, 22).",
+  "proof_devices": [
+   "rank sandwich: rank(C) <= |C|-1 from the multiplier relation and >= |C|-1 from full rank of A with Z^T grad f_i0 != 0, then Lemma 2.2 certifies a zero-sum cadre (Lemma 3.2) (pp. 7-8)",
+   "sum-one cadre exists iff the orthogonal projection Z^T grad f_i0 = 0 (Lemma 3.3) (pp. 8-9)",
+   "h^T grad f_mu = -(Z^T grad f_mu)^T B^-1 (Z^T grad f_mu) < 0 iff Z^T grad f_mu != 0, and A^T h = 0 gives equal first-order change of all working functions (Lemma 5.1) (pp. 11-12)"
+  ],
+  "experiments": "22 literature minimax/Chebyshev problems (n 2-20, m up to 51) plus one application (80 functions, 40 variables); function-evaluation counts vs Hald-Madsen, Conn 1979, Womersley-Fletcher and Charalambous, rival numbers copied where available from the literature; NM needs no more evaluations than CN/WF/CL where numbers exist (one tie), while Hald-Madsen stopped on round-off on 11 of 22 but used fewer evaluations than NM on 6, and the tie is argued via per-iteration cost (pp. 17-22).",
+  "positioning": "Compared with the SEQP-type methods of Conn [12] and Womersley-Fletcher [33] and the SLP/trust-region plus quasi-Newton method of Hald-Madsen [20]; claims to keep the cheap iterations of EQP and the fast active-set identification of IQP by recognising the structure of the optimum (pp. 17-19).",
+  "writing": "Numbered model algorithm first (p. 6), then one section per component, then the full algorithm (pp. 16-17); hedged conclusions (the method appears more efficient / still appears preferable) backed by a per-iteration cost section; convergence asserted by citation of the thesis (pp. 18-19, 22).",
+  "limits_future": "Numerical results called limited; Maratos effect possible but unobserved, with a fix referred to [14] (= S164); constrained minimax extension referred to [14] (pp. 19, 22).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Linear Chebyshev characterisation and Remez experience carried to nonlinear minimax; reuses QR null-space bases, projected quasi-Newton, and the Coleman-Conn simplification that drops Z^T G v; aims to combine the EQP and IQP advantages.",
+    "pages": "pp. 4-5, 9-11, 15, 19"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two-tier test (22 literature problems plus one real 80x40 application) measured in function evaluations; caveat: rival numbers copied from the literature where available, not rerun on shared code.",
+    "pages": "pp. 20-22"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Triad split across a report cluster: characterisation report [13], thesis [23] for convergence, this report for algorithm plus numbers, S164 for details.",
+    "pages": "pp. 4, 22"
+   },
+   {
+    "method": "Research Taste 6",
+    "relation": "evidence",
+    "note": "Claim worded with appears ... preferable and supported by a per-iteration cost argument when evaluation counts are comparable.",
+    "pages": "pp. 18-19, 22"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "evidence",
+    "note": "Benchmarks against and supersedes Conn's own 1979 minimax method (CN column).",
+    "pages": "pp. 17, 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Characterisation-driven algorithm design",
+    "evidence": "Search directions always decrease the maximum function and at the same time try to enforce the characterisation (levelled reference set); the method identifies the active set by constructively building the reference set rather than by active-set search.",
+    "pages": "pp. 5-6, 19"
+   },
+   {
+    "pattern": "Degeneracy taxonomy with a remedy per type",
+    "evidence": "Degenerate points classified as Type A/B/C by which cadres exist; each type gets its own direction or tolerance rule (use h; level and halve tau_c; constrained least squares).",
+    "pages": "pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "To descend while equalising k functions, split the step into h = -Z B^-1 Z^T grad f_mu (null space of the difference-Jacobian; equal decrease) and v = -A(A^T A)^-1 Phi (range space; levelling), and keep v only if grad f_mu^T v < 0 (pp. 5, 11-12).",
+   "Detect a degenerate or optimal gradient configuration with the QR you already maintain: test ||Z^T grad f_mu|| <= tau_c and halve tau_c whenever degeneracy is met (pp. 9, 16).",
+   "Use the signs of the certificate's multipliers to drop several working constraints in one iteration (p. 13).",
+   "Choose the Hessian model by a staleness rule: first-order directions until the working set has been unchanged for gamma = 3 iterations, then second-order information; skip BFGS updates with s^T y <= 0 (pp. 14-15).",
+   "When evaluation counts tie with a rival, report per-iteration linear-algebra cost (EQP linear systems vs LP/IQP subproblem size) as a second axis (pp. 18-19).",
+   "Reuse NLP test problems for a minimax code via min max{F, F - alpha_i g_i} with a known sufficiently large alpha_i (p. 20)."
+  ],
+  "coauthors": "Yuying Li",
+  "quotes": []
+ },
+ {
+  "id": "S149",
+  "year": "1991",
+  "title": "An introduction to the standard data input format (SDIF) for nonlinear mathematical programming problems",
+  "read_level": "partial",
+  "contribution": "A tutorial on the Standard Input Format (SIF) for LANCELOT: an MPS-compatible language whose groups, nonlinear elements and internal variables express group-partially-separable structure, with value and derivative code, indexing and loops for large problems, and a growing public test collection (more than 500 problems).",
+  "problem_entry": "Once LANCELOT version A existed, stating large test problems, and especially their structure, which is crucial for performance, became a formidable challenge; the authors copied the success of MPS for LP (pp. 4-5).",
+  "key_idea": "Make MPS a subset of the syntax, then add group functions of linear forms and nonlinear element functions with internal variables, giving the problem class min sum g_i(a_i^T x - b_i + sum w_j f_j(x)) with the same kind of constraints and bounds; derivatives written per element in the SGIF/SEIF chapters (pp. 6, 21-22, 30, 34-35, 38).",
+  "assumptions": "No theorems; the model is the problem class the format expresses ((25)-(27), (36)-(38)); MPS defaults: variables nonnegative, start point 0 (pp. 9, 14, 30, 38).",
+  "proof_devices": [],
+  "experiments": "none; LANCELOT transcripts on toy problems, plus an anecdote of a user's energy-scenario problem with more than 1000 variables specified, validated and solved in one hour (pp. 5, 9-10).",
+  "positioning": "Builds on MPS (IBM) for LP; contrasts with GAMS, AMPL and OMNI, which cannot express nonlinear structure and are not public domain; rests on the CGT trust-region and augmented-Lagrangian papers and on partial separability (Griewank-Toint) (pp. 4-6, 75).",
+  "writing": "Conversational tutorial, presented as a learning tool rather than a reference guide, that grows from the simplest LP one construct at a time, ends each chapter with the expressible problem class as a formula, and openly labels its caveats paragraph a disclaimer (pp. 4, 6, 30, 38).",
+  "limits_future": "Rigid fixed format and outdated MPS keyword style accepted for compatibility; not a modelling language; blank-significant names are an error source; future: translate more test sets (Hock-Schittkowski, Schittkowski) and release the collection to the public domain (pp. 6-7, 58, 68).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Input format and problem collection built as infrastructure for testing LANCELOT: MPS compatibility for reuse, standard sets translated, public-domain aim.",
+    "pages": "pp. 4-6, 68"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Solver released together with its input format and syntax template (template on the LANCELOT tape).",
+    "pages": "pp. 4, 68"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Structure (group partial separability, internal variables) is part of the problem statement; the authors call it crucial for performance and say no modelling language could express it.",
+    "pages": "pp. 4, 6, 35, 38"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The format exists because theory (CGT 1988, 1991) and code (LANCELOT) needed a stream of test problems.",
+    "pages": "p. 4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Design the new standard as a superset of the incumbent",
+    "evidence": "SIF keeps MPS as a subset so that existing LP test sets load unchanged, accepting fixed format and old keyword style as the price.",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "Tutorial that grows the expressible problem class",
+    "evidence": "Each chapter adds one construct and closes with the problem class now expressible, stated as a formula.",
+    "pages": "pp. 4, 30, 38-39"
+   }
+  ],
+  "transferable": [
+   "When proposing a new input or benchmark format, make the dominant existing format a strict subset so every existing instance is a test case on day one, and state the price paid (p. 6).",
+   "Describe nonlinear structure with internal variables: if an element depends on its variables only through a few linear combinations (u = v - w), declare the range transformation and give derivatives with respect to u only (pp. 35, 38).",
+   "Make derivative availability declarative and sparse: a gradient or Hessian is available once one entry is given, and unspecified entries are zero (p. 38).",
+   "In a manual, close each chapter with the mathematical problem class the reader can now express (pp. 30, 38)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "Both a proven methodology and suitable software were indeed badly needed.",
+    "page": 4
+   },
+   {
+    "text": "none of these actually provides a way of specifying the nonlinear structure as does the SIF.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S093",
+  "year": "1992",
+  "title": "A structure-exploiting algorithm for nonlinear minimax problems",
+  "read_level": "unreadable",
+  "contribution": "not read: the supplied file is the 1990 Cornell TR 90-1104 (byte-identical to S108's PDF), not the SIOPT article; the text file holds only empty page markers.",
+  "problem_entry": "not read",
+  "key_idea": "not read",
+  "assumptions": "not read",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "not read",
+  "writing": "not read",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "Yuying Li",
+  "quotes": []
+ }
+]

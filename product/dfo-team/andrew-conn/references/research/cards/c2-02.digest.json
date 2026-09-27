@@ -1,0 +1,273 @@
+[
+ {
+  "id": "S005",
+  "year": "1991",
+  "title": "A globally convergent augmented Lagrangian algorithm for optimization with general constraints and simple bounds",
+  "read_level": "full",
+  "contribution": "Proves global convergence (without assuming bounded multipliers), a penalty parameter bounded away from zero, active-set identification, R-linear rate and second-order limit properties for a class of augmented Lagrangian methods that keep simple bounds outside the penalty and solve the subproblems inexactly, and shows by counterexample that the single-limit-point assumption is needed.",
+  "problem_entry": "Scale gap: large constrained problems lacked what structure, inexact Newton and trust regions gave unconstrained optimization; active-set methods change active sets slowly and SQP solves QPs too exactly, while bounds allow fast active-set changes (pp. 1-3).",
+  "key_idea": "Minimize the augmented Lagrangian approximately over the box with the authors' bound-constrained trust-region method, stopping on a projected-gradient tolerance; switch between multiplier updates and penalty reduction by a feasibility test sized to what the multiplier iteration should achieve, with tolerances as powers of the penalty (pp. 1-2, 7-9).",
+  "assumptions": "C2 functions; bounded iterates; full rank of the floating-variable constraint Jacobian at limit points (LICQ-type); locally Lipschitz Hessians and nonsingular reduced KKT matrices for every degenerate subset (AS5, called insurance); single limit point for the bounded-penalty theorem; no bounded-multiplier assumption (pp. 1, 9, 13, 17).",
+  "proof_devices": [
+   "dominated/floating variable split via the projected gradient P(x, grad Phi) (pp. 5-6)",
+   "least-squares multipliers at x* as an analytical device, made computable after active-set identification (pp. 6, 20)",
+   "recursive bound on multiplier growth between penalty reductions, split into three parameter cases (Lemma 4.1, pp. 9-10)",
+   "two-case global convergence: penalty bounded away (feasibility test forces c -> 0) vs penalty -> 0 (mu*||lambda|| -> 0) (Thm 4.4, pp. 12-13)",
+   "finite split into at most 2^|I5| subsequences with fixed floating/dominated pattern of degenerate variables (p. 14)",
+   "reduced KKT system with Taylor remainders, inverse norm M, quadratic terms absorbed for large k (Lemma 5.1, pp. 15-17)",
+   "contradiction plus induction: if the penalty is reduced infinitely often, show the feasibility test passes forever from a late iterate (Thm 5.3, pp. 17-19)",
+   "constructed admissible iterate cycle between two KKT points of x^2 - 1 = 0 driving the penalty to zero (Sec. 6, pp. 21-25)"
+  ],
+  "experiments": "none; numerical testing deliberately deferred until software is built thoroughly (p. 4); scaling choices deferred to testing (pp. 26-27).",
+  "positioning": "Restates prior globally convergent AL methods (Powell, Rockafellar, Bertsekas, Polak-Tits, Hager, Yamashita, Bartholomew-Biggs) by their assumptions, sets SQP aside for large scale, and claims to remove Bertsekas's bounded-multiplier requirement while adding bounds (pp. 3, 11, 13).",
+  "writing": "Abstract names two results; roadmap; rationale paragraph and suggested parameters after the algorithm boxes; every assumption justified (AS5 as insurance); road-sign sentence in long proof; a whole section for the negative example; declines more general but impractical update rules (pp. 1, 4, 8-9, 13, 16, 27).",
+  "limits_future": "No numbers; scalings unspecified; rigid tolerance rules; single limit point necessary; future: numerical experience and treating linear constraints differently from nonlinear ones (pp. 4, 26-27).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory leg published alone with code and numbers explicitly deferred; the triad exists only across papers. Step 1 (framework) evidenced: free inner solver and multiplier formula, theorem valid for any tolerances -> 0.",
+    "pages": "pp. 4, 7-9, 13, 27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Bounds handled exactly outside the penalty; slacks put all combinatorics into bounds; design driven by large-scale sparsity.",
+    "pages": "pp. 1-2, 4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Transplants structure/inexact-Newton/trust-region ideas and the authors' own bound-constrained code into a constrained outer loop; reuses Powell's 1969 penalty device.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "By analogy: the certified interface is inner-solve accuracy (projected gradient <= omega) and feasibility (<= eta), not a model's geometry.",
+    "pages": "pp. 7, 13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Show an assumption is needed by a constructed counterexample",
+    "evidence": "Admissible iterate cycle between two KKT points drives the penalty to zero when there are two limit points; later cited by S022 and mirrored in S007.",
+    "pages": "pp. 21-25"
+   },
+   {
+    "pattern": "Insurance assumption over all combinatorial branches",
+    "evidence": "AS5 required for every subset of the dual-degenerate indices, justified as insurance; proof enumerates at most 2^|I5| subsequences.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "pattern": "Split by type",
+    "evidence": "Bounds kept outside the augmented Lagrangian, general constraints inside; linear vs nonlinear split announced.",
+    "pages": "pp. 1, 4"
+   }
+  ],
+  "transferable": [
+   "Pair a sure-to-converge fallback (penalty -> 0) with a fast mechanism (multiplier updates) and switch by a test calibrated to the fast mechanism's expected progress (p. 8).",
+   "Make tolerances powers of the current penalty parameter and reset them on each penalty reduction (pp. 7, 18-19).",
+   "Specify the subproblem solver only by a stopping test on a computable criticality measure, allowing scaled variants (pp. 7, 27).",
+   "Assume nondegeneracy for every subset of the degenerate index set and split the sequence into finitely many fixed-pattern subsequences (pp. 13-14).",
+   "Prove a parameter stays bounded away from zero by contradiction plus induction from a well-chosen late iterate (pp. 17-19).",
+   "Show necessity with an admissible iterate cycle between two KKT points with different multipliers (pp. 21-25)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "the construction of appropriate software is by no means trivial and we wish to make a thorough job of it.",
+    "page": 4
+   },
+   {
+    "text": "As we do not know which might defect under such perturbations, (AS5) is a form of \"insurance\" against all possible eventualities.",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "S019",
+  "year": "1996",
+  "title": "An algorithm using quadratic interpolation for unconstrained derivative free optimization",
+  "read_level": "full",
+  "contribution": "Proposes a derivative-free trust-region algorithm with quadratic interpolation models, explicit geometry management (poisedness, Lagrange-function replacement measure, six-step improvement procedure), models from incomplete sets, history-validated long steps and a noise-aware predicted-reduction test, and tests two variants on 20 small CUTE problems with and without noise against finite-difference LANCELOT codes.",
+  "problem_entry": "Application class of costly, noisy measurements or simulations (geophysics, helicopter rotor) plus a derivative audit showing finite differences, AD and source-level differentiation fail (pp. 2-3).",
+  "key_idea": "Follow Powell's interpolation trust-region idea but insist on long steps and early progress with every evaluation: build models before p points exist, reuse past points, validate larger regions on history before jumping, and make geometry improvement explicit (pp. 4-10).",
+  "assumptions": "f twice differentiable with unavailable derivatives, evaluation cost dominating dense linear algebra, unconstrained, noise given by absolute and relative levels; well-definedness needs the interpolation set to stay poised; no convergence assumptions because no theorem (pp. 4, 11, 13).",
+  "proof_devices": [
+   "basis-independent replacement factor |L(x+, x-)| for the interpolation determinant, credited to Powell (p. 6)",
+   "scaled replacement measure S(x, x-) for points outside the trust region (eqs. 2.7-2.9, p. 6)",
+   "poisedness preservation: expand the incoming basis vector in the current columns; the constant quadratic rules out all-zero coefficients; determinant multiplies by the coefficient (eqs. 2.42-2.44, pp. 13-14)"
+  ],
+  "experiments": "MATLAB prototype on 20 CUTE problems (n = 2-4); cost = function evaluations; baseline finite-difference SR1 LANCELOT with stated conversion formula; mean of 10 random initial sets; noise 1e-4 and 1e-2 absolute/relative against a noise-adapted finite-difference trust-region code; practical failures bracketed; by my count new variants use fewer evaluations than LANCELOT on 7-8/20 noiseless problems and than the FD code on 8-10/20 and 14-16/20 at the two noise levels (pp. 15-18).",
+  "positioning": "Five-class taxonomy of DFO methods plus DOE modelling; places itself in Powell's model-building class and differs only by long steps and early progress; credits Powell and Sauer-Xu; no criticism of competitors (pp. 3-7).",
+  "writing": "Work-in-progress framing; prose rationale then formal algorithm then six numbered self-critical comments; numbered tentative conclusions with explicit caution; long future-work list; no theorems (pp. 4, 11-20).",
+  "limits_future": "No convergence theory, very limited testing, heavy linear algebra, slow termination, min-norm variant less robust; future: higher-degree models, cheaper algebra, partial separability, bounds and constraints via AL or penalties, convergence theory, variable-accuracy evaluations (pp. 14-15, 18-20).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Pre-theorem form: geometry (poisedness, determinant, Lagrange functions, improvement procedure) is explicit and monitored but carries no theorem; convergence theory named as future work.",
+    "pages": "pp. 5-9, 20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and tests first, theory deferred: the reverse order of S005/S022; the triad assembles across papers.",
+    "pages": "pp. 15-20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "CUTE problems, evaluations as cost unit, noisy variants at two levels, baseline from the finite-difference school, practical failures flagged, seeds averaged; but only 20 problems with n <= 4 and no application tier.",
+    "pages": "pp. 15-18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Explicit derivative audit (finite differences, AD, source availability) before choosing DFO; structure (partial separability, least-squares lower bound) noted.",
+    "pages": "pp. 3, 10, 19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Trust-region machinery transplanted into DFO; LANCELOT reused as baseline; noise rule taken from Conn et al. 1993.",
+    "pages": "pp. 9, 15-16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Weak: applications named only generically, no partner; need asserted from experience.",
+    "pages": "pp. 2-3, 20"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Use every evaluation twice",
+    "evidence": "Past evaluated points reused for geometry and to validate long steps; models built before p points exist.",
+    "pages": "pp. 6-10"
+   },
+   {
+    "pattern": "Noise level as an algorithm parameter",
+    "evidence": "Predicted reduction compared with absolute/relative noise levels; stopping behaviour described in terms of noise.",
+    "pages": "pp. 12, 15, 17"
+   }
+  ],
+  "transferable": [
+   "Derivative audit: one sentence per derivative route (finite differences, AD, source) saying why it fails for the class (p. 3).",
+   "Validate the model on already-evaluated points (ratio >= 0.85) before spending an evaluation on a long step (pp. 9-10).",
+   "Build a usable quadratic model from fewer than p points via minimum Frobenius norm or a sub-quadratic basis (pp. 6-7).",
+   "If predicted reduction is not larger than the noise level, improve geometry instead of evaluating the step (p. 12).",
+   "Prove an exchange keeps the interpolation set poised by expanding the incoming basis vector in the current columns (pp. 13-14).",
+   "Give the baseline's cost-unit conversion formula in a footnote, bracket practical failures, and average over random initial designs (pp. 16-17).",
+   "Follow the formal algorithm with numbered comments on its own weak spots and possible remedies (pp. 13-15)."
+  ],
+  "coauthors": "Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "At variance with Powell's proposal, we will however insist on the ability of our algorithm to take long steps and also to progress as early as possible with every available function evaluation.",
+    "page": 4
+   },
+   {
+    "text": "Research in this domain remains challenging and, in the authors' experience, clearly meets a strong and explicit need in several application areas.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S022",
+  "year": "1996",
+  "title": "Convergence properties of an augmented Lagrangian algorithm for optimization with a combination of general equality and linear constraints",
+  "read_level": "full",
+  "contribution": "Extends the CGT 1991 augmented Lagrangian theory from simple bounds to general linear inequality constraints handled in the subproblem, with several penalty parameters for constraint subsets, proving global and R-linear convergence, active-set identification and that all penalty parameters stay bounded away from zero, under an inner stopping rule that covers the tests of existing linearly constrained packages.",
+  "problem_entry": "A design shortcut in the authors' LANCELOT (linear inequalities turned into slack equations inside the AL) may be inefficient given specialized linear-constraint solvers; plus the practical wish for per-subset penalties (p. 2).",
+  "key_idea": "Keep linear constraints outside the AL; stop the inner iteration when the projection of -grad Phi on the tangent cone of the eps-active (dominant) constraints is small, a test that contains existing codes' tests; update multipliers or penalties per subset and drive tolerances by the largest penalty (pp. 2, 5-7).",
+  "assumptions": "Nonempty feasible polyhedron, C2 functions, bounded iterates (argued always true in practice), full rank of J(x*)Z*; locally Lipschitz Hessians and nonsingular reduced KKT matrices for every choice of weakly active constraints (AS6, a safeguard); single limit point for bounded penalties (pp. 3, 8, 15, 24).",
+  "proof_devices": [
+   "dominant constraints within kappa0*omega and their normal/tangent cones (eq. 3.2, p. 5)",
+   "uniform constants by minimizing over the finitely many possible dominant sets (Lemma 4.1, pp. 8-9)",
+   "criticality measure sigma_k = max{-grad Phi^T d : A(x+d) >= b, ||d|| <= 1} driven to zero via Moreau decomposition and convex perturbation continuity (Lemmas 4.2-4.3, pp. 9-10)",
+   "counting argument: over q successive decreases the largest penalty falls by a fixed factor (Lemma 4.5, p. 13)",
+   "strongly vs weakly active constraints for active-set identification (Thm 5.1, Cor. 5.2, pp. 14-15)",
+   "two-stage bounded-penalty proof: largest penalty first (contradiction plus induction), then all penalties via a recursion on the vanishing-penalty subsets (Thms 5.5-5.6, pp. 20-23)",
+   "native-test-implies-abstract-test lemmas for dominant multipliers and reduced gradients; sigma_k <= omega_k^2 implies a variant of the cone test (Lemma 7.1, Thm 7.2, pp. 26-29)"
+  ],
+  "experiments": "none; extensive large-scale experiments announced as future work requiring considerable care (p. 29).",
+  "positioning": "Explicit sequel to CGT 1991 with result-by-result analogies; credits Fletcher, Powell and Bertsekas for separate linear handling and multiple penalties; contrasts its balancing update with Powell's on technical grounds; names MINOS, LSNNO, VE14, VE19, IMSL LCONG and NAG codes whose tests are covered (pp. 2, 5-7, 13-15, 27-28).",
+  "writing": "Abstract lists design features then three results; practice-first introduction; coherence check and practical parameter values after the algorithm; each result tied by number to its predecessor with the new difficulty marked; conclusion rests practical relevance on the stopping rule (pp. 1-2, 7, 13-15, 22, 29).",
+  "limits_future": "No numbers; no local theory under the weaker test sigma_k <= omega_k; single limit point necessary; flexible-multiplier proofs only in technical reports; future: large-scale experiments and other merit functions (pp. 24, 26, 28-29).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Linear constraints kept outside the AL so specialized solvers can be used and the AL Hessian keeps its structure; constraints grouped by nonlinearity with separate penalties.",
+    "pages": "pp. 2-3, 29"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory only with numerics announced; but the framework is built so the theorem covers existing packages as inner solvers (theorem about the algorithm actually run).",
+    "pages": "pp. 5-6, 26-29"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Transplants the CGT 1991 proof architecture and the authors' 1993 criticality measure.",
+    "pages": "pp. 13-22, 28"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "By analogy: the certified interface is the inner criticality test (3.3) with implementable sufficient conditions (7.1)/(7.3).",
+    "pages": "pp. 5, 26-28"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Mirror the predecessor's architecture",
+    "evidence": "Lemmas and theorems explicitly mapped to CGT 1991 counterparts (analog, generalization, inspired by), with the one new difficulty (q penalties) marked.",
+    "pages": "pp. 13-15, 20-22"
+   },
+   {
+    "pattern": "Certify existing software as components",
+    "evidence": "Abstract stopping rule designed to contain the tests of named packages, with lemmas proving each family's test implies it.",
+    "pages": "pp. 5-6, 26-29"
+   },
+   {
+    "pattern": "Insurance assumption over all combinatorial branches",
+    "evidence": "AS6 required for every choice of weakly active constraints, called a safeguard against perturbations; same move as S005 AS5.",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "Split by type",
+    "evidence": "Linear constraints handled in the subproblem, nonlinear equalities in the augmented Lagrangian.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "Show an assumption is needed by a constructed counterexample",
+    "evidence": "Single-limit-point assumption defended by pointing to the CGT 1991 counterexample.",
+    "pages": "p. 24"
+   }
+  ],
+  "transferable": [
+   "Turn a documented shortcut in your own released software into the next theory paper, stating its practical cost first (p. 2).",
+   "Define the inner stopping test through eps-active (dominant) constraints and a tangent-cone projection so it contains solvers' native tests (pp. 5-6).",
+   "With per-block parameters, update blocks separately but drive tolerances by one aggregate such as the largest penalty (p. 6).",
+   "Prove short 'native test implies abstract test' lemmas for each solver family to certify existing codes (pp. 26-29).",
+   "Extend a one-parameter bounded-penalty proof to q parameters by first bounding the largest, then all via a recursion (pp. 20-23).",
+   "Get uniform constants by taking extrema over the finitely many possible near-active index sets (pp. 8-9, 16).",
+   "In a generalization paper, map each result by number to its predecessor and spend prose only on the genuinely new difficulty (pp. 13-15, 22)."
+  ],
+  "coauthors": "N. Gould, A. Sartenaer, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "the inner iteration stopping rule (3.3) covers the type of optimality tests used in available packages for linearly constrained problems.",
+    "page": 29
+   },
+   {
+    "text": "This condition is theoretically interesting but might be practically too strong.",
+    "page": 28
+   }
+  ]
+ }
+]

@@ -13,5 +13,9 @@
  "S090": "https://api.openalex.org/works/doi:10.1109/bigdata.2015.7364098",
  "S079": "https://research.ibm.com/publications/sparse-markov-net-learning-with-priors-on-regularization-parameters",
  "S120": "https://api.openalex.org/works/doi:10.21236/ada622645 (DTIC record ADA622645 / AFRL-AFOSR-VA-TR-2015-0278 abstract, as indexed by OpenAlex; PDF at https://apps.dtic.mil/sti/pdfs/ADA622645.pdf was blocked from this network)",
- "S128": "https://api.crossref.org/works/10.1190/1.2792862 (publisher-deposited abstract; landing page https://doi.org/10.1190/1.2792862)"
+ "S128": "https://api.crossref.org/works/10.1190/1.2792862 (publisher-deposited abstract; landing page https://doi.org/10.1190/1.2792862)",
+ "S111": "https://api.nsf.gov/services/v1/awards/2008434.json",
+ "S108": "https://api.nsf.gov/services/v1/awards/2438005.json",
+ "S112": "https://events.cornell.edu/event/orie_colloquium_katya_scheinberg_lehigh",
+ "S143": "https://mathopt.zib.de/Optima-Issues/optima79.pdf"
 }

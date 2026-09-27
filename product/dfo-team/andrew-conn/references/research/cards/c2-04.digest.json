@@ -1,0 +1,357 @@
+[
+ {
+  "id": "S017",
+  "year": "2000",
+  "title": "An efficient primal-dual interior-point method for minimizing a sum of Euclidean norms",
+  "read_level": "full",
+  "contribution": "A primal-dual interior-point method for the sum-of-norms pair (Newton on primal/dual feasibility plus a smoothed complementarity condition, Mehrotra predictor-corrector, symmetrized Schur complement with a skew correction) that is much faster than the primal barrier method when many norms are zero, solving plastic-collapse problems with hundreds of thousands of variables in under about 50 iterations.",
+  "problem_entry": "History (Fermat, earliest duality) plus a shared failure of existing methods: Weiszfeld and smoothing ignore duality and slow down when many norms are zero; Calamai-Conn/Overton active-set Newton needs many iterations then; Andersen's primal method is the baseline (pp. 1-4).",
+  "key_idea": "Replace the nondifferentiable complementarity z_i - ||z_i|| x_i = 0 by the centering condition z_i - (||z_i||^2+mu^2)^{1/2} x_i = 0, which is the optimality condition of a smoothed primal-dual pair (Theorem 1); Newton gives a nonsymmetric Schur complement that is symmetric on the central path, so symmetrize for Cholesky with a skew correction; transplant Mehrotra's predictor-corrector from LP; new primal scaling rule exploits homogeneous constraints (pp. 4-11).",
+  "assumptions": "A full rank, m < dn; convex nonsmooth objective; strict complementarity may fail; dual feasibility kept exactly, primal feasibility not (rounding); no convergence assumptions because no convergence theorem (pp. 1, 5-6).",
+  "proof_devices": [
+   "four-step duality chain: Cauchy-Schwarz, min-max exchange [Roc70 Cor. 37.3.2], trivial step, unboundedness (p. 2)",
+   "Theorem 1 imported from [And96b]: centering condition = complementarity of smoothed pair D_mu/P_mu (p. 5)",
+   "descent of dual step: (Dz)^T E^{-1} z = -(Dy)^T A H A^T Dy < 0 since symmetric part positive definite (p. 7)",
+   "F_mu positive definite on feasible set and symmetric on the central path, hence near-symmetry near the path (p. 7)",
+   "second-order expansion of the centering condition for the corrector RHS, eq. (24) (p. 9)",
+   "no convergence or complexity proof; complexity delegated to Xue-Ye via Nesterov-Todd (p. 3)"
+  ],
+  "experiments": "Tier 1: Matlab, random topologically constrained Steiner trees (d=2), medians over many instances, 5 algorithm variants x 2 primal rules, SC vs non-SC strata (20 vs 180 of 200 ladder problems) (pp. 11-14). Tier 2: large sparse plastic-collapse problems on the same Convex 3240 machine and instances as the primal barrier study; no CPU gain on smooth sspN, up to ~6x CPU and 5x fewer iterations with many zero norms, constrained clN13 36,371 s -> 6,179 s (pp. 14-18). Large-scale code differs from the Section 3 algorithm, disclosed (p. 14).",
+  "positioning": "Specialized method justified over generic QCQP/self-scaled cone theory (Nesterov-Todd, Adler-Alizadeh), agreeing with Xue-Ye; supersedes Conn's own Calamai-Conn active-set method; baseline is coauthor Andersen's primal method; applications credited to others (VLSI placement, image reconstruction, JPL) (pp. 2-4).",
+  "writing": "Historical hook, taxonomy of prior methods by use of duality, roadmap, applications list unified by zero norms, observation-level hedging ('apparently', 'presumably'), physical interpretation of complementarity as the flow rule, two-sentence conclusion restricted to nonsmooth problems (pp. 1-4, 12-18).",
+  "limits_future": "No gain on smooth instances, slower without strict complementarity, scaling rule fails with nonhomogeneous constraints, symmetrization needs modified Cholesky (pp. 12-15); future: more applications (p. 4); not stated: no convergence proof and tested code differs from presented algorithm (p. 14).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Outside DFO: duality/complementarity structure, homogeneity (primal scaling rule) and sparsity exploited instead of generic smoothing or generic QCQP.",
+    "pages": "pp. 2-8, 13"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Mehrotra predictor-corrector and modified Cholesky transplanted from LP; skew correction invented to make the transplant work.",
+    "pages": "pp. 8-10, 12"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Two-tier test: random small instances with per-option tables, then large application instances on the baseline's own machine; no-gain tier reported.",
+    "pages": "pp. 11-18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Code and numbers without the theory leg: only theorem imported from [And96b], complexity delegated to Xue-Ye, large-scale code differs from presented algorithm.",
+    "pages": "pp. 3, 5, 14"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak: application partner (plastic collapse) is a coauthor; complementarity interpreted as the material flow rule and used as an accuracy check.",
+    "pages": "pp. 16-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "supersede your own earlier method openly",
+    "evidence": "The paper names the Calamai-Conn active-set method as inefficient with many zero norms and replaces it (also evidence for Heuristic 8); second instance in S016 p. 19.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "physical interpretation as a correctness check",
+    "evidence": "More zero norms judged correct from physical understanding; complementarity = flow rule.",
+    "pages": "pp. 16-17"
+   }
+  ],
+  "transferable": [
+   "Classify prior methods by how they handle the single feature that makes the problem hard (zero norms at the solution) (pp. 2-4).",
+   "Replace a nondifferentiable complementarity condition by a smoothed centering condition and show it is the exact optimality condition of a smoothed primal-dual pair (p. 5).",
+   "Symmetrize a Newton matrix that is symmetric on the central path to use Cholesky, and move the skew part to the right-hand side as a correction (pp. 7, 10).",
+   "Guard a heuristic corrector with a descent test and fall back to the predictor (p. 10).",
+   "Add a stopping test for an event impossible in exact arithmetic (primal infeasibility exceeding the duality gap) (p. 11).",
+   "Rerun comparisons on the earlier study's machine and instances, and stratify random test classes by the structural property the theory says matters (pp. 13-14)."
+  ],
+  "coauthors": "K. D. Andersen, E. Christiansen, M. L. Overton",
+  "quotes": [
+   {
+    "text": "Our view is that the sum of norms problem is sufficiently important that a specialized approach is justified.",
+    "page": 3
+   },
+   {
+    "text": "There is a small reduction in the iteration count but not in the CPU time.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S003",
+  "year": "2008",
+  "title": "An algorithmic framework for convex mixed integer nonlinear programs",
+  "read_level": "full",
+  "contribution": "A family of hybrid branch-and-cut algorithms for convex MINLP whose extreme settings are NLP branch-and-bound and outer approximation, implemented from COIN-OR components (Cbc, Cgl, Clp, Ipopt), with a public library of convex MINLP instances and a computational comparison against SBB and Dicopt (read from the 31 Oct 2005 preprint).",
+  "problem_entry": "Strategic: MINLP is important and hard, its building blocks MILP and NLP have matured, and COIN-OR offers reusable components; a 2004 IBM-CMU team combines both fields (pp. 1-2).",
+  "key_idea": "One branch-and-cut using OA relaxations and NLP relaxations for lower bounds and fixed-integer NLPs for upper bounds; I-Hyb solves NLP relaxations every L=10 nodes (L=1 gives NLP BB) and runs a root OA local search with limit kappa=30 s (kappa=inf gives OA), plus Cbc cuts and reliability branching (pp. 3, 8-11).",
+  "assumptions": "f, g convex and C^2; X, Y polyhedral, X bounded; constraint qualification at optima of fixed-integer NLP and feasibility subproblems for OA equivalence; nonconvex use only heuristic (pp. 2-4).",
+  "proof_devices": [
+   "validity of linearizations at any point by convexity (p. 3)",
+   "Theorem 1: OA relaxation over T-hat has the same optimal value as P, stated without proof (p. 4)",
+   "counterexample (ball in R^3, y free in the linearization) showing the Fletcher-Leyffer optimal-solution equivalence is incorrectly stated (pp. 4-5)",
+   "finite convergence of OA and Quesada-Grossmann cited, not re-proved (pp. 5-6)"
+  ],
+  "experiments": "41 convex instances from a >150-problem library, public in AMPL/GAMS, classes described by nonlinearity source and integrality gap; selected using an earlier hybrid version (3 h / 30 s rule); baselines SBB and Dicopt with versions; one machine, 3 h limit; Dolan-More time profile plus a difference-based reading; failures attributed; per-node and per-MILP cost decomposition and a controlled CPLEX-for-Cbc swap (pp. 10-16, 19-22).",
+  "positioning": "Builds on Duran-Grossmann/Fletcher-Leyffer OA, Gupta-Ravindran/Leyffer NLP BB, Geoffrion GBD, Westerlund ECP; extends Quesada-Grossmann branch-and-cut; corrects a Fletcher-Leyffer theorem; commercial codes as baselines (pp. 2-6, 14).",
+  "writing": "Four numbered contributions up front ('Thus far'), pseudocode figures, every parameter limit named, hedged diagnosis ('We suspect', 'Geometric considerations lead us to believe'), results section spent on explanation not victory; no conclusion in this preprint (pp. 2, 9-16).",
+  "limits_future": "Dicopt much faster on many BatchS/RSyn/Syn instances; Ipopt numerical failures; open question which problems suit OA vs BB; release on COIN-OR; not stated: nonconvex not tested, instance selection used an earlier hybrid (pp. 2, 12, 14).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Strong: cross-school team (MILP + NLP), hybrid family with rival classical methods as parameter extremes, benchmarked against both parents as own and commercial implementations.",
+    "pages": "pp. 1-3, 9-10, 14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Public instance library is a stated contribution, two modelling formats, class descriptions, performance profiles, attributed failures; caution: selection rule uses an earlier version of the proposed method.",
+    "pages": "pp. 2, 10-16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Framework, open-source code and numbers delivered together; the theory leg is a corrected equivalence theorem plus cited convergence, no new convergence theorem.",
+    "pages": "pp. 2-6, 8-16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak: IBM-CMU team and chemical-engineering instances (batch plants, synthesis, water networks); Conn's personal role not identifiable.",
+    "pages": "pp. 1, 10-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "parametrized family whose extremes are the rival classical methods",
+    "evidence": "L=1 gives NLP BB and kappa=inf gives OA inside one hybrid code.",
+    "pages": "pp. 3, 9-10"
+   },
+   {
+    "pattern": "build on shared open-source components",
+    "evidence": "Solver assembled from COIN-OR Cbc, Cgl, Clp and Ipopt and planned for release on COIN-OR.",
+    "pages": "pp. 1-2, 8"
+   },
+   {
+    "pattern": "diagnose a performance gap by per-unit cost and a controlled component swap",
+    "evidence": "0.27 vs 0.21 s/node; 81.9 vs 2.1 s/MILP; I-OA rerun with CPLEX as LP solver on Syn40M03M (1815 -> 267 s vs 1.2 s).",
+    "pages": "pp. 15-16"
+   },
+   {
+    "pattern": "correct a published theorem with a minimal counterexample",
+    "evidence": "Converse of Fletcher-Leyffer Theorem 1 fails; ball in R^3 with y free in the linearization.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Give the algorithm two knobs whose limits recover the two classical rival methods, so one code benchmarks the whole spectrum (pp. 9-10).",
+   "Warm-start node NLPs from the parent's primal-dual solution with a weaker interior push (p. 8).",
+   "Check the converse of a cited equivalence theorem and publish a small counterexample if it fails (pp. 4-5).",
+   "Describe each test class by nonlinearity source and integrality gap (pp. 10-12).",
+   "Decompose timing gaps into per-unit costs and test the lead explanation with a one-component swap (pp. 15-16).",
+   "Report a difference-based reading of a ratio performance profile when seconds-long instances distort ratios (p. 14).",
+   "State measurement artefacts of baselines, such as CPU time excluding file I/O (p. 14)."
+  ],
+  "coauthors": "P. Bonami, L. T. Biegler, G. Cornuéjols, I. E. Grossmann, C. D. Laird, J. Lee, A. Lodi, F. Margot, N. Sawaya, A. Wächter",
+  "quotes": [
+   {
+    "text": "A class of hybrid algorithms, of which branch and bound and polyhedral outer approximation are the two extreme cases, is proposed and implemented.",
+    "page": 1
+   },
+   {
+    "text": "We suspect that the quality of the linear relaxation obtained by the OA algorithms is the driving criterion",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S016",
+  "year": "2008",
+  "title": "Geometry of interpolation sets in derivative free optimization",
+  "read_level": "full",
+  "contribution": "Defines Lambda-poisedness through the coefficients expressing phi(x) in terms of phi(y^i), proves it equivalent (up to data-independent constants) to the norm of the inverse of the scaled natural-basis interpolation matrix, derives Taylor-like error bounds for linear, quadratic (and cubic) interpolation in these terms, and gives LU and QR pivot-threshold algorithms that certify and repair interpolation sets (read from preprint).",
+  "problem_entry": "Convergence of model-based DFO needs Taylor-like bounds whose geometry constant stays uniformly bounded; Powell's Lagrange rule lacks a proof and the authors' own CST 1997 Newton-polynomial scheme needs an expensive full replacement step (pp. 2-3, 5-6, 18-19).",
+  "key_idea": "Lagrange polynomials = solution lambda(x) of M^T lambda = phi(x) (Lemma 3.1); Lambda-poisedness bounds ||lambda(x)|| on B(1); with the natural basis on the scaled set this is equivalent to bounding ||M^{-1}|| (Theorem 3.3), which a factorization can control by pivot thresholds, replacing only bad points (pp. 6-8, 19-23).",
+  "assumptions": "f C^1 with Lipschitz gradient (linear) / C^2 with Lipschitz Hessian (quadratic) / C^3 with Lipschitz third derivatives (cubic); complete interpolation; set centered and scaled to unit ball; y^0 = 0 (current iterate), shift costs B(2 Delta); natural basis required (pp. 2, 4, 6, 11-14, 25).",
+  "proof_devices": [
+   "coefficients view: Lagrange polynomials solve M(phi,Y)^T lambda(x) = phi(x) (Lemma 3.1, p. 6)",
+   "norm equivalence: psi(v) = max_{x in B(1)} |v^T phi(x)| is a norm, top singular vector argument gives ||M^{-T}|| <= theta Lambda (Theorem 3.3, pp. 8-9)",
+   "explicit theta via Lemma 3.4: a quadratic with ||v||_inf = 1 reaches 1/4 on the unit ball by restricting variables and checking points (+-1/sqrt2, +-1/sqrt2) (pp. 9-10)",
+   "scale invariance of Lagrange polynomials vs non-invariance of kappa(M), so measure on the set scaled to B(1) (Lemma 3.5, p. 11)",
+   "subtract one interpolation equation from the others to cancel the value error, leaving L e_g = O(Delta^2) with a point-independent matrix (pp. 12-13)",
+   "diagonal scaling diag(D_Delta^{-1}, D_Delta^2^{-1}) to separate Hessian, gradient and value orders (pp. 15-17)",
+   "pivot-threshold bound ||M^{-1}|| <= c(p1) eps_growth / xi from LU/QR (pp. 19-23)"
+  ],
+  "experiments": "Minimal: 100 random points in a unit cube; Powell's Lagrange rule, LU and QR algorithms select sets and ||M^{-1}|| is compared (mostly 10-100, never above 1000); dimension and repetitions not stated; no optimizer in the loop; authors caveat randomness and need for a real DFO package (pp. 23-24).",
+  "positioning": "Ciarlet-Raviart bounds recast for optimization and their stretchedness indicator refuted by six points on a circle; Powell's rule credited as working well in practice but unproved; own CST 1997 scheme criticized as expensive; de Boor's Gaussian elimination repurposed for changing sets; pattern-search positive bases as analogy (pp. 3, 5-6, 18-19).",
+  "writing": "Thesis in the abstract ('main task'), novelty claimed only for intuition, condition-number link and algorithms while bounds are re-derived for optimization readers, candid possible underperformance versus Powell, one unsupported efficiency claim, no conclusion section (pp. 1, 6, 17-18, 23-24).",
+  "limits_future": "Practical usefulness untested, polynomials recomputed at each update, theta for degree > 2 out of scope, cubic constants not given, growth factors unbounded; future: prove Powell-like rules keep uniform poisedness, regression and underdetermined models (pp. 2, 10, 19, 21-25).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Core evidence for steps 1-4: Taylor-like bounds (Thms 4.1-4.2), geometric condition (Lambda-poisedness), repair algorithms replacing only bad points, and a guarantee for any interpolation-based DFO method using such an algorithm.",
+    "pages": "pp. 3, 7, 13, 16, 19-23"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Step 5 (measure how often improvement fires) not done; only a static selection experiment; the criticality step is not discussed here.",
+    "pages": "p. 24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory first; implementation and practical study explicitly deferred to a good DFO package.",
+    "pages": "pp. 23-24"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Approximation theory (Ciarlet-Raviart bounds, de Boor Gaussian elimination) transplanted and rewritten for changing sample sets.",
+    "pages": "pp. 5-6, 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "equivalence up to data-independent constants between an abstract quality measure and a computable matrix quantity",
+    "evidence": "Lambda-poisedness vs ||M^{-1}|| (Theorem 3.3), reused in S028 Theorems 2.8 and 5.7.",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "theory for a device practitioners already use",
+    "evidence": "Powell's Lagrange-maximization rule works well in practice but had no uniform-bound guarantee; the paper supplies a theory and certified alternatives.",
+    "pages": "pp. 18-19"
+   },
+   {
+    "pattern": "supersede your own earlier method openly",
+    "evidence": "The authors' own CST 1997 full-replacement step is called very expensive and replaced by one-point repairs (also evidence for Heuristic 8); second instance in S017 p. 2.",
+    "pages": "p. 19"
+   }
+  ],
+  "transferable": [
+   "Rewrite the object to be bounded as the solution of a linear system M^T lambda(x) = phi(x), so its size is governed by a factorizable matrix (pp. 6, 8).",
+   "Certify geometry with a pivot threshold during LU/QR, swapping in existing points before creating new ones by maximizing the pivot polynomial (pp. 20-23).",
+   "Normalize geometry once (center at current iterate, scale to unit ball) and state the cost of the normalization (pp. 6, 11).",
+   "Prove norm equivalence through psi(v) = max_{x in B} |v^T phi(x)| and make the constant explicit by a small case analysis (pp. 9-10).",
+   "Cancel the unknown value error by subtracting one interpolation equation from the others (pp. 12-13).",
+   "Refute a proposed geometric indicator with one degenerate configuration (six points on a circle) (p. 6)."
+  ],
+  "coauthors": "K. Scheinberg, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "The main task of such a derivative free algorithm is to maintain an interpolation sampling set so that this constant remains small, and at least uniformly bounded.",
+    "page": 1
+   },
+   {
+    "text": "We would like to emphasize that the goal of this section is not so much the novelty of the bounds, in general, but their usefulness for the reader with primarily optimization motivations, not to mention the simplicity of the derivation of these bounds.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S028",
+  "year": "2008",
+  "title": "Geometry of sample sets in derivative-free optimization: polynomial regression and underdetermined interpolation",
+  "read_level": "full",
+  "contribution": "Extends Lambda-poisedness, its equivalence with the conditioning of the natural-basis matrix, and Taylor-like error bounds from complete interpolation to least-squares regression and minimum-norm underdetermined interpolation, relating each to complete interpolation via subsets or sub-bases and arguing (with small 2-D tests) for regression and minimum-norm models (read from preprint).",
+  "problem_entry": "Two practical regimes: cheap but noisy evaluations (regression could smooth) and expensive evaluations (underdetermined models already used in the COIN-OR DFO code and by Powell); the S016 theory does not immediately extend (pp. 1-2).",
+  "key_idea": "Keep S016's coefficients view M^T lambda(x) = phi(x): for regression the minimum-norm lambda gives Lagrange regression polynomials, for underdetermined interpolation the least-squares lambda gives minimum-norm Lagrange polynomials (a kind of duality); choose minimum-norm over best sub-basis because it is robust to perturbations (pp. 8-9, 18-23).",
+  "assumptions": "Lipschitz gradient (linear) or Hessian (quadratic); set centered and scaled to unit ball with y^0 = 0; full column rank (regression) or full row rank (underdetermined); natural basis fixed; noise treated only informally via i.i.d. asymptotics cited to the book (pp. 5, 10, 14-17, 21-25).",
+  "proof_devices": [
+   "maximum-determinant subset + Cramer's rule: coefficients on the subset at most (m-n+1) Lambda (Lemma 1.1, p. 4)",
+   "basis independence of the least-squares polynomial via change of basis alpha_phi = P alpha_psi (p. 5)",
+   "Lagrange regression polynomials as minimum-norm solutions and minimum-norm Lagrange polynomials as least-squares solutions via reduced SVD (Lemmas 2.4, 5.4, pp. 9, 22)",
+   "reduced-SVD version of the S016 norm-equivalence theorem, theta <= 4 sqrt(q1) for d = 2 (Theorems 2.8, 5.7, pp. 11-13, 24)",
+   "regression error bounds stated without proof as adaptations of S016 (Theorems 3.1-3.2, pp. 14-16)",
+   "underdetermined error bound only on the projection V^T of scaled errors onto the observed subspace (Theorem 5.8, pp. 25-26)",
+   "perturbation counterexample: two nearly equal sample sets give very different best-sub-basis models (Example 5.2, pp. 19-20)"
+  ],
+  "experiments": "2-D illustrative tests: f1 reported (f2, f3 said to behave alike), random points in unit square plus origin, best-subset vs least-squares regression (p1 = 7..31) and best-basis vs minimum-norm (p1 = 3..5, also on a square of radius 0.01), errors on a 0.1 lattice (max and summed l2), 200 runs with 0.001 tie margin; regression and min-norm usually win; one table row appears inconsistent with the text (pp. 16-17, 26-27).",
+  "positioning": "Continues S016; connects to regression simplex gradients (Kelley; Custodio-Vicente), COIN-OR DFO min-norm models, Powell's least-Frobenius updating (Remark 5.2), approximation-theory Lebesgue constants simplified for optimization, Colson-Toint partial separability, Deng-Ferris repeated sampling for noise (pp. 1-2, 7, 18, 23-24, 27).",
+  "writing": "Each extension motivated by a cost/noise regime, question-framed section answered 'neither' from theory before numbers, omitted proofs flagged as adaptations, unverified claims marked, conclusion points to the book and noise (pp. 1-3, 14-17, 26-27).",
+  "limits_future": "Very limited computation, no algorithm targeting regression sets directly, theta likely exponential in degree, underdetermined bound only on a projection, no l1/l_inf regression; future: book with Lambda-poised set algorithms and convergence of a modified UOBYQA-type method, regression for noise (pp. 8, 13-14, 26-27).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Core evidence for step 2 (geometry condition per model type: interpolation, regression, underdetermined) and step 4 (bounds usable for global convergence as long as Lambda stays uniformly bounded).",
+    "pages": "pp. 9-10, 16, 22-24"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Regression proposed as the remedy for noise, which the SKILL lists as a Method 3 weakness, but supported only by a cited asymptotic argument, not experiments.",
+    "pages": "pp. 17, 27"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Theory first; computation deferred to a separate computational study, algorithms and convergence to the book.",
+    "pages": "pp. 3, 27"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Illustrative 2-D random tests with one reported function instead of a public test set; labelled very limited by the authors.",
+    "pages": "pp. 16-17, 26-27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Weak: known derivative sparsity can be exploited by choosing the matching sub-basis; partial separability cited.",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Approximation-theory Lagrange polynomials and Lebesgue constants simplified and re-proved for an optimization audience.",
+    "pages": "pp. 2, 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "equivalence up to data-independent constants between an abstract quality measure and a computable matrix quantity",
+    "evidence": "Theorems 2.8 and 5.7 relate regression and minimum-norm Lambda-poisedness to ||Sigma^{-1}|| of the natural-basis matrix (after S016 Theorem 3.3).",
+    "pages": "pp. 11, 24"
+   },
+   {
+    "pattern": "theory for a device practitioners already use",
+    "evidence": "Minimum-norm and least-Frobenius-norm underdetermined models were used in the COIN-OR DFO code and Powell's codes before a theory existed.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "perturbation robustness as the selection criterion between model-building rules",
+    "evidence": "Best sub-basis jumps between very different models for nearly identical sets; minimum-norm varies continuously and spreads coefficients evenly.",
+    "pages": "pp. 19-20"
+   }
+  ],
+  "transferable": [
+   "For a non-square fit, pick the canonical solution (minimum-norm or least-squares) whose Lagrange representation m(x) = sum f(y^i) L_i(x) survives (pp. 8-9, 21-22).",
+   "Rule out a rival solution-selection rule with a perturbation counterexample (pp. 19-20).",
+   "Move between rectangular and square poisedness via the maximum-determinant subset and Cramer's rule, paying a factor (m-n+1) (p. 4).",
+   "When data underdetermine the model, bound only the error projection onto the observed subspace and check it reduces to the square case (pp. 25-26).",
+   "Report paired win counts over 200 random runs with a stated tie margin, on a large and on a tiny region (pp. 16-17, 26-27).",
+   "Answer the practical question with the theory's prediction (a trade-off) before showing numbers (p. 16)."
+  ],
+  "coauthors": "K. Scheinberg, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "Given our theory, the answer to this question seems to be ‘neither’.",
+    "page": 16
+   },
+   {
+    "text": "Hence, we see that the sub-basis approach suffers from a lack of robustness with respect to small perturbations in the sample set.",
+    "page": 20
+   }
+  ]
+ }
+]

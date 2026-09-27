@@ -1,0 +1,447 @@
+[
+ {
+  "id": "S066",
+  "year": "2015",
+  "title": "Alternating direction methods for non convex optimization with applications to second-order least-squares and risk parity portfolio selection",
+  "read_level": "partial",
+  "contribution": "Convergence and an O(1/sqrt(k)) best-iterate rate for ADMM and alternating linearization (ALM/PLM) on nonconvex two-block objectives F = h(f(x), g(x)) that are blockwise convex but not sums, applied to least-squares risk parity, with SOS/SDSOS lower bounds that certify global optimality (pp. 1, 3, 9-16, 27-29).",
+  "problem_entry": "Application pull (risk parity as a quartic least-squares problem, NP-hard in general) and a gap: ADMM/ALM are understood only for convex composite objectives, and nonconvex ADMM proofs assume that iterate differences vanish (pp. 2, 7-8).",
+  "key_idea": "Split x = y so that each block subproblem is convex (QPs for risk parity); ADMM uses a fixed small mu; ALM linearizes the other block and picks mu by backtracking until F <= Q_mu; ADMM is read as an inexact ALM and PLM as a cheap Levenberg-Marquardt (pp. 6-7, 12, 16-19).",
+  "assumptions": "Lipschitz gradients of F, F1 and F2; blockwise convexity; F bounded below; mu < 1/(4L) for ADMM and mu_k >= tau > 0 for ALM; two blocks only (pp. 5, 8-9, 14).",
+  "proof_devices": [
+   "multiplier = -grad_2 F from the optimality of the last block update, so the dual change is at most L times the primal change and the augmented Lagrangian is a Lyapunov function (pp. 8-9)",
+   "best-iterate rate: summed sufficient decreases give min_{i<=k} step = O(1/sqrt(k)), which bounds stationarity (pp. 10-11, 14-15)",
+   "ALM descent lemma F(u) - F(x_hat) >= ||x_hat - u||^2/(2 mu) from blockwise convexity plus optimality at x = u (pp. 13-14)",
+   "sanity check that the rate recovers the standard O(1/eps^2) complexity in the unconstrained case (pp. 12, 16)"
+  ],
+  "experiments": "Risk parity (random 20x20 and 200x200, a 5-asset hard case, 14-asset, 482-asset group); six local methods compared by iterations and QP solves to KKT tolerances 1e-3 to 1e-7; SOS via SOSTOOLS, sequential SOS, DSOS/SDSOS lower bounds (pp. 24-30).",
+  "positioning": "Extends Hong et al.'s nonconvex ADMM to objectives that are not sums and criticises the successive-difference assumption of earlier nonconvex ADMM proofs; builds on the authors' convex ALM [12] and the risk-parity least-squares model [3]; links the scheme to Levenberg-Marquardt (pp. 2, 8, 12, 18-19).",
+  "writing": "Explicit contribution sentence in the introduction (p. 3); full proofs for every theorem; frank admission that the separate-theta variant is undesirable both in theory and in practice (p. 24).",
+  "limits_future": "Two blocks only; ADMM analysis needs a small constant mu (tuned in practice); SOS does not scale (14 assets: inaccurate bound after more than 1 h, direct SOSTOOLS no answer within 24 h); DSOS/SDSOS need more testing; future work: new applications (pp. 8, 17, 24, 28-30).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "keeps ADMM/ALM with FISTA-type backtracking from the convex literature (including own ALM); the new part is the proof under blockwise convexity; the analysis explains why ADMM needs a fixed mu (its multiplier is not an exact partial gradient)",
+    "pages": "pp. 12, 16-17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "the two-block structure h(f, g) makes every subproblem convex; for least squares the scheme is a structured, cheap Levenberg-Marquardt",
+    "pages": "pp. 3, 5-6, 18-19"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "deterministic, with no stochastic process, but the rate is checked against the standard deterministic order (Workflow C step 4)",
+    "pages": "pp. 11-12, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "counts the dominant-cost operation (QP subproblem solves) next to iterations; no noise, no function-evaluation counts",
+    "pages": "p. 25"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "counterexample-first / hidden-assumption audit (without counterexample)",
+    "evidence": "prior nonconvex ADMM convergence rests on a successive-difference condition that cannot be verified in advance or enforced during the run",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "local upper bound plus global lower-bound certificate",
+    "evidence": "local ADMM/ALM gives the upper bound; an SOS relaxation seeded with the local solution's active bounds, and grown with the bounds its own solution violates, gives a lower bound that certifies global optimality or non-existence of a risk-parity solution",
+    "pages": "pp. 20, 27-29"
+   }
+  ],
+  "transferable": [
+   "Prove augmented-Lagrangian descent in a nonconvex ADMM by writing the multiplier as a partial gradient (from the last block's optimality condition), so that the dual change is Lipschitz-bounded by the primal change (pp. 8-9).",
+   "Get a rate without assuming that the iterates converge: sum the sufficient decreases, bound the smallest step over k iterations by O(1/sqrt(k)), and bound stationarity at that best iterate (pp. 10-11, 15).",
+   "Keep a theory-violating variant (separate theta update) in the comparison table to show that it is also worse in practice (p. 24).",
+   "Report the count of the dominant-cost operation (subproblem solves), not only iterations (p. 25).",
+   "Seed a large global relaxation with the active constraints of a local solution and add only the violated ones (Algorithm 6, pp. 28-29)."
+  ],
+  "coauthors": "X. Bai",
+  "quotes": [
+   {
+    "text": "Our focus and main contribution is to analyze these methods in a nonconvex setting where the objective function cannot be represented as a sum of multiple functions.",
+    "page": 3
+   },
+   {
+    "text": "While such assumption seems reasonable in that the iterates produced by the algorithm do not exhibit any erratic behavior, it is not clear if this condition can be verified in advance or enforced during the progress of the algorithm.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S094",
+  "year": "2015",
+  "title": "Superposition of protein structures using electrostatic isopotentials",
+  "read_level": "full",
+  "contribution": "A proof of concept that proteins can be superposed by electric fields alone: trust-region DFO maximizes the VASP-E overlap of electrostatic isopotentials, and the overlaps separate most binding-specificity subfamilies in serine proteases and enolases (pp. 1-7).",
+  "problem_entry": "Atom-based superposition may miss binding preferences that long-range electrostatics control; the paper frames the work as a test of the hypothesis that the same binding preference gives a larger isopotential overlap (p. 1).",
+  "key_idea": "A 7-dimensional rigid-motion vector; objective = VASP-E lattice CSG intersection volume of the positive and negative isopotentials; the book's trust-region DFO used unchanged, after centering the centroids; the resolution is fixed by an offline noise/runtime calibration instead of S085's adaptive accuracy rule (pp. 3-5).",
+  "assumptions": "Local optimum only (global not guaranteed); relative noise delta_r measured against the finest affordable resolution r* = 0.25, with r = 1.0 used; smoothness not discussed (pp. 3-5).",
+  "proof_devices": [],
+  "experiments": "Resolution calibration, 10 LHS random starts vs Ska warm start, same- vs different-specificity overlaps at +/-2.5 to 10 kT/e for 14 serine proteases and 10 enolases, single-isopotential variant, RMSD against Ska; no optimizer baseline and no evaluation counts (pp. 4-7).",
+  "positioning": "Positions against atom-based superposition (acknowledging its many successes) and against surface-based electrostatic comparison; cites the group's own DFO-VASP [40] and the IDFO book [21] (pp. 1-3).",
+  "writing": "Hypothesis-driven framing with 'first algorithm' and 'first proof of concept' claims; one overclaim, that two or three restarts 'guarantee' a high-quality superposition (pp. 1-2, 5).",
+  "limits_future": "Two subfamilies are not distinguished; local optima only; a large overlap is no guarantee of functional similarity; future work: comparisons of electric fields and molecular design (pp. 3, 6-7).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "noise measured before optimizing (relative noise vs runtime across the fidelity knob), then a fixed fidelity is chosen, as in Workflow A's noise experiment; no accuracy contract tied to Delta, and S085's adaptive rule is dropped",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "weak: the book's trust-region DFO applied unchanged to a new black box",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "validate against an independent domain criterion",
+    "evidence": "because a large overlap does not ensure functional similarity, DFO solutions are checked by RMSD to the backbone alignment (a metric the optimizer did not use), and outliers are traced to low-overlap runs",
+    "pages": "p. 7"
+   }
+  ],
+  "transferable": [
+   "Calibrate a simulator's fidelity knob before optimizing: plot relative error (against the finest affordable fidelity) and runtime across settings, then fix the cheapest acceptable setting (pp. 4-5).",
+   "Show where a domain-knowledge warm start falls in the distribution of final values from space-filling random starts (Fig. 6, p. 5).",
+   "Check optimizer output with an independent structural metric and trace outliers back to low-objective runs (p. 7)."
+  ],
+  "coauthors": "Z. Guo, J. Hong, B. Y. Chen",
+  "quotes": [
+   {
+    "text": "To compare proteins based on their electric fields, we have developed the first algorithm designed to superpose protein structures using electric fields alone.",
+    "page": 1
+   },
+   {
+    "text": "Restarting DFO two or three times can thereby guarantee a high quality superposition.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S121",
+  "year": "2015",
+  "title": "Um método de Região de Confiança sem Derivadas com Modelos Construídos por máquinas de Vetores Suporte para Regressão",
+  "read_level": "full",
+  "contribution": "Theorem statements (no proofs) that epsilon-SVR models, with tube width and slacks O(Delta^2) on Lambda-poised samples, satisfy |f - m| <= kappa Delta^2 in the trust region, the model hypothesis of the convex-constrained DFO trust-region method of Conejo et al. (pp. 2, 5-6).",
+  "problem_entry": "The Conejo et al. algorithm accepts any sufficiently accurate model; the aim is to show that SVR regression models qualify (pp. 1-2).",
+  "key_idea": "Build linear or quadratic (kernel x'y + (x'y)^2) epsilon-SVR models from the dual QP, and tie the SVR margin and slacks to Delta^2 with a Lambda-poisedness condition adapted to SVR and feature space (pp. 3-5).",
+  "assumptions": "Omega nonempty, closed and convex; f differentiable, derivatives unavailable; samples framed as i.i.d. from dP; Lambda-poised sets with at least n+1 or (n+1)(n+2)/2 points; as printed, Definitions 2-3 have an off-by-one (too many difference vectors required to be linearly independent) (pp. 1-2, 5).",
+  "proof_devices": [],
+  "experiments": "Illustration only: SVR models of Rosenbrock near (1,1) with radii 0.5 and 0.1 (Figs. 1-2, p. 6); no optimization runs.",
+  "positioning": "Builds on the convex-constrained DFO trust region of Conejo, Karas, Pedroso et al. [2] and the IDFO book [4]; SVR background from Vapnik and Schoelkopf-Smola (pp. 1-4).",
+  "writing": "Portuguese extended abstract; a tutorial SVR exposition takes most of the space (pp. 2-5); theorems stated without proofs; the conclusion claims more than the theorems cover (p. 7).",
+  "limits_future": "Only function-value error bounds (no gradient bound, no Delta^3 for quadratics); no proofs, no runs; the conclusion's single-point claim is not covered by the theorems; no limits or future work stated (pp. 5-7).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "a new model class (SVR) enters DFO only together with a poisedness definition and a Delta-scaled error bound",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "deterministic: the fitting tolerance (SVR tube and slacks) scales as Delta^2, the error <= kappa Delta^q contract shape without probability",
+    "pages": "pp. 5-6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import (existing, s01/S033)",
+    "evidence": "ML regression theory (SVR) becomes the model builder of a DFO trust-region method",
+    "pages": "pp. 2-5"
+   }
+  ],
+  "transferable": [
+   "To use any regression method in model-based DFO, make its fitting tolerance an explicit function of the trust-region radius (here O(Delta^2)), and state the geometry condition in its own feature space (pp. 5-6)."
+  ],
+  "coauthors": "A. Verdério, E. W. Karas, L. G. Pedroso",
+  "quotes": [
+   {
+    "text": "No algoritmo proposto em [2] qualquer modelo pode ser utilizado desde que forne¸ca uma aproxima¸c˜ao suficientemente precisa da fun¸c˜ao objetivo.",
+    "page": 2
+   },
+   {
+    "text": "pois a t´ecnica permite a constru¸c˜ao de modelos conhecendo apenas um ponto da fun¸c˜ao original.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S046",
+  "year": "2017",
+  "title": "Methodologies and software for derivative-free optimization",
+  "read_level": "full",
+  "contribution": "A user-oriented survey chapter of DFO methods and software, organized by problem features (smoothness, noise, complexity, probabilistic methods, constraint types, global, multiobjective and mixed-integer extensions), with named codes for each class (pp. 2-13).",
+  "problem_entry": "Users with simulation-based objectives whose derivatives are neither available nor approximable need a map from problem features to algorithms, which a method-class organization such as the IDFO book [53] does not give (p. 2).",
+  "key_idea": "Structure by the user's problem features; for each class give the key idea, the convergence or complexity status and the available software, e.g. fully linear models, the geometry debate ([70] vs [123]), WCC in iterations and evaluations, probabilistic models and descent, relaxable vs unrelaxable constraints (pp. 2-13).",
+  "assumptions": "General level only; O(A) hides constants independent of the iteration counter, with the n-dependence made explicit when appropriate (p. 2).",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Balanced survey: places the authors' own work (fully linear/quadratic models, self-correcting geometry, sparse models, probabilistic models, STORM) beside Powell, Audet-Dennis, Kolda-Lewis-Torczon and Kelley, and reports the Fasano-Morales-Nocedal challenge to geometry fairly (pp. 3-9).",
+  "writing": "Compact definitional prose; paragraphs typically end with the software that implements the method; no conclusion section (pp. 2-13).",
+  "limits_future": "Only short descriptions of methods (p. 2); no conclusion and no open problems stated (text ends at p. 13).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "geometry cannot be totally ignored (counterexample in [123]), but geometry steps are needed only when the model gradient is small; sharper than Heuristic 4's 'final stage' wording",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "weighted regression converges when the noise is small relative to the trust-region radius; probabilistic models are fully linear with a probability conditioned on the past",
+    "pages": "pp. 7-8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "complexity stated in iterations and in function evaluations, with the n-dependence explicit (answers Taste warning 6)",
+    "pages": "pp. 2, 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "states that in DFO effort must be measured in function evaluations",
+    "pages": "p. 8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "organize by the user's problem features, not by method class",
+    "evidence": "the chapter is explicitly structured around problem features, unlike the IDFO book, to direct users to suitable algorithms",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "In a survey or related-work section, organize by the reader's problem features and attach a named, available code to every method class (pp. 2, 4-13).",
+   "State DFO complexity separately in iterations and function evaluations, with the n-dependence explicit (pp. 2, 8).",
+   "Present a contested design choice as evidence that it can be dropped plus a counterexample showing it cannot be dropped entirely, then give the minimal rule (pp. 3-4)."
+  ],
+  "coauthors": "A. L. Custódio, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "In [123] an example was given showing that geometry cannot be totally ignored and that some form of model improvement is necessary",
+    "page": 3
+   },
+   {
+    "text": "In DFO it becomes also important to measure the effort in terms of the number of function evaluations",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S074",
+  "year": "2017",
+  "title": "A novel l0-constrained gaussian graphical model for anomaly localization",
+  "read_level": "full",
+  "contribution": "An l0-constrained, Frobenius-regularized Gaussian graphical model for per-variable anomaly scores, solved by a projected-gradient method with BB steps and a PD-enforcing backtracking; it has the best mean AUC on one sensor data set (pp. 2-4).",
+  "problem_entry": "Anomaly localization needs sparse dependency graphs, but only l1-regularized GGMs have been used, and little is known about the best way to learn them for this task (p. 1).",
+  "key_idea": "Constrain sparsity directly (||X||_0 <= kappa) and add (lambda/2)||X||_F^2 so that no few entries dominate the scores; project by keeping the kappa largest entries (symmetric tie-break) and enforce X > 0 inside the backtracking test (pp. 2-3).",
+  "assumptions": "f smooth and convex; feasible set nonconvex and not closed; no convergence theorem stated; the choice of lambda and kappa is not reported (pp. 2-3).",
+  "proof_devices": [],
+  "experiments": "One real 42-sensor car data set with two known miswired sensors; 4 graph models x 3 scoring methods; ROC curves and mean/std AUC over length-50 windows; l0+l2+KL best (0.9767), with the SSA exception named (pp. 3-4).",
+  "positioning": "Extends Ide et al.'s l1-GGM anomaly localization; cites cardinality-constrained models (Lu-Zhang, Yuan et al.) and the elastic net; does not cite the authors' own sparse inverse covariance papers (pp. 1-2, 4).",
+  "writing": "Short workshop style; claims that the model 'outperforms' others, and names the one scoring method where it does not (p. 4).",
+  "limits_future": "One data set; no convergence result, runtimes or parameter-selection details; no limits or future work stated (pp. 3-4).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "classical projected gradient with BB and backtracking kept; the only change is that the backtracking test also enforces the open PD constraint that the projection cannot handle",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "projection onto the l0 set is a closed-form sort (O(n^2 log n))",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "full factorial comparison (models x scoring) against ground truth, with mean and std over windows; no cost comparison",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "smooth true target instead of convex surrogate (existing, s02), l0 variant",
+    "evidence": "imposes the true sparsity constraint instead of the l1 surrogate and adds a regularizer chosen for the downstream anomaly score",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "For a nonconvex set that is not closed (sparse matrices intersected with the open PD cone), project onto the cheap part and enforce the rest in the backtracking acceptance test (p. 3).",
+   "Break ties in a nonunique projection by a fixed order that preserves needed structure (symmetry) (p. 3).",
+   "Evaluate a model change with a factorial design across downstream scoring methods; report mean +/- std over windows and name where the new model loses (pp. 3-4)."
+  ],
+  "coauthors": "D. T. Phan, T. Idé, J. Kalagnanam, M. Menickelly",
+  "quotes": [
+   {
+    "text": "Although sparsity is of utmost importance in terms of identification of responsible variables as well as robustness to the noise of real-world sensor data, little is known about what is the best approach to learn sparse dependency graphs in the context of anomaly localization.",
+    "page": 1
+   },
+   {
+    "text": "Hence the `2 regularization term keeps the magnitude of all entries uniformly similar.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S061",
+  "year": "2023",
+  "title": "Stochastic adaptive regularization method with cubics: A high probability complexity bound",
+  "read_level": "full",
+  "contribution": "The first high-probability iteration bound for stochastic adaptive cubic regularization (SARC): O(eps^{-3/2}) with overwhelmingly high probability, which matches the deterministic order, under stochastic zeroth-, first- and second-order oracles with fixed reliability (pp. 2, 11).",
+  "problem_entry": "ARC is optimal deterministically, but stochastic ARC results were either expected bounds under exact or bounded zeroth-order oracles, or non-adaptive with bounds holding only on the event of accurate estimates (p. 2).",
+  "key_idea": "Keep ARC with the CGT11 step conditions; call SFO/SSO with accuracy inputs mu/sigma_k and sqrt(mu/sigma_k); add a 2 eps'_f error correction to the acceptance ratio; then map the process onto the JSX21 framework (pp. 3-4, 10).",
+  "assumptions": "phi bounded below, C^2, with Lipschitz gradient and Hessian; SZO with mean error <= eps_f and a sub-exponential tail; SFO/SSO accurate with probability >= 1 - delta; stronger than JSX21/CBS22: oracles implementable for arbitrarily small mu; p > 1/2; eps above a floor set by mu and eps'_f (pp. 1-3, 9).",
+  "proof_devices": [
+   "true iteration defined through max{mu/sigma_k, ||s_k||^2} (Definition 1, p. 4)",
+   "large sigma: a true iteration is successful or has a tiny step (Lemma 2, p. 5); before eps-stationarity true steps are not tiny (Lemma 4, p. 7)",
+   "union bound for the joint gradient and Hessian accuracy event (Lemma 6, pp. 8-9)",
+   "verify the five properties of the JSX21 stochastic process and import its sub-exponential tail bound (Theorem 2, p. 10; Theorem 3, p. 11)",
+   "sigma_k dominated by a one-sided geometric random walk, which gives sample complexity via JSX23 (p. 11)"
+  ],
+  "experiments": "none (numerical performance explicitly not discussed, p. 3)",
+  "positioning": "Positions against CS18 and Bellavia et al. (expected bounds only) and Tripuraneni et al. (non-adaptive, event-only bound); extends JSX21 and CBS22 to the CS18 framework, and says the extension is far from trivial (pp. 2-3).",
+  "writing": "Explicit contributions paragraph with 'first' and 'To the best of our knowledge'; a roadmap of the lemmas; openly flags the stronger oracle assumption (pp. 2-4).",
+  "limits_future": "Stronger oracle assumption; relaxed step-dependent oracle inputs left open; no numerical study (future work); stopping time measured at the trial point (pp. 3-4, 9).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "accuracy/reliability oracle definitions with accuracy tied to 1/sigma_k; the irreducible eps_f fixes the reachable eps",
+    "pages": "pp. 1-4, 9"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ARC and the CGT11 step conditions are unchanged; the repairs are a 2 eps'_f slack and oracle inputs tied to sigma",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "high-probability tail and deterministic order O(eps^{-3/2}); the abstract's 'superior' claim is about complexity order, not experiments (no numerics), so SKILL.md's 'outperforms' wording should not be read as empirical",
+    "pages": "pp. 1, 3, 9-11"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "sigma_k upper bound (random walk) -> lower bound on oracle accuracy -> sample complexity",
+    "pages": "p. 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "convergence by embedding in an existing framework (existing, s2-02), stochastic form",
+    "evidence": "per-realization lemmas, then a checklist of the JSX21 process properties (Theorem 2), then the imported tail bound",
+    "pages": "pp. 8, 10-11"
+   }
+  ],
+  "transferable": [
+   "When the required accuracy depends on the not-yet-computed step, define the 'true iteration' with max{computable input, step-dependent term} and pass the computable input to the oracle (p. 4).",
+   "Add a 2 eps'_f slack to the numerator of the acceptance ratio when function estimates carry irreducible error (pp. 3-4).",
+   "State the noise floor as a power of the oracle's irreducible error and compare the exponent across sibling methods (p. 9).",
+   "Structure the proof as deterministic per-realization lemmas plus a checklist of process properties that a published stochastic theorem needs (pp. 4-10)."
+  ],
+  "coauthors": "M. Xie",
+  "quotes": [
+   {
+    "text": "We do not discuss the numerical performance of our method in this paper.",
+    "page": 3
+   },
+   {
+    "text": "This is because function value estimates have an irreducible error, so without this correction term, the algorithm may always reject improvement steps.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S137",
+  "year": "2021",
+  "title": "High Probability Step Size Lower Bound for Adaptive Stochastic Optimization",
+  "read_level": "full",
+  "contribution": "A high-probability lower bound min_{k<=n} alpha_k >= alpha_bar gamma n^{-(1+nu) log_{p/(1-p)}(1/gamma)} for any adaptive stochastic method whose iterations are true with probability p > 1/2 and are successful when true with a small step; the bound recovers the deterministic one as p -> 1 (pp. 1, 4).",
+  "problem_entry": "Oracle accuracy, and hence samples per call, is tied to the step size; deterministic analysis lower-bounds the step easily, but with oracle failures no bound existed (pp. 1, 3).",
+  "key_idea": "No new algorithm: an abstract adaptive framework and a two-part assumption; the log step size is coupled with a one-sided random walk reflected at 0 whose maximum over n steps is bounded (pp. 2, 4-5).",
+  "assumptions": "P(true | past) >= p > 1/2; true iterations with alpha_k <= alpha_bar are successful; Lipschitz constants unknown to the algorithm; the same factor gamma for increases and decreases (pp. 1-2, 4).",
+  "proof_devices": [
+   "coupling proof that a reflected random walk stochastically dominates the step-size exponent (Lemma 3, Appendix A, p. 8)",
+   "hitting probability of level l in n steps from the explicit spectral form of a truncated birth-death chain (Proposition 1, Appendix B, p. 8)",
+   "choose level l = ceil(log_a n) with a = (p/q)^{1/(1+nu)} to turn geometric decay into a polynomial failure probability (Appendix C, p. 9)",
+   "tightness via the q^l lower bound (Remark 5, p. 5)"
+  ],
+  "experiments": "MNIST with an MLP and a small CNN; step-size trajectories of ALOE (gamma = 0.7, 0.9) vs SLS, which violates the assumption; CNN: ALOE >99% vs SLS about 49% accuracy after the same number of iterations (p. 6).",
+  "positioning": "Contrasts adaptive methods with SGD's per-application step tuning; covers the group's line-search, trust-region and ARC analyses [1-6] and Gratton et al. (pp. 1-2, 4).",
+  "writing": "Problem-solution abstract; remarks turn the bound into parameter advice (gamma as a function of p, an SGD-like n^{-1/2} schedule as a special case); proofs in appendices (pp. 1, 4-5, 8-9).",
+  "limits_future": "No conclusion or future-work section; limits not discussed; the numerical comparison is at equal iterations, not samples; the Appendix B citation [1, Section XVI.3] points to the wrong reference-list entry (pp. 6-8).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "step parameter as a random walk; high-probability bound; deterministic limit as p -> 1",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "lower-bound the step parameter with high probability to bound samples per oracle call; the earliest statement in the corpus of the step leading to S057",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "accuracy M_j tied to alpha_k (TR: M0 = kappa alpha^2, M1 = kappa alpha) with fixed reliability delta < 1/2, achieved through the batch size",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "stated: adaptive methods borrow from deterministic optimization and avoid SGD's per-application step tuning; the SGD n^{-1/2} schedule reappears as a special gamma choice",
+    "pages": "pp. 1, 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "spin off the enabling lemma (existing, s01)",
+    "evidence": "the step-size bound that sample complexity needs is published alone as a workshop paper; S057 later builds on the same coupling",
+    "pages": "pp. 1, 3"
+   },
+   {
+    "pattern": "analysis-derived parameter rule",
+    "evidence": "the bound prescribes a larger gamma when oracle reliability p is low, and gamma = (p/(1-p))^{-1/4} gives an n^{-1/2} floor",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Lower-bound an adaptive parameter that moves by constant factors by mapping its log to an integer walk, coupling it with a dominating reflected walk, and bounding that walk's maximum over n steps (pp. 4-5, 8-9).",
+   "Pick the level l = ceil(log_a n) with a just below the drift ratio p/q to convert a geometric hitting probability into a polynomial-in-n failure probability (p. 9).",
+   "Include a competitor that violates your assumption to show what the assumption buys in practice (p. 6)."
+  ],
+  "coauthors": "B. Jin, M. Xie",
+  "quotes": [
+   {
+    "text": "In the deterministic setting, a lower bound on the step size is easily derived, however, in the stochastic setting, due to possible oracle failures, bounds on the step size have not been previously derived.",
+    "page": 1
+   },
+   {
+    "text": "Providing a lower bound on the step size parameter in turn gives an upper bound on the number of samples needed for each oracle evaluation.",
+    "page": 3
+   }
+  ]
+ }
+]

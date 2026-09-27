@@ -450,7 +450,7 @@
   {
    "id": "S022",
    "title": "An efficient implementation of an active set method for SVMs.",
-   "authors": "K Scheinberg, KP Bennett, E Parrado-Hernández",
+   "authors": "K Scheinberg",
    "venue": "Journal of Machine Learning Research",
    "year": 2006,
    "cites": 147,
@@ -465,7 +465,8 @@
    "sources": [
     "scholar",
     "dblp"
-   ]
+   ],
+   "note": "Sole author (JMLR 7, 2006). Google Scholar lists the JMLR issue editors K.P. Bennett and E. Parrado-Hernández as coauthors; corrected from the paper's first page."
   },
   {
    "id": "S023",
@@ -2105,7 +2106,8 @@
    "sources": [
     "scholar",
     "crossref"
-   ]
+   ],
+   "note": "Only the 2019 arXiv version (1903.00359, same text as S089) was found; the 2025 journal version was not read. Count S089/S106 as one paper."
   },
   {
    "id": "S107",
@@ -2121,7 +2123,8 @@
    "dup_of": null,
    "sources": [
     "scholar"
-   ]
+   ],
+   "note": "Same text as S098 (arXiv 2510.03187, ProxSTORM); the 2024 Sandia report version was not found. Count S098/S107 as one paper."
   },
   {
    "id": "S108",
@@ -2702,15 +2705,17 @@
   },
   {
    "id": "S143",
-   "title": "OPTIMA",
+   "title": "OPTIMA 79: Geometry in model-based algorithms for derivative-free unconstrained optimization (feature article)",
    "authors": "K Scheinberg",
    "venue": null,
    "year": null,
    "cites": null,
    "doi": null,
    "arxiv": null,
-   "urls": [],
-   "kind": "other",
+   "urls": [
+    "https://mathopt.zib.de/Optima-Issues/optima79.pdf"
+   ],
+   "kind": "essay",
    "dup_of": null,
    "sources": [
     "scholar"

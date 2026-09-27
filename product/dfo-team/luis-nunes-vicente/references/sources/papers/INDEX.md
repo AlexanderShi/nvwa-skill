@@ -108,23 +108,23 @@
 | 96 | S097 | 2014 | Globally convergent DC trust-region methods | Journal of Global Optimization | 4 | journal | url | txt | 18 | supplement | — |
 | 97 | S098 | 2003 | Updating the multipliers associated with inequality constraints in an augmented Lagrangian multiplier method | Journal of Optimization Theory and Applications | 4 | journal | url | txt | 15 | supplement | — |
 | 98 | S099 | 1999 | Characterization of the smoothness and curvature of a marginal function for a trust-region problem | Mathematical Programming | 3 | journal | url | txt | 17 | supplement | — |
-| 99 | S100 | 1992 | Parametric linear programming techniques for the indefinite quadratic programming problem | IMA Journal of Management Mathematics | 3 | journal | — | no-oa |  | supplement | — |
+| 99 | S100 | 1993 | Parametric linear programming techniques for the indefinite quadratic programming problem | IMA Journal of Management Mathematics | 3 | journal | — | no-oa |  | supplement | — |
 | 100 | S101 | 2026 | Stochastic set-valued optimization and its application to robust learning | arXiv preprint arXiv:2603.17691 | 2 | preprint | arXiv | txt | 27 | core | — |
 | 101 | S102 | 2025 | Sequential test sampling for stochastic derivative-free optimization | arXiv preprint arXiv:2509.14505 | 2 | preprint | arXiv | txt | 25 | core | — |
 | 102 | S104 | 2017 | An indicator for the switch from derivative-free to derivative-based optimization | Operations Research Letters 45 (4), 353-361 | 2 | journal | url | txt | 17 | supplement | — |
 | 103 | S106 | 2001 | Pattern search methods for user-provided points | Lecture Notes in Computer Science, 95-98 | 2 | conference | url | txt | 4 | supplement | — |
 | 104 | S107 | 2025 | Non-smooth stochastic gradient descent using smoothing functions | arXiv preprint arXiv:2507.10901 | 1 | preprint | arXiv | txt | 37 | core | — |
-| 105 | S108 | 2019 | Optimization by space transformation and decomposition | — | 1 | other | — | no-oa |  | supplement | — |
+| 105 | S108 | 2019 | Optimization by space transformation and decomposition | — | 1 | other | manual | txt | 107 | supplement | — |
 | 106 | S109 | 2006 | Matemática industrial em Portugal. Análise e perspectivas | Fundação Calouste Gulbenkian, Tema Ciência e Sociedade | 1 | chapter | manual | txt | 8 | supplement | — |
 | 107 | S110 | 2026 | Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization | arXiv preprint arXiv:2609.11567 | — | preprint | arXiv | txt | 29 | core | — |
 | 108 | S111 | 2026 | Stochastic block coordinate and function alternation for multi-objective optimization and learning | arXiv preprint arXiv:2605.12432 | — | preprint | arXiv | txt | 22 | core | — |
 | 109 | S112 | 2022 | A package for optimization based on space decomposition | — | — | other | — | no-oa |  | supplement | — |
-| 110 | S113 | 2020 | A Review of Multi-Objective Optimization: Theory and Algorithms | — | — | other | — | no-oa |  | supplement | — |
+| 110 | S113 | 2020 | A Review of Multi-Objective Optimization: Theory and Algorithms | — | — | other | manual | txt | 46 | supplement | — |
 | 111 | S116 | 2012 | Facultés universitaires Notre-Dame de la Paix Faculté des Sciences—Département de Mathématique | — | — | other | — | no-oa |  | supplement | — |
 | 112 | S117 | 2012 | Special issue on nonlinear and global optimization, dedicated to Professor Joaquim João Júdice on the occasion of his sixtieth anniversary | Top 20 (1), 1-3 | — | other | — | no-oa |  | supplement | — |
 | 113 | S120 | — | The Effects of Travel Distance on MLB Performance | — | — | journal | url | txt | 10 | supplement | — |
-| 114 | S121 | — | SIAG on Optimization Views and News | — | — | other | — | no-oa |  | supplement | — |
-| 115 | S122 | — | SIAG on Optimization Views and News | — | — | other | — | no-oa |  | supplement | — |
+| 114 | S121 | 2025 | SIAG on Optimization Views and News | — | — | other | manual | txt | 15 | core | — |
+| 115 | S122 | 2023 | SIAG on Optimization Views and News | — | — | other | manual | txt | 24 | core | — |
 | 116 | D001 | 1994 | Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software 20(1), 120-123 | — | journal | manual | txt | 4 | supplement | — |
 | 117 | H001 | 2004 | Editorial | Optimization and Engineering 5 (2004) 99-100 (Special Issue on Optimization and Engineering) | — | other | url | txt | 4 | supplement | — |
 | 118 | H002 | 1999 | An analysis of Newton’s method for equivalent Karush-Kuhn-Tucker systems | Investigación Operativa 7 (1999) 17-28 | — | journal | url | txt | 10 | supplement | — |
@@ -135,4 +135,4 @@
 | 123 | H007 | 1997 | Métodos de optimização para controlo óptimo e projecto de engenharia | Actas da I Conferência Nacional de Telecomunicações, pp. 437-440, 1997 | — | conference | url | txt | 4 | supplement | — |
 | 124 | H008 | 1991 | Efficient vehicle routing algorithms for municipal waste collection (written in portuguese) | Investigação Operacional 10 (1991) 47-58 | — | journal | — | no-oa |  | supplement | — |
 
-124 works · txt 104 · pdf 0 · no-oa 20
+124 works · txt 108 · pdf 0 · no-oa 16

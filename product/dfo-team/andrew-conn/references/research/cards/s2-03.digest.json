@@ -1,0 +1,129 @@
+[
+ {
+  "id": "S103",
+  "year": "1992",
+  "title": "Intensive numerical tests with LANCELOT (Release A): the complete results",
+  "read_level": "full",
+  "contribution": "Archival report listing, for 943 CUTE problems and 21 LANCELOT algorithmic variants, the complete per-run minor iterations, gradient evaluations, cumulative CG iterations and CPU times on which the analysis paper [3] (Report 92/16) is based.",
+  "problem_entry": "Not a new problem: the analysis in [3] could not list the many runs, so this report provides the complete results 'for future reference' (pp. 1-2).",
+  "key_idea": "A four-metric grid (iterations, gradient evaluations, CG iterations, CPU seconds) over 943 problems x 21 variants, preceded by a problem-characteristics table with a cross-variant best objective value and followed by coded failures and bracketed wrong-minimum runs (pp. 2-3, 18-85).",
+  "assumptions": "Problems (1)-(3) with smooth f and c, large n and/or m; runs capped at 1000 iterations, three million words of workspace and 18000 CPU seconds on a DECstation 5000/200; timings under f77 3.0-2 without optimization, rounded to seconds (pp. 2, 18, 69).",
+  "proof_devices": [],
+  "experiments": "943 CUTE instances (398 distinct names, n up to 15625), 21 variants, 4 cost measures; failure codes E/M/F/I/S/T; brackets flag >0.01% deviation from the best value; my tally: default 865/943 successful terminations, seprc 878, dfp 608; 920 problems solved by at least one variant, the 23 unsolved ones carry the best-value sentinel 0.1000000D+26 (pp. 3-34).",
+  "positioning": "Cites only CUTE [1] (in preparation, 1992), the LANCELOT book [2] and the analysis report [3]; no comparison with other solvers inside the report (p. 86).",
+  "writing": "Two short prose passages plus some 80 pages of tables; conventions stated once and reused ('Other conventions are as in the previous section'); variant definitions deliberately left to [3] (pp. 2, 18, 35, 52, 69).",
+  "limits_future": "Variants undefined in the report; no separate function-evaluation count; no noisy or engineering tier; no summary statistics or profiles; no future directions stated (pp. 2-86).",
+  "method_links": [
+   {"method": "Method 1", "relation": "evidence", "note": "Data layer of the LANCELOT testing twin: explicitly the basis of the discussion in [3], the numerical-experiments companion to the LANCELOT book.", "pages": "pp. 1-2, 86"},
+   {"method": "Method 2", "relation": "evidence", "note": "Shared public collection (CUTE, 943 instances) and per-option reporting of all 21 variants including failures (Method 2 step 5).", "pages": "pp. 2, 18-85"},
+   {"method": "Method 2", "relation": "variant", "note": "Cost units are iterations, gradient evaluations, CG iterations and CPU time (derivative-based solver), not function evaluations; no noisy or engineering tier.", "pages": "pp. 2, 18"}
+  ],
+  "new_pattern_candidates": [
+   {"pattern": "archival complete-results report", "evidence": "Per-run results for every problem x variant x measure published as a separate report so the analysis paper can stay short and every number stays checkable.", "pages": "pp. 1-2"}
+  ],
+  "transferable": [
+   "Publish a companion data report with every problem x variant x cost measure plus a problem-characteristics table (n, m, bound/constraint types, best value), and cite it from the analysis paper.",
+   "Code every failed run by cause (arithmetic error, memory, infeasible, iteration limit, tiny step, time limit) and count all of them as failures.",
+   "Flag runs that terminate successfully at a different objective value (relative tolerance 0.01% against the best value over all variants) instead of counting them as plain successes.",
+   "Report several cost units side by side and state machine, compiler, optimization level and timing rounding."
+  ],
+  "coauthors": "Nick Gould, Ph.L. Toint",
+  "quotes": [
+   {"text": "These results constitute the basis on the discussion and analysis presented by the authors in [3].", "page": 1},
+   {"text": "It is the purpose of the present report to provide, for future reference, the complete set of results on which this discussion is based.", "page": 2}
+  ]
+ },
+ {
+  "id": "S155",
+  "year": "1992",
+  "title": "Discontinuous piecewise differentiable optimization I: Theory",
+  "read_level": "full",
+  "contribution": "Introduces a decomposition of a (possibly discontinuous) piecewise linear function into a smooth part plus single-ridge terms, proves it exists and is unique at non-degenerate points, and derives from it per-activity optimality conditions and a finitely convergent active-set projected-gradient algorithm that generalizes Conn's 1973 l1 exact-penalty method, with a sketch of the nonlinear extension.",
+  "problem_entry": "Generalize Conn's own l1 exact-penalty projection algorithm to general discontinuous piecewise linear problems (reduced to unconstrained form by the penalty (3)), motivated by VLSI/floorplanning, layout, batch production and fixed-charge applications and by the weaknesses of subgradient, bundle and smoothing methods (pp. 4, 6-7).",
+  "key_idea": "Locally f(x) = f(x^) + g^T(x-x^) + sum_i v_i min(0, a_i^T(x-x^)) over active ridges (Definition 1, Theorem 1); a dead point is optimal iff g = sum u_i a_i with 0 <= u_i <= -v_i; descend by -Pg or by dropping one activity along +/-P_{-i}a_i with a breakpoint line search; for discontinuities use the lower semicontinuous envelope and ignore soaring directions, changing only step 4 (pp. 11-13, 22-24, 27, 35).",
+  "assumptions": "Ridges, active sets and cell gradients available at any point (more than a bundle oracle); f decomposable at iterates and breakpoints; linearly independent active ridge gradients at dead points; non-contact points and known fault sets in the discontinuous case; degeneracy and contact points deferred to Part II (pp. 8, 11, 22, 31, 35).",
+  "proof_devices": [
+   "change of variables y = Lx making active ridges coordinates; continuity forces cell-gradient components to depend only on sign(y_i), giving h(y) = y^T d^full + sum (d_i^empty - d_i^full) min(0, y_i) (pp. 14-15)",
+   "uniqueness by testing along single-dropping directions P_{-k} a_k (p. 16)",
+   "constructive decomposition from |A|+1 cell gradients instead of 2^|A| (Proposition 1, pp. 16-18)",
+   "finite termination by counting sign vectors sigma in {-1,0,1}^|R| that cannot recur under strict monotone decrease; active set grows at non-dead points, one activity dropped at dead points (Theorem 3, p. 26)",
+   "lower semicontinuous envelope turns infimum into minimum; soaring directions excluded so the continuous proofs carry over (pp. 27-28, 32-35)"
+  ],
+  "experiments": "none in Part I; implementation and numerical results deferred to Part II (pp. 4, 38)",
+  "positioning": "Generalizes Conn 1973 [8], Conn-Pietrzykowski [14], Coleman-Conn [6,7] and shows Conn-Cornuejols facility location [11] as an instance with nested ridges; contrasts with subgradient/bundle methods, Fourer's piecewise-linear simplex and smoothing approaches (Zang, Imo-Leech) (pp. 6-7, 21, 24).",
+  "writing": "Two-part paper announced in the abstract; one running toy example (the square-base pyramid (2)) reused for each definition; intuitive explanation placed before each proof; English and French abstracts (pp. 4-6, 10, 14, 18).",
+  "limits_future": "Degeneracy, contact points, constrained case, implementation and numerics deferred to Part II; nonlinear extension only sketched with an expected linear rate for the first-order version; future comparison with bundle, composite nonsmooth methods and Clarke's theory (pp. 8, 36-38).",
+  "method_links": [
+   {"method": "Method 6", "relation": "evidence", "note": "Conn's own 1973 l1 exact-penalty projection algorithm transplanted to discontinuous piecewise linear optimization; the Conn-Cornuejols facility-location method shown to be an instance.", "pages": "pp. 7, 24"},
+   {"method": "Method 5", "relation": "evidence", "note": "Deliberately assumes and exploits more structure (ridges, cell gradients) than a bundle-method oracle; argues structure-exploiting nonsmooth methods beat general bundle methods.", "pages": "pp. 6-7, 11"},
+   {"method": "Method 1", "relation": "evidence", "note": "Planned as paired publications from the start: Part I theory, Part II degeneracy, implementation and numerical results.", "pages": "pp. 4, 38"},
+   {"method": "Method 3", "relation": "variant", "note": "By analogy: a checkable geometric condition (linear independence of active ridge gradients) guarantees existence and uniqueness of the local model and carries the optimality theorem; degenerate case deferred.", "pages": "pp. 13, 20, 22"},
+   {"method": "Method 4", "relation": "variant", "note": "Applications listed from the literature as motivation, not from a user engagement.", "pages": "p. 7"}
+  ],
+  "new_pattern_candidates": [
+   {"pattern": "smooth + single-kink local decomposition", "evidence": "Nonsmooth function written locally as linear term plus one min(0,.) term per active kink, from which a per-kink multiplier interval test and single-dropping descent directions follow.", "pages": "pp. 11-13, 21-23"},
+   {"pattern": "minimal-change extension", "evidence": "Discontinuous case handled by the lower semicontinuous envelope so that only step 4 of the algorithm changes and the decomposition/optimality proofs go through exactly as in the continuous case.", "pages": "pp. 27, 32, 35"}
+  ],
+  "transferable": [
+   "For a piecewise function, prove a canonical local form (linear part + sum v_i min(0, a_i^T(x-x^))) exists under a regularity condition, then derive the optimality test and descent directions one kink at a time.",
+   "Prove finite termination by showing iterates never revisit a sign pattern of the active constraints while f strictly decreases.",
+   "Handle discontinuities by working with the lower semicontinuous envelope and forbidding only directions along which f jumps up, keeping the rest of the continuous algorithm.",
+   "In an exact line search along a piecewise-linear path, pop breakpoints from a heap and update the directional derivative at each breakpoint instead of sorting all of them."
+  ],
+  "coauthors": "Marcel Mongeau",
+  "quotes": [
+   {"text": "(Hence, we are assuming that more information on the structure of the objective function is available than, for example, in a bundle method, which assumes that only one element of the subdifferential is known at any point.)", "page": 11},
+   {"text": "We have hence set a framework for an algorithm dealing directly with discontinuities that could be involved in a non-differentiable optimization problem.", "page": 38}
+  ]
+ },
+ {
+  "id": "S031",
+  "year": "1993",
+  "title": "Global convergence of a class of trust region algorithms for optimization using inexact projections on convex constraints",
+  "read_level": "partial",
+  "contribution": "Proves global convergence to critical points, finite identification of the binding (in)equality constraints and (under second-order sufficiency) whole-sequence convergence for a class of trust-region methods on convex feasible sets that allows iteration-dependent general norms, approximate gradients with error <= kappa*Delta_k and inexact projected-gradient (generalized Cauchy point) computations, e.g. by truncated LPs; also covers noisy function values.",
+  "problem_entry": "Existing convex-constraint trust-region theories need the explicitly computed Euclidean projected gradient, which may be expensive; with polyhedral norms the projection becomes an LP that network and staircase structure make cheap (p. 3).",
+  "key_idea": "Replace the projected-gradient Cauchy point by a Generalized Cauchy Point defined only through conditions (2.30)-(2.35): feasible, within nu2*Delta_k, achieving a fraction mu3 of the best linearized decrease chi_k(t) in a ball of radius t, plus Goldstein-type or length conditions; any step giving a fraction of the GCP decrease is accepted (pp. 9-11).",
+  "assumptions": "Compact level set, Lipschitz gradient, uniformly equivalent norms, gradient error <= kappa1*Delta_k, divergent sum 1/beta_k of model curvature bounds, beta_k[f(x_k)-f(x_k+1)] -> 0; for identification also AS.6-AS.11 (LICQ, Dunn nondegeneracy, asymptotically exact gradients, admitted to simplify exposition); AS.12 (C2) for whole-sequence convergence (pp. 4, 6-7, 20, 22, 35-37, 48).",
+  "proof_devices": [
+   "criticality measure chi_k[x] = |min <grad f, d>| over x+d in X, ||d||_(k) <= 1, proved equivalent across norms by sandwiching unit balls between two l2 balls (Theorem 4, pp. 13-14)",
+   "chi(t)/t nonincreasing via rescaling the t2-optimal step by t1/t2 and convexity of X (Lemma 2, p. 8)",
+   "Moreau decomposition bound |<g,d>| <= ||d||_(k) ||P_T(g)||_[k] (Lemma 2 part 3, p. 8)",
+   "Cauchy-type decrease m_k(x_k)-m_k(x_k+s_k) >= c3 chi_k min[1, Delta_k, chi_k/(1+omega_k^C)] with curvature along the step as a Rayleigh quotient (Theorem 9, pp. 17-18)",
+   "radius lower bound Delta_k >= c5/beta_k by contradiction at the first violating index (Lemma 12, pp. 19-20)",
+   "Powell's lemma: sum over successful k of min(Delta_k, eps/beta_k) finite implies sum 1/beta_k finite, contradicting AS.4 (Lemma 13, Theorem 14, p. 21)",
+   "liminf to lim via two interleaved subsequences m_i, l_i and AS.5 (Theorem 17, pp. 22-24)",
+   "LP weak-duality bound as stopping certificate for the inexact GCP linear program (7.12) (pp. 50-51)",
+   "relative noise ratio E_k = (f(x_k)-m_k(x_k))/(m_k(x_k)-m_k(x_k+s_k)) inserted into the rho_k bound of Lemma 12 (pp. 57-58)",
+   "two-variable constrained counterexample (7.28)-(7.29) showing a fixed relative gradient-accuracy condition (Carter) fails under constraints (pp. 54-55)"
+  ],
+  "experiments": "none; typical constant values listed, remaining constants 'will only become clear after extensive testing' (p. 13)",
+  "positioning": "Extends CGT 1988 bound-constrained theory [9], Burke-More-Toraldo [4], More [20] and Toint [29] 'in a more general setting'; inexact-gradient device taken from Toint [29]; Carter's relative accuracy condition [6] shown insufficient under constraints; uses Dunn's nondegeneracy and Burke-More identification ideas (pp. 3, 37, 54-55).",
+  "writing": "Bulleted list of new features in the introduction; numbered remarks motivating each algorithmic condition; 'familiar vocabulary of classical optimization' chosen over convex-analysis prerequisites; glossary and one-page assumption summary in appendices; long discussion-and-extensions section (pp. 3, 7, 10-13, 50-58, 62-66).",
+  "limits_future": "GCP algorithm is only a feasibility model (inner solver, t0, special cases open); AS.9 and AS.11 strong; identification without LICQ only 'weak' and a geometric version is ongoing research; application to network flow-conservation constraints under study (pp. 28, 37, 53-54, 58).",
+  "method_links": [
+   {"method": "Method 3", "relation": "evidence", "note": "Pre-DFO precursor: model accuracy is an explicit algorithm-independent condition ((2.13): gradient error <= kappa1*Delta_k) and convergence is proved once for any model satisfying (2.12)-(2.13) plus curvature conditions.", "pages": "pp. 6-7, 10, 19-21"},
+   {"method": "Method 3", "relation": "evidence", "note": "Workflow D step 1 made a theorem: with noisy f, convergence (Theorems 14, 17) survives if the ratio of function-value uncertainty to predicted model decrease stays below a modest bound (about 0.1).", "pages": "pp. 57-58"},
+   {"method": "Method 1", "relation": "variant", "note": "Theory-only member of the triad: GCP procedure is only a model, constants left to extensive testing, network application still under study; Report 90/4 revised 1995.", "pages": "pp. 2, 13, 28, 58"},
+   {"method": "Method 1", "relation": "evidence", "note": "Theory covers 'a relatively abstract algorithmic class' defined by conditions (taste #2), even covering linesearch methods.", "pages": "p. 10"},
+   {"method": "Method 5", "relation": "evidence", "note": "Designed to exploit cheap null-space bases (network spanning trees, staircase matrices) via polyhedral norms and LPs.", "pages": "pp. 3, 29, 50-51"},
+   {"method": "Method 6", "relation": "evidence", "note": "Transplants the 1988 bound-constrained trust-region theory to general convex sets and imports LP machinery (simplex bases, weak duality, interior-point duality gaps) into the Cauchy-point computation.", "pages": "pp. 3, 50-51"}
+  ],
+  "new_pattern_candidates": [
+   {"pattern": "assumption audit -> single-lemma extension", "evidence": "(2.12) is used only in Lemma 11, so noisy function values are handled by patching that one inequality; AS.6 results obtained by 'entirely similar' proofs with chi_k replaced by chi_k^C.", "pages": "pp. 36, 57-58"},
+   {"pattern": "inexact subproblem with checkable certificate", "evidence": "Exact projection replaced by a fraction-of-optimum condition on the linearized decrease, certified during a simplex solve by an LP weak-duality bound.", "pages": "pp. 9-11, 50-51"}
+  ],
+  "transferable": [
+   "When a subproblem (projection onto X) is expensive, require only a fraction mu3 of the optimal linearized decrease chi_k(t) and certify it cheaply, e.g. stop a simplex method when <g,d_l> <= -mu3 * (best dual objective so far).",
+   "Let the norm vary by iteration and prove once that the criticality measures are uniformly equivalent (Theorem 4); the norm then becomes a free design choice such as l_inf or polyhedral norms that turn subproblems into LPs.",
+   "Make the accuracy requirement on approximate gradients proportional to the trust-region radius (||e_k|| <= kappa*Delta_k) rather than a fixed relative accuracy, and show with a small constrained example why the fixed version fails.",
+   "Before generalizing a convergence proof, list which lemma uses which assumption and extend by modifying only those lemmas (noisy f needs only a bound on noise / predicted decrease).",
+   "After the algorithm statement, add numbered remarks justifying each condition, and put every assumption in a one-page appendix."
+  ],
+  "coauthors": "N.I.M. Gould, A. Sartenaer, Ph.L. Toint",
+  "quotes": [
+   {"text": "Of course, this only describes a relatively abstract algorithmic class.", "page": 10},
+   {"text": "We emphasize that this GCP Algorithm is only a model, intended to show feasibility of our approach", "page": 28}
+  ]
+ }
+]

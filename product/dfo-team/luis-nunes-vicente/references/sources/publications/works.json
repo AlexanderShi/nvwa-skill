@@ -2038,7 +2038,7 @@
    "title": "Parametric linear programming techniques for the indefinite quadratic programming problem",
    "authors": "LN Vicente, JJ Judice, PM Pardalos",
    "venue": "IMA Journal of Management Mathematics",
-   "year": 1992,
+   "year": 1993,
    "cites": 3,
    "doi": "10.1093/imaman/4.4.343",
    "arxiv": null,
@@ -2049,7 +2049,8 @@
     "scholar",
     "homepage",
     "crossref"
-   ]
+   ],
+   "note": "IMA J. Math. Appl. Business & Industry 4 (1993) 343-349 per the author's homepage; Scholar gives 1992."
   },
   {
    "id": "S101",
@@ -2411,7 +2412,7 @@
    "title": "SIAG on Optimization Views and News",
    "authors": "J Diakonikolas, LN Vicente, D Drusvyatskiy, M Menickelly, P Belotti, ...",
    "venue": null,
-   "year": null,
+   "year": 2025,
    "cites": null,
    "doi": null,
    "arxiv": null,
@@ -2420,14 +2421,15 @@
    "dup_of": null,
    "sources": [
     "scholar"
-   ]
+   ],
+   "note": "SIAG/OPT Views and News 33(1), Dec 2025; Vicente's part is the Chair's Column (p. 14)."
   },
   {
    "id": "S122",
    "title": "SIAG on Optimization Views and News",
    "authors": "H Lu, S Cen, Y Chi, LN Vicente, H Lu",
    "venue": null,
-   "year": null,
+   "year": 2023,
    "cites": null,
    "doi": null,
    "arxiv": null,
@@ -2436,7 +2438,8 @@
    "dup_of": null,
    "sources": [
     "scholar"
-   ]
+   ],
+   "note": "SIAG/OPT Views and News 31(1), Dec 2023; Vicente's part is the Chair's Column (p. 23)."
   },
   {
    "id": "D001",
