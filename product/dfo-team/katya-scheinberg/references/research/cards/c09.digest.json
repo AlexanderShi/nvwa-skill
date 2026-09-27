@@ -208,7 +208,7 @@
    {
     "method": "Method 1",
     "relation": "evidence",
-    "note": "Bounded deterministic noise fixes the floor eps >= Omega(sqrt(n) eps_f) with Delta_min = Theta(sqrt(eps_f))",
+    "note": "Bounded deterministic noise fixes the floor eps >= Omega(sqrt(n * eps_f)), i.e. order sqrt(n)*sqrt(eps_f) (Cor. 4.4, p. 16; p. 22) with Delta_min = Theta(sqrt(eps_f))",
     "pages": "pp. 2-3, 8, 22"
    },
    {

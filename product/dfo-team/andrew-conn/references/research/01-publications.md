@@ -1,8 +1,10 @@
 # 01 · Publications — landscape and signature-work anatomy (Andrew R. Conn)
 
-Research date: 2026-09-27. Method: web-search snippets only (WebFetch and OpenAlex were blocked; no full text was read). Every item below was confirmed by at least one search result showing title + authors + year (+ venue where shown). Credibility: **primary** = the work itself (bibliographic record / abstract); **secondary** = someone else describing it.
+Research date: 2026-09-27. Method (first pass): web-search snippets only (WebFetch and OpenAlex were blocked; no full text was read).
 
-Conn (1946–2019) wrote more than eighty research papers and co-wrote three books (SIAM News obituary, secondary: https://www.siam.org/publications/siam-news/articles/obituary-andrew-r-conn). No bibliometric export was possible, so the landscape below was put together by hand from confirmed records. It is a **sample, not a census**.
+**Update 2026-09-27 (full-text reading).** The publication list is now a census, not a sample: the Google Scholar profile plus DBLP and Crossref give 155 distinct works (`../sources/publications/scholar.md`, `works.json`), and 71 of the 138 in-scope works were read in full text into paper cards (`07-paper-cards.md`; synthesis in `08-deep-reading-synthesis.md`). See §3 for the coverage and §2 for the corrections the full texts make to the anatomies below. The anatomies in `SKILL.md` are the current versions. Every item below was confirmed by at least one search result showing title + authors + year (+ venue where shown). Credibility: **primary** = the work itself (bibliographic record / abstract); **secondary** = someone else describing it.
+
+Conn (1946–2019) wrote more than eighty research papers and co-wrote three books (SIAM News obituary, secondary: https://www.siam.org/publications/siam-news/articles/obituary-andrew-r-conn). No bibliometric export was possible in the first pass, so the landscape below was put together by hand from confirmed records. It is a **sample, not a census**; the census is §3.
 
 ## 1. Landscape by phase and theme
 
@@ -27,7 +29,9 @@ dblp record used for the 2014–2018 items (secondary aggregator, lists title/au
 
 ## 2. Signature-work anatomies
 
-Rules: "Origin" and "Abandoned paths" are marked **speculation** wherever no first-hand account was found. None was found for any of these works.
+Rules: "Origin" and "Abandoned paths" are marked **speculation** wherever no first-hand account was found. None was found for any of these works in the first pass.
+
+> **Corrections from the full texts (2026-09-27).** These first-pass anatomies are kept as written; the current versions are in `SKILL.md` (Signature Work Anatomy), which also adds the 1988 CGT theory/testing twin and CUTE. What changed: A's origin is stated ("the applications presented to the authors" [S009 p. 3]; geophysics and helicopter rotors [S019 pp. 2–3]) and its abandoned paths are known (the CST full-replacement geometry step, later called "very expensive" [S016 p. 19]; the CST gradient bound, later called "clearly inferior" [S124 pp. 26–27]). B's origin is stated in the paper [S012 p. 2], and "fully linear / fully quadratic" are the paper's own defined terms [S012 Defs 3.1, 3.3], not later literature's. C's abandoned options are stated [S040 p. 50; S061 p. 21]. D's minimal evidence is 41 designers on 168 circuits in the first JiffyTune paper (ICCAD 1996) [S036 p. 6], and its origin story appears first person in Conn's 2007 essay [S236 p. 3], not only in the MAM 2015 profile. E (the 2009 book) has no open full text and stays at abstract level [S002].
 
 ### A. Recent progress in unconstrained nonlinear optimization without derivatives (Math. Programming 1997, DOI 10.1007/BF02614326) — with the companion Powell-festschrift paper (CUP 1997)
 
@@ -85,3 +89,26 @@ Rules: "Origin" and "Abandoned paths" are marked **speculation** wherever no fir
 | Key insight | Both frameworks, direct search (generalized pattern search, mesh-adaptive search, convergent Nelder–Mead variants) and model-based, can be taught "rigorously" in one book (publisher description snippet). |
 | Reception | "First contemporary comprehensive treatment" (publisher description). 2015 Lagrange Prize in Continuous Optimization. The prize citation notes impact in "aerospace engineering, urban transport systems, adaptive meshing for partial differential equations, and groundwater remediation" (quote as shown in snippet; SIAM/MOS prize page). |
 | Methods shown | M6 (cross-school synthesis), M3 |
+
+## 3. Full-text coverage of the Google Scholar list (2026-09-27)
+
+Source list: `../sources/publications/scholar.md` (Google Scholar profile harvested and re-audited 2026-09-27, plus DBLP and Crossref; full records incl. duplicates in `works.json`). Per-work full-text status: `../sources/papers/INDEX.md` (texts are git-ignored). Card index: `07-paper-cards.md`.
+
+| Item | Count | Note |
+|---|---|---|
+| Google Scholar rows | 237 (+2 DBLP-only) | 56 duplicate rows set aside (`dup_of`) |
+| Distinct works | 155 | kinds: journal 66, conference 25, report 22, patent 13, chapter 10, other 9, book 5, thesis 2, talk 2, preprint 1 |
+| Skipped, excluded from every denominator | 45 | 17 rows that are not Conn publications (referee and acknowledgement lists, progress-report sections, a misattributed row, an organisers' message), 11 unresolved title-page fragments, 13 patents, 2 talks (S148, S187), S153 (authorship doubtful), S156 (a student's thesis) |
+| In-scope works / card entries | 138 / 140 | S236 and S049 each have a superseded second card |
+| Distinct papers | 133 | after merging S032 = S123, S093 = S108, S111 = S026, S126 ~ S054, S102 ~ S120 |
+| Read in full text | 71 | 53 in full, 18 in part; 8 scanned papers read from page images (S018, S021, S030, S046, S048, S108, S130, S164) |
+| Abstract-level | 50 | no open full text (`no-oa`) |
+| Metadata-only | 16 | title, venue, coauthors |
+| Unreadable | 1 | S093, whose file is S108's and is read there |
+
+Full-text reads by period (full or partial / carded): 1972–1979 1/11; 1980–1989 12/26; 1990–1995 17/27; 1996–2000 22/32; 2001–2005 2/7; 2006–2010 6/11; 2011–2015 4/15; 2016–2023 7/9. The CGT, LANCELOT and early DFO years (1985–2000) are read almost completely; the 1970s penalty and minimax papers, the three books and the 2006–2015 energy work are known mostly from abstracts (`08-deep-reading-synthesis.md` §1, §11).
+
+Weighting: IBM team papers where Conn is a middle author (S032/S123, S057) and papers where his role cannot be identified (S003, S060) are carded but carry no weight as evidence of his personal practice.
+
+Works the first pass did not know about and that matter for the skill: Conn's single-author essay *My Experiences as an Industrial Research Mathematician* (SIAG/OPT Views-and-News 18(2), 2007) [S236]; the first JiffyTune paper (ICCAD 1996) [S036]; the 1989 LANCELOT design statement [S046]; the LANCELOT–MINOS comparison and its complete-results report [S102; S120]; the 1994 survey with its closing rule on publishing practical algorithms [S061]; the 1996 survey with its critique of papers without numbers [S080]; and the posthumous co-authored papers of 2020–2023 [S032; S135; S099; S141].
+
