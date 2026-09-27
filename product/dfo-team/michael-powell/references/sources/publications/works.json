@@ -1,0 +1,3625 @@
+{
+ "researcher": "M. J. D. Powell",
+ "scholar_user": "p3kDmy0AAAAJ",
+ "harvested": "2026-09-27",
+ "source_note": "Google Scholar profile + DBLP + Crossref",
+ "works": [
+  {
+   "id": "S001",
+   "title": "A rapidly convergent descent method for minimization",
+   "authors": "R Fletcher, MJD Powell",
+   "venue": "The Computer Journal",
+   "year": 1963,
+   "cites": 7118,
+   "doi": "10.1093/comjnl/6.2.163",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/6.2.163"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S002",
+   "title": "An efficient method for finding the minimum of a function of several variables without calculating derivatives",
+   "authors": "MJD Powell",
+   "venue": "The computer journal",
+   "year": 1964,
+   "cites": 6999,
+   "doi": "10.1093/comjnl/7.2.155",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/7.2.155"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S003",
+   "title": "A fast algorithm for nonlinearly constrained optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "Numerical analysis",
+   "year": 1978,
+   "cites": 2942,
+   "doi": "10.1007/bfb0067703",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S004",
+   "title": "A method for non-linear constraints in minimization problems",
+   "authors": "MJD Powell",
+   "venue": "Optimization",
+   "year": 1969,
+   "cites": 2709,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S005",
+   "title": "Radial basis functions for multivariable interpolation: a review",
+   "authors": "MJD Powell",
+   "venue": "Algorithms for approximation",
+   "year": 1987,
+   "cites": 2672,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S006",
+   "title": "Restart procedures for the conjugate gradient method",
+   "authors": "MJD Powell",
+   "venue": "Mathematical programming",
+   "year": 1977,
+   "cites": 2635,
+   "doi": "10.1007/bf01593790",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01593790"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S007",
+   "title": "The BOBYQA algorithm for bound constrained optimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Cambridge NA Report NA2009/06, University of Cambridge, Cambridge",
+   "year": 2009,
+   "cites": 2462,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S008",
+   "title": "A direct search optimization method that models the objective and constraint functions by linear interpolation",
+   "authors": "MJD Powell",
+   "venue": "Advances in optimization and numerical analysis",
+   "year": 1994,
+   "cites": 2391,
+   "doi": "10.1007/978-94-015-8330-5_4",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S009",
+   "title": "Approximation theory and methods",
+   "authors": "MJD Powell",
+   "venue": "Cambridge university press",
+   "year": 1981,
+   "cites": 1925,
+   "doi": "10.1017/cbo9781139171502",
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S010",
+   "title": "The theory of radial basis function approximation in 1990",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical Physics",
+   "year": 1990,
+   "cites": 1530,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S011",
+   "title": "A hybrid method for nonlinear equations",
+   "authors": "MJD Powell",
+   "venue": "Numerical methods for nonlinear algebraic equations",
+   "year": 1970,
+   "cites": 1384,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S012",
+   "title": "A method for minimizing a sum of squares of non-linear functions without calculating derivatives",
+   "authors": "MJD Powell",
+   "venue": "The Computer Journal",
+   "year": 1965,
+   "cites": 933,
+   "doi": "10.1093/comjnl/7.4.303",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/7.4.303"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S013",
+   "title": "The convergence of variable metric methods for non-linearly constrained optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "Nonlinear programming",
+   "year": 1978,
+   "cites": 900,
+   "doi": "10.1016/b978-0-12-468660-1.50007-4",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S014",
+   "title": "Direct search algorithms for optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "Acta numerica",
+   "year": 1998,
+   "cites": 892,
+   "doi": "10.1017/s0962492900002841",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S015",
+   "title": "A new algorithm for unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Nonlinear programming",
+   "year": 1970,
+   "cites": 820,
+   "doi": "10.1016/b978-0-12-597050-1.50006-3",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S016",
+   "title": "Algorithms for nonlinear constraints that use Lagrangian functions",
+   "authors": "MJD Powell",
+   "venue": "Mathematical programming",
+   "year": 1978,
+   "cites": 816,
+   "doi": "10.1007/bf01588967",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01588967"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S017",
+   "title": "The NEWUOA software for unconstrained optimization with derivatives",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 2004,
+   "cites": 789,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S018",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S018",
+   "title": "The NEWUOA software for unconstrained optimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Large-scale nonlinear optimization",
+   "year": 2006,
+   "cites": 777,
+   "doi": "10.1007/0-387-30065-1_16",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S019",
+   "title": "A FORTRAN subroutine for solving systems of nonlinear algebraic equations.",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment, Harwell (England)",
+   "year": 1968,
+   "cites": 777,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S020",
+   "title": "Nonconvex minimization calculations and the conjugate gradient method",
+   "authors": "MJD Powell",
+   "venue": "Numerical analysis",
+   "year": 1984,
+   "cites": 766,
+   "doi": "10.1007/bfb0099521",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S021",
+   "title": "On the estimation of sparse Jacobian matrices",
+   "authors": "AR Curtis, MJD Powell, JK Reid",
+   "venue": "J. Inst. Math. Appl",
+   "year": 1974,
+   "cites": 682,
+   "doi": "10.1093/imamat/13.1.117",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S022",
+   "title": "Variable metric methods for constrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming The State of the Art",
+   "year": 1983,
+   "cites": 661,
+   "doi": "10.1007/978-3-642-68874-4_12",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/978-3-642-68874-4_12"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S023",
+   "title": "Piecewise quadratic approximations on triangles",
+   "authors": "MJD Powell, MA Sabin",
+   "venue": "ACM Transactions on Mathematical Software (TOMS)",
+   "year": 1977,
+   "cites": 659,
+   "doi": "10.1145/355759.355761",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1145/355759.355761"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S024",
+   "title": "Some global convergence properties of a variable metric algorithm for minimization without exact line searches",
+   "authors": "MJD Powell",
+   "venue": "Nonlinear programming",
+   "year": 1976,
+   "cites": 642,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S025",
+   "title": "UOBYQA: unconstrained optimization by quadratic approximation",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 2002,
+   "cites": 542,
+   "doi": "10.1007/s101070100290",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S101070100290"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S026",
+   "title": "On search directions for minimization algorithms",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1973,
+   "cites": 541,
+   "doi": "10.1007/bf01584660",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01584660"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S027",
+   "title": "The watchdog technique for forcing convergence in algorithms for constrained optimization",
+   "authors": "RM Chamberlain, MJD Powell, C Lemarechal, HC Pedersen",
+   "venue": "Algorithms for Constrained Minimization of Smooth Nonlinear Functions",
+   "year": 1982,
+   "cites": 520,
+   "doi": "10.1007/bfb0120945",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S028",
+   "title": "Convergence properties of a class of minimization algorithms",
+   "authors": "MJD Powell",
+   "venue": "Nonlinear programming",
+   "year": 1975,
+   "cites": 520,
+   "doi": "10.1016/b978-0-12-468650-2.50005-5",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S029",
+   "title": "A view of algorithms for optimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Mathematics Today-Bulletin of the Institute of Mathematics and its Applications",
+   "year": 2007,
+   "cites": 417,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S030",
+   "title": "A trust region algorithm for equality constrained optimization",
+   "authors": "MJD Powell, Y Yuan",
+   "venue": "Mathematical Programming",
+   "year": 1990,
+   "cites": 374,
+   "doi": "10.1007/bf01588787",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01588787"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S031",
+   "title": "Convergence properties of algorithms for nonlinear optimization",
+   "authors": "MJD Powell",
+   "venue": "Siam Review",
+   "year": 1986,
+   "cites": 357,
+   "doi": "10.1137/1028154",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S032",
+   "title": "On the convergence of the variable metric algorithm",
+   "authors": "MJD Powell",
+   "venue": "IMA Journal of Applied Mathematics",
+   "year": 1971,
+   "cites": 337,
+   "doi": "10.1093/imamat/7.1.21",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S033",
+   "title": "On the global convergence of trust region algorithms for unconstrained minimization",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1984,
+   "cites": 303,
+   "doi": "10.1007/bf02591998",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF02591998"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S034",
+   "title": "An iterative method for finding stationary values of a function of several variables",
+   "authors": "MJD Powell",
+   "venue": "The Computer Journal",
+   "year": 1962,
+   "cites": 302,
+   "doi": "10.1093/comjnl/5.2.147",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/5.2.147"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S035",
+   "title": "Developments of NEWUOA for unconstrained minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Dept. Appl. Math. Theoretical Phys., Univ. Cambridge, Cambridge, UK",
+   "year": 2007,
+   "cites": 254,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S036",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S036",
+   "title": "Developments of NEWUOA for minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "IMA journal of numerical analysis",
+   "year": 2008,
+   "cites": 253,
+   "doi": "10.1093/imanum/drm047",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S037",
+   "title": "Recent advances in unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1971,
+   "cites": 250,
+   "doi": "10.1007/bf01584071",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01584071"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S038",
+   "title": "On the quadratic programming algorithm of Goldfarb and Idnani",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming Essays in Honor of George B. Dantzig Part II",
+   "year": 1985,
+   "cites": 248,
+   "doi": "10.1007/bfb0121074",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S039",
+   "title": "On the quadratic programming algorithm of Goldfarb and Idnani",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge, Department of Applied Mathematics",
+   "year": 1983,
+   "cites": 248,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S038",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S040",
+   "title": "A tolerant algorithm for linearly constrained optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1989,
+   "cites": 216,
+   "doi": "10.1007/bf01589118",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01589118"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S041",
+   "title": "A survey of numerical methods for unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "SIAM Review",
+   "year": 1970,
+   "cites": 205,
+   "doi": "10.1137/1012004",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S042",
+   "title": "On the estimation of sparse Hessian matrices",
+   "authors": "MJD Powell, PL Toint",
+   "venue": "SIAM Journal on Numerical Analysis",
+   "year": 1979,
+   "cites": 201,
+   "doi": "10.1137/0716078",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S043",
+   "title": "Univariate multiquadric approximation: quasi-interpolation to scattered data",
+   "authors": "RK Beatson, MJD Powell",
+   "venue": "Constructive Approximation",
+   "year": 1992,
+   "cites": 199,
+   "doi": "10.1007/bf01279020",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S044",
+   "title": "Univariate multiquadric approximation: quasi-interpolation to scattered data",
+   "authors": "RK Beatson, MJD Powell",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical Physics",
+   "year": 1990,
+   "cites": 199,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S043",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S045",
+   "title": "Least Frobenius norm updating of quadratic models that satisfy interpolation conditions",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 2004,
+   "cites": 192,
+   "doi": "10.1007/s10107-003-0490-7",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-003-0490-7"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S046",
+   "title": "The uniform convergence of thin plate spline interpolation in two dimensions",
+   "authors": "MJD Powell",
+   "venue": "Numerische Mathematik",
+   "year": 1994,
+   "cites": 187,
+   "doi": "10.1007/s002110050051",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S047",
+   "title": "On trust region methods for unconstrained minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Mathematical programming",
+   "year": 2003,
+   "cites": 178,
+   "doi": "10.1007/s10107-003-0430-6",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-003-0430-6"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S048",
+   "title": "The Differential Correction Algorithm for Rational ℓ_∞-Approximation",
+   "authors": "I Barrodale, MJD Powell, FDK Roberts",
+   "venue": "SIAM Journal on Numerical Analysis",
+   "year": 1972,
+   "cites": 173,
+   "doi": "10.1137/0709044",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S049",
+   "title": "How bad are the BFGS and DFP methods when the objective function is quadratic?",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1986,
+   "cites": 160,
+   "doi": "10.1007/bf01582161",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01582161"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S050",
+   "title": "A recursive quadratic programming algorithm that uses differentiable exact penalty functions",
+   "authors": "MJD Powell, Y Yuan",
+   "venue": "Mathematical Programming",
+   "year": 1986,
+   "cites": 159,
+   "doi": "10.1007/bf01580880",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01580880"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S051",
+   "title": "Some convergence properties of the conjugate gradient method",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1976,
+   "cites": 159,
+   "doi": "10.1007/bf01580369",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01580369"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S052",
+   "title": "On the modification of 𝐿𝐷𝐿^{𝑇} factorizations",
+   "authors": "R Fletcher, MJD Powell",
+   "venue": "Mathematics of Computation",
+   "year": 1974,
+   "cites": 150,
+   "doi": "10.1090/s0025-5718-1974-0359297-1",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S053",
+   "title": "Curve fitting by splines in one variable",
+   "authors": "MJD Powell",
+   "venue": "Numerical Approximation to Functions and Data",
+   "year": 1970,
+   "cites": 127,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S054",
+   "title": "On the maximum errors of polynomial approximations defined by interpolation and by least squares criteria",
+   "authors": "MJD Powell",
+   "venue": "The Computer Journal",
+   "year": 1967,
+   "cites": 123,
+   "doi": "10.1093/comjnl/9.4.404",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/9.4.404"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S055",
+   "title": "Recent research at Cambridge on radial basis functions",
+   "authors": "MJD Powell",
+   "venue": "New Developments in Approximation Theory",
+   "year": 1999,
+   "cites": 117,
+   "doi": "10.1007/978-3-0348-8696-3_14",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S056",
+   "title": "On applying Householder transformations to linear least squares problems.",
+   "authors": "MJD Powell, JK Reid",
+   "venue": "IFIP Congress",
+   "year": 1968,
+   "cites": 117,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S057",
+   "title": "Radial basis function methods for interpolation to functions of many variables",
+   "authors": "MJD Powell",
+   "venue": "HERCMA",
+   "year": 2001,
+   "cites": 116,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S058",
+   "title": "ZQPCVX a FORTRAN subroutine for convex quadratic programming",
+   "authors": "MJD Powell",
+   "venue": "Department of Applied Mathematics and Theoretical Physics, University",
+   "year": 1983,
+   "cites": 116,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S059",
+   "title": "VMCWD: A FORTRAN subroutine for constrained optimization",
+   "authors": "MJD Powell",
+   "venue": "ACM SIGMAP Bulletin",
+   "year": 1983,
+   "cites": 113,
+   "doi": "10.1145/1111272.1111273",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S060",
+   "title": "Nonlinear optimization 1981",
+   "authors": "MJD Powell",
+   "venue": "NATO Conference Series. Series II: Systems Science",
+   "year": 1982,
+   "cites": 107,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S061",
+   "title": "A Calculation of the Ground-State Splitting for Mn Ions in a Cubic Field",
+   "authors": "JR Gabriel, DF Johnston, MJD Powell",
+   "venue": "Proceedings of the Royal Society of London A: Mathematical, Physical and…",
+   "year": 1961,
+   "cites": 98,
+   "doi": "10.1098/rspa.1961.0214",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S062",
+   "title": "Weighted uniform sampling—a Monte Carlo technique for reducing variance",
+   "authors": "MJD Powell, J Swann",
+   "venue": "IMA Journal of Applied Mathematics",
+   "year": 1966,
+   "cites": 95,
+   "doi": "10.1093/imamat/2.3.228",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S063",
+   "title": "Ground-State Splitting for d 5 S 6 Ions in a Cubic Field",
+   "authors": "MJD Powell, JR Gabriel, DF Johnston",
+   "venue": "Physical Review Letters",
+   "year": 1960,
+   "cites": 94,
+   "doi": "10.1103/physrevlett.5.145",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S064",
+   "title": "Updating conjugate directions by the BFGS formula",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming",
+   "year": 1987,
+   "cites": 91,
+   "doi": "10.1007/bf02591850",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF02591850"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S065",
+   "title": "Some properties of the variable metric algorithm",
+   "authors": "MJD Powell",
+   "venue": "AERE, Theoretical Physics Division",
+   "year": 1971,
+   "cites": 89,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S066",
+   "title": "Piecewise quadratic surface fitting for contour plotting",
+   "authors": "MJD Powell",
+   "venue": "UKAEA, Harwell, Atomic Energy Research Establishment",
+   "year": 1973,
+   "cites": 85,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S067",
+   "title": "On fast trust region methods for quadratic models with linear constraints",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming Computation",
+   "year": 2015,
+   "cites": 77,
+   "doi": "10.1007/s12532-015-0084-4",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S12532-015-0084-4"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S068",
+   "title": "On the Lagrange functions of quadratic models that are defined by interpolation*",
+   "authors": "MJD Powell",
+   "venue": "Optimization Methods and Software",
+   "year": 2001,
+   "cites": 77,
+   "doi": "10.1080/10556780108805839",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S069",
+   "title": "Optimal interpolation",
+   "authors": "PW Gaffney, MJD Powell",
+   "venue": "Numerical analysis",
+   "year": 1976,
+   "cites": 77,
+   "doi": "10.1007/bfb0080117",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S070",
+   "title": "General algorithms for discrete nonlinear approximation calculations",
+   "authors": "MJD Powell",
+   "venue": "Approximation theory IV",
+   "year": 1983,
+   "cites": 75,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S071",
+   "title": "TOLMIN: A Fortran package for linearly constrained optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical…",
+   "year": 1989,
+   "cites": 72,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S072",
+   "title": "On the use of quadratic models in unconstrained minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Optimization Methods and Software",
+   "year": 2004,
+   "cites": 71,
+   "doi": "10.1080/10556780410001661450",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556780410001661450"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S073",
+   "title": "Problems related to unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "AERE, Theoretical Physics Division",
+   "year": 1971,
+   "cites": 68,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S074",
+   "title": "A Krylov subspace algorithm for multiquadric interpolation in many dimensions",
+   "authors": "AC Faul, G Goodsell, MJD Powell",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2005,
+   "cites": 66,
+   "doi": "10.1093/imanum/drh021",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S075",
+   "title": "Proof of convergence of an iterative technique for thin plate spline interpolation in two dimensions",
+   "authors": "AC Faul, MJD Powell",
+   "venue": "Advances in Computational Mathematics",
+   "year": 1999,
+   "cites": 66,
+   "doi": "10.1023/a:1018923925800",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1023/A:1018923925800"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S076",
+   "title": "Least squares smoothing of univariate data to achieve piecewise monotonicity",
+   "authors": "IC Demetriou, MJD Powell",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 1991,
+   "cites": 65,
+   "doi": "10.1093/imanum/11.3.411",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S077",
+   "title": "Introduction to constrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Computer Sciences and Systems Division, AERE",
+   "year": 1974,
+   "cites": 65,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S078",
+   "title": "Fast evaluation of polyharmonic splines in three dimensions",
+   "authors": "RK Beatson, MJD Powell, AM Tan",
+   "venue": "IMA Journal of Numerical Analysis",
+   "year": 2007,
+   "cites": 64,
+   "doi": "10.1093/imanum/drl027",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S079",
+   "title": "The convergence of variable metric matrices in unconstrained optimization",
+   "authors": "G Ren-Pu, MJD Powell",
+   "venue": "Mathematical programming",
+   "year": 1983,
+   "cites": 60,
+   "doi": "10.1007/bf02591941",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF02591941"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S080",
+   "title": "On the calculation of orthogonal vectors",
+   "authors": "MJD Powell",
+   "venue": "The Computer Journal",
+   "year": 1968,
+   "cites": 60,
+   "doi": "10.1093/comjnl/11.3.302",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/11.3.302"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S081",
+   "title": "Extensions to subroutine VFO2AD",
+   "authors": "MJD Powell",
+   "venue": "System Modeling and Optimization",
+   "year": 1982,
+   "cites": 59,
+   "doi": "10.1007/bfb0006176",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S082",
+   "title": "A thin plate spline method for mapping curves into curves in two dimensions",
+   "authors": "MJD Powell",
+   "venue": "Computational Techniques and Applications: CTAC95",
+   "year": 1996,
+   "cites": 56,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S083",
+   "title": "Radial basis function interpolation on an infinite regular grid",
+   "authors": "MD Buhmann, MJD Powell",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical…",
+   "year": 1988,
+   "cites": 53,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S084",
+   "title": "The performance of two subroutines for constrained optimization on some difficult test problems",
+   "authors": "MJD Powell",
+   "venue": "Numerical Optimization I 984",
+   "year": 1985,
+   "cites": 53,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S085",
+   "title": "Krylov subspace methods for radial basis function interpolation",
+   "authors": "AC Faul, MJD Powell",
+   "venue": "UNIVERSITY OF CAMBRIDGE DEPARTMENT OF APPLIED MATHEMATICS AND THEORETICAL…",
+   "year": 1999,
+   "cites": 50,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S086",
+   "title": "A view of unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment Computer Science & Systems Division",
+   "year": 1975,
+   "cites": 50,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S087",
+   "title": "On multigrid techniques for thin plate spline interpolation in two dimensions",
+   "authors": "RK Beatson, G Goodsell, MJD Powell",
+   "venue": "Department of Applied Mathematics and Theoretical Physics, University of…",
+   "year": 1995,
+   "cites": 49,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S088",
+   "title": "An iterative method for thin plate spline interpolation that employs approximations to Lagrange functions",
+   "authors": "RK Beatson, MJD Powell",
+   "venue": "Pitman Research Notes in Mathematics Series",
+   "year": 1994,
+   "cites": 48,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S089",
+   "title": "Tabulation of thin plate splines on a very fine two-dimensional grid",
+   "authors": "MJD Powell",
+   "venue": "Numerical Methods in Approximation Theory, Vol. 9",
+   "year": 1992,
+   "cites": 48,
+   "doi": "10.1007/978-3-0348-8619-2_13",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S090",
+   "title": "Univariate multiquadric approximation: reproduction of linear polynomials",
+   "authors": "MJD Powell",
+   "venue": "Multivariate Approximation and Interpolation",
+   "year": 1990,
+   "cites": 47,
+   "doi": "10.1007/978-3-0348-5685-0_17",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S091",
+   "title": "The Crystalline Field Parameters for Dysprosium Ethyl Sulphate",
+   "authors": "MJD Powell, R Orbach",
+   "venue": "Proceedings of the Physical Society",
+   "year": 1961,
+   "cites": 45,
+   "doi": "10.1088/0370-1328/78/5/315",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S092",
+   "title": "RANK ONE METHODS FOR UNCONSTRAINED OPTIMIZATION.",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment, Harwell (England)",
+   "year": 1969,
+   "cites": 44,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S093",
+   "title": "On the convergence of trust region algorithms for unconstrained minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Computational Optimization and Applications",
+   "year": 2012,
+   "cites": 43,
+   "doi": "10.1007/s10589-012-9483-x",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10589-012-9483-X"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S094",
+   "title": "Some algorithms for thin plate spline interpolation to functions of two variables",
+   "authors": "MJD Powell",
+   "venue": "Advances in Computational Mathematics (New Delhi, 1993)",
+   "year": 1994,
+   "cites": 42,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S095",
+   "title": "The minimum sum of squares change to univariate data that gives convexity",
+   "authors": "IC Demetriou, MJD Powell",
+   "venue": "IMA journal of numerical analysis",
+   "year": 1991,
+   "cites": 42,
+   "doi": "10.1093/imanum/11.3.433",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S096",
+   "title": "A view of unconstrained minimization algorithms that do not require derivatives",
+   "authors": "MJD Powell",
+   "venue": "ACM Transactions on Mathematical Software (TOMS)",
+   "year": 1975,
+   "cites": 41,
+   "doi": "10.1145/355637.355638",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1145/355637.355638"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S097",
+   "title": "A view of minimization algorithms that do not require derivatives",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment",
+   "year": 1974,
+   "cites": 41,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S096",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S098",
+   "title": "Unconstrained minimization algorithms without computation of derivatives",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 1972,
+   "cites": 40,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S099",
+   "title": "Truncated Laurent expansions for the fast evaluation of thin plate splines",
+   "authors": "MJD Powell",
+   "venue": "Numerical Algorithms",
+   "year": 1993,
+   "cites": 38,
+   "doi": "10.1007/bf02212042",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF02212042"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S100",
+   "title": "Curve fitting by cubic splines",
+   "authors": "MJD Powell",
+   "venue": "UKAEA, Harwell, Atomic Energy Research Establishment",
+   "year": 1967,
+   "cites": 38,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S101",
+   "title": "Crystalline-field splittings in cerous magnesium nitrate",
+   "authors": "MJM Leask, R Orbach, MJD Powell, WP Wolf",
+   "venue": "Proceedings of the Royal Society of London A: Mathematical, Physical and…",
+   "year": 1963,
+   "cites": 37,
+   "doi": "10.1098/rspa.1963.0059",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S102",
+   "title": "A review of methods for multivariable interpolation at scattered data points",
+   "authors": "MJD Powell",
+   "venue": "INSTITUTE OF MATHEMATICS AND ITS APPLICATIONS CONFERENCE SERIES 63, 283-310",
+   "year": 1997,
+   "cites": 34,
+   "doi": "10.1093/oso/9780198500148.003.0011",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S103",
+   "title": "A review of methods for multivariable interpolation at scattered data points",
+   "authors": "MJD Powell",
+   "venue": "Department of Applied Mathematics and Theoretical Physics, University of…",
+   "year": 1996,
+   "cites": 34,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S102",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S104",
+   "title": "On the number of iterations of Karmarkar's algorithm for linear programming",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 62 (1-3), 153-197",
+   "year": 1993,
+   "cites": 32,
+   "doi": "10.1007/bf01585165",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01585165"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S105",
+   "title": "Data smoothing by divided differences",
+   "authors": "MP Cullinan, MJD Powell",
+   "venue": "Numerical analysis, 26-37",
+   "year": 1982,
+   "cites": 32,
+   "doi": "10.1007/bfb0093146",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S106",
+   "title": "The minimax solution of linear equations subject to bounds on the variables",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment",
+   "year": 1974,
+   "cites": 31,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S107",
+   "title": "A note on quasi-Newton formulae for sparse second derivative matrices",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 20 (1), 144-151",
+   "year": 1981,
+   "cites": 30,
+   "doi": "10.1007/bf01589341",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01589341"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S108",
+   "title": "Beyond symmetric Broyden for updating quadratic models in minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 138 (1-2), 475-500",
+   "year": 2013,
+   "cites": 29,
+   "doi": "10.1007/s10107-011-0510-y",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S10107-011-0510-Y"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S109",
+   "title": "A review of algorithms for thin plate spline interpolation in two dimensions",
+   "authors": "MJD Powell",
+   "venue": "Department of Applied Mathematics and Theoretical Physics, University of…",
+   "year": 1996,
+   "cites": 29,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S110",
+   "title": "A new iterative algorithm for thin plate spline interpolation in two dimension",
+   "authors": "MJD Powell",
+   "venue": "UNIVERSITY OF CAMBRIDGE DEPARTMENT OF APPLIED MATHEMATICS AND THEORETICAL…",
+   "year": 1995,
+   "cites": 29,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S111",
+   "title": "Mtirtwinarital Programming in Theory and Practice, PA. Hammer and G. Zoulendijk.(Kds.)… North-Holland Publishing Company, l974",
+   "authors": "MJD Powell",
+   "venue": "Mathematical programming in theory and practice: proceedings of the NATO…",
+   "year": 1974,
+   "cites": 29,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": "S112",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S112",
+   "title": "Unconstrained minimization and extensions for constraints",
+   "authors": "MJD Powell",
+   "venue": "AERE, Theoretical Physics Division",
+   "year": 1972,
+   "cites": 29,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S113",
+   "title": "Univariate multiquadric interpolation: Some recent results",
+   "authors": "MJD Powell",
+   "venue": "Curves and surfaces, 371-381",
+   "year": 1991,
+   "cites": 28,
+   "doi": "10.1016/b978-0-12-438660-0.50059-5",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1016/B978-0-12-438660-0.50059-5"
+   ],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S114",
+   "title": "Univariate multiquadric interpolation: some recent results",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical…",
+   "year": 1990,
+   "cites": 28,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S113",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S115",
+   "title": "Karmarkar's algorithm: a view from nonlinear programming",
+   "authors": "MJD Powell",
+   "venue": "University of Canterbury. Dept. of Mathematics",
+   "year": 1989,
+   "cites": 28,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S116",
+   "title": "Methods for nonlinear constraints in optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "Iserles and Powell, 325-358",
+   "year": 1987,
+   "cites": 28,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S117",
+   "title": "The local dependence of least squares cubic splines",
+   "authors": "MJD Powell",
+   "venue": "SIAM Journal on Numerical Analysis 6 (3), 398-413",
+   "year": 1969,
+   "cites": 28,
+   "doi": "10.1137/0706036",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S118",
+   "title": "A theorem on rank one modifications to a matrix and its inverse",
+   "authors": "MJD Powell",
+   "venue": "The Computer Journal 12 (3), 288-290",
+   "year": 1969,
+   "cites": 28,
+   "doi": "10.1093/comjnl/12.3.288",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/12.3.288"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S119",
+   "title": "The State of the art in numerical analysis: based on the proceedings of a joint IMA/SIAM conference on the state of the art in numerical analysis held in Cambridge in April 1986",
+   "authors": "A Iserles, MJD Powell",
+   "venue": "Oxford University Press, USA",
+   "year": 1987,
+   "cites": 27,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S120",
+   "title": "On the A-acceptability of rational approximations that interpolate the exponential function",
+   "authors": "A Iserles, MJD Powell",
+   "venue": "IMA Journal of Numerical Analysis 1 (3), 241-251",
+   "year": 1981,
+   "cites": 27,
+   "doi": "10.1093/imanum/1.3.241",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S121",
+   "title": "On the convergence of the DFP algorithm for unconstrained optimization when there are only two variables",
+   "authors": "MJD Powell",
+   "venue": "Mathematical programming 87 (2), 281-301",
+   "year": 2000,
+   "cites": 25,
+   "doi": "10.1007/s101070050115",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/S101070050115"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S122",
+   "title": "QR factorization for linear least squares problems on the hypercube",
+   "authors": "RM Chamberlain, MJD Powell",
+   "venue": "Chr. Michelsen Institute. Centre for Computer Science",
+   "year": 1986,
+   "cites": 22,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S153",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S123",
+   "title": "On best L 2 spline approximations",
+   "authors": "MJD Powell",
+   "venue": "Numerische Mathematik Differentialgleichungen Approximationstheorie, 317-339",
+   "year": 1968,
+   "cites": 22,
+   "doi": "10.1007/978-3-0348-5881-6_28",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S124",
+   "title": "On updating the inverse of a KKT matrix1",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 2004,
+   "cites": 21,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S125",
+   "title": "Some convergence properties of the modified log barrier method for linear programming",
+   "authors": "MJD Powell",
+   "venue": "SIAM Journal on Optimization 5 (4), 695-739",
+   "year": 1995,
+   "cites": 21,
+   "doi": "10.1137/0805035",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1137/0805035"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S126",
+   "title": "An algorithm for maximizing entropy subject to simple bounds",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 42 (1-3), 171-180",
+   "year": 1988,
+   "cites": 21,
+   "doi": "10.1007/bf01589401",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01589401"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S127",
+   "title": "USING CUBIC SPLINES TO APPROXIMATE FUNCTIONS OF ONE VARIABLE TO PRESCRIBED ACCURACY.",
+   "authors": "AR Curtis, MJD Powell",
+   "venue": "Atomic Energy Research Establishment, Harwell (England)",
+   "year": 1967,
+   "cites": 21,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S128",
+   "title": "Necessary conditions for a minimax approximation",
+   "authors": "AR Curtis, MJD Powell",
+   "venue": "The Computer Journal 8 (4), 358-361",
+   "year": 1966,
+   "cites": 21,
+   "doi": "10.1093/comjnl/8.4.358",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/8.4.358"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S129",
+   "title": "On the convergence of a wide range of trust region methods for unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "IMA journal of numerical analysis 30 (1), 289-301",
+   "year": 2010,
+   "cites": 19,
+   "doi": "10.1093/imanum/drp021",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S130",
+   "title": "A review of algorithms for nonlinear equations and unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Proceedings ICIAM, 220-232",
+   "year": 1988,
+   "cites": 19,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S131",
+   "title": "Optimization algorithms in 1979",
+   "authors": "MJD Powell",
+   "venue": "Optimization Techniques, 83-98",
+   "year": 1980,
+   "cites": 19,
+   "doi": "10.1007/bfb0036381",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S132",
+   "title": "Quadratic termination properties of Davidon's new variable metric algorithm",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 12 (1), 141-147",
+   "year": 1977,
+   "cites": 18,
+   "doi": "10.1007/bf01593779",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01593779"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S133",
+   "title": "Approximation theory and optimization: tributes to MJD Powell",
+   "authors": "MJD Powell, A Iserles",
+   "venue": "Cambridge University Press",
+   "year": 1997,
+   "cites": 17,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S134",
+   "title": "Univariate interpolation on a regular finite grid by a multiquadric plus a linear polynomial",
+   "authors": "RK Beatson, MJD Powell",
+   "venue": "IMA journal of numerical analysis 12 (1), 107-133",
+   "year": 1992,
+   "cites": 17,
+   "doi": "10.1093/imanum/12.1.107",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S135",
+   "title": "Univariate interpolation on a regular finite grid by a multiquadric plus a linear polynomial",
+   "authors": "RK Beatson, MJD Powell",
+   "venue": "University of Cambridge, Department of Applied Mathematics and Theoretical…",
+   "year": 1991,
+   "cites": 17,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S134",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S136",
+   "title": "A Fortran subroutine for plotting the part of a conic that is inside a given triangle",
+   "authors": "S Marlow, MJD Powell",
+   "venue": "SIS-76-2831",
+   "year": 1976,
+   "cites": 16,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S137",
+   "title": "On nonlinear optimization since 1959",
+   "authors": "MJD Powell",
+   "venue": "The Birth of Numerical Analysis, 141-160",
+   "year": 2009,
+   "cites": 15,
+   "doi": "10.1142/9789812836267_0009",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1142/9789812836267_0009"
+   ],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S138",
+   "title": "DAMTP 2008/NA03",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 2008,
+   "cites": 15,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S137",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S139",
+   "title": "On the rate of convergence of variable metric algorithms for unconstrained optimization",
+   "authors": "MJD Powell",
+   "venue": "Report DAMTP, 1525-1539",
+   "year": 1983,
+   "cites": 15,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S140",
+   "title": "A Technique that Gains Speed and Accuracy in the Minimax Solution of Overdetermined Linear Equations MJ Hopper",
+   "authors": "MJD Powell",
+   "venue": "Mathematical software III: proceedings of a symposium conducted by the…",
+   "year": 1977,
+   "cites": 15,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S141",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S141",
+   "title": "A technique that gains speed and accuracy in the minimax solution of overdetermined linear equations",
+   "authors": "MJ Hopper, MJD Powell",
+   "venue": "Mathematical Software 3, 15-32",
+   "year": 1977,
+   "cites": 15,
+   "doi": "10.1016/b978-0-12-587260-7.50006-6",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S142",
+   "title": "Least squares fitting to univariate data subject to restrictions on the signs of the second differences",
+   "authors": "IC Demetriou, MJD Powell",
+   "venue": "Approximation Theory and Optimization. Tributes to MJD Powell, 109-132",
+   "year": 1997,
+   "cites": 14,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S143",
+   "title": "Nonlinear Programming—Sequential Unconstrained Minimization Techniques",
+   "authors": "MJD Powell",
+   "venue": "The Computer Journal 12 (3), 207-a-207",
+   "year": 1969,
+   "cites": 14,
+   "doi": "10.1093/comjnl/12.3.207-a",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/12.3.207-A"
+   ],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S144",
+   "title": "The differential correction algorithm for generalized rational functions",
+   "authors": "EW Cheney, MJD Powell",
+   "venue": "Constructive Approximation 3 (1), 249-256",
+   "year": 1987,
+   "cites": 13,
+   "doi": "10.1007/bf01890568",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S145",
+   "title": "An example of cycling in a feasible point algorithm",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 20 (1), 353-357",
+   "year": 1981,
+   "cites": 13,
+   "doi": "10.1007/bf01589358",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01589358"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S146",
+   "title": "Gradient conditions and Lagrange multipliers in nonlinear programming",
+   "authors": "MJD Powell",
+   "venue": "Lecture 9, 210",
+   "year": 1980,
+   "cites": 13,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S147",
+   "title": "On the convergence of cyclic Jacobi methods",
+   "authors": "KW Brodlie, MJD Powell",
+   "venue": "IMA Journal of Applied Mathematics 15 (3), 279-287",
+   "year": 1975,
+   "cites": 13,
+   "doi": "10.1093/imamat/15.3.279",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S148",
+   "title": "The use of band matrices for second derivative approximations in trust region algorithms",
+   "authors": "MJD Powell",
+   "venue": "Advances in Nonlinear Programming, 3-28",
+   "year": 1998,
+   "cites": 12,
+   "doi": "10.1007/978-1-4613-3335-7_1",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S149",
+   "title": "Conditions for superlinear convergence in l1 and l∞ solutions of overdetermined non-linear equations",
+   "authors": "MJD Powell, Y Yuan",
+   "venue": "IMA journal of numerical analysis 4 (2), 241-251",
+   "year": 1984,
+   "cites": 12,
+   "doi": "10.1093/imanum/4.2.241",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S150",
+   "title": "The Shanno-Toint procedure for updating sparse symmetric matrices",
+   "authors": "MJD Powell, PL Toint",
+   "venue": "IMA Journal of Numerical Analysis 1 (4), 403-413",
+   "year": 1981,
+   "cites": 12,
+   "doi": "10.1093/imanum/1.4.403",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S151",
+   "title": "An upper triangular matrix method for quadratic programming",
+   "authors": "MJD Powell",
+   "venue": "Nonlinear programming 4",
+   "year": 1981,
+   "cites": 12,
+   "doi": "10.1016/b978-0-12-468662-5.50006-9",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S152",
+   "title": "Log barrier methods for semi-infinite programming calculations",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge, Department of Applied Mathematics and Theoretical Physics",
+   "year": 1992,
+   "cites": 11,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S153",
+   "title": "QR factorization for linear least-squares problems on a hypercube multiprocessor",
+   "authors": "RM Chamberlain, MJD Powell",
+   "venue": "IMA journal of numerical analysis 8 (4)",
+   "year": 1988,
+   "cites": 11,
+   "doi": "10.1093/imanum/8.4.401",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S154",
+   "title": "Quadratic termination properties of minimization algorithms II. Proofs of theorems",
+   "authors": "MJD Powell",
+   "venue": "IMA Journal of Applied Mathematics 10 (3)",
+   "year": 1972,
+   "cites": 10,
+   "doi": "10.1093/imamat/10.3.343",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S155",
+   "title": "The complexity of Karmarkar's algorithm for linear programming",
+   "authors": "MJD Powell",
+   "venue": "Department of Applied Mathematics and Theoretical Physics, University of Cambridge",
+   "year": 1991,
+   "cites": 9,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S156",
+   "title": "On error growth in the Bartels-Golub and Fletcher-Matthews algorithms for updating matrix factorizations",
+   "authors": "MJD Powell",
+   "venue": "Linear Algebra and its Applications 88",
+   "year": 1987,
+   "cites": 9,
+   "doi": "10.1016/0024-3795(87)90127-3",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S157",
+   "title": "A Fortran subroutine that calculates the minimax solution of linear equations subject to bounds on the variables",
+   "authors": "K Madsen, M Powell",
+   "venue": "SIS-75-2465",
+   "year": 1975,
+   "cites": 9,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S158",
+   "title": "On a decomposition of conditionally positive-semidefinite matrices",
+   "authors": "DH Martin, MJD Powell, DH Jacobson",
+   "venue": "Linear Algebra and its Applications 39",
+   "year": 1981,
+   "cites": 7,
+   "doi": "10.1016/0024-3795(81)90289-5",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S159",
+   "title": "On the estimation of sparse Jacobian matrices",
+   "authors": "AR Curtis, MJD Powell, JK Reid",
+   "venue": "AERE, Theoretical Physics Division",
+   "year": 1972,
+   "cites": 7,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S021",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S160",
+   "title": "Quadratic termination properties of a class of double-rank minimization algorithms",
+   "authors": "MJD Powell",
+   "venue": "AERE, Theoretical Physics Division",
+   "year": 1972,
+   "cites": 7,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S161",
+   "title": "FORTRAN subroutine for plotting a cubic spline function",
+   "authors": "S Marlow, MJD Powell",
+   "venue": "UKAEA Research Group, Harwell. Atomic Energy Research Establishment",
+   "year": 1973,
+   "cites": 6,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S162",
+   "title": "A'taut string algorithm'for straightening a piecewise linear path in two dimensions",
+   "authors": "MJD Powell",
+   "venue": "IMA journal of numerical analysis 18 (1)",
+   "year": 1998,
+   "cites": 5,
+   "doi": "10.1093/imanum/18.1.1",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S163",
+   "title": "An algorithm that straightens and smooths piecewise linear curves in two dimensions",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge, Department of Applied Mathematics and Theoretical Physics",
+   "year": 1994,
+   "cites": 5,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S164",
+   "title": "On a matrix factorization for linearly constrained optimization problems",
+   "authors": "MJD Powell",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical Physics",
+   "year": 1988,
+   "cites": 5,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S165",
+   "title": "Trust region calculations revisited1",
+   "authors": "MJD Powell, ...",
+   "venue": "Numerical Analysis 1997 380",
+   "year": 1997,
+   "cites": 4,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S166",
+   "title": "Algorithms for constrained and unconstrained optimization calculations",
+   "authors": "MJD Powell",
+   "venue": "Current Developments in the Interface: Economics, Econometrics, Mathematics",
+   "year": 1982,
+   "cites": 4,
+   "doi": "10.1007/978-94-009-7933-8_26",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S167",
+   "title": "The Lagrange method and SAO with bounds on the dual variables",
+   "authors": "MJD Powell",
+   "venue": "Optimization Methods and Software 29 (2)",
+   "year": 2014,
+   "cites": 3,
+   "doi": "10.1080/10556788.2013.822497",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1080/10556788.2013.822497"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S168",
+   "title": "The general theory of linear approximation",
+   "authors": "DC Handscomb, DF Mayers, MJD Powell",
+   "venue": "Methods of Numerical Approximation",
+   "year": 1966,
+   "cites": 3,
+   "doi": "10.1016/b978-0-08-011996-0.50011-3",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S169",
+   "title": "An application of gaussian elimination to interpolation by generalized rational functions",
+   "authors": "T Hãvie, MJD Powell",
+   "venue": "Rational Approximation and Interpolation: Proceedings of the United Kingdom",
+   "year": 1984,
+   "cites": 2,
+   "doi": "10.1007/bfb0072431",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S170",
+   "title": "An optimal way of moving a sequence of points onto a curve in two dimensions",
+   "authors": "MJD Powell",
+   "venue": "Computational Optimization and Applications 13 (1-3)",
+   "year": 1999,
+   "cites": 2,
+   "doi": "10.1023/a:1008617208706",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1023/A:1008617208706"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S171",
+   "title": "The updating of matrices of conjugate directions in optimization algorithms",
+   "authors": "MJD Powell, ...",
+   "venue": "Department of Applied Mathematics and, Theoretical Physics, University of Cambridge",
+   "year": 1989,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S172",
+   "title": "A discrete characterization theorem for the discrete L 1 linear approximation problem",
+   "authors": "MJD Powell, FDK Roberts",
+   "venue": "Journal of Approximation Theory 30 (3)",
+   "year": 1980,
+   "cites": 2,
+   "doi": "10.1016/0021-9045(80)90004-0",
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S173",
+   "title": "Some Global Convergence Properties of a Variable Metric Algorithm for Minimization Without Exact Line Searches: Presented at the AMS/SIAM Symposium on Nonlinear Programming",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment",
+   "year": 1975,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S024",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S174",
+   "title": "THE DIFFERENTIAL CORRECTION ALGORITHM FOR RATIONAL",
+   "authors": "MJD Powell, I Barrodale, PDK Roberts",
+   "venue": "Lecture Notes in Mathematics 228",
+   "year": 1971,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S175",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S175",
+   "title": "The differential correction algorithm for rational L∞ approximation",
+   "authors": "MJD Powell, I Barrodale, FDK Roberts",
+   "venue": "Conference on Applications of Numerical Analysis",
+   "year": 1971,
+   "cites": 2,
+   "doi": "10.1007/bfb0069455",
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S176",
+   "title": "A Fortran Subroutine for Unconstrained Minimization",
+   "authors": "MJD POWELL",
+   "venue": "AERE, Harwell",
+   "year": 1970,
+   "cites": 2,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S177",
+   "title": "On the convergence of exchange algorithms for calculating minimax approximations",
+   "authors": "AR Curtis, MJD Powell",
+   "venue": "The Computer Journal 9 (1)",
+   "year": 1966,
+   "cites": 2,
+   "doi": "10.1093/comjnl/9.1.78",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1093/COMJNL/9.1.78"
+   ],
+   "kind": "journal",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S178",
+   "title": "THEORY OF GENERAL NON-LINEAR MINIMAX APPROXIMATIONS",
+   "authors": "MJD Powell",
+   "venue": "Methods of Numerical Approximation: Lectures Delivered at a Summer School",
+   "year": 1966,
+   "cites": 1,
+   "doi": "10.1016/b978-0-08-011996-0.50022-8",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S179",
+   "title": "A new iterative algorithm for thin plate spline interpolation in two dimensions",
+   "authors": "MJD Powell, ...",
+   "venue": "Department of Applied Mathematics and Theoretical Physics, University of Cambridge",
+   "year": 1995,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S110",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S180",
+   "title": "A FORTRAN SUBROUTINE TO INVERT A RECTANGULAR MATRIX OF FULL RANK.",
+   "authors": "MJD Powell",
+   "venue": "Atomic Energy Research Establishment, Harwell (England)",
+   "year": 1969,
+   "cites": 1,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S181",
+   "title": "The exchange algorithm for calculating minimax linear approximations over a discrete point set",
+   "authors": "MJD Powell",
+   "venue": "Methods of Numerical Approximation",
+   "year": 1966,
+   "cites": 1,
+   "doi": "10.1016/b978-0-08-011996-0.50012-5",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S182",
+   "title": "AN INTRODUCTION TO S-ENTROPY",
+   "authors": "MJD Powell",
+   "venue": "Methods of Numerical Approximation: Lectures Delivered at a Summer School",
+   "year": 1966,
+   "cites": null,
+   "doi": "10.1016/b978-0-08-011996-0.50026-5",
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S183",
+   "title": "Special Issue Dedicated to Professor Michael JD Powell on the Occasion of His 70th Birthday",
+   "authors": "MJD Powell, P Toint, Y Yuan",
+   "venue": "Taylor & Francis",
+   "year": 2008,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S184",
+   "title": "On the Lagrange functions of quadratic models that are de ned by interpolation1",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 2000,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S068",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S185",
+   "title": "A quadratic interpolation method for unconstrained minimization without derivatives",
+   "authors": "MJD Powell",
+   "venue": "XXV Congreso Nacional de Estadística e Investigación Operativa: Vigo, 4-7 de",
+   "year": 2000,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S186",
+   "title": "DAMTP 1997/NA18",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 1997,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S187",
+   "title": "A Thin Plate Spline for Mapping Curves Into Curves in Two Dimensions",
+   "authors": "MJD Powell, ...",
+   "venue": "University of Cambridge, Department of Applied Mathematics and Theoretical Physics",
+   "year": 1995,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S082",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S188",
+   "title": "Curve fitting by thin plate splines",
+   "authors": "M Powell",
+   "venue": "Univ. of Michigan, Ann Arbor, MI (United States)",
+   "year": 1994,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S189",
+   "title": "Panel discussion on multivariate problems",
+   "authors": "MJD Powell, W Light, M von Golitschek, M AB",
+   "venue": "Numerical Algorithms 5",
+   "year": 1993,
+   "cites": null,
+   "doi": "10.1007/bf02216049",
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S190",
+   "title": "Algorithms for Linearly Constrained Optimization Calculations",
+   "authors": "MJD Powell, ...",
+   "venue": "University of Cambridge. Department of Applied Mathematics and Theoretical Physics",
+   "year": 1990,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S191",
+   "title": "Mathematical Programming: Series A and B Volume 42 Issue 1",
+   "authors": "MJD Powell",
+   "venue": "Springer-Verlag New York, Inc. 42 (1)",
+   "year": 1988,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": "S192",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S192",
+   "title": "Martin Beale memorial symposium",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 42 (1)",
+   "year": 1988,
+   "cites": null,
+   "doi": "10.1007/bf01589387",
+   "arxiv": null,
+   "urls": [
+    "https://doi.org/10.1007/BF01589387"
+   ],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "dblp"
+   ]
+  },
+  {
+   "id": "S193",
+   "title": "JH Wilkinson, FRS, FIMA (1919–1986)",
+   "authors": "KW Morton, MJD Powell",
+   "venue": "IMA Journal of Numerical Analysis 7 (4)",
+   "year": 1987,
+   "cites": null,
+   "doi": "10.1093/imanum/7.4.522",
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S194",
+   "title": "NATO Advanced Research Institute on Nonlinear",
+   "authors": "MJD Powell",
+   "venue": "Mathematical Programming 19 (1)",
+   "year": 1980,
+   "cites": null,
+   "doi": "10.1007/bf01581634",
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S195",
+   "title": "On a decomposition of conditionally positive semidefinite matrices(applications to linear quadratic control problems)",
+   "authors": "DH MARTIN, MJD POWELL, DH JACOBSON",
+   "venue": null,
+   "year": 1980,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S158",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S196",
+   "title": "NAMES AND ADDRESSES 0F THE AUTH0RS",
+   "authors": "JE Dennis Jr, BC Eaves, HW Kuhn, DG Luenberger, GP McCormick, ...",
+   "venue": "Nonlinear Programming 9",
+   "year": 1976,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "chapter",
+   "dup_of": "S024",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S197",
+   "title": "Optimization in action: 7th–9th January 1975. University of Bristol, UK. Organized by the Institute of Mathematics and its Applications, Essex, UK",
+   "authors": "MJD Powell",
+   "venue": "Computer-Aided Design 7 (4)",
+   "year": 1975,
+   "cites": null,
+   "doi": "10.1016/0010-4485(75)90078-0",
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar",
+    "crossref"
+   ]
+  },
+  {
+   "id": "S198",
+   "title": "FORTRAN subroutine for calculating a cubic spline approximation to a given function",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 1972,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S199",
+   "title": "Numerical methods for unconstrained optimization(Book- Numerical methods for unconstrained optimization.)",
+   "authors": "W MURRAY, CG BROYDEN, R FLETCHER, MJD POWELL, WH SWANN",
+   "venue": "London and New York, Academic Press, 1972. 150 p",
+   "year": 1972,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S200",
+   "title": "DIFFERENTIAL CORRECTION ALGORITHM FOR RATIONAL L-INFINITY-APPROXIMATION",
+   "authors": "BARRODAL. I, FDK ROBERTS, MJD POWELL",
+   "venue": "SIAM JOURNAL ON NUMERICAL ANALYSIS 9 (3)",
+   "year": 1972,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "journal",
+   "dup_of": "S048",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S201",
+   "title": "Rank one methods for unconstrained optimization(Second derivative matrix for unconstrained optimization)",
+   "authors": "MJD POWELL",
+   "venue": null,
+   "year": 1969,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S092",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S202",
+   "title": "A FORTRAN subroutine to invert a rectangular matrix of full rank(Economical FORTRAN subroutine for inverting rectangular matrix of full rank)",
+   "authors": "MJD POWELL",
+   "venue": null,
+   "year": 1969,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S180",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S203",
+   "title": "INFORMATION PROCESSING 68-NORTH-HOLLAND PUBLISHING COMPANY-AMSTERDAM (1969)",
+   "authors": "MJD POWELL, JK REID",
+   "venue": "Information Processing: Proceedings of IFIP Congress 1",
+   "year": 1969,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": "S056",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S204",
+   "title": "\" on APPLYING HOUSEHOLDER TRANSFORMATIONS TO LINEAR LEAST",
+   "authors": "MJD Powell",
+   "venue": null,
+   "year": 1968,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S056",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S205",
+   "title": "UNCLASSIFIED TP 322",
+   "authors": "MJD Powell, JK Raid",
+   "venue": null,
+   "year": 1968,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S056",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S206",
+   "title": "A REVIEW OF METHODS FOR UNCONSTRAINED OPTIMIZATION",
+   "authors": "MJD POWELL",
+   "venue": "SIAM REVIEW 10 (4), 483-&",
+   "year": 1968,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S207",
+   "title": "A FORTRAN subroutine for solving systems of nonlinear algebraic equations(FORTRAN subroutine for solving systems on nonlinear equations)",
+   "authors": "MJD POWELL",
+   "venue": null,
+   "year": 1968,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S019",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S208",
+   "title": "Error analysis for equal-interval interpolation by cubic splines",
+   "authors": "AR Curtis, MJD Powell",
+   "venue": "Theoretical Physics Division, Atomic Energy Research Establishment",
+   "year": 1967,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S209",
+   "title": "Using cubic splines to approximate functions of one variable to prescribed accuracy(Algorithm for use of cubic splines to approximate one variable function accurately)",
+   "authors": "AR CURTIS, MJD POWELL",
+   "venue": null,
+   "year": 1967,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "report",
+   "dup_of": "S127",
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S210",
+   "title": "A COMPARISON OF WEIGHTED LEAST SQUARES AND MINIMAX POLYNOMIAL APPROXIMATIONS",
+   "authors": "MJD POWELL",
+   "venue": "SIAM REVIEW 8 (4), 575-&",
+   "year": 1966,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "S211",
+   "title": "Election of Council",
+   "authors": "B Martos, A Orden, MJD Powell, P Wolfe",
+   "venue": null,
+   "year": null,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "other",
+   "dup_of": null,
+   "sources": [
+    "scholar"
+   ]
+  },
+  {
+   "id": "D001",
+   "title": "A comparison of spline approximations with classical interpolation methods",
+   "authors": "M. J. D. Powell",
+   "venue": "IFIP Congress (1): 95-98",
+   "year": 1968,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "conference",
+   "dup_of": null,
+   "sources": [
+    "dblp"
+   ]
+  },
+  {
+   "id": "D002",
+   "title": "System Modelling and Optimization: Methods, Theory and Applications, 19th IFIP TC7 Conference on System Modelling and Optimization, July 12-16, 1999, Cambridge, UK",
+   "authors": "M. J. D. Powell, Stefan Scholtes",
+   "venue": "IFIP Conference Proceedings [edited volume; Powell as editor]",
+   "year": 2000,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [],
+   "kind": "book",
+   "dup_of": null,
+   "sources": [
+    "dblp"
+   ]
+  }
+ ]
+}
