@@ -214,6 +214,19 @@ Agent 3（过程证据）的prompt要额外强调：**找行为而不是找言�
 
 ---
 
+## 十二、全文深读（可选的深度档加强）
+
+搜索摘要只能支撑「他说过什么」；要看清「他实际怎么做」，最终要读论文全文。
+
+1. `python3 scripts/fetch_publications.py "<姓名>" --json --out <skill目录>/references/sources/publications` —— 完整发表列表（OpenAlex）
+2. `python3 scripts/fetch_fulltexts.py <skill目录>` —— 匹配arXiv、下载全文、抽取文本，生成 `references/sources/papers/INDEX.md`（角色与阅读状态）
+3. 按 `references/paper-reading-card.md` 分批写论文卡片，追加到 `references/research/07-paper-cards.md`
+4. 按卡片模板第三节的保守更新规则汇总回 SKILL.md
+
+需要网络可达 api.openalex.org、export.arxiv.org、arxiv.org。不在arXiv上的论文需要用户提供PDF。PDF与抽取文本不提交（版权）。
+
+---
+
 ## 十一、质量自检清单（研究Skill）
 
 生成后逐项检查（`scripts/quality_check.py` 会自动识别研究Skill并跑对应检查）：
