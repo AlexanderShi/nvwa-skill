@@ -1,9 +1,11 @@
 # Andrew R. Conn: publication list (Google Scholar + DBLP + Crossref)
 
-Harvested 2026-09-27 from https://scholar.google.com/citations?user=2dAwoocAAAAJ&hl=en (profile "Andrew Conn", IBM Research, verified email at us.ibm.com; 22,557 citations, h-index 53 at harvest). Scholar rows: 237; DBLP-only items: 2; distinct works listed below: 155 (102 with DOI, 2 with arXiv id). Set aside: 55 duplicate rows (dup_of), 12 unresolved title-page fragments, 17 rows that are not Conn publications.
+Harvested 2026-09-27 from https://scholar.google.com/citations?user=2dAwoocAAAAJ&hl=en (profile "Andrew Conn", IBM Research, verified email at us.ibm.com; 22,557 citations, h-index 53 at harvest). Scholar rows: 237; DBLP-only items: 2; distinct works listed below: 155 (102 with DOI, 2 with arXiv id). Set aside: 56 duplicate rows (dup_of), 11 unresolved title-page fragments, 17 rows that are not Conn publications.
 
-Kinds among listed works: journal 66, conference 24, report 22, patent 13, chapter 10, other 10, book 5, thesis 2, talk 2, preprint 1.
-DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint because dblp.org itself returned a bot-check page). Scholar years are kept as shown; known corrections are in the row notes at the end (e.g. three LNM 1982 papers that Scholar dates 2006). Full records incl. duplicates: `works.json`.
+Kinds among listed works: journal 66, conference 25, report 22, patent 13, chapter 10, other 9, book 5, thesis 2, talk 2, preprint 1.
+DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint because dblp.org itself returned a bot-check page). Years and venues are Scholar's, except where two independent sources (DBLP, Crossref, zbMATH author profile conn.andrew-r) agree on a different value; those 8 corrections (S006, S048, S062, S069, S074, S086, S224, S233) are listed in the row notes at the end with Scholar's original value. Full records incl. duplicates: `works.json`.
+
+Audit 2026-09-27: the Scholar profile was re-read sorted by year (237 rows, 5 pages); every row is present in works.json (title similarity >= 0.9, same year and citation count). All DOIs resolve at doi.org (30x) and match their Crossref titles (three hand-accepted cases noted below); both arXiv ids match their arXiv abstract pages.
 
 | # | Year | Title | Venue | Cites | DOI | arXiv | Kind |
 |---|---|---|---|---|---|---|---|
@@ -12,7 +14,7 @@ DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint
 | S003 | 2008 | An algorithmic framework for convex mixed integer nonlinear programs | Discrete optimization | 1297 | [10.1016/j.disopt.2006.10.011](https://doi.org/10.1016/j.disopt.2006.10.011) |  | journal |
 | S004 | 1995 | CUTE: Constrained and unconstrained testing environment | ACM Transactions on Mathematical Software (TOMS) | 1240 | [10.1145/200979.201043](https://doi.org/10.1145/200979.201043) |  | journal |
 | S005 | 1991 | A globally convergent augmented Lagrangian algorithm for optimization with general constraints and simple bounds | SIAM Journal on Numerical Analysis | 1229 | [10.1137/0728030](https://doi.org/10.1137/0728030) |  | journal |
-| S006 | 2013 | LANCELOT: a Fortran package for large-scale nonlinear optimization (Release A) | Springer Science & Business Media | 1072 | [10.1007/978-3-662-12211-2](https://doi.org/10.1007/978-3-662-12211-2) |  | book |
+| S006 | 1992 | LANCELOT: a Fortran package for large-scale nonlinear optimization (Release A) | Springer Series in Computational Mathematics 17 | 1072 | [10.1007/978-3-662-12211-2](https://doi.org/10.1007/978-3-662-12211-2) |  | book |
 | S007 | 1997 | A globally convergent Lagrangian barrier algorithm for optimization with general inequality constraints and simple bounds | Math. Comput. | 549 | [10.1090/s0025-5718-97-00777-1](https://doi.org/10.1090/s0025-5718-97-00777-1) |  | journal |
 | S008 | 1988 | Global convergence of a class of trust region algorithms for optimization with simple bounds | SIAM journal on numerical analysis | 461 | [10.1137/0725029](https://doi.org/10.1137/0725029) |  | journal |
 | S009 | 1997 | Recent progress in unconstrained nonlinear optimization without derivatives | Mathematical programming | 398 | [10.1007/bf02614326](https://doi.org/10.1007/bf02614326) |  | journal |
@@ -51,7 +53,7 @@ DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint
 | S045 | 1987 | An exact penalty function for semi-infinite programming | Mathematical Programming | 74 | [10.1007/bf02591681](https://doi.org/10.1007/bf02591681) |  | journal |
 | S046 | 1989 | An introduction to the structure of large scale nonlinear optimization problems and the LANCELOT project | University of Waterloo. Department of Computer Science | 71 |  |  | report |
 | S047 | 1996 | Convergence properties of minimization algorithms for convex constraints using a structured trust region | SIAM Journal on Optimization | 66 | [10.1137/s1052623492236481](https://doi.org/10.1137/s1052623492236481) |  | journal |
-| S048 | 2006 | Generalizing the LINPACK condition estimator | Numerical Analysis: Proceedings of the Third IIMAS Workshop Held at Cocoyoc... | 64 | [10.1007/bfb0092961](https://doi.org/10.1007/bfb0092961) |  | conference |
+| S048 | 1982 | Generalizing the LINPACK condition estimator | Numerical Analysis: Proceedings of the Third IIMAS Workshop Held at Cocoyoc... | 64 | [10.1007/bfb0092961](https://doi.org/10.1007/bfb0092961) |  | conference |
 | S049 | 1994 | Performance of a multifrontal scheme for partially separable optimization | Advances in Optimization and Numerical Analysis | 63 | [10.1007/978-94-015-8330-5_6](https://doi.org/10.1007/978-94-015-8330-5_6) |  | chapter |
 | S051 | 1978 | On Cline's Direct Method for Solving Overdetermined Linear Systems in the Sense | SIAM Journal on Numerical Analysis | 61 | [10.1137/0715017](https://doi.org/10.1137/0715017) |  | journal |
 | S052 | 1980 | Second-order conditions for an exact penalty function | Mathematical Programming | 56 | [10.1007/bf01581639](https://doi.org/10.1007/bf01581639) |  | journal |
@@ -64,17 +66,17 @@ DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint
 | S059 | 1989 | Correction to the paper on global convergence of a class of trust region algorithms for optimization with simple bounds | SIAM Journal on Numerical Analysis | 49 | [10.1137/0726044](https://doi.org/10.1137/0726044) |  | journal |
 | S060 | 2014 | Lagrangian relaxation based decomposition for well scheduling in shale-gas systems | Computers & Chemical Engineering | 48 | [10.1016/j.compchemeng.2014.02.005](https://doi.org/10.1016/j.compchemeng.2014.02.005) |  | journal |
 | S061 | 1994 | Large-scale nonlinear constrained optimization: a current survey | Algorithms for continuous optimization: the state of the art | 48 | [10.1007/978-94-009-0369-2_10](https://doi.org/10.1007/978-94-009-0369-2_10) |  | chapter |
-| S062 | 2006 | A second-order method for solving the continuous multifacility location problem | Numerical Analysis: Proceedings of the 9th Biennial Conference | 47 | [10.1007/bfb0093145](https://doi.org/10.1007/bfb0093145) |  | conference |
+| S062 | 1982 | A second-order method for solving the continuous multifacility location problem | Numerical Analysis: Proceedings of the 9th Biennial Conference | 47 | [10.1007/bfb0093145](https://doi.org/10.1007/bfb0093145) |  | conference |
 | S063 | 2015 | Solving air traffic conflict problems via local continuous optimization | European Journal of Operational Research | 44 | [10.1016/j.ejor.2014.08.045](https://doi.org/10.1016/j.ejor.2014.08.045) |  | journal |
 | S065 | 2012 | On the local convergence of a derivative-free algorithm for least-squares minimization | Computational optimization and applications | 43 | [10.1007/s10589-010-9367-x](https://doi.org/10.1007/s10589-010-9367-x) |  | journal |
 | S066 | 2012 | Bilevel derivative-free optimization and its application to robust optimization | Optimization Methods and Software | 42 | [10.1080/10556788.2010.547579](https://doi.org/10.1080/10556788.2010.547579) |  | journal |
 | S067 | 1998 | Discontinuous piecewise linear optimization | Mathematical programming | 41 | [10.1007/bf01581171](https://doi.org/10.1007/bf01581171) |  | journal |
-| S069 | 2006 | An approach to nonlinear l1 data fitting | Numerical Analysis: Proceedings of the Third IIMAS Workshop | 37 | [10.1007/bfb0092959](https://doi.org/10.1007/bfb0092959) |  | conference |
+| S069 | 1982 | An approach to nonlinear l1 data fitting | Numerical Analysis: Proceedings of the Third IIMAS Workshop | 37 | [10.1007/bfb0092959](https://doi.org/10.1007/bfb0092959) |  | conference |
 | S070 | 1999 | Method for incorporating noise considerations in automatic circuit optimization | US Patent 5,999,714 | 36 |  |  | patent |
 | S071 | 1979 | An efficient second order method to solve the (constrained) minimax problem | Department of Combinatorics and Optimization, University of Waterloo | 36 |  |  | report |
 | S072 | 1989 | Primal Methods are Better than Dual Methods for Solving Overdetermined Linear Systems in the l_∞ Sense? | SIAM journal on numerical analysis | 35 | [10.1137/0726041](https://doi.org/10.1137/0726041) |  | journal |
 | S073 | 1997 | Large-scale optimization with applications: optimal design and control | Springer Science & Business Media | 34 | [10.1007/978-1-4612-1960-6](https://doi.org/10.1007/978-1-4612-1960-6) |  | book |
-| S074 | 1992 | On the number of inner iterations per outer iteration of a globally convergent algorithm for optimization with general nonlinear inequality constraints and simple bounds | Rutherford Appleton Laboratory | 34 | [10.1023/a:1008667728545](https://doi.org/10.1023/a:1008667728545) |  | journal |
+| S074 | 1997 | On the number of inner iterations per outer iteration of a globally convergent algorithm for optimization with general nonlinear inequality constraints and simple bounds | Computational Optimization and Applications | 34 | [10.1023/a:1008667728545](https://doi.org/10.1023/a:1008667728545) |  | journal |
 | S075 | 2018 | A progressive barrier derivative-free trust-region algorithm for constrained optimization | Computational Optimization and Applications | 33 | [10.1007/s10589-018-0020-4](https://doi.org/10.1007/s10589-018-0020-4) |  | journal |
 | S076 | 2014 | Reservoir uncertainty quantification using probabilistic history matching workflow | SPE Annual Technical Conference and Exhibition | 33 | [10.2118/170893-ms](https://doi.org/10.2118/170893-ms) |  | conference |
 | S077 | 1997 | Circuit optimization via adjoint Lagrangians | 1997 Proceedings of IEEE International Conference on Computer Aided Design | 31 | [10.1109/iccad.1997.643532](https://doi.org/10.1109/iccad.1997.643532) |  | conference |
@@ -85,7 +87,7 @@ DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint
 | S083 | 2012 | Integrating mathematical optimization and decision making in intelligent fields | SPE intelligent energy international conference | 25 | [10.2118/149780-ms](https://doi.org/10.2118/149780-ms) |  | conference |
 | S084 | 2013 | Embedding structural information in simulation-based optimization | Computers & chemical engineering | 24 | [10.1016/j.compchemeng.2013.02.004](https://doi.org/10.1016/j.compchemeng.2013.02.004) |  | journal |
 | S085 | 1994 | Improving the decomposition of partially separable functions in the context of large-scale optimization: a first approach | Large Scale Optimization: State of the Art | 24 | [10.1007/978-1-4613-3632-7_5](https://doi.org/10.1007/978-1-4613-3632-7_5) |  | chapter |
-| S086 | 1992 | Large-scale nonlinear constrained optimization | Linear Algebra for Large Scale and Real-Time Applications | 23 | [10.1007/978-94-015-8196-7_3](https://doi.org/10.1007/978-94-015-8196-7_3) |  | chapter |
+| S086 | 1993 | Large-scale nonlinear constrained optimization | Linear Algebra for Large Scale and Real-Time Applications | 23 | [10.1007/978-94-015-8196-7_3](https://doi.org/10.1007/978-94-015-8196-7_3) |  | chapter |
 | S089 | 1994 | A note on exploiting structure when using slack variables | Mathematical Programming | 22 | [10.1007/bf01582214](https://doi.org/10.1007/bf01582214) |  | journal |
 | S090 | 1981 | Penalty function methods | Department of Computer Science, University of Waterloo | 22 |  |  | report |
 | S091 | 2018 | Efficient solution of quadratically constrained quadratic subproblems within the mesh adaptive direct search algorithm | European Journal of Operational Research | 21 | [10.1016/j.ejor.2017.10.058](https://doi.org/10.1016/j.ejor.2017.10.058) |  | journal |
@@ -150,6 +152,7 @@ DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint
 | S171 | 2007 | Assisted seismic matching: Joint inversion of seismic, rock physics and basin modeling | SEG International Exposition and Annual Meeting, SEG-2007-1903 |  | [10.1190/1.2792862](https://doi.org/10.1190/1.2792862) |  | conference |
 | S175 | 2003 | ISMP2000-Part 3-Foreword | MATHEMATICAL PROGRAMMING 95 (1) |  |  |  | other |
 | S176 | 2003 | Exploiting Optimality Conditions in Accurate Static Circuit Tuning | High Performance Algorithms and Software for Nonlinear Optimization |  | [10.1007/978-1-4613-0241-4_17](https://doi.org/10.1007/978-1-4613-0241-4_17) |  | chapter |
+| S224 | 2002 | ISMP2000. Part 2 | Mathematical Programming |  | [10.1007/s101070100277](https://doi.org/10.1007/s101070100277) |  | other |
 | D002 | 2000 | Noise considerations in circuit optimization | IEEE Trans. Comput. Aided Des. Integr. Circuits Syst. |  | [10.1109/43.848089](https://doi.org/10.1109/43.848089) |  | journal |
 | S178 | 2000 | Manual for Fortran Software Package DFO v1. 2 |  |  |  |  | other |
 | S181 | 1997 | Large-scale Optimization with Applications: Optimization in Inverse Problems and Design | Springer New York |  | [10.1007/978-1-4612-1962-0](https://doi.org/10.1007/978-1-4612-1962-0) |  | book |
@@ -159,8 +162,7 @@ DBLP person: https://dblp.org/pid/98/1795 (read through the DBLP SPARQL endpoint
 | S202 | 1989 | Erratum: Primal Methods are Better than Dual Methods for Solving Overdetermined Linear Systems in the Sense? | SIAM Journal on Numerical Analysis |  | [10.1137/0726071](https://doi.org/10.1137/0726071) |  | journal |
 | S214 | 1983 | Nondifferential and variational techniques in optimization: DC Sorensen and RJ-B. Wets (Eds.) Volume 17 in: Mathematical Programming Studies, North-Holland, Amsterdam, 1982… | European Journal of Operational Research |  | [10.1016/0377-2217(83)90322-3](https://doi.org/10.1016/0377-2217(83)90322-3) |  | other |
 | D001 | 1981 | Erratum | Math. Program. |  | [10.1007/bf01584255](https://doi.org/10.1007/bf01584255) |  | journal |
-| S224 |  | ISMP2000. Part 2 |  |  | [10.1007/s101070100277](https://doi.org/10.1007/s101070100277) |  | other |
-| S233 |  | DIRECT APPROACHES FOR THE MINIMAX PROBLEM | acm |  |  |  | other |
+| S233 | 1978 | DIRECT APPROACHES FOR THE MINIMAX PROBLEM | Computers and Mathematical Programming: Proceedings of the Bicentennial Conference (NBS Special Publication 502) |  |  |  | conference |
 | S236 |  | SIAG/OPT Views-and-News |  |  |  |  | other |
 
 ## Unresolved Scholar fragments
@@ -175,7 +177,6 @@ Rows whose Scholar title is a scraped title-page or acknowledgement fragment; th
 | S190 | 1993 | Report 92/18 (revised) November 19, 1993 | title-page fragment of FUNDP report 92/18 (revised 19 Nov 1993); paper not identified |
 | S209 | 1986 | This report is simultaneously issued at the University of Waterloo, the AERE at Harwell, and the FUNDP at Namur. | title-page fragment of a 1986 Conn-Gould-Toint report (Waterloo/Harwell/Namur); paper not identified |
 | S217 | 1981 | Faculty of Mathematics | garbled title (institution name) of a 1981 Calamai-Conn Waterloo item; paper not identified |
-| S219 | 1978 | Department of Combinatorics and Optimization University of Waterloo | garbled title (affiliation line) of a Conn paper in the Bicentennial Conference on Mathematical Programming proceedings (1978); paper not identified |
 | S230 |  | Acknowledgement: This work was done mainly while the two authors were visiting ARTEMIS, University of Grenoble, France. Both are extremely grateful for the generous hospitality… | acknowledgement-text fragment of a two-author paper written at ARTEMIS, Grenoble; paper not identified |
 | S231 |  | Report 92/15 (updated) September 11, 1995 | title-page fragment of FUNDP report 92/15 (updated 11 Sep 1995); paper not identified |
 | S232 |  | Report 94/1 January 31, 1994 | title-page fragment of FUNDP report 94/1 (31 Jan 1994); paper not identified |
@@ -204,27 +205,28 @@ Rows whose Scholar title is a scraped title-page or acknowledgement fragment; th
 | S220 |  | Message from the Conference Organizers | conference organizers' message, Conn not an author |
 | S237 |  | ARNE FRANStN | garbled name list (acknowledgement/referee list) |
 
-The 55 duplicate rows (variant citations, report versions, garbled titles, book chapters listed separately) are kept in works.json with `dup_of` pointing at the row they duplicate.
+The 56 duplicate rows (variant citations, report versions, garbled titles, book chapters listed separately) are kept in works.json with `dup_of` pointing at the row they duplicate.
 
 ## Row notes
 
-Why rows were marked as duplicates, how some DOIs were matched, and known Scholar errors (works.json keeps only the standard fields).
+Why rows were marked as duplicates, how some DOIs were matched, year/venue corrections, and known Scholar errors (works.json keeps only the standard fields).
 
-- S006: Springer 2013 reprint of the 1992 book (Springer Series in Computational Mathematics 17); DOI accepted by hand: Crossref title is only "Lancelot" (Conn, Gould, Toint; Springer Ser. Comput. Math., 1992)
+- S006: Year/venue corrected from Scholar's 2013 / 'Springer Science & Business Media' (reprint listing) to the 1992 first edition, Springer Ser. Comput. Math. 17 (Crossref + zbMATH 0761.90087 agree); DOI accepted by hand: Crossref title is only "Lancelot" (Conn, Gould, Toint; Springer Ser. Comput. Math., 1992)
 - S034 (dup_of S005): Junk title (repository hostname); SIAM J. Numer. Anal. 1991 Conn-Gould-Toint paper = S005
 - S035 (dup_of S001): Variant citation of the Trust-Region Methods book
 - S037 (dup_of S001): Junk title (author-name fragment); variant citation of the Trust-Region Methods book
-- S048: Published 1982 in Lecture Notes in Mathematics 909 (Cocoyoc 1981 workshop); Scholar's 2006 is the online date
+- S048: Year corrected from Scholar's 2006 (SpringerLink online date) to 1982: Lecture Notes in Mathematics 909, 73-83 (Cocoyoc 1981 workshop); Crossref published-print + zbMATH 0532.65032 agree
 - S050 (dup_of S006): 1992 original-edition listing of the LANCELOT book, title prefixed with an author-name fragment
 - S059: Correction note to S008
-- S062: Published 1982 in Lecture Notes in Mathematics 912 (Dundee 1981 conference); Scholar's 2006 is the online date
+- S062: Year corrected from Scholar's 2006 (SpringerLink online date) to 1982: Lecture Notes in Mathematics 912, 1-25 (Dundee 1981 conference); Crossref published-print + zbMATH 0485.65013 agree
 - S064 (dup_of S001): Chapter of the Trust-Region Methods book (S001), not a separate publication
 - S068 (dup_of S008): Garbled title (author-name fragment); SIAM J. Numer. Anal. 1988 Conn-Gould-Toint simple-bounds paper = S008
-- S069: Published 1982 in Lecture Notes in Mathematics 909 (Cocoyoc 1981 workshop); Scholar's 2006 is the online date
+- S069: Year corrected from Scholar's 2006 (SpringerLink online date) to 1982: Lecture Notes in Mathematics 909, 48-58 (Cocoyoc 1981 workshop); Crossref published-print + zbMATH 0477.65012 agree
 - S073: Edited volume (Biegler, Coleman, Conn, Santosa eds.), IMA Vol. Math. Appl. 93, Part II
-- S074: Scholar shows the 1992 RAL report; the paper appeared in Comput. Optim. Appl. 7 (1997) (DBLP)
+- S074: Year/venue corrected from Scholar's 1992 / 'Rutherford Appleton Laboratory' (the RAL report listing) to Comput. Optim. Appl. 7(1), 41-69 (1997), whose title (with 'inequality') and DOI this row carries (DBLP + Crossref + zbMATH 0893.90153 agree). A 1992 version titled '...general nonlinear constraints...' appeared in Numerical Analysis 1991 (Dundee), Pitman Res. Notes Math. 260, 49-68 (zbMATH 0809.65066)
 - S080: Report version; a chapter with this title appeared in The State of the Art in Numerical Analysis (Duff & Watson eds., OUP 1997)
 - S081 (dup_of S007): Author-name-prefixed duplicate of S007
+- S086: Year corrected from Scholar's 1992 (the NATO ASI, Leuven, Aug 1992) to 1993, the volume's publication year (NATO ASI Ser. E 232, 21-48, Kluwer; Crossref + zbMATH 0818.90103 agree)
 - S087 (dup_of S002): Duplicate listing of the DFO book
 - S088 (dup_of S001): Variant citation of the Trust-Region Methods book
 - S095 (dup_of S040): Technical-report version of S040
@@ -233,7 +235,9 @@ Why rows were marked as duplicates, how some DOIs were matched, and known Schola
 - S112 (dup_of S102): Variant listing of the same 1997 LANCELOT-vs-MINOS report as S102
 - S119 (dup_of S001): Junk title (author-name fragment); variant citation of the Trust-Region Methods book
 - S121: Guest-edited special issue of Mathematical Programming (Series B), not an article
+- S123: arXiv 1905.00424 v1 title; later arXiv versions carry the AAAI 2020 title of S032 (the published version)
 - S124: Coimbra preprint; closely related to S016
+- S126: Crossref best hit (ratio 0.934) was the DOI of S054, a different chapter; rejected
 - S127: Guest-edited special issue of Mathematical Programming (Series B), not an article
 - S133 (dup_of S001): Chapter of the Trust-Region Methods book (S001), not a separate publication
 - S134: Probably Conn's PhD thesis (University of Waterloo); not verified
@@ -281,16 +285,17 @@ Why rows were marked as duplicates, how some DOIs were matched, and known Schola
 - S208 (dup_of S011): Report version (truncated title) of S011
 - S212 (dup_of S044): Report/abstract listing of S044
 - S214: Book review by Conn (Eur. J. Oper. Res. 1983); DOI accepted by hand: Crossref title "Nondifferential and variational techniques in optimization" (EJOR 1983, author Conn) is the leading part of the Scholar title
+- S219 (dup_of S233): Garbled title (affiliation line) of 'Direct approaches for the minimax problem' (Conn, Bicentennial Conference proceedings, NBS Spec. Publ. 502, 1978) = S233; identified via zbMATH 0434.65037
 - S221 (dup_of S021): Uppercase duplicate listing of S021
 - S222 (dup_of S166): Title fragment of S166
 - S223 (dup_of S073): Library-catalogue listing of S073
-- S224: Editorial foreword, ISMP 2000 special issue part 2 (Math. Program. 91(3), 2002; DOI from DBLP 'Foreword', matched manually)
+- S224: Editorial foreword, ISMP 2000 special issue part 2 (Math. Program. 91(3), 2002; DOI from DBLP 'Foreword', matched manually). Year/venue filled (Scholar shows none): DBLP + Crossref + zbMATH 1007.90002 agree
 - S225 (dup_of S124): OCR-garbled duplicate of S124
 - S226 (dup_of S048): OCR-garbled duplicate of S048
 - S227 (dup_of S008): Title fragment; most likely S008
 - S228 (dup_of S021): OCR-garbled duplicate of S021
 - S229 (dup_of S002): SIAM advertisement listing S002
+- S233: Year/venue filled from zbMATH 0434.65037 (NBS Spec. Publ. 502, 184-193, 1978; Gaithersburg 1976 conference), which agrees with Scholar row S219 (1978, same proceedings, Conn sole author); Scholar shows no year and venue 'acm'
 - S236: SIAG/OPT Views-and-News newsletter issue
 - D001: Erratum by Coleman & Conn, Math. Program. 21 (1981) p. 357; probably to S052 (not verified)
 - D002: Journal version (IEEE TCAD 19(6), 2000) of the ICCAD 1998 paper S039
-- S126: Crossref best hit (ratio 0.934) was the DOI of S054, a different chapter; rejected

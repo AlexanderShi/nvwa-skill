@@ -2,7 +2,7 @@
  "researcher": "Andrew R. Conn",
  "scholar_user": "2dAwoocAAAAJ",
  "harvested": "2026-09-27",
- "source_note": "Google Scholar profile + DBLP + Crossref",
+ "source_note": "Google Scholar profile + DBLP + Crossref (years/venues checked against zbMATH)",
  "works": [
   {
    "id": "S001",
@@ -100,8 +100,8 @@
    "id": "S006",
    "title": "LANCELOT: a Fortran package for large-scale nonlinear optimization (Release A)",
    "authors": "AR Conn, GIM Gould, PL Toint",
-   "venue": "Springer Science & Business Media",
-   "year": 2013,
+   "venue": "Springer Series in Computational Mathematics 17",
+   "year": 1992,
    "cites": 1072,
    "doi": "10.1007/978-3-662-12211-2",
    "arxiv": null,
@@ -110,7 +110,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "crossref"
+    "crossref",
+    "zbmath"
    ]
   },
   {
@@ -863,7 +864,7 @@
    "title": "Generalizing the LINPACK condition estimator",
    "authors": "AK Cline, AR Conn, CF Van Loan",
    "venue": "Numerical Analysis: Proceedings of the Third IIMAS Workshop Held at Cocoyoc...",
-   "year": 2006,
+   "year": 1982,
    "cites": 64,
    "doi": "10.1007/bfb0092961",
    "arxiv": null,
@@ -872,7 +873,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "crossref"
+    "crossref",
+    "zbmath"
    ]
   },
   {
@@ -1113,7 +1115,7 @@
    "title": "A second-order method for solving the continuous multifacility location problem",
    "authors": "PH Calamai, AR Conn",
    "venue": "Numerical Analysis: Proceedings of the 9th Biennial Conference",
-   "year": 2006,
+   "year": 1982,
    "cites": 47,
    "doi": "10.1007/bfb0093145",
    "arxiv": null,
@@ -1122,7 +1124,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "crossref"
+    "crossref",
+    "zbmath"
    ]
   },
   {
@@ -1238,7 +1241,7 @@
    "title": "An approach to nonlinear l1 data fitting",
    "authors": "RH Bartels, AR Conn",
    "venue": "Numerical Analysis: Proceedings of the Third IIMAS Workshop",
-   "year": 2006,
+   "year": 1982,
    "cites": 37,
    "doi": "10.1007/bfb0092959",
    "arxiv": null,
@@ -1247,7 +1250,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "crossref"
+    "crossref",
+    "zbmath"
    ]
   },
   {
@@ -1320,8 +1324,8 @@
    "id": "S074",
    "title": "On the number of inner iterations per outer iteration of a globally convergent algorithm for optimization with general nonlinear inequality constraints and simple bounds",
    "authors": "AR Conn, NIM Gould, PL Toint",
-   "venue": "Rutherford Appleton Laboratory",
-   "year": 1992,
+   "venue": "Computational Optimization and Applications",
+   "year": 1997,
    "cites": 34,
    "doi": "10.1023/a:1008667728545",
    "arxiv": null,
@@ -1332,7 +1336,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "dblp"
+    "dblp",
+    "zbmath"
    ]
   },
   {
@@ -1534,7 +1539,7 @@
    "title": "Large-scale nonlinear constrained optimization",
    "authors": "AR Conn, N Gould, PL Toint",
    "venue": "Linear Algebra for Large Scale and Real-Time Applications",
-   "year": 1992,
+   "year": 1993,
    "cites": 23,
    "doi": "10.1007/978-94-015-8196-7_3",
    "arxiv": null,
@@ -1543,7 +1548,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "crossref"
+    "crossref",
+    "zbmath"
    ]
   },
   {
@@ -3721,7 +3727,7 @@
    "arxiv": null,
    "urls": [],
    "kind": "conference",
-   "dup_of": null,
+   "dup_of": "S233",
    "sources": [
     "scholar"
    ]
@@ -3794,8 +3800,8 @@
    "id": "S224",
    "title": "ISMP2000. Part 2",
    "authors": "AR CONN, FB SHEPHERD",
-   "venue": null,
-   "year": null,
+   "venue": "Mathematical Programming",
+   "year": 2002,
    "cites": null,
    "doi": "10.1007/s101070100277",
    "arxiv": null,
@@ -3806,7 +3812,8 @@
    "dup_of": null,
    "sources": [
     "scholar",
-    "dblp"
+    "dblp",
+    "zbmath"
    ]
   },
   {
@@ -3941,16 +3948,17 @@
    "id": "S233",
    "title": "DIRECT APPROACHES FOR THE MINIMAX PROBLEM",
    "authors": "AR Conn",
-   "venue": "acm",
-   "year": null,
+   "venue": "Computers and Mathematical Programming: Proceedings of the Bicentennial Conference (NBS Special Publication 502)",
+   "year": 1978,
    "cites": null,
    "doi": null,
    "arxiv": null,
    "urls": [],
-   "kind": "other",
+   "kind": "conference",
    "dup_of": null,
    "sources": [
-    "scholar"
+    "scholar",
+    "zbmath"
    ]
   },
   {

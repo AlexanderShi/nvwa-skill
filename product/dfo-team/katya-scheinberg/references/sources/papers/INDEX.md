@@ -70,5 +70,55 @@
 | 58 | S058 | 2005 | Product-form Cholesky factorization in interior point methods for second-order cone programming | Mathematical Programming 103 (1), 153-179 | 31 | journal | — | no-oa |  | supplement | — |
 | 59 | S059 | 2001 | Incremental learning and selective sampling via parametric optimization framework for SVM | Advances in neural information processing systems 14 | 30 | conference | — | no-oa |  | supplement | — |
 | 60 | S060 | 2019 | A novel smoothed loss and penalty function for noncrossing composite quantile estimation via deep neural networks | arXiv preprint arXiv:1909.12122 | 23 | preprint | arXiv | txt | 12 | supplement | — |
+| 61 | S061 | 2023 | Stochastic adaptive regularization method with cubics: A high probability complexity bound | 2023 Winter Simulation Conference (WSC), 3520-3531 | 22 | conference | — | no-oa |  | supplement | — |
+| 62 | S062 | 2017 | On the construction of quadratic models for derivative-free trust-region algorithms | EURO Journal on Computational Optimization 5 (4), 501-527 | 20 | journal | — | no-oa |  | supplement | — |
+| 63 | S063 | 2018 | When does stochastic gradient algorithm work well? | arXiv preprint arXiv:1801.06159 | 15 | preprint | arXiv | txt | 21 | supplement | — |
+| 64 | S064 | 2009 | Map approach to learning sparse Gaussian Markov networks | 2009 IEEE international conference on acoustics, speech and signal... | 14 | conference | — | no-oa |  | supplement | — |
+| 65 | S065 | 2000 | Derivative free optimization method | Department Computing and Software, McMaster University | 13 | report | — | no-oa |  | supplement | — |
+| 66 | S066 | 2015 | Alternating direction methods for non convex optimization with applications to second-order least-squares and risk parity portfolio selection | Optimization-Online | 12 | preprint | — | no-oa |  | supplement | — |
+| 67 | S067 | 2011 | Fast first-order methods for composite convex optimization with line search | preprint | 10 | preprint | — | no-oa |  | supplement | — |
+| 68 | S068 | 2025 | Stochastic ISTA/FISTA adaptive step search algorithms for convex composite optimization | Journal of Optimization Theory and Applications 205 (1), 10 | 9 | journal | arXiv | txt | 26 | supplement | — |
+| 69 | S069 | 2005 | Solving structured convex quadratic programs by interior point methods with application to support vector machines and portfolio optimization | Submitted for publication | 9 | preprint | — | no-oa |  | supplement | — |
+| 70 | S070 | 2005 | System and method for derivative-free optimization of electrical circuits | US Patent App. 10/626,762 | 9 | patent | — | no-oa |  | skip | — |
+| 71 | S071 | 2002 | INCAS: An incremental active set method for SVM | Tech. rep. | 9 | report | — | no-oa |  | supplement | — |
+| 72 | S072 | 2003 | Error estimates and poisedness in multivariate polynomial interpolation | Centro de Matemática da Universidade de Coimbra | 8 | report | — | no-oa |  | supplement | — |
+| 73 | S073 | 2022 | Finding optimal policy for queueing models: New parameterization | arXiv preprint arXiv:2206.10073 | 7 | preprint | arXiv | txt | 14 | supplement | — |
+| 74 | S074 | 2017 | A novel l0-constrained gaussian graphical model for anomaly localization | 2017 IEEE International Conference on Data Mining Workshops (ICDMW), 830-833 | 7 | conference | — | no-oa |  | supplement | — |
+| 75 | S076 | 2012 | Recovering the structure of sparse markov networks from high-dimensional data | US Patent 8,326,787 | 7 | patent | — | no-oa |  | skip | — |
+| 76 | S077 | 2008 | Numerically stable LDLT factorizations in interior point methods for convex quadratic programming | IMA journal of numerical analysis 28 (4), 806-826 | 7 | journal | — | no-oa |  | supplement | — |
+| 77 | S078 | 2018 | Directly and efficiently optimizing prediction error and AUC of linear classifiers | arXiv preprint arXiv:1802.02535 | 6 | preprint | arXiv | txt | 13 | supplement | — |
+| 78 | S079 | 2010 | Sparse Markov net learning with priors on regularization parameters. | ISAIM | 6 | conference | — | no-oa |  | supplement | — |
+| 79 | S080 | 2001 | The COIN-OR initiative: accelerating operations research progress through open-source software | ORMS Today 28 (5), 20-22 | 6 | other | — | no-oa |  | supplement | — |
+| 80 | S081 | 2026 | Stochastic gradients: Optimization, simulation, randomization, and sensitivity analysis | IISE Transactions 58 (2), 240-256 | 5 | journal | — | no-oa |  | supplement | — |
+| 81 | S082 | 2017 | An Empirical Analysis of Constrained Support Vector Quantile Regression for Nonparametric Probabilistic Forecasting of Wind Power. | AAAI Workshops | 5 | conference | arXiv | txt | 7 | supplement | — |
+| 82 | S083 | 2025 | Stochastic adaptive optimization with unreliable inputs: A unified framework for high-probability complexity analysis | arXiv preprint arXiv:2511.19411 | 4 | preprint | arXiv | txt | 23 | supplement | — |
+| 83 | S084 | 2013 | Efficient quasi-newton proximal method for large scale sparse optimization | Conference on Neural Information Processing Systems. NIPS | 4 | conference | — | no-oa |  | supplement | — |
+| 84 | S085 | 2012 | Aligning ligand binding cavities by optimizing superposed volume | 2012 IEEE International Conference on Bioinformatics and Biomedicine, 1-5 | 4 | conference | — | no-oa |  | supplement | — |
+| 85 | S086 | 2006 | Detecting Generic Visual Eventswith Temporal Cues | 2006 Fortieth Asilomar Conference on Signals, Systems and Computers, 54-58 | 4 | conference | — | no-oa |  | supplement | — |
+| 86 | S087 | 2026 | Function-free optimization via comparison oracles | arXiv preprint arXiv:2604.26867 | 3 | preprint | arXiv | txt | 46 | supplement | — |
+| 87 | S088 | 2025 | On Complexity of Model-Based Derivative-Free Methods | arXiv preprint arXiv:2510.14935 | 3 | preprint | arXiv | txt | 20 | supplement | — |
+| 88 | S089 | 2019 | Novel and efficient approximations for zero-one loss of linear classifiers | arXiv preprint arXiv:1903.00359 | 3 | preprint | arXiv | txt | 18 | supplement | — |
+| 89 | S090 | 2015 | A scalable solution for group feature selection | 2015 IEEE International Conference on Big Data (Big Data), 2846-2848 | 3 | conference | — | no-oa |  | supplement | — |
+| 90 | S091 | 2000 | Parametric linear semidefinite programming | INTERNATIONAL SERIES IN OPERATIONS RESEARCH AND MANAGEMENT SCIENCE, 92-110 | 3 | chapter | — | no-oa |  | supplement | — |
+| 91 | S092 | 1999 | Derivative free optimization algorithms for constrained problems | Presentation at the 1999 SIAM Conference on Optimization | 3 | talk | — | no-oa |  | skip | — |
+| 92 | S093 | 2026 | First-and Second-Order Stochastic Adaptive Regularization with Cubics: High-Probability Iteration and Sample Complexity | INFORMS Journal on Optimization | 2 | journal | arXiv | txt | 21 | supplement | — |
+| 93 | S094 | 2015 | Superposition of protein structures using electrostatic isopotentials | 2015 IEEE International Conference on Bioinformatics and Biomedicine (BIBM... | 2 | conference | — | no-oa |  | supplement | — |
+| 94 | S096 | 2011 | 17 Optimization Methods for Sparse Inverse Covariance Selection | Optimization for machine learning, 455 | 2 | chapter | — | no-oa |  | supplement | — |
+| 95 | S097 | 2000 | Efficient implementation of interior point methods for quadratic problems arising in support vector machines | NIPS | 2 | conference | — | no-oa |  | supplement | — |
+| 96 | S098 | 2025 | ProxSTORM--A Stochastic Trust-Region Algorithm for Nonsmooth Optimization | arXiv preprint arXiv:2510.03187 | 1 | preprint | arXiv | txt | 33 | supplement | — |
+| 97 | S100 | 2013 | Efficiently Using Second Order Information in Large l1 Regularization Problems | arXiv preprint arXiv:1303.6935 | 1 | preprint | arXiv | txt | 14 | supplement | — |
+| 98 | S101 | 2012 | Fast first-order methods for composite convex optimization with large steps | — | 1 | preprint | — | no-oa |  | supplement | — |
+| 99 | S102 | 2007 | Rock Physics and Depositional History from Seismic Matching–A Model Study | 69th EAGE Conference and Exhibition incorporating SPE EUROPEC 2007, cp-27-00236 | 1 | conference | — | no-oa |  | supplement | — |
+| 100 | S104 | 2026 | Powell-Style Model-Based Derivative-Free Optimization with Complexity Guarantees | arXiv preprint arXiv:2609.09441 | — | preprint | arXiv | txt | 32 | supplement | — |
+| 101 | S105 | 2026 | Editor's Comments on the 50th Anniversary of Mathematics of Operations Research | Mathematics of Operations Research 51 (1), iv-viii | — | other | — | no-oa |  | supplement | — |
+| 102 | S106 | 2025 | Novel and Efficient Approximations for Zero-One and Ranking Losses of Linear Classifiers | Vietnam Journal of Mathematics 53 (4), 815-834 | — | journal | — | no-oa |  | supplement | — |
+| 103 | S107 | 2024 | ProxSTORM-A Stochastic Trust Region Method for Nonsmooth Optimization | Sandia National Laboratories (SNL-NM), Albuquerque, NM (United States) | — | report | — | no-oa |  | supplement | — |
+| 104 | S108 | 2024 | Collaborative Research: AF: Small: A Unified Framework for Analyzing Adaptive Stochastic Optimization Methods Based on Probabilistic Oracles | NSF Award Number 2438005 | — | other | — | no-oa |  | supplement | — |
+| 105 | S109 | 2023 | Stochastic Optimization Methods With Momentum | INFORMS Annual Meeting | — | talk | — | no-oa |  | skip | — |
+| 106 | S110 | 2021 | Shuffling Gradient-Based Methods | INFORMS Annual Meeting | — | talk | — | no-oa |  | skip | — |
+| 107 | S111 | 2020 | Collaborative Research: AF: Small: Adaptive Optimization of Stochastic and Noisy Function | NSF Award Number 2008434 | — | other | — | no-oa |  | supplement | — |
+| 108 | S112 | 2020 | Complexity analysis framework of adaptive optimization methods via martingales | Complexity 17 | — | other | — | no-oa |  | supplement | — |
+| 109 | S113 | 2019 | Knowing What to Know in Stochastic Optimization | Collections 52 (02) | — | other | — | no-oa |  | supplement | — |
+| 110 | S116 | 2017 | Chapter 39: Volumetric Alignment of Protein-Binding Cavities | Advances and Trends in Optimization with Engineering Applications, 519-528 | — | chapter | — | no-oa |  | supplement | — |
 
-60 works · txt 33 · pdf 0 · no-oa 27
+110 works · txt 46 · pdf 0 · no-oa 64
