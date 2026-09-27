@@ -19,3 +19,11 @@ voice_tts/CosyVoice/
 # Transient working files & logs
 voice_tts/passage.txt
 *.log
+
+# Downloaded papers for skill research (copyrighted — keep local)
+product/**/references/sources/papers/*.pdf
+product/**/references/sources/papers/txt/
+
+# Private materials from people you know (supervisor feedback, meeting notes) — never publish
+product/**/references/sources/private/*
+!product/**/references/sources/private/README.md

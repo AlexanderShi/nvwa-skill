@@ -1,0 +1,63 @@
+# Michael J. D. Powell · Resource Tracker
+
+Every source behind the `michael-powell` skill, plus anything you add later. One row per resource.
+
+**Status**: ✅ verified (title/authors/venue/year confirmed by search) · ⚠️ unverified (lead only — do not cite) · 📥 saved locally in this folder
+
+| # | Type | Title | Authors | Year | Venue / Where | Link / DOI / arXiv | Status | Used in | Notes |
+|---|------|-------|---------|------|---------------|--------------------|--------|---------|-------|
+| 1 | paper | An efficient method for finding the minimum of a function of several variables without calculating derivatives | M. J. D. Powell | 1964 | Computer Journal 7(2):155–162 | https://academic.oup.com/comjnl/article-abstract/7/2/155/335330 | ✅ | 01, 06 | Title/venue/pages confirmed in search |
+| 2 | tech-report | A direct search optimization method that models the objective and constraint functions by linear interpolation (COBYLA) | M. J. D. Powell | 1992 | DAMTP 1992/NA5, Cambridge | https://github.com/libprima/prima/blob/main/fortran/original/cobyla/email.txt | ✅ 📥 | 01, 03 | Report number and Oaxaca Jan 1992 conference stated in Powell's own cover note |
+| 3 | paper | A direct search optimization method that models the objective and constraint functions by linear interpolation | M. J. D. Powell | 1994 | Advances in Optimization and Numerical Analysis (eds Gomez, Hennart), Kluwer, pp. 51–67 | https://doi.org/10.1007/978-94-015-8330-5_4 | ✅ | 01, SKILL | Signature work A |
+| 4 | paper | Direct search algorithms for optimization calculations | M. J. D. Powell | 1998 | Acta Numerica 7:287–336 | https://doi.org/10.1017/S0962492900002841 | ✅ | 01, 02 | Abstract: "collection of essays" |
+| 5 | paper | UOBYQA: unconstrained optimization by quadratic approximation | M. J. D. Powell | 2002 | Mathematical Programming 92:555–582 (report DAMTP 2000/NA14) | https://doi.org/10.1007/s101070100290 | ✅ | 01, 03, 05 | n ≤ 20 limit stated in abstract |
+| 6 | paper | Least Frobenius norm updating of quadratic models that satisfy interpolation conditions | M. J. D. Powell | 2004 | Mathematical Programming Ser. B 100:183–215 | https://doi.org/10.1007/s10107-003-0490-7 | ✅ | 01, SKILL | Theory enabling NEWUOA |
+| 7 | paper | The NEWUOA software for unconstrained optimization without derivatives | M. J. D. Powell | 2006 | Large-Scale Nonlinear Optimization (eds Di Pillo, Roma), Springer, pp. 255–297 (report DAMTP 2004/NA08) | https://doi.org/10.1007/0-387-30065-1_16 | ✅ | 01, 03, SKILL | Signature work B |
+| 8 | essay | A view of algorithms for optimization without derivatives | M. J. D. Powell | 2007 | Mathematics Today 43:170–174; DAMTP 2007/NA03 | https://optimization-online.org/2007/06/1680/ | ✅ | 02, SKILL | Powell's own positioning essay; full text not read (fetch blocked) |
+| 9 | tech-report | The BOBYQA algorithm for bound constrained optimization without derivatives | M. J. D. Powell | 2009 | DAMTP 2009/NA06, Cambridge | https://www.damtp.cam.ac.uk/user/na/NA_papers/NA2009_06.pdf | ✅ | 01, 03, SKILL | Also https://optimization-online.org/2010/05/2616/ |
+| 10 | paper | On fast trust region methods for quadratic models with linear constraints | M. J. D. Powell | 2015 | Mathematical Programming Computation 7(3):237–267 | https://doi.org/10.1007/s12532-015-0084-4 | ✅ | 01, 06 | LINCOA subproblem only |
+| 11 | software | Powell's original Fortran 77 codes + cover notes (COBYLA 1992, UOBYQA, NEWUOA 2004, BOBYQA 2009, LINCOA 2013) | M. J. D. Powell | 1992–2013 | Mirrored in PRIMA repo `fortran/original/` | https://github.com/libprima/prima/tree/main/fortran/original | ✅ 📥 | 02, 03, SKILL | Read directly; notes in `software/powell-fortran-notes.md` |
+| 12 | memoir/obituary | Michael J. D. Powell. 29 July 1936—19 April 2015 | M. D. Buhmann, R. Fletcher, A. Iserles, P. Toint | 2018 | Biogr. Mems Fell. R. Soc. 64:341–366 | https://doi.org/10.1098/rsbm.2017.0023 | ✅ | 04, 06 | Abstract only (full text fetch blocked) |
+| 13 | memoir/obituary | Obituary for Mike Powell | C. Cartis, A. Griewank, P. Toint, Y. Yuan | 2015 | Optimization Methods & Software 30(3) | https://doi.org/10.1080/10556788.2015.1051808 | ✅ | 04, 06 | Snippet: first trust-region convergence result 1970; BFGS, augmented Lagrangian |
+| 14 | memoir/obituary | Obituaries: Michael J.D. Powell | A. Iserles | 2015 | SIAM News | https://www.siam.org/publications/siam-news/articles/obituaries-michael-jd-powell/ | ✅ | 04, 06 | "seventeen years" at Harwell (snippet); fetch blocked |
+| 15 | memoir/obituary | Michael J.D. Powell's work in approximation theory and optimisation | M. D. Buhmann | 2019 | Journal of Approximation Theory 238 | https://www.sciencedirect.com/science/article/pii/S0021904517301053 | ✅ | 04, 06 | Mentions DFP formula, Powell–Sabin, RBFs |
+| 16 | book | Approximation Theory and Optimization: Tributes to M. J. D. Powell | eds M. D. Buhmann, A. Iserles | 1997 | Cambridge University Press | https://www.cambridge.org/ca/universitypress/subjects/mathematics/numerical-analysis/approximation-theory-and-optimization-tributes-m-j-d-powell | ✅ | 04 | Contributors include Conn, Scheinberg, Toint, Moré, Fletcher |
+| 17 | software | PRIMA: Reference Implementation for Powell's Methods with Modernization and Amelioration | Z. Zhang | 2023 | GitHub / Zenodo DOI 10.5281/zenodo.8052654 | https://github.com/libprima/prima | ✅ 📥 | 03, 04, 05, 06 | README read directly (bug list, handover, SciPy 1.16) |
+| 18 | paper | PDFO: a cross-platform package for Powell's derivative-free optimization solvers | T. M. Ragonneau, Z. Zhang | 2024 | Mathematical Programming Computation 16:535–559 | https://doi.org/10.1007/s12532-024-00257-9 | ✅ | 06, SKILL | Confirmed via PRIMA README (read directly) + https://github.com/pdfo/pdfo |
+| 19 | critique | Benchmarking derivative-free optimization algorithms | J. J. Moré, S. M. Wild | 2009 | SIAM J. Optimization 20(1):172–191 | https://www.mcs.anl.gov/uploads/cels/papers/P1471.pdf | ✅ | 03, 05 | NEWUOA fastest on ~50% at τ=1e-5 |
+| 20 | profile | Michael J. D. Powell (Wikipedia) | — | — | Wikipedia | https://en.wikipedia.org/wiki/Michael_J._D._Powell | ✅ | 06 | Background only |
+| 21 | profile | M.J.D. Powell's bibliography (RS memoir supplement) | — | 2018 | Royal Society | https://royalsocietypublishing.org/rsbm/article-supplement/63941/pdf/rsbm20170023supp1/ | ✅ | 01 | Exists; not read |
+| 22 | profile | Offprints of MJD Powell | DAMTP | — | Cambridge DAMTP | https://www.damtp.cam.ac.uk/user/na/MJDP_Offprints.html | ✅ | 01 | Exists; host blocked for fetch |
+| 23 | software | Py-BOBYQA | NAG (authors not confirmed) | — | GitHub | https://github.com/numericalalgorithmsgroup/pybobyqa | ✅ | 01, 06 | Existence confirmed; authorship not |
+| 24 | software | SciPy fmin_cobyla / fmin_powell docs | SciPy | — | SciPy docs | https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_cobyla.html | ✅ | 01 | Adoption evidence |
+| 25 | talk | Zaikun Zhang, PRIMA talk at ICIAM 2023 | Z. Zhang | 2023 | ICIAM 2023 | https://raw.githubusercontent.com/ztalks/20230825-iciam23/main/20230825-iciam.pdf | ⚠️ | — | Link from PRIMA README; content not read |
+| 26 | paper | Beyond symmetric Broyden for updating quadratic models in minimization without derivatives | (Powell — not confirmed in snippet) | ? | Mathematical Programming | https://link.springer.com/article/10.1007/s10107-011-0510-y | ⚠️ | 05 | Title + URL only |
+| 27 | tech-report | Developments of NEWUOA for unconstrained minimization without derivatives | (Powell — not confirmed) | 2007? | Optimization Online | https://optimization-online.org/wp-content/uploads/2007/06/1689.pdf | ⚠️ | — | Venue (IMA JNA?) unconfirmed |
+| 28 | tech-report | A Fortran subroutine for unconstrained minimization requiring first derivatives of the objective function | Powell (per search summary) | ? | AERE Harwell report R.6469 | — | ⚠️ | — | Year not confirmed |
+| 29 | paper | Recent advances in trust region algorithms | (author not confirmed; possibly Y. Yuan) | 2015 | Mathematical Programming | https://link.springer.com/article/10.1007/s10107-015-0893-2 | ⚠️ | — | Lead only |
+| 30 | student-recollection | Ya-xiang Yuan — Mathematics Genealogy entry (advisor not shown in snippet) | — | — | Math Genealogy | https://www.mathgenealogy.org/id.php?id=98372 | ⚠️ | 04 | Student relationship NOT verified |
+| 31 | critique | Incorporating minimum Frobenius norm models in direct search | (authors not confirmed) | ? | Comput. Optim. Appl. | https://link.springer.com/article/10.1007/s10589-009-9283-0 | ⚠️ | 05 | Bridge to direct-search lens |
+| 32 | critique | Least H² norm updating quadratic interpolation model function for DFO trust-region algorithms | (not confirmed) | 2023 | arXiv 2302.12017 | https://arxiv.org/abs/2302.12017 | ⚠️ | 05 | Title only |
+| 33 | critique | Powell-Style Model-Based Derivative-Free Optimization with Complexity Guarantees | (not confirmed) | 2026 | arXiv 2609.09441 | https://arxiv.org/abs/2609.09441 | ⚠️ | 05, 06 | Title only |
+| 34 | book | Introduction to Derivative-Free Optimization (Conn, Scheinberg, Vicente) | — | 2009? | SIAM | — | ⚠️ | 05 | From memory; not searched (budget) |
+| 35 | critique | Derivative-free optimization: a review of algorithms and comparison of software implementations (Rios, Sahinidis) | — | 2013? | J. Global Optim. | — | ⚠️ | 05 | Search budget exhausted before verification |
+| 36 | paper | Derivative-free optimization methods (Acta Numerica 2019; authors believed Larson, Menickelly, Wild) | not confirmed | 2019 | Acta Numerica | https://arxiv.org/abs/1904.11585 | ⚠️ | — | Title seen; authors not in snippet |
+| 37 | paper | Powell's derivative-based classics (DFP 1963 with Fletcher; hybrid/dogleg 1970; augmented Lagrangian 1969; SQP 1978; PRP counterexample 1984) | Powell et al. | 1963–1984 | various | — | ⚠️ | 01 | Contributions confirmed by obituaries; individual titles not verified |
+
+**Types**: paper · book · tech-report · software · talk · interview · essay · memoir/obituary · student-recollection · critique · profile
+
+## Folders
+
+| Folder | What goes there |
+|--------|-----------------|
+| `publications/` | Publication landscape (output of `scripts/fetch_publications.py`, or a hand-built list) |
+| `papers/` | Full texts you download. PDFs are git-ignored — keep copyrighted files local |
+| `talks/` | Talk transcripts, slides, lecture notes |
+| `essays/` | Methodology writings, surveys, prefaces, advice pieces |
+| `software/` | Notes on solvers and code (repo links, versions, docs) |
+
+## Adding a resource
+
+1. Add a row to the table (keep numbering).
+2. If you save a file, put it in the matching folder and mark it 📥.
+3. If it changes a method or claim in `SKILL.md`, note which research file (`../research/0X-*.md`) you updated in **Used in**.

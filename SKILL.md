@@ -292,6 +292,7 @@ spawn subagent时，用以下结构给任务（以Agent 1著作为例）：
 - 研究者发表全景（研究Skill · Agent 1用）：`python3 [skill目录]/scripts/fetch_publications.py "<研究者英文名>" --out <skill目录>/references/sources/publications`
   - 从OpenAlex拉取：高被引论文、按5年分段的研究方向变化、一作→末作位次变化、高频合作者（含疑似学生信号）、常投venue、最近论文、代表作候选及摘要
   - 同名消歧：自动列出候选并选被引最高的，不是本人时用 `--author-id` 重跑
+- 研究者论文全文（研究Skill · 深读用）：`python3 [skill目录]/scripts/fetch_fulltexts.py <skill目录>` —— 从 `fetch_publications.py --json` 的结果匹配arXiv、下载全文并抽取文本，维护 `references/sources/papers/INDEX.md`；再按 `references/paper-reading-card.md` 逐篇写论文卡片
 - 调研摘要生成（Phase 1.5用）：`python3 [skill目录]/scripts/merge_research.py <skill目录>`
   - 自动扫描 `references/research/01-06.md`，统计来源数、一手/二手占比、关键发现
   - 按文件名自动识别人物Skill/研究Skill（也可 `--mode research`），研究模式额外把DOI/arXiv ID计入来源

@@ -1,0 +1,76 @@
+# Luís Nunes Vicente · Resource Tracker
+
+Every source behind the `luis-nunes-vicente` skill, plus anything you add later. One row per resource.
+
+**Status**: ✅ verified (title/authors/venue/year confirmed by search) · ⚠️ unverified (lead only — do not cite) · 📥 saved locally in this folder
+
+| # | Type | Title | Authors | Year | Venue / Where | Link / DOI / arXiv | Status | Used in | Notes |
+|---|------|-------|---------|------|---------------|--------------------|--------|---------|-------|
+| 1 | paper | Worst case complexity of direct search | L. N. Vicente | 2013 | EURO J. Comput. Optim. 1:143–153 | https://doi.org/10.1007/s13675-012-0003-7 | ✅ | 01, 03, SKILL | Signature anatomy 2.3; Method 2 |
+| 2 | paper | Direct search based on probabilistic descent | S. Gratton, C. W. Royer, L. N. Vicente, Z. Zhang | 2015 | SIAM J. Optim. 25(3):1515–1541 | https://www.zhangzk.net/docs/publications/2015dspd.pdf | ✅ | 01, 02, 03, SKILL | Signature anatomy 2.4; Method 3; DOI not seen in results |
+| 3 | paper | Using sampling and simplex derivatives in pattern search methods | A. L. Custódio, L. N. Vicente | 2007 | SIAM J. Optim. 18:537–555 | https://www.mat.uc.pt/~lnv/papers/sid-psm.pdf | ✅ | 01, 03, SKILL | Signature anatomy 2.1; Method 1 |
+| 4 | software | SID-PSM (v1.3, Dec 2014, MATLAB, LGPL) | A. L. Custódio, L. N. Vicente | 2014 | mat.uc.pt | http://www.mat.uc.pt/sid-psm/ | ✅ | 03, SKILL | Obtained by e-mail; code not inspected |
+| 5 | paper | Direct multisearch for multiobjective optimization | A. L. Custódio, J. F. A. Madeira, A. I. F. Vaz, L. N. Vicente | 2011 | SIAM J. Optim. 21(3):1109–1140 | https://doi.org/10.1137/10079731X | ✅ | 01, 03, SKILL | Errata exists on DMS site; purity/spread profiles, 100 AMPL problems |
+| 6 | software | DMS – Direct MultiSearch | Custódio, Madeira, Vaz, Vicente | 2011 | mat.uc.pt | http://www.mat.uc.pt/dms/ | ✅ | 03, SKILL | Site lists paper + errata |
+| 7 | book | Introduction to Derivative-Free Optimization | A. R. Conn, K. Scheinberg, L. N. Vicente | 2009 | SIAM, MPS-SIAM Series on Optimization | https://doi.org/10.1137/1.9780898718768 ; http://www.mat.uc.pt/~lnv/idfo/ | ✅ | 01, 02, 06, SKILL | Lagrange Prize 2015 |
+| 8 | paper | Convergence of trust-region methods based on probabilistic models | A. S. Bandeira, K. Scheinberg, L. N. Vicente | 2014 | SIAM J. Optim. 24(3):1238–1264 | https://www.semanticscholar.org/paper/Convergence-of-Trust-Region-Methods-Based-on-Models-Bandeira-Scheinberg/edf332931d618a7788cce3d9338970fd835826a5 | ✅ | 01, 03, SKILL | Method 3 |
+| 9 | paper | Analysis of direct searches for discontinuous functions | L. N. Vicente, A. L. Custódio | 2012 | Math. Program. 133:299–325 | https://doi.org/10.1007/s10107-010-0429-8 | ✅ | 01, 03, 05, SKILL | Last-part theorem later counterexampled |
+| 10 | critique | Counterexample and an additional revealing poll step for a result of 'analysis of direct searches for discontinuous functions' | C. Audet, P.-Y. Bouchet, L. Bourdin | 2024 | Math. Program. 208:411–424 | https://doi.org/10.1007/s10107-023-02042-3 ; arXiv:2211.09947 | ✅ | 05, SKILL | arXiv v1 titled 'Erratum, counterexample…' |
+| 11 | paper | Smoothing and worst-case complexity for direct-search methods in nonsmooth optimization | R. Garmanjani, L. N. Vicente | 2013 | IMA J. Numer. Anal. 33:1008–1028 | https://optimization-online.org/2012/01/3331/ | ✅ | 01, 03, 05, SKILL | 'one order of magnitude worse' |
+| 12 | paper | A merit function approach for direct search | S. Gratton, L. N. Vicente | 2014 | SIAM J. Optim. 24(4):1980–1998 | https://www.mat.uc.pt/~lnv/papers/merit.pdf | ✅ | 01, 03, SKILL | Relaxable vs unrelaxable constraints |
+| 13 | paper | Globally convergent evolution strategies | Y. Diouane, S. Gratton, L. N. Vicente | 2015 | Math. Program. 152:467–490 | https://doi.org/10.1007/s10107-014-0793-x | ✅ | 01, 03, SKILL | Method 1; constrained sequel COAP 2015 DOI 10.1007/s10589-015-9747-3 |
+| 14 | paper | Incorporating minimum Frobenius norm models in direct search | A. L. Custódio, H. Rocha, L. N. Vicente | 2010 | Comput. Optim. Appl. 46:265–278 | https://doi.org/10.1007/s10589-009-9283-0 | ✅ | 01, 03, SKILL | Method 1 |
+| 15 | paper | A particle swarm pattern search method for bound constrained global optimization | A. I. F. Vaz, L. N. Vicente | 2007 | J. Glob. Optim. 39:197–219 | https://doi.org/10.1007/s10898-007-9133-5 | ✅ | 01, 03, SKILL | PSwarm origin |
+| 16 | paper | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | A. S. Bandeira, K. Scheinberg, L. N. Vicente | 2012 | Math. Program. 134:223–257 | https://doi.org/10.1007/s10107-012-0578-z ; arXiv:1306.5729 | ✅ | 01, 03 | Sparse models |
+| 17 | paper | Worst case complexity of direct search under convexity | M. Dodangeh, L. N. Vicente | 2016 | Math. Program. 155:307–332 | https://doi.org/10.1007/s10107-014-0847-0 | ✅ | 01, 03, SKILL | O(ε⁻¹) |
+| 18 | paper | On the optimal order of worst case complexity of direct search | M. Dodangeh, L. N. Vicente, Z. Zhang | 2016 | Optim. Lett. 10:699–708 | https://doi.org/10.1007/s11590-015-0908-1 | ✅ | 01, 03, 05, SKILL | n² factor optimal |
+| 19 | paper | Complexity and global rates of trust-region methods based on probabilistic models | S. Gratton, C. W. Royer, L. N. Vicente, Z. Zhang | 2018 | IMA J. Numer. Anal. 38(3):1579–1597 | https://doi.org/10.1093/imanum/drx043 | ✅ | 01, 03 | Method 3 |
+| 20 | paper | Direct search based on probabilistic feasible descent for bound and linearly constrained problems | S. Gratton, C. W. Royer, L. N. Vicente, Z. Zhang | 2019 | Comput. Optim. Appl. 72:525–559 | https://doi.org/10.1007/s10589-019-00062-4 | ✅ | 01, 03 | Constrained extension |
+| 21 | paper | Stochastic trust-region and direct-search methods: A weak tail bound condition and reduced sample sizing | F. Rinaldi, L. N. Vicente, D. Zeffiro | 2024 | SIAM J. Optim. 34:2067–2092 | https://doi.org/10.1137/22M1543446 ; arXiv:2202.11074 | ✅ | 01, 03, SKILL | Signature 2.5; Method 3/5 |
+| 22 | paper | Sequential test sampling for stochastic derivative-free optimization | A. Ding, F. Rinaldi, L. N. Vicente | 2025 | arXiv preprint | arXiv:2509.14505 ; https://arxiv.org/pdf/2509.14505 | ✅ | 03, 06, SKILL | Preprint; AFOSR/ONR funded |
+| 23 | paper | Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization | A. Ding, T. H. Tran, L. N. Vicente | 2026 | arXiv preprint | arXiv:2609.11567 ; https://arxiv.org/abs/2609.11567 | ✅ | 02, 03, 06, SKILL | Latest item (Sep 2026) |
+| 24 | paper | The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning | S. Liu, L. N. Vicente | 2021 | Ann. Oper. Res. | https://doi.org/10.1007/s10479-021-04033-z ; arXiv:1907.04472 | ✅ | 01, 03, SKILL | Lehigh pivot |
+| 25 | paper | Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach | S. Liu, L. N. Vicente | 2022 | Comput. Manag. Sci. 19(3):513–537 | https://doi.org/10.1007/s10287-022-00425-z ; arXiv:2008.01132 | ✅ | 01, 03, SKILL | Code: github.com/sul217/MOO_Fairness (not opened) |
+| 26 | paper | Inexact bilevel stochastic gradient methods for constrained and unconstrained lower-level problems | T. Giovannelli, G. D. Kent, L. N. Vicente | 2025 | J. Glob. Optim. | https://doi.org/10.1007/s10898-025-01502-8 ; arXiv:2110.00604 | ✅ | 01, 03 | Code: github.com/GdKent/BSG_Methods_Con_Unc (not opened) |
+| 27 | paper | Bilevel optimization with a multi-objective lower-level problem: risk-neutral and risk-averse formulations | T. Giovannelli, G. D. Kent, L. N. Vicente | 2024 | Optim. Methods Softw. 39(4):756–778 | https://doi.org/10.1080/10556788.2024.2318707 ; arXiv:2302.05540 | ✅ | 01, 06 |  |
+| 28 | paper | Pareto sensitivity, most-changing sub-fronts, and knee solutions | T. Giovannelli, M. M. Raimundo, L. N. Vicente | 2025 | arXiv preprint (v3 Mar 2026) | arXiv:2501.16993 ; https://arxiv.org/abs/2501.16993 | ✅ | 02, 05, 06, SKILL | Code: github.com/tommaso-giovannelli/snee |
+| 29 | paper | Stochastic block coordinate and function alternation for multi-objective optimization and learning | T. H. Tran, L. N. Vicente | 2026 | arXiv preprint | arXiv:2605.12432 ; https://arxiv.org/abs/2605.12432 | ✅ | 02, 06, SKILL | May 2026 |
+| 30 | paper | Full-low evaluation methods for derivative-free optimization | A. S. Berahas, O. Sohab, L. N. Vicente | 2023 | Optim. Methods Softw. 38(2):386–411 | https://doi.org/10.1080/10556788.2022.2142582 ; arXiv:2107.11908 | ✅ | 02, 03, SKILL | Method 1 |
+| 31 | essay | Methodologies and software for derivative-free optimization (Ch. 37) | A. L. Custódio, K. Scheinberg, L. N. Vicente | 2017 | SIAM, Advances and Trends in Optimization with Engineering Applications, pp. 495–506 | https://www.researchgate.net/publication/317572261_Chapter_37_Methodologies_and_Software_for_Derivative-Free_Optimization | ✅ | 01, 02 | Survey; content not read |
+| 32 | profile | Industrial and Systems Engineering welcomes Luis Nunes Vicente as new chair (incl. on-record quote) | Lehigh Rossin College | 2018 | engineering.lehigh.edu | https://engineering.lehigh.edu/news/article/industrial-and-systems-engineering-welcomes-luis-nunes-vicente-new-chairs | ✅ | 02, 06, SKILL | Only exact Vicente quote found |
+| 33 | profile | Lehigh ISE faculty Luis Nunes Vicente selected as a Fellow of SIAM | Lehigh Rossin College | 2024 | engineering.lehigh.edu | https://engineering.lehigh.edu/news/article/lehigh-ise-faculty-luis-nunes-vicente-has-been-selected-fellow-siam | ✅ | 02, 06 | Fellow citation quoted |
+| 34 | profile | Lagrange Prize 2015 news / prize history | Univ. Coimbra DMAT; SIAM | 2015 | uc.pt; siam.org | https://www.uc.pt/en/fctuc/dmat/noticias/LagrangePrize | ✅ | 06, SKILL | Prize citation quote |
+| 35 | talk | Reducing Sample Complexity in Stochastic Derivative-Free Optimization via Tail Bounds and Hypothesis Testing (Pitt IE seminar; Rice CMOR colloquium) | L. N. Vicente | 2025/26 ⚠️ | Univ. Pittsburgh; Rice Univ. | https://calendar.pitt.edu/event/ie-seminar-luis-nunes-vicente-reducing-sample-complexity-in-stochastic-derivative-free-optimization-via-tail-bounds-and-hypothesis-testing-416 | ✅ | 02, 06 | Title/abstract verified; exact year not shown |
+| 36 | talk | Pareto sensitivity, most-changing sub-fronts, and knee solutions (UH ISE seminar) | L. N. Vicente | 2026 | Univ. Houston | https://www.ise.uh.edu/research/seminars/202602/pareto-sensitivity-most-changing-sub-fronts-knee-solutions | ✅ | 06 |  |
+| 37 | student-recollection | PhD thesis: Globally convergent evolution strategies with application to Earth imaging problem in geophysics (adv. Gratton & Vicente) | Y. Diouane | 2014 | INP Toulouse | https://oatao.univ-toulouse.fr/12202/1/Diouane.pdf | ✅ | 04 | Thesis record, not a recollection |
+| 38 | student-recollection | PhD thesis: DFO Methods based on Probabilistic and Deterministic Properties: Complexity Analysis and Numerical Relevance (adv. Gratton & Vicente) | C. W. Royer | 2016 | Univ. Toulouse | https://www.lamsade.dauphine.fr/~croyer/cv_en.pdf | ✅ | 04 | Thesis record |
+| 39 | student-recollection | PhD thesis: Stochastic Multi-Objective Optimization and Its Application to Fairness in Machine Learning (chair Vicente) | S. Liu | 2022 | Lehigh University | https://preserve.lehigh.edu/lehigh-scholarship/graduate-publications-theses-dissertations/theses-dissertations/stochastic-multi | ✅ | 04 | Thesis record |
+| 40 | student-recollection | PhD thesis: Applications of Simplex Derivatives to Direct Search Methods (adv. Vicente) | A. L. Custódio | 2007 | Univ. Coimbra | http://aguia.mat.uc.pt/phd_prog/instructor.php?edc=14&id=38 | ✅ | 04 | Thesis record |
+| 41 | critique | Non-convergence Analysis of Probabilistic Direct Search | C. Huang, Z. Zhang | 2026 | arXiv preprint | arXiv:2606.01320 ; https://arxiv.org/abs/2606.01320 | ✅ | 05, SKILL | Confirms threshold essential |
+| 42 | critique | Globalization strategies for Mesh Adaptive Direct Search | C. Audet, J. E. Dennis Jr., S. Le Digabel | 2010 | Comput. Optim. Appl. 46:193–215 | https://doi.org/10.1007/s10589-009-9266-1 | ✅ | 05, SKILL | Competing (mesh, no sufficient decrease) |
+| 43 | paper | Direct search based on probabilistic descent in reduced spaces | (authors not shown in results; recalled as Roberts & Royer) | 2023 | SIAM J. Optim. | https://doi.org/10.1137/22M1488569 | ⚠️ | 01 | Title/venue seen; authors unconfirmed — cite only as "a reduced-space extension" |
+| 44 | profile | Luis Nunes Vicente – Wikipedia (bio, PhD, advisor, Tucker finalist) | — | — | Wikipedia (via search snippet) | https://en.wikipedia.org/wiki/Luis_Nunes_Vicente | ✅ | 06 | Secondary; page itself blocked |
+| 45 | software | PSwarm: a hybrid solver for linearly constrained global derivative-free optimization | (Vaz, Vicente – authorship not shown in result) | 2009 | Optim. Methods Softw. 24(4–5) | https://doi.org/10.1080/10556780902909948 | ⚠️ | 03 | Authors not confirmed by search; do not cite as fact |
+| 46 | talk | ISMP 2018 Bordeaux plenary ('A new Hessian-free model-based method and its application to…') | L. N. Vicente | 2018 | ISMP 2018 | https://ismp2018.sciencesconf.org/ | ⚠️ | 06 | Only partial title seen |
+| 47 | paper | A merit function approach for evolution strategies | (Diouane et al.?) | ≈2021 | ? | https://www.researchgate.net/publication/351109036_A_merit_function_approach_for_evolution_strategies | ⚠️ | 04 | Authors/venue unconfirmed |
+| 48 | paper | Full-low evaluation methods for bound and linearly constrained derivative-free optimization | (authors not shown) | 2024 | Comput. Optim. Appl. | https://doi.org/10.1007/s10589-024-00596-2 | ⚠️ | — | Vicente authorship not confirmed |
+| 49 | profile | Math Genealogy entry (14 students, 18 descendants) | — | — | mathgenealogy.org | https://www.mathgenealogy.org/id.php?id=29593 | ⚠️ | 04 | Counts from snippet only; page blocked |
+| 50 | paper | Worst-case complexity bounds of directional direct-search methods for multiobjective optimization | (authors not shown) | 2020 | J. Optim. Theory Appl. | https://doi.org/10.1007/s10957-020-01781-z | ⚠️ | — | Vicente authorship not confirmed; not cited |
+
+**Types**: paper · book · tech-report · software · talk · interview · essay · memoir/obituary · student-recollection · critique · profile
+
+## Folders
+
+| Folder | What goes there |
+|--------|-----------------|
+| `publications/` | Publication landscape (output of `scripts/fetch_publications.py`, or a hand-built list) |
+| `papers/` | Full texts you download. PDFs are git-ignored — keep copyrighted files local |
+| `talks/` | Talk transcripts, slides, lecture notes |
+| `essays/` | Methodology writings, surveys, prefaces, advice pieces |
+| `software/` | Notes on solvers and code (repo links, versions, docs) |
+
+## Adding a resource
+
+1. Add a row to the table (keep numbering).
+2. If you save a file, put it in the matching folder and mark it 📥.
+3. If it changes a method or claim in `SKILL.md`, note which research file (`../research/0X-*.md`) you updated in **Used in**.

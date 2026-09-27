@@ -52,6 +52,7 @@
 | Skill | 说明 |
 |-------|------|
 | [`product/刘亦菲`](product/刘亦菲) | 刘亦菲思维视角：7 个核心心智模型、12 条决策启发式、完整表达 DNA + 13 份调研底稿 |
+| [`product/dfo-team`](product/dfo-team) | 无导数优化（DFO）研究顾问团：Powell / Conn / Scheinberg / Vicente / Audet 五个研究Skill + `dfo-roundtable` 圆桌（遇到问题时召集五人讨论并给出方案）。每人一个资源文件夹，见 [product/dfo-team/README.md](product/dfo-team/README.md) |
 
 ### 怎么用
 
