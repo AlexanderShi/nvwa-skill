@@ -54,8 +54,8 @@ Every source behind the `katya-scheinberg` skill, plus anything you add later. O
 | 46 | critique | Iteration Complexity and Finite-Time Efficiency of Adaptive Sampling Trust-Region Methods for Stochastic DFO | ⚠️ | 2023 | arXiv | arXiv:2305.10650 | ⚠️ | 05 | Competing adaptive-sampling line (authors unconfirmed) |
 | 47 | critique | Avoiding Geometry Improvement in Derivative-Free Model-Based Methods via Randomization | ⚠️ | 2023 | arXiv | arXiv:2305.17336 | ⚠️ | 05 | Authors unconfirmed |
 | 48 | critique | On complexity constants of linear and quadratic models for derivative-free trust-region algorithms | ⚠️ | 2022 | arXiv | arXiv:2205.11358 | ⚠️ | 05 | Authors unconfirmed |
-| 49 | profile | PhD advisor (commonly reported as D. Goldfarb) | — | — | — | — | ⚠️ | 04, 06 | Not confirmed by any search result |
-| 50 | profile | Farkas Prize (INFORMS Optimization Society) — year | — | — | KAUST / GT bios | https://obd.kaust.edu.sa/speakers/detail/katya-scheinberg | ⚠️ (year) | 06 | Prize confirmed, year not |
+| 49 | profile | Katya Scheinberg (Wikipedia): PhD Columbia 1997, advisor Donald Goldfarb; dissertation "Issues Related to Interior Point Methods for Linear and Semidefinite Programming" | — | — | Wikipedia | https://en.wikipedia.org/wiki/Katya_Scheinberg | ✅ | 04, 06, SKILL | Verified via search 2026-09-27 |
+| 50 | profile | Farkas Prize (INFORMS Optimization Society), 2019 | — | 2019 | Wikipedia; KAUST bio | https://en.wikipedia.org/wiki/Katya_Scheinberg ; https://obd.kaust.edu.sa/speakers/detail/katya-scheinberg | ✅ | 06, SKILL | Year verified via search 2026-09-27 |
 
 **Types**: paper · book · tech-report · software · talk · interview · essay · memoir/obituary · student-recollection · critique · profile
 

@@ -10,7 +10,7 @@
 | Philippe L. Toint | CST 1997; Scheinberg–Toint 2010 | Senior peer | Co-author |
 | L. N. Vicente | CSV 2008; book 2009; BSV 2014 | Senior peer | Co-author |
 | C. Cartis | Cartis–Scheinberg 2018; Blanchet et al. 2019 | Peer; complexity-analysis specialist | Co-author |
-| Donald Goldfarb | Scheinberg–Ma–Goldfarb NIPS 2010 | Senior | Co-author. ⚠️ Commonly reported as Scheinberg's Columbia PhD advisor — **not confirmed** by any search result |
+| Donald Goldfarb | Scheinberg–Ma–Goldfarb NIPS 2010 | Senior | Co-author and Scheinberg's Columbia PhD advisor (PhD 1997; https://en.wikipedia.org/wiki/Katya_Scheinberg, verified 2026-09-27) |
 | J. Blanchet | Blanchet et al. 2019 | Applied-probability peer | Co-author |
 | Krzysztof Choromanski | FoCM 2022 | ML researcher (Google, per general knowledge — ⚠️ not confirmed in results) | Co-author; ML bridge |
 | S. Fine | JMLR 2001 | IBM-era colleague (⚠️ affiliation not confirmed) | Co-author |

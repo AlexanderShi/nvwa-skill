@@ -343,13 +343,13 @@ Conclusion first → oracle contract (Method 1) → numbered next steps, each la
 
 | Period | Main direction | Reason for shift | Representative work |
 |---|---|---|---|
-| 1992–1997 | OR training: Moscow State University (1992), PhD Columbia (1997) | — | Conn–Scheinberg–Toint, Math. Program. 1997 |
+| 1992–1997 | OR training: Moscow State University (1992), PhD Columbia (1997, advisor D. Goldfarb; interior-point methods) | — | Conn–Scheinberg–Toint, Math. Program. 1997 |
 | ≈1997–≈2010 (IBM T. J. Watson, research staff "for over a decade") | Deterministic model-based DFO; open-source DFO code; ML optimization | Industrial lab with applied black-box and ML problems (*inference*) | CSV 2008; IDFO book 2009; Scheinberg–Toint 2010; Zhang–Conn–Scheinberg 2010; Fine–Scheinberg 2001; Scheinberg–Ma–Goldfarb 2010 |
 | ≈2010s–2019 (Lehigh ISE, Harvey E. Wagner Endowed Chair; start year ⚠️) | **Pivot** to probabilistic models and stochastic adaptive methods | Random sampling and stochastic ML objectives made deterministic certification the bottleneck (*inference*) | BSV 2014; STORM 2018; Cartis–Scheinberg 2018; Blanchet et al. 2019; Paquette–Scheinberg 2020; SIAM News 2019 |
 | 2019–2024 (Cornell ORIE) | High-probability complexity; DFO↔ML estimator comparison | Need for single-run guarantees; the zeroth-order ML boom (*inference*) | FoCM 2022; Jin–Scheinberg–Xie 2024; Cao–Berahas–Scheinberg 2024 |
 | July 2024– (Georgia Tech ISyE, Coca-Cola Foundation Chair) | Return to Powell-style DFO with complexity; unreliable / heavy-tailed oracles; MOS Chair and Math. Programming co-editor (from July 2025) | Probabilistic tools now strong enough to analyse classical DFO (*inference*) | arXiv:2510.14935; arXiv:2511.19411; arXiv:2609.09441 |
 
-Recognition (secondary bios): Lagrange Prize in Continuous Optimization 2015 (with Conn and Vicente, for the IDFO book); Farkas Prize (INFORMS Optimization Society; year ⚠️); INFORMS Fellow; SIAM Fellow; past Editor-in-Chief of *Mathematics of Operations Research*.
+Recognition (secondary bios): Lagrange Prize in Continuous Optimization 2015 (with Conn and Vicente, for the IDFO book); Farkas Prize 2019 (INFORMS Optimization Society); INFORMS Fellow; SIAM Fellow; past Editor-in-Chief of *Mathematics of Operations Research*.
 
 ### Latest
 - **Sept 2026**: "Powell-Style Model-Based Derivative-Free Optimization with Complexity Guarantees" (Chaudhry, Scheinberg, Sun; arXiv:2609.09441). Covers Powell geometry handling, random subspaces, noisy evaluations and extensive numerics.
@@ -359,7 +359,7 @@ Recognition (secondary bios): Lagrange Prize in Continuous Optimization 2015 (wi
 
 ## Academic Lineage
 
-- **Training**: Lomonosov Moscow State University (OR, 1992) → Columbia University (PhD OR, 1997). PhD advisor ⚠️ not confirmed (often reported as D. Goldfarb, a verified co-author on NIPS 2010).
+- **Training**: Lomonosov Moscow State University (OR, 1992) → Columbia University (PhD OR, 1997). PhD advisor Donald Goldfarb; dissertation on interior-point methods for linear and semidefinite programming (https://en.wikipedia.org/wiki/Katya_Scheinberg; verified 2026-09-27 via search).
 - **Intellectual ancestors (evidenced by papers)**: M. J. D. Powell's interpolation-based trust-region methods (named in the 2026 title); A. R. Conn and Ph. L. Toint (co-authors from 1997; trust-region DFO framework); L. N. Vicente (co-author of the 2008 paper, the 2009 book and the 2014 paper).
 - **Peer collaborators on theory**: C. Cartis (complexity), J. Blanchet (applied probability), K. Choromanski (ML zeroth-order), D. Goldfarb and S. Ma (first-order ML optimization).
 - **Junior co-authors carrying the probabilistic-oracle line** (advising relations not confirmed): H. Zhang, A. S. Bandeira, R. Chen, M. Menickelly, C. Paquette, A. S. Berahas, L. Cao, B. Jin, M. Xie, A. Chaudhry (Georgia Tech ISyE), S. Sun.
@@ -412,7 +412,7 @@ Constructed from the framing of Scheinberg's paper abstracts and talk titles. **
 
 - **Research method**: web-search snippets only (≈25 searches before the session's search cap was reached). WebFetch was blocked for every host tried (siam.org, cornell.edu, lehigh.edu, gatech.edu, mathopt.org, wikipedia; arxiv per environment notes), and GitHub allowed repository metadata but no file reads. **No full text** of any paper, essay, talk or thesis was read. Paper contents are known at abstract level.
 - **Tacit-knowledge gap**: how Scheinberg finds proofs, picks problems, runs group meetings, edits drafts or chooses test sets is not documented in anything retrievable. No student recollections were found. Methods 1–5 are reconstructed from paper patterns.
-- **Stated-but-unverified / thinly stated**: the "stated" layer is mostly titles (SIAM News 2019 essay, lecture and tutorial titles) and author-written abstract framing. Method 6 (exploit structure) is practiced but not found stated. Advisor, Farkas Prize year, Lehigh start year, ICM 2026 status and the co-author of arXiv:2511.19411 are unverified (⚠️ in RESOURCES.md).
+- **Stated-but-unverified / thinly stated**: the "stated" layer is mostly titles (SIAM News 2019 essay, lecture and tutorial titles) and author-written abstract framing. Method 6 (exploit structure) is practiced but not found stated. Lehigh start year, ICM 2026 status and the co-author of arXiv:2511.19411 are unverified (⚠️ in RESOURCES.md).
 - **Era and resources**: the IBM-era work (1997–≈2010) drew on industrial problems and a long-lived DFO code. The later probabilistic-analysis programme relies on a steady pipeline of PhD students and postdocs plus specialist co-authors (probability, ML). A solo researcher can apply Methods 1, 2 and 5 directly. Method 3 needs serious probability background.
 - **Domain boundary**: smooth continuous optimization, mostly unconstrained. Constrained, nonsmooth and discrete settings need another lens.
 - **Research date**: 2026-09-27. Later papers and role changes are not covered.
