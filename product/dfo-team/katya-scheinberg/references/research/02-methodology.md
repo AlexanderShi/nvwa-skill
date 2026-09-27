@@ -34,7 +34,7 @@
 |---|---|---|---|
 | C1 | SIAM News author bio (via search summary) | Research interests "lie in the development of efficient and theoretically sound algorithms for continuous optimization and machine learning" (wording as shown in search summary). | primary-ish (author bio) |
 | C2 | IDFO book blurb (SIAM 2009; Amazon/Google Books records) | Book presents DFO methods "designed to efficiently and rigorously solve optimization problems", covering "direct search to model-based approaches"; Scheinberg "authored the open source DFO software" (blurb wording via search summary; paraphrase-level). | primary (co-authored publisher text) |
-| C3 | Georgia Tech / KAUST / Wikipedia bios | Service record (MOS Chair from July 2025; co-editor Math. Programming; past EiC Mathematics of Operations Research; past chair SIAG/OPT; EiC SIAM-MOS book series; editor of Optima). Signals the community-building layer, not method. | secondary |
+| C3 | Georgia Tech / KAUST / Wikipedia bios | Service record (MOS Chair from July 2025; co-editor Math. Programming; past EiC Mathematics of Operations Research; past chair SIAG/OPT; EiC SIAM-MOS book series; editor of Optima; ✗ Corrected 2026-09-27: co-editor of Optima (with A. Caprara, under editor A. Lodi, 2009) [card S143, p. 10], not editor.). Signals the community-building layer, not method. | secondary |
 
 ## D. Recurring stated themes (≥3 appearances across A–C)
 
@@ -70,7 +70,7 @@
 
 | # | Item | What it states | Layer | URL |
 |---|---|---|---|---|
-| G1 | Scheinberg, article in *Optima* 79 (Mathematical Programming Society newsletter; ≈2009; exact title not retrieved) | Search summaries of the article: it discusses the Moré–Wild numerical experiments showing Powell's model-based method is very effective despite the low accuracy of its quadratic models. The main point is that one needs to impose **only minimal quality controls** to promote convergence and ensure good performance (paraphrase of search-summary wording). | Method statement (Method 4) | https://www.mathopt.org/Optima-Issues/optima79.pdf |
+| G1 | Scheinberg, article in *Optima* 79 (Mathematical Programming Society newsletter; ≈2009; exact title not retrieved) | Search summaries of the article: it discusses the Moré–Wild numerical experiments showing Powell's model-based method is very effective despite the low accuracy of its quadratic models. The main point is that one needs to impose **only minimal quality controls** to promote convergence and ensure good performance (paraphrase of search-summary wording). ✗ Corrected 2026-09-27 (full text, card S143, pp. 4, 6): the Moré–Wild framing and the "only minimal quality controls" wording are from Jorge Nocedal's discussion column in the same issue (p. 6), which presents them as a summary of her essay ("As Scheinberg discusses in this issue of Optima, …"); Moré–Wild is not in her reference list. Her own statement is p. 4: "it turns out that it is not necessary to compute extra sample points unless the gradient of the model becomes small." Title: "Geometry in model-based algorithms for derivative-free unconstrained optimization" (May 2009) [card S143, p. 1]. | Method statement (Method 4) | https://www.mathopt.org/Optima-Issues/optima79.pdf |
 | G2 | Curtis & Scheinberg, "Adaptive stochastic optimization: a framework for analyzing stochastic optimization algorithms", *IEEE Signal Processing Magazine* 37(5), 32–42 (2020) | Summarises the research on adaptive stochastic methods and contrasts them with non-adaptive SG approaches whose parameters must be tuned for each application. Adaptive methods may offer significant computational savings (paraphrase). | Taste (Method 2) | https://ieeexplore.ieee.org/document/9194022/ ; arXiv:2001.06699 |
 | G3 | Curtis & Scheinberg, "Optimization methods for supervised machine learning: from linear models to deep learning", INFORMS *TutORials in OR* (2017) | Introduces "key models, algorithms, and open questions" of optimization for ML to an INFORMS audience that knows optimization but less ML (paraphrase of abstract). Covers first-order, stochastic gradient, variance-reduced and second-order methods. | Framing / teaching | https://doi.org/10.1287/educ.2017.0168 ; arXiv:1706.10207 |
 
@@ -102,7 +102,7 @@
 2. **Algorithms analysed as stochastic processes (martingales / stopping times)**: F4, H5, plus the 2019 title (3× stated). The stated side of Method 3 is no longer abstract framing only.
 3. **Deterministic parity**: B1, B2, B7, B8, H4 (5×).
 4. **Adaptive methods over tuned schedules**: B3, F4, G2, H1 (4×).
-5. **Minimal quality control / minimal safeguard**: G1 (2009 essay), B9 (2010), H7 context (3×). This is now stated in Scheinberg's own words (paraphrase), not only practised.
+5. **Minimal quality control / minimal safeguard**: G1 (2009 essay), B9 (2010), H7 context (3×). This is now stated in Scheinberg's own words (paraphrase), not only practised. ✗ Corrected: her own words are the p. 4 sentence of the essay, not the "minimal quality controls" paraphrase, which is Nocedal's column [card S143, pp. 4, 6]; the stance dates from 2009–2010, while in 2008 the stated practice was to maintain poisedness throughout [card S016, p. 18].
 6. **Bias sets the neighbourhood; variance and cost set the rate**: F3, H2 (2×; the exact wording is unconfirmed).
 7. **DFO ≡ zeroth-order**: A3, F5, C1 (3×).
 

@@ -34,7 +34,7 @@
 - Zhang–Conn–Scheinberg, SIOPT 2010: least-squares DFO algorithm with "numerical comparisons … to standard derivative-free software packages" (snippet; https://www.math.lsu.edu/~hozhang/papers/GlobalDFLS.pdf).
 - Berahas–Cao–Choromanski–Scheinberg, FoCM 2022: four gradient estimators (finite differences, linear interpolation, Gaussian smoothing, sphere smoothing) compared by derived sample-count/radius bounds **and** empirically (https://doi.org/10.1007/s10208-021-09513-z).
 - Chaudhry–Scheinberg–Sun 2026: "extensive numerical comparison of the model-based trust region methods" (arXiv:2609.09441).
-- *Inference (not verified in full text):* benchmark sets likely standard DFO test collections; not confirmed.
+- *Inference (not verified in full text):* benchmark sets likely standard DFO test collections; not confirmed. ✗ Superseded (full text): verified from five papers (Moré–Wild set, CUTEr/CUTEst, data and performance profiles) [cards S023, pp. 17–19; S033, pp. 25–26; S012, pp. 27–29; S041, pp. 33–36; S104, pp. 26–30].
 
 ## P5. Structure exploitation before generic methods
 
@@ -84,9 +84,9 @@ With the earlier table this makes **12 papers (2014–2026)** following P1. That
 ### P4+ Experiments: what could and could not be verified
 
 - FoCM 2022 abstract (via search): numerical results evaluate the quality of the gradient approximations *and* their performance inside a line-search DFO algorithm. Estimators are compared on two levels, accuracy of the estimate and end-to-end performance.
-- Optima 79 (≈2009) essay: builds on the Moré–Wild numerical experiments on Powell's method (search summary). Moré & Wild, SIAM J. Optim. 20(1) (2009), introduced **data profiles** for budget-limited DFO benchmarking (https://doi.org/10.1137/080724083).
+- Optima 79 (≈2009) essay: builds on the Moré–Wild numerical experiments on Powell's method (search summary). ✗ Corrected 2026-09-27 (full text, card S143, pp. 4, 6): the Moré–Wild framing and the "only minimal quality controls" wording are from Jorge Nocedal's discussion column in the same issue (p. 6), which presents them as a summary of her essay ("As Scheinberg discusses in this issue of Optima, …"); Moré–Wild is not in her reference list. Her own statement is p. 4: "it turns out that it is not necessary to compute extra sample points unless the gradient of the model becomes small." Moré & Wild, SIAM J. Optim. 20(1) (2009), introduced **data profiles** for budget-limited DFO benchmarking (https://doi.org/10.1137/080724083).
 - Stefan M. Wild (co-author of the benchmark paper) sat on R. Chen's 2015 Lehigh PhD committee (thesis record, https://preserve.lehigh.edu/etd/2548). Menickelly (Scheinberg PhD, 2017) co-authored the 2019 Acta Numerica DFO survey with Larson and Wild.
-- *Inference, not verified:* the group's DFO experiments likely use Moré–Wild-style problems and data/performance profiles, with budgets counted in function evaluations. **No search result confirmed the test sets or metrics used in any specific Scheinberg paper.** The pre-meeting workflow in SKILL.md therefore phrases this as a question to check, not a rule.
+- *Inference, not verified:* the group's DFO experiments likely use Moré–Wild-style problems and data/performance profiles, with budgets counted in function evaluations. **No search result confirmed the test sets or metrics used in any specific Scheinberg paper.** The pre-meeting workflow in SKILL.md therefore phrases this as a question to check, not a rule. ✗ Superseded (full text): the published conventions are now verified (see the line above and SKILL.md Method 5); the group's *current* convention is still a question for the supervisor.
 
 ### P5+ ML-optimization thread (verified)
 
@@ -105,6 +105,6 @@ With the earlier table this makes **12 papers (2014–2026)** following P1. That
 |---|---|---|
 | Define the oracle first (F1–F3, 2021–2025) | Oracle conditions are the main novelty in 12 papers (P1, P1+) | ✅ consistent |
 | Analyse algorithms as stochastic processes with martingale behaviour (F4) | Blanchet 2019 renewal-reward; tail bounds 2021–2025 | ✅ consistent |
-| Minimal quality control in model-based DFO (Optima 79, ≈2009) | Scheinberg–Toint 2010; Powell-style complexity 2025–2026 | ✅ consistent over 17 years |
+| Minimal quality control in model-based DFO (Optima 79, ≈2009) | Scheinberg–Toint 2010; Powell-style complexity 2025–2026 | ✅ consistent over 17 years. ⚠ Corrected: not constant. The stance dates from 2009–2010 [cards S143, p. 4; S030, pp. 3, 12]; in 2008 the stated practice was the opposite, "maintain well-poisedness throughout the algorithm" [card S016, p. 18]; the "minimal quality controls" wording is Nocedal's column [card S143, p. 6] |
 | Adaptive methods instead of tuned schedules (G2, F4) | Every stochastic paper uses line search, trust region or ARC | ✅ consistent. Large-scale ML evidence for the *savings claim* is not in the verified corpus (see open-problems.md row 10) |
 | Bias affects the neighbourhood, not the rate (F3, paraphrase) | Neighbourhood results in BCS 2021 and CBS 2024; biased oracles in JSX 2024 | ✅ consistent (stated side unconfirmed verbatim) |

@@ -15,7 +15,7 @@
 | 2019–2024 | Professor, School of Operations Research and Information Engineering, Cornell University | Gradient-estimator comparison with ML (FoCM 2022); high-probability bounds (Jin–Scheinberg–Xie, arXiv 2021 → SIOPT 2024; Cao–Berahas–Scheinberg, arXiv 2022 → Math. Program. 2024) | *Inference*: move from expected to tail bounds reflects ML-style "single run" guarantees | https://www.orie.cornell.edu/spotlights/welcome-katya-scheinberg (existence; content unread) |
 | July 2024– | Coca-Cola Foundation Chair and Professor, H. Milton Stewart School of ISyE, Georgia Tech | Return to Powell-style model-based DFO with complexity (arXiv 2025, 2026); unreliable/heavy-tailed oracles (arXiv 2025) | *Inference*: Arc 2 tools now strong enough to analyse Arc 1 algorithms | https://www.isye.gatech.edu/users/katya-scheinberg (secondary) |
 | July 2025– | Chair, Mathematical Optimization Society; co-editor, Mathematical Programming | Service | — | Georgia Tech / KAUST bios (secondary) |
-| undated | INFORMS Fellow; SIAM Fellow; Farkas Prize (INFORMS Optimization Society; year ⚠️); past EiC Mathematics of Operations Research; past chair SIAG/OPT; EiC SIAM-MOS book series; editor of Optima | — | — | https://obd.kaust.edu.sa/speakers/detail/katya-scheinberg (secondary) |
+| undated | INFORMS Fellow; SIAM Fellow; Farkas Prize (INFORMS Optimization Society; year ⚠️); past EiC Mathematics of Operations Research; past chair SIAG/OPT; EiC SIAM-MOS book series; editor of Optima (✗ Corrected 2026-09-27: co-editor of Optima (with A. Caprara, under editor A. Lodi, 2009) [card S143, p. 10], not editor. See §14.) | — | — | https://obd.kaust.edu.sa/speakers/detail/katya-scheinberg (secondary) |
 
 ## 2. Pivots and their triggers (summary)
 
@@ -126,7 +126,7 @@ Topic assignment is by card content; three undated records are excluded [08 §8.
 - Radius-scaled accuracy: κΔ on the ball in 1997–2009 [cards S008, pp. 11–12; S007, pp. 7–8], the same form with probability p from 2014 [card S018, pp. 6–7], with irreducible floors from 2021 [cards S041, pp. 4–5; S083, pp. 2–5].
 - Known structure kept exact: cheap constraints in 1998 [card S019, pp. 6–7], the prox term in 2025 [card S098, pp. 2, 4, 7].
 - Equal-evaluation benchmarking in DFO from the first practice paper [card S019, p. 10] to 2026 [card S104, pp. 26–30].
-- Framework-then-instantiation, from the 1997 survey to the 2025 unified framework [cards S004, pp. 8–16; S083, pp. 12, 18–21] (SKILL.md Method 7).
+- Framework-then-instantiation, from the 1997 survey to the 2025 unified framework [cards S004, pp. 8–16; S083, pp. 12, 18–21] (SKILL.md Heuristic 8; proposed as Method 7 and demoted because exclusivity was not shown, see 08 §4).
 
 ### 13. Collaboration pattern by period (research works only; coauthors appearing at least twice in the period)
 
@@ -139,7 +139,7 @@ Topic assignment is by card content; three undated records are excluded [08 §8.
 | 2016–2020 | 27 | 0 | 36 | L. M. Nguyen 5, Takáč 4, Ghanbari 4, Curtis 3, Menickelly 3, Hatalis/Lamadrid/Kishore 3, Cartis 2, Kalagnanam 2 |
 | 2021–2026 | 20 | 1 | 20 | M. Xie 6, L. M. Nguyen 4, Berahas 3, Cao 3, Jin 3, Tran 3, Chaudhry 2 |
 
-Overall most frequent: Goldfarb 14 (1998–2014), Conn 12 (1997–2010), Vicente 9 (2003–2017), L. M. Nguyen 9 (2017–2025), M. Xie 6 (2021–2026) [08 §9]. One senior partner per era, then a student or postdoc per line from about 2012; specialists brought in for one step (applied probability for the stopping-time framework [card S013]; a hitting-probability proof credited to J. A. Fill [card S057, p. 20]; an ML co-author for estimator comparisons [cards D003; S006]); industry and laboratory partners (IBM; Goldman Sachs Asset Management [card S021]; Sandia National Laboratories [card S098]). Sole-authored research work is rare and position-like [cards S022; S143]. Author order is alphabetical in some analysis papers and not in others, so it is not evidence of who led.
+Overall most frequent: Goldfarb 14 (1998–2014), Conn 12 (1997–2010), Vicente 9 (2003–2017), L. M. Nguyen 9 (2017–2025), M. Xie 6 (2021–2026) [08 §9]. One senior partner per era, then a student or postdoc per line from about 2012; specialists brought in for one step (applied probability for the stopping-time framework [card S013]; a hitting-probability proof credited to J. A. Fill [card S057, p. 20]; an ML co-author for estimator comparisons [cards D003; S006]); industry and laboratory partners (IBM; Goldman Sachs Asset Management [card S021]; Sandia National Laboratories [card S098]). Sole-authored research work is rare: one algorithm and software paper (S022, JMLR 2006: an active-set QP for SVMs, benchmarked against SVMlight and released as SVM-QP) plus position pieces and essays [cards S143; S044]. Author order is alphabetical in some analysis papers and not in others, so it is not evidence of who led.
 
 ### 14. Corrections to earlier sections
 

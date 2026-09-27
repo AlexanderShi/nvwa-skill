@@ -32,7 +32,7 @@
 ## 3. Community roles relevant to mentoring (secondary: institutional bios via search)
 
 - Chair, Mathematical Optimization Society, from July 2025; co-editor, Mathematical Programming (Georgia Tech/KAUST bio snippets).
-- Past: Editor-in-Chief, Mathematics of Operations Research; chair, SIAM Activity Group on Optimization; Editor-in-Chief, SIAM-MOS Series on Optimization; associate editor SIOPT, Math. Programming, SIMODS; editor of Optima (MOS newsletter). Sources: https://www.isye.gatech.edu/users/katya-scheinberg ; https://obd.kaust.edu.sa/speakers/detail/katya-scheinberg
+- Past: Editor-in-Chief, Mathematics of Operations Research; chair, SIAM Activity Group on Optimization; Editor-in-Chief, SIAM-MOS Series on Optimization; associate editor SIOPT, Math. Programming, SIMODS; editor of Optima (MOS newsletter; ✗ Corrected 2026-09-27: co-editor of Optima (with A. Caprara, under editor A. Lodi, 2009) [card S143, p. 10], not editor.). Sources: https://www.isye.gatech.edu/users/katya-scheinberg ; https://obd.kaust.edu.sa/speakers/detail/katya-scheinberg
 - Google Research Visiting Researcher program page exists for Scheinberg (https://research.google/programs-and-events/visiting-researcher-program/katya-scheinberg/) — dates/content not retrieved.
 
 ## 4. Gaps
