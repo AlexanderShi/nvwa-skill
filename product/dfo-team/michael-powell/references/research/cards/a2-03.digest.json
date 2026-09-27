@@ -1,0 +1,936 @@
+[
+ {
+  "id": "S051",
+  "year": "1976",
+  "title": "Some convergence properties of the conjugate gradient method",
+  "read_level": "abstract",
+  "contribution": "Stronger negative result: on a convex quadratic with an arbitrary downhill initial direction, CG either terminates or converges only linearly (the usual case); necessary and sufficient start/direction relations for termination are studied (abstract).",
+  "problem_entry": "Conjecture that CG converges superlinearly, already refuted by a Crowder–Wolfe example (abstract).",
+  "key_idea": "Upgrade a single counterexample into a theorem over all downhill initial directions on convex quadratics (abstract); proofs not read.",
+  "assumptions": "Convex quadratic objective; arbitrary downhill initial search direction (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Crowder and Wolfe's counterexample to the superlinear-rate conjecture (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "negative result first, then relax the design parameter",
+    "relation": "evidence",
+    "note": "1976 negative rate result precedes the 1977 adaptive-restart paper S006 (link rests on the two abstracts)",
+    "pages": "abstract"
+   },
+   {
+    "method": "numerics → conjecture → proof or counterexample",
+    "relation": "variant",
+    "note": "conjecture is someone else's and already refuted by example; Powell generalizes the example into a theorem",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a conjecture has been refuted by one example, prove the general version (bad behaviour for every start in a natural class unless a stated condition holds), then study the exceptional set via necessary and sufficient conditions (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "It has been conjectured that the conjugate gradient method for minimizing functions of several variables has a superlinear rate of convergence, but Crowder and Wolfe show by example that the conjecture is false.",
+    "page": "abstract"
+   },
+   {
+    "text": "Now the stronger result is given that, if the objective function is a convex quadratic and if the initial search direction is an arbitrary downhill direction, then either termination occurs or the rate of convergence is only linear, the second possibility being more usual.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S006",
+  "year": "1977",
+  "title": "Restart procedures for the conjugate gradient method",
+  "read_level": "abstract",
+  "contribution": "CG algorithm whose restart procedure adapts to the objective function automatically, plus reasons for one choice of the search-direction multiplying factor, supported by numerical examples (abstract).",
+  "problem_entry": "CG needs no stored matrices but is only linearly convergent unless restarted; the usual fixed restart every n or n+1 iterations ignores the objective function (abstract).",
+  "key_idea": "Replace the fixed restart period by an objective-dependent automatic restart test; argue for one expression of the multiplying factor (abstract); restart test not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Several numerical examples reported in support (abstract); scope not read.",
+  "positioning": "Against the usual practice of restarting every n or (n+1) iterations (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "keeps storage-free CG, removes one limitation: the fixed, problem-independent restart period (outside DFO)",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "no matrix storage is the stated reason for using CG",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "weak: numerical examples support the conclusions",
+    "pages": "abstract"
+   },
+   {
+    "method": "negative result first, then relax the design parameter",
+    "relation": "evidence",
+    "note": "follows the 1976 negative rate result S051",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Replace a schedule parameter fixed by convention (restart every n iterations) by a test on quantities the iteration already computes (abstract, idea level only)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "At present it is usual to restart every n or (n + 1) iterations, where n is the number of variables, but it is known that the frequency of restarts should depend on the objective function.",
+    "page": "abstract"
+   },
+   {
+    "text": "Therefore the main purpose of this paper is to provide an algorithm with a restart procedure that takes account of the objective function automatically.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S132",
+  "year": "1977",
+  "title": "Quadratic termination properties of Davidon's new variable metric algorithm",
+  "read_level": "abstract",
+  "contribution": "New elementary proof of the quadratic termination of Davidon's line-search-free variable metric algorithm, exposing freedom in search directions and explaining the effect of a restart procedure (abstract).",
+  "problem_entry": "Davidon's new variable metric algorithm terminates on quadratics without line searches (abstract).",
+  "key_idea": "Re-prove a known termination property elementarily and read design freedom off the proof (abstract); proof not read.",
+  "assumptions": "Positive definite second-derivative approximations; quadratic objective (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Davidon's algorithm [1] (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "quadratic-case test as the first design question",
+    "relation": "evidence",
+    "note": "weak: object of study is quadratic termination",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "elementary re-proof of another author's theorem to expose design freedom",
+    "evidence": "new elementary proof of Davidon's termination properties shows freedom in search directions and explains restarts; same move in S107",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Re-prove a published property with the most elementary argument available and report which algorithm choices the proof never uses as free parameters (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "We give a new and elementary proof of these termination properties.",
+    "page": "abstract"
+   },
+   {
+    "text": "It shows the great freedom allowed by the algorithm in the choice of search directions and it explains the effect of a restart procedure.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S016",
+  "year": "1978",
+  "title": "Algorithms for nonlinear constraints that use Lagrangian functions",
+  "read_level": "abstract",
+  "contribution": "Survey of about eight years of Lagrangian-function methods for nonlinear constraints (with linear constraint approximations or penalty terms), ending in the recommendation of one method (abstract).",
+  "problem_entry": "Lagrangian functions underlie many successful constrained methods, combined with linearized constraints or penalty terms (abstract).",
+  "key_idea": "Judge the progress of the field by relevance to practical algorithms and recommend one particular method (abstract); which method not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Math. Programming 14, 224–248 (R007 p. 28, ref [21]); augmented Lagrangian methods among his main interests on arrival in Cambridge 1976 (R007 p. 14).",
+  "writing": "Dated admission that the recommended method seems more powerful than he believed possible at the beginning of 1976 (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "public self-correction of an earlier explanation",
+    "relation": "variant",
+    "note": "the correction is of a dated belief about what is possible, not of an explanation",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "End a survey with a single recommendation and date your own change of view, so readers can weigh the recommendation (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Much has been discovered about these techniques during the last eight years and this paper gives a view of the progress and understanding that has been achieved and its relevance to practical algorithms.",
+    "page": "abstract"
+   },
+   {
+    "text": "A particular method is recommended that seems to be more powerful than the author believed to be possible at the beginning of 1976.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S042",
+  "year": "1979",
+  "title": "On the estimation of sparse Hessian matrices",
+  "read_level": "abstract",
+  "contribution": "Two cheap algorithms (a direct and a substitution method) that estimate a sparse Hessian from gradient differences using sparsity and symmetry to reduce the number of gradient evaluations; examples show they may not minimize that number (abstract).",
+  "problem_entry": "Automatic estimation of second derivatives from first-derivative differences when the Hessian's sparsity structure is known (abstract).",
+  "key_idea": "Exploit symmetry as well as sparsity to make the number of gradient vectors small (abstract); algorithms not read.",
+  "assumptions": "Known sparsity structure; symmetric Hessian; gradients available (abstract).",
+  "proof_devices": [],
+  "experiments": "Algorithms seem very successful in practice; examples where they are not optimal (abstract).",
+  "positioning": "Extension to symmetric matrices of Curtis–Powell–Reid sparse Jacobian estimation; first of three Toint-project contributions (R007 p. 15).",
+  "writing": "",
+  "limits_future": "May not minimize the number of first-derivative vector calculations (abstract).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "economy of derivative information via known structure rather than least-change updating",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "algorithms need little computer arithmetic",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "non-optimality examples stated in the abstract",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When proposing a heuristic for a combinatorial saving (here the number of gradient differences), include examples where it is not optimal and say so in the abstract (abstract)."
+  ],
+  "coauthors": "P. L. Toint",
+  "quotes": [
+   {
+    "text": "Our main purpose is to find ways of taking advantage of the sparsity structure and the symmetry of the second derivative matrix, in order to make small the number of first derivative vectors that have to be calculated.",
+    "page": "abstract"
+   },
+   {
+    "text": "Some examples show, however, that the given methods may not minimize the number of first derivative vector calculations.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S009",
+  "year": "1981",
+  "title": "Approximation theory and methods",
+  "read_level": "abstract",
+  "contribution": "Textbook on the theory behind current approximation methods and the main techniques of calculation, based on third-year Cambridge undergraduate lectures (publisher description).",
+  "problem_entry": "Functions must be approximated by polynomials and piecewise polynomials for computation; piecewise polynomials had become far more useful over twenty years (abstract).",
+  "key_idea": "Theory plus analysed computational techniques with enough motivation for scientists and engineers (abstract); chapters not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Memoir: new results or streamlined proofs, well-chosen problems, mostly univariate (R007 p. 18); published 1981, a later optimization book postponed (X002 p. 6).",
+  "writing": "Publisher copy in third person; may not be Powell's own text.",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The general theory of the subject and its application to polynomial approximation are classical, but piecewise polynomials have become far more useful during the last twenty years.",
+    "page": "abstract"
+   },
+   {
+    "text": "This book gives a thorough and coherent introduction to the theory that is the basis of current approximation methods.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S107",
+  "year": "1981",
+  "title": "A note on quasi-Newton formulae for sparse second derivative matrices",
+  "read_level": "abstract",
+  "contribution": "New proof of a Dennis–Schnabel theorem on the effect of sparsity on quasi-Newton updating formulae for second-derivative estimates (abstract).",
+  "problem_entry": "Quasi-Newton methods for very many variables must exploit Hessian sparsity, so variable-metric updates need sparse extensions (abstract).",
+  "key_idea": "Sparse extensions suggest themselves when updates are derived by variational methods; re-prove the Dennis–Schnabel theorem (abstract); proof not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Dennis and Schnabel [1]; second of three Toint-project contributions (R007 p. 15).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "precursor: sparse updates obtained by variational derivation, the family of least-change updating that NEWUOA later uses with the Frobenius norm; norm and sparsity mechanism not read",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "elementary re-proof of another author's theorem to expose design freedom",
+    "evidence": "new proof of a Dennis–Schnabel theorem (with S132)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Suitable extensions suggest themselves when the updating formulae are derived by variational methods [1, 3].",
+    "page": "abstract"
+   },
+   {
+    "text": "The purpose of the present paper is to give a new proof of a theorem of Dennis and Schnabel [1], that shows the effect of sparsity on updating formulae for second derivative estimates.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S120",
+  "year": "1981",
+  "title": "On the A-acceptability of rational approximations that interpolate the exponential function",
+  "read_level": "abstract",
+  "contribution": "Characterization: the only A-acceptable interpolating rational approximations to exp(x) are those of Ehle & Picel and Nørsett; used to verify Ehle's (1976) conjecture (abstract).",
+  "problem_entry": "Which rational approximations to exp(x) that use all coefficients for (possibly Hermitian) interpolation are A-acceptable (abstract).",
+  "key_idea": "Prove a complete characterization over the class, then derive the conjecture (abstract); proof not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Ehle & Picel (1975), Nørsett (1975), Ehle (1976) conjecture (abstract); memoir restates result via E_{n,m,k} classes (R007 pp. 18–19); his only paper with Iserles, coauthorship at Iserles' insistence (X001 p. 15).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "settle a named conjecture through a complete characterization",
+    "evidence": "characterization of A-acceptable interpolating approximations used to verify Ehle's conjecture",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "To prove a conjecture about a special subclass, first characterize the property over the whole natural class, then read off the conjecture (abstract)."
+  ],
+  "coauthors": "A. Iserles",
+  "quotes": [
+   {
+    "text": "It is shown that the only A-acceptable approximations of this kind are the functions of Ehle & Picel (1975) and Norsett (1975).",
+    "page": "abstract"
+   },
+   {
+    "text": "These results are used to verify a conjecture of Ehle (1976) on the characterization of the A-acceptable order-constrained Chebyshev approximations to exp (x).",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S150",
+  "year": "1981",
+  "title": "The Shanno-Toint procedure for updating sparse symmetric matrices",
+  "read_level": "abstract",
+  "contribution": "Proof that the Shanno (1978) and Toint (1980) sparse-update methods are equivalent, plus examples where the procedure worsens Hessian approximations on a quadratic, so its convergence properties are sometimes worse than other published methods (abstract).",
+  "problem_entry": "Two recent sparse quasi-Newton updating methods that reduce to variable-metric formulae without sparsity (abstract).",
+  "key_idea": "Equivalence proof, then counterexamples on quadratic objectives (abstract); neither read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Examples on quadratic objectives (abstract).",
+  "positioning": "Shanno (1978), Toint (1980); coauthor is one of the method authors; third Toint-project contribution (R007 p. 15).",
+  "writing": "",
+  "limits_future": "Convergence properties of the procedure sometimes less good than other published methods (abstract).",
+  "method_links": [
+   {
+    "method": "minimal analytic counterexample per failure mode",
+    "relation": "evidence",
+    "note": "weak: examples on a quadratic show the approximation getting worse; minimality not read",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "unify two published methods by an equivalence proof before judging them",
+    "evidence": "Shanno and Toint procedures proved equivalent, then shown by example to degrade approximations",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Before comparing two published updates, check whether they are the same method; then test on a quadratic whether it can degrade the quantity it is meant to improve (abstract)."
+  ],
+  "coauthors": "P. L. Toint",
+  "quotes": [
+   {
+    "text": "It is proved that these methods are equivalent.",
+    "page": "abstract"
+   },
+   {
+    "text": "Further, some examples are given to show that the procedure may make the second derivative approximations worse when the objective function is quadratic.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S158",
+  "year": "1981",
+  "title": "On a decomposition of conditionally positive-semidefinite matrices",
+  "read_level": "abstract",
+  "contribution": "Characterization of the matrices A for which a nonnegative quadratic form on {Ax ≥ 0} always admits a decomposition Q = AᵀCA + S with C copositive and S positive semidefinite (abstract).",
+  "problem_entry": "The strict decomposition theorem (C strictly copositive, S positive definite) has no automatic non-strict analogue (abstract).",
+  "key_idea": "Characterize exactly when the non-strict decomposition always exists (abstract); not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "D. H. Martin, D. H. Jacobson",
+  "quotes": [
+   {
+    "text": "A symmetric matrix C is said to be copositive if its associated quadratic form is nonnegative on the positive orthant.",
+    "page": "abstract"
+   },
+   {
+    "text": "In this paper we give a characterization of those matrices A for which such a decomposition is always possible.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S027",
+  "year": "1982",
+  "title": "The watchdog technique for forcing convergence in algorithms for constrained optimization",
+  "read_level": "abstract",
+  "contribution": "Watchdog technique: an extension to line-search optimization algorithms that lets some iterations take much longer steps than the line-search objective allows, with global and Q-superlinear convergence properties proved (abstract).",
+  "problem_entry": "Line-search objective functions can block long steps, costly when steps must follow a curved constraint boundary (abstract).",
+  "key_idea": "Relax the line-search acceptance on some iterations (abstract); the rule deciding which iterations was not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Math. Programming Studies 16 (1982) 1–17; cited by Powell–Yuan 1986 among papers on making unit steps acceptable near the solution (S050 pp. 1, 13).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "add-on to working line-search algorithms removing one limitation (the veto on long steps), outside DFO",
+    "pages": "abstract"
+   },
+   {
+    "method": "make the theorem admit the practitioner's preferred choice",
+    "relation": "evidence",
+    "note": "long efficient steps allowed and global plus Q-superlinear convergence proved",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "If a merit function blocks the fast local steps you want, relax the acceptance test on some iterations and prove global convergence survives while the fast rate is recovered (abstract, idea level only)."
+  ],
+  "coauthors": "R. M. Chamberlain, C. Lemaréchal, H. C. Pedersen",
+  "quotes": [
+   {
+    "text": "The purpose is to allow some iterations to choose step-lengths that are much longer than those that would be allowed normally by the line search objective function.",
+    "page": "abstract"
+   },
+   {
+    "text": "Reasons for using the technique are that it can give large gains in efficiency when a sequence of steps has to follow a curved constraint boundary, and it provides some highly useful algorithms with a Q-superlinear rate of convergence.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S166",
+  "year": "1982",
+  "title": "Algorithms for constrained and unconstrained optimization calculations",
+  "read_level": "abstract",
+  "contribution": "Brief survey of the main ideas of current constrained and unconstrained optimization algorithms, explained by purpose rather than detail, for an economics/econometrics interface volume (abstract; pp. 293–310 per R007 p. 29).",
+  "problem_entry": "Outside audience (economics, econometrics) needs the main ideas of optimization algorithms (abstract, venue).",
+  "key_idea": "Organize the survey by the purpose of each technique (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Purpose-first exposition; importance of all techniques stated as a belief (abstract).",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "purpose-first survey for an outside audience",
+    "evidence": "attention to the purpose of each technique instead of its details",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When surveying methods for readers outside the field, give one paragraph per technique saying what problem it solves and why it is needed, without the formulas (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Attention is given to the purpose of each technique instead of to its details.",
+    "page": "abstract"
+   },
+   {
+    "text": "It is believed that all the techniques that are mentioned are important to the development of useful algorithms.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S022",
+  "year": "1983",
+  "title": "Variable metric methods for constrained optimization",
+  "read_level": "abstract",
+  "contribution": "Theory of variable metric methods for nonlinear constraints via global and local convergence analysis of a basic algorithm: superlinear convergence needs less second-derivative information than unconstrained; inconsistent linearizations handled by unconstrained subproblems; Maratos effect and reduced-gradient relations studied briefly (abstract).",
+  "problem_entry": "Constrained variable metric methods use first derivatives and one positive definite matrix collecting second-derivative information automatically (abstract).",
+  "key_idea": "Explain the family through one basic algorithm; compute search directions by unconstrained minimization subproblems to avoid inconsistent linearized constraints (abstract); subproblem not read.",
+  "assumptions": "First derivatives available; single positive definite matrix (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Bonn 1982 state-of-the-art volume, pp. 288–311 (R007 p. 29, ref [34]; S050 p. 13, ref [16]); distinct from the 1979 LNM 704 chapter of the same title (R007 p. 28, ref [23]).",
+  "writing": "",
+  "limits_future": "Maratos effect and relations to reduced gradient algorithms studied only briefly (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "weak: a known failure mode (Maratos effect) addressed briefly in the survey itself",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "identify the minimal information a convergence rate needs",
+    "evidence": "superlinear convergence requires less second-derivative information than in the unconstrained case",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Explain a method family through one stripped-down basic algorithm, prove its global and local convergence, and state exactly how much second-order information the fast rate needs (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The theory of these methods is shown by analysing the global and local convergence properties of a basic algorithm, and we find that superlinear convergence requires less second derivative information than in the unconstrained case.",
+    "page": "abstract"
+   },
+   {
+    "text": "Moreover, in order to avoid the difficulties of inconsistent linear approximations to constraints, careful consideration is given to the calculation of search directions by unconstrained minimization subproblems.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S024",
+  "year": "1976",
+  "title": "Some global convergence properties of a variable metric algorithm for minimization without exact line searches",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: global convergence analysis of a variable metric algorithm with inexact line searches (642 cites); SIAM–AMS Proceedings IX (Cottle & Lemke eds), AMS, pp. 53–72 (R007 p. 28, ref [17]).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: memoir says his first DFP convergence proof (exact line searches) was built upon by his later contributions [17, 22] (R007 p. 9); mapping plausible, memoir numbering unreliable elsewhere.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S069",
+  "year": "1976",
+  "title": "Optimal interpolation",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: optimal interpolation; Numerical Analysis Dundee 1975, LNM 506, pp. 90–99 (Crossref; R007 p. 28, ref [18]).",
+  "problem_entry": "",
+  "key_idea": "Secondary: memoir summary — smallest c(x) bounding the pointwise error of approximations linear in the data values by c(x)‖f^(k)‖∞ (R007 p. 20).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. W. Gaffney",
+  "quotes": []
+ },
+ {
+  "id": "S136",
+  "year": "1976",
+  "title": "A Fortran subroutine for plotting the part of a conic that is inside a given triangle",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: code report (SIS-76-2831) for plotting a conic clipped to a triangle; same pair wrote a 1973 cubic-spline plotting report (R007 p. 27, ref [12]); possible link to contour plotting of S023 surfaces not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code issued as a report (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Marlow",
+  "quotes": []
+ },
+ {
+  "id": "S023",
+  "year": "1977",
+  "title": "Piecewise quadratic approximations on triangles",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: piecewise quadratic approximation on triangulations, TOMS 3(4) 316–325, 1977 (659 cites). Secondary: the Powell–Sabin split into six or twelve sub-triangles giving a C1 piecewise quadratic from vertex values and gradients (R007 p. 20).",
+  "problem_entry": "",
+  "key_idea": "Secondary: for the six-triangle split the nine interior conditions match the degrees of freedom (R007 p. 20).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: widely used in finite elements and CAGD (R007 p. 20).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Secondary (card c06): count continuity conditions against degrees of freedom before choosing a split (R007 p. 20)."
+  ],
+  "coauthors": "M. A. Sabin",
+  "quotes": []
+ },
+ {
+  "id": "S141",
+  "year": "1977",
+  "title": "A technique that gains speed and accuracy in the minimax solution of overdetermined linear equations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: a technique for faster and more accurate minimax (L∞) solution of overdetermined linear equations, pp. 15–33 of Mathematical Software per Crossref; continues the 1974–75 minimax reports S106/S157.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "speed and accuracy are the stated goal (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. J. Hopper",
+  "quotes": []
+ },
+ {
+  "id": "S003",
+  "year": "1978",
+  "title": "A fast algorithm for nonlinearly constrained optimization calculations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: a fast algorithm for nonlinearly constrained optimization (2942 cites); Numerical Analysis Dundee 1977, LNM 630, pp. 144–157 (S137 p. 20; S050 p. 13, ref [14]).",
+  "problem_entry": "",
+  "key_idea": "Secondary: Powell (1978) damped secant vector γ = θγ̂ + (1−θ)Bδ with largest θ ∈ [0,1] such that δᵀγ ≥ 0.1 δᵀBδ, needed in order to provide software (S137 p. 13); memoir's 'partial updating' keeps the Lagrangian Hessian approximation positive definite at the cost of curvature information (R007 p. 15).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Not among the 83 papers cited in the memoir list (R007 pp. 26–33); memoir's SQP account cites [22, 23] instead (R007 p. 14).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "preserve a structural invariant at the cost of information",
+    "relation": "evidence",
+    "note": "secondary only: damped BFGS/partial updating keeps positive definiteness",
+    "pages": "S137 p. 13; R007 p. 15"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "secondary only: safeguard justified by the need to provide software",
+    "pages": "S137 p. 13"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S013",
+  "year": "1978",
+  "title": "The convergence of variable metric methods for non-linearly constrained optimization calculations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: convergence theory for variable metric (SQP-type) methods under nonlinear constraints; Nonlinear Programming 3, pp. 27–63 (Crossref; S050 p. 13, ref [15]).",
+  "problem_entry": "",
+  "key_idea": "Secondary: cited for superlinear convergence of recursive QP when the unit step is eventually always acceptable (S050 p. 1).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: one of the memoir's two 'seminal' SQP papers [22, 23] giving clarification, implementation and convergence theory (R007 pp. 14, 28); number mapping plausible but memoir numbering unreliable elsewhere.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S131",
+  "year": "1980",
+  "title": "Optimization algorithms in 1979",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: dated survey of optimization algorithms as of 1979; Optimization Techniques, LNCIS 22, pp. 83–98 (R007 p. 28, ref [25]); one of several year-stamped surveys (S016, S060, S166).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S146",
+  "year": "1980",
+  "title": "Gradient conditions and Lagrange multipliers in nonlinear programming",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: expository lecture on gradient (first-order) optimality conditions and Lagrange multipliers; venue string 'Lecture 9, 210' unidentified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S172",
+  "year": "1980",
+  "title": "A discrete characterization theorem for the discrete L 1 linear approximation problem",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: discrete characterization theorem for discrete L1 linear approximation, J. Approx. Theory 30(3) 173–179 (Crossref); CORE lists an Elsevier open-archive copy but download failed.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: memoir describes an L1 contribution expressing the LP optimality conditions via data on a finite set (R007 p. 19); its reference number [21] points elsewhere (R007 p. 28), identification not verified.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "F. D. K. Roberts",
+  "quotes": []
+ },
+ {
+  "id": "S194",
+  "year": "1980",
+  "title": "NATO Advanced Research Institute on Nonlinear",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: one-page item (p. 115) in Mathematical Programming 19(1), most likely an announcement of a NATO Advanced Research Institute; possibly the institute whose proceedings are S060 (not verified). Non-research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S145",
+  "year": "1981",
+  "title": "An example of cycling in a feasible point algorithm",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: five-page counterexample (pp. 353–357) showing cycling in a feasible-point algorithm; algorithm not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "minimal analytic counterexample per failure mode",
+    "relation": "evidence",
+    "note": "counterexample paper (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S151",
+  "year": "1981",
+  "title": "An upper triangular matrix method for quadratic programming",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: QP method based on an upper triangular matrix; Nonlinear Programming 4, pp. 1–24 (Crossref; R007 p. 29, ref [30]).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: robust SQP codes required efficient QP solving (R007 p. 15, citing [33, 35]); this paper not cited there.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S060",
+  "year": "1982",
+  "title": "Nonlinear optimization 1981",
+  "read_level": "metadata",
+  "contribution": "Inferred from title/venue: NATO conference proceedings 'Nonlinear optimization 1981', edited by Powell (Academic Press, London, 1982) per S050 p. 13, ref [3]. Editorial item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S081",
+  "year": "1982",
+  "title": "Extensions to subroutine VFO2AD",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: extensions to the existing library subroutine VFO2AD (probably VF02AD), System Modeling and Optimization, pp. 529–538 (Crossref); the algorithm VF02AD implements is not named in any corpus text.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: interviewer quotes Powell that he usually produced a Fortran program for the Harwell subroutine library whenever he proposed a new algorithm (X002 p. 3).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "extend an existing code instead of replacing it (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "published extensions of a library subroutine (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S105",
+  "year": "1982",
+  "title": "Data smoothing by divided differences",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: smoothing univariate data via conditions on divided differences, Numerical Analysis, pp. 26–37 (Crossref).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: memoir describes later Demetriou–Powell smoothing with non-negative second divided differences and calls divided differences a frequent tool of his (R007 p. 19); precursor link not verified.",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. P. Cullinan",
+  "quotes": []
+ },
+ {
+  "id": "S058",
+  "year": "1983",
+  "title": "ZQPCVX a FORTRAN subroutine for convex quadratic programming",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: code report for a convex QP solver, DAMTP 1983/NA17 (R007 p. 29, ref [35]).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Secondary: with VMCWD [33], the QP work that robust SQP codes required (R007 p. 15).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "code issued as a DAMTP report (inferred from title)",
+    "pages": "metadata (inferred from title)"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ }
+]

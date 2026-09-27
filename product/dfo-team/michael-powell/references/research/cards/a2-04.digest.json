@@ -1,0 +1,997 @@
+[
+ {
+  "id": "S059",
+  "year": "1983",
+  "title": "VMCWD: A FORTRAN subroutine for constrained optimization",
+  "read_level": "abstract",
+  "contribution": "A published Fortran listing (VMCWD) for smooth constrained optimization, whose abstract itself states the trade-off: efficient in function and gradient evaluations, expensive overhead per iteration when evaluations are cheap (abstract).",
+  "problem_entry": "A usable code for least value of a function subject to general equality and inequality constraints; the user supplies functions and gradients (abstract).",
+  "key_idea": "Variable metric method for constrained optimization plus the Watch-Dog technique, hence VMCWD (abstract); watchdog details not read.",
+  "assumptions": "Objective and constraint functions and their gradients computable for any x (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Overheads per iteration are expensive when function and gradient evaluation time is negligible (abstract).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "solver published as a Fortran listing in 1983, a decade before COBYLA; free-of-charge status not stated",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Taste mark 2",
+    "relation": "evidence",
+    "note": "evaluations as currency, overhead admitted",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "evidence",
+    "note": "limitation stated in the abstract itself",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "In the abstract of a software paper, name the regime where your code is the wrong choice (here: cheap function evaluations, where per-iteration overhead dominates) (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "A listing is given of a Fortran subroutine that calculates the least value of a function of several variables subject to general equality and inequality constraints.",
+    "page": "abstract"
+   },
+   {
+    "text": "This method is particularly efficient in terms of the number of function and gradient evaluations, but the overheads per iteration are expensive when the time to calculate functions and gradients is negligible.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S070",
+  "year": "1983",
+  "title": "General algorithms for discrete nonlinear approximation calculations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: conference chapter on general algorithms for discrete nonlinear approximation (75 cites); sits beside S149 (l1/l-infinity overdetermined equations, 1984); norms treated not known.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S079",
+  "year": "1983",
+  "title": "The convergence of variable metric matrices in unconstrained optimization",
+  "read_level": "abstract",
+  "contribution": "Proves that the DFP/BFGS variable metric matrices converge when unit-step iterates converge to a point with zero gradient and positive definite Hessian, F having Lipschitz continuous second derivative; identifies the limit for strictly convex quadratics (abstract, Springer page; not in abstracts.json).",
+  "problem_entry": "Do the variable metric matrices converge when the DFP or BFGS iterates with unit steps converge? (abstract, Springer page)",
+  "key_idea": "Convergence of the matrix sequence under Lipschitz second derivative and convergence of iterates to a point with positive definite Hessian (abstract, Springer page); proof not read.",
+  "assumptions": "Unit step-lengths; Lipschitz continuous second derivative; iterates converge to x* with zero gradient and positive definite Hessian (abstract, Springer page).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "Ge Ren-Pu",
+  "quotes": []
+ },
+ {
+  "id": "S020",
+  "year": "1984",
+  "title": "Nonconvex minimization calculations and the conjugate gradient method",
+  "read_level": "abstract",
+  "contribution": "Two-variable examples showing Polak-Ribiere gradients can stay bounded away from zero (and that some variable metric algorithms need not converge), plus a global convergence theorem for Fletcher-Reeves (abstract).",
+  "problem_entry": "Global convergence of conjugate gradient methods without restarts, exact arithmetic and exact line searches, C2 objective with bounded level sets (abstract).",
+  "key_idea": "Construct small (two-variable) failure examples for Polak-Ribiere and prove a positive theorem for Fletcher-Reeves (abstract); construction not read.",
+  "assumptions": "Exact arithmetic; exact line searches; twice continuously differentiable objective; bounded level sets; no restarts (abstract).",
+  "proof_devices": [
+   "two-variable counterexamples (abstract)"
+  ],
+  "experiments": "",
+  "positioning": "Negative result for Polak-Ribiere and some variable metric algorithms, positive for Fletcher-Reeves (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "minimal-instance counterexample / smallest-case analysis",
+    "relation": "evidence",
+    "note": "failure examples have only two variables",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "negative result under the most favourable idealization",
+    "evidence": "failure shown even with exact arithmetic and exact line searches, so it cannot be blamed on implementation",
+    "pages": "abstract"
+   },
+   {
+    "pattern": "pair a theorem with an example that marks its boundary",
+    "evidence": "counterexample for Polak-Ribiere alongside a convergence theorem for Fletcher-Reeves in one paper (also S144)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "To show a method can fail, grant it every idealization (exact arithmetic, exact line searches, smooth objective, bounded level sets) and construct the smallest example that still fails, so the negative result is about the method, not the implementation (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Most of our attention is given to the Polak-Ribière algorithm, and unfortunately we find examples that show that the calculated gradients can remain bounded away from zero.",
+    "page": "abstract"
+   },
+   {
+    "text": "However, a global convergence theorem is proved for the Fletcher-Reeves version of the conjugate gradient method.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S033",
+  "year": "1984",
+  "title": "On the global convergence of trust region algorithms for unconstrained minimization",
+  "read_level": "abstract",
+  "contribution": "A global convergence result for trust region algorithms when the second derivative approximations are bounded by a quantity growing linearly with the iteration number (F bounded below, continuously differentiable) (abstract).",
+  "problem_entry": "Known global convergence needs second derivative approximations that are not too large; how large may they be before convergence can fail? (abstract)",
+  "key_idea": "Replace a qualitative boundedness hypothesis by an explicit growth rate (linear in the iteration number) (abstract); proof not read.",
+  "assumptions": "Objective bounded below and continuously differentiable; bound on second derivative approximations depending linearly on iteration number (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "quantify a qualitative hypothesis as an explicit growth rate",
+    "evidence": "the qualitative condition on second derivative approximations becomes a bound that grows linearly with the iteration number",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "When a theorem needs a quantity to stay bounded, ask how fast it may grow before the conclusion fails, and prove the result under that growth rate (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "We consider how large these approximations have to be, if they prevent convergence when the objective function is bounded below and continuously differentiable.",
+    "page": "abstract"
+   },
+   {
+    "text": "Thus we obtain a useful convergence result in the case when there is a bound on the second derivative approximations that depends linearly on the iteration number.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S149",
+  "year": "1984",
+  "title": "Conditions for superlinear convergence in l1 and l∞ solutions of overdetermined non-linear equations",
+  "read_level": "abstract",
+  "contribution": "Necessary and sufficient conditions on second derivative estimates for superlinear convergence in l1 and l-infinity solutions of overdetermined nonlinear equations (abstract).",
+  "problem_entry": "If fewer than n equations are satisfied (l1) or fewer than n+1 maximum residuals occur (l-infinity), superlinear convergence requires second derivative information (abstract).",
+  "key_idea": "Characterize exactly which second derivative estimates suffice (abstract); conditions not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "necessary-and-sufficient condition on derivative estimates for a rate",
+    "evidence": "conditions on second derivative estimates that are necessary and sufficient for superlinear convergence (weak, single work)",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "Y. Yuan",
+  "quotes": [
+   {
+    "text": "This paper establishes some conditions on second derivative estimates that are necessary and sufficient for superlinear convergence.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S169",
+  "year": "1984",
+  "title": "An application of gaussian elimination to interpolation by generalized rational functions",
+  "read_level": "abstract",
+  "contribution": "Shows that a Gaussian-elimination procedure for evaluating a generalized rational interpolant breaks down only if r(xi) or the coefficients are not properly defined, and relates the intermediate equations to rational interpolants on subsets; one numerical example (abstract).",
+  "problem_entry": "Compute r(xi)=p(xi)/q(xi) for a generalized rational function whose coefficients satisfy interpolation conditions (abstract).",
+  "key_idea": "Eliminate the unknown coefficients by Gaussian elimination to obtain r(xi) directly; intermediate equations are rational interpolants on subsets of coefficients and data (abstract).",
+  "assumptions": "",
+  "proof_devices": [
+   "breakdown characterization (abstract)",
+   "structural interpretation of intermediate elimination equations (abstract)"
+  ],
+  "experiments": "A numerical example demonstrates the procedure (abstract); not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "breakdown only when the computed object is undefined",
+    "evidence": "procedure breaks down only if r(xi) or the coefficients of the rational function are not properly defined",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "For a direct method, prove that it breaks down only when the quantity it computes does not exist, then interpret its intermediate quantities as solutions of subproblems (abstract)."
+  ],
+  "coauthors": "T. Havie",
+  "quotes": [
+   {
+    "text": "It is shown that the procedure breaks down only if r(ξ) or the coefficients of the rational function are not properly defined.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S038",
+  "year": "1985",
+  "title": "On the quadratic programming algorithm of Goldfarb and Idnani",
+  "read_level": "abstract",
+  "contribution": "Analysis of two Goldfarb-Idnani QP implementations (pathological instability of the faster one, excellent accuracy of both on difficult tests) and release of a Fortran subroutine applying the faster one, compared with QPSOL and VE02A (abstract; abstract truncated at VEO2A, comparison outcome not read).",
+  "problem_entry": "Two implementations of the Goldfarb-Idnani convex QP algorithm; the faster one can be unstable (abstract).",
+  "key_idea": "Weigh a pathological example against numerical testing on difficult problems; ship the faster implementation (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical testing on some difficult problems; comparison with QPSOL and VE02A (abstract); results of the comparison not read (abstract truncated).",
+  "positioning": "Compared with two widely available feasible-point QP subroutines, QPSOL and VE02A (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "adversarial test-case construction for one's own fast method",
+    "relation": "evidence",
+    "note": "pathological example against the implementation he then ships",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "numerical stability of the two implementations is the analysed quantity",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Fortran subroutine provided for general use",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "testing on difficult problems and comparison with widely available codes",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a faster variant has a pathological instability, publish the pathological example together with tests on hard problems, then state which variant you ship and why (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "A pathological example shows that the faster one can be unstable, but numerical testing on some difficult problems indicates that both implementations give excellent accuracy.",
+    "page": "abstract"
+   },
+   {
+    "text": "Therefore the author has provided for general use [8] a Fortran subroutine that applies the faster implementation.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S084",
+  "year": "1985",
+  "title": "The performance of two subroutines for constrained optimization on some difficult test problems",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: test report of two constrained-optimization subroutines on difficult test problems (Method 5, inferred); which two is not stated (VMCWD S059 plausible, not verified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "inferred from title",
+    "pages": "title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S031",
+  "year": "1986",
+  "title": "Convergence properties of algorithms for nonlinear optimization",
+  "read_level": "abstract",
+  "contribution": "SIAM Review survey of successful methods for unconstrained, constrained and nondifferentiable optimization, focused on what theoretical analysis contributed; states that practice supplies the main ideas and theory supplies improvements, coherence and understanding (abstract).",
+  "problem_entry": "Review of the most successful optimization methods (abstract).",
+  "key_idea": "Organize the review by the contribution of theoretical analysis to algorithm development (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Central view hedged with \"It seems that\" (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Research Taste mark 5",
+    "relation": "evidence",
+    "note": "stated: practice gives the new ideas, theory feeds back improvements, coherence and understanding",
+    "pages": "abstract"
+   },
+   {
+    "method": "numerics → conjecture → proof or counterexample",
+    "relation": "variant",
+    "note": "practice-first order stated as a view of the whole field rather than a per-paper workflow",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Particular attention is given to the contribution that theoretical analysis has made to the development of algorithms.",
+    "page": "abstract"
+   },
+   {
+    "text": "It seems that practical considerations provide the main new ideas, and that subsequent theoretical studies give improvements to algorithms, coherence to the subject, and better understanding.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S049",
+  "year": "1986",
+  "title": "How bad are the BFGS and DFP methods when the objective function is quadratic?",
+  "read_level": "abstract",
+  "contribution": "Analysis of BFGS and DFP with unit steps on two-variable quadratics via nonlinear three-term eigenvalue recurrences; BFGS may need more than 10 iterations for the first decimal place, DFP far worse; explains DFP being less suitable and shows quadratics inform efficiency far from the solution (abstract).",
+  "problem_entry": "Explain gross inefficiencies of BFGS and DFP (abstract).",
+  "key_idea": "Reduce the updates on n=2 quadratics with unit steps to nonlinear three-term recurrences between eigenvalues of consecutive Hessian approximations and analyse them (abstract).",
+  "assumptions": "Quadratic objective of two variables; step-lengths of one (abstract).",
+  "proof_devices": [
+   "eigenvalue recurrence analysis on two-variable quadratics (abstract)"
+  ],
+  "experiments": "",
+  "positioning": "Explains why DFP is often less suitable than BFGS (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "minimal-instance counterexample / smallest-case analysis",
+    "relation": "evidence",
+    "note": "n=2 quadratics with unit steps",
+    "pages": "abstract"
+   },
+   {
+    "method": "quadratic-case test as the first design question",
+    "relation": "evidence",
+    "note": "argues quadratics carry much efficiency information",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analyse the transient, not only the asymptotic rate",
+    "evidence": "studies efficiency when the iterate is too far from the solution for an asymptotic convergence analysis",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Reduce the method on the smallest non-trivial case (two-variable quadratic, unit steps) to a recurrence on a few scalars (eigenvalues) and use it to count iterations in the pre-asymptotic phase that rate theorems ignore (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Specifically, the BFGS algorithm may require more than 10 iterations to achieve the first decimal place of accuracy, while the performance of the DFP method is far worse.",
+    "page": "abstract"
+   },
+   {
+    "text": "The results help to explain why the DFP method is often less suitable than the BFGS algorithm for general unconstrained optimization calculations, and they show that quadratic functions provide much information about efficiency when the current vector of variables is too far from the solution for an asymptotic convergence analysis.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S005",
+  "year": "1987",
+  "title": "Radial basis functions for multivariable interpolation: a review",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: review chapter on RBF multivariable interpolation (2672 cites, most cited in batch); opens the RBF strand continued by S083, S010 and later S055/S057; content not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S064",
+  "year": "1987",
+  "title": "Updating conjugate directions by the BFGS formula",
+  "read_level": "abstract",
+  "contribution": "A procedure for updating a matrix Z of B-conjugate directions consistently with the BFGS revision of B that seems much more stable than a product formula, with automatic column rescaling against a poor initial B; relevant to active set methods, Cholesky updating and BFGS properties (abstract, Springer page; not in abstracts.json; formulas damaged in extraction).",
+  "problem_entry": "B is not stored explicitly because systems with B must be solved; work with Z whose columns satisfy conjugacy conditions (abstract, Springer page).",
+  "key_idea": "Update Z in a way that corresponds to BFGS; extension rescales the columns of Z automatically (abstract, Springer page).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "stability of a matrix update is the design goal; the product formula is rejected as less stable",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S116",
+  "year": "1987",
+  "title": "Methods for nonlinear constraints in optimization calculations",
+  "read_level": "abstract",
+  "contribution": "Survey of techniques for nonlinear equality constraints in SQP algorithms (Newton on first-order conditions, globalization by line searches, trust regions, L1 and differentiable penalty functions, Lagrangian Hessian approximations with multiplier estimates); chapter in S119 (abstract; metadata).",
+  "problem_entry": "Review of methods for nonlinear equality constraints in SQP with smooth functions and first derivatives (abstract).",
+  "key_idea": "Organize techniques around the Newton iteration for the first-order optimality conditions (abstract).",
+  "assumptions": "Smooth objective and constraint functions with computable first derivatives (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "There is also the important problem of forcing convergence efficiently from poor initial estimates of solutions, and here line searches, trust regions, L_1 penalty functions and differential penalty functions are employed.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S119",
+  "year": "1987",
+  "title": "The State of the art in numerical analysis: based on the proceedings of a joint IMA/SIAM conference on the state of the art in numerical analysis held in Cambridge in April 1986",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: IMA/SIAM conference proceedings volume co-edited with A. Iserles; contains his chapter S116 (pp. 325-358); community service, not a research item.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "A. Iserles (co-editor)",
+  "quotes": []
+ },
+ {
+  "id": "S144",
+  "year": "1987",
+  "title": "The differential correction algorithm for generalized rational functions",
+  "read_level": "abstract",
+  "contribution": "Differential correction algorithm for generalized rational functions with two theorems on convergence and order of convergence, plus an example where the order drops from superlinear to linear when no best approximation exists (abstract, Springer page; not in abstracts.json).",
+  "problem_entry": "Extend the differential correction algorithm to generalized rational functions (abstract, Springer page).",
+  "key_idea": "Describe the algorithm and prove convergence and order theorems (abstract, Springer page); theorems not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Continues the 1971-72 differential correction work (S175/S048, batch a2-02) with Cheney (metadata).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "pair a theorem with an example that marks its boundary",
+    "evidence": "example showing the order of convergence deteriorates when a best generalized rational approximation does not exist (also S020)",
+    "pages": "abstract (Springer page)"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "E. W. Cheney",
+  "quotes": []
+ },
+ {
+  "id": "S156",
+  "year": "1987",
+  "title": "On error growth in the Bartels-Golub and Fletcher-Matthews algorithms for updating matrix factorizations",
+  "read_level": "abstract",
+  "contribution": "Pathological examples showing serious error growth in Bartels-Golub and Fletcher-Matthews updates (worse for Fletcher-Matthews, but harder to detect automatically for Bartels-Golub), with numerical results that confirm the growth but are called atypical (abstract).",
+  "problem_entry": "Can large error growth occur in these updates if unfavourable conditions persist for several iterations? (abstract)",
+  "key_idea": "Construct pathological examples and compare the two methods on accuracy loss and automatic detectability (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Some numerical results confirm error growth; stated to be atypical of ordinary calculations (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "The bad cases are atypical of ordinary calculations (abstract).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "rounding-error growth in matrix updating is the subject",
+    "pages": "abstract"
+   },
+   {
+    "method": "adversarial test-case construction for one's own fast method",
+    "relation": "variant",
+    "note": "pathological cases target standard methods by others, not his own code",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "evidence",
+    "note": "confirming runs declared atypical",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When you exhibit error growth in a numerical method, report which method is worse, whether the bad cases can be detected automatically, and how typical they are (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Pathological examples show serious loss of accuracy, which is worse for the Fletcher-Matthews algorithm.",
+    "page": "abstract"
+   },
+   {
+    "text": "Some numerical results confirm the growth of errors, but they are atypical of ordinary calculations.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S193",
+  "year": "1987",
+  "title": "JH Wilkinson, FRS, FIMA (1919–1986)",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: one-page obituary (p. 522 per Crossref) of J. H. Wilkinson, with K. W. Morton; non-research item; content not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "K. W. Morton",
+  "quotes": []
+ },
+ {
+  "id": "S083",
+  "year": "1988",
+  "title": "Radial basis function interpolation on an infinite regular grid",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: RBF interpolation on an infinite regular grid (53 cites); 1988 DAMTP report later published in Algorithms for Approximation II (1990, pp. 146-169, DOI 10.1007/978-1-4899-3442-0_15, per Crossref, closed access).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. D. Buhmann",
+  "quotes": []
+ },
+ {
+  "id": "S126",
+  "year": "1988",
+  "title": "An algorithm for maximizing entropy subject to simple bounds",
+  "read_level": "abstract",
+  "contribution": "Algorithm with convergence proof for maximum entropy with simple bounds on Fourier coefficients and nonnegative intensities: outer parameter iteration with inconsistency test, inner CG plus active-set method making many active-set changes at once; numerical results only second-hand (abstract).",
+  "problem_entry": "Unusual maximum entropy problem with simple bound constraints on Fourier coefficients and nonnegativity of image intensities (abstract).",
+  "key_idea": "Avoid mixing constraint types by moving one into the objective through a parameter tuned by an outer iteration; inner problem has only simple bounds (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Only second-hand remarks on numerical results (abstract).",
+  "positioning": "",
+  "writing": "Labels numerical evidence as second-hand (abstract).",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "honest provenance: numerical evidence explicitly labelled second-hand",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "weak: many active-set changes at once for efficiency on a large calculation",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Taste mark 5",
+    "relation": "evidence",
+    "note": "weak: application problem leads to algorithm with convergence proof",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When two constraint classes clash, move one into the objective through a parameter tuned by an outer loop so the inner solver sees only simple bounds, and put a consistency test in the outer loop (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "The algorithm avoids mixing these constraints by introducing a parameter into the objective function that is adjusted by an outer iteration.",
+    "page": "abstract"
+   },
+   {
+    "text": "The algorithm is described, a proof of convergence is given, and there are some second-hand remarks on numerical results.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S130",
+  "year": "1988",
+  "title": "A review of algorithms for nonlinear equations and unconstrained optimization",
+  "read_level": "abstract",
+  "contribution": "Survey of globalization and automatic derivative approximation for nonlinear equations and unconstrained optimization, with explicit verdicts (trust regions over line searches; a few extra function values for Jacobian estimates, especially sparse), library software and promising recent work (abstract).",
+  "problem_entry": "Newton needs a good starting point and first derivatives, which is often highly restrictive in practice (abstract).",
+  "key_idea": "Survey the techniques that relax both requirements and give verdicts (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "Trust regions judged more useful than line searches (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "weak: stated 1988 preference for trust regions over line searches; RHO/DELTA split not in abstract",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Taste mark 2",
+    "relation": "evidence",
+    "note": "weak: function values counted as the price of derivative estimates",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "We find that \"trust regions\" are more useful than \"line searches\", and that a few extra function values are needed to provide suitable estimates of Jacobians, especially when the Jacobian is sparse.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S153",
+  "year": "1988",
+  "title": "QR factorization for linear least-squares problems on a hypercube multiprocessor",
+  "read_level": "abstract",
+  "contribution": "Implementation of Givens-rotation QR for least squares on the Intel hypercube, with two merge implementations compared by load balance and communications, overlap of local rotations with message waits, tree-structured merges, and numerical results (abstract).",
+  "problem_entry": "Large least-squares problems with many observations and few variables are slow on sequential machines (abstract).",
+  "key_idea": "Assign rows to processors; handle cross-processor rotations as merges organized as trees per column (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Numerical results showing usefulness and efficiency (abstract); not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "communications and load balance treated as first-class design quantities (parallel variant setting)",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Compare parallel implementations on load balance and message count as well as speed, and overlap local work with communication waits (abstract)."
+  ],
+  "coauthors": "R. M. Chamberlain",
+  "quotes": [
+   {
+    "text": "Two ways of implementing the merges are described and they are compared on the grounds of load balance and the number of communications required.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S164",
+  "year": "1988",
+  "title": "On a matrix factorization for linearly constrained optimization problems",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: report on a matrix factorization for linearly constrained optimization, one year before S040/S071 (TOLMIN); link plausible, not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S192",
+  "year": "1988",
+  "title": "Martin Beale memorial symposium",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: one-page front item (p. 3 per Crossref) of the Martin Beale memorial symposium issue of Mathematical Programming 42 (1-3); S126 appears in the same issue, possibly a symposium paper (not verified).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S040",
+  "year": "1989",
+  "title": "A tolerant algorithm for linearly constrained optimization calculations",
+  "read_level": "abstract",
+  "contribution": "A tolerant method for linearly constrained optimization that treats small-residual inequalities as inequalities with zero right-hand sides and ignores others, with automatic tolerance adjustment, a convergence theorem needing only a bounded feasible region, and a Fortran implementation much more reliable than the software tested by Hock and Schittkowski (1981) (abstract).",
+  "problem_entry": "Two extremes for search directions (all constraints vs active set); nearly degenerate constraints hurt efficiency (abstract).",
+  "key_idea": "Intermediate rule controlled by an automatically adjusted tolerance on constraint residuals (abstract).",
+  "assumptions": "Main convergence theorem assumes only boundedness of the feasible region (abstract).",
+  "proof_devices": [],
+  "experiments": "Comparison with the software tested by Hock and Schittkowski (1981) (abstract); details not read.",
+  "positioning": "Particularly appropriate for semi-infinite programming with many discretized linear constraints (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "keeps the active-set framework and changes one element (which constraints shape the direction), outside the DFO series",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "comparison on an established test-set study with a stated application niche",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Fortran implementation; TOLMIN package report S071 the same year (S071 inferred from title)",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When the literature offers two extreme rules, define an intermediate rule controlled by a tolerance, make the tolerance self-adjusting, and prove convergence under the weakest assumption you can (here only a bounded feasible region) (abstract)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "We prefer an intermediate method that treats all inequality constraints with “small” residuals as inequalities with zero right hand sides and that disregards the other inequality conditions.",
+    "page": "abstract"
+   },
+   {
+    "text": "The numerical results indicate that a Fortran implementation of our algorithm is much more reliable than the software that was tested by Hock and Schittkowski (1981).",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S071",
+  "year": "1989",
+  "title": "TOLMIN: A Fortran package for linearly constrained optimization calculations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: TOLMIN code-package report for the tolerant algorithm of S040 (whose abstract reports a Fortran implementation); paper-plus-code pair (Method 6, inferred).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "inferred from title: code package companion to S040",
+    "pages": "title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": []
+ },
+ {
+  "id": "S171",
+  "year": "1989",
+  "title": "The updating of matrices of conjugate directions in optimization algorithms",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: follow-up report on updating matrices of conjugate directions, the topic of S064 (1987); relation not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "MJD Powell, ... (others not listed)",
+  "quotes": []
+ },
+ {
+  "id": "S010",
+  "year": "1990",
+  "title": "The theory of radial basis function approximation in 1990",
+  "read_level": "abstract",
+  "contribution": "Coherent account of radial basis function theory (orders of convergence, nonsingularity of interpolation matrices, conjectures), claiming RBFs are becoming as important as piecewise polynomials though good software is lacking (abstract of the 1992 chapter version, DOI 10.1093/oso/9780198534396.003.0003).",
+  "problem_entry": "RBF approximation is relatively new, so many exciting properties are proved only in special cases (abstract).",
+  "key_idea": "Survey the known theory coherently and note conjectures (abstract); content not read.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Good software not yet available for general computer calculations; interesting conjectures noted (abstract).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "theory runs ahead of code; missing software flagged as a gap rather than supplied",
+    "pages": "abstract"
+   },
+   {
+    "method": "publish preliminary results with explicit status",
+    "relation": "evidence",
+    "note": "weak: conjectures listed as conjectures",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "This approach to multivariable approximation is relatively new, however, so many of the most exciting properties have been proved to hold only in special cases.",
+    "page": "abstract"
+   },
+   {
+    "text": "Therefore the author believes that radial basis function methods are becoming as important as piecewise polynomials although good software is not yet available for general computer calculations.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S190",
+  "year": "1990",
+  "title": "Algorithms for Linearly Constrained Optimization Calculations",
+  "read_level": "metadata",
+  "contribution": "Inferred from title: report on algorithms for linearly constrained optimization, part of the 1988-1990 TOLMIN strand (S164, S040, S071); content unknown.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "MJD Powell, ... (others not listed)",
+  "quotes": []
+ },
+ {
+  "id": "S076",
+  "year": "1991",
+  "title": "Least squares smoothing of univariate data to achieve piecewise monotonicity",
+  "read_level": "abstract",
+  "contribution": "Dynamic programming algorithms that compute the global least-squares piecewise-monotonic smoothing (at most k monotonic sections) in O(n^2 + kn log n) operations, O(n) for k=1,2, despite O(n^k) local minima; room for improvement for k>=3 (abstract).",
+  "problem_entry": "Noisy univariate data show far more sign changes in first divided differences than the underlying function (abstract).",
+  "key_idea": "Treat section joins as integer variables and use dynamic programming to reach the global minimum (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "A discussion of complexity suggests room for improvement when k>=3 (abstract).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "operation counts for general k and small k are headline results",
+    "pages": "abstract"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "evidence",
+    "note": "remaining complexity gap for k>=3 stated in the abstract",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a fitting problem has combinatorially many local minima, look for an ordering that admits dynamic programming and a global minimum; report operation counts for general k and small-k special cases, and say where the count may not be optimal (abstract)."
+  ],
+  "coauthors": "I. C. Demetriou",
+  "quotes": [
+   {
+    "text": "Fortunately we find that a dynamic programming procedure can calculate the global minimum of the sum of squares in at most O(n2 + kn log n) computer operations.",
+    "page": "abstract"
+   },
+   {
+    "text": "They perform well in practice, but a discussion of complexity suggests that there is still room for improvement when k ≽ 3.",
+    "page": "abstract"
+   }
+  ]
+ }
+]

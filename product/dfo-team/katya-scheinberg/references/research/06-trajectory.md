@@ -84,3 +84,74 @@ Entry timing: Scheinberg entered model-based DFO early (1997, before the field h
 - **2026:** ICM section lecture; arXiv:2510.14935 in ICM proceedings (co-author's page).
 - **May 2025:** Aisenstadt Chair lectures (just outside the window; recorded on YouTube).
 - **2025:** JOTA stochastic ISTA/FISTA (Nguyen–Scheinberg–Tran) and Math. Program. sample-complexity paper (Jin–Scheinberg–Xie) published.
+
+---
+
+## Update 2026-09-27 (full-text pass)
+
+Source: `08-deep-reading-synthesis.md` §8–§9, built from the paper cards (`07-paper-cards.md`; 78 papers read in full or in part). Citations like [card S018, pp. 1, 6–8] point to the card and the page of the full text.
+
+### 9. Topics by period (carded works with a year; full or partial reads in brackets)
+
+| Period | Works | IPM/conic | SVM training | Model-based DFO | Structured 1st/2nd-order & sparse | SG & variance reduction | Adaptive stochastic (probabilistic oracles) | Gradient estimation / new oracles | ML models & applications | DFO applications | Service |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1996–2000 | 13 | 7 [0] | 1 [0] | 5 [3] | | | | | | | |
+| 2001–2005 | 8 | 3 [2] | 3 [2] | 1 [1] | | | | | | | 1 [0] |
+| 2006–2010 | 24 | 1 [0] | 1 [1] | 7 [6] | 7 [3] | | | | 2 [2] | 3 [1] | 3 [1] |
+| 2011–2015 | 17 | | | 3 [3] | 10 [7] | | 2 [1] | | | 2 [2] | |
+| 2016–2020 | 32 | | | 2 [1] | 3 [3] | 7 [7] | 9 [5] | 1 [1] | 6 [6] | 3 [2] | 1 [0] |
+| 2021–2026 | 22 | | | 2 [2] | | 2 [2] | 11 [10] | 5 [3] | 1 [1] | | 1 [0] |
+
+Topic assignment is by card content; three undated records are excluded [08 §8.1].
+
+### 10. Turns, as the full texts show them
+
+1. **Deterministic geometry → probabilistic models (2012–2014).** A rigorous theorem for random sample sets sits next to a deterministic practical code, and a stochastic trust-region framework is named as future work [card S033, pp. 5–6, 21]; two years later the trust region runs on models that are fully linear only with probability ≥ 1/2 [card S018, pp. 1, 6–8]. The certificate became a probability; the algorithm stayed the same. This replaces the *inference* in §2 item 1 with text evidence.
+2. **Almost sure → expected complexity (2014–2020).** Almost-sure results only [cards S018, pp. 10–13; S012, p. 25] → hitting-time bounds with exact f [card S014, p. 13] → random f and the renewal-reward framework [card S013, pp. 4–10] → line search [card S015, pp. 17–19] → one template for all adaptive methods [card S047, pp. 7–8].
+3. **Expected → high probability and total sample cost (2021–2025)** [cards D001, pp. 7–13; S041, pp. 16–21; S137, pp. 4–5; S057, pp. 12–13], then unreliable inputs with heavy tails and p < 1/2 [card S083, pp. 15–17].
+4. **Return to Powell-style DFO with complexity (2025–2026).** The open problem of certifying Powell-like geometry [card S016, p. 24] and the "closest theoretically convergent algorithm" framing of the 2009 essay [card S143, p. 5] come back as complexity results for geometry-correcting methods and random subspaces [cards S088, pp. 1–3, 12–19; S104, pp. 1–2, 10–23], using the stochastic-analysis devices (the η₂ acceptance test from 2014) in the deterministic setting [card S088, pp. 2–3].
+5. **New oracles (2026).** Optimization defined by a preference relation alone, with matching lower bounds [card S087, pp. 2–4, 24–26].
+
+### 11. Parallel lines that ended
+
+- Interior-point linear algebra (last read paper 2005) [cards S050; S058].
+- SVM training at IBM [cards S003; S059; S022].
+- Structured first-order and sparse learning with Goldfarb, Ma, Qin, Tang and Bai (2009–2016) [cards S010; S005; S011; S028; S029; S054; S066].
+- Stochastic gradient and variance reduction with L. M. Nguyen and Takáč (2017–2022) [cards S002; S024; S009; S032; S037; S055]. This line does not follow the adaptive-method lens (new estimators with tuned or prescribed steps).
+- Student-led ML modelling and applications (2017–2019), which use their host field's data sets and scores [cards S078; S089; S051; S060; S082; S074].
+
+### 12. What stayed constant across 1997–2026
+
+- The classical trust-region / line-search skeleton, changed in one place per paper [cards S008, pp. 17–18; S018, p. 1; S041, pp. 11–12; S104, pp. 4, 24–25].
+- Radius-scaled accuracy: κΔ on the ball in 1997–2009 [cards S008, pp. 11–12; S007, pp. 7–8], the same form with probability p from 2014 [card S018, pp. 6–7], with irreducible floors from 2021 [cards S041, pp. 4–5; S083, pp. 2–5].
+- Known structure kept exact: cheap constraints in 1998 [card S019, pp. 6–7], the prox term in 2025 [card S098, pp. 2, 4, 7].
+- Equal-evaluation benchmarking in DFO from the first practice paper [card S019, p. 10] to 2026 [card S104, pp. 26–30].
+- Framework-then-instantiation, from the 1997 survey to the 2025 unified framework [cards S004, pp. 8–16; S083, pp. 12, 18–21] (SKILL.md Method 7).
+
+### 13. Collaboration pattern by period (research works only; coauthors appearing at least twice in the period)
+
+| Period | Works | Sole-authored | Distinct coauthors | Frequent coauthors (count) |
+|---|---|---|---|---|
+| 1996–2000 | 13 | 3 | 8 | Conn 4, Toint 4, Goldfarb 3 |
+| 2001–2005 | 7 | 0 | 4 | Fine 3, Goldfarb 3 |
+| 2006–2010 | 21 | 2 | 38 | Conn 7, Rish 5, Vicente 4, H. Zhang 3, Goldfarb 3, Asadi 3, Ma 2 (plus IBM team papers) |
+| 2011–2015 | 16 | 0 | 17 | Goldfarb 5, Bandeira 3, Vicente 3, Ma 2, R. Chen 2, Tang 2, Bai 2, B. Y. Chen 2 |
+| 2016–2020 | 27 | 0 | 36 | L. M. Nguyen 5, Takáč 4, Ghanbari 4, Curtis 3, Menickelly 3, Hatalis/Lamadrid/Kishore 3, Cartis 2, Kalagnanam 2 |
+| 2021–2026 | 20 | 1 | 20 | M. Xie 6, L. M. Nguyen 4, Berahas 3, Cao 3, Jin 3, Tran 3, Chaudhry 2 |
+
+Overall most frequent: Goldfarb 14 (1998–2014), Conn 12 (1997–2010), Vicente 9 (2003–2017), L. M. Nguyen 9 (2017–2025), M. Xie 6 (2021–2026) [08 §9]. One senior partner per era, then a student or postdoc per line from about 2012; specialists brought in for one step (applied probability for the stopping-time framework [card S013]; a hitting-probability proof credited to J. A. Fill [card S057, p. 20]; an ML co-author for estimator comparisons [cards D003; S006]); industry and laboratory partners (IBM; Goldman Sachs Asset Management [card S021]; Sandia National Laboratories [card S098]). Sole-authored research work is rare and position-like [cards S022; S143]. Author order is alphabetical in some analysis papers and not in others, so it is not evidence of who led.
+
+### 14. Corrections to earlier sections
+
+| Item | Earlier | Now | Source |
+|---|---|---|---|
+| Optima role (§1 "undated" row) | "editor of Optima" | Co-editor of Optima (with A. Caprara, under editor A. Lodi) in 2009; her article in issue 79 (May 2009) is "Geometry in model-based algorithms for derivative-free unconstrained optimization" | [card S143, pp. 1, 10] |
+| Minimal-safeguard stance (implied constant since 1997) | held for 17 years | Geometry-as-certificate dates from 1997 [card S008, pp. 14–17], but in 2008 the stated practice was to maintain poisedness throughout [card S016, p. 18]; the minimal-safeguard stance dates from 2009–2010 | [cards S143, p. 4; S030, pp. 3, 12] |
+| ProxSTORM (§3 leads) | third-party, authors unverified | Scheinberg's own paper with Baraldi, Javeed, Kouri (Sandia), arXiv:2510.03187 | [card S098] |
+| Pivot trigger 1 (§2) | *inference* | text evidence, see §10 item 1 | [cards S033; S018] |
+
+### 15. Latest (added)
+
+- **2026**: "Function-free optimization via comparison oracles" (Scheinberg, Xiong; arXiv:2604.26867) [card S087]; stochastic cubic regularization in *INFORMS J. Optim.* (DOI 10.1287/ijoo.2025.0123) [card S093].
+- **Oct 2025**: ProxSTORM (Baraldi, Javeed, Kouri, Scheinberg; arXiv:2510.03187) [card S098].
+- **2026**: MOR 50th-anniversary editor's comments (metadata only) [card S105].

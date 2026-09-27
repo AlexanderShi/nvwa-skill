@@ -22,7 +22,7 @@
 
 | Title (as seen) | ID | What it signals |
 |---|---|---|
-| ProxSTORM — A Stochastic Trust-Region Algorithm for Nonsmooth Optimization | arXiv:2510.03187 | STORM's smoothness assumption is a limit; others extend to nonsmooth. |
+| ProxSTORM — A Stochastic Trust-Region Algorithm for Nonsmooth Optimization | arXiv:2510.03187 | STORM's smoothness assumption is a limit; others extend to nonsmooth. **Corrected 2026-09-27 (full text):** ProxSTORM is Scheinberg's own paper with R. J. Baraldi, A. Javeed and D. P. Kouri (Sandia), not a third-party critique; it extends STORM to f + φ with a known prox [card S098, pp. 1–3]. |
 | Trust-Region Sequential Quadratic Programming for Stochastic Optimization with Random Models | arXiv:2409.15734 | Random-model TR is unconstrained in Scheinberg's core work; others extend to constraints. |
 | Iteration Complexity and Finite-Time Efficiency of Adaptive Sampling Trust-Region Methods for Stochastic Derivative-Free Optimization | arXiv:2305.10650 | Competing design: adaptive sampling to control estimator error, versus fixed-probability accuracy. |
 | Complexity of Zeroth- and First-Order Stochastic Trust-Region Algorithms | SIAM J. Optim., DOI 10.1137/24M1664484 | Parallel complexity line for stochastic TR. |

@@ -1,0 +1,223 @@
+[
+ {
+  "id": "S090",
+  "year": "1990",
+  "title": "Univariate multiquadric approximation: reproduction of linear polynomials",
+  "read_level": "full",
+  "contribution": "Proves that univariate multiquadric approximations reproduce all linear polynomials when the only condition on the centres is that they are unbounded above and below, via a divided-difference (hat-function) basis, and shows that for c != 0 the span of the multiquadrics is dense in C[a,b] on any finite interval.",
+  "problem_entry": "Conjecture that polynomial reproduction (known on the integer lattice via Fourier transforms: Jackson 1987, Buhmann 1988) does not need a regular grid, attacked first in d = 1 with arbitrary unbounded centres (pp. 1-3).",
+  "key_idea": "The naive space S0 of absolutely convergent translate sums contains no polynomials (pp. 4-6), so move to multiquadric hat functions (second divided differences) written through a positive Peano kernel acting on the piecewise-linear interpolant of the coefficients; linear reproduction then follows from kernel moment identities (pp. 3, 7-9).",
+  "assumptions": "d = 1; centres strictly increasing and unbounded in both directions, no spacing conditions (pp. 3-4); admissibility = absolute convergence for every x (p. 3); c != 0 for the kernel positivity and density results (pp. 7, 11, 13).",
+  "proof_devices": [
+   "characterization lemma reducing 'absolutely convergent for every x' to one summability condition by splitting off the finite index set near x (2.3)-(2.4), (3.11)-(3.12) (pp. 4, 7-8)",
+   "B-spline/Peano-kernel representation of second divided differences, psi_j = (1/2) int B_j(theta) phi''(x-theta) dtheta with phi'' > 0 (3.4)-(3.6) (p. 7)",
+   "reproduction via kernel moment identities: unit integral (3.13) and vanishing odd moment (3.14) (pp. 8-9)",
+   "epsilon-T split of a tail integral (3.22)-(3.24) (p. 10)",
+   "far-centre Taylor expansion plus explicit Vandermonde-type solution with bounded products (4.8)-(4.10), then Weierstrass (pp. 11-12)"
+  ],
+  "experiments": "none; a practitioner's report (Philip Smith, IMSL: centres diverging in least-squares fits) is explained by Theorem 6 (p. 14)",
+  "positioning": "Extends Buhmann (1988) by removing uniform spacing when d = 1 (p. 3); builds on Hardy 1971 and Jackson 1987 (p. 2); credits Nira Dyn's private results in detail (p. 14).",
+  "writing": "States why the conjecture matters before the plan (p. 2); conclusion judges the result against the original aim (p. 13); explicit self-criticism ('Unfortunately', p. 3; 'inelegant', p. 13).",
+  "limits_future": "Confined to the univariate case (p. 3); S2 construction inelegant and misses important approximants such as lattice cardinal functions that reproduce quadratics (pp. 13-14); future: larger space (5.1), uniqueness, multivariate lines of centres (5.3) whose conditions are stronger than necessary (pp. 13-14).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "honest scope in a theory paper without experiments: univariate restriction announced early, contribution described as only sustaining the conjecture, construction called inelegant",
+    "pages": "pp. 3, 13-14"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "theory analogue: remove one hypothesis (regular lattice) of a known theorem while keeping degree and dimension fixed",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimal-instance counterexample / smallest-case analysis",
+    "evidence": "multivariate conjecture attacked in d = 1 in the hope that studying the univariate case would provide ideas",
+    "pages": "pp. 3, 14"
+   },
+   {
+    "pattern": "theory to explain a practitioner-reported failure",
+    "evidence": "density Theorem 6 explains centres diverging in IMSL least-squares multiquadric fits",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "change the basis, not the claim",
+    "evidence": "natural span contains no polynomials; a divided-difference basis makes sums converge and the reproduction result true",
+    "pages": "pp. 4-9"
+   }
+  ],
+  "transferable": [
+   "Reduce 'absolutely convergent for every x' to one coefficient summability condition by splitting off the finite set of nearby terms and bounding the tail uniformly (pp. 4, 7-8).",
+   "If growing basis functions span none of the targets, take divided-difference combinations with a positive Peano kernel; exactness reduces to the kernel's zeroth and first moments (pp. 7-9).",
+   "Prove density of a translate family on an interval by sending centres to infinity geometrically (each at least twice the previous) and solving a small Vandermonde system to isolate each far-expansion Taylor coefficient (p. 12).",
+   "When a practitioner reports an odd run, check whether a theorem of yours explains it and say so (p. 14)."
+  ],
+  "coauthors": "none (sole author); acknowledges Nira Dyn and Rick Beatson (p. 15)",
+  "quotes": [
+   {
+    "text": "It seems, however, that our main contribution to this important problem is that we have sustained the conjecture that there is no need for the centres to form a regular grid.",
+    "page": 14
+   },
+   {
+    "text": "Theorem 6 explains some unfortunate numerical experiments that were described to me by Philip Smith of IMSL.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S089",
+  "year": "1992",
+  "title": "Tabulation of thin plate splines on a very fine two-dimensional grid",
+  "read_level": "full",
+  "contribution": "An algorithm and Fortran package that tabulate a thin plate spline on a very fine square grid in O(h^-2 + n eps^(-1/3) |log h|) work instead of O(h^-2 n), by recursive mesh halving with O(h^6) biharmonic-aware stencils and explicit treatment of terms near their centres, with a closed-form analysis of all higher-order truncation terms.",
+  "problem_entry": "Application posed by Ian Barrodale: thin-plate-spline image warping (medical images, shipping channels, satellite pictures of forests) needs s at up to 10^8 grid points with n ~ 200-500, where direct evaluation is impracticable (pp. 1-4).",
+  "key_idea": "Each TPS term is smooth away from its centre, so subtabulate by recursive halving with O(h^6) stencils made exact on quadratics and cleared of the fourth-order term by the biharmonic equation; delete and later re-add terms whose centres are within rho*h, with rho = ceil((6/eps)^(1/6)) (pp. 3-11).",
+  "assumptions": "Distinct, non-collinear interpolation points (p. 3); relative accuracy eps per term, with the log factor ignored on a scale-invariance argument (p. 11); stability of recursive stencil use not analysed (p. 14).",
+  "proof_devices": [
+   "stencil weights from polynomial exactness plus biharmonic identity (2.3)-(2.10) (pp. 5-6)",
+   "sixth-derivative bound 72/(x^2+y^2)^2 (3.10) converted into the neighbourhood size rho (pp. 10-11)",
+   "scale invariance: change of units adds a quadratic, which the stencils reproduce (p. 11)",
+   "closed-form complex derivatives of the TPS kernel and exact t-th order error terms by rotational symmetry (Lemmas 1-5, pp. 17-21), showing higher-order terms add at most 6.2% for rho >= 10 (p. 20)"
+  ],
+  "experiments": "Table 1: workstation times for grids 100^2-800^2 and n = 25-400 at eps = 1e-6, split into subtabulation and correction costs (about n/100 s per halving), vs direct evaluation 395.56 s (n = 25) on 800x800; timing noise of at least 1% disclosed (pp. 14-15).",
+  "positioning": "Adopts TPS warping of Barrodale, Berkley and Skea and Duchon's variational justification (p. 2); relates stability to subdivision (Dyn 1992) (p. 14); contrasts with fast multipole methods for general points (p. 16).",
+  "writing": "Opens with plain-language applications before any formula (p. 2); cost formula in abstract and introduction (pp. 1, 4); acknowledgements record enjoyment of industrial use (p. 21).",
+  "limits_future": "Error accumulation over recursive halving not analysed (p. 14); names cheaper 1-D stencils (4.1) and working with s instead of s_h as probably more efficient alternatives (pp. 15-16); grid can be split into pieces for storage (p. 15).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "cost formula in h, n, eps stated first; loop order over centres avoids O(h^-2) overhead; parameter rho derived from the tolerance",
+    "pages": "pp. 1, 4, 9-11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "timing noise disclosed, unanalysed stability stated, implemented design admitted probably slower than an alternative",
+    "pages": "pp. 14-16"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "code shipped with report but to a company (Barrodale Computing Services), which improved it; no free-use statement in this paper",
+    "pages": "pp. 3, 14, 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "publish the rejected alternative",
+    "evidence": "formula (4.1) and the f = s variant described with trade-offs, the latter judged probably more efficient",
+    "pages": "pp. 15-16"
+   },
+   {
+    "pattern": "verify the asymptotic design rule against all higher-order terms",
+    "evidence": "rho chosen from the leading O(h^6) term; appendix bounds every higher-order term in closed form (<= 6.2% excess for rho >= 10)",
+    "pages": "pp. 16-21"
+   },
+   {
+    "pattern": "invariance argument to justify a simplification",
+    "evidence": "quadratic exactness makes errors independent of units, licensing neglect of the log factor (related to existing 'invariance as a veto on a more accurate variant')",
+    "pages": "p. 11"
+   }
+  ],
+  "transferable": [
+   "Design finite-difference stencils by polynomial exactness and then use the PDE the target satisfies away from singularities to cancel the next Taylor term, gaining two orders at no extra width (pp. 5-6).",
+   "Split a sum of singular kernels into a smooth far part for fast approximation and a near part evaluated exactly, with the cut-off radius derived from the leading error bound and the tolerance (pp. 9-11).",
+   "After fixing a parameter by the leading asymptotic error term, bound all higher-order terms at the smallest allowed parameter value and report the worst excess (p. 20).",
+   "Tabulate timings over size x n so that cost components separate, use the smallest-n column as an upper bound on one component, and report the brute-force baseline for the largest case (pp. 14-15)."
+  ],
+  "coauthors": "none (sole author); problem suggested by Ian Barrodale; comments from Rick Beatson and Martin Buhmann (p. 21)",
+  "quotes": [
+   {
+    "text": "Ian Barrodale suggested that I study this problem because he knew of my interest in radial basis function methods.",
+    "page": 3
+   },
+   {
+    "text": "We have not investigated analytically whether a sequence of applications of the method of Section 2 can cause an unacceptably large accumulation of errors.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S186",
+  "year": "1997",
+  "title": "DAMTP 1997/NA18",
+  "read_level": "full",
+  "contribution": "Duplicate Scholar entry: the text is byte-identical to S165 'Trust region calculations revisited' (DAMTP 1997/NA18, carded as core in c01), which argues for the More-Sorensen trust-region subproblem method and makes it affordable for dense quasi-Newton B via banded orthogonal similarity transforms (O(n^{7/3}) or O(n^{11/5}) per iteration).",
+  "problem_entry": "Community belief that truncated CG (Steihaug) is preferable because More-Sorensen is too expensive, refuted by a two-variable ill-conditioned example and a cost analysis (pp. 1, 3).",
+  "key_idea": "Keep the More-Sorensen (1-eps)-optimality guarantee, refine the lambda iteration (Newton plus false position), and make each Cholesky cheap by keeping Omega^T B Omega banded with bandwidth about n^{2/3} under rank-one updates (pp. 7-17, 19-20).",
+  "assumptions": "Euclidean norm (p. 2); symmetric possibly indefinite B (p. 2); dense B changed by rank-one/two quasi-Newton updates for Section 3 (pp. 12-13).",
+  "proof_devices": [
+   "characterization theorem via Lagrangian and negative-curvature perturbation (pp. 4-5)",
+   "convex secular function 1/Delta - 1/||d(lambda)|| (p. 6)",
+   "failed-Cholesky vector u with u^T(B+lambda I)u <= 0 giving a Rayleigh-quotient lower bound on lambda* (2.11) (p. 7)",
+   "exact quadratic identity for the MS termination test (pp. 10-11)",
+   "Givens-rotation counting O(n^2/(s+1)) shown first on an explicit n = 10, s = 2 pattern (pp. 14-16)",
+   "balancing cost monomials, s ~ n^{3/5}, t ~ n^{4/5} (p. 20)"
+  ],
+  "experiments": "One timing table copied from Powell (1997): band vs full, n = 50-800 on a Sun 4, giving c ~ 0.12 and savings from n >= 40 (p. 17).",
+  "positioning": "Defends More-Sorensen against Steihaug; one-sentence mention of Gould, Rendl-Wolkowicz, Sorensen (p. 3); reports Yuan's conjecture favouring CG for positive definite B (p. 19).",
+  "writing": "Thesis argued in the abstract (p. 1); Discussion critiques the standard questions of convergence theory (pp. 17-18).",
+  "limits_future": "Practical importance called debatable (p. 17); advantage shrinks for positive definite B with line searches (p. 19); hoped useful for future optimization software (p. 20).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "per-iteration cost cut from O(n^3) to O(n^{7/3}) / O(n^{11/5}); lambda bounds reuse the failed factorization",
+    "pages": "pp. 7, 12-20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "rationale: avoid small trust-region radii while far from a minimum",
+    "pages": "p. 18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "tiny counterexample against a popular default",
+    "evidence": "two-variable ill-conditioned quadratic where truncated CG gains 2e-6 vs > 1.0",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "critique the questions theory asks",
+    "evidence": "three standard theory questions each given an objection",
+    "pages": "pp. 17-18"
+   },
+   {
+    "pattern": "advocacy rewrite of one's own report for a broader audience",
+    "evidence": "conference version of the band-matrix report, table copied from Powell (1997)",
+    "pages": "p. 17"
+   },
+   {
+    "pattern": "balance cost monomials by choosing parameters as powers of n",
+    "evidence": "s ~ n^{3/5}, t ~ n^{4/5} give O(n^{11/5})",
+    "pages": "p. 20"
+   },
+   {
+    "pattern": "timing sweep to calibrate hidden constants and the crossover n",
+    "evidence": "band/full table yields c ~ 0.12 and crossover near n = 40",
+    "pages": "p. 17"
+   }
+  ],
+  "transferable": [
+   "Treat a failed Cholesky factorization of B + lambda I as information: build u from the partial factor with u^T(B+lambda I)u <= 0 and raise the lower bound on lambda* by the Rayleigh quotient (p. 7).",
+   "Run a general elimination procedure on one small explicit sparsity pattern, listing each rotation, before stating its general operation count (pp. 14, 16)."
+  ],
+  "coauthors": "none (sole author); thanks Jorge More for comments on Sections 1-2 (p. 20)",
+  "quotes": [
+   {
+    "text": "This unwelcome situation occurs because B is ill-conditioned, and the truncated conjugate gradient method has become the method of steepest descents.",
+    "page": 3
+   },
+   {
+    "text": "It is hoped that this conclusion will be valuable to the future development of software for nonlinear optimization calculations.",
+    "page": 20
+   }
+  ]
+ }
+]

@@ -127,3 +127,64 @@ All URLs/IDs are listed inline. Aggregator records (Semantic Scholar, ResearchGa
 **Still unverified**: arXiv:1703.06925; arXiv:1306.5729 (authors).
 
 The analysis templates behind these papers are in `../proof-playbook.md`; the ordered reading list is in `../reading-path.md`.
+
+---
+
+## Update 2026-09-27 (full-text pass): coverage from the Google Scholar list
+
+The publication list is now complete at the level of the Google Scholar profile, and most papers were read in full. Sources: `../sources/publications/scholar.md` (Google Scholar profile https://scholar.google.com/citations?user=zbqRbOkAAAAJ, plus DBLP and Crossref; machine-readable in `works.json`), the full-text index `../sources/papers/INDEX.md`, the paper cards indexed in `07-paper-cards.md`, and the synthesis `08-deep-reading-synthesis.md`.
+
+### Coverage
+
+| Item | Count | Note |
+|---|---|---|
+| Google Scholar rows | 143 | 14 are duplicates or junk rows (`dup_of` in `works.json`) |
+| Distinct works on the Scholar list | 129 | plus 3 found only in DBLP/arXiv (D001–D003) = **132 works** |
+| Works with an open full text | 85 | `txt` in INDEX.md; 47 are `no-oa` (including 3 patents and 4 talks) |
+| Card entries / distinct papers carded | 125 / 119 | five same-text pairs count once: S011 = S123, S089 = S106, S098 = S107, S028 = S067, D001 = S043 |
+| **Read in full text** | **78** | 64 in full, 14 partially (skipped parts named on each card) |
+| Abstract-level | 19 | including the IDFO book (S001), which has no open full text |
+| Metadata-only | 21 | claims on these cards are marked *inferred* |
+| Unreadable | 1 | S133 (DFO v1.2 manual); the v2.0 manual (2003) was carded as a substitute |
+| Skipped | 8 | 3 patents, 4 talks, and D002 (Scheinberg is an author only on arXiv v1) |
+
+Full-text reads by period (full or partial / all carded works with a year): 1996–2000 3/13; 2001–2005 5/8; 2006–2010 14/24; 2011–2015 13/17; 2016–2020 25/32; 2021–2026 18/22 [08 §1]. The interior-point years are therefore known almost only from abstracts, while the DFO and stochastic-analysis lines are read nearly completely.
+
+### Research lines in the full list (cards per line; full or partial reads in brackets, from 08 §8.1)
+
+| Line | Works (read) | Card ids |
+|---|---|---|
+| Interior-point and conic | 11 (2) | S027, S034, S039, S040, S045, S050, S058, S069, S077, S091, S134 |
+| SVM training | 6 (3) | S003, S022, S059, S071, S097, S140 |
+| Model-based DFO | 20 (16) | S001, S004, S007, S008, S016, S019, S023, S025, S030, S033, S046, S053, S062, S065, S072, S088, S104, S121, S133, S143 |
+| Structured first/second-order and sparse learning | 21 (13) | S005, S010, S011, S021, S028, S029, S035, S042, S048, S049, S054, S064, S066, S079, S084, S090, S096, S100, S101, S124, S142 |
+| Stochastic gradient and variance reduction | 9 (9) | S002, S009, S024, S031, S032, S036, S037, S055, S063 |
+| Adaptive stochastic methods with probabilistic oracles | 22 (16) | S012, S013, S014, S015, S018, S026, S041, S043/D001, S047, S057, S061, S068, S083, S093, S098, S108, S111, S112, S113, S119, S120, S137 |
+| Gradient estimation and new oracles | 6 (4) | D003, S006, S044, S073, S081, S087 |
+| ML models and applications (mostly student-led) | 9 (9) | S017, S020, S051, S060, S074, S078, S082, S086, S089 |
+| DFO applications | 8 (5) | S038, S052, S056, S085, S094, S102, S116, S128 |
+| Service and editorial | 7 (1) | S080, S105, S118, S126, S127, S129, S138 |
+
+(Counts in brackets are cards read in full or in part; S143 counts once although it has an abstract card and a full card. The read level of every card is in `07-paper-cards.md`.)
+
+### Leads from §1.3 and later sections now resolved by the full texts
+
+| Lead | Resolution | Card |
+|---|---|---|
+| arXiv:1703.06925 (authors unconfirmed) | Ghanbari, Scheinberg (2017), "Black-box optimization in machine learning with trust region based derivative free algorithm"; read in full | S052 |
+| arXiv:1306.5729 (authors unconfirmed) | Bandeira, Scheinberg, Vicente, *Math. Program.* (2012), DOI 10.1007/s10107-012-0578-z; read partially | S033 |
+| ProxSTORM, arXiv:2510.03187 (listed as third-party, authors unconfirmed) | Baraldi, Javeed, Kouri, **Scheinberg** (Sandia collaboration); read in full; same text as the 2024 Sandia report | S098 = S107 |
+| Optima 79 article (title not retrieved) | "Geometry in model-based algorithms for derivative-free unconstrained optimization", Optima 79, May 2009, sole-authored; the Moré–Wild framing and the "minimal quality controls" wording attributed to it in earlier search summaries come from Nocedal's discussion column in the same issue (p. 6); she was co-editor of Optima (p. 10) | S143 |
+| arXiv:1905.13043 authors | Berahas, Cao, Choromanski, Scheinberg (confirmed in the text) | D003 |
+| arXiv:2609.09441 authors | The text lists three authors (Chaudhry, Scheinberg, Sun); the Scholar row lists two | S104 |
+| JMLR 2006 active-set SVM paper | Sole-authored; the Scholar record lists the JMLR issue editors as coauthors | S022 |
+
+### Corrections to §1.2 "Observed patterns"
+
+- **Venue profile claim "algorithm papers almost always pair a theorem with numerical comparison"**: true for algorithm and software papers [cards S012, S006, S033, S041, S098, S104], but the pure-analysis papers have no numerical section [cards S014, S026, S083, S088, S093]. SKILL.md Taste mark 4 is corrected accordingly.
+- **Two arcs, one bridge**: confirmed, with two more parallel lines visible only in the full list: structured first-order methods and sparse learning (2009–2016) and stochastic gradient / variance reduction (2017–2022) [08 §8.2]. The latter does not follow the adaptive-method lens (new estimators with tuned or prescribed steps) and is recorded in SKILL.md as a scope limit on Method 2.
+- **Co-author pattern**: confirmed and refined in 08 §9 (one senior partner per era, then a student or postdoc per line; specialists brought in for one step).
+
+### Signature-work anatomies
+
+The four anatomies in §2 above were built from abstracts. SKILL.md now carries full-text versions of all four plus two more (Scheinberg–Toint 2010 with the Optima 79 essay; Jin–Scheinberg–Xie 2024), each with page references to the cards. §2 is kept as the abstract-level record.
