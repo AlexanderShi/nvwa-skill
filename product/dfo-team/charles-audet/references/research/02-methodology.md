@@ -65,7 +65,7 @@ Credibility: **primary** = text written by Audet or a team including Audet; **se
 
 | # | Statement | Wording | Source | Cred. |
 |---|---|---|---|---|
-| O1 | The software is a living research record: NOMAD "has been in continuous development since 2001, evolving with the integration of new algorithmic features published in scientific publications". | Search-summary wording of the TOMS 2022 abstract (treat as paraphrase) | 10.1145/3544489 | primary |
+| O1 | The software is a living research record: NOMAD "has been in continuous development since 2001, evolving with the integration of new algorithmic features published in scientific publications". | Search-summary wording of the TOMS 2022 abstract (treat as paraphrase). ✗ Checked 2026-09-27 against the abstract, which reads: "In continuous development since 2001, it constantly evolved with the integration of new algorithmic features published in scientific publications." (S021 p. 1) | 10.1145/3544489 | primary |
 | O2 | User feedback is part of development: "Bug reports and suggestions are valuable to us!" | Verbatim | NOMAD user guide, Introduction.rst | primary (team) |
 | O3 | Prototypes are shared early "for transparency" even when "not intended for direct reuse". | Verbatim (CatMADS_prototype README) | https://raw.githubusercontent.com/bbopt/CatMADS_prototype/main/README.md | primary (group) |
 | O4 | Shared infrastructure has strict conventions (group BibTeX: "**NEVER** change a key"). | Verbatim | https://raw.githubusercontent.com/bbopt/bibtex/master/README.md | primary (group) |

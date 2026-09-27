@@ -34,7 +34,7 @@ Observed pattern (inference, medium confidence):
 
 ## 2. Co-author structure (primary, bib counts)
 - **Mentors / senior partners:** P. Hansen, B. Jaumard, G. Savard (1997–2013, global and bilevel optimization); J.E. Dennis Jr. (2000–2012, pattern search, MADS).
-- **Peer co-leads:** S. Le Digabel (48), C. Tribes (18, research software engineer on NOMAD), W. Hare (textbook), M. Kokkolaras (engineering design, surrogates), D. Orban (algorithm tuning), Y. Diouane (2023–2026, ADS, Mads-PIP, categorical).
+- **Peer co-leads:** S. Le Digabel (48), C. Tribes (18, research software engineer on NOMAD), W. Hare (textbook), M. Kokkolaras (engineering design, surrogates), D. Orban (algorithm tuning), Y. Diouane (2023–2026, ADS, Mads-PIP, categorical; ✗ checked 2026-09-27: the 2023 framework paper S058 has no Diouane, and the first joint work is the mixed-variable distance, arXiv 2024 / Neurocomputing 2025, S092).
 - **Industry-embedded co-authors:** S. Alarie (12 entries; thanked in NOMAD acknowledgments for "feedbacks and tests"), P. Côté (hydropower; PyNomad), A.E. Gheribi (materials), M. Diago, X. Lebeuf.
 - **Cross-school collaborations with other DFO lenses:** A.R. Conn (two 2018 papers), A.L. Custódio (2008 erratum), L.N. Vicente (co-editor of a 2004 *Optimization and Engineering* special issue on surrogate optimization with Audet and Dennis [B]).
 

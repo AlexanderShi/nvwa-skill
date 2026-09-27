@@ -57,7 +57,7 @@ The raw counts are the links as recorded on the 193 cards. The distinct counts e
 | 1 Free Search, rigid Poll | 40 / 35 / 1 | 39 (32) / 33 (30) / 1 (1) | 6 | Keep. Add the ordering slot (§4.3) and correct one practice item (§3.1 #6) |
 | 2 Constraint semantics first | 45 / 36 / 0 | 41 (35) / 33 (29) / 0 | 6 | Keep. Extend to inputs (§4.3) and to evaluation cost (§3.2) |
 | 3 Guarantee ladder, bounded by counterexamples | 40 / 43 / 4 | 39 (32) / 43 (41) / 4 (3) | 7 | Keep. Correct the complexity claim (§3.1 #3). Add adversarial instances and instrument audits (§4.3) |
-| 4 Real blackboxes → public benchmark artifacts | 37 / 27 / 1 | 35 (33) / 27 (23) / 1 (1) | 6 | Keep. Re-scope: partner problems mostly stay private (§3.2) |
+| 4 Real blackboxes → public benchmark artifacts | 37 / 27 / 1 | 35 (33) / 27 (23) / 1 (1) | 6 | Keep. Re-scope: no public release is mentioned for most partner problems (§3.2) |
 | 5 Budget-aware, cross-community benchmarking | 33 / 58 / 4 | 32 (26) / 54 (51) / 4 (4) | 6 | Keep. Re-scope: the most variants of any method, so say–do is only partly consistent (§2.2) |
 | 6 Solver as research instrument | 43 / 19 / 0 | 40 (34) / 19 (15) / 0 | 6 | Keep. Add the second instrument and prototypes outside NOMAD (§3.2) |
 
@@ -81,7 +81,7 @@ Every method has at least 26 full-text evidence cards spread over at least six f
   - an off-mesh surrogate optimum is projected onto the mesh although off-mesh is "often more efficient" [S046 pp. 7–8];
   - ensembles and Bayesian-style subproblems live in the Search [S099 pp. 6–7, 15–16];
   - a cross-entropy Search [S133 pp. 1, 3];
-  - "searches bring performance, polls carry guarantees" [S121 pp. 4, 6, 15, 21].
+  - searches bring performance, polls carry guarantees (card paraphrase, not the paper's words); verbatim: "The extended poll is optional, but is labeled as a poll, since it affects the convergence guarantees." [S121 p. 6].
 - *Say–do*: ✅ stated and practiced, 1998–2026.
 - *Update*:
   - The full texts show two more theory-free slots: the evaluation order under opportunism [S072 p. 6; S114 p. 10; S143 p. 10] and a wrapper around the blackbox [S112 p. 14; S173 pp. 6–7] (§4.3, §5).
@@ -108,7 +108,7 @@ Every method has at least 26 full-text evidence cards spread over at least six f
 **Method 3: Guarantee ladder, bounded by counterexamples**
 - *Stated*:
   - "the stronger the hypotheses on the objective and feasible region, the stronger the resulting theoretical guarantees" [S023 p. 7];
-  - results "sharp in that they predict the behavior", with an example for each rung of the ladder [S002 pp. 1, 9–12].
+  - results "sharp in that they predict the behavior" [S002 p. 3], with an example for each rung of the ladder [S002 pp. 9–12].
 - *Practiced*:
   - three minimal counterexamples to Torczon's results (1998 TR) [S025 TR pp. 3–12];
   - hierarchy (i)–(vii) [S002 p. 12];
@@ -141,8 +141,8 @@ Every method has at least 26 full-text evidence cards spread over at least six f
   - Cat-Suite [S130 pp. 3, 5];
   - a solver-selection guide over SOLAR [S175 pp. 7, 9].
 - *Say–do*: ✅, with a scope correction.
-  - Partner blackboxes usually stay with the partner [S013 pp. 2–10; S032 pp. 18–19, 29; S145 p. 14; S084 pp. 24–26; S143 pp. 12–13; S167 pp. 4, 10].
-  - Public artifacts come from dedicated benchmark papers or from scaled-down public twins [S074 pp. 3–8; D006 pp. 4, 18, 22].
+  - No public release is mentioned for the partner blackboxes in S013 (pp. 2–10), S032 (pp. 18–19, 29), S145 (p. 14), S084 (pp. 24–26), S143 (pp. 12–13) and S167 (pp. 4, 10). The texts do not say the blackboxes are private; this is inferred from the absence of a release statement.
+  - Public artifacts come from dedicated benchmark papers and, once, from a scaled-down public twin: Micro-PRIAD, open-source on GitHub [D006 pp. 4, 6, 22]. S074 built a cheaper surrogate problem "to be accessible for testing outside of HQ", with no public release stated [S074 pp. 3–4]. (Corrected after review: S074 was first cited as a second public twin.)
 
 **Method 5: Budget-aware, cross-community benchmarking**
 - *Stated*:
@@ -199,7 +199,7 @@ The full texts win over the search snippets SKILL.md was built from. Each item n
    - *Change*: Origin = a 1998 probe of Torczon's 1997 theorems. The GPS reanalysis came after it and cites it. Why then = Torczon's theory was new and Audet had just arrived at Rice.
    - The 2004 journal version was not available, so "six counterexamples" is not verified by a full text.
 2. **Signature Work Anatomy, progressive barrier.**
-   - *SKILL.md says*: "NOMAD 3 needed a default" (Why then, marked inference).
+   - *SKILL.md says*: "NOMAD 3 (2008) needed a default treatment for quantifiable relaxable constraints" (Why then, marked inference).
    - *Full text*: that inference is not stated. The paper's motivations are four user situations [S007 pp. 3–4]:
      - no feasible start was available for an aircraft planform problem;
      - GPS-filter users valued its constraint-sensitivity information;
@@ -329,7 +329,7 @@ The full texts win over the search snippets SKILL.md was built from. Each item n
 - *Counterexamples aimed at measuring instruments and benchmark logs* rather than theorems [S004 pp. 7–10, 13, 18; S156 p. 11].
 
 **Method 4**
-- *Partner blackboxes stay private*. Public artifacts come from purpose-built benchmark papers [S071; S130; S175; D006] or scaled-down twins [S074 pp. 3–8; D006 pp. 4, 18, 22].
+- *No public release is mentioned for most partner blackboxes*. Public artifacts come from purpose-built benchmark papers [S071; S130; S175; D006] or, once, a scaled-down public twin [D006 pp. 4, 6, 22]; S074's cheaper surrogate problem has no stated public release [S074 pp. 3–4].
 - *Synthetic collections built by documented transformations* (Cat-Suite) [S130 pp. 5–7].
 - *The artifact is a tool front end*, not an instance [S159 pp. 7, 16, 19].
 - *Printed instances in the pre-web era* [S070 pp. 157–167; S010 pp. 25–26].
@@ -428,6 +428,11 @@ The full texts win over the search snippets SKILL.md was built from. Each item n
   - the IDS paper analyses only its assignment subproblem [S173 pp. 10–16].
 - Instance proofs must be kept in the final notation of the paper [D001 p. 1].
 
+**Revision after review (2026-09-27)**
+- *Exclusivity narrowed*: the framework proof and the collapse check (steps 1–2 above) are shared ground with the Conn lens (framework theorems, one-component reduction checks) and the Vicente lens (collapse check as a standard sub-step). Check 4 therefore passes only for three devices: re-proving one's own flagship as an instance of each successor framework, eventually-static adaptation, and the theory contract as the software plug-in interface. SKILL.md Method 7 is narrowed to these devices and marks exclusivity ⚠ moderate, with an Honest Boundary line.
+- *Recount*: counting only cards that carry an instance, collapse or finite-change proof gives 22 distinct cards: S001, S002, S005, S006, S007, S011, S020, S021, S027, S031, S061, S074, S090, S120, S121, S123, S129, S144, S155, S157, S158, D001. S156 (a benchmark normalization that reduces to n+1), S062 (an equivalence of bilevel definitions), S058 (a notation framework), S092 and S137 are dropped as weak support; D001 (an instance proof) and S158 (a finite-change proof), listed above as supporting devices, are counted.
+- *Step 1 made concrete*: the four MADS instance properties OrthoMADS discharges are listed verbatim in SKILL.md [S006 p. 14].
+
 **Relation to Methods 1 and 3**
 - Method 1 is the special case where the new idea sits in the Search. Method 7 covers ideas that change the Poll, the mesh or the acceptance rule [S001; S006; S061; S090; S121; S129; S158].
 - Method 3 states and audits a guarantee; Method 7 constructs it cheaply. The two appear together in the same papers [S001 pp. 11–13; S129 pp. 7, 11–18].
@@ -450,7 +455,7 @@ The full texts win over the search snippets SKILL.md was built from. Each item n
   - say–do ✅: "It would be surprising if one could run the simulation code with a continuous variable where the simulation expects a discrete input" [S011 p. 2]; speed and quality depend "on the user-defined set of neighbors" [S028 p. 13]. Practiced with measured prices: separate evaluations to find and to certify, with a ξ = 5% extended poll [S011 p. 22]; knowledge-restricted neighbours cost about 90% fewer evaluations for about 5.7% worse f [S028 p. 18]; ξ chosen by data profiles [S121 pp. 20, 23];
   - executable ✅;
   - exclusivity ✅: Bayesian optimization and metaheuristics are the usual routes for categorical variables, and they lack these guarantees [S121 p. 3].
-- *Why merge*: the cards already record these papers as Method 2 variants, "semantics first applied to inputs" [S011; S058; S092].
+- *Why merge*: the cards already record these papers as Method 2 variants (card label: semantics first applied to inputs) [S011; S058; S092].
 
 **(c) Adversarial-but-legal instances, rival-failure toys and instrument audits → Method 3, revised steps 2 and 4.**
 - *Proposed wording*:
@@ -484,7 +489,7 @@ The full texts win over the search snippets SKILL.md was built from. Each item n
 | Reformulation as a lens | 4: S050, S070, S076, S093 (+ S062, S064, S124, S151, S155; 10 abstract cards 1994–2009) | ✅ 1997–2026 | ✅ [S070 pp. 20, 174] | ✅ | ✗: the GERAD school's shared tool, not Audet-specific | Heuristic N10 |
 | Cross-family transplant and retuning | 6: S053, S063, S116, S124, S129, S158 | ✅ 2016–2026 | ✅ [S063 p. 13; S158 pp. 1, 3] | ✅ | ✗: cross-pollination is common | Heuristic N8 |
 | Couple auxiliary parameters to the step size | 3: S053, S140, S158 (+ S129) | ✅ 2021–2026 | ⚠: stated only in [S053 p. 9] | ✅ | ⚠ | Heuristic N8 (algorithm design) |
-| Train/held-out split for tuning | 4 + counter-case S016: S057, S073, S095, S150 | ✅ | ⚠ [S073 p. 6] | ✅ | ✗: standard in ML | Revise Heuristic 7 |
+| Train/held-out split for tuning | 4: S057, S073, S095, S150 | ✅ | ⚠ [S073 p. 6] | ✅ | ✗: standard in ML | Revise Heuristic 7 |
 | Nested split: DFO on the pathological block | 3: S151, S155, S186 (+ S095) | ✅ 2021–2026 | ✅ [S151 p. 3] | ✅ | ⚠ | Revise Heuristic 9 |
 | Catalogue open cells, then fill them | 7: S040, S080, S093, S108, S117, S146, S034 (+ S092, S156, S084, S004) | ✅ | ✅ [S080 p. 2] | ✅ | ⚠ (mostly side line) | Heuristic N9 (topic choice) |
 | Public self-correction | 3: D001, S040, S173 (+ S132) | ✅ | ✅ | ⚠ | ⚠ | Method 3 step 4 practice only |
@@ -513,9 +518,9 @@ Each item is executable and passes at least one more check. "Checks" lists R (re
 **Revisions to existing heuristics**
 - **H1**: add that interrupted or low-fidelity evaluations push relaxable constraints to EB [S123; S112; S173] (§3.1 #12).
 - **H4**: extend to adversarial-but-legal instances, rival-failure toys and instrument audits (§4.3c).
-- **H7**: tune on one problem subset and report on held-out problems [S057 p. 18; S095 p. 9; S073 p. 6; S150 pp. 19–22]. The source case tuned and judged on the same list [S016 p. 22].
+- **H7**: tune on one problem subset and report on held-out problems [S057 p. 18; S095 p. 9; S073 p. 6; S150 pp. 19–22]; later tuning papers hold out problems.
 - **H8**: deterministic or seeded, with randomness only where the guarantee needs it [S202 p. 104; S138 pp. 7–9].
-- **H9**: "keep a convergence backbone" instead of "the direct-search backbone" [S150; S140]. Add the nested split, with DFO on the pathological block and a specialized or certified solver inside [S151 pp. 3–5; S155 pp. 5–6; S186 pp. 4–5; S095 pp. 6–7].
+- **H9**: keep a convergence backbone instead of the direct-search backbone (SKILL.md wording) [S150; S140]. Add the nested split, with DFO on the pathological block and a specialized or certified solver inside [S151 pp. 3–5; S155 pp. 5–6; S186 pp. 4–5; S095 pp. 6–7].
 - **H10**: the full texts confirm students as first or corresponding authors of the late categorical, multi-fidelity and penalty-interior-point papers [S121 p. 1; S157; S158 p. 1; S173 p. 1; S092 p. 1]. Formal supervision roles are still not stated in the texts.
 
 **Recommended list after the update, keeping 10 heuristics**:
@@ -557,7 +562,7 @@ All clusters formed from the 267 new-pattern candidates on the cards, grouped by
 | Couple auxiliary parameters to the step size | 3 | 3: S053, S140, S158 | S129 | N8 |
 | Catalogue open cells, then fill them | 9 | 7: S034, S040, S080, S093, S108, S117, S146 (+ S082 abstract, S213 programme) | S004, S084, S092, S103, S156 | N9 |
 | Reformulation as a lens | 14 | 4: S050, S070, S076, S093 (+ 10 abstract cards 1994–2009) | S062, S064, S124, S151, S155 | N10 |
-| Train/held-out split for tuning | 5 | 5: S016 (counter-case), S057, S073, S095, S150 | S092, S118 | H7 revised |
+| Train/held-out split for tuning | 4 | 4: S057, S073, S095, S150 (S016 is the original tuning-as-blackbox case) | S092, S118 | H7 revised |
 | Nested split (DFO outside, specialized solver inside) | 3 | 3: S151, S155, S186 | S095 | H9 revised |
 | Public self-correction and self-successor repair | 4 | 3: D001, S040, S173 (+ S154 abstract) | S132 | Method 3 step 4 practice |
 | LHS feasibility census / benchmark non-triviality | 2 | 2: S071, S175 | S022†, S123, S157 | Method 4 step (§7.3) |
@@ -565,7 +570,7 @@ All clusters formed from the 267 new-pattern candidates on the cards, grouped by
 | Frozen versioned benchmarks, reproducibility switches | 1 | 1: S071 | S019/S202, S021 | Method 4/6 evidence |
 | Noise census before comparisons | 1 | 1: S060 | D006, S016, S071 | Method 5 step 5 evidence |
 | Report degenerate-to-baseline and failure instances | 2 (one work) | 1: S112/S163 | S029, S101, S133, S167 | Method 5 evidence |
-| Scaled-down public twin of a proprietary blackbox | 2 | 2: D006, S074 | S123 | Method 4 variant |
+| Scaled-down public twin of a proprietary blackbox | 1 | 1: D006 (S074 builds a cheaper test surrogate but states no public release) | S123 | Method 4 variant |
 | Non-shrinking probes (revealing poll, covering step) | 2 | 2: S090, S138 | S137 | §7.1 technique |
 | Terminology hygiene | 2 | 2: S002, S058 | S121 | §7.4 writing move |
 | Extremal-geometry side line (numeric first, certified or exact later; analytic pruning; optimality conditions as cuts; ε-uniqueness) | 19 | 12: D002, D003, S037, S040, S070, S080, S094, S104, S108, S117, S142, S146 (+ 7 abstract) | S093, S103, S113, S118, S152, S177 | Side line, out of core (§7.1, §8) |
@@ -630,10 +635,10 @@ All clusters formed from the 267 new-pattern candidates on the cards, grouped by
 ### 7.3 Experiment protocols
 
 - **Effort currency with explicit weights, with every phase charged** [S128 p. 15; S155 pp. 19, 25, 27; S156 pp. 13–16; D006 p. 22; S084 pp. 19–20; S019 pp. 50, 79–82]. Feasibility and preprocessing phases are charged [S007 p. 25; S027 p. 22; S112 pp. 18–19].
-- **Fair baselines**: common f0 and f*, instances flagged and dropped when no solver improves f0, a two-phase h-then-f plot for infeasible starts, and a switching check that re-plots without the best solver [S128 pp. 5–6, 9–11, 13–14; S175 p. 11; S157 pp. 22–23].
+- **Fair baselines**: common f0 and f*, instances flagged and dropped when no solver improves f0, a two-phase h-then-f plot for infeasible starts [S128 pp. 5–6, 10–11; S175 p. 11; S157 pp. 22–23]. S128 illustrates the switching effect of performance profiles by removing the fastest solver [S128 pp. 9, 13–14]; re-plotting without it is a check derived from that illustration, not a step the paper prescribes.
 - **Same-solver controlled comparison** [S001 p. 19; S029 pp. 14–15; S061 p. 14; S129 p. 19; S172 pp. 16–17, 20; S158 p. 18; S019 p. 83].
 - **Purpose-labelled problems**, including the competitor's home ground and a hypothesis-violating case [S001 pp. 3, 19–25; S063 pp. 17–23; S034 p. 1].
-- **Noise census, seeds and replications** [S060 pp. 7–8; D006 pp. 13–14; S071 p. 25; S016 p. 21; S021 pp. 14–16; S027 p. 23; S006 p. 15; S150 pp. 18–19].
+- **Noise census, seeds and replications**: 100 replications of one point [S060 p. 8], differences judged against two standard deviations [S060 pp. 11–12]; Micro-PRIAD uses ±3σ bands [D006 pp. 13–14]; also [S071 p. 25; S016 p. 21; S021 pp. 14–16; S027 p. 23; S006 p. 15; S150 pp. 18–19].
 - **Held-out tuning** [S057 p. 18; S095 p. 9; S073 p. 6; S150 pp. 19–22].
 - **Benchmark construction**:
   - an LHS feasibility census [S175 p. 9; S071 p. 24; S157 pp. 7–8; S123 p. 8];
@@ -659,9 +664,9 @@ All clusters formed from the 267 new-pattern candidates on the cards, grouped by
 ### 7.4 Writing moves
 
 - **Open with the pathologies and scope the tool negatively** [S019 p. 11; S023 p. 7; S034 p. 1; S071 p. 3; S173 p. 3].
-- **Pose "why not keep the existing method?"** and answer it with concrete user situations [S007 pp. 3–4].
+- **Pose *why not keep the existing method?*** (template question; S007 asks "what motivates us to undertake this research rather than to abandon the filter in favor of the barrier") and answer it with concrete user situations [S007 pp. 3–4].
 - **Show a toy pathology figure before the algorithm** [S172 pp. 7–8; S129 pp. 5–6; S046 p. 13].
-- **Position by similarity and difference**: "as in X … unlike Y" clauses in the abstract [S007 p. 1]; a literature table whose columns are the gaps the paper fills [S156 p. 10; S092 pp. 7, 10].
+- **Position by similarity and difference**: *as in X … unlike Y* clauses (template) in the abstract [S007 p. 1]; a literature table whose columns are the gaps the paper fills [S156 p. 10; S092 pp. 7, 10].
 - **Summarize the ladder** as a numbered hierarchy or a case → theorem → assumptions table [S002 p. 12; S007 pp. 24–25; S090 p. 14].
 - **Write limitations as confessions with a point** [S005 p. 24; S001 p. 25]. **Say which rung is lost** [S027 p. 17].
 - **Erratum style**: restate the result, split it into checkable bullets, and say whether the statement or only the proof is affected [D001 p. 1].
@@ -740,7 +745,9 @@ Distinct coauthors per period, over 184 Audet works after merging duplicates. Su
 | 2020–2024 | 27 | 2 (S122, S190) | 32 | Le Digabel 9, Tribes 3, Kokkolaras 3, Alarie 3, Bouchet 3, Bigeon 3, Batailly 3, Kojtych 3 |
 | 2025–2026 | 26 | 1 (S177) | 37 | Le Digabel 13, Tribes 9, Diouane 8, Diago 5, Lebeuf 5, Hallé-Hannan 4, Hare 3, Alarie 2 |
 
-Over all periods there are 157 distinct coauthors. The most frequent, with their first and last year, are: Le Digabel 54 (2004–2026), Hansen 36 (1997–2021), Dennis 22 (1999–2012), Tribes 20 (2009–2026), Messine 18 (2002–2025), Savard 17 (1994–2011), Alarie 12, Jaumard 10, Abramson 9, Diouane 9 (2025–2026), Kokkolaras 8 and Hare 7 (2017–2026).
+Counting rule for this table and the next paragraph: coauthor surnames from the card coauthor fields of the carded Audet works, duplicates merged. SKILL.md instead uses a rule reproducible from `works.json`: distinct non-talk entries after merging duplicates (including S101 = S128, D002 = S067, S019 = S202, S112 = S163, S145 ≈ S204), with S213 and D008 excluded (186 entries). That gives Le Digabel 54, Dennis 21 and Tribes 19.
+
+Over all periods there are 157 distinct coauthors. The most frequent (card rule), with their first and last year, are: Le Digabel 54 (2004–2026), Hansen 36 (1997–2021), Dennis 22 (1999–2012), Tribes 20 (2009–2026), Messine 18 (2002–2025), Savard 17 (1994–2011), Alarie 12, Jaumard 10, Abramson 9, Diouane 9 (2025–2026), Kokkolaras 8 and Hare 7 (2017–2026).
 
 **Observations**
 - **Hubs change by era**:
@@ -791,7 +798,7 @@ Over all periods there are 157 distinct coauthors. The most frequent, with their
 
 - **Unread key works (no open full text)**. Their SKILL.md claims still rest on abstracts:
   - the textbook, first and second editions [S003 metadata; D005 abstract], so the stated side of Method 5 ("Comparing Optimization Methods") and the accuracy-profile warning still come from a secondary quotation;
-  - VNS search [S009], quadratic-model search [S038], mesh-based Nelder–Mead [S043], Robust-MADS [S055];
+  - VNS search [S009], poll reduction to n+1 points [S038] (✗ first labelled "quadratic-model search"; its abstract describes a Poll-side reduction), mesh-based Nelder–Mead [S043], Robust-MADS [S055];
   - BiMADS and MultiMads [S018; S026], MV-MADS [S017], globalization strategies [S024], granular variables [S033], COCO [S141];
   - the AIAA 2000 surrogate paper [S008] and the NOMAD project record [S012].
 - **The 2004 tightness article.** Only the 1998 report was read [S025], so "six counterexamples" is unverified.
