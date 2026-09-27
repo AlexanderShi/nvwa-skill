@@ -8,7 +8,7 @@
   3. DOI → Unpaywall 开放获取位置（只用 OA 链接，不绕过付费墙）
   4. works.json 里给出的候选 PDF 链接（作者主页、机构仓库、DBLP ee）
 下载后校验：必须是 PDF，且前两页文本包含标题的大部分关键词，否则丢弃并标 mismatch。
-抽取纯文本（扫描版PDF没有文字层时，若装了 tesseract 则自动逐页 OCR），维护可提交的 INDEX.md（角色、全文状态、阅读状态；Role/Read 手改会保留）。
+抽取纯文本（扫描版PDF没有文字层、或文字层是字体乱码时，若装了 tesseract 则自动逐页 OCR），维护可提交的 INDEX.md（角色、全文状态、阅读状态；Role/Read 手改会保留）。
 
 用法:
     python3 acquire_fulltexts.py <skill目录> [--works PATH] [--delay SEC] [--only ID,ID] [--recheck]
@@ -158,6 +158,15 @@ def slug(work: dict) -> str:
     return f"{work['id']}-{work.get('year') or 'nd'}-" + "-".join(words)
 
 
+COMMON = set("the and of to in is that for we with this are be by on as it an at from or which can if not our then".split())
+
+
+def stopword_ratio(text: str) -> float:
+    """英文常用词占比：正常论文约0.2，字体乱码的文字层 <0.01（非英文论文约0.02-0.04，不会误判）。"""
+    words = re.findall(r"[a-z]+", text.lower())
+    return sum(1 for w in words if w in COMMON) / len(words) if words else 0.0
+
+
 def ocr_pages(doc) -> list[str] | None:
     """扫描版PDF（无文字层）：逐页渲染后用 tesseract OCR；没装 tesseract 返回 None。"""
     import shutil
@@ -179,13 +188,15 @@ def ocr_pages(doc) -> list[str] | None:
 
 
 def extract_text(pdf: Path, txt: Path) -> int:
-    """返回页数；失败返回 0。文字层几乎为空（扫描件）时自动 OCR。"""
+    """返回页数；失败返回 0。文字层几乎为空（扫描件）或是字体乱码时自动 OCR。"""
     try:
         import pypdfium2 as pdfium
         doc = pdfium.PdfDocument(str(pdf))
         pages = [doc[i].get_textpage().get_text_range() for i in range(len(doc))]
-        if pages and sum(len(p.strip()) for p in pages) / len(pages) < 200:
-            pages = ocr_pages(doc) or pages
+        if pages and (sum(len(p.strip()) for p in pages) / len(pages) < 200 or stopword_ratio("".join(pages)) < 0.01):
+            ocr = ocr_pages(doc)  # 无文字层，或文字层是字体乱码（Type 3 字体等）
+            if ocr and stopword_ratio("".join(ocr)) > stopword_ratio("".join(pages)):
+                pages = ocr
         txt.write_text("\n\f\n".join(f"[[page {i + 1}]]\n{p}" for i, p in enumerate(pages)), encoding="utf-8")
         return len(pages)
     except ImportError:
