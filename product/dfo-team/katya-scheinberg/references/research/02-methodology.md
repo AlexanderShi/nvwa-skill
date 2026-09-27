@@ -48,3 +48,66 @@
 
 - No retrieved text where Scheinberg describes *how problems are chosen*, *how papers are written*, or *how mentoring is done*. Those layers have **no stated evidence** here.
 - No retrieved quote on reviewing standards or on critiques of other approaches.
+
+---
+
+## Update 2026-09-27 (deepening pass, ~60 additional searches)
+
+> Same evidence rules as above: search results and snippets only, no full text. The new material raises the stated layer from *titles* to *talk abstracts, a newsletter essay, an overview article and a tutorial*. It is still not a long-form "how I do research" text.
+
+### F. Talk and tutorial abstracts (primary: abstracts are normally written by the speaker)
+
+| # | Item | What it states (paraphrase unless quoted) | Layer | URL | Cred. |
+|---|---|---|---|---|---|
+| F1 | "Stochastic First Order Oracles and Where to Find Them", INFORMS Annual Meeting 2021 (Anaheim) | Continuous optimization is expanding toward methods that do not need exact objective information, and most of them still use approximate first-order information. The talk gives **a general definition of a stochastic oracle** and applies it to sampled stochastic gradients, traditional and randomized finite differences, and robust gradient estimation. It then asks which properties of such oracles the convergence analysis needs. | Problem framing (Method 1) | https://pubsonline.informs.org/do/10.1287/orms.2021.05.48n/full/ | primary (abstract via search summary) |
+| F2 | "Stochastic Oracles and Where to Find Them", plenary, NeurIPS 2022 OPT workshop | Same abstract. Opening sentences as shown in search result: "Continuous optimization is a mature field which has recently undergone major expansion and change. One of the key new directions is the development of methods that do not require exact information about the objective function." | Problem framing | https://neurips.cc/virtual/2022/55786 | primary |
+| F3 | Same title: Distinguished Tutte Lecture, Waterloo (17 May 2024); Lehigh ISE Spencer C. Schantz Technical Talk (10 Apr 2025) | Same programme, repeated over four years at four venues. One search summary of the tutorial abstract adds three points: variance directly affects the convergence rate; variance trades off against oracle cost across oracles; **bias affects the neighbourhood of convergence but not the rate** (paraphrase; exact wording not confirmed by a second search). | Result judgement (Methods 1, 3) | https://uwaterloo.ca/combinatorics-and-optimization/events/distinguished-tutte-lecture-katya-scheinberg ; https://engineering.lehigh.edu/news/article/lehigh-ise-spencer-c-schantz-technical-talk-katya-scheinberg-georgia-institute | primary |
+| F4 | "Overview of Adaptive Stochastic Optimization Methods" (MIT ORC; Princeton; Cornell CAM colloquium 10 Feb 2023; NC State 27 Mar 2023; MICDE Winter 2022 seminar video) | Stochastic variants of adaptive methods (step search, trust region, cubic regularization) let the **step-size parameter dictate the accuracy required** of stochastic approximations. Those requirements are therefore adaptive and may be biased or even inconsistent. The step parameter is not bounded away from zero, which obstructs complexity analysis. **Viewing the algorithms as stochastic processes with martingale behaviour** gives expected-complexity bounds that also hold with high probability. Applications listed: expectation minimization, black-box and simulation optimization, and corrupt samples. | Method statement (Methods 1, 2, 3) | https://orc.mit.edu/events/overview-adaptive-stochastic-optimization-methods ; https://www.youtube.com/watch?v=OVSnPO3FBxY | primary (abstract via search summary) |
+| F5 | Aisenstadt Chair lectures, CRM Montréal, 20–30 May 2025: "Introduction to derivative-free and zeroth order optimization I/II"; "A study of stochastic and noisy oracles in unconstrained continuous optimization" | Titles again join DFO and zeroth-order optimization and centre the course on oracles. The word "unconstrained" states the scope explicitly. | Framing; scope | https://www.youtube.com/watch?v=Szz3J0eBCWk ; https://www.youtube.com/watch?v=5j8LvlbzsJQ ; https://www.youtube.com/watch?v=1zS8v_B1JPM ; https://www.crmath.ca/en/prizes-and-honours/aisenstadt-chairs/ | primary (titles) |
+| F6 | SIAM Conference on Optimization 2017 (Vancouver) plenary: "Using Second-order Information in Training Large-scale Machine Learning Models" | Title only. States an interest in second-order methods for ML, matched by the practice record (LHAC, Math. Program. 2016; SARC 2023). | Taste | https://archive.siam.org/meetings/op17/invited.php | primary (title via search summary) |
+
+### G. Essays, overviews, tutorials (primary)
+
+| # | Item | What it states | Layer | URL |
+|---|---|---|---|---|
+| G1 | Scheinberg, article in *Optima* 79 (Mathematical Programming Society newsletter; ≈2009; exact title not retrieved) | Search summaries of the article: it discusses the Moré–Wild numerical experiments showing Powell's model-based method is very effective despite the low accuracy of its quadratic models. The main point is that one needs to impose **only minimal quality controls** to promote convergence and ensure good performance (paraphrase of search-summary wording). | Method statement (Method 4) | https://www.mathopt.org/Optima-Issues/optima79.pdf |
+| G2 | Curtis & Scheinberg, "Adaptive stochastic optimization: a framework for analyzing stochastic optimization algorithms", *IEEE Signal Processing Magazine* 37(5), 32–42 (2020) | Summarises the research on adaptive stochastic methods and contrasts them with non-adaptive SG approaches whose parameters must be tuned for each application. Adaptive methods may offer significant computational savings (paraphrase). | Taste (Method 2) | https://ieeexplore.ieee.org/document/9194022/ ; arXiv:2001.06699 |
+| G3 | Curtis & Scheinberg, "Optimization methods for supervised machine learning: from linear models to deep learning", INFORMS *TutORials in OR* (2017) | Introduces "key models, algorithms, and open questions" of optimization for ML to an INFORMS audience that knows optimization but less ML (paraphrase of abstract). Covers first-order, stochastic gradient, variance-reduced and second-order methods. | Framing / teaching | https://doi.org/10.1287/educ.2017.0168 ; arXiv:1706.10207 |
+
+### H. New author-written abstract framing (primary)
+
+| # | Paper | Stated framing | Layer |
+|---|---|---|---|
+| H1 | Paquette & Scheinberg arXiv v1 (2018, "…with Convergence Rate Analysis") | For deterministic optimization, line search provides stability and improved efficiency. The paper adapts classical backtracking Armijo to the stochastic setting, with accuracy "dynamically adjusted" and holding with a sufficiently large, but fixed, probability (paraphrase). | Method 2 |
+| H2 | Berahas, Cao & Scheinberg, SIOPT 31 (2021) | The paper *extends the framework* built for exact function values and random gradients to noisy functions. Noise is bounded in absolute value "without any additional assumptions". Two alternative gradient conditions are given (paraphrase). | Method 1, 3 |
+| H3 | Jin, Scheinberg & Xie, Math. Program. 209 (2025) | Step-size parameters in stochastic adaptive methods are not bounded away from zero because of oracle failures, and bounds on them had not been derived before. This states a **gap** and closes it (paraphrase). | Result judgement / agenda |
+| H4 | Scheinberg & Xie, arXiv:2308.13161 | SARC outperforms other stochastic adaptive methods, "as in the deterministic case" (paraphrase). The deterministic ordering of methods is the benchmark for the stochastic ordering. | Deterministic parity |
+| H5 | Scheinberg & Xie, arXiv:2511.19411 | The first iteration-complexity analysis in this setting with high-probability bounds on the stopping time. The tail decays exponentially or polynomially depending on the zeroth-order oracle assumptions (paraphrase). | Method 3 |
+| H6 | Nguyen, Scheinberg & Tran, JOTA 205 (2025) | Stochastic ISTA/FISTA analysed **without assuming an unbiased stochastic gradient**. The inexact fixed-step analysis is extended to backtracking (paraphrase). | Method 1, 2 |
+| H7 | Chaudhry & Scheinberg, arXiv:2510.14935 | Theoretical complexity analysis "lags behind practice" for Powell-type model-based methods (paraphrase). The paper sets out to close that gap. | Agenda (Method 4) |
+
+### I. Prize citations and profiles (secondary; institution-written)
+
+| # | Item | Content | URL |
+|---|---|---|---|
+| I1 | SIAM Fellow, class of 2025 | Recognised for foundational contributions to derivative-free optimization and optimization applications in data science, and for service to the optimization community (paraphrase of Georgia Tech news summary). | https://www.isye.gatech.edu/news/coca-cola-foundation-chair-katya-scheinberg-selected-2025-class-siam-fellows |
+| I2 | Lagrange Prize 2015 (with Conn, Vicente; for the IDFO book) | Citation as shown in search result: "A small sampling of the direct impact of their work is seen in aerospace engineering, urban transport systems, adaptive meshing for partial differential equations, and groundwater remediation." | https://www.uc.pt/en/fctuc/dmat/noticias/LagrangePrize ; https://www.mathopt.org/?nav=lagrange |
+| I3 | Farkas Prize 2019 (INFORMS Optimization Society) | Award page exists; citation text **not retrieved**. | https://connect.informs.org/optimizationsociety/prizes/farkas-prize/2019 |
+| I4 | ICM 2026 section lecture, Control Theory and Optimization | Invited section lecturer (search summary of a Georgia Tech news page). The companion paper arXiv:2510.14935 is listed as ICM 2026 proceedings on the co-author's homepage. | https://math.gatech.edu/news/school-mathematics-professor-john-etnyre-speak-icm-2026 ; https://chaudhrya.github.io/ |
+| I5 | MOS Chair | Took office mid-2025 (July per Georgia Tech bio; an Optima summary says August 2025). **No Chair's column or statement on publication culture was found.** | https://www.mathopt.org/Optima-Issues/optima107.pdf (predecessor's column) |
+
+### J. Revised recurring themes (count includes sections A–I)
+
+1. **Oracle-first framing**: A1, A2, B4, B5, B10, F1–F5, H2, H6 (≥12×, over 2019–2025, at four venues with the same talk). This is now the best-evidenced stated principle.
+2. **Algorithms analysed as stochastic processes (martingales / stopping times)**: F4, H5, plus the 2019 title (3× stated). The stated side of Method 3 is no longer abstract framing only.
+3. **Deterministic parity**: B1, B2, B7, B8, H4 (5×).
+4. **Adaptive methods over tuned schedules**: B3, F4, G2, H1 (4×).
+5. **Minimal quality control / minimal safeguard**: G1 (2009 essay), B9 (2010), H7 context (3×). This is now stated in Scheinberg's own words (paraphrase), not only practised.
+6. **Bias sets the neighbourhood; variance and cost set the rate**: F3, H2 (2×; the exact wording is unconfirmed).
+7. **DFO ≡ zeroth-order**: A3, F5, C1 (3×).
+
+### K. Still missing
+
+- No long-form interview, podcast, oral history or "advice to students" text was found.
+- No MOS Chair statement, and no SIAG/OPT Views-and-News article by Scheinberg was found. The Optima 79 article title was not retrieved.
+- No talk transcript was read, so the talk abstracts are known only through search summaries.
