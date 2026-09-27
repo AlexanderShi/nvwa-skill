@@ -1,0 +1,463 @@
+[
+ {
+  "id": "S048",
+  "year": "2009",
+  "title": "Row by row methods for semidefinite programming",
+  "read_level": "full",
+  "contribution": "Introduces the row-by-row (RBR) block coordinate descent method for SDP: fixing an (n-1)-dimensional principal submatrix turns the PSD constraint into a Schur-complement second-order cone constraint, giving closed-form updates for maxcut and matrix completion, an augmented-Lagrangian wrapper for general linear constraints, and a convergence proof for the log-barrier version.",
+  "problem_entry": "Cost per iteration rather than iteration count: IPMs need O(n^6) work and O(m^2) memory per iteration, so the authors accept a non-polynomial method whose iterations are much cheaper; direct predecessor is Banerjee-El Ghaoui-d'Aspremont's Schur-complement BCD (pp. 1-2).",
+  "key_idea": "Fix B = X_{i^c,i^c}; X PSD iff xi - y^T B^{-1} y >= nu (rotated SOC), so each row update is an SOCP, closed-form for maxcut (one matvec, Lemma 3.1) and matrix completion (one small linear solve, Lemma 4.1); wrap in an augmented Lagrangian when linear constraints couple rows (pp. 3-6, 11-16).",
+  "assumptions": "Slater condition (Assumption 2.1, p. 3); convergence theorem for the barrier problem with box constraints, convex f, strict convexity and compact level set (Thm 3.4, pp. 9-10); AL convergence only argued from standard theory (p. 12).",
+  "proof_devices": [
+   "Bertsekas Prop. 2.7.1 adaptation: monotone decrease, strict convexity along a segment forces X^{k,1}-X^k -> 0, then summed per-row variational inequalities give global optimality (Thm 3.4, pp. 9-10)",
+   "reinterpretation of the safeguard nu as a log-barrier parameter sigma so the barrier convergence proof covers PURE-RBR-M (Lemma 3.2, pp. 7-8)",
+   "3x3 counterexample for nu = 0 and 2x2 counterexample for coupled linear constraints, each placed before its safeguard (pp. 6-7, 10-11)"
+  ],
+  "experiments": "Maxcut SDPs on rudy graphs n = 1000-4000 (random and almost planar, 5 seeds each, commands printed) vs DSDP on CPU time and cycles, e.g. R4000-1 DSDP 6274 s vs PURE-RBR-M 36.5 s (rel-obj 5.9e-3) / 261.1 s (4.0e-5); matrix completion p = q = 100-500, r = 10, no competing solver (pp. 16-19).",
+  "positioning": "Against interior-point methods (O(n^6) per iteration) and as a primal, overlapping-block relative of Banerjee-El Ghaoui-d'Aspremont's BCD; convergence argument borrowed from Bertsekas (pp. 1-2, 9).",
+  "writing": "Introduction leads with concrete wall-clock claims (4000x4000 maxcut in under 5.25 minutes, p. 1); each safeguard is preceded by a tiny counterexample; low hedging, with informal asides such as Fortuitously and Somewhat surprisingly (pp. 5, 17).",
+  "limits_future": "Non-polynomial complexity (p. 1); only two SDP classes tested (p. 15); future work on exploiting the SOCP subproblem form (p. 12) and general conic programs with nonnegativity and SOC constraints (p. 19).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Constraint structure (fixed diagonal, sampled entries) makes each block subproblem a matvec, a cubic root or a small linear solve.",
+    "pages": "pp. 5-6, 13, 15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Classical BCD and augmented Lagrangian kept, but the change is a reformulation (PSD -> SOC via Schur complement), not a repair under a weaker oracle.",
+    "pages": "pp. 4-5, 10-13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Step 4 pattern: negative example first (nu = 0; coupled linear constraints), then the minimal safeguard (nu > 0; AL wrapper).",
+    "pages": "pp. 6-7, 10-11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "convergence by embedding in an existing framework",
+    "evidence": "AL version's convergence asserted from Theorem 3.4 plus standard AL theory rather than proved.",
+    "pages": "p. 12"
+   },
+   {
+    "pattern": "counterexample before safeguard",
+    "evidence": "3x3 example (nu = 0) and 2x2 example (coupled constraints) motivate nu > 0 and the AL wrapper.",
+    "pages": "pp. 6-7, 10-11"
+   }
+  ],
+  "transferable": [
+   "Handle a PSD constraint inside block coordinate descent by fixing the complementary principal submatrix and writing the block's feasibility as a Schur-complement SOC constraint (pp. 3-4).",
+   "Justify each safeguard with the smallest counterexample that breaks the unguarded method, placed right before the safeguard (pp. 6-7, 10-11).",
+   "Reinterpret a numerical safeguard parameter as a barrier parameter so an existing barrier convergence proof covers the practical algorithm (Lemma 3.2, pp. 7-8).",
+   "Print instance-generator commands and random seeds for every test problem (p. 16; Table 5.2, p. 19)."
+  ],
+  "coauthors": "Z. Wen, D. Goldfarb, S. Ma",
+  "quotes": [
+   {
+    "text": "Although the computational complexity of the new method presented here is not polynomial, each of its iterations can be executed much more cheaply than in an interior point algorithm.",
+    "page": 1
+   },
+   {
+    "text": "Fortuitously, the optimal solution of (3.2) is determined by a single matrix-vector product as we can see from the following lemma.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S049",
+  "year": "2009",
+  "title": "SINCO-a greedy coordinate ascent method for sparse inverse covariance selection problem",
+  "read_level": "full",
+  "contribution": "Proposes SINCO, a greedy primal coordinate ascent method for l1-penalized sparse inverse covariance selection whose single-entry steps have closed-form exact line searches, and shows empirically that its iterate path reproduces the regularization-path ROC and yields lower false-positive rates than glasso.",
+  "problem_entry": "Structure recovery of Gaussian Markov networks: COVSEL/glasso work on the dual with whole-row BCD, IPMs are O(p^6) per iteration and recover sparsity only in the limit; judge algorithms by true/false positives, not just objective (pp. 1-5, 11).",
+  "key_idea": "Update one diagonal entry or one symmetric pair of C at a time; with W = C^{-1} the exact line search is a root of a quadratic, so all O(p^2) candidate steps can be evaluated and the best one taken (Gauss-Southwell), with an O(p^2) Sherman-Morrison-Woodbury update of W (pp. 5-9).",
+  "assumptions": "Zero-mean Gaussian data (p. 3); nonnegative entrywise penalty matrix S allowing row-specific lambda_i (p. 4); convergence asserted from BCD on a strictly convex objective and the RBR result, not proved (p. 9).",
+  "proof_devices": [
+   "closed-form determinant of a symmetric rank-two update: det(C + theta(e_i e_j^T + e_j e_i^T)) = det(C)(1 + 2 theta W_ij + theta^2 (W_ij^2 - W_ii W_jj)) (pp. 7-8)",
+   "root localisation: positive discriminant, f'(0) > 0 and f -> -infinity at theta_max = 1/(sqrt(W_ii W_jj) - W_ij) give exactly one root in (0, theta_max) (p. 8)"
+  ],
+  "experiments": "Synthetic random and scale-free networks with known ground truth (p = 100-1100, n = 500-5500) vs glasso on ROC and CPU (implementation asymmetry acknowledged); fMRI StarPlus data (3 subjects, 40 samples, leave-one-out) vs COVSEL and SVM (pp. 9-17).",
+  "positioning": "Against glasso and COVSEL (dual row-wise BCD) and interior-point methods; presented as a simplified RBR method (S048) applied to the primal (pp. 4-5).",
+  "writing": "Claims framed around structure recovery (false positives) rather than speed alone; a key weakness (missing true positives on denser networks) stated early (p. 5); convergence handled in one paragraph by reference (p. 9).",
+  "limits_future": "May miss true positives on dense networks (p. 5); tolerance path costs more CPU than the regularization path (p. 12); may be too slow and possibly uncompetitive on sparse dual SDPs such as matrix completion (pp. 19-20); future: RBR applied to the same problem (p. 5).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Rank-two structure of a symmetric pair update makes det and inverse updates closed-form, so a coordinate step is O(1) and greedy selection over all pairs is affordable.",
+    "pages": "pp. 5-9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Head-to-head comparison on the real goal (ROC against ground truth) rather than equal evaluations; CPU comparison across unequal implementations acknowledged.",
+    "pages": "pp. 9-15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Coordinate descent kept; the change is the selection rule and the primal variable space, not a repair.",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "solver path as model-selection path",
+    "evidence": "Iterates of one run at small lambda with decreasing tolerance trace the same TP/FP trade-off as the regularization path.",
+    "pages": "pp. 2, 11-12"
+   },
+   {
+    "pattern": "convergence by embedding in an existing framework",
+    "evidence": "Convergence claimed because SINCO is a special case of the RBR method of S048.",
+    "pages": "p. 9"
+   }
+  ],
+  "transferable": [
+   "For log-det objectives, keep W = C^{-1} and use the rank-one determinant lemma twice to get a closed-form exact line search along any symmetric pair (pp. 7-8).",
+   "If one coordinate step costs O(1), evaluate all candidates and take the best (Gauss-Southwell); cost per iteration stays at the O(p^2) inverse update (pp. 5, 9).",
+   "For structure recovery, plot the ROC of one run's iterates at decreasing tolerance next to the ROC of the lambda path (pp. 12-13).",
+   "Report CPU time per nonzero when the solution size changes with tolerance (Fig. 3, p. 14)."
+  ],
+  "coauthors": "I. Rish",
+  "quotes": [
+   {
+    "text": "But since the real goal is to recover true nonzero structure of the covariance matrix, it is not necessary to solve problem (8) accurately.",
+    "page": 12
+   },
+   {
+    "text": "On the other hand, it may suffer from introducing too few nonzeros and thus missing some of the true positives, especially on denser networks.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S123",
+  "year": "2010",
+  "title": "Efficient Algorithms for the Group Lasso",
+  "read_level": "full",
+  "contribution": "Derives an exact block coordinate descent for the Group Lasso without orthonormal groups (each block solved as a trust-region subproblem by Newton's method on the secular equation), a block-step ISTA variant (ISTA-BC) and a hybrid, proves global convergence by embedding both step types in Tseng-Yun BCGD, and shows competitive performance including on MMV problems; the text file is a later revision titled Efficient Block-coordinate Descent Algorithms for the Group Lasso.",
+  "problem_entry": "Classical BCD for the Group Lasso needs orthonormal group blocks for closed-form updates, and gradient methods (ISTA/FISTA, SLEP) have good rates but are often slower in practice (pp. 2-3).",
+  "key_idea": "A nonzero block solution solves a trust-region subproblem for some radius, found by Newton on 1 - 1/||y(Delta)|| with a cached eigendecomposition (BCD-GL); for large groups use separate backtracking steps per block (ISTA-BC); switch per group at 200 variables (BCD-HYB); in MMV the block Hessians are multiples of I and both coincide in closed form (pp. 3-7, 12).",
+  "assumptions": "Least-squares loss, given non-overlapping groups (overlap by column duplication, p. 14); M_j + delta I if M_j singular to meet framework bounds (p. 10).",
+  "proof_devices": [
+   "Beck-Teboulle O(1/k) proof with a vector of block Lipschitz constants replacing the scalar, constant proportional to sqrt(max/min block Lipschitz ratio) (Theorem 1, Lemma 1, pp. 8-9)",
+   "global convergence by showing ISTA-BC steps (H_jj = I/t_j) and BCD-GL steps (H_jj = M_j) satisfy Tseng-Yun BCGD's modified Armijo rule and uniform Hessian bounds (Theorem 2, pp. 9-10)"
+  ],
+  "experiments": "Matlab; 11 small and 7 large-group synthetic sets, breast-cancer data with 878 overlapping pathway groups, MMV and scalability sets; baselines FISTA, SLEP, BCGD, SpaRSA, SPG/SPOR-SPG; all stopped at F - F* <= 1e-5 vs an ISTA-BC reference; CPU, iterations and fractional Aprods; performance profiles (pp. 13-20).",
+  "positioning": "Extends Yuan-Lin BCD beyond orthonormal blocks and Beck-Teboulle ISTA/FISTA to per-block steps; convergence via Tseng-Yun BCGD; notes M-BCD appeared concurrently (pp. 2-3, 9-10, 12).",
+  "writing": "Contribution paragraph enumerates the algorithms (p. 2); results summarised with performance profiles (p. 16); limitations appear inside the method sections, and the conclusion only restates results (pp. 6-7, 21).",
+  "limits_future": "No rate for ISTA-BC or BCD-GL (p. 7); unclear whether acceleration helps in block form (p. 7); Gauss-Seidel steps not parallel (p. 6); poor on Nemirovski sets (p. 16); Aprods exclude eigendecomposition costs (p. 16); no future work stated (p. 21).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "One eigendecomposition per group reused every iteration; identity block Hessians in MMV give closed-form steps.",
+    "pages": "pp. 3-4, 12"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "ISTA kept with only the step rule changed per block; convergence obtained by showing new steps are instances of an existing convergent method (BCGD).",
+    "pages": "pp. 6, 9-10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "All solvers run to the same objective gap against a common reference, work counted in matrix-vector products; not function evaluations and eigendecomposition cost excluded.",
+    "pages": "pp. 13-16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "convergence by embedding in an existing framework",
+    "evidence": "BCD-GL and ISTA-BC steps shown to be BCGD steps satisfying its Armijo rule and Hessian bounds, so Tseng-Yun's convergence theorem applies.",
+    "pages": "pp. 9-10"
+   },
+   {
+    "pattern": "explicit negative scope statement",
+    "evidence": "Reports that ISTA-BC, ISTA-MS and BCGD do much worse on the Nemirovski worst-case-style sets.",
+    "pages": "p. 16"
+   }
+  ],
+  "transferable": [
+   "Solve a group-lasso block exactly as a trust-region subproblem: Newton on 1 - 1/||y(Delta)|| with a cached eigendecomposition (pp. 3-4).",
+   "Get global convergence of a hybrid method by showing each step type meets the acceptance rule and Hessian bounds of an existing convergent framework (pp. 9-10).",
+   "Count block-wise products as fractions of a full product to keep work comparisons fair (p. 15).",
+   "Stop all competitors at the same objective gap against a precomputed reference and report performance profiles (pp. 15-16)."
+  ],
+  "coauthors": "Z. (Tony) Qin, D. Goldfarb",
+  "quotes": [
+   {
+    "text": "The proofs of the theoretical rates of convergence of the ISTA/FISTA algorithms do not readily extend to ISTA-BC or BCD-GL.",
+    "page": 7
+   },
+   {
+    "text": "However, as we show in our computational results, the BCD approach (when it can be applied) often outperforms the existing gradient-based approaches.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S067",
+  "year": "2011",
+  "title": "Fast first-order methods for composite convex optimization with line search",
+  "read_level": "unreadable",
+  "contribution": "not read: the text file is byte-identical (same MD5) to S028's file, i.e. the FoCM 2014 version with backtracking and X. Bai as coauthor; the 2011 preprint with line search is not in the corpus.",
+  "problem_entry": "not read",
+  "key_idea": "not read",
+  "assumptions": "not read",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "not read",
+  "writing": "not read",
+  "limits_future": "not read",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "D. Goldfarb (as listed; file shows D. Goldfarb and X. Bai)",
+  "quotes": []
+ },
+ {
+  "id": "S035",
+  "year": "2012",
+  "title": "Block coordinate descent methods for semidefinite programming",
+  "read_level": "partial",
+  "contribution": "Handbook chapter that re-presents the row-by-row BCD method for SDP within a survey of BCD and first-order SDP methods, derives the glasso/Banerjee BCD as RBR on the sparse inverse covariance dual, generalizes RBR to rank-two updates with an SOC positivity condition, and adds comparisons with SDPLR, FPCA and SVT.",
+  "problem_entry": "Same IPM-cost entry as S048, now with an explicit scope limit that BCD is not a general-purpose SDP solver (p. 2), and RBR placed within surveys of BCD rules/convergence and first-order SDP methods (pp. 2-5).",
+  "key_idea": "RBR plus two extensions: sparse inverse covariance BCD as RBR on the bound-constrained dual with a Lasso-dual row subproblem (pp. 13-14), and rank-two updates X + (uv^T + vu^T)/2 whose positive definiteness is one SOC constraint in v for fixed u (pp. 21-23).",
+  "assumptions": "Theorem 3 with explicit compact level set and differentiable convex f (pp. 14-15); AL convergence stated for a slightly modified algorithm with details deferred to Wen's thesis (p. 19); rank-two convergence only sketched for finite spanning direction sets (p. 23).",
+  "proof_devices": [
+   "same Bertsekas-style limit-point argument as S048 Theorem 3.4 (p. 15)",
+   "eigenvalues of a rank-two perturbation of the identity give the SOC condition 2 + u^T X^{-1} v - sqrt((u^T X^{-1} u)(v^T X^{-1} v)) > 0 (p. 22)"
+  ],
+  "experiments": "Maxcut vs DSDP and SDPLR (SDPLR 4.4e-6-6.9e-5 rel-obj in 4.0-123.9 s vs PURE-RBR-M 2.9e-5-4.9e-5 in 3.9-265.7 s); matrix completion p = q = 200-500 vs FPCA and SVT, with LMaFit named as consistently much faster (pp. 23-26).",
+  "positioning": "Surveys BCD convergence theory (Bertsekas to Nesterov's RCDM) and first-order SDP methods; credits Banerjee et al. with the first BCD for SDP; positions RBR as a niche solver (pp. 2-5).",
+  "writing": "Survey-plus-method chapter that opens with an explicit disclaimer against general-purpose use and closes with a summary dominated by limitations (pp. 2, 28).",
+  "limits_future": "Best when high accuracy is not needed; only non-coupling constraints handled directly; slow near the cone boundary with tight constraints; pure RBR trapped near the boundary on matrix completion (pp. 25, 28); choice of rank-two directions left for further study (p. 23).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Scope rule stated: RBR works when the block subproblem is closed-form or a simple QP; generic use discouraged.",
+    "pages": "pp. 2, 21, 28"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Weak: stronger specialized baselines added (SDPLR, FPCA, SVT) and a faster competitor (LMaFit) named; CPU/accuracy, not evaluations.",
+    "pages": "pp. 24-26"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Augmented Lagrangian wrapper as the classical fix for BCD with coupling constraints; helps even without coupling.",
+    "pages": "pp. 19, 28"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "explicit negative scope statement",
+    "evidence": "States BCD is not a good general-purpose SDP solver, names LMaFit as faster, lists limitations in the summary.",
+    "pages": "pp. 2, 26, 28"
+   },
+   {
+    "pattern": "convergence by embedding in an existing framework",
+    "evidence": "AL convergence from standard theory for a slightly modified algorithm; rank-two convergence said to extend easily from Theorem 3.",
+    "pages": "pp. 19, 23"
+   }
+  ],
+  "transferable": [
+   "State in one sentence where the method should not be used, then show where it wins (p. 2).",
+   "Generalize a coordinate update to a rank-two update; for fixed u, positive definiteness is one SOC constraint and the Cholesky factor updates in O(n^2) (p. 22).",
+   "When a competitor needs tuning, report the settings tried and that it still failed on some problems (p. 26)."
+  ],
+  "coauthors": "Z. Wen, D. Goldfarb",
+  "quotes": [
+   {
+    "text": "We note, however, that using a BCD method as a general purpose SDP solver is not a good idea.",
+    "page": 2
+   },
+   {
+    "text": "Like all first-order methods, they are best suited to situations where highly accurate solutions are not required.",
+    "page": 28
+   }
+  ]
+ },
+ {
+  "id": "S085",
+  "year": "2012",
+  "title": "Aligning ligand binding cavities by optimizing superposed volume",
+  "read_level": "full",
+  "contribution": "Applies model-based trust-region DFO (DFO-VASP) to superpose ligand binding cavities by maximizing their overlapping volume computed by VASP, with a noise-driven accuracy increase and warm or Latin-hypercube starts, and validates the superpositions on serine protease and enolase superfamilies.",
+  "problem_entry": "Application pull: atom-based least-squares superposition does not maximize cavity overlap and fails without atomic similarity; the overlap volume is available only as a noisy, derivative-free VASP computation (pp. 1-2).",
+  "key_idea": "Keep the trust-region DFO framework of the Conn-Scheinberg-Vicente book, but when the model reduction is comparable to the noise level of the current VASP resolution, refine the resolution and rebuild the model; start from the backbone superposition or 10 Latin-hypercube points (p. 2).",
+  "assumptions": "Rigid superposition (rotations and translations); convergence to a local optimum known only without noise; no global guarantee; noise estimate xi_r assumed available, estimation not described (p. 2).",
+  "proof_devices": [],
+  "experiments": "14 serine protease and 10 enolase PDB structures; baseline backbone superposition by Ska; visual orientation check (124/136 consistent), intersection volume vs backbone, and statistical tests of volumetric similarity and fragment volume at the 0.05 level; no optimizer baseline, no evaluation counts or run times (pp. 3-4).",
+  "positioning": "Against atom-correspondence (RMSD) superposition methods in structural bioinformatics; builds on VASP and trust-region DFO from the IDFO book (pp. 1-2).",
+  "writing": "Application paper for a bioinformatics audience with the optimization described in two paragraphs; the volume claim differs between abstract, Section 4.2 and conclusion (pp. 1, 4-5).",
+  "limits_future": "12 enolase pairs misoriented (p. 3); local optima only (p. 2); inconsistent claims on volume gains (pp. 1, 4-5); future applications to binding specificity and protein engineering (pp. 1, 5).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Early heuristic: evaluation accuracy is raised when the predicted decrease reaches the noise level; accuracy tied to progress but without probability or analysis.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Classical trust-region DFO kept; only the noise-corrupted sufficient-reduction check is repaired.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fidelity knob tied to predicted decrease vs noise",
+    "evidence": "Lower VASP resolution (less noise) when model reduction is comparable to the noise estimate, then rebuild the model.",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "If a simulator has a fidelity knob, raise fidelity only when the model-predicted decrease becomes comparable to the current noise estimate, then rebuild the model (p. 2).",
+   "For a nonconvex application objective, compare a domain warm start with a Latin-hypercube multistart (pp. 2, 4)."
+  ],
+  "coauthors": "R. Chen, B. Y. Chen",
+  "quotes": [
+   {
+    "text": "The essential mechanism of the above algorithm lies in the checking for the sufficient reduction, which is corrupted when the underlying function 𝑓 is computed with noise.",
+    "page": 2
+   },
+   {
+    "text": "This algorithmic framework has been shown to converge to a local optimal solution in the absence of noise.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S084",
+  "year": "2013",
+  "title": "Efficient quasi-newton proximal method for large scale sparse optimization",
+  "read_level": "full",
+  "contribution": "Presents LHAC, a general-purpose proximal quasi-Newton method for l1-regularized problems that uses a compact L-BFGS Hessian to make coordinate-descent subproblem steps O(m), a greedy working set, and prox-parameter backtracking with a sufficient-decrease test, and reports speed-ups over QUIC and GLMNET.",
+  "problem_entry": "First-order methods are slow locally, while fast second-order solvers (GLMNET, QUIC) depend on the Hessian structure of one loss; aim for a general method that still beats them (p. 1).",
+  "key_idea": "Quadratic model with B_k = gamma I - Q R Q^T plus prox term, solved inexactly by coordinate descent in O(m) per step; working set = support plus largest subgradient violations; replace line search by increasing the prox parameter until F(x+d) - F(x) <= rho (Q - F(x)) (pp. 2-3).",
+  "assumptions": "f convex twice differentiable, g with easy scaled prox (p. 1); theory deferred to other work, rate citation broken, working-set rule a heuristic outside the analysis (pp. 1-2).",
+  "proof_devices": [],
+  "experiments": "C/C++ LHAC vs QUIC on two gene-expression SICS sets (lambda = 0.5) and vs GLMNET on four sparse logistic regression sets, plus a line-search ablation; stop at relative subgradient norm 1e-6; subgradient vs time plots (pp. 3-4).",
+  "positioning": "General-purpose alternative to specialized second-order solvers GLMNET and QUIC; working-set idea borrowed from LP and SVM practice (pp. 1-2).",
+  "writing": "Short paper with a bulleted contribution list (p. 2), theory explicitly deferred, and draft-level artefacts (broken citation, H_k scaling and legend inconsistencies) (pp. 1-4).",
+  "limits_future": "No theory in this paper; heuristic working set (p. 2); no conclusion section; later analysed in S029 (Math. Program. 2016).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Structure exploited is the low rank of the algorithm's own Hessian approximation, not of f; paper stresses it needs no problem structure.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Classical line search replaced by a trust-region-like prox-parameter update, justified by analysability and performance, with an ablation (same move as S029).",
+    "pages": "pp. 2-4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Comparison with specialist solvers on time to a relative subgradient tolerance, not evaluations.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analysable surrogate for a practical heuristic (c02 candidate)",
+    "evidence": "Prox-parameter update replaces line search and is claimed to improve performance, with an LHAC vs line-search ablation.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "With a compact L-BFGS matrix, maintain v = Q-hat d so each coordinate step computes (Bd)_i in O(m) (p. 3).",
+   "Replace a line search by increasing the prox term and re-solving, accept by a ratio test, and ablate against the line-search version (pp. 3-4).",
+   "Build the working set from the current support plus the few largest optimality violations (p. 3)."
+  ],
+  "coauthors": "X. Tang",
+  "quotes": [
+   {
+    "text": "Instead of line search procedure, we update a prox term of our quadratic model, which allows us to extend global convergence bounds of proximal gradient methods to the case of proximal quasi-Newton methods.",
+    "page": 2
+   },
+   {
+    "text": "In our experiments small values of ρ provided much better performance than values close to 1.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S028",
+  "year": "2014",
+  "title": "Fast first-order methods for composite convex optimization with backtracking",
+  "read_level": "full",
+  "contribution": "Shows that full backtracking (prox parameter allowed to increase) can be used in FISTA and FALM while preserving O(sqrt(L/eps)) complexity, by coupling the momentum update to the ratio of consecutive prox parameters, and gives bounds in terms of the average of square roots of prox parameters or local composite Lipschitz constants.",
+  "problem_entry": "FISTA's analysis requires nonincreasing prox parameters, so a large early Lipschitz estimate forces small steps forever and the bound depends on the smallest prox parameter; FALM uses a fixed one (pp. 1-2, 13-14).",
+  "key_idea": "Set theta_k = mu_k/mu_{k+1} in t_{k+1} = (1 + sqrt(1 + 4 theta_k t_k^2))/2 and recompute t_k, y_k whenever backtracking lowers mu_k (FISTA-BKTR, FALM-BKTR), preserving mu_k t_k^2 >= mu_{k+1} t_{k+1}(t_{k+1}-1); motivate with local composite Lipschitz constants that can be much smaller than L(f) (pp. 4-9, 14).",
+  "assumptions": "f convex C^{1,1} (Assumption 2.1, p. 2); g convex with easy prox (p. 1); Theorem 3.9 needs each initial trial mu at least 1/L(f,g,y_i) (p. 10).",
+  "proof_devices": [
+   "Beck-Teboulle potential 2 mu_k t_k^2 v_k + ||u_k||^2 nonincreasing under the invariant (Lemma 3.3, pp. 6-7)",
+   "induction sqrt(mu_{k+1}) t_{k+1} >= sqrt(mu_{k+1})/2 + sqrt(mu_k) t_k giving mu_k t_k^2 >= (sum sqrt(mu_i)/2)^2 (Lemma 3.7, pp. 9-10)",
+   "negative argument: with theta_k < 1 alone, t_{k+1} < theta_k^{1/2} t_k + 1 so t_k cannot grow linearly (p. 8)",
+   "Nesterov's counting lemma for backtracking calls with mu^0_k = mu_{k-1}/alpha (Lemma 3.10, p. 11)"
+  ],
+  "experiments": "Lasso/compressed sensing (Spear10, Spear3, Bdata1, Sparco3), Huber-smoothed l2 and l2-logistic regression on Optdigits; protocol: iterations and matvecs to beat FISTA(j); SpaRSA and YALL1 at defaults; mu trajectories plotted; failures reported (pp. 17-22).",
+  "positioning": "Generalizes Beck-Teboulle FISTA and Goldfarb-Ma-Scheinberg FALM; compared with Nesterov's composite method, whose backtracking criterion needs an extra gradient per step (pp. 1-2, 10-11).",
+  "writing": "Abstract states preserved complexity plus the new average-parameter dependence; heuristics and anomalies reported plainly with investigation deferred (pp. 12, 18); conclusion names the missing iterate analysis (p. 22).",
+  "limits_future": "Concrete gains from local constants need an analysis of the iterates (p. 22); choosing mu increases from local Lipschitz estimates open (p. 11); increase-every-l-iterations heuristic (p. 12); logistic regression analysis future (p. 22).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "FISTA/FALM kept; the first property broken by increasing mu (inequality 3.11) repaired by coupling theta_k to the mu ratio inside backtracking; reused by S068.",
+    "pages": "pp. 2, 8-9"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Deterministic precursor: complexity expressed through the step-parameter trajectory (sum of sqrt(mu_i)), cf. Heuristic 10.",
+    "pages": "pp. 9-10, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Common accuracy target per checkpoint (FISTA(j)) and work in matvecs; no evaluations or noise.",
+    "pages": "p. 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "counterexample before safeguard",
+    "evidence": "Shows that simply allowing theta_k < 1 stops t_k from growing before designing the coupled backtracking.",
+    "pages": "p. 8"
+   }
+  ],
+  "transferable": [
+   "Carry theta_k = mu_k/mu_{k+1} into the momentum update and recompute the extrapolated point whenever backtracking lowers mu, so the FISTA invariant holds by construction (pp. 8-9).",
+   "Prove mu_k t_k^2 >= (sum sqrt(mu_i)/2)^2 by induction to state the rate via the average sqrt(mu_i) (pp. 9-10).",
+   "Benchmark by running the baseline j iterations and reporting each competitor's iterations and matvecs to reach the baseline's best value (p. 17).",
+   "Plot the step-parameter trajectory beside the tables to explain iteration savings (Figs. 5.1-5.4, pp. 18-23)."
+  ],
+  "coauthors": "D. Goldfarb, X. Bai",
+  "quotes": [
+   {
+    "text": "The principal drawback of FISTA compared to the method in [9] is the requirement that the estimates of the Lipschitz constant (or the prox parameters) that are used must be nondecreasing from one iteration to the next.",
+    "page": 2
+   },
+   {
+    "text": "Ideally, one should select the increase of the prox term based on the estimated increase of the local Lipschitz constant.",
+    "page": 11
+   }
+  ]
+ }
+]

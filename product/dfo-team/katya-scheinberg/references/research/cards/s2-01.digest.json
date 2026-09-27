@@ -1,0 +1,442 @@
+[
+ {
+  "id": "S133",
+  "year": "2000",
+  "title": "Manual for Fortran Software Package DFO v1. 2",
+  "read_level": "unreadable",
+  "contribution": "UNREADABLE AS NAMED: the text file is the DFO v2.0 manual (K. Scheinberg, Aug 20, 2003), not v1.2 (2000, Conn-Scheinberg-Toint); the substitute documents a trust-region interpolation DFO code for expensive smooth problems with easy, difficult and virtual (hidden) constraints (pp. 1-3).",
+  "problem_entry": "[v2.0 substitute] Software for smooth expensive functions without usable derivatives, n < 50; states when not to use it (derivatives available, n large) (p. 1).",
+  "key_idea": "[v2.0 substitute] Best point as base, interpolation set chosen near the base while keeping well-poisedness, model minimised over trust region subject to modelled difficult constraints (exact penalty if infeasible), ratio test; minimum-Frobenius-norm models by default (pp. 2-3, 9-10).",
+  "assumptions": "[v2.0 substitute] Smoothness needed for theory; optional absolute/relative noise levels used only for termination (pp. 1, 8).",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "[v2.0 substitute] Cites Conn-Scheinberg-Toint 1996-98 as the algorithm and the Conn-Scheinberg-Vicente 2003 preprint (S072) for well-poisedness; interfaces NPSOL/NPOPT/IPOPT (pp. 2-3, 12-13).",
+  "writing": "[v2.0 substitute] Plain user manual: every parameter with typical value, meaning and effect; frank remarks such as effort levels 'not fully tested yet' and defaults justified by 'Experiments and some intuition' (pp. 5-10).",
+  "limits_future": "[v2.0 substitute] Default maximum 50 variables, slow for large n, EFFORT levels untested, penalty METHOD 3/4 not usable with IPOPT; no future work (pp. 1, 7, 9, 10).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "[v2.0 substitute] geometry as tunable price: pivot thresholds PIVTHR/ADDTHR, exchange factor XCHTHR, EFFORT levels (lowest = recompute only when necessary); NPMIN = n+1 gives fully linear models",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "[v2.0 substitute] difficult constraints computed with f are modelled individually by default rather than folded into a penalty",
+    "pages": "pp. 1-2, 10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "[v2.0 substitute] noise level used only as a stopping rule (no accuracy tied to Delta) - Workflow B step 6 in early form",
+    "pages": "p. 8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "scope statement up front (when not to use the method)",
+    "evidence": "[v2.0 substitute] manual advises against DFO when derivatives can be estimated efficiently or n is high",
+    "pages": "p. 1"
+   }
+  ],
+  "transferable": [
+   "Handle hidden constraints with an evaluation-failure flag, never an artificially high function value (p. 1).",
+   "Use a loose pivot threshold for points that made progress and a strict one for points kept only because already evaluated (PIVTHR 0.001 vs ADDTHR 0.1, p. 8).",
+   "Cap radius growth (DELMAX = 10*DELTA) so one long step does not make the stored sample set irrelevant (p. 7)."
+  ],
+  "coauthors": "Listed: A. R. Conn, Ph. L. Toint; the substitute v2.0 file names K. Scheinberg only (p. 1)",
+  "quotes": [
+   {
+    "text": "For example, if NPMIN is n + 1 then every interpolation will be at least fully linear (if at all possible).",
+    "page": 9
+   },
+   {
+    "text": "Experiments and some intuition show that VARNT= 1 generally works better than VARNT= 2, but it may not be so for some problems.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S059",
+  "year": "2001",
+  "title": "Incremental learning and selective sampling via parametric optimization framework for SVM",
+  "read_level": "full",
+  "contribution": "POKER, a parametric-QP framework that moves one scalar in the right-hand side of the SVM KKT system while tracking the optimal partition, giving a fixed-bias method, a bias-adjusting method and their alternation AltPOKER, an exact incremental 1-norm soft-margin SVM with arbitrary chunk sizes and look-ahead-based selective sampling (pp. 2-7).",
+  "problem_entry": "Active-set SVM training is slow and fixed-bias incremental shortcuts generalise worse; the only exact incremental method is Cauwenberghs-Poggio; entry via parametric QP from optimization (pp. 1-2).",
+  "key_idea": "Homotopy in a scalar (u for the fixed-bias system, then b) with partition (I0, Ic, Is) updates at breakpoints; dObj criterion runs a few adjustable-bias iterations to estimate objective change, likened to strong branching (pp. 3-6).",
+  "assumptions": "1-norm soft-margin SVM KKT system; nondegenerate (Qss nonsingular) vs degenerate case; O(n^2) estimate assumes few support vectors (pp. 3-4, 7).",
+  "proof_devices": [
+   "finite termination because each iteration consumes a parameter interval with a distinct optimal partition and partitions are finite (p. 4)",
+   "per-iteration cost O(n|Is|)+O(|Is|^3) nondegenerate; exponential worst case argued away by the simplex analogy (pp. 2, 4)"
+  ],
+  "experiments": "Abalone batch mode (iterations vs size, polynomial kernels), diabetes incremental (iterations vs chunk size), selective sampling on synthetic 10Kx2, ionosphere, diabetes (Table 1); iteration counts only, qualitative comparison to Cauwenberghs-Poggio (pp. 5-7).",
+  "positioning": "Positions against active-set methods, fixed-bias incremental updates and Cauwenberghs-Poggio (independently developed, somewhat similar, but more general: fixed-bias and bias-adjusting modes, chunks, objective-change estimate) (pp. 1-2, 7).",
+  "writing": "Short NIPS paper; lemmas deferred to a technical report (footnote 3, p. 2); theory-vs-practice framing for complexity ('In theory ... But in practice ...', p. 5); contributions restated in the conclusion as three generality claims (p. 7).",
+  "limits_future": "Exponential worst case, complexity depends on few SVs; future: true on-line algorithm, active learning, massive-data (speech) applications (pp. 2, 7).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "keeps a classical optimization device (parametric QP, simplex-type partition pivoting; strong branching) and carries it into SVM training",
+    "pages": "pp. 2, 6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "exploits piecewise-linear dependence of the KKT solution on one scalar while the partition is fixed",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "comparisons by iteration counts only, no equal-cost head-to-head",
+    "pages": "pp. 5-7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "classical OR device imported into ML",
+    "evidence": "parametric QP homotopy and strong-branching-style look-ahead brought into SVM training (compare s01 'reverse field import')",
+    "pages": "pp. 2, 6"
+   }
+  ],
+  "transferable": [
+   "Relax an awkward coupling constraint by fixing its parameter, then treat the parameter as a homotopy variable and track the optimal partition until the dropped optimality condition holds (pp. 3-4).",
+   "Use a few iterations of the exact solver as a look-ahead score for which data to add, after a cheaper criterion shortlists candidates (p. 6).",
+   "Prove finite termination of a partition-following method by showing each iteration consumes a parameter interval with a distinct optimal partition (p. 4)."
+  ],
+  "coauthors": "S. Fine (IBM Watson)",
+  "quotes": [
+   {
+    "text": "In theory adding even one point may force the algorithm to work as hard as if it were solving the problem \"from scratch\". But in practice it virtually never happens.",
+    "page": 5
+   },
+   {
+    "text": "Our method is independently developed, but somewhat similar to that in [3].",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S072",
+  "year": "2003",
+  "title": "Error estimates and poisedness in multivariate polynomial interpolation",
+  "read_level": "partial",
+  "contribution": "Introduces Lambda-poisedness, a geometric basis-independent measure of interpolation-set quality equivalent to bounded Lagrange polynomials, derives Taylor-like error bounds for all derivatives (function error a posteriori) in the linear and quadratic cases, and gives a Gaussian-elimination algorithm that builds or repairs well-poised sets (pp. 1-2, 10, 19, 24, 27-29).",
+  "problem_entry": "Interpolation models must behave like Taylor models for standard trust-region theory to apply; existing bounds are basis-tied, hard to read, or cover function values only; condition numbers are basis-dependent and misleading (pp. 1-2, 6).",
+  "key_idea": "Define poisedness by the coefficient norm needed to represent phi(x)-phi(0) through phi(y^i)-phi(0) over the ball; derive all derivative errors from one x-independent linear system obtained by subtracting interpolation conditions; repair geometry by threshold pivoting (pp. 6-10, 27-28).",
+  "assumptions": "Y in B(Delta) with an interpolation point at the centre (the trust-region situation); linear: Lipschitz gradient, n+1 points; quadratic: Lipschitz Hessian, (n+1)(n+2)/2 points (pp. 3-5, 11-12).",
+  "proof_devices": [
+   "subtract the first interpolation condition from the others so the function-value error cancels: L e_g(x) = O(Delta^2) with x-independent L (eq. (10), p. 8)",
+   "Lambda-poised iff ||L^{-1}|| <= Lambda/Delta via scaling to the unit ball (Lemmas 2.2-2.3, pp. 9-10)",
+   "Lemma 3.3: a quadratic with ||v||_inf = 1 reaches |value| >= 1/2 on the unit ball, by restricting to the variables of the largest coefficient; gives theta_Q and the attainable pivot threshold xi < 1/2 (pp. 17-18, 28)",
+   "Lagrange-polynomial equivalence L_j(x) = lambda_j(x) (Proposition 5.2, pp. 24-25)"
+  ],
+  "experiments": "none",
+  "positioning": "Re-derives and simplifies Powell, Sauer-Xu, Waldron bounds (as good for function values, adds derivatives); corrects the authors' own 1997 CST analysis whose O(Delta) gradient bound gives only first-order convergence; links optimal simplex to positive bases in pattern search (pp. 2, 24-27, 31).",
+  "writing": "Motivation-first intro that criticises prior bounds as unintuitive; linear case first 'to introduce the basic steps', quadratic next, general degree via cubic; explicit remarks on which assumptions are not WLOG (p. 4) and open choices (p. 11) (pp. 2-4, 11).",
+  "limits_future": "Unclear which of two gradient bounds is better (p. 11); growth factors only 'expected to be of reasonable size' (p. 29); O(n^6) repair cost (p. 29); no future work in the conclusion (pp. 31-32).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "geometry is the only controllable error source and Lambda prices it; Algorithm 6.1 replaces only bad points",
+    "pages": "pp. 2, 27-28, 32"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "origin of the error <= kappa*Delta^k shape (controllable Lambda times uncontrollable gamma) later required only with probability p",
+    "pages": "pp. 10, 19"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "aim is to make standard unconstrained trust-region convergence theory apply unchanged to interpolation models",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "equivalence-bridge definition",
+    "evidence": "new geometric Lambda-poisedness proved equivalent to bounded Lagrange polynomials so prior results transfer (compare s01/S053 partial RIP)",
+    "pages": "p. 2; Proposition 5.2, p. 24"
+   },
+   {
+    "pattern": "self-correction of own earlier analysis",
+    "evidence": "§5.3 shows the 1997 CST O(Delta) gradient bound only yields first-order convergence and is superseded",
+    "pages": "pp. 26-27"
+   }
+  ],
+  "transferable": [
+   "Bound all derivative errors of an interpolation model at once by subtracting interpolation conditions so the unknown value error cancels, inverting the x-independent matrix, and deriving the value error last (pp. 8-10, 32).",
+   "Define a geometry measure via coefficient norms of representing any point by the samples, prove basis-independence, and tie it to ||L^{-1}|| by rescaling to the unit ball (pp. 7, 9-10).",
+   "Turn threshold-pivoting Gaussian elimination into a geometry-repair routine that replaces a point by the maximiser of the pivot polynomial, with a universal lower bound making the threshold attainable (pp. 28-29)."
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "However, it turns out to be equivalent to Λ being the upper bound on the absolute values of the Lagrange polynomials.",
+    "page": 2
+   },
+   {
+    "text": "In practical situations only the geometry of the interpolation set is controllable.",
+    "page": 32
+   }
+  ]
+ },
+ {
+  "id": "S050",
+  "year": "2004",
+  "title": "A product-form Cholesky factorization method for handling dense columns in interior point methods for linear programming",
+  "read_level": "partial",
+  "contribution": "A product-form Cholesky factorization (sparse Cholesky plus product-form rank-one updates, with pivot skipping) for dense columns in IPMs for LP that is nearly as fast as Schur complement/SMW but stable, backed by a proof that Cholesky factors of AD^2A^T stay uniformly bounded as the duality gap goes to zero (pp. 1, 7-14, 22-25, 29-34).",
+  "problem_entry": "Dense columns destroy sparse Cholesky efficiency; the standard Schur complement/SMW remedy is unstable near optimality (2x2 example; Andersen's fix fails on about half the test problems late in the run) (pp. 1-2, 5-6).",
+  "key_idea": "Keep the normal-equations approach and sparse Cholesky; add dense columns as symmetric rank-one updates (Bennett's method via Fletcher-Powell and Gill-Murray-Saunders formulas) kept in product form; handle small pivots with an extension of Wright's pivot skipping (pp. 7-10, 22).",
+  "assumptions": "Fixed A, diagonal D(mu); no near-degeneracy; IPM iterates follow optimal-partition rates; error analysis follows Fletcher-Powell [7] (pp. 10-11, 18).",
+  "proof_devices": [
+   "smallest-bad-column-index contradiction along a subsequence (Theorem 4.4, pp. 12-14)",
+   "subsequence partition of functions by relative rate (Lemma 4.1, p. 11)",
+   "projection lemma: a bounded r(mu) with r(mu)^T B -> 0 forces linear dependence of rows of B (Lemma 4.3, p. 12)",
+   "uniqueness of LDL^T: product-form factor = L^{-1} Lbar, bounded by Lemma 4.2 (Theorem 4.5, p. 14)",
+   "operation-count cost model in k and m predicting ~4% (k=10, m=3000) to ~50% (k=50) slowdown vs Schur complement (p. 27)"
+  ],
+  "experiments": "20 problems (5 Netlib + two-stage stochastic LP deterministic equivalents, 4-50 dense columns); CF, PFCF, Schur complement (with Andersen's columns) and augmented system inside Mehrotra's fo1/fo1aug, OSL for time, CPLEX 6.5.1 for stability; accuracy 1e-8; failures and out-of-memory marked (pp. 16, 29-34).",
+  "positioning": "Direct critique of the Schur complement/SMW method and Andersen's fix by example and experiment; builds on Bennett and Fletcher-Powell rank-one updates (p. 8) and Wright's pivot skipping (p. 22); relates Theorem 4.4 to the Vavasis-Ye chi_A constant (pp. 5-6, 8, 10, 22).",
+  "writing": "Abstract states the trade-off plainly (as stable as Cholesky, nearly as efficient as SMW); counterexample in §2 before the method; theory followed by a computational-evidence subsection (§4.2); conclusion concedes speed (pp. 1, 5-6, 16, 34).",
+  "limits_future": "Slightly slower than Schur complement, augmented system up to 3x faster with many dense columns, implementation differences between host codes; future: extend Theorem 4.4 to other D and general convex IPMs (done in S058) (pp. 29, 34).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "keeps normal equations + sparse Cholesky and changes only dense-column handling, reusing classical rank-one updates (Bennett; Fletcher-Powell) and Wright's pivot skipping",
+    "pages": "pp. 2, 7-8, 22"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "sparse + low-rank dense split, each part treated with the fitting tool",
+    "pages": "pp. 5, 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "competitors run inside the same IPM code and test set, failures reported, stability and speed measured separately",
+    "pages": "pp. 29-34"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "tiny explicit counterexample",
+    "evidence": "2x2 instance where Schur complement fails in floating point, shown before the new method (sibling in S058 §5)",
+    "pages": "pp. 5-6"
+   },
+   {
+    "pattern": "stability as uniform boundedness in the limit",
+    "evidence": "factor entries proved bounded as mu -> 0 by smallest-bad-index contradiction on a subsequence; reused in S058",
+    "pages": "pp. 11-14"
+   }
+  ],
+  "transferable": [
+   "Show a fast method is numerically unsafe with a 2x2 or 3x3 instance where a below-machine-precision quantity destroys the answer, computed and exact solutions side by side (pp. 5-6).",
+   "Prove boundedness of a parameter-dependent factorization by contradiction at the smallest column index that blows up, on a subsequence where all scale ratios converge (pp. 11-14).",
+   "Give an operation-count model in the problem's own sizes that predicts the relative slowdown and check it against timings (p. 27; Table 3, p. 33)."
+  ],
+  "coauthors": "D. Goldfarb",
+  "quotes": [
+   {
+    "text": "But the main property holds for all tested examples: the elements of L do not grow.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S058",
+  "year": "2005",
+  "title": "Product-form Cholesky factorization in interior point methods for second-order cone programming",
+  "read_level": "partial",
+  "contribution": "Extends product-form Cholesky factorization to SOCP normal equations (sparse plus low-rank with additions and subtractions), derives and costs five update variants, and proves Cholesky and product-form factors stay bounded as mu -> 0 for iterates near the central path, with a counterexample off it (pp. 1-3, 8, 14, 19-24).",
+  "problem_entry": "Large cones make SOCP normal equations dense (sparse plus low rank); SMW is unstable on most SOCP problems even random nondegenerate ones; the LP analysis does not carry over directly (pp. 2-3).",
+  "key_idea": "Product-form LDL^T updates for V S V^T with indefinite diagonal S, based on 1960s-70s Bennett and Fletcher-Powell updates; rank-1 variants cheapest, rank-k Bennett for parallel machines (pp. 2, 8, 13-14).",
+  "assumptions": "Iterates converge to a strictly complementary solution and stay in a central neighbourhood, x(mu) = x* + O(mu); purely primal case analysed for simplicity (pp. 15, 17, 19).",
+  "proof_devices": [
+   "eigen-structure of the SOCP scaling matrix gives three eigenvalue rate classes (§4.1, Table 2, pp. 15-16)",
+   "smallest-bad-index contradiction reused from S050 (Theorem 1, pp. 19-20)",
+   "3x3 counterexample trajectory off the central path where L grows unboundedly, naming the failing lemma (§5, pp. 23-24)"
+  ],
+  "experiments": "SeDuMi 1.04 on 3 random and DIMACS SOCP problems: sizes of L entries (none above 10,000; filtinf1 with SDP the exception for >1,000) and times with/without PFCF; no SMW comparison since SeDuMi lacks it (pp. 24-26).",
+  "positioning": "Sequel to S050 (ref [11]); SMW criticised as unstable (citing [2]); Sturm's SDP example cited as similar growth phenomenon (pp. 2, 24).",
+  "writing": "Intro enumerates exactly why SOCP is harder than LP (subtractions, extra O(1) eigenvalues, bad scaling); work table for all variants; no conclusion section (pp. 2-3, 14, 26).",
+  "limits_future": "Needs central neighbourhood (counterexample), SDP not covered without major revision, pivot skipping never needed; no future work stated (pp. 22-25).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "old update formulas kept, only product form new; LP analysis carried over and changed where SOCP breaks it",
+    "pages": "pp. 2, 13-15"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "sparse + low-rank normal-equation structure exploited, savings stated as a function of cone sizes",
+    "pages": "pp. 2, 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "extend own result to a harder class and list what breaks",
+    "evidence": "LP -> SOCP with subtractions, extra O(1) eigenvalue class, path assumptions enumerated",
+    "pages": "pp. 2-3, 14-15"
+   },
+   {
+    "pattern": "tiny explicit counterexample",
+    "evidence": "3x3 off-central-path trajectory where the boundedness theorem fails (Taste mark 5 style)",
+    "pages": "pp. 23-24"
+   }
+  ],
+  "transferable": [
+   "After proving a result under an assumption, build the smallest violating example, name the lemma that fails and state the weaker case that still holds (pp. 23-24).",
+   "Tabulate exact operation counts for every algorithm variant and read off which wins in which regime (Table 1, pp. 13-14).",
+   "When a competitor cannot be run in the host solver, say so and cite the measured ratio from earlier work (p. 26)."
+  ],
+  "coauthors": "D. Goldfarb",
+  "quotes": [
+   {
+    "text": "Clearly, the rank-1 methods require the least amount of work.",
+    "page": 13
+   },
+   {
+    "text": "On random problems, although there was less improvement, it was still substantial.",
+    "page": 26
+   }
+  ]
+ },
+ {
+  "id": "S086",
+  "year": "2006",
+  "title": "Detecting Generic Visual Eventswith Temporal Cues",
+  "read_level": "full",
+  "contribution": "Generic visual event detection in broadcast news via bag-of-frames shot representation compared by Earth Mover's Distance (an LP) and multi-cue fusion by multiple kernel learning solved as an SOCP (pp. 1-4).",
+  "problem_entry": "Event detection in unconstrained video, where object-centred methods need strong scene assumptions and feature-driven ones use low-level features; extends the authors' HMM-based work (p. 1).",
+  "key_idea": "EMD between frame clusters as a shot distance turned into an exponential kernel; MKL with shared support-vector weights and learned kernel weights (pp. 2-4).",
+  "assumptions": "Shot-level binary labels; 33 concept-detector confidences per frame as descriptors (pp. 2, 4).",
+  "proof_devices": [],
+  "experiments": "TRECVID-2005 dev set (~80 h, >69,000 shots, 1/3 held out), 13 LSCOM events, AP@1000; EMD more than doubles AP over static baseline, MKL +5% mean AP over early fusion but degrades some events (pp. 4-5).",
+  "positioning": "Positions against object-centred and feature-driven event detection and early/late fusion; uses Bach-Lanckriet-Jordan MKL and Rubner et al. EMD (pp. 1, 3-4).",
+  "writing": "Two-part contribution stated in the abstract and intro; results explained mechanistically (sparsity of the EMD flow; lost flexibility in MKL) (pp. 1, 4-5).",
+  "limits_future": "O(n^2)/O(kn^2) kernel memory, MKL sometimes worse; future: predict which fusion suits which concept, joint program for kernel and SV weights (p. 5).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "weak: classical optimization models (transport LP, conic MKL) used as ML building blocks, not the black-box structure lens; Scheinberg's role not stated",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Report per-class gains and losses of a new fusion component and explain the loss mechanism (p. 5)."
+  ],
+  "coauthors": "L. Xie, D. Xu, S. Ebadollahi, S.-F. Chang, J. R. Smith",
+  "quotes": [
+   {
+    "text": "While MKL can increase average precision by 10 ∼ 200% for 8 out of the 13 target events, yet it sometimes degrades the performance compared to early- and late- fusion.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S102",
+  "year": "2007",
+  "title": "Rock Physics and Depositional History from Seismic Matching–A Model Study",
+  "read_level": "full",
+  "contribution": "A proof-of-concept study that fits basin-model (Basin2) and petrophysics parameters to synthetic seismic data by wrapping the forward chain in derivative-free and gradient-based optimizers, after replacing a multimodal least-squares misfit with a smoother functional (pp. 1-4).",
+  "problem_entry": "Ill-posed, costly inverse problem of matching seismic phase and amplitude by adjusting sedimentary parameters; model study on a synthetic ground truth with 26 parameters (p. 1).",
+  "key_idea": "Compare DFO, NEWUOA, ASA, IPOPT, CBB/CGCBB and LMDIF; diagnose spurious local minima of the least-squares misfit and switch to a two-stage split and a smooth envelope-of-envelope functional, adding 20 petrophysics unknowns (pp. 2-3).",
+  "assumptions": "None formal; weighted sum-of-squares Basin2-loop functional (p. 3).",
+  "proof_devices": [],
+  "experiments": "Basin2-loop convergence from several starting guesses (Fig. 5, not in text) and full-loop fits by ASA and NEWUOA needing well over a thousand iterations (pp. 3-4).",
+  "positioning": "Extends Imhof-Sharma; cites differential semblance (Symes; Stolk-Symes) as the provably smooth functional they want to adopt (pp. 1, 3-4).",
+  "writing": "Narrative engineering report with candid hedges ('perhaps unnecessarily', 'While not ideal') (p. 3).",
+  "limits_future": "Next: differential-semblance functional, scaling and preconditioning, stochastic exploration of acceptable parameter sets, field data (p. 4).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "many solvers on one application but reported in iterations, no equal-accuracy protocol",
+    "pages": "pp. 2, 4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "sum-of-squares misfit without residual-wise models; only LMDIF uses the least-squares structure (missed-structure case vs Heuristic 3)",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fix the objective, not the solver",
+    "evidence": "two-parameter slice of the misfit shows spurious minima; misfit replaced by a smoother functional",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Plot the objective on a two-parameter slice before tuning optimizers; many local minima indicate the measure of fit is the problem (Fig. 3 caption, p. 3).",
+   "Fit a synthetic ground-truth model built with the same forward simulator first, to separate solver failure from model error (pp. 1-2)."
+  ],
+  "coauthors": "S. A. Levin, U. Mello, V. Lopez, L. Xu, A. R. Conn, H. Zhang",
+  "quotes": [
+   {
+    "text": "This told us we needed a smoother measure of seismic match.",
+    "page": 3
+   },
+   {
+    "text": "Both the ASA and NEWUOA methods required well over a thousand iterations in order to achieve this degree of fit.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S129",
+  "year": "2007",
+  "title": "Mathematical Programming in Machine Learning and Data Mining",
+  "read_level": "full",
+  "contribution": "BIRS workshop report (Banff, Jan 2007) that frames ML/DM problems as optimization, lists open problems by topic (kernels, structured prediction, SDP, clustering, complexity), collects talk abstracts and participant reports on follow-up work (pp. 1-10).",
+  "problem_entry": "The MP and ML/DM communities are disjoint with no shared venues; the workshop aims to identify new problems and match them with solution approaches (p. 2).",
+  "key_idea": "Report structure: overview, open problems, talk abstracts, participants' progress reports, outcome (pp. 1-10).",
+  "assumptions": "n/a",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Places the workshop after 2005 workshops and a 2006 JMLR special topic on ML and large-scale optimization; cites Fine-Scheinberg 2001 and Scheinberg 2006 among MP-community SVM implementations (pp. 2, 11-12).",
+  "writing": "Organizers' report; open problems stated per topic; Scheinberg's own signed section is short and concrete (visits, talks, ideas taken) (pp. 2-3, 9).",
+  "limits_future": "Stated open problems: good kernels, l1 kernelization, SDP cost, relevance of worst-case accurate-solution complexity to generalization (pp. 2-3).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "weak stated precursor: worst-case complexity that assumes fairly accurate solutions is not always relevant to the ML goal; unsigned section",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "weak: fast approximate methods that exploit formulation structure named as the answer to expensive SDPs (summary of others' talks)",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. Peng, T. Terlaky, D. Schuurmans, M. Jordan (batch metadata); the file also lists T. Poggio as organizer (p. 1)",
+  "quotes": [
+   {
+    "text": "However, the MP community and the ML/DM community are quite disjoint.",
+    "page": 2
+   },
+   {
+    "text": "It is not always relevant for the ultimate goal of a machine learning problem - good generalization error bounds.",
+    "page": 3
+   }
+  ]
+ }
+]

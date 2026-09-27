@@ -1,0 +1,439 @@
+[
+ {
+  "id": "S151",
+  "year": "2021",
+  "title": "A derivative-free approach to optimal control problems with piecewise constant Mayer cost function",
+  "read_level": "full",
+  "contribution": "Proposes a hybrid method for discretized optimal control with a piecewise constant (floor-type) Mayer cost: NOMAD/Mads with progressive barrier optimizes only the few state variables that affect the discontinuity, while Ipopt solves the smooth trajectory subproblems between them; on four control problems the hybrid finds far lower Bolza costs than Ipopt-only or NOMAD-only approaches.",
+  "problem_entry": "Application-driven class (precision sports, parking) where PMP is unlikely (optima end on plateau boundaries), smoothing leaves near-zero gradients, and MADS cannot handle the full discretization's size (pp. 2-3).",
+  "key_idea": "Reformulate min_x as min_y inf_z with y = singular variables (states at indices Λ ⊇ Ω ∪ {N}) given to DFO and z to a smooth inner solver; evaluate the blackbox by a two-phase solve returning (minimal infeasibility, objective) to the progressive barrier instead of +∞ (pp. 3-10).",
+  "assumptions": "Smooth dynamics, constraints and Lagrange cost; singularities only through a known subset of states; RK4 discretization; h_c(y,·) attains its minimum (Prop. 2.9); all methods run on a smoothed floor (τ = 75) for fair comparison (pp. 4-11).",
+  "proof_devices": [
+   "reformulation equivalence min_x = min_y inf_z with FWD (feasible-well-defined) conditions (Prop. 2.4, p. 6)",
+   "one 2-D counterexample per hypothesis of the reformulation (Examples 2.5-2.8, p. 7)",
+   "two-phase evaluation: minimize squared violation, then objective under the found violation level (§2.3, pp. 7-8)"
+  ],
+  "experiments": "Harmonic oscillator, two Zermelo problems, Lotka-Volterra (N = 400-600), common uncontrolled start and smoothing, MSO vs MDFBBO vs hybrids M{N}, M{N/2,N} by final Bolza cost from legends (e.g. Z1: 32.20, 34.35 vs 4.88, p. 14); single runs, no counts or timings; M{N} failure on LV diagnosed by an infeasibility map (Fig. 9, pp. 16-17).",
+  "positioning": "Sits between optimal-control direct/indirect methods (PMP for Lipschitz and hybrid systems cited) and DFO (MADS, progressive barrier); distinguishes itself from trajectory-optimization decomposition (needs derivatives) and bilevel optimization (no leader-follower conflict) (pp. 2-5).",
+  "writing": "Predicts why each naive baseline fails in §1 and §3.2 and checks it in §4 (pp. 3, 10); motivates with everyday examples (darts, parking, p. 2-3); presents the unexpected LV failure as 'intriguing' and analyses it (p. 16).",
+  "limits_future": "Best Λ is not the smallest; inner Ipopt failures act as code-induced hidden constraints; class of suitable problems unidentified; future: Λ as DFO variables, penalty-relaxed state matching, early-stopped SO surrogates (pp. 15-18).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Division of labour by variable block (DFO outer on singular states, smooth solver inner), not by Search/Poll step; 'each solver to a problem it is designed for'.",
+    "pages": "pp. 3-5, 9-10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Infeasible inner problems return quantified violation plus finite objective to the progressive barrier rather than +∞; inner-solver failures named as hidden constraints.",
+    "pages": "pp. 7-8, 16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Small-scale: each hypothesis of the reformulation proposition bounded by a 2-D counterexample; no convergence analysis of the algorithm.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Equal initialization and equal smoothing for fairness, but single runs, final values only, no evaluation budget accounting.",
+    "pages": "pp. 10-17"
+   },
+   {
+    "method": "Warning sign 5 (small n)",
+    "relation": "evidence",
+    "note": "NOMAD's 'critical value of 50' variables motivates giving it only n or 2n state variables.",
+    "pages": "p. 10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "singular/smooth variable split",
+    "evidence": "DFO only on the variables carrying the discontinuity, gradient-based inner solver on the rest; possible precursor of the 2026 partitioned structure-aware framework (inference).",
+    "pages": "pp. 3-5, 9"
+   },
+   {
+    "pattern": "failure map over outer variables",
+    "evidence": "Infeasibility of Ipopt's answer plotted over x_N explains why NOMAD stays in a ribbon around the start.",
+    "pages": "pp. 16-17"
+   }
+  ],
+  "transferable": [
+   "Return (minimal infeasibility, objective under it) from an infeasible inner optimization to a progressive barrier instead of +∞ (pp. 7-8).",
+   "State the failure mechanism of each naive baseline before running it, then check it (pp. 3, 10).",
+   "Pair a reformulation proposition with one minimal 2-D counterexample per hypothesis (pp. 6-7)."
+  ],
+  "coauthors": "P.-Y. Bouchet, L. Bourdin",
+  "quotes": [
+   {
+    "text": "The main idea is thus to optimize the final state alone via a DFBBO algorithm, while a smooth subproblem, which consists in solving the initial problem with the final state being fixed and with a minimal Lagrange cost, is solved via a SO algorithm.",
+    "page": 3
+   },
+   {
+    "text": "We could set the value +∞, but such a choice would not provide any information to pursue efficiently the numerical resolution of (R).",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S099",
+  "year": "2022",
+  "title": "Quantifying uncertainty with ensembles of surrogates for blackbox optimization",
+  "read_level": "full",
+  "contribution": "Turns an ensemble of deterministic surrogates into a pseudo-stochastic model by measuring pairwise trend or feasibility disagreement between members (smooth and nonsmooth versions, objective and constraint versions), and uses it with Bayesian-style subproblems in the MADS Search; better than no-search and quad-search MADS on 3 of 4 expensive problems and much cheaper than kriging.",
+  "problem_entry": "Ensembles and stochastic models are 'fundamentally separated': ensembles give no uncertainty for Bayesian acquisition, GPs become costly as samples grow (pp. 2-3).",
+  "key_idea": "Uncertainty = weighted average over model pairs of disagreement in trends (1-cos of simplex gradients, or xor of predicted decrease over a positive spanning set) or in feasibility (sigmoid of product, xor of signs), scaled by 10·Var of cached values; P, PI, EI replaced by sigmoid-based substitutes; solved in the MADS Search and projected on the mesh (pp. 8-16).",
+  "assumptions": "Bounds unrelaxable, c_j relaxable; no probabilistic foundation claimed; independence of constraints in P(x); many constants set by preliminary tests (factor 10, N_best, λ, simplex 0.001, PSS 0.005) (pp. 2, 11-15, 35).",
+  "proof_devices": [
+   "convergence inherited from MADS because every Search candidate is projected onto the mesh (p. 15)",
+   "invariance thought experiment (f/10+20 vs -f) to specify what the uncertainty must measure (p. 8)",
+   "property-list justification of an EI substitute without a Gaussian model (p. 15)"
+  ],
+  "experiments": "NOMAD 4, 18 default models vs no search, quad search, kriging, DFN, SHEBO; 7 analytical problems (15 instances, 1200(n+1)), aircraft range, simplified wing, solar1 (15 problem seeds, 10 replications), styrene; 4 NOMAD seeds (1 on solar1); data profiles at several τ, time data profiles, median table for SHEBO; losses to quad search on analytical problems and solar1 reported (pp. 16-28).",
+  "positioning": "Frames BBO as direct search vs surrogate methods with the search-poll paradigm credited to Audet 2004; closest prior uses of model disagreement are multi-fidelity correlation works; builds on the OECV metric and Talgorn et al.'s SP1-SP8 (pp. 2-3, 11, 13).",
+  "writing": "Design arguments by toy example before formulas (p. 8); concessions in result sentences (quad search 'must be favoured on cheap analytical problems', p. 19); a paragraph on what counts as a fair comparison (pp. 20-22).",
+  "limits_future": "Models must stay cheap; no gain on analytical problems; quadratics better on solar1; future: decouple objective/constraint uncertainty types, other weights, simplex/PSS size, adaptive λ, local α, understanding formulations 'chosen on a purely empirical basis' (pp. 28-29).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "All ensemble and Bayesian machinery lives in the Search, candidates projected on the mesh, Poll unchanged, convergence inherited.",
+    "pages": "pp. 6-7, 15-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Budgets in (n+1) units, data and time data profiles, seeds, other-family solvers, competitor's home ground conceded; variant: formulations and λ selected on the comparison problems.",
+    "pages": "pp. 16-28"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "solar1 (seed/replication parameters) and styrene from bbopt plus two MDO problems.",
+    "pages": "pp. 19-26"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Constraint uncertainty built on sign/feasibility, not trend; for SHEBO violated constraints recast as hidden constraints.",
+    "pages": "pp. 10, 16"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Built on NOMAD 4 and its default model library.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "invariance thought experiments to design a metric",
+    "evidence": "f/10+20 must give minimal uncertainty, -f maximal; standard deviation fails this test.",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "compare each model class with its own best configuration",
+    "evidence": "Kriging tested with its own best formulation SP5 rather than inside the formulations tuned for ensembles.",
+    "pages": "pp. 20-22"
+   }
+  ],
+  "transferable": [
+   "Add time data profiles next to evaluation data profiles when a competitor's per-iteration cost is high (p. 23).",
+   "For a solver that cannot follow the common protocol, report median best value, time and evaluations to reach it, plus total time (pp. 26-28).",
+   "When replacing a Gaussian quantity by a non-probabilistic substitute, list the original's qualitative properties and keep them (p. 15)."
+  ],
+  "coauthors": "S. Le Digabel, R. Saltet",
+  "quotes": [
+   {
+    "text": "In this case the uncertainty shall be minimum since using either model will yield the same candidate points.",
+    "page": 8
+   },
+   {
+    "text": "The resulting algorithm benefits from the convergence results of MADS since all the candidate points lie on the mesh",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S113",
+  "year": "2022",
+  "title": "Tight bounds on the maximal perimeter of convex equilateral small polygons",
+  "read_level": "full",
+  "contribution": "Constructs, for n = 2^s with s ≥ 4, convex equilateral small n-gons A_n whose perimeter is within π⁴/n⁴ + O(1/n⁵) of the upper bound and exceeds Mossinghoff's by 2π⁴/n⁴ + O(1/n⁵), proving Mossinghoff's hexadecagon suboptimal, and shows A_32 and A_64 are themselves not optimal.",
+  "problem_entry": "Open extremal problem (n = 2^s, s ≥ 4) entered by beating the best known construction (Mossinghoff 2008) in the constant of the O(1/n⁴) gap (pp. 1-2).",
+  "key_idea": "Define the polygon by its diameter graph (symmetry axis, half-path, pendant edges) so coordinates are closed-form in one angle t and equilaterality is one scalar equation; expand the root asymptotically (pp. 5-6).",
+  "assumptions": "Vertices in upper half-plane, counterclockwise, v0 at origin; convexity by determinants σ_i ≥ 0; n = 2^s, s ≥ 4 only (pp. 2, 5).",
+  "proof_devices": [
+   "diameter-graph-parameterized construction reducing the polygon to one angle (pp. 5-6)",
+   "asymptotic expansion of the root t0(n) (derivation not shown) (p. 6)",
+   "smallness and convexity checked by expanding critical distance and determinant (p. 6)",
+   "better instances Z32, Z64 from other diameter graphs as self-audit (Props. 1-2, pp. 7-8)"
+  ],
+  "experiments": "none (numerical table of perimeters for n = 16-256 and fraction of gap closed tending to 2/3, Table 1, p. 7)",
+  "positioning": "Historical chain Reinhardt 1922, Vincze 1950, Datta 1997, Tamvakis 1987, Audet-Hansen-Messine(-Perron) 2004/2007, Mossinghoff 2008, Bingane 2021-22; improves directly on Mossinghoff's family (pp. 1-4).",
+  "writing": "Main theorem stated on p. 2 before any construction; a single computational proof section; table with gap fraction (pp. 2, 5-7).",
+  "limits_future": "Another family might improve Theorem 1; exact optima for s ≥ 4 remain out of reach (pp. 2, 8).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Rigor as a bound sandwich (upper bound, constructive lower bound, explicit gap constant) rather than a convergence ladder; self-audit shows own family suboptimal for n = 32, 64.",
+    "pages": "pp. 2, 6-8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Released artifact is the OPTIGON code package (Julia/MATLAB vertex coordinates), not a blackbox benchmark.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "The extremal-polygon line dated 2002-2013 in SKILL.md continues in 2022 with Bingane.",
+    "pages": "pp. 1-2, 4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "graph-parameterized construction",
+    "evidence": "Candidate extremal polygon encoded by a diameter graph plus symmetry, reducing to one scalar equation, then asymptotic expansion.",
+    "pages": "pp. 5-6"
+   }
+  ],
+  "transferable": [
+   "Report a new bound with the fraction of the remaining gap it closes and its limit as n grows (p. 7).",
+   "After an asymptotic result, test optimality at small n by exhibiting better instances (pp. 7-8)."
+  ],
+  "coauthors": "C. Bingane",
+  "quotes": [
+   {
+    "text": "In particular, for the first open case n = 16, our result proves that Mossinghoff’s equilateral hexadecagon is suboptimal.",
+    "page": 1
+   },
+   {
+    "text": "This suggests that it is possible that another family of convex equilateral small polygons might produce an improvement to Theorem 1.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S142",
+  "year": "2022",
+  "title": "The equilateral small octagon of maximal width",
+  "read_level": "full",
+  "contribution": "Determines the equilateral small octagon of maximal width (w*₈ = 0.9537763006… + ε, 0 ≤ ε ≤ 10⁻⁶, ε-unique with radius 1.5×10⁻⁴) by combining analytic lemmas that leave two height-graph configurations with Couenne global-optimization certificates, and gives an asymptotic family G_n within 2π⁴/(3n⁴) + O(1/n⁶) of the width bound for n = 2^s, s ≥ 4.",
+  "problem_entry": "First open case (n = 8) of the maximal width of equilateral small 2^s-gons, plus an asymptotic family for larger n (p. 1).",
+  "key_idea": "Guess a height graph giving a candidate F8 in closed form, prune the space analytically (side-length bounds from the width-perimeter inequality, furthest-vertex lemmas, Ptolemy) to two configurations, then certify each with a global MINLP solver (pp. 5-9).",
+  "assumptions": "Coordinates normalized (v0 at origin, upper half-plane, counterclockwise); certificate relies on Couenne's numerical tolerances, stated as ε ≤ 10⁻⁶ in the theorem (pp. 1, 4, 9).",
+  "proof_devices": [
+   "contradiction by distance: two disjoint long diagonals force a distance > 1.0263 (Lemma 2, p. 7)",
+   "case reduction of height graphs to two configurations (Corollary 1, p. 7)",
+   "Ptolemy's inequality to tighten side-length and width bounds (Prop. 3, pp. 7-8)",
+   "global-solver certificates: infeasible configuration, raised objective bound infeasible (pp. 8-9)",
+   "ε-uniqueness via an exclusion-ball constraint made infeasible (Prop. 5, p. 9)",
+   "asymptotic expansion for the family G_n (pp. 10-11)"
+  ],
+  "experiments": "Solver runs as proof steps (Couenne via AMPL/NEOS: 0.32 s, 3.18 s, 2.05 s, 2.80 s) and a width table for n = 16-256 (pp. 9, 11).",
+  "positioning": "Relative to Bezdek-Fodor 2000 (width theory), Audet-Hansen-Messine-Ninin 2013 (non-equilateral octagon), Audet-Hansen-Messine 2009 inequality and Bingane's lower bounds (pp. 1-4, 6).",
+  "writing": "Both main results stated as Theorems 1-2 on pp. 1-2; lemma chain with short proofs; solver times given inside proofs (pp. 1-2, 7-9).",
+  "limits_future": "Precision 10⁻⁶ and uniqueness only outside a 1.5×10⁻⁴ ball; Theorem 1's 'only attained' is stronger than the ε-uniqueness proved; no future work stated (pp. 1, 9, 11).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Tolerance written into the theorem and claim fenced by an explicit certificate; device is case reduction plus global solver, not counterexamples.",
+    "pages": "pp. 1, 9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "AMPL models released so the certificate can be rerun.",
+    "pages": "p. 9"
+   },
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "The PhD-era global-optimization toolkit is still used in 2022, now via an off-the-shelf solver.",
+    "pages": "p. 9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analytic pruning before a global-solver certificate",
+    "evidence": "Variable bounds and configuration elimination by hand until each remaining MINLP closes in seconds.",
+    "pages": "pp. 6-9"
+   },
+   {
+    "pattern": "ε-uniqueness by exclusion constraint",
+    "evidence": "Adding ||z - z*||² ≥ 2.25×10⁻⁸ makes the model infeasible, proving near-uniqueness.",
+    "pages": "p. 9"
+   }
+  ],
+  "transferable": [
+   "Write the solver tolerance into the theorem statement (value + ε, 0 ≤ ε ≤ 10⁻⁶) (p. 1).",
+   "Use a known inequality between two functionals plus the best known value of one to bound the variables of the other problem (p. 6).",
+   "Certify optimality by raising the objective's lower bound slightly and showing infeasibility (p. 9)."
+  ],
+  "coauthors": "C. Bingane",
+  "quotes": [
+   {
+    "text": "This paper solves the first open case and finds the optimal equilateral small octagon.",
+    "page": 1
+   },
+   {
+    "text": "Within the limit of the numerical computations, this corresponds to the octagon F8.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S058",
+  "year": "2023",
+  "title": "A general mathematical framework for constrained mixed-variable blackbox optimization problems with meta and categorical variables",
+  "read_level": "full",
+  "contribution": "Introduces a notation framework for mixed-variable blackbox problems in which meta variables decree which variables and constraints are acting, separates nominal/ordinal categorical from integer/continuous variables, defines the domain and feasible set via meta-parameterized sets, and casts direct search (subproblems plus user-defined neighborhoods) and Bayesian optimization (auxiliary problem with encoders and mixed kernels) in it; no experiments.",
+  "problem_entry": "Meta variables (switching other variables and constraints on or off) and metric-free categorical variables make mixed-variable BBO hard, and earlier frameworks conflated categorical with integer and meta with categorical variables (pp. 2-3, 10).",
+  "key_idea": "Partition x = (x^m, x^q, x^s) with types and roles (meta, decreed, global), parameterize sets by the meta component, and express solution strategies as standard subproblems or an auxiliary problem (pp. 7-27).",
+  "assumptions": "No meta variable decreed by another meta variable; meta variables not encoded for BO; noise-free zero-mean GP; constraints handled inside subproblem solvers (pp. 8, 23-25).",
+  "proof_devices": [
+   "none: definitions only (Defs. 1-9); no theorems or convergence statement (pp. 7-25)"
+  ],
+  "experiments": "none (stated, with the surrogate management framework as precedent, p. 2)",
+  "positioning": "Builds on Audet-Dennis mixed-variable GPS lineage and 'importantly relies' on Lucidi-Piccialli(-Sciandrone) dimensional variables, which it generalizes and renames; critiques relax-and-round one-hot BO; reviews GP categorical kernels and Pelamatti et al. (pp. 2-4, 8).",
+  "writing": "Definitions interleaved with one running MLP hyperparameter example; each modelling choice justified right after it (integer vs categorical split p. 10, renaming p. 8); arXiv v1 has broken cross-references (pp. 18, 23, 28).",
+  "limits_future": "No experiments and no theory; future computational studies and BO development bridging optimization and machine learning (pp. 2, 28).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Classify-before-solving applied to variables: type and role for every variable, global vs decreed for every constraint, decision tree; axis is switching, not relaxability.",
+    "pages": "pp. 7-11, 15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Architecture only: flexible global search before a poll over user-defined neighborhoods, a poll alone misses good points; no convergence claimed.",
+    "pages": "pp. 22-23"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "The 'Hallé-Hannan → categorical framework 2023' entry; MSc scholarships acknowledged.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "framework/notation paper before algorithm papers",
+    "evidence": "Vocabulary published first, no experiments, justified by the SMF precedent; algorithms (CatMADS) follow later per SKILL.md.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "terminology hygiene",
+    "evidence": "'dimensional' renamed 'meta' because it clashes with physical units in engineering.",
+    "pages": "p. 8"
+   }
+  ],
+  "transferable": [
+   "Thread one small realistic example through every definition and end with the fully instantiated sets and constraints (pp. 5-6, 16-18).",
+   "Define neighborhoods of metric-free variables as sets of rules that may depend on the whole point, writing boundary cases explicitly (p. 21).",
+   "In a mixed-kernel GP, compare conditional components only when the switching components are equal (p. 27)."
+  ],
+  "coauthors": "E. Hallé-Hannan, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "The decree property is a special property that only meta variables possess.",
+    "page": 7
+   },
+   {
+    "text": "By its own, a poll is prone to miss out good point solutions.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S140",
+  "year": "2023",
+  "title": "Sequential stochastic blackbox optimization with zeroth-order gradient estimators",
+  "read_level": "partial",
+  "contribution": "Proposes SSO, which solves a sequence of Gaussian-smoothed problems with decreasing smoothing β_i by a zeroth-order Signum whose vanishing momentum step reduces variance and whose momentum norm is the stopping test; proves expectation rates for ZO-Signum under Lipschitz F and an evaluation complexity for SSO under smoothness and local convexity; competitive on SOLAR and blackbox adversarial attacks.",
+  "problem_entry": "Gap in prior work [43]: smoothing's convexification with large β was used without β → 0, with fixed inner iterations, without convergence proof or rate, on analytical problems only (pp. 2-3).",
+  "key_idea": "Homotopy in the smoothing parameter: β_i = β0/(i+1)² defines both the subproblem and its tolerance ||m|| ≤ Lβ_i/(4β0); ZO-Signum with decaying momentum step; optional MADS-style finite search step before the convergent local step (pp. 5-8).",
+  "assumptions": "F(·,ξ) integrable and L0-Lipschitz, no differentiability (Assumption 1); for SSO rates also Lipschitz gradient (Assumption 2) and local convexity of f^{β_i} with starts inside the convex ball for i ≥ I (Assumption 3) (pp. 4, 18-19).",
+  "proof_devices": [
+   "descent + bias + variance decomposition following Bernstein et al. (Prop. 4.1, p. 9)",
+   "cross term vanishes by conditioning on the σ-field and unbiasedness (Lemma 4.2, pp. 9-10)",
+   "E||g̃||² ≤ L0²(n+4)² via Nesterov-Spokoiny moment bound (Lemma 4.3, p. 10)",
+   "split-sum bound on the decaying-momentum weights (Lemma 4.4, pp. 10-11)",
+   "random output iterate R uniform in [C, K] for the expectation rate (Theorem 4.9, p. 14)",
+   "small momentum implies small gradient under local convexity, summed over subproblems for the complexity (Lemma 4.13, Theorem 4.17, pp. 19-23)"
+  ],
+  "experiments": "SOLAR instance 2 as a feasibility problem (integers fixed), 1000 evaluations, mean of 5 seeds vs NOMAD 3.9.1, CMA-ES, ZO-adaMM; adversarial attacks on Cifar10 (100 images, 5000 queries) and ImageNet with success rate, distortion and evaluations; per-problem hyperparameters outside the analysed step exponents (pp. 24-26, 30).",
+  "positioning": "Related work split into stochastic direct search/model-based vs ZO gradient methods; [43] singled out as the last work to exploit convexification; rates compared with ZO-SGD, ZO-signSGD, ZO-adaMM, ZSCG in a table that shows ZO-Signum worse (pp. 2-3, 17-18).",
+  "writing": "Three contribution bullets (pp. 3-4); workflow tables of lemmas/theorems (pp. 8, 18); explicit statement of worse rates (p. 17); 'first of its kind' hedged with 'to the best of our knowledge' (pp. 23, 27).",
+  "limits_future": "Stronger dimension dependence, sign loses gradient magnitude, fixed term large if the convex region is hard to reach; future: constrained stochastic problems (pp. 15, 17, 23, 27).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "Contradicts SKILL.md's claim that complexity-style guarantees are absent from Audet's corpus and the Roundtable remark that no Audet abstract gives expected bounds: expectation rates and an evaluation complexity are proved; ladder shape (Lipschitz → convex → smooth + locally convex) is evidence, no counterexamples.",
+    "pages": "pp. 1, 8, 14-15, 18, 21-22"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Search/local split exported to a stochastic gradient method; finite search budget so convergence rests on the local step; no mesh.",
+    "pages": "pp. 7-8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "SOLAR reused from bbopt.",
+    "pages": "p. 24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Other-family baselines (NOMAD, CMA-ES) but mean-of-5-seeds curves only, per-problem tuned hyperparameters, no data profiles.",
+    "pages": "pp. 24-26, 30"
+   },
+   {
+    "method": "Inner Tension: small-n vs scale",
+    "relation": "evidence",
+    "note": "NOMAD excluded from adversarial attacks because it 'is not recommended for large problems'.",
+    "pages": "p. 26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "homotopy in smoothing parameter with coupled stopping test",
+    "evidence": "β_i sets both the smoothed subproblem and the momentum-norm tolerance; step sizes reset per subproblem, momentum carried over.",
+    "pages": "pp. 5-8"
+   },
+   {
+    "pattern": "variance reduction by decaying momentum step",
+    "evidence": "s2 → 0 replaces growing mini-batches; momentum norm doubles as stopping criterion.",
+    "pages": "pp. 7, 9"
+   }
+  ],
+  "transferable": [
+   "Give a workflow table mapping lemmas to theorems before a long analysis (pp. 8, 18).",
+   "Convert rates in different measures with Jensen's inequality and tabulate assumptions, measure, rate and query complexity, including rows where you lose (pp. 17-18).",
+   "Use a vanishing momentum step for variance reduction and the momentum norm as stopping test (pp. 7, 9)."
+  ],
+  "coauthors": "J. Bigeon, R. Couderc, M. Kokkolaras",
+  "quotes": [
+   {
+    "text": "Furthermore, neither a convergence proof nor a convergence rate are provided for the algorithm.",
+    "page": 3
+   },
+   {
+    "text": "The convergence is guaranteed by the local step, since the search step is run only a finite number of times.",
+    "page": 8
+   }
+  ]
+ }
+]

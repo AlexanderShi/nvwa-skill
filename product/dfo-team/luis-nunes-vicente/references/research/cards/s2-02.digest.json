@@ -1,0 +1,576 @@
+[
+ {
+  "id": "S106",
+  "year": "2001",
+  "title": "Pattern search methods for user-provided points",
+  "read_level": "full",
+  "contribution": "A pattern-search algorithm in which a user routine (e.g. physics-based geometric moves in molecular geometry) proposes trial points that are projected onto the mesh by a cheap integer program and also used to order the poll, with serial and MPI Fortran 95 codes.",
+  "problem_entry": "Expensive unconstrained problems in molecular geometry, where the user can propose energy-lowering points by physically relevant transformations; how to use them without losing pattern-search convergence (p. 1).",
+  "key_idea": "Evaluate f only at the mesh point nearest the user point (integer program (1)); in the poll, choose the positive basis best aligned with the user direction and poll in increasing-angle order (pp. 1-3).",
+  "assumptions": "None stated in the note; convergence is deferred to TR [1] (the S025 paper); W = {n e_i} keeps the projection at O(|V|n) flops (pp. 1-3).",
+  "proof_devices": [
+   "none (no theorem; convergence deferred to [1], p. 1)"
+  ],
+  "experiments": "none; software description only (Fortran 95, MPI, two user routines with effort parameters, p. 4).",
+  "positioning": "Builds on Torczon, Lewis–Torczon and Audet–Dennis pattern-search theory; cites Meza–Martinez and Hart for direct search and evolutionary methods in molecular problems (pp. 2, 4).",
+  "writing": "Four-page announcement: motivation in one paragraph, pattern-search primer, full algorithm box, software paragraph; no theorem or numerics (pp. 1-4).",
+  "limits_future": "No limits or future work stated; theory and numerics live in the companion report [1] (S025) (pp. 1, 4).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "User/physics proposals sit in the search step; convergence comes from mesh projection, poll and mesh-size update. Earliest instance in the corpus (2001).",
+    "pages": "pp. 1-3"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "variant",
+    "note": "The poll is ordered, but by an external hint direction rather than a simplex gradient from past evaluations.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Code released (Fortran 95/MPI web site), but no collection or profiles in this note.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Design forced by molecular-geometry practice.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "project the domain/heuristic proposal onto the convergence structure",
+    "evidence": "User point replaced by the nearest mesh point via an integer program; same method as S025, so not an independent paper.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "pattern": "use guidance information to order the poll",
+    "evidence": "Poll basis chosen by best cosine with the user direction and points polled by increasing angle.",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "minimal application oracle / matrix-free interface",
+    "evidence": "Two user routines (func, trial_point) with integer/real effort parameters.",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "Evaluate only at the mesh point nearest an external proposal, found by a small integer program, and pick the lattice generator set so that projection costs O(|V|n) (pp. 1-3).",
+   "Reuse the proposal to choose and order the poll directions by angle, so a good hint saves evaluations (p. 3).",
+   "Expose an effort parameter in the user routine so the proposal can be greedy in the search step and conservative in the poll (p. 4)."
+  ],
+  "coauthors": "P. Alberto, F. Nogueira, H. Rocha",
+  "quotes": [
+   {
+    "text": "it is the user and the optimization algorithm together, and not the optimization algorithm alone, that lead the",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "S054",
+  "year": "2002",
+  "title": "Local convergence of a primal-dual method for degenerate nonlinear programming",
+  "read_level": "partial",
+  "contribution": "A stabilized primal–dual interior-point method (componentwise floors in the Newton matrix plus acceptance of infeasible unit steps with superlinear residual decrease) that converges q-quadratically under MFCQ instead of LICQ, without a centrality condition.",
+  "problem_entry": "Local interior-point theory assumes LICQ, which fails generically for optimal control with state bounds when n_y >> n_u; follow Wright's stabilized SQP to work under MFCQ (p. 2).",
+  "key_idea": "Two changes to classical primal–dual: floors of the order of the distance to S on X and Z in the Newton matrix (replacing centrality), and acceptance of a unit step that leaves the orthant when negative parts and the residual drop superlinearly (pp. 3-6).",
+  "assumptions": "C^2, KKT, strict complementarity, second-order sufficiency for all multipliers, MFCQ; iterates assumed to enter a strictly complementary neighbourhood (pp. 3-4, 7).",
+  "proof_devices": [
+   "error bound: residual ||(grad l, g, min(x,z))|| = Theta(dist to S) under MFCQ + SOSC (3.9) (p. 5)",
+   "SVD of the active-constraint Jacobian and orthogonal change of variables (Lemma 4.1 part A, pp. 7-8)",
+   "Theta(residual) block M22 shown nonsingular by contradiction with full column rank of grad g (part B, pp. 9-10)",
+   "step O(residual) (Lemma 4.1) + unit step gives residual O(residual^2) (Lemma 4.2) + induction + Cauchy-sequence single limit (Theorem 4.3, pp. 7, 12-14)"
+  ],
+  "experiments": "none",
+  "positioning": "Extends Wright's stabilized SQP to primal–dual methods; contrasts with Ralph–Wright and Tseng, who need centrality and monotonicity; lists LICQ-based interior-point theories including Vicente's own (pp. 2-3).",
+  "writing": "Two modifications announced in one paragraph (p. 3); the long proof is split into labelled parts (A)-(E) with headings (p. 7); a Discussion section states the main assumption's weakness (p. 14).",
+  "limits_future": "Neighbourhood-entry assumption is significant; strict complementarity failure not covered; proposes index-set guessing or Wright's LP-based identification to start from any nearby point (pp. 3, 14-15).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Primal–dual Newton skeleton kept; only the coefficient matrix and the step-acceptance rule change (acceptance widened to infeasible unit steps); local and derivative-based.",
+    "pages": "pp. 3, 5-6"
+   },
+   {
+    "method": "Taste #3",
+    "relation": "evidence",
+    "note": "Exactly two modifications of the classical method.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "State-constrained optimal control is the example that breaks LICQ.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "weakest condition the proof touches",
+    "evidence": "Centrality replaced by floors that deliver only what the proof needs: small components bounded below by a multiple of the residual.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Discussion: the neighbourhood-entry assumption is significant and needs enhancements.",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "forward-compatible acceptance test",
+    "evidence": "Condition (3.11b) is not needed by the local theory but kept because a future merit-function globalization will need it.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "transferable": [
+   "Use an error-bound residual that is Theta(distance to the solution set) as the progress measure and to set every parameter (floor, centering, step length) (pp. 5-6).",
+   "Replace centrality by componentwise floors in the Newton matrix so the system stays well defined after an infeasible unit step (pp. 4-6).",
+   "Quadratic local template: step O(r), unit step gives O(r^2), induction keeps the neighbourhood, Cauchy sequence gives one limit when multipliers are non-unique (pp. 7, 12-14).",
+   "For degenerate Jacobians, rotate into SVD range/null coordinates and prove the key block nonsingular by contradiction with the rank assumption (pp. 7-10)."
+  ],
+  "coauthors": "S. J. Wright",
+  "quotes": [
+   {
+    "text": "a step length of 1 may be taken even when it leads to new iterates that have nonpositive",
+    "page": 3
+   },
+   {
+    "text": "The key requirement is that the iterates should avoid the situation in",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S095",
+  "year": "2002",
+  "title": "Local analysis of a new multipliers method",
+  "read_level": "partial",
+  "contribution": "A new augmented-Lagrangian multipliers method for optimal-control-structured NLP that updates the bound multipliers of the states explicitly (nonnegative without projection) and the state-equation multipliers implicitly, with partial-exactness theorems, local linear/superlinear convergence and a dual interpretation.",
+  "problem_entry": "Optimal control/design with state bounds (c_y nonsingular); classical multipliers methods must impose nonnegativity of inequality multipliers explicitly; make the bound multipliers the explicit ones (pp. 1-2).",
+  "key_idea": "Eliminate state-equation multipliers via the adjoint formula, put them into a Fletcher-type augmented Lagrangian, minimize within bounds, and read the new bound-multiplier update from the subproblem's first-order conditions (pp. 2-3, 8).",
+  "assumptions": "f, c C^3 with c_y nonsingular; LICQ, second-order sufficiency and strict complementarity at the solution (pp. 3, 8).",
+  "proof_devices": [
+   "two-way exactness bridge: first- and second-order conditions transfer between penalized and original problem for small penalty (Theorems 4.2-4.4, pp. 6-7)",
+   "Bertsekas Prop. 2.4 template: change of variables, nonsingular Jacobian at r = s = 0 for all penalty values in [0, mu_bar], implicit function theorem (pp. 8-10)",
+   "dual function with grad d = c_y^{-1} c and Hessian (53); Newton on the dual for a q-quadratic variant (pp. 15-16)"
+  ],
+  "experiments": "none (numerics announced for a forthcoming paper, p. 16)",
+  "positioning": "Starts from Hestenes–Powell, Bertsekas, Rockafellar, Fletcher's augmented Lagrangian penalty and Conn–Gould–Toint's bound-constrained LANCELOT approach; proof follows Bertsekas with the extra difficulty stated (pp. 2, 8).",
+  "writing": "Section map at the end of the introduction (p. 2); a paragraph before the main theorem states where the proof departs from Bertsekas and what is lost (p. 8); conclusions list concrete future topics (p. 16).",
+  "limits_future": "Efficiency questions for general NLP (least-squares multipliers, orthogonal null-space basis); future: general NLP with globalization and numerics, iteration counts, active-set identification, degeneracy (p. 16).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Multipliers-method skeleton and Bertsekas' proof kept; only which multipliers are explicit changes; the loss (smaller region) is stated.",
+    "pages": "pp. 2, 8"
+   },
+   {
+    "method": "Taste #3",
+    "relation": "evidence",
+    "note": "Without the cross term the update is the classical one premultiplied by c_y^T.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Optimal control/design with state bounds; implementable with state and adjoint solves.",
+    "pages": "pp. 1-2, 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose",
+    "evidence": "Convergence region min{delta, delta/mu} is smaller than Bertsekas' delta/mu.",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "structured class first, general class in a follow-up",
+    "evidence": "Conclusions forecast the general-NLP paper and its efficiency issues; realized in S098.",
+    "pages": "p. 16"
+   }
+  ],
+  "transferable": [
+   "Eliminate one family of multipliers through a first-order (adjoint) formula inside the augmented Lagrangian so that the remaining multipliers' update comes out of the subproblem's first-order conditions and is nonnegative for free (pp. 2-3, 8).",
+   "Prove a two-way exactness bridge between penalized and original problem before the convergence theorem and reuse its positive definiteness in the implicit-function proof (pp. 5-7, 9).",
+   "Give the dual reading of a new update (gradient and Hessian of the dual function, scaled ascent step, Newton-on-the-dual variant) (pp. 15-16)."
+  ],
+  "coauthors": "none (single author)",
+  "quotes": [
+   {
+    "text": "The update formula maintains these multipliers zy nonnegative without any",
+    "page": 2
+   },
+   {
+    "text": "Our new multipliers method is perhaps better tailored to problems of the form (1) and (2) where the null",
+    "page": 16
+   }
+  ]
+ },
+ {
+  "id": "S062",
+  "year": "2003",
+  "title": "Space mapping: Models, sensitivities, and trust-regions methods",
+  "read_level": "full",
+  "contribution": "Organizes the mathematics of space mapping: sensitivities of the map for vector-valued models, globally convergent trust-region methods for space-mapping surrogates (including an inexact blended surrogate), and a regularity theorem showing that a scalar-model surrogate is regular but can be flat and kinked.",
+  "problem_entry": "Space mapping (Bandler et al.) grew up in engineering design; the paper sets out to organize its mathematical and algorithmic aspects: sensitivities of the map, provably convergent TR methods for its surrogates, and the surrogate's shape (pp. 1-2).",
+  "key_idea": "Differentiate the argmin that defines the map to get sensitivities and an adjoint-type surrogate gradient; compose linear models with the quadratic merit so Powell's Cauchy bound and standard TR theory apply; define the scalar map by closest matching point (pp. 3-6, 10).",
+  "assumptions": "Quadratic merit H; unique argmin; G(x) invertible; P well defined and smooth (flagged as strongest and problem dependent); scalar case: P point-to-point, admitted strong (pp. 2-3, 6-7, 14).",
+  "proof_devices": [
+   "sensitivity equation G(x) J_P(x) = J_c(P(x))^T J_f(x) from differentiating the optimality condition (pp. 3-4)",
+   "Powell's Cauchy bound for the composed quadratic model, then Conn–Gould–Toint global theorem (pp. 5-6)",
+   "Carter-type relative gradient error condition (17) for inexact sensitivities (pp. 8-9)",
+   "weight w_k -> 0 transfers surrogate stationarity to the fine model (Corollary 2.1, p. 9)",
+   "three-part case analysis (coincide / flat / kink) for regularity of g_P (Theorem 3.1, pp. 11-12)"
+  ],
+  "experiments": "none; 1-D illustrations only (Figs. 1-2, pp. 11, 14).",
+  "positioning": "Builds on Bandler et al., Bakr et al. (Broyden, TR globalization) and Conn–Gould–Toint theory; reorganizes rather than criticizes; notes the Bakr et al. choice of using c directly may not satisfy the Cauchy condition (pp. 1-2, 4-5).",
+  "writing": "Two parallel parts each ending with a discussion-and-extensions subsection (pp. 10, 13-14); assumptions frankly graded (strongest, problem dependent) (p. 7); worked 1-D example introduced before the theorem to guide the proof (p. 11).",
+  "limits_future": "Strong well-definedness assumptions; point-to-set map and nonsmoothness when m <= n; flat surrogates mean abandon SM when flatness appears; extensions to second order, line search, quasi-Newton, Hilbert spaces, Dennis–Li–Tapia nonsmooth TR (pp. 7, 10, 13-14).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Coarse model inside a TR skeleton with Cauchy decrease; guarantee is surrogate stationarity, fine-model stationarity needs w_k -> 0.",
+    "pages": "pp. 5-6, 9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Same TR skeleton for two surrogates; only the model, the ratio numerator and a gradient-accuracy condition change.",
+    "pages": "pp. 6-9"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Space mapping comes from electromagnetic/engineering design.",
+    "pages": "pp. 1-2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bridge inequality to a classical proof",
+    "evidence": "(11) puts the composed model's decrease into Powell's form, after which Conn–Gould–Toint's theorem applies.",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "abstract assumptions, then verify per instance",
+    "evidence": "Conditions 2.1 translate TR-theorem assumptions on the surrogate into conditions on f, c and P.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "pattern": "reusable 1-D pathology example",
+    "evidence": "g = x^2 with a shifted quadratic coarse model shows the flat region and kinks; reused in S044 Fig. 3.1.",
+    "pages": "pp. 11-13"
+   }
+  ],
+  "transferable": [
+   "Differentiate the optimality condition of an argmin-defined surrogate to get sensitivities, and compute the surrogate gradient adjoint-style with one linear solve (pp. 3-4).",
+   "Compose linear inner models with the exact outer quadratic so that the TR model is quadratic and Powell's bound applies unchanged (pp. 4-5).",
+   "For a blended surrogate w*coarse + (1-w)*fine, prove convergence for fixed w and then drive w_k -> 0 to reach fine-model stationarity (p. 9).",
+   "Explain a surrogate's shape with a hand-solvable 1-D fine/coarse pair that exhibits every regime (pp. 11-13)."
+  ],
+  "coauthors": "none (single author)",
+  "quotes": [
+   {
+    "text": "the situation is highly problem dependent",
+    "page": 7
+   },
+   {
+    "text": "there is no guarantee that the surrogate",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S076",
+  "year": "2003",
+  "title": "Numerical behavior of a stabilized SQP method for degenerate NLP problems",
+  "read_level": "full",
+  "contribution": "A Matlab study of Wright's stabilized SQP with constraint identification (sSQPa) on twelve degenerate NLP problems and on feasibility problems, showing fast local convergence and convergence from remote points without globalization, and documenting failures.",
+  "problem_entry": "sSQPa has a superlinear local theory for problems without LICQ or strict complementarity but no documented numerics; target: NLP subproblems in global optimization (pp. 1, 5).",
+  "key_idea": "Restate sSQPa for mixed constraints and test it with practical adaptations (least-squares initial multipliers, tuned decrease parameter), several starting points and feasibility-mode residual measures (pp. 3-9, 15-18).",
+  "assumptions": "C^2 with Lipschitz second derivatives, MFCQ, KKT, second-order sufficiency; no LICQ, no strict complementarity (p. 2).",
+  "proof_devices": [
+   "none new; theory restated from Wright [12] (Theorem 1, Lemmas 1-3, pp. 5-7)"
+  ],
+  "experiments": "Matlab, no globalization, 12 degenerate problems x 3 starting points, log-error/residual vs iteration plots, iteration comparisons with NPSOL/SNOPT/NITRO/LOQO on two problems plus a restated Anitescu table, ID0 identification table, 57-trial feasibility comparison of four measures and two infeasible problems (pp. 8-18).",
+  "positioning": "Presented as a numerical companion to Wright's sSQPa theory [12]; compares against established NLP solvers and restates Anitescu's comparison (pp. 3, 9, 13).",
+  "writing": "Problem-by-problem narrative with one sentence of verdict each; failures and their structural reasons reported (pp. 9-15); no conclusion section (p. 18).",
+  "limits_future": "Failures on HS13, problem 10 and ID0 misidentification reported; no globalization; global-optimization use stated as ongoing work (pp. 1, 10, 13, 15).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Hand-collected degenerate test set, multiple starts, iteration comparisons with established solvers, failures reported; but no profiles, iterations not evaluations, no code release mentioned.",
+    "pages": "pp. 8-16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Contrast: a local method run without globalization; global behaviour observed, not guaranteed.",
+    "pages": "pp. 1, 8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Algorithm reused for feasibility by zeroing the objective and changing the stopping residual measure.",
+    "pages": "pp. 15-18"
+   },
+   {
+    "method": "Taste #4",
+    "relation": "evidence",
+    "note": "Experiments designed to confirm specific theorems of [12] (rate; single ID0 call near S).",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "Initial multipliers from least squares instead of the LP; decrease-test parameter changed to 0.05 after trials.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "HS13 not solved; only linear rate on problem 10; ID0 misidentifies on problems 2 and 7.",
+    "pages": "pp. 10, 13, 15"
+   },
+   {
+    "pattern": "report your own failed first design",
+    "evidence": "A second LP to maximize multipliers gave little gain.",
+    "pages": "pp. 7-8"
+   }
+  ],
+  "transferable": [
+   "For a local method, plot log error vs iteration from three starts at increasing distance plus the residual from the farthest one: rate and basin in one figure (p. 8).",
+   "When the method loses on a problem, give the structural reason (stabilized QP resembles augmented-Lagrangian methods known to struggle there) (p. 13).",
+   "Compare several stationarity/feasibility measures as stopping tests by counting wins over all problem-start pairs (Table 6, p. 16)."
+  ],
+  "coauthors": "E.-S. M. E. Mostafa, S. J. Wright",
+  "quotes": [
+   {
+    "text": "Other solvers, among them NPSOL, SNOPT, and NITRO, exhibit a similar behavior for this problem by not",
+    "page": 10
+   },
+   {
+    "text": "this might explain the not so good",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "S098",
+  "year": "2003",
+  "title": "Updating the multipliers associated with inequality constraints in an augmented Lagrangian multiplier method",
+  "read_level": "partial",
+  "contribution": "Extends S095's multipliers method to general NLP (h(x)=0, x>=0): least-squares equality multipliers inside the augmented Lagrangian and an explicit, automatically nonnegative update of the bound multipliers, with local linear/superlinear convergence.",
+  "problem_entry": "Interchange the explicit/implicit roles of equality and bound multipliers in the classical multipliers method, generalizing the structured class of S095 (pp. 2-3).",
+  "key_idea": "lambda(x,w) = least-squares multiplier; P(x,w,mu) augmented Lagrangian; minimize within bounds and set w_{k+1} = grad P, nonnegative by the subproblem's KKT conditions (pp. 2-4).",
+  "assumptions": "f, h C^3, grad h full rank; nondegeneracy, second-order sufficiency, strict complementarity (pp. 3, 6).",
+  "proof_devices": [
+   "explicit penalty threshold as reciprocal of the largest eigenvalue of a reduced matrix (Theorem 3.1, p. 6)",
+   "six-step implicit-function proof following Bertsekas Prop. 2.4: nonsingularity at zero then positive penalty, IFT, bounds, optimality (appendix, pp. 9-14)",
+   "orthogonal projector ZZ^T onto N(grad h^T) to split gradient and Hessian (pp. 3-5)"
+  ],
+  "experiments": "No data shown; conclusions claim competitiveness with LANCELOT on small problems (p. 8).",
+  "positioning": "Positioned against the classical method (Bertsekas) and Conn–Gould–Toint's globally convergent augmented Lagrangian/LANCELOT; generalizes Vicente's S095 (pp. 1-3, 8).",
+  "writing": "Main proof moved to an appendix announced as long and technical (p. 6); the paragraph on departures from Bertsekas repeats S095's almost verbatim (S098 p. 8; S095 p. 8); concrete limitations in the conclusions (pp. 7-8).",
+  "limits_future": "Costly inner iterations; globalization open because grad P differs from grad l by a term in h(x) (4.1); smaller convergence neighbourhood; constants grow with the conditioning of grad h^T grad h (pp. 3, 7-8, 15).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Multipliers-method skeleton and Bertsekas' proof structure kept; only which multipliers are explicit changes.",
+    "pages": "pp. 2, 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Competitiveness claim against LANCELOT with no table, collection or profiles (warning sign #5); early-career data point.",
+    "pages": "p. 8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Identity grad P = grad l, crucial for Conn–Gould–Toint globalization, fails by a term proportional to h(x) (4.1).",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Smaller convergence neighbourhood; relatively costly inner iterations.",
+    "pages": "pp. 3, 7"
+   },
+   {
+    "pattern": "structured class first, general class in a follow-up",
+    "evidence": "General-NLP sequel of S095; conclusions point back to the structured class where linear systems become state/adjoint solves.",
+    "pages": "pp. 3, 7-8"
+   }
+  ],
+  "transferable": [
+   "To explain why a global result does not carry over, write the identity the classical proof relies on and exhibit the extra term in your method (p. 8).",
+   "State a threshold penalty parameter explicitly as an eigenvalue of a reduced matrix (p. 6).",
+   "When porting a local proof from a structured to a general class, replace the structural inverse by least-squares quantities and a null-space basis and report the conditioning dependence of the constants (pp. 2-4, 15)."
+  ],
+  "coauthors": "C. P. Avelino",
+  "quotes": [
+   {
+    "text": "The update naturally maintains the nonnegativity of the multipliers without the need for a positive-orthant",
+    "page": 1
+   },
+   {
+    "text": "It turns out that it is possible to derive a multipliers method where the multipliers w",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "H001",
+  "year": "2004",
+  "title": "Editorial",
+  "read_level": "full",
+  "contribution": "Guest editorial (Audet, Dennis, Vicente) for the Optimization and Engineering special issue on surrogate optimization, summarizing three convergence-theory papers and four engineering-application papers.",
+  "problem_entry": "Frames the issue by algorithms that use derivatives not at all or selectively because they may be unavailable, too expensive or misleading, with surrogates used explicitly or implicitly (p. 1).",
+  "key_idea": "n/a (editorial); organizes papers into theory (pattern-search counterexamples, filter frame methods, space mapping + classical method) and applications (categorical design, uncertainty, well-field design, airfoil noise) (pp. 1-3).",
+  "assumptions": "n/a (editorial)",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Places the issue in the pattern-search/surrogate tradition of Audet and Dennis; defines global convergence as convergence to stationarity from arbitrary points (p. 1).",
+  "writing": "One paragraph per paper: problem class, technique, key result; theory papers first, applications second; signed by Vicente on behalf of the editors (pp. 1-3).",
+  "limits_future": "No own contribution; singles out a counterexample paper, a released problem class and a surrogate in the search step (pp. 1-3).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Editors' reading: Kriging surrogate minimized in the pattern-search search step; space mapping as a preprocessing phase before a globally convergent method.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "Weak: Audet's counterexample paper presented as required reading, two decades before the 2024 counterexample to Vicente's 2012 result.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Four of seven papers are engineering applications.",
+    "pages": "pp. 2-3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Weak: release of a problem class to the research community highlighted.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "C. Audet, J. E. Dennis",
+  "quotes": [
+   {
+    "text": "the common element of these papers is the treatment of algorithms that make no use (or selected use) of derivative information, which might be unavailable, too expensive, or misleading.",
+    "page": 1
+   },
+   {
+    "text": "The first paper in our special issue is one that all of those interested in the field should be well aware of.",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "S044",
+  "year": "2005",
+  "title": "Space mapping for optimal control of partial differential equations",
+  "read_level": "full",
+  "contribution": "A Tikhonov-regularized (smooth) space mapping, a new Broyden update that adds a secant condition from the surrogate gradient, and a trust-region aggressive space-mapping algorithm for PDE optimal control, tested against nonlinear multigrid on two semilinear elliptic problems.",
+  "problem_entry": "Discretized PDE control is large and nonlinear; MG/OPT needs convexification and uses only grid coarsening; space mapping can use simpler surrogates, but S062's definition creates kinks (pp. 1-5).",
+  "key_idea": "Define P by penalized least-squares matching (smooth when G(x) is nonsingular), update its Jacobian by a Broyden formula with a relaxed second secant condition damped by sigma_k, and globalize by trust regions (pp. 3-9, 12-13).",
+  "assumptions": "g, g-hat, r, r-hat C^1 (C^2 for smoothness), P single-valued, G(x) uniformly nonsingular; TR theorem needs Carter's condition on B_k, not shown for Broyden matrices (pp. 4, 7).",
+  "proof_devices": [
+   "marginal-function regularity (Rockafellar) for directional derivatives of g_P (Theorem 2.1, p. 4)",
+   "Carter's relative-error condition imported for TR global convergence (Theorem 4.1, p. 7)",
+   "closed-form least-squares solution of the two-secant problem via vectorization and one Lagrange multiplier (Proposition 5.1, pp. 8-9)",
+   "sizing relation alpha*lambda(x) ~ g-hat(x-hat) - g(x) between smooth and nonsmooth definitions (p. 5)"
+  ],
+  "experiments": "Two 2-D semilinear elliptic control problems; CPU-ratio vs FAS nonlinear multigrid (0.089-1.040) and res-ratio vs prolongated coarse solution (0.011-0.044) over coarsening levels; new vs classical Broyden ablation (0.072 vs 0.089); sigma_k sensitivity (pp. 16-22).",
+  "positioning": "Repairs Vicente's own S062 nonsmooth mapping; builds on Bandler et al. and Bakr et al.; contrasts with Lewis–Nash MG/OPT (flexibility, nonconvex globalization) (pp. 2-5).",
+  "writing": "Early and repeated disclaimer that SM is not a fast fine-grid solver (pp. 3, 19); theory imported with an explicit statement that investigating it further is not the authors' goal (p. 7); conclusions list concrete untreated cases (p. 22).",
+  "limits_future": "Not a fast fine solver; CPU advantage vanishes at fine coarse levels; control bounds not treated; fine-gradient approximations untested; future: several coarse models, level-specific optimizers, SM-based fast solver (pp. 3, 15, 19, 22-23).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Coarse model + Broyden inside TR skeleton; guarantee is surrogate stationarity and relies on Carter's condition not verified for Broyden matrices.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Skeleton unchanged; only the definition of P and the secant condition change.",
+    "pages": "pp. 3-5, 8-9"
+   },
+   {
+    "method": "Taste #3",
+    "relation": "evidence",
+    "note": "sigma_k = 0 recovers the practitioners' Broyden update.",
+    "pages": "p. 9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Strongest-available baseline (nonlinear multigrid) and ablation of the new ingredient, but two examples, no collection/profiles, code not mentioned.",
+    "pages": "pp. 16-22"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Superconductivity (Ginzburg–Landau) model.",
+    "pages": "p. 18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "critique of one's own previous result as the entry point",
+    "evidence": "S062's nonsmooth space mapping is the foil; the new regularized definition removes its kinks.",
+    "pages": "pp. 3-5"
+   },
+   {
+    "pattern": "import a neighbouring field's certified tool through a specialist coauthor",
+    "evidence": "Multigrid transfer operators, FAS baseline and semismooth Newton from the PDE-control coauthor.",
+    "pages": "pp. 16-18"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "CPU-ratio about 1 at the finest coarse level; not a fast fine-grid solver.",
+    "pages": "p. 19"
+   },
+   {
+    "pattern": "reusable 1-D pathology example",
+    "evidence": "Fig. 3.1 reuses S062's g = x^2 example to compare smooth and nonsmooth surrogates.",
+    "pages": "pp. 5-6"
+   }
+  ],
+  "transferable": [
+   "Replace an equality-constrained map definition (kinks where the CQ fails) by a Tikhonov-penalized least-squares one, and size the weight via the old multiplier (alpha*lambda ~ residual) (pp. 3-5).",
+   "Derive a quasi-Newton update from how the Jacobian is used: add a second secant condition, relax the incompatible pair by least squares, damp the perturbation with sigma_k and keep sigma_k = 0 as the ablation baseline (pp. 8-9, 19-20).",
+   "Report quality per cost against the strongest solver with a CPU ratio at matched residual and a residual ratio against the naive coarse solution (p. 18)."
+  ],
+  "coauthors": "M. Hintermüller",
+  "quotes": [
+   {
+    "text": "The space mapping is based on a regularization approach which, in contrast to other space-mapping techniques, results in a smooth mapping and, thus, avoids certain irregular situations at kinks.",
+    "page": 1
+   },
+   {
+    "text": "However, let us re-emphasize that in this paper, space mapping is not designed to be a new fast fine grid solver.",
+    "page": 19
+   }
+  ]
+ }
+]

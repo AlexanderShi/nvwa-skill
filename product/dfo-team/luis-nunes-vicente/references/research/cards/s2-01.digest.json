@@ -1,0 +1,499 @@
+[
+ {
+  "id": "S081",
+  "year": "1996",
+  "title": "A comparison between line searches and trust regions for nonlinear optimization",
+  "read_level": "full",
+  "contribution": "Shows that a trust region forced to step along the quasi-Newton direction satisfies fraction of Cauchy decrease and fraction of optimal decrease when the condition number of Hk is uniformly bounded, the same assumption line searches need, which supports the claim that the trust region's freedom of direction is a built-in regularization (pp. 1, 4-6).",
+  "problem_entry": "An asymmetry between two classical theorems: line searches need bounded cond(Hk), trust regions only bounded ||Hk||. The author notes the comparison is unfair and asks when the scaled quasi-Newton step satisfies conditions (8) and (9) (pp. 2-4).",
+  "key_idea": "Take away the trust region's choice of direction (step -Hk^{-1}gk scaled back to the radius, (10)) and see which assumption the restricted method needs (p. 4).",
+  "assumptions": "Unconstrained; f C1, bounded below, gradient uniformly continuous; Hk SPD; l2 norm; new hypothesis cn(Hk) <= kappa (pp. 1-2, 4-5).",
+  "proof_devices": [
+   "model decrease of the boundary-scaled QN step >= (1/2) Delta_k ||g_k|| cos(theta_k), (11), combined with cos(theta_k) >= 1/kappa (6) and an upper bound on the Cauchy decrease in both branches of (7) (p. 5)",
+   "bound on the optimal model decrease via ||s*_k|| <= Delta_k < ||H_k^{-1} g_k|| (p. 6)",
+   "borrowed 3x3 diagonal counterexample (Byrd-Schnabel-Shultz) where QN decrease is O(.^6) vs Cauchy decrease O(.^5) (p. 5)",
+   "Armijo condition rewritten as a ratio (12) beside the trust-region ratio with curvature (p. 6)"
+  ],
+  "experiments": "none",
+  "positioning": "Builds on Armijo, Goldstein, Wolfe, Zoutendijk, Powell, Thomas and Sorensen, and reuses an example and a theorem of Byrd-Schnabel-Shultz [2]; restates the literature without criticizing it (pp. 3-6).",
+  "writing": "Question-driven short note: claim in the abstract, the question posed in section 3, two theorems plus one counterexample, and final remarks on acceptance tests and regularization (pp. 1, 4-7).",
+  "limits_future": "No limitations or future work stated; scope is unconstrained problems with SPD Hk and no numerics (pp. 1-7).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The trust-region skeleton accepts a foreign step (the QN direction), and fraction of Cauchy decrease connects that step to the convergence theorem; unlike Method 1 the foreign step needs an extra assumption (bounded condition number). Derivative-based precursor.",
+    "pages": "pp. 4-6"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Globalizations are compared through their acceptance tests written in a common ratio form; the paper compares acceptance tests and does not generalize one.",
+    "pages": "p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bridge inequality to a classical proof",
+    "evidence": "prove the scaled QN step satisfies fraction of Cauchy decrease, then Powell's theorem (Theorem 2.2) applies",
+    "pages": "pp. 4-5"
+   },
+   {
+    "pattern": "negative example for the rejected alternative",
+    "evidence": "the borrowed diagonal example shows the forced trust region failing (8) without the condition-number bound",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "handicap the flexible method to isolate what its freedom buys",
+    "evidence": "the trust region is restricted to the line-search direction, and it then needs the line-search assumption",
+    "pages": "pp. 4-6"
+   }
+  ],
+  "transferable": [
+   "To compare two globalization strategies fairly, restrict the more flexible one to the other's step and ask which assumption the restricted version needs; the difference names what the flexibility buys (pp. 4-6).",
+   "To show a new step inherits a classical theorem, prove it satisfies the classical decrease condition (fraction of Cauchy decrease) with a constant depending only on your assumption, then cite the theorem (Theorem 4.1 -> Theorem 2.2, pp. 4-5).",
+   "Pair the positive theorem with a small diagonal counterexample in which a parameter goes to zero, showing the assumption cannot be dropped (Example 4.1, p. 5).",
+   "Rewrite competing acceptance tests in one common ratio form so the reader sees which quantity (curvature) each uses (p. 6)."
+  ],
+  "coauthors": "single author (thanks J. Dennis, M. El-Alem, M. Heinkenschloss, R. Tapia, V. Torczon)",
+  "quotes": [
+   {
+    "text": "The question we ask and then answer in this short paper supports this claim.",
+    "page": 1
+   },
+   {
+    "text": "One can see that trust regions use curvature to accept or reject a step but line searches do not.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "H007",
+  "year": "1997",
+  "title": "Métodos de optimização para controlo óptimo e projecto de engenharia",
+  "read_level": "full",
+  "contribution": "Portuguese-language overview of the TRICE project for a telecommunications audience: the problem class with states and controls, the composition of SQP, trust regions and affine scaling, three tiers of convergence properties, deterministic inexactness tolerances, and the Fortran 77/Matlab release with a GUI and a public user's guide (pp. 1-3).",
+  "problem_entry": "Problems min f(y,u) s.t. C(y,u)=0, y,u >= 0 from optimal control, design and identification; the entry is that optimization researchers should now target structured problem classes coming from applications (pp. 1-2).",
+  "key_idea": "Compose proven techniques (SQP, trust regions, Coleman-Li affine scaling) and exploit the user's linearized-state and adjoint solvers in an all-at-once formulation instead of the costly reduced one (pp. 1-2).",
+  "assumptions": "f and C once or twice continuously differentiable; m < n; implicit function theorem for the reduced form; implemented case has no state bounds (pp. 1-2).",
+  "proof_devices": [
+   "none in the paper; results cited from [5], [13] and [10]: global first-order, global second-order and local q-quadratic convergence with inactive trust regions near the solution (p. 2)",
+   "inexactness analysis [10] giving per-iteration tolerances for linear solves and derivatives from known quantities (pp. 2-3)"
+  ],
+  "experiments": "none reported; the interface is said to have been tested on a wide range of application problems (p. 3).",
+  "positioning": "Presents TRICE as exploiting problem structure, unlike most optimization software; nearly all references are the author's and Heinkenschloss's reports (pp. 3-4).",
+  "writing": "Short overview in Portuguese; each section ends by pointing to technical reports; convergence claims listed in tiers (pp. 1-3).",
+  "limits_future": "State-bounded problem open: preconditioners, interior-point algorithms (H003), local convergence under degeneracy, trust-region globalization and an efficient implementation (p. 3).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Solver released in Fortran 77 and Matlab with a GUI and a user's guide at a public URL; modular, almost object-oriented interface.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Global convergence comes from a trust-region skeleton wrapped around proven components (SQP, affine scaling), not a heuristic.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Inexact solves and finite-difference derivatives with tolerances computed each iteration: deterministic precursor of probabilistic requirements.",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "design around the user's existing oracle",
+    "evidence": "algorithms consume the application's linearized-state and adjoint (or sensitivity) solvers",
+    "pages": "pp. 1-3"
+   },
+   {
+    "pattern": "implementable accuracy conditions",
+    "evidence": "tolerances for linear solves and derivatives computed from quantities known at the start of each iteration",
+    "pages": "pp. 2-3"
+   }
+  ],
+  "transferable": [
+   "Offer the user two equivalent oracle options (adjoint solves, or sensitivity-matrix products) and state when each is efficient (sensitivities only for few controls) (p. 3).",
+   "In a short overview, list convergence properties in tiers keyed to the derivative information supplied (first derivatives -> first-order points; second derivatives -> second-order points; local q-quadratic rate) (p. 2)."
+  ],
+  "coauthors": "single author (TRICE project with M. Heinkenschloss)",
+  "quotes": []
+ },
+ {
+  "id": "H003",
+  "year": "1998",
+  "title": "On interior-point Newton algorithms for discretized optimal control problems with state constraints",
+  "read_level": "full",
+  "contribution": "For discretized optimal control problems with bounds on states and controls, gives a constraint qualification that holds without regularity, derives one affine-scaling and two primal-dual interior-point Newton algorithms from equivalent optimality systems, proves local well-posedness and q-quadratic rates, reduces the linear algebra to the null space, and relates the three algorithms (pp. 1-2, 4-5, 11-18).",
+  "problem_entry": "Adding state bounds to the TRIP class breaks regularity whenever |A(y) U A(u)| > n-m and turns state bounds into nonlinear constraints y(u) >= 0 in the reduced form, so optimality conditions must first be secured without regularity (pp. 3-5).",
+  "key_idea": "Apply Newton's method in an interior-point way to three equivalent forms of the first-order conditions (Table 1.1), compute each step as s = s^n + W s_u, and use the correspondence D <-> X^{1/2}, E <-> Z to port centralization and explain multiplier updates (pp. 2, 10-17).",
+  "assumptions": "f, C twice continuously differentiable with Lipschitz second derivatives; Cy nonsingular; rate theorems at a nondegenerate regular point satisfying second-order sufficiency (pp. 3, 12, 14, 16).",
+  "proof_devices": [
+   "feasible-arc construction x(t) = (y(u+t p_u), u+t p_u) from the implicit function to prove the first- and second-order KKT constraint qualifications under (2.8) (Prop. 2.1, pp. 4-5)",
+   "nonsingularity of the scaled KKT matrix from regularity plus positive definiteness on the null space (Prop. 3.3, pp. 7-8)",
+   "nonsingularity of W^T H^a W by lifting a null vector to the full KKT matrix (Prop. 4.1, p. 11)",
+   "rank argument premultiplying the full primal-dual matrix by diag(W^T, I, I) (p. 17)",
+   "q-quadratic rate borrowed from Coleman-Li / Dennis-Heinkenschloss-Vicente and El-Bakry et al. under |sigma-1| = O(||F||) (pp. 12, 15, 17)",
+   "r-quadratic multipliers via a Lipschitz bound on the multiplier map (pp. 12, 17)"
+  ],
+  "experiments": "none shown; preliminary numerics on problems from [17] are asserted to be encouraging without data (p. 2).",
+  "positioning": "Extends the affine-scaling approach of [10], [17], [28] to state bounds; credits Das [9] for independent discovery of the same formulation for general NLP and notes the full-space primal-dual algorithm is that of El-Bakry et al. [12] (pp. 1-2).",
+  "writing": "Summary table mapping algorithms to variables (Table 1.1); an explicit claim that the unified view yields insight, backed by two remarks (pp. 2, 13-17).",
+  "limits_future": "Trust-region globalization under study; local rate in the singular case open; regularity and strict complementarity likely absent for this class (pp. 18-19).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Keeps the affine-scaling Newton skeleton of [10] and changes only the scaling object (D and E now cover states); the price (loss of regularity and nondegeneracy) is stated. Local, derivative-based.",
+    "pages": "pp. 1, 4-7, 18-19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Numerics asserted as encouraging with no data, collection or profiles.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "affine scaling extends [10]; the full-space primal-dual algorithm is that of [12]; section 6 recovers general NLP",
+    "pages": "pp. 2, 18"
+   },
+   {
+    "pattern": "correspondence between sibling algorithms to port a missing component",
+    "evidence": "D <-> X^{1/2}, E <-> Z at stationarity is used to add centralization to the affine-scaling algorithm and to interpret its multiplier update",
+    "pages": "pp. 13-14, 17"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "regularity fails structurally with state bounds; singular-case rate left open",
+    "pages": "pp. 4, 18-19"
+   }
+  ],
+  "transferable": [
+   "Derive a family of algorithms by applying Newton to equivalent forms of one optimality system, tabulate which variables each iterates on, and use the correspondence at stationary points (D <-> X^{1/2}, E <-> Z) to move a feature (centralization) from one algorithm to another (pp. 2, 13-14).",
+   "When a standard constraint qualification fails structurally, prove a class-specific sufficient condition by building an explicit feasible arc from the implicit function y(u + t p_u) (Prop. 2.1, pp. 4-5).",
+   "Prove nonsingularity of a reduced null-space matrix by contradiction: lift its null vector to the full KKT matrix known to be nonsingular (Prop. 4.1, p. 11)."
+  ],
+  "coauthors": "single author",
+  "quotes": [
+   {
+    "text": "The preliminary numerical results are encouraging.",
+    "page": 2
+   },
+   {
+    "text": "One of our claims in this paper is that looking at these three interior{point Newton algorithms in a comprehensive manner is a tool to gain insight about their individual components and properties.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "H004",
+  "year": "1998",
+  "title": "Derivative computations for a class of optimal control problems",
+  "read_level": "full",
+  "contribution": "Lecture notes that express first- and second-order derivative computations for optimal control problems, by sensitivity and adjoint equations, through applications of the null-space operator W and its adjoint, and characterize the oblique projector W W* against the orthogonal one (pp. 1-8).",
+  "problem_entry": "How to compute gradients and Hessians of the full and reduced formulations when the discretization carries an infinite-dimensional scaling and information is available only as operator-times-vector products (pp. 1-2).",
+  "key_idea": "Localize every sensitivity or adjoint computation in W d_u (one generalized linearized state solve) and W* d (one generalized adjoint solve) (p. 6).",
+  "assumptions": "Finite-dimensional Hilbert spaces with their own scalar products; implicit function theorem assumptions; f, c once or twice differentiable (pp. 1-3).",
+  "proof_devices": [
+   "implicit differentiation of grad_y l(y(u),u,lambda(u)) = 0 to show the reduced Hessian equals the Hessian of f-hat (13), credited to [6] (pp. 4-5)",
+   "orthogonality/uniqueness argument characterizing the oblique projector (Prop. 2.1, pp. 7-8)"
+  ],
+  "experiments": "none",
+  "positioning": "Explicitly motivated by [3] (S011) and [7] (S048); sections 2.1-2.2 repeat S048 section 3 almost verbatim; projector result from the thesis [13] (pp. 1, 3-8).",
+  "writing": "Expository, notation-first teaching notes with two-step computational recipes (pp. 3-6).",
+  "limits_future": "None stated (pp. 1-8).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The reusable artefact is an oracle abstraction (W and W* applications) any algorithm can call, not a solver with profiles.",
+    "pages": "p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimal application oracle / matrix-free interface",
+    "evidence": "all derivative computations reduced to applying W and W* to vectors",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "research section recycled as teaching notes",
+    "evidence": "footnote declares teaching material for a CIM school lecture; sections 2.1-2.2 repeat S048 section 3",
+    "pages": "p. 1; pp. 3-6"
+   }
+  ],
+  "transferable": [
+   "Express every derivative computation through two primitives, W v and W* d, each costing one linearized-state or adjoint solve; algorithms then need only those primitives (p. 6).",
+   "When only sensitivities are available, obtain the Lagrangian term <lambda, c> from one linearized state solve via <grad_y f, c_y^{-1} c> (p. 4).",
+   "Store a reduced-Hessian approximation as the full-space operator [0 0; 0 H-hat] so full-space code paths stay valid (p. 6)."
+  ],
+  "coauthors": "single author",
+  "quotes": [
+   {
+    "text": "It also localizes the use of the sensitivity equation method and the adjoint equation method in the derivative calculations.",
+    "page": 6
+   },
+   {
+    "text": "Written as part of the teaching material used to support the lecture Optimization Methods for Control and Design Problems given by the author at the School of Finite Elements and Applications, CIM, Coimbra 1998.",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "H002",
+  "year": "1999",
+  "title": "An analysis of Newton's method for equivalent Karush-Kuhn-Tucker systems",
+  "read_level": "full",
+  "contribution": "An abstract model bounds the difference between Newton steps on an original KKT system and on an equivalent reformulation by kappa ||U||, with U a relating condition, and instantiates it for equality constraints (steps coincide in the limit), simple bounds and discretized optimal control (steps need not coincide) (pp. 4-10).",
+  "problem_entry": "Equivalent forms of the first-order conditions give different Newton methods; the question is how close their steps are, answered for several reformulations at once (p. 2).",
+  "key_idea": "Premultiply the original Newton equation by the reformulation operator G and subtract, splitting the step discrepancy into function-value consistency, derivative consistency and a reduced cross-derivative term (pp. 4-5).",
+  "assumptions": "F, G, H with Lipschitz first derivatives; standard Newton assumptions near a solution make the constants uniform (pp. 4-5).",
+  "proof_devices": [
+   "subtract the G-premultiplied original Newton equation from the reformulated one to get an identity for R(x-bar)(dx - dx-bar) (p. 4)",
+   "three-term bound ||R-S||, ||G dF/dy||, ||GH - GF|| each <= kappa_i ||U|| (Theorem 2.1, p. 5)",
+   "per-instance choice of U and check whether ||U|| -> 0 at stationary points (pp. 6-10)"
+  ],
+  "experiments": "none",
+  "positioning": "Builds on Goodman's null-space Newton [7], Coleman-Li affine scaling [1,2] and the author's own [3], [5], [9] (pp. 2-3, 10).",
+  "writing": "Question stated plainly in the introduction; one paragraph interpreting each term of the bound; the author moves quickly to the examples (pp. 2, 5).",
+  "limits_future": "In the interior-point instances the bound does not imply the steps coincide; future: the same analysis for the three algorithms of [9] on general NLP (pp. 3, 7, 10).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Newton's method is kept and the system reformulated; the price of the reformulation is measured by ||U||, and the paper says where it does not vanish. Local, derivative-based.",
+    "pages": "pp. 4-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "abstract assumptions, then verify per instance",
+    "evidence": "Theorem 2.1 with abstract hypotheses verified in sections 3-5",
+    "pages": "pp. 5-10"
+   },
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "one model covers equality constraints, simple bounds and discretized optimal control",
+    "pages": "pp. 1-2"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "steps need not coincide in the bound-constrained instances",
+    "pages": "pp. 3, 7, 10"
+   }
+  ],
+  "transferable": [
+   "To compare two algorithms derived from equivalent formulations, premultiply one Newton equation by the reformulation operator G and subtract the other; the identity splits the step discrepancy into function-value consistency, derivative consistency and a cross-derivative term (pp. 4-5).",
+   "State the comparison theorem with abstract hypotheses (each term <= kappa_i ||U||), verify them per instance, and report where ||U|| -> 0 fails (pp. 5-10).",
+   "After the key inequality, give one paragraph interpreting each term of the bound (p. 5)."
+  ],
+  "coauthors": "single author",
+  "quotes": [
+   {
+    "text": "The goal of this work is not to provide the answer only for this particular reformulation.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S048",
+  "year": "1999",
+  "title": "An interface between optimization and application for the numerical solution of optimal control problems",
+  "read_level": "full",
+  "contribution": "Specifies a language-neutral, matrix-free interface between optimizers and optimal control applications (user routines, status flags, inexactness tolerances, iterate-lifecycle callback, consistency checks, weighted inner products), with derivative formulas and code fragments, implemented in Fortran 77 and Matlab (pp. 3-27).",
+  "problem_entry": "General NLP solvers applied to discretized optimal control problems hit memory limits, cannot use application solvers such as multigrid, and ignore infinite-dimensional scaling (mesh-dependent convergence); new optimization methods reach the field late (pp. 2-3).",
+  "key_idea": "Separate optimization from application: leave partial-Jacobian solves, scalar products and inexact evaluations to user routines called through a fixed interface, so optimizers are written once, matrix-free (pp. 3, 10-16, 25).",
+  "assumptions": "f, c at least once differentiable, second derivatives in parts; implicit function theorem for the reduced problem; finite-dimensional Hilbert spaces (pp. 3, 6).",
+  "proof_devices": [
+   "adjoint identities that must hold to O(tol) with inexact solvers, and finite-difference checks built only from interface routines (p. 17)",
+   "gradients, adjoints and BFGS updates rederived under weighted inner products T (Appendix A, pp. 25-27)"
+  ],
+  "experiments": "none in this paper; code fragments (steepest descent, reduced SQP, augmented Lagrangian, L-BFGS) and one duct-flow optimal control example (pp. 18-24).",
+  "positioning": "Contrasts with general NLP solvers (LANCELOT, LOQO, SNOPT) and relates to the broader C++ Hilbert Class Library, which could implement the interface (pp. 2, 4).",
+  "writing": "'We believe' framing of the gap; Table 1 of routines; code fragments; a separate Limitations and Extensions section (pp. 3, 10, 17-25).",
+  "limits_future": "Not sufficient for all algorithms; L2 vs L-infinity for pointwise bounds; in-core vectors for time-dependent PDEs and seismic inversion; inexactness control and failure handling deferred (pp. 17-18, 24-25).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "The artefact itself is the paper; Fortran 77 and Matlab implementations solved a variety of problems.",
+    "pages": "pp. 1-4, 24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "No problem collection, baseline or profiles; only code fragments and one worked application.",
+    "pages": "pp. 17-24"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "States that inexact but cheaper information, properly controlled, can make algorithms more efficient, and supplies a deterministic tol hook.",
+    "pages": "p. 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimal application oracle / matrix-free interface",
+    "evidence": "Jacobians and Hessians only as operator applications through a fixed set of user routines",
+    "pages": "pp. 3, 10-16"
+   },
+   {
+    "pattern": "design around the user's existing oracle",
+    "evidence": "partial-Jacobian solves (e.g., multigrid) left to the application",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "infrastructure as a stand-alone citable publication",
+    "evidence": "the interface specification is published in ACM TOMS",
+    "pages": "pp. 1-4"
+   },
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "code fragments ignore the status flags and tolerance control, declared beyond scope",
+    "pages": "pp. 17-18"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "section 6 limitations: L-infinity bounds, in-core storage, insufficient for all algorithms",
+    "pages": "pp. 24-25"
+   }
+  ],
+  "transferable": [
+   "Give every user routine a three-state status flag (0 success, >0 fatal, <0 performed but suspicious) and a tolerance input (pp. 10-11).",
+   "Add an iterate-lifecycle callback (init / trial / accept / reactivate / temporary) so the application can cache per-iterate work, log, or checkpoint (pp. 13-14).",
+   "Ship consistency tests with the interface: adjoint identities to O(tol) and finite-difference checks built only from interface routines (p. 17).",
+   "Put problem scaling into user-supplied inner products rather than variable transformations, and rederive gradients, adjoints and BFGS under them (pp. 4-5, 25-27).",
+   "Add a job argument so the application can exploit special cases the optimizer knows about (p. 12)."
+  ],
+  "coauthors": "M. Heinkenschloss",
+  "quotes": [
+   {
+    "text": "We believe that the gap between optimization methods and their application to optimal control problems can be narrowed and in many cases even be closed by the provision of an interface between optimization algorithms and optimal control applications.",
+    "page": 3
+   },
+   {
+    "text": "By using this interface or some of its features, optimization algorithm designers are forced to separate optimization and application tasks within the algorithms.",
+    "page": 25
+   }
+  ]
+ },
+ {
+  "id": "S099",
+  "year": "1999",
+  "title": "Characterization of the smoothness and curvature of a marginal function for a trust-region problem",
+  "read_level": "full",
+  "contribution": "Computes the marginal function v(Delta) of the trust-region subproblem and its first and second derivatives in every scenario (positive definite, easy and hard cases), proves v is C1 everywhere and C-infinity except at most at one breakpoint, characterizes its convexity/concavity, and uses v' in Newton's method for a Gaussian discriminant-analysis separation measure (pp. 2-15).",
+  "problem_entry": "A statistics application needs v'(Delta) to solve an equation by Newton's method; general NLP sensitivity theory gives only Lipschitz continuity and one-sided derivatives and does not cover all scenarios (pp. 3-4).",
+  "key_idea": "Explicit calculation through the Gay-Sorensen characterization and the eigendecomposition of H, split into three cases with thresholds Delta* and Delta#, summarized in one table (pp. 4-11).",
+  "assumptions": "Euclidean norm, symmetric H, any g; nothing else (p. 2).",
+  "proof_devices": [
+   "implicit differentiation of the secular equation g^T(H+lambda I)^{-2} g = Delta^2 to obtain lambda'(Delta) and v', v'' (pp. 5-6)",
+   "asymptotics of h(lambda) as Delta -> 0+ giving v''_+(0) = g^T H g / g^T g (pp. 9-10)",
+   "one-sided limits at Delta* and Delta# showing loss of twice differentiability but a Schwartz second derivative (pp. 11-12)",
+   "Cauchy-Schwarz on g^T(H+lambda I)^{-3} g showing v'' is monotone decreasing (p. 12)"
+  ],
+  "experiments": "Plots of v, v', v'' on 3-D diagonal examples (Matlab + MINPACK-2 dgqt.f); S-PLUS Newton solve on UCI iris, wdbc, wine in 7, 10, 7 iterations to 1e-14 (pp. 6-10, 15).",
+  "positioning": "Applies Gauvin, Rockafellar and Janin, then declares the general sensitivity theory insufficient; uses Gay, More and Sorensen for the subproblem (pp. 3-4).",
+  "writing": "Enthusiastic framing of the results as surprising; reader guidance to skip section 2; one summary table of formulae (pp. 3, 11).",
+  "limits_future": "Extensions to ellipsoidal norms by change of variables and to More's quadratic constraint said to be easy; no limitations discussed (p. 15).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Validation is one application on three real datasets with iteration counts, no baseline or collection.",
+    "pages": "p. 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import",
+    "evidence": "a trust-region object exported, with a statistician coauthor, into discriminant analysis",
+    "pages": "pp. 13-15"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "general sensitivity theory applied first, then declared insufficient for all scenarios",
+    "pages": "pp. 3-4"
+   },
+   {
+    "pattern": "exploit the problem's own geometry",
+    "evidence": "eigenstructure and easy/hard dichotomy of the trust-region subproblem organize the proof",
+    "pages": "pp. 5-8"
+   }
+  ],
+  "transferable": [
+   "To differentiate a value function whose multiplier solves a scalar secular equation, differentiate that equation implicitly to get lambda', then substitute into the KKT expression of v (pp. 5-6).",
+   "Collect an exhaustive case analysis into one table of formulae per case and parameter interval (Table 1, p. 11).",
+   "Build a Newton starting point by linear interpolation between two parameter values where the function is known in closed form (5.7) (p. 14)."
+  ],
+  "coauthors": "D. A. Andrews",
+  "quotes": [
+   {
+    "text": "But the mathematical questions we answer in this paper go far beyond this point.",
+    "page": 3
+   },
+   {
+    "text": "These results have some implications for problem (1.1), but we will omit them since they are too general and they do not cover all possible scenarios in (1.1).",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S055",
+  "year": "2001",
+  "title": "Bilevel programming: Introduction, history and overview",
+  "read_level": "full",
+  "contribution": "Encyclopedia entry defining bilevel programming, illustrating nonconvex and disconnected induced regions with one small example, and summarizing history, theory (optimality conditions, strong NP-hardness, exponentially many local minima, special cases) and algorithm classes keyed to problem class and guarantee (pp. 1-3).",
+  "problem_entry": "Definition of the hierarchical problem and its applications in transportation, management, planning and optimal design (p. 1).",
+  "key_idea": "One worked two-variable example plus a one-constraint modification exhibits the class's pathologies, followed by a routing of algorithm classes by problem class and global/local guarantee (pp. 1-3).",
+  "assumptions": "For branch-and-bound and complementarity methods, lower level convex in y with a constraint qualification (p. 2).",
+  "proof_devices": [
+   "none (worked example only)"
+  ],
+  "experiments": "none",
+  "positioning": "Balanced survey citing Bracken-McGill, Candler-Norton, Stackelberg and main surveys; self-citations [5], [20], [21] (pp. 2-3).",
+  "writing": "Compact definitional entry with keywords in the margin; manuscript dated 1 Dec. 1997 (pp. 1-3).",
+  "limits_future": "No new results; points to the Shimizu-Ishizuka-Bard book, surveys and the author's bibliography review (p. 3).",
+  "method_links": [],
+  "new_pattern_candidates": [
+   {
+    "pattern": "survey as a problem-feature routing table",
+    "evidence": "algorithm classes keyed to problem class and global/local guarantee",
+    "pages": "pp. 2-3"
+   },
+   {
+    "pattern": "controlled-difficulty test-problem generators",
+    "evidence": "own generator result cited: linear BP with exponentially many local minima can be constructed",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "one toy example exhibiting every pathology",
+    "evidence": "one example shows a nonconvex, then disconnected induced region with two local minimizers",
+    "pages": "pp. 1-2"
+   }
+  ],
+  "transferable": [
+   "In a survey or tutorial, use one two-variable example plus a one-constraint modification to exhibit every structural pathology of the class (nonconvex then disconnected feasible region, several local minimizers) (pp. 1-2).",
+   "Organize an algorithm overview by (problem class, guarantee type: global or local minimizer) rather than chronologically (pp. 2-3)."
+  ],
+  "coauthors": "single author",
+  "quotes": [
+   {
+    "text": "However, it was not until the early eighties that these problems started receiving the attention they deserve.",
+    "page": 2
+   },
+   {
+    "text": "This simple example illustrates many features of bilevel programming like the nonconvexity and the disconnectedness of the induced region",
+    "page": 2
+   }
+  ]
+ }
+]

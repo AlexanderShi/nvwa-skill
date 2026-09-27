@@ -1,0 +1,4 @@
+{
+ "S093": "The paper answers the three distinct questions of maximizing the perimeter, diameter and area of equilateral unit-width convex polygons. The solution to each of these problems is trivially unbounded when the number of sides is even. We show that when this number is odd, the optimal solution to these three problems is identical, and arbitrarily close to a trapezoid. The paper also considers the maximization of the sum of distances between all pairs of vertices of equilateral unit-width convex polygons. Based on numerical experiments on the three first open cases, it is conjectured that the optimal solution to this fourth problem is the same trapezoid as for the three other problems.",
+ "S093__src": "https://hal.science/hal-00847259"
+}

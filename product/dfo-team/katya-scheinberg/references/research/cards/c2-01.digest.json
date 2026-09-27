@@ -1,0 +1,389 @@
+[
+ {
+  "id": "S008",
+  "year": "1997",
+  "title": "On the convergence of derivative-free methods for unconstrained optimization",
+  "read_level": "full",
+  "contribution": "Defines a broad class of interpolation-model trust-region DFO methods (Newton fundamental polynomials, Sauer-Xu error bound) and proves every limit point is first-order critical, with geometry adequacy gating radius reduction and a criticality loop tying model accuracy to the model gradient.",
+  "problem_entry": "Practitioner demand for expensive simulations; direct search, AD and FD ruled out; Powell's interpolation methods worked numerically (Conn-Toint 1996, Powell 1996) but had no convergence theory (pp. 2-5).",
+  "key_idea": "Keep the trust-region skeleton; shrink the radius only if the interpolation set is adequate (fully linear, bounded Newton polynomials), re-certify the model in a ball of radius <= mu*||g_k|| when g_k is small, and allow moves to the best interpolation point (pp. 14-15, 17-18).",
+  "assumptions": "f C^2 with globally bounded gradient and Hessian, bounded below, bounded model Hessians (chosen 'to keep our analysis simple', p. 6); adequacy = >= n+1 points in the ball with bounded Newton polynomials (p. 11); no noise, unconstrained.",
+  "proof_devices": [
+   "Sauer-Xu path-sum interpolation error bound (3.8) (p. 9)",
+   "constructive well-poised set: each point = argmax of current Newton polynomial over the ball; normalization + at-most-doubling gives bound 2^{|Y[d]|} (Theorem 2, pp. 10-11)",
+   "function-error to gradient-error transfer by Taylor + direction h = delta*(grad f - g)/||grad f - g|| (Theorem 4, pp. 12-13)",
+   "criticality loop finiteness by geometric shrinking and triangle inequality (Lemma 5(iii), pp. 16-17)",
+   "radius bounded below away from criticality by first-reduction contradiction using adequacy at reductions (Lemma 7, pp. 18-19)",
+   "standard TR skeleton: liminf via summed Cauchy decrease, all limit points via sum-of-radii argument (Theorems 9-12, pp. 19-22)"
+  ],
+  "experiments": "none (numerics deferred to Conn-Toint 1996 and Powell 1996, p. 5)",
+  "positioning": "Full section on Powell's DFO contributions as 'the main source of our inspiration'; Newton instead of Lagrange polynomials justified by the Sauer-Xu formula, not superiority; Carter 1991 and More 1983 as TR theory (pp. 4-7, 15, 18).",
+  "writing": "Modest ('reasonable global convergence results', 'admittedly simplistic', 'merely to explore a framework'); plain-language paragraphs after key lemmas; flags own Lemma 3 as 'of little theoretical use' and geometry constant as theory-only (pp. 2, 11-12, 15, 17, 19).",
+  "limits_future": "Future: which class members perform best numerically, extend the class, bounds other than Sauer-Xu (p. 22). Unstated: no rates/complexity, global gradient bound, no algorithmic adequacy test via pivots (p. 12), costly full-set geometry repair (criticized in S016 p. 19).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "1997 origin of geometry-as-certificate: radius shrinks only with adequate geometry; certification at unsuccessful and criticality iterations; fully linear suffices",
+    "pages": "pp. 11, 14-17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "TR skeleton kept; paper lists 'three important aspects' where the standard proof breaks and re-proves only those",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "deterministic ancestor (my interpretation): Lemma 7 radius lower bound away from criticality is what later stochastic analyses replace by a step-parameter random walk; only liminf/lim, no complexity",
+    "pages": "pp. 18-19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "weak: monomial basis lets known Hessian sparsity be imposed by dropping x_i x_j",
+    "pages": "p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "abstract algorithm class with pluggable quality predicates",
+    "evidence": "geometry insertion/improvement left unspecified except for properties the proof needs ('There is no need to specify exactly how this is done for the purpose of our theory'); second instance after S004",
+    "pages": "p. 13"
+   },
+   {
+    "pattern": "safeguard test with fallback to the analysable step",
+    "evidence": "threshold pivoting as the practical test; the provable argmax construction of Theorem 2 'a last resort'",
+    "pages": "p. 11"
+   }
+  ],
+  "transferable": [
+   "Turn a uniform function-error bound into a gradient-error bound: Taylor-expand f and model, subtract, choose h = delta*(grad f - g)/||grad f - g|| (pp. 12-13)",
+   "Gate radius decrease on a model certificate so that 'every radius reduction happens with a good model' is a free lemma (Step 4, p. 14; Lemma 5(ii), p. 16)",
+   "Criticality loop: re-certify the model in a ball of radius <= mu*||g_k||, shrinking by omega until ||g_k|| >= eps_g; finite unless stationary (Step 1, p. 14; Lemma 5(iii), pp. 16-17)",
+   "Prove existence of a well-conditioned sample set constructively by greedy argmax of the current basis polynomial (Theorem 2, pp. 10-11)",
+   "List where your algorithm departs from the framework whose theory you reuse and re-prove only what those departures break (p. 17)"
+  ],
+  "coauthors": "A. R. Conn, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "This implies that the model cannot be judged locally inappropriate (and, consequently, the trust-region radius reduced) before the geometry of the interpolation set is itself satisfactory.",
+    "page": 17
+   },
+   {
+    "text": "We recall here that our purpose is merely to explore a framework in which convergence theory can be discussed, and the above will serve that goal.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S019",
+  "year": "1998",
+  "title": "A derivative free optimization algorithm in practice",
+  "read_level": "full",
+  "contribution": "Practice paper for the Conn-Scheinberg-Toint DFO code: prose algorithm, practical properties (fully linear suffices, min-Frobenius models, noise robustness), a three-class constraint treatment (easy / difficult / virtual-hidden), and evaluation-count comparisons with PDS, LANCELOT-FD and COBYLA on CUTE/HS plus a Boeing helicopter application.",
+  "problem_entry": "Engineering black boxes (Boeing helicopter rotor with 11-50 variables at ~1 min/evaluation, engine nozzle at hours/evaluation, water-network calibration); goal: few evaluations, use each value as soon as available (pp. 2-3).",
+  "key_idea": "Interpolation trust region that decreases the radius only once the model is fully linear, grows the model from 2 points, uses minimum-Frobenius-norm underdetermined models, and puts cheap constraints exactly into the subproblem (pp. 3-7).",
+  "assumptions": "f C^2, derivatives unavailable, expensive, noise typically present, n < 100; constraints defined by smooth functions even if unknown; hidden constraints assumed to be smooth feasible sets (pp. 2, 6, 8).",
+  "proof_devices": [
+   "none new; convergence cited to S008 with the remark that fully linear suffices (p. 5)",
+   "counting argument: 528 points for one full quadratic in 31 variables vs good solution after ~180 evaluations (p. 5)",
+   "informal noise argument: noise matters only when trust-region radius is small relative to noise; FD gradients fragile if noise level unknown (pp. 5-6)",
+   "counter-picture for own virtual-constraint heuristic (Figure 1, pp. 7-8)"
+  ],
+  "experiments": "26 unconstrained CUTE, 13 inequality-HS, 16 equality-HS problems vs PDS, LANCELOT-FD, COBYLA; function evaluations and final f, CPU time explicitly omitted, tolerances not matched; LANCELOT-FD fewer evaluations on 16/26 unconstrained, DFO fewer on 12/13 and 15/16 constrained (my count); helicopter 10 restarts per size with 15-20% failed evaluations counted (pp. 8-11).",
+  "positioning": "Algorithm of S008/S004 with Conn-Toint 1996 prototype and Powell inspiration; baselines span direct search, FD quasi-Newton (own LANCELOT), Powell's COBYLA; Booker et al. 1998 for helicopter comparisons (pp. 3, 8, 11).",
+  "writing": "Practice voice, prose algorithm, hedged claims about global minima, names the flaw of its own heuristic, no conclusion section (pp. 3-5, 8, 11).",
+  "limits_future": "Virtual-constraint heuristic can stop at non-minimizers; difficult constraints left to ongoing research; local convergence only; future: more sophisticated heuristics (pp. 5, 7-8). Unstated: no equal-accuracy protocol; unconstrained LANCELOT wins not discussed.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "practice side of pay-only-the-minimum: fully linear suffices, radius not reduced before fully linear, ~180 evaluations vs 528 for one full quadratic, min-Frobenius models",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "strong: cheap constraints kept exact in the subproblem (Method 6 step 2), equality constraints reduce interpolation dimension, prior knowledge of variable importance/separability shapes the model",
+    "pages": "pp. 6-7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "compares by function evaluations with CPU time set aside, but stopping tolerances not matched ('appropriate comparable default values')",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "deterministic precursor: damage from noise tied to trust-region radius relative to noise level; FD fragile with unknown noise",
+    "pages": "pp. 5-6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "constraint taxonomy by information and cost",
+    "evidence": "easy (cheap values+derivatives) / difficult (expensive black box) / virtual (hidden pass-fail at full cost), each treated differently",
+    "pages": "pp. 3, 6-8"
+   },
+   {
+    "pattern": "state your own heuristic's failure with a counter-picture",
+    "evidence": "Figure 1 shows all shrinking-box trial points infeasible while x_k is not a local minimum; text calls the flaw clear",
+    "pages": "pp. 7-8"
+   }
+  ],
+  "transferable": [
+   "Motivate with a cost calculation from the application (FD gradient in 31 variables > 30 min; one full quadratic = 528 points) (pp. 3, 5)",
+   "Put constraints cheap relative to f into the trust-region subproblem so no expensive evaluation is spent on infeasible points (p. 6)",
+   "Use equality constraints to shrink the model space: points needed depend on the dimension of the feasible affine set (pp. 6-7)",
+   "One table with function evaluations and final f for every solver, early terminations marked with reasons, and a sentence on why CPU time is omitted (pp. 9-10)",
+   "On a multimodal application, run 10 restarts differing only in one random initial sample, plot all trajectories, count failed evaluations in the budget (pp. 10-11)"
+  ],
+  "coauthors": "A. R. Conn, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "Our algorithm proves to be very robust in case of noise.",
+    "page": 6
+   },
+   {
+    "text": "We do not list the CPU time, since it is not relevant in our context.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S003",
+  "year": "2001",
+  "title": "Efficient SVM training using low-rank kernel representations",
+  "read_level": "full",
+  "contribution": "Makes an interior point method for the SVM dual QP run in O(nk^2) time and O(nk) storage when the kernel has (or is approximated by) rank k, via product-form Cholesky updates and greedy pivoted incomplete Cholesky, with a method-agnostic bound c^2*l*eps/2 on the optimal-value change.",
+  "problem_entry": "SVM QP scales with n and a general IPM iteration is O(n^3); existing remedies decompose into small subproblems; new entry is the numerical rank of the kernel matrix, stated as three key observations (pp. 1-2).",
+  "key_idea": "Keep Mehrotra's IPM and change only the linear algebra of (D + VV^T)^{-1}w: product-form Cholesky instead of SMW because the IPM drives D to ill-conditioning near optimality; approximate full-rank kernels by pivoted incomplete Cholesky with a free trace stopping rule (pp. 2, 5-14).",
+  "assumptions": "PSD dense kernel of rank k << n (or approximable); scalar c for simplicity; fast spectral decay typical; Theorem 1 needs Q - Q~ PSD with trace <= eps; PFC stability proof not extended from LP to SVM QP ('beyond interest of this paper') (pp. 2, 4, 12, 15).",
+  "proof_devices": [
+   "operation counts per solve: SMW nk^2/2 vs PFC k^2n (pp. 7, 11)",
+   "2x2 machine-precision example showing SMW failure (Example 1, pp. 7-8) plus complementarity argument that IPM produces that scaling (p. 8)",
+   "trace identity: sum of remaining pivoted-Cholesky diagonals = tr(residual) (p. 14)",
+   "perturbation sandwich on a shared feasible set: f~(x~*) <= f~(x*) <= f(x*) and f(x*) - f~(x~*) <= 1/2 x~*^T dQ x~* <= c^2 l eps/2 (Theorem 1, pp. 14-15)"
+  ],
+  "experiments": "CPU time vs dot-product-specialised SMO on 150 speaker-ID problems (n ~ 7000) and vs SVMlight across chunk sizes on Abalone; SMW vs PFC digits of accuracy on constructed and real instances; ICF effect on objective, ||w||, train/test error vs rank on Abalone poly kernel; competitor tolerances not stated (pp. 15-20).",
+  "positioning": "Against decomposition methods (SMO, chunking, shrinking) and random-sampling low-rank approximations (Smola-Schoelkopf, Williams-Seeger); imports LP-IPM linear algebra (Goldfarb-Scheinberg 1999, SMW trouble in LP); notation section bridges optimization and SVM conventions (pp. 1-4, 7, 9, 12).",
+  "writing": "Contribution as three numbered observations; generality of the bound advertised in the abstract; trade-offs stated both ways (SMW preferable if accuracy is not a priority); gaps admitted (pp. 1-2, 12, 18-19).",
+  "limits_future": "Future: embed in chunking/shrinking for massive data, use approximate problem to identify support vectors then re-solve, bound ensuring active-set identification (pp. 19-20). Unstated: no competitor tolerances; timing shown with exactly low-rank dot-product kernels (my inference).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "strong: low-rank kernel structure makes the dominant IPM solve O(nk^2) (Method 6 step 3)",
+    "pages": "pp. 2, 6-11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "classical Mehrotra IPM kept; only its linear algebra changed, choosing the variant that survives where the classical formula breaks (ill-conditioned D near optimality)",
+    "pages": "pp. 5-8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "head-to-head against each competitor's strongest configuration, but in CPU time and without stated tolerances",
+    "pages": "pp. 15-17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "weak, my interpretation: Theorem 1 states what an approximation must satisfy (PSD residual, trace <= eps) and what it buys, independent of how it is built",
+    "pages": "p. 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "method-agnostic guarantee for an approximation step",
+    "evidence": "bound 'holds regardless of the approximation method': stated in terms of a property of Q~, not of the algorithm producing it",
+    "pages": "pp. 1, 15"
+   },
+   {
+    "pattern": "port LP-solver engineering into ML",
+    "evidence": "product-form Cholesky from LP IPMs (Goldfarb-Scheinberg 1999) moved into SVM training; S022 does the same with LP pricing/sprint",
+    "pages": "pp. 2, 11"
+   }
+  ],
+  "transferable": [
+   "Perturbation sandwich for an approximate QP on the same feasible set: evaluate each problem at the other's optimum; PSD residual gives one side, box constraints and support size the other (pp. 14-15)",
+   "Greedy pivoted incomplete Cholesky whose remaining-diagonal sum equals the residual trace, giving a free stopping rule and a kernelized implementation (pp. 13-14)",
+   "Show numerical instability three ways: 2x2 machine-arithmetic example, constructed degenerate instance, real-data failure, reporting digits reached (pp. 7-8, 17)",
+   "Benchmark against the competitor at its best: its specialised variant and a sweep of its own tuning parameter (pp. 15-17)",
+   "Report an approximation's effect at optimization level and learning level against rank, next to the approximation error (pp. 18-20)",
+   "Include a notation paragraph mapping one community's conventions onto the other's (pp. 3-4)"
+  ],
+  "coauthors": "S. Fine",
+  "quotes": [
+   {
+    "text": "Our current effort is concentrated on the numerical rank of the kernel matrix as a source for further enhancement of the performance of the IPM.",
+    "page": 2
+   },
+   {
+    "text": "This bound is general in the sense that it holds regardless of the approximation method.",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "S022",
+  "year": "2006",
+  "title": "An efficient implementation of an active set method for SVMs",
+  "read_level": "full",
+  "contribution": "Shows that a classical full dual active-set QP method, adapted to SVM structure (one-index working-set changes with O(n_s^2) Cholesky updates, singular-case infinite directions, LP-style pricing with sprint), beats SVMlight in CPU time, and releases it as open-source SVM-QP.",
+  "problem_entry": "Dense high-rank SVM kernels defeat IPMs; full active-set methods were considered impractical for large SVMs; chunking/decomposition are slow near the optimum and sensitive to an unpredictable chunk size (pp. 1-3).",
+  "key_idea": "Keep the simplex-type active-set method; take one step toward the reduced-QP solution per iteration, change the active set one index at a time so the Cholesky factor of Q_ss is updated not refactorized, and price reduced costs by the most negative element using sprint or shrinking (pp. 3, 5-14).",
+  "assumptions": "Standard soft-margin SVM with any nonnegative penalty vector; Q_ss may be singular; number of margin support vectors moderate (if n_s ~ n the method is impractical and the problem likely overfits); Q_s storable (<= 400 MB) (pp. 1, 7, 10, 13).",
+  "proof_devices": [
+   "no new convergence proof; finite termination inherited from Fletcher 1971 / Frangioni 1996, worst case exponential (p. 4)",
+   "Schur complement for the bias and triangular solves for the free variables (pp. 6-7)",
+   "infinite descent directions read from the zero rows of a singular Cholesky factor, verified by substitution (Cases 1-3, pp. 7-9)",
+   "structural argument: more than two zero eigenvalues only from warm starts since each infinite-direction step removes one index (p. 8)",
+   "bordered Cholesky add and Givens-rotation delete in O(n_s^2) (pp. 9-10)"
+  ],
+  "experiments": "Letter-G, USPS OCR, Web, Adult, Abalone, Spam with RBF/linear/poly kernels and several C; CPU seconds with equal memory; SVMlight run at default 1e-3 and at SVM-QP's 1e-6; full Adult/Web re-run by a third party (Mittelmann) incl. own out-of-memory failure; ablations sprint vs shrinking, memory-saving mode, IPM warm start (not dramatic), incremental mode (much slower) (pp. 10-19).",
+  "positioning": "Descends from simplex/QP active-set methods (Fletcher, Goldfarb, Nocedal-Wright); SMO recast as chunk size 2; distinguished from Cauwenberghs-Poggio and Hastie et al. path methods; sprint credited to Forrest, singular case to Belloni; S003 IPM as warm start (pp. 2-4, 17, 20).",
+  "writing": "Abstract concedes 'The underlying method is not new'; scope fenced (generalization identical, not discussed); toy example (ten identical points) justifies a design choice; normative remark on overfitting problems; two-sentence conclusion; no theorems (pp. 1, 3-4, 10, 19).",
+  "limits_future": "Memory for the Cholesky factor when n_s is large; iterative solver needed for extreme sizes; crude IPM in warm start; no full path; incremental mode loses look-ahead; future: theoretical analysis of behaviour and complexity, kernel-parameter warm starts, C++ version (pp. 4, 10, 13, 17, 19).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "stated and practised on the ML side: 'The method itself is not new'; classical active-set QP kept, only factorization updates and pricing re-engineered",
+    "pages": "pp. 3, 9-14"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "SVM structure (only margin support vectors free, n_s << n) drives the design; S003 low-rank IPM reused as warm start",
+    "pages": "pp. 3, 13, 16-17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "early (2006) equal-accuracy comparison: baseline also run at the new method's tolerance, memory matched, third-party reproduction; metric CPU time",
+    "pages": "pp. 10-12, 16"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "variant",
+    "note": "numbers without a new guarantee; theory left as future work",
+    "pages": "p. 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "port LP-solver engineering into ML",
+    "evidence": "sprint/sifting and simplex pricing rules from industrial LP codes moved into SVM training (second instance after S003)",
+    "pages": "pp. 13-14, 20"
+   },
+   {
+    "pattern": "report negative ablations",
+    "evidence": "IPM warm start 'not as dramatic as one might hope' and incremental mode 'a dramatic increase of CPU time' kept with their tables",
+    "pages": "pp. 17-19"
+   }
+  ],
+  "transferable": [
+   "Change the working set by one index per iteration so a factorization is updated in O(n_s^2) rather than recomputed in O(n_s^3), and take one step toward the reduced solution rather than solving it (pp. 3, 9-10)",
+   "Build infinite descent directions for a singular reduced Hessian directly from its Cholesky factor (pp. 7-9)",
+   "Run the baseline at its default tolerance and at yours, report both columns, and match memory budgets (pp. 10-12, 16)",
+   "Have the largest runs repeated by an independent person on other hardware and report your own failures in the table (pp. 12-13)",
+   "Keep ablations that did not pay off, with tables and a one-line reason (pp. 17-19)",
+   "Justify a granularity choice with a toy data configuration a referee can check in one line (pp. 3-4)"
+  ],
+  "coauthors": "none (sole author; K. P. Bennett and E. Parrado-Hernandez are the issue editors, not coauthors, p. 1)",
+  "quotes": [
+   {
+    "text": "The method itself is not new (see Nocedal and Wright, 1999). Our contribution is to adapt it to the SVM framework and provide an efficient implementation.",
+    "page": 3
+   },
+   {
+    "text": "However, it is questionable whether such problems should ever be solved, since the resulting classifiers is most likely overfitting the data and its generalization properties are expected to be very poor.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S016",
+  "year": "2008",
+  "title": "Geometry of interpolation sets in derivative free optimization",
+  "read_level": "full",
+  "contribution": "Introduces Lambda-poisedness (Lagrange polynomials as coefficients of phi(x) in the sample vectors), proves its equivalence up to constants with the conditioning of the scaled natural-basis interpolation matrix, derives explicit Taylor-like bounds for linear, quadratic and cubic interpolation in those terms, and gives LU/QR point-replacement algorithms with a provable poisedness bound.",
+  "problem_entry": "Convergence needs a uniformly bounded geometry constant, but Powell's Lagrange maintenance has no bound, the authors' own 1997 Newton method needs expensive full-set replacement, and Ciarlet-Raviart constants are not algorithmic (pp. 2-6, 19).",
+  "key_idea": "Measure geometry by ||M^-1|| / kappa(M^) of the natural-basis matrix on Y scaled to the unit ball, which is equivalent to Lambda-poisedness and can be controlled by a pivot threshold during LU or QR factorization, replacing only the points that spoil poisedness (pp. 7-8, 18-23).",
+  "assumptions": "Lipschitz gradient (linear), Lipschitz Hessian (quadratic), Lipschitz third derivatives (cubic) on a neighbourhood of B(Delta); enclosing ball centred at origin and y0 = 0 wlog; determined interpolation only; no noise (pp. 2, 6, 11-14, 25).",
+  "proof_devices": [
+   "Lagrange polynomials as coefficient vector lambda(x) with M^T lambda(x) = phi(x), hence basis independence (Lemma 3.1, p. 6)",
+   "norm equivalence psi(v) = max_{x in B(1)} |v^T phi(x)| >= sigma||v|| plus singular-vector orthogonality to get ||M^-1|| <= theta*Lambda (Theorem 3.3, pp. 8-9)",
+   "any quadratic with unit infinity-norm coefficients reaches >= 1/4 on B(1), by restricting to 1-2 variables (Lemma 3.4, pp. 9-10)",
+   "scale invariance of Lagrange polynomials vs non-invariance of kappa(M) (Lemma 3.5, p. 11)",
+   "error system: subtract interpolation equations from Taylor expansions at x, cancel e^f via the center point, obtain x-independent system with the scaled interpolation matrix; explicit constants (Theorems 4.1-4.2, pp. 12-17)",
+   "factorization bound ||M^-1|| <= c(p1)*eps_growth/xi with pivot threshold xi < 1/4 always attainable (Propositions 5.1-5.2, pp. 19-23)"
+  ],
+  "experiments": "One Matlab sanity test: 100 random points in the unit cube, sets chosen by Powell's Lagrange maximization, LU and QR give similar ||M^-1|| (mostly 10-100, never > 1000); caveats stated; no optimization runs (p. 24).",
+  "positioning": "Credits Powell's strategy as reasonable and practical but unproven, applies the same criticism to own 1997 method, contrasts with Ciarlet-Raviart and de Boor, links the linear case to positive bases in pattern search; novelty claimed modestly (usefulness and simplicity over novelty of bounds) (pp. 5-6, 17-20).",
+  "writing": "Intuition before theorem (distance to linear dependency), remarks after theorems, early organization paragraph, hedged practical claims (may not beat Powell's algorithm) (pp. 1, 3, 7, 10-11, 23).",
+  "limits_future": "Determined interpolation only (regression/underdetermined deferred); polynomials recomputed at updates; practical value untested in a DFO package; theta for d > 2 open; future: prove Powell-like algorithms give uniform well-poisedness (pp. 2, 10, 19, 23-24), later taken up by S088/S104.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "strong: the geometry constant (Lambda or kappa(M^)) is exactly what certifies model quality in the Taylor-like bounds; algorithms replace only points that spoil poisedness",
+    "pages": "pp. 2-3, 13-19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "2008 stated practical position is to maintain well-poisedness throughout, not only when the proof needs it; the confine-to-the-end minimal-safeguard stance appears only in Scheinberg-Toint 2010 (S030)",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Powell's replace-by-maximization logic kept; only the quality measure swapped for one with a proof",
+    "pages": "pp. 18-21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "measure the safeguard with a standard linear-algebra quantity",
+    "evidence": "condition number / factorization pivots of the scaled interpolation matrix replace bounds on polynomial maxima, so factorization algorithms and analysis can be reused",
+    "pages": "pp. 3, 19"
+   },
+   {
+    "pattern": "revive a dismissed measure under the right normalization",
+    "evidence": "condition number of M is basis-dependent in general but valid for the natural basis on a set scaled to the unit ball",
+    "pages": "pp. 4, 8, 11"
+   },
+   {
+    "pattern": "leave certifying the practitioners' heuristic as an explicit open problem",
+    "evidence": "future study to show Powell-like algorithms give uniform well-poisedness; taken up in S104",
+    "pages": "p. 24"
+   }
+  ],
+  "transferable": [
+   "Error bound for any interpolation model: subtract interpolation equations from Taylor expansions at x, cancel the unknown function error via the centre point, and read off an x-independent linear system with the scaled interpolation matrix (pp. 12-16)",
+   "Scale the sample set to the unit ball before measuring conditioning and state which quantities are scale-invariant (p. 11)",
+   "Norm-equivalence trick for uniform constants, computed explicitly for low degree by restricting to one or two variables (pp. 9-10)",
+   "Build a safeguard from a factorization with a pivot threshold plus a lemma that a replacement point always exists (pp. 20-23)",
+   "Cheap sanity experiment against the practitioners' heuristic on shared random point pools, with the weakness of the test stated (p. 24)",
+   "Name a competitor's gap precisely and apply the same test to your own earlier method (pp. 18-19)"
+  ],
+  "coauthors": "A. R. Conn, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "It is often simpler to design algorithms that operate with the condition number of a matrix rather than directly with a bound on the Lagrange polynomials.",
+    "page": 3
+   },
+   {
+    "text": "In practice, it is more efficient to maintain well-poisedness throughout the algorithm, not just when it is necessary to pass the criterion needed for the convergence proof.",
+    "page": 18
+   }
+  ]
+ }
+]
