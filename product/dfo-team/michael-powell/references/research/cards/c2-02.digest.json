@@ -1,0 +1,205 @@
+[
+ {
+  "id": "S115",
+  "year": "1989",
+  "title": "Karmarkar's algorithm: a view from nonlinear programming",
+  "read_level": "full",
+  "contribution": "Re-derives Karmarkar's algorithm as a QP/Newton-barrier step without projective transformations (Theorem 6). Extends it to general linear inequalities without the standard form, proving iterate-by-iterate equivalence and keeping polynomial time (Theorem 7). Shows numerically and proves in exact arithmetic that on a 2-variable semi-infinite problem the iterates converge to a non-solution.",
+  "problem_entry": "A hyped method from outside his area (New York Times 1984, the most active field in mathematical programming). He committed to an IMA talk to force himself to study it, read about 1% of the literature, and asked what the nonlinear-programming view makes possible (pp. 3-4, 23).",
+  "key_idea": "Characterize the step as the QP min dᵀ∇V + ½dᵀX⁻²d subject to Aᵀd=0 (Newton step on a partly linearized barrier). Then substitute general constraints Zᵀy≥0 into that QP to get potential W(y) = n log hᵀy − Σ log Z(·,j)ᵀy (pp. 19-20, 25-28).",
+  "assumptions": "Bounded, nonempty feasible set; strictly positive, non-optimal feasible start; independent columns of A; optimal value zero ('embarassing'), later replaced by a lower bound; exact arithmetic for the failure proof; sparsity ignored (pp. 5, 8, 14-16, 37, 41).",
+  "proof_devices": [
+   "three sufficient conditions for a substantial line-search reduction (directional derivative, curvature bound, room to move), each mapped to one inequality, then a Taylor series with explicit remainder (pp. 11-14)",
+   "Lemma 3: the restrictive assumption forces a nonpositive component of P c (p. 12)",
+   "Lemma 5: all components of P c positive implies γ(k) < γ*, which licenses an automatic lower-bound increase (pp. 15-16)",
+   "equivalence theorem by induction: the step QPs (5.19) and (5.25) coincide, so iterates satisfy x(k) = Zᵀy(k) and polynomial time transfers (Theorem 7, pp. 28-31)",
+   "isomorphism {y: Bᵀy=0} ↔ S proved by contradiction with boundedness (p. 29)",
+   "homogeneity argument: full Newton on V is non-unique (4.22), so linearizing log cᵀx stabilizes; the line search over half-lines makes the x(k) term redundant (pp. 21-22)",
+   "exact-arithmetic failure proof: reduction identity F(x(k+1)) = F(x(k)) − log((1+sin ω)/(1−sin ω)) plus geometric decay of sin²ω, so Σ sin ω < ∞ and F stays bounded below (pp. 37-39)",
+   "infinite constraint sum replaced by an analytic integral (Dwight 865.44) (p. 33)",
+   "algebraic self-checks against invariants (Aᵀd=0, eᵀd=0, orthogonality to the barrier gradient) (pp. 18, 34-35, 38)"
+  ],
+  "experiments": "One 2-variable semi-infinite example (min x₂ over the unit disk via infinitely many tangents). Table 1: from (0.1,−0.5) the iterates settle at (0.0416,−0.9991), not (0,−1); from (0.599,0.8) they converge towards (0.7324,−0.6809). Figure 2 shows premature convergence from (0.8,0.5). No simplex comparisons (pp. 32-37, 39-40).",
+  "positioning": "Credits Gonzaga, Strang, Todd–Burrell and Gill et al. precisely. Claims novelty only for the direct general-constraint version and the §6 failure. Says the results seem to contradict the consensus on very large LPs. Offers his TOLMIN as an explicit-constraint alternative (pp. 4, 36, 39-41).",
+  "writing": "First person, candid about motives and the 'shamefully narrow' window. Negative result stated in the abstract. Wry section outline. Conditions stated in words before proofs. Moderate hedging (pp. 2-4, 11-13, 36, 40-41).",
+  "limits_future": "§4 is 'just a reformulation'; the theory does not cover the infinite case; sparsity is ignored; remedies are only sketched. Future: study the efficiency loss as more tangent constraints approximate the disk (pp. 22, 34, 40-41).",
+  "method_links": [
+   {
+    "method": "Heuristic 6",
+    "relation": "evidence",
+    "note": "Linear constraints should be treated explicitly, not lumped into a penalty/barrier. He says this view kept him from studying Karmarkar and was strengthened by the results; TOLMIN is the alternative. Also Taste warning sign 3.",
+    "pages": "pp. 40-41"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Relaxes one limitation of someone else's algorithm (the standard-form requirement), keeps its machinery, and proves by an equivalence theorem that the guarantees survive.",
+    "pages": "pp. 23-31"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The experiment is a falsification test on one tiny, fully specified problem, followed by an exact-arithmetic proof. Benchmark comparisons are explicitly deprioritized. The negative result appears in the abstract.",
+    "pages": "pp. 2, 36-40"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "§5 is motivated by keeping 5 variables instead of at least 200 slack variables for a minimax fit.",
+    "pages": "p. 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "tiny counterexample against a popular default",
+    "evidence": "A 2-variable semi-infinite LP on which Karmarkar's iterates converge to a non-solution, against the belief that the method suits very large LPs.",
+    "pages": "pp. 4, 32-39"
+   },
+   {
+    "pattern": "numerics -> conjecture -> proof or counterexample",
+    "evidence": "Table 1 suggested spurious convergence, and closed-form iteration formulas then proved the failure in exact arithmetic.",
+    "pages": "pp. 36-39"
+   },
+   {
+    "pattern": "clarify–implement–prove someone else's idea",
+    "evidence": "Karmarkar re-derived as a QP/Newton-barrier step (Theorem 6) and extended to general constraints (Theorem 7).",
+    "pages": "pp. 17-31"
+   },
+   {
+    "pattern": "self-derivation over literature study",
+    "evidence": "Read about 1% of the papers, then derived independently. Here a crowded topic was entered on purpose, via a talk commitment.",
+    "pages": "pp. 3-4, 41"
+   },
+   {
+    "pattern": "equivalence theorem to carry guarantees across a reformulation",
+    "evidence": "Theorem 7: the direct y-space iterates equal a linear image of standard-form Karmarkar iterates, so polynomial time transfers.",
+    "pages": "pp. 28-31"
+   },
+   {
+    "pattern": "check derived formulas against invariants they must satisfy",
+    "evidence": "(4.7) checked for Aᵀd=0 and (4.8); (6.13) checked by orthogonality; step length verified via (6.19).",
+    "pages": "pp. 18, 34-35, 38"
+   }
+  ],
+  "transferable": [
+   "Characterize a transformed method's step as a QP in the original variables, then extend the method by substituting the new structure into the QP rather than into the closed-form direction (pp. 19, 25-27).",
+   "If full Newton on a homogeneous objective is not unique, linearize the term that breaks homogeneity to regain a unique, stabilized step (p. 21).",
+   "Prove algorithm equivalence by induction: under x(k)=Zᵀy(k) the step QPs coincide, and exact line searches on equal potentials give equal next iterates (p. 30).",
+   "Prove convergence to a wrong point with an exact per-iteration reduction identity plus geometric decay of an angle variable, so the total reduction is finite (pp. 38-39).",
+   "Stress-test 'many constraints' by making the constraints a continuum and integrating the barrier sum analytically (pp. 32-33).",
+   "Check every derived formula against the invariants the method must preserve before using it (pp. 18, 34-35)."
+  ],
+  "coauthors": "none (sole author); Ian Coope thanked for advice (p. 41)",
+  "quotes": [
+   {
+    "text": "Applying this version to a semi-infinite programming problem in only two variables, we find that the algorithm is not always efficient when there are very many constraints.",
+    "page": 4
+   },
+   {
+    "text": "I still hold this view, and it has been strengthened by the results of this paper.",
+    "page": 40
+   }
+  ]
+ },
+ {
+  "id": "S030",
+  "year": "1990",
+  "title": "A trust region algorithm for equality constrained optimization",
+  "read_level": "full",
+  "contribution": "Proposes a trust-region SQP algorithm for equality constraints that uses Fletcher's differentiable exact penalty and relaxes the linearized constraints to ‖c+Aᵀd‖ ≤ ζ_k. Proves global convergence (Theorem 3.9) and local superlinear convergence under a projected Dennis–Moré condition (Theorem 4.7), without second derivatives.",
+  "problem_entry": "Extends his own line-search algorithm (Powell–Yuan 1986a) to trust regions, to avoid the Maratos effect, line-search inefficiency far from the solution and the positive-definiteness requirement. Earlier TR methods used nondifferentiable penalties (pp. 2-3).",
+  "key_idea": "Choose ζ_k between the least linearized residuals attainable in two smaller balls (b₁Δ_k, b₂Δ_k). In the predicted change D_k, use the null-space projection d̂_k, the midpoint constraint estimate and λ(x_k+d_k). Accept iff the penalty decreases, and at least double σ_k when D_k fails its test (pp. 2-5).",
+  "assumptions": "C¹ data, with C³ assumed in the analysis; bounded convex set containing all iterates and trial points; full-rank A(x) on it; bounded B_k, not necessarily positive definite; locally, second-order sufficiency and a projected Dennis–Moré condition; exact subproblem solution (pp. 1, 5, 14, 20).",
+  "proof_devices": [
+   "Cauchy-type bound on gᵀd for the exact TR step via generalized inverse and Fletcher's Theorem 5.2.1 (Lemma 3.2, p. 6)",
+   "tangential step solves a reduced null-space TR problem, so Lemma 3.2 applies to P_k g_k (Lemma 3.4, pp. 7-8)",
+   "penalty parameter at least doubles per increase, so boundedness gives finitely many increases (Lemma 3.6, p. 10)",
+   "Δ_k → 0 by contradiction on a subsequence (referee's proof) (Lemma 3.7, pp. 10, 22)",
+   "up-crossing argument between levels 0.9ξ and 0.1ξ against a monotone, convergent merit sequence (Lemma 3.8, pp. 11-12)",
+   "explicit feasible comparison step with a smaller model value contradicts subproblem optimality (Theorem 3.9, pp. 12-14)",
+   "r_k → 1 via the differentiated normal equation for λ at x*, so the trust region becomes inactive and Boggs–Tolle–Wang/Powell 1983 superlinear theory applies (Lemmas 4.3-4.6, Theorem 4.7, pp. 15-18)"
+  ],
+  "experiments": "none. The algorithm had not been used for any numerical computation. An earlier variant compared favourably with the 1986a line-search method in Yuan's unpublished 1985 Dundee talk (p. 21).",
+  "positioning": "Continues Powell–Yuan 1986a and Celis–Dennis–Tapia 1985, but changes their ζ choice. Contrasts with the nondifferentiable-penalty TR methods of Byrd–Schnabel–Shultz and Vardi. Cites Boggs–Tolle–Wang and Powell 1983 for the local rate. Rejects the 'sufficient decrease' acceptance rule (pp. 2, 15, 18, 21).",
+  "writing": "Two-sentence abstract hedged with 'Under certain conditions'. Status stated right after the algorithm ('mainly of theoretical interest'). A paragraph justifies the unusual D_k terms by the proofs that need them. The Discussion argues design choices by mechanism (pp. 1, 4-5, 19-21).",
+  "limits_future": "No subproblem solver and no numerics; full-rank λ(x) needed, and the regularized λ is not covered; possible non-convergence with ε=0; constants untuned. Future: solve the two-constraint subproblem, choose its multipliers, use B_k that need not be positive definite (for sparsity) (pp. 5, 19-22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Keeps the 1986a penalty function, multiplier device and SQP subproblem, and changes only the globalization (line search to trust region).",
+    "pages": "pp. 2-5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "A single radius driven by the ratio test (legible thresholds 0.1/0.9) with no separate resolution parameter. The shared rationale is that a TR step keeps a constraint-correcting component of fixed relative length, where a line search scales it down.",
+    "pages": "pp. 4, 19"
+   },
+   {
+    "method": "Heuristic 6",
+    "relation": "evidence",
+    "note": "Constraints are linearized individually in the subproblem, and the merit function is used only to accept steps and compare estimates of the solution.",
+    "pages": "pp. 3-5, 21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "A theory-only paper with no numerical computation, although the honest-scope half holds ('mainly of theoretical interest').",
+    "pages": "pp. 5, 21"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "No code shipped; the subproblem solver is delegated to the coauthor's report (Yuan 1988).",
+    "pages": "pp. 5, 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "publish preliminary results with explicit status",
+    "evidence": "Theory published before any numerical use, and the paper says so twice.",
+    "pages": "pp. 5, 21"
+   },
+   {
+    "pattern": "make the theorem admit the practitioner's preferred choice / prove for a family",
+    "evidence": "Any ζ_k in the interval, any admissible constants and subproblem tolerances (5.7) are covered; the theory seems to allow many suitable parameter choices.",
+    "pages": "pp. 3, 20, 22"
+   },
+   {
+    "pattern": "safeguard designed so that the proof goes through",
+    "evidence": "The d̂_k and midpoint terms in D_k exist for the superlinear analysis.",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "merit function only compares points",
+    "evidence": "Accept any decrease of the penalty and reject 'sufficient decrease' rules, backed by a one-variable example where the rule blocks the step to the solution.",
+    "pages": "p. 21"
+   },
+   {
+    "pattern": "safeguard-inactivity reduction to an existing local-rate theorem",
+    "evidence": "Show r_k → 1, so Δ_k stays bounded away from zero and the TR is inactive, then cite the SQP superlinear theory.",
+    "pages": "pp. 15, 18"
+   }
+  ],
+  "transferable": [
+   "Resolve trust-region/linearized-constraint inconsistency by bounding ‖c+Aᵀd‖ by any ζ between the least residuals attainable in two smaller balls (p. 3).",
+   "Use the null-space projection of the step in the predicted reduction to get superlinear convergence under a weaker, projected Dennis–Moré condition (p. 4).",
+   "Evaluate multipliers at the trial point inside the predicted change, so the penalty parameter can be adjusted without second derivatives (p. 5).",
+   "Raise the penalty parameter by at least a factor of 2 each time, so a boundedness lemma immediately gives finitely many increases (p. 10).",
+   "Prove termination by building an explicit feasible comparison step with a smaller model value (pp. 12-14).",
+   "Reduce the local-rate proof to the unsafeguarded SQP theorem by showing r_k → 1 and hence an inactive trust region (pp. 15, 18)."
+  ],
+  "coauthors": "Y. Yuan",
+  "quotes": [
+   {
+    "text": "Unfortunately this algorithm is mainly of theoretical interest until an efficient procedure is developed for the calculation of the search direction.",
+    "page": 5
+   },
+   {
+    "text": "A striking example of the disadvantage of the “sufficient decrease” criterion is that it can prevent the step to the true solution in an unconstrained calculation when there is only one variable.",
+    "page": 21
+   }
+  ]
+ }
+]

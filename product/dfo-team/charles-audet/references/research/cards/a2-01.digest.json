@@ -1,0 +1,1030 @@
+[
+ {
+  "id": "S127",
+  "year": "1994",
+  "title": "Concavity cuts for the linear maxmin problem",
+  "read_level": "abstract",
+  "contribution": "Method to compute valid concavity cuts for the linear maxmin problem through a primal and a dual concave-programming reformulation (abstract).",
+  "problem_entry": "Cutting planes for the linear maxmin problem. The entry is to obtain valid concavity cuts for maxmin, which needs the problem in concave-programming form (abstract).",
+  "key_idea": "The problem is reformulated as a concave program with linear constraints in two ways, a primal and a dual approach, and valid concavity cuts are computed from each (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "A concave-programming tool (concavity cuts) is carried over to maxmin through two reformulations, primal and dual.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "B. Jaumard, G. Savard",
+  "quotes": [
+   {
+    "text": "We consider a primal and a dual approach.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S014",
+  "year": "1997",
+  "title": "Links between linear bilevel and mixed 0–1 programming problems",
+  "read_level": "abstract",
+  "contribution": "Big-constant-free reformulation of mixed 0-1 programs as linear bilevel programs, proof that MIP branch-and-bound is embedded in a bilevel branch-and-bound (identical subproblem sequences), and a new BLP optimality test with nonstandard penalties (abstract).",
+  "problem_entry": "Links between linear bilevel programming (BLP) and linear mixed 0-1 programming. The new reformulation is presented as one that needs no large finite constant, which implies that earlier ones did (abstract).",
+  "key_idea": "A new MIP0-1 → BLP reformulation with no large constant. Proof that classical MIP branch-and-bound is embedded in a bilevel branch-and-bound: on any instance and its reformulation both produce the same sequence of subproblems (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "The reformulation is used to compare algorithms and to port a test (penalties) from MIP to BLP, not only to move solutions.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "To compare two algorithms that live in different problem classes, prove that through the reformulation they generate identical subproblem sequences. Then port the stronger class's tests (here, penalties) to the other class (abstract)."
+  ],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard",
+  "quotes": [
+   {
+    "text": "A new reformulation of the linear mixed 0-1 programming problem into a bilevel linear programming one, which does not require the introduction of a large finite constant, is presented.",
+    "page": "abstract"
+   },
+   {
+    "text": "Moreover, we deduce a new optimality test for bilevel linear programming which makes use of nonstandard penalties.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S100",
+  "year": "1998",
+  "title": "Complete enumeration of equilibria for two-person games in strategic and sequence forms",
+  "read_level": "abstract",
+  "contribution": "Finite branch-and-bound enumeration of all Nash equilibria for strategic-form and sequence-form bimatrix games from complementary slackness of two pairs of parameterized LPs, with computational experience (abstract).",
+  "problem_entry": "Enumerate all Nash equilibria, in finite time, of two-person games given in strategic form and in sequence form (abstract).",
+  "key_idea": "Branch and bound on the complementary slackness conditions of two pairs of parameterized linear programs, with one algorithm for each form (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "Equilibrium conditions are handled as complementary slackness of parameterized LPs. That this reuses the thesis maxmin/bilinear branching is taken from card b2-01 (ch. 4), not from this abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard (GERAD page; works.json lists only \"C Audet, ...\")",
+  "quotes": [
+   {
+    "text": "For each forms, the algorithm exploits complementary slackness optimality conditions of two pairs of parameterized linear programming problems.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S106",
+  "year": "1998",
+  "title": "On the linear maxmin and related programming problems",
+  "read_level": "abstract",
+  "contribution": "Chapter linking linear maxmin, bilevel, disjoint bilinear and mixed 0-1 programming. It presents the Beale-Small-in-HJS embedding, concavity cuts for both symmetric maxmin reformulations, a finite branch and bound, numerical results and a bimatrix-game application (abstract).",
+  "problem_entry": "The linear maxmin problem is a game played in sequence by two players with opposite objectives, in which the first player anticipates the opponent's reaction. It can be read as a special linear bilevel program or as a reformulation of disjoint bilinear programming (abstract).",
+  "key_idea": "A map of links: MIP0-1 and BLP reformulate into each other, and Beale–Small's MIP algorithm is embedded in Hansen–Jaumard–Savard's BLP algorithm. Each maxmin problem has a symmetric partner through the bilinear reformulation, both give concavity cuts, and a branch and bound that exploits both is finite (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "The whole chapter is organised as reformulation links, each one used to transfer algorithms, cuts or embeddings.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard",
+  "quotes": [
+   {
+    "text": "Moreover, the similarity between these problems is deeper.",
+    "page": "abstract"
+   },
+   {
+    "text": "We show how to exploit these symmetrical maxmin reformulations in order to obtain a finitely convergent branch and bound algorithm.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S171",
+  "year": "1998",
+  "title": "Enumeration of all extreme equilibrum strategies of bimatrix games",
+  "read_level": "abstract",
+  "contribution": "Earlier form of the S052 work on enumerating all extreme equilibria of bimatrix games (abstract identical to S052's; identity of the 1998 item not verified).",
+  "problem_entry": "Same as S052 (abstract identical).",
+  "key_idea": "Same as S052 (abstract identical).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "Same evidence as S052; not independent.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard",
+  "quotes": []
+ },
+ {
+  "id": "S041",
+  "year": "1999",
+  "title": "A symmetrical linear maxmin approach to disjoint bilinear programming",
+  "read_level": "abstract",
+  "contribution": "Two symmetric linear maxmin reformulations of disjoint bilinear programming, with a bijection of optima and no extra local optima. Their complementarity and monotonicity conditions give a finite exact branch and bound, and boundedness is shown to be strongly NP-complete (abstract).",
+  "problem_entry": "Disjoint bilinear programming (BILD), and the question of whether its optimal value is bounded (abstract).",
+  "key_idea": "BILD is reformulated as two distinct linear maxmin problems. There is a simple bijection between their optimal solutions and those of BILD, and they have no more local optima than BILD. The necessary optimality conditions of both reformulations (complementarity and monotonicity) drive a finite, exact branch and bound (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "Both symmetric reformulations are used at once, and their optimality conditions become the branching rules.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When you propose a reformulation, prove (i) a bijection between its optimal solutions and the original's and (ii) that it has no more local optima. \"The reformulation adds no complexity\" then becomes a theorem instead of a claim (abstract)."
+  ],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard",
+  "quotes": [
+   {
+    "text": "In that sense, the reformulations do not introduce additional complexity.",
+    "page": "abstract"
+   },
+   {
+    "text": "Determining if the optimal value of a bilinear programming problem is bounded is shown to be strongly NP-complete.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S148",
+  "year": "1999",
+  "title": "On the convergence of mixed integer pattern search algorithms",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): convergence analysis of pattern search with integer variables, an early step of the Audet-Dennis mixed-variable GPS line (S011).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J.E. Dennis Jr.",
+  "quotes": []
+ },
+ {
+  "id": "S008",
+  "year": "2000",
+  "title": "A surrogate-model-based method for constrained optimization",
+  "read_level": "abstract",
+  "contribution": "Surrogate-model-based constrained optimization method that pairs global exploration through response models with a provably convergent local mechanism, and addresses surrogate conditioning as points cluster (abstract).",
+  "problem_entry": "Constrained optimization in which the objective and the constraints are represented by global surrogates (response models) of the true responses. Global optimality cannot be guaranteed in general (abstract).",
+  "key_idea": "The method handles three named issues: balancing effort between global exploration of the design space and local refinement, keeping the surrogate well conditioned as points pile up locally, and providing a provably convergent mechanism that ensures local optimality (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Global surrogates drive exploration while a provably convergent mechanism ensures local optimality. The abstract does not name the Search/Poll split.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Plan for surrogate ill-conditioning when sample points cluster near the incumbent. Name it as a design issue with its own mechanism, next to the exploration/refinement balance and the local-convergence safeguard (abstract)."
+  ],
+  "coauthors": "J. Dennis (works.json: \"J Denni\"; presumably J.E. Dennis Jr.), D. Moore, A. Booker, P. Frank",
+  "quotes": [
+   {
+    "text": "In general, guarantees of global optimality are not possible.",
+    "page": "abstract"
+   },
+   {
+    "text": "However, a robust surrogate-model-based optimization method is presented here that has good global search properties, and proven local convergence results.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D013",
+  "year": "2001",
+  "title": "Notes de cours, MTH6404, Programmation en nombres entiers",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): integer-programming course notes (MTH6404, Polytechnique Montréal).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": []
+ },
+ {
+  "id": "S052",
+  "year": "2001",
+  "title": "Enumeration of all extreme equilibria of bimatrix games",
+  "read_level": "abstract",
+  "contribution": "Exact enumeration of all extreme Nash equilibria of bimatrix games through complementary slackness of two pairs of parameterized LPs, tested on random games up to 29x29 and 700x5 (abstract).",
+  "problem_entry": "The equilibrium set of a bimatrix game is a union of polytopes that need not be disjoint, and their vertices (the extreme equilibria) are enough to identify all equilibria (abstract).",
+  "key_idea": "All extreme equilibria are enumerated through the complementary slackness conditions of two pairs of parameterized linear programs (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Randomly generated games up to 29x29 and 700x5; growth of the number of extreme equilibria reported (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Exponential growth of the number of extreme equilibria with size (abstract).",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "Equilibria are handled as LP optimality conditions, which reuses the maxmin/bilinear branching of the thesis (card b2-01).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Instance sizes are scaled along two axes (square, and one dimension fixed), but on random instances only, with no stated competitor.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Reduce \"find all solutions\" to a finite generating set (here the vertices of the equilibrium polytopes), enumerate that set exactly, and report how its size grows (abstract)."
+  ],
+  "coauthors": "P. Hansen, B. Jaumard, G. Savard",
+  "quotes": [
+   {
+    "text": "Knowledge of the vertices of these polytopes (extreme equilibria) is sufficient to identify all equilibria.",
+    "page": "abstract"
+   },
+   {
+    "text": "Therefore, the results could be useful for further study of refinements of Nash equilibria.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S054",
+  "year": "2003",
+  "title": "Catalytic combustion kinetics: using a direct search algorithm to evaluate kinetic parameters from light‐off curves",
+  "read_level": "abstract",
+  "contribution": "GPS-based parameter estimation of catalytic combustion kinetics from light-off curves through a transient 1-D monolith finite-element reactor model, compared with Fletcher-Reeves (abstract).",
+  "problem_entry": "Estimate the kinetic constants of a rate expression for catalytic combustion from experimental light-off curves (abstract).",
+  "key_idea": "The simulator is a transient one-dimensional single-channel monolith finite-element reactor model. A routine based on generalized pattern search fits the rate-expression parameters for the oxidation of CO and of CO/CH4 mixtures (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "GPS vs Fletcher-Reeves on fitting CO and CO/CH4 oxidation kinetics (abstract); outcome not read.",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Cross-family baseline (a gradient method), but the abstract gives neither the comparison currency nor the result.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "R.E. Hayes, F.H. Bertrand, S.T. Kolaczkowski",
+  "quotes": [
+   {
+    "text": "A parameter global optimization routine based on a generalized pattern Search algorithm is used to determine the best fit parameters in the rate expression for the oxidation of CO and mixtures of CO and CH4.",
+    "page": "abstract"
+   },
+   {
+    "text": "The algorithm is compared to a more classical gradient method, the Fletcher‐Reeves method.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S089",
+  "year": "2003",
+  "title": "Optimisation des stratégies de maintenance intégration à la production",
+  "read_level": "abstract",
+  "contribution": "Simulation-based GPS optimization of maintenance strategies integrated with production, returning lower and upper bounds on the optimal replacement interval for a chosen confidence index and acceptable extra cost (abstract).",
+  "problem_entry": "Optimize maintenance strategies so that they fit a production plan fixed in advance (abstract).",
+  "key_idea": "Two modules: a GPS optimization module and a simulation module that reproduces the computation of the objective, so the objective is a simulation (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: deliver a near-optimal interval under an acceptable extra cost",
+    "relation": "evidence",
+    "note": "Bounds on the optimal replacement interval for a given confidence index and acceptable extra cost.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "deliver a near-optimal interval under an acceptable extra cost",
+    "evidence": "Maintenance model returns lower/upper bounds on the optimal replacement interval given a confidence index and an acceptable surcharge (S089 = S215).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Give the practitioner an interval of decisions whose cost stays within an agreed surcharge of the optimum (at a stated confidence level), not a single optimum (abstract)."
+  ],
+  "coauthors": "M.-S. Ouali, H. Aoudjit",
+  "quotes": [
+   {
+    "text": "Le modèle d’optimisation proposé permet selon le choix d’un indice de confiance et d’un surcoût de maintenance acceptable, de déterminer une borne inférieure et une borne supérieure qui limitent de part et d’autre l’intervalle de remplacement optimal.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S212",
+  "year": "2003",
+  "title": "Pattern Search for Mixed Variable Optimization Problems",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): pattern search for mixed-variable optimization, part of the Abramson-Audet-Dennis MVP line (S011, S031, S213).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M.A. Abramson, J.E. Dennis Jr.",
+  "quotes": []
+ },
+ {
+  "id": "S215",
+  "year": "2003",
+  "title": "Optimisation et intégration à la production des stratégies de maintenance",
+  "read_level": "abstract",
+  "contribution": "Journal version of S089 (identical abstract): simulation-based GPS optimization of maintenance strategies with bounds on the optimal replacement interval (abstract).",
+  "problem_entry": "Same as S089: maintenance strategies integrated with a production plan (abstract).",
+  "key_idea": "Same as S089: a GPS optimization module coupled to a simulation module that computes the objective (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: deliver a near-optimal interval under an acceptable extra cost",
+    "relation": "evidence",
+    "note": "Same work as S089; not independent evidence.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M.-S. Ouali, H. Aoudjit",
+  "quotes": [
+   {
+    "text": "Le second est un module de simulation qui reproduit la logique de calcul de la fonction objectif.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D009",
+  "year": "2004",
+  "title": "Exact Solution of -norm and -norm Plane Separation",
+  "read_level": "abstract",
+  "contribution": "Exact methods for plane separation: a new MIP formulation for L-infinity and a nonconvex QP branch-and-cut for L2, with heuristic bounds used to accelerate the exact solution (abstract).",
+  "problem_entry": "Separate two point sets in R^n by a hyperplane that minimizes the sum of the L_p distances to the plane of the misclassified points (abstract).",
+  "key_idea": "A new mixed-integer formulation for the L∞ case, and a branch-and-cut nonconvex QP algorithm for the L2 case (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Publicly available data sets and larger artificial problems; heuristic bounds inside exact methods (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: proposer-certifier protocol",
+    "relation": "evidence",
+    "note": "Heuristic bounds are fed into exact methods to accelerate certification.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, A. Karam, C.-T.D. Ng, S. Perron",
+  "quotes": [
+   {
+    "text": "We also explore the accelerating potential of incorporating heuristic bounds in our exact solution approaches.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D012",
+  "year": "2004",
+  "title": "Special issue on surrogate optimization",
+  "read_level": "metadata",
+  "contribution": "Guest-edited special issue (Audet, Dennis, Vicente) of Optimization and Engineering 5(2), 2004, on surrogate optimization. Crossref lists the editorial (pp. 99-100) and seven papers mixing direct-search theory and engineering surrogate applications (metadata).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J.E. Dennis Jr., L.N. Vicente (co-editors)",
+  "quotes": []
+ },
+ {
+  "id": "S056",
+  "year": "2004",
+  "title": "The minimum diameter octagon with unit-length sides: Vincze's wife's octagon is suboptimal",
+  "read_level": "abstract",
+  "contribution": "Solves Vincze's minimum-diameter equilateral octagon problem, showing the solution is epsilon-unique, by geometric arguments and global optimization of a nonconvex QP (abstract).",
+  "problem_entry": "Answers S. Vincze's 1950 query: find the convex octagon with unit-length sides and minimum diameter (abstract). The title says the octagon of Vincze's wife is not optimal (metadata).",
+  "key_idea": "Geometric arguments plus a global optimization algorithm that solves a nonconvex quadratic program (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "variant",
+    "note": "Here the certified global optimization of a nonconvex QP is itself the proof (ε-uniqueness), with no later algebraic step mentioned.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine, S. Perron",
+  "quotes": [
+   {
+    "text": "It also shows that the solution is ε-unique.",
+    "page": "abstract"
+   },
+   {
+    "text": "The proof uses geometric arguments and a global optimization algorithm to solve a nonconvex quadratic program.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S105",
+  "year": "2004",
+  "title": "Exact solution of three nonconvex quadratic programming problems",
+  "read_level": "abstract",
+  "contribution": "Exact nonconvex QCQP algorithm applied to pooling (literature instances), fractional programming and the largest small octagon (abstract).",
+  "problem_entry": "Nonconvex quadratically constrained quadratic programming (QCQP), shown through three applications (abstract).",
+  "key_idea": "One exact algorithm is applied to three problem families: pooling (standard literature instances), fractional programming, and the largest small octagon (abstract). That the algorithm is the S010 branch-and-cut (card c2-01) is inferred, not stated.",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: certify or improve published solutions of literature instances",
+    "relation": "variant",
+    "note": "Standard pooling problems from the literature are solved exactly. What was certified or improved is not in the abstract.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "The largest small octagon is used as a QCQP test case.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "Finally, we show how it can be used to find the largest small octagon, a mathematical problem from geometry.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S051",
+  "year": "2005",
+  "title": "Essays and surveys in global optimization",
+  "read_level": "abstract",
+  "contribution": "Edited volume (Audet, Hansen, Savard) of essays and surveys in global optimization (abstract, publisher blurb).",
+  "problem_entry": "Global optimization is defined as finding the global optimum of a nonlinear, nonconvex, multivariate function of continuous and/or integer variables under possibly nonconvex constraints, with a proof of optimality expected (abstract).",
+  "key_idea": "not read (an edited collection; its contents are not in the abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Research Trajectory (1997–2002 exact global optimization; \"taste for exact, provable answers\")",
+    "relation": "evidence",
+    "note": "The blurb makes proof of optimality part of the definition of the field. Weak evidence, because it is publisher text.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, G. Savard (co-editors)",
+  "quotes": [
+   {
+    "text": "In addition, once the solutions are found, proof of its optimality is also expected from this methodology.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S077",
+  "year": "2005",
+  "title": "Nonlinear programming by mesh adaptive direct searches",
+  "read_level": "abstract",
+  "contribution": "Short expository introduction to MADS for the SIAG/OPT newsletter: nonsmooth convergence theory, practical success, and pointers to implementations including the MATLAB GADS toolbox (abstract from GERAD/Rice pages).",
+  "problem_entry": "An introduction to the ideas behind MADS, explicitly not a survey (abstract, GERAD G-2005-86). The newsletter venue comes from the GERAD page (metadata).",
+  "key_idea": "The authors argue that MADS convergence theory makes a case for closing the gap between nonlinear optimizers and nonsmooth analysts, while the methods also succeed on difficult practical problems (abstract, GERAD G-2005-86).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Implementations are cited to encourage use, and MADS is available in a commercial toolbox (MATLAB GADS).",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The convergence theory is presented as making a case for closing the gap between nonlinear optimizers and nonsmooth analysts. The abstract does not name the Clarke calculus.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M.A. Abramson, J.E. Dennis Jr.",
+  "quotes": []
+ },
+ {
+  "id": "S109",
+  "year": "2005",
+  "title": "Robust optimization of chemical processes using a MADS algorithm",
+  "read_level": "abstract",
+  "contribution": "Probably the GERAD report version of S044 (same abstract): MADS on a spent potliner treatment simulation, 37% better than the best known value despite 43% failed evaluations (abstract).",
+  "problem_entry": "Same as S044: chemical-process optimization defined by a simulation (abstract).",
+  "key_idea": "Same as S044: MADS on a spent potliner treatment process (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Same evidence as S044; not independent.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "V. Béchard, J. Chaouki",
+  "quotes": [
+   {
+    "text": "In comparison with the best previously known objective function value, a 37% reduction is obtained even if the model failed to return a value 43% of the time.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S030",
+  "year": "2007",
+  "title": "New branch-and-cut algorithm for bilevel linear programming",
+  "read_level": "abstract",
+  "contribution": "Branch-and-cut for linear bilevel programming that transposes mixed 0-1 Gomory cuts to BLP through the MIP-BLP equivalence, with branch and bound for finite global termination; beats pure branch and bound on random instances (abstract).",
+  "problem_entry": "Linear mixed 0–1 programs can be reformulated as equivalent continuous bilevel linear programs (abstract).",
+  "key_idea": "The equivalence is used to transpose mixed 0–1 Gomory cuts to BLP. Phase 1 generates Gomory-like cuts, and phase 2 is a branch and bound that guarantees finite termination at a global optimum. Cut selection and branching criteria are studied, and extra algorithmic tests are proposed (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Randomly generated BLPs; baseline pure branch-and-bound (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "A cut family is transferred across the MIP → BLP reformulation.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The same division of labour inside an exact method: a cut phase for performance and a branch-and-bound phase that alone ensures finite termination.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "If class A reformulates into class B, take A's strongest cut family (here Gomory cuts), derive its analogue in B, and keep a branch-and-bound phase that alone guarantees finite termination (abstract)."
+  ],
+  "coauthors": "G. Savard, W. Zghal",
+  "quotes": [
+   {
+    "text": "We exploit these equivalences to transpose the concept of mixed 0–1 Gomory cuts to BLP.",
+    "page": "abstract"
+   },
+   {
+    "text": "Our algorithm outperforms pure branch-and-bound when tested on a series of randomly generated problems.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S047",
+  "year": "2007",
+  "title": "Disjunctive cuts for continuous linear bilevel programming",
+  "read_level": "abstract",
+  "contribution": "Valid disjunctive cuts for continuous linear bilevel programming, obtained by reformulating BLP as a disjunctive program via duality, illustrated on an example (abstract).",
+  "problem_entry": "Generate disjunctive cuts for bilevel linear programs with continuous variables (abstract).",
+  "key_idea": "Duality theory reformulates BLP as a disjunctive program. Disjunctive-programming results then give valid cuts that tighten the linear relaxation (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Only an example and a discussion of algorithmic integration (abstract).",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "A disjunctive-programming tool is imported into BLP through a duality-based reformulation.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J. Haddad, G. Savard",
+  "quotes": [
+   {
+    "text": "Then duality theory is used to reformulate BLP as a disjunctive program and, from there, disjunctive programming results are applied to derive valid cuts.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S049",
+  "year": "2007",
+  "title": "The small octagon with longest perimeter",
+  "read_level": "abstract",
+  "contribution": "Determines the unit-diameter convex octagon of maximum perimeter (open since 1922) by geometric reasoning and interval-arithmetic global optimization of trigonometric nonconvex programs (abstract).",
+  "problem_entry": "Which convex octagon of unit diameter has maximum perimeter? An open question since 1922 (abstract).",
+  "key_idea": "Geometric reasoning plus an interval-arithmetic global optimization algorithm that solves a series of nonlinear, nonconvex programs with trigonometric functions (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "variant",
+    "note": "Interval-arithmetic global optimization serves as the certificate, and no later algebraic step is mentioned.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "This answers an open question dating from 1922.",
+    "page": "abstract"
+   },
+   {
+    "text": "The proof uses geometric reasoning and an interval arithmetic based global optimization algorithm to solve a series of non-linear and non-convex programs involving trigonometric functions.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S170",
+  "year": "2007",
+  "title": "Perfect and Proper Refinements of all extreme Nash equilibria for bimatrix games",
+  "read_level": "abstract",
+  "contribution": "Enumeration of Nash maximal subsets by maximal cliques, LP-based identification of perfect extreme equilibria and Selten maximal subsets, and a 0-1 mixed QP to detect non-proper extreme equilibria (abstract).",
+  "problem_entry": "Refine the set of extreme Nash equilibria (perfect and proper), starting from earlier work that wrote bimatrix games as parametric mixed 0-1 programs enumerated by EχMIP (abstract).",
+  "key_idea": "Maximal-clique enumeration lists all Nash maximal subsets. A pair of LPs identifies perfect extreme equilibria and enumerates Selten maximal subsets. A 0-1 mixed quadratic program identifies non-proper extreme equilibria (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "Game-theoretic refinement concepts are recast as LPs, a clique problem and a 0-1 mixed QP.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "Turn each qualitative solution concept (perfect, proper) into a membership test by a small mathematical program (an LP pair, or a 0-1 mixed QP) run over an enumerated finite candidate set (abstract)."
+  ],
+  "coauthors": "S. Belhaiza, P. Hansen",
+  "quotes": [
+   {
+    "text": "We also define a 0-1 mixed quadratic program in order to identify non-proper extreme equilibria.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S009",
+  "year": "2008",
+  "title": "Nonsmooth optimization through mesh adaptive direct search and variable neighborhood search",
+  "read_level": "abstract",
+  "contribution": "MADS combined with a VNS search step (with optional surrogates) for nonsmooth constrained optimization, keeping MADS convergence while escaping local solutions; numerical results show advantages and limitations (abstract).",
+  "problem_entry": "Nonsmooth constrained optimization. The aim is to let a convergent local method (MADS) escape local solutions (abstract).",
+  "key_idea": "The VNS metaheuristic is combined with MADS. The resulting algorithm keeps MADS's convergence properties, gains VNS's far-reaching exploration, and has a generic way to use surrogate functions inside the VNS search (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "Numerical results illustrate limitations as well as advantages (abstract); specifics not read.",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The metaheuristic is added so that MADS convergence is retained. SKILL.md already cites this paper for Method 1.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "V. Béchard, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "The resulting algorithm retains the convergence properties of MADS, and allows the far reaching exploration features of VNS to move away from local solutions.",
+    "page": "abstract"
+   },
+   {
+    "text": "Numerical results illustrate advantages and limitations of this method.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S018",
+  "year": "2008",
+  "title": "Multiobjective optimization through a series of single-objective formulations",
+  "read_level": "abstract",
+  "contribution": "BiMads: approximates the Pareto front of nonsmooth bound-constrained biobjective problems by solving a series of single-objective formulations with MADS; the approximation satisfies Clarke-based first-order necessary conditions; tested on pathology-specific problems (abstract).",
+  "problem_entry": "Bound-constrained multiobjective optimization of nonsmooth functions whose structure cannot be exploited or is absent, typically outputs of a computer simulation (abstract).",
+  "key_idea": "The paper gives definitions and optimality conditions and two families of single-objective formulations. BiMads exploits the fact that Pareto points can be ordered when there are two objectives, and approximates the front by solving a series of single-objective formulations with MADS (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Literature problems chosen for specific difficulties: nonconvex, disjoint, local and nonuniform Pareto fronts (abstract).",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The guarantee is stated as Clarke-calculus first-order necessary conditions for the whole front approximation.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "The test problems are chosen for the pathologies targeted (nonconvex, disjoint, local, nonuniform fronts).",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: reduce a new problem class to a series of problems the certified solver already handles",
+    "relation": "evidence",
+    "note": "Biobjective → series of single-objective MADS runs.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reduce a new problem class to a series of problems the certified solver already handles",
+    "evidence": "BiMads solves a series of single-objective formulations with MADS and inherits Clarke-based conditions (S018); compare the thesis reformulation habit (card b2-01).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Exploit the structure only the special case has (for two objectives, Pareto points can be ordered). Reduce the problem to a sequence of single-objective subproblems for an existing convergent solver, and state what the combined output inherits from that solver's guarantees (abstract)."
+  ],
+  "coauthors": "G. Savard, W. Zghal",
+  "quotes": [
+   {
+    "text": "The property that Pareto points may be ordered in BOP and not in MOP is exploited by our algorithm.",
+    "page": "abstract"
+   },
+   {
+    "text": "The Pareto front approximation is shown to satisfy some first order necessary optimality conditions based on the Clarke calculus.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S044",
+  "year": "2008",
+  "title": "Spent potliner treatment process optimization using a MADS algorithm",
+  "read_level": "abstract",
+  "contribution": "Formulates simulation-based chemical process optimization and applies MADS to a spent potliner treatment process, improving the best known objective by 37% despite 43% failed evaluations (abstract).",
+  "problem_entry": "A chemical process optimization problem defined by a computer simulation: typically nonlinear, nonconvex and nondifferentiable, over a disconnected set (abstract).",
+  "key_idea": "A brief review of chemical-engineering optimization methods, then MADS in detail, a derivative-free method suited to functions that are noisy, costly or undefined at some points (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Single industrial process; baseline is the best previously known objective value; failure rate 43% reported (abstract).",
+  "positioning": "Brief overview of popular optimization methods in the chemical engineering literature (abstract).",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Failed evaluations (hidden constraints) are part of the problem statement and are reported as a 43% failure rate.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The baseline is the best previously known value, not a competing solver run under the same budget.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "In an application paper, report the simulator's failure rate next to the improvement. This shows the method worked despite hidden constraints instead of leaving the reader to guess (abstract)."
+  ],
+  "coauthors": "V. Béchard, J. Chaouki",
+  "quotes": [
+   {
+    "text": "This is useful when the functions are noisy, costly or undefined at some points, or when derivatives are unavailable or unusable.",
+    "page": "abstract"
+   },
+   {
+    "text": "In comparison with the best previously known objective function value, a 37% reduction is obtained even if the model failed to return a value 43% of the time.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S083",
+  "year": "2008",
+  "title": "Exact L2-norm plane separation",
+  "read_level": "abstract",
+  "contribution": "Exact method for L2-norm plane separation (nonconvex QP; practical exact techniques were previously unavailable for L2 per the abstract), accelerated by heuristics, with the finding that L2 does not classify significantly better than L1 or L-infinity (abstract).",
+  "problem_entry": "Exact L2-norm plane separation. Despite recent progress, practical exact techniques existed only for the L1 and L∞ cases (abstract).",
+  "key_idea": "A new approach based on nonconvex quadratic programming solves the L2 case exactly, with heuristic results used inside the exact process (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "Artificial instances (up to 20000 points in 6-D; 13-D with 2000 points), UCI instances; heuristic warm information; comparison of L1, L2, L-infinity classification (abstract).",
+  "positioning": "Exact methods previously practical only for L1 and L-infinity (abstract).",
+  "writing": "",
+  "limits_future": "L2 is computationally more expensive and not significantly better at classification (abstract).",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: proposer-certifier protocol",
+    "relation": "evidence",
+    "note": "Heuristic results are incorporated into the exact solution process and substantially cut times on UCI instances.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: report when the costlier exact model does not pay off",
+    "relation": "evidence",
+    "note": "L2 is more expensive and not significantly better.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "report when the costlier exact model does not pay off",
+    "evidence": "S083 states that the L2 formulation, though more expensive, does not classify significantly better than L1/L-infinity.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Once the expensive variant is solvable exactly, test whether it pays off against the cheap variants on the end task (here classification), and publish the result even when it does not (abstract)."
+  ],
+  "coauthors": "P. Hansen, A. Karam, C.-T. Ng, S. Perron",
+  "quotes": [
+   {
+    "text": "We also observe that, for difficult real-life instances from the UCI Repository, computation times are substantially reduced by incorporating heuristic results in the exact solution process.",
+    "page": "abstract"
+   },
+   {
+    "text": "It appears that, despite the fact that L2formulation is computationally more expensive, it does not give significantly better results than the L1and L∞formulations.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S135",
+  "year": "2008",
+  "title": "Localisation de stations de mesure automatisée du couvert nival",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): CRM industrial problem-solving workshop report on locating automated snow-cover measurement stations, the likely seed of S074.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Alarie, S. Le Digabel, Q. Lequy, M. Sylla, O. Marcotte",
+  "quotes": []
+ }
+]

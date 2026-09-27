@@ -1,0 +1,453 @@
+[
+ {
+  "id": "S028",
+  "year": "2001",
+  "title": "Mixed variable optimization of the number and composition of heat intercepts in a thermal insulation system",
+  "read_level": "unreadable",
+  "contribution": "Not assessed: the 26-page text file is font-encoding garbage; only figure labels are readable (material names on p. 11; objective value vs number of function evaluations plots on pp. 18, 20, 22).",
+  "problem_entry": "not read",
+  "key_idea": "not read",
+  "assumptions": "not read",
+  "proof_devices": [],
+  "experiments": "not read (only plot axis labels 'Number function evaluations' / 'Objective function value' survive, pp. 18, 20, 22)",
+  "positioning": "not read; S029 cites it (ref. 20) among engineering applications with categorical variables solved by a GPS algorithm (S029 p. 2)",
+  "writing": "not read",
+  "limits_future": "not read; D016 lists it as Optimization and Engineering 2(1), pp. 5-29, 2001 (D016 p. 6). PDF exists; OCR could recover it.",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. Kokkolaras, J.E. Dennis Jr.",
+  "quotes": []
+ },
+ {
+  "id": "S050",
+  "year": "2001",
+  "title": "Concavity cuts for disjoint bilinear programming",
+  "read_level": "unreadable",
+  "contribution": "Not assessed: the 27-page text file is font-encoding garbage; its only word-like string is 'BIP' (pp. 26-27).",
+  "problem_entry": "not read",
+  "key_idea": "not read",
+  "assumptions": "not read",
+  "proof_devices": [],
+  "experiments": "not read",
+  "positioning": "not read; the thesis has a section on concavity cuts for the two maxmin reformulations (card b2-01, thesis §2.4), relation to this paper not checked",
+  "writing": "not read",
+  "limits_future": "not read; D016 lists it as Mathematical Programming 90(2), pp. 373-398, 2001 (D016 p. 6). PDF exists; OCR could recover it.",
+  "method_links": [],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "S. Alarie, B. Jaumard, G. Savard",
+  "quotes": []
+ },
+ {
+  "id": "S037",
+  "year": "2002",
+  "title": "The largest small octagon",
+  "read_level": "full",
+  "contribution": "Settles the first open case of Graham's 1975 conjecture: among unit-diameter octagons the maximum area 0.726867 is attained by Graham's conjectured configuration, proven by reducing to 31 diameter-graph configurations, solving the conjectured one with the QCQP branch-and-cut and eliminating the other 30.",
+  "problem_entry": "Graham (1975) solved the hexagon and conjectured the optimal shape for even n >= 8; the octagon is the first open case (p. 3).",
+  "key_idea": "Extend Graham's hexagon method: linear thrackleations (Woodall) leave 31 configurations; solve configuration (31) exactly as a 10-variable QCQP (z* ~ 0.726867, accuracy ~1e-5) and certify the other 30 cannot exceed 0.7268 (pp. 3-14).",
+  "assumptions": "Convex octagons of unit diameter (p. 3); certificate relies on solver accuracy ~1e-5 (p. 7) and on heptagon/hexagon optima 0.7198/0.6750 rounded up (pp. 10-11).",
+  "proof_devices": [
+   "exhaustion over 31 diameter-graph configurations from Woodall's linear-thrackle theorem (p. 3)",
+   "one-angle analytic upper bound 2B(theta)+cos theta sin theta+(1-sin theta)/2 checked by a plot, eliminating 23 configurations (pp. 9-10)",
+   "incumbent-cutoff infeasibility: QP with area >= 0.7268 plus angle bounds from smaller-polygon optima shown infeasible by the exact solver (pp. 10-11)",
+   "necessary optimality conditions (perpendicularity) derived by moving one vertex at a time, added to relaxations of the incumbent configuration so the exact solver can prove infeasibility (pp. 12-14)"
+  ],
+  "experiments": "none beyond solver runs; configuration (31) took more than 100 hours (p. 12)",
+  "positioning": "Extends Graham's thrackleation-plus-optimization method to n = 8 (pp. 3, 14); only 5 references, two of them Audet's thesis and the QCQP branch-and-cut (p. 15).",
+  "writing": "Short note with a one-sentence contribution in the abstract (p. 2), figure-driven case analysis, one-paragraph conclusion without limits or future work (p. 14).",
+  "limits_future": "No limits or future work stated (p. 14); unstated: §4.1 relies on a plot and the proof on solver tolerance ~1e-5 (pp. 7, 10); 2.78% here vs 2.79% in S108 (rounding).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Proposer/certifier split in exact optimization: the conjecture proposes the incumbent configuration; all other cases must be certified unable to beat it.",
+    "pages": "pp. 6-14"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Thesis-era QCQP branch-and-cut code reused as the instrument that settles a 1975 conjecture (reused research code, not a maintained product).",
+    "pages": "pp. 6, 11, 14"
+   },
+   {
+    "method": "new-pattern candidate: incumbent-cutoff infeasibility certificate",
+    "relation": "evidence",
+    "note": "Add objective >= incumbent and prove infeasibility for each non-incumbent case.",
+    "pages": "pp. 11, 14"
+   },
+   {
+    "method": "new-pattern candidate: necessary optimality conditions as extra constraints",
+    "relation": "evidence",
+    "note": "Perpendicularity conditions make relaxations of the incumbent case tractable.",
+    "pages": "pp. 12-14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "incumbent-cutoff infeasibility certificate",
+    "evidence": "QPs (3) and those of Table 2 with area >= 0.7268 are shown infeasible by the branch-and-cut",
+    "pages": "pp. 11, 14"
+   },
+   {
+    "pattern": "necessary optimality conditions as extra constraints",
+    "evidence": "Configurations (17)-(20) are relaxations of (31); a direct solve was judged unrealistic (>100 h), so perpendicularity conditions are derived and added",
+    "pages": "pp. 12-14"
+   }
+  ],
+  "transferable": [
+   "To prove an incumbent optimal across a finite case split, add objective >= incumbent to each case and show infeasibility with an exact solver (pp. 11, 14).",
+   "Use known optima of smaller instances to bound variables of the larger instance before the exact solve (pp. 10-11).",
+   "When a case relaxes the incumbent case, perturb one variable at a time: either the missing constraint becomes active or a first-order condition must hold; add that condition as a constraint (pp. 12-13)."
+  ],
+  "coauthors": "P. Hansen, F. Messine, J. Xiong",
+  "quotes": [
+   {
+    "text": "This proves the rst open ase of a onje ture of Graham (1975).",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "D016",
+  "year": "2004",
+  "title": "Optimization tools for engineering design using surrogate functions",
+  "read_level": "full",
+  "contribution": "AFOSR final report (grant F49620-01-1-0013, Dec 2000-Nov 2003) of the Dennis (PI)-Audet (CoPI) project: announces MADS as lifting GPS's fixed-direction restriction, documents NOMAD C++ cycle 5 and its industrial users, and lists publications, talks and ExxonMobil/Boeing transition projects.",
+  "problem_entry": "Engineering design with expensive simulations and surrogates (p. 1); the research problem named is GPS's reliance on a fixed finite set of directions to which convergence results are tied (p. 4).",
+  "key_idea": "MADS explores a set of directions dense in the whole space and generalizes GPS (p. 4); NOMAD C++ cycle 5 offers GPS/MADS, a cache, filter, bound barrier with conforming directions, user surrogates and LH search (pp. 3, 5).",
+  "assumptions": "not applicable (grant report: no model or theorem)",
+  "proof_devices": [],
+  "experiments": "Anecdotal only: ExxonMobil tanker problem (<=15 min vs over a day, p. 3); 4-variable catalytic reactor fit, GPS beats gradient method and MADS faster than GPS (p. 5); Kelley's public well-location problems (pp. 5-6); Boeing planform with surrogates (pp. 16-17).",
+  "positioning": "Positions NOMAD for DAKOTA integration (pp. 3, 5) and Boeing's Design Explorer (p. 16); special issue of Optimization and Engineering co-edited with L.N. Vicente (pp. 1, 3).",
+  "writing": "Grant-report register: claims of an exceptionally productive period (p. 1), bullet lists of outputs, and transition projects each with status, blocking reason and contact (pp. 14-17).",
+  "limits_future": "MADS to replace GPS, earlier papers to be recast in the book (p. 5); projects delayed by ExxonMobil internal funding (p. 15) and Boeing priorities (p. 16); Le Digabel and Zghal starting PhDs on MADS extensions (p. 4).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD C++ already carries research features to UTRC/ExxonMobil; a user problem (well-bore trajectory) is logged as a future algorithm application; Dennis's talk Optimization Tech Transfer is a Two-Way Street.",
+    "pages": "pp. 3, 5, 10, 16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "MADS motivated by GPS convergence results known not to hold; Audet's 2003 talks titled First Order Optimality Conditions Tied to Local Differentiability.",
+    "pages": "pp. 5, 12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "User-defined surrogates and Latin hypercube searches added to NOMAD as search-type features.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "The public benchmark is another group's (Kelley's well-location problems); the group's own industrial problems (Boeing nozzle, ExxonMobil casing) are not released.",
+    "pages": "pp. 5, 14-16"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J.E. Dennis Jr. (PI); C. Audet (CoPI)",
+  "quotes": [
+   {
+    "text": "MADS is much more flexible, and allows us to show the convergence results that we always wished for in GPS, but knew did not hold.",
+    "page": 5
+   },
+   {
+    "text": "Previous approaches could sometimes hold up the process for over a day, while NOMAD has never needed more than 15 minutes to solve an instance of the problem.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S029",
+  "year": "2004",
+  "title": "Generalized pattern searches with derivative information",
+  "read_level": "full",
+  "contribution": "Uses available (possibly approximate or partial) derivative information to prune ascent directions from the GPS poll set, reducing the worst-case Poll cost from n+1 evaluations to one with the implicit direction set {-1,0,1}^n, while proving that GPS convergence results are unchanged.",
+  "problem_entry": "User question: how to use derivatives where available (p. 1); target is the worst-case O(n) Poll cost, continuing Lewis-Torczon (pp. 1-2); engineering codes give cheap inexact gradients (p. 2).",
+  "key_idea": "Change only the Poll: prune directions with d'grad f > 0; poll from the never-constructed rich set D = {-1,0,1}^n, which any nonzero vector prunes to a singleton (Thms 2-3, p. 9); Search left for global exploration (pp. 4-5).",
+  "assumptions": "A1 f_X = f + indicator available (f may be nonsmooth/discontinuous), A2 rational constraint matrix, A3 iterates in a compact set (p. 13); approximate gradients need only sign agreement on the largest components (Def. 6, p. 10).",
+  "proof_devices": [
+   "Davis's positive-spanning characterization (Thm 1, p. 3) and pruning number rho(D) with rho(D) >= |D|/2 for positive bases (Prop. 1, p. 7)",
+   "completion of the surviving direction by all directions with negative inner product, positive spanning checked by a two-case construction (Thm 2, pp. 8-9)",
+   "Clarke-quotient argument with a pruned-direction case: a direction counts if polled or pruned infinitely often, since d'grad f(x_k) > 0 bounds the quotient below by zero (Thm 6, pp. 13-14)",
+   "epsilon-approximation to the large components: sign agreement suffices to prune to a singleton (Def. 6, Thm 4, p. 10)"
+  ],
+  "experiments": "NOMADm, Poll-only (empty Search), 8 poll strategies on CUTE problems (text: seven strategies, 20 problems; Table 1 has 21 rows), stop at Delta <= 1e-4 or 50,000 evaluations, f and grad-f evaluations counted separately, perturbed starts for fairness; plus a 2-D example showing a 2-point random Search finds the global minimum (pp. 14-18).",
+  "positioning": "Continues Lewis-Torczon's reduction of per-iteration cost (p. 2); builds on the Audet-Dennis GPS analysis and tightness report (pp. 13-14); relates surviving directions to Byrd-Tapia l1/l_inf gradients (pp. 6, 9).",
+  "writing": "Explicit hedges on what the experiments mean (p. 2); flags 'a major point of this paper' (p. 7); clarifies the ambiguous term 'pruned set' (p. 5); credits referees for a shorter proof of Prop. 3 (p. 18).",
+  "limits_future": "No time saving if the gradient costs about n evaluations (p. 18; p. 2); pruned polls may end at different, sometimes worse minimizers (PALMER1, p. 18); future: derivatives in the Search, e.g. Hermite interpolants (pp. 2, 4).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Search/Poll division explicit (Search decides global quality), but the performance idea goes into the Poll and is admitted because the proof is redone with pruned directions counted as polled.",
+    "pages": "pp. 4-5, 13-15"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Ladder relative to local smoothness at the limit (Lipschitz -> Clarke; strict differentiability -> grad f = 0; linear constraints + conforming -> KKT); A2 flagged as needed; liminf Delta_k = 0 not strengthenable by the tightness example.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation currency with f and grad-f counted separately, fairness perturbations, unflattering PALMER1 reported; but same-family variants only, with an explicit disclaimer.",
+    "pages": "pp. 2, 15, 18"
+   },
+   {
+    "method": "new-pattern candidate: component ablation with the other step switched off",
+    "relation": "evidence",
+    "note": "Empty Search used so that Poll variants are compared fairly.",
+    "pages": "pp. 2, 14-15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "component ablation with the other step switched off",
+    "evidence": "No Search step is employed in the CUTE runs to give a fair comparison of Poll steps; results disclaimed as saying nothing about GPS vs other methods",
+    "pages": "pp. 2, 14-15"
+   }
+  ],
+  "transferable": [
+   "Use side information only to skip poll points whose failure it predicts, and in the proof treat a skipped direction as polled via the sign of its directional derivative (Def. 4, p. 5; Thm 6, pp. 13-14).",
+   "Poll from a large implicit direction set such as {-1,0,1}^n and complete the chosen direction to a positive spanning set only inside the proof (pp. 8-9).",
+   "State the accuracy needed from an approximate gradient as sign agreement on its largest components, not as a norm bound (Def. 6, Thm 4, p. 10).",
+   "Test a component with the rest of the algorithm switched off; count each oracle separately; perturb the start when a run lands on a stationary point by luck (pp. 14-15)."
+  ],
+  "coauthors": "M.A. Abramson, J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "We prove that using these less expensive POLL steps does not weaken the known convergence properties of the method, all of which depend only on the POLL step.",
+    "page": 1
+   },
+   {
+    "text": "These results should not be interpreted as saying anything about the efficiency or robustness of GPS algorithms in comparison with other direct search methods.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S098",
+  "year": "2004",
+  "title": "An exact method for fractional goal programming",
+  "read_level": "full",
+  "contribution": "First exact approach to general fractional goal programming: a counterexample shows optima need not be vertices, a localization theorem bounds the optimal face, and a reformulation to a linearly-objectived QCQP is solved by the group's branch-and-cut (and a complementarity-aware variant) on random instances with up to 14 fractional objectives.",
+  "problem_entry": "All published methods are heuristic (local NLP or vertex enumeration), and a two-variable example with a non-vertex optimum shows vertex enumeration can fail (pp. 1-2).",
+  "key_idea": "Introduce denominator variables and deviation variables d+, d- to obtain a QCQP with linear objective and LP-derived bounds; solve with qp, or frac which fixes the complementary deviation to zero when branching forces the other positive (p. 3).",
+  "assumptions": "Bounded polyhedron X; denominators strictly positive on X (p. 1); bounds from LPs (p. 3).",
+  "proof_devices": [
+   "two-variable counterexample: optimum (2,2) not at a vertex (p. 2)",
+   "localization (Prop. 1): freeze the deviation sign pattern at an optimum, apply a Carrizosa-Plastria corollary to get an optimal face of dimension <= m-1, then count objectives at target (pp. 2-3)",
+   "complementarity d+ d- = 0 automatically satisfied at the optimum, exploited as a branching rule (p. 3)"
+  ],
+  "experiments": "Random instances with planted attainable targets and nonzero optimum; m in {6,10,14}, n in {5,10,15}, 30 per cell; mean/std CPU seconds; factors: redundant constraint (4), simulated heuristic warm start, qp vs frac (pp. 4-6).",
+  "positioning": "Positions against the heuristic fractional goal programming literature (Kornbluth, Steuer, Romero) and reuses a Carrizosa-Plastria localization technique (pp. 1-2).",
+  "writing": "Presents itself as a note exploring the practical applicability of a recent algorithm (p. 1); four remarks sketch extensions (p. 6).",
+  "limits_future": "High variance of solve times (p. 6); heuristic baselines not run (pp. 4-6); extensions to m = 1, piecewise convex penalties, quadratic ratios and posynomials only sketched (p. 6).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Exact method as certifier of a heuristic's solution; certification cost measured with a simulated warm start.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Minimal counterexample to a solution-method shortcut (optimum at a vertex), then a correct weaker localization result.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Factorial design on random instances with mean and std; CPU-time currency; no external baseline.",
+    "pages": "pp. 4-6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Reuse of the group's qp branch-and-cut code, slightly modified to exploit complementarity.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "one exact research code reused as certifier across problem classes",
+    "evidence": "qp of Audet-Hansen-Jaumard-Savard reused here; same code settles the octagon in S037 and S108",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "Linearize a sum of ratio-deviation terms by making each denominator a variable and splitting deviations into d+ and d-, giving a linear objective with bilinear constraints (p. 3).",
+   "Branching rule from implied complementarity: when branching forces one member of a complementary pair above zero, fix the other at zero (p. 3).",
+   "Simulate a good heuristic by re-running the exact method with the known optimum as incumbent; the difference measures the cost of proving optimality (p. 4).",
+   "Generate random instances with a planted, separately attainable target per objective and discard trivial instances with optimal value 0 (p. 4)."
+  ],
+  "coauthors": "E. Carrizosa, P. Hansen",
+  "quotes": [
+   {
+    "text": "However, only heuristic procedures are suggested in the literature on the field.",
+    "page": 1
+   },
+   {
+    "text": "Given a solution produced by a heuristic method, the algorithm can be used to either confirm its global optimality or to show that it is not optimal by finding the true global solution.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S108",
+  "year": "2005",
+  "title": "Quatre petits octogones",
+  "read_level": "full",
+  "contribution": "French expository account (text read: MATAPLI no. 80, 2006) of how the authors solved the four first open small-octagon problems (maximal area, maximal perimeter, and both for equilateral octagons) by combining diameter-graph case analysis with two exact global solvers, with the history of the problems and a list of new open problems.",
+  "problem_entry": "Four questions on small n-gons; odd n, n = 4, even n not a power of 2 (perimeter) and n = 6 (area) are solved, so the first open cases are all octagons (pp. 2-9).",
+  "key_idea": "Reduce each problem to 31 diameter-graph configurations and settle each with global optimization: RLT branch-and-cut for QCQP (area, equilateral perimeter) or interval branch-and-bound IBBA (perimeter) (pp. 10-15).",
+  "assumptions": "Convex unit-diameter polygons (p. 2); analytic closed forms obtained with Maple under an assumed symmetry axis, stated as such (pp. 15, 19).",
+  "proof_devices": [
+   "relaxation-saturation: solve configuration 10 (a relaxation of 29) and observe the extra constraint active at the optimum (p. 14)",
+   "first-order optimality conditions plus angle bounds added as constraints eliminate configuration 10 in 0.12 s (p. 14)",
+   "rounding-controlled interval arithmetic guaranteeing all digits of the maximal perimeter 3.1211 (p. 15)",
+   "closed forms for regular small polygons yield non-monotone sequences and another proof of Reinhardt's even-n result (pp. 17-18)"
+  ],
+  "experiments": "Computational records only: >100 h on a SUN-SPARC 20 for area configuration 31 (p. 12); 3 h, 12 h and 44 h on a 30-PC cluster for the perimeter (p. 14); 45 s for the equilateral-perimeter QP (p. 15).",
+  "positioning": "Places the work in a 1922-2005 history (Reinhardt, Vincze, Graham, Bieri, Mossinghoff, Yuan) and critiques Graham's omitted symmetry proof (pp. 6-8).",
+  "writing": "Popular-science register in French: rhetorical questions (p. 1, p. 17), the playful club of 'octogonistes' (p. 10), anecdotes, and closing open problems (pp. 18-19).",
+  "limits_future": "Open: decagon (area), 16-gon (perimeter), octagons of maximal width (conjectured solution 0.9776 unproven) and equilateral width entirely open (pp. 18-19); equilateral area regular only verified for n = 4, 6, 8 (p. 16).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Hypothesis audit applied to geometry literature: Graham's omitted symmetry proof, Bieri's unproven symmetry assumption, Reinhardt's buried epilogue; own symmetry-assuming solutions labelled.",
+    "pages": "pp. 6-8, 15, 19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Two exact solvers from the coauthors' theses and papers (RLT branch-and-cut; IBBA) reused as instruments across four problems.",
+    "pages": "pp. 12, 14, 15, 20"
+   },
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "Width octagon found numerically in 2003, analytic under symmetry in 2004, proof still missing.",
+    "pages": "pp. 18-19"
+   },
+   {
+    "method": "new-pattern candidate: optimality conditions as cuts",
+    "relation": "evidence",
+    "note": "First-order conditions added as constraints eliminate a configuration in 0.12 s; fails for configuration 18 because the conditions hold there.",
+    "pages": "p. 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "optimality conditions as cuts",
+    "evidence": "First-order conditions + bounds eliminate configuration 10 in 0.12 s; configuration 18 needs 44 h because the conditions hold at its optimum",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "close with numbered open problems, each with best conjecture and blocker",
+    "evidence": "Conclusion lists decagon, 16-gon, maximal-width octagon (conjecture 0.9776, unproven configuration) and equilateral width",
+    "pages": "pp. 18-19"
+   }
+  ],
+  "transferable": [
+   "To find which case holds the optimum, solve the relaxed case and check whether the distinguishing constraint is active at its optimum (p. 14).",
+   "When elimination by optimality conditions fails, state why (the conditions hold at that case's optimum) and switch to pure bounding (p. 14).",
+   "End with explicit open problems, each with the best known conjecture and what stops the proof (pp. 18-19)."
+  ],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "Which octagon with unit diameter (or small octagon) has the largest area or the longest perimeter ? Could it be the regular octagon ? Well, no, this is not the case.",
+    "page": 1
+   },
+   {
+    "text": "C’est bien ce qui s’est passe... plus de 10 ans plus tard.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S048",
+  "year": "2006",
+  "title": "Enumeration of all the extreme equilibria in game theory: bimatrix and polymatrix games",
+  "read_level": "full",
+  "contribution": "Formulates bimatrix and polymatrix game equilibria as the feasible set of a mixed 0-1 LP with data-derived big-L constants and gives Ex-MIP, the first algorithm enumerating all extreme equilibria of polymatrix games, tested up to 14x14 bimatrix and 13x13x13 three-player games and compared honestly with the group's faster bimatrix-only EEE.",
+  "problem_entry": "Equilibria form unions of polytopes, so enumerate their vertices; EEE handles bimatrix games only (bilinear approach), and no complete enumeration existed for more than two players (pp. 1, 3-4, 9, 22).",
+  "key_idea": "Linearize complementary slackness of each player's LP with binaries and big-L; enumerate extreme feasible solutions per binary pattern with a principal tree over binaries, secondary trees fixing positive continuous variables to zero, and no-good cuts (pp. 5-6, 10-12, 16-17).",
+  "assumptions": "Normal-form games with finite strategy sets; polymatrix payoffs are pairwise sums (pp. 2, 8); no nondegeneracy assumption stated (pp. 4-18).",
+  "proof_devices": [
+   "valid big-L from payoff ranges (max - min), proved by bounding alpha and A_i y between extreme entries (Props 2.1, 3.1, pp. 5, 10-11)",
+   "completeness of Ex-MIP by principal + secondary branching (Thm 5.1, pp. 17-18; sketch citing a nonexistent Proposition 5.2)",
+   "iterated strict-dominance elimination terminating in at most M^2 iterations (Prop. 4.1, p. 15); weak dominance excluded as unsafe (p. 15)"
+  ],
+  "experiments": "C++ + CPLEX 6.0; 10 random games per cell, payoffs uniform on [0,10], densities 0.12-1; mean/std of nodes, CPU time and number of extreme equilibria; bimatrix 5x5-14x14 vs EEE, 3-player 3x3x3-13x13x13 (pp. 20-21).",
+  "positioning": "Extends the group's EEE (bimatrix only) to polymatrix games via MIP; cites Keiding and von Stengel bounds and the LCP line (Howson, Yanovskaya) (pp. 3-4, 9).",
+  "writing": "Formulation-first with short propositions; claims a first for polymatrix games and concedes slower times on bimatrix (p. 22); several cross-reference slips (pp. 5, 6, 17, 21).",
+  "limits_future": "Slower than EEE on larger, denser bimatrix games (pp. 21-22); polymatrix time grows exponentially (p. 22); future: equilibrium refinements (p. 1).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Competitor is the group's own state of the art on its home ground and is conceded faster; identical equilibrium counts as correctness cross-check; CPU-time currency.",
+    "pages": "pp. 20-22"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Outside DFO: only provably lossless preprocessing (strict dominance) is allowed; weak dominance excluded because it may lose equilibria.",
+    "pages": "p. 15"
+   },
+   {
+    "method": "new-pattern candidate: data-derived valid big-M",
+    "relation": "evidence",
+    "note": "L constants from payoff ranges answer the admitted difficulty of choosing them.",
+    "pages": "pp. 5, 10-11"
+   },
+   {
+    "method": "new-pattern candidate: generality over speed, conceded in the conclusion",
+    "relation": "evidence",
+    "note": "Ex-MIP slower than EEE on bimatrix but the only method extending to polymatrix games.",
+    "pages": "p. 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "data-derived valid big-M",
+    "evidence": "Props 2.1 and 3.1 give L from payoff ranges after admitting that choosing L large enough is problematic",
+    "pages": "pp. 5, 10-11"
+   },
+   {
+    "pattern": "generality over speed, conceded in the conclusion",
+    "evidence": "Discussion: same set of equilibria as EEE but larger solution times; only Ex-MIP handles n > 2 players",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "When linearizing complementarity with binaries, derive each big-M from data ranges and prove validity by bounding both members of the complementary pair (pp. 5, 10-11).",
+   "Enumerate all vertices of a union of polytopes indexed by binary patterns with a principal tree over patterns, a secondary tree fixing positive continuous variables to zero, and no-good cuts on visited patterns (pp. 16-17).",
+   "Before comparing speed of two exact enumerators, check that they find the same number of objects on the same instances (Table 2, p. 20).",
+   "Use only provably lossless reductions (strict dominance) and say why the tempting one (weak dominance) is excluded (p. 15)."
+  ],
+  "coauthors": "S. Belhaiza, P. Hansen",
+  "quotes": [
+   {
+    "text": "Making sure that the constants L1 and L2 are large enough is often problematic.",
+    "page": 5
+   },
+   {
+    "text": "Compared to the state-of-the-art algorithm EEE (Ref. 3) on bimatrix games, Eχ-MIP finds the same set of equilibria, but suffers from larger solution times.",
+    "page": 22
+   }
+  ]
+ }
+]

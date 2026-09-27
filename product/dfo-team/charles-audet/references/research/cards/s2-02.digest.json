@@ -1,0 +1,621 @@
+[
+ {
+  "id": "S062",
+  "year": "2006",
+  "title": "A note on the definition of a linear bilevel programming solution",
+  "read_level": "full",
+  "contribution": "Shows that Lu, Shi and Zhang's alternative definition of a linear bilevel programming solution is equivalent to moving the first-level constraints involving follower variables into the second level, and is therefore a relaxation of BLP that accepts infeasible points rather than a way to solve a wider class of problems.",
+  "problem_entry": "Rebuttal of a published claim: Lu-Shi-Zhang called a BLP instance with nonempty S but no solution a deficiency of the theory; the note denies the premise, since BLP solutions need not be Pareto optimal and no solution may exist (pp. 1, 4).",
+  "key_idea": "A minimal two-variable pair BLP1/BLP2 that differ only in which level holds y = 0 has different induced regions (p. 3); Theorem 1 proves the new definition's induced region equals that of BLP' with the first-level y-constraints moved down (p. 5).",
+  "assumptions": "Linear BLP, polyhedral X and P1, follower set {w : Bw >= b - Ax}; with first-level y-constraints the induced region may be disconnected or discrete (p. 2).",
+  "proof_devices": [
+   "smallest pair of instances differing only in the level that holds one constraint, with induced regions computed explicitly (BLP1 vs BLP2, p. 3)",
+   "set equality of follower argmin sets by definitional rewriting over the common set S (Theorem 1, pp. 5-6)",
+   "import of known facts: non-Pareto optimality of BLP solutions [11] and connectedness without first-level y-constraints [12] (pp. 2, 4)"
+  ],
+  "experiments": "none",
+  "positioning": "Direct rebuttal of Lu, Shi and Zhang [8,9,10], naming their claim and stating 'contrary to what is stated by the authors'; relies on the Montreal bilevel school (Savard's thesis, Marcotte-Savard, Audet et al. JOTA 1997) (pp. 1, 4, 6).",
+  "writing": "Seven-page note: claim and verdict in the abstract, a two-line toy with a figure, then one theorem with three corollaries; no conclusion section (pp. 1-6).",
+  "limits_future": "No limitations or future work stated; notes the relaxed problem is still NP-hard (p. 4).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Step 4 audit applied to a published definition: smallest counterexample plus a correct characterization (equivalence theorem), not just the flaw.",
+    "pages": "pp. 3-6"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Bilevel analogue of constraint semantics: which level holds a constraint is a modeling decision that changes the feasible set.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "new-pattern candidate: equivalence proof unmasks a claimed generalization as a known relaxation",
+    "relation": "evidence",
+    "note": "The proposal is proved identical to BLP', an already-studied special case.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "new-pattern candidate: Rival-failure toy examples",
+    "relation": "variant",
+    "note": "The toy shows the rival definition's answer is infeasible for the original problem.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "equivalence proof unmasks a claimed generalization as a known relaxation",
+    "evidence": "Theorem 1: IR_LSZ = IR_BLP'; the new definition equals moving first-level y-constraints to the second level, a relaxation of BLP.",
+    "pages": "pp. 4-6"
+   },
+   {
+    "pattern": "Rival-failure toy examples",
+    "evidence": "BLP1 vs BLP2: same S, induced regions {(0,0)} vs [0,1]x{0}; the new definition's optimum (1,0) is infeasible for BLP1.",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "To refute a proposed reformulation or definition, build the smallest pair of instances that differ only in where one constraint sits and compute both feasible regions explicitly (p. 3).",
+   "Prove the proposal identical to a named special case so readers inherit everything already known about it (Theorem 1, Corollaries 2-4, pp. 5-6)."
+  ],
+  "coauthors": "J. Haddad, G. Savard",
+  "quotes": [
+   {
+    "text": "Thus, contrary to what is stated by the authors who suggested the new definition, this does not allow to solve a wider class of problems, but rather relaxes the feasible region, allowing for infeasible points to be considered as feasible.",
+    "page": 1
+   },
+   {
+    "text": "no solution was found because no solution exists, and this may happen even if S is not empty.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S031",
+  "year": "2007",
+  "title": "Filter pattern search algorithms for mixed variable constrained optimization problems",
+  "read_level": "full",
+  "contribution": "Introduces Filter-MVPS, a derivative-free filter pattern search for problems with continuous and categorical variables and general nonlinear constraints, with a Clarke-calculus hierarchy of limit-point results (for the constraint violation h and, under a poll-around-best-feasible choice, for f) that reduces to earlier GPS results.",
+  "problem_entry": "Categorical variables make the functions unevaluable off their lists, so no continuous relaxation exists; earlier MVP pattern search handled only bound/linear constraints, and alternatives need hard-to-set parameters (augmented Lagrangian) or more than simple decrease (filter SQP) (pp. 1-3).",
+  "key_idea": "Extend mixed-variable GPS (MVPS) with the Audet-Dennis filter on (f, h = ||C+||^2): user-defined discrete neighbors, extended polls triggered in f or in h, a temporary local filter per extended poll, poll center chosen as best feasible or least infeasible point, search step left free (pp. 4-12).",
+  "assumptions": "A1 compact iterates; A2 directions D_i = G_i Z_i contain tangent-cone generators of the linear constraints; rational tau; finite neighbor sets on the mesh; limit results need y-hat in N(p-hat); f-results need the best feasible point as poll center at all but finitely many iterations (pp. 5, 11, 13-14, 18).",
+  "proof_devices": [
+   "lower bound on distance between distinct mesh points ||u^c - v^c|| >= Delta_k/||G_i^-1|| (Lemma 5.1, p. 12)",
+   "upper bound on Delta_k from finitely many discrete values under A1 (Lemma 5.2, pp. 12-13)",
+   "Torczon integer-lattice argument with rational tau = p/q giving liminf Delta_k = 0 (Thm 5.3, p. 13)",
+   "Clarke derivative bounded below by limsup of nonnegative failed-poll difference quotients along limit directions (Thms 5.10-5.11, 5.16-5.17, pp. 16-19)",
+   "strict differentiability relative to the tangent cone yields KKT in continuous variables (Thm 5.7, pp. 14-15)",
+   "polar-cone characterization when KKT for f is out of reach (Cor. 5.18-5.19, p. 19)"
+  ],
+  "experiments": "none in this paper; the thermal-insulation application in [2] is cited as giving a 50% improvement (p. 10).",
+  "positioning": "Presented as MVPS [6] extended by the filter of [8]; criticizes Lewis-Torczon's augmented Lagrangian parameters and notes filter SQP/SLP needs more than simple decrease; claims the first provably convergent algorithm for this class (pp. 1-3, 7).",
+  "writing": "Long literature-map introduction, algorithm figures, theorem ladder summarized as a bullet hierarchy in 5.6; candid limitations ('It is unfortunate...') and an explicit omission remark (pp. 1-3, 11-12, 21).",
+  "limits_future": "No first-order stationarity for f (only polar-cone result), f-results need poll-around-best-feasible, possible stalling, filter-direction results omitted; future: MADS for mixed variables (pp. 18-22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Search step free and outside the convergence theory; categorical intelligence in structured poll extensions whose finiteness is proved.",
+    "pages": "pp. 4-6, 11"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Hierarchy indexed by local smoothness and subsequence type; counterexamples cited for D = GZ and rational tau; KKT for f stated as unattainable.",
+    "pages": "pp. 13, 19, 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Three-way semantics: linear constraints never evaluated when violated, nonlinear relaxable via filter, categorical values unevaluable off-list.",
+    "pages": "pp. 1, 7"
+   },
+   {
+    "method": "new-pattern candidate: user-defined neighborhood defines optimality",
+    "relation": "evidence",
+    "note": "Second occurrence (after S213): local optimality relative to user map N(x), guided by engineering knowledge.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "new-pattern candidate: Generalize-and-recover",
+    "relation": "evidence",
+    "note": "Results reduce seamlessly to earlier classes; 5.6 unifies all pattern-search theory to date.",
+    "pages": "pp. 1, 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "user-defined neighborhood defines optimality",
+    "evidence": "Definition 2.1: local minimizer w.r.t. a finite user map N(x) with x in N(x); neighbors must lie on the mesh.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "Abstract: new results 'reduce seamlessly to existing results'; 5.6 presents the hierarchy as unifying prior pattern-search theory.",
+    "pages": "pp. 1, 21"
+   },
+   {
+    "pattern": "replace a performance-dependent hypothesis with an implementable algorithmic choice",
+    "evidence": "Filtering-by-incumbent conditions depend on the run; the paper assumes instead poll-around-best-feasible, which 'is easy to implement'.",
+    "pages": "p. 20"
+   }
+  ],
+  "transferable": [
+   "For variables without a metric, define local optimality relative to a finite user-supplied neighbor set N(x) with x in N(x), and require N(x_k) on the current mesh so finiteness arguments survive (pp. 4-5).",
+   "Aggregate constraints as h = ||C+||^2 so hypotheses can be stated on C and h inherits its smoothness (pp. 7, 15).",
+   "Replace a hypothesis that depends on how the run goes by a sufficient algorithmic choice the user can enforce, and say why (p. 20).",
+   "Set a near-miss trigger for extra polling as a percentage of the incumbent value bounded away from zero, xi_k = max{xi, 0.05|f(x_k)|}, and state its cost/quality trade-off (p. 6)."
+  ],
+  "coauthors": "M.A. Abramson, J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "While the search step contributes nothing to the convergence theory of GPS (and in fact, an unsuitable search may impede performance), the use of surrogates enables the user to potentially gain significant improvement early on in the iteration process at much lower cost.",
+    "page": 5
+   },
+   {
+    "text": "It is unfortunate that convergence of the algorithm to a first-order stationary point (with respect to the continuous variables) cannot be guaranteed.",
+    "page": 21
+   }
+  ]
+ },
+ {
+  "id": "S040",
+  "year": "2007",
+  "title": "Extremal problems for convex polygons",
+  "read_level": "full",
+  "contribution": "Surveys ten pairs of extremal problems for convex polygons (fix one of perimeter, diameter, area, sum of distances, width; extremize another), tabulates for which n each is solved, reviews geometric and global-optimization methods, compiles NLP-solver results on the largest-small-polygon model, and lists open problems and test sets.",
+  "problem_entry": "Extremal plane-geometry problems solved since the Greeks by geometry are increasingly complemented by global optimization; the survey targets geometers, optimizers and test-set users (pp. 1-3).",
+  "key_idea": "A problem matrix (Table I) marking solved n per cell, then per problem: history, exact solutions, bounds, approximate solutions; new items: Conjecture 2.1, a best-known unit-perimeter max-width quadrilateral, and Table II with constructive reference rows (pp. 2-9).",
+  "assumptions": "Definitions only: convex, equilateral, regular; small = unit diameter; width = minimum over directions of supporting-line distance; NLP model in polar coordinates with many local optima (pp. 1-3, 8).",
+  "proof_devices": [
+   "diameter-graph enumeration (Erdos, Woodall structure): 10 hexagon and 31 octagon configurations (pp. 5-6)",
+   "geometric elimination of 23 of 30 octagon cases, 7 numerically (p. 7)",
+   "RLT branch-and-cut on the optimal configuration (over 100 hours) (p. 7)",
+   "solve a relaxation (<= for =) with interval B&B IBBA, check activity, then first-order conditions and angle bounds eliminate the case in 0.12 s (pp. 12-13)",
+   "symmetry assumption solved in Maple, then diagonal-diameter lemma and RLT in 45 s to 1e-7 for the equilateral octagon (pp. 13-14)"
+  ],
+  "experiments": "No new runs; Table II compiles Moré et al.'s results of 7 NLP codes for n = 6..200 with regular, regular (n-1) and corrected (n-1) polygons as reference rows; codes fail badly for large n (pp. 8-10).",
+  "positioning": "Frames global optimization as complementing classical geometry; credits Zenodorus, Reinhardt, Graham, Mossinghoff, Tamvakis, Datta, Bezdek-Fodor, Pillichshammer; showcases own octagon results and answers Tamvakis' question negatively (pp. 1, 3-15).",
+  "writing": "Survey organized around one summary table; uniform per-problem structure; ends with a numbered list of open problems and extensions (pp. 2, 15-17).",
+  "limits_future": "Only one of ten problems solved for all n, five almost completely open; proposes circumradius, inradius, fatness, medians, mediatrices, star polygons, polytopes (pp. 15-17).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Outside DFO: extremal-geometry instances turned into test sets for exact, heuristic and NLP codes, argued to be challenging and discriminating.",
+    "pages": "pp. 3, 9-10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Compiled comparison by final value and CPU time from one start, not by evaluation budget; constructive baselines added as reference rows.",
+    "pages": "p. 9"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Public correction of the group's own published octagon formulation (two sign errors).",
+    "pages": "p. 6"
+   },
+   {
+    "method": "new-pattern candidate: catalogue open cells, then fill them",
+    "relation": "evidence",
+    "note": "Table I and the open-problem list are the agenda later worked through by S080, S093, S117.",
+    "pages": "pp. 2, 15-17"
+   },
+   {
+    "method": "new-pattern candidate: analytic pruning before a global-solver certificate",
+    "relation": "evidence",
+    "note": "Geometry removes 23 of 30 cases; first-order conditions plus bounds cut a 3-hour case to 0.12 s.",
+    "pages": "pp. 7, 13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "catalogue open cells, then fill them",
+    "evidence": "Table I marks for which n each of ten extremal problems is solved, several cells open; conclusion counts solved/open.",
+    "pages": "pp. 2, 15-16"
+   },
+   {
+    "pattern": "analytic pruning before a global-solver certificate",
+    "evidence": "23 of 30 octagon configurations eliminated geometrically; case 10 eliminated in 0.12 s after adding first-order conditions and bounds.",
+    "pages": "pp. 7, 13"
+   },
+   {
+    "pattern": "public self-correction (errata and corrected formulations)",
+    "evidence": "'two erroneous signs in the problem formulation' of the group's own [1] and [6], corrected in [4].",
+    "pages": "p. 6"
+   }
+  ],
+  "transferable": [
+   "Structure a survey as a problem matrix (fix A, extremize B) with one table saying which instances of each cell are solved; open cells become a public agenda (p. 2; pp. 15-17).",
+   "When reporting others' solver results, add rows for simple constructive baselines so failures against a trivial construction are visible (Table II, p. 9).",
+   "Solve a relaxation (<= for =) to global optimality, check the relaxed constraint is active, then add first-order conditions and tight bounds to close the remaining case (pp. 12-13)."
+  ],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "We hope by this survey to make geometers more aware of the help that global optimization can bring them, to stimulate work of optimizers in applying global optimization to plane geometry as well as to provide sets of test problems for both exact and heuristic algorithms from that field (including methods of nonlinear programming).",
+    "page": 3
+   },
+   {
+    "text": "There were two erroneous signs in the problem formulation in [1] and [6]. A corrected version may be found in [4].",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "D001",
+  "year": "2008",
+  "title": "Erratum: Mesh adaptive direct search algorithms for constrained optimization",
+  "read_level": "full",
+  "contribution": "Restates Proposition 4.2 of the 2006 MADS paper (LTMADS is a MADS instance) as three explicit conditions and gives a proof consistent with the final notation; the statement was correct, only its proof was incompatible.",
+  "problem_entry": "The notation of the MADS paper evolved from preliminary versions, leaving the proof of Proposition 4.2 incompatible with the final notation (p. 1).",
+  "key_idea": "Split the claim into (i) directions are nonnegative integer combinations of D, (ii) frame size bounded by the poll size parameter, (iii) limits of normalized direction sets are positive spanning (Coope-Price), and prove each (pp. 1-2).",
+  "assumptions": "LTMADS construction: lower-triangular L with diagonal +-2^l and bounded random integer lower entries, permutations, completing column b(l); minimal [B -b'] or maximal [B -B'] positive bases (p. 2).",
+  "proof_devices": [
+   "determinant counting |det L| = 2^(l(n-1)), |det B| = 2^(ln), invariant under permutations (p. 2)",
+   "integrality and bounded entries imply nonnegative integer combination of D = [I -I], so frames lie on the mesh (p. 2)",
+   "two-case frame-size bound for minimal vs maximal basis (p. 2)",
+   "normalized-basis determinant bounded below uniformly in k plus Coope-Price conditions (C1)/(C2), structure constants in [-1, -1/n] (p. 2)"
+  ],
+  "experiments": "none",
+  "positioning": "Corrects the authors' own SIAM J. Optim. 17 (2006) paper, relying on Coope-Price frame theory and Davis positive bases (pp. 1-2).",
+  "writing": "Two pages: first sentence states the statement is correct and only the proof is affected; restated proposition in bullets; one proof (pp. 1-2).",
+  "limits_future": "None stated; the proposition and the LTMADS convergence results stand (p. 1).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Step 4 applied to the author's own flagship; nuance: a proof repair, not a false result, weaker than SKILL.md's 'needed an erratum' tension.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "new-pattern candidate: public self-correction (errata and corrected formulations)",
+    "relation": "evidence",
+    "note": "Second occurrence in this batch with S040's corrected sign errors.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "public self-correction (errata and corrected formulations)",
+    "evidence": "Erratum restates and re-proves Proposition 4.2 of MADS 2006, stating that the statement was correct.",
+    "pages": "pp. 1-2"
+   }
+  ],
+  "transferable": [
+   "In an erratum, restate the proposition in full, split it into separately provable bullets, give one self-contained proof in the final notation, and say in the first sentence whether statement or only proof was affected (p. 1).",
+   "To show normalized random integer bases give positive spanning limits, bound the normalized basis determinant below uniformly in k and check Coope-Price (C1) or (C2) (p. 2)."
+  ],
+  "coauthors": "A.L. Custódio, J.E. Dennis Jr.",
+  "quotes": [
+   {
+    "text": "The notation used in the paper evolved since the preliminary versions and, unfortunately, even though the statement of Proposition 4.2 is correct, its proof is not compatible with the final notation.",
+    "page": 1
+   },
+   {
+    "text": "The proof that LTMADS is indeed an instance of MADS is not compatible with the notation used in the rest of the paper.",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "S027",
+  "year": "2008",
+  "title": "Parallel space decomposition of the mesh adaptive direct search algorithm",
+  "read_level": "full",
+  "contribution": "Introduces PSD-MADS, an asynchronous master/slave parallel space-decomposition method in which slaves run MADS on random variable subsets and a pollster runs a single-poll MADS on the full space, proves it is a MADS instance so the Clarke-stationarity results carry over (losing only the zeroth-order result), and shows better solutions than pGPS, pMADS and APPS on problems with up to 500 variables.",
+  "problem_entry": "Direct search is impractical on expensive problems with more than a few dozen variables; Dennis-Wu suggested GPS plus PVD, but PVD theory needs differentiability, exact subproblem solves, synchronization and separable/convex constraints (pp. 2-4).",
+  "key_idea": "Make the decomposition an instance of MADS: one pollster slave does a single-direction poll on all variables; all regular-slave subspace work, kept on nested meshes and shared through a cache server, is the Search step of this apparent pollster algorithm (pp. 8-16).",
+  "assumptions": "f valued in R U {inf}; feasibility oracle with nonsmooth CQ; finite-time blackboxes; compact trial points; feasible x0 (extreme barrier); integer tau for mesh nesting (Hyp. 3.1); b(l) dense with probability one (pp. 2, 5, 8-9, 16-17).",
+  "proof_devices": [
+   "mesh sizes are tau^(-eta) Delta_user by induction (Prop. 4.1, p. 15)",
+   "slave mesh = tau^beta times master mesh (Prop. 4.2, p. 16)",
+   "mesh nesting M(Delta^p_j) in M(Delta^M_k) in M(Delta^1_k) puts every slave point on the pollster mesh (Prop. 4.3, p. 16)",
+   "apparent pollster algorithm: parallel work reinterpreted as a finite Search step, so MADS results transfer (Fig. 6, pp. 14-16)",
+   "integer tau makes meshes nested (p. 17)"
+  ],
+  "experiments": "G2 (n = 20..500, 100n evals, q = 14) and MoVars (n = 60, two constraint levels, 3000 evals, q = 6, phase-1 evals counted) vs pGPS, pMADS, APPS 5.0; 30 runs for randomized methods, one for others; z best/worst/avg and area-under-curve S_avg; PSD-MADS best on average and S_avg everywhere, pMADS descends fastest and has better best/worst on A with n = 20 (pp. 21-24).",
+  "positioning": "Builds on block-Jacobi/PVD (Ferris-Mangasarian) and APPS; differs from Fukushima's framework (constraints, nonsmooth) and MoVars (convergence analysis, dynamic subsets, asynchronous) (pp. 2-4, 10).",
+  "writing": "Roadmap, per-process pseudocode figures, a worked timeline example (Fig. 7), and a one-sentence 'price to pay' statement of the lost result (pp. 7, 10-13, 20-21).",
+  "limits_future": "Random subset selection ('not clear how to do this in general'), zeroth-order result lost, single-poll mesh may shrink too fast, not aimed at wall-clock speedup; future: grouping by knowledge/scaling, forget-me-not terms, subspace searches, recomposition step, progressive barrier (pp. 7-8, 17, 23-26).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Extreme case: all parallel subspace work is Search; the proof rests on a single-direction Poll.",
+    "pages": "pp. 8, 14-16"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "States exactly which rung (zeroth-order result) is lost and why.",
+    "pages": "pp. 7, 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation currency explicit and another family (APPS) included, but pre-data-profile mean trajectories and single runs for deterministic competitors.",
+    "pages": "p. 23"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Feasible starting points, Problem B source code and best points posted on the author's website.",
+    "pages": "p. 22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Extreme barrier only, requiring a phase-1 feasibility run; progressive barrier named as future fix.",
+    "pages": "pp. 22, 26"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Implemented on the NOMAD research code; later a documented NOMAD remedy for many variables.",
+    "pages": "pp. 21-22"
+   },
+   {
+    "method": "new-pattern candidate: Framework theorem with plug-in instance",
+    "relation": "evidence",
+    "note": "New algorithm proved correct by showing it is a MADS instance (apparent pollster).",
+    "pages": "pp. 14-16"
+   },
+   {
+    "method": "new-pattern candidate: Evaluation cache as shared memory and data source",
+    "relation": "evidence",
+    "note": "Cache server avoids double evaluations and serves a zero-cost cache search.",
+    "pages": "pp. 11-12, 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Framework theorem with plug-in instance",
+    "evidence": "PSD-MADS interpreted as a single-poll MADS whose Search is the slaves' work; MADS convergence inherited.",
+    "pages": "pp. 14-16"
+   },
+   {
+    "pattern": "MADS-as-subroutine composition",
+    "evidence": "Regular slaves run MADS instances on subproblems with their own mesh and budget limits.",
+    "pages": "pp. 11, 18-19"
+   },
+   {
+    "pattern": "Evaluation cache as shared memory and data source",
+    "evidence": "Dedicated cache-server process; querying it is a search step that costs no evaluation.",
+    "pages": "pp. 11-12, 19"
+   }
+  ],
+  "transferable": [
+   "To parallelize or decompose a convergent method without a new proof, let one worker run the certified poll, force all other workers' trial points onto its mesh (integer mesh ratio, nested mesh sizes), and interpret them as the Search step (pp. 9, 14-17).",
+   "Count phase-1 feasibility evaluations in the plotted budget (p. 22).",
+   "With randomized and deterministic competitors, report best/worst/mean over 30 seeds plus the area between each z-vs-evaluations curve and a fixed reference level (p. 23).",
+   "State the theoretical cost of an extension in one sentence where the design choice is made (p. 7)."
+  ],
+  "coauthors": "J.E. Dennis Jr., S. Le Digabel",
+  "quotes": [
+   {
+    "text": "The price to pay for our new capability to handle a large number of variables is that this last convergence result will be lost.",
+    "page": 7
+   },
+   {
+    "text": "The most representative cost of a black-box algorithm is the number of black-box evaluations.",
+    "page": 23
+   }
+  ]
+ },
+ {
+  "id": "S076",
+  "year": "2009",
+  "title": "A new sequence form approach for the enumeration and refinement of all extreme Nash equilibria for extensive form games",
+  "read_level": "full",
+  "contribution": "Writes the sequence-form equilibrium conditions of a two-person extensive game as a mixed 0-1 program Q, proves P = Proj_x(Q) and Ext(P) subset of Proj_x(Ext(Q)) (strict in examples), and extends the EXMIP enumeration algorithm in exact rational arithmetic (XGame Solver), showing that the sequence form can reveal subgame-perfect extreme equilibria missed by the strategic form.",
+  "problem_entry": "Extensive games are usually converted to an exponential strategic form; the sequence form is compact, and the group's EXMIP enumerated extreme equilibria only for strategic-form games (pp. 1-3).",
+  "key_idea": "Linearize sequence-form complementarity with binary vectors and payoff-range constants, enumerate extreme points of the resulting mixed 0-1 set by principal (binary) and secondary (x_k = 0) branching in exact arithmetic (pp. 6-11).",
+  "assumptions": "Finite two-person extensive games with perfect recall; L_i = payoff range; simplex returns vertices (pp. 3, 6-7, 11).",
+  "proof_devices": [
+   "LP duality plus exact binary linearization of complementarity gives P = Proj_x(Q) (Theorem 1, p. 8)",
+   "convex-combination contradiction shows every extreme equilibrium projects from an extreme point of Q (p. 8)",
+   "small literature examples show the inclusion can be strict (pp. 8, 12-13)",
+   "completeness of enumeration inherited from the 2006 JOTA proof (p. 11)"
+  ],
+  "experiments": "Two literature games (von Stengel et al.; Kohlberg-Mertens): 3 vs 4 and 7 vs 10 extreme points in strategic vs sequence form; subgame-perfect equilibrium identified; no timings (pp. 4, 12-14).",
+  "positioning": "Builds on Kuhn, Romanovskii, Koller-Megiddo, von Stengel and the group's own EXMIP (Belhaiza 2002, JOTA 2006); claims the mixed 0-1 formulation is new, while a 1998 Audet-Hansen-Jaumard-Savard conference paper on strategic and sequence forms appears in the references but is not cited in the body (pp. 1-2, 14).",
+  "writing": "Background survey of forms, formulation with a worked example program, theorem, implementation classes, two example tables, short discussion (pp. 2-14).",
+  "limits_future": "Exact arithmetic increases enumeration time and speed is not an objective; the Ext(Q)-to-Ext(P) filtering procedure is not formalized in the body; no future work stated (pp. 1, 10, 14).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Outside DFO: an inclusion theorem immediately tested for equality and shown strict by examples.",
+    "pages": "pp. 8, 12-13"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Algorithm released as free software (XGame Solver) in a non-DFO line.",
+    "pages": "p. 10"
+   },
+   {
+    "method": "new-pattern candidate: reformulation as a lens (transfer tests, not just solutions)",
+    "relation": "evidence",
+    "note": "Same engine on a different representation yields dual information that selects subgame-perfect equilibria.",
+    "pages": "pp. 13-14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reformulation as a lens (transfer tests, not just solutions)",
+    "evidence": "Sequence-form enumeration exposes a subgame-perfect extreme equilibrium not identified in the strategic form.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "pattern": "exact rational arithmetic when the output is a complete list",
+    "evidence": "BigInteger/Rational/Simplex classes adopted because a numerator or denominator can exceed the largest representable integer; time explicitly deprioritized.",
+    "pages": "pp. 9-10"
+   }
+  ],
+  "transferable": [
+   "Linearize a complementarity x perp s with a binary u: x + u <= 1 and s <= L u, with L from the data range, turning an equilibrium set into a projection of a mixed 0-1 polyhedral union (pp. 7-8).",
+   "After proving an inclusion between sets of extreme points, ask whether it is an equality and settle it with the smallest literature examples (p. 8).",
+   "Run the same enumeration on two representations of one object and tabulate the extra points as results (Tables 1-4, pp. 4, 12-13)."
+  ],
+  "coauthors": "S. Belhaiza, P. Hansen",
+  "quotes": [
+   {
+    "text": "This example shows that when using the sequence form of the extensive game, extreme subgame perfect equilibria can be found while they might be ignored when only strategic form is used.",
+    "page": 14
+   },
+   {
+    "text": "However, the use of exact arithmetics represented a very interesting challenge which made computing time not be considered as the main objective of this work.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S080",
+  "year": "2009",
+  "title": "Isoperimetric polygons of maximum width",
+  "read_level": "full",
+  "contribution": "Proves the upper bound (1/(2n)) cot(pi/(2n)) on the width of any unit-perimeter n-gon, shows it is attained by regular polygons (odd n) and clipped regular Reuleaux polygons (n = m 2^s, m odd), determines the quadrilateral analytically under diagonal symmetry and certifies it numerically to 1e-4 in general, and gives formulations and near-optimal solutions for n = 8, 16, 32.",
+  "problem_entry": "Answers the open cell posed in the group's own survey [3] (S040); no other literature on it; nearest is Bezdek-Fodor's unit-diameter version; a max-min-max problem (p. 2).",
+  "key_idea": "Bound then attainment then residue: relaxation-based upper bound, constructions meeting it for all n except powers of 2, analytic symmetric quadrilateral plus interval certificate, then QP/NLP formulations and four heuristic routes for n = 2^s, s >= 3 (pp. 3-15).",
+  "assumptions": "WLOG convex and simple (convex hull plus homothety); limit argument for a unique farthest vertex per side enabling Bezdek-Fodor's sum-of-angles lemma; symmetry-based orderings for the quadrilateral; precision 1e-4 (pp. 3, 10-11).",
+  "proof_devices": [
+   "relax each side height to (c_i/2) cot(alpha_i/2), pairwise exchange shows all equal at optimum, sum the tan identities, finish with Lassak's result (Theorem 1, pp. 3-5)",
+   "three-case KKT analysis for the symmetric quadrilateral (Theorem 2, pp. 7-9)",
+   "interval branch-and-bound certificate of about 40 hours (Prop. 4, pp. 9-11)",
+   "monotonicity of alpha cot alpha for the added-vertex construction (Prop. 5, p. 11)",
+   "inner max encoded by convex multipliers lambda to give a single-level program (Theorem 3, pp. 13-14)"
+  ],
+  "experiments": "Table 1: widths of five constructions vs the upper bound for n = 8, 16, 32 with gaps < 9.43e-5, 1.69e-6, 1.43e-8; fmincon from Mossinghoff's polygons in 1 s, 20 s, 20 min; random starts no better (pp. 12, 15).",
+  "positioning": "Answers the survey's open cell; relates to Bezdek-Fodor, Lassak, Mossinghoff; reuses the group's octagon configurations (pp. 2, 12).",
+  "writing": "Theorem-proof paper with two tables and no conclusion section; states what is proved exactly and what numerically (pp. 3-15).",
+  "limits_future": "Exact solutions for n = 2^s, s >= 3 'appear to be presently out of reach'; formulations and near-optimal values given; abstract formula for n = 4 appears inconsistent in the extracted text (pp. 1, 11).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Outside DFO: exact where a bound is attained, otherwise a certified precision or an explicit gap table.",
+    "pages": "pp. 9-12"
+   },
+   {
+    "method": "new-pattern candidate: catalogue open cells, then fill them",
+    "relation": "evidence",
+    "note": "Problem taken from the group's own survey Table I.",
+    "pages": "p. 2"
+   },
+   {
+    "method": "new-pattern candidate: analytic pruning before a global-solver certificate",
+    "relation": "evidence",
+    "note": "Symmetric subcase solved by KKT, then a 40-hour interval run certifies the general case.",
+    "pages": "pp. 7-11"
+   },
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "variant",
+    "note": "Order reversed for n = 4: analytic value first, numeric certificate second.",
+    "pages": "pp. 7-11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "catalogue open cells, then fill them",
+    "evidence": "'This problem, posed in the survey [3]' - the unit-perimeter max-width cell left open in S040 Table I.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "analytic pruning before a global-solver certificate",
+    "evidence": "Theorem 2 (symmetric, analytic) then Prop. 4 (general, interval B&B, 40 h, 1e-4).",
+    "pages": "pp. 7-11"
+   }
+  ],
+  "transferable": [
+   "For an upper bound on a min over sides, relax each term to a closed-form bound, prove by pairwise exchange that all terms are equal at the optimum, then sum to reduce to a single classical inequality (pp. 3-5).",
+   "For unsolved cases, publish a gap table of each construction against the proven upper bound, per n (Table 1, p. 12).",
+   "Solve the symmetric subcase analytically, then certify the general case with an interval global solver to a stated precision (pp. 7-11)."
+  ],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "This problem, posed in the survey [3], consists in finding for all n which polygon with n vertices and unit perimeter has the largest width.",
+    "page": 2
+   },
+   {
+    "text": "Observe the small values of the errors and their rapid decrease with increase of n.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S103",
+  "year": "2009",
+  "title": "Simple polygons of maximum perimeter contained in a unit disk",
+  "read_level": "full",
+  "contribution": "Gives a complete answer to Brass-Moser-Pach's question: for odd n >= 5 the supremum perimeter of a simple n-gon in a unit disk has an explicit closed form and is approached by near-isosceles-triangle polygons (equilateral triangle for n = 3; near-segment for even n), with p*_n/n increasing over odd n.",
+  "problem_entry": "A question from Brass, Moser and Pach's research-problems book (p. 437); even n is trivial, odd n open (pp. 1-2).",
+  "key_idea": "Guess the optimal shape from a simple lower-bound construction and a perturbation argument, then prove a matching upper bound by a lemma chain and minimize it over one parameter; attain it by a limiting sequence (pp. 2, 7-8).",
+  "assumptions": "n odd; WLOG longest edge c_n >= p_n/n, disk centered at 0, v1 and v_n vertically aligned; the result is a supremum, not a maximum, for n > 3 (p. 2).",
+  "proof_devices": [
+   "zone separation U/L: two consecutive vertices in one zone force p < p_n (Lemma 1, pp. 2-3)",
+   "parity argument: odd n gives three consecutive vertices monotone in y (Lemma 2, pp. 3-4)",
+   "convexity of the sum of distances puts the maximum on the region boundary (p. 4)",
+   "Lagrange-multiplier analysis forcing a = 0 (Lemma 4, pp. 5-7)",
+   "minimizing the bound over v via 2(n-2)^2 v^2 + v - 1 = 0 (p. 8)"
+  ],
+  "experiments": "none",
+  "positioning": "Answers a posed research problem; the problem book is the only reference (pp. 1, 8).",
+  "writing": "Eight-page note: construction and intuition first, then a lemma chain, theorem and corollary; no conclusion section (pp. 1-8).",
+  "limits_future": "None stated (p. 8).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Outside DFO: precise about the kind of optimum (supremum, not maximum) with explicit approaching sequences.",
+    "pages": "pp. 2, 8"
+   },
+   {
+    "method": "new-pattern candidate: problem-book sourcing",
+    "relation": "evidence",
+    "note": "Problem taken from Brass-Moser-Pach; S040 and S080 also cite problem collections.",
+    "pages": "p. 1"
+   },
+   {
+    "method": "new-pattern candidate: catalogue open cells, then fill them",
+    "relation": "variant",
+    "note": "The catalogue is someone else's problem book rather than the group's own survey.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "problem-book sourcing",
+    "evidence": "Answers Brass-Moser-Pach [1, p. 437]; S040 opens with Croft-Falconer-Guy's Unsolved problems in geometry (S040 p. 1) and S080 cites Brass et al. (S080 p. 2).",
+    "pages": "p. 1"
+   },
+   {
+    "pattern": "perturb the lower-bound construction to guess the extremal shape",
+    "evidence": "Alternating-vertex construction plus derivative argument along the circle predicts the isosceles-triangle limit later proved optimal.",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Before proving optimality, build a simple lower-bound construction and differentiate the objective along a small perturbation; if it helps, the direction points to the optimal shape (p. 2).",
+   "With an odd number of objects around a cycle, a parity argument gives three consecutive ones in monotone order, a foothold for local exchange bounds (Lemma 2, pp. 3-4).",
+   "If the extremum is approached but not attained, state a supremum and give the explicit approaching sequence (pp. 2, 8)."
+  ],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": [
+   {
+    "text": "In this paper, we give a complete answer to the question posed by Brass, Moser and Pach [1, p. 437]: for a given integer n, find a simple n-sided planar polygon contained in a disk of radius 1 that has the longest perimeter.",
+    "page": 1
+   },
+   {
+    "text": "We use the term supremum instead of maximum since we will see that there are no optimal simple polygons when n> 3.",
+    "page": 2
+   }
+  ]
+ }
+]

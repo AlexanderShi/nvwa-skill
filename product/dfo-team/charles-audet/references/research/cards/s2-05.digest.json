@@ -1,0 +1,589 @@
+[
+ {
+  "id": "S046",
+  "year": "2018",
+  "title": "Order-based error for managing ensembles of surrogates in mesh adaptive direct search",
+  "read_level": "full",
+  "contribution": "Introduces the order-based error metrics OE/OECV, which count pairwise order flips for the objective and feasibility flips for each constraint (with leave-one-out predictions), to select models in a 17-model ensemble used in the MADS Search; OECV-selected ensembles beat RMSE/PRESS selection, quadratic models and VNS on 10 analytic problems and on Lockwood, and are generally best on two MDO problems.",
+  "problem_entry": "No single surrogate type is consistently best, and RMSE/PRESS reward fit (and punish harmless outliers) while SBO needs the right minimizer: af(x)+b is a perfect surrogate despite a large RMSE (p. 6).",
+  "key_idea": "Select, per blackbox output, the ensemble member with the smallest cross-validated order error; use it in a Search solved by an inner MADS (10,000 model evaluations), project its solution onto the mesh with a randomized projection, and order poll points by the surrogate (pp. 5, 7-8, 12-13).",
+  "assumptions": "No new theory: convergence kept because the Search returns finitely many mesh points (p. 7; p. 22); reaching a global minimizer is 'contingent upon the accuracy of the chosen surrogate models' (p. 5); mesh update changed within what MADS permits (p. 7).",
+  "proof_devices": [
+   "pairwise order-disagreement count via XOR of sign tests (E_OE, E_OECV; pp. 12-13)",
+   "closed-form leave-one-out values ŷcv = y − diag(P)⁻¹Py for linear models (p. 9)",
+   "1-D outlier toy (x² for x ≤ 1/2, else 1) sampled at ±1/k to mimic iterates (p. 13)",
+   "randomized projection onto the union of submeshes with greedy filtering (p. 8)"
+  ],
+  "experiments": "10 analytic problems + simplified wing, aircraft range, Lockwood (50 LH starts each), budget 1000(n+1) or 100(n+1), seven MADS variants in NOMAD 3.7.1, median relative discrepancy vs groups of n+1 evaluations plus data profiles; OECV best on analytic (8/10) and Lockwood (72% of runs beat the literature best in 700 evaluations) (pp. 14-20, 26).",
+  "positioning": "Sits in the MADS search-and-poll literature (LH, VNS, PSO, GA, quadratic and surrogate searches, p. 5) and against ensemble weighting schemes WTA1-3 and weight optimization (pp. 6, 11); critiques RMSE/PRESS as selection metrics for SBO (p. 6).",
+  "writing": "The contribution is flagged as 'The main contribution of this work' at the start of §4.1.2 (p. 12) and again in the conclusion (p. 22); a toy example precedes the benchmarks (p. 13); results are narrated problem by problem with an explicit ranking of variants (pp. 16-20).",
+  "limits_future": "More expensive cross-validation variants left out (p. 12); no other solver family compared (p. 15); the conclusion explains why PRESS/RMSE keep selecting polynomial models and points to a fourth application (trumpet) in [69] (p. 22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Surrogates enter only through the Search and poll ordering; the surrogate solution is projected onto the mesh to keep MADS convergence although off-mesh optimization 'is often more efficient'; the no-Search variant is the baseline and 'yields poor performance'.",
+    "pages": "pp. 7-8, 16"
+   },
+   {
+    "method": "Taste mark 3",
+    "relation": "evidence",
+    "note": "Practical freedom (ensembles, global exploration) at no cost to the Poll-based theory.",
+    "pages": "pp. 5, 7, 22"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Simplified wing, aircraft range and Lockwood reused as realistic tests with best-known values.",
+    "pages": "pp. 18-20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation-based axis, 50 starts, data profiles and a constrained discrepancy measure, but all competitors are MADS variants.",
+    "pages": "pp. 15-16, 26"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "All runs in NOMAD 3.7.1 with defaults for untested parameters.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged and used as rankers",
+    "evidence": "Origin of OE/OECV in the corpus: models are scored by order and feasibility agreement, not fit; reused in S068 and S099.",
+    "pages": "pp. 6, 12-13"
+   }
+  ],
+  "transferable": [
+   "Score a model by the decisions it drives: count pairwise order flips for the objective and feasibility flips per constraint, with leave-one-out predictions (pp. 12-13).",
+   "Let a surrogate be optimized off-mesh, then project onto the union of submeshes around all cached points with random perturbations and keep the candidate best on the surrogate (pp. 7-8).",
+   "Motivate a new metric with a 1-D function sampled on an iterate-like sequence where the classical metric picks a model with the wrong minimizer (p. 13).",
+   "For constrained benchmarks, normalize each run by its best and worst first-feasible values and plot the median over runs, with data profiles in an appendix (pp. 16, 26)."
+  ],
+  "coauthors": "M. Kokkolaras, S. Le Digabel, B. Talgorn",
+  "quotes": [
+   {
+    "text": "Our main concern in SBO is to find the correct optimizer, not necessarily the correct optimum.",
+    "page": 6
+   },
+   {
+    "text": "The poll rigorously ensures global convergence toward a solution satisfying some local optimality conditions, while the search can implement any method likely to improve the efficiency and global exploration of the optimization process in order to escape local optima.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S073",
+  "year": "2019",
+  "title": "A hybrid optimization approach for efficient calibration of computationally intensive hydrological models",
+  "read_level": "full",
+  "contribution": "Chains DDS (global exploration) and MADS (local refinement and automatic stopping) with five transition features (shared cache, anisotropic initial mesh from the cache, 2N stagnation handover, shared budget, 3-digit rounding), saving about 70% and 40% of simulations when calibrating HYDROTEL 10 and 19 with final quality comparable to full-budget DDS.",
+  "problem_entry": "Distributed hydrological models take minutes per run and need frequent recalibration; a benchmark shows DDS finds good zones fastest but then wastes simulations, while MADS and SCE-UA are slow early (pp. 7, 11-12, 19-20).",
+  "key_idea": "Run the two unchanged codes in sequence and engineer the handover: cache, initial mesh from the spread of near-best cached points, stop DDS after 2N non-improving simulations (MADS's poll unit), a single budget, and rounding of 1 − NSE to 3 digits (pp. 21-26).",
+  "assumptions": "Bounds only; objective described as nonsmooth, discontinuous and noisy (p. 3); MADS's Clarke-type condition is presented (pp. 15-16) and final solutions are said to satisfy necessary optimality conditions (p. 30), without discussing the effect of rounding.",
+  "proof_devices": [
+   "none; settings justified by small sensitivity studies (pp. 24, 26-27)"
+  ],
+  "experiments": "32 trials from common random starts, 2,000-simulation budget, default settings, DDS/MADS/SCE-UA benchmarks shown as boxplots at checkpoints; design on two watersheds, validation on a held-out third and on a 10-year period; equal-budget DDS-600/1200 baselines; >16,900 CPU hours (pp. 16-18, 27-38).",
+  "positioning": "Frames calibration as blackbox optimization citing Audet (2014) and Audet & Hare (2017) (p. 3); adopts Razavi et al.'s four remedies for expensive models and targets the first, more efficient algorithms (pp. 5-6); treats SCE-UA and DDS as the hydrology state of the art (pp. 5, 14).",
+  "writing": "Four numbered objectives (p. 6); contribution located in the transition features (p. 6); results judged in hydrological units (differences below 0.02 of 1 − NSE deemed too small to matter, p. 31).",
+  "limits_future": "Methodological choices forced by experiment cost, single objective (NSE), single model (p. 41); future: surrogates (low-fidelity physical and response-surface), biobjective and parallel versions (pp. 40-42).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The heuristic runs before MADS rather than inside the Search; MADS supplies refinement, stopping and rescue of trapped DDS runs; handover tuned to MADS's 2N failure unit.",
+    "pages": "pp. 21-24, 35"
+   },
+   {
+    "method": "Taste warning 6",
+    "relation": "evidence",
+    "note": "Heuristics 'do not guarantee convergence to local nor to global optimal solutions' while direct-search methods 'are not heuristics'; the hybrid gives the heuristic a convergent finisher.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Currency = simulations; cross-family baselines with defaults; common starting points; equal-budget baselines. Variant: boxplots at checkpoints, no profiles.",
+    "pages": "pp. 16-19, 37"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD 3.5 used as is; NOMAD features and support advertised.",
+    "pages": "pp. 16, 40"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "train/held-out split for tuned algorithmic parameters",
+    "evidence": "Toulnustouc watershed kept out of the design 'to avoid overfit' and used for validation.",
+    "pages": "p. 6; p. 34"
+   },
+   {
+    "pattern": "Evaluation cache as shared memory and data source",
+    "evidence": "The DDS cache sets MADS's anisotropic initial mesh size.",
+    "pages": "pp. 22-23"
+   },
+   {
+    "pattern": "round outputs to the decision-relevant precision",
+    "evidence": "Rounding 1 − NSE to 3 digits stops the mesh from chasing meaningless differences and saves about 300 simulations.",
+    "pages": "p. 26"
+   }
+  ],
+  "transferable": [
+   "Express the handover threshold between a global heuristic and a convergent local method in the local method's own unit (2N non-improving evaluations = one failed MADS poll) (p. 24).",
+   "Initialize per-coordinate step sizes from the spread of near-best points in the first method's cache (pp. 22-23).",
+   "Design on some instances and validate on a held-out instance that played no part in the design (p. 6; p. 34).",
+   "After reporting savings, add baselines given exactly the budget your method used (p. 37)."
+  ],
+  "coauthors": "P.-L. Huot, A. Poulin, S. Alarie",
+  "quotes": [
+   {
+    "text": "are not heuristics since they are supported by a convergence analysis",
+    "page": 5
+   },
+   {
+    "text": "no changes were made in an effort to maintain a high level of simplicity and to respect the original optimization strategies of both algorithms.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "D003",
+  "year": "2022",
+  "title": "Numerical certification of Pareto optimality for biobjective nonlinear problems",
+  "read_level": "full",
+  "contribution": "Reduces the certification of a conjectured (explicit or parameterized) biobjective Pareto front to proving infeasibility of an ε-margin single-objective problem with a rigorous interval branch-and-bound solver, and certifies the area-perimeter Pareto fronts of small equilateral and non-equilateral hexagons.",
+  "problem_entry": "Certify, rather than generate, a front one believes to be Pareto-optimal: the biobjective analogue of a global-optimality certificate, applied to a new class of extremal polygon problems (pp. 3-4, 8-9).",
+  "key_idea": "The conjecture is exact iff max f2 − g(f1) over f1 ∈ I equals 0; adding f2 − g(f1) ≥ ε makes the problem infeasible when the conjecture holds, which IBBA can prove (Props. 4-5, Problems 3 and 5, pp. 5-7, 18).",
+  "assumptions": "Every conjectured point is attained (pp. 5, 7); equalities relaxed by δ = 1e-10 for IBBA (p. 18); certificate valid for ε = 1e-6, which must exceed rounding in constants (p. 12).",
+  "proof_devices": [
+   "if-and-only-if reduction of a conjectured front to a zero optimal value (Props. 4-5, pp. 5-7)",
+   "ε-margin constraint turning certification into rigorous infeasibility (Problems 3, 5, pp. 6-7)",
+   "area-containment bound on side length (Lemma 6, p. 13)",
+   "case split on diameter-graph configurations (Prop. 7, pp. 19-20)",
+   "symmetry-breaking constraints (pp. 11-12)"
+  ],
+  "experiments": "IBBA certifies the equilateral hexagon front in 0.46 s and the two-part non-equilateral front in about 24 CPU hours over 6 subproblems, ε = 1e-6, δ = 1e-10 (pp. 19, 21).",
+  "positioning": "Separates itself from front-generation methods and surveys, including multiobjective branch and bound (p. 3); builds on interval global optimization and IBBA from Messine's and Ninin's theses (p. 18); extends the Audet-Hansen-Messine extremal polygon line (pp. 8-9).",
+  "writing": "Generic definitions and two propositions (pp. 4-7) before a worked application (pp. 8-21); each constraint of the certification models is explained in prose (pp. 11-12, 14, 16); the discussion names concrete obstacles for more objectives (p. 23).",
+  "limits_future": "Certify first-order multiobjective conditions [14]; extend to more than two objectives, where surfaces, multi-parameter parameterizations and loss of the ordering property are obstacles (p. 23).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Guarantee is a rigorous finite-precision certificate rather than an asymptotic ladder; the if-and-only-if propositions show the reduction loses nothing.",
+    "pages": "pp. 5-7, 18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "ε-uniqueness by exclusion constraint",
+    "evidence": "Biobjective form: add an ε-improvement constraint and prove infeasibility.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "pattern": "analytic pruning before a global-solver certificate",
+    "evidence": "Lemma 6 and the Prop. 7 case split are added because IBBA did not finish without them.",
+    "pages": "pp. 13, 19"
+   },
+   {
+    "pattern": "extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "evidence": "Preliminary numerics suggest a two-part front before certification; here the certificate is numerical, not algebraic.",
+    "pages": "p. 13"
+   }
+  ],
+  "transferable": [
+   "Write the statement that no feasible point beats the conjecture by ε in both objectives as a feasibility problem and prove it infeasible with a complete, rounding-safe solver (pp. 4-7).",
+   "If the certifying solver stalls, add proven structural lemmas as constraints and solve one subproblem per combinatorial case (pp. 13, 19-21).",
+   "State the certificate's tolerance and check that it exceeds the rounding of constants in the model (p. 12)."
+  ],
+  "coauthors": "F. Messine, J. Ninin",
+  "quotes": [
+   {
+    "text": "The goal is now to apply a global optimization algorithm to this problem to show that there are no feasible solutions.",
+    "page": 6
+   },
+   {
+    "text": "Indeed IBBA can guarantee that an optimization problem has strictly no feasible solution.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S090",
+  "year": "2022",
+  "title": "Escaping unknown discontinuous regions in blackbox optimization",
+  "read_level": "full",
+  "contribution": "Proposes DiscoMads, a Mads extension that reveals weak discontinuities from cached evaluations, excludes a margin around them through a progressive-barrier constraint, and adds a random revealing poll; it keeps the Mads results and proves a stronger one (local minimizer of the violation function), and is tested on analytic, truss, styrene and turbomachine problems.",
+  "problem_entry": "Engineering designs must stay away from nonlinear resonance regions where simulated outputs jump; the 'away from discontinuities' constraint needs infinitely many evaluations to certify, and prior discontinuous-optimization methods give no control on the distance (pp. 4-6).",
+  "key_idea": "Model unsafe points by a rate-of-change threshold τ within radius r_d, build a growing set D^k of revealing points from the cache, impose d^k(x) = 1 − dist(x, D^k)/r_e as a relaxable PB constraint, and add a non-shrinking random revealing poll so the stronger theorem holds; r_d = 0 recovers Mads (pp. 6, 8-10).",
+  "assumptions": "x⁰ ∈ X with finite f and h, bounded iterates, piecewise continuous outputs (A4.1, A4.2, A4.4; pp. 11-12); deterministic outputs (p. 11); one τ for all revealing outputs and mandatory input scaling (pp. 17, 25).",
+  "proof_devices": [
+   "monotone cache-based inner approximation D^k ⊆ D^{k+1} with nondecreasing d^k (Property 4.6, p. 12)",
+   "contradiction via a point visited infinitely often to show mesh refinement (Thm 4.7, pp. 12-13)",
+   "positive volume-ratio probability giving dense revealing-poll points (Lemma 4.12, pp. 14-15)",
+   "three-case convergence h^k → ĥ near the refined point (Lemma 4.13, pp. 15-16)",
+   "piecewise-continuity sandwich contradicting mesh-local-optimizer status (Thm 4.14, p. 16)",
+   "case table: refining sequence → theorem → assumptions (Table 4.1, p. 14)"
+  ],
+  "experiments": "NOMAD 3.9.1, quadratic models off, speculative search only; 2-D analytic (100 seeds, r_e sweep), two-bar truss (100 seeds, budgets 100/200/2000), styrene with hidden-constraint failures turned into jumps (100 seeds), turbomachine blade on an interpolation of 45,000 simulations (4 instances, 1 seed) with stress-field checks; no competing solver (pp. 17-25).",
+  "positioning": "Frames the problem against robust optimization and RBDO (infinite constraints), discontinuity detection in UQ, and the discontinuous-optimization methods of Birgin et al. and Wechsung-Barton; cites Vicente & Custódio (2012) neutrally; builds on Mads, the progressive barrier and Clarke calculus (pp. 5, 7-8).",
+  "writing": "Engineering motivation first (p. 4), then a modelling figure of D, M and Ω̂ (p. 6); explicit contribution sentence (p. 6); a guarantee table (p. 14); each application labelled by what it illustrates (pp. 16-17).",
+  "limits_future": "Mandatory input scaling, single τ, cruder revealing mechanism; future: anisotropic mesh or scaled detection regions, per-output τ, reliability index for early stopping, surrogates (p. 25); best feasible f not monotone and small budgets leave some solutions in D (pp. 19, 21).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Guarantee table by case; Mads results kept; one stronger rung (local minimizer of ĥ) needing an extra assumption (A4.4).",
+    "pages": "pp. 13-16"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The new mechanism is put into the Poll (random revealing poll before the classical poll) because the stronger theorem needs non-shrinking dense sampling; the Search is minimal. The 2024 note (S138) views the same step as a Search step.",
+    "pages": "pp. 10, 13, 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "New constraint declared quantifiable and relaxable and given to PB; EB points never used for detection; styrene binary constraints to EB, relaxable to PB.",
+    "pages": "pp. 9-10, 22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Styrene blackbox modified 'to return an artificially high value' on hidden-constraint failure so failures become detectable jumps; acceptable because the solver detects jumps and quadratic models are off (contrast with step 4 and the SKILL.md penalty anti-pattern).",
+    "pages": "pp. 17, 22"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Truss blackbox released online; styrene reused from bbopt; industrial turbomachine model (interpolated for development).",
+    "pages": "pp. 19, 21, 24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "100 seeds and budget sensitivity, but no competitor and no profiles; success measured by distance to discontinuity and hidden-constraint count H(x,σ).",
+    "pages": "pp. 19-22"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Implemented in NOMAD 3.9.1.",
+    "pages": "p. 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fixed-radius revealing sampling",
+    "evidence": "First appearance in the corpus of the random revealing poll in a ball of radius r_m > r_d + r_e, whose density lemma the 2024 note adapts.",
+    "pages": "p. 10; pp. 14-15"
+   },
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "r_d = 0 makes DiscoMads identical to Mads; Mads theorems recovered outside the margin.",
+    "pages": "p. 6; pp. 13-14"
+   },
+   {
+    "pattern": "infinite constraint approximated from the cache",
+    "evidence": "A constraint no finite set of evaluations can certify is replaced by d^k built from cached points; d^k is nondecreasing and converges to d near refined points.",
+    "pages": "p. 5; p. 12; pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "Turn the requirement to stay away from an unknown bad region into a relaxable constraint d^k(x) = 1 − dist(x, D^k)/r_e over a growing set of detected points and give it to the progressive barrier (pp. 8-9).",
+   "When a detected event changes the constraint, freeze the mesh and reset the barrier threshold so the count of infeasible undominated points below it is unchanged (pp. 9-10).",
+   "Write the convergence section as a table: case of refining sequence and limit location → theorem → assumptions (p. 14).",
+   "Check the returned design physically, including points at distance r_e toward the nearest discontinuity (pp. 24-25)."
+  ],
+  "coauthors": "A. Batailly, S. Kojtych",
+  "quotes": [
+   {
+    "text": "The constraint d requires an infinite number of evaluations to be deemed feasible.",
+    "page": 5
+   },
+   {
+    "text": "When the parameter rd is fixed to 0 by the user, the region D is empty and the behavior of the algorithm is identical to Mads.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S132",
+  "year": "2022",
+  "title": "Correction to: Numerical certification of Pareto optimality for biobjective nonlinear problems",
+  "read_level": "full",
+  "contribution": "Erratum to D003 that republishes Fig. 9 with the missing top-right portion of the non-equilateral hexagon front (near P ≈ 3.1, A ≈ 0.674).",
+  "problem_entry": "The published version of D003 omitted the top-right part of Fig. 9 (p. 1).",
+  "key_idea": "Republish the complete figure as Fig. 1; nothing else changes (pp. 1-2).",
+  "assumptions": "not applicable",
+  "proof_devices": [],
+  "experiments": "none",
+  "positioning": "Erratum to D003 (p. 1).",
+  "writing": "One sentence stating what is missing and one pointing to the corrected figure (p. 1).",
+  "limits_future": "Figure-level repair only; the dropped portion is the part D003 says only careful inspection reveals (D003 p. 21).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Weak evidence for correcting one's own published work (step 4; Taste warning sign 2); the error is in a figure, not a result.",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "F. Messine, J. Ninin",
+  "quotes": [
+   {
+    "text": "The top-right part of Fig. 9 is missing from the published version of [1].",
+    "page": 1
+   }
+  ]
+ },
+ {
+  "id": "S186",
+  "year": "2022",
+  "title": "Second order sliding mode twisting controller tuning based on two-level optimization process",
+  "read_level": "full",
+  "contribution": "Tunes twisting-controller gains with a two-level process: a branch-and-bound global solver (IBEX) computes guaranteed bounds on σ̈ for given gains, and NOMAD minimizes r1 + r2 subject to less conservative finite-time convergence conditions; on a pendulum it cuts the gains from (129, 96.5) to (47.1, 36.6) with less chattering.",
+  "problem_entry": "Sliding-mode convergence conditions depend on perturbation bounds; over-approximated bounds give conservative gains, so gains are often tuned by simulation instead of derived from the conditions; SIP solvers only handled first-order sliding mode (p. 2).",
+  "key_idea": "Treat the certified bound computation as the blackbox: the inner global solver returns guaranteed m_i, M_i, the outer DFO optimizes the gains under Theorem 2's conditions, which have no explicit form; replace time by a perturbation box to make bounds computable (pp. 3-5).",
+  "assumptions": "σ̈ affine in u; σ, σ̇, h, g explicit; p(t) in a known box; state in a known compact set (pp. 2-3); the output gains are certified and only locally optimal (p. 4); constraint handling in NOMAD not stated.",
+  "proof_devices": [
+   "replace unbounded time by a perturbation box, giving [l⁺,u⁺] ⊇ [l*,u*] (Theorem 3, p. 4)",
+   "classical conditions recovered by plugging crude bounds into the new conditions (Remark 1, p. 3)",
+   "guaranteed bounds from a global solver as blackbox outputs (pp. 4-5)"
+  ],
+  "experiments": "Pendulum with varying arm length; IBEX with precision 0.01; 100 × 100 grid (70 min) to map feasible gains; one NOMAD run (defaults, 500 evaluations, 8 min) from the best classical-condition gains; L2 error −59.99% in sliding (pp. 5-6).",
+  "positioning": "Extends optimization-based tuning of first-order sliding mode [12, 13] to the twisting controller (pp. 2, 4); relies on the authors' less conservative conditions [9] (p. 3); uses off-the-shelf global solvers and NOMAD (p. 5).",
+  "writing": "Conference format: conditions quoted from control theory (p. 3), a two-level diagram (Fig. 1, p. 5), one worked example (pp. 5-6); two citations unresolved as '[?]' in the HAL version (p. 5).",
+  "limits_future": "Computationally expensive and only locally optimal (pp. 4, 6); future: less conservative conditions and other 2-SM controllers (p. 6).",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "variant",
+    "note": "Direct search tunes controller parameters, and each evaluation is a rigorous global optimization returning certified bounds, so feasibility is guaranteed.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Known structure (explicit h, g, σ̈) exploited by the inner global solver while the outer level stays derivative-free.",
+    "pages": "pp. 2, 5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "The guarantee that matters (finite-time convergence) comes from control theory via certified bounds; DFO gives only local optimality.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "One NOMAD run, no seeds, no other DFO solver; the grid is illustration only.",
+    "pages": "p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "feasibility-by-relay warm start",
+    "evidence": "NOMAD starts from the optimum of the conservative linear conditions, a point already certified feasible.",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "singular/smooth variable split (variant: rigorous inner solver as the blackbox)",
+    "evidence": "DFO outside on the two gains; a global solver inside produces the certified constraint values.",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "When a sufficient condition involves sup/inf of explicit functions, compute them with a rigorous global solver inside the blackbox and let DFO optimize the design subject to the certified values (pp. 4-5).",
+   "Replace an unbounded time dependence by a box on the time-varying inputs to get a bounded, solvable problem (p. 4).",
+   "Warm-start from the best design under the older conservative condition so any improvement is attributable to the sharper condition (p. 6)."
+  ],
+  "coauthors": "D. Monnet, A. Goldsztejn, F. Plestan",
+  "quotes": [
+   {
+    "text": "Local minima or maxima cannot be used because inequalities would not be guaranteed to hold.",
+    "page": 4
+   },
+   {
+    "text": "As a consequence, the control law is often tuned by simulation rather than derived from the convergence conditions.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S107",
+  "year": "2023",
+  "title": "Methodology for the redesign of compressor blades undergoing nonlinear structural interactions: Application to blade-tip/casing contacts",
+  "read_level": "full",
+  "contribution": "Proposes a three-step blade redesign pipeline (two-way parameterization fitted with NOMAD, NOMAD update against a clearance-consumption criterion, nonlinear contact check) and shows the criterion reduces vibration on NASA rotor 37 but worsens peak amplitudes on the more flexible rotor 67.",
+  "problem_entry": "Blades are designed with empirical, often linear criteria that can fail under nonlinear contacts, and redesigns are costly; an easy blade update and physically relevant criteria are needed (p. 4).",
+  "key_idea": "Parameterize any existing blade (5 stacking + 14 profile parameters per section, identified by DFO fitting), optimize 4 sweep/lean variables for clearance consumption with NOMAD, then audit with full nonlinear dynamics (pp. 2, 5-11).",
+  "assumptions": "Bounds only; profile parameters fixed; small bounds so modes 1 and 2 stay 1B and 1T; parameterized model validated (0.06% error on first eigenfrequency) (pp. 11, 13).",
+  "proof_devices": [
+   "none (physical validation by nonlinear frequency response curves and modal contribution maps, pp. 12-13)"
+  ],
+  "experiments": "Rotor 37 (A, B) and rotor 67 (C, D, E), 400 simulations of about 45 s each with NOMAD 3.9.1 defaults; target criterion cut by 58-98%; rotor 37 peak from about 20 mm to 5 mm, rotor 67 maxima higher than the initial blade; one run per instance, no other optimizer (pp. 11-19).",
+  "positioning": "Extends Batailly et al.'s high-pressure compressor redesign [16], the clearance-consumption criterion [17] and an academic blade parameterization [18] to arbitrary existing blades (p. 4); cites other parameterization methods [11, 12] (p. 4).",
+  "writing": "Three-step flowchart (Fig. 1, p. 5); each case study ends with a 'Partial conclusion' (pp. 14, 18); the negative rotor 67 result is stated plainly in the conclusion (pp. 19-20).",
+  "limits_future": "Criterion relevance depends on the initial blade's dynamics; future: clearance consumption over several nodes and modes, centrifugal effects, other nonlinear interactions, intentional mistuning (pp. 19-20).",
+  "method_links": [
+   {
+    "method": "Taste mark 1",
+    "relation": "evidence",
+    "note": "Real industrial FE blackbox with named pathologies (non-periodic responses, model-generation failures).",
+    "pages": "pp. 11, 16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Weak: model-generation failures are a stated reason to choose MADS; no other constraints.",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Weak: the input CAD models of rotors 37 and 67 are freely available online.",
+    "pages": "p. 15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "One run per instance, no baseline optimizer; verdict from high-fidelity physics, not profiles.",
+    "pages": "pp. 11-19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD with defaults used for both model identification and update.",
+    "pages": "pp. 9, 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogate-to-truth reversal report",
+    "evidence": "Criterion improved by up to 98% on rotor 67 while true vibration peaks worsen; reported and explained.",
+    "pages": "pp. 17-19"
+   },
+   {
+    "pattern": "validate the blackbox physically before optimizing it",
+    "evidence": "Parameterized model checked on eigenfrequencies and contact responses before optimization.",
+    "pages": "p. 11"
+   }
+  ],
+  "transferable": [
+   "Use the same DFO solver to fit a parameterized model to a legacy geometry and then to optimize it (pp. 9, 11).",
+   "Optimize a cheap proxy criterion, judge the result with the expensive analysis the proxy stands for, and report disagreement (pp. 15, 18-19)."
+  ],
+  "coauthors": "S. Kojtych, F. Nyssen, A. Batailly",
+  "quotes": [
+   {
+    "text": "It is well-suited for inequality constrained blackbox optimization involving time-consuming simulations and handles situations in which the model generation returns an error or fails.",
+    "page": 11
+   },
+   {
+    "text": "Thus, presented results indicate that the relevance of a local clearance consumption as performance criterion is highly dependent on the dynamics of the initial blade.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S163",
+  "year": "2023",
+  "title": "Hierarchically constrained multi-fidelity blackbox optimization",
+  "read_level": "full",
+  "contribution": "arXiv v1 of Inter-DS (COAP 2025, card S112): a wrapper between a direct-search solver and a multi-fidelity blackbox that interrupts evaluations at the lowest fidelity trusted to reveal a constraint violation, with the constraint-to-fidelity assignment chosen by minimizing expected evaluation time under a misidentification bound; tested with NOMAD 4 on SOLAR instances.",
+  "problem_entry": "Hydro-Québec PRIAD blackboxes are too expensive even with massive parallelism, and some constraint violations are predictable at low fidelity; multi-fidelity literature is mostly unconstrained and uses low fidelity to guide sampling (pp. 2-3, 5).",
+  "key_idea": "Estimate representativeness, violation probability and time per fidelity from an LH sample, choose a biadjacency matrix B minimizing expected time subject to ε, and run any solver with the fidelity controller as its blackbox, re-checking at full fidelity before a new incumbent (pp. 6-11).",
+  "assumptions": "Satisfied at assigned fidelity implies satisfied above (p. 11); independent violations (p. 10); p_ij decreasing in i (p. 12); time increasing in fidelity (p. 9); abstract claims preserved convergence (p. 1) with no statement or proof in §§3-5.",
+  "proof_devices": [
+   "expected-cost model of sequential sub-evaluations Σ t_i y_i Π P_k(B) (eqs. 8-10, pp. 10-11)",
+   "exchange lemma: moving a fidelity row down keeps feasibility and does not raise cost (Lemmas 1-2, pp. 12-14)",
+   "reduction to exhaustive enumeration after filtering fidelities and a priori constraints (Thm 3, pp. 14-15)"
+  ],
+  "experiments": "NOMAD 4 Inter PB, Inter EB and base case on solar2/3/4 (no x⁰) and solar2/3/4/7 (feasible x⁰), 20 runs each, n_H = 1e4, ε = 0.05, 18 fidelity levels, data profiles in blackbox time with LH time charged; success on solar2, total failure without x⁰ on solar3/4, EB best on solar3/4 with x⁰, solar7 reduces to the base case (pp. 15-19).",
+  "positioning": "Continues the group's PB, PEB, interruptible EB and hierarchical satisfiability line and the constraint taxonomy (p. 4); contrasts with unconstrained, few-fidelity BO/GP work, GOSAC and the model-adequacy framework (p. 5); argues for realistic benchmarks such as SOLAR over analytical ones (pp. 5-6).",
+  "writing": "The abstract states the conditional outcome (p. 1); the discussion lists favorable conditions as bullets (p. 19); experiments framed as a proof of concept (p. 15).",
+  "limits_future": "Needs scarce feasible points, accurate low-fidelity violation checks and homogeneous constraint behaviour; EB vs PB depends on the blackbox; future: dynamic B, PRIAD application, ML for behaviour analysis (pp. 19-20).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Unrelaxable bounds, quantifiable constraints, hidden failures set to ∞, a priori constraints at fidelity 0.",
+    "pages": "pp. 2, 6"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "EB vs PB chosen because interrupted points do not return true outputs and by feasibility scarcity, not only by constraint semantics.",
+    "pages": "pp. 15, 20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Mechanism sits at the blackbox interface rather than in the Search or the Poll.",
+    "pages": "pp. 1, 6-8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Preserved convergence asserted in the abstract without analysis, although feasibility can be misidentified with probability up to ε; the published version rewords it as 'inherited' (S112 text p. 14), still without proof.",
+    "pages": "pp. 1, 7, 10"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Industrial motivation tested on SOLAR, described as the only benchmark with fidelity-dependent constraints.",
+    "pages": "pp. 3, 15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Currency is blackbox time with preprocessing charged; no solver from another family.",
+    "pages": "pp. 15-18"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Fidelity structure exploited around an unchanged direct-search solver.",
+    "pages": "pp. 1, 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "Evaluations stop at the lowest fidelity that already shows an assigned constraint violation.",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "Report the degenerate-to-baseline and failure instances",
+    "evidence": "solar7 reduces to the base case; solar3/4 without x⁰ mark every point infeasible.",
+    "pages": "pp. 17, 19"
+   }
+  ],
+  "transferable": [
+   "Put the cost-saving mechanism in a wrapper around the blackbox so the solver and its theory are untouched, and re-check at full fidelity before a point can become the incumbent (pp. 6-8).",
+   "Replace a two-objective design choice (time vs misidentification) by a threshold ε and minimize expected time alone (p. 10).",
+   "Start the new method's curves at its preprocessing time so its cost is charged on the same axis (p. 18)."
+  ],
+  "coauthors": "S. Alarie, M. Diago Martinez, S. Le Digabel, X. Lebeuf",
+  "quotes": [
+   {
+    "text": "all while preserving the efficiency and convergence properties of the chosen solver.",
+    "page": 1
+   },
+   {
+    "text": "The results show that when using Algorithm 3.2, every evaluated point is systematically considered infeasible.",
+    "page": 17
+   }
+  ]
+ }
+]
