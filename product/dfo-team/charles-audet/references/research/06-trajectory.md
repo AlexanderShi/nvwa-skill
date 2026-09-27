@@ -18,7 +18,7 @@ Sources: group bibliography (primary, [B]) — https://raw.githubusercontent.com
 
 ## 2. Pivots and their (inferred) causes
 
-1. **Global/bilevel → blackbox direct search (c. 2000).** Coincides with the Rice post-doc with Dennis and the Boeing-surrogate AIAA paper. Inference: exposure to engineering simulation problems where structure (bilinear/bilevel) is unavailable.
+1. **Global/bilevel → blackbox direct search (c. 2000).** Coincides with the Rice post-doc with Dennis and the AIAA 2000 surrogate paper (co-authors Booker, Frank, Moore; affiliation ⚠️ unverified). Inference: exposure to engineering simulation problems where structure (bilinear/bilevel) is unavailable.
 2. **Theory → applications + software (c. 2008–2010).** Coincides with Le Digabel's PhD (2008) and the NOMAD 3 release (2008). The team gained software capacity, and industrial users followed.
 3. **Default mesh → questioning the mesh (2025–2026).** ADS replaces the mesh with a "punctured space". The flagship concept is being reconsidered by its own authors.
 4. **Back to bilevel (2026).** *Benchmarking bilevel derivative-free optimization algorithms* (with Dijon, Diouane; arXiv 2605.30531) returns to the PhD-era problem class, now in the blackbox setting. (Inference: full circle. The paper was not read.)
@@ -46,3 +46,14 @@ Direction of travel (inference): (i) constraints richer than inequalities (equal
 - Upstream: GERAD global-optimization school (Hansen, Jaumard, Savard); J.E. Dennis Jr. (Rice) for pattern search. Formal PhD advisor ⚠️ not verified.
 - Peers and co-leads: Le Digabel, Tribes, Hare, Kokkolaras, Orban, Diouane.
 - Downstream (co-authoring students; supervision role not verified): Le Digabel (PhD 2008), Peyrega, Amaioua, Dzahini, Lakhmiri, Salomon (PhDs); Bouchet, Hallé-Hannan, Lebeuf, Ihaddadene, Béchard, Lemyre Garneau (MScs).
+
+## Source IDs (primary unless noted)
+- Early global optimization: JOTA 1997 https://doi.org/10.1023/A:1022645805569 ; Math. Program. 1999 https://doi.org/10.1007/s101070050072 ; Math. Program. 2000 https://doi.org/10.1007/s101079900106
+- Mixed-variable pattern search (2001): https://doi.org/10.1137/S1052623499352024 ; thermal insulation (2001): https://doi.org/10.1023/A:1011860702585
+- GPS analysis (2003): https://doi.org/10.1137/S1052623400378742 ; tightness (2004): https://doi.org/10.1023/B:OPTE.0000033370.66768.a9 ; MADS (2006): https://doi.org/10.1137/040603371 ; PB (2009): https://doi.org/10.1137/070692662 ; OrthoMADS (2009): https://doi.org/10.1137/080716980
+- Polygons: DCG 2009 https://doi.org/10.1007/s00454-008-9093-7 ; DCG 2013 https://doi.org/10.1007/s00454-013-9489-x
+- Trade-off studies (2012): https://doi.org/10.1080/10556788.2011.571687 ; fewer evaluations (2014): https://doi.org/10.1137/120895056 ; survey (2014): https://doi.org/10.1007/978-1-4939-1124-0_2
+- Textbook: https://doi.org/10.1007/978-3-319-68913-5 (2017) ; https://doi.org/10.1007/978-3-032-00906-7 (2026)
+- NOMAD 4 (2022): https://doi.org/10.1145/3544489 ; discontinuities (2022): https://doi.org/10.1137/21M1420915 ; hierarchical constraints (2022): https://doi.org/10.1016/j.orl.2022.06.006
+- Recent: arXiv:2507.23054 ; arXiv:2607.05183 ; arXiv:2601.20811 ; arXiv:2601.06321 ; arXiv:2603.27839 ; arXiv:2605.30531 ; arXiv:2506.06937 ; https://doi.org/10.1007/s11590-026-02302-z ; https://doi.org/10.1007/s10957-026-03042-x
+- GERAD profile (secondary): https://www.gerad.ca/en/people/charles-audet ; NOMAD funding and authorship (primary): https://raw.githubusercontent.com/bbopt/nomad/master/doc/user_guide/source/Introduction.rst

@@ -84,14 +84,18 @@ Pick **2 leads + 1 challenger** from the problem signals. Confirm against the me
 
 | Problem signal | Leads | Challenger |
 |----------------|-------|-----------|
-| Deterministic, reasonably smooth, unconstrained or bounds, expensive evaluations | Powell, Conn | Vicente |
+| Smooth or mildly noisy, expensive; unconstrained, bounds or linear constraints; off-the-shelf solver needed now | Powell, Conn | Audet |
+| Very tight budget (tens of evaluations) | Powell, Conn | Scheinberg |
+| Exploitable structure: least squares, bilevel or robust form | Conn, Scheinberg | Powell |
 | Smooth-ish with general nonlinear constraints, small n | Powell, Audet | Conn |
-| Hidden or unrelaxable constraints, simulation crashes, nonsmooth outputs | Audet, Vicente | Powell |
-| Integer or categorical variables | Audet, Vicente | Conn |
-| Stochastic noise; averaging possible; ML / RL objectives | Scheinberg, Vicente | Powell |
-| Need convergence or complexity guarantees; writing a methods paper | Vicente, Conn | Scheinberg |
+| Hidden constraints, simulation crashes, nonsmooth or discontinuous outputs | Audet, Vicente | Powell |
+| Integer, categorical or mixed variables | Audet | — (outside the other lenses' evidence) |
+| Stochastic noise with controllable sampling; ML / RL objectives | Scheinberg, Vicente | Audet |
+| High dimension (hundreds of variables or more) | Scheinberg, Vicente | Powell |
+| A heuristic (e.g. CMA-ES, particle swarm) that works but has no guarantee | Vicente | Audet |
+| Need convergence or complexity guarantees; writing a methods paper | Scheinberg, Vicente | Conn |
 | Designing a new model-based algorithm | Conn, Scheinberg | Powell |
-| Multiple objectives | Audet, Vicente | Scheinberg |
+| Multiple objectives | Audet, Vicente | — |
 | Choosing between solvers / benchmarking | Audet, Powell | Vicente |
 
 ### Step 2 · Opening Statements
@@ -104,13 +108,13 @@ Unseated members get one line each ("pass" or a single caution), or are skipped.
 
 ### Step 3 · Cross-examination (1–2 rounds)
 
-Choose the 1–3 disagreements that actually change the plan. Typical fault lines:
+Choose the 1–3 disagreements that actually change the plan. These are documented in the members' skills — use them before inventing new ones:
 
-1. **Model-based vs direct search** — efficiency from interpolation/trust-region models on smooth problems vs robustness of poll/mesh methods on nonsmooth, noisy or crash-prone blackboxes.
-2. **Guarantees vs performance** — provable convergence/complexity vs tuned practical efficiency.
-3. **Noise** — resample and average, build models robust to noise, or analyze with probabilistic models.
-4. **Constraints** — approximate and model them vs treat them as blackbox outputs with barrier / progressive-barrier strategies.
-5. **Where to spend evaluations** — model geometry and quality vs raw progress.
+1. **Model-based vs direct search** (Powell, Conn ↔ Audet, Vicente) — efficiency from interpolation/trust-region models on smooth problems vs robustness of poll/mesh methods on nonsmooth, noisy or crash-prone blackboxes. Audet's lens lets models *propose* points in a free Search step while the Poll carries the guarantee; the progressive-barrier trust-region hybrid (Audet, Conn, Le Digabel & Peyrega, 2018) is the documented middle ground.
+2. **How much geometry control is worth** (Conn ↔ Powell, Scheinberg) — certify model quality every iteration, or spend fewer evaluations on it (Fasano, Morales & Nocedal, 2009; Scheinberg & Toint, 2010).
+3. **Deterministic vs probabilistic model quality** (Conn ↔ Scheinberg, Vicente) — models that are good every iteration vs good "often enough" (Bandeira, Scheinberg & Vicente, 2014).
+4. **Globalization in direct search** (Vicente ↔ Audet) — sufficient decrease vs mesh-based acceptance; Audet, Bouchet & Bourdin (2024) gave a counterexample to a 2012 Vicente–Custódio theorem on discontinuous functions, so claims at the edge of the theory need checking.
+5. **Guarantees vs performance** — provable convergence/complexity vs tuned practical efficiency; settle with an equal-budget comparison, not argument.
 
 Each exchange: claim → evidence (method or paper from the member skill) → **the experiment that would settle it**.
 
@@ -161,7 +165,7 @@ Check every solver name, link, option and paper cited in the plan with tools. An
 This team represents the mathematical-optimization tradition of DFO. Say so plainly when another tradition fits better:
 
 - Very expensive, low-dimensional, global search with uncertainty-aware sampling → Bayesian optimization (not represented here).
-- Cheap evaluations, multimodal landscape, moderate-to-high dimension → evolution strategies such as CMA-ES (not represented here).
+- Cheap evaluations, multimodal landscape, moderate-to-high dimension → evolution strategies such as CMA-ES. Only partly represented: the Vicente lens covers wrapping such heuristics in a globally convergent framework, not tuning them.
 - Nonlinear least squares → also consider DFO-LS (Cartis, Fiala, Marteau & Roberts, 2019).
 
 ## Shared References (verified 2026-09)
@@ -172,6 +176,14 @@ This team represents the mathematical-optimization tradition of DFO. Say so plai
 - Cartis, C., Fiala, J., Marteau, B. & Roberts, L. (2019). Improving the flexibility and robustness of model-based derivative-free optimization solvers. *ACM TOMS* 45(3), 32. https://doi.org/10.1145/3338517 — DFO-LS and Py-BOBYQA.
 - PRIMA — reference implementation of Powell's COBYLA, UOBYQA, NEWUOA, BOBYQA and LINCOA, started by Zaikun Zhang in 2020. https://github.com/libprima/prima
 - Audet, C., Le Digabel, S., Rochon Montplaisir, V. & Tribes, C. (2022). Algorithm 1027: NOMAD version 4: Nonlinear optimization with the MADS algorithm. *ACM TOMS* 48(3), 35. https://doi.org/10.1145/3544489
+
+### Papers behind the documented disagreements
+
+- Audet, C., Conn, A. R., Le Digabel, S. & Peyrega, M. (2018). A progressive barrier derivative-free trust-region algorithm for constrained optimization. *Comput. Optim. Appl.* 71, 307–329. https://doi.org/10.1007/s10589-018-0020-4
+- Fasano, G., Morales, J. L. & Nocedal, J. (2009). On the geometry phase in model-based algorithms for derivative-free optimization. *Optim. Methods Softw.* 24, 145–154. https://doi.org/10.1080/10556780802409296
+- Scheinberg, K. & Toint, Ph. L. (2010). Self-correcting geometry in model-based algorithms for derivative-free unconstrained optimization. *SIAM J. Optim.* 20(6), 3512–3532. https://doi.org/10.1137/090748536
+- Bandeira, A. S., Scheinberg, K. & Vicente, L. N. (2014). Convergence of trust-region methods based on probabilistic models. *SIAM J. Optim.* 24(3), 1238–1264. https://arxiv.org/abs/1304.2808
+- Audet, C., Bouchet, P.-Y. & Bourdin, L. (2024). Counterexample and an additional revealing poll step for a result of "analysis of direct searches for discontinuous functions". *Math. Program.* 208, 411–424. https://doi.org/10.1007/s10107-023-02042-3
 
 ## Honest Boundary
 

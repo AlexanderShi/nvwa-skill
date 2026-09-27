@@ -52,3 +52,18 @@ No published response by Vicente or Custódio to the 2024 note was found (search
 - Independence problem: the two textbook reviews found are by Brezhneva (independent as far as known) and Kokkolaras (frequent co-author, not independent).
 - No citation-context analysis (how others criticize MADS in their related-work sections) was possible without full texts.
 - ⚠️ Lead: *Best practices for comparing optimization algorithms* (Beiranvand, Hare, et al.; arXiv 1709.08242) is a benchmarking-methodology paper co-authored by Audet's textbook partner Hare, not by Audet. The full author list and venue were not verified.
+
+## Source IDs
+- MADS erratum (2008): https://doi.org/10.1137/060671267 (primary)
+- Counterexample note (2024): https://doi.org/10.1007/s10107-023-02042-3 ; arXiv:2211.09947 (primary)
+- GPS tightness (2004): https://doi.org/10.1023/B:OPTE.0000033370.66768.a9 (primary)
+- PBTR with Conn (2018): https://doi.org/10.1007/s10589-018-0020-4 ; quadratic subproblems with Conn (2018): https://doi.org/10.1016/j.ejor.2017.10.058 (primary)
+- Model-based methods in DF nonsmooth optimization (Audet & Hare 2020): https://doi.org/10.1007/978-3-030-34910-3_19 (primary)
+- Fewer evaluations via quadratic models (2014): https://doi.org/10.1137/120895056 (primary)
+- OrthoMADS (2009): https://doi.org/10.1137/080716980 (primary)
+- ADS (2025): arXiv:2507.23054 (primary)
+- StoMADS (2021): https://doi.org/10.1007/s10589-020-00249-0 ; StoMADS repo README: https://raw.githubusercontent.com/bbopt/StoMADS/main/README.md (primary)
+- Surrogate ensembles (JOGO 2018): https://doi.org/10.1007/s10898-017-0574-1 ; UQ with ensembles (COAP 2022): https://doi.org/10.1007/s10589-022-00381-z ; locally weighted regression (Optim. Eng. 2018): https://doi.org/10.1007/s11081-017-9370-5 (primary)
+- COCO/GECCO 2022: https://doi.org/10.1145/3520304.3534019 ; mesh-based NM (2018): https://doi.org/10.1007/s10589-018-0016-0 ; cross-entropy + MADS (2021): https://doi.org/10.1007/s43069-021-00075-y (primary)
+- Dzahini, Rinaldi, Royer, Zeffiro survey: arXiv:2403.05322 (secondary)
+- Kokkolaras review: https://doi.org/10.1007/s11081-019-09422-9 (secondary, not independent)

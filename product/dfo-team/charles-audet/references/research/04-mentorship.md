@@ -54,3 +54,17 @@ Observed pattern (inference, medium confidence):
 - How Audet runs meetings, gives feedback on drafts, or picks the next thesis topic.
 - The division of supervision between Audet and Le Digabel.
 - Unpublished failed directions.
+
+## Source IDs for the thesis → paper table (primary, bib-verified)
+- Spent potliner (Optim. Eng. 2008): https://doi.org/10.1007/s11081-007-9030-2 · STYRENE/VNS (JOGO 2008): https://doi.org/10.1007/s10898-007-9234-1
+- PSD-MADS (SIAM J. Optim. 2008): https://doi.org/10.1137/070707518 · Globalization strategies (COAP 2010): https://doi.org/10.1007/s10589-009-9266-1
+- Robust MADS (Opt. Lett. 2018): https://doi.org/10.1007/s11590-017-1226-6
+- SOLAR (Optim. Eng. 2024/25): https://doi.org/10.1007/s11081-024-09952-x
+- Linear equalities (COAP 2015): https://doi.org/10.1007/s10589-014-9708-2 · PBTR (COAP 2018): https://doi.org/10.1007/s10589-018-0020-4
+- Quadratic subproblems with Conn (EJOR 2018): https://doi.org/10.1016/j.ejor.2017.10.058
+- Adaptive precision (SIAM J. Optim. 2021): https://doi.org/10.1137/20M1318894 · Counterexample note (Math. Program. 2024): https://doi.org/10.1007/s10107-023-02042-3 · Partitioned framework (JOTA 2026): https://doi.org/10.1007/s10957-026-03042-x
+- StoMADS (COAP 2021): https://doi.org/10.1007/s10589-020-00249-0 · Dzahini et al. survey: arXiv:2403.05322
+- Performance indicators (EJOR 2021): https://doi.org/10.1016/j.ejor.2020.11.016
+- Mixed-variable framework (Oper. Res. Forum 2023): https://doi.org/10.1007/s43069-022-00180-6 · Distance (Neurocomputing 2025): https://doi.org/10.1016/j.neucom.2025.131208 · CatMADS: arXiv:2506.06937
+- Inter-DS (COAP 2025): https://doi.org/10.1007/s10589-024-00645-w · Multi-fidelity constraints: arXiv:2601.06321
+- Book reviews (secondary): Kokkolaras, Optim. Eng. 2019, https://doi.org/10.1007/s11081-019-09422-9 ; Brezhneva, Math. Reviews 2018 (quoted on retailer page, via search: https://www.amazon.com/Derivative-Free-Optimization-Operations-Financial-Engineering/dp/3319689126)
