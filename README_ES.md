@@ -159,6 +159,25 @@ Cada skill indica explícitamente lo que no puede hacer:
 
 ---
 
+## 🔬 Destilar cómo investigan los mejores investigadores (Research Skill)
+
+Una skill de perspectiva captura cómo **piensa** alguien. Con los grandes investigadores, a menudo lo que quieres aprender es cómo **investigan**: cómo eligen problemas, cómo diseñan experimentos, qué revisan cuando un proyecto se atasca, cuándo abandonar y cómo escriben el paper. El modo de investigación de Nuwa lo destila en una **skill de mentor de investigación** ejecutable: traes tu propio problema de investigación y te da los siguientes pasos con los métodos de ese investigador.
+
+```
+> Destila los métodos de investigación de Richard Hamming
+> Crea una research skill con la forma de investigar de Karpathy
+> Destila "metodología de investigación en ML" a partir de Hamming, Schulman y Karpathy
+```
+
+- Diferencia con una skill de perspectiva: la unidad central no son modelos mentales sino "métodos de investigación (con pasos concretos) + gusto investigador + flujos de trabajo por etapa". Al activarse no interpreta a la persona: en modo mentor aplica sus métodos a tu tarea
+- Controles adicionales: **coherencia entre lo que dice y lo que hace** (el método declarado debe aparecer en sus papers/código reales) y **citas verificables** (nunca inventar papers)
+- `scripts/fetch_publications.py` obtiene de [OpenAlex](https://openalex.org) el panorama de publicaciones (papers más citados, evolución temática, coautores, candidatos a obra representativa)
+- `merge_research.py` y `quality_check.py` detectan automáticamente las research skills y ejecutan las comprobaciones correspondientes
+
+Metodología: [references/research-extraction-framework.md](references/research-extraction-framework.md) · Plantilla: [references/research-skill-template.md](references/research-skill-template.md) (ambas en chino)
+
+---
+
 ## Personajes destilados
 
 Nuwa ya ha destilado 14 personas + 1 tema. Cada uno es un skill independiente y listo para instalar, construido sobre el estándar Agent Skills, y funciona en Claude Code / Codex / Cursor / OpenClaw / Hermes y otros runtimes:

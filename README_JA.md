@@ -160,6 +160,25 @@ skills を自動ロードしない runtime でも、`SKILL.md` の内容を会�
 
 ---
 
+## 🔬 研究者の「研究のやり方」を蒸留する（研究Skill）
+
+人物Skillはその人の**考え方**を蒸留します。トップ研究者の場合、学びたいのはむしろ**研究のやり方**――テーマの選び方、実験の設計、行き詰まったときに何を確認するか、いつ撤退するか、論文の書き方――ではないでしょうか。Nuwaの研究モードは、これを実行可能な**研究メンターSkill**として蒸留します。自分の研究課題を持ち込むと、その研究者の方法で次の一手を提示します。
+
+```
+> Richard Hamming の研究方法を蒸留して
+> Karpathy の研究のやり方で研究Skillを作って
+> Hamming、Schulman、Karpathy から「ML研究方法論」を蒸留して
+```
+
+- 人物Skillとの違い：中心単位は「メンタルモデル」ではなく「研究方法（具体的な手順付き）＋研究の審美眼＋段階別ワークフロー」。起動後は本人を演じるのではなく、メンターモードであなたの研究タスクに方法を適用します
+- 追加の関門：**言行一致**（本人が語る方法が実際の論文・コードに現れているか）と**引用の検証可能性**（論文を捏造しない）
+- `scripts/fetch_publications.py` で [OpenAlex](https://openalex.org) から論文の全体像（高被引用論文、研究テーマの変遷、共著者、代表作候補）を取得できます
+- `merge_research.py` と `quality_check.py` は研究Skillを自動判別し、対応するチェックを実行します
+
+方法論：[references/research-extraction-framework.md](references/research-extraction-framework.md) · テンプレート：[references/research-skill-template.md](references/research-skill-template.md)（いずれも中国語）
+
+---
+
 ## 蒸留済みの人物
 
 Nuwaはすでに14人の人物 + 1つのテーマを蒸留した。それぞれが独立した、すぐにインストールして使えるSkillで、すべてAgent Skills標準に基づき、Claude Code / Codex / Cursor / OpenClaw / Hermes などの runtime で汎用的に動作する：

@@ -157,6 +157,53 @@ Every skill explicitly states what it cannot do:
 
 ---
 
+## 🔬 Distilling Researchers' Research Skills
+
+A perspective skill captures how someone **thinks**. With top researchers, what you often want is how they **do research**: how they pick problems, find an angle, design experiments, debug a stuck project, decide when to quit, and write the paper. Nuwa's research mode distills this into a **research-mentor skill** — you bring your own research problem, and it gives you actionable next steps using that researcher's methods.
+
+```
+> Distill Richard Hamming's research skills
+> Build a research skill from how Karpathy does research
+> I want a Terence Tao–style research mentor
+> Distill "ML research methodology" from Hamming, Schulman and Karpathy
+```
+
+Then use it:
+
+```
+> Use Hamming's method to judge whether this problem is worth working on
+> Karpathy-style: my loss won't go down — what do I check next?
+> Review the structure of my paper draft with this research skill
+```
+
+### How it differs from a perspective skill
+
+| | Perspective skill | Research skill |
+|---|---|---|
+| Captures | How they think and talk | How they do research: problem choice, experiments, judging results, writing |
+| Core unit | Mental models | Research methods (with concrete steps) + research taste (judgment criteria) + stage workflows |
+| When activated | Speaks as the person | Mentor mode: applies their methods to your research task (voice optional) |
+| Key evidence | What they said | What they left behind: paper structure, code, ablations, rebuttals, abandoned directions |
+| Extra gates | — | **Say–do consistency**: a stated method must show up in their actual papers/code. **Verifiable citations**: no fabricated papers |
+
+### Six research agents
+
+Publications (landscape + signature-work anatomy) · Stated methodology (what they say they do) · Process evidence (what they actually do) · Students & collaborators (mentoring style, tacit knowledge) · Peer critique (blind spots) · Research trajectory (pivots and timing).
+
+Agent 1 can start with a publication landscape pulled from [OpenAlex](https://openalex.org) (free, no key):
+
+```bash
+python3 scripts/fetch_publications.py "Richard Hamming" --out <skill-dir>/references/sources/publications
+```
+
+It reports top-cited papers, topic shifts in 5-year buckets, first→last-author transition (from hands-on to leading a group), frequent collaborators (with a likely-student signal), recent papers, and signature-work candidates.
+
+`scripts/merge_research.py` and `scripts/quality_check.py` auto-detect research skills and run the matching checks (methods have steps, say–do evidence, signature-work anatomy, research-integrity rules, verifiable citations…).
+
+Methodology: [references/research-extraction-framework.md](references/research-extraction-framework.md) · Output template: [references/research-skill-template.md](references/research-skill-template.md) (both in Chinese, like the rest of the core files).
+
+---
+
 ## Distilled People
 
 Nuwa has already distilled 14 people + 1 topic. Each is a standalone, ready-to-install skill built on the Agent Skills standard, running across Claude Code / Codex / Cursor / OpenClaw / Hermes and other runtimes:
@@ -227,8 +274,15 @@ Full methodology in `references/extraction-framework.md`.
 nuwa-skill/
 ├── SKILL.md                    # Nuwa herself
 ├── references/
-│   ├── extraction-framework.md # Extraction methodology (read this for depth)
-│   └── skill-template.md       # Template for generating skills
+│   ├── extraction-framework.md          # Extraction methodology (read this for depth)
+│   ├── skill-template.md                # Template for perspective skills
+│   ├── research-extraction-framework.md # Research-skill methodology
+│   ├── research-skill-template.md       # Template for research skills
+│   └── fidelity-scorecard.md            # Fidelity scorecard (incl. research variant)
+├── scripts/
+│   ├── fetch_publications.py   # Researcher publication landscape (OpenAlex)
+│   ├── merge_research.py       # Phase 1.5 research summary (persona/research auto-detect)
+│   └── quality_check.py        # Phase 4 quality check (persona/research auto-detect)
 └── examples/
     ├── naval-perspective/       # Naval full example + research data
     └── elon-musk-perspective/   # Musk full example + research data
