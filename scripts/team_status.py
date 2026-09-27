@@ -138,6 +138,8 @@ def member_status(team: Path, m: dict, with_quality: bool) -> dict:
         stage = "T1 base skill"
     else:
         stage = "T0 scaffold"
+    if not st["skill"] and stage != "T0 scaffold":
+        stage += " · ⚠️ no SKILL.md (T1 missing)"
     st["stage"] = stage
     return st
 
