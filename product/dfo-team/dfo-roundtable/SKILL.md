@@ -178,7 +178,7 @@ This team represents the mathematical-optimization tradition of DFO. Say so plai
 - The discussion is simulated from methods distilled from public work; it is not what these researchers would actually say.
 - Member skills were built from web-search results without full-text reading; each member's own Honest Boundary lists its gaps.
 - Disagreements between lenses are inferred from their published methods, not from recorded debates.
-- Powell died in 2015; that lens reflects work up to then. Later maintenance of the solvers (e.g. PRIMA) is others' work.
+- Powell (d. 2015) and Conn (d. 2019) are historical lenses: they reflect work up to then. Later developments (e.g. PRIMA maintaining Powell's solvers) are others' work.
 - Bayesian optimization and evolutionary methods are outside this team.
 - Recommendations are hypotheses to test on the user's problem, not guarantees.
 - Research date: 2026-09.

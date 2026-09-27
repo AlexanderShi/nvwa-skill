@@ -77,5 +77,5 @@ To add a resource later: add a row to that researcher's `RESOURCES.md`, drop any
 
 - These are simulated lenses built from public work, not the researchers' own views.
 - Research was done through web search results in 2026-09 without full-text reading; each skill's Honest Boundary lists its gaps and `RESOURCES.md` marks unverified leads ⚠️.
-- Powell died in 2015; that skill reflects work up to then.
+- Powell (d. 2015) and Conn (d. 2019) are historical lenses; their skills reflect work up to then.
 - Treat every recommendation as a hypothesis to test on your problem.
