@@ -16,7 +16,8 @@
     --delay SEC      arXiv 请求间隔秒数（默认 3，arXiv API 要求礼貌访问）
     --no-download    只匹配arXiv、更新INDEX，不下载PDF
 
-需要的网络: api.openalex.org（先跑 fetch_publications.py）、export.arxiv.org、arxiv.org
+需要的网络: api.openalex.org（先跑 fetch_publications.py）、arxiv.org
+    arXiv 检索走 arxiv.org 网页检索（与 acquire_fulltexts.py 共用）：export.arxiv.org API 会拒绝云端 IP（HTTP 406）。
 
 输出:
     <skill目录>/references/sources/papers/INDEX.md    论文索引（提交到git）
@@ -38,15 +39,13 @@ import subprocess
 import sys
 import time
 import urllib.error
-import urllib.parse
 import urllib.request
-import xml.etree.ElementTree as ET
-from difflib import SequenceMatcher
 from pathlib import Path
+
+from acquire_fulltexts import arxiv_author_papers, arxiv_search, best_arxiv_match
 
 ARXIV_ID_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/([a-z\-]+(?:\.[A-Z]{2})?/\d{7}|\d{4}\.\d{4,5})(?:v\d+)?", re.I)
 ARXIV_DOI_RE = re.compile(r"10\.48550/arxiv\.([0-9]{4}\.[0-9]{4,5})", re.I)
-ATOM = {"a": "http://www.w3.org/2005/Atom"}
 UA = {"User-Agent": "nuwa-skill/fetch_fulltexts (research skill distillation)"}
 
 INDEX_HEADER = ["#", "Year", "Title", "Venue", "Cites", "arXiv", "Full text", "Role", "Read", "OpenAlex"]
@@ -97,25 +96,6 @@ def arxiv_from_work(work: dict) -> str | None:
 def surname_of(author: dict) -> str:
     name = (author.get("display_name") or "").strip()
     return name.split()[-1] if name else ""
-
-
-def arxiv_search(title: str, surname: str) -> str | None:
-    """按标题+作者姓在 arXiv API 搜索，标题相似度 ≥ 0.9 才认。"""
-    words = [w for w in norm_title(title).split() if len(w) > 2][:10]
-    if not words:
-        return None
-    q = " AND ".join([f"ti:{w}" for w in words] + ([f"au:{surname}"] if surname else []))
-    url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode({"search_query": q, "max_results": 5})
-    root = ET.fromstring(http_get(url))
-    target = norm_title(title)
-    best, best_ratio = None, 0.0
-    for entry in root.findall("a:entry", ATOM):
-        t = entry.findtext("a:title", default="", namespaces=ATOM)
-        ratio = SequenceMatcher(None, target, norm_title(t)).ratio()
-        if ratio > best_ratio:
-            m = ARXIV_ID_RE.search(entry.findtext("a:id", default="", namespaces=ATOM))
-            best, best_ratio = (m.group(1) if m else None), ratio
-    return best if best_ratio >= 0.9 else None
 
 
 # ---------- 全文 ----------
@@ -198,6 +178,7 @@ def run(skill_dir: Path, works_path: Path, max_n: int | None, core_k: int, delay
     (papers / "txt").mkdir(parents=True, exist_ok=True)
     index_path = papers / "INDEX.md"
     kept = read_index(index_path)
+    author_papers = None  # 按需取一次
 
     rows = []
     for rank, w in enumerate(works):
@@ -209,10 +190,19 @@ def run(skill_dir: Path, works_path: Path, max_n: int | None, core_k: int, delay
                        if ((a.get("author") or {}).get("id") or "").endswith(aid)), {})
             try:
                 arx = arxiv_search(w["title"], surname_of(me.get("author") or {}))
-            except (urllib.error.URLError, ET.ParseError, TimeoutError) as e:
+            except (urllib.error.URLError, TimeoutError) as e:
                 print(f"  ⚠️ arXiv 搜索失败：{w['title'][:60]}… ({e})")
                 arx = None
             time.sleep(delay)
+            if not arx:
+                if author_papers is None:
+                    try:
+                        author_papers = arxiv_author_papers(researcher, delay)
+                    except (urllib.error.URLError, TimeoutError) as e:
+                        print(f"  ⚠️ arXiv 作者列表获取失败：{researcher} ({e})")
+                        author_papers = []
+                    time.sleep(delay)
+                arx = best_arxiv_match(w["title"], author_papers)
 
         status = "no-oa"
         if arx:
@@ -265,7 +255,7 @@ def main():
     try:
         c = run(skill_dir, works, args.max or None, args.core, args.delay, not args.no_download)
     except urllib.error.URLError as e:
-        print(f"❌ 访问 arXiv 失败：{e}（需要允许 export.arxiv.org 与 arxiv.org）")
+        print(f"❌ 访问 arXiv 失败：{e}（需要允许 arxiv.org）")
         sys.exit(2)
     print(f"✅ {c['total']} 篇：全文文本 {c['txt']} · 仅PDF {c['pdf']} · 未下载 {c['arxiv']} · 无开放全文 {c['no-oa']}")
     print(f"   索引：{skill_dir / 'references/sources/papers/INDEX.md'}")

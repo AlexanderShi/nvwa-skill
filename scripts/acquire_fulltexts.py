@@ -4,7 +4,8 @@
 
 读取通用格式的 works.json（Google Scholar 列表 + DBLP/Crossref 补全，见下），为每篇论文依次尝试：
   1. 已知 arXiv ID → arxiv.org/pdf/<id>
-  2. arXiv 网页标题检索（arxiv.org/search，标题相似度 ≥ 0.9 且作者姓出现）
+  2. arXiv 网页标题检索（arxiv.org/search，标题相似度 ≥ 0.9 且作者姓出现）；
+     搜不到时在研究者的 arXiv 论文列表里按相似度 ≥ 0.9 再找（预印本标题常和发表版差一两个词）
   3. DOI → Unpaywall 开放获取位置（只用 OA 链接，不绕过付费墙）
   4. works.json 里给出的候选 PDF 链接（作者主页、机构仓库、DBLP ee）
 下载后校验：必须是 PDF，且前两页文本包含标题的大部分关键词，否则丢弃并标 mismatch。
@@ -47,6 +48,10 @@ UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) nuwa-skill/acquire_fulltext
 UNPAYWALL_EMAIL = "nuwa-skill@users.noreply.github.com"
 ARXIV_ID_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/([a-z\-]+(?:\.[A-Z]{2})?/\d{7}|\d{4}\.\d{4,5})(?:v\d+)?", re.I)
 STOP = {"the", "and", "for", "with", "from", "into", "via", "its", "their", "using", "based", "on", "of", "in", "a", "an", "to"}
+
+# 不经本脚本下载、手动放进 papers/ 的全文，按 works.json 里 urls 的关键词标注来源（小写匹配，先匹配先用）；
+# 其他报告系列在这里加一行即可，例如 "gerad.ca": "GERAD Cahier"。都不匹配时标 "manual"。
+SOURCE_LABELS = {"damtp": "DAMTP report"}
 
 INDEX_HEADER = ["#", "ID", "Year", "Title", "Venue", "Cites", "Kind", "Source", "Full text", "Pages", "Role", "Read"]
 
@@ -98,23 +103,50 @@ def title_in_text(title: str, text: str) -> float:
 
 # ---------- 来源 ----------
 
-def arxiv_search(title: str, surname: str) -> str | None:
-    q = urllib.parse.urlencode({"query": title[:250], "searchtype": "title", "size": 25, "abstracts": "hide"})
-    page = http_get(f"https://arxiv.org/search/?{q}").decode("utf-8", "replace")
-    best, best_ratio = None, 0.0
+def arxiv_results(page: str) -> list[tuple[str, str, str]]:
+    """arXiv 检索结果页 → [(arXiv ID, 标题, 作者)]。"""
+    out = []
     for block in page.split('<li class="arxiv-result">')[1:]:
         m_id = ARXIV_ID_RE.search(block)
         m_t = re.search(r'<p class="title is-5 mathjax">(.*?)</p>', block, re.S)
         m_a = re.search(r'<p class="authors">(.*?)</p>', block, re.S)
-        if not (m_id and m_t):
-            continue
-        authors = norm_title(m_a.group(1)) if m_a else ""
+        if m_id and m_t:
+            out.append((m_id.group(1), m_t.group(1), norm_title(m_a.group(1)) if m_a else ""))
+    return out
+
+
+def best_arxiv_match(title: str, results: list[tuple[str, str, str]], surname: str = "") -> str | None:
+    best, best_ratio = None, 0.0
+    for arx, t, authors in results:
         if surname and norm_title(surname) not in authors:
             continue
-        r = title_ratio(title, m_t.group(1))
+        r = title_ratio(title, t)
         if r > best_ratio:
-            best, best_ratio = m_id.group(1), r
+            best, best_ratio = arx, r
     return best if best_ratio >= 0.9 else None
+
+
+def arxiv_search(title: str, surname: str) -> str | None:
+    q = urllib.parse.urlencode({"query": title[:250], "searchtype": "title", "size": 25, "abstracts": "hide"})
+    page = http_get(f"https://arxiv.org/search/?{q}").decode("utf-8", "replace")
+    return best_arxiv_match(title, arxiv_results(page), surname)
+
+
+def arxiv_author_papers(researcher: str, delay: float, limit: int = 1000) -> list[tuple[str, str, str]]:
+    """研究者在 arXiv 上的全部论文（按作者检索）。
+    预印本标题常和正式发表版差一两个词，而 arXiv 标题检索要求每个词都出现，一个词不同就搜不到；
+    标题检索落空时在这份列表里按相似度匹配。"""
+    parts = researcher.split()
+    query = f"{parts[-1]}, {parts[0][0]}" if len(parts) > 1 else researcher  # arXiv 推荐的「姓, 名首字母」
+    papers = []
+    for start in range(0, limit, 200):
+        q = urllib.parse.urlencode({"query": query, "searchtype": "author", "size": 200, "abstracts": "hide", "start": start})
+        page = arxiv_results(http_get(f"https://arxiv.org/search/?{q}").decode("utf-8", "replace"))
+        papers += page
+        if len(page) < 200:
+            break
+        time.sleep(delay)
+    return papers
 
 
 def arxiv_abstract(arx: str) -> str:
@@ -290,6 +322,7 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
     abs_path = papers / "abstracts.json"
     kept = read_index(index_path)
     abstracts = json.loads(abs_path.read_text(encoding="utf-8")) if abs_path.exists() else {}
+    author_papers = None  # 按需取一次
 
     rows = []
     kept_without_file = 0
@@ -308,8 +341,8 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
                 pages = txt.read_text(encoding="utf-8", errors="replace").count("[[page ") or ""
             status = "txt" if txt.exists() else "pdf"
             if source == "—":  # supplied outside this script (homepage search, report series, by hand)
-                urls = " ".join(w.get("urls") or [])
-                source = "DAMTP report" if "damtp" in urls else "manual"
+                urls = " ".join(w.get("urls") or []).lower()
+                source = next((label for key, label in SOURCE_LABELS.items() if key in urls), "manual")
         elif todo and not skip_net:
             arx = w.get("arxiv")
             if not arx:
@@ -318,6 +351,15 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
                 except (urllib.error.URLError, TimeoutError) as e:
                     print(f"  ⚠️ arXiv search failed: {w['title'][:60]} ({e})")
                 time.sleep(delay)
+                if not arx:
+                    if author_papers is None:
+                        try:
+                            author_papers = arxiv_author_papers(researcher, delay)
+                        except (urllib.error.URLError, TimeoutError) as e:
+                            print(f"  ⚠️ arXiv author listing failed: {researcher} ({e})")
+                            author_papers = []
+                        time.sleep(delay)
+                    arx = best_arxiv_match(w["title"], author_papers)
                 if arx:
                     w["arxiv"] = arx
             candidates = []

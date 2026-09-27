@@ -1,0 +1,100 @@
+{
+ "schema": 1,
+ "team": "dfo-team",
+ "title": "DFO Team",
+ "field": "derivative-free optimization (mathematical-optimization tradition; Bayesian and evolutionary methods not represented)",
+ "language": "English",
+ "created": "2026-09-27",
+ "roundtable": "dfo-roundtable",
+ "chase_hints": [
+  "Optimization Online (optimization-online.org)",
+  "university technical-report series of the members and their coauthors",
+  "free proceedings (PMLR, NeurIPS, AAAI)",
+  "HAL, CiteSeerX, OSTI, DTIC and NASA report servers"
+ ],
+ "members": [
+  {
+   "slug": "michael-powell",
+   "name": "M. J. D. Powell",
+   "surname": "Powell",
+   "living": false,
+   "hint": "Cambridge DAMTP numerical analyst (1936-2015); COBYLA, UOBYQA, NEWUOA, BOBYQA, LINCOA",
+   "scholar": "p3kDmy0AAAAJ",
+   "dblp": "",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "DAMTP numerical-analysis reports (use http://www.damtp.cam.ac.uk/..., https fails; check the author on page 1, the series holds other authors' reports)",
+    "his two published interviews and the Royal Society biographical memoir"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "andrew-conn",
+   "name": "Andrew R. Conn",
+   "surname": "Conn",
+   "living": false,
+   "hint": "Waterloo, then IBM T. J. Watson Research Center (1946-2019); trust-region methods, LANCELOT, model-based DFO",
+   "scholar": "2dAwoocAAAAJ",
+   "dblp": "",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "Rutherford Appleton Laboratory (RAL) reports",
+    "University of Waterloo and Cornell technical reports",
+    "Namur (FUNDP) reports with Gould and Toint"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "katya-scheinberg",
+   "name": "Katya Scheinberg",
+   "surname": "Scheinberg",
+   "living": true,
+   "hint": "model-based and stochastic DFO; probabilistic models (IBM Research, Lehigh, Cornell, Georgia Tech)",
+   "scholar": "zbqRbOkAAAAJ",
+   "dblp": "",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "Lehigh ISE and Columbia IEOR technical reports",
+    "JMLR and NeurIPS open proceedings",
+    "Coimbra (DMUC) preprints with Vicente"
+   ],
+   "student_mode": true
+  },
+  {
+   "slug": "luis-nunes-vicente",
+   "name": "Luís Nunes Vicente",
+   "surname": "Vicente",
+   "living": true,
+   "hint": "direct search, worst-case complexity, probabilistic descent (Coimbra, Lehigh)",
+   "scholar": "TLkN5_AAAAAJ",
+   "dblp": "",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "Coimbra (DMUC) preprint series",
+    "Lehigh ISE technical reports"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "charles-audet",
+   "name": "Charles Audet",
+   "surname": "Audet",
+   "living": true,
+   "hint": "Polytechnique Montreal / GERAD; MADS, NOMAD, blackbox and constrained optimization",
+   "scholar": "WuHBdIkAAAAJ",
+   "dblp": "",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "GERAD Cahiers (https://www.gerad.ca/en/papers/G-YYYY-NN)",
+    "Polytechnique Montreal repository and HAL",
+    "Rice University CAAM reports (PhD-era work with Dennis)"
+   ],
+   "student_mode": false
+  }
+ ]
+}

@@ -228,7 +228,8 @@ Agent 3（过程证据）的prompt要额外强调：**找行为而不是找言�
    - 校验下载的 PDF 确实是这篇论文。扫描件或乱码文字层自动用 tesseract 做 OCR。
    - 生成 `references/sources/papers/INDEX.md`。
    - PDF 与 `txt/` 不提交，新克隆的仓库里没有。本地没有文件的行会保留 INDEX 里已提交的 txt/pdf 状态，但重新抽取文本和第6步的摘录核对都需要原文件，所以要在存有原 PDF 和 `txt/` 的那份工作区里跑。旧版脚本会把这些行重置为 `no-oa`，遇到时用 `git checkout -- <skill目录>/references/sources/papers/INDEX.md` 恢复。
-   - OpenAlex 与 export.arxiv.org 可达时，旧的 `fetch_fulltexts.py` 也能用。
+   - arXiv 标题检索要求每个词都出现，预印本标题和发表版差一两个词就搜不到，这时脚本会在研究者的 arXiv 作者列表里按相似度再找一次。
+   - OpenAlex 可达时，旧的 `fetch_fulltexts.py` 也能用。它的 arXiv 检索同样走 arxiv.org 网页，因为 export.arxiv.org 的 API 会拒绝云端 IP（HTTP 406）。OpenAlex 没有 API key 时，每个 IP 每天只有 $0.10 额度，云端共享 IP 很快就会 429，所以要设置环境变量 `OPENALEX_API_KEY`。
 3. **agent 补搜**：仍标 `no-oa` 的论文，由 agent 在合法的开放来源里找，比如作者主页、机构技术报告、Optimization Online、HAL、会议官网、OSTI、CORE。
    - 找到的文件命名为 `<ID>-<年份>-<标题前8词>.pdf`，存进 `papers/`，再重跑第2步。
    - 不用 Sci-Hub，不绕付费墙。
