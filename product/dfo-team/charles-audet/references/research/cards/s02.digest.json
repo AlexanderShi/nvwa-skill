@@ -1,0 +1,514 @@
+[
+ {
+  "id": "S116",
+  "year": "2016",
+  "title": "A derivative-free trust-region augmented Lagrangian algorithm",
+  "read_level": "full",
+  "contribution": "Proposes DFTRl, a derivative-free trust-region method for general equality/inequality/bound constrained problems that solves the quadratic-model subproblem with Algencan's PHR augmented Lagrangian and defines the trust-region ratio on that same augmented Lagrangian, so the unconstrained DFTR update rules are reused almost unchanged; competitive with COBYLA and better on equality problems (no convergence analysis).",
+  "problem_entry": "Gap in the literature for general constraints in DFTR: COBYLA's l-infinity merit and linear models, NLopt's equality-as-two-inequalities, and partial coverage by trust-funnel, SQP-DFTR, NOWPAC, inexact restoration and PBTR (p. 5).",
+  "key_idea": "Use the PHR augmented Lagrangian twice: to solve the model subproblem (Algencan) and to define r^k as actual vs predicted decrease with (lambda, mu, rho) frozen at the subproblem solver's output, keeping the unconstrained update rules (pp. 6-7).",
+  "assumptions": "f, h, g are C2 with unavailable derivatives (p. 5); no convergence hypotheses; printed condition 0<gamma_inc<1<gamma_dec conflicts with the success update min{gamma_inc*Delta, Delta_max} (p. 7).",
+  "proof_devices": [
+   "none: no convergence analysis; justification by 'the subproblem augmented Lagrangian is a model of L_rho' (p. 7)"
+  ],
+  "experiments": "83 CUTEst problems (40 inequality-only, 43 with equalities), budget 100(n+1), NLopt-COBYLA and HOPSPACK defaults with HOPSPACK's linear-constraint feature disabled for fairness, data/performance profiles tau=1e-3 (p. 8); DFTRl ~ COBYLA on inequalities (10% fewer solved), better on equalities, dominates HOPSPACK (pp. 8-9); problem counts inconsistent 83/80/43-vs-40 (pp. 8, 10, 12).",
+  "positioning": "Positions against COBYLA (merit and models), trust-funnel, NOWPAC, inexact restoration, PBTR [3], and AL-based DFO (Lewis-Torczon/HOPSPACK, Algencan) by re-description rather than criticism (p. 5).",
+  "writing": "Short 6-page report; contribution sentence in abstract claims the merit-function design 'is shown to be an efficient technique' from profiles only (p. 4).",
+  "limits_future": "Future: other penalty functions, other sample-set management, adapt the progressive barrier for inequalities (p. 10); absence of theory not flagged.",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Budget in groups of n+1, profiles, cross-family competitor and a fairness adjustment, but analytic CUTEst only (Taste warning sign 4).",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "All constraints folded into one augmented Lagrangian, no EB/PB split; PB left to future work and to the companion PBTR.",
+    "pages": "pp. 5-7, 10"
+   },
+   {
+    "method": "Method 3",
+    "relation": "contradiction",
+    "note": "Algorithm paper with no convergence analysis at all.",
+    "pages": "pp. 5-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "merit function as bridge to reuse unconstrained machinery",
+    "evidence": "TR ratio computed on the augmented Lagrangian with parameters from the subproblem solver so unconstrained DFTR update rules apply unchanged; cf. S144 weighted h, S158 merit z.",
+    "pages": "p. 4, p. 7"
+   }
+  ],
+  "transferable": [
+   "Extend an unconstrained trust-region method to constraints by computing the ratio on a merit function whose parameters are frozen at the subproblem solver's output (p. 7).",
+   "Disable a competitor's feature your method lacks and say so, to compare algorithms not feature sets (p. 8).",
+   "Report inequality-only and equality-containing subsets separately (pp. 8-9)."
+  ],
+  "coauthors": "S. Le Digabel, M. Peyrega",
+  "quotes": [
+   {
+    "text": "Using an augmented Lagrangian, and more generally a merit function, to design the DFTR update rules with constraints is shown to be an efficient technique.",
+    "page": 4
+   },
+   {
+    "text": "Finally, the progressive barrier [4] could be adapted to this new algorithm to improve the treatment of inequalities.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S068",
+  "year": "2018",
+  "title": "Locally weighted regression models for surrogate-assisted design optimization",
+  "read_level": "full",
+  "contribution": "Makes LOWESS local-regression surrogates practical inside MADS (one linear solve for all outputs with warm-started CG/Cholesky switching, a differentiable Gamma-quantile scaling distance, and a shape parameter chosen by leave-one-out multi-output order error), and shows on four engineering problems that they beat quadratic, kernel-smoothing and Dakota strategies per blackbox evaluation.",
+  "problem_entry": "Limits of the group's earlier surrogates (PRS poor on multimodal data, kernel smoothing undershoots) and the question of how to measure surrogate accuracy for optimization rather than for fit (p. 5).",
+  "key_idea": "Local polynomial regression at each prediction point, generalizing PRS and KS, with smooth locality (Gamma quantile d_q) and lambda chosen by pairwise order error so the surrogate problem has the same minimizers; used in MADS Search and for poll ordering (pp. 6-14).",
+  "assumptions": "Box X and c_j<=0 blackboxes (p. 5); Tikhonov r=1e-3 with scale invariance (p. 7); Gaussian kernel (p. 10); order-preservation conditions (7)-(8) with h = sum max(0,c)^2 and lexicographic order (p. 12).",
+  "proof_devices": [
+   "single linear solve A_xi u_xi = e1 gives all m+1 predictions (p. 9)",
+   "tie-break term log(lambda)/p^3 below the resolution of a piecewise-constant metric (p. 13)",
+   "no convergence analysis beyond citing MADS (p. 5)"
+  ],
+  "experiments": "TCSD, Vessel, Lockwood, Solar 6 (n<=6, m<=6), budgets 100(n+1)-1000(n+1), 7 strategies incl. Dakota DiRect/SOGA/EA, 50 LHS starts with seeds, median discrepancy, data profiles and performance profiles per evaluation and per wall-clock (tmax), infeasibility rates (pp. 13-16); LOWESS best per evaluation, up to 22% more solved; overhead matters for cheap blackboxes (pp. 15, 22).",
+  "positioning": "Continues the group's order-error surrogate work [8] and earlier PRS/KS study; reviews LOWESS history from Cleveland (pp. 5-6).",
+  "writing": "Explicit three-item contribution paragraph (pp. 6-7); design choices justified in one sentence each (tri-cube rejected, moment estimator preferred for simplicity) (pp. 10-11); internal tension on linear vs quadratic LOWESS recommendation (p. 22).",
+  "limits_future": "O(n^6) per prediction limits n (p. 6); less advantageous for cheap blackboxes or large problems (p. 22); future: order error for RBF/Kriging, multiobjective, use LOWESS gradients (p. 22).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Surrogate optimization lives in the Search and poll ordering; 'assisted, not based'.",
+    "pages": "p. 5, p. 14, p. 22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Cross-family Dakota baselines, engineering blackboxes, evaluation and wall-clock views, 50 seeded starts, medians justified.",
+    "pages": "pp. 13-15"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Solar 6 used with its first best-known value; Vessel best-known improved.",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Framework available in NOMAD 3.8.",
+    "pages": "p. 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged by ranking fidelity (order error)",
+    "evidence": "lambda chosen by leave-one-out aggregate order error over pairs, lexicographic in violation then objective; also S114 poll ordering and S144 h-tilde ordering.",
+    "pages": "p. 6, pp. 12-13"
+   }
+  ],
+  "transferable": [
+   "Tune a surrogate hyperparameter by leave-one-out pairwise order error (pp. 12-13).",
+   "Break ties in a piecewise-constant selection metric with a tiny smoothness term below its resolution (p. 13).",
+   "Replace a k-nearest-neighbour distance by a fitted-distribution quantile to make the surrogate differentiable (pp. 10-11).",
+   "Report profiles per evaluation and per wall-clock with tmax = budget x mean blackbox time (pp. 14-15).",
+   "Use the median of relative discrepancies when values can be 0 or infinity (p. 15)."
+  ],
+  "coauthors": "B. Talgorn, S. Le Digabel, M. Kokkolaras",
+  "quotes": [
+   {
+    "text": "However, surrogate optimization should be conducted carefully; it should be used to assist the process of optimizing the original problem, not substitute it entirely.",
+    "page": 5
+   },
+   {
+    "text": "The use of the median is motivated by the wide ranges of magnitude that the discrepancy values can take; moreover, discrepancy can take the value of zero or infinity, which makes the use of the geometric or arithmetic means, respectively, impossible.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S095",
+  "year": "2018",
+  "title": "Tuning Runge-Kutta parameters on a family of ordinary differential equations",
+  "read_level": "full",
+  "contribution": "Shows that the two free parameters of fourth-order Runge-Kutta methods can be tuned to a family of ODE by a 2-variable blackbox solved with default NOMAD in 100 evaluations, giving large error reductions on held-out members of the same family but not across families.",
+  "problem_entry": "Parameter tuning as a demonstration: classical, Gill and Ralston RK4 parameters optimize storage or truncation-error coefficients, not the error on a given family (pp. 5-6).",
+  "key_idea": "Eliminate the 8 order conditions in closed form so the blackbox psi(beta1, beta5) is unconstrained in R^2, returning infinity when the closed form is undefined or RK diverges (pp. 6-7).",
+  "assumptions": "Two ODE families with analytic C-infinity solutions; training set of 24 systems chosen arbitrarily (acknowledged); psi nonsmooth with infinite holes (pp. 7-8).",
+  "proof_devices": [
+   "none (application note); relies on MADS Clarke-based analysis (p. 8)"
+  ],
+  "experiments": "NOMAD defaults from the classical point, 100 evaluations, single run; training gains >300x (A), 5x (B); held-out 24 systems average gains ~40x and ~4x with worst case better; extrapolation to larger systems; B-tuned parameters worse than classical on A; ode45 comparison (pp. 8-10).",
+  "positioning": "Frames within automated parameter tuning (OPAL, Hoos, SPAPT) and compares to Gill and Ralston parameter choices (pp. 5-6).",
+  "writing": "Very short, demonstration-style; prints the exact one-line Matlab call; admits arbitrariness of training choices (pp. 7-8).",
+  "limits_future": "Tuned parameters are family-specific and may not transfer (p. 10); no future work stated.",
+  "method_links": [
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Algorithm treated as a blackbox and tuned by direct search.",
+    "pages": "p. 5, p. 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Undefined parameters and divergence return psi = infinity (extreme barrier), not a penalty.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Fixed budget and held-out comparison with literature baselines, but no profiles and no replications.",
+    "pages": "pp. 8-9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "SKILL lists a RUNGEKUTTA benchmark from a 2018 paper; this text defines psi but does not mention a release (not stated).",
+    "pages": "p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "train/held-out split for tuned algorithmic parameters",
+    "evidence": "Parameters tuned on 24 training systems, then average and worst error reported on 24 disjoint systems normalized to the default, plus extrapolation.",
+    "pages": "p. 5, p. 9"
+   }
+  ],
+  "transferable": [
+   "Solve algebraic consistency conditions in closed form inside the blackbox so the optimizer sees a low-dimensional unconstrained problem; return infinity where undefined (pp. 6-7).",
+   "Report average and worst error on disjoint held-out instances normalized so defaults score 1 (p. 9).",
+   "Probe extrapolation beyond the training range and report where tuned parameters break (p. 9)."
+  ],
+  "coauthors": "none (single author)",
+  "quotes": [
+   {
+    "text": "Of course, these values could have been chosen differently, thereby leading to a different analysis.",
+    "page": 7
+   },
+   {
+    "text": "The optimized parameters are specifically tuned for each family and may not be pertinent for use with other families.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S124",
+  "year": "2018",
+  "title": "Algorithmic construction of the subdifferential from directional derivatives",
+  "read_level": "full",
+  "contribution": "Gives algorithms and exact upper bounds on the number of exact directional-derivative calls needed to reconstruct a polytope subdifferential: 1-2 in R^1, 3nv (or 3nv+1 without a tight vertex bound) in R^2, 3n-1 in R^n with at most 2 vertices and 5n-1 with at most 3, linking the question to Geometric Probing.",
+  "problem_entry": "DFO methods approximate subdifferentials from approximate directional derivatives; ask the idealized counting question for polytope subdifferentials (finite max functions) and exact derivatives (pp. 2-4).",
+  "key_idea": "Abstract to finding vertices of a polytope from a support-function oracle (Hyperplane Probing without contact location); refine outer polytope and inner vertex set in R^2; lift to R^n via projections (pp. 5-7, 13-15).",
+  "assumptions": "Nonempty polytope subdifferential, exact oracle, known bound nf >= nv or nf = infinity (pp. 4-5).",
+  "proof_devices": [
+   "stage-counting: each oracle call moves one true vertex one stage interior(P) -> edge(P) -> vertex(P) -> confirmed, giving 3nv (+1) (Thm 3.3, pp. 10-11)",
+   "tightness by worked example (Example 3.2, p. 12)",
+   "positive spanning initialization costs at most m-3 extra calls (Lemma 3.6, pp. 12-13)",
+   "induction on dimension through projections (vertices of projections are projections of vertices) (Thm 4.4, pp. 14-17)"
+  ],
+  "experiments": "none",
+  "positioning": "Bridges DFO subdifferential approximation (Bagirov, Kiwiel, Hare) and Geometric Probing (Dobkin-Edelsbrunner-Yap 3nv-1 necessary / 3nv sufficient), extending the latter beyond R^2/R^3 (pp. 2, 5-6).",
+  "writing": "Results listed as bullets in the introduction with section pointers (p. 3); summary table of bounds (p. 18); ends with a figure of failure under inexact oracle (p. 19). Extracted text has a stray differently-numbered block on p. 17.",
+  "limits_future": "R^n with arbitrary nf open; inexact oracle adaptation nontrivial for the main algorithms, Figure 9 shows a stall (pp. 18-19).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Theory as exact, tight oracle-count bounds rather than an asymptotic ladder; scope boundary and inexact-oracle failure stated.",
+    "pages": "pp. 10-12, 18-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "cross-field abstraction that imports known bounds",
+    "evidence": "Recast as Hyperplane Probing, import 3nv-1 necessary / 3nv sufficient, price the missing location information at one extra call.",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Reduce the question to an oracle abstraction and look for it in other fields before proving (p. 5).",
+   "Prove oracle-count bounds by stage counting over finitely many states per true object (pp. 10-11).",
+   "Reduce n-D reconstruction to repeated low-dimensional problems via projections and count by induction (pp. 14-17).",
+   "End a theory paper with a picture of how the algorithm breaks under the realistic inexact oracle (pp. 18-19)."
+  ],
+  "coauthors": "W. Hare",
+  "quotes": [
+   {
+    "text": "Interestingly, this reduction of information has very little impact on the algorithm or convergence.",
+    "page": 5
+   },
+   {
+    "text": "However, the more interesting algorithms (Algorithm 3.1, 4.1 and 4.3) are not so trivial to adapt.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S125",
+  "year": "2018",
+  "title": "Selection of variables in parallel space decomposition for the mesh adaptive direct search algorithm",
+  "read_level": "full",
+  "contribution": "Replaces PSD-MADS's random choice of subproblem variables with clusters of variables of similar influence (cache-based variance sensitivity matrix + k-means), adds a hybrid that falls back to random selection when clusters stop producing improvements, sets defaults by parameter sweeps, and improves results on constrained problems up to 4,000 variables.",
+  "problem_entry": "Large-n constrained blackboxes beyond NOMAD's ~20-variable comfort zone; PSD-MADS (2008) chose variables at random and its conclusion asked for better selection (p. 5).",
+  "key_idea": "Sensitivity matrix from the cache (variance-based, ranges binned 10^Pvr), k-means clusters queued for slaves, dynamic subproblem size, and a random-selection diversification phase; full-space pollster keeps MADS convergence (pp. 8, 10-13).",
+  "assumptions": "Problem (1) with blackbox outputs (p. 5); all tests from feasible starts, ruling out a violated/satisfied split (p. 11); no new convergence assumptions.",
+  "proof_devices": [
+   "none: convergence delegated to the pollster whose directions grow dense (p. 8)"
+  ],
+  "experiments": "12 problems n=60-4,000, budget 100n, 30 runs, 500 processes on CASIR, data profiles; one-factor-at-a-time sweeps to defaults (2,10,4,Q,S2); hybrid tested with pre-default parameters due to compute limits; Improved worse than Original on DISK averages, hybrid best Zworst on 9/11; G2-4000 averages -0.079 vs -0.272 vs -0.277 (pp. 14-19).",
+  "positioning": "Reviews parallel decomposition (Block-Jacobi, PVD, PGD, PVT) and parallel DFO (APPS, HOPSPACK, CS-DFN hybrids); builds on STATS-MADS screening (pp. 6-10).",
+  "writing": "Five named parameters with a table and a per-parameter results subsection (pp. 13-17); candid footnote about limited supercomputer access (p. 17).",
+  "limits_future": "Future: surrogate Search in subproblems, PFA on a dedicated slave, strategies for small machines, violated/satisfied grouping for infeasible starts, output correlations (pp. 19-20).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Learned heuristic only chooses subspaces; the full-space pollster carries convergence.",
+    "pages": "p. 8, pp. 10-12"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Discovered variable-influence structure exploited within the direct-search backbone.",
+    "pages": "pp. 10-11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Profiles and 30 replications at large n, but only same-solver variants and defaults not re-run jointly on the 11-problem set.",
+    "pages": "p. 14, p. 17, p. 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "learned selection with random fallback for diversification",
+    "evidence": "After 3 non-improving queue refills, switch to random variable selection for 5n subproblems, then back to k-means.",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "transferable": [
+   "When a learned selection rule starts repeating itself, switch to random selection for a fixed budget, then return (pp. 12-13).",
+   "Get variable-output sensitivities for free from the evaluation cache by binning variable ranges (p. 10).",
+   "Tune several parameters one at a time from a baseline with the original method in every figure (pp. 14-17).",
+   "Footnote when a comparison used non-final parameters and why (p. 17)."
+  ],
+  "coauthors": "S. Alarie, N. Amaioua, S. Le Digabel, L.-A. Leclaire",
+  "quotes": [
+   {
+    "text": "This process is important since it allows to benefit from the convergence analysis of MADS [5].",
+    "page": 8
+   },
+   {
+    "text": "Access to the supercomputer is limited, and we could not use additional access time to perform additional runs.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S114",
+  "year": "2019",
+  "title": "Dynamic improvements of static surrogates in direct search optimization",
+  "read_level": "full",
+  "contribution": "Introduces the hybrid quadratic model (HQM), a quadratic model whose inputs are the n variables plus the static surrogate's value, generalizing additive and multiplicative corrections, and uses it to order MADS poll points; it solves more problems at tight tolerances on MDO and Lockwood problems, though not always.",
+  "problem_entry": "Static surrogates (simplified physics, relaxed tolerances) and dynamic models were combined only by additive or multiplicative corrections (pp. 5-6).",
+  "key_idea": "Treat x0 = g_tilde(x) as an extra model input; fit by regression or minimum-Frobenius norm on cache points in a scaled bounding box of the poll set; order poll points by the HQMs (pp. 7-10).",
+  "assumptions": "X unrelaxable, c_j relaxable with PB (pp. 5, 10); test problems must have a static surrogate and no numerical noise (p. 10); rho value used not stated (only rho=2 in illustration, p. 11).",
+  "proof_devices": [
+   "poisedness for minimum-Frobenius hybrid modelling iff KKT matrix F(phi,Y) nonsingular (Prop. 1, p. 9)",
+   "five-case analysis by number of points (pp. 8-9)",
+   "1-D step-function example (p. 9)"
+  ],
+  "experiments": "NOMAD 3.8.0, four poll orderings; Simple MDO 10/16 variables with fidelity via MDA tolerance, 100 starts x 10 seeds; Simplified Wing; Lockwood with 1/5-cost surrogate, profiles in evaluations and CPU time; hqm best on MDO at tight tau and on Lockwood, not on Simplified Wing (pp. 10-12).",
+  "positioning": "Extends the surrogate management framework and additive/multiplicative correction literature; cites S068 LOWESS as next dynamic model (pp. 5-6, 13).",
+  "writing": "Letter-length; reports a non-dominant case plainly (p. 11); one-sentence intuition in the conclusion (static finds basin, quadratic accelerates) (p. 13).",
+  "limits_future": "Future: combine static surrogates with other dynamic models (e.g., LOWESS) in Search or Poll (p. 13).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The model idea is inserted in poll ordering, a convergence-neutral slot.",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Reuses group blackboxes with fidelity knobs (Simple MDO, Simplified Wing, Lockwood).",
+    "pages": "pp. 11-12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "1,000 seeded runs and CPU-time profiles, but baselines are NOMAD orderings only.",
+    "pages": "pp. 11-12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogate value as an input feature of the model",
+    "evidence": "HQM basis includes x0 = g_tilde(x), subsuming additive and multiplicative corrections without surrogate derivatives.",
+    "pages": "p. 7"
+   },
+   {
+    "pattern": "order-first surrogate use",
+    "evidence": "HQM used only to order poll points; shared with S068 and S144.",
+    "pages": "p. 6, p. 10"
+   }
+  ],
+  "transferable": [
+   "Add a cheap surrogate's value as an extra input coordinate of a local model (p. 7).",
+   "Build local models from cache points in a scaled bounding box of the poll set, with fallback to the raw surrogate (p. 10).",
+   "State the test-problem selection criterion explicitly (p. 10).",
+   "Add CPU-time data profiles when the surrogate cost is not negligible (p. 12)."
+  ],
+  "coauthors": "J. Côté-Massicotte",
+  "quotes": [
+   {
+    "text": "Instead of simply applying an additive or multiplicative correction, the hybrid model treats the static model as an input.",
+    "page": 7
+   },
+   {
+    "text": "These results suggest that the correction brought by HQM is not always dominant.",
+    "page": 11
+   }
+  ]
+ },
+ {
+  "id": "S144",
+  "year": "2019",
+  "title": "Constraint scaling in the Mesh Adaptative Direct Search algorithm",
+  "read_level": "full",
+  "contribution": "Makes MADS-PB less sensitive to constraint scaling by dividing each constraint in the violation function by a dynamic weight (first, median or maximum violation), re-anchors the barrier threshold after rescaling, proves that the first two leave the PB analysis intact after finitely many changes and that the maximum weighting keeps monotonicity and uniform-convergence properties, and finds the maximum weighting best on analytic and unbalanced surrogate-assisted problems.",
+  "problem_entry": "Scaling a constraint leaves the feasible set unchanged but changes PB's aggregate violation, so MADS-PB depends on units (pp. 4-5).",
+  "key_idea": "h(x;a) = sum max(0, c_i/a_i)^2 with dynamic weights; re-anchor h_max on the same cache point after a weight change; optionally weight the surrogate h_tilde used for ordering (pp. 8-9, 12-13).",
+  "assumptions": "A1 (finite x0 in X), A2 (compactness) from PB, plus A3 (c_i bounded above on X) for uniform convergence (pp. 7, 12); c relaxable/quantifiable, X unrelaxable (p. 5).",
+  "proof_devices": [
+   "finitely many weight changes, then invoke the PB analysis from k_max (p. 10)",
+   "1-D counterexample with infinitely many rescalings for the maximum weighting (p. 10)",
+   "monotone weights imply convergence of h(.;a^k), eventual monotonicity of h_max, non-increase of evaluated h (Thms 3-5, pp. 10-11)",
+   "uniform convergence bound C^2 * sum |1/(a_i^k)^2 - 1/a_i^2| under A3 (Thm 6, p. 12)"
+  ],
+  "experiments": "NOMAD 3.8.0 OrthoMADS, 1,500 evaluations; 5 analytic problems (500 instances) and Styrene/MDO/Lockwood (30 starts each), plus unbalanced twins scaled by 10^j; data profiles; max weighting best on analytic (58% vs <35% at 1e-5), blackboxes inconclusive, weighting h and h_tilde best on unbalanced blackboxes with surrogates (pp. 13-16).",
+  "positioning": "Complements dynamic variable scaling [8] with output scaling; builds on PB and the Le Digabel-Wild constraint taxonomy (p. 5).",
+  "writing": "Motivates with a units example (1 km vs 1000 m) (p. 5); lists each weighting's drawbacks before testing (pp. 8-9); honest inconclusive result (p. 17); some printed slips (pp. 11, 13).",
+  "limits_future": "PB result for the limit h(.;a) left as hope (p. 12); blackbox results inconclusive; future: learn constraint importance via sensitivity analysis as in S125 (p. 17).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Relaxable/quantifiable vs unrelaxable split, h=+inf outside X; maximum weighting fragile to 1e20 error outputs from hidden constraints.",
+    "pages": "pp. 5-6, 9"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Counterexample first, then strongest surviving properties, with the gap stated.",
+    "pages": "pp. 10-12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Synthetic unbalanced twins and realistic blackboxes, but no other solver family; blackbox results inconclusive.",
+    "pages": "pp. 13-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "eventually-static adaptation",
+    "evidence": "Weights change at most once per constraint so the PB analysis applies after the last change; cf. S158 finite barrier migrations.",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "invariance stress test via rescaled twin problems",
+    "evidence": "Each constraint multiplied by 10^{j_i} (Table 3) with the same starting points.",
+    "pages": "pp. 13-14"
+   }
+  ],
+  "transferable": [
+   "Make an adaptive merit change finitely often, then invoke the existing analysis after the last change (p. 10).",
+   "Re-anchor the acceptance threshold on the same stored point after rescaling (p. 9).",
+   "Test invariance claims with rescaled twins (10^{j_i} per constraint, same starts) (pp. 13-14).",
+   "Build the 1-D example where an adaptive rule adapts infinitely often, then prove the weaker monotonicity properties (pp. 10-12)."
+  ],
+  "coauthors": "G. Caporossi, S. Jacquet",
+  "quotes": [
+   {
+    "text": "In an optimization problem, multiplying an inequality constraint by a positive scalar has no effect on the domain. However, such a transformation might have an effect in practice.",
+    "page": 4
+   },
+   {
+    "text": "The results on the blackbox problems were inconclusive.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S166",
+  "year": "2019",
+  "title": "Low-cost and representative surrogate hydrological models. Part II-Use within calibration frameworks",
+  "read_level": "full",
+  "contribution": "Tests five ways of plugging reduced-fidelity HYDROTEL models into the hybrid DDS-MADS calibration approach and shows a menu of time-quality tradeoffs, with the best compromise on the 19-parameter model obtained by calibrating through a cheaper 10- or 17-parameter reduced model and finishing with MADS on the true model.",
+  "problem_entry": "Hydrological calibration of a computationally intensive distributed model; combine efficient optimization (DDS-MADS) with low-cost surrogates and manage surrogate vs original use (pp. 5-6).",
+  "key_idea": "Sequence global DDS and local MADS with five transition features (shared cache, stagnation switch, mesh initialized from good DDS points, budget transfer, rounding) and place reduced-fidelity models in the global phase, the true model in the MADS phase (frameworks A-E) (pp. 7-10).",
+  "assumptions": "Reduced-fidelity models qualified by CPU-time ratio and rank correlation of 1-NSE; HYDROTEL 10 surrogates 16-44x cheaper, HYDROTEL 19 only ~2x; HYDROTEL 17 surrogate representativeness not evaluated (pp. 8-10).",
+  "proof_devices": [
+   "none (empirical)"
+  ],
+  "experiments": "3 watersheds x 2 model versions, 32 trials per framework, boxplots of final 1-NSE; time vs DDS-MADS-Bench and quality vs DDS-Bench; framework B 94-98% faster but not locally optimal for the true model; D/E best compromise on HYDROTEL 19 (pp. 11-15). Tables 1-4 not extracted.",
+  "positioning": "Builds on Razavi et al. surrogate reviews and Razavi-Tolson reduced-fidelity calibration; questions Toal's 0.9 representativeness threshold for reduced-fidelity models (pp. 5-6, 16).",
+  "writing": "Hydrology-journal style with per-framework narrative subsections; conclusion framed as user choice among tradeoffs (pp. 11-16).",
+  "limits_future": "HYDROTEL-specific; future: study CPU-ratio levels, representativeness requirements, other models, more watersheds and objectives (p. 16).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Heuristic and rigorous parts are sequenced (DDS then MADS) rather than nested as Search/Poll; MADS on the true model restores local optimality.",
+    "pages": "pp. 7-8, p. 12"
+   },
+   {
+    "method": "Taste warning sign 6",
+    "relation": "evidence",
+    "note": "DDS heuristic wrapped with a MADS backbone and stopping test.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Wall-clock currency with 32 trials, but different benchmarks for time and quality and no profiles.",
+    "pages": "p. 11"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "parameter-reduction fidelity",
+    "evidence": "Cheap model built by removing the 2 parameters that drive cost (HYDROTEL 10/17 as surrogates for HYDROTEL 19).",
+    "pages": "p. 10, p. 16"
+   },
+   {
+    "pattern": "tradeoff menu instead of a single winner",
+    "evidence": "Frameworks A-E recommended by user objective (quality vs time).",
+    "pages": "pp. 15-16"
+   }
+  ],
+  "transferable": [
+   "When chaining a global heuristic with MADS: share the cache, switch on stagnation, initialize mesh sizes from the spread of good heuristic points (pp. 7-8).",
+   "Round the objective to the precision that matters to stop noise-driven mesh oscillation (p. 8).",
+   "Report a surrogate's CPU-time ratio and rank correlation before using it; classify ratios (ideal > 15) (pp. 8-9, 16).",
+   "End surrogate-only runs with one true evaluation and state that the result is not a local optimum of the true model (p. 12)."
+  ],
+  "coauthors": "P.-L. Huot, A. Poulin, S. Alarie",
+  "quotes": [
+   {
+    "text": "It is important to keep in mind that framework B does not provide a local optimal solution for the original model.",
+    "page": 12
+   },
+   {
+    "text": "No experiments have been completed to evaluate the level of representativeness and the CPU time ratios of the reduced-fidelity HYDROTEL 17 models, but this version is expected to yield good performance on CPU time ratio and representativeness.",
+    "page": 10
+   }
+  ]
+ }
+]

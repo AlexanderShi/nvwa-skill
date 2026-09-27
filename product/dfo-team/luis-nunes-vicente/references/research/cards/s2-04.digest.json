@@ -1,0 +1,562 @@
+[
+ {
+  "id": "S082",
+  "year": "2012",
+  "title": "Modeling binary stars: age, helium abundance, and convection parameters",
+  "read_level": "full",
+  "contribution": "Uses the CESAM–PSwarm simulation-based optimization pipeline to estimate mass, age, helium, metals, mixing length and overshooting, with error bars, for the 14 stars of seven FGK binaries, and finds that only VZ Hya and alpha Cen are compatible with solar-scaled models in both components (pp. 1, 3-5, 8).",
+  "problem_entry": "Six stellar unknowns against four observables make single-star calibration underdetermined; the field fixes solar Delta Y/Delta Z and alpha by assumption, and binaries (coeval, same composition) offer a test of that assumption (pp. 2-3).",
+  "key_idea": "No new algorithm: an error-weighted least-squares misfit solved by PSwarm (global, derivative-free) is wrapped in a protocol of 35 runs per star, pair filtering by an agreement metric theta < 1 and objective < 1, averaging, and perturbation-based error bars (pp. 3-5).",
+  "assumptions": "Coeval binary components with common composition; MLT convection with free alpha, ov = 0 below 1.1 solar masses; fixed input physics and primordial helium 0.23 kept for consistency with the 2011 work (pp. 2-4).",
+  "proof_devices": [
+   "none (no theorems); statistical devices only: pair-consensus filter theta<1 with objective<1 (p. 4) and RMS of estimates re-solved under +/-1 sigma perturbation of each observable (p. 5)"
+  ],
+  "experiments": "14 stars from Torres et al. (2010); mass recovery regression R^2 = 0.9916 (Fig. 1, p. 5); literature comparison per binary (pp. 5-6); bias check against the earlier 115-star sample (p. 7).",
+  "positioning": "Places itself in the binary-star calibration literature (Popper & Ulrich, Andersen, Torres et al.) and agrees with prior studies except for NGC188 KR V12, where it proposes an alternative explanation to Meibom et al. (pp. 1-2, 6, 8).",
+  "writing": "Domain-journal style with hedged physical interpretation (seems to indicate, we suspect) and a single methodology paragraph that cites PSwarm (pp. 1, 3, 7).",
+  "limits_future": "Models lack rotation, which a sub-solar alpha may mimic, flagged for further study; alpha–mass trend mixes age and composition; overshooting trend within large error bars (pp. 7-8).",
+  "method_links": [
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "A Vicente solver is the engine of a domain-journal (astrophysics) paper.",
+    "pages": "pp. 2-5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Downstream use of PSwarm, the swarm-in-search-step product of Method 1, chosen because the problem needs global derivative-free search.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Released solver reused, but validation by recovering a known quantity and literature agreement, not by a collection with profiles.",
+    "pages": "pp. 4-5, 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory paper / application paper split",
+    "evidence": "Solver paper (2007) and application papers (2011 = S075, 2012) are separate; the application paper describes the solver in one paragraph.",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "multistart consensus filter for non-identifiable inverse problems",
+    "evidence": "35 runs per star; keep run pairs agreeing on shared age/X/Y (theta<1) with objective<1; average survivors.",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Multistart plus consensus filter: keep only runs that fit within error bars and agree on physically shared parameters across linked objects, then average (pp. 4-5).",
+   "Derivative-free error bars: re-solve with each observable at its +/-1 sigma extreme, one at a time, and report RMS change and a per-observable sensitivity table (p. 5).",
+   "Leave a known quantity free so that recovering it validates the pipeline (pp. 4-5).",
+   "Check for method bias toward a reported trend on an earlier, larger sample (p. 7)."
+  ],
+  "coauthors": "J. M. Fernandes, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "Our numerical experience has also shown that this problem has non-unique global minimizers.",
+    "page": 3
+   },
+   {
+    "text": "Thus, to properly solve it, one must select a solver capable of global optimization without the use of derivatives (and, preferably, in a parallel environment, given the cost of the numerical simulations).",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S090",
+  "year": "2013",
+  "title": "Inexact solution of NLP subproblems in MINLP",
+  "read_level": "partial",
+  "contribution": "Shows how the master-problem cuts of outer approximation and generalized Benders decomposition for convex MINLP can absorb the residuals of inexactly solved NLP subproblems while keeping equivalence to a perturbed MINLP and finite termination, and tests exact versus inexact cuts on 19 AMPL problems (pp. 1, 4-6, 11, 15-21).",
+  "problem_entry": "OA and GBD theory (equivalence, finiteness) assumes exact NLP subproblem solutions; the paper asks what changes when only inexact KKT conditions hold (pp. 2-3).",
+  "key_idea": "Keep the OA/GBD loops and change only the cuts: perturbed gradient (grad_y f - r), right-hand sides s/lambda and a formula in z, w, u for infeasible subproblems; zero residuals recover the classical master (p. 4).",
+  "assumptions": "Convex C1 f, g; bounded polyhedral X; feasible approximate NLP solutions and nonnegative multipliers; correct feasibility classification; residuals bounded by a fraction of the convexity gap for every pair of discrete assignments (Assumptions 2.1-2.2) (pp. 2-6, 22).",
+  "proof_devices": [
+   "multiply inexact infeasibility cuts by the multipliers mu^k and sum: left side vanishes by the inexact KKT equations, right side equals -u^k < 0, so x^k is excluded (pp. 6-7)",
+   "Cauchy–Schwarz plus residual bound ||r|| <= tau * gap / ||dy|| leaves (1 - tau) * convexity gap <= 0, keeping perturbed cuts valid (pp. 7-8)",
+   "finiteness by showing no discrete assignment is generated twice (Theorem 2.2, p. 11)",
+   "inexact KKT point = exact solution of a perturbed NLP (Appendix A.1, p. 22)",
+   "exact theory recovered as corollary with zero residuals (Corollaries 2.1, 3.1, pp. 9, 14)"
+  ],
+  "experiments": "MATLAB fmincon + CPLEX on 19 MacMINLP/CMU-IBM AMPL problems; exact vs inexact cuts with inexact NLP solves; report iterations N and count C of violated assumption inequalities; inexact cuts cycle less and usually need fewer OA iterations (pp. 16-21).",
+  "positioning": "Extends Duran–Grossmann, Fletcher–Leyffer, Quesada–Grossmann and Bonami et al.; follows the proof of Bonami et al. Theorem 1 and the algorithm presentation of Fletcher–Leyffer; credits Grossmann for placing inexact OA between exact OA and ECP (pp. 1-2, 6, 10, 20).",
+  "writing": "Scope exclusion stated in the introduction, a figure giving the geometry of exact vs inexact cuts, and experiments labelled preliminary (pp. 2, 4, 6).",
+  "limits_future": "Assumptions need NLP solves at all discrete assignments, which defeats the purpose of inexactness; convexity, feasibility, nonnegative multipliers and exact feasibility classification are needed; larger tests and solver integration left open (pp. 20, 22).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "OA/GBD skeleton kept; only the cut absorbs residuals; exact theory re-derived with the exact case as corollary (outside DFO).",
+    "pages": "pp. 4-6, 9, 11, 14-15"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Exactness relaxed to a deterministic residual bound that cannot be checked in practice, unlike Method 3's implementable threshold rule.",
+    "pages": "pp. 5, 20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Public AMPL collections but tables only; no profiles, no mention of released code.",
+    "pages": "pp. 16-21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "Numerics run without imposing Assumptions 2.1-2.2 and count their violations post hoc (column C).",
+    "pages": "pp. 16, 20"
+   },
+   {
+    "pattern": "nest the known theories as special cases",
+    "evidence": "Corollaries 2.1 and 3.1 recover exact OA and GBD equivalence with zero residuals.",
+    "pages": "pp. 9, 14"
+   }
+  ],
+  "transferable": [
+   "Treat an inexact KKT point as an exact solution of a perturbed problem and reuse the exact theory on it (p. 22; eq. (6), p. 3).",
+   "Keep a perturbed linearization cut valid by bounding the slope perturbation by a fraction tau of the convexity gap (Assumption 2.1, Fig. 1, pp. 5-8).",
+   "When a condition cannot be imposed, run without it and report per problem how many of its inequalities were violated (pp. 16-21).",
+   "Tighten the inner tolerance with outer progress, e.g. min{1e-2, max{1e-6, 10^-theta |UBD_{p-1} - UBD_{p-2}|}} (eq. (29), p. 16)."
+  ],
+  "coauthors": "M. Li",
+  "quotes": [
+   {
+    "text": "Our treatment of inexactness does not, however, address inexactness in the classification of NLP subproblems feasibility.",
+    "page": 2
+   },
+   {
+    "text": "Such requirement would then undermine the practical purpose of saving computational effort aimed by the NLP subproblem inexactness.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S061",
+  "year": "2014",
+  "title": "Efficient cardinality/mean-variance portfolios",
+  "read_level": "full",
+  "contribution": "Recasts the cardinality-constrained Markowitz model as a biobjective problem (return per variance vs cardinality), computes the whole efficient front in one run with the direct multisearch solver used off the shelf, and evaluates the portfolios out-of-sample against 1/N and Markowitz/MIQP baselines (pp. 1, 7-13).",
+  "problem_entry": "The cardinality constraint makes Markowitz an MIQP that must be re-solved for each K, while no model consistently beats the naive 1/N strategy; make cardinality an objective instead (pp. 1, 5-6).",
+  "key_idea": "min -mu'w/w'Qw and min card(w) over e'w = 1 with bounds; solve the discontinuous biobjective problem with DMS after epsilon-thresholding the count, symmetric bounds and eliminating the equality (pp. 7, 14).",
+  "assumptions": "Historical estimates of mean and covariance; linear returns and variance as risk; short selling allowed; no convergence claim beyond DMS's existing theory for discontinuous functions (pp. 2, 7-8, 13).",
+  "proof_devices": [
+   "none (no theorems)"
+  ],
+  "experiments": "FTSE 100 (12/24/48 securities, 2003-2007, plus 2003-2010 crisis set) and Fama/French FF10/17/48; rolling-sample out-of-sample Sharpe ratio, 50-bp transaction costs, Sharpe net of costs; baselines 1/N, max return per variance, min variance, MIQP per K; p-values computed but not significant (pp. 7-11).",
+  "positioning": "Takes DeMiguel–Garlappi–Uppal's 1/N as the benchmark and contrasts itself with Brodie et al.'s l1 penalty, which needs a tuned parameter and lacks a stated efficiency property (pp. 1, 5-6, 12).",
+  "writing": "Result framed as surprising and as a more direct way to handle sparsity; the abstract states outperformance while the non-significance appears only in Section 4.4 (pp. 1, 10, 12-13).",
+  "limits_future": "Net of costs no gain over 1/N on FTSE data; MIQP better on net Sharpe; problem structure (smooth first objective, parallel poll) unused; FF100 needed about 1e7 evaluations; future: any black-box risk measure (pp. 10, 12-13).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The K-parameterized constraint becomes an objective; front computed without aggregation (Heuristic #4).",
+    "pages": "pp. 6-7, 12-13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Released dms solver reused with documented parameter changes; evaluation by domain metrics on six data sets, no profiles.",
+    "pages": "pp. 8-14"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Finance application of the DMS solver.",
+    "pages": "pp. 7-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reformulate to reuse existing DFO solvers",
+    "evidence": "Epsilon-count, symmetric bounds, equality eliminated by substitution so dms can be applied.",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "promote the swept parameter to an objective",
+    "evidence": "Cardinality bound K becomes a second objective; one run covers all cardinalities.",
+    "pages": "pp. 6-7, 12-13"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Net-of-cost Sharpe does not beat 1/N on FTSE; MIQP better on net Sharpe.",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "Turn a swept model parameter into an objective and compute one Pareto front for all its values (pp. 6-7, 12-13).",
+   "Make a discontinuous objective direct-search-ready: epsilon-thresholded count, symmetric box, eliminate the single equality by substitution (p. 14).",
+   "Portfolio out-of-sample protocol: rolling window, Sharpe, Sharpe net of proportional costs, crisis-period rerun, 1/N benchmark (pp. 9-11).",
+   "List every solver parameter changed from default (budget, tolerance, cache, initial list) (p. 14)."
+  ],
+  "coauthors": "R. P. Brito",
+  "quotes": [
+   {
+    "text": "Direct multisearch was applied off-the-shelf to determine the cardinality/mean-variance efficient frontier.",
+    "page": 13
+   },
+   {
+    "text": "It is unclear what sort of efficient or nondominant property their portfolios satisfy.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "S071",
+  "year": "2014",
+  "title": "A surrogate management framework using rigorous trust-region steps",
+  "read_level": "full",
+  "contribution": "Introduces a surrogate management framework in which an optional search step (surrogate, heuristic) precedes a rigorous derivative-free trust-region step, proves liminf and lim first-order convergence by rewriting TR theory in direct-search form, and illustrates a Gauss–Newton search step on least squares (pp. 1-4, 9-17).",
+  "problem_entry": "Booker et al.'s surrogate framework exists only for direct search, where the poll is the rigorous step; trust-region DFO has no mesh, so the search step needs sufficient decrease (p. 2).",
+  "key_idea": "Search step accepted if f <= f_k - rho(Delta_k), radius kept or increased and TR step skipped; otherwise a CSV-type derivative-free TR step with criticality and model improvement (Algorithms 2.1-2.2, pp. 3-6).",
+  "assumptions": "Lipschitz gradient on the enlarged level set, fully linear model class with model-improvement algorithm, f bounded below, bounded model Hessians, rho(Delta) -> 0 implies Delta -> 0 (pp. 7-9).",
+  "proof_devices": [
+   "trust radius -> 0 first: successful decreases rho(Delta_k) and eta1*Cauchy decrease must vanish, radius grows only by gamma_inc (Lemma 3.2, pp. 9-10)",
+   "radius reduced infinitely often only in TR steps, each with ||g_k|| = O(Delta_k), plus fully linear gradient error <= kappa_eg Delta_k (Theorem 3.1, pp. 10-11)",
+   "lim result via subsequence contradiction with search step restricted to B(x_k; gamma_fac Delta_k), rho linear and fully linear models there (Theorem 3.2, pp. 11-13)"
+  ],
+  "experiments": "53 Moré–Wild least-squares problems; interpolation TR solver [3] with vs without a Gauss–Newton search step built from simplex gradients; data profiles N = 100, 200, tau = 1e-1, 1e-5; search step helps except at very small budgets (pp. 13-17).",
+  "positioning": "Continues Booker et al. (1998) and uses Conn–Scheinberg–Vicente TR as rigorous step; names Scheinberg–Toint self-correcting geometry as an alternative (pp. 2, 4, 18).",
+  "writing": "Contribution stated by analogy with search/poll direct search in the abstract, a second contribution of proof reorganization, and an intuitive paragraph before Theorem 3.1 (pp. 1-3, 10).",
+  "limits_future": "Illustration only; sample-set communication between search and TR steps left application dependent; framework also applies to derivative-based TR; no complexity (pp. 18).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Free search slot glued by sufficient decrease; convergence from the rigorous step; radius never reduced in search.",
+    "pages": "pp. 2-4, 9-11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "TR skeleton kept; acceptance of the added step is sufficient decrease because no mesh exists.",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "On/off ablation on data profiles but no external baselines and no mention of code release.",
+    "pages": "pp. 14-16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "transplant the proof skeleton across algorithm families",
+    "evidence": "TR convergence rewritten as direct search: step size (radius) -> 0, then stationarity on radius-reducing iterations; lim needs a near-empty search step as in direct search.",
+    "pages": "pp. 2-3, 9-11"
+   }
+  ],
+  "transferable": [
+   "Add a search step to any TR method: accept only on f <= f_k - rho(Delta_k), never shrink Delta after search, analyse only the rigorous steps (pp. 3-4, 9-10).",
+   "Two-line DFO-TR liminf: prove Delta_k -> 0, then ||g_k|| = O(Delta_k) on every radius-reducing iteration (pp. 9-11).",
+   "Least-squares search step: Jacobian from n simplex gradients on the n closest scaled sample points, Gauss–Newton step in a ball of radius theta*Delta_k (pp. 13-14).",
+   "Ablate one addition on data profiles without retuning the base method in its favour, and explain where the budget hides the effect (pp. 15-16)."
+  ],
+  "coauthors": "S. Gratton",
+  "quotes": [
+   {
+    "text": "the benefits of the search step would even be more noticed, but we did not want to tailor the underlying method to the benefit of this step.",
+    "page": 16
+   },
+   {
+    "text": "the principle of a search or oracle step can also be applied to most derivative-based trust-region methods described in [5].",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S097",
+  "year": "2014",
+  "title": "Globally convergent DC trust-region methods",
+  "read_level": "full",
+  "contribution": "Solves trust-region subproblems over closed convex sets with the DC algorithm applied to a proximal DC split of the quadratic model, proves that every limit point is first-order critical with only one projection per step required, and shows a C implementation (TRDC) is competitive with TRON, IPOPT and Lancelot B on 271 CUTEr problems (pp. 1-2, 5-15).",
+  "problem_entry": "Trust-region steps for convex-constrained problems usually need a fraction of the generalized Cauchy decrease, which may cost several projections; bring DCA in as the subproblem solver (pp. 1-2).",
+  "key_idea": "m = [rho/2||p||^2 + indicator_D] - [rho/2||p||^2 - m] with rho = ||Hessian|| + eps; each DCA iteration is one projection onto (C - x_k) ∩ B(0, Delta_k) (pp. 4-5).",
+  "assumptions": "f C2 with Lipschitz Hessian on C and exact Hessian in the model; f bounded below used in the proof though not in the theorem statement; experiments bound-constrained only (pp. 1-2, 6-7).",
+  "proof_devices": [
+   "convexity of the second DC component plus projection inequality give telescoping model decrease >= rho ||p||^2 / (2 l0) (eq. (8), p. 6)",
+   "Taylor error kappa Delta^3/6 vs decrease of order ||p||^2 gives |tau_k - 1| <= kappa l0 ||p|| / (3 rho), so small radii succeed and Delta_k >= Delta_min > 0 (p. 6)",
+   "limit of the projection optimality condition gives -grad f(x_inf) in the normal cone for every limit point (p. 7)"
+  ],
+  "experiments": "TRDC in C on 271 unconstrained/bound CUTEr problems vs TRON, IPOPT, Lancelot B; CPU-time performance profiles in the modified form for zero times and in the original form without easy problems; TRDC competitive, especially n <= 2000, about 90% robustness (pp. 8-15).",
+  "positioning": "Surveys bound-constrained method classes and places itself as a trust-region method with a projected-gradient flavour; compares its step requirement with the generalized Cauchy point (pp. 2, 5).",
+  "writing": "Abstract states both the price (exact second derivatives) and the gain (one projection); conclusion calls the proof short and clean (pp. 1, 15).",
+  "limits_future": "Exact second derivatives required; first-order only, no rate or complexity; only bound constraints tested; alternative DC split conjectured but not proved; no future-work section (pp. 1-2, 7-8, 15).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "TR skeleton and ratio test kept; the step-quality requirement (DCA-step decrease instead of Cauchy decrease) changes, not the acceptance test.",
+    "pages": "pp. 5-6, 15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "C implementation, 271-problem collection, strongest derivative-based baselines, two profile variants.",
+    "pages": "pp. 8-15"
+   },
+   {
+    "method": "Taste #3",
+    "relation": "evidence",
+    "note": "DCA used unchanged; minimal effort per iteration is one projection.",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "implementable accuracy conditions",
+    "evidence": "Inner DCA stopping test (model decrease >= C||p||^2) is exactly the inequality the proof uses.",
+    "pages": "p. 8"
+   },
+   {
+    "pattern": "import a collaborator's method as the subproblem engine",
+    "evidence": "DCA from the Le Thi / Pham Dinh school becomes the TR subproblem solver.",
+    "pages": "pp. 2-5"
+   }
+  ],
+  "transferable": [
+   "Proximal DC split with rho >= ||Hessian of model||: each inner iteration is one projection and decreases telescope to >= rho||p||^2/(2 l0) (pp. 4-6).",
+   "A model decrease of order ||p||^2 against a Taylor error of order ||p||^3 gives a radius floor and a result for every limit point (pp. 6-7).",
+   "Make the inner stopping rule the exact inequality the proof consumes, with a free constant (p. 8).",
+   "CPU-time profiles with zero timings: shifted-ratio profiles plus original profiles on the non-trivial subset, reported together (pp. 11-13)."
+  ],
+  "coauthors": "H. A. Le Thi, H. V. Ngai, P. Dinh Tao, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "We will see that the theory requires only one DCA iteration to solve the trust-region subproblem, which amounts to only one projection onto the feasible region",
+    "page": 2
+   },
+   {
+    "text": "all it is required is a reduction in the predicted decrease of the order of the square of the step (being irrelevant the size of the constant multiplying it)",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S057",
+  "year": "2015",
+  "title": "Globally convergent evolution strategies for constrained optimization",
+  "read_level": "full",
+  "contribution": "Extends globally convergent (CMA-type) evolution strategies to unrelaxable constraints via an extreme barrier, with offspring conformed to the constraints either by adding tangent-cone positive generators or by projection, proves Clarke-stationarity results, and tests bound, linear and nonlinear constrained problems against BCDFO, CMA-ES, MCS, PSWARM and MADS (pp. 1-19).",
+  "problem_entry": "The 2015 globally convergent ES covered only unconstrained problems, and ES constraint handling relies on penalties; treat constraints as unrelaxable with a feasible start (p. 2).",
+  "key_idea": "Sufficient decrease on the weighted mean of the extreme-barrier function; directions either augmented with positive generators of the epsilon-active tangent cone (ES-LC-B) or replaced by projected offspring (ES-LC-P); optional quadratic-model search step (pp. 4, 7-11).",
+  "assumptions": "f bounded below and Lipschitz near the limit point; nonempty hypertangent cone; bounded directions; sigma_k||a_k|| -> 0 and rho(sigma_k)/(sigma_k||a_k||) -> 0; bounded iterates for a refining subsequence (pp. 5-6).",
+  "proof_devices": [
+   "refining subsequence of unsuccessful iterations with sigma -> 0 from sufficient decrease (Lemma 2.1, p. 5)",
+   "insert x_k + sigma_k a_k into the Clarke–Jahn lim sup and use f_Omega(x_k + sigma_k a_k) > f(x_k) - rho(sigma_k) (Theorem 2.1, pp. 6-7)",
+   "density required only in the union of nearby tangent cones when constraint derivatives are known (Theorem 2.2, p. 7)",
+   "projection viewed as modified directions with Lipschitz projection giving condition (i) (p. 9)"
+  ],
+  "experiments": "114 bound and 107 linearly constrained AMPL problems vs BCDFO, CMA-ES, MCS, PSWARM; performance profiles (3000 evals) and data profiles (1500 evals), 10 runs averaged; nonlinear G1-G13 + 3 engineering problems vs MADS-EB with a feasibility phase (pp. 11-20).",
+  "positioning": "Extends the authors' unconstrained ES; contrasts penalty-based ES constraint handling and direct-search tangent-cone methods; MADS-EB as the nonlinear baseline (pp. 2, 7-8, 17).",
+  "writing": "Abstract lists both approaches and the implementation features; results name winners and losers plainly, including the authors' weaker variant (pp. 1, 14, 16).",
+  "limits_future": "Nonlinear tests essentially a proof of concept; only unrelaxable constraints (merit-function treatment of relaxable ones in Diouane's thesis); barrier variant weak on linear constraints (pp. 3, 14, 19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "ES generation and CMA step kept (sigma reset to the CMA step when larger); ES directions remain over 90% of selected directions.",
+    "pages": "pp. 2, 4, 10, 12"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Unrelaxable constraints only through the extreme barrier in the acceptance test (Heuristic #6); one theorem covers both direction-conforming variants.",
+    "pages": "pp. 3, 7-9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Performance and data profiles, strongest DFO baselines including unsafeguarded CMA-ES, search-step ablation, losing variant reported.",
+    "pages": "pp. 11-18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "exploit the problem's own geometry",
+    "evidence": "Positive generators of the epsilon-active tangent cone added to random ES directions.",
+    "pages": "pp. 9-10"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "ES-LC-B worst on linear constraints in performance profiles; PSWARM ahead in data profiles.",
+    "pages": "pp. 14, 16"
+   }
+  ],
+  "transferable": [
+   "Conform a randomized sampler to constraints by augmenting its directions with tangent-cone generators or by projecting samples, then re-check only two scalar conditions on the mean direction (pp. 6-10).",
+   "Epsilon-active generators: epsilon = min(0.1, 10 sigma_k), halve until full row rank, D = [Z -Z Y -Y] from QR of the active rows (pp. 9-10).",
+   "Feasibility phase by minimizing sum of max(c_i, 0) and separate reporting of constraint (#g) and objective (#f) evaluations (pp. 17-19).",
+   "Average f_L and the data profile over runs for stochastic solvers (pp. 14-16)."
+  ],
+  "coauthors": "Y. Diouane, S. Gratton",
+  "quotes": [
+   {
+    "text": "What makes it possible to derive a result like Theorem 2.2 valid for nonlinear constraints is the use of sufficient decrease (which takes care of the need to drive the step-size parameter to zero).",
+    "page": 8
+   },
+   {
+    "text": "Our experience tells us that the ES directions are still predominant, representing more than 90% of the overall selected directions.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S043",
+  "year": "2016",
+  "title": "Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation",
+  "read_level": "partial",
+  "contribution": "Proposes a Levenberg–Marquardt method whose gradient model is accurate only with a probability conditioned on the past and whose subproblems are solved inexactly, proves almost-sure liminf convergence of the true gradient, and applies it to 4DVAR data assimilation with ensemble Kalman smoother gradients (pp. 1, 5-11, 15-25).",
+  "problem_entry": "In 4DVAR, ensemble methods give stochastic gradient approximations; LM regularization keeps the subproblem structure while globalizing Gauss–Newton (pp. 1-2).",
+  "key_idea": "Gradient model within kappa/gamma^alpha with probability p given the past; on success with ||g_m|| >= eta2/gamma^2, gamma_{j+1} = max{gamma_j lambda^((1-p_j)/p_j), gamma_min}; inexact normal-equation residual tied to gamma (pp. 5-7).",
+  "assumptions": "Lipschitz gradient on the level set, bounded Jacobian models, probability guesses in [p_min, p_max] within (0,1), least-squares f bounded below by zero (pp. 5, 8-9).",
+  "proof_devices": [
+   "LM analogue of the small-radius-implies-success lemma: gamma above a threshold and accurate gradient give rho_j >= eta1 (Lemma 5.2, pp. 8-9)",
+   "gamma_j -> infinity on every realization (Lemma 5.3, p. 9)",
+   "submartingale W_j = sum(1_{S_i}/p_i - 1) with bounded increments => lim sup W_j = infinity a.s. (Lemma 5.4, Durrett, pp. 9-10)",
+   "B_j = log_lambda(b/gamma_j) dominates W_j because p_j enters the gamma update, contradiction (pp. 10-11)"
+  ],
+  "experiments": "Rosenbrock least squares with Gaussian gradient noise, 60 runs, p_j = 1 vs chi-square-based p_j vs p_min; expensive-gradient case with randomized exact calls; Lorenz–63 4DVAR twin experiment with EnKS for N = 4, 40, 80, 400; p_j = 1 stagnates in all cases (pp. 11-15, 23-25).",
+  "positioning": "Follows Bandeira–Scheinberg–Vicente probabilistic trust regions; positions against Bocquet–Sakov iterative EnKS, which nests the minimization inside EnKS and uses classical LM without derivative-approximation control (pp. 5, 10, 25-26).",
+  "writing": "Tutorial-style 4DVAR section for the less familiar reader; theory, then two toy illustrations, then the application; the main practical difficulty is named in the conclusions (pp. 2, 15, 25).",
+  "limits_future": "Guaranteeing probabilistic accuracy is the main practical difficulty; small ensembles need pseudo-inverses outside the theory; large realistic data assimilation left open; liminf only; a cross-reference to a non-existent Proposition 4.2 (pp. 10, 22-23, 25).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Gradient accuracy required only with probability conditioned on the past; submartingale argument; almost-sure convergence.",
+    "pages": "pp. 5, 9-11"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Step 6: deterministic update (p_j = 1) run against the probabilistic one on the same problems; deterministic stagnates.",
+    "pages": "pp. 11-13, 23-25"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "LM skeleton kept; only the gamma update and its trigger change; exact gradients recover the classical update.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Data assimilation application (4DVAR with EnKS).",
+    "pages": "pp. 15-25"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "condition on the past, not independence",
+    "evidence": "Assumption 3.1 conditions on the sigma-algebra of past models.",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "derive the probability from the noise model or certify it by construction",
+    "evidence": "Chi-square formula for Gaussian noise, ensemble-size formula for EnKS, and a randomized exact-gradient call with guaranteed probability.",
+    "pages": "pp. 11, 13-14, 21"
+   }
+  ],
+  "transferable": [
+   "Scale the accuracy requirement with the method's own parameter (kappa/gamma^alpha, any alpha in (0,2]) (p. 5).",
+   "Put the probability guess into the parameter update so a log-parameter process dominates the submartingale (pp. 6, 10-11).",
+   "Compute p_j from the noise model: chi-square distribution for Gaussian noise, with sqrt(N) for ensembles (pp. 11, 21).",
+   "Mixed oracle: draw U ~ U[0, 1/pbar], call the exact gradient if U <= 1, so accuracy probability >= pbar holds by construction (pp. 13-14).",
+   "Express linear-solver and finite-difference tolerances in the regularization parameter (p. 7; p. 21)."
+  ],
+  "coauthors": "E. Bergou, S. Gratton",
+  "quotes": [
+   {
+    "text": "The algorithm stagnated after some iterations, and could not approximate the minimizer with a descent accuracy.",
+    "page": 12
+   },
+   {
+    "text": "but we presented a number of practical situations where this is achievable.",
+    "page": 25
+   }
+  ]
+ },
+ {
+  "id": "S068",
+  "year": "2016",
+  "title": "A parallel evolution strategy for an earth imaging problem in geophysics",
+  "read_level": "partial",
+  "contribution": "Builds a warm-start velocity model for 3D acoustic full-waveform inversion by combining a DCT-based search-space reduction (320 parameters instead of about 3.5 million) with a globally convergent ES adapted for synchronous parallelism, run on 2048 cores; it recovers the salt dome at 1 Hz but stalls at 2 Hz (pp. 1, 8-18).",
+  "problem_entry": "FWI converges only from a good smooth starting model, usually built by tomography; compute it by parallel global search instead, which requires reducing the dimension first (pp. 2-3, 6).",
+  "key_idea": "Linear magnification map m = K C^{-1} g (block means + DCT) plus the max/max sufficient-decrease ES variant, chosen over the numerically best mean/mean because it needs no extra, serializing evaluation; bounds by projection; MPI-2 master/cluster implementation (pp. 8-16).",
+  "assumptions": "Velocities in [1500, 4500] m/s, 10 points per wavelength, known Dirac sources and synthetic data from the true model; convergence inherited from earlier ES papers, none proved here for the reduced parallel method (pp. 4, 13, 16).",
+  "proof_devices": [
+   "nonsingularity of the DCT coefficient matrix via determinant factorization and DCT-III properties (Theorem 6.1, p. 20)"
+  ],
+  "experiments": "SEG/EAGE salt dome, CURIE 2048 cores, 24 h; 1 Hz with lambda = 512 recovers the salt dome (objective 2042.113 -> 575.8082 in 278 iterations); 2 Hz warm-started stalls at a local minimum; single runs, no baselines (pp. 16-18).",
+  "positioning": "Contrasts tomography, stereotomography and Laplace-domain inversion as starting-model methods, and earlier heuristic inversions that used cheap objectives or simple parametrizations (pp. 2-3, 11-12).",
+  "writing": "Three numbered contributions in the abstract; conclusion claims a great improvement in automation while stating that the test scenario is not truly realistic (pp. 1, 19).",
+  "limits_future": "Unrealistic scenario (known sources, synthetic data, surface receivers in practice); 2 Hz failure with a larger population as suggested remedy; realistic tests and other geoscience problems as future work (pp. 18-19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "ES kept almost intact; only sufficient decrease, step shrink and projection added; weight update left off to change the ES as little as possible.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Globalization variant chosen by the computing architecture (no serializing extra evaluation), not by the best numerical result.",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Real application but single runs, no baselines, no profiles.",
+    "pages": "pp. 16-18"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Full-waveform inversion for Earth imaging with an industrial coauthor.",
+    "pages": "pp. 1-3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose",
+    "evidence": "2 Hz run stalls at a local minimum; the scenario is declared not truly realistic.",
+    "pages": "pp. 18-19"
+   },
+   {
+    "pattern": "fit the algorithm variant to the parallel architecture",
+    "evidence": "max/max chosen over mean/mean because mean/mean's extra evaluation would stall synchronized clusters.",
+    "pages": "p. 13"
+   },
+   {
+    "pattern": "reduce the search space before global search",
+    "evidence": "DCT magnification from 320 parameters to the full 3.5-million grid before running the ES.",
+    "pages": "pp. 6-11"
+   }
+  ],
+  "transferable": [
+   "Replace a globalization test that needs an extra, serializing evaluation by one that uses only already-evaluated offspring (pp. 13-14).",
+   "Smooth low-dimensional parametrization of a gridded field: block means plus mean-preserving DCT, a fixed linear map far cheaper than an evaluation; prove the coefficient matrix nonsingular (pp. 8-9, 20).",
+   "Frequency continuation: solve at low frequency and warm-start the higher one (p. 17).",
+   "Choose the population size as a multiple of the number of clusters (p. 17)."
+  ],
+  "coauthors": "Y. Diouane, S. Gratton, X. Vasseur, H. Calandra",
+  "quotes": [
+   {
+    "text": "The mean/mean version would therefore corrupt the parallel nature of ES’s.",
+    "page": 13
+   },
+   {
+    "text": "Unlike the 1 Hz case, this plot at 2 Hz indicates that the inversion process is getting stacked at a local minimum.",
+    "page": 18
+   }
+  ]
+ }
+]

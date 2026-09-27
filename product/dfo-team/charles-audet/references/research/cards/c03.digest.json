@@ -1,0 +1,431 @@
+[
+ {
+  "id": "S023",
+  "year": "2014",
+  "title": "A survey on direct search methods for blackbox optimization and their applications",
+  "read_level": "full",
+  "contribution": "Surveys directional direct search (coordinate search, GPS, MADS, sufficient decrease) for blackbox optimization, the problem structures it can still exploit (integer/categorical variables, bounds, EB/filter/PB constraints, minimax, multiobjective), surrogates and parallelism, the hierarchical nonsmooth convergence analysis, and a catalogue of applications, closing with the lack of shareable real blackbox benchmarks.",
+  "problem_entry": "Defines blackbox optimization by three cited pathologies with numbers (up to 2000 CPU hours per run, 60% failed calls, nondeterministic outputs) and scopes out model-based DFO, which assumes derivatives exist (p. 7).",
+  "key_idea": "Tell the field as a genealogy where each generation removes a named, example-backed limitation of the previous one (CS -> GPS -> MADS; the Search step exists so user knowledge cannot break the Poll), with a convergence ladder whose strength grows with the hypotheses (pp. 7-11, 14-16).",
+  "assumptions": "Only f(x0) < inf required, x0 need not be feasible; constraint taxonomy unrelaxable/hidden/relaxable-quantifiable; theory graded from no assumption (zeroth order) to Lipschitz, regular, strictly differentiable, hypertangent cone (pp. 10, 12, 15).",
+  "proof_devices": [
+   "no proofs; verbal convergence ladder: zeroth-order mesh-local-optimizer limit -> Clarke derivative >= 0 along refining directions (Lipschitz) -> 0 in generalized gradient (MADS dense directions) -> hypertangent-cone stationarity under EB -> Rockafellar subderivative for non-Lipschitz f (pp. 15-16)",
+   "infeasible refined points under PB characterized as stationary for the violation h on the hypertangent cone of X (p. 16)",
+   "counting argument (2*lambda+1)^2 - 1 candidate poll points in 2D to explain why decoupling mesh and poll sizes densifies directions (p. 10)",
+   "smooth-case bound: gradient <= constant x mesh size at unsuccessful iterates, used to justify mesh-size stopping (p. 15)",
+   "necessity of rational step-size factor cited from the 2004 tightness paper (p. 9)"
+  ],
+  "experiments": "none (survey); only a benchmarking stance in the Discussion (p. 19)",
+  "positioning": "Organized around the Audet-Dennis lineage (30 of 143 references by Audet); predecessors credited as origin points (Torczon's liminf result called the first cornerstone), criticism only through others' counterexamples (McKinnon, Kolda-Lewis-Torczon), model-based DFO placed in its own niche by its assumptions; cites Vicente-Custodio 2012 approvingly (pp. 7-9, 11, 15, 19-24).",
+  "writing": "Pedagogical, theorems as verbal statements with one displayed formula; hierarchy announced in the roadmap; one deliberate surprise sentence (derivative-free methods avoid strict maximizers unlike Newton); applications as short quantitative case summaries (pp. 7, 14-16).",
+  "limits_future": "Few real blackboxes are openly distributed and CUTEr/Hock-Schittkowski are not ideal for benchmarking, hoping more real test problems will be shared; global optimization out of reach; noisy outputs named as a pathology but no algorithmic section (pp. 7, 13, 14, 19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Stated: the Search step was introduced so users can inject problem knowledge without destroying the Poll structure that carries the theory; surrogates/VNS/ordering enter via Search and point ordering.",
+    "pages": "pp. 9, 13-14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Stated taxonomy with reasons: unrelaxable (simulation cannot be trusted, e.g. log/sqrt), hidden (inexplicable failure), relaxable quantifiable (EB, filter, PB, hybrid PB->EB); x0 need not be feasible.",
+    "pages": "pp. 10, 12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Hierarchical analysis announced and laid out; a hypothesis shown necessary via the 2004 tightness paper. Variant: no counterexamples built in this chapter.",
+    "pages": "pp. 7, 9, 14-16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Strongest stated source: real blackboxes are rarely shared (proprietary/internal) and CUTEr/HS smooth problems are not ideal benchmarks; hope that real test problems will be shared.",
+    "pages": "p. 19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Premise that realistic blackboxes must be in the test set; no experiments.",
+    "pages": "p. 19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "NOMAD integrates the surveyed features (LH, periodic variables, batch/library modes).",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "surrogates judged by shared trends, not accuracy",
+    "evidence": "A surrogate measured in seconds for a truth measured in hours is a poor approximation but very useful because it shares similarities; used to order trial points under opportunism.",
+    "pages": "pp. 13-14"
+   },
+   {
+    "pattern": "genealogy exposition",
+    "evidence": "Each method generation introduced by a named limitation of its predecessor with a concrete failure (McKinnon NM; CS on modified Dennis-Woods).",
+    "pages": "pp. 8-9"
+   }
+  ],
+  "transferable": [
+   "Open with a pathology paragraph: one cited real case and one number each for cost, failure rate and nondeterminism (p. 7).",
+   "Explain why decoupling mesh and poll sizes densifies directions by counting candidate poll points, (2*lambda+1)^2 - 1 in 2D (p. 10).",
+   "Require only a point where the simulation succeeds (f(x0) < inf), not a feasible point (p. 10).",
+   "Justify a mesh-size stopping rule by the smooth-case bound gradient <= constant x mesh size at unsuccessful iterates (p. 15).",
+   "State what the method guarantees at infeasible limit points (stationarity of the violation h), not only at feasible ones (p. 16).",
+   "Use a cheap surrogate for ordering even when its values are on a different scale from the truth (pp. 13-14)."
+  ],
+  "coauthors": "sole author",
+  "quotes": [
+   {
+    "text": "The convergence analysis is hierarchical in the sense that the stronger the hypotheses on the objective and feasible region, the stronger the resulting theoretical guarantees.",
+    "page": 7
+   },
+   {
+    "text": "Comparing direct search methods for blackbox optimization on smooth problems from the CUTEr [77] or from the Hock and Schittkowski [86] collection (or on some perturbed variants) is not ideal, as these problems do not possess the same kind of difficulties than blackbox problems without derivatives from real applications.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S053",
+  "year": "2021",
+  "title": "Stochastic mesh adaptive direct search for blackbox optimization using probabilistic estimates",
+  "read_level": "full",
+  "contribution": "Introduces StoMADS, a MADS variant for unconstrained stochastic blackboxes that compares probabilistically accurate function estimates with a sufficient-decrease test, proves almost-sure summability of mesh sizes and almost-sure Clarke stationarity via martingale arguments without any model or gradient information, and shows on 66 noisy Moré-Wild problems that it beats Robust-MADS and deterministic NOMAD (arXiv v1 read).",
+  "problem_entry": "Double gap: MADS-family noise methods lack stochastic convergence (Robust-MADS zero-order and deterministic, Bouchet's variant expensive), while probabilistic-estimate theory (Chen-Menickelly-Scheinberg, Paquette-Scheinberg) needs models or gradients (pp. 2-4).",
+  "key_idea": "Keep the MADS mesh/frame/Poll but decide success from estimates with threshold gamma*eps_f*delta_p^2, giving three iteration types (success, certain failure, uncertain failure) with step updates tau^-2 / tau^2 / tau; the frame size also controls the required estimate accuracy (pp. 5-9).",
+  "assumptions": "Estimates beta-probabilistically eps_f-accurate conditioned on the past plus kappa_F-variance condition scaled by Delta_p^4; f bounded below; f locally Lipschitz and all iterates in a compact set (for simplicity); coordinate mesh, tau = 1/2, Householder poll for the Clarke result (pp. 8-9, 12, 16-17).",
+  "proof_devices": [
+   "potential Phi_k = nu (f(X_k) - f_min) + (1 - nu) Delta_p^2 with E[Phi_{k+1} - Phi_k | past] <= -eta Delta_p^2 via a 2x3 case split (good/bad estimates x success/certain/uncertain failure); nu from inequality (6), beta from (7) (pp. 12-15)",
+   "conditional Cauchy-Schwarz bounding bad-estimate error by (1-beta)^{1/2} kappa_F Delta_p^2 (Lemma 1, p. 10)",
+   "true-success decrease (gamma - 2) eps_f delta_p^2 (Lemma 2, pp. 11-12)",
+   "sum of mesh sizes finite a.s. => whole sequence to zero, stronger than MADS liminf, credited to sufficient decrease (Cor. 1, Remark 2, pp. 15-16)",
+   "log-step submartingale R_k = -1/2 log_tau(delta_p/lambda) bounded below by a +-1 random walk W_k whose limsup is +inf a.s. (Theorems 3-4, pp. 17-19)",
+   "Clarke bound using delta_p ||d|| >= 1 while delta_m ||d|| -> 0 with Householder-based poll directions (Theorem 5, pp. 17, 20)"
+  ],
+  "experiments": "66 Moré-Wild CUTEst sum-of-squares instances (n 2-12) with additive uniform noise on each residual scaled by |f(x0)-f*| at sigma = 1/3/5%; budget 1000(n+1); data and performance profiles at tau = 1e-1, 1e-3; vs NOMAD 3.9.1 robust/basic/default; Search disabled; five variants n_k = 1..5 below theoretical sample size; replications and implementation not reported (pp. 21-24).",
+  "positioning": "Explicit import from the Scheinberg school ([16], [23], [38]; 7 of 40 references with Scheinberg), attributed per definition and lemma; direct criticism of the group's own Robust-MADS and of Bouchet's MSc method; stochastic NM methods set aside (pp. 2-4, 8-10, 28-31).",
+  "writing": "Novelty claim stated in introduction and discussion; uppercase random/lowercase realization convention; Remarks 1-3 interpret results; hedging only in experiments; theory-practice gap on sample sizes admitted twice (pp. 3-4, 7, 9, 16, 22, 28).",
+  "limits_future": "Unconstrained only; practical sample sizes below theory; compactness of iterates assumed for simplicity; no rates; future: stochastically noisy constrained and chance-constrained blackbox optimization (pp. 16, 22, 28).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "MADS Search/Poll/mesh/frame kept; change confined to the success decision. Variant: experiments disable the Search.",
+    "pages": "pp. 4-7, 21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Guarantee ladder in probabilistic form (zero order -> refining subsequence -> a.s. Clarke); no counterexamples for hypothesis necessity; compactness assumed for simplicity.",
+    "pages": "pp. 11-20, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Equal evaluation budgets and data/performance profiles, but same-family (NOMAD) competitors only, artificial noise on analytic problems, no replications reported.",
+    "pages": "pp. 21-24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "SKILL.md cites StoMADS on YATSOp/STARS problems; the arXiv v1 read tests only 66 Moré-Wild problems. Published COAP version not read, so possibly a version difference.",
+    "pages": "pp. 21-27"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "Baselines are NOMAD 3.9.1 configurations, but StoMADS itself was not yet in NOMAD (cf. S021 p. 18).",
+    "pages": "p. 21"
+   },
+   {
+    "method": "Roundtable (vs Scheinberg lens)",
+    "relation": "evidence",
+    "note": "Guarantees are almost-sure and asymptotic with no expected-iteration bound; probabilistic-estimate conditions imported from Scheinberg-school work.",
+    "pages": "pp. 2, 8-20"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "import and rehost a proof architecture",
+    "evidence": "Supermartingale analysis of probabilistic trust-region/line-search methods rehosted on MADS mesh/frame by replacing model decrease with an estimate-based sufficient-decrease test.",
+    "pages": "pp. 2, 12-15"
+   },
+   {
+    "pattern": "step size doubles as accuracy controller",
+    "evidence": "Accuracy required relative to delta_p^2, so shrinking the frame drives estimate variance to zero without a separate control parameter.",
+    "pages": "p. 9 (Remark 1), p. 16 (Remark 3)"
+   }
+  ],
+  "transferable": [
+   "Three-way acceptance test (success / certain failure / uncertain failure) with type-specific step updates tau^-2 / tau^2 / tau (pp. 5-7).",
+   "Cap the step size (tau^-zhat) so the random step size is integrable and conditional expectations are defined (pp. 5, 9).",
+   "Accumulate samples at the incumbent across iterations (formulas (3)-(4)) to raise accuracy without extra evaluations (pp. 10-11).",
+   "Potential nu (f - f_min) + (1 - nu) Delta^2 with explicit inequalities for nu and beta (pp. 12-15).",
+   "Prove liminf-type stationarity by contradiction with a log-step submartingale dominated by a +-1 random walk (pp. 18-19).",
+   "Build noisy test sets by perturbing each residual of a sum-of-squares with noise scaled by |f(x0) - f*| at several sigma levels (pp. 21, 23)."
+  ],
+  "coauthors": "K.J. Dzahini, M. Kokkolaras, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "The main novelty of the present work is that no model or gradient information is needed to find descent directions, compared to prior works, in particular [23, 38] and [40].",
+    "page": 3
+   },
+   {
+    "text": "MADS is not appropriate for stochastic blackbox optimization, even though StoMADS estimates accuracy do not meet the prescription that has been derived theoretically.",
+    "page": 28
+   }
+  ]
+ },
+ {
+  "id": "S021",
+  "year": "2022",
+  "title": "Algorithm 1027: NOMAD Version 4: Nonlinear Optimization with the MADS Algorithm",
+  "read_level": "full",
+  "contribution": "Describes NOMAD 4, a complete redesign of the NOMAD blackbox solver around reusable algorithmic components, a priority evaluation queue with multi-threaded evaluation, a MegaSearchPoll component and a reimplemented PSDMADS, and shows performance parity with NOMAD 3 plus parallel speed-ups (arXiv v2 read).",
+  "problem_entry": "Software debt: NOMAD 3 (2008) had grown by minor releases, algorithm/sub-algorithm interactions were unanticipated and many-core clusters were unexploited, so a redesign was decided with requirements derived from 20 years of development avenues (pp. 2-3).",
+  "key_idea": "Encode algorithms as nested Start/Run/End components and turn the MADS theory contract for the Search (finite points, projected on mesh, within budget) into the plug-in interface; evaluations go through a shared priority queue served by secondary threads (pp. 5-11).",
+  "assumptions": "Blackbox evaluation far more expensive than algorithmic overhead; failures encoded as f = inf; sequential MADS recommended for n <= 50; rational tau and delta = min{Delta, Delta^2} (pp. 3, 4, 8, 11).",
+  "proof_devices": [
+   "no new theorem; correctness via inheritance of the MADS hierarchical analysis by keeping theory-bearing parts intact (mesh projection of Search points, the pollster in PSDMADS) (pp. 2, 6, 11)",
+   "empirical parity with NOMAD 3 as validation that the algorithms were coded correctly (p. 14)"
+  ],
+  "experiments": "In-house Runner; data profiles in groups of n+1 evaluations; NOMAD 3 vs 4 restricted to shared features (ORTHO 2N, last-success ordering) on 53 smooth Moré-Wild problems (400(n+1), 10 seeds) and 18 constrained problems (1000(n+1), 10 seeds) at tau 1e-2/1e-4: comparable; PSDMADS on SRosenbr50/250 with 30 runs, NOMAD 4 worst beats NOMAD 3 best; Solar 7 wall-clock on 8 cores with MegaSearchPoll up to 3.3x faster; no other solvers (pp. 14-17).",
+  "positioning": "Only baseline is the group's own NOMAD 3; reach shown via own and external applications (astrophysics, LIGO paper with >700 co-authors); one external development cited (Liuzzi-Truemper hybrid); 39 of 65 references by Audet, Le Digabel or Tribes (pp. 2, 8, 14, 18-22).",
+  "writing": "Terminology defined before diagrams of component trees and thread workflows carry the design; development-process paragraph (Agile, unit/integration tests, regular profile comparisons); modest conclusion ending with an invitation to industry (pp. 5-13, 17-18).",
+  "limits_future": "Not yet ported: VNS, BiObjective, ORTHO N+1 and model-based ordering, RobustMADS, StoMADS, categorical/periodic variables; evaluation groups may stay underfilled; Windows version pending; future: port these features and derive generic features from industrial applications (pp. 4, 8, 9, 13, 14, 18).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Features from publications integrated continuously and motivated by industrial partners; user-requested restart feature; invitation to industry; confirms features lagging (RobustMADS/StoMADS future) and redesign parity check.",
+    "pages": "pp. 1, 13, 14, 18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Search contract (finite, projected on mesh, within budget) becomes the component interface; pollster kept in PSDMADS for convergence; nested model-search Mads disables its own model search.",
+    "pages": "pp. 6, 7, 11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation-count data profiles with seeds and time-based profiles for parallelism match, but no cross-family competitor despite the stated requirement on p. 3.",
+    "pages": "pp. 3, 14-17"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Solar 7 (2015 MSc code on GitHub) used as the realistic slow blackbox for timing.",
+    "pages": "pp. 16, 20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Failures encoded as f = inf; EB and PB both described (weak evidence).",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory contract as software interface",
+    "evidence": "Conditions the convergence proof needs from the Search become the API of the Search plug-in slot; pollster kept as theory carrier in PSDMADS.",
+    "pages": "pp. 6, 7, 11"
+   },
+   {
+    "pattern": "parity test on the common feature subset",
+    "evidence": "Rewrite validated against old code with both restricted to shared features, 10 seeds, two tolerances, smooth and constrained sets.",
+    "pages": "p. 14"
+   }
+  ],
+  "transferable": [
+   "Generic Start/Run/End components with nested sub-algorithms; disable the recursive feature inside the nested call (p. 7).",
+   "Generate all Search and Poll points before evaluating when cores are plentiful (MegaSearchPoll) (pp. 9-10).",
+   "Keep a cheap theory-carrying element (a pollster evaluating one point) inside a heuristic-heavy parallel scheme (p. 11).",
+   "Report worst vs best of 30 runs and mean with min/max bars for stochastic algorithms (pp. 15-16).",
+   "Support parallel speed-up claims on a real slow blackbox (~5 s/eval) with time-based data profiles and time-vs-evaluations plots (pp. 16-17).",
+   "Add a development-process paragraph (tests, regular benchmark comparisons, user-requested features) to a software paper (p. 13)."
+  ],
+  "coauthors": "S. Le Digabel, V. Rochon Montplaisir, C. Tribes",
+  "quotes": [
+   {
+    "text": "In continuous development since 2001, it constantly evolved with the integration of new algorithmic features published in scientific publications.",
+    "page": 1
+   },
+   {
+    "text": "Comparing the performance of the two versions is crucial to validate that algorithms have been correctly coded.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S123",
+  "year": "2022",
+  "title": "Hierarchically constrained blackbox optimization",
+  "read_level": "full",
+  "contribution": "Proposes two MADS-with-extreme-barrier procedures (Int, Hier) that interrupt sequential constraint evaluations once a trial point cannot improve the incumbent, proves Int generates the same iterates as plain EB when no dynamic models are used, and illustrates cost savings on the spring design problem (arXiv v1 read).",
+  "problem_entry": "Industrial pipeline (Hydro-Québec PRIAD: five chained blackboxes from seconds to days) turned into a problem class where each constraint and the objective can be evaluated sequentially with a continue/stop decision after each (pp. 1-2).",
+  "key_idea": "Stop evaluating as soon as the decision is determined: partial sums of squared violations are monotone, so reject once a partial sum reaches h(x^k); Hier instead solves min c_j s.t. c_1..c_{j-1} <= 0 in sequence; EB is used because PB needs all constraint values (pp. 3-5).",
+  "assumptions": "h = sum max(c_j,0)^2; X = R^n, N^n or bounded subset; equivalence needs no dynamic surrogate models and identical parameters/seeds; constraint order supplied by user (by cost or estimated infeasibility) (pp. 1-4, 6, 8).",
+  "proof_devices": [
+   "decision-equivalence proposition: Int and EB make identical accept/reject decisions at every trial point (two-case analysis per phase), so iterates coincide (Prop. 2.1, p. 4)",
+   "monotonicity of partial sums s_l(t) of squared violations as the stopping certificate (p. 3)",
+   "explicit naming of the feature that voids equivalence (dynamic models built from evaluated values) (p. 4)"
+  ],
+  "experiments": "Closed-form TCSD spring problem (3 vars, 4 constraints), cost = multiplications/divisions per function, budget 10,000, 40 random infeasible starts; EB/PB baselines; cost to first feasible point, calls per function, avg/best final f, 5% data profiles; orderings by cost and by LH-estimated infeasibility; Hier ~60% faster to feasibility than PB, Int dominates most profiles, EB edge at ~7,000 explained by default quadratic models (pp. 5-9).",
+  "positioning": "Minimal: 12 references (5 group works), no prior work on partial or interrupted evaluation cited; industrial knowledge (Rio Tinto Kemano) used to motivate ordering by infeasibility (pp. 8, 10).",
+  "writing": "Letter format: industrial pipeline first, one proposition with short proof, honest framing of the closed-form test, anomaly explained against the proposition's hypotheses; strong claim that industrial problems will undoubtedly benefit (pp. 2, 4, 5, 7, 9).",
+  "limits_future": "Single closed-form test problem, static constraint order, objective always last; future: dynamic ordering, inserting the objective into the sequence, real blackboxes (pp. 5, 9).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Extends constraint semantics with evaluation cost, pipeline position and likelihood of violation; explicit trade-off: PB would use violation amounts but needs all values, so EB is chosen to allow interruption.",
+    "pages": "pp. 2, 3, 6, 8"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "Exploits the sequential structure of the blackbox while leaving MADS unchanged.",
+    "pages": "pp. 2-5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Savings come from evaluation management, not from the Search; all MADS steps kept.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Theory transferred by decision-equivalence for Int; Hier has no stated guarantee.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Industrial pipeline motivates but the test is closed-form; later Micro-PRIAD benchmark link is inferred by name only.",
+    "pages": "pp. 2, 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Budget in cost units, data profiles, 40 random starts, cost-to-feasibility metric; variant: one problem and same-family baselines.",
+    "pages": "pp. 6-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "decision-equivalence proposition",
+    "evidence": "Cheaper variant proven to make exactly the baseline's decisions, so baseline convergence theory transfers without new analysis; related to S021's parity test.",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "early termination via a monotone partial aggregate",
+    "evidence": "Evaluation of a trial point stops once the partial sum of squared violations reaches the incumbent's h.",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Stop a sequential evaluation once a monotone partial aggregate reaches the incumbent's value (p. 3).",
+   "Hierarchical feasibility: minimize c_j subject to c_1..c_{j-1} <= 0, each stopped at its first feasible point which seeds the next (pp. 4-5).",
+   "Prove decision-equivalence of a cost-saving variant by case analysis per phase and list the features that void it (p. 4).",
+   "Estimate per-constraint violation likelihood by Latin-hypercube sampling of the bounds (5,000 points) to order evaluations (p. 8).",
+   "Emulate evaluation cost on a closed-form problem with a proxy unit (operation counts) and a budget in that unit, stated as an illustration (pp. 5-6).",
+   "Report cost to first feasible point separately when all starts are infeasible (pp. 7, 9)."
+  ],
+  "coauthors": "S. Alarie (Hydro-Québec/IREQ), P. Jacquot (EDF), S. Le Digabel",
+  "quotes": [
+   {
+    "text": "Complex industrial problems, such as the problem PRIAD mentioned in introduction, will undoubtedly benefit from evaluation interruptions, and this without losing solution quality.",
+    "page": 9
+   },
+   {
+    "text": "Although it is not a blackbox optimization problem because closed-form expressions of all functions are known, we use it to illustrate the behaviour of the algorithmic procedures.",
+    "page": 5
+   }
+  ]
+ },
+ {
+  "id": "S138",
+  "year": "2024",
+  "title": "Counterexample and an additional revealing poll step for a result of \"analysis of direct searches for discontinuous functions\"",
+  "read_level": "full",
+  "contribution": "Gives a one-dimensional counterexample to Theorem 4.1 and Corollary 4.1 of Vicente & Custódio (Math. Program. 2012), locates the false step in their proof, and repairs the result by adding a randomized Revealing Poll step, with a new theorem valid for any number of pieces and a check that the repaired method solves the counterexample (arXiv v2 read).",
+  "problem_entry": "Audit of a published end-of-paper result giving sufficient conditions for f(x_k) -> f(x*) on piecewise-Lipschitz discontinuous functions, while acknowledging the paper's main results as important (pp. 1-3).",
+  "key_idea": "Counterexample: f quadratic on x <= 0, scaled polynomial copies 2^l p(x/2^l) on x > 0; an adversarial Search jumps to the next local minimizer while a small Poll with directions {-1,1} always fails, so iterates reach 0 without sampling the left branch. Repair: a fixed-radius random Revealing Poll viewed as a Search step (pp. 3-7).",
+  "assumptions": "Counterexample satisfies [5, Ass. 2.1, 4.1] with partition ]-2,0], ]0,2[ and lsc at 0; density of refining directions holds trivially in R; repair replaces the exterior cone property with cl(B_i) = cl(int B_i); forcing function rho continuous nondecreasing with rho(t)/t -> 0 (pp. 4-5, 7-8).",
+  "proof_devices": [
+   "1-D counterexample from geometrically scaled copies of one quartic polynomial, verified by induction over iterations (Lemma 1, pp. 4-5)",
+   "adversarial Search step steering iterates while the Poll fails (p. 4)",
+   "1-D trivialization: unit sphere in R is {-1,1}, so density of refining directions holds with a finite poll set (Prop. 2, p. 5)",
+   "proof diagnosis by numbering the original argument's steps and refuting the false implication (strict decrease => negative Clarke derivative) with x -> -|x| (p. 6)",
+   "almost-sure density of random probes via a positive volume-ratio lower bound and independence (Lemma 2, p. 8)",
+   "limit f(x_k) -> f(x*) by contradiction with continuity of f restricted to the branch, using density (Theorem 1, p. 9)",
+   "re-running the counterexample through the repaired algorithm (Prop. 3, p. 9)"
+  ],
+  "experiments": "none (analytic counterexample verified by proof)",
+  "positioning": "Careful correction of another group's paper: main results called important and shown to remain usable, errors hedged with 'to the best of our knowledge', repair credited to the group's own DiscoMADS; the same 2012 paper had been cited approvingly in Audet's 2012 survey (pp. 1-2, 6-7, 9; S023 p. 15).",
+  "writing": "Structure mirrors the claim (counterexample, failing proof step, repair and check, discussion); the abstract states the flaw mechanism in one sentence; target statements reproduced in full; generalization to any dimension asserted but not shown (pp. 1-3, 10).",
+  "limits_future": "Guarantees become almost-sure because the added step is random; extra evaluations per iteration; generalization to higher dimensions not shown; future: save evaluations or find hypotheses restoring the results without modifying the algorithm (pp. 8-10).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Counterexample to a peer's published theorem checked by induction, exact false step located, repair with a new theorem; matches Workflow E checkpoint; audits a result Audet's own 2012 survey cited approvingly.",
+    "pages": "pp. 3-9; S023 p. 15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Repair enters as an extra step viewed as a Search, so earlier results are inherited; conversely the counterexample exploits Search freedom adversarially.",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "variant",
+    "note": "Randomness introduced deliberately to sample a fixed-radius ball densely, at the price of almost-sure instead of deterministic guarantees.",
+    "pages": "pp. 7-8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "adversarial Search in counterexamples",
+    "evidence": "Search proposes exactly the next local minimizer toward the discontinuity while the Poll always fails, steering iterates where the Poll cannot see the flaw.",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "1-D trivialization of density hypotheses",
+    "evidence": "In R the unit sphere is {-1,1}, so dense refining directions hold with a finite poll set.",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "fixed-radius revealing sampling",
+    "evidence": "Non-shrinking random probe around the incumbent detects branches of a discontinuous function that a shrinking poll misses.",
+    "pages": "pp. 6-9"
+   }
+  ],
+  "transferable": [
+   "Build 1-D counterexamples from scaled copies 2^l p(x/2^l) of one polynomial so local minima accumulate geometrically at the point of interest (p. 4).",
+   "Pair the counterexample with an algorithm instance whose Search jumps to the next local minimizer and whose Poll always fails (p. 4).",
+   "Number the steps of a flawed proof, certify the valid ones, and refute the false implication with a one-line function such as -|x| (p. 6).",
+   "Prove almost-sure density of random probes with a positive volume-ratio lower bound plus independence (p. 8).",
+   "State which results of the corrected paper survive and why (p. 9).",
+   "Close a repair by running the original counterexample through the repaired algorithm (p. 9)."
+  ],
+  "coauthors": "P.-Y. Bouchet, L. Bourdin",
+  "quotes": [
+   {
+    "text": "Unfortunately, to the best of our knowledge, one of the statements from [5, Theorem 4.1] is incorrect, which also affects the validity of [5, Corollary 4.1].",
+    "page": 2
+   },
+   {
+    "text": "It shows in the one-dimensional case that a dDSM may converge to a point of discontinuity without noticing it, since it evaluates points in only one of the branches of the function near the refined point.",
+    "page": 10
+   }
+  ]
+ }
+]

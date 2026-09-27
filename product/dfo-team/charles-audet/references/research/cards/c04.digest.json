@@ -1,0 +1,325 @@
+[
+ {
+  "id": "D007",
+  "year": "2025",
+  "title": "Scheduling ISMP 2024",
+  "read_level": "full",
+  "contribution": "Describes the three-stage MIP pipeline (clique-based talk groups selected by a set-partitioning MIP, stability-rewarding re-optimization, rank-matching room assignment) used to schedule the 1,265 regular talks of ISMP 2024 in Montréal, and releases anonymized instances to MIPLIB 2024.",
+  "problem_entry": "Scale of the group's own community conference (~1,600 participants, >1,300 talks) makes manual scheduling impossible; requirements listed in words as four hard constraints, one 'If possible' constraint and soft goals (pp. 3-5).",
+  "key_idea": "Generate candidate talk groups as cliques of a shared-keyword graph (<=4 talks) and prune streams by keyword mining, then let a MIP choose groups, streams and blocks with affinity bonuses and penalized stream copies; re-optimize with +6/+5 bonuses for staying in the previous slot/day; assign rooms by matching capacity rank to stream-size rank (pp. 5-12).",
+  "assumptions": "Affinity = shared keywords + preferred streams; groups must be cliques (a strong condition, conceded p. 15); hand-set bonuses (b_suggested 5/3, alpha = 200, b ~ -0.2); U_talk = 4, short blocks {3,6,9,12}; two-stage split with stage-2 feasibility guaranteed by parallel sessions <= |R| (pp. 7-15).",
+  "proof_devices": [
+   "clique necessary condition for promising groups, with the bound sum_{i<=U} C(|I|,i) on candidates and a pair filter (>=2 common keywords) (pp. 5-6)",
+   "soft 'same stream not in parallel' constraint modeled by stream copies with weight w(k) = -i for the i-th copy (p. 9)",
+   "stability bonus for re-optimization: c(l,k)+6 same stream and block, +5 same stream and day (p. 10)",
+   "upstream aggregate constraint (parallel sessions <= |R|) guaranteeing downstream room-assignment feasibility (p. 10)",
+   "rank-matching exponential room bonus plus consecutive-triple variables y_{k,p,r} for sessions 'without holes' (pp. 11-12)"
+  ],
+  "experiments": "One real instance, Gurobi 11.0.0 on i7-12700 (20 threads): talk assignment 3,000 s, gap 0.2351%, 32,111 rows x 1,927,811 columns, all 198 preferred-stream talks satisfied; rooms 20.89 s, gap 0.0039%; 17 re-optimizations, 3 published, ~47 requests, moved-talk counts reported (sums 1,240/1,251 vs 1,265 unexplained); no baseline comparison (pp. 13-14).",
+  "positioning": "Minimal: prior ISMP tools (2018 Scheduler; 2012/2015 model in a bachelor's thesis) and six conference-scheduling papers listed in the abstract without comparison (p. 3).",
+  "writing": "Technical-report register; each constraint glossed in plain words; notation in an appendix; hedging reserved for solution quality, which is 'difficult to quantify' (pp. 7, 12, 14-16).",
+  "limits_future": "Cliques lose information, hard constraints may leave participants unsatisfied, quality unquantified; future: abstract-similarity metrics, non-clique groups, soft co-authorship constraints, a reusable user interface (p. 15).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Anonymized real ISMP instances with all participant constraints submitted to MIPLIB 2024 (outside DFO).",
+    "pages": "pp. 5, 15"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Classification applied to requirements: hard constraints 1-4, 'if possible' constraint 5 as penalized stream copies, wishes as bonuses.",
+    "pages": "pp. 4-5, 7-9"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Heuristic candidate generation + exact MIP selection, but the heuristic restricts what the exact stage can reach (optimal only for the restricted problem), acknowledged by the authors.",
+    "pages": "pp. 5-7, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "stability-weighted re-optimization",
+    "evidence": "Objective bonuses tied to the last published schedule (+6 same slot, +5 same day) and moved-talk counts as the stability metric.",
+    "pages": "pp. 10, 14"
+   },
+   {
+    "pattern": "community-service OR -> public instance",
+    "evidence": "Group schedules its own field's flagship conference and submits the anonymized instance to MIPLIB 2024.",
+    "pages": "pp. 3, 15"
+   }
+  ],
+  "transferable": [
+   "Write requirements in tiers (hard, 'if possible', objectives) before notation and trace each modeling device to one tier.",
+   "Generate set-partitioning columns from a cheap necessary condition (cliques of a similarity graph) and let the MIP choose; state the filter's cost as a limit.",
+   "For re-optimization of a published plan, reward staying close to the previous solution in the objective instead of hard-fixing it.",
+   "Guarantee feasibility of a later decomposition stage with an aggregate constraint in the earlier stage.",
+   "Report instance size (rows, columns, nonzeros), time budget, final gap and, for re-optimizations, how many items moved between published versions.",
+   "Submit anonymized instances of a real applied model to the field's standard library (MIPLIB)."
+  ],
+  "coauthors": "M. Gervais-Dubé, A. Hertz, S. Le Digabel, A. Legrain",
+  "quotes": [
+   {
+    "text": "After the initial schedule is published online for participants, it is crucial to minimize the number of changes in subsequent schedules to avoid disrupting their event planning.",
+    "page": 10
+   },
+   {
+    "text": "Furthermore, only cliques were considered to form group of talks. Since this is a strong condition, some information is lost in the process.",
+    "page": 15
+   }
+  ]
+ },
+ {
+  "id": "S071",
+  "year": "2025",
+  "title": "Solar: a solar thermal power plant simulator for blackbox optimization benchmarking",
+  "read_level": "full",
+  "contribution": "Releases solar, an open-source, platform-reproducible C++ simulator of a molten-salt CSP tower plant parametrized into ten frozen benchmark instances (5-29 mixed/categorical variables, 1-2 objectives, 0-17 a priori/simulation/hidden constraints, stochastic outputs with seeds and replications, variable fidelity), with starting points, best-known values and difficulty diagnostics.",
+  "problem_entry": "Benchmarking gap: real engineering blackboxes are proprietary, analytic test sets are crucial but unrepresentative, and existing realistic problems each have only some BBO pathologies; entry by listing the pathologies a benchmark must carry (pp. 2-3).",
+  "key_idea": "One physics simulator from a 2015 MSc thesis, instrumented with switches (instance, seed, rep, fid), anti-triviality constraint models and a material-based cost model, frozen as release 1.0 with instances named solarX.1 and an in-house RNG checked by solar -check (pp. 3, 11-27).",
+  "assumptions": "Point-source sun, 1 kW/m2, clear day, flat heliostats without tracking errors (may overestimate performance), neglected internal convection, 6 m/s wind, epsilon-NTU or ideal exchanger, steady state, 95% generator efficiency, creep ignored; constraint semantics by the Le Digabel-Wild taxonomy (a priori unrelaxable, simulation QRSK, hidden NUSH) (pp. 8-13, 18-23).",
+  "proof_devices": [
+   "benchmark non-triviality certificate: active bounds and saturated constraints at best-known x* vs x0 (Table 15, pp. 28-29)",
+   "feasibility-rate contrast: 10,000 LH points vs a 400n-evaluation NOMAD 3 run, split into a priori, all, hidden (Table 13, p. 24)",
+   "coefficient of variation per stochastic output at 100 points x 100 seeds (Fig. 8, p. 25)",
+   "fidelity diagnostics: time vs fidelity, constraint-label errors near x*, objective error vs time (Figs. 9-11, pp. 27-29)",
+   "local sensitivity: feasibility proportion in balls B_r(x*) for r from 1e-7 to 0.1 (Figs. 14-15, pp. 31-32)"
+  ],
+  "experiments": "Budget 400n (150n for solar5.1); LH vs NOMAD 3 feasibility table; replication counts under a Gauss stopping rule on an Apple M2 Max (solar2.1 at x* ~12 days); data profiles on solar6.1 from 30 LH starts for NOMAD 3, NOMAD 4, CMA-ES (none systematically reaches the best known); solar8.1 fronts from several solvers at 5,000 evaluations (pp. 24-30).",
+  "positioning": "Continues the group's benchmarking line (textbook, applications survey, NOMAD, constraint taxonomy); credits realistic predecessors (groundwater community problems, STYRENE, heat intercepts, Lockwood) and states CSP optimization papers do not provide benchmarking tools; praises analytic test sets before calling them unrepresentative (pp. 2-3).",
+  "writing": "Hedged then strong novelty claim ('it seems that no work exhibits...' then 'solar is the first realistic blackbox...'); single 'main contribution'; user-manual register in Section 4 with explicit instance recommendations; 'we believe' for difficulty (pp. 3, 21-31).",
+  "limits_future": "Model simplifications may overestimate performance, creep ignored, bugs may remain (framed as realistic), unbounded variables left to users, x* coordinates withheld; future: new instances and a community results database via nomad@gerad.ca (pp. 8, 13, 17-18, 23, 28, 32).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Thesis model -> standalone executable with fixed I/O, classified constraints, fidelity surrogates, seeds/replications, starting points, credited best-known values, public repo with solver logs.",
+    "pages": "pp. 3, 13-32"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Variables kept in physical units with some unbounded integers (not scaled to [0,100], step 2); only best-known values released, not x* coordinates (step 5).",
+    "pages": "pp. 17-18, 23, 28"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "A priori/unrelaxable constraints checked before simulation with cnt_eval=false and 1e20 outputs; simulation constraints relaxable (QRSK); hidden constraints as failures; most suggested x0 infeasible.",
+    "pages": "pp. 18-23, 29"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Budgets in multiples of n, data profiles over 30 starting points, CMA-ES as another-family solver; used to certify difficulty rather than rank solvers.",
+    "pages": "pp. 24, 29-30"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Starting points in NOMAD syntax, NOMAD logs shipped, results collected at nomad@gerad.ca.",
+    "pages": "pp. 3, 22, 32"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "benchmark non-triviality certification",
+    "evidence": "Anti-triviality constraint models by design plus diagnostics (LH vs solver feasibility, CoV, fidelity mislabeling, active constraints at x*, feasibility in balls).",
+    "pages": "pp. 11, 24-32"
+   },
+   {
+    "pattern": "frozen, versioned benchmark IDs",
+    "evidence": "Release 1.0 frozen; instances named solarX.1; bug fixes only in release 2.0; solar -check for platform reproducibility.",
+    "pages": "pp. 13-14, 20-21"
+   },
+   {
+    "pattern": "course-to-benchmark loop",
+    "evidence": "Students of the MTH8418 DFO course among the beta-testers who supplied best-known values.",
+    "pages": "p. 32"
+   }
+  ],
+  "transferable": [
+   "Open a benchmark paper with the list of real-problem pathologies and a table showing each one present in at least one instance.",
+   "Add constraint models whose only job is to make the optimum non-trivial, and replace scale-based descriptive sub-models with ones that respond to design variables.",
+   "Freeze a released benchmark and put the major version in the instance name (solarX.1).",
+   "Ship an in-house RNG and a self-check command so stochastic outputs are identical across platforms.",
+   "Return a sentinel value and a count-evaluation flag so a-priori-rejected points are not charged to the budget.",
+   "Certify difficulty with random-sampling vs solver feasibility rates, CoV per output, fidelity-vs-error plots and active constraints at the best-known point.",
+   "State each modeling simplification with the direction of the error it introduces."
+  ],
+  "coauthors": "N. Andrés-Thió, M. Diago, A. E. Gheribi, S. Le Digabel, X. Lebeuf, M. Lemyre Garneau, C. Tribes",
+  "quotes": [
+   {
+    "text": "In fact, it seems that no work exhibits a realistic application specifically developed for BBO benchmarking.",
+    "page": 3
+   },
+   {
+    "text": "Without them, the solution to many of the problems would be trivial or impractical.",
+    "page": 11
+   }
+  ]
+ },
+ {
+  "id": "S092",
+  "year": "2025",
+  "title": "A distance for mixed-variable and hierarchical domains with meta variables",
+  "read_level": "full",
+  "contribution": "Generalizes the group's single-level meta-variable framework to arbitrary DAG hierarchies (roles meta, meta-decreed, decreed, neutral) and defines a deterministic, constant-time metric (meta distance) on points that do not share variables, via an extended domain with an EXC value and a proven bijection; illustrated with KNN/IDW models on 40 hyperparameter datasets.",
+  "problem_entry": "Heterogeneous mixed-variable datasets are split into homogeneous subsets, which hurts when data is scarce or expensive; existing distances are random, lack metric axioms (identity of indiscernibles) or cost O(N^3 log N) (pp. 2, 4, 7).",
+  "key_idea": "Extend every point with its excluded variables set to EXC, organize decree dependencies in a role DAG with universal/restricted sets, define a per-variable included-excluded distance (d, 0, or theta >= sup d/2) aggregated by an l_p norm, and induce it on the original domain through the bijective transfer mapping (pp. 8-20).",
+  "assumptions": "Role graph is a DAG (Assumption 1, justified by a two-variable circular example); theta >= sup d/2; bounded restricted sets (else theta = infinity); p >= 1; any 1D distance in the both-included case (pp. 11, 17-19).",
+  "proof_devices": [
+   "minimal contradiction example (two circular meta-decreed binaries) placed before the DAG assumption (p. 11)",
+   "bijection proof by deleting EXC nodes from the role graph (Thm. 2, pp. 15-16)",
+   "case analysis on EXC patterns for the triangle inequality, where only the case u,v included and z excluded needs theta >= sup d/2 (Thm. 3, pp. 17-18)",
+   "reindexing per-variable distances into one vector and identifying the meta distance with its l_p norm (Thm. 4, p. 19)",
+   "extend-then-induce: define the metric on an extended domain and transfer it through a bijection (Cor. 1, p. 20)"
+  ],
+  "experiments": "40 datasets (5 variants x 4 sizes x MLP/Fashion-MNIST or CNN/CIFAR10); KNN classification with 20 seeds where Hybrid is best overall and Meta best only on variant #1; IDW regression tuned by NOMAD (200 n evaluations, 33% LHS, 200 instances) with data profiles at tau = 10%, 2.5%, 0.5% on validation and test RMSE, Meta best; data-aggregation curves mixed on CNN (pp. 20-25, 28-29).",
+  "positioning": "Two comparison tables (vs graph distances; feature matrix vs subproblems, own prior framework, variable-size kernel, Hutter-Osborne kernel, EMI); mechanism-based criticism (pseudo-distances without identity of indiscernibles, O(N^3 log N) cost); claims to generalize tree-structured, variable-size, conditional/NAS and hierarchical spaces (pp. 3-7, 25).",
+  "writing": "'This work has two main contributions' early; one running MLP example through five figures; numbered comments after definitions; Corollary 1 followed by a four-step recap; hedged discussion ('should provide', 'seems to confirm') (pp. 2-25).",
+  "limits_future": "theta must be infinite for unbounded sets, scaling of categorical/excluded variables ambiguous, only simple models tested; future: incompatibilities between values (in progress), Gaussian processes and Bayesian optimization, broader experiments (pp. 19-20, 27).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Semantics-first applied to inputs: every variable gets a type and a role in a role DAG before the model or distance is chosen.",
+    "pages": "pp. 8-12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "DAG hypothesis justified by a minimal contradiction; theta bound is exactly what the triangle inequality needs, with its cost stated; no guarantee ladder.",
+    "pages": "pp. 11, 17-19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Data profiles in groups of (n+1) evaluations at three tolerances with seeds; losses of the proposed method reported.",
+    "pages": "pp. 22-25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Model parameters tuned by NOMAD (MADS) as a blackbox with LHS start (also Heuristic 7).",
+    "pages": "p. 23"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Scripts and data released at github.com/bbopt/graph_distance (weak).",
+    "pages": "p. 27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "generalize your own framework, shown in a feature table",
+    "evidence": "Own 2023 meta framework listed as a row of Table 2 with its gaps; paper generalizes it to arbitrary hierarchy levels and adds a distance.",
+    "pages": "pp. 7, 10, 25"
+   },
+   {
+    "pattern": "extend-prove bijection-induce",
+    "evidence": "Extended points with EXC, bijective transfer mapping, metric on the extended domain, induced metric on the original domain.",
+    "pages": "pp. 9-20"
+   }
+  ],
+  "transferable": [
+   "State the research gap as a short list of defects each existing method has at least one of, then tabulate methods against those defects.",
+   "To compare objects that do not share coordinates, extend them to a common coordinate set with a sentinel value, give a per-coordinate rule for sentinel pairs, prove the extension is a bijection and induce the metric back.",
+   "Put the smallest breaking example right before a structural assumption (acyclicity).",
+   "Isolate the one case of a triangle-inequality proof that forces a parameter bound and make that bound the hypothesis.",
+   "When a DFO solver tunes a model on validation error, record the test error at each validation improvement and draw data profiles for both."
+  ],
+  "coauthors": "E. Hallé-Hannan, Y. Diouane, S. Le Digabel, P. Saves",
+  "quotes": [
+   {
+    "text": "This is problematic, particularly in optimization, as distinct points with a distance of zero can lead to convergence issues or unreliable exploration.",
+    "page": 7
+   },
+   {
+    "text": "Heterogeneous datasets are often partitioned into homogeneous data subsets of similar types that are easier to tackle: this approach is undesirable when data is limited or expensive-to-generate",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S101",
+  "year": "2025",
+  "title": "Benchmarking constrained, multi-objective and surrogate-assisted derivative-free optimization methods",
+  "read_level": "full",
+  "contribution": "Reviews convergence plots and accuracy, performance and data profiles for DFO and formally extends them to infeasible starting points, multi-objective problems (normalized hypervolume accuracy) and surrogate-assisted methods (weighted effort N = N_t + w N_s), implemented in the open-source RunnerPost tool.",
+  "problem_entry": "Existing benchmarking tools silently assume easy feasibility, a single objective and no surrogate; in DFO the effort is simulation calls, so each hidden assumption breaks one quantity (pp. 3-4, 10).",
+  "key_idea": "Keep tau-solve and the profile definitions, but redefine the baseline f0 (first feasible values across algorithms), the quality measure (hypervolume within an ideal-nadir box from the union of fronts) and the effort count (weighted surrogate evaluations, time, or Monte Carlo repetitions), under setup rules for test sets, algorithm sets and logs (pp. 4-15).",
+  "assumptions": "Evaluation dominates algorithm cost; comparable stopping criteria and logged evaluation number, objective and feasibility flag; same initial points for all algorithms; w equals the true relative cost; (n_p+1) scaling from simplex gradients (pp. 4-5, 9, 13, 15).",
+  "proof_devices": [
+   "digits-of-accuracy equivalence -log10(1 - f_acc) >= d <=> f_acc >= 1 - 10^-d (p. 7)",
+   "tau-solve rewritten as f(x) <= f* + tau (f0 - f*) (p. 8)",
+   "switching phenomenon shown by re-plotting performance profiles without the best algorithm (ratio range 40 -> 12) (pp. 9, 13-14)",
+   "two-panel convergence plot: violation h until first feasible point eta_a, then best feasible f (p. 11)",
+   "closed-form 2D hypervolume as a sum of rectangles (p. 13)"
+  ],
+  "experiments": "None on real problems; illustrative anonymized data designed to exhibit pitfalls (evaluations vs time, ranking reversal with tau, f0 choice, w = 0 vs 1/10), all plots generated by RunnerPost (pp. 4, 6-16).",
+  "positioning": "Builds on Dolan-Moré, Moré-Wild, Beiranvand-Hare-Lucet (accuracy profiles), Gould-Scott (switching), filter methods and the group's indicator review without criticizing anyone (pp. 4, 7-12).",
+  "writing": "Tutorial, prescriptive register ('should', 'It is recommended'); each profile given with definition, axis ranges, monotonicity and a numeric reading of an example figure; discussion restates three extensions and ends with a hope sentence (pp. 5-16).",
+  "limits_future": "No limitations section; future only combining techniques (multi-objective surrogate-based); discussion claims hidden-constraint handling that the body reduces to inf/NaN log flags (pp. 5, 16).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Evaluation count as currency, data profiles in groups of n+1, several tau, accuracy profiles described as not considering effort.",
+    "pages": "pp. 4, 8-10, 14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Small representative test set preferred to large unrelated one; derivative-based algorithms excluded and algorithm set kept very low, narrowing 'another family' to DFO families.",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Constrained benchmarking needs eta_a, violation h and a feasible-only baseline; logs separate failed evaluations.",
+    "pages": "pp. 5, 10-12"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "The instrument is a post-processing tool (RunnerPost, MIT) rather than the solver; every plot comes from it.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fair-baseline rules",
+    "evidence": "Same f0 and f* for all algorithms, f0 from first feasible points under infeasible starts (min or max, both shown), drop and flag instances nobody improves.",
+    "pages": "pp. 5-6, 11-12"
+   },
+   {
+    "pattern": "weighted effort accounting for surrogates",
+    "evidence": "N = N_t + w N_s with w the relative cost; several weights for several surrogates; repetitions for Monte Carlo fidelity.",
+    "pages": "p. 15"
+   }
+  ],
+  "transferable": [
+   "Log at least evaluation number, objective value and a feasibility flag, with inf/NaN for failed evaluations.",
+   "Fix f0 and f* identically for all algorithms; remove and flag instances that no algorithm improves.",
+   "For infeasible starts, plot the violation h until the first feasible point and the best feasible f afterwards, and show that the f0 choice (min or max of first feasible values) does not change the conclusion.",
+   "Count surrogate-assisted effort as N = N_t + w N_s with w the measured cost ratio, and show profiles at w = 0 and at the realistic w.",
+   "Show the dependence of performance profiles on the algorithm set by re-plotting without the best solver.",
+   "For each plot type introduced, give axis ranges, monotonicity and one sentence reading numbers off an example figure."
+  ],
+  "coauthors": "W. Hare, C. Tribes",
+  "quotes": [
+   {
+    "text": "Moreover, comparing DFO algorithms to algorithms that explicitly use derivatives should be avoided.",
+    "page": 5
+   },
+   {
+    "text": "It is recommended to keep the number of algorithms very low.",
+    "page": 5
+   }
+  ]
+ }
+]

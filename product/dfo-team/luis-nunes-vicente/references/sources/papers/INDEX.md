@@ -35,11 +35,11 @@
 | 23 | S023 | 2013 | Worst case complexity of direct search | EURO Journal on Computational Optimization | 118 | journal | url | txt | 11 | core | — |
 | 24 | S024 | 2012 | Analysis of direct searches for discontinuous functions | Mathematical Programming | 117 | journal | url | txt | 31 | core | — |
 | 25 | S025 | 2004 | Pattern search methods for user-provided points: Application to molecular geometry problems | SIAM Journal on Optimization | 101 | journal | url | txt | 21 | core | — |
-| 26 | S026 | 1994 | Generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software (TOMS) | 100 | journal | — | no-oa |  | supplement | — |
+| 26 | S026 | 1994 | Generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software (TOMS) | 100 | journal | manual | txt | 17 | supplement | — |
 | 27 | S027 | 2018 | Complexity and global rates of trust-region methods based on probabilistic models | IMA Journal of Numerical Analysis | 99 | journal | url | txt | 18 | supplement | — |
 | 28 | S028 | 2008 | Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity | European Journal of Operational Research | 98 | journal | url | txt | 27 | supplement | — |
 | 29 | S029 | 2012 | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | Mathematical Programming | 96 | journal | arXiv | txt | 31 | supplement | — |
-| 30 | S030 | 2008 | Using simplex gradients of nonsmooth functions in direct search methods | IMA Journal of Numerical Analysis | 96 | journal | — | no-oa |  | supplement | — |
+| 30 | S030 | 2008 | Using simplex gradients of nonsmooth functions in direct search methods | IMA Journal of Numerical Analysis | 96 | journal | manual | txt | 14 | supplement | — |
 | 31 | S031 | 1997 | On the convergence theory of trust-region-based algorithms for equality-constrained optimization | SIAM Journal on Optimization | 76 | journal | url | txt | 25 | supplement | — |
 | 32 | S032 | 2016 | Trust-region methods without using derivatives: Worst case complexity and the non-smooth case | SIAM Journal on Optimization | 73 | journal | url | txt | 27 | supplement | — |
 | 33 | S033 | 1993 | Generating linear and linear-quadratic bilevel programming problems | SIAM Journal on Scientific Computing | 70 | journal | — | no-oa |  | supplement | — |
@@ -62,13 +62,13 @@
 | 50 | S050 | 2015 | Globally convergent evolution strategies | Mathematical Programming | 39 | journal | url | txt | 22 | core | — |
 | 51 | S051 | 2011 | On partially sparse recovery | Preprint 11-13, Dept. Mathematics, Univ. Coimbra | 39 | preprint | arXiv | txt | 6 | supplement | — |
 | 52 | S052 | 1995 | Geometry and local optimality conditions for bilevel programs with quadratic strictly convex lower levels | Minimax and applications | 39 | chapter | — | no-oa |  | supplement | — |
-| 53 | S053 | 1993 | A new technique for generating quadratic programming test problems | Mathematical Programming | 39 | journal | — | no-oa |  | supplement | — |
+| 53 | S053 | 1993 | A new technique for generating quadratic programming test problems | Mathematical Programming | 39 | journal | manual | txt | 15 | supplement | — |
 | 54 | S054 | 2002 | Local convergence of a primal-dual method for degenerate nonlinear programming | Computational Optimization and Applications | 38 | journal | url | txt | 16 | supplement | — |
 | 55 | S055 | 2001 | Bilevel programming: Introduction, history and overview | Encyclopedia of optimization | 38 | chapter | url | txt | 3 | supplement | — |
-| 56 | S056 | 2001 | Algorithms for Solving Non-Linear Constrained and Optimization Problems: The State of The Art | — | 38 | report | — | no-oa |  | supplement | — |
+| 56 | S056 | 2001 | Algorithms for Solving Non-Linear Constrained and Optimization Problems: The State of The Art | — | 38 | report | manual | txt | 223 | supplement | — |
 | 57 | S057 | 2015 | Globally convergent evolution strategies for constrained optimization | Computational Optimization and Applications | 35 | journal | url | txt | 23 | supplement | — |
 | 58 | S058 | 2019 | Trust-region methods for the derivative-free optimization of nonsmooth black-box functions | SIAM Journal on Optimization | 33 | journal | url | txt | 27 | supplement | — |
-| 59 | S059 | 2008 | SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization | Departamento de Matemática, Universidade de Coimbra | 32 | report | — | no-oa |  | supplement | — |
+| 59 | S059 | 2008 | SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization | Departamento de Matemática, Universidade de Coimbra | 32 | report | manual | txt | 22 | supplement | — |
 | 60 | S060 | 2020 | A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds | Mathematical Programming | 30 | journal | url | txt | 29 | supplement | — |
 | 61 | S061 | 2014 | Efficient cardinality/mean-variance portfolios | System Modeling and Optimization, Springer series IFIP Advances in Information and Communication Technology | 29 | conference | url | txt | 22 | supplement | — |
 | 62 | S062 | 2003 | Space mapping: Models, sensitivities, and trust-regions methods | Optimization and Engineering | 29 | journal | url | txt | 15 | supplement | — |
@@ -92,7 +92,7 @@
 | 80 | S081 | 1996 | A comparison between line searches and trust regions for nonlinear optimization | Investigação Operacional | 13 | journal | url | txt | 8 | supplement | — |
 | 81 | S082 | 2012 | Modeling binary stars: age, helium abundance, and convection parameters | Monthly Notices of the Royal Astronomical Society | 12 | journal | url | txt | 9 | supplement | — |
 | 82 | S083 | 2009 | Implicitly and densely discrete black-box optimization problems | Optimization Letters | 11 | journal | url | txt | 9 | supplement | — |
-| 83 | S084 | 2000 | Local convergence of the affine-scaling interior-point algorithm for nonlinear programming | Computational Optimization and Applications | 11 | journal | — | no-oa |  | supplement | — |
+| 83 | S084 | 2000 | Local convergence of the affine-scaling interior-point algorithm for nonlinear programming | Computational Optimization and Applications | 11 | journal | manual | txt | 13 | supplement | — |
 | 84 | S085 | 2008 | Local analysis of the feasible primal-dual interior-point method | Computational Optimization and Applications | 9 | journal | url | txt | 16 | supplement | — |
 | 85 | S086 | 2024 | Match score dataset for team ball sports | Data in brief | 7 | journal | url | txt | 10 | core | — |
 | 86 | S087 | 2011 | Estimation of risk-neutral density surfaces | Computational Management Science | 7 | journal | url | txt | 34 | supplement | — |
@@ -115,7 +115,7 @@
 | 103 | S106 | 2001 | Pattern search methods for user-provided points | Lecture Notes in Computer Science, 95-98 | 2 | conference | url | txt | 4 | supplement | — |
 | 104 | S107 | 2025 | Non-smooth stochastic gradient descent using smoothing functions | arXiv preprint arXiv:2507.10901 | 1 | preprint | arXiv | txt | 37 | core | — |
 | 105 | S108 | 2019 | Optimization by space transformation and decomposition | — | 1 | other | — | no-oa |  | supplement | — |
-| 106 | S109 | 2006 | Matemática industrial em Portugal. Análise e perspectivas | Fundação Calouste Gulbenkian, Tema Ciência e Sociedade | 1 | chapter | — | no-oa |  | supplement | — |
+| 106 | S109 | 2006 | Matemática industrial em Portugal. Análise e perspectivas | Fundação Calouste Gulbenkian, Tema Ciência e Sociedade | 1 | chapter | manual | txt | 8 | supplement | — |
 | 107 | S110 | 2026 | Non-monotone direct-search methods for deterministic and stochastic derivative-free optimization | arXiv preprint arXiv:2609.11567 | — | preprint | arXiv | txt | 29 | core | — |
 | 108 | S111 | 2026 | Stochastic block coordinate and function alternation for multi-objective optimization and learning | arXiv preprint arXiv:2605.12432 | — | preprint | arXiv | txt | 22 | core | — |
 | 109 | S112 | 2022 | A package for optimization based on space decomposition | — | — | other | — | no-oa |  | supplement | — |
@@ -125,7 +125,7 @@
 | 113 | S120 | — | The Effects of Travel Distance on MLB Performance | — | — | journal | url | txt | 10 | supplement | — |
 | 114 | S121 | — | SIAG on Optimization Views and News | — | — | other | — | no-oa |  | supplement | — |
 | 115 | S122 | — | SIAG on Optimization Views and News | — | — | other | — | no-oa |  | supplement | — |
-| 116 | D001 | 1994 | Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software 20(1), 120-123 | — | journal | — | no-oa |  | supplement | — |
+| 116 | D001 | 1994 | Algorithm 728: FORTRAN subroutines for generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software 20(1), 120-123 | — | journal | manual | txt | 4 | supplement | — |
 | 117 | H001 | 2004 | Editorial | Optimization and Engineering 5 (2004) 99-100 (Special Issue on Optimization and Engineering) | — | other | url | txt | 4 | supplement | — |
 | 118 | H002 | 1999 | An analysis of Newton’s method for equivalent Karush-Kuhn-Tucker systems | Investigación Operativa 7 (1999) 17-28 | — | journal | url | txt | 10 | supplement | — |
 | 119 | H003 | 1998 | On interior-point Newton algorithms for discretized optimal control problems with state constraints | Optimization Methods & Software 8 (1998) 249-275 | — | journal | url | txt | 20 | supplement | — |
@@ -135,4 +135,4 @@
 | 123 | H007 | 1997 | Métodos de optimização para controlo óptimo e projecto de engenharia | Actas da I Conferência Nacional de Telecomunicações, pp. 437-440, 1997 | — | conference | url | txt | 4 | supplement | — |
 | 124 | H008 | 1991 | Efficient vehicle routing algorithms for municipal waste collection (written in portuguese) | Investigação Operacional 10 (1991) 47-58 | — | journal | — | no-oa |  | supplement | — |
 
-124 works · txt 96 · pdf 0 · no-oa 28
+124 works · txt 104 · pdf 0 · no-oa 20

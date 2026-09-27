@@ -1,0 +1,431 @@
+[
+ {
+  "id": "S049",
+  "year": "2014",
+  "title": "A merit function approach for direct search",
+  "read_level": "full",
+  "contribution": "Extends directional direct search to nonlinear, possibly nonsmooth, derivative-free constraints. Relaxable constraints are handled by an l1 merit-function acceptance test plus a Restoration mode, and unrelaxable ones by an extreme barrier. The paper proves Clarke-stationarity results for every Restoration regime.",
+  "problem_entry": "Classifies constraints by evaluation status (relaxable vs unrelaxable, including hidden constraints). It then positions itself as a merit-function alternative to the filter-based progressive barrier of Audet–Dennis, the only prior general approach handling both types (pp. 1–3).",
+  "key_idea": "Keep the search/poll/step skeleton and redefine only success. A step succeeds on sufficient decrease of the violation g when far from feasibility, otherwise on sufficient decrease of M = f + mu_k g. mu_k is a derivative-free transcription of the classical penalty update. Restoration is entered when g falls while f rises a lot (pp. 3–6).",
+  "assumptions": "f and c_i locally Lipschitz near limit points; f bounded below; nonempty hypertangent cone of Omega_nr; refining directions dense in the relevant cones. The infinite enter/leave-Restoration case additionally needs no step increase, no search step and convergent iterates, which the authors call 'not the ideal ones'. No bound on the penalty parameter is assumed (pp. 2, 7–12, 17).",
+  "proof_devices": [
+   "case split by Restoration recurrence: finitely often / entered and never left / entered and left infinitely often (p. 4)",
+   "three-branch contradiction for lim inf alpha_k = 0, where a merit-success with the ratio-defined mu_k is impossible by construction (p. 7)",
+   "Clarke–Jahn derivative along refining directions with Lipschitz swap of d_k for d and rho(alpha)/alpha -> 0 (pp. 8–11)",
+   "density of refining directions in T^Cl(x*) or T(x*) gives Clarke stationarity (pp. 9–11)",
+   "mean value theorem with limit PSS D* for the smooth particularization (pp. 13–14)"
+  ],
+  "experiments": "Proof of concept: untuned MATLAB, no search step, random unit directions |D_k| in {n/2, n+1, 2n}, 40 seeds. Three problems from the progressive-barrier paper (two with n = 50, plus the styrene truth model via NOMAD's C++ code), each from feasible and infeasible starts. Plots of f vs evaluations; compared with progressive barrier only through its published numbers. Restoration was entered a negligible number of times (pp. 14–16).",
+  "positioning": "'An alternative approach to progressive barrier [6]'; credits MADS and Vicente–Custódio as the two ways to globalize with an extreme barrier; lists augmented-Lagrangian, penalty, restoration and filter methods neutrally; notes that model-based TR has no constrained convergence theory (pp. 2–3).",
+  "writing": "One-sentence novelty claim in the abstract; reusable boxed 'Begin … End' definitions; roadmap by case; §7 translates Clarke results into smooth gradient language; hedged numerics ('proof of concept', 'relatively promising'); a referee simplification is reported and declined (pp. 1, 4–5, 13–14, 17).",
+  "limits_future": "States: extra conditions in the infinite-switch case; no comprehensive comparison; random directions/PSS study under way; effect of search step, mu-bar and step resetting open (pp. 12, 17). Unstated: no complexity, three test problems, Restoration theory barely exercised, no code release (pp. 14–16).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Skeleton unchanged; only 'success' redefined (violation decrease far from feasibility, else merit decrease); Heuristic 6 is this paper exactly",
+    "pages": "pp. 1, 3–6"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Step 5 (state the price in the abstract) not done: no price or complexity is stated",
+    "pages": "p. 1"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Sufficient decrease explicitly chosen over lattices to allow free dense directions, 'not to differ much from simple decrease'; forcing function capped at 1e-5 in numerics; no heuristic in the search step",
+    "pages": "pp. 2, 14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Origin: numerics poll with as few as n/2 random directions without positive spanning; a random-direction/PSS study is announced as under way (Heuristic 2)",
+    "pages": "pp. 14–15, 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Not applied: the constrained nonsmooth extension gives only lim-inf/Clarke results, no worst-case bound",
+    "pages": "pp. 7–13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Three-problem proof of concept, no profiles, baseline only via published numbers, no code release stated; benchmark deferred",
+    "pages": "pp. 4, 14–17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "mode-recurrence case analysis",
+    "evidence": "Convergence proof organized by whether Restoration is entered finitely often, never left, or entered/left infinitely often; the extra hypotheses are confined to the last case (also S073)",
+    "pages": "pp. 4, 6–13"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Theorem 6.1 states which algorithmic freedoms (search step, step increase) must be removed in the infinite-switch case and calls the conditions not ideal",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "Two-part success test: sufficient decrease of the violation only when g(x_k) > C rho(alpha_k), otherwise sufficient decrease of f + mu_k g with mu_k = max{mu-bar, Delta f/(C rho(alpha_k))} (pp. 4–5)",
+   "Port a derivative-based parameter update to DFO by replacing grad f^T d with the difference quotient along the poll step, and derivative-based quantities with rho(alpha)/alpha (p. 4)",
+   "Derivative-free Restoration trigger and exit rule based on g falling while f rises by more than mu-bar rho(alpha) (pp. 5–6)",
+   "Move a relaxable constraint to unrelaxable after N Restoration calls, per constraint (p. 13)",
+   "Random-polling protocol: |D_k| in {n/2, n+1, 2n}, 40 seeds, budgets in multiples of n, iteration counts reported to argue for parallel polling (pp. 14–15)"
+  ],
+  "coauthors": "S. Gratton",
+  "quotes": [
+   {
+    "text": "The merit function and the corresponding penalty parameter are only used in the evaluation of an already computed step, to decide whether it will be accepted or not.",
+    "page": 3
+   },
+   {
+    "text": "in practice, sufficient decrease can be imposed as not to differ much from simple decrease.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S050",
+  "year": "2015",
+  "title": "Globally convergent evolution strategies",
+  "read_level": "full",
+  "contribution": "Makes the (mu/mu_W, lambda)-ES class, including CMA-ES, globally convergent to Clarke-stationary points. The change is minimal: a separate step size contracted on failed sufficient decrease and reset to the ES step on success. Three decrease variants are proved and benchmarked.",
+  "problem_entry": "The ES community has no global convergence results for recombining ES (only asymptotic (1, lambda) results). The paper sets out to bridge DFO and ES, which are separated by terminology, and defines global convergence as display (1) (p. 2).",
+  "key_idea": "Change Algorithm 2.1 'in a minimal way'. Keep ES sampling, selection, recombination and the CMA updates. Add sigma_k separate from sigma^ES, impose sufficient decrease (mean/mean, max/max or max/mean), contract sigma_k on failure and set sigma_{k+1} = max{sigma_k, sigma^ES_k} on success (pp. 4–6, 11).",
+  "assumptions": "f bounded below and Lipschitz near x*; normalized recombined directions a_k (or each d^i_k) dense in the sphere along the refining subsequence, with ||a_k|| bounded away from zero; a weight condition (2) for the max versions. Density is argued with probability one for Gaussian directions (pp. 6–10).",
+  "proof_devices": [
+   "lim inf sigma_k = 0 by contradiction per version, using weight condition (2) to transfer max-decrease to the mean (pp. 6–7)",
+   "Clarke analysis along the recombined direction a_k with Lipschitz correction r_k <= nu ||a_k/||a_k|| - d|| (p. 8)",
+   "backtrack to the last successful iteration, where frozen x^mu and condition (2) give a standard no-decrease inequality at x_k (pp. 9–10)",
+   "probabilistic density: every spherical cap has probability >= eta for Gaussian a_k, plus resampling when ||a_k|| < eps (p. 9)"
+  ],
+  "experiments": "CMA-ES with Hansen's default parameters, rho = 1e-4 sigma^2. Moré–Wild 53 problems x 4 classes; data profiles (50n budget; 1e-3, 1e-7) and performance profiles (f* from 500000-evaluation runs; 1e-2, 1e-4). Version ablation (mean/mean best). Against pure CMA-ES and NOMAD/MADS without models, losses are reported. Global check on 19 BBOB multimodal functions with 20 starts and medians, where pure CMA-ES is slightly better (pp. 10–18).",
+  "positioning": "Bridges ES (Rechenberg, Beyer–Schwefel, Hansen; asymptotic analyses by Auger, Jägersküpper, Greenwood–Zhu) and DFO. Explains why the MADS lattice does not fit continuous ES sampling and follows the sufficient-decrease line (Vicente–Custódio, Coope–Price, KLT). Constructive toward ES (pp. 2–3, 8).",
+  "writing": "Single framing question; original and modified algorithms printed side by side; Newton-without-line-search analogy; assumptions discussed after the theorem; proof difficulty admitted; measured numerical claims; the naming slip 'mean/max' appears twice (pp. 3–6, 9, 15–17; proof difficulty p. 5; slip pp. 5, 11).",
+  "limits_future": "States: only CMA-ES tested; interaction with the CMA updates not understood; CMA's implicit derivative information unused; search step with quadratic models and the constrained case left to a forthcoming paper (pp. 18–19). Unstated: no complexity; weight condition (2) not enforced in the runs; no code release (p. 11).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Minimal wrapper around the ES: separate step size, sufficient decrease, contraction; step 4 reset rule sigma_{k+1} = max{sigma_k, sigma^ES_k}; step 6 raw-heuristic ablation done",
+    "pages": "pp. 4–6, 11, 14–18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Heuristic is not put in a search step; the ES loop itself becomes the poll-like mechanism; a search step is future work",
+    "pages": "pp. 6, 19"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Randomness only certifies density w.p. 1; convergence claimed 'for any realization'; not probabilistic descent",
+    "pages": "pp. 4, 9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Collection, data + performance profiles, unsafeguarded baseline, losses to MADS (small budgets) and pure CMA-ES (piecewise robustness, global search) reported",
+    "pages": "pp. 12–18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "No code release stated (step 5)",
+    "pages": "pp. 1–22"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Not applied: no rate or complexity",
+    "pages": "pp. 6–10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "enumerate acceptance-test variants, keep the provable ones, let profiles rank them",
+    "evidence": "Three sufficient-decrease tests proved, a fourth dropped for proof difficulty, profiles pick mean/mean",
+    "pages": "pp. 4–5, 13–14"
+   },
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "Weight condition (2), needed for the max-version theory, 'was not included in the runs', with reasons",
+    "pages": "p. 11"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Fourth variant dropped because of 'The difficulty in proving global convergence'",
+    "pages": "p. 5"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "MADS better at small budgets; pure CMA-ES more robust on piecewise problems and slightly better in global search",
+    "pages": "pp. 15–18"
+   }
+  ],
+  "transferable": [
+   "Decouple the heuristic's internal step length from a convergence-controlling step size; contract the latter on failure and set it to max(own, heuristic's) on success (pp. 6, 11)",
+   "For population methods, impose sufficient decrease on the recombined mean at the cost of one extra evaluation (pp. 4, 13)",
+   "Justify density of random directions via a positive lower bound on spherical-cap probabilities, with resampling if the norm is below eps (p. 9)",
+   "Chain back to the last successful iteration when the acceptance test compares quantities across iterations (pp. 9–10)",
+   "Benchmark twice: local collection with profiles for efficiency, plus a multimodal suite with medians over starts to check the heuristic's original strength (pp. 12–18)"
+  ],
+  "coauthors": "Y. Diouane, S. Gratton",
+  "quotes": [
+   {
+    "text": "The main question we address in this paper is how to change Algorithm 2.1, in a minimal way, so that it enjoys some form of convergence properties, while preserving as much as possible the original design and goals.",
+    "page": 4
+   },
+   {
+    "text": "Despite addressing the same problem domain, derivative-free optimization and evolution strategies have historically had little connection, in part because of major differences in terminology and notation.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S041",
+  "year": "2016",
+  "title": "On the optimal order of worst case complexity of direct search",
+  "read_level": "full",
+  "contribution": "Proves |D|/cm(D)^2 >= c n^2 for every positive spanning set. Hence the n^2 factor in the known O(n^2 eps^-2) and O(n^2 eps^-1) direct-search evaluation bounds cannot be improved by choosing another PSS; D-plus is optimal up to a constant.",
+  "problem_entry": "Asks whether the n^2 in existing WCC bounds is an artefact of D-plus. Rewrites the bounds as O(m kappa^-2 eps^-a), which turns the question into min over PSS of |D|/cm(D)^2 (problem (6)) (pp. 1–2, 5).",
+  "key_idea": "Cosine measure equals a sphere-covering radius: a unit PSS with cm = kappa covers the sphere with caps of radius arccos kappa, and cm(D) is the largest such kappa. A discrete-geometry covering bound then caps cm(D) <= zeta sqrt(n^-1 log(|D|/n)) (pp. 6–8).",
+  "assumptions": "f C^1 with Lipschitz gradient and bounded below; rho = C alpha^p with p = 2 fixed; PSS with cm >= kappa, |D| <= m and bounded norms; search step costing at most a multiple of m. 'Optimal' refers to the n-order of the upper-bound expression over PSS choices, not to an oracle lower bound (pp. 3–5, 8).",
+  "proof_devices": [
+   "equivalence lemma: cosine measure <-> spherical covering by caps of radius arccos(cm) (pp. 6–7)",
+   "imported covering bound from discrete geometry (Tikhomirov 2015 and earlier results) (p. 7)",
+   "log x <= x - 1 to finish (p. 8)",
+   "rewrite the WCC bound as m kappa^-p-hat to expose the design trade-off (pp. 4–5)"
+  ],
+  "experiments": "none (Fig. 1 plots |D|/cm(D)^2 for uniform 2-D PSSs, p. 6)",
+  "positioning": "Completes the authors' WCC line ([20], [9]); credits Konečný–Richtárik's simpler rederivation, noting its restriction; imports discrete geometry with explicit thanks to that community; closes by comparing with GRVZ probabilistic descent O(mn eps^-2) (pp. 2, 7–9).",
+  "writing": "Nine pages; abstract states the result and the proof idea; guiding question posed in the text; κ explained as the price of missing gradient information, by analogy with randomized coordinate descent; open problems listed precisely with status (n = 3, 4 known; n >= 5 open) (pp. 1, 4, 8).",
+  "limits_future": "Problems (6) and (12) open; optimality of D-plus for m = 2n open for n >= 5 (p. 8). The result concerns bounds for deterministic PSS polling; the implied direction is randomization (p. 8).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Step 5 (ask whether the n-order is optimal) in its purest form; Heuristic 9 is this paper; step 3 made explicit as m kappa^-2",
+    "pages": "pp. 2, 4–8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "SKILL.md's 'optimal n^2 factor' and 'intrinsic to the deterministic class' overstate it: optimality is over PSS choices within the sufficient-decrease upper-bound template, not an oracle lower bound",
+    "pages": "pp. 1, 5, 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The lower bound makes the comparison with probabilistic descent 'more rigorously made'; randomization 'has the potential to improve the efficiency'",
+    "pages": "p. 8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import",
+    "evidence": "Cosine measure recast as a sphere-covering radius so that an extremal bound from discrete geometry settles an optimization-complexity question, with help from that community (cf. S029)",
+    "pages": "pp. 6–7, 9"
+   }
+  ],
+  "transferable": [
+   "Rewrite an evaluation bound as (cost per iteration) x (per-iteration quality)^-2 and optimize the design over that ratio, with small explicit designs as sanity checks (pp. 2, 5)",
+   "Use an equivalent definition of your key constant in another field's language to import that field's extremal bounds (pp. 6–7)",
+   "Explain a constant by analogy with a better-known method (kappa^-2 vs number of blocks in RCDM) (p. 4)",
+   "Finish a short theory paper with precisely stated open problems and their known special cases (p. 8)"
+  ],
+  "coauthors": "M. Dodangeh, Z. Zhang",
+  "quotes": [
+   {
+    "text": "In other words, κ can be interpreted as the price to pay for the absence of gradient information.",
+    "page": 4
+   },
+   {
+    "text": "Such a bound, when m is much smaller than n, is better than the optimal situation that we already proved for the bound (4).",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S046",
+  "year": "2016",
+  "title": "Worst case complexity of direct search under convexity",
+  "read_level": "full",
+  "contribution": "Proves that sufficient-decrease directional direct search on smooth convex functions needs O(eps^-1) iterations and O(n^2 eps^-1) evaluations to reach ||grad f|| < eps, with a 1/k rate in f and global r-linear rates for f and x under strong convexity. This is the first deterministic DFO method with the convex gradient-method order.",
+  "problem_entry": "Uses the gradient-method yardstick: the bound improves to O(eps^-1) under convexity, and Nesterov's random Gaussian DFO attains it only in expectation. Can a deterministic zero-order method match it? Direct search is chosen as the simplest setting (p. 2).",
+  "key_idea": "No algorithmic change (except an optional step cap M for p != 2). Port Nesterov's convex proof to direct search: at unsuccessful iterations ||grad f|| = O(alpha); charge successes to the nearest unsuccessful iteration; telescope 1/Delta f; count unsuccessful iterations by a log of step ratios (pp. 3–15).",
+  "assumptions": "f convex, C^1 with Lipschitz gradient; nonempty solution set with R = sup over the level set of dist(., X*) finite (holds without bounded level sets, e.g. f = y^2; fails for sqrt(x^2 + y^2) - x); PSS with cm >= cm_min; step cap M if p != 2; strong convexity results with p = 2 only (pp. 6–8, 16, 23).",
+  "proof_devices": [
+   "at unsuccessful iterations ||grad f|| <= omega_g^-1 alpha^min(1,p-1) (Cor. 3.1, p. 7)",
+   "convexity + R: Delta f_i <= R ||grad f(x_{k_i})|| (p. 9)",
+   "reciprocal telescoping of 1/Delta f over unsuccessful-iteration indices (p. 9)",
+   "log counting |U| <= omega1 |S| + omega2 + log_beta2(...) (pp. 10–11)",
+   "ln x <= x to absorb the log term (p. 12)",
+   "midpoint split of successful iterations for the gradient bound, mirroring the k..2k argument (pp. 13–14)",
+   "strong convexity: ||grad f||^2 >= 2 mu (f - f*) gives a (1 - 2 omega mu) contraction per success (p. 17)"
+  ],
+  "experiments": "Tables of average evaluations over 20 runs. Nesterov's quadratic for n = 2–16: direct search (D-plus, gamma = 1, rho = 1e-3 t^2) far beats one-point Gaussian and beats two-point Gaussian even though the latter gets exact r0 and nu ('a huge advantage'). Five convex CUTEr problems at n = 8: direct search better 'overall', though two-point Gaussian wins on arglinc at every accuracy (not mentioned in the text). No profiles (pp. 19–23).",
+  "positioning": "Places itself in the WCC literature (Nesterov, CGT sharpness and FD-ARC, Garmanjani–Vicente smoothing). Novelty counted precisely: second DFO method with O(eps^-1), 'but the first time for a deterministic approach'. Improves Dolan–Lewis–Torczon's local r-linear result on three stated points (pp. 2, 19, 22).",
+  "writing": "Abstract of three results stated relative to the gradient method; §2 recaps the gradient proofs that §4 mirrors; notation paragraph on O-constants; parameter commentary (gamma = 1 optimal); pathological example in the conclusion; advantage given to competitors disclosed (pp. 1, 3–6, 22–23).",
+  "limits_future": "States: Assumption 4.1 can fail; p != 2 needs the cap M; strong convexity for p = 2 only (pp. 7, 16, 23). No future-work section; constants complicated and not optimized; no code release (pp. 11, 15, 18, 22–23).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Every step present: class fixed, successes via rho, unsuccessful iterations via alpha contractions, conversion to evaluations with n-dependence via cm_min, gradient-method comparison, numerics against the randomized rival",
+    "pages": "pp. 1–23"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Theory-paper numerics: tables on one quadratic and five CUTEr problems, no profiles on a collection, no code release stated",
+    "pages": "pp. 19–23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bridge inequality to a classical proof",
+    "evidence": "||grad f|| = O(alpha) at unsuccessful iterations plus the convexity bound Delta f <= R ||grad f|| put direct search into Nesterov's 1/k proof structure",
+    "pages": "pp. 4, 7–9, 13–14"
+   },
+   {
+    "pattern": "deterministic counterpart of an in-expectation result",
+    "evidence": "Target chosen because random Gaussian DFO had O(eps^-1) only in expectation; claims 'the first time for a deterministic approach'",
+    "pages": "pp. 2, 22"
+   },
+   {
+    "pattern": "handicap the competitor with oracle information",
+    "evidence": "Two-point Gaussian given exact r0 and nu, called 'unrealistic in DFO' and 'a huge advantage'; direct search still better on the quadratic and overall",
+    "pages": "pp. 21–22"
+   }
+  ],
+  "transferable": [
+   "Recap the derivative-based proof you will mirror in its own short section, then follow its structure (pp. 3–4, 9, 13–14)",
+   "Midpoint split of successful iterations: a function-value rate bounds the first half, gradient-norm decrease the second (pp. 13–14)",
+   "Replace bounded level sets by finite R = sup dist(L_f(x0), X*); give one example where the weaker condition holds and one where it fails (pp. 7, 23)",
+   "Log-count unsuccessful iterations from alpha_k <= alpha_k0 gamma^|S| beta2^|U| and a lower bound on alpha (pp. 10–11)",
+   "Give competitors their oracle constants exactly and say so, so a win cannot be blamed on tuning (pp. 21–22)"
+  ],
+  "coauthors": "M. Dodangeh",
+  "quotes": [
+   {
+    "text": "It is thus natural to ask if one can achieve a similar bound for deterministic zero-order methods, and direct search offers a simple and instructive setting to answer such a question.",
+    "page": 2
+   },
+   {
+    "text": "This does not come as a surprise since both Algorithms 6.1 and 6.2 do not accept steps and do not adjust step sizes depending on some form of decrease as does direct search.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S073",
+  "year": "2023",
+  "title": "Full-low evaluation methods for derivative-free optimization",
+  "read_level": "full",
+  "contribution": "A DFO framework that alternates expensive Full-Eval line-search iterations (FD-BFGS in practice) with cheap Low-Eval direct-search iterations (probabilistic [d, -d] polling). A switch couples the two step sizes. Theory gives a gradient-descent-type rate when Full-Eval keeps succeeding and Clarke stationarity when it fails; the method is robust across smooth, nonsmooth and noisy problems.",
+  "problem_entry": "Diagnoses that each DFO paradigm (direct search, FD line search, model-based TR, untheorized hybrids) fits only some regimes. Aims at one rigorous class with 'sustainedly good performance across all possible function types' (pp. 2–4).",
+  "key_idea": "A Full-Eval step counts only if its line-search step beta >= gamma rho(alpha_k), where alpha_k is the direct-search step; otherwise switch to Low-Eval. Successful Full-Eval steps then act as direct-search search steps. Switch back after as many consecutive Low-Eval failures as the last Full-Eval's backtracks (pp. 5–6, 10, 14).",
+  "assumptions": "Smooth: C^1 with L-Lipschitz gradient; ||grad f - g_k|| <= u_g beta_k ||g_k|| (ensured by a criticality-step FD loop); angle and size conditions on p_k. Nonsmooth: 'Full-Eval Failure' (||g_k|| bounded away from 0 on successful Full-Eval), bounded iterates, Lipschitz f near x*, dense refining directions. Noise not covered by theory; the implementation fixes h = sqrt(eps) (pp. 2, 7, 10–13).",
+  "proof_devices": [
+   "lower bound on the backtracked step from Taylor plus failure of beta_k/tau (Lemma 3.1, pp. 7–8)",
+   "decrease >= M ||g_k||^2 per successful Full-Eval, giving min ||grad f|| = O(1/sqrt(ns_k)) (p. 8)",
+   "PL inequality for a linear rate under strong convexity (pp. 9–10)",
+   "coupling (2.2) turns Full-Eval successes into forcing-function decreases, so alpha_k -> 0 by summability (Lemma 3.2, pp. 10–11)",
+   "standard refining-direction Clarke argument (pp. 11–12)",
+   "criticality-step loop for FD gradients with finite termination by contradiction (pp. 12–13)"
+  ],
+  "experiments": "Six solvers (Full-Low, BFGS-FD, pDS, DFO-TR, FDLM, NOMAD). 62 smooth CUTEst problems (n = 2–51), 12 scalable problems at n = 40 and 80, and 53 Moré–Wild problems (piecewise smooth; additive and multiplicative, deterministic and stochastic noise at 1e-3). Performance profiles (2000n budget) and data profiles (100(n+1) budget). Losses reported per class (DFO-TR on small smooth problems and additive deterministic noise; NOMAD on stochastic noise). Number of runs for randomized solvers not stated (pp. 13–22).",
+  "positioning": "Surveys paradigms with balanced pros and cons; places Vicente's own SID-PSM/MFN hybrids among those without comprehensive theory; claims 'To our knowledge such type of rigorous results is novel in DFO'; contrasts with FDLM's explicit noise estimation; separates its terminology from the surrogate framework of Booker et al. (pp. 2–4, 15).",
+  "writing": "Abstract pairs 'For the theory, we consider' with 'In practice,'; the key design move is flagged twice; results explained per class; overall-best claim without a combined profile; minor slips (tau for theta and I_SL twice in Lemma 3.2's proof; 'four other approaches' followed by five) (pp. 1, 5, 11, 13–14, 20–22).",
+  "limits_future": "Future: bound and linear constraints, larger dimensions, other Full/Low instantiations (TR with fully linear models, simplex gradients, deterministic DS; Gaussian smoothing) (p. 24). Unstated: rate counts only successful Full-Eval iterations with no total-evaluation complexity; no noise theory; h and criticality step differ between theory and code; switching rule not analysed; no code release (pp. 2, 6, 8, 12–14).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "FD-BFGS keeps its own step; the direct-search poll gives convergence; Full-Eval steps are 'essentially considered as search steps'; BFGS-FD-only baseline is the step-6 ablation",
+    "pages": "pp. 10, 14, 17–22"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The heuristic has its own rate theory, and the coupling is a floor beta >= gamma rho(alpha) that triggers a switch, not a reset rule",
+    "pages": "pp. 5–6, 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Low-Eval implemented as probabilistic direct search with [d, -d] (<= 2 evaluations), chosen for 'superior performance' over PSS",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Stated nonsmooth theory is a density argument; the random [d, -d] choice is not connected to it or to probabilistic descent",
+    "pages": "pp. 11, 13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Rate per successful Full-Eval iteration compared with gradient descent, but not converted into total function evaluations",
+    "pages": "pp. 8–9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Collections, performance + data profiles, component ablations (Full-only, Low-only), losses reported by class",
+    "pages": "pp. 14–22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "SKILL.md says the Lehigh papers ship GitHub code, but this Lehigh paper's arXiv text mentions no code or repository",
+    "pages": "pp. 1–27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "mode-recurrence case analysis",
+    "evidence": "Smooth results hold if infinitely many Full-Eval iterations succeed; nonsmooth results hold under Full-Eval Failure, with Low-Eval driving alpha -> 0 (also S049)",
+    "pages": "pp. 6–11"
+   },
+   {
+    "pattern": "iteration taxonomy for complexity",
+    "evidence": "Iterations partitioned into I_SF, I_SL, I_UF, I_UL, and the nonsmooth proof handles each class in turn",
+    "pages": "pp. 4, 10–11"
+   },
+   {
+    "pattern": "idealized theorem + practical algorithm with the gap written out",
+    "evidence": "The abstract separates 'For the theory' from 'In practice' for both iteration types, although the h/criticality-step gap is not written out",
+    "pages": "pp. 1, 12–13"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "DFO-TR best on small smooth problems and additive deterministic noise; NOMAD best on stochastic noise; Full-Low between its components on multiplicative stochastic noise",
+    "pages": "pp. 17–22"
+   }
+  ],
+  "transferable": [
+   "Coupling condition beta_LS >= gamma rho(alpha_DS): the fast method's successes become search steps in the convergent method's proof (pp. 5, 10–11)",
+   "Effort-matched switching: return to the expensive mode after as many cheap-mode failures as the expensive mode's last backtracks (pp. 6, 14)",
+   "Criticality-step loop for FD gradients to guarantee ||grad f - g|| <= u_g beta ||g|| (pp. 12–13)",
+   "BFGS skip rule s^T y >= 1e-10 ||s|| ||y|| and a conditional H0 scaling for nonconvex DFO (p. 13)",
+   "Benchmark a hybrid against each of its components alone, across smooth, nonsmooth and four noise models, and recheck rankings at other noise levels (pp. 14–22)"
+  ],
+  "coauthors": "A. S. Berahas, O. Sohab",
+  "quotes": [
+   {
+    "text": "A key feature of our Full-Low Evaluation methodology that led to rigorous results (see the proof of Lemma 3.2) is to stop the line-search once condition (2.2) is violated.",
+    "page": 13
+   },
+   {
+    "text": "One can see from the proof of Lemma 3.2 (below) that Full-Eval steps are essentially considered as search steps from the direct-search perspective of the Low-Eval iterations.",
+    "page": 10
+   }
+  ]
+ }
+]

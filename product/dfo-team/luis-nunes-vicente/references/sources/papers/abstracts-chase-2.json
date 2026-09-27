@@ -1,4 +1,0 @@
-{
- "S100": "In this paper, we discuss a multiparametric technique for finding a global minimum for an indefinite quadratic programming problem based on the spectral decomposition of the matrix of the quadratic form. Special attention is given to the case where this matrix has only rank 1, where the multiparametric linear program turns out to be a single-parameter linear program. An extension of the traditional linear parametric procedure is introduced which in general solves this problem efficiently. However, an example is presented showing that this technique may take an exponential number of steps.",
- "S100__src": "https://academic.oup.com/imaman/article-abstract/4/4/343/665106"
-}
