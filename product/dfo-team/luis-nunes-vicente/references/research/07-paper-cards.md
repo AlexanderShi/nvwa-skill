@@ -20,7 +20,7 @@
 
 Attribution notes: S029 is a joint paper with Bandeira and Scheinberg (also on Scheinberg's list). S056 is a 223-page multi-author COCONUT report; only §2.1 (PDF pp. 7–9) is Vicente's, and only that section is used as his evidence. S121/S122 are SIAG/OPT newsletter issues; only the signed Chair's Columns are his (service writing, no research method). S113 is a talk deck presented by his student Suyun Liu. S040 is his PhD thesis (derivative-based, before his DFO work).
 
-Legend for *Methods linked*: M1–M5 = SKILL.md core methods; H# = research heuristic; T# = taste mark; W# = taste warning sign; WfA/WfE = workflows; SigDMS = Signature Work Anatomy (DMS row); e = evidence, v = variant, c = contradiction. Links from service columns (S121, S122), from non-Vicente chapters of S056 and the "not applicable" link of S092 are omitted.
+Legend for *Methods linked*: M1–M5 = SKILL.md core methods; H# = research heuristic, in the first-pass numbering (H5 and H9 are retired in SKILL.md: old H5, smoothing, is now Method 4 step 2; old H9, n-order optimality, is Method 2 step 5; H11 and H12 were added on 2026-09-27 and carry no links here); T# = taste mark; W# = taste warning sign; WfA/WfE = workflows; SigDMS = Signature Work Anatomy (DMS row); e = evidence, v = variant, c = contradiction. Links from service columns (S121, S122), from non-Vicente chapters of S056 and the "not applicable" link of S092 are omitted.
 
 ## Cards
 

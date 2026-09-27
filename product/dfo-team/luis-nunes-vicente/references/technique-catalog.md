@@ -8,7 +8,7 @@
 >
 > Reading lesson (general): before reusing a number or a parameter from any paper, check that its table, caption and text agree and that the experiment's parameters satisfy the theorem being cited.
 
-How the techniques map onto SKILL.md: proof devices serve Methods 2–4 and Workflow C; design moves serve Methods 1, 3 and 4 and Workflows A, B, D, E; experiment protocols serve Methods 5–6 and Workflow F; writing moves serve Method 6.
+How the techniques map onto SKILL.md: proof devices serve Methods 2–4 and Workflow C (its "stuck on → device" table points here); design moves serve Methods 1, 3 and 4 and Workflows A, B, D, E; experiment protocols serve Method 5, heuristic H10 and Workflow F; writing moves serve H10 and Workflow F.
 
 ---
 

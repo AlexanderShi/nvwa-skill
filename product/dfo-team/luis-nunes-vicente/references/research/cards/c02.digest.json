@@ -154,7 +154,7 @@
   "key_idea": "Build the multicriteria problem from the whole bilevel problem, including lower-level optimality, rather than from the two objectives. Encode optimality in an order relation, replace argmin by a gradient condition, and induce the order by a nonconvex cone (pp. 2, 7-9).",
   "assumptions": "Unconstrained bilevel, lower level C1 in y (convex in y for equivalence); the cone is admitted nonconvex, and scalarization choice is 'highly problem dependent' (pp. 8-9, 11).",
   "proof_devices": [
-   "order relation defined so that 'solution iff nondominated' follows from the definition (Thm 6, p. 8)",
+   "order relation defined so that bilevel solutions are exactly its nondominated points, by definition (Thm 6, p. 8)",
    "replace the argmin condition by a first-order condition and track the one-way inclusion of nondominated sets (eq. 7, p. 8)",
    "cone-induced order properties and monotone scalarization theorems (Thms 1-5, pp. 3-6)",
    "two-variable example as a negative test of linear scalarization (pp. 9-10; formulas garbled in extraction)"

@@ -75,7 +75,7 @@ Source: `08-deep-reading-synthesis.md` §8–§9, built from the 124 paper cards
 - **Keep the skeleton, change one object**: 1996 [S037 pp. 5–7; S040 p. 103] to 2026 [S110 p. 4].
 - **Inexactness tied to progress**: 1996 [S040 p. 136], 2002 [S013 p. 10], 2012 [S047 p. 8], 2024–2025 [S088 pp. 13–14; S042 pp. 13–14].
 - **Artefacts**: generators 1993–94 [S053 p. 14; D001], TRICE and the interface 1997–99 [H007 p. 3; S048], PSwarm/SID-PSM 2007–09 [S005 p. 14; S059], DMS collection 2011 [S003 p. 15], GitHub code 2022–25 [S016 p. 5; S042 p. 22; S091 p. 7].
-- **Publishing the boundary** (SKILL.md Method 6): 1998 [H003 pp. 4, 18–19] to 2026 [S110 p. 14].
+- **Publishing the boundary** (SKILL.md heuristic H10; proposed as a Method 6 and demoted on review, see 08 §4.1): 1998 [H003 pp. 4, 18–19] to 2026 [S110 p. 14].
 - **Applications**: circuits [S039 pp. 17–18], molecules [S106; S025], superconductivity [S044 p. 18], finance [S028; S087; S061], astrophysics [S075; S082], data assimilation [S043], geophysics [S068], medicine [S035], manufacturing [S036; S078], transport [S080], fairness [S016; S101], sports [S086; S092]. A 2006 essay ties applications to academics' own research portfolio and contacts [S109 pp. 4–5].
 
 ### Collaboration pattern
@@ -101,4 +101,4 @@ Source: `08-deep-reading-synthesis.md` §8–§9, built from the 124 paper cards
 2. Convergence → complexity (2013): single-authored opener [S023], every comparison with 2004–2012 derivative-based complexity results [S023 pp. 2, 8–9].
 3. Deterministic → probabilistic (2014–2015): the stated trigger is the random-direction numerics of the merit-function paper [S049 pp. 14–15, 17; S019 p. 2] and the probabilistic-models trust-region paper [S014].
 4. DFO → ML-facing stochastic methods (2019 →): no personal explanation found; the only signed sentence is field-level [S121 p. 14].
-5. Back to stochastic DFO sampling (2022 → 2026): the tail bound [S067], then an audit of its total cost that opens the sequential-test paper [S102 p. 3], then non-monotone acceptance [S110].
+5. Back to stochastic DFO sampling (2022 → 2026): the tail bound [S067], whose own Remark 5.1 discloses that fewer samples per iteration need not reduce total cost [S067 p. 20]; the sequential-test paper takes up that caveat as its entry point [S102 p. 3]; then non-monotone acceptance [S110].
