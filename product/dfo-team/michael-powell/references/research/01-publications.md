@@ -1,8 +1,31 @@
 # 01 · Publications: landscape and signature-work anatomy
 
-Research date: 2026-09-27. Method: web-search results plus directly reading Powell's original Fortran distributions (READMEs, cover emails, code comments) as mirrored in the PRIMA repository. `scripts/fetch_publications.py` could not reach OpenAlex from this environment, so this landscape was built by hand. **No full-text reading of papers**: paper content comes from abstracts and search snippets only. Where a claim goes beyond those, it is marked *(inference)* or *(speculation)*.
+Research date: 2026-09-27. Method: web-search results plus directly reading Powell's original Fortran distributions (READMEs, cover emails, code comments) as mirrored in the PRIMA repository. `scripts/fetch_publications.py` could not reach OpenAlex from this environment, so this landscape was built by hand. **First pass (sections 1–2): no full-text reading of papers**; paper content there comes from abstracts and search snippets only. Where a claim goes beyond those, it is marked *(inference)* or *(speculation)*.
+
+**Deep-reading pass (same date, section 0 and section 3):** the full publication list was then harvested from Google Scholar (with DBLP and Crossref), every listed work was carded, and 35 works were read in full text. Section 0 gives the coverage; section 3 lists what the full texts change in sections 1–2. Where the two passes disagree, the full texts and `08-deep-reading-synthesis.md` §3 take precedence.
 
 Credibility tags: **[primary]** = Powell's own paper, report, code or cover note · **[secondary]** = obituary, memoir, benchmark or successor project.
+
+---
+
+## 0. Coverage from the Google Scholar list (deep-reading pass)
+
+Sources: `../sources/publications/scholar.md` (the list, sorted by citations, with an audit note), `../sources/publications/works.json` (all records including duplicates), the full-text index `../sources/papers/INDEX.md` (Full text, Role and Read columns), the card index `07-paper-cards.md` and the synthesis `08-deep-reading-synthesis.md`.
+
+| Item | Count | Note |
+|---|---|---|
+| Google Scholar rows | 211, plus 2 DBLP-only items = 213 records | profile `p3kDmy0AAAAJ`, harvested 2026-09-27 |
+| Duplicate or junk records | 29 | marked `dup_of` in `works.json` |
+| Distinct works | 184 | 115 with a DOI (checked against Crossref titles); none on arXiv |
+| Card entries | 187 | 184 works + R007 (Royal Society memoir, secondary) + X001 (SIAM oral history, 2005) + X002 (CIM Bulletin interview, 2003) |
+| Full text read | 35 works (30 full + 5 partial: S057, S074, S078, S121, S170) + R007, X001, X002 | S186 is the same text as S165 and counts once |
+| Abstract-level cards | 73 entries (72 works; S175 and S048 are one work at two stages) | no open full text |
+| Metadata-only cards | 75 | 11 non-research items; 4 books or edited volumes |
+| Skipped | 0 | |
+
+Full-text reads by period (full or partial / carded research works; from `08-deep-reading-synthesis.md` §1): 1960–64 1/7; 1965–69 1/24; 1970–74 0/23; 1975–79 0/17; 1980–84 1/25; 1985–89 2/19; 1990–94 3/20; 1995–99 7/15; 2000–04 8/9; 2005–09 7/7; 2010–15 5/5. The derivative-free period after 1997 is read almost completely; before it, only eight classics have open full texts (S001 1963, S019 1968, S139 1983, S050 1986, S115 1989, S030 1990/91, S090 1990, S089 1992).
+
+Read level of the most-cited works (Scholar citations, 2026): of the ten most cited, two were read in full, S001 (DFP, 7118) and S007 (BOBYQA, 2462). The others are abstract- or metadata-level: S002 (1964 conjugate directions, 6999, abstract), S003 (1978 SQP, 2942, metadata), S004 (1969 augmented Lagrangian, 2709, metadata), S005 (1987 RBF review, 2672, metadata), S006 (1977 CG restarts, 2635, abstract), S008 (COBYLA, 2391, abstract), S009 (Approximation Theory and Methods, 1925, abstract) and S010 (1990 RBF report, 1530, abstract). Of the top twenty, S014, S018 and S019 were also read in full. So the method evidence rests on the DFO reports and a few classics, not on the most-cited early papers.
 
 ---
 
@@ -83,3 +106,18 @@ Credibility tags: **[primary]** = Powell's own paper, report, code or cover note
 
 ### E. Early precursor: the 1964 conjugate-direction method (Computer Journal 7(2):155–162)
 One sentence, from the abstract snippet: a simple variation of the one-parameter-at-a-time method that yields conjugate directions on quadratics, "resulting in fast convergence". *Inference:* the same move recurs 30 years later: take a crude practical method, find the smallest modification that gives it the right behaviour on quadratics, and prove it on test functions. Now in SciPy as `fmin_powell` [secondary].
+
+---
+
+## 3. What the deep-reading pass changes in sections 1–2
+
+Each item points to the cards; the full reasoning is in `08-deep-reading-synthesis.md` §3.
+
+- **⚠️ leads now verified.** "Beyond symmetric Broyden for updating quadratic models in minimization without derivatives" is Powell's (Math. Program. 138:475–500, 2013, DOI 10.1007/s10107-011-0510-y; read in full, card S108). "Developments of NEWUOA for minimization without derivatives" is Powell's (IMA J. Numer. Anal. 2008, DOI 10.1093/imanum/drm047; read in full, card S036). The pre-DFO classics are on the Scholar list with checked metadata: DFP with Fletcher (S001, 1963, read in full), "A hybrid method for nonlinear equations" (S011, 1970, metadata), "A method for non-linear constraints in minimization problems" (S004, 1969, metadata), the 1978 SQP papers (S003, S013 metadata; S016 abstract) and "Nonconvex minimization calculations and the conjugate gradient method" (S020, 1984, abstract).
+- **UOBYQA's limit** is given as three figures in Powell's texts: "very promising" for n ≤ 20 [S025 p. 1], prohibitive beyond about 50 [S025 p. 30; S047 p. 2; S045 p. 3], about 100 in practice [S029 p. 10]. NEWUOA superseded it [S029 p. 10], and the full-quadratic regime stays a choice of NPT in NEWUOA and BOBYQA [S018 p. 2; S007 p. 34].
+- **Anatomy A (COBYLA), Origin and Abandoned paths**: Powell's own later account names IMSL's wrapping of TOLMIN with differences, the popularity of simulated annealing and genetic algorithms, and a four-variable, ten-constraint problem from Westland Helicopters [S029 pp. 2–3; S014 pp. 2, 45]. COBYLA had one radius (Δ = ρ); the two radii came later from research student Evan Jones [S047 p. 5; S014 pp. 26–28, 34–35]. RBF models were tried for the local model and dropped; the memoir places the RBF attempt first and the polynomial-interpolation codes after it [R007 pp. 17, 21], and Powell's own accounts of COBYLA's origin do not mention it [S029 pp. 2–3; S014 p. 2]. The COBYLA paper itself stays abstract-only [S008].
+- **Anatomy B (NEWUOA), Why then**: least-Frobenius updating was first tried in January 2002 [S072 pp. 7–8]; eighteen months of rounding trouble followed, ended by the factored Ω [S124 pp. 3, 14, 22]; the release came in December 2003 [S018 p. 3].
+- **Anatomy C (BOBYQA), Origin**: NEWUOA's success with 320 variables encouraged the extension to bounds [S036 p. 6]; the speculation about user demand is dropped. Five versions of the alternative step were published before the release decision [S036 pp. 11–14, 19].
+- **Anatomy D (LINCOA)**: the 2015 paper is a design record of the trust-region step, with two rejected techniques (Krylov steps, boundary searches) and about two years of work that did not enter the software [S067 pp. 1, 25, 30].
+- **Pattern "mostly single-author work in the DFO period"**: verified. Every DFO paper read is sole-authored; across the whole list 48 of 170 research works are co-authored (`08-deep-reading-synthesis.md` §9).
+- **Pattern "report first, code by email"**: verified and older than the DFO series. The practice dates from the 1968 Harwell report for NS01A [S019 pp. 9–13, 45] and code reports from 1970 on [R007 pp. 27–30].

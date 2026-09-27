@@ -128,7 +128,7 @@
    {
     "method": "Method 3 / Heuristic 2",
     "relation": "evidence",
-    "note": "The m=2n+1 versus n+6 evidence is mixed: n+6 wins on CHROSEN and ARWHEAD but loses by about 3x on the trigonometric problem; the best m depends on F.",
+    "note": "The m=2n+1 versus n+6 evidence is mixed: n+6 needs fewer evaluations on ARWHEAD and gives the shortest run times on CHROSEN despite somewhat more evaluations, but needs about 3x more evaluations on the trigonometric problem; the best m depends on F.",
     "pages": "pp. 17-19"
    },
    {

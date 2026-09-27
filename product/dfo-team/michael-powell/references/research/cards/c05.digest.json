@@ -20,7 +20,7 @@
    "lim inf to lim upgrade by (l, m) index pairs with 10 eps / eps gradient levels and summed decrease contradicting boundedness (pp. 25-27)"
   ],
   "experiments": "Same algorithm with linear vs symmetric-Broyden quadratic models on trigonometric sum of squares and chained Rosenbrock, n=20..320, 5 random instances each, min-max #F and final infinity-norm error; parameters fixed and theory written before any run; no other solvers (pp. 27-30).",
-  "positioning": "Credits Conn-Scheinberg-Vicente with most published DFO trust-region theory and reuses their conditions; frames the contrast as a strategic difference (one F per iteration vs model-improvement phases), not a criticism; concedes NEWUOA is much more efficient in practice (pp. 2-4).",
+  "positioning": "Credits Conn-Scheinberg-Vicente with most published DFO trust-region theory and reuses their conditions; calls the contrast (one F per iteration vs model-improvement phases) a major strategic difference, in neutral terms; concedes NEWUOA is much more efficient in practice (pp. 2-4).",
   "writing": "Theorem in abstract, roadmap at end of section 1, reader told proofs of Lemmas 2-3 can be skipped without losing coherence, each parameter's purpose stated at introduction, algorithm in prose not pseudocode (pp. 1, 4, 6-7, 13, 16, 20).",
   "limits_future": "Exact arithmetic; rho never increased causes unnecessarily small steps; test functions may be too easy; future: take NEWUOA's radius adjustment so rho becomes a lower bound, extend to linear (straightforward) and nonlinear constraints (pp. 2, 30-31).",
   "method_links": [
