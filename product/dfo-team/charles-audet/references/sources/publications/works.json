@@ -663,13 +663,14 @@
    "id": "S031",
    "title": "Filter pattern search algorithms for mixed variable constrained optimization problems",
    "authors": "MA Abramson, C Audet, JE Dennis Jr",
-   "venue": null,
-   "year": 2004,
+   "venue": "Pacific Journal of Optimization 3(3), 477-500",
+   "year": 2007,
    "cites": 91,
    "doi": "10.21236/ada445031",
    "arxiv": null,
    "urls": [
-    "https://www.gerad.ca/en/papers/G-2004-53"
+    "https://www.gerad.ca/en/papers/G-2004-53",
+    "https://doi.org/10.21236/ada445031"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -749,13 +750,14 @@
    "id": "S035",
    "title": "Self-scheduling short-term unit commitment and loading problem",
    "authors": "S Séguin, P Côté, C Audet",
-   "venue": "IEEE Transactions on Power Systems",
-   "year": 2015,
+   "venue": "IEEE Transactions on Power Systems 31(1), 133-142",
+   "year": 2016,
    "cites": 78,
    "doi": "10.1109/tpwrs.2014.2383911",
    "arxiv": null,
    "urls": [
-    "https://www.gerad.ca/en/papers/G-2014-21"
+    "https://www.gerad.ca/en/papers/G-2014-21",
+    "https://doi.org/10.1109/tpwrs.2014.2383911"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -763,7 +765,8 @@
     "scholar",
     "gerad",
     "bbopt-bib",
-    "semanticscholar"
+    "semanticscholar",
+    "crossref"
    ]
   },
   {
@@ -2883,21 +2886,23 @@
    "id": "S134",
    "title": "A note on bimatrix game maximal Selten subsets",
    "authors": "C Audet, S Belhaiza, P Hansen",
-   "venue": "Groupe d'études et de recherche en analyse des décisions",
-   "year": 2010,
+   "venue": "Arabian Journal of Mathematics 3(3), 299-311",
+   "year": 2014,
    "cites": 4,
    "doi": "10.1007/s40065-014-0101-x",
    "arxiv": null,
    "urls": [
-    "https://www.gerad.ca/en/papers/G-2010-03"
+    "https://www.gerad.ca/en/papers/G-2010-03",
+    "https://doi.org/10.1007/s40065-014-0101-x"
    ],
-   "kind": "report",
+   "kind": "journal",
    "dup_of": null,
    "sources": [
     "scholar",
     "gerad",
     "bbopt-bib",
-    "semanticscholar"
+    "semanticscholar",
+    "crossref"
    ]
   },
   {
@@ -2999,14 +3004,15 @@
    "id": "S140",
    "title": "Sequential stochastic blackbox optimization with zeroth-order gradient estimators",
    "authors": "C Audet, J Bigeon, R Couderc, M Kokkolaras",
-   "venue": "arXiv preprint arXiv:2305.19450",
+   "venue": "AIMS Mathematics 8(11), 25922-25956",
    "year": 2023,
    "cites": 3,
    "doi": "10.3934/math.20231321",
    "arxiv": "2305.19450",
    "urls": [
     "https://www.gerad.ca/en/papers/G-2023-16",
-    "https://hal.science/hal-04684482/"
+    "https://hal.science/hal-04684482/",
+    "https://doi.org/10.3934/math.20231321"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -3014,7 +3020,8 @@
     "scholar",
     "gerad",
     "bbopt-bib",
-    "semanticscholar"
+    "semanticscholar",
+    "crossref"
    ]
   },
   {
@@ -3196,8 +3203,8 @@
    "id": "S150",
    "title": "Risk averse constrained blackbox optimization under mixed aleatory/epistemic uncertainties",
    "authors": "C Audet, J Bigeon, R Couderc, M Kokkolaras",
-   "venue": "arXiv preprint arXiv:2310.11380",
-   "year": 2023,
+   "venue": "Computational Optimization and Applications 92, 375-435",
+   "year": 2025,
    "cites": 2,
    "doi": "10.1007/s10589-025-00704-w",
    "arxiv": "2310.11380",
@@ -3211,7 +3218,8 @@
     "scholar",
     "dblp",
     "gerad",
-    "semanticscholar"
+    "semanticscholar",
+    "crossref"
    ]
   },
   {

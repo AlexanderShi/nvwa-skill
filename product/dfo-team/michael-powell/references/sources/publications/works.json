@@ -119,7 +119,9 @@
    "cites": 2462,
    "doi": null,
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2009_06.pdf"
+   ],
    "kind": "report",
    "dup_of": null,
    "sources": [
@@ -237,7 +239,9 @@
    "cites": 892,
    "doi": "10.1017/s0962492900002841",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1998_04.ps.gz"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -306,7 +310,9 @@
    "cites": 777,
    "doi": "10.1007/0-387-30065-1_16",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2004_08.pdf"
+   ],
    "kind": "chapter",
    "dup_of": null,
    "sources": [
@@ -428,7 +434,8 @@
    "doi": "10.1007/s101070100290",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S101070100290"
+    "https://doi.org/10.1007/S101070100290",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2000_14.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -499,7 +506,9 @@
    "cites": 417,
    "doi": null,
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2007_03.pdf"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -622,7 +631,9 @@
    "cites": 253,
    "doi": "10.1093/imanum/drm047",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2007_05.pdf"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -778,7 +789,8 @@
    "doi": "10.1007/s10107-003-0490-7",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S10107-003-0490-7"
+    "https://doi.org/10.1007/S10107-003-0490-7",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2002_08.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -814,7 +826,8 @@
    "doi": "10.1007/s10107-003-0430-6",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S10107-003-0430-6"
+    "https://doi.org/10.1007/S10107-003-0430-6",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2002_02.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -958,7 +971,9 @@
    "cites": 117,
    "doi": "10.1007/978-3-0348-8696-3_14",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1998_05.ps.gz"
+   ],
    "kind": "conference",
    "dup_of": null,
    "sources": [
@@ -992,7 +1007,9 @@
    "cites": 116,
    "doi": null,
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2001_11.ps.gz"
+   ],
    "kind": "conference",
    "dup_of": null,
    "sources": [
@@ -1161,7 +1178,8 @@
    "doi": "10.1007/s12532-015-0084-4",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S12532-015-0084-4"
+    "https://doi.org/10.1007/S12532-015-0084-4",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2014_02.pdf"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -1179,7 +1197,9 @@
    "cites": 77,
    "doi": "10.1080/10556780108805839",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2000_10.ps.gz"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -1246,7 +1266,8 @@
    "doi": "10.1080/10556780410001661450",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1080/10556780410001661450"
+    "https://doi.org/10.1080/10556780410001661450",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2003_03.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -1280,7 +1301,9 @@
    "cites": 66,
    "doi": "10.1093/imanum/drh021",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2002_05.ps.gz"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -1298,7 +1321,8 @@
    "doi": "10.1023/a:1018923925800",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1023/A:1018923925800"
+    "https://doi.org/10.1023/A:1018923925800",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1998_08.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -1349,7 +1373,9 @@
    "cites": 64,
    "doi": "10.1093/imanum/drl027",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2006_03.pdf"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -1469,7 +1495,9 @@
    "cites": 50,
    "doi": null,
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1999_11.ps.gz"
+   ],
    "kind": "report",
    "dup_of": null,
    "sources": [
@@ -1601,7 +1629,8 @@
    "doi": "10.1007/s10589-012-9483-x",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S10589-012-9483-X"
+    "https://doi.org/10.1007/S10589-012-9483-X",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2011_01.pdf"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -1860,7 +1889,8 @@
    "doi": "10.1007/s10107-011-0510-y",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S10107-011-0510-Y"
+    "https://doi.org/10.1007/S10107-011-0510-Y",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2010_04.pdf"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -2079,7 +2109,8 @@
    "doi": "10.1007/s101070050115",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1007/S101070050115"
+    "https://doi.org/10.1007/S101070050115",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1999_07.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -2130,7 +2161,9 @@
    "cites": 21,
    "doi": null,
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2004_01.pdf"
+   ],
    "kind": "report",
    "dup_of": null,
    "sources": [
@@ -2219,7 +2252,9 @@
    "cites": 19,
    "doi": "10.1093/imanum/drp021",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2008_06.pdf"
+   ],
    "kind": "journal",
    "dup_of": null,
    "sources": [
@@ -2354,7 +2389,8 @@
    "doi": "10.1142/9789812836267_0009",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1142/9789812836267_0009"
+    "https://doi.org/10.1142/9789812836267_0009",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2008_03.pdf"
    ],
    "kind": "chapter",
    "dup_of": null,
@@ -2541,7 +2577,9 @@
    "cites": 12,
    "doi": "10.1007/978-1-4613-3335-7_1",
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1997_12.ps.gz"
+   ],
    "kind": "chapter",
    "dup_of": null,
    "sources": [
@@ -2822,7 +2860,9 @@
    "cites": 4,
    "doi": null,
    "arxiv": null,
-   "urls": [],
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1997_18.ps.gz"
+   ],
    "kind": "conference",
    "dup_of": null,
    "sources": [
@@ -2856,7 +2896,8 @@
    "doi": "10.1080/10556788.2013.822497",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1080/10556788.2013.822497"
+    "https://doi.org/10.1080/10556788.2013.822497",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2011_16.pdf"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -2909,7 +2950,8 @@
    "doi": "10.1023/a:1008617208706",
    "arxiv": null,
    "urls": [
-    "https://doi.org/10.1023/A:1008617208706"
+    "https://doi.org/10.1023/A:1008617208706",
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA1997_21.ps.gz"
    ],
    "kind": "journal",
    "dup_of": null,
@@ -3620,6 +3662,64 @@
    "sources": [
     "dblp"
    ]
+  },
+  {
+   "id": "R007",
+   "title": "Michael James David Powell. 29 July 1936 — 19 April 2015 (Biographical Memoirs of Fellows of the Royal Society)",
+   "authors": "M. D. Buhmann, R. Fletcher, A. Iserles, P. Toint",
+   "venue": "Biographical Memoirs of Fellows of the Royal Society (DAMTP NA2017/04 preprint)",
+   "year": 2017,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "http://www.damtp.cam.ac.uk/user/na/NA_papers/NA2017_04.pdf"
+   ],
+   "kind": "memoir",
+   "dup_of": null,
+   "sources": [
+    "damtp"
+   ],
+   "head": "MICHAEL JAMES DAVID POWELL | 29 July 1936 — 19 April 2015 | MICHAEL J.D. POWELL | 29 July 1936 — 19 April 2015 | Elected FRS 1983 | by M.D. Buhmann(∗) | , R. Fletcher FRS(†) | , A. Iserles(‡) & P. Toint(¶)",
+   "note": "Not by Powell: biographical memoir, read as process evidence about how he worked."
+  },
+  {
+   "id": "X001",
+   "title": "An interview with Michael J. D. Powell (SIAM oral history, conducted by Philip Davis, 6 April 2005)",
+   "authors": "M. J. D. Powell, P. Davis",
+   "venue": "SIAM History of Numerical Analysis and Scientific Computing (Computer History Museum)",
+   "year": 2005,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://history.siam.org/pdfs2/Powell_final.pdf"
+   ],
+   "kind": "interview",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Linked from Powell's memorial page zhangzk.net/powell.html; not a Scholar row."
+  },
+  {
+   "id": "X002",
+   "title": "An Interview with M. J. D. Powell (Bulletin of the International Center for Mathematics, n. 14, June 2003)",
+   "authors": "M. J. D. Powell (interviewed by L. N. Vicente)",
+   "venue": "Bulletin of the International Center for Mathematics 14",
+   "year": 2003,
+   "cites": null,
+   "doi": null,
+   "arxiv": null,
+   "urls": [
+    "https://www.mat.uc.pt/~lnv/papers/mjdp.pdf"
+   ],
+   "kind": "interview",
+   "dup_of": null,
+   "sources": [
+    "homepage"
+   ],
+   "note": "Linked from zhangzk.net/powell.html; not a Scholar row. Interviewer per the Coimbra hosting page; verify."
   }
  ]
 }

@@ -20,5 +20,25 @@
 | 8 | S008 | 2007 | Using sampling and simplex derivatives in pattern search methods | SIAM Journal on Optimization | 240 | journal | url | txt | 20 | supplement | — |
 | 9 | S009 | 1996 | Discrete linear bilevel programming problem | Journal of Optimization Theory and Applications | 225 | journal | — | no-oa |  | supplement | — |
 | 10 | S010 | 2008 | Geometry of interpolation sets in derivative free optimization | Mathematical Programming | 210 | journal | url | txt | 26 | supplement | — |
+| 11 | S011 | 1998 | Trust-region interior-point SQP algorithms for a class of nonlinear programming problems | SIAM Journal on Control and Optimization | 204 | journal | url | txt | 48 | supplement | — |
+| 12 | S012 | 2010 | Incorporating minimum Frobenius norm models in direct search | Computational Optimization and Applications | 201 | journal | url | txt | 17 | supplement | — |
+| 13 | S013 | 2002 | Analysis of inexact trust-region SQP algorithms | SIAM Journal on Optimization | 192 | journal | url | txt | 18 | supplement | — |
+| 14 | S014 | 2014 | Convergence of trust-region methods based on probabilistic models | SIAM Journal on Optimization | 181 | journal | arXiv | txt | 29 | supplement | — |
+| 15 | S015 | 2019 | Complexity of gradient descent for multiobjective optimization | Optimization Methods and Software | 164 | journal | url | txt | 10 | supplement | — |
+| 16 | S016 | 2022 | Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach | Computational Management Science | 160 | journal | arXiv | txt | 18 | supplement | — |
+| 17 | S017 | 2024 | The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning | Annals of Operations Research | 157 | journal | arXiv | txt | 30 | supplement | — |
+| 18 | S018 | 2009 | PSwarm: A hybrid solver for linearly constrained global derivative-free optimization | Optimization Methods and Software | 157 | journal | url | txt | 22 | supplement | — |
+| 19 | S019 | 2015 | Direct search based on probabilistic descent | SIAM Journal on Optimization | 133 | journal | url | txt | 29 | supplement | — |
+| 20 | S020 | 2008 | Geometry of sample sets in derivative-free optimization: Polynomial regression and underdetermined interpolation | IMA Journal of Numerical Analysis | 132 | journal | url | txt | 28 | supplement | — |
+| 21 | S021 | 1994 | A comparison of block pivoting and interior-point algorithms for linear least squares problems with nonnegative variables | Mathematics of Computation | 128 | journal | — | no-oa |  | supplement | — |
+| 22 | S022 | 2006 | Multicriteria approach to bilevel optimization | Journal of Optimization Theory and Applications | 126 | journal | url | txt | 14 | supplement | — |
+| 23 | S023 | 2013 | Worst case complexity of direct search | EURO Journal on Computational Optimization | 118 | journal | url | txt | 11 | supplement | — |
+| 24 | S024 | 2012 | Analysis of direct searches for discontinuous functions | Mathematical Programming | 117 | journal | url | txt | 31 | supplement | — |
+| 25 | S025 | 2004 | Pattern search methods for user-provided points: Application to molecular geometry problems | SIAM Journal on Optimization | 101 | journal | url | txt | 21 | supplement | — |
+| 26 | S026 | 1994 | Generating quadratic bilevel programming test problems | ACM Transactions on Mathematical Software (TOMS) | 100 | journal | — | no-oa |  | supplement | — |
+| 27 | S027 | 2018 | Complexity and global rates of trust-region methods based on probabilistic models | IMA Journal of Numerical Analysis | 99 | journal | url | txt | 18 | supplement | — |
+| 28 | S028 | 2008 | Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity | European Journal of Operational Research | 98 | journal | url | txt | 27 | supplement | — |
+| 29 | S029 | 2012 | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | Mathematical Programming | 96 | journal | arXiv | txt | 31 | supplement | — |
+| 30 | S030 | 2008 | Using simplex gradients of nonsmooth functions in direct search methods | IMA Journal of Numerical Analysis | 96 | journal | — | no-oa |  | supplement | — |
 
-10 works · txt 7 · pdf 0 · no-oa 3
+30 works · txt 24 · pdf 0 · no-oa 6

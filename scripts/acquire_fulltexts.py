@@ -261,12 +261,15 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
         todo = (not only or w["id"] in only)
         skip_net = (prev.get("Full text") == "no-oa" and not recheck) or w.get("kind") in ("patent", "talk")
 
-        if txt.exists():
-            status = "txt"
-        elif pdf.exists():
-            pages = extract_text(pdf, txt) or ""
-            status = "txt" if pages else "pdf"
-            source = source if source != "—" else "manual"
+        if txt.exists() or pdf.exists():
+            if not txt.exists():
+                pages = extract_text(pdf, txt) or ""
+            elif not pages:
+                pages = txt.read_text(encoding="utf-8", errors="replace").count("[[page ") or ""
+            status = "txt" if txt.exists() else "pdf"
+            if source == "—":  # supplied outside this script (homepage search, report series, by hand)
+                urls = " ".join(w.get("urls") or [])
+                source = "DAMTP report" if "damtp" in urls else "manual"
         elif todo and not skip_net:
             arx = w.get("arxiv")
             if not arx:
