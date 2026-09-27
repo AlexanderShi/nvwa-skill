@@ -22,3 +22,7 @@ voice_tts/passage.txt
 
 # Downloaded papers for skill research (copyrighted — keep local)
 product/**/references/sources/papers/*.pdf
+
+# Private materials from people you know (supervisor feedback, meeting notes) — never publish
+product/**/references/sources/private/*
+!product/**/references/sources/private/README.md
