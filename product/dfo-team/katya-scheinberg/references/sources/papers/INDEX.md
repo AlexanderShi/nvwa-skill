@@ -30,5 +30,45 @@
 | 18 | S018 | 2014 | Convergence of trust-region methods based on probabilistic models | SIAM Journal on Optimization | 181 | journal | arXiv | txt | 29 | supplement | — |
 | 19 | S019 | 1998 | A derivative free optimization algorithm in practice | 7th AIAA/USAF/NASA/ISSMO Symposium on Multidisciplinary Analysis and... | 179 | conference | — | no-oa |  | supplement | — |
 | 20 | S020 | 2006 | IBM Research TRECVID-2006 Video Retrieval System. | TRECVID | 155 | conference | url | txt | 20 | supplement | — |
+| 21 | S021 | 2016 | Least-squares approach to risk parity in portfolio selection | Quantitative finance | 147 | journal | — | no-oa |  | supplement | — |
+| 22 | S022 | 2006 | An efficient implementation of an active set method for SVMs. | Journal of Machine Learning Research | 147 | journal | — | no-oa |  | supplement | — |
+| 23 | S023 | 2010 | A derivative-free algorithm for least-squares minimization | SIAM Journal on Optimization | 145 | journal | — | no-oa |  | supplement | — |
+| 24 | S024 | 2017 | Stochastic recursive gradient algorithm for nonconvex optimization | arXiv preprint arXiv:1705.07261 | 135 | preprint | arXiv | txt | 15 | supplement | — |
+| 25 | S025 | 2008 | Geometry of sample sets in derivative-free optimization: polynomial regression and underdetermined interpolation | IMA journal of numerical analysis | 132 | journal | — | no-oa |  | supplement | — |
+| 26 | S026 | 2021 | Global convergence rate analysis of a generic line search algorithm with noise | SIAM Journal on Optimization | 125 | journal | arXiv | txt | 30 | supplement | — |
+| 27 | S027 | 1998 | Interior point trajectories in semidefinite programming | SIAM Journal on Optimization | 124 | journal | — | no-oa |  | supplement | — |
+| 28 | S028 | 2014 | Fast first-order methods for composite convex optimization with backtracking | Foundations of computational mathematics | 119 | journal | — | no-oa |  | supplement | — |
+| 29 | S029 | 2016 | Practical inexact proximal quasi-Newton method with global complexity analysis | Mathematical Programming | 116 | journal | arXiv | txt | 29 | supplement | — |
+| 30 | S030 | 2010 | Self-correcting geometry in model-based algorithms for derivative-free unconstrained optimization | SIAM Journal on Optimization | 101 | journal | unpaywall | txt | 20 | supplement | — |
+| 31 | S031 | 2017 | Optimization methods for supervised machine learning: From linear models to deep learning | Leading developments from INFORMS communities | 99 | chapter | arXiv | txt | 27 | supplement | — |
+| 32 | S032 | 2019 | New convergence aspects of stochastic gradient algorithms | Journal of Machine Learning Research | 97 | journal | arXiv | txt | 49 | supplement | — |
+| 33 | S033 | 2012 | Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization | Mathematical programming | 96 | journal | arXiv | txt | 31 | supplement | — |
+| 34 | S034 | 2000 | Duality and optimality conditions | Handbook of Semidefinite Programming: Theory, Algorithms, and Applications... | 91 | chapter | — | no-oa |  | supplement | — |
+| 35 | S035 | 2012 | Block coordinate descent methods for semidefinite programming | Handbook on semidefinite, conic and polynomial optimization | 80 | chapter | — | no-oa |  | supplement | — |
+| 36 | S036 | 2019 | A stochastic trust region algorithm based on careful step normalization | Informs Journal on Optimization | 77 | journal | arXiv | txt | 25 | supplement | — |
+| 37 | S037 | 2021 | Inexact SARAH algorithm for stochastic optimization | Optimization Methods and Software | 74 | journal | arXiv | txt | 20 | supplement | — |
+| 38 | S038 | 2009 | Intensive optimization of masks and sources for 22nm lithography | Optical Microlithography XXII | 70 | conference | — | no-oa |  | supplement | — |
+| 39 | S039 | 1996 | Extension of Karmarkar's algorithm onto convex quadratically constrained quadratic problems | Mathematical Programming | 69 | journal | — | no-oa |  | supplement | — |
+| 40 | S040 | 1999 | On parametric semidefinite programming | Applied Numerical Mathematics | 66 | journal | — | no-oa |  | supplement | — |
+| 41 | S041 | 2024 | First-and second-order high probability complexity bounds for trust-region methods with noisy oracles | Mathematical Programming | 63 | journal | arXiv | txt | 42 | supplement | — |
+| 42 | S042 | 2010 | Learning sparse Gaussian Markov networks using a greedy coordinate ascent approach | Joint European Conference on Machine Learning and Knowledge Discovery in... | 60 | conference | — | no-oa |  | supplement | — |
+| 43 | S043 | 2021 | High probability complexity bounds for line search based on stochastic oracles | Advances in Neural Information Processing Systems | 59 | conference | arXiv | txt | 30 | supplement | — |
+| 44 | S044 | 2022 | Finite difference gradient approximation: To randomize or not? | INFORMS Journal on Computing | 58 | journal | — | no-oa |  | supplement | — |
+| 45 | S045 | 1999 | A modified barrier-augmented Lagrangian method for constrained minimization | Computational optimization and applications | 58 | journal | — | no-oa |  | supplement | — |
+| 46 | S046 | 2017 | Methodologies and software for derivative-free optimization | Advances and Trends in Optimization with Engineering Applications, 495-506 | 52 | chapter | — | no-oa |  | supplement | — |
+| 47 | S047 | 2020 | Adaptive stochastic optimization: a framework for analyzing stochastic optimization algorithms | IEEE Signal Processing Magazine | 50 | journal | arXiv | txt | 16 | supplement | — |
+| 48 | S048 | 2009 | Row by row methods for semidefinite programming | Industrial Engineering | 50 | report | — | no-oa |  | supplement | — |
+| 49 | S049 | 2009 | SINCO-a greedy coordinate ascent method for sparse inverse covariance selection problem | preprint | 42 | preprint | — | no-oa |  | supplement | — |
+| 50 | S050 | 2004 | A product-form Cholesky factorization method for handling dense columns in interior point methods for linear programming | Mathematical Programming | 41 | journal | — | no-oa |  | supplement | — |
+| 51 | S051 | 2017 | Smooth pinball neural network for probabilistic forecasting of wind power | arXiv preprint arXiv:1710.01720 | 40 | preprint | arXiv | txt | 8 | supplement | — |
+| 52 | S052 | 2017 | Black-box optimization in machine learning with trust region based derivative free algorithm | arXiv preprint arXiv:1703.06925 | 39 | preprint | arXiv | txt | 13 | supplement | — |
+| 53 | S053 | 2013 | On partial sparse recovery | arXiv preprint arXiv:1304.2809 | 39 | preprint | arXiv | txt | 6 | supplement | — |
+| 54 | S054 | 2018 | Proximal quasi-Newton methods for regularized convex optimization with linear and accelerated sublinear convergence rates | Computational Optimization and Applications 69 (3), 597-627 | 38 | journal | arXiv | txt | 31 | supplement | — |
+| 55 | S055 | 2022 | Nesterov accelerated shuffling gradient method for convex optimization | International Conference on Machine Learning, 21703-21732 | 33 | conference | arXiv | txt | 30 | supplement | — |
+| 56 | S056 | 2020 | Feature engineering and forecasting via derivative-free optimization and ensemble of sequence-to-sequence networks with applications in renewable energy | Energy 196, 117136 | 33 | journal | arXiv | txt | 24 | supplement | — |
+| 57 | S057 | 2025 | Sample complexity analysis for adaptive optimization algorithms with stochastic oracles | Mathematical Programming 209 (1), 651-679 | 31 | journal | arXiv | txt | 21 | supplement | — |
+| 58 | S058 | 2005 | Product-form Cholesky factorization in interior point methods for second-order cone programming | Mathematical Programming 103 (1), 153-179 | 31 | journal | — | no-oa |  | supplement | — |
+| 59 | S059 | 2001 | Incremental learning and selective sampling via parametric optimization framework for SVM | Advances in neural information processing systems 14 | 30 | conference | — | no-oa |  | supplement | — |
+| 60 | S060 | 2019 | A novel smoothed loss and penalty function for noncrossing composite quantile estimation via deep neural networks | arXiv preprint arXiv:1909.12122 | 23 | preprint | arXiv | txt | 12 | supplement | — |
 
-20 works · txt 13 · pdf 0 · no-oa 7
+60 works · txt 33 · pdf 0 · no-oa 27

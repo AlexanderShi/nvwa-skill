@@ -769,7 +769,7 @@
    "id": "S038",
    "title": "Methodologies and software for derivative-free optimization",
    "authors": "AL Custódio, LN Vicente, K Scheinberg",
-   "venue": "Siam Society for Industrial and Applied",
+   "venue": "Advances and Trends in Optimization with Engineering Applications (MOS-SIAM Series on Optimization), SIAM",
    "year": 2017,
    "cites": 52,
    "doi": "10.1137/1.9781611974683.ch37",
@@ -873,7 +873,7 @@
    "title": "Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation",
    "authors": "E Bergou, S Gratton, LN Vicente",
    "venue": "SIAM/ASA Journal on Uncertainty Quantification",
-   "year": 2014,
+   "year": 2016,
    "cites": 49,
    "doi": "10.1137/140974687",
    "arxiv": null,
@@ -886,7 +886,8 @@
    "sources": [
     "scholar",
     "dblp",
-    "homepage"
+    "homepage",
+    "crossref"
    ]
   },
   {
@@ -936,7 +937,7 @@
    "title": "Worst case complexity of direct search under convexity",
    "authors": "M Dodangeh, LN Vicente",
    "venue": "Mathematical Programming",
-   "year": 2015,
+   "year": 2016,
    "cites": 43,
    "doi": "10.1007/s10107-014-0847-0",
    "arxiv": null,
@@ -949,7 +950,8 @@
    "sources": [
     "scholar",
     "dblp",
-    "homepage"
+    "homepage",
+    "crossref"
    ]
   },
   {
@@ -1212,7 +1214,7 @@
   },
   {
    "id": "S060",
-   "title": "A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds: S. Gratton et al.",
+   "title": "A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds",
    "authors": "S Gratton, CW Royer, LN Vicente",
    "venue": "Mathematical Programming",
    "year": 2020,
@@ -1228,7 +1230,8 @@
    "sources": [
     "scholar",
     "dblp",
-    "homepage"
+    "homepage",
+    "crossref"
    ]
   },
   {
@@ -1538,7 +1541,7 @@
    "title": "Numerical behavior of a stabilized SQP method for degenerate NLP problems",
    "authors": "ESME Mostafa, LN Vicente, SJ Wright",
    "venue": "International Workshop on Global Optimization and Constraint Satisfaction",
-   "year": 2002,
+   "year": 2003,
    "cites": 18,
    "doi": "10.1007/978-3-540-39901-8_10",
    "arxiv": null,
@@ -1551,7 +1554,8 @@
    "sources": [
     "scholar",
     "dblp",
-    "homepage"
+    "homepage",
+    "crossref"
    ]
   },
   {
@@ -1575,7 +1579,7 @@
   },
   {
    "id": "S078",
-   "title": "Optimal 3D printing of complex objects in a 5–axis printer: B. Ramos et al.",
+   "title": "Optimal 3D printing of complex objects in a 5-axis printer",
    "authors": "B Ramos, D Pinho, D Martins, AIF Vaz, LN Vicente",
    "venue": "Optimization and Engineering",
    "year": 2022,
@@ -1660,7 +1664,7 @@
    "title": "Modeling binary stars: age, helium abundance, and convection parameters",
    "authors": "JM Fernandes, AIF Vaz, LN Vicente",
    "venue": "Monthly Notices of the Royal Astronomical Society",
-   "year": 2014,
+   "year": 2012,
    "cites": 12,
    "doi": "10.1111/j.1365-2966.2012.21516.x",
    "arxiv": null,
@@ -2593,5 +2597,9 @@
     "homepage"
    ]
   }
- ]
+ ],
+ "audit": {
+  "date": "2026-09-27",
+  "note": "Re-fetched the Scholar profile sorted by year (122 rows, articles 1-122): every row is present here (difflib ratio >= 0.9 on normalised titles), none missing. All 97 DOIs resolve at doi.org (302) and match their Crossref titles; all 25 arXiv ids match their arxiv.org titles. Corrected where Crossref/DBLP/author homepage agree against Scholar: S043 year 2014->2016, S046 2015->2016, S076 2002->2003, S082 2014->2012; S038 venue (Scholar showed a truncated publisher string); S060 and S078 titles (Scholar appended \": <first author> et al.\")."
+ }
 }

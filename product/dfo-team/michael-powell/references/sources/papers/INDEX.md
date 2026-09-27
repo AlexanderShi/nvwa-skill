@@ -40,5 +40,35 @@
 | 28 | S029 | 2007 | A view of algorithms for optimization without derivatives | Mathematics Today-Bulletin of the Institute of Mathematics and its Applications | 417 | journal | — | no-oa |  | supplement | — |
 | 29 | S030 | 1990 | A trust region algorithm for equality constrained optimization | Mathematical Programming | 374 | journal | — | no-oa |  | supplement | — |
 | 30 | S031 | 1986 | Convergence properties of algorithms for nonlinear optimization | Siam Review | 357 | journal | — | no-oa |  | supplement | — |
+| 31 | S032 | 1971 | On the convergence of the variable metric algorithm | IMA Journal of Applied Mathematics | 337 | journal | — | no-oa |  | supplement | — |
+| 32 | S033 | 1984 | On the global convergence of trust region algorithms for unconstrained minimization | Mathematical Programming | 303 | journal | — | no-oa |  | supplement | — |
+| 33 | S034 | 1962 | An iterative method for finding stationary values of a function of several variables | The Computer Journal | 302 | journal | — | no-oa |  | supplement | — |
+| 34 | S036 | 2008 | Developments of NEWUOA for minimization without derivatives | IMA journal of numerical analysis | 253 | journal | — | no-oa |  | supplement | — |
+| 35 | S037 | 1971 | Recent advances in unconstrained optimization | Mathematical Programming | 250 | journal | — | no-oa |  | supplement | — |
+| 36 | S038 | 1985 | On the quadratic programming algorithm of Goldfarb and Idnani | Mathematical Programming Essays in Honor of George B. Dantzig Part II | 248 | chapter | — | no-oa |  | supplement | — |
+| 37 | S040 | 1989 | A tolerant algorithm for linearly constrained optimization calculations | Mathematical Programming | 216 | journal | — | no-oa |  | supplement | — |
+| 38 | S041 | 1970 | A survey of numerical methods for unconstrained optimization | SIAM Review | 205 | journal | — | no-oa |  | supplement | — |
+| 39 | S042 | 1979 | On the estimation of sparse Hessian matrices | SIAM Journal on Numerical Analysis | 201 | journal | — | no-oa |  | supplement | — |
+| 40 | S043 | 1992 | Univariate multiquadric approximation: quasi-interpolation to scattered data | Constructive Approximation | 199 | journal | — | no-oa |  | supplement | — |
+| 41 | S045 | 2004 | Least Frobenius norm updating of quadratic models that satisfy interpolation conditions | Mathematical Programming | 192 | journal | — | no-oa |  | supplement | — |
+| 42 | S046 | 1994 | The uniform convergence of thin plate spline interpolation in two dimensions | Numerische Mathematik | 187 | journal | — | no-oa |  | supplement | — |
+| 43 | S047 | 2003 | On trust region methods for unconstrained minimization without derivatives | Mathematical programming | 178 | journal | — | no-oa |  | supplement | — |
+| 44 | S048 | 1972 | The Differential Correction Algorithm for Rational ℓ_∞-Approximation | SIAM Journal on Numerical Analysis | 173 | journal | — | no-oa |  | supplement | — |
+| 45 | S049 | 1986 | How bad are the BFGS and DFP methods when the objective function is quadratic? | Mathematical Programming | 160 | journal | — | no-oa |  | supplement | — |
+| 46 | S050 | 1986 | A recursive quadratic programming algorithm that uses differentiable exact penalty functions | Mathematical Programming | 159 | journal | — | no-oa |  | supplement | — |
+| 47 | S051 | 1976 | Some convergence properties of the conjugate gradient method | Mathematical Programming | 159 | journal | — | no-oa |  | supplement | — |
+| 48 | S052 | 1974 | On the modification of 𝐿𝐷𝐿^{𝑇} factorizations | Mathematics of Computation | 150 | journal | — | no-oa |  | supplement | — |
+| 49 | S053 | 1970 | Curve fitting by splines in one variable | Numerical Approximation to Functions and Data | 127 | chapter | — | no-oa |  | supplement | — |
+| 50 | S054 | 1967 | On the maximum errors of polynomial approximations defined by interpolation and by least squares criteria | The Computer Journal | 123 | journal | — | no-oa |  | supplement | — |
+| 51 | S055 | 1999 | Recent research at Cambridge on radial basis functions | New Developments in Approximation Theory | 117 | conference | — | no-oa |  | supplement | — |
+| 52 | S056 | 1968 | On applying Householder transformations to linear least squares problems. | IFIP Congress | 117 | conference | — | no-oa |  | supplement | — |
+| 53 | S057 | 2001 | Radial basis function methods for interpolation to functions of many variables | HERCMA | 116 | conference | — | no-oa |  | supplement | — |
+| 54 | S058 | 1983 | ZQPCVX a FORTRAN subroutine for convex quadratic programming | Department of Applied Mathematics and Theoretical Physics, University | 116 | report | — | no-oa |  | supplement | — |
+| 55 | S059 | 1983 | VMCWD: A FORTRAN subroutine for constrained optimization | ACM SIGMAP Bulletin | 113 | journal | — | no-oa |  | supplement | — |
+| 56 | S060 | 1982 | Nonlinear optimization 1981 | NATO Conference Series. Series II: Systems Science | 107 | book | — | no-oa |  | supplement | — |
+| 57 | S061 | 1961 | A Calculation of the Ground-State Splitting for Mn Ions in a Cubic Field | Proceedings of the Royal Society of London A: Mathematical, Physical and… | 98 | journal | — | no-oa |  | supplement | — |
+| 58 | S062 | 1966 | Weighted uniform sampling—a Monte Carlo technique for reducing variance | IMA Journal of Applied Mathematics | 95 | journal | — | no-oa |  | supplement | — |
+| 59 | S063 | 1960 | Ground-State Splitting for d 5 S 6 Ions in a Cubic Field | Physical Review Letters | 94 | journal | — | no-oa |  | supplement | — |
+| 60 | S064 | 1987 | Updating conjugate directions by the BFGS formula | Mathematical Programming | 91 | journal | — | no-oa |  | supplement | — |
 
-30 works · txt 0 · pdf 0 · no-oa 30
+60 works · txt 0 · pdf 0 · no-oa 60

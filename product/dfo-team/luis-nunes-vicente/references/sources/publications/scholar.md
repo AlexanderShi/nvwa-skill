@@ -6,6 +6,8 @@ Counts: 122 Scholar rows (7 marked as duplicates), 1 DBLP-only item, 8 homepage-
 
 Ids: S### = Scholar order (by citations), D### = DBLP only, H### = only on the author's homepage. Sorted by Scholar citations; items without a count go last.
 
+Audit 2026-09-27: the Scholar profile was re-read sorted by year (articles 1–122); every row is in works.json and none was missing. All DOIs resolve at doi.org and match their Crossref titles; all arXiv ids match their arxiv.org titles. Corrections where Crossref, DBLP and/or the author's paper list agree against Scholar: S043 year 2014→2016, S046 2015→2016, S076 2002→2003 (LNCS 2861), S082 2014→2012 (MNRAS 425); S038 venue (Scholar showed a truncated publisher string); S060 and S078 titles (Scholar appended ": <first author> et al."). S055 keeps Scholar's 2001 (first edition of the Encyclopedia); its DOI points to the 2008/2009 second-edition entry.
+
 | # | Year | Title | Venue | Cites | DOI | arXiv | Kind |
 |---|---|---|---|---|---|---|---|
 | S001 | 2009 | Introduction to Derivative-Free Optimization | Society for Industrial and Applied Mathematics | 2876 | 10.1137/1.9780898718768 |  | book |
@@ -45,15 +47,15 @@ Ids: S### = Scholar order (by citations), D### = DBLP only, H### = only on the a
 | S035 | 2017 | Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models | PloS one | 62 | 10.1371/journal.pone.0174200 |  | journal |
 | S036 | 2018 | On the optimal object orientation in additive manufacturing | The International Journal of Advanced Manufacturing Technology | 60 | 10.1007/s00170-018-2218-0 |  | journal |
 | S037 | 1996 | Trust-region interior-point algorithms for minimization problems with simple bounds | Applied Mathematics and Parallel Computing, Festschrift for Klaus Ritter | 58 | 10.1007/978-3-642-99789-1_7 |  | chapter |
-| S038 | 2017 | Methodologies and software for derivative-free optimization | Siam Society for Industrial and Applied | 52 | 10.1137/1.9781611974683.ch37 |  | chapter |
+| S038 | 2017 | Methodologies and software for derivative-free optimization | Advances and Trends in Optimization with Engineering Applications (MOS-SIAM Series on Optimization), SIAM | 52 | 10.1137/1.9781611974683.ch37 |  | chapter |
 | S039 | 1999 | Two-step algorithms for nonlinear optimization with structured applications | SIAM Journal on Optimization | 51 | 10.1137/s1052623498334396 |  | journal |
 | S040 | 1996 | Trust-Region Interior Point Algorithms for a Class of Nonlinear Programming Problems | PhD Thesis, Rice University | 51 |  |  | thesis |
 | S041 | 2016 | On the optimal order of worst case complexity of direct search | Optimization Letters | 50 | 10.1007/s11590-015-0908-1 |  | journal |
 | S042 | 2025 | Inexact bilevel stochastic gradient methods for constrained and unconstrained lower-level problems | Journal of Global Optimization | 49 | 10.1007/s10898-025-01502-8 | 2110.00604 | journal |
-| S043 | 2014 | Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation | SIAM/ASA Journal on Uncertainty Quantification | 49 | 10.1137/140974687 |  | journal |
+| S043 | 2016 | Levenberg-Marquardt methods based on probabilistic gradient models and inexact subproblem solution, with application to data assimilation | SIAM/ASA Journal on Uncertainty Quantification | 49 | 10.1137/140974687 |  | journal |
 | S044 | 2005 | Space mapping for optimal control of partial differential equations | SIAM Journal on Optimization | 45 | 10.1137/s105262340342907x |  | journal |
 | S045 | 2019 | Direct search based on probabilistic feasible descent for bound and linearly constrained problems | Computational Optimization and Applications | 43 | 10.1007/s10589-019-00062-4 |  | journal |
-| S046 | 2015 | Worst case complexity of direct search under convexity | Mathematical Programming | 43 | 10.1007/s10107-014-0847-0 |  | journal |
+| S046 | 2016 | Worst case complexity of direct search under convexity | Mathematical Programming | 43 | 10.1007/s10107-014-0847-0 |  | journal |
 | S047 | 2012 | Bilevel derivative-free optimization and its application to robust optimization | Optimization Methods and Software | 42 | 10.1080/10556788.2010.547579 |  | journal |
 | S048 | 1999 | An interface optimization and application for the numerical solution of optimal control problems | ACM Transactions on Mathematical Software (TOMS) | 41 | 10.1145/317275.317278 |  | journal |
 | S049 | 2014 | A merit function approach for direct search | SIAM Journal on Optimization | 40 | 10.1137/130917661 |  | journal |
@@ -67,7 +69,7 @@ Ids: S### = Scholar order (by citations), D### = DBLP only, H### = only on the a
 | S057 | 2015 | Globally convergent evolution strategies for constrained optimization | Computational Optimization and Applications | 35 | 10.1007/s10589-015-9747-3 |  | journal |
 | S058 | 2019 | Trust-region methods for the derivative-free optimization of nonsmooth black-box functions | SIAM Journal on Optimization | 33 | 10.1137/19m125772x |  | journal |
 | S059 | 2008 | SID-PSM: A pattern search method guided by simplex derivatives for use in derivative-free optimization | Departamento de Matemática, Universidade de Coimbra | 32 |  |  | report |
-| S060 | 2020 | A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds: S. Gratton et al. | Mathematical Programming | 30 | 10.1007/s10107-018-1328-7 |  | journal |
+| S060 | 2020 | A decoupled first/second-order steps technique for nonconvex nonlinear unconstrained optimization with improved complexity bounds | Mathematical Programming | 30 | 10.1007/s10107-018-1328-7 |  | journal |
 | S061 | 2014 | Efficient cardinality/mean-variance portfolios | System Modeling and Optimization, Springer series IFIP Advances in Information and Communication Technology | 29 | 10.1007/978-3-662-45504-3_6 |  | conference |
 | S062 | 2003 | Space mapping: Models, sensitivities, and trust-regions methods | Optimization and Engineering | 29 | 10.1023/a:1023968629245 |  | journal |
 | S063 | 1992 | Generation of disjointly constrained bilinear programming test problems | Computational Optimization and Applications | 29 | 10.1007/bf00249639 |  | journal |
@@ -82,13 +84,13 @@ Ids: S### = Scholar order (by citations), D### = DBLP only, H### = only on the a
 | S073 | 2023 | Full-low evaluation methods for derivative-free optimization | Optimization Methods and Software | 19 | 10.1080/10556788.2022.2142582 | 2107.11908 | journal |
 | S074 | 2016 | A second-order globally convergent direct-search method and its worst-case complexity | Optimization | 19 | 10.1080/02331934.2015.1124271 |  | journal |
 | S075 | 2011 | Modelling nearby FGK population I stars: A new form of estimating stellar parameters using an optimization approach | Astronomy & Astrophysics | 18 | 10.1051/0004-6361/200811182 |  | journal |
-| S076 | 2002 | Numerical behavior of a stabilized SQP method for degenerate NLP problems | International Workshop on Global Optimization and Constraint Satisfaction | 18 | 10.1007/978-3-540-39901-8_10 |  | conference |
+| S076 | 2003 | Numerical behavior of a stabilized SQP method for degenerate NLP problems | International Workshop on Global Optimization and Constraint Satisfaction | 18 | 10.1007/978-3-540-39901-8_10 |  | conference |
 | S077 | 2008 | A globally convergent primal-dual interior-point filter method for nonlinear programming: new filter optimality measures and computational results | Preprint 08-49, Dept. Mathematics, Univ. Coimbra | 16 |  |  | report |
-| S078 | 2022 | Optimal 3D printing of complex objects in a 5–axis printer: B. Ramos et al. | Optimization and Engineering | 15 | 10.1007/s11081-021-09624-0 |  | journal |
+| S078 | 2022 | Optimal 3D printing of complex objects in a 5-axis printer | Optimization and Engineering | 15 | 10.1007/s11081-021-09624-0 |  | journal |
 | S079 | 2026 | The limitation of neural nets for approximation and optimization | Journal of Global Optimization | 14 | 10.1007/s10898-024-01426-9 | 2311.12253 | journal |
 | S080 | 2023 | An integrated assignment, routing, and speed model for roadway mobility and transportation with environmental, efficiency, and service goals | Transportation research part C: emerging technologies | 14 | 10.1016/j.trc.2023.104144 | 2210.03717 | journal |
 | S081 | 1996 | A comparison between line searches and trust regions for nonlinear optimization | Investigação Operacional | 13 |  |  | journal |
-| S082 | 2014 | Modeling binary stars: age, helium abundance, and convection parameters | Monthly Notices of the Royal Astronomical Society | 12 | 10.1111/j.1365-2966.2012.21516.x |  | journal |
+| S082 | 2012 | Modeling binary stars: age, helium abundance, and convection parameters | Monthly Notices of the Royal Astronomical Society | 12 | 10.1111/j.1365-2966.2012.21516.x |  | journal |
 | S083 | 2009 | Implicitly and densely discrete black-box optimization problems | Optimization Letters | 11 | 10.1007/s11590-009-0120-2 |  | journal |
 | S084 | 2000 | Local convergence of the affine-scaling interior-point algorithm for nonlinear programming | Computational Optimization and Applications | 11 | 10.1023/a:1008774924658 |  | journal |
 | S085 | 2008 | Local analysis of the feasible primal-dual interior-point method | Computational Optimization and Applications | 9 | 10.1007/s10589-007-9075-3 |  | journal |
