@@ -1,0 +1,165 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada's first grading round fails one question, so her fix and second test round run; Bo passes at once.",
+  "^synthesis:": {
+    "core_methods": [
+      {
+        "name": "Method 1 (fictional)",
+        "recurrence": true,
+        "say_do": true,
+        "executable": true,
+        "exclusive": true,
+        "evidence": "notes 01 and 03"
+      },
+      {
+        "name": "Method 2 (fictional)",
+        "recurrence": true,
+        "say_do": true,
+        "executable": true,
+        "exclusive": true,
+        "evidence": "notes 02 and 03"
+      },
+      {
+        "name": "Method 3 (fictional)",
+        "recurrence": true,
+        "say_do": true,
+        "executable": true,
+        "exclusive": true,
+        "evidence": "notes 01 and 05"
+      }
+    ],
+    "heuristics": 6,
+    "taste_criteria": 5,
+    "roundtable_lens": "fictional lens"
+  },
+  "^build:": {
+    "words": 7600,
+    "core_methods": 3,
+    "quality_check": "12/12",
+    "quality_passed": true,
+    "links": "0 broken"
+  },
+  "^exam:": {
+    "exam_file": "$SCRATCH/base-skills/<slug>/phase4-exam.json",
+    "questions": [
+      {
+        "qid": "q1",
+        "kind": "known",
+        "question": "fictional known-position question 1"
+      },
+      {
+        "qid": "q2",
+        "kind": "known",
+        "question": "fictional known-position question 2"
+      },
+      {
+        "qid": "q3",
+        "kind": "known",
+        "question": "fictional known-position question 3"
+      },
+      {
+        "qid": "q4",
+        "kind": "taste",
+        "question": "fictional career fork"
+      },
+      {
+        "qid": "q5",
+        "kind": "edge",
+        "question": "fictional out-of-field question"
+      },
+      {
+        "qid": "q6",
+        "kind": "executability",
+        "question": "fictional stuck project"
+      }
+    ]
+  },
+  "^answer:": {
+    "answers": [
+      {
+        "qid": "q1",
+        "answer": "fictional blind answer"
+      }
+    ]
+  },
+  "^grade:ada-example:r1$": {
+    "passed": false,
+    "citations_checked": 12,
+    "items": [
+      {
+        "qid": "q1",
+        "verdict": "pass"
+      },
+      {
+        "qid": "q2",
+        "verdict": "pass"
+      },
+      {
+        "qid": "q3",
+        "verdict": "pass"
+      },
+      {
+        "qid": "q4",
+        "verdict": "fail",
+        "problem": "predicted the road not taken"
+      },
+      {
+        "qid": "q5",
+        "verdict": "pass"
+      },
+      {
+        "qid": "q6",
+        "verdict": "partial",
+        "problem": "no checkpoint"
+      }
+    ],
+    "findings": [
+      {
+        "severity": "major",
+        "location": "Core Research Methods / Method 2",
+        "problem": "fictional: method weighted wrongly",
+        "fix": "fictional fix"
+      }
+    ]
+  },
+  "^grade:": {
+    "passed": true,
+    "citations_checked": 10,
+    "items": [
+      {
+        "qid": "q4",
+        "verdict": "pass"
+      },
+      {
+        "qid": "q6",
+        "verdict": "pass"
+      }
+    ]
+  },
+  "^fix:": {
+    "applied": 1,
+    "quality_check": "12/12",
+    "weak_dimensions_marked": [
+      "fictional: taste prediction for the 1990s fork"
+    ]
+  },
+  "^refine-A:": {
+    "lens": "A",
+    "changes": [
+      {
+        "location": "Agentic Protocol",
+        "problem": "fictional: no stop rule",
+        "rewrite": "fictional rewrite"
+      }
+    ]
+  },
+  "^refine-B:": {
+    "lens": "B",
+    "changes": [
+      {
+        "location": "description",
+        "problem": "fictional: trigger missing",
+        "rewrite": "fictional rewrite"
+      }
+    ]
+  }
+}

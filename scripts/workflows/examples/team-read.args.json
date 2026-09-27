@@ -1,0 +1,41 @@
+{
+  "repo": "$REPO",
+  "team": "product/example-team",
+  "scratch": "$SCRATCH",
+  "date": "2026-01-15",
+  "members": [
+    {
+      "slug": "ada-example",
+      "name": "Ada Example",
+      "surname": "Example",
+      "living": false,
+      "hint": "FICTIONAL placeholder, not a real person: bandit theorist at an example university (1931-2009); regret lower bounds and index policies",
+      "scholar": "",
+      "dblp": "",
+      "orcid": "",
+      "homepage": "",
+      "chase_hints": [
+        "her department's technical-report series (fictional; check the author on page 1, the series holds other authors' reports)"
+      ],
+      "student_mode": false
+    },
+    {
+      "slug": "bo-sample",
+      "name": "Bo Sample",
+      "surname": "Sample",
+      "living": true,
+      "hint": "FICTIONAL placeholder, not a real person: experimentalist at an example institute; contextual bandits, A/B-testing practice and open-source benchmarks",
+      "scholar": "EXAMPLE_SCHOLAR_ID",
+      "dblp": "00/0000",
+      "orcid": "0000-0000-0000-0000",
+      "homepage": "https://example.org/~sample",
+      "chase_hints": [
+        "papers page on the homepage (fictional)"
+      ],
+      "student_mode": true
+    }
+  ],
+  "round": 1,
+  "overwrite": false,
+  "retry": true
+}

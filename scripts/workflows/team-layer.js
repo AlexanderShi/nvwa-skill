@@ -46,6 +46,10 @@ need(/^\d{4}-\d{2}-\d{2}$/.test(ARGS.date || ''), 'args.date must be "YYYY-MM-DD
 need(Array.isArray(ARGS.members) && ARGS.members.length > 0, 'args.members must be a non-empty array copied from team.json')
 ARGS.members.forEach((m, i) => need(m && /^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') && m.name, `args.members[${i}] needs a kebab-case slug and a name`))
 need(ARGS.roundtable === undefined || /^[a-z0-9][a-z0-9-]*$/.test(ARGS.roundtable), 'args.roundtable must be a kebab-case slug')
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'roundtable', 'deep_tier', 'example_team']
+const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-layer.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = ARGS.repo.replace(/\/+$/, '')
 const TEAM_REL = ARGS.team.replace(/^\.\//, '').replace(/\/+$/, '')

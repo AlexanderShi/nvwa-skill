@@ -1,0 +1,73 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada's first fix leaves the word gate failing, so a second fix round runs; Bo is blocked at the quote gate.",
+  "^mine:ada-example$": {
+    "cards_total": 60,
+    "full_cards": 22,
+    "abstract_cards": 30,
+    "promote": [
+      {
+        "name": "fictional new method",
+        "cards": [
+          "S003",
+          "S011",
+          "S020"
+        ],
+        "as": "core"
+      }
+    ]
+  },
+  "^mine:bo-sample$": {
+    "blocked": true,
+    "blocked_reason": "fictional: 3 quotes NOT FOUND"
+  },
+  "^edit:": {
+    "methods_before": 4,
+    "methods_after": 5,
+    "words_before": 8200,
+    "words_after": 11900,
+    "quality_check": "12/12",
+    "ledger_sections": 14
+  },
+  "^verify:fidelity:": {
+    "lens": "fidelity",
+    "findings": [
+      {
+        "severity": "blocker",
+        "file": "SKILL.md",
+        "location": "Method 5",
+        "problem": "fictional: quote not in the text",
+        "fix": "fictional fix"
+      }
+    ]
+  },
+  "^fix:ada-example$": {
+    "applied": 1,
+    "words_after": 13400,
+    "gates": [
+      {
+        "name": "quality_check",
+        "command": "python3 scripts/quality_check.py <skill>/SKILL.md",
+        "passed": true,
+        "detail": "12/12"
+      },
+      {
+        "name": "words",
+        "command": "wc -w <skill>/SKILL.md",
+        "passed": false,
+        "detail": "fictional: 13400 > 13000"
+      }
+    ]
+  },
+  "^fix2:": {
+    "applied": 1,
+    "words_after": 11600,
+    "gates": [
+      {
+        "name": "words",
+        "command": "wc -w <skill>/SKILL.md",
+        "passed": true,
+        "detail": "11600"
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada goes through Find (book parts and new papers); Bo has a batch file prepared by hand, so a Plan agent lists it.",
+  "^find:ada-example$": {
+    "batch_file_ok": true,
+    "batch_file": "$SCRATCH/batches-ada-example-inc-2026-02.json",
+    "new_ids": [
+      "B001",
+      "B002",
+      "S101"
+    ],
+    "batches": [
+      {
+        "bid": "c3-01",
+        "mode": "core",
+        "papers": 3
+      },
+      {
+        "bid": "a3-01",
+        "mode": "abstract",
+        "papers": 1
+      }
+    ],
+    "problems": []
+  },
+  "^plan:bo-sample$": {
+    "batch_file_ok": true,
+    "batch_file": "$SCRATCH/batches-bo-sample-inc-2026-02.json",
+    "new_ids": [
+      "S120",
+      "S121"
+    ],
+    "batches": [
+      {
+        "bid": "c4-01",
+        "mode": "core",
+        "papers": 2
+      }
+    ],
+    "problems": []
+  },
+  "^read:": {
+    "cards_written": 2,
+    "unreadable": [],
+    "problems": []
+  },
+  "^integrate:": {
+    "files_changed": [
+      "SKILL.md",
+      "references/research/08-deep-reading-synthesis.md"
+    ],
+    "words_before": 11400,
+    "words_after": 11650,
+    "summary": "fictional"
+  },
+  "^verify:": {
+    "findings": [
+      {
+        "severity": "minor",
+        "file": "SKILL.md",
+        "problem": "fictional: reviewer named in the wrong place",
+        "fix": "fictional fix"
+      }
+    ]
+  },
+  "^fix:": {
+    "applied": 1,
+    "gates": [
+      {
+        "name": "quotes",
+        "command": "python3 scripts/verify_card_quotes.py <skill>",
+        "passed": true,
+        "detail": "all exact"
+      }
+    ]
+  }
+}

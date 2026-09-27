@@ -54,6 +54,10 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(String(a.date))) throw new Error('team-read: arg
 a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') || !m.name) throw new Error(`team-read: members[${i}] needs a kebab-case slug and a name`) })
 if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-read: args.repo and args.scratch must be absolute paths')
 if (String(a.team).startsWith('/')) throw new Error('team-read: args.team must be relative to args.repo, e.g. "product/<team>"')
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'round', 'batchFiles', 'batches', 'only', 'overwrite', 'retry']
+const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-read.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = String(a.repo).replace(/\/+$/, '')
 const TEAM_REL = String(a.team).replace(/^\.\//, '').replace(/\/+$/, '')

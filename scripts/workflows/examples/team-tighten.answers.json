@@ -1,0 +1,35 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada is tightened and reviewed; Bo is already within the target and skipped.",
+  "^tighten:ada-example$": {
+    "words_before": 20900,
+    "words_after": 11400,
+    "ledger_sections": 18,
+    "quality_check": "12/12"
+  },
+  "^tighten:bo-sample$": {
+    "skipped": true,
+    "words_before": 9800,
+    "words_after": 9800
+  },
+  "^verify-tighten:": {
+    "findings": [
+      {
+        "severity": "major",
+        "problem": "fictional: one page reference only in the backup",
+        "fix": "fictional fix"
+      }
+    ]
+  },
+  "^fix-tighten:": {
+    "applied": 1,
+    "words_after": 11450,
+    "gates": [
+      {
+        "name": "lossless",
+        "command": "python3 scripts/check_ledger.py <skill> --before <backup>",
+        "passed": true,
+        "detail": "0 problems"
+      }
+    ]
+  }
+}

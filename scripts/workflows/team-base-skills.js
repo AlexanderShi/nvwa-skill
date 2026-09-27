@@ -57,6 +57,10 @@ const STEPS = ['research', 'review', 'synthesis', 'build', 'test', 'refine']
 const FROM = STEPS.indexOf(ARGS.from || 'research')
 const TO = STEPS.indexOf(ARGS.to || 'refine')
 need(FROM >= 0 && TO >= 0 && FROM <= TO, `args.from / args.to must be among ${STEPS.join(', ')} with from <= to`)
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'from', 'to', 'tier', 'dims', 'user_context', 'word_budget', 'example_team']
+const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-base-skills.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 const on = s => { const i = STEPS.indexOf(s); return i >= FROM && i <= TO }
 
 const REPO = ARGS.repo.replace(/\/+$/, '')

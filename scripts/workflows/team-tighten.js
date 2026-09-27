@@ -46,6 +46,10 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(String(a.date))) throw new Error('team-tighten: 
 a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') || !m.name) throw new Error(`team-tighten: members[${i}] needs a kebab-case slug and a name`) })
 if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-tighten: args.repo and args.scratch must be absolute paths')
 if (String(a.team).startsWith('/')) throw new Error('team-tighten: args.team must be relative to args.repo, e.g. "product/<team>"')
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'targetWords', 'maxWords', 'force']
+const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-tighten.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = String(a.repo).replace(/\/+$/, '')
 const TEAM_REL = String(a.team).replace(/^\.\//, '').replace(/\/+$/, '')
@@ -87,7 +91,7 @@ function tightenPrompt(m) {
 
 Your job (TIGHTEN, lossless): bring SKILL.md to at most ~${TARGET} words without losing information or traceability.
 0. Measure: wc -w ${SK}/SKILL.md. ${a.force ? 'Tighten even if it is already within the target (args.force).' : `If it is already ≤ ${TARGET} words AND every 09-evidence-ledger.md#… link in SKILL.md resolves, change nothing and return skipped=true.`}
-1. Save a copy first: cp -n ${SK}/SKILL.md ${backup(m)} (keep an existing copy: it is the pre-tighten state).
+1. Save a copy first: mkdir -p ${SCR} && cp -n ${SK}/SKILL.md ${backup(m)} (keep an existing copy: it is the pre-tighten state).
 2. Create or extend ${ledger(m)}: the full evidence behind SKILL.md, one section per SKILL.md item, each preceded by an explicit anchor line (<a id="method-1"></a>, then "## Method 1: <name>"; likewise heuristic-N, taste-marks, taste-warnings, anatomy-<short-name>, corrections, card-key). Move there, verbatim, every long evidence list, every per-work case list beyond the strongest few, long say–do tallies, long variant/contradiction explanations and long anatomy table rows. Start the ledger with a short Contents list of its anchors.
 3. In SKILL.md keep, for every core method: One line; Evidence reduced to Stated (the single strongest statement, verbatim with card and page if it is a quote), Practice (the 3–5 strongest cards with pages), Say–do (one line with the counts), Variants/corrections (at most 4 one-line bullets, each keeping its ✗/⚠ mark and card ref); a pointer "(full evidence: references/research/09-evidence-ledger.md#method-N)"; Steps; Applies to stage; Different from standard practice; Limitations. Heuristics and taste items: one or two lines each with at most 3 card refs, plus a ledger pointer. Signature work anatomy: keep the anatomies but at most ~2 lines per row. Research trajectory: keep the table, trim the prose. Keep a short "Corrections from the full texts" list (one line each) near the Honest Boundary so the corrections stay visible.
 4. Do NOT change: ${protectedList(m)}. Do not add new claims.

@@ -128,48 +128,33 @@ apt-get install -y tesseract-ocr ghostscript     # OCR；ps2pdf 随 ghostscript 
 | 步 | 命令 / 工作流 | 输入 → 输出 | 闸门（通过标准） | 成本（每人） | 并行 |
 |---|---|---|---|---|---|
 | T0 定义 | `new_team.py --init` → 手填 → `new_team.py` | 选人结果 → `team.json`、团队目录骨架、README / 圆桌 / DEEP-READING 模板 | `.md` 里不剩 `{{`；`[TODO: …]` 就是待办 | 0 | — |
-| T1 基础Skill | `team-base-skills.js` | 成员信息 → `<M>/SKILL.md`（含 Roundtable Card）、`research/01–06` | `quality_check.py` 12/12 | 17–20 agent（标准档；quick 档只跑调研 01–03） | 每人一个工作流 |
-| T2 团队层 | `team-layer.js` | 各人的 Roundtable Card → README、圆桌 SKILL.md、各人 RESOURCES.md | `check_links.py` 0；每人都有 Roundtable Card | 2 agent，团队另加 5 | 团队一次 |
-| T3.1 发表全表 | `team-harvest.js`（DBLP 走 `dblp_works.py`） | Scholar id、DBLP、Crossref → `works.json`、`scholar.md`；再做独立审计 | `validate_works.py` 0 errors；条目数与 Scholar 总数对得上 | 3 agent / 40 万 token | 每人一个 |
-| T3.2 开放全文 | `acquire_fulltexts.py` | `works.json` → PDF、`txt/`、`INDEX.md`、`abstracts.json` | INDEX 行数 = `works.json` 条目数 | 0 agent；arXiv 请求间隔 3 秒 | 每人一个后台进程 |
+| T1 基础Skill | `team-base-skills.js`（`to` / `from` 分段，见下方人工检查点；`tier: "quick"` 只跑调研 01–03） | 成员信息 → `<M>/SKILL.md`（含 Roundtable Card）、`research/01–06` | `quality_check.py` 12/12 | 16–20 agent（quick 档 13–17） | 每人一个工作流 |
+| T2 团队层 | `team-layer.js`（只做轻量档时 `deep_tier: false`） | 各人的 Roundtable Card → README、圆桌 SKILL.md、各人 RESOURCES.md | `check_links.py` 0；每人都有 Roundtable Card | 2 agent，团队另加 3–5 | 团队一次 |
+| T3.1 发表全表 | `team-harvest.js`（DBLP 走 `dblp_works.py`；`acquire: true` 顺带做 T3.2） | Scholar id、DBLP、Crossref → `works.json`、`scholar.md`；再做独立审计 | `validate_works.py` 0 errors；条目数与 Scholar 总数对得上 | 3 agent / 40 万 token | 每人一个 |
+| T3.2 开放全文 | `acquire_fulltexts.py` | `works.json` → PDF、`txt/`、`INDEX.md`、`abstracts.json` | INDEX 行数 = `works.json` 里不是重复（`dup_of` 为空）的条目数 | 0 agent；arXiv 请求间隔 3 秒 | 每人一个后台进程 |
 | T3.3 补搜、合并 | `team-chase.js`（最后自动跑 `merge_chase.py`） | 仍为 no-oa 的作品（每块 20 篇）→ PDF、摘要 → 并入 `abstracts.json`、`abstract-sources.json`，重跑获取 | 只用合法开放来源；在首页核对作者；报告新增全文数 | 5 / 90 万 | 每人一个 |
 | T3.4 切批 | `plan_reading_batches.py`，分轮跑 | INDEX → 角色（写回 INDEX）、批次计划 JSON（放 scratch） | 批次不超上限；后续轮次 `--exclude` 之前各轮的计划 | 0 | 每人一个 |
-| T3.5 读卡 | `team-read.js`，每轮一次 | 批次计划与全文 → `cards/<bid>.md` + `.digest.json` | `verify_card_quotes.py` 全部通过；`mark_read_from_cards.py` 之后没有未读行 | 22 / 580 万 | 每人一个；各轮之间串行 |
-| T3.6 汇总 | `team-synthesize.js` | 卡片 → 07、08、09、`technique-catalog.md`，SKILL.md 保守更新 | 质疑者复核；12/12；字数不超预算 | 6 / 240 万 | 每人一个 |
+| T3.5 读卡 | `team-read.js`（`round: N`），每轮一次 | 批次计划与全文 → `cards/<bid>.md` + `.digest.json` | `verify_card_quotes.py` 全部通过；`mark_read_from_cards.py` 之后没有未读行 | 22 / 580 万 | 每人一个；各轮之间串行 |
+| T3.6 汇总 | `team-synthesize.js` | 卡片 → 07、08、09、`technique-catalog.md`，SKILL.md 保守更新 | 三位质疑者复核；12/12；`check_ledger.py`；字数不超预算 | 6 / 240 万 | 每人一个 |
 | T3.7 精简 | `team-tighten.js`（SKILL.md 仍超预算时才跑） | SKILL.md 精简到约 11.5k 词，长证据移入 `09-evidence-ledger.md` | `check_ledger.py` 通过；12/12 | 3 / 70 万 | 每人一个 |
-| T3.8 团队整合 | `team-integrate.js` | 各人的 08 → README 诚实边界、DEEP-READING.md、圆桌 fault lines | 覆盖表与 `team_status.py --coverage` 一致；`check_links.py` 0 | 团队一次，4 / 100 万 | 团队一次 |
-| T4 增量 | `team-increment.js` | 书的开放部分、新论文 → 新批次卡片，再保守更新 | 与 T3.5–T3.7 相同 | 每位书作者 4 / 100 万 | 每人一个 |
+| T3.8 团队整合 | `team-integrate.js` | 各人的 08 → README 诚实边界、DEEP-READING.md、圆桌 fault lines | 覆盖表与 `team_status.py --coverage` 一致；`check_links.py` 0 | 团队一次，6–7 agent（DFO 用旧版时 4 / 100 万） | 团队一次 |
+| T4 增量 | `team-increment.js`（`find: ["book-parts"]` 或 `["new-papers"]`） | 书的开放部分、新论文 → 新批次卡片，再保守更新 | 与 T3.5–T3.7 相同 | 每位书作者 4 / 100 万 | 每人一个 |
 
-成本列里 T3 以后是 DFO 的实测（第六节）；T1、T2 是按工作流结构估的 agent 数，DFO 没有单独计量。
+成本列里 T3.1–T3.7 和 T4 是 DFO 的实测（第六节）；T1、T2、T3.8 的 agent 数按现在的工作流结构估算，DFO 没有单独计量这几步。
 
-**工作流参数。** 九个工作流共用 5 个参数：
-- `repo`：仓库的绝对路径；
-- `team`：`product/<team>`；
-- `scratch`：绝对路径，放批次计划、补搜分块和备份；
-- `date`：`YYYY-MM-DD`；
-- `members`：从 `team.json` 原样拷贝的成员对象数组。
-
-按成员跑的工作流，`members` 只放一位，每人起一个工作流，在同一条消息里一起发出。T2 和 T3.8 要等所有人，`members` 放全体。一个完整的调用：
+**工作流参数。** 五个共用参数（`repo`、`team`、`scratch`、`date`、`members`）和各工作流的特有参数，见 [README 第二节](../scripts/workflows/README.md#二参数约定)。按成员跑的工作流，`members` 只放一位（从 `team.json` 原样拷贝），每人起一个，在同一条消息里一起发出；T2 和 T3.8 放全体。一个完整的调用：
 
 ```js
 Workflow({scriptPath: "<repo>/scripts/workflows/team-base-skills.js",
           args: {repo: "<repo>", team: "product/<team>", scratch: "<scratch>", date: "YYYY-MM-DD",
-                 members: [/* team.json 里这一位成员的对象，原样拷贝 */], to: "review"}})
+                 members: [/* team.json 里这一位成员的对象 */], to: "review"}})
 ```
 
-其余工作流只换 `scriptPath` 和下表的特有参数：
+其余工作流只换 `scriptPath`，再加上表里括号中的参数。
 
-| 工作流 | `members` | 特有参数（默认值） | 工作流自己跑的闸门 |
-|---|---|---|---|
-| `team-base-skills.js` | 一位 | `from` / `to`（`research` … `refine`）；`tier`（`standard` / `quick`）；`word_budget`（8000）；`example_team` | `merge_research.py`、12/12、链接 |
-| `team-layer.js` | 全体 | `deep_tier`（true：保留留给 T3.8 的 TODO）；`example_team` | 链接 0、不剩 `{{`、12/12 |
-| `team-harvest.js` | 一位 | `audit`（true）；`acquire`（false；设为 true 时顺带跑 T3.2） | `validate_works.py` |
-| `team-chase.js` | 一位 | `chunk_size`（20）；`max_searches`（4）；`skip_ids`；`only_chunks`；`merge`（true） | `merge_chase.py`、`validate_works.py` |
-| `team-read.js` | 一位 | `round`（1）；`batchFiles`（默认 `<scratch>/batches-<slug>-r<round>.json`）；`only`；`overwrite`（false：已写完的批次跳过，可续跑）；`retry`（true） | 合并摘要、修正摘录、回填 Read 列 |
-| `team-synthesize.js` | 一位 | `wordBudget`（11500，09 同时写）；`maxWords`；`notes` | 摘录没有全部通过的成员直接拦下，不改文件 |
-| `team-tighten.js` | 一位 | `targetWords`（11500）；`maxWords`；`force` | `check_ledger.py`、12/12、字数 |
-| `team-integrate.js` | 全体 | `rootReadme`（false）；`newFaultLines`（2） | 覆盖表、链接 0、fault line 双方都有卡片 |
-| `team-increment.js` | 一位 | `label`；`find`（`book-parts` / `new-papers`）；`batchFiles`；`since`；`what`；`maxGrowth`（400 词） | 同 T3.5–T3.7 |
+**续跑与预览。**
+- 中断以后续跑：同样的调用加上 `resumeFromRunId: "<上次的 runId>"`。
+- 第一次在真团队上跑之前，先用 `dry_run.mjs`（Node ≥ 18）预览每个 agent 会收到的 prompt，不花 token：`node scripts/workflows/dry_run.mjs scripts/workflows/team-<name>.js scripts/workflows/examples/team-<name>.args.json --team product/<team> --member <slug>`。
 
 **人工检查点。** 对应主 `SKILL.md` 的 Phase 1.5 和 2.5：
 1. T1 先用 `to: "review"` 跑，把调研摘要摆给用户看；
@@ -260,6 +245,7 @@ python3 scripts/check_links.py $T
 | SKILL.md 膨胀到约 21k 词（DFO 当时） | 汇总时没有给字数预算 | `team-synthesize.js` 现在默认给 11,500 词预算并同时写 `09-evidence-ledger.md`；仍超预算再跑 T3.7 |
 | 汇总提出的新方法站不住 | 排他性不过关 | 保留质疑复核；新的核心方法要有 ≥3 篇论文支撑，并过四重验证 |
 | 容器重启，工作丢了 | 容器是临时的 | 每一步 commit |
+| 工作流中断、被停，或者改了脚本 | — | 用同样的 `scriptPath` 和 `args`，加 `resumeFromRunId` 续跑，没改过的 agent 调用直接取缓存；也可以用 T1 的 `from`、T3.5 的 `overwrite: false` / `only`、T3.3 的 `only_chunks` |
 | 书的正文读不到 | 正文不开放 | 读合法开放的部分（目录、勘误、增补、前言、已发表书评），作为 `B###` 条目、批次 `k01`；不用影子图书馆 |
 | WebSearch 突然全部失败 | 每个会话约 200 次的预算用完了 | 补搜先用 curl 查 `chase_hints` 里的已知仓库，WebSearch 留给难找的 |
 | fault line 只有一方的证据 | 圆桌从成员简介拼出来 | 每条都要双方的卡片证据；成员简介指向各人的 technique catalog 和 08 |
@@ -280,7 +266,7 @@ DFO 深读档的实测：5 人，Scholar 935 行，421 篇开放全文，795 张
 | 发表全表 T3.1 | 15 / 190 万 | 3 / 40 万 | 3% |
 | 团队整合 T3.8 | 4 / 100 万 | 团队一次 | 2% |
 
-合计：深读档每人约 45 个 agent、1,100 万 token；这 220 个 agent 共约 32 agent-小时（每人约 6.5）。轻量档按工作流结构估：T1 每人 17–20 个 agent，T2 每人 2 个、团队另加 5 个；DFO 这两步没有计量 token。实际耗时 ≈ agent-小时 ÷ 同时在跑的 agent 数，所以要按第二节的办法把并行开足。
+合计：深读档每人约 45 个 agent、1,100 万 token；这 220 个 agent 共约 32 agent-小时（每人约 6.5）。轻量档按工作流结构估：T1 每人 16–20 个 agent，T2 每人 2 个、团队另加 3–5 个；DFO 这两步没有计量 token。实际耗时 ≈ agent-小时 ÷ 同时在跑的 agent 数，所以要按第二节的办法把并行开足。
 
 **怎么省：**
 

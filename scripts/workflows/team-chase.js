@@ -42,6 +42,10 @@ need(typeof ARGS.scratch === 'string' && ARGS.scratch.startsWith('/'), 'args.scr
 need(/^\d{4}-\d{2}-\d{2}$/.test(ARGS.date || ''), 'args.date must be "YYYY-MM-DD"')
 need(Array.isArray(ARGS.members) && ARGS.members.length > 0, 'args.members must be a non-empty array copied from team.json')
 ARGS.members.forEach((m, i) => need(m && /^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') && m.name, `args.members[${i}] needs a kebab-case slug and a name`))
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'chunk_size', 'max_searches', 'skip_ids', 'only_chunks', 'merge']
+const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-chase.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = ARGS.repo.replace(/\/+$/, '')
 const TEAM_REL = ARGS.team.replace(/^\.\//, '').replace(/\/+$/, '')
@@ -165,7 +169,11 @@ if (!DO_MERGE) log('args.merge is false: abstracts-chase-*.json stay unmerged an
 
 const results = await pipeline(
   MEMBERS,
-  m => A(planPrompt(m), { label: `chase-plan:${m.slug}`, phase: 'Plan', schema: PLAN }),
+  // the runtime ends an item's pipeline when a stage returns null, so a dead planning agent is reported here
+  m => A(planPrompt(m), { label: `chase-plan:${m.slug}`, phase: 'Plan', schema: PLAN }).then(plan => {
+    if (!plan) log(`${m.slug}: planning agent returned nothing; member skipped`)
+    return plan
+  }),
   (plan, m) => {
     if (!plan) { log(`${m.slug}: planning agent returned nothing; member skipped`); return null }
     const ex = plan.excluded.filter(e => e.count > 0).map(e => `${e.count} ${e.reason}`).join(', ')

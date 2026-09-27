@@ -1,0 +1,83 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada's plan has one batch of each mode (core, supplement, book, abstract); her supplement batch dies once and its retry succeeds. Bo's plan shows the resume and missing-text skips.",
+  "^plan:ada-example$": {
+    "file_exists": true,
+    "already_carded": [],
+    "problems": [],
+    "batches": [
+      {
+        "bid": "c01",
+        "mode": "core",
+        "papers": 4,
+        "pages": 96
+      },
+      {
+        "bid": "s01",
+        "mode": "supplement",
+        "papers": 7,
+        "pages": 180
+      },
+      {
+        "bid": "b01",
+        "mode": "book",
+        "papers": 1,
+        "pages": 320
+      },
+      {
+        "bid": "a01",
+        "mode": "abstract",
+        "papers": 30,
+        "pages": 0
+      }
+    ]
+  },
+  "^plan:bo-sample$": {
+    "file_exists": true,
+    "already_carded": [
+      "c01"
+    ],
+    "problems": [
+      "MISSING-TXT c02 S044"
+    ],
+    "batches": [
+      {
+        "bid": "c01",
+        "mode": "core",
+        "papers": 5,
+        "pages": 104
+      },
+      {
+        "bid": "c02",
+        "mode": "core",
+        "papers": 3,
+        "pages": 70
+      },
+      {
+        "bid": "s01",
+        "mode": "supplement",
+        "papers": 8,
+        "pages": 200
+      }
+    ]
+  },
+  "^read:ada-example:s01$": null,
+  "^read:": {
+    "cards_written": 4,
+    "full_read": [
+      "S001",
+      "S002"
+    ],
+    "partial_read": [
+      "S003"
+    ],
+    "unreadable": [],
+    "problems": []
+  },
+  "^gate:": {
+    "merged_chase": true,
+    "quotes_total": 38,
+    "quotes_fixed": 2,
+    "quotes_not_found": 0,
+    "status_row": "| <slug> | fictional status row |"
+  }
+}

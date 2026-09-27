@@ -49,6 +49,10 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(String(a.date))) throw new Error('team-synthesiz
 a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') || !m.name) throw new Error(`team-synthesize: members[${i}] needs a kebab-case slug and a name`) })
 if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-synthesize: args.repo and args.scratch must be absolute paths')
 if (String(a.team).startsWith('/')) throw new Error('team-synthesize: args.team must be relative to args.repo, e.g. "product/<team>"')
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'wordBudget', 'maxWords', 'notes']
+const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-synthesize.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = String(a.repo).replace(/\/+$/, '')
 const TEAM_REL = String(a.team).replace(/^\.\//, '').replace(/\/+$/, '')
@@ -119,7 +123,7 @@ function editPrompt(m, mine) {
 The synthesis note is ${SK}/references/research/08-deep-reading-synthesis.md and the card index is 07-paper-cards.md (mining summary: ${JSON.stringify(mine)}).
 Your job (EDIT): update the skill conservatively so it is deeper and more usable, following paper-reading-card.md section 三.
 Word budget: SKILL.md is loaded into a model's context on activation, so distil, do not paste. It must end at about ${BUDGET} words or fewer (wc -w; hard limit ${MAXW}). Write the exhaustive evidence into ${SK}/references/research/09-evidence-ledger.md IN THE SAME PASS (not as a later clean-up): one section per SKILL.md item, each preceded by an explicit anchor line such as <a id="method-1"></a> and then a heading "## Method 1: <name>" (likewise heuristic-N, taste-marks, taste-warnings, anatomy-<short-name>, corrections, card-key). In SKILL.md put a pointer after each item, e.g. "(full evidence: references/research/09-evidence-ledger.md#method-1)". If a ledger already exists, extend it under the same anchors.
-0. Save a copy first: cp -n ${SK}/SKILL.md ${backup(m)} (keep an existing copy: it is the pre-synthesis state).
+0. Save a copy first: mkdir -p ${SCR} && cp -n ${SK}/SKILL.md ${backup(m)} (keep an existing copy: it is the pre-synthesis state).
 SKILL.md (use the section names the skill already has, in its language):
 - Core research methods: for each method keep **One line**; **Evidence**, reduced to Stated (the single strongest statement; verbatim with card and page if it is a quote), Practice (the 3–5 strongest cards with pages, e.g. "[card S012, pp. 9–11]"), Say–do (one line with the counts, e.g. "✅ stated + practiced; full texts: N cards"), Variants/corrections (at most 4 one-line bullets, each with its ✗/⚠ mark and card ref); the ledger pointer; **Steps**; **Applies to stage**; **Different from standard practice**; **Limitations**. Promote only what 08 promotes, in the same house format. Keep 3–7 core methods and the existing numbering. Never delete a method or its evidence: if the full texts contradict it, mark the contradiction and correct the claim, citing the card (the detail goes to the ledger).
 - Research heuristics, research taste (marks of good research / warning signs), research anti-patterns: add items 08 supports, each with ≥2 card ids, one or two lines each with at most 3 card refs (more in the ledger).

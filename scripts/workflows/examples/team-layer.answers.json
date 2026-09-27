@@ -1,0 +1,82 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Both verifiers report one finding, so the fixer runs.",
+  "^card:bo-sample$": {
+    "lens": "fictional experimental lens",
+    "student_mode": true,
+    "edited": true,
+    "deep_tier_done": false,
+    "quality_check": "12/12"
+  },
+  "^card:": {
+    "lens": "fictional one-line lens",
+    "known_for": "fictional signature work",
+    "leads_when": "fictional signal",
+    "methods": [
+      "Method 1",
+      "Method 2",
+      "Method 3"
+    ],
+    "likely_disagreements": [
+      {
+        "with": "the other member",
+        "point": "fictional contrast",
+        "papers": "10.0000/fictional"
+      }
+    ],
+    "key_papers": [
+      {
+        "title": "fictional paper",
+        "id": "10.0000/fictional",
+        "position": "fictional position",
+        "where": "SKILL.md Method 2"
+      }
+    ],
+    "quality_check": "12/12",
+    "deep_tier_done": false,
+    "edited": false
+  },
+  "^roundtable$": {
+    "file": "$REPO/product/example-team/example-roundtable/SKILL.md",
+    "seated": [
+      "ada-example",
+      "bo-sample"
+    ],
+    "fault_lines": [
+      {
+        "title": "fictional: theory-first vs benchmark-first",
+        "sides": "Example vs Sample",
+        "kind": "contrast of published methods",
+        "evidence": "[ada-example 01-publications.md §2; 10.0000/a] vs [bo-sample 03-process-evidence.md §1; arXiv:0000.00000]"
+      }
+    ],
+    "dropped_contrasts": [
+      "fictional: one-sided contrast (no evidence on Sample's side)"
+    ],
+    "seating_rows": 9,
+    "links": "0 broken"
+  },
+  "^verify:structure$": {
+    "lens": "structure",
+    "findings": [
+      {
+        "severity": "major",
+        "file": "README.md",
+        "location": "team table",
+        "problem": "fictional: status column disagrees with team_status.py",
+        "fix": "fictional fix"
+      }
+    ]
+  },
+  "^verify:evidence$": {
+    "lens": "evidence",
+    "findings": [
+      {
+        "severity": "minor",
+        "file": "example-roundtable/SKILL.md",
+        "location": "Shared References",
+        "problem": "fictional: month missing",
+        "fix": "fictional fix"
+      }
+    ]
+  }
+}

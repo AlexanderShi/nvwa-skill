@@ -1,0 +1,59 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Each member's plan yields two chunks, so two chase agents per member run and then the merge.",
+  "^chase-plan:": {
+    "chunk_file": "$SCRATCH/chase/<slug>.json",
+    "works": 31,
+    "chunks": 2,
+    "books": 1,
+    "excluded": [
+      {
+        "reason": "dup_of set",
+        "count": 3
+      },
+      {
+        "reason": "kind talk",
+        "count": 2
+      }
+    ]
+  },
+  "^chase:": {
+    "found": [
+      {
+        "id": "S012",
+        "url": "https://example.org/reports/s012.pdf",
+        "file": "$REPO/product/example-team/<slug>/references/sources/papers/2001-fictional-title-s012.pdf",
+        "version": "technical report"
+      }
+    ],
+    "not_found": [
+      "S013",
+      "S020"
+    ],
+    "abstracts_added": 2,
+    "rejected": [
+      {
+        "id": "S017",
+        "url": "https://example.org/other.pdf",
+        "reason": "fictional: other author on page 1"
+      }
+    ],
+    "book_leads": [
+      {
+        "id": "S040",
+        "part": "table of contents",
+        "url": "https://example.org/book/toc"
+      }
+    ],
+    "searches_used": 3
+  },
+  "^chase-merge:": {
+    "urls_recorded": 2,
+    "abstracts_merged": 4,
+    "new_full_texts": [
+      "S012"
+    ],
+    "still_no_oa": 27,
+    "merge_chase": "fictional: merged 4, 0 problems",
+    "validate_works": "0 errors"
+  }
+}

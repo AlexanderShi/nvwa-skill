@@ -1,0 +1,64 @@
+{
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada has finished the synthesis, Bo is still reading; the first fix leaves the links gate failing, so a second fix round runs.",
+  "^status:team$": {
+    "coverage_md": "| Member | Works | Open full texts | Cards | Unread |\n|---|---|---|---|---|\n| ada-example | 41 | 25 | 41 | 0 |\n| bo-sample | 120 | 88 | 60 | 60 |\n(fictional numbers)",
+    "members": [
+      {
+        "slug": "ada-example",
+        "stage": "synthesized",
+        "has_08": true
+      },
+      {
+        "slug": "bo-sample",
+        "stage": "reading (round 2)",
+        "has_08": false
+      }
+    ],
+    "problems": []
+  },
+  "^integrate:": {
+    "files_changed": [
+      "README.md",
+      "DEEP-READING.md"
+    ],
+    "summary": "fictional"
+  },
+  "^verify:numbers-links$": {
+    "findings": [
+      {
+        "severity": "blocker",
+        "file": "DEEP-READING.md",
+        "problem": "fictional: coverage cell differs from team_status.py",
+        "fix": "fictional fix"
+      }
+    ]
+  },
+  "^fix:integration$": {
+    "applied": 1,
+    "gates": [
+      {
+        "name": "coverage",
+        "command": "python3 scripts/team_status.py product/example-team --coverage",
+        "passed": true,
+        "detail": "equal"
+      },
+      {
+        "name": "links",
+        "command": "python3 scripts/check_links.py product/example-team",
+        "passed": false,
+        "detail": "fictional: 1 broken"
+      }
+    ]
+  },
+  "^fix2:integration$": {
+    "applied": 1,
+    "gates": [
+      {
+        "name": "links",
+        "command": "python3 scripts/check_links.py product/example-team",
+        "passed": true,
+        "detail": "0 broken"
+      }
+    ]
+  }
+}

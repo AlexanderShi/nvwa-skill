@@ -40,6 +40,10 @@ need(typeof ARGS.scratch === 'string' && ARGS.scratch.startsWith('/'), 'args.scr
 need(/^\d{4}-\d{2}-\d{2}$/.test(ARGS.date || ''), 'args.date must be "YYYY-MM-DD"')
 need(Array.isArray(ARGS.members) && ARGS.members.length > 0, 'args.members must be a non-empty array copied from team.json')
 ARGS.members.forEach((m, i) => need(m && /^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') && m.name, `args.members[${i}] needs a kebab-case slug and a name`))
+// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'audit', 'acquire']
+const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
+if (unknownArgs.length) log(`team-harvest.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = ARGS.repo.replace(/\/+$/, '')
 const TEAM_REL = ARGS.team.replace(/^\.\//, '').replace(/\/+$/, '')
@@ -218,9 +222,13 @@ if (noScholar.length) log(`no Google Scholar id in team.json for: ${noScholar.jo
 
 const results = await pipeline(
   MEMBERS,
-  m => A(harvestPrompt(m), { label: `harvest:${m.slug}`, phase: 'Harvest', schema: HARVEST }),
+  // the runtime ends an item's pipeline when a stage returns null, so a dead harvest agent is reported here
+  m => A(harvestPrompt(m), { label: `harvest:${m.slug}`, phase: 'Harvest', schema: HARVEST }).then(h => {
+    if (!h) log(`${m.slug}: harvest agent returned nothing; audit and acquisition skipped for this member`)
+    return h
+  }),
   (h, m) => {
-    if (!h) { log(`${m.slug}: harvest agent returned nothing; audit and acquisition skipped for this member`); return { harvest: null, audit: null } }
+    if (!h) return { harvest: null, audit: null } // defensive: already logged in stage 1
     if (!h.identity_confirmed) log(`${m.slug}: profile identity NOT confirmed (${h.identity_evidence}); check before using the list`)
     if (!DO_AUDIT) return { harvest: h, audit: null }
     return A(auditPrompt(m, h), { label: `audit:${m.slug}`, phase: 'Audit', schema: AUDIT }).then(a => {
