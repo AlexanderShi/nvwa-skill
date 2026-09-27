@@ -2419,7 +2419,7 @@
    "id": "S139",
    "title": "On the rate of convergence of variable metric algorithms for unconstrained optimization",
    "authors": "MJD Powell",
-   "venue": "Report DAMTP, 1525-1539",
+   "venue": "Proceedings of the International Congress of Mathematicians, Warszawa 1983, pp. 1525-1539",
    "year": 1983,
    "cites": 15,
    "doi": null,
@@ -3222,7 +3222,8 @@
    "dup_of": null,
    "sources": [
     "scholar"
-   ]
+   ],
+   "note": "DAMTP 1997/NA18 is 'Trust region calculations revisited' — same text as S165; count once."
   },
   {
    "id": "S187",
