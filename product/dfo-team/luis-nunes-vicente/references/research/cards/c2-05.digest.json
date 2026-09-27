@@ -1,0 +1,232 @@
+[
+ {
+  "id": "S107",
+  "year": "2025",
+  "title": "Non-smooth stochastic gradient descent using smoothing functions",
+  "read_level": "full",
+  "contribution": "Proposes smoothing stochastic gradient (SSG), plain SGD on a smoothing function f̃(·,µ_k) with µ_k driven to zero on a prescribed schedule, proves rates in convex (1/T^{1/4}), non-convex (close to T^{-1/2} for smoothing gradients, T^{-2/7+ε} for nearby subgradients) and strongly convex (close to 1/T^{1/2}) regimes, verifies the assumptions for two compositional problem classes, and reports preliminary tests on four UCI datasets (pp. 1, 5, 10, 13, 16, 33).",
+  "problem_entry": "Stochastic compositional problems ϕ(E[ψ]) and E[ϕ(ψ)] with a non-smooth outer ϕ; SCGD targets inner non-smoothness, and no compositional method iteratively updates a smoothing parameter (pp. 1–4).",
+  "key_idea": "SGD on f̃(·,µ_k) that only differs from SGD in the update µ_{k+1} ≤ µ_k; schedules µ_k = k^{-a}, α_k = k^{-b} fixed a priori by the rate analysis, (a,b) = (1/4,3/4) in the convex case, µ_k = α_k^{(2−d)/3} in the non-convex case (pp. 7, 10–11).",
+  "assumptions": "Stated on f̃: unbiased gradients, second moment ≤ G²/µ², |f − f̃| ≤ Cµ; convex f̃ plus bounded iterates via projection; or ∇f̃ Lipschitz with C0/µ, Lipschitz in µ, Σα^d < ∞; a nearby-subgradient assumption for true subgradients. Verification for ϕ(E[ψ]) needs ϕ̃′ linear via restricted mean-preserving sampling and fails for the hinge case (pp. 7–8, 11, 14, 18–19).",
+  "proof_devices": [
+   "projected-SGD distance recursion + convexity + telescoping with bounded iterates, then smoothing accuracy Cµ at x_k and x* (pp. 8–10)",
+   "LP maximizing min{a, 1−b, b−2a} over schedule exponents → (1/4, 3/4) (p. 10)",
+   "descent lemma with Lipschitz constant C0/µ_k plus µ-change term C1(µ_k − µ_{k+1}) (p. 12)",
+   "coupling µ_k = α_k^{(2−d)/3} so α_k²/µ_k³ = α_k^d is summable (pp. 11–13)",
+   "nearby-subgradient transfer via ‖a+b‖² ≤ 2‖a‖² + 2‖b‖² (pp. 14–16)",
+   "Lyapunov J_k = E‖x_k − x*‖² + Λ_k E‖y_k − ψ(x_{k−1})‖² with SCGD tracking lemma (pp. 35–37)"
+  ],
+  "experiments": "Finite-sum case only: hinge loss on QSAR and Breast Cancer Wisconsin, L1 loss on Automobile Price and Yacht Hydrodynamics, one 75/25 split, SSG vs non-smooth SGD and SCGD (run outside its assumptions) with the same α0 k^{-3/4} for all; test-loss curves, no repeated runs reported; SSG lowest final test loss and smoother curves (pp. 24–26).",
+  "positioning": "Claims to match SCGD's rates for a 'complementary' problem (inner vs outer non-smoothness); dismisses a saddle-point O(T^{-1/2}) route as not convex–concave for nonlinear ψ; builds on own direct-search smoothing [18] (pp. 4, 10–11, 16).",
+  "writing": "Assumptions introduced as 'mild' with forward promises of verification; strongly convex case relegated to an appendix as less applicable; each main result followed by an SCGD comparison; conclusion distils a design rule linking smoothing and step decay (pp. 7, 10, 16, 26–27).",
+  "limits_future": "Stated: hinge case of (1.1) not covered, non-convex rates only for smoothing gradients/nearby subgradients, no double expectation; future: variance reduction (SVRG, SAGA), CVaR applications. Unstated: no code, convex proof does not use smoothness, O(1/√T) subgradient benchmark (p. 3) not addressed (pp. 16, 19, 27).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "SGD skeleton kept; only the object changes to f̃(·,µ_k) with one extra update line; price stated in the abstract (higher Lipschitz constants)",
+    "pages": "pp. 1, 7"
+   },
+   {
+    "method": "Heuristic 5",
+    "relation": "variant",
+    "note": "smoothing carried from direct search [18] to SGD, but µ reduced on a fixed a-priori schedule tied to α_k, not when a step-size indicator is small",
+    "pages": "pp. 4, 8, 11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "rates in stochastic gradient evaluations benchmarked against SCGD (a neighbouring compositional method), not against the subgradient method's O(1/√T) recalled on p. 3; the price is not named",
+    "pages": "pp. 1, 3, 10, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "real datasets and a named compositional baseline, but no collection, profiles, repeated runs or code link",
+    "pages": "pp. 24–26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "exponent balancing",
+    "evidence": "LP over schedule exponents (a,b) and coupling µ_k = α_k^{(2−d)/3}; third paper after S034 and S032",
+    "pages": "pp. 10–12"
+   },
+   {
+    "pattern": "abstract assumptions, then verify per instance",
+    "evidence": "assumptions stated on f̃, then one proposition per assumption for each of two problem classes",
+    "pages": "pp. 7, 16–23"
+   },
+   {
+    "pattern": "theory paper / application paper split",
+    "evidence": "S107 supplies SSG with rates; S101 imports it without theory; the two cite each other as technical reports",
+    "pages": "p. 28 (ref. [21]); S101 pp. 15, 21, 25–26"
+   }
+  ],
+  "transferable": [
+   "Maximize the smallest exponent of a multi-term rate bound with a small LP to pick schedule exponents (p. 10)",
+   "Couple the smoothing parameter to the step size so the error series becomes Σα_k^d (pp. 11–12)",
+   "Split f̃(x_{k+1},µ_{k+1}) − f̃(x_k,µ_k) into a µ-change term (Lipschitz in µ) and an x-change term (descent lemma) (p. 12)",
+   "Use two independent samples for an unbiased product estimator and state the sampling restriction that makes it unbiased (pp. 17–19)",
+   "Run experiments with the exponents the theorem declares optimal and explain curve differences by a sample-level mechanism (pp. 24–26)"
+  ],
+  "coauthors": "T. Giovannelli, J. Tan",
+  "quotes": [
+   {
+    "text": "it only differs from the traditional stochastic gradient algorithm in the update of the smoothing parameter",
+    "page": 7
+   },
+   {
+    "text": "Accordingly, our method smooths the outer function while preserving the compositional structure, whereas SCGD-type methods rely on auxiliary tracking sequences to approximate the inner expectation.",
+    "page": 16
+   }
+  ]
+ },
+ {
+  "id": "S079",
+  "year": "2026",
+  "title": "The limitation of neural nets for approximation and optimization",
+  "read_level": "full",
+  "contribution": "An empirical audit of neural networks as surrogates in optimization: SiLU is the best activation for approximating CUTEst objectives, NNs match interpolation/regression on values and gradients but not Hessians, an activation-augmented quadratic basis without cross terms is as accurate as the full basis, and NN or interpolation surrogate gradients do not improve the FLE derivative-free solver (pp. 1–3, 8, 15, 21).",
+  "problem_entry": "NNs are popular engineering surrogates, but the authors know of no paper evaluating NN approximation accuracy or NN surrogates inside optimization algorithms (p. 2).",
+  "key_idea": "Three-stage audit: activation choice via performance profiles of training, accuracy of value/gradient/Hessian against quadratic interpolation/regression and RBF on identical sample sets, then replace the forward-difference gradient in FLE's FD-BFGS step by a surrogate gradient (FLE-S) and profile against FLE (pp. 5–6, 11–12, 18–20).",
+  "assumptions": "Smooth noiseless unconstrained f; samples uniform in B(x0;1), shifted and scaled; one NN architecture (2 hidden layers of 4n neurons, Adam, ReduceLROnPlateau monitoring the testing risk); no convergence theory (pp. 3, 6, 19).",
+  "proof_devices": [
+   "none (no lemmas or theorems in the paper, checked pp. 1–31)"
+  ],
+  "experiments": "CUTEst sets of 38 problems (n = 20, 40, 60) and 53 negative-curvature problems (n = 2–50); performance profiles at τ = 10⁻², 10⁻⁵; relative-error box plots at x0; FLE vs FLE-S (natural basis, basis (3.5) with Sigmoid, RBF, NN-ReLU, NN-SiLU) in function evaluations; no FLE-S variant beats FLE; code on GitHub; no timings (pp. 3, 5–8, 12–17, 21).",
+  "positioning": "Against engineering NN-surrogate practice and learning-to-optimize work; builds on DFO model literature and on evidence that FD-BFGS is strong for smooth noiseless DFO; baseline is the authors' own 'state-of-the-art' FLE (pp. 2–3, 8, 17).",
+  "writing": "Verdict in the title and section headings; numbered contributions phrased as 'The evidence provided shows'; informal one-sentence summary of the negative result; positive by-product (cross terms dispensable) kept in the abstract; omitted failed variants disclosed in the conclusion (pp. 1–3, 15, 23).",
+  "limits_future": "Stated: unit-ball sampling makes quadratic approximations inaccurate; a more complex NN argued (not tested) to remain uncompetitive. Unstated: single architecture, smooth noiseless problems only, n ≤ 60, no timing for the claimed training cost, no future work (pp. 6, 13, 15, 21–23).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "a learned component is inserted into the FLE skeleton and the step-6 comparison against the unwrapped solver is negative across the collection; Method 1 needs a stated failure mode",
+    "pages": "pp. 20–23, 30–31"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "two stated CUTEst collections, performance profiles at two accuracies, function evaluations as unit, strongest in-house baseline, public code",
+    "pages": "pp. 3, 5, 21, 29–30"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "evaluations are the cost unit, but the NN training cost emphasized in the abstract is not counted",
+    "pages": "pp. 1, 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "audit a fashionable tool and publish the negative result",
+    "evidence": "whole paper is a negative result on NN surrogates, extending the c05 candidate 'state where you lose'",
+    "pages": "pp. 1, 3, 21, 23"
+   },
+   {
+    "pattern": "disclose omitted experiments",
+    "evidence": "surrogate-in-line-search and surrogate search-step variants failed and are listed though not shown",
+    "pages": "p. 23"
+   }
+  ],
+  "transferable": [
+   "Give every surrogate candidate the same sample set (size (n+1)(n+2)/2, same ball, same shift-and-scale) before comparing accuracy (pp. 6, 12, 15)",
+   "Treat model variants as solvers in performance profiles with a convergence test relative to the best value any variant attains (pp. 5–6)",
+   "Measure an evaluation-saving component by profiling the whole solver in function evaluations against the unmodified solver (p. 21)",
+   "Feed interpolation models only the first backtracking point plus one random point per iteration to avoid collinear samples (pp. 19–20)",
+   "Collect the interpolation sample from the smallest ball B(x_k; 0.1·1.1^j) holding (n+1)(n+2)/2 points (p. 20)"
+  ],
+  "coauthors": "T. Giovannelli, O. Sohab",
+  "quotes": [
+   {
+    "text": "When doing finite-difference BFGS, it seems that no surrogate modeling helps, including a magical/search step based on surrogate optimization.",
+    "page": 3
+   },
+   {
+    "text": "However, these experiments did not result in a good performance for the algorithms equipped with surrogate models and, therefore, we decided to omit the corresponding numerical results from the paper.",
+    "page": 23
+   }
+  ]
+ },
+ {
+  "id": "S101",
+  "year": "2026",
+  "title": "Stochastic set-valued optimization and its application to robust learning",
+  "read_level": "full",
+  "contribution": "Introduces stochastic hyperbox-valued (interval- and rectangle-valued) optimization for robust learning, with sub- and superquantiles of the loss as lower and upper objectives of the equivalent multiobjective problem, proves a Rockafellar–Uryasev-type characterization for subquantiles, and solves the models with smoothed PF-SMG plus knee selection, reporting lower replication variance than ERM under class-proportion shift (pp. 1, 3–4, 11, 15–19, 23–24).",
+  "problem_entry": "Robust ML reduces variability to a single empirical-risk measure, and set-valued optimization has no stochastic formulations (p. 3).",
+  "key_idea": "Hyperbox SVO ≡ MOO with 2k objectives (Theorem 3.1); choose f_lb = subquantile and f_ub = superquantile of the loss, a family whose corners recover ERM and min–max; solve with PF-SMG with SSG smoothing and pick an angle-based knee (pp. 9, 11–12, 15).",
+  "assumptions": "Hyperbox images (closed, convex S(x) ± K); ψ continuously differentiable; ξ independent of x; tail levels as hyperparameters; η replaced by the sorted empirical quantile; no convergence result for the pipeline (pp. 8, 11, 15, 19–20).",
+  "proof_devices": [
+   "quantile reflection lemma Q_{−Z}(1−u) = −Q_Z(u) at continuity points (pp. 23–24)",
+   "S_p[Z] = −S̄_{1−p}[−Z] via change of variables, then Rockafellar–Uryasev applied to −Z (p. 24)",
+   "imported: Jahn's vectorization theorem and the hyperbox comparison of [21]/[11] (pp. 8–9)"
+  ],
+  "experiments": "Logistic regression on Adult (IVO, RVO) and German Credit (IVO); 1500 iterations, initial step 1.3, 30 class-rebalanced test replications from one test set; metrics: variance of test loss across replications and FRPA; baselines ERM, single SMG point, bi-objective knee; tail levels, smoothing and PF-SMG settings, accuracy values and code not reported in the text (pp. 15–18).",
+  "positioning": "Careful SVO lineage (Kuroiwa, Khan–Tammer–Zălinescu, Hamel et al., Jahn, Eichfelder); criticizes robust ML approaches as a class; novelty claimed from the book and survey; reuses own SMG, PF-SMG, Pareto-sensitivity and SSG work; one citation slip ([26] for [25]) (pp. 2–3, 21).",
+  "writing": "'Our contributions' paragraph plus roadmap; first-person strong claim that any two-objective ML problem fits RVO; geometric intuition via Remark 5.1; hedging concentrated in the numerics; conclusion opens with a modelling lesson and ends with three concrete future directions (pp. 3–4, 13–14, 19–20).",
+  "limits_future": "Stated future: more criteria (higher-dimensional hyperboxes), other knee rules targeting stability, data-driven tuning of tail levels. Unstated: no convergence theory, x_RVO is a weighted sum of two knees not shown Pareto optimal, one model class and two datasets, evaluation variance computed with model-specific losses (pp. 15–16, 19–20).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "solvers (SMG, PF-SMG) kept unchanged; the problem is reformulated into MOO by vectorization; the changed object is the objective vector, not the acceptance test",
+    "pages": "pp. 9, 25–27"
+   },
+   {
+    "method": "Heuristic 4",
+    "relation": "evidence",
+    "note": "PF-SMG keeps a nondominated list; text warns against fixed scalarization; knee chosen a posteriori",
+    "pages": "pp. 15–16, 27"
+   },
+   {
+    "method": "Heuristic 8",
+    "relation": "variant",
+    "note": "knee chosen by an angle rule rather than the Pareto-sensitivity formalization [17]; x_RVO is an a-posteriori weighted aggregation of two knees",
+    "pages": "p. 15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "two datasets, no profiles, no code link, hyperparameters missing; qualifies Taste #5's Lehigh-code claim",
+    "pages": "pp. 16–18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory paper / application paper split",
+    "evidence": "SMG, PF-SMG and SSG imported from companion papers with their own theory; this paper adds modelling and one lemma",
+    "pages": "pp. 15, 25–27"
+   },
+   {
+    "pattern": "import a formalism and claim the first stochastic version",
+    "evidence": "no stochastic SVO formulations per the book and survey; paired with a small mirror theorem",
+    "pages": "pp. 3, 23–24"
+   },
+   {
+    "pattern": "interpolating model family nesting ERM and worst case",
+    "evidence": "(p, p̄) = (1, 0) gives ERM, (0, 1) gives min/max over the support",
+    "pages": "pp. 11–12"
+   }
+  ],
+  "transferable": [
+   "Reduce a box-valued set objective to a finite MOO through lower and upper corner vectors and reuse any MOO solver (p. 9)",
+   "Design a parametric model family whose corners recover ERM and the worst case (pp. 11–12)",
+   "Derive a mirror characterization by applying the classical result to −Z with a quantile-reflection lemma (pp. 23–24)",
+   "Select one model reproducibly as the knee with the smallest interior angle among consecutive nondominated points (p. 15)",
+   "Test label-shift robustness by class-rebalanced sub-sampling of one held-out set and report variance across replications (pp. 15–16)"
+  ],
+  "coauthors": "T. Giovannelli, J. Tan",
+  "quotes": [
+   {
+    "text": "To the best of our knowledge and according to the book by Khan et al. [25] and survey [20], no stochastic formulations for SVO have been proposed so far.",
+    "page": 3
+   },
+   {
+    "text": "Consequently, an effective modeling framework depends on constructing meaningful and informative lower and upper objectives.",
+    "page": 19
+   }
+  ]
+ }
+]

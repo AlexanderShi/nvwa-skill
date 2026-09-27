@@ -1,0 +1,17 @@
+{
+ "S001": "https://api.openalex.org/works/doi:10.1137/1.9780898718768 (SIAM book description; https://doi.org/10.1137/1.9780898718768)",
+ "S027": "https://api.crossref.org/works/10.1137/s105262349630009x (publisher abstract, SIAM J. Optim. 8(4):871-886; https://doi.org/10.1137/s105262349630009x)",
+ "S038": "https://api.openalex.org/works/doi:10.1117/12.814844 (also https://ui.adsabs.harvard.edu/abs/2009SPIE.7274E..09R/abstract)",
+ "S040": "https://www.semanticscholar.org/paper/2555ce71a4471a1cc285a2887ce1380c1bbb863d",
+ "S042": "https://mlanthology.org/ecmlpkdd/2010/scheinberg2010ecmlpkdd-learning/",
+ "S044": "https://www.semanticscholar.org/paper/821afc452d571181a5468da3c192d3615d7ba6ba",
+ "S045": "https://core.ac.uk/outputs/100679970",
+ "S062": "https://www.semanticscholar.org/paper/e1d54b5502d9def8edc0fceaa29bafccb1345eb8",
+ "S064": "https://api.openalex.org/works/doi:10.1109/icassp.2009.4959935",
+ "S077": "https://api.openalex.org/works/doi:10.1093/imanum/drn058",
+ "S081": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1080/24725854.2025.2469839?fields=abstract",
+ "S090": "https://api.openalex.org/works/doi:10.1109/bigdata.2015.7364098",
+ "S079": "https://research.ibm.com/publications/sparse-markov-net-learning-with-priors-on-regularization-parameters",
+ "S120": "https://api.openalex.org/works/doi:10.21236/ada622645 (DTIC record ADA622645 / AFRL-AFOSR-VA-TR-2015-0278 abstract, as indexed by OpenAlex; PDF at https://apps.dtic.mil/sti/pdfs/ADA622645.pdf was blocked from this network)",
+ "S128": "https://api.crossref.org/works/10.1190/1.2792862 (publisher-deposited abstract; landing page https://doi.org/10.1190/1.2792862)"
+}

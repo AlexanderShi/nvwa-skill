@@ -1,0 +1,488 @@
+[
+ {
+  "id": "S077",
+  "year": "2008",
+  "title": "A globally convergent primal-dual interior-point filter method for nonlinear programming: new filter optimality measures and computational results",
+  "read_level": "partial",
+  "contribution": "The paper revises the 2004 primal-dual interior-point filter method. The second filter entry becomes objective plus a multiple of complementarity (f + cµ or ℓ + (c+n)µ), and inexact Hessians are allowed if their action along ∇xℓ is accurate to O(∆^{q−1}). Global convergence is kept, and the method is released as the Fortran 90 solver ipfilter, benchmarked against ipopt on CUTEr (pp. 1–2, 4, 6, 17, 30–31).",
+  "problem_entry": "Two defects of the authors' own 2004 method: its first-order optimality filter entry may not distinguish minimization from maximization, and it depends on exact Hessians. A practical goal is added: a released solver (pp. 1–2, 4).",
+  "key_idea": "Keep the normal/tangential step split, the central neighbourhood, the envelope filter and restoration. Replace the optimality filter entry by θg = f + cµ (or ℓ + (c+n)µ), with an SQP-filter-style switching condition. Require H only through ‖[H − ∇²ℓ]∇ℓ‖ ≤ N‖∇ℓ‖∆^{q−1}, met by a finite-difference Hessian–vector product and H r̃ = ∇ℓ (pp. 4–8, 14–17).",
+  "assumptions": "(A1) bounded iterates; (A2) Lipschitz ∇h and ∇²xwℓ; (A3) bounded Hk with the decrease condition (2.22); (A4) Hk + ½X⁻¹Z PSD on the null space of ∇h^T; (A5) bounded KKT⁻¹, which rules out infeasible problems. The constant c must satisfy (2.33) (pp. 10, 17).",
+  "proof_devices": [
+   "Lemma 2.5: upper bound on the change of the new filter entry θg along the step, and lower bound on its linear-model decrease (p. 9)",
+   "Lemma 2.1: sufficient decrease of θℓ^p under the one-vector Hessian condition (2.21), via Hölder-type gradient estimates for ‖x‖^p (Lemma 2.2) (pp. 6–8)",
+   "lemma-by-lemma reuse of the 2004 proof, e.g., 'See [18, Lemma 5]' (pp. 18–21)",
+   "filter dichotomy: infinitely many filter additions (Thm 4.12) vs finitely many (Thm 4.13) (pp. 24–25)",
+   "repair of the subsequence issue in Lemma 4.9: keep dominated entries, or use a modified acceptance test (p. 21)"
+  ],
+  "experiments": "ipfilter 0.2 against ipopt 3.5.1 on CUTEr Sept. 2008 (631 problems) and an old CUTE set (469), comparing problems solved and average iterations. Old CUTE: 449 vs 448 solved. CUTEr: 532 vs 549 (84.34% vs 87.00%), with 47.44 vs 38.58 iterations. ipfilter is ahead on QPs. No profiles and no CPU-time or evaluation counts (pp. 30–31).",
+  "positioning": "Presented as continuing the authors' own framework [18]. The new entries are said to be closer to SLP/SQP filter entries (Fletcher–Leyffer line). ipopt (Wächter–Biegler) is the benchmark, and its stopping test is mimicked (pp. 1–2, 4, 29–30).",
+  "writing": "The introduction names the theoretical and practical motivation and announces the web site and the ESA selection. There is no conclusions section: the paper ends with the numerical tables (pp. 1–2, 31).",
+  "limits_future": "Numerics for (2.21) without second derivatives are out of scope. The code supports only exact second derivatives (p = 1). It is less robust than ipopt on current CUTEr. No future-work list (pp. 8, 29, 31).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The skeleton of the 2004 method is kept; only the acceptance measure (filter entry) and the Hessian requirement change, and the proof is reused lemma by lemma.",
+    "pages": "pp. 2, 14–15, 18–21"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "A free solver is shipped and compared with the strongest baseline (ipopt) on a large collection, but only aggregate tables are reported, no profiles.",
+    "pages": "pp. 2, 30–31"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "A deterministic, not probabilistic, weakening of an expensive requirement: the exact Hessian becomes its action along ∇xℓ, with ∆-dependent accuracy.",
+    "pages": "pp. 6, 8"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "weakest condition the proof touches",
+    "evidence": "Hessian accuracy is required only along ∇xℓ: ‖[H − ∇²ℓ]∇ℓ‖ ≤ N‖∇ℓ‖∆^{q−1}, said to be the strongest relaxation for first-order information",
+    "pages": "pp. 6, 8"
+   },
+   {
+    "pattern": "deterministic inexactness tied to the step",
+    "evidence": "the Hessian error is allowed to grow like ∆^{q−1}",
+    "pages": "p. 6"
+   }
+  ],
+  "transferable": [
+   "Require a Hessian approximation only through its action on the one vector the proof uses; meet the condition with a finite-difference Hessian–vector product plus a secant-type condition H r̃ = ∇ℓ (pp. 6, 8).",
+   "To make a first-order optimality measure distinguish minima from maxima, add the objective to a constant multiple of complementarity (f + cµ), then reprove only the lemma that bounds its change along the step (pp. 4, 9).",
+   "When you revise a published convergent method, cite the unchanged lemmas one by one and reprove only those that touch the changed object (pp. 18–21).",
+   "Report the old and the current version of a test collection, plus the problem class where you win, next to the aggregate where you lose (pp. 30–31)."
+  ],
+  "coauthors": "R. Silva, M. Ulbrich, S. Ulbrich",
+  "quotes": [
+   {
+    "text": "In fact, the optimality filter entry in [18] mentioned above is based on first-order principles and thus might have weaknesses in distinguishing well between minimization and maximization.",
+    "page": 2
+   },
+   {
+    "text": "A numerical study on the imposition of (2.21) without second-order derivatives is out of the scope of this paper.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S085",
+  "year": "2008",
+  "title": "Local analysis of the feasible primal-dual interior-point method",
+  "read_level": "full",
+  "contribution": "The paper proves q-quadratic local convergence for the Newton primal-dual interior-point method that keeps the inequalities strictly feasible without slacks and without special multiplier formulas. This holds when the binding inequalities are concave, or when the primal step stays non-orthogonal to their gradients. Preliminary numerics show the feasible method is competitive with the slack-based infeasible one (pp. 1–2, 6, 10, 13–15).",
+  "problem_entry": "The local theory of El-Bakry et al. and Yamashita–Yabe covers only infeasible methods. The feasible alternatives need either a log barrier (only superlinear) or a special multiplier update (Tits et al.). Open gap: the plain feasible primal-dual method (pp. 1–2).",
+  "key_idea": "Keep the Newton primal-dual step and the classical rules for τk and µk. Maintain g(x) < 0 through a step length that includes the first root of gᵢ along the step. That root is computed inexactly, with a residual tolerance proportional to −gᵢ(xk)‖∆wk‖, by a warm-started scalar Newton iteration (pp. 2, 4–5, 11–12).",
+  "assumptions": "Classical nondegenerate assumptions A1–A3: C² with Lipschitz second derivatives, LICQ, SOSC, strict complementarity. A4 asks for concave binding inequalities; it is replaced in §4 by the angle condition lim inf ∇gᵢ^T∆xk/‖∆xk‖ > 0 (pp. 5–6, 10).",
+  "proof_devices": [
+   "Lemma 3.3: 1 − αk ≤ (1 − τk) + κζ(‖F0(wk)‖ + µk‖e‖), proved in four cases (step length set by a multiplier or by an inequality; constraint active or inactive) (pp. 6–9)",
+   "mean-value form of the inexact root (23), with concavity used in (25) (pp. 8–9)",
+   "q-quadratic Theorem 3.1 borrowed from Yamashita–Yabe once the step-length bound holds (pp. 9–10)",
+   "Taylor-expansion bound (27) under the non-orthogonality condition (28) for nonconcave constraints (pp. 10–11)"
+  ],
+  "experiments": "Fortran 90 with dense LAPACK, on small CUTEr problems with nonlinear inequalities and a strictly feasible x0. Feasible vs infeasible, both without globalization: 15 vs 11 converged, similar iteration counts, about 2 extra evaluations per iteration for the root. Per-problem table with failure reasons (pp. 13–14).",
+  "positioning": "Follows the analyses of El-Bakry et al. and Yamashita–Yabe. Contrasts with Gould–Orban–Sartenaer–Toint (log barrier) and Tits et al. (multiplier formula). Self-cites Vicente 2000 and Vicente–Wright 2002 (pp. 1–2, 16).",
+  "writing": "Short, standard structure: algorithm, then a concave-case theorem, a nonconcave extension, numerics, and remarks that separate theoretical interest from computational limitation (pp. 2, 15).",
+  "limits_future": "Needs a strictly feasible x0 (finding one is out of scope). Efficient only with few or easily structured inequalities. No globalization. Suggests imposing strict feasibility only on the constraints that restrict the domain (pp. 13, 15).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The Newton primal-dual skeleton and its parameter rules are kept; only the treatment of the inequalities changes (strict feasibility through the step length), and the rate proof is borrowed.",
+    "pages": "pp. 2, 4, 9–10"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "A head-to-head comparison against the natural baseline with every failure listed, but a small test set, no profiles and no code release mentioned.",
+    "pages": "pp. 13–14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "weakest condition the proof touches",
+    "evidence": "concavity of the binding inequalities is replaced by the angle condition the proof uses, which is then linked to centrality",
+    "pages": "pp. 10, 15"
+   },
+   {
+    "pattern": "deterministic inexactness tied to the step",
+    "evidence": "the residual of the root computation may be of order −gᵢ(xk)c1‖∆wk‖ without losing the q-quadratic rate",
+    "pages": "pp. 4–5"
+   }
+  ],
+  "transferable": [
+   "To carry a local-rate proof over to a variant, isolate where the new feature enters (the step length) and prove 1 − αk ≤ (1 − τk) + O(‖F0‖ + µk); the rest of the q-quadratic argument can be cited (pp. 6–10).",
+   "Let a nonlinear sub-computation (the first root of gᵢ along the step) be inexact, with a residual tolerance proportional to −gᵢ(xk)‖∆wk‖, and solve it by warm-started scalar Newton at about 2 evaluations per iteration (pp. 4–5, 11–13).",
+   "Put both methods and every problem in one table, with the failure reason for each run (pp. 13–14)."
+  ],
+  "coauthors": "R. Silva, J. Soares",
+  "quotes": []
+ },
+ {
+  "id": "S083",
+  "year": "2009",
+  "title": "Implicitly and densely discrete black-box optimization problems",
+  "read_level": "full",
+  "contribution": "The paper defines local minimization for black-box problems whose variables are projected onto an unknown, dense discrete set before evaluation. It gives a directional direct-search method whose only new ingredient is a poll test detecting when the projection collapses to the current point. It proves that the step size stays bounded away from 0 and ∞ and oscillates between failure and collapse levels (pp. 1–6).",
+  "problem_entry": "An application-driven modelling gap: in apparently continuous problems, evaluations first round or project the variables onto an unknown discrete set L (discrete, closed, bounded distance) (pp. 1–2).",
+  "key_idea": "Standard directional direct search with extreme barrier and simple decrease, plus one test: if ‖PL(xk+αk d) − xk‖ ≤ cαk, stop polling and increase αk. The directions are dense in the unit sphere, as in MADS (pp. 4–5).",
+  "assumptions": "L satisfies (L1)–(L3). The user returns the projected point together with its value (value-only returns are out of scope as noisy problems). The level set is bounded, and PL can be any operator consistent with (L3) (pp. 2–5).",
+  "proof_devices": [
+   "finiteness of L ∩ level set: the iterates are eventually constant (p. 6)",
+   "αk bounded above by contradiction with (L3), and bounded away from 0 by contradiction with (L1)–(L2) (p. 6)",
+   "two limit subsequences: αk → αout (failed polls along dense directions) and αk → αin (projection collapse) (pp. 5–6)"
+  ],
+  "experiments": "MATLAB illustration on one 2-D oscillatory quadratic over the lattice γZ² (γ = 0.1, 0.01), with a random orthogonal positive basis. Plots of αk oscillating between two levels, as predicted (p. 7).",
+  "positioning": "Presented as a directional method that resembles MADS when L → Rⁿ. Credits Audet (private communication) with a counterexample showing the definition fails for sparse discrete sets. Cites only six references (pp. 3, 5, 8–9).",
+  "writing": "Opens with a one-line thesis sentence, states the limits of the definition right after it, calls the paper a first attempt, and ends with five numbered open questions (pp. 1, 3, 8).",
+  "limits_future": "Rbetween (condition 3) is not captured, which would need dense sampling in the ball. Open: stopping rules, aligning pattern-search lattices with the discrete structure of the application, using the projection distance, definitions valid for sparse sets. Referee-suggested application: caches of evaluated points (pp. 6, 8–9).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The poll/step-size skeleton is kept; one test changes what an unsuccessful (too fine) poll means and when α increases.",
+    "pages": "pp. 4–5"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "A counterexample to the new definition (f = −|x| on a sparse set, from Audet) is printed up front and the scope narrowed to dense sets.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "solution concept tailored to what the algorithm can certify",
+    "evidence": "Definition 1.1 is built to suit direct search; the theorem then states which of its conditions are certified ((2), roughly (4)) and which is not ((3))",
+    "pages": "pp. 2–3, 6"
+   }
+  ],
+  "transferable": [
+   "If the variable space has hidden granularity, add one test to the poll step that detects a mesh finer than the structure (‖PL(xk+αd) − xk‖ ≤ cα) and then increase α instead of decreasing it (pp. 4–5).",
+   "Bound the step size above and below by contradicting, in turn, each defining property of the hidden set (p. 6).",
+   "Design the numerical illustration to show the theorem's prediction (the oscillating αk), not benchmark performance (p. 7).",
+   "End a short paper with a numbered list of specific open questions (p. 8)."
+  ],
+  "coauthors": "single author",
+  "quotes": [
+   {
+    "text": "Many optimization problems are only apparently continuous.",
+    "page": 1
+   },
+   {
+    "text": "This paper is a first attempt to shed some light on the solution of implicitly discrete black-box optimization problems.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S051",
+  "year": "2011",
+  "title": "On partially sparse recovery",
+  "read_level": "full",
+  "contribution": "The paper introduces partial NSP and partial RIP for recovering vectors with a sparse part and a dense part by ℓ1-minimizing only the sparse part. It shows that both are implied by the classical NSP and RIP (the RIP with the same constant), extends the result to noisy measurements, and shows Gaussian matrices need up to an order fewer measurements (pp. 1–5).",
+  "problem_entry": "Motivated by partially known supports in compressed sensing and by sparse Hessian recovery in the authors' own DFO models. Earlier sufficient conditions are not simple extensions of NSP and RIP (p. 1).",
+  "key_idea": "Project out the dense block with P = I − A2(A2^TA2)⁻¹A2^T, so partial recovery reduces to classical compressed sensing on PA1 followed by solving A2x2 = y − A1x1 (p. 3).",
+  "assumptions": "A2 has full column rank. Bounded noise ‖ε‖ ≤ η. Gaussian entries with variance 1/k for the measurement count (pp. 2–5).",
+  "proof_devices": [
+   "orthogonal projection onto R(A2)⊥ reducing the problem to the classical setting (p. 3)",
+   "NSP proof adapted from Rauhut with appropriate modifications (pp. 2–3)",
+   "x1-parts of the noisy problems (11) and (14) shown equal by mapping feasible points both ways (p. 4)",
+   "union bound over C(N−r, s−r) sparsity patterns with the Baraniuk et al. concentration estimate (p. 5)"
+  ],
+  "experiments": "none",
+  "positioning": "Positions itself against Vaswani–Lu, Friedlander et al. and Jacques as giving the natural NSP/RIP analogues; the application is tied back to the authors' sparse DFO interpolation paper [5] (pp. 1, 5).",
+  "writing": "IEEE letter style: the contribution paragraph ends the introduction, the definitions reduce to the classical ones at r = 0, and the concluding remarks are three sentences (pp. 1–3, 5).",
+  "limits_future": "The proof of the C1, C2 bounds is omitted. The concluding remarks list no limitations and no future work (pp. 4–5).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Outside DFO: the classical ℓ1/NSP/RIP framework is kept and only the object changes (A → PA1), so the proofs carry over.",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "import a neighbouring field's certified tool through a specialist coauthor",
+    "evidence": "compressed-sensing theory (with Bandeira) developed because sparse Hessian recovery is needed for DFO models",
+    "pages": "p. 1"
+   }
+  ],
+  "transferable": [
+   "Reduce a structured variant to the classical problem by projecting out the unconstrained block (P = I − A2A2†); then every classical guarantee transfers with the same constants (p. 3).",
+   "When introducing new sufficient conditions, first prove the classical ones imply them, then show where they are strictly cheaper (measurement count) (pp. 3, 5)."
+  ],
+  "coauthors": "A. S. Bandeira, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "We show that it is possible to guarantee recovery of a partially sparse signal using Gaussian random matrices with the number of measurements an order smaller than the one necessary for general recovery.",
+    "page": 1
+   },
+   {
+    "text": "Note that the first step is now reduced to the classical setting of Compressed Sensing.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S075",
+  "year": "2011",
+  "title": "Modelling nearby FGK population I stars: A new form of estimating stellar parameters using an optimization approach",
+  "read_level": "full",
+  "contribution": "The paper estimates six stellar parameters at once (mass, age, helium, metals, mixing length, overshooting) by bound-constrained global DFO (PSwarm) over a stellar-evolution simulator. It validates on the Sun and synthetic stars, applies the method to 115 real FGK stars, and releases an online tool (pp. 1–9).",
+  "problem_entry": "The application sets the problem: six unknowns and four observables per star, and standard practice fixes α, ΔY/ΔZ and ov at solar-scaled or ad hoc values. Are these parameters universal? (pp. 1–3)",
+  "key_idea": "A weighted least-squares misfit between simulated (CESAM) and observed Teff, L, Z/X, g, under bounds, solved by PSwarm. Simulator failures are treated as +∞. Non-uniqueness is handled with 25 runs per star, averaged, and a filter that removes runs at bounds or with f > 1 (pp. 2–6).",
+  "assumptions": "Stated physics choices (CESAM v3, OPAL, EFF equation of state, no rotation or diffusion) and bounds (Table 1). For the real stars, overshooting is fixed and Z is tied to [Fe/H]. The optimization theory is the cited PSwarm convergence result (pp. 2–4, 6).",
+  "proof_devices": [
+   "none (application paper; PSwarm convergence to stationary points cited)"
+  ],
+  "experiments": "Validation ladder: the Sun, then five fictitious stars with known parameters, then 196 → 115 real stars compared with literature masses, ages and helium; 25 runs per star on a 130-node cluster (pp. 4–9).",
+  "positioning": "An alternative to grid or isochrone interpolation and to Bayesian approaches. The results are argued to be in line with other techniques while leaving all parameters free (pp. 1, 6).",
+  "writing": "Written for an astronomy audience (Context/Aims/Methods/Results abstract). The optimization method is explained from the ground up (search/poll, extreme barrier). Estimates are compared parameter by parameter with published accuracies (pp. 1, 3, 5–6).",
+  "limits_future": "A non-zero overshooting for the Sun without astrophysical meaning; the Sun's age about 400 Myr low; overshooting too poorly determined to estimate. Future work: the chemistry of the solar neighbourhood and a comparison of planet hosts with other stars (pp. 4, 6, 9).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Evidence of use, not design: the PSwarm hybrid (swarm in the search step, poll for convergence) is the solver of choice for an expensive simulator.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "A public online tool for the application community, and one real application (Taste #6).",
+    "pages": "pp. 2, 9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "planted-truth validation ladder",
+    "evidence": "the Sun as a calibrated case, then fictitious stars generated with known parameters, then real stars against literature values",
+    "pages": "pp. 4–8"
+   },
+   {
+    "pattern": "multi-start averaging for non-identifiable inverse problems",
+    "evidence": "25 runs per star, stopped once the average stabilized after about 20; runs at bounds or with f > 1 discarded",
+    "pages": "pp. 5–6"
+   }
+  ],
+  "transferable": [
+   "For an inverse problem that is not identifiable, run the global solver many times, stop adding runs when the average stabilizes, and report averages with their spread (pp. 5, 8–9).",
+   "Treat simulator crashes and invalid outputs like infeasible points (+∞, the extreme barrier) (p. 3).",
+   "Discard solutions that sit on a bound (they would move if the bound were removed) and solutions whose misfit exceeds the error box (p. 6)."
+  ],
+  "coauthors": "J. M. Fernandes, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "We also provide an online computational tool for other researchers to use and test our methodology",
+    "page": 2
+   },
+   {
+    "text": "We also remark that we found a non-zero overshooting value for the Sun without astrophysical meaning.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S087",
+  "year": "2011",
+  "title": "Estimation of risk-neutral density surfaces",
+  "read_level": "full",
+  "contribution": "The paper recovers a risk-neutral density surface over strikes and maturities from option prices. It fits a bicubic spline by convex least squares, with nonnegativity imposed either at the knots (QP) or certified along knot lines by SDP, validates on synthetic and S&P500 data, and prices CBOE binary options closer to the market than Black–Scholes (pp. 1–18).",
+  "problem_entry": "Extends the authors' single-maturity spline method to several maturities. Positioned against nonconvex parametric fitting and against Coleman–Verma–Li's implied-volatility splines; the density is inverted directly (pp. 2–3).",
+  "key_idea": "Option prices are linear in the spline coefficients, so the least-squares misfit is quadratic and convex. Nonnegativity is imposed heuristically at the knots (QP) or rigorously along the knot lines with the Bertsimas–Popescu SDP characterization, with an SOC epigraph for SDPT3 (pp. 4–7).",
+  "assumptions": "Nonnegativity is certified only along the knot lines (inside the rectangles it was never an issue in practice). Market data must be arbitrage-free, so violating prices are removed. Not applicable to path-dependent options (pp. 3, 15–16).",
+  "proof_devices": [
+   "none (modelling paper); prices linear in the spline coefficients (p. 6); scaling by the average knot against ω⁵ ill-conditioning (pp. 6, 8); Hessian shift ξ = |λmin| (p. 9)"
+  ],
+  "experiments": "Black–Scholes, absolute-diffusion and Heston synthetic data with known densities (with out-of-sample maturities), then S&P500 1995 and 2006, then binary options July 2008. Metrics: residual, errors with a 0.01 price floor, at-the-money errors, QP vs SDP CPU time (pp. 8–18).",
+  "positioning": "Closest to Coleman–Verma–Li; builds on its own single-maturity paper [33] and on Bertsimas–Popescu. The comparison with [12] is acknowledged as hard to make rigorous (pp. 2, 7, 14).",
+  "writing": "The contribution is framed as nonparametric, convex and certified. Each experiment reports problem dimensions and metric tables, and the weak 2006 fit is explained (pp. 1, 9–18).",
+  "limits_future": "Weaker fit on the 2006 data (smaller set, irregular strikes); the comparison with [12] is not rigorous; no path-dependent options. No future directions (pp. 3, 14, 18).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Outside DFO: the single-maturity formulation (splines, least squares, QP vs SDP nonnegativity) is kept and only the object changes, from a curve to a surface.",
+    "pages": "pp. 3–7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Data sets with known truth plus market sets and baselines (Black–Scholes, [12]), but no profiles and, in the text read, no code release.",
+    "pages": "pp. 8–18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "planted-truth validation ladder",
+    "evidence": "synthetic models with known densities, then market data, then out-of-sample instruments (binary options)",
+    "pages": "pp. 8–17"
+   },
+   {
+    "pattern": "import a neighbouring field's certified tool through a specialist coauthor",
+    "evidence": "SDP nonnegativity certificates solved with SDPT3, of which coauthor Tütüncü is a developer",
+    "pages": "pp. 7, 21"
+   }
+  ],
+  "transferable": [
+   "Offer a cheap heuristic constraint (nonnegativity at the knots, QP) and a certified one (SDP certificate), and report both accuracy and CPU cost (pp. 6–7, 16).",
+   "Floor small prices (0.01) in the relative-error metric so cheap far-out-of-the-money options do not dominate it, and report at-the-money errors separately (p. 9).",
+   "Remove arbitrage from market data before fitting, since no nonnegative density fits prices that contain arbitrage (p. 15).",
+   "Validate out of sample by fitting some maturities and predicting prices at held-out maturities and strikes (pp. 13–14)."
+  ],
+  "coauthors": "A. M. Monteiro, R. H. Tütüncü",
+  "quotes": [
+   {
+    "text": "Semidefinite programming is employed to guarantee the nonnegativity of the densities.",
+    "page": 1
+   },
+   {
+    "text": "The SDP approach is computationally more expensive but not as much as one would think",
+    "page": 16
+   }
+  ]
+ },
+ {
+  "id": "S047",
+  "year": "2012",
+  "title": "Bilevel derivative-free optimization and its application to robust optimization",
+  "read_level": "full",
+  "contribution": "A first derivative-free method for bilevel problems. Interpolation trust-region methods with minimum-Frobenius-norm models run at both levels, with lower-level inexactness and point-reuse rules derived from interpolation error bounds so the upper-level model stays fully linear. Applied to robust (min–max) optimization of simulation-based functions (pp. 1–3, 8–9, 16–19).",
+  "problem_entry": "Bilevel problems with no derivatives at either level. The reduced formulation is chosen because a nonconvex derivative-free lower level cannot be replaced by its first-order conditions. Unconstrained case first. The motivation is robust optimization reformulated as bilevel (pp. 1–3, 16–17).",
+  "key_idea": "The derivative-free trust-region skeleton is kept at both levels. The evaluation of the reduced upper function becomes an inexact lower solve, with ‖∇mℓ‖ = O((∆u)²) and ∆ℓ = O(∆u). Lower-level points evaluated at upper variables perturbed by O((∆ℓ)³) are reused, and a linear surrogate supplies lower-level starting points (pp. 8–9, 12–14).",
+  "assumptions": "A unique lower-level solution. A C¹ reduced upper function. Nonsingular ∇²ℓℓ fℓ near the solution (inverse function theorem). fu Lipschitz in the lower variables. Upper-level constraints on lower-level variables are excluded (pp. 2–3, 8, 14).",
+  "proof_devices": [
+   "interpolation error bounds for perturbed values: error O(∆³) keeps models fully quadratic, O(∆²) keeps them fully linear (Thms 4.1–4.2) (pp. 6–7)",
+   "inverse-function bound ‖xℓ − xℓ_dfo‖ ≤ c‖∇ℓ fℓ‖ chained with Lipschitz fu to bound the error in the reduced function (p. 8)",
+   "inexact function values with errors ≤ η0′(m(x) − m(x+s)) give ρ ≥ η0 − 2η0′ (Conn–Gould–Toint §10.6) (pp. 5–6)",
+   "no new convergence theory: existing derivative-free trust-region theory reused as is (p. 3)"
+  ],
+  "experiments": "Two synthetic bilevel problems (5 and 20 variables per level), the Bertsimas–Nohadani–Teo robust example from two starting points, and an 8-asset Omega-function portfolio. Progress is plotted against lower-level evaluations for basic / inexact / inexact plus reuse. No competitors, since none are said to exist (pp. 16–19, 21–24).",
+  "positioning": "Builds on Conn–Scheinberg–Toint and Conn–Scheinberg–Vicente convergence theory, Powell's minimum-Frobenius-norm models and Fasano–Morales–Nocedal's sample-set update. The inexact lower solve is related to inexact Newton and SQP methods (pp. 4–5, 10, 18–19).",
+  "writing": "States its scoping decisions openly (reduced formulation, unconstrained first) and closes by stating that no competing methods exist (pp. 2–3, 19).",
+  "limits_future": "The total number of lower-level evaluations is still high. Reuse is less robust. Robust counterparts produce concave lower-level problems, though the nonconvex reduced function is the real difficulty. A separate study on Omega portfolios is announced (pp. 18–19).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The derivative-free trust-region skeleton is unchanged; only the evaluation of the reduced function changes into an inexact inner solve, and the theory is reused as is.",
+    "pages": "pp. 3, 12–14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "A deterministic precursor: inner accuracy is tied to the outer trust radius and predicted decrease, not to a probability.",
+    "pages": "pp. 5–9, 14"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Lower-level evaluations already paid for, at nearby upper variables, are reused.",
+    "pages": "pp. 9, 14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "A 'relatively sophisticated' MATLAB implementation, but no stated release, no collection, no baselines.",
+    "pages": "pp. 14, 19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "deterministic inexactness tied to the step",
+    "evidence": "lower-level gradient tolerance O((∆u)²) and radius O(∆u) keep the upper model fully linear; dynamic accuracy tied to min(‖su‖², ‖su‖‖gu‖)",
+    "pages": "pp. 8–9, 14"
+   }
+  ],
+  "transferable": [
+   "Derive inner-solve tolerances by chaining error bounds so the outer model keeps its accuracy class, and implement them as max(min(10⁻²(∆u)², 10⁻²∆u‖gu‖, 10⁻²), 10⁻⁵) (pp. 8, 14).",
+   "Reuse points evaluated at perturbed parameters when the perturbation is below O(∆³) (pp. 9, 14).",
+   "Plot progress against evaluations at the expensive level, with one curve per expedient switched on (an ablation in one figure) (p. 21).",
+   "If no competitor exists, say so explicitly rather than invent a straw baseline (p. 19)."
+  ],
+  "coauthors": "A. R. Conn",
+  "quotes": [
+   {
+    "text": "An astute reader will notice that there are no comparisons with competing methods — this is because such methods appear not to exist.",
+    "page": 19
+   },
+   {
+    "text": "However it does not appear to be as robust as the previous idea, and we recommend it only when the lower level function evaluations are relatively expensive.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S064",
+  "year": "2012",
+  "title": "Optimizing radial basis functions by DC programming and its use in direct search for global derivative-free optimization",
+  "read_level": "full",
+  "contribution": "The paper puts cubic-RBF model minimization in the search step of directional direct search for bound- and linearly constrained global DFO. It solves the box-constrained RBF subproblem with d.c. algorithms (a projection-based DCA2 with adaptive ρ) and shows on 199 AMPL problems that the RBF search improves efficiency in data profiles (pp. 1–2, 6–8, 22–23, 34).",
+  "problem_entry": "The global ability of direct search depends on what goes in its search step (earlier: particle swarm, DIRECT), and RBF models are known to suit global optimization. The subproblem is posed so a d.c. solver applies (p. 2).",
+  "key_idea": "Search: minimize an RBF model over bounds ∩ an ℓ∞ trust region of radius σkαk (still a box), accept on simple decrease, and pull back for linear constraints. Poll with ±eᵢ, ±e, optionally ordered by the model. Subproblem by DCA2: x_{k+1} = P(∇h(x_k)/ρ), with an a priori ρ bound and adaptive doubling (pp. 6–8, 13).",
+  "assumptions": "No theorem proved. Global convergence relies on direct-search theory, which requires a finite search step yielding a lattice point. How the RBF minimizer is placed on the lattice is not stated in the parts read. DCA properties are quoted (pp. 5, 7–8).",
+  "proof_devices": [
+   "none new; upper bound ρ = 12 np‖λ‖∞ max{‖ℓ̄‖, ‖ū‖} derived from the RBF Hessian formula (p. 7)"
+  ],
+  "experiments": "107 bound + 92 linearly constrained AMPL problems. Performance and data profiles at ε = 10⁻¹ and 10⁻⁵, averaged over 10 runs. DCA compared with fmincon on the subproblems. The full method against Pattern (empty search) and PSwarm with a 1000-evaluation budget, plus a model-success-rate profile (pp. 9–13, 22–23).",
+  "positioning": "Hybrid in the line of Vaz–Vicente (PSwarm) and Griffin–Kolda (DIRECT). RBF models follow Oeuvray–Bierlaire and Wild–Regis–Shoemaker. DCA by Pham Dinh Tao and Le Thi Hoai An (pp. 2, 4).",
+  "writing": "The main conclusion is stated in the introduction together with its condition (more than n + 1 points). A dedicated section describes the test set and profiles. The conclusion is brief and has no limitations section (pp. 2, 9–12, 23, 34).",
+  "limits_future": "None stated explicitly. Implicit: final objective values show no major differences between variants; efficiency depends on having enough cached points (pp. 2, 22–23).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "A model-based global step goes in the search; convergence is left to the poll and step-size mechanism.",
+    "pages": "pp. 2, 7–8"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Acceptance uses simple decrease with an integer-lattice requirement, not a sufficient-decrease forcing function.",
+    "pages": "pp. 7–8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Stated collection with URL, performance and data profiles, baselines including the empty-search version and the previous heuristic (PSwarm).",
+    "pages": "pp. 9–13, 22–23"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Cached evaluations are reused to build RBF models and to order the poll.",
+    "pages": "pp. 8, 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "import a neighbouring field's certified tool through a specialist coauthor",
+    "evidence": "DCA from its co-developer Le Thi Hoai An used as the subproblem solver",
+    "pages": "pp. 2, 4"
+   }
+  ],
+  "transferable": [
+   "Use an ℓ∞ trust region of radius proportional to the direct-search step size, so bounds ∩ trust region stays a box and any box solver applies (pp. 2, 8).",
+   "Choose a d.c. decomposition whose DCA step is a closed-form projection, with an a priori ρ bound, then make ρ adaptive (start small, double on non-decrease) (pp. 7, 13).",
+   "Build interpolation sets from a cache with 80% nearest and 20% far points to improve geometry (p. 22).",
+   "Report a model-success-rate profile: models built divided by models that led to a successful iteration (p. 23)."
+  ],
+  "coauthors": "Le Thi Hoai An, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "Our main conclusion is that a direct-search method with an RBF model minimization in the search step offers a good compromise between global optimization and computational effort (i.e., number of function evaluations) as long as relatively more than n + 1 points are used in the corresponding sampling process.",
+    "page": 2
+   },
+   {
+    "text": "The cache proved not to be useful in the particle swarm search step, as the number of hits in the cache was very low.",
+    "page": 22
+   }
+  ]
+ }
+]
