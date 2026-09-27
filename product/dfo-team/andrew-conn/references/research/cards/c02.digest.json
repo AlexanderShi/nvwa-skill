@@ -1,0 +1,177 @@
+[
+ {
+  "id": "S007",
+  "year": "1997",
+  "title": "A globally convergent Lagrangian barrier algorithm for optimization with general inequality constraints and simple bounds",
+  "read_level": "full",
+  "contribution": "Proves global convergence to KKT points, and (under AS4-AS7) that the penalty parameter stays bounded away from zero, for a class of shifted Lagrangian barrier methods whose shifts s = µλ^αλ transplant the augmented-Lagrangian multiplier device from quadratic penalties to log barriers, with simple bounds kept out of the barrier.",
+  "problem_entry": "Diagnosis that barrier ill-conditioning (Lootsma/Murray) was 'forgotten' in the interior-point rush, while penalties had long been fixed by augmented Lagrangians; asks why the shift device was never applied to barriers (pp. 4-5).",
+  "key_idea": "Shift constraints by s_i = µλ_i^αλ and update multipliers by λ̄_i = λ_i s_i/(c_i+s_i), inside the same outer-loop skeleton as CGT 1991 (one switching test between multiplier update and µ reduction), so µ need not go to zero (pp. 6, 9, 12-13).",
+  "assumptions": "C2 functions; bounded multiplier set (AS2) or full-rank active Jacobian (AS3); for µ bounded away: Lipschitz Hessians, nonsingular KKT matrices, single limit point, strict complementarity or αλ=1; no convexity (pp. 3, 7, 15-21).",
+  "proof_devices": [
+   "per-constraint case split (inactive with µ bounded / µ→0; active) driven by identity λ−λ̄ = cλ̄/s (B.2, pp. 36-38)",
+   "Lemma B.1: µ_k λ_k^{3/2}→0 by summing multiplier updates between successive penalty reductions (pp. 34-36)",
+   "AS2 + Fiacco perturbation lemma for bounded multipliers (pp. 15-16)",
+   "least-squares multiplier estimates and nonsingular KKT matrix to remove a-posteriori ||x_k−x*|| from error bounds (pp. 16-18)",
+   "contradiction: assume µ-reduction step fires infinitely often, show acceptance test eventually always holds (C.3, pp. 44-47)",
+   "constructed counterexample cycle between two KKT points showing single-limit-point assumption is necessary (Thm 5.4, pp. 20, 47-51)",
+   "dominated/floating variable partition for bound identification (pp. 10-11)"
+  ],
+  "experiments": "none in the paper; anecdote that a rudimentary implementation solved >90% of ~1000 problems, sometimes faster than LANCELOT A, and HSL VE14 (p. 27)",
+  "positioning": "Companion to CGT 1991 augmented Lagrangian; continues Frisch/Fiacco-McCormick, corrects the interior-point community's neglect of ill-conditioning; restates Polyak's modified and Gill et al.'s shifted barriers in its own frame and differs on rates (superlinear vs linear) while admitting it excludes Polyak's αλ=0 (pp. 4-6, 16).",
+  "writing": "Two-result abstract, seven numbered motivations, intuition paragraph after the dense algorithm, every theorem tagged as analog of its 1991 counterpart, proofs in appendices for one concrete parameter instance, specific hedges ('It is unclear', 'We caution the reader') (pp. 3, 7-8, 13, 20, 33).",
+  "limits_future": "No numerical evidence; inner-solver/outer-loop fit unanalysed; restarts after µ reduction may be inefficient; αλ<1 without AS7 open; parameter choice more critical than for augmented Lagrangian (pp. 20, 27, 33).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "transplants augmented-Lagrangian shift/multiplier device from penalty to barrier; composite barrier/augmented-Lagrangian function for mixed constraints",
+    "pages": "pp. 5-6, 26-27"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "companion pair is theory-theory (1991 AL -> 1992/1997 LB) and the paper openly lacks a numerical study; framework-first design (step 1) strongly present",
+    "pages": "pp. 3, 8, 12, 27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "simple (hard) bounds handled exactly outside the barrier; slack variables avoided for large-scale problems",
+    "pages": "pp. 3, 7-8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "certifies inner-solve accuracy (ω_k, η_k as powers of µ) instead of a model; theorem covers any inner solver meeting the test",
+    "pages": "pp. 14, 16, 27"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Mirror the predecessor's architecture",
+    "evidence": "development deliberately kept theorem-for-theorem close to CGT 1991 so the two methods combine; composite method inherits both theories",
+    "pages": "pp. 8-9, 26-27"
+   },
+   {
+    "pattern": "Recover a forgotten lesson",
+    "evidence": "1970s barrier ill-conditioning lessons 'forgotten' by interior-point extensions; 'rather strange' that the shift device was not applied to barriers",
+    "pages": "pp. 4-5"
+   },
+   {
+    "pattern": "Necessity by constructed counterexample",
+    "evidence": "Thm 5.4 builds an admissible iterate cycle so µ→0 without the single-limit-point assumption",
+    "pages": "pp. 20, 47-51"
+   }
+  ],
+  "transferable": [
+   "Remove intrinsic ill-conditioning by shifting the singularity with multiplier-weighted shifts, then prove the parameter stays bounded away from zero (pp. 12, 19-20).",
+   "Two-regime outer loop with one switching test; tolerances as powers of µ with explicit exponent conditions and a concrete admissible tuple (pp. 12-13, 20).",
+   "Specify subproblem solvers only by an inexact termination test (projected gradient ≤ ω_k, diagonal scalings allowed) so the theorem covers every solver (pp. 14, 27).",
+   "Bounded-away proof: assume the reduction step fires infinitely often and show the acceptance test must eventually always hold (pp. 44-47).",
+   "Show an assumption is necessary by constructing an admissible iterate cycle that breaks the conclusion (pp. 20, 47-51).",
+   "Phase-1 restart problem with a known feasible point and early termination (ξ<1) so the auxiliary barrier solve never enters its ill-conditioned phase (pp. 23-24).",
+   "Prove a concrete parameter instance in the appendix, point to the tech report for the general case, and warn it is not a recommended setting (pp. 8, 33)."
+  ],
+  "coauthors": "N. I. M. Gould, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "We have intentionally kept our development as close as possible to that of Conn et al. [11] in order to emphasize the unity between our approaches to shifting an exterior and interior penalty function",
+    "page": 8
+   },
+   {
+    "text": "Nor have we provided any detailed numerical evidence that the approach taken here is effective on general problems.",
+    "page": 27
+   }
+  ]
+ },
+ {
+  "id": "S009",
+  "year": "1997",
+  "title": "Recent progress in unconstrained nonlinear optimization without derivatives",
+  "read_level": "full",
+  "contribution": "ISMP97 semi-plenary survey that defines a class of derivative-free trust-region methods built on quadratic interpolation and makes the geometry of the interpolation set an explicit, measurable condition, comparing Powell's Lagrange-polynomial scheme with CST's Newton-polynomial scheme and setting out the open problems of the field.",
+  "problem_entry": "Practitioner demand: expensive f from measurements or proprietary simulations with no derivatives; triage of direct search, AD, finite differences and function modelling, backed by Powell's per-evaluation rate argument (pp. 3-4).",
+  "key_idea": "Trust region + interpolation model whose set geometry (poisedness) is monitored; shrink the radius only when the geometry was adequate, otherwise improve geometry; measure geometry by Lagrange factors or Newton-polynomial pivots with a threshold (pp. 7-16).",
+  "assumptions": "Smooth unconstrained f, derivatives unavailable, evaluation cost dominates everything else; bounded d-th derivative for the error bound; adequacy defined via κ1 > κ0 bounds (pp. 3, 12, 15-16).",
+  "proof_devices": [
+   "no proofs (survey); states Theorem 1 of CST 1997: a κ0-bounded Newton-polynomial basis can be built in any ball (p. 15)",
+   "Sauer-Yuan/Sauer path-sum interpolation error bound using Newton fundamental polynomials (p. 15)",
+   "slack κ1 > κ0 so the adequacy condition is attainable; finite number of replacements restores it (p. 16)",
+   "Powell's basis-independent determinant ratio |L(y+,y−)| as replacement measure (p. 11)"
+  ],
+  "experiments": "none; points to preliminary results in Conn-Toint 1996 and Powell 1996 (pp. 6, 12)",
+  "positioning": "Historical review crediting Powell 1964, rehabilitating Winfield 1969/1973 as an unnoticed early trust-region method, presenting Powell's Lagrange approach as elegant but expensive and CST's as the one with convergence theory; tracks codes (VA04/VA24, PRAXIS, COBYLA) and their CUTE interfaces (pp. 5-6, 17).",
+  "writing": "Modest purpose statement, concepts taught by tiny counterexamples (six points on a line/circle, Rosenbrock valley), one figure, caveats in footnotes, closes with an itemized agenda (pp. 4, 7-8, 13, 17-18).",
+  "limits_future": "No numbers; open problems: geometry vs linear-algebra cost, initial models with few points, pivot theory, structure (Hessian sparsity, partial separability), noise via approximation plus sufficient sampling, and high-quality software (pp. 10, 17-18).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "geometry made an explicit adequacy condition with attainability theorem and restoration procedure; radius reduction conditioned on certified geometry; cost of geometry checks counted. Abstract wording is 'geometrical quality' (SKILL.md paraphrases as geometric)",
+    "pages": "pp. 3, 9-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "DFO entered only after ruling out AD and finite differences for black-box users; structure (sparsity, partial separability) named first for scaling up; nuance: Powell's per-evaluation argument favours modelling f over estimated derivatives",
+    "pages": "pp. 3-4, 17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "trust-region machinery transplanted into DFO; multivariate approximation theory imported; rival Powell scheme presented alongside",
+    "pages": "pp. 7, 11-15, 17"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "stated only: theory in CST 1997, numbers elsewhere, software declared the condition for realizing the methods' potential",
+    "pages": "pp. 12, 17-18"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "weak: survey records which DFO codes have CUTE interfaces",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "weak: demand from 'applications presented to the authors'",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Recover a forgotten lesson",
+    "evidence": "rehabilitates Winfield's overlooked interpolation trust-region method and names what it lacked (geometry); same move as S007 p. 4",
+    "pages": "pp. 5-6"
+   },
+   {
+    "pattern": "Survey as a research agenda",
+    "evidence": "closes with an itemized list of open problems (cost vs geometry, initial models, structure, noise/regression, software) that set the group's next topics",
+    "pages": "p. 17"
+   }
+  ],
+  "transferable": [
+   "Justify a derivative-free design by convergence rate per function evaluation (secant ≈1.618 vs Newton with FD derivative √2) (p. 4).",
+   "Open with a four-way triage of the user's options (direct search, AD, finite differences, modelling) and why each fails for the target user (pp. 3-4).",
+   "Shrink the trust-region radius only if the model was certified adequate when the step was computed; otherwise repair the model and keep the radius (pp. 9-10).",
+   "Measure model quality with byproducts of model construction (Newton-polynomial pivots with threshold θ) so the check costs no evaluations (pp. 14-15).",
+   "Define a quality condition with a constant looser than the one an existence theorem guarantees (κ1 > κ0) so it is always attainable (p. 16).",
+   "Explain a degeneracy with the smallest counterexample (six points on a circle for planar quadratic interpolation) (pp. 7-8)."
+  ],
+  "coauthors": "K. Scheinberg, Ph. L. Toint",
+  "quotes": [
+   {
+    "text": "This simple example indicates that it may not be optimal to use function values to compute explicit derivative approximations.",
+    "page": 4
+   },
+   {
+    "text": "Finally, the authors acknowledge that the potential of the methods outlined in this paper will only be fully realized when associated high quality software will become available to users.",
+    "page": 17
+   }
+  ]
+ }
+]

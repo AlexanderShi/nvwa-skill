@@ -1,0 +1,505 @@
+[
+ {
+  "id": "S078",
+  "year": "2018",
+  "title": "Directly and efficiently optimizing prediction error and AUC of linear classifiers",
+  "read_level": "full",
+  "contribution": "Under Gaussian class distributions the expected 0-1 error and AUC of a linear classifier are smooth with closed-form gradients in the first two moments, so they can be optimized directly with per-iteration cost independent of n (Thms 2-7, pp. 4-5; p. 8).",
+  "problem_entry": "Surrogate losses are used only because empirical 0-1 error and AUC have zero or undefined gradients; pairwise AUC surrogates are also expensive (abstract p. 1; pp. 1-3).",
+  "key_idea": "Replace the surrogate by the expected metric in closed form via Gaussianity of w^T X, with empirical moments computed once; keep plain GD with Armijo backtracking (Thms 2, 6, pp. 4-5; Alg. 1 p. 5).",
+  "assumptions": "Gaussian class-conditional (or joint) distributions; the authors argue near-normality of w^T X by a dependent-variable CLT and leave theory to future work (pp. 4-5).",
+  "proof_devices": [
+   "closure of Gaussians under linear maps (Tong) giving F_error = P(+)(1-phi(mu+/sigma+)) + P(-)phi(mu-/sigma-) (Thm 2, p. 4)",
+   "chain rule for phi(w^T mu / sqrt(w^T Sigma w)) (Lemma 2, p. 4)"
+  ],
+  "experiments": "9 synthetic Gaussian sets (exact vs empirical moments vs logistic/pairwise hinge) and 19 LIBSVM/UCI sets, 20 runs each; accuracy/AUC and time; losing cases' traces shown; LDA in appendix (pp. 6-8, 12-13).",
+  "positioning": "Positions against surrogate ERM (logistic, hinge, pairwise losses) and against LDA as the classical Gaussian-assumption method (p. 2, p. 5).",
+  "writing": "Advantage stated as data-size-independent iterations; failures reported with a one-line cause hypothesis and deferred to future work (p. 2, p. 7).",
+  "limits_future": "Gaussian assumption not justified theoretically; stalls on 2 data sets; future: second-order methods (p. 5, p. 7, p. 8).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "structure exploited is distributional (moments), precomputed once so iterations do not depend on n",
+    "pages": "p. 2, p. 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "weak: classical Armijo backtracking GD kept unchanged; novelty is in the objective",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "smooth true target instead of convex surrogate",
+    "evidence": "closed-form smooth expected error and AUC optimized directly instead of logistic/hinge",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Precompute sufficient statistics once so per-iteration cost depends on d only (p. 2, p. 8).",
+   "Two-tier synthetic test with exact vs estimated parameters to separate model error from estimation error (Table 2, p. 6).",
+   "Show traces of the data sets where your method loses and name the likely cause (p. 7)."
+  ],
+  "coauthors": "H. Ghanbari",
+  "quotes": [
+   {
+    "text": "Another key advantage of the proposed method over the classical empirical risk minimization is that the training data is only used once at the beginning of the algorithm to compute the approximate moments.",
+    "page": 2
+   },
+   {
+    "text": "Improving our method for such cases is subject of future work.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S032",
+  "year": "2019",
+  "title": "New convergence aspects of stochastic gradient algorithms",
+  "read_level": "partial",
+  "contribution": "Convergence of SGD and Hogwild! (a.s. and O(1/t) in expectation) for strongly convex F without the bounded-gradient assumption, by deriving the second-moment bound from per-realization smoothness, plus a larger admissible class of diminishing step sizes (pp. 4-5, 6-8, 14-16).",
+  "problem_entry": "The classical bound E||grad f||^2 <= sigma^2 contradicts strong convexity (shown on p. 3); Bottou et al.'s M,N bound has unknown constants (p. 3).",
+  "key_idea": "Keep SGD/Hogwild! and derive E||grad f(w;xi)||^2 <= 4L[F(w)-F*] + N from per-sample L-smoothness (+convexity), giving explicit constants and larger initial steps; unify Hogwild! variants by a filtered recursion (Lemma 1 p. 6; Remark 1 p. 8; pp. 9-10).",
+  "assumptions": "F mu-strongly convex; every f(.;xi) L-smooth, optionally convex; i.i.d. samples; bounded delay tau with atomic coordinate reads/writes for Hogwild! (pp. 2, 6, 11).",
+  "proof_devices": [
+   "||a||^2 <= 2||a-b||^2 + 2||b||^2 with E||grad f(w;xi)-grad f(w*;xi)||^2 <= 2L[F(w)-F*] (Lemma 1 proof, pp. 21-22)",
+   "Bertsekas supermartingale convergence lemma for a.s. convergence (Lemma 5 p. 21; Thm 1 p. 7)",
+   "ODE-style comparison C(t)=e^{-M(t)} int e^{M(x)} n(x)^2 dx crossing n(t) once (Lemma 3, pp. 15-16)"
+  ],
+  "experiments": "l2-logistic regression on ijcnn1 and covtype, single-core simulation of the Hogwild! recursion, 10 runs, varying support fraction and delay tau in {1,10,100} (pp. 17-18).",
+  "positioning": "Corrects the classical bounded-gradient analyses and sharpens Bottou-Curtis-Nocedal and Moulines-Bach (larger step class); contrasts with fixed-step Hogwild! analyses (Leblond et al.) (pp. 3-4, 8-9).",
+  "writing": "Opens with a contradiction and a two-function counterexample before the contribution list; contributions as nested bullets (pp. 3-5).",
+  "limits_future": "Strong convexity of F required throughout; conclusion lists no limitations or future directions (p. 2, p. 18).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "the stochastic-gradient second-moment bound is derived from per-sample structure rather than imposed or controlled",
+    "pages": "p. 6, p. 8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "SGD/Hogwild! kept, novelty moved into assumptions, but step schedules are prescribed, not adaptive",
+    "pages": "pp. 6-8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "martingale tool used for a.s. convergence under prescribed schedules; no stopping-time analysis of an adaptive step",
+    "pages": "p. 7, p. 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "counterexample-first assumption audit",
+    "evidence": "bounded-gradient assumption shown inconsistent with strong convexity plus a two-function example",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Test a standard assumption against the rest of your assumptions and derive a contradiction (p. 3).",
+   "Derive E||g||^2 <= A[F-F*] + B from per-sample smoothness in three lines (pp. 21-22).",
+   "Unify several algorithms by one recursion with random coordinate filters (pp. 9-10).",
+   "Simulate asynchronous methods on one core when the claim concerns iteration counts (p. 17)."
+  ],
+  "coauthors": "L. M. Nguyen, P. H. Nguyen, P. Richtárik, M. Takáč, M. van Dijk",
+  "quotes": [
+   {
+    "text": "However, this assumption is clearly false if F is strongly convex.",
+    "page": 3
+   },
+   {
+    "text": "By introducing Assumption 2, which holds for many ML problems, we are able to provide the values of M and N.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S036",
+  "year": "2019",
+  "title": "A stochastic trust region algorithm based on careful step normalization",
+  "read_level": "partial",
+  "contribution": "TRish, an SG method that takes normalized (trust-region) steps only when the stochastic gradient norm lies in an interval, with SG-type guarantees under PL and nonconvex settings and better empirical performance than tuned SG (pp. 4, 9-16, 18-23).",
+  "problem_entry": "SG stepsizes have no natural scaling and must be problem dependent; always-normalized steps need strong assumptions; stochastic TR methods need random fully linear models (pp. 2-3).",
+  "key_idea": "Use the linear-model TR step -alpha g/||g|| only for ||g|| in [1/gamma1, 1/gamma2], SG steps outside, accept every step; safeguard motivated by an example where normalized unbiased steps ascend in expectation (Alg. p. 4; Example 2.1 p. 4).",
+  "assumptions": "L-smooth bounded-below f; unbiased g with E||g||^2 <= M1 + M2||grad f||^2; optional PL; variance proportional to alpha_k^2 (batch |S_k| = alpha_k^-2) or geometrically decreasing for stronger rates (pp. 5-7, 12, 14).",
+  "proof_devices": [
+   "three-case split plus event E_k={grad f^T g >= 0} isolating the normalization cost in one term (gamma1-gamma2) alpha P[E]E[grad f^T g|E] (Lemma 3.1, pp. 6-7)",
+   "bound P[E]E[grad f^T g|E] <= h1 + h2||grad f||^2 (Lemma 3.2, p. 8; referee-suggested proof, p. 24)",
+   "couple gamma1-gamma2 proportional to alpha_k to recover SG O(1/k) (Thm 3.2, p. 11)"
+  ],
+  "experiments": "Logistic regression (a1a, w1a, rcv1) and CNNs (mnist, cifar-10) vs SG with equal tuning budget over the same effective stepsize range, 10 runs, branch frequencies reported (pp. 18-23).",
+  "positioning": "Modification of SG, contrasted with always-normalized methods ([12]) and with random-model stochastic trust region ([16],[5]) that use ratio tests and fully linear models (pp. 2-3).",
+  "writing": "Hedged claims ('we contend', 'one can argue'); a worked counterexample precedes the analysis; explicit parameter-selection section linking theory to practice (pp. 2, 4, 17-18, 23).",
+  "limits_future": "Only reduces stepsize problem-dependence; parameter choice needs a variance estimate; needs a larger study with stepsize decay; future: Hessian approximations, acceleration, momentum (pp. 2, 18, 23).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "TR step kept; safeguarded only where Example 2.1 breaks descent in expectation",
+    "pages": "pp. 4-5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Assumption 3.4 ties gradient second moment to alpha_k^2 via batch size alpha_k^-2",
+    "pages": "p. 12"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "no stochastic-process/stopping-time machinery; SG-style expectation recursions; explicitly not random-model TR",
+    "pages": "p. 3, pp. 9-16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "counterexample-first assumption audit",
+    "evidence": "Example 2.1: unbiased gradient whose normalized direction ascends w.p. 2/3 motivates the safeguard",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "error-sensitive step only where the estimate is accurate",
+    "evidence": "normalization applied only when ||g_k|| is in a trusted interval",
+    "pages": "pp. 4-5"
+   }
+  ],
+  "transferable": [
+   "Two-point distribution counterexample to justify each safeguard (Example 2.1, p. 4).",
+   "Case split on sign of grad f^T g to collect a nonstandard step's cost in one term, then tie that parameter to the stepsize (pp. 6-7, 11).",
+   "Fair tuning: same number of settings over the same effective stepsize range for the baseline (pp. 18-19).",
+   "Report how often each algorithmic branch fired (pp. 19-23)."
+  ],
+  "coauthors": "F. E. Curtis, R. Shi",
+  "quotes": [
+   {
+    "text": "We argue in this paper that employing normalized steps in all iterations cannot lead to general convergence guarantees, which perhaps explains the additional assumptions required for convergence by [12].",
+    "page": 3
+   },
+   {
+    "text": "We attribute this better behavior to the algorithm’s use of normalized steps, which one can argue lessens its dependence on problem-specific quantities.",
+    "page": 23
+   }
+  ]
+ },
+ {
+  "id": "S060",
+  "year": "2019",
+  "title": "A novel smoothed loss and penalty function for noncrossing composite quantile estimation via deep neural networks",
+  "read_level": "partial",
+  "contribution": "SPNN: a neural network trained on a logistic-smoothed pinball loss over multiple quantiles with a squared-hinge non-crossing penalty, applied to GEFCom2014 wind-power probabilistic forecasting (pp. 5-6, 7-9).",
+  "problem_entry": "Application: multiple-quantile estimation in NNs suffers quantile crossover; reordering heuristics lack foundation and constrained SVQR is expensive (p. 1, p. 3).",
+  "key_idea": "Smooth the pinball loss as tau u + alpha log(1+exp(-u/alpha)) so gradient methods apply, and add c*sum max(0, eps - (q_m - q_{m-1}))^2 to prevent crossing (eqs. 3, 5, 6, pp. 5-6).",
+  "assumptions": "No theory; hyperparameters chosen empirically on training data (smoothing 0.01, penalty 1000, margin 0); activation stated as tanh (p. 5) but ReLU in case studies (p. 7).",
+  "proof_devices": [
+   "none (chain-rule gradient derivation only, p. 6)"
+  ],
+  "experiments": "GEFCom2014 wind, 10 zones, 2013 test year with 12-month sliding-window retraining; baselines persistence, climatology, uniform, QR, SVQR; QS, IS, ACE, sharpness, QVSS; compared with competition winners (pp. 7-9).",
+  "positioning": "Extends Zheng's smooth quantile regression to NNs; contrasts with Huber-smoothed QRNN and monotone composite QRNN (pp. 5-6).",
+  "writing": "Numbered contribution list in the introduction; 'we are the first' claim hedged by 'Based on our knowledge' (pp. 1-2, p. 5).",
+  "limits_future": "Future: solar, wave, prices, load; very short-term forecasting from past power only; no count of crossing violations reported in results read (p. 10; pp. 6-9).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "weak: a nonsmooth structured loss is smoothed so standard gradient methods apply, rather than replaced",
+    "pages": "p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "smooth true target instead of convex surrogate",
+    "evidence": "logistic smoothing of the pinball loss keeps the quantile target",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Enforce ordering among outputs with a squared-hinge penalty with margin (eq. 6, p. 6).",
+   "Place results against a public competition leaderboard and state the input differences (p. 9)."
+  ],
+  "coauthors": "K. Hatalis, A. J. Lamadrid, S. Kishore",
+  "quotes": [
+   {
+    "text": "A possible way to prevent this issue is to utilize simple heuristics of reordering estimated quantiles.",
+    "page": 3
+   },
+   {
+    "text": "We note again that the top teams used a wide range of engineered features while we used raw wind speed data along with time as input to our model.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S089",
+  "year": "2019",
+  "title": "Novel and efficient approximations for zero-one loss of linear classifiers",
+  "read_level": "full",
+  "contribution": "Smooth closed-form approximations of expected 0-1 error and ranking loss for linear classifiers, derived by assuming only that w^T X (not X) is near-normal, optimized with L-BFGS at cost independent of n (pp. 5-7, 10, 15).",
+  "problem_entry": "Same as S078: surrogates are optimized only because empirical error/ranking loss are step functions; pairwise ranking surrogates are superlinear in n (pp. 1-4).",
+  "key_idea": "Move the Gaussian assumption to the 1-D projection w^T X (CLT argument), derive F_n01 and F_nrank with gradients, handle scale invariance by a (1-||w||^2)^2 penalty, and optimize with L-BFGS (pp. 5-7, 10).",
+  "assumptions": "w^T X approximately normal for the w met in training; cross-covariances set to zero; objective undefined at w=0 and nonconvex (pp. 2, 5, 7-9).",
+  "proof_devices": [
+   "Gaussian closure plus chain rule (Lemma 3.4, pp. 5-6)",
+   "CLT for sums of weakly dependent features as motivation (p. 5)"
+  ],
+  "experiments": "Histograms of projections at early/late iterates; 9 synthetic and 21 LIBSVM/UCI sets up to real-sim; accuracy/AUC, iterations, solve and moment time; LDA and ADAM baselines; objective-vs-true-loss plots along the optimization path (pp. 8-15).",
+  "positioning": "Against surrogate ERM (logistic, pairwise hinge, sigmoid-smoothed ranking) and LDA; claims milder assumption than LDA's Gaussian data (pp. 2-4, 14).",
+  "writing": "Argues the assumption's mildness up front and supports it by plots; conclusion claims 'theoretical motivation' rather than proof (p. 2, p. 15).",
+  "limits_future": "Conclusion lists no limits; tables show covtype failure (0.5502 vs 0.7562) and LDA at or above F_n01 on several sets despite 'clearly inferior' in the text; synthetic tables identical to S078 incl. times (pp. 13-15; pp. 11-12).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "distributional structure (moments) exploited; moment time reported separately",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "weak: standard L-BFGS with Wolfe line search used unchanged",
+    "pages": "p. 10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "assumption on the statistic the objective uses, checked along the path",
+    "evidence": "normality assumed for w^T X and checked by histograms at early and late iterates",
+    "pages": "p. 5; pp. 8-9"
+   },
+   {
+    "pattern": "smooth true target instead of convex surrogate",
+    "evidence": "closed-form smooth approximations of error and ranking loss",
+    "pages": "pp. 5-7"
+   }
+  ],
+  "transferable": [
+   "Put the distributional assumption on the low-dimensional quantity the objective uses and plot it at early and late iterates (p. 5; pp. 8-9).",
+   "Plot the surrogate and the baseline surrogate against the true objective along the start-to-solution segment (p. 14).",
+   "Report one-time preprocessing time in its own column (Table 4.5, p. 13)."
+  ],
+  "coauthors": "H. Ghanbari, M. Li",
+  "quotes": [
+   {
+    "text": "We will argue that this assumption is a lot milder than the assumption that the data itself is nearly Gaussian.",
+    "page": 2
+   },
+   {
+    "text": "We see that Fn01 overall provides a better approximation of the empirical error than logistic regression.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S056",
+  "year": "2020",
+  "title": "Feature engineering and forecasting via derivative-free optimization and ensemble of sequence-to-sequence networks with applications in renewable energy",
+  "read_level": "partial",
+  "contribution": "An ensemble of seq2seq LSTM networks with additive resampling, designed and tuned (hyperparameters, ensemble size, feature subset) by a scaled trust-region DFO that handles box and integer variables, tested on wind, solar and wave data (pp. 2-8, 9-19).",
+  "problem_entry": "Application: multistep renewable forecasting where existing ML ignores temporal structure and seasonality; DFO as a tuner for expensive black boxes (pp. 1-3).",
+  "key_idea": "SDFO-TR = DFO-TR plus an upper-bound-plus-penalty for box violations, [0,1] scaling, and piecewise-constant encoding of integer variables, used to choose hyperparameters, ensemble factor and features (p. 8, p. 14).",
+  "assumptions": "Black-box loss bounded above (MAAPE <= pi/2); no smoothness claimed for the piecewise-constant objective; heuristic appeal that DFO escapes flat minima (pp. 8-9).",
+  "proof_devices": [
+   "none (algorithmic description only; Alg. 1 p. 6)"
+  ],
+  "experiments": "NREL, GECAD, NSRDB, NOAA data; 60/20/20 split; horizons 1-72; baselines ELM, SVR, RF, SARIMA, FOS-ELM, Spearmint BO; MAAPE, NRMSE, MAE; feature-selection comparison with Spearmint per metric (pp. 9-19).",
+  "positioning": "Positions DFO against Bayesian optimization as time-efficient and accurate but continuous-only, and seq2seq ensembles against SVR/ELM/RF (pp. 2, 4, 9-10).",
+  "writing": "Bullet-list observations after each table; strong superiority claims, with the data cut to ten days acknowledged later (pp. 11-15).",
+  "limits_future": "Many features may hurt DFO; data limited by computation; future: DFO as a decision maker for parallel-structure design in other ML areas (p. 14, p. 15, p. 20).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "existing DFO-TR reused, modified only where box/integer variables break it",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "poisedness kept by farthest-point replacement but applied to a piecewise-constant objective outside the smooth theory",
+    "pages": "p. 6, p. 8"
+   },
+   {
+    "method": "Research Taste mark 6",
+    "relation": "evidence",
+    "note": "DFO used as ML hyperparameter/architecture tool",
+    "pages": "p. 2, p. 20"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "DFO-TR as ML-pipeline design tool (integer encoding)",
+    "evidence": "integer hyperparameters and feature switches encoded as sub-intervals of [0,1] for a model-based TR solver",
+    "pages": "p. 8, p. 14"
+   }
+  ],
+  "transferable": [
+   "Encode an integer with t values as t sub-intervals of [0,1] plus two penalty sections for a continuous DFO solver (p. 8).",
+   "Return 'upper bound + distance to box' for infeasible points when the loss is bounded (p. 8).",
+   "Tune the competing tuner separately on each reported metric to expose metric trade-offs (Table 7, p. 15)."
+  ],
+  "coauthors": "M. Pirhooshyaran, L. V. Snyder",
+  "quotes": [
+   {
+    "text": "Theoretically, scaling is not required because the trust region radius would handle different magnitudes for different parameters.",
+    "page": 8
+   },
+   {
+    "text": "This is why we introduced the complexity into the function at the first place and let the DFO decides.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S037",
+  "year": "2021",
+  "title": "Inexact SARAH algorithm for stochastic optimization",
+  "read_level": "partial",
+  "contribution": "iSARAH replaces SARAH's exact outer gradient with a mini-batch of chosen size b, extending SARAH to expectation minimization with total sample complexity O(max{sigma*^2/eps, kappa} log(1/eps)) in the strongly convex case and the best known rate in the convex case under an outer-iterate assumption (pp. 4-5, 16-19).",
+  "problem_entry": "SVRG/SARAH need exact gradients each outer loop, so they apply only to finite sums; SCSG applies to expectations but with worse kappa dependence (pp. 1-3).",
+  "key_idea": "Keep SARAH's recursive estimator and replace only the anchor gradient by a b-sample average, with b chosen to recover SARAH's rate (pp. 3-5).",
+  "assumptions": "Per-sample L-smooth; strongly convex F or convex realizations as needed; E||grad f(w*;xi)||^2 <= sigma*^2; for convex multi-loop, F - F* <= M||grad F||^2 + N at outer iterates only (pp. 6-7, 17-18).",
+  "proof_devices": [
+   "telescoping identity for E||grad F(w_t) - v_t||^2 from E[v_j - v_{j-1}|F_j] = grad F(w_j) - grad F(w_{j-1}) (Lemma 7, p. 10)",
+   "outer-loop linear contraction to a b-dependent floor (Thm 3, p. 16)",
+   "parameter choice eta=2/(5L), m=20kappa-1, b=max{20kappa-10, 20sigma*^2/eps} (Cor. 4, p. 17)"
+  ],
+  "experiments": "none",
+  "positioning": "Compared with SVRG, SARAH, SCSG, SPIDER/SpiderBoost and ProxSARAH via complexity tables; notes an unstated assumption in original SARAH (pp. 2-4).",
+  "writing": "Complexity tables with an explicit additional-assumption column; assumptions argued 'reasonable' with a constructed example (p. 4, pp. 17-19).",
+  "limits_future": "One-loop needs learning rate O(eps), 'practically undesirable'; best convex rate only under Assumption 5; nonconvex bounded-variance case deferred to ProxSARAH (p. 3, p. 19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "sample size b is the accuracy knob set exactly to recover the exact-gradient rate",
+    "pages": "p. 4, p. 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "SARAH recursion unchanged; only the anchor gradient is replaced",
+    "pages": "pp. 3-5"
+   },
+   {
+    "method": "Research Taste mark 2",
+    "relation": "evidence",
+    "note": "parity with the exact-gradient SARAH rate",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Research Taste mark 4",
+    "relation": "contradiction",
+    "note": "theory-only paper; no numerical experiments",
+    "pages": "pp. 1-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "complexity table with explicit additional-assumption column",
+    "evidence": "Tables 1-2 list Bound / Problem / Ad. Asm. for each method",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "counterexample-first / hidden-assumption audit",
+    "evidence": "points out that original SARAH's convex result used an unstated assumption",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "error-sensitive step only where the estimate is accurate",
+    "evidence": "accurate (large-batch) gradient at the outer anchor, cheap recursive updates inside",
+    "pages": "p. 4"
+   }
+  ],
+  "transferable": [
+   "Prove a telescoping identity for a recursive estimator so the only new term is the initial sampling error, then size the batch (Lemma 7 p. 10; Cor. 4 p. 17).",
+   "Replace bounded iterates/PL by F - F* <= M||grad F||^2 + N at outer iterates only, with a concrete non-PL example (pp. 17-18).",
+   "Complexity table with Bound / Problem / Additional assumption columns (p. 4)."
+  ],
+  "coauthors": "L. M. Nguyen, M. Takáč",
+  "quotes": [
+   {
+    "text": "The key idea of the analysis of iSARAH is to establish bounds on b which ensure sufficient accuracy for recovering original SARAH convergence rate.",
+    "page": 4
+   },
+   {
+    "text": "In other words, Assumption 5 is a relaxation of the boundedness assumption and the PL condition.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S055",
+  "year": "2022",
+  "title": "Nesterov accelerated shuffling gradient method for convex optimization",
+  "read_level": "partial",
+  "contribution": "NASG applies Nesterov extrapolation once per epoch of a shuffling gradient method and proves O(1/T) in epochs for convex finite sums, deterministically for any permutation and for the last iterate, improving the variance term by n for randomized shuffling (pp. 4-6).",
+  "problem_entry": "Stochastic NAG has no provable acceleration without vanishing variance; shuffling SGD's best convex rate is O(1/T^{2/3}); per-iteration momentum accumulates errors (pp. 1-3).",
+  "key_idea": "Keep NAG's extrapolation and shuffling SGD's inner loop but move the momentum update to epoch level, viewing the epoch as NAG with the full gradient replaced by sequential component gradients (pp. 3-4).",
+  "assumptions": "Component L-smoothness; convex components (variance at optimum) or convex F with generalized bounded variance; no bounded domain/gradient; horizon-dependent step eta_t = k alpha^t/(LT) (pp. 4-5).",
+  "proof_devices": [
+   "Nesterov auxiliary sequences theta^(t)=2/(t+2), v^(t) with convex-combination identities (eqs. 7-8, p. 5)",
+   "weighted key estimate with T(T+2) factor (Lemma A.1, p. 14)"
+  ],
+  "experiments": "Logistic regression (w8a, ijcnn1, covtype) and linear/one-hidden-layer nets on MNIST, Fashion-MNIST, CIFAR-10; baselines NAG, NASG-PI, SGD, SGD-M, Adam with random reshuffling; grid-tuned constant LR; 10 seeds; effective data passes on x-axis (pp. 7-9, 29).",
+  "positioning": "Improves shuffling SGD rates (Mishchenko et al., Nguyen et al.); distinguishes from variance reduction (needs full gradients) and from per-iteration stochastic momentum (pp. 2-3).",
+  "writing": "Central question posed explicitly in the introduction; complexity table with footnotes on assumption differences; remark stating guarantee type (pp. 2-3, 6).",
+  "limits_future": "Open: better dependence on n; nonconvex analysis; rate is O(1/T), not NAG's O(1/T^2) (p. 9; p. 2 vs p. 5).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "NAG and shuffling kept; only the placement of momentum changes",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "error-sensitive momentum applied only where aggregated gradient information is closest to the full gradient; no explicit accuracy contract",
+    "pages": "pp. 3-4"
+   },
+   {
+    "method": "Research Taste mark 2",
+    "relation": "variant",
+    "note": "parity with GD's O(1/T), not with NAG's O(1/T^2)",
+    "pages": "p. 2, p. 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "weak: comparisons at equal cost measured in effective data passes",
+    "pages": "p. 4, p. 7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "complexity table with explicit additional-assumption column",
+    "evidence": "Table 1 with footnotes on differing assumptions and criteria",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "error-sensitive step only where the estimate is accurate",
+    "evidence": "momentum per epoch instead of per iteration to avoid error accumulation",
+    "pages": "pp. 3-4"
+   }
+  ],
+  "transferable": [
+   "Motivating mini-experiment showing the naive placement failing before the theory (Fig. 1, p. 4).",
+   "Rewrite the deterministic method so the stochastic one is its perturbation and reuse its proof algebra (p. 4; eqs. 7-8, p. 5).",
+   "State guarantee type precisely: deterministic, any permutation, last iterate (Remark 4.4, p. 6)."
+  ],
+  "coauthors": "T. H. Tran, L. M. Nguyen",
+  "quotes": [
+   {
+    "text": "Can we use Nesterov’s momentum technique for Shuffling SGD to improve the convergence rate using only standard assumptions (e.g. without assuming vanishing variance)?",
+    "page": 2
+   },
+   {
+    "text": "Our convergence bounds in Theorem 4.1 and 4.3 hold in a deterministic sense.",
+    "page": 6
+   }
+  ]
+ }
+]

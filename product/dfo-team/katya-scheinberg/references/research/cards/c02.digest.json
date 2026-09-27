@@ -1,0 +1,335 @@
+[
+ {
+  "id": "S018",
+  "year": "2014",
+  "title": "Convergence of trust-region methods based on probabilistic models",
+  "read_level": "full",
+  "contribution": "Proves almost-sure first-order convergence (liminf and lim) and second-order liminf convergence of a nearly classical trust-region method whose models are fully linear/quadratic only with probability >= 1/2 conditioned on the past, with exact function values, and shows DFO constructions (Gaussian sample sets, sparse recovery) that satisfy the condition (pp. 1, 7, 10-13, 19, 22-26).",
+  "problem_entry": "Certified model geometry in model-based DFO is expensive, and random sample sets may give good models with fewer points; the question is how accurate a random model must be, and how often, for the classical TR method to converge (pp. 1-2).",
+  "key_idea": "Require models fully linear (errors kappa*delta_k, kappa*delta_k^2) only with conditional probability p >= 1/2, and change the TR method only by requiring ||g_k|| >= eta2*delta_k for a successful step/radius increase (Defs 3.1-3.2, pp. 6-7; Alg. 3.1, p. 8).",
+  "assumptions": "f in C^1 with Lipschitz gradient on the enlarged level set and bounded below; exact f values; Cauchy decrease for every model realization; bounded model Hessians ('introduced for convenience'); P(S_k | past models) >= 1/2; second order adds C^2, Lipschitz and bounded Hessian (pp. 1, 7-8, 15).",
+  "proof_devices": [
+   "realization-wise lemma: delta_k -> 0 on every sample path because radius increases force constant f-decrease (Lemma 3.1, pp. 8-9)",
+   "bounded-increment submartingale W_k = sum(2*1_{S_i} - 1) has limsup = +inf a.s. (Thm 4.1-4.2, pp. 9-10)",
+   "log-radius random walk R_k = log_gamma(delta_k/b) dominated from below by W_k (p. 11)",
+   "Bernoulli-signed submartingale G_k = G_{k-1} + B_k Z_k: sum over good < inf and sum over bad = inf is a null event (Lemma 4.1, p. 11)",
+   "sum of radii over eps-noncritical iterations finite a.s. (Lemma 4.2, p. 12)",
+   "deterministic 'ascent pair' argument reused for lim-type result (Thm 4.3, pp. 12-13)",
+   "modified second-order measure tau(x) with ||grad f||/||Hess f|| term to avoid bounded model Hessians (p. 16)"
+  ],
+  "experiments": "Illustrative single runs counting function evaluations with unequal final accuracies: 2-D Rosenbrock across compass search, random-basis direct search, random search and quadratic TR (pp. 5-6); deterministic vs random 5-point MFN sample sets, 8500 vs 2700 evals (p. 24); 10-D function with 2 active variables, random-sample sparse vs greedy sparse vs MFN models (p. 26).",
+  "positioning": "Contrasts with stochastic gradient methods whose models are correct only in expectation (p. 1); criticizes random search for fixed complexity-derived step sizes and lack of curvature (p. 4); relies on More-Wild for model-based superiority (p. 5); builds on its own sparse-recovery paper [3] and Scheinberg-Toint [31] (pp. 23, 25).",
+  "writing": "Contribution framed as two differences from stochastic optimization (p. 1); kappa-constant glossary (p. 3); illustrative figures before theory (pp. 4-6); a conjecture with an explicit account of where the proof fails (pp. 20-21); a closing section of concrete model constructions and future work (pp. 22-27).",
+  "limits_future": "Second-order lim-type convergence left as Conjecture 5.1 because the decrease bounds sum delta^2 not sum delta and radius growth is not guaranteed (pp. 20-21); exact function values at trial points required, relaxation is future work (p. 27); structured random-matrix bounds and dependent sample sets are future work (pp. 25, 27); no rates or complexity are given.",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "radius-scaled accuracy with fixed conditional probability p >= 1/2; exact f values",
+    "pages": "pp. 1, 6-7"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "'almost identical to the classical method'; the only change is the ||g_k|| >= eta2*delta_k success condition",
+    "pages": "pp. 1, 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "random walk on the (log) radius is already the core device, but only almost-sure convergence is proved; no stopping time, expected or tail complexity",
+    "pages": "pp. 10-11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "random sample sets replace deterministic geometry maintenance; Gaussian sets probabilistically fully linear; sparse l1 recovery gives fully quadratic models from fewer points",
+    "pages": "pp. 2, 23-26"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "counts function evaluations, but single illustrative runs with unequal final accuracies; no equal-accuracy protocol",
+    "pages": "pp. 5-6, 24, 26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "localized-failure conjecture",
+    "evidence": "States Conjecture 5.1, runs the lim-type proof, names the failing inequality (sum delta^2 vs sum delta) and explains why the obvious repair (increasing success probability) leads to deterministic schemes of no interest",
+    "pages": "pp. 20-21"
+   },
+   {
+    "pattern": "realization-wise safety, probability-driven progress",
+    "evidence": "delta_k -> 0 proved for every realization regardless of model quality; probability used only to show progress via the random walk",
+    "pages": "pp. 8-11"
+   }
+  ],
+  "transferable": [
+   "Put a gradient-vs-radius test (||g_k|| >= eta2*delta_k) inside the TR acceptance rule, so that no iteration needs a certified model (p. 8).",
+   "Split the proof into a realization-wise lemma (no probability) and a probabilistic random-walk lemma, and use the first as the contradiction lever (pp. 8-11).",
+   "Use G_k = G_{k-1} + B_k Z_k with conditional P(B_k = 1) >= 1/2 to show that bad iterations cannot carry an infinite sum while good ones carry a finite one (Lemma 4.1, p. 11).",
+   "Condition the success probability on the sigma-algebra of past oracle draws rather than assuming independence, and justify the choice in one sentence (p. 7).",
+   "When an extension fails, state it as a conjecture and name the inequality that breaks (pp. 20-21)."
+  ],
+  "coauthors": "A. S. Bandeira, L. N. Vicente",
+  "quotes": [
+   {
+    "text": "As a result of this particular setting, we are able to prove convergence, with probability one, of a trust-region method which is almost identical to the classical method.",
+    "page": 1
+   },
+   {
+    "text": "We believe this condition is more reasonable than assuming complete independence of Mk from the past, which is difficult to ensure given that the current iterate, around which the model is built, and the trust-region radius depend on the algorithm history.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S029",
+  "year": "2016",
+  "title": "Practical inexact proximal quasi-Newton method with global complexity analysis",
+  "read_level": "full",
+  "contribution": "Gives a global O(1/k) rate for a proximal quasi-Newton framework that uses a prox-parameter update instead of a line search. The rate holds with exact subproblems, with inexact ones (phi_k <= a^2/k^2), and in expectation when the inner solve succeeds only with probability 1-p (randomized coordinate descent). The paper also delivers the LBFGS-based solver LHAC, competitive with QUIC and LIBLINEAR (pp. 3, 11, 15, 18, 23-27).",
+  "problem_entry": "Specialized proximal-Newton codes (QUIC, GLMNET) with l(k) CD passes and line search work well in practice but have no global rate, and the l(k)-passes heuristic lacks justification (pp. 2-4).",
+  "key_idea": "Replace the line search with a TR-like sufficient-decrease test on the prox parameter mu in H_k = G_k + I/(2 mu_k), solve subproblems by randomized CD whose complexity is known, and use the LBFGS compact form for O(m) CD steps (pp. 5-6, 18, 21-23).",
+  "assumptions": "f convex L-smooth; g convex, Lipschitz on the level set; sigma*I <= H_k <= M*I; bounded distance to the solution set (for simplicity); no strong convexity or C^2; Hessian approximations may be arbitrarily inaccurate; random version: P(phi_k <= a^2/k^2) >= 1-p conditioned on the past (pp. 6-7, 18).",
+  "proof_devices": [
+   "phi-subdifferential lemma for phi-optimal prox solutions (Lemma 1, p. 6)",
+   "Delta F_k - Delta F_{k+1} >= c Delta F_k^2 then telescoping 1/Delta F, borrowed from smooth-case Nesterov / Cartis-Gould-Toint analysis (Thm 6, pp. 11-12)",
+   "per-iteration dichotomy: error-dominated (Delta F_k <= b sqrt(phi_k)) or progress (1/Delta F_{k+1} - 1/Delta F_k >= c) (Lemma 8, pp. 13-15)",
+   "telescope from the last error-dominated iteration (Thm 10, p. 16)",
+   "geometric-weight sum over the index of the last good random inner solve, giving factor (2-p)/(1-p) (Thm 15, pp. 18-19)",
+   "Richtarik-Takac randomized CD complexity converts the accuracy target into an inner-iteration count (Lemma 16, pp. 20-21)"
+  ],
+  "experiments": "LHAC (C/C++) vs QUIC on 4 sparse inverse covariance sets and vs LIBLINEAR on 4 sparse logistic regression sets, plus an Armijo-line-search ablation LHAC-L; wall-clock time vs log relative objective, F* from baselines at 1e-7, stop at 1e-8, fixed defaults (mu=1, beta=1/2, rho=0.01, m=10), baselines rebuilt on the same machine and instrumented only for logging (pp. 23-27).",
+  "positioning": "Framework covering modified QUIC/GLMNET-type methods (p. 1); answers Byrd et al.'s SQA naming by folding the prox term into the model (p. 3); rejects accelerated method [12] as needing impractical H_k conditions (p. 4); claims weaker inexactness requirements than [26] (Remark 11, p. 16).",
+  "writing": "Three numbered main results (p. 3); a 'first complete global convergence rate result' claim (p. 3); a natural analysis under an admitted-unverifiable assumption followed by an alternative analysis (pp. 8-10); remarks that interpret constants (pp. 9-10, 15); experiment aims stated as three claims (p. 23).",
+  "limits_future": "Sublinear only, no local superlinear or strong convexity (pp. 6, 27); active-set and working-set strategies not analysed (pp. 3, 22); practical l(k)=ak+b has inferior theoretical complexity (p. 21); (2-p) factor is an overestimate (p. 19); acceleration without restrictive H_k assumptions is future work (p. 4).",
+  "method_links": [
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "LBFGS low-rank structure plus closed-form 1-D l1 step make CD steps O(m); the problem class is defined by exploitable structure in g",
+    "pages": "pp. 1, 21-23"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "classical Armijo line search is replaced (not kept) because the rate proof fails for it, and cyclic CD is replaced by randomized CD; the ablation shows the change costs nothing",
+    "pages": "pp. 10, 18, 25, 27"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "accuracy contract on the inner solver, phi_k <= a^2/k^2 with conditional probability >= 1-p, tied to the iteration count rather than a step size",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "expected O(1/k) keeps the deterministic order with an explicit (2-p)/(1-p) factor (deterministic parity), but via a counting/geometric-series proof, not a supermartingale or stopping time",
+    "pages": "pp. 18-19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "comparison by wall-clock time with fixed defaults rather than evaluation counts; Remark 14 notes that evaluations dominate cost",
+    "pages": "pp. 18, 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analysable surrogate for a practical heuristic",
+    "evidence": "line search replaced by a prox-parameter update and cyclic CD by randomized CD to obtain rates; ablation shows no loss",
+    "pages": "pp. 18, 25, 27"
+   },
+   {
+    "pattern": "theory-certified inner-loop budget",
+    "evidence": "known inner-solver rate converts the outer accuracy requirement into l(k) CD passes, justifying a practitioners' heuristic",
+    "pages": "pp. 3, 17, 20-21, 24"
+   },
+   {
+    "pattern": "compete on constants when the order is fixed",
+    "evidence": "O(1/k) unchanged; the benefit of second-order information is argued through M_i vs L(f) in the constant",
+    "pages": "pp. 9-10, 12"
+   }
+  ],
+  "transferable": [
+   "For inexact methods, prove a per-iteration dichotomy (error-dominated vs exact-case progress) and telescope from the last error-dominated iteration; this needs only phi_k <= a^2/k^2 (pp. 13-16).",
+   "For randomly inexact inner solves, condition on the index of the last good solve and sum with geometric weights to get the deterministic rate times (2-p)/(1-p); check that the conditioning justifies the product form (pp. 18-19).",
+   "If a line search has no rate proof, swap in a TR-like acceptance test on a prox/regularization parameter and keep the line-search variant as an ablation (pp. 5-6, 24-25).",
+   "Pick the inner solver for its known complexity so the number of inner passes can be fixed a priori (pp. 18, 20-21).",
+   "State experiment aims as 2-3 falsifiable claims; rebuild baselines on the same machine with logging-only changes; take F* from the strongest baseline at tight tolerance (pp. 23-24)."
+  ],
+  "coauthors": "X. Tang",
+  "quotes": [
+   {
+    "text": "The assumption above is not verifiable, hence it does not appear to be very useful.",
+    "page": 8
+   },
+   {
+    "text": "to provide convergence rates we had to depart from some standard techniques, such as line-search, replacing it instead by a prox-parameter updating mechanism with a trust-region-like sufficient decrease condition for acceptance of iterates.",
+    "page": 27
+   }
+  ]
+ },
+ {
+  "id": "S002",
+  "year": "2017",
+  "title": "SARAH: A novel method for machine learning problems using stochastic recursive gradient",
+  "read_level": "full",
+  "contribution": "Introduces SARAH, a variance-reduced method with a biased recursive gradient estimator. It needs no gradient storage, its inner loop provably converges linearly in the strongly convex case, it has SVRG-level complexity with a larger admissible step, and it comes with a practical variant, SARAH+, that stops the inner loop adaptively (pp. 1-7).",
+  "problem_entry": "SGD is slow and variance-sensitive with hand-picked schedules, SAG/SAGA need O(nd) storage, and SVRG's inner loop does not reduce variance; the aim is to combine SAGA's accumulated information with SVRG's occasional full gradient (pp. 1-2, 4).",
+  "key_idea": "Recursive estimator v_t = grad f_i(w_t) - grad f_i(w_{t-1}) + v_{t-1}, deliberately biased (E[v_t|F_t] != grad P(w_t)), inside an SVRG-style outer loop; SARAH+ stops the inner loop when ||v_t||^2 <= gamma ||v_0||^2 (pp. 2-3, 7).",
+  "assumptions": "Each f_i L-smooth; P mu-strongly convex or each f_i mu-strongly convex; each f_i convex; accuracy E||grad P(w_T)||^2 <= eps; constant learning rate (pp. 2-3, 6).",
+  "proof_devices": [
+   "descent lemma via a^T b = (||a||^2 + ||b||^2 - ||a-b||^2)/2 without convexity (Lemma 1, pp. 5, 10-11)",
+   "MSE telescoping identity for a biased recursive estimator using conditional unbiasedness of increments (Lemma 2, pp. 5, 11)",
+   "co-coercivity bound on increment variances that telescopes against ||v_t||^2 (Lemma 3, pp. 5, 11-12)",
+   "linear contraction of E||v_t||^2 within one inner loop (Thms 1a/1b, pp. 4, 12-13)",
+   "parameter choice by optimizing the rate expression (Lemma 6, p. 10; Cor. 3, pp. 6, 14)",
+   "randomly selected output iterate (p. 3)"
+  ],
+  "experiments": "L2-regularized logistic regression (lambda = 1/n) on covtype, ijcnn1, news20 and rcv1 vs SVRG, SAG, SGD+ and FISTA; loss residual and test error vs effective passes; best-in-hindsight learning rates for all methods with a tabulated best (m*, eta*); m-sensitivity sweep m*/8..8m*; gamma sweep for SARAH+; 2-D toy trajectory and ||v_t||^2 traces (pp. 4, 6-8).",
+  "positioning": "A new member of the fixed-step variance-reduction class; tables compare complexity, fixed learning rate and storage against GD, SGD, SVRG and SAG/SAGA; direct contrast with SVRG on inner-loop convergence, admissible step (1/L vs 1/(4L)) and rate constant (pp. 1-2, 6).",
+  "writing": "Five contribution bullets and a check-mark comparison table (p. 2); intuition figures before the theorems (p. 4); 'more stable' as the recurring claim (pp. 2, 4, 8); all proofs in the supplement (pp. 10-14).",
+  "limits_future": "No limitations or future-work section; admits that SARAH+'s gamma needs tuning but reports robustness (p. 7); complexity equals SVRG/SAG rather than improving the order (p. 8).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "a new estimator with a constant, tuned learning rate rather than a reanalysed classical adaptive method; Method 2 and Taste 3 should be scoped to the adaptive/DFO line",
+    "pages": "pp. 2-3, 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "estimator error controlled in mean square (no probability-p contract) but tied to step lengths; a deliberately biased estimator predates the 2024 'allow bias' evidence",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "expected squared-gradient bounds with a random output; m=1 reduces to GD as a deterministic sanity check; no stopping-time or high-probability analysis",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "cost counted in effective passes (oracle calls), but every method is tuned per dataset in hindsight; the paper answers with tuning-robustness evidence and sensitivity sweeps",
+    "pages": "pp. 7-8"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "weak: exploits the specific finite-sum form, as the other variance-reduction methods it cites do",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory-derived stopping rule",
+    "evidence": "the quantity proved to contract (||v_t||^2) becomes SARAH+'s inner-loop termination test",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "pattern": "compete on constants/admissible step when the order ties",
+    "evidence": "same O((n+kappa) log 1/eps) as SVRG, but a larger admissible eta and a smaller rate constant",
+    "pages": "p. 6"
+   }
+  ],
+  "transferable": [
+   "Analyse a biased recursive estimator by writing its MSE as a telescoping sum of increment variances; only conditional unbiasedness of increments is needed (Lemma 2, pp. 5, 11).",
+   "Bound the increment variances by co-coercivity so that they telescope against ||v_t||^2 and cancel part of the descent lemma (pp. 11-12).",
+   "Turn a provably contracting computable quantity into an adaptive loop-termination rule with a safe cap (SARAH+, p. 7).",
+   "When tuning per dataset, publish every method's best-parameter table, a x1/8..x8 sensitivity sweep, and whether the tuned values sit near the theoretical ones (p. 8).",
+   "Open with a 2-D toy trajectory that shows the qualitative behaviour the theorems prove (Fig. 1, p. 4)."
+  ],
+  "coauthors": "L. M. Nguyen, J. Liu, M. Takáč",
+  "quotes": [
+   {
+    "text": "Observe that in SVRG, vt is an unbiased estimator of the gradient, while it is not true for SARAH.",
+    "page": 3
+   },
+   {
+    "text": "We show that the variance of the steps inside the inner loop goes to zero, thus SARAH is theoretically more stable and reliable than SVRG.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S024",
+  "year": "2017",
+  "title": "Stochastic recursive gradient algorithm for nonconvex optimization",
+  "read_level": "full",
+  "contribution": "Extends SARAH to mini-batches and nonconvex finite sums: an O(n + L^2/eps^2) IFO bound for the inner loop under only L-smoothness, a linear rate O((n + L^2 tau^2) log 1/eps) for tau-gradient-dominated functions, and neural-network experiments (pp. 2, 5, 7-8).",
+  "problem_entry": "Variance-reduction methods are mostly designed for convex problems, while SGD's nonconvex analysis needs bounded gradients; SARAH needs only L-smoothness (p. 2).",
+  "key_idea": "Mini-batch recursive estimator with sampling without replacement; analyse the inner loop alone for general nonconvex f and the full method under gradient dominance; b=n recovers GD (pp. 3-5).",
+  "assumptions": "Each f_i L-smooth; for the linear rate, tau-gradient dominance P - P* <= tau ||grad P||^2; no bounded-gradient assumption; guarantees in expectation for a random output iterate (pp. 2, 4).",
+  "proof_devices": [
+   "Lemmas 1-2 of SARAH carried over to b >= 1 (p. 4; pp. 11-12)",
+   "exact second moment for sampling without replacement giving the factor (1/b)(n-b)/(n-1) (Lemma 3, pp. 5, 12-13)",
+   "step size chosen as the root of the quadratic that cancels the accumulated error against the descent term (Thm 1, pp. 5, 13)",
+   "gradient dominance turns a one-epoch sublinear bound into a per-epoch contraction 2 tau/(eta(m+1)) (Thm 2, pp. 5, 14)"
+  ],
+  "experiments": "One-hidden-layer neural nets on MNIST and CIFAR10 (b=10, Glorot init) vs SVRG, AdaGrad and SGD-M; training loss and test error vs effective passes; parameters tuned by scanning ranges, SARAH+ ratio fixed at 0.7; supplement has b=20 runs and m-sensitivity on CIFAR10, whose P(w*) source is not stated (pp. 7-8, 14-15).",
+  "positioning": "Compared with nonconvex SVRG (Reddi et al.; Allen-Zhu-Hazan) and Natasha in a table; concedes SVRG's better eps-dependence, claims better n-dependence, and criticises SVRG's unknown constant nu (p. 2).",
+  "writing": "Short paper with bullet contributions and all proofs in the supplement (pp. 3, 11-15); hedging is inconsistent: p. 2 concedes SVRG's better eps-dependence, but the conclusion claims the best sublinear rate in the literature (pp. 2, 9).",
+  "limits_future": "Full-SARAH nonconvex rate open (p. 2); SARAH+ for nonconvex problems rests on an assumed analogy with the convex case (p. 7); no future-work section (p. 9).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "new estimator with a constant, tuned step, not a reanalysed classical adaptive method",
+    "pages": "pp. 3, 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "expected bounds with random output; GD rate recovered at b=n (deterministic parity check); no high-probability or stopping-time analysis",
+    "pages": "pp. 2, 4, 6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "cost in IFO calls/effective passes, but methods tuned by per-dataset scans",
+    "pages": "pp. 2, 8"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "oracle is the IFO; estimator MSE tied to step lengths via the (n-b)/(n-1) factor; no probabilistic contract",
+    "pages": "pp. 2, 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "compete on assumptions when the order ties",
+    "evidence": "same eps-order as SGD without the bounded-gradient assumption and with better constants",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "theory-derived stopping rule",
+    "evidence": "SARAH+ reused for nonconvex problems, with the convex-case analogy explicitly flagged as an assumption",
+    "pages": "p. 7"
+   }
+  ],
+  "transferable": [
+   "For mini-batches without replacement, compute the second moment exactly; the (1/b)(n-b)/(n-1) factor interpolates between SGD and GD so the GD special case falls out (pp. 12-13).",
+   "Choose the step size as the positive root of the quadratic that makes the error term cancel the descent term (Thm 1, pp. 5, 13).",
+   "Use gradient dominance to turn a one-epoch sublinear bound into a per-epoch linear contraction without convexity (Thm 2, pp. 5, 14).",
+   "In comparison tables, state where the competitor wins and keep the conclusion consistent with the table (pp. 2, 9)."
+  ],
+  "coauthors": "L. M. Nguyen, J. Liu, M. Takáč",
+  "quotes": [
+   {
+    "text": "Convergence rate of the full SARAH algorithm for general nonconvex functions remains an open question.",
+    "page": 2
+   },
+   {
+    "text": "Under the assumption that similar behavior happens in the nonconvex case, instead of tuning the inner loop size for SARAH, we believe that a proper choice of the ratio γ below, the automatic loop termination can give superior or competitive performances.",
+    "page": 7
+   }
+  ]
+ }
+]
