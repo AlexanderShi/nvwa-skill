@@ -1,0 +1,347 @@
+export const meta = {
+  name: 'team-increment',
+  description: 'T4 increment: per team member, optionally find new legitimate material (open book parts, new papers), card it, fold it conservatively into 07/08/09, SKILL.md and the reference files, then review and fix until the gates pass',
+  whenToUse: 'After a team is finished, whenever new material appears: open parts of books (table of contents, front matter, errata, addenda, published reviews) or new papers (research-team playbook, stage T4).',
+  phases: [
+    { title: 'Prepare', detail: 'find + register new material and plan its batches, or list a batch file prepared by hand' },
+    { title: 'Read', detail: 'one agent per batch writes cards/<bid>.md + <bid>.digest.json; one retry per failed batch' },
+    { title: 'Integrate', detail: 'conservative update of 07/08/09, SKILL.md (capped growth) and reference files; quote and quality gates' },
+    { title: 'Verify', detail: 'read-only skeptic: every new claim backed by a new card and the text; rules; gates' },
+    { title: 'Fix', detail: 'apply confirmed findings; one more fix round if a gate still fails' },
+  ],
+}
+
+/*
+ * team-increment.js · research-team kit, stage T4 (fold new material into finished skills).
+ * Launch:  Workflow({ scriptPath: '<repo>/scripts/workflows/team-increment.js', args: { ... } })
+ *
+ * Args shared by all team workflows:
+ *   args.repo     absolute path of the nuwa repo (has scripts/, references/)
+ *   args.team     team folder relative to repo, e.g. "product/bandit-team" (holds team.json)
+ *   args.scratch  absolute scratch dir for batch/chunk JSON files and backups (agents may write there)
+ *   args.date     "YYYY-MM-DD" (scripts cannot call Date.now())
+ *   args.members  array of member objects copied from team.json (slug, name, surname, living, hint, scholar,
+ *                 dblp, orcid, homepage, chase_hints, student_mode); each member runs through pipeline()
+ *                 independently (no barrier between members)
+ *
+ * Args specific to team-increment:
+ *   args.label       short name of this increment, used in file names and the 08 section heading (default "inc-<date>")
+ *   args.find        array, subset of ["book-parts", "new-papers"] (default []): the Prepare agent searches for that
+ *                    material, registers it in works.json (+ files in papers/), runs validate_works.py,
+ *                    acquire_fulltexts.py --only <new ids> and plan_reading_batches.py, writing the batch file
+ *   args.batchFiles  optional {slug: absolute path}: a batch file prepared by hand (plan_reading_batches.py after the
+ *                    new rows are in works.json with a "note" each); a member listed here skips the search
+ *                    default path: <scratch>/batches-<slug>-<label>.json
+ *   args.round       optional reading-round number for plan_reading_batches.py (default: one more than the highest
+ *                    round among the member's existing card files)
+ *   args.since       optional "YYYY-MM-DD": new papers after this date (default: works.json "harvested")
+ *   args.what        optional {slug: "what the new material is"} (shown to every agent of that member)
+ *   args.maxGrowth   net SKILL.md growth allowed, in words (default 400; detail goes to 09-evidence-ledger.md)
+ *
+ * Writes (per member): works.json/INDEX.md rows and files for new material (Prepare, only with args.find);
+ *   cards/<bid>.md + .digest.json; 07, 08 (section "Increment <label>"), 09, SKILL.md, technique-catalog.md,
+ *   RESOURCES.md, 01/05/06 where relevant (+ student-mode files). Backup: <scratch>/<slug>-SKILL.before-<label>.md.
+ * Next: commit per member; then team-integrate.js so the team README / DEEP-READING.md / roundtable show the new coverage.
+ * Cost baseline (worked example product/dfo-team/, open book material only): ~3 agents and ~0.8M tokens per member.
+ */
+
+const a = (typeof args === 'string' ? JSON.parse(args) : args) || {}
+function need(keys) {
+  const miss = keys.filter(k => a[k] === undefined || a[k] === null || a[k] === '')
+  if (miss.length) throw new Error(`team-increment: missing args: ${miss.join(', ')} (see the header comment)`)
+}
+need(['repo', 'team', 'scratch', 'date', 'members'])
+if (!Array.isArray(a.members) || !a.members.length) throw new Error('team-increment: args.members must be a non-empty array of team.json member objects')
+if (!/^\d{4}-\d{2}-\d{2}$/.test(String(a.date))) throw new Error('team-increment: args.date must be "YYYY-MM-DD"')
+a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') || !m.name) throw new Error(`team-increment: members[${i}] needs a kebab-case slug and a name`) })
+if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-increment: args.repo and args.scratch must be absolute paths')
+if (String(a.team).startsWith('/')) throw new Error('team-increment: args.team must be relative to args.repo, e.g. "product/<team>"')
+const FIND_KINDS = ['book-parts', 'new-papers']
+const FIND = Array.isArray(a.find) ? a.find : (a.find ? [String(a.find)] : [])
+const badKinds = FIND.filter(k => !FIND_KINDS.includes(k))
+if (badKinds.length) throw new Error(`team-increment: args.find accepts only ${FIND_KINDS.join(', ')}; got ${badKinds.join(', ')}`)
+
+const REPO = String(a.repo).replace(/\/+$/, '')
+const TEAM_REL = String(a.team).replace(/^\.\//, '').replace(/\/+$/, '')
+const TEAM = `${REPO}/${TEAM_REL}`
+const SCR = String(a.scratch).replace(/\/+$/, '')
+const DATE = a.date
+const LABEL = String(a.label || `inc-${DATE}`).replace(/[^A-Za-z0-9._-]+/g, '-')
+const GROWTH = Number(a.maxGrowth || 400)
+const MEMBERS = a.members
+
+function A(prompt, opts) {
+  if (!opts || !opts.phase || !opts.label) throw new Error('A() needs opts.phase and opts.label')
+  return agent(prompt, opts)
+}
+function list(x) { return Array.isArray(x) && x.length ? x.join('; ') : '' }
+function skillDir(m) { return `${TEAM}/${m.slug}` }
+function cardsDir(m) { return `${skillDir(m)}/references/research/cards` }
+function handFile(m) { return a.batchFiles && a.batchFiles[m.slug] }
+function batchFile(m) { return handFile(m) || `${SCR}/batches-${m.slug}-${LABEL}.json` }
+function backup(m) { return `${SCR}/${m.slug}-SKILL.before-${LABEL}.md` }
+function what(m) { return a.what && a.what[m.slug] ? a.what[m.slug] : '' }
+
+function teamCtx(m) {
+  return `Team: ${TEAM}/. Read ${TEAM}/team.json first: "field" is the research field, "language" the language of the member skills, "roundtable" the roundtable folder, "chase_hints" field-wide open repositories, and "members" the researchers (hint, student_mode, chase_hints). The team was built with the nuwa kit in ${REPO} (rules and templates in ${REPO}/references/, tools in ${REPO}/scripts/). Today is ${DATE}.
+Member: ${m.name} (slug ${m.slug}${m.hint ? `; ${m.hint}` : ''}). Skill folder: ${skillDir(m)}/. Where this prompt and the member's entry in team.json differ, team.json wins.`
+}
+
+const RULES = `House rules (non-negotiable):
+- Evidence: every claim carries a page ("p. 7") or section reference from the [[page N]] markers of the extracted text ("abstract" for an abstract), or card ids with pages in the skill files. Quotes are copied verbatim (line breaks collapsed to single spaces); never put a paraphrase inside quotation marks. If you did not read something, write "not read"; never guess.
+- Sources: only public, legitimate material (open access, author-hosted copies, institutional repositories, free proceedings, publisher pages that are openly served). Never Sci-Hub, LibGen, any paywall circumvention, or scraping behind a login. Book bodies are almost never open: use only their legitimately open parts.
+- Privacy: never open, read or quote anything under a references/sources/private/ folder. Never put the user's e-mail address (or any personal address) into a request to an outside service; Crossref needs none, and where a service insists on one (Unpaywall) use nuwa-skill@users.noreply.github.com, the address scripts/acquire_fulltexts.py uses.
+- Scope: edit only the files this step names as its outputs; scratch files go under ${SCR}/. Do not git commit, push, stash, reset or checkout (the operator commits after the stage). Stop a process by its exact PID, never with pkill -f <pattern> (that can kill your own shell).`
+
+function ctx(m) {
+  const SK = skillDir(m)
+  const w = what(m)
+  return `${teamCtx(m)}
+
+Context: ${m.name}'s research-craft skill is ${SK}/SKILL.md. It was already distilled from a full-text reading of the researcher's works: cards in references/research/cards/ (*.md + *.digest.json), index references/research/07-paper-cards.md, synthesis 08-deep-reading-synthesis.md, evidence ledger 09-evidence-ledger.md (SKILL.md links its <a id> anchors), technique catalog references/technique-catalog.md${m.student_mode ? ', student-mode files references/proof-playbook.md, open-problems.md, reading-path.md' : ''}. This is increment "${LABEL}": new material is being carded and folded in.${w ? ` Operator's description of the new material: ${w}` : ''}
+House rules for the update: ${REPO}/references/paper-reading-card.md (card format D1–D8; quotes must pass python3 ${REPO}/scripts/verify_card_quotes.py ${SK}) and its section 三 (conservative update: only add, mark contradictions, a new core method needs ≥3 distinct works plus the four-way validation of ${REPO}/references/research-extraction-framework.md section 三; book material alone never promotes a method). Those files are in Chinese; their rules apply as written.
+
+${RULES}`
+}
+
+const BOOK_PARTS = `BOOK PARTS: for each book, monograph or thesis in works.json whose body has no open text, look for its legitimately open parts: the table of contents and front matter / preface that the publisher or the authors host, errata lists and addenda on the authors' pages, sample chapters the publisher serves openly, and published reviews that are openly readable (open-access journals, the reviewer's or a society's page). Register each as a B row (next free B number; venue "book material"; kind book-toc, errata, book-addendum or review, and "other" for front matter, a preface or a sample chapter, with the note saying which; these are the kinds scripts/validate_works.py accepts). The book body itself is never fetched.`
+
+function newPapersText(m) {
+  return `NEW PAPERS since ${a.since || 'the "harvested" date in works.json'}:
+${m.scholar ? `- Google Scholar has no API and blocks curl, so use WebFetch on https://scholar.google.com/citations?user=${m.scholar}&hl=en&sortby=pubdate&cstart=0&pagesize=50 with this prompt, verbatim: "Return every publication row on this page as JSON lines with keys title, authors, venue, year, cites (one line per row, none omitted), then a final line TOTAL=<number of rows you returned>." If TOTAL disagrees with the rows you received, refetch with pagesize=20 (cstart=0, 20, 40, …). Stop paging once the rows are older than the cut-off date.` : '- Google Scholar: this member has no Scholar id in team.json, so rely on the sources below.'}
+- DBLP: ${m.dblp ? `python3 ${REPO}/scripts/dblp_works.py --pid ${m.dblp} --out ${SCR}/dblp-${m.slug}-${LABEL}.json` : `find the pid with python3 ${REPO}/scripts/dblp_works.py --name "${m.name}" (or --scholar / --orcid), then python3 ${REPO}/scripts/dblp_works.py --pid <pid> --out ${SCR}/dblp-${m.slug}-${LABEL}.json`} (it queries https://sparql.dblp.org/sparql; the dblp.org search/pid REST API sits behind a bot wall).${m.orcid ? `\n- ORCID ${m.orcid}: https://pub.orcid.org/v3.0/${m.orcid}/works with Accept: application/json.` : ''}
+- arXiv: the HTML search https://arxiv.org/search/?query=<surname>&searchtype=author (export.arxiv.org answers 406 to cloud IPs).
+- DOIs: Crossref https://api.crossref.org/works?query.bibliographic=<title>&query.author=<surname>&rows=3, never with an e-mail or mailto parameter; DataCite has arXiv DOIs (10.48550/arXiv.<id>); OpenAlex only if OPENALEX_API_KEY is set (shared cloud IPs get 429).
+- A row is new only if no works.json row has the same normalised title, DOI or arXiv id; a preprint and its published version are one work (mark the duplicate with dup_of as the existing rows do). New Scholar rows get the next free S number; others D (bibliographic database only), H (homepage or CV only), R (report-series item) or X (external document about the researcher, e.g. an interview).`
+}
+
+function findPrompt(m, bf) {
+  const SK = skillDir(m)
+  return `${ctx(m)}
+
+Your job (FIND + PREPARE for increment "${LABEL}"): find new, legitimately open material for ${m.name}'s skill and prepare it for carding. Wanted: ${FIND.join(' and ')}.
+Existing state: ${SK}/references/sources/publications/works.json (keys researcher, scholar_user, harvested, works[]), ${SK}/references/sources/papers/INDEX.md (a Read value other than "—" means already carded), ${cardsDir(m)}/.
+Leads: this member's chase_hints${list(m.chase_hints) ? ` (${list(m.chase_hints)})` : ' (none given)'}; the team's "chase_hints" in team.json;${m.homepage ? ` the homepage ${m.homepage};` : ''} author and coauthor homepages, institutional repositories, technical-report series, arXiv, HAL, free proceedings, publisher open-access pages, Semantic Scholar / CORE open PDFs. Use curl against these first: the WebSearch tool has a small per-session budget shared by every agent, so keep it for the hard cases. If WebFetch or WebSearch is not loaded, load it with ToolSearch "select:WebFetch,WebSearch".
+
+${FIND.includes('book-parts') ? BOOK_PARTS + '\n\n' : ''}${FIND.includes('new-papers') ? newPapersText(m) + '\n\n' : ''}Register each new item:
+- Add a works.json row in the shape of the existing rows (id, title, authors, venue, year, cites, doi, arxiv, urls, kind, dup_of, sources) plus a "note": what the item is, whose voice it is (a review is the reviewer's), and how to read it (e.g. "table of contents: read every line; do not invent chapter content beyond the titles"). plan_reading_batches.py copies the note into the batch file and the reader follows it. Never reuse or renumber an existing id.
+- Save a downloaded PDF at ${SK}/references/sources/papers/<slug>.pdf, with <slug> exactly as acquire_fulltexts.py computes it: python3 -c "import sys;sys.path.insert(0,'${REPO}/scripts');import acquire_fulltexts as q;print(q.slug({'id':'B006','year':2011,'title':'<title>'}))". For an item that exists only as a web page (e.g. a review), save its text as papers/txt/<slug>.txt starting with a "[[page 1]]" line (more markers if it is paginated). Check the first page of every file: the right title, and ${m.surname || m.name} (or the book's authors) among the authors; delete wrong files.
+- python3 ${REPO}/scripts/validate_works.py ${SK} → 0 errors.
+- python3 ${REPO}/scripts/acquire_fulltexts.py ${SK} --only <new ids, comma-separated> (extracts text with [[page N]] markers, OCR fallback for scans with OMP_THREAD_LIMIT=1, adds INDEX.md rows, keeps existing Role/Read values).
+- python3 ${REPO}/scripts/plan_reading_batches.py ${SK} --round N --core-ids <new ids> > ${bf}, where N is ${a.round ? a.round : 'one more than the highest round among the existing card files (c01 → 1, c2-01 → 2, …)'}. It plans only rows whose Read column is still "—"; if it also plans older unread rows, keep them and name them in problems.
+If nothing new and legitimate turns up, change no file and return an empty batches list.
+Edit only: works.json, new files under papers/ (and txt/), INDEX.md and abstracts.json through acquire_fulltexts.py, and ${bf}.
+Return the new ids, the batch file, its batches (bid, mode, number of works) and problems.`
+}
+
+function planPrompt(m, bf) {
+  return `${teamCtx(m)}
+
+Your job (PLAN, read-only): list the reading batches of increment "${LABEL}" in the batch file ${bf} (JSON from scripts/plan_reading_batches.py: {"summary", "batches": [{"bid", "mode", "papers": [...]}]}). With python report, for each batch, bid, mode and number of works; new_ids = all work ids in the file. For every non-abstract batch check that each work's "txt" file exists (relative paths are relative to ${REPO}); add "MISSING-TXT <bid> <id>" to problems for each one missing. If the file is missing or invalid, return batch_file_ok false and say why. Do not edit any file.`
+}
+
+function readPrompt(m, b, bf, retry) {
+  const SK = skillDir(m), CARDS = cardsDir(m), PAP = `${SK}/references/sources/papers`
+  const isAbs = b.mode === 'abstract'
+  return `${ctx(m)}
+
+Your job (READ, increment "${LABEL}"): write cards for every item of batch ${b.bid} (mode ${b.mode}). Print the items with:
+  python3 -c "import json;b=[x for x in json.load(open('${bf}'))['batches'] if x['bid']=='${b.bid}'][0];[print(p) for p in b['papers']]"
+Relative "txt" paths are relative to ${REPO}. Read ${REPO}/references/paper-reading-card.md (card format) and the core research methods, heuristics, taste and Honest Boundary sections of ${SK}/SKILL.md first.
+How to read:
+- Every item's "note", when present, says what it is, whose voice it is and how to read it: follow it. A published review is the reviewer's voice, never the authors'. A table of contents is "title only": infer the book's architecture (what comes first, what gets a whole chapter, what is left out) and label inferences as such; never invent chapter content. Errata and addenda are the authors' public self-correction: record what they correct, with pages.
+${isAbs ? `- This is an abstract batch (no open text): use abstracts.json; for a missing abstract try Crossref (https://api.crossref.org/works/<doi>, no e-mail parameter), https://arxiv.org/abs/<id> or the publisher landing page, and record a found abstract verbatim in ${PAP}/abstracts-chase-${b.bid}.json (keyed by id, plus "<id>__src" with the URL). Write compact abstract-level cards (D1, D2, D8; "inferred from title" for metadata-only items).` : `- Full-text items: core → whole text, all of D1–D8; supplement → abstract, introduction, method statement, main results, evaluation setup, conclusion (short card); books over 150 pages → chapter level with a "Chapter map". Check the first page first: the right title and ${m.surname || m.name} (or the book's authors) among the authors; otherwise mark "unreadable" with "WRONG-TEXT <id>" in problems. Garbled or empty text → "unreadable" with "REOCR <id>".`}
+Write ${CARDS}/${b.bid}.md (batch header "Batch intent / Focus dimensions / Material roles", with the intent naming increment "${LABEL}"; then one card per item, heading "### <ID> · <title> (<venue> <year>, <DOI/arXiv or URL>)", read level under it, "**Method links**:", "**Transferable techniques**:", "**Quotes**:" ≤2 verbatim with page) and ${CARDS}/${b.bid}.digest.json (a JSON array in the same object shape as the other digest files in that folder: id, year, title, read_level, contribution, problem_entry, key_idea, assumptions, proof_devices, experiments, positioning, writing, limits_future, method_links, new_pattern_candidates, transferable, coauthors, quotes; method_links[].method written "Method N").
+Link each card to the skill's existing Method N / heuristics / research taste / Honest Boundary items it supports, varies or contradicts. Card language: the language of the texts read.
+Then run python3 ${REPO}/scripts/verify_card_quotes.py ${SK} and fix any failing quote of THIS batch (exact text or no quotation marks).
+Edit no file other than the two card files${isAbs ? ` and abstracts-chase-${b.bid}.json` : ''}.${retry ? '\nA previous attempt at this batch died or wrote no cards; files it left may exist. Overwrite them.' : ''}
+Return the structured status (bid "${b.bid}").`
+}
+
+function integratePrompt(m, s) {
+  const SK = skillDir(m)
+  const reports = s.batches.map((b, i) => s.reports[i] ? { bid: b.bid, cards_written: s.reports[i].cards_written, unreadable: s.reports[i].unreadable, problems: s.reports[i].problems } : { bid: b.bid, agent: 'died' })
+  return `${ctx(m)}
+The new cards are written: ${s.batches.map(b => `cards/${b.bid}.md`).join(', ')} (+ .digest.json). Readers' reports: ${JSON.stringify(reports)}
+
+Your job (INTEGRATE, conservative): fold the new cards into the skill.
+0. Save a copy first: cp -n ${SK}/SKILL.md ${backup(m)}. If any papers/abstracts-chase-*.json was written, merge it with python3 ${REPO}/scripts/merge_chase.py ${SK} (merges abstracts without overwriting, then reruns acquire_fulltexts.py; --no-acquire if the network is down). Run python3 ${REPO}/scripts/verify_card_quotes.py ${SK}: every quote must be exact before anything is folded in (fix failing quotes in the new cards).
+1. 07-paper-cards.md: add rows for the new card ids in the existing format and update the coverage numbers in its header (this member's row of python3 ${REPO}/scripts/team_status.py ${TEAM} --coverage).
+2. 08-deep-reading-synthesis.md: add a section "Increment ${LABEL} (${DATE})": what the new material adds or changes per existing method / heuristic / taste item, with card ids and pages; for book material also what the book's own organisation (table of contents, preface), the errata/addenda and the external reviews show; record rejected updates. New papers can support a promotion only if the pattern now appears in ≥3 distinct works (old and new cards together) and passes all four checks; say so explicitly. Book material alone never promotes.
+3. SKILL.md: add only what the material genuinely supports, keeping it concise: net growth at most ~${GROWTH} words (wc -w before/after); put the detail in 09-evidence-ledger.md under the matching anchors. Typical, if supported: a Stated-evidence line where a book's structure or preface states a method's priority; an evidence line for public self-correction (errata) where a heuristic or taste item covers it; a reception / peer-view line from a review, attributed to the reviewer by name; a Research Trajectory "Latest" line for a new edition or new work; the Honest Boundary updated to say exactly what new material was read (and, for books, that the body was not). Do not change the frontmatter (except "researched:" → ${DATE}), Activation Rules (except the coverage numbers in the first-activation disclaimer, when they change), ${m.student_mode ? 'Student Mode, ' : ''}Research Integrity Rules or the method numbering.
+4. references/technique-catalog.md: any transferable device from the new cards (card ids, pages). references/sources/RESOURCES.md: rows for the new sources (✅ verified, URL from works.json). references/research/05-peer-critique.md: published reviews (reviewer's voice). references/research/01-publications.md and 06-trajectory.md: new works.${m.student_mode ? ' Student mode: reading-path.md (a book-based stage from a table of contents is labelled "from the table of contents; chapters not read"), proof-playbook.md (proof devices from addenda or new papers, with pages), open-problems.md (open problems the new works state).' : ''}
+5. Gates: python3 ${REPO}/scripts/mark_read_from_cards.py ${SK}; python3 ${REPO}/scripts/verify_card_quotes.py ${SK} → all exact; python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md → 12/12; python3 ${REPO}/scripts/check_ledger.py ${SK} → every SKILL.md → ledger anchor resolves; python3 ${REPO}/scripts/check_links.py ${SK} → 0 broken.
+Edit only: 07, 08, 09, SKILL.md, technique-catalog.md, RESOURCES.md, 01/05/06${m.student_mode ? ', the student-mode files' : ''}, quote fixes in the new cards, INDEX.md via mark_read_from_cards.py, abstracts.json via merge_chase.py.
+Report files changed, the SKILL.md word count before/after, and what you decided not to add.`
+}
+
+function verifyPrompt(m, integ) {
+  const SK = skillDir(m)
+  return `${ctx(m)}
+The new material was carded and integrated (integration report: ${JSON.stringify(integ)}). You are a READ-ONLY reviewer: do not edit files. Use git -C ${REPO} diff -- ${TEAM_REL}/${m.slug} plus the untracked new card files, and the pre-increment copy ${backup(m)}. Check:
+1. Every new claim in SKILL.md, 08, 09, technique-catalog, RESOURCES, 01/05/06${m.student_mode ? ', reading-path, proof-playbook, open-problems' : ''} is supported by a new card and by the text at the cited page (open the txt files). Reviews are attributed to the reviewer, never the authors; table-of-contents inferences are labelled (no invented chapter content).
+2. python3 ${REPO}/scripts/verify_card_quotes.py ${SK} is all exact; python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md is 12/12; SKILL.md grew by at most ~${GROWTH + 100} words against the pre-increment copy; frontmatter (except "researched:"), Activation Rules (except the coverage numbers of the first-activation disclaimer), ${m.student_mode ? 'Student Mode, ' : ''}Research Integrity Rules unchanged (diff).
+3. Conservative rules: no new core method unless ≥3 distinct works and all four checks are shown in 08; nothing deleted; contradictions marked.
+4. Every card id cited exists in 07-paper-cards.md; every ledger anchor linked from SKILL.md exists and nothing of the pre-increment SKILL.md was lost (python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)}; the frontmatter's researched: date and the disclaimer's coverage numbers in Activation Rules may differ by design); python3 ${REPO}/scripts/check_links.py ${SK} is clean; INDEX.md's Read column is filled for the new ids.
+Report findings with severity (blocker = unsupported claim or broken rule; major = misleading or gate failing; minor = polish) and a concrete fix each.`
+}
+
+function fixPrompt(m, findings, round) {
+  const SK = skillDir(m)
+  return `${ctx(m)}
+${round === 1 ? 'A reviewer checked the increment.' : 'After the first fix round some gates still fail.'} Findings: ${JSON.stringify(findings)}
+Your job (FIX${round > 1 ? ', round ' + round : ''}): verify each finding against the files and texts, apply the ones you confirm (blockers and majors always). Do not modify the pre-increment copy ${backup(m)}.
+Then run every gate and report each in gates (name, command, passed, detail):
+- quotes: python3 ${REPO}/scripts/verify_card_quotes.py ${SK} → all exact
+- quality_check: python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md → 12/12
+- ledger: python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)} → anchors resolve, nothing lost (only the frontmatter's researched: date and the disclaimer's coverage numbers in Activation Rules may differ)
+- links: python3 ${REPO}/scripts/check_links.py ${SK} → 0 broken
+- growth: wc -w SKILL.md now vs ${backup(m)} → at most ~${GROWTH + 100} words more
+If a script does not exist in this checkout, do the equivalent check with python and say so in detail.
+Edit only the files the integration step owns and the new cards. Report what you changed and declined.`
+}
+
+const PREP = {
+  type: 'object',
+  properties: {
+    batch_file_ok: { type: 'boolean' },
+    batch_file: { type: 'string' },
+    new_ids: { type: 'array', items: { type: 'string' } },
+    batches: { type: 'array', items: { type: 'object', properties: { bid: { type: 'string' }, mode: { type: 'string' }, papers: { type: 'number' } }, required: ['bid', 'mode', 'papers'] } },
+    problems: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['batch_file_ok', 'batch_file', 'new_ids', 'batches', 'problems'],
+}
+const STATUS = {
+  type: 'object',
+  properties: {
+    bid: { type: 'string' },
+    cards_written: { type: 'number' },
+    unreadable: { type: 'array', items: { type: 'string' } },
+    problems: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['bid', 'cards_written', 'unreadable', 'problems'],
+}
+const OUT = {
+  type: 'object',
+  properties: {
+    files_changed: { type: 'array', items: { type: 'string' } },
+    words_before: { type: 'number' },
+    words_after: { type: 'number' },
+    not_added: { type: 'array', items: { type: 'string' } },
+    summary: { type: 'string' },
+    problems: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['files_changed', 'words_before', 'words_after', 'not_added', 'summary', 'problems'],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: { findings: { type: 'array', items: { type: 'object', properties: { severity: { type: 'string', enum: ['blocker', 'major', 'minor'] }, file: { type: 'string' }, problem: { type: 'string' }, fix: { type: 'string' } }, required: ['severity', 'problem', 'fix'] } } },
+  required: ['findings'],
+}
+const FIX = {
+  type: 'object',
+  properties: {
+    applied: { type: 'number' },
+    declined: { type: 'array', items: { type: 'string' } },
+    gates: { type: 'array', items: { type: 'object', properties: { name: { type: 'string' }, command: { type: 'string' }, passed: { type: 'boolean' }, detail: { type: 'string' } }, required: ['name', 'command', 'passed', 'detail'] } },
+    summary: { type: 'string' },
+  },
+  required: ['applied', 'declined', 'gates', 'summary'],
+}
+
+async function prepareStage(m) {
+  const bf = batchFile(m)
+  const search = FIND.length && !handFile(m)
+  if (FIND.length && handFile(m)) log(`${m.slug}: batch file given in args.batchFiles; no search for this member`)
+  const p = search
+    ? await A(findPrompt(m, bf), { label: `find:${m.slug}`, phase: 'Prepare', schema: PREP })
+    : await A(planPrompt(m, bf), { label: `plan:${m.slug}`, phase: 'Prepare', schema: PREP, effort: 'low' })
+  if (!p) { log(`${m.slug}: prepare agent returned nothing; member skipped`); return { slug: m.slug, stopped: 'prepare agent failed' } }
+  if (!p.batch_file_ok || !p.batches.length) {
+    log(`${m.slug}: nothing to read (${search ? 'no new legitimate material found' : `batch file ${bf} missing, invalid or empty`}${p.problems.length ? `; ${list(p.problems)}` : ''}); member skipped`)
+    return { slug: m.slug, stopped: 'nothing to read', prepare: p }
+  }
+  if (p.problems.length) log(`${m.slug}: prepare reported ${p.problems.length} problem(s), e.g. ${p.problems.slice(0, 3).join('; ')} (full list in the result)`)
+  const noTxt = new Set(p.problems.filter(x => /^MISSING-TXT\s/.test(x)).map(x => x.split(/\s+/)[1]))
+  const batches = p.batches.filter(b => !noTxt.has(b.bid))
+  if (batches.length < p.batches.length) log(`${m.slug}: skipping ${p.batches.length - batches.length} batch(es) whose text files are missing (${[...noTxt].join(', ')}); run python3 scripts/acquire_fulltexts.py ${TEAM_REL}/${m.slug} first`)
+  if (!batches.length) return { slug: m.slug, stopped: 'text files missing', prepare: p }
+  log(`${m.slug}: ${p.new_ids.length} new item(s) in ${batches.length} batch(es)`)
+  return { slug: m.slug, bf: p.batch_file || bf, batches, prepare: p }
+}
+
+async function readStage(s, m) {
+  if (s.stopped) return s
+  const run = (b, retry) => A(readPrompt(m, b, s.bf, retry), { label: `read:${m.slug}:${b.bid}${retry ? ':retry' : ''}`, phase: 'Read', schema: STATUS })
+  const reports = await parallel(s.batches.map(b => () => run(b, false)))
+  const bad = () => s.batches.filter((b, i) => !reports[i] || !(reports[i].cards_written > 0))
+  const failed1 = bad()
+  if (failed1.length) {
+    log(`${m.slug}: retrying ${failed1.length} batch(es) once: ${failed1.map(b => b.bid).join(', ')}`)
+    const again = await parallel(failed1.map(b => () => run(b, true)))
+    failed1.forEach((b, j) => { if (again[j]) reports[s.batches.indexOf(b)] = again[j] })
+  }
+  const failed = bad().map(b => b.bid)
+  if (failed.length === s.batches.length) { log(`${m.slug}: no batch produced cards; integration skipped`); return { ...s, reports, stopped: 'no cards written' } }
+  if (failed.length) log(`${m.slug}: no cards for ${failed.join(', ')}; integrating the rest, rerun later with a batch file holding only those`)
+  return { ...s, reports, failed }
+}
+
+async function integrateStage(s, m) {
+  if (s.stopped) return s
+  const integ = await A(integratePrompt(m, s), { label: `integrate:${m.slug}`, phase: 'Integrate', schema: OUT })
+  if (!integ) { log(`${m.slug}: integrate agent returned nothing; member stopped before review`); return { ...s, stopped: 'integrate agent failed' } }
+  log(`${m.slug}: SKILL.md ${integ.words_before} → ${integ.words_after} words (cap +${GROWTH}); ${integ.files_changed.length} file(s) changed`)
+  return { ...s, integ }
+}
+
+async function verifyStage(s, m) {
+  if (s.stopped) return s
+  const v = await A(verifyPrompt(m, s.integ), { label: `verify:${m.slug}`, phase: 'Verify', schema: FINDINGS })
+  if (!v) log(`${m.slug}: reviewer returned nothing; the fix agent will still run every gate`)
+  const findings = v ? v.findings : []
+  log(`${m.slug}: ${findings.length} findings (${findings.filter(f => f.severity === 'blocker').length} blockers)`)
+  return { ...s, findings }
+}
+
+async function fixStage(s, m) {
+  if (s.stopped) return s
+  let fix = await A(fixPrompt(m, s.findings, 1), { label: `fix:${m.slug}`, phase: 'Fix', schema: FIX })
+  let failing = fix ? fix.gates.filter(g => !g.passed) : [{ name: 'fix agent', command: '-', passed: false, detail: 'fix agent returned nothing' }]
+  let rounds = 1
+  if (failing.length) {
+    log(`${m.slug}: gate(s) still failing: ${failing.map(g => g.name).join(', ')}; one more fix round`)
+    const fix2 = await A(fixPrompt(m, failing.map(g => ({ severity: 'blocker', problem: `${g.name} failed: ${g.detail}`, fix: `make "${g.command}" pass` })), 2), { label: `fix2:${m.slug}`, phase: 'Fix', schema: FIX })
+    rounds = 2
+    if (fix2) { fix = fix2; failing = fix2.gates.filter(g => !g.passed) }
+    if (failing.length) log(`${m.slug}: STILL failing after two fix rounds: ${failing.map(g => `${g.name} (${g.detail})`).join('; ')}; needs a human look`)
+  }
+  return { ...s, fix, fix_rounds: rounds, gates_failing: failing.map(g => g.name) }
+}
+
+const results = await pipeline(MEMBERS, prepareStage, readStage, integrateStage, verifyStage, fixStage)
+const members = results.map((r, i) => r || { slug: MEMBERS[i].slug, stopped: 'a stage threw; this member was dropped (see the run transcript)' })
+const changed = members.filter(r => r.integ).map(r => r.slug)
+return {
+  stage: 'T4 increment',
+  label: LABEL,
+  date: DATE,
+  members: members.map(r => ({
+    slug: r.slug,
+    stopped: r.stopped || null,
+    batch_file: r.bf || null,
+    new_ids: r.prepare ? r.prepare.new_ids : [],
+    prepare_problems: r.prepare ? r.prepare.problems : [],
+    batches_failed: r.failed || [],
+    integrate: r.integ || null,
+    findings: r.findings ? r.findings.length : null,
+    fix: r.fix || null,
+    fix_rounds: r.fix_rounds || 0,
+    gates_failing: r.gates_failing || null,
+  })),
+  next: [
+    changed.length ? `Commit ${changed.join(', ')}: works.json, INDEX.md, abstracts, cards, 07–09, SKILL.md and reference files (never PDFs, txt/ or private/).` : 'Nothing was integrated.',
+    changed.length ? 'Then run team-integrate.js so the team README, DEEP-READING.md coverage and the roundtable reflect the increment.' : 'No team-level refresh needed.',
+  ],
+}
