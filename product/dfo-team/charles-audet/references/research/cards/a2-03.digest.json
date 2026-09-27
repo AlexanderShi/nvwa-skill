@@ -1,0 +1,667 @@
+[
+ {
+  "id": "S198",
+  "year": "2016",
+  "title": "La saga des trois octogones",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): A French popular-science piece on three octagons by the small-polygon trio Audet–Hansen–Messine, so outreach for the extremal-polygon side line. Which three octagons it covers is not known.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: popular and historical accounts of the octagon results",
+    "relation": "evidence",
+    "note": "Popular-science venue; inferred from title.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "popular and historical accounts of the octagon results",
+    "evidence": "Pour la Science dossier (S198), \"Three little octagons\" (S221), \"The story of Hansen's octagon\" (D011); inferred from titles.",
+    "pages": "inferred from title"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": []
+ },
+ {
+  "id": "S199",
+  "year": "2016",
+  "title": "A decomposition approach for the hydropower operation and maintenance scheduling",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): A decomposition method for scheduling the operation and maintenance of hydropower generation together, an industrial OR application. The word \"decomposition\" suggests mathematical programming rather than blackbox optimization. It sits with the hydropower maintenance cards S204 (s01) and S145 (s2-04).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Research Trajectory",
+    "relation": "evidence",
+    "note": "Part of the 2010–2016 applications period with hydropower partners; inferred from title and coauthors.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "J.A. Rodríguez, M.F. Anjos, P. Côté",
+  "quotes": []
+ },
+ {
+  "id": "S003",
+  "year": "2017",
+  "title": "Derivative-free and blackbox optimization",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): First edition of the Audet–Hare DFBBO textbook (969 Scholar citations in works.json). The author's book page gives its size: 302 pages, 36 b/w figures, 180 exercises, 174 references, 14+1 chapters. No abstract was found (Crossref has none; the Springer page is behind a JavaScript challenge).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Textbook with W. Hare; content not read. The accuracy-profile quote SKILL.md attributes to it (Method 5) stays secondary.",
+    "pages": "metadata"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "DFBBO textbook, first edition (Springer 2017).",
+    "pages": "metadata"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "W. Hare",
+  "quotes": []
+ },
+ {
+  "id": "S115",
+  "year": "2017",
+  "title": "Maximal area of equilateral small polygons",
+  "read_level": "abstract",
+  "contribution": "Proves that among equilateral polygons with given number of sides and diameter, the regular one maximizes area (abstract).",
+  "problem_entry": "Maximal area of equilateral small polygons (abstract).",
+  "key_idea": "",
+  "assumptions": "Equilateral polygons, fixed number of sides, fixed diameter (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: extremal-geometry side line: numeric global optimization first, exact algebraic certificate later",
+    "relation": "evidence",
+    "note": "Sole-authored result in the small-polygon line (cf. S093 in s2-04, S113 and S142 in s04). The abstract gives only the result, so the numeric-then-exact part is not checked here.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": [
+   {
+    "text": "The paper shows that among all equilateral polygons with a given number of sides and the same diameter, the regular polygon has the maximal area.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S043",
+  "year": "2018",
+  "title": "Mesh-based Nelder–Mead algorithm for inequality constrained optimization: C. Audet, C. Tribes",
+  "read_level": "abstract",
+  "contribution": "Extends Nelder–Mead to inequality-constrained optimization by embedding it as a Mads search step, so it inherits Mads convergence; reports improved solution quality (abstract).",
+  "problem_entry": "NM is widely used despite lacking convergence support and is limited to unconstrained problems (abstract).",
+  "key_idea": "NM as a Mads Search step: heuristic power, Mads guarantees (abstract).",
+  "assumptions": "Inequality-constrained problems (abstract); constraint treatment (EB/PB) not stated in the abstract.",
+  "proof_devices": [],
+  "experiments": "Numerical experiments showing improved solution quality with the NM search step (abstract); problem set, competitors and budget not read.",
+  "positioning": "Positions against NM's missing convergence support while acknowledging its wide use (abstract).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "A guarantee-free heuristic (NM) is admitted only as a Search step and the method inherits all of the Mads analysis.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Taste warning sign 6",
+    "relation": "evidence",
+    "note": "Direct abstract support for the \"wrap heuristics\" pattern already cited in SKILL.md.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "To publish a popular heuristic that has no convergence theory, reimplement it as the Search step of a convergent direct search (trial points on the mesh), let the Poll carry the proof, and report the improvement attributable to that search step (abstract)."
+  ],
+  "coauthors": "C. Tribes",
+  "quotes": [
+   {
+    "text": "This is done through a search step of the mesh adaptive direct search (Mads) algorithm, inspired by the NM algorithm.",
+    "page": "abstract"
+   },
+   {
+    "text": "The proposed algorithm does not suffer from the NM lack of convergence, but instead inherits from the totality of the Mads convergence analysis.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S055",
+  "year": "2018",
+  "title": "Robust optimization of noisy blackbox problems using the mesh adaptive direct search algorithm",
+  "read_level": "abstract",
+  "contribution": "Robust-MADS: a MADS variant for noisy unconstrained blackboxes that smooths the objective with past evaluations instead of resampling (abstract).",
+  "problem_entry": "Noise creates artificial solutions where MADS can stall (abstract).",
+  "key_idea": "Smoothing from the evaluation history, no resampling (abstract).",
+  "assumptions": "Unconstrained problems with numerical noise (abstract).",
+  "proof_devices": [],
+  "experiments": "Noisy problems from the literature (abstract); protocol not read.",
+  "positioning": "Implicitly contrasts with resampling-based noise handling (\"rather than resampling points\", abstract).",
+  "writing": "",
+  "limits_future": "not read (the unconstrained restriction is stated, abstract)",
+  "method_links": [
+   {
+    "method": "Workflow B",
+    "relation": "evidence",
+    "note": "Step 5 recommends robust MADS for noisy blackboxes; the abstract confirms its mechanism: smoothing from past evaluations, unconstrained case only.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: evaluation-economical noise handling (reuse cached evaluations instead of resampling)",
+    "relation": "evidence",
+    "note": "Smoothing uses previously evaluated points rather than new samples.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "evaluation-economical noise handling: reuse cached evaluations instead of resampling",
+    "evidence": "Robust-MADS smooths the objective \"using previously evaluated function evaluations, rather than resampling points\".",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Before spending evaluations on replications to fight noise, smooth the objective with values already in the evaluation cache; resampling becomes the fallback, not the default (abstract)."
+  ],
+  "coauthors": "A. Ihaddadene, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "Blackbox optimization problems are often contaminated with numerical noise, and direct search methods such as the Mesh Adaptive Direct Search (MADS) algorithm may get stuck at solutions artificially created by the noise.",
+    "page": "abstract"
+   },
+   {
+    "text": "We propose a way to smooth out the objective function of an unconstrained problem using previously evaluated function evaluations, rather than resampling points.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S079",
+  "year": "2018",
+  "title": "Efficient solution of quadratically constrained quadratic subproblems within the mesh adaptive direct search algorithm",
+  "read_level": "abstract",
+  "contribution": "Three structure-exploiting QCQP solvers (l1 penalty, augmented Lagrangian, and a new combination) for the quadratic-model search step of MADS, implemented in NOMAD and tested on 65 analytic problems and 4 engineering simulations (abstract).",
+  "problem_entry": "Quadratic-model search in MADS produces QCQP subproblems that need an efficient solver (abstract).",
+  "key_idea": "Exploit the quadratic structure of the models; combine exact penalty and augmented Lagrangian (abstract).",
+  "assumptions": "Constrained blackbox problems; quadratic models of objective and constraints inside the search step (abstract).",
+  "proof_devices": [],
+  "experiments": "65 analytical test problems and 4 simulation-based engineering applications, inside NOMAD (abstract); profiles and baselines not read.",
+  "positioning": "Trajectory note (inferred from title): QCQP, the subject of the 1997 thesis Ch. 5 (card b2-01), returns here as a subproblem inside DFO; the abstract does not make this link.",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The quadratic models live in an optional, \"versatile search step\"; the paper improves that Search, not the Poll.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "The methods are implemented within NOMAD.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Two problem layers (65 analytic + 4 simulation-based engineering applications); competitors and profile type not read.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When a Search step generates a stream of structured subproblems, make the subproblem solver the research object: build several solvers that exploit the structure, implement them in the host code, and compare them on both an analytic set and real simulations (abstract)."
+  ],
+  "coauthors": "N. Amaioua, A.R. Conn, S. Le Digabel",
+  "quotes": [
+   {
+    "text": "One of the optional MADS features is a versatile search step in which quadratic models are built leading to a series of quadratically constrained quadratic subproblems.",
+    "page": "abstract"
+   },
+   {
+    "text": "These methods are implemented within the NOMAD software package and their impact are assessed through computational experiments on 65 analytical test problems and 4 simulation-based engineering applications.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S033",
+  "year": "2019",
+  "title": "The mesh adaptive direct search algorithm for granular and discrete variables",
+  "read_level": "abstract",
+  "contribution": "A Mads variant whose mesh update progressively increases precision so it handles granular variables, and discrete variables as a corollary, tested in NOMAD (abstract).",
+  "problem_entry": "Mads is built for continuous variables; many practical variables have a controlled number of decimals (abstract).",
+  "key_idea": "Redesign the mesh-refinement rule around variable granularity (abstract).",
+  "assumptions": "Granular variables with a controlled number of decimals (abstract).",
+  "proof_devices": [],
+  "experiments": "Computational results with NOMAD (abstract); protocol not read.",
+  "positioning": "Builds on Mads's continuous-variable design and Clarke-based analysis (abstract).",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The new pathology is handled by changing the mesh update, the structure the Poll relies on, not by adding a Search step.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Workflow C",
+    "relation": "evidence",
+    "note": "Algorithm design for a new blackbox pathology (granular/discrete variables) inside MADS.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Computational results are presented with NOMAD.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: generalize the variable type so the harder case becomes a corollary",
+    "relation": "evidence",
+    "note": "Granular handling gives discrete handling as a corollary.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "generalize the variable type so the harder case becomes a corollary",
+    "evidence": "Granular-variable mesh update; \"A corollary of this new approach is the ability to treat discrete variables.\"",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [
+   "Generalize the variable type first (granular = fixed number of decimals) so that the case that looks harder (discrete variables) falls out as a corollary of the same mechanism (abstract)."
+  ],
+  "coauthors": "S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "This modification involves a new way of updating the underlying mesh so that the precision is progressively increased.",
+    "page": "abstract"
+   },
+   {
+    "text": "A corollary of this new approach is the ability to treat discrete variables.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D004",
+  "year": "2020",
+  "title": "Model-based methods in derivative-free nonsmooth optimization",
+  "read_level": "abstract",
+  "contribution": "Survey of model-based DFO for nonsmooth optimization: history, model accuracy for smooth functions, nonsmooth modelling, frameworks, and the authors' opinions on research directions (abstract).",
+  "problem_entry": "Model-based DFO assumed smoothness; recent work extends it to nonsmooth problems (abstract).",
+  "key_idea": "Organize the field from smooth-model accuracy to nonsmooth modelling and frameworks (abstract).",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "none stated (survey, abstract)",
+  "positioning": "Frames the field historically, from smooth to nonsmooth model-based DFO (abstract).",
+  "writing": "Ends a survey with the authors' own opinions on research directions (abstract).",
+  "limits_future": "opinions on research directions announced; content not read (abstract)",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Scope note: the chapter surveys methods where a model guides the whole algorithm, the family Method 1 contrasts itself with. The abstract does not say how the authors weigh model-driven against Search-only use of models.",
+    "pages": "abstract"
+   },
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Survey chapter co-written with the textbook coauthor.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "Survey chapter on model-based DFO for nonsmooth optimization with W. Hare, ending with opinions on research directions.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "W. Hare",
+  "quotes": [
+   {
+    "text": "One branch of DFO focuses on model-based DFO methods, where an approximation of the objective function is used to guide the optimization algorithm.",
+    "page": "abstract"
+   },
+   {
+    "text": "We conclude the paper with some of our opinions on profitable research directions in model-based DFO for NSO.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S190",
+  "year": "2021",
+  "title": "Optimisation continue: Problèmes linéaires et non linéaires",
+  "read_level": "abstract",
+  "contribution": "Graduate textbook in French on continuous optimization (fundamentals, linear, nonlinear with and without constraints), with intuitions, full proofs, examples, figures and exercises (abstract).",
+  "problem_entry": "Optimization is broad; the book restricts itself to continuous variables for graduate applied-math and engineering students (abstract).",
+  "key_idea": "Intuition first, then rigorous proof of every result (abstract).",
+  "assumptions": "Continuous variables only (abstract).",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "Intuition for each technique paired with rigorous proof of every stated result (abstract).",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Sole-authored graduate textbook, outside DFO. Methods 1–6 are not supported by the abstract.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "Sole-authored French graduate textbook on linear and nonlinear continuous optimization with full proofs.",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": [
+   {
+    "text": "L’ouvrage comprend trois parties : la première introduit des notions fondamentales d’optimisation, la deuxième est dédiée à l'optimisation linéaire et la dernière porte sur l’optimisation non linéaire, avec et sans contraintes.",
+    "page": "abstract"
+   },
+   {
+    "text": "Il présente les intuitions à l'origine de diverses techniques d'optimisation et démontre rigoureusement tous les résultats énoncés, ce qui permet de saisir les rouages des méthodes et leur fonctionnement.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S122",
+  "year": "2022",
+  "title": "Blackbox optimization",
+  "read_level": "abstract",
+  "contribution": "Encyclopedia of Optimization entry on blackbox optimization (abstract); content not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Sole-authored encyclopedia entry defining \"blackbox optimization\"; supported by venue metadata only, since the abstract is generic.",
+    "pages": "abstract; venue metadata"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "Sole-authored Encyclopedia of Optimization entry \"Blackbox optimization\".",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "sole author",
+  "quotes": [
+   {
+    "text": "The present document in the Blackbox Optimization entry.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S141",
+  "year": "2022",
+  "title": "Constrained blackbox optimization with the NOMAD solver on the COCO constrained test suite",
+  "read_level": "abstract",
+  "contribution": "NOMAD (MADS with progressive barrier) vs CMA-ES on COCO's bbob-constrained suite, reported with COCO graphs and constrained data profiles; concludes that these tools are complementary and many graphs are needed (abstract).",
+  "problem_entry": "New COCO bbob-constrained suite; constrained blackbox optimization (abstract).",
+  "key_idea": "Evaluate one solver with two communities' benchmarking tools and compare the tools themselves (abstract).",
+  "assumptions": "Quantifiable and relaxable constraints handled by the progressive barrier (abstract).",
+  "proof_devices": [],
+  "experiments": "NOMAD (MADS + PB) vs CMA-ES on the COCO bbob-constrained suite; COCO postprocessing graphs plus data profiles adapted to constraints (abstract).",
+  "positioning": "Brings a DFO tool (data profiles) into an evolutionary-computation platform and venue (abstract).",
+  "writing": "Abstract ends on a methodological warning rather than a performance claim (abstract).",
+  "limits_future": "Warns that benchmarking tools and their variations can disagree (abstract).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Cross-community benchmarking on the evolutionary-computation home ground (GECCO, COCO, CMA-ES), with data profiles adapted to constraints and a call to use complementary tools together.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "The progressive barrier is used for quantifiable and relaxable constraints.",
+    "pages": "abstract"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "MADS enters the comparison through its NOMAD implementation.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [
+   "When you benchmark on another community's platform, report both the platform's native postprocessing and your own community's profiles (adapted to constraints if needed), and say where they disagree (abstract)."
+  ],
+  "coauthors": "S. Le Digabel, L. Salomon, C. Tribes",
+  "quotes": [
+   {
+    "text": "Computational tests are illustrated with the postprocessing graphs from the COCO platform, as well as with data profiles, an established tool in the derivative-free optimization community, adapted here for the constrained case.",
+    "page": "abstract"
+   },
+   {
+    "text": "The results illustrate that researchers must be very careful with the use of these tools, which are complementary and should ideally be used together.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "D010",
+  "year": "2025",
+  "title": "Tribute conference for Pierre Hansen and François Soumis",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): A two-page newsletter report on a tribute conference for two GERAD figures, P. Hansen (Audet's early coauthor) and F. Soumis. This is a community-service item, not research. The newsletter PDF URL in works.json was unreachable (connection reset, HTTP 503), so it was not read.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "Academic Lineage",
+    "relation": "evidence",
+    "note": "Service to the GERAD school named as Audet's upstream; inferred from title.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "community building (symposia, tributes)",
+    "evidence": "Tribute-conference report (D010) and DFO symposium organization (S218); inferred from titles.",
+    "pages": "inferred from title"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "G. Desaulniers",
+  "quotes": []
+ },
+ {
+  "id": "D011",
+  "year": "2025",
+  "title": "The story of Hansen's octagon",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): A historical account of an octagon problem associated with P. Hansen, told in a global-optimization workshop the same year as the Hansen tribute (D010). It continues the octagon line that begins with the thesis's Graham octagon (card b2-01).",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: popular and historical accounts of the octagon results",
+    "relation": "evidence",
+    "note": "Narrative \"story\" piece; inferred from title.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "F. Messine",
+  "quotes": []
+ },
+ {
+  "id": "D005",
+  "year": "2026",
+  "title": "Derivative-Free and Blackbox Optimization (2nd edition)",
+  "read_level": "abstract",
+  "contribution": "Second edition of the Audet–Hare textbook on derivative-free and blackbox optimization, with 16 end-of-chapter projects and many exercises (abstract).",
+  "problem_entry": "Optimization when derivatives are unavailable, unreliable or impractical (abstract).",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "not read",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "relation": "evidence",
+    "note": "Second edition of the DFBBO textbook, roughly doubled in exercises and figures.",
+    "pages": "abstract"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reference works as a research output (textbooks, encyclopedia entry, survey chapter)",
+    "evidence": "DFBBO textbook 2nd edition: 16 end-of-chapter projects, 372 exercises (author's page).",
+    "pages": "abstract"
+   }
+  ],
+  "transferable": [],
+  "coauthors": "W. Hare",
+  "quotes": [
+   {
+    "text": "This second edition offers a comprehensive introduction to the field of optimization when derivatives are unavailable, unreliable, or impractical.",
+    "page": "abstract"
+   },
+   {
+    "text": "16 end-of-chapter projects are provided, allowing advanced exploration of desired topics.",
+    "page": "abstract"
+   }
+  ]
+ },
+ {
+  "id": "S218",
+  "year": "",
+  "title": "Third Derivative-Free Optimization Symposium",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): Most likely the organizing-committee listing of a DFO symposium, harvested by Scholar as a publication. This is community service, not research.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: community building (symposia, tributes)",
+    "relation": "evidence",
+    "note": "Symposium organization with the international DFO community; inferred from title.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "M. Porcelli, Y. Diouane, F. Rinaldi, W. Hare, S. Wild, S. Le Digabel",
+  "quotes": []
+ },
+ {
+  "id": "S221",
+  "year": "",
+  "title": "Three little octagons",
+  "read_level": "metadata",
+  "contribution": "Inferred from title (metadata only): A piece on three small octagons by the Audet–Hansen–Messine trio. It may be an English counterpart of S198 or relate to S108 \"Quatre petits octogones\" (2005); this was not verified.",
+  "problem_entry": "",
+  "key_idea": "",
+  "assumptions": "",
+  "proof_devices": [],
+  "experiments": "",
+  "positioning": "",
+  "writing": "",
+  "limits_future": "",
+  "method_links": [
+   {
+    "method": "new-pattern candidate: popular and historical accounts of the octagon results",
+    "relation": "evidence",
+    "note": "Same trio and topic as S198; inferred from title.",
+    "pages": "inferred from title"
+   }
+  ],
+  "new_pattern_candidates": [],
+  "transferable": [],
+  "coauthors": "P. Hansen, F. Messine",
+  "quotes": []
+ }
+]
