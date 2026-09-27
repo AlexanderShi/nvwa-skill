@@ -57,3 +57,54 @@
 ## P7. What could not be observed
 
 - Proof drafts, arXiv v1→final changes (beyond the Submartingales→Supermartingales title change), referee reports, rebuttals, failed projects. No evidence of abandoned directions was retrievable.
+
+---
+
+## Update 2026-09-27 (deepening pass)
+
+### P1+ More papers with the same pattern: classical method kept, weaker oracle
+
+| Paper | What changes vs deterministic | What stays classical | Source |
+|---|---|---|---|
+| Berahas–Cao–Scheinberg, SIOPT 31 (2021) | f computed with bounded noise, and no other assumption. Gradient estimates inexact and possibly random | Line search (modified by a noise slack) | https://doi.org/10.1137/19M1291832 ; arXiv:1910.04055 |
+| Jin–Scheinberg–Xie, NeurIPS 34 (2021) | Probabilistic zeroth/first-order oracles, possibly biased | Line search | https://proceedings.neurips.cc/paper/2021/hash/4cb811134b9d39fc3104bd06ce75abad-Abstract.html |
+| Scheinberg–Xie, arXiv:2308.13161 (2023; WSC 2023 preliminary) | Stochastic zeroth/first/second-order oracles with accuracy and reliability requirements | Adaptive regularization with cubics | https://arxiv.org/abs/2308.13161 |
+| Jin–Scheinberg–Xie, Math. Program. 209 (2025) | Adaptive oracle costs; step parameter not bounded below | Step search / trust region | https://doi.org/10.1007/s10107-024-02078-z |
+| Nguyen–Scheinberg–Tran, JOTA 205 (2025) | Stochastic gradient not assumed unbiased | ISTA / FISTA with backtracking | https://doi.org/10.1007/s10957-025-02621-8 |
+
+With the earlier table this makes **12 papers (2014–2026)** following P1. That is enough to treat Method 2 as the group's default design move, not a coincidence.
+
+### P2+ Analysis style: more detail
+
+- Blanchet et al. (2019): the search summary describes the core device as a general **renewal-reward** process and its stopping time. Later work used the same device for stochastic direct-search and line-search analyses (https://doi.org/10.1287/ijoo.2019.0016).
+- **Title drift between arXiv v1 and the journal version** (observable): "…via Submartingales" → "…via Supermartingales" (Blanchet et al.); "A Stochastic Line Search Method with Convergence Rate Analysis" (arXiv:1807.07994 v1) → "…with Expected Complexity Analysis" (SIOPT 2020); "…for Line Search Based on Stochastic Oracles" (NeurIPS 2021) → "…for Adaptive Step Search Based on Stochastic Oracles" (SIOPT 2024). *Reading (inference):* results are sharpened in revision toward a precise statement of *which* guarantee (expected complexity) and *which* algorithm class (step search rather than line search).
+- **Short version first, long version later** (observable): NeurIPS 2021 → SIOPT 2024; NeurIPS 2022 OPT workshop / WSC 2023 → arXiv:2308.13161 (extended to second order). *Inference:* ML or simulation venues are used to put a result out, and optimization journals carry the full theory.
+- **From iteration to sample complexity** (observable): after tail bounds (2021–2024), the 2025 Math. Program. paper bounds the step parameter to obtain total oracle cost. It is the same programme one level closer to practice.
+
+### P4+ Experiments: what could and could not be verified
+
+- FoCM 2022 abstract (via search): numerical results evaluate the quality of the gradient approximations *and* their performance inside a line-search DFO algorithm. Estimators are compared on two levels, accuracy of the estimate and end-to-end performance.
+- Optima 79 (≈2009) essay: builds on the Moré–Wild numerical experiments on Powell's method (search summary). Moré & Wild, SIAM J. Optim. 20(1) (2009), introduced **data profiles** for budget-limited DFO benchmarking (https://doi.org/10.1137/080724083).
+- Stefan M. Wild (co-author of the benchmark paper) sat on R. Chen's 2015 Lehigh PhD committee (thesis record, https://preserve.lehigh.edu/etd/2548). Menickelly (Scheinberg PhD, 2017) co-authored the 2019 Acta Numerica DFO survey with Larson and Wild.
+- *Inference, not verified:* the group's DFO experiments likely use Moré–Wild-style problems and data/performance profiles, with budgets counted in function evaluations. **No search result confirmed the test sets or metrics used in any specific Scheinberg paper.** The pre-meeting workflow in SKILL.md therefore phrases this as a question to check, not a rule.
+
+### P5+ ML-optimization thread (verified)
+
+- Tang & Scheinberg, *Math. Program.* 160, 495–529 (2016), "Practical inexact proximal quasi-Newton method with global complexity analysis" (arXiv:1311.6547; LHAC = Low-rank Hessian Approximation in Active-set Coordinate descent). The first global rate for an algorithm that solves its subproblems inexactly by randomized coordinate descent (per summary of Tang's thesis).
+- Nguyen, Liu, Scheinberg, Takáč, *ICML* 2017, "SARAH" (arXiv:1703.00102): a recursive stochastic gradient for finite sums, with a linear rate under strong convexity, including for the inner loop.
+- SIAM OP17 plenary title (2017): "Using Second-order Information in Training Large-scale Machine Learning Models".
+- *Observed:* at Lehigh (2010–2019) the ML line ran alongside the probabilistic-model line and shared its taste: exploit structure (low-rank Hessians, active sets) and prove a global rate.
+
+### P6+ Software trail update
+
+- LHAC paper venue now verified (Math. Program. 2016), so row 32 in RESOURCES.md is upgraded.
+
+### P9 Say–do cross-check after this pass
+
+| Stated (02-methodology) | Practised (this file) | Verdict |
+|---|---|---|
+| Define the oracle first (F1–F3, 2021–2025) | Oracle conditions are the main novelty in 12 papers (P1, P1+) | ✅ consistent |
+| Analyse algorithms as stochastic processes with martingale behaviour (F4) | Blanchet 2019 renewal-reward; tail bounds 2021–2025 | ✅ consistent |
+| Minimal quality control in model-based DFO (Optima 79, ≈2009) | Scheinberg–Toint 2010; Powell-style complexity 2025–2026 | ✅ consistent over 17 years |
+| Adaptive methods instead of tuned schedules (G2, F4) | Every stochastic paper uses line search, trust region or ARC | ✅ consistent. Large-scale ML evidence for the *savings claim* is not in the verified corpus (see open-problems.md row 10) |
+| Bias affects the neighbourhood, not the rate (F3, paraphrase) | Neighbourhood results in BCS 2021 and CBS 2024; biased oracles in JSX 2024 | ✅ consistent (stated side unconfirmed verbatim) |
