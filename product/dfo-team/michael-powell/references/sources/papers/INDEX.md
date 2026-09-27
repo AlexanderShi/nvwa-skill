@@ -10,192 +10,192 @@
 
 | # | ID | Year | Title | Venue | Cites | Kind | Source | Full text | Pages | Role | Read |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | S001 | 1963 | A rapidly convergent descent method for minimization | The Computer Journal | 7118 | journal | manual | txt | 6 | core | — |
-| 2 | S002 | 1964 | An efficient method for finding the minimum of a function of several variables without calculating derivatives | The computer journal | 6999 | journal | — | no-oa |  | core | — |
-| 3 | S003 | 1978 | A fast algorithm for nonlinearly constrained optimization calculations | Numerical analysis | 2942 | conference | — | no-oa |  | core | — |
-| 4 | S004 | 1969 | A method for non-linear constraints in minimization problems | Optimization | 2709 | chapter | — | no-oa |  | core | — |
-| 5 | S005 | 1987 | Radial basis functions for multivariable interpolation: a review | Algorithms for approximation | 2672 | chapter | — | no-oa |  | core | — |
-| 6 | S006 | 1977 | Restart procedures for the conjugate gradient method | Mathematical programming | 2635 | journal | — | no-oa |  | core | — |
-| 7 | S007 | 2009 | The BOBYQA algorithm for bound constrained optimization without derivatives | Cambridge NA Report NA2009/06, University of Cambridge, Cambridge | 2462 | report | DAMTP report | txt | 39 | core | — |
-| 8 | S008 | 1994 | A direct search optimization method that models the objective and constraint functions by linear interpolation | Advances in optimization and numerical analysis | 2391 | chapter | — | no-oa |  | core | — |
-| 9 | S009 | 1981 | Approximation theory and methods | Cambridge university press | 1925 | book | — | no-oa |  | core | — |
-| 10 | S010 | 1990 | The theory of radial basis function approximation in 1990 | University of Cambridge. Department of Applied Mathematics and Theoretical Physics | 1530 | report | — | no-oa |  | core | — |
-| 11 | S011 | 1970 | A hybrid method for nonlinear equations | Numerical methods for nonlinear algebraic equations | 1384 | chapter | — | no-oa |  | core | — |
-| 12 | S012 | 1965 | A method for minimizing a sum of squares of non-linear functions without calculating derivatives | The Computer Journal | 933 | journal | — | no-oa |  | core | — |
-| 13 | S013 | 1978 | The convergence of variable metric methods for non-linearly constrained optimization calculations | Nonlinear programming | 900 | conference | — | no-oa |  | core | — |
-| 14 | S014 | 1998 | Direct search algorithms for optimization calculations | Acta numerica | 892 | journal | DAMTP report | txt | 49 | core | — |
-| 15 | S015 | 1970 | A new algorithm for unconstrained optimization | Nonlinear programming | 820 | conference | — | no-oa |  | core | — |
-| 16 | S016 | 1978 | Algorithms for nonlinear constraints that use Lagrangian functions | Mathematical programming | 816 | journal | — | no-oa |  | core | — |
-| 17 | S018 | 2006 | The NEWUOA software for unconstrained optimization without derivatives | Large-scale nonlinear optimization | 777 | chapter | DAMTP report | txt | 42 | core | — |
-| 18 | S019 | 1968 | A FORTRAN subroutine for solving systems of nonlinear algebraic equations. | Atomic Energy Research Establishment, Harwell (England) | 777 | report | manual | txt | 58 | core | — |
-| 19 | S020 | 1984 | Nonconvex minimization calculations and the conjugate gradient method | Numerical analysis | 766 | conference | — | no-oa |  | core | — |
-| 20 | S021 | 1974 | On the estimation of sparse Jacobian matrices | J. Inst. Math. Appl | 682 | journal | — | no-oa |  | core | — |
-| 21 | S022 | 1983 | Variable metric methods for constrained optimization | Mathematical Programming The State of the Art | 661 | conference | — | no-oa |  | core | — |
-| 22 | S023 | 1977 | Piecewise quadratic approximations on triangles | ACM Transactions on Mathematical Software (TOMS) | 659 | journal | — | no-oa |  | core | — |
-| 23 | S024 | 1976 | Some global convergence properties of a variable metric algorithm for minimization without exact line searches | Nonlinear programming | 642 | conference | — | no-oa |  | core | — |
-| 24 | S025 | 2002 | UOBYQA: unconstrained optimization by quadratic approximation | Mathematical Programming | 542 | journal | DAMTP report | txt | 31 | core | — |
-| 25 | S026 | 1973 | On search directions for minimization algorithms | Mathematical Programming | 541 | journal | — | no-oa |  | core | — |
-| 26 | S027 | 1982 | The watchdog technique for forcing convergence in algorithms for constrained optimization | Algorithms for Constrained Minimization of Smooth Nonlinear Functions | 520 | chapter | — | no-oa |  | supplement | — |
-| 27 | S028 | 1975 | Convergence properties of a class of minimization algorithms | Nonlinear programming | 520 | conference | — | no-oa |  | supplement | — |
-| 28 | S029 | 2007 | A view of algorithms for optimization without derivatives | Mathematics Today-Bulletin of the Institute of Mathematics and its Applications | 417 | journal | DAMTP report | txt | 12 | core | — |
-| 29 | S030 | 1990 | A trust region algorithm for equality constrained optimization | Mathematical Programming | 374 | journal | manual | txt | 23 | core | — |
-| 30 | S031 | 1986 | Convergence properties of algorithms for nonlinear optimization | Siam Review | 357 | journal | — | no-oa |  | supplement | — |
-| 31 | S032 | 1971 | On the convergence of the variable metric algorithm | IMA Journal of Applied Mathematics | 337 | journal | — | no-oa |  | supplement | — |
-| 32 | S033 | 1984 | On the global convergence of trust region algorithms for unconstrained minimization | Mathematical Programming | 303 | journal | — | no-oa |  | supplement | — |
-| 33 | S034 | 1962 | An iterative method for finding stationary values of a function of several variables | The Computer Journal | 302 | journal | — | no-oa |  | supplement | — |
-| 34 | S036 | 2008 | Developments of NEWUOA for minimization without derivatives | IMA journal of numerical analysis | 253 | journal | DAMTP report | txt | 19 | supplement | — |
-| 35 | S037 | 1971 | Recent advances in unconstrained optimization | Mathematical Programming | 250 | journal | — | no-oa |  | supplement | — |
-| 36 | S038 | 1985 | On the quadratic programming algorithm of Goldfarb and Idnani | Mathematical Programming Essays in Honor of George B. Dantzig Part II | 248 | chapter | — | no-oa |  | supplement | — |
-| 37 | S040 | 1989 | A tolerant algorithm for linearly constrained optimization calculations | Mathematical Programming | 216 | journal | — | no-oa |  | supplement | — |
-| 38 | S041 | 1970 | A survey of numerical methods for unconstrained optimization | SIAM Review | 205 | journal | — | no-oa |  | supplement | — |
-| 39 | S042 | 1979 | On the estimation of sparse Hessian matrices | SIAM Journal on Numerical Analysis | 201 | journal | — | no-oa |  | supplement | — |
-| 40 | S043 | 1992 | Univariate multiquadric approximation: quasi-interpolation to scattered data | Constructive Approximation | 199 | journal | — | no-oa |  | supplement | — |
-| 41 | S045 | 2004 | Least Frobenius norm updating of quadratic models that satisfy interpolation conditions | Mathematical Programming | 192 | journal | DAMTP report | txt | 36 | core | — |
-| 42 | S046 | 1994 | The uniform convergence of thin plate spline interpolation in two dimensions | Numerische Mathematik | 187 | journal | — | no-oa |  | supplement | — |
-| 43 | S047 | 2003 | On trust region methods for unconstrained minimization without derivatives | Mathematical programming | 178 | journal | DAMTP report | txt | 22 | supplement | — |
-| 44 | S048 | 1972 | The Differential Correction Algorithm for Rational ℓ_∞-Approximation | SIAM Journal on Numerical Analysis | 173 | journal | — | no-oa |  | supplement | — |
-| 45 | S049 | 1986 | How bad are the BFGS and DFP methods when the objective function is quadratic? | Mathematical Programming | 160 | journal | — | no-oa |  | supplement | — |
-| 46 | S050 | 1986 | A recursive quadratic programming algorithm that uses differentiable exact penalty functions | Mathematical Programming | 159 | journal | manual | txt | 14 | core | — |
-| 47 | S051 | 1976 | Some convergence properties of the conjugate gradient method | Mathematical Programming | 159 | journal | — | no-oa |  | supplement | — |
-| 48 | S052 | 1974 | On the modification of 𝐿𝐷𝐿^{𝑇} factorizations | Mathematics of Computation | 150 | journal | — | no-oa |  | supplement | — |
-| 49 | S053 | 1970 | Curve fitting by splines in one variable | Numerical Approximation to Functions and Data | 127 | chapter | — | no-oa |  | supplement | — |
-| 50 | S054 | 1967 | On the maximum errors of polynomial approximations defined by interpolation and by least squares criteria | The Computer Journal | 123 | journal | — | no-oa |  | supplement | — |
-| 51 | S055 | 1999 | Recent research at Cambridge on radial basis functions | New Developments in Approximation Theory | 117 | conference | DAMTP report | txt | 18 | supplement | — |
-| 52 | S056 | 1968 | On applying Householder transformations to linear least squares problems. | IFIP Congress | 117 | conference | — | no-oa |  | supplement | — |
-| 53 | S057 | 2001 | Radial basis function methods for interpolation to functions of many variables | HERCMA | 116 | conference | DAMTP report | txt | 23 | supplement | — |
-| 54 | S058 | 1983 | ZQPCVX a FORTRAN subroutine for convex quadratic programming | Department of Applied Mathematics and Theoretical Physics, University | 116 | report | — | no-oa |  | supplement | — |
-| 55 | S059 | 1983 | VMCWD: A FORTRAN subroutine for constrained optimization | ACM SIGMAP Bulletin | 113 | journal | — | no-oa |  | supplement | — |
-| 56 | S060 | 1982 | Nonlinear optimization 1981 | NATO Conference Series. Series II: Systems Science | 107 | book | — | no-oa |  | supplement | — |
-| 57 | S061 | 1961 | A Calculation of the Ground-State Splitting for Mn Ions in a Cubic Field | Proceedings of the Royal Society of London A: Mathematical, Physical and… | 98 | journal | — | no-oa |  | supplement | — |
-| 58 | S062 | 1966 | Weighted uniform sampling—a Monte Carlo technique for reducing variance | IMA Journal of Applied Mathematics | 95 | journal | — | no-oa |  | supplement | — |
-| 59 | S063 | 1960 | Ground-State Splitting for d 5 S 6 Ions in a Cubic Field | Physical Review Letters | 94 | journal | — | no-oa |  | supplement | — |
-| 60 | S064 | 1987 | Updating conjugate directions by the BFGS formula | Mathematical Programming | 91 | journal | — | no-oa |  | supplement | — |
-| 61 | S065 | 1971 | Some properties of the variable metric algorithm | AERE, Theoretical Physics Division | 89 | report | — | no-oa |  | supplement | — |
-| 62 | S066 | 1973 | Piecewise quadratic surface fitting for contour plotting | UKAEA, Harwell, Atomic Energy Research Establishment | 85 | report | — | no-oa |  | supplement | — |
-| 63 | S067 | 2015 | On fast trust region methods for quadratic models with linear constraints | Mathematical Programming Computation | 77 | journal | DAMTP report | txt | 31 | core | — |
-| 64 | S068 | 2001 | On the Lagrange functions of quadratic models that are defined by interpolation* | Optimization Methods and Software | 77 | journal | DAMTP report | txt | 17 | supplement | — |
-| 65 | S069 | 1976 | Optimal interpolation | Numerical analysis | 77 | conference | — | no-oa |  | supplement | — |
-| 66 | S070 | 1983 | General algorithms for discrete nonlinear approximation calculations | Approximation theory IV | 75 | conference | — | no-oa |  | supplement | — |
-| 67 | S071 | 1989 | TOLMIN: A Fortran package for linearly constrained optimization calculations | University of Cambridge. Department of Applied Mathematics and Theoretical… | 72 | report | — | no-oa |  | supplement | — |
-| 68 | S072 | 2004 | On the use of quadratic models in unconstrained minimization without derivatives | Optimization Methods and Software | 71 | journal | DAMTP report | txt | 16 | supplement | — |
-| 69 | S073 | 1971 | Problems related to unconstrained optimization | AERE, Theoretical Physics Division | 68 | report | — | no-oa |  | supplement | — |
-| 70 | S074 | 2005 | A Krylov subspace algorithm for multiquadric interpolation in many dimensions | IMA Journal of Numerical Analysis | 66 | journal | DAMTP report | txt | 29 | supplement | — |
-| 71 | S075 | 1999 | Proof of convergence of an iterative technique for thin plate spline interpolation in two dimensions | Advances in Computational Mathematics | 66 | journal | DAMTP report | txt | 10 | supplement | — |
-| 72 | S076 | 1991 | Least squares smoothing of univariate data to achieve piecewise monotonicity | IMA Journal of Numerical Analysis | 65 | journal | — | no-oa |  | supplement | — |
-| 73 | S077 | 1974 | Introduction to constrained optimization | Computer Sciences and Systems Division, AERE | 65 | report | — | no-oa |  | supplement | — |
-| 74 | S078 | 2007 | Fast evaluation of polyharmonic splines in three dimensions | IMA Journal of Numerical Analysis | 64 | journal | DAMTP report | txt | 30 | supplement | — |
-| 75 | S079 | 1983 | The convergence of variable metric matrices in unconstrained optimization | Mathematical programming | 60 | journal | — | no-oa |  | supplement | — |
-| 76 | S080 | 1968 | On the calculation of orthogonal vectors | The Computer Journal | 60 | journal | — | no-oa |  | supplement | — |
-| 77 | S081 | 1982 | Extensions to subroutine VFO2AD | System Modeling and Optimization | 59 | conference | — | no-oa |  | supplement | — |
-| 78 | S082 | 1996 | A thin plate spline method for mapping curves into curves in two dimensions | Computational Techniques and Applications: CTAC95 | 56 | conference | — | no-oa |  | supplement | — |
-| 79 | S083 | 1988 | Radial basis function interpolation on an infinite regular grid | University of Cambridge. Department of Applied Mathematics and Theoretical… | 53 | report | — | no-oa |  | supplement | — |
-| 80 | S084 | 1985 | The performance of two subroutines for constrained optimization on some difficult test problems | Numerical Optimization I 984 | 53 | conference | — | no-oa |  | supplement | — |
-| 81 | S085 | 1999 | Krylov subspace methods for radial basis function interpolation | UNIVERSITY OF CAMBRIDGE DEPARTMENT OF APPLIED MATHEMATICS AND THEORETICAL… | 50 | report | DAMTP report | txt | 25 | supplement | — |
-| 82 | S086 | 1975 | A view of unconstrained optimization | Atomic Energy Research Establishment Computer Science & Systems Division | 50 | report | — | no-oa |  | supplement | — |
-| 83 | S087 | 1995 | On multigrid techniques for thin plate spline interpolation in two dimensions | Department of Applied Mathematics and Theoretical Physics, University of… | 49 | report | — | no-oa |  | supplement | — |
-| 84 | S088 | 1994 | An iterative method for thin plate spline interpolation that employs approximations to Lagrange functions | Pitman Research Notes in Mathematics Series | 48 | chapter | — | no-oa |  | supplement | — |
-| 85 | S089 | 1992 | Tabulation of thin plate splines on a very fine two-dimensional grid | Numerical Methods in Approximation Theory, Vol. 9 | 48 | conference | manual | txt | 22 | supplement | — |
-| 86 | S090 | 1990 | Univariate multiquadric approximation: reproduction of linear polynomials | Multivariate Approximation and Interpolation | 47 | conference | manual | txt | 15 | supplement | — |
-| 87 | S091 | 1961 | The Crystalline Field Parameters for Dysprosium Ethyl Sulphate | Proceedings of the Physical Society | 45 | journal | — | no-oa |  | supplement | — |
-| 88 | S092 | 1969 | RANK ONE METHODS FOR UNCONSTRAINED OPTIMIZATION. | Atomic Energy Research Establishment, Harwell (England) | 44 | report | — | no-oa |  | supplement | — |
-| 89 | S093 | 2012 | On the convergence of trust region algorithms for unconstrained minimization without derivatives | Computational Optimization and Applications | 43 | journal | DAMTP report | txt | 31 | supplement | — |
-| 90 | S094 | 1994 | Some algorithms for thin plate spline interpolation to functions of two variables | Advances in Computational Mathematics (New Delhi, 1993) | 42 | conference | — | no-oa |  | supplement | — |
-| 91 | S095 | 1991 | The minimum sum of squares change to univariate data that gives convexity | IMA journal of numerical analysis | 42 | journal | — | no-oa |  | supplement | — |
-| 92 | S096 | 1975 | A view of unconstrained minimization algorithms that do not require derivatives | ACM Transactions on Mathematical Software (TOMS) | 41 | journal | — | no-oa |  | supplement | — |
-| 93 | S098 | 1972 | Unconstrained minimization algorithms without computation of derivatives | — | 40 | other | — | no-oa |  | supplement | — |
-| 94 | S099 | 1993 | Truncated Laurent expansions for the fast evaluation of thin plate splines | Numerical Algorithms | 38 | journal | — | no-oa |  | supplement | — |
-| 95 | S100 | 1967 | Curve fitting by cubic splines | UKAEA, Harwell, Atomic Energy Research Establishment | 38 | report | — | no-oa |  | supplement | — |
-| 96 | S101 | 1963 | Crystalline-field splittings in cerous magnesium nitrate | Proceedings of the Royal Society of London A: Mathematical, Physical and… | 37 | journal | — | no-oa |  | supplement | — |
-| 97 | S102 | 1997 | A review of methods for multivariable interpolation at scattered data points | INSTITUTE OF MATHEMATICS AND ITS APPLICATIONS CONFERENCE SERIES 63, 283-310 | 34 | conference | — | no-oa |  | supplement | — |
-| 98 | S104 | 1993 | On the number of iterations of Karmarkar's algorithm for linear programming | Mathematical Programming 62 (1-3), 153-197 | 32 | journal | — | no-oa |  | supplement | — |
-| 99 | S105 | 1982 | Data smoothing by divided differences | Numerical analysis, 26-37 | 32 | conference | — | no-oa |  | supplement | — |
-| 100 | S106 | 1974 | The minimax solution of linear equations subject to bounds on the variables | Atomic Energy Research Establishment | 31 | report | — | no-oa |  | supplement | — |
-| 101 | S107 | 1981 | A note on quasi-Newton formulae for sparse second derivative matrices | Mathematical Programming 20 (1), 144-151 | 30 | journal | — | no-oa |  | supplement | — |
-| 102 | S108 | 2013 | Beyond symmetric Broyden for updating quadratic models in minimization without derivatives | Mathematical Programming 138 (1-2), 475-500 | 29 | journal | DAMTP report | txt | 25 | supplement | — |
-| 103 | S109 | 1996 | A review of algorithms for thin plate spline interpolation in two dimensions | Department of Applied Mathematics and Theoretical Physics, University of… | 29 | report | — | no-oa |  | supplement | — |
-| 104 | S110 | 1995 | A new iterative algorithm for thin plate spline interpolation in two dimension | UNIVERSITY OF CAMBRIDGE DEPARTMENT OF APPLIED MATHEMATICS AND THEORETICAL… | 29 | report | — | no-oa |  | supplement | — |
-| 105 | S112 | 1972 | Unconstrained minimization and extensions for constraints | AERE, Theoretical Physics Division | 29 | report | — | no-oa |  | supplement | — |
-| 106 | S113 | 1991 | Univariate multiquadric interpolation: Some recent results | Curves and surfaces, 371-381 | 28 | conference | — | no-oa |  | supplement | — |
-| 107 | S115 | 1989 | Karmarkar's algorithm: a view from nonlinear programming | University of Canterbury. Dept. of Mathematics | 28 | report | manual | txt | 42 | core | — |
-| 108 | S116 | 1987 | Methods for nonlinear constraints in optimization calculations | Iserles and Powell, 325-358 | 28 | chapter | — | no-oa |  | supplement | — |
-| 109 | S117 | 1969 | The local dependence of least squares cubic splines | SIAM Journal on Numerical Analysis 6 (3), 398-413 | 28 | journal | — | no-oa |  | supplement | — |
-| 110 | S118 | 1969 | A theorem on rank one modifications to a matrix and its inverse | The Computer Journal 12 (3), 288-290 | 28 | journal | — | no-oa |  | supplement | — |
-| 111 | S119 | 1987 | The State of the art in numerical analysis: based on the proceedings of a joint IMA/SIAM conference on the state of the art in numerical analysis held in Cambridge in April 1986 | Oxford University Press, USA | 27 | book | — | no-oa |  | supplement | — |
-| 112 | S120 | 1981 | On the A-acceptability of rational approximations that interpolate the exponential function | IMA Journal of Numerical Analysis 1 (3), 241-251 | 27 | journal | — | no-oa |  | supplement | — |
-| 113 | S121 | 2000 | On the convergence of the DFP algorithm for unconstrained optimization when there are only two variables | Mathematical programming 87 (2), 281-301 | 25 | journal | DAMTP report | txt | 23 | supplement | — |
-| 114 | S123 | 1968 | On best L 2 spline approximations | Numerische Mathematik Differentialgleichungen Approximationstheorie, 317-339 | 22 | conference | — | no-oa |  | supplement | — |
-| 115 | S124 | 2004 | On updating the inverse of a KKT matrix1 | — | 21 | report | DAMTP report | txt | 25 | supplement | — |
-| 116 | S125 | 1995 | Some convergence properties of the modified log barrier method for linear programming | SIAM Journal on Optimization 5 (4), 695-739 | 21 | journal | — | no-oa |  | supplement | — |
-| 117 | S126 | 1988 | An algorithm for maximizing entropy subject to simple bounds | Mathematical Programming 42 (1-3), 171-180 | 21 | journal | — | no-oa |  | supplement | — |
-| 118 | S127 | 1967 | USING CUBIC SPLINES TO APPROXIMATE FUNCTIONS OF ONE VARIABLE TO PRESCRIBED ACCURACY. | Atomic Energy Research Establishment, Harwell (England) | 21 | report | — | no-oa |  | supplement | — |
-| 119 | S128 | 1966 | Necessary conditions for a minimax approximation | The Computer Journal 8 (4), 358-361 | 21 | journal | — | no-oa |  | supplement | — |
-| 120 | S129 | 2010 | On the convergence of a wide range of trust region methods for unconstrained optimization | IMA journal of numerical analysis 30 (1), 289-301 | 19 | journal | DAMTP report | txt | 16 | supplement | — |
-| 121 | S130 | 1988 | A review of algorithms for nonlinear equations and unconstrained optimization | Proceedings ICIAM, 220-232 | 19 | conference | — | no-oa |  | supplement | — |
-| 122 | S131 | 1980 | Optimization algorithms in 1979 | Optimization Techniques, 83-98 | 19 | conference | — | no-oa |  | supplement | — |
-| 123 | S132 | 1977 | Quadratic termination properties of Davidon's new variable metric algorithm | Mathematical Programming 12 (1), 141-147 | 18 | journal | — | no-oa |  | supplement | — |
-| 124 | S133 | 1997 | Approximation theory and optimization: tributes to MJD Powell | Cambridge University Press | 17 | book | — | no-oa |  | supplement | — |
-| 125 | S134 | 1992 | Univariate interpolation on a regular finite grid by a multiquadric plus a linear polynomial | IMA journal of numerical analysis 12 (1), 107-133 | 17 | journal | — | no-oa |  | supplement | — |
-| 126 | S136 | 1976 | A Fortran subroutine for plotting the part of a conic that is inside a given triangle | SIS-76-2831 | 16 | report | — | no-oa |  | supplement | — |
-| 127 | S137 | 2009 | On nonlinear optimization since 1959 | The Birth of Numerical Analysis, 141-160 | 15 | chapter | DAMTP report | txt | 20 | supplement | — |
-| 128 | S139 | 1983 | On the rate of convergence of variable metric algorithms for unconstrained optimization | Report DAMTP, 1525-1539 | 15 | report | manual | txt | 15 | core | — |
-| 129 | S141 | 1977 | A technique that gains speed and accuracy in the minimax solution of overdetermined linear equations | Mathematical Software 3, 15-32 | 15 | conference | — | no-oa |  | supplement | — |
-| 130 | S142 | 1997 | Least squares fitting to univariate data subject to restrictions on the signs of the second differences | Approximation Theory and Optimization. Tributes to MJD Powell, 109-132 | 14 | chapter | — | no-oa |  | supplement | — |
-| 131 | S143 | 1969 | Nonlinear Programming—Sequential Unconstrained Minimization Techniques | The Computer Journal 12 (3), 207-a-207 | 14 | other | — | no-oa |  | supplement | — |
-| 132 | S144 | 1987 | The differential correction algorithm for generalized rational functions | Constructive Approximation 3 (1), 249-256 | 13 | journal | — | no-oa |  | supplement | — |
-| 133 | S145 | 1981 | An example of cycling in a feasible point algorithm | Mathematical Programming 20 (1), 353-357 | 13 | journal | — | no-oa |  | supplement | — |
-| 134 | S146 | 1980 | Gradient conditions and Lagrange multipliers in nonlinear programming | Lecture 9, 210 | 13 | chapter | — | no-oa |  | supplement | — |
-| 135 | S147 | 1975 | On the convergence of cyclic Jacobi methods | IMA Journal of Applied Mathematics 15 (3), 279-287 | 13 | journal | — | no-oa |  | supplement | — |
-| 136 | S148 | 1998 | The use of band matrices for second derivative approximations in trust region algorithms | Advances in Nonlinear Programming, 3-28 | 12 | chapter | DAMTP report | txt | 24 | supplement | — |
-| 137 | S149 | 1984 | Conditions for superlinear convergence in l1 and l∞ solutions of overdetermined non-linear equations | IMA journal of numerical analysis 4 (2), 241-251 | 12 | journal | — | no-oa |  | supplement | — |
-| 138 | S150 | 1981 | The Shanno-Toint procedure for updating sparse symmetric matrices | IMA Journal of Numerical Analysis 1 (4), 403-413 | 12 | journal | — | no-oa |  | supplement | — |
-| 139 | S151 | 1981 | An upper triangular matrix method for quadratic programming | Nonlinear programming 4 | 12 | conference | — | no-oa |  | supplement | — |
-| 140 | S152 | 1992 | Log barrier methods for semi-infinite programming calculations | University of Cambridge, Department of Applied Mathematics and Theoretical Physics | 11 | report | — | no-oa |  | supplement | — |
-| 141 | S153 | 1988 | QR factorization for linear least-squares problems on a hypercube multiprocessor | IMA journal of numerical analysis 8 (4) | 11 | journal | — | no-oa |  | supplement | — |
-| 142 | S154 | 1972 | Quadratic termination properties of minimization algorithms II. Proofs of theorems | IMA Journal of Applied Mathematics 10 (3) | 10 | journal | — | no-oa |  | supplement | — |
-| 143 | S155 | 1991 | The complexity of Karmarkar's algorithm for linear programming | Department of Applied Mathematics and Theoretical Physics, University of Cambridge | 9 | report | — | no-oa |  | supplement | — |
-| 144 | S156 | 1987 | On error growth in the Bartels-Golub and Fletcher-Matthews algorithms for updating matrix factorizations | Linear Algebra and its Applications 88 | 9 | journal | — | no-oa |  | supplement | — |
-| 145 | S157 | 1975 | A Fortran subroutine that calculates the minimax solution of linear equations subject to bounds on the variables | SIS-75-2465 | 9 | report | — | no-oa |  | supplement | — |
-| 146 | S158 | 1981 | On a decomposition of conditionally positive-semidefinite matrices | Linear Algebra and its Applications 39 | 7 | journal | — | no-oa |  | supplement | — |
-| 147 | S160 | 1972 | Quadratic termination properties of a class of double-rank minimization algorithms | AERE, Theoretical Physics Division | 7 | report | — | no-oa |  | supplement | — |
-| 148 | S161 | 1973 | FORTRAN subroutine for plotting a cubic spline function | UKAEA Research Group, Harwell. Atomic Energy Research Establishment | 6 | report | — | no-oa |  | supplement | — |
-| 149 | S162 | 1998 | A'taut string algorithm'for straightening a piecewise linear path in two dimensions | IMA journal of numerical analysis 18 (1) | 5 | journal | — | no-oa |  | supplement | — |
-| 150 | S163 | 1994 | An algorithm that straightens and smooths piecewise linear curves in two dimensions | University of Cambridge, Department of Applied Mathematics and Theoretical Physics | 5 | report | — | no-oa |  | supplement | — |
-| 151 | S164 | 1988 | On a matrix factorization for linearly constrained optimization problems | University of Cambridge. Department of Applied Mathematics and Theoretical Physics | 5 | report | — | no-oa |  | supplement | — |
-| 152 | S165 | 1997 | Trust region calculations revisited1 | Numerical Analysis 1997 380 | 4 | conference | DAMTP report | txt | 20 | supplement | — |
-| 153 | S166 | 1982 | Algorithms for constrained and unconstrained optimization calculations | Current Developments in the Interface: Economics, Econometrics, Mathematics | 4 | chapter | — | no-oa |  | supplement | — |
-| 154 | S167 | 2014 | The Lagrange method and SAO with bounds on the dual variables | Optimization Methods and Software 29 (2) | 3 | journal | DAMTP report | txt | 19 | supplement | — |
-| 155 | S168 | 1966 | The general theory of linear approximation | Methods of Numerical Approximation | 3 | chapter | — | no-oa |  | supplement | — |
-| 156 | S169 | 1984 | An application of gaussian elimination to interpolation by generalized rational functions | Rational Approximation and Interpolation: Proceedings of the United Kingdom | 2 | conference | — | no-oa |  | supplement | — |
-| 157 | S170 | 1999 | An optimal way of moving a sequence of points onto a curve in two dimensions | Computational Optimization and Applications 13 (1-3) | 2 | journal | DAMTP report | txt | 26 | supplement | — |
-| 158 | S171 | 1989 | The updating of matrices of conjugate directions in optimization algorithms | Department of Applied Mathematics and, Theoretical Physics, University of Cambridge | 2 | report | — | no-oa |  | supplement | — |
-| 159 | S172 | 1980 | A discrete characterization theorem for the discrete L 1 linear approximation problem | Journal of Approximation Theory 30 (3) | 2 | journal | — | no-oa |  | supplement | — |
-| 160 | S175 | 1971 | The differential correction algorithm for rational L∞ approximation | Conference on Applications of Numerical Analysis | 2 | conference | — | no-oa |  | supplement | — |
-| 161 | S176 | 1970 | A Fortran Subroutine for Unconstrained Minimization | AERE, Harwell | 2 | report | — | no-oa |  | supplement | — |
-| 162 | S177 | 1966 | On the convergence of exchange algorithms for calculating minimax approximations | The Computer Journal 9 (1) | 2 | journal | — | no-oa |  | supplement | — |
-| 163 | S178 | 1966 | THEORY OF GENERAL NON-LINEAR MINIMAX APPROXIMATIONS | Methods of Numerical Approximation: Lectures Delivered at a Summer School | 1 | chapter | — | no-oa |  | supplement | — |
-| 164 | S180 | 1969 | A FORTRAN SUBROUTINE TO INVERT A RECTANGULAR MATRIX OF FULL RANK. | Atomic Energy Research Establishment, Harwell (England) | 1 | report | — | no-oa |  | supplement | — |
-| 165 | S181 | 1966 | The exchange algorithm for calculating minimax linear approximations over a discrete point set | Methods of Numerical Approximation | 1 | chapter | — | no-oa |  | supplement | — |
-| 166 | S182 | 1966 | AN INTRODUCTION TO S-ENTROPY | Methods of Numerical Approximation: Lectures Delivered at a Summer School | — | chapter | — | no-oa |  | supplement | — |
-| 167 | S183 | 2008 | Special Issue Dedicated to Professor Michael JD Powell on the Occasion of His 70th Birthday | Taylor & Francis | — | other | — | no-oa |  | supplement | — |
-| 168 | S185 | 2000 | A quadratic interpolation method for unconstrained minimization without derivatives | XXV Congreso Nacional de Estadística e Investigación Operativa: Vigo, 4-7 de | — | conference | — | no-oa |  | supplement | — |
-| 169 | S186 | 1997 | DAMTP 1997/NA18 | — | — | report | manual | txt | 20 | supplement | — |
-| 170 | S188 | 1994 | Curve fitting by thin plate splines | Univ. of Michigan, Ann Arbor, MI (United States) | — | report | — | no-oa |  | supplement | — |
-| 171 | S189 | 1993 | Panel discussion on multivariate problems | Numerical Algorithms 5 | — | other | — | no-oa |  | supplement | — |
-| 172 | S190 | 1990 | Algorithms for Linearly Constrained Optimization Calculations | University of Cambridge. Department of Applied Mathematics and Theoretical Physics | — | report | — | no-oa |  | supplement | — |
-| 173 | S192 | 1988 | Martin Beale memorial symposium | Mathematical Programming 42 (1) | — | other | — | no-oa |  | supplement | — |
-| 174 | S193 | 1987 | JH Wilkinson, FRS, FIMA (1919–1986) | IMA Journal of Numerical Analysis 7 (4) | — | other | — | no-oa |  | supplement | — |
-| 175 | S194 | 1980 | NATO Advanced Research Institute on Nonlinear | Mathematical Programming 19 (1) | — | other | — | no-oa |  | supplement | — |
-| 176 | S197 | 1975 | Optimization in action: 7th–9th January 1975. University of Bristol, UK. Organized by the Institute of Mathematics and its Applications, Essex, UK | Computer-Aided Design 7 (4) | — | other | — | no-oa |  | supplement | — |
-| 177 | S198 | 1972 | FORTRAN subroutine for calculating a cubic spline approximation to a given function | — | — | report | — | no-oa |  | supplement | — |
-| 178 | S199 | 1972 | Numerical methods for unconstrained optimization(Book- Numerical methods for unconstrained optimization.) | London and New York, Academic Press, 1972. 150 p | — | book | — | no-oa |  | supplement | — |
-| 179 | S206 | 1968 | A REVIEW OF METHODS FOR UNCONSTRAINED OPTIMIZATION | SIAM REVIEW 10 (4), 483-& | — | other | — | no-oa |  | supplement | — |
-| 180 | S208 | 1967 | Error analysis for equal-interval interpolation by cubic splines | Theoretical Physics Division, Atomic Energy Research Establishment | — | report | — | no-oa |  | supplement | — |
-| 181 | S210 | 1966 | A COMPARISON OF WEIGHTED LEAST SQUARES AND MINIMAX POLYNOMIAL APPROXIMATIONS | SIAM REVIEW 8 (4), 575-& | — | other | — | no-oa |  | supplement | — |
-| 182 | S211 | — | Election of Council | — | — | other | — | no-oa |  | supplement | — |
-| 183 | D001 | 1968 | A comparison of spline approximations with classical interpolation methods | IFIP Congress (1): 95-98 | — | conference | — | no-oa |  | supplement | — |
-| 184 | D002 | 2000 | System Modelling and Optimization: Methods, Theory and Applications, 19th IFIP TC7 Conference on System Modelling and Optimization, July 12-16, 1999, Cambridge, UK | IFIP Conference Proceedings [edited volume; Powell as editor] | — | book | — | no-oa |  | supplement | — |
-| 185 | R007 | 2017 | Michael James David Powell. 29 July 1936 — 19 April 2015 (Biographical Memoirs of Fellows of the Royal Society) | Biographical Memoirs of Fellows of the Royal Society (DAMTP NA2017/04 preprint) | — | memoir | url | txt | 34 | core | — |
-| 186 | X001 | 2005 | An interview with Michael J. D. Powell (SIAM oral history, conducted by Philip Davis, 6 April 2005) | SIAM History of Numerical Analysis and Scientific Computing (Computer History Museum) | — | interview | manual | txt | 23 | core | — |
-| 187 | X002 | 2003 | An Interview with M. J. D. Powell (Bulletin of the International Center for Mathematics, n. 14, June 2003) | Bulletin of the International Center for Mathematics 14 | — | interview | manual | txt | 7 | core | — |
+| 1 | S001 | 1963 | A rapidly convergent descent method for minimization | The Computer Journal | 7118 | journal | manual | txt | 6 | core | carded |
+| 2 | S002 | 1964 | An efficient method for finding the minimum of a function of several variables without calculating derivatives | The computer journal | 6999 | journal | — | no-oa |  | core | abstract |
+| 3 | S003 | 1978 | A fast algorithm for nonlinearly constrained optimization calculations | Numerical analysis | 2942 | conference | — | no-oa |  | core | metadata |
+| 4 | S004 | 1969 | A method for non-linear constraints in minimization problems | Optimization | 2709 | chapter | — | no-oa |  | core | metadata |
+| 5 | S005 | 1987 | Radial basis functions for multivariable interpolation: a review | Algorithms for approximation | 2672 | chapter | — | no-oa |  | core | metadata |
+| 6 | S006 | 1977 | Restart procedures for the conjugate gradient method | Mathematical programming | 2635 | journal | — | no-oa |  | core | abstract |
+| 7 | S007 | 2009 | The BOBYQA algorithm for bound constrained optimization without derivatives | Cambridge NA Report NA2009/06, University of Cambridge, Cambridge | 2462 | report | DAMTP report | txt | 39 | core | carded |
+| 8 | S008 | 1994 | A direct search optimization method that models the objective and constraint functions by linear interpolation | Advances in optimization and numerical analysis | 2391 | chapter | — | no-oa |  | core | abstract |
+| 9 | S009 | 1981 | Approximation theory and methods | Cambridge university press | 1925 | book | — | no-oa |  | core | abstract |
+| 10 | S010 | 1990 | The theory of radial basis function approximation in 1990 | University of Cambridge. Department of Applied Mathematics and Theoretical Physics | 1530 | report | — | no-oa |  | core | abstract |
+| 11 | S011 | 1970 | A hybrid method for nonlinear equations | Numerical methods for nonlinear algebraic equations | 1384 | chapter | — | no-oa |  | core | metadata |
+| 12 | S012 | 1965 | A method for minimizing a sum of squares of non-linear functions without calculating derivatives | The Computer Journal | 933 | journal | — | no-oa |  | core | abstract |
+| 13 | S013 | 1978 | The convergence of variable metric methods for non-linearly constrained optimization calculations | Nonlinear programming | 900 | conference | — | no-oa |  | core | metadata |
+| 14 | S014 | 1998 | Direct search algorithms for optimization calculations | Acta numerica | 892 | journal | DAMTP report | txt | 49 | core | carded |
+| 15 | S015 | 1970 | A new algorithm for unconstrained optimization | Nonlinear programming | 820 | conference | — | no-oa |  | core | metadata |
+| 16 | S016 | 1978 | Algorithms for nonlinear constraints that use Lagrangian functions | Mathematical programming | 816 | journal | — | no-oa |  | core | abstract |
+| 17 | S018 | 2006 | The NEWUOA software for unconstrained optimization without derivatives | Large-scale nonlinear optimization | 777 | chapter | DAMTP report | txt | 42 | core | carded |
+| 18 | S019 | 1968 | A FORTRAN subroutine for solving systems of nonlinear algebraic equations. | Atomic Energy Research Establishment, Harwell (England) | 777 | report | manual | txt | 58 | core | carded |
+| 19 | S020 | 1984 | Nonconvex minimization calculations and the conjugate gradient method | Numerical analysis | 766 | conference | — | no-oa |  | core | abstract |
+| 20 | S021 | 1974 | On the estimation of sparse Jacobian matrices | J. Inst. Math. Appl | 682 | journal | — | no-oa |  | core | abstract |
+| 21 | S022 | 1983 | Variable metric methods for constrained optimization | Mathematical Programming The State of the Art | 661 | conference | — | no-oa |  | core | abstract |
+| 22 | S023 | 1977 | Piecewise quadratic approximations on triangles | ACM Transactions on Mathematical Software (TOMS) | 659 | journal | — | no-oa |  | core | metadata |
+| 23 | S024 | 1976 | Some global convergence properties of a variable metric algorithm for minimization without exact line searches | Nonlinear programming | 642 | conference | — | no-oa |  | core | metadata |
+| 24 | S025 | 2002 | UOBYQA: unconstrained optimization by quadratic approximation | Mathematical Programming | 542 | journal | DAMTP report | txt | 31 | core | carded |
+| 25 | S026 | 1973 | On search directions for minimization algorithms | Mathematical Programming | 541 | journal | — | no-oa |  | core | abstract |
+| 26 | S027 | 1982 | The watchdog technique for forcing convergence in algorithms for constrained optimization | Algorithms for Constrained Minimization of Smooth Nonlinear Functions | 520 | chapter | — | no-oa |  | supplement | abstract |
+| 27 | S028 | 1975 | Convergence properties of a class of minimization algorithms | Nonlinear programming | 520 | conference | — | no-oa |  | supplement | metadata |
+| 28 | S029 | 2007 | A view of algorithms for optimization without derivatives | Mathematics Today-Bulletin of the Institute of Mathematics and its Applications | 417 | journal | DAMTP report | txt | 12 | core | carded |
+| 29 | S030 | 1990 | A trust region algorithm for equality constrained optimization | Mathematical Programming | 374 | journal | manual | txt | 23 | core | carded |
+| 30 | S031 | 1986 | Convergence properties of algorithms for nonlinear optimization | Siam Review | 357 | journal | — | no-oa |  | supplement | abstract |
+| 31 | S032 | 1971 | On the convergence of the variable metric algorithm | IMA Journal of Applied Mathematics | 337 | journal | — | no-oa |  | supplement | abstract |
+| 32 | S033 | 1984 | On the global convergence of trust region algorithms for unconstrained minimization | Mathematical Programming | 303 | journal | — | no-oa |  | supplement | abstract |
+| 33 | S034 | 1962 | An iterative method for finding stationary values of a function of several variables | The Computer Journal | 302 | journal | — | no-oa |  | supplement | abstract |
+| 34 | S036 | 2008 | Developments of NEWUOA for minimization without derivatives | IMA journal of numerical analysis | 253 | journal | DAMTP report | txt | 19 | supplement | carded |
+| 35 | S037 | 1971 | Recent advances in unconstrained optimization | Mathematical Programming | 250 | journal | — | no-oa |  | supplement | abstract |
+| 36 | S038 | 1985 | On the quadratic programming algorithm of Goldfarb and Idnani | Mathematical Programming Essays in Honor of George B. Dantzig Part II | 248 | chapter | — | no-oa |  | supplement | abstract |
+| 37 | S040 | 1989 | A tolerant algorithm for linearly constrained optimization calculations | Mathematical Programming | 216 | journal | — | no-oa |  | supplement | abstract |
+| 38 | S041 | 1970 | A survey of numerical methods for unconstrained optimization | SIAM Review | 205 | journal | — | no-oa |  | supplement | abstract |
+| 39 | S042 | 1979 | On the estimation of sparse Hessian matrices | SIAM Journal on Numerical Analysis | 201 | journal | — | no-oa |  | supplement | abstract |
+| 40 | S043 | 1992 | Univariate multiquadric approximation: quasi-interpolation to scattered data | Constructive Approximation | 199 | journal | — | no-oa |  | supplement | abstract |
+| 41 | S045 | 2004 | Least Frobenius norm updating of quadratic models that satisfy interpolation conditions | Mathematical Programming | 192 | journal | DAMTP report | txt | 36 | core | carded |
+| 42 | S046 | 1994 | The uniform convergence of thin plate spline interpolation in two dimensions | Numerische Mathematik | 187 | journal | — | no-oa |  | supplement | abstract |
+| 43 | S047 | 2003 | On trust region methods for unconstrained minimization without derivatives | Mathematical programming | 178 | journal | DAMTP report | txt | 22 | supplement | carded |
+| 44 | S048 | 1972 | The Differential Correction Algorithm for Rational ℓ_∞-Approximation | SIAM Journal on Numerical Analysis | 173 | journal | — | no-oa |  | supplement | abstract |
+| 45 | S049 | 1986 | How bad are the BFGS and DFP methods when the objective function is quadratic? | Mathematical Programming | 160 | journal | — | no-oa |  | supplement | abstract |
+| 46 | S050 | 1986 | A recursive quadratic programming algorithm that uses differentiable exact penalty functions | Mathematical Programming | 159 | journal | manual | txt | 14 | core | carded |
+| 47 | S051 | 1976 | Some convergence properties of the conjugate gradient method | Mathematical Programming | 159 | journal | — | no-oa |  | supplement | abstract |
+| 48 | S052 | 1974 | On the modification of 𝐿𝐷𝐿^{𝑇} factorizations | Mathematics of Computation | 150 | journal | — | no-oa |  | supplement | abstract |
+| 49 | S053 | 1970 | Curve fitting by splines in one variable | Numerical Approximation to Functions and Data | 127 | chapter | — | no-oa |  | supplement | metadata |
+| 50 | S054 | 1967 | On the maximum errors of polynomial approximations defined by interpolation and by least squares criteria | The Computer Journal | 123 | journal | — | no-oa |  | supplement | abstract |
+| 51 | S055 | 1999 | Recent research at Cambridge on radial basis functions | New Developments in Approximation Theory | 117 | conference | DAMTP report | txt | 18 | supplement | carded |
+| 52 | S056 | 1968 | On applying Householder transformations to linear least squares problems. | IFIP Congress | 117 | conference | — | no-oa |  | supplement | metadata |
+| 53 | S057 | 2001 | Radial basis function methods for interpolation to functions of many variables | HERCMA | 116 | conference | DAMTP report | txt | 23 | supplement | skimmed |
+| 54 | S058 | 1983 | ZQPCVX a FORTRAN subroutine for convex quadratic programming | Department of Applied Mathematics and Theoretical Physics, University | 116 | report | — | no-oa |  | supplement | metadata |
+| 55 | S059 | 1983 | VMCWD: A FORTRAN subroutine for constrained optimization | ACM SIGMAP Bulletin | 113 | journal | — | no-oa |  | supplement | abstract |
+| 56 | S060 | 1982 | Nonlinear optimization 1981 | NATO Conference Series. Series II: Systems Science | 107 | book | — | no-oa |  | supplement | metadata |
+| 57 | S061 | 1961 | A Calculation of the Ground-State Splitting for Mn Ions in a Cubic Field | Proceedings of the Royal Society of London A: Mathematical, Physical and… | 98 | journal | — | no-oa |  | supplement | abstract |
+| 58 | S062 | 1966 | Weighted uniform sampling—a Monte Carlo technique for reducing variance | IMA Journal of Applied Mathematics | 95 | journal | — | no-oa |  | supplement | abstract |
+| 59 | S063 | 1960 | Ground-State Splitting for d 5 S 6 Ions in a Cubic Field | Physical Review Letters | 94 | journal | — | no-oa |  | supplement | metadata |
+| 60 | S064 | 1987 | Updating conjugate directions by the BFGS formula | Mathematical Programming | 91 | journal | — | no-oa |  | supplement | abstract |
+| 61 | S065 | 1971 | Some properties of the variable metric algorithm | AERE, Theoretical Physics Division | 89 | report | — | no-oa |  | supplement | metadata |
+| 62 | S066 | 1973 | Piecewise quadratic surface fitting for contour plotting | UKAEA, Harwell, Atomic Energy Research Establishment | 85 | report | — | no-oa |  | supplement | metadata |
+| 63 | S067 | 2015 | On fast trust region methods for quadratic models with linear constraints | Mathematical Programming Computation | 77 | journal | DAMTP report | txt | 31 | core | carded |
+| 64 | S068 | 2001 | On the Lagrange functions of quadratic models that are defined by interpolation* | Optimization Methods and Software | 77 | journal | DAMTP report | txt | 17 | supplement | carded |
+| 65 | S069 | 1976 | Optimal interpolation | Numerical analysis | 77 | conference | — | no-oa |  | supplement | metadata |
+| 66 | S070 | 1983 | General algorithms for discrete nonlinear approximation calculations | Approximation theory IV | 75 | conference | — | no-oa |  | supplement | metadata |
+| 67 | S071 | 1989 | TOLMIN: A Fortran package for linearly constrained optimization calculations | University of Cambridge. Department of Applied Mathematics and Theoretical… | 72 | report | — | no-oa |  | supplement | metadata |
+| 68 | S072 | 2004 | On the use of quadratic models in unconstrained minimization without derivatives | Optimization Methods and Software | 71 | journal | DAMTP report | txt | 16 | supplement | carded |
+| 69 | S073 | 1971 | Problems related to unconstrained optimization | AERE, Theoretical Physics Division | 68 | report | — | no-oa |  | supplement | metadata |
+| 70 | S074 | 2005 | A Krylov subspace algorithm for multiquadric interpolation in many dimensions | IMA Journal of Numerical Analysis | 66 | journal | DAMTP report | txt | 29 | supplement | skimmed |
+| 71 | S075 | 1999 | Proof of convergence of an iterative technique for thin plate spline interpolation in two dimensions | Advances in Computational Mathematics | 66 | journal | DAMTP report | txt | 10 | supplement | carded |
+| 72 | S076 | 1991 | Least squares smoothing of univariate data to achieve piecewise monotonicity | IMA Journal of Numerical Analysis | 65 | journal | — | no-oa |  | supplement | abstract |
+| 73 | S077 | 1974 | Introduction to constrained optimization | Computer Sciences and Systems Division, AERE | 65 | report | — | no-oa |  | supplement | metadata |
+| 74 | S078 | 2007 | Fast evaluation of polyharmonic splines in three dimensions | IMA Journal of Numerical Analysis | 64 | journal | DAMTP report | txt | 30 | supplement | skimmed |
+| 75 | S079 | 1983 | The convergence of variable metric matrices in unconstrained optimization | Mathematical programming | 60 | journal | — | no-oa |  | supplement | abstract |
+| 76 | S080 | 1968 | On the calculation of orthogonal vectors | The Computer Journal | 60 | journal | — | no-oa |  | supplement | abstract |
+| 77 | S081 | 1982 | Extensions to subroutine VFO2AD | System Modeling and Optimization | 59 | conference | — | no-oa |  | supplement | metadata |
+| 78 | S082 | 1996 | A thin plate spline method for mapping curves into curves in two dimensions | Computational Techniques and Applications: CTAC95 | 56 | conference | — | no-oa |  | supplement | metadata |
+| 79 | S083 | 1988 | Radial basis function interpolation on an infinite regular grid | University of Cambridge. Department of Applied Mathematics and Theoretical… | 53 | report | — | no-oa |  | supplement | metadata |
+| 80 | S084 | 1985 | The performance of two subroutines for constrained optimization on some difficult test problems | Numerical Optimization I 984 | 53 | conference | — | no-oa |  | supplement | metadata |
+| 81 | S085 | 1999 | Krylov subspace methods for radial basis function interpolation | UNIVERSITY OF CAMBRIDGE DEPARTMENT OF APPLIED MATHEMATICS AND THEORETICAL… | 50 | report | DAMTP report | txt | 25 | supplement | carded |
+| 82 | S086 | 1975 | A view of unconstrained optimization | Atomic Energy Research Establishment Computer Science & Systems Division | 50 | report | — | no-oa |  | supplement | metadata |
+| 83 | S087 | 1995 | On multigrid techniques for thin plate spline interpolation in two dimensions | Department of Applied Mathematics and Theoretical Physics, University of… | 49 | report | — | no-oa |  | supplement | metadata |
+| 84 | S088 | 1994 | An iterative method for thin plate spline interpolation that employs approximations to Lagrange functions | Pitman Research Notes in Mathematics Series | 48 | chapter | — | no-oa |  | supplement | metadata |
+| 85 | S089 | 1992 | Tabulation of thin plate splines on a very fine two-dimensional grid | Numerical Methods in Approximation Theory, Vol. 9 | 48 | conference | manual | txt | 22 | supplement | carded |
+| 86 | S090 | 1990 | Univariate multiquadric approximation: reproduction of linear polynomials | Multivariate Approximation and Interpolation | 47 | conference | manual | txt | 15 | supplement | carded |
+| 87 | S091 | 1961 | The Crystalline Field Parameters for Dysprosium Ethyl Sulphate | Proceedings of the Physical Society | 45 | journal | — | no-oa |  | supplement | abstract |
+| 88 | S092 | 1969 | RANK ONE METHODS FOR UNCONSTRAINED OPTIMIZATION. | Atomic Energy Research Establishment, Harwell (England) | 44 | report | — | no-oa |  | supplement | metadata |
+| 89 | S093 | 2012 | On the convergence of trust region algorithms for unconstrained minimization without derivatives | Computational Optimization and Applications | 43 | journal | DAMTP report | txt | 31 | supplement | carded |
+| 90 | S094 | 1994 | Some algorithms for thin plate spline interpolation to functions of two variables | Advances in Computational Mathematics (New Delhi, 1993) | 42 | conference | — | no-oa |  | supplement | abstract |
+| 91 | S095 | 1991 | The minimum sum of squares change to univariate data that gives convexity | IMA journal of numerical analysis | 42 | journal | — | no-oa |  | supplement | abstract |
+| 92 | S096 | 1975 | A view of unconstrained minimization algorithms that do not require derivatives | ACM Transactions on Mathematical Software (TOMS) | 41 | journal | — | no-oa |  | supplement | abstract |
+| 93 | S098 | 1972 | Unconstrained minimization algorithms without computation of derivatives | — | 40 | other | — | no-oa |  | supplement | metadata |
+| 94 | S099 | 1993 | Truncated Laurent expansions for the fast evaluation of thin plate splines | Numerical Algorithms | 38 | journal | — | no-oa |  | supplement | metadata |
+| 95 | S100 | 1967 | Curve fitting by cubic splines | UKAEA, Harwell, Atomic Energy Research Establishment | 38 | report | — | no-oa |  | supplement | metadata |
+| 96 | S101 | 1963 | Crystalline-field splittings in cerous magnesium nitrate | Proceedings of the Royal Society of London A: Mathematical, Physical and… | 37 | journal | — | no-oa |  | supplement | abstract |
+| 97 | S102 | 1997 | A review of methods for multivariable interpolation at scattered data points | INSTITUTE OF MATHEMATICS AND ITS APPLICATIONS CONFERENCE SERIES 63, 283-310 | 34 | conference | — | no-oa |  | supplement | abstract |
+| 98 | S104 | 1993 | On the number of iterations of Karmarkar's algorithm for linear programming | Mathematical Programming 62 (1-3), 153-197 | 32 | journal | — | no-oa |  | supplement | metadata |
+| 99 | S105 | 1982 | Data smoothing by divided differences | Numerical analysis, 26-37 | 32 | conference | — | no-oa |  | supplement | metadata |
+| 100 | S106 | 1974 | The minimax solution of linear equations subject to bounds on the variables | Atomic Energy Research Establishment | 31 | report | — | no-oa |  | supplement | metadata |
+| 101 | S107 | 1981 | A note on quasi-Newton formulae for sparse second derivative matrices | Mathematical Programming 20 (1), 144-151 | 30 | journal | — | no-oa |  | supplement | abstract |
+| 102 | S108 | 2013 | Beyond symmetric Broyden for updating quadratic models in minimization without derivatives | Mathematical Programming 138 (1-2), 475-500 | 29 | journal | DAMTP report | txt | 25 | supplement | carded |
+| 103 | S109 | 1996 | A review of algorithms for thin plate spline interpolation in two dimensions | Department of Applied Mathematics and Theoretical Physics, University of… | 29 | report | — | no-oa |  | supplement | abstract |
+| 104 | S110 | 1995 | A new iterative algorithm for thin plate spline interpolation in two dimension | UNIVERSITY OF CAMBRIDGE DEPARTMENT OF APPLIED MATHEMATICS AND THEORETICAL… | 29 | report | — | no-oa |  | supplement | metadata |
+| 105 | S112 | 1972 | Unconstrained minimization and extensions for constraints | AERE, Theoretical Physics Division | 29 | report | — | no-oa |  | supplement | metadata |
+| 106 | S113 | 1991 | Univariate multiquadric interpolation: Some recent results | Curves and surfaces, 371-381 | 28 | conference | — | no-oa |  | supplement | abstract |
+| 107 | S115 | 1989 | Karmarkar's algorithm: a view from nonlinear programming | University of Canterbury. Dept. of Mathematics | 28 | report | manual | txt | 42 | core | carded |
+| 108 | S116 | 1987 | Methods for nonlinear constraints in optimization calculations | Iserles and Powell, 325-358 | 28 | chapter | — | no-oa |  | supplement | abstract |
+| 109 | S117 | 1969 | The local dependence of least squares cubic splines | SIAM Journal on Numerical Analysis 6 (3), 398-413 | 28 | journal | — | no-oa |  | supplement | metadata |
+| 110 | S118 | 1969 | A theorem on rank one modifications to a matrix and its inverse | The Computer Journal 12 (3), 288-290 | 28 | journal | — | no-oa |  | supplement | abstract |
+| 111 | S119 | 1987 | The State of the art in numerical analysis: based on the proceedings of a joint IMA/SIAM conference on the state of the art in numerical analysis held in Cambridge in April 1986 | Oxford University Press, USA | 27 | book | — | no-oa |  | supplement | metadata |
+| 112 | S120 | 1981 | On the A-acceptability of rational approximations that interpolate the exponential function | IMA Journal of Numerical Analysis 1 (3), 241-251 | 27 | journal | — | no-oa |  | supplement | abstract |
+| 113 | S121 | 2000 | On the convergence of the DFP algorithm for unconstrained optimization when there are only two variables | Mathematical programming 87 (2), 281-301 | 25 | journal | DAMTP report | txt | 23 | supplement | skimmed |
+| 114 | S123 | 1968 | On best L 2 spline approximations | Numerische Mathematik Differentialgleichungen Approximationstheorie, 317-339 | 22 | conference | — | no-oa |  | supplement | abstract |
+| 115 | S124 | 2004 | On updating the inverse of a KKT matrix1 | — | 21 | report | DAMTP report | txt | 25 | supplement | carded |
+| 116 | S125 | 1995 | Some convergence properties of the modified log barrier method for linear programming | SIAM Journal on Optimization 5 (4), 695-739 | 21 | journal | — | no-oa |  | supplement | abstract |
+| 117 | S126 | 1988 | An algorithm for maximizing entropy subject to simple bounds | Mathematical Programming 42 (1-3), 171-180 | 21 | journal | — | no-oa |  | supplement | abstract |
+| 118 | S127 | 1967 | USING CUBIC SPLINES TO APPROXIMATE FUNCTIONS OF ONE VARIABLE TO PRESCRIBED ACCURACY. | Atomic Energy Research Establishment, Harwell (England) | 21 | report | — | no-oa |  | supplement | metadata |
+| 119 | S128 | 1966 | Necessary conditions for a minimax approximation | The Computer Journal 8 (4), 358-361 | 21 | journal | — | no-oa |  | supplement | abstract |
+| 120 | S129 | 2010 | On the convergence of a wide range of trust region methods for unconstrained optimization | IMA journal of numerical analysis 30 (1), 289-301 | 19 | journal | DAMTP report | txt | 16 | supplement | carded |
+| 121 | S130 | 1988 | A review of algorithms for nonlinear equations and unconstrained optimization | Proceedings ICIAM, 220-232 | 19 | conference | — | no-oa |  | supplement | abstract |
+| 122 | S131 | 1980 | Optimization algorithms in 1979 | Optimization Techniques, 83-98 | 19 | conference | — | no-oa |  | supplement | metadata |
+| 123 | S132 | 1977 | Quadratic termination properties of Davidon's new variable metric algorithm | Mathematical Programming 12 (1), 141-147 | 18 | journal | — | no-oa |  | supplement | abstract |
+| 124 | S133 | 1997 | Approximation theory and optimization: tributes to MJD Powell | Cambridge University Press | 17 | book | — | no-oa |  | supplement | metadata |
+| 125 | S134 | 1992 | Univariate interpolation on a regular finite grid by a multiquadric plus a linear polynomial | IMA journal of numerical analysis 12 (1), 107-133 | 17 | journal | — | no-oa |  | supplement | abstract |
+| 126 | S136 | 1976 | A Fortran subroutine for plotting the part of a conic that is inside a given triangle | SIS-76-2831 | 16 | report | — | no-oa |  | supplement | metadata |
+| 127 | S137 | 2009 | On nonlinear optimization since 1959 | The Birth of Numerical Analysis, 141-160 | 15 | chapter | DAMTP report | txt | 20 | supplement | carded |
+| 128 | S139 | 1983 | On the rate of convergence of variable metric algorithms for unconstrained optimization | Report DAMTP, 1525-1539 | 15 | report | manual | txt | 15 | core | carded |
+| 129 | S141 | 1977 | A technique that gains speed and accuracy in the minimax solution of overdetermined linear equations | Mathematical Software 3, 15-32 | 15 | conference | — | no-oa |  | supplement | metadata |
+| 130 | S142 | 1997 | Least squares fitting to univariate data subject to restrictions on the signs of the second differences | Approximation Theory and Optimization. Tributes to MJD Powell, 109-132 | 14 | chapter | — | no-oa |  | supplement | abstract |
+| 131 | S143 | 1969 | Nonlinear Programming—Sequential Unconstrained Minimization Techniques | The Computer Journal 12 (3), 207-a-207 | 14 | other | — | no-oa |  | supplement | metadata |
+| 132 | S144 | 1987 | The differential correction algorithm for generalized rational functions | Constructive Approximation 3 (1), 249-256 | 13 | journal | — | no-oa |  | supplement | abstract |
+| 133 | S145 | 1981 | An example of cycling in a feasible point algorithm | Mathematical Programming 20 (1), 353-357 | 13 | journal | — | no-oa |  | supplement | metadata |
+| 134 | S146 | 1980 | Gradient conditions and Lagrange multipliers in nonlinear programming | Lecture 9, 210 | 13 | chapter | — | no-oa |  | supplement | metadata |
+| 135 | S147 | 1975 | On the convergence of cyclic Jacobi methods | IMA Journal of Applied Mathematics 15 (3), 279-287 | 13 | journal | — | no-oa |  | supplement | abstract |
+| 136 | S148 | 1998 | The use of band matrices for second derivative approximations in trust region algorithms | Advances in Nonlinear Programming, 3-28 | 12 | chapter | DAMTP report | txt | 24 | supplement | carded |
+| 137 | S149 | 1984 | Conditions for superlinear convergence in l1 and l∞ solutions of overdetermined non-linear equations | IMA journal of numerical analysis 4 (2), 241-251 | 12 | journal | — | no-oa |  | supplement | abstract |
+| 138 | S150 | 1981 | The Shanno-Toint procedure for updating sparse symmetric matrices | IMA Journal of Numerical Analysis 1 (4), 403-413 | 12 | journal | — | no-oa |  | supplement | abstract |
+| 139 | S151 | 1981 | An upper triangular matrix method for quadratic programming | Nonlinear programming 4 | 12 | conference | — | no-oa |  | supplement | metadata |
+| 140 | S152 | 1992 | Log barrier methods for semi-infinite programming calculations | University of Cambridge, Department of Applied Mathematics and Theoretical Physics | 11 | report | — | no-oa |  | supplement | abstract |
+| 141 | S153 | 1988 | QR factorization for linear least-squares problems on a hypercube multiprocessor | IMA journal of numerical analysis 8 (4) | 11 | journal | — | no-oa |  | supplement | abstract |
+| 142 | S154 | 1972 | Quadratic termination properties of minimization algorithms II. Proofs of theorems | IMA Journal of Applied Mathematics 10 (3) | 10 | journal | — | no-oa |  | supplement | abstract |
+| 143 | S155 | 1991 | The complexity of Karmarkar's algorithm for linear programming | Department of Applied Mathematics and Theoretical Physics, University of Cambridge | 9 | report | — | no-oa |  | supplement | abstract |
+| 144 | S156 | 1987 | On error growth in the Bartels-Golub and Fletcher-Matthews algorithms for updating matrix factorizations | Linear Algebra and its Applications 88 | 9 | journal | — | no-oa |  | supplement | abstract |
+| 145 | S157 | 1975 | A Fortran subroutine that calculates the minimax solution of linear equations subject to bounds on the variables | SIS-75-2465 | 9 | report | — | no-oa |  | supplement | metadata |
+| 146 | S158 | 1981 | On a decomposition of conditionally positive-semidefinite matrices | Linear Algebra and its Applications 39 | 7 | journal | — | no-oa |  | supplement | abstract |
+| 147 | S160 | 1972 | Quadratic termination properties of a class of double-rank minimization algorithms | AERE, Theoretical Physics Division | 7 | report | — | no-oa |  | supplement | metadata |
+| 148 | S161 | 1973 | FORTRAN subroutine for plotting a cubic spline function | UKAEA Research Group, Harwell. Atomic Energy Research Establishment | 6 | report | — | no-oa |  | supplement | metadata |
+| 149 | S162 | 1998 | A'taut string algorithm'for straightening a piecewise linear path in two dimensions | IMA journal of numerical analysis 18 (1) | 5 | journal | — | no-oa |  | supplement | abstract |
+| 150 | S163 | 1994 | An algorithm that straightens and smooths piecewise linear curves in two dimensions | University of Cambridge, Department of Applied Mathematics and Theoretical Physics | 5 | report | — | no-oa |  | supplement | abstract |
+| 151 | S164 | 1988 | On a matrix factorization for linearly constrained optimization problems | University of Cambridge. Department of Applied Mathematics and Theoretical Physics | 5 | report | — | no-oa |  | supplement | metadata |
+| 152 | S165 | 1997 | Trust region calculations revisited1 | Numerical Analysis 1997 380 | 4 | conference | DAMTP report | txt | 20 | supplement | carded |
+| 153 | S166 | 1982 | Algorithms for constrained and unconstrained optimization calculations | Current Developments in the Interface: Economics, Econometrics, Mathematics | 4 | chapter | — | no-oa |  | supplement | abstract |
+| 154 | S167 | 2014 | The Lagrange method and SAO with bounds on the dual variables | Optimization Methods and Software 29 (2) | 3 | journal | DAMTP report | txt | 19 | supplement | carded |
+| 155 | S168 | 1966 | The general theory of linear approximation | Methods of Numerical Approximation | 3 | chapter | — | no-oa |  | supplement | metadata |
+| 156 | S169 | 1984 | An application of gaussian elimination to interpolation by generalized rational functions | Rational Approximation and Interpolation: Proceedings of the United Kingdom | 2 | conference | — | no-oa |  | supplement | abstract |
+| 157 | S170 | 1999 | An optimal way of moving a sequence of points onto a curve in two dimensions | Computational Optimization and Applications 13 (1-3) | 2 | journal | DAMTP report | txt | 26 | supplement | skimmed |
+| 158 | S171 | 1989 | The updating of matrices of conjugate directions in optimization algorithms | Department of Applied Mathematics and, Theoretical Physics, University of Cambridge | 2 | report | — | no-oa |  | supplement | metadata |
+| 159 | S172 | 1980 | A discrete characterization theorem for the discrete L 1 linear approximation problem | Journal of Approximation Theory 30 (3) | 2 | journal | — | no-oa |  | supplement | metadata |
+| 160 | S175 | 1971 | The differential correction algorithm for rational L∞ approximation | Conference on Applications of Numerical Analysis | 2 | conference | — | no-oa |  | supplement | abstract |
+| 161 | S176 | 1970 | A Fortran Subroutine for Unconstrained Minimization | AERE, Harwell | 2 | report | — | no-oa |  | supplement | metadata |
+| 162 | S177 | 1966 | On the convergence of exchange algorithms for calculating minimax approximations | The Computer Journal 9 (1) | 2 | journal | — | no-oa |  | supplement | abstract |
+| 163 | S178 | 1966 | THEORY OF GENERAL NON-LINEAR MINIMAX APPROXIMATIONS | Methods of Numerical Approximation: Lectures Delivered at a Summer School | 1 | chapter | — | no-oa |  | supplement | metadata |
+| 164 | S180 | 1969 | A FORTRAN SUBROUTINE TO INVERT A RECTANGULAR MATRIX OF FULL RANK. | Atomic Energy Research Establishment, Harwell (England) | 1 | report | — | no-oa |  | supplement | metadata |
+| 165 | S181 | 1966 | The exchange algorithm for calculating minimax linear approximations over a discrete point set | Methods of Numerical Approximation | 1 | chapter | — | no-oa |  | supplement | metadata |
+| 166 | S182 | 1966 | AN INTRODUCTION TO S-ENTROPY | Methods of Numerical Approximation: Lectures Delivered at a Summer School | — | chapter | — | no-oa |  | supplement | metadata |
+| 167 | S183 | 2008 | Special Issue Dedicated to Professor Michael JD Powell on the Occasion of His 70th Birthday | Taylor & Francis | — | other | — | no-oa |  | supplement | metadata |
+| 168 | S185 | 2000 | A quadratic interpolation method for unconstrained minimization without derivatives | XXV Congreso Nacional de Estadística e Investigación Operativa: Vigo, 4-7 de | — | conference | — | no-oa |  | supplement | metadata |
+| 169 | S186 | 1997 | DAMTP 1997/NA18 | — | — | report | manual | txt | 20 | supplement | carded |
+| 170 | S188 | 1994 | Curve fitting by thin plate splines | Univ. of Michigan, Ann Arbor, MI (United States) | — | report | — | no-oa |  | supplement | abstract |
+| 171 | S189 | 1993 | Panel discussion on multivariate problems | Numerical Algorithms 5 | — | other | — | no-oa |  | supplement | metadata |
+| 172 | S190 | 1990 | Algorithms for Linearly Constrained Optimization Calculations | University of Cambridge. Department of Applied Mathematics and Theoretical Physics | — | report | — | no-oa |  | supplement | metadata |
+| 173 | S192 | 1988 | Martin Beale memorial symposium | Mathematical Programming 42 (1) | — | other | — | no-oa |  | supplement | metadata |
+| 174 | S193 | 1987 | JH Wilkinson, FRS, FIMA (1919–1986) | IMA Journal of Numerical Analysis 7 (4) | — | other | — | no-oa |  | supplement | metadata |
+| 175 | S194 | 1980 | NATO Advanced Research Institute on Nonlinear | Mathematical Programming 19 (1) | — | other | — | no-oa |  | supplement | metadata |
+| 176 | S197 | 1975 | Optimization in action: 7th–9th January 1975. University of Bristol, UK. Organized by the Institute of Mathematics and its Applications, Essex, UK | Computer-Aided Design 7 (4) | — | other | — | no-oa |  | supplement | metadata |
+| 177 | S198 | 1972 | FORTRAN subroutine for calculating a cubic spline approximation to a given function | — | — | report | — | no-oa |  | supplement | metadata |
+| 178 | S199 | 1972 | Numerical methods for unconstrained optimization(Book- Numerical methods for unconstrained optimization.) | London and New York, Academic Press, 1972. 150 p | — | book | — | no-oa |  | supplement | metadata |
+| 179 | S206 | 1968 | A REVIEW OF METHODS FOR UNCONSTRAINED OPTIMIZATION | SIAM REVIEW 10 (4), 483-& | — | other | — | no-oa |  | supplement | metadata |
+| 180 | S208 | 1967 | Error analysis for equal-interval interpolation by cubic splines | Theoretical Physics Division, Atomic Energy Research Establishment | — | report | — | no-oa |  | supplement | metadata |
+| 181 | S210 | 1966 | A COMPARISON OF WEIGHTED LEAST SQUARES AND MINIMAX POLYNOMIAL APPROXIMATIONS | SIAM REVIEW 8 (4), 575-& | — | other | — | no-oa |  | supplement | metadata |
+| 182 | S211 | — | Election of Council | — | — | other | — | no-oa |  | supplement | metadata |
+| 183 | D001 | 1968 | A comparison of spline approximations with classical interpolation methods | IFIP Congress (1): 95-98 | — | conference | — | no-oa |  | supplement | metadata |
+| 184 | D002 | 2000 | System Modelling and Optimization: Methods, Theory and Applications, 19th IFIP TC7 Conference on System Modelling and Optimization, July 12-16, 1999, Cambridge, UK | IFIP Conference Proceedings [edited volume; Powell as editor] | — | book | — | no-oa |  | supplement | abstract |
+| 185 | R007 | 2017 | Michael James David Powell. 29 July 1936 — 19 April 2015 (Biographical Memoirs of Fellows of the Royal Society) | Biographical Memoirs of Fellows of the Royal Society (DAMTP NA2017/04 preprint) | — | memoir | url | txt | 34 | core | carded |
+| 186 | X001 | 2005 | An interview with Michael J. D. Powell (SIAM oral history, conducted by Philip Davis, 6 April 2005) | SIAM History of Numerical Analysis and Scientific Computing (Computer History Museum) | — | interview | manual | txt | 23 | core | carded |
+| 187 | X002 | 2003 | An Interview with M. J. D. Powell (Bulletin of the International Center for Mathematics, n. 14, June 2003) | Bulletin of the International Center for Mathematics 14 | — | interview | manual | txt | 7 | core | carded |
 
 187 works · txt 39 · pdf 0 · no-oa 148

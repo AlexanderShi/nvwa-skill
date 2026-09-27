@@ -1,0 +1,115 @@
+# Technique catalog · Andrew R. Conn
+
+> What this is: the transferable techniques found while reading Conn's papers in full, grouped into proof devices, algorithm-design moves, experiment protocols, writing moves and (from one essay) engagement moves. Each entry gives a one-line "how to use it" and the paper cards it rests on, as [card id pages]. Cards are in `research/cards/` and indexed in `research/07-paper-cards.md`; the aggregation is `research/08-deep-reading-synthesis.md` §7.
+>
+> Date: 2026-09-27. Page numbers are those of the text versions read (often FUNDP/Namur or IBM technical reports and preprints), so they may differ from the published papers. Eight early papers were read from page images (S018, S021, S030, S046, S048, S108, S130, S164); their page references come from the images.
+>
+> Attribution: nearly every device here is joint work (with Gould and Toint for 1984–2003, with Scheinberg, Toint and Vicente for DFO, with IBM engineers for circuits, with Coleman, Calamai, Li and Bartels at Waterloo). A technique listed here is a *device the papers use*, not a claim that Conn invented it; where a device is imported (Dennis–Moré bounded deterioration, Sauer–Xu error bounds, MADS's progressive barrier) the card says from where. Papers where Conn is a middle author or his role cannot be identified (S003, S032/S123, S057, S060) are marked *(unweighted)* and only illustrate a device.
+>
+> Reading lesson (general): before reusing a number from any paper, check that its tables, captions and text agree, and that the experiment's parameters satisfy the theorem being cited.
+
+How the techniques map onto `SKILL.md`: proof devices serve Methods 1 and 3, Heuristic H11 and Workflow B; design moves serve Methods 3, 5 and 6, Heuristics H12–H13 and Workflows A, B, D; experiment protocols serve Methods 2 and 7 and Workflows C and G; writing moves serve Methods 1 and 7 and Workflow F; engagement moves serve Method 4 and Workflow E.
+
+---
+
+## 1. Proof devices
+
+| # | Technique | How to use it | Cards |
+|---|---|---|---|
+| P1 | **Generalized Cauchy point as a step certificate** | Define a Cauchy point along the projected-gradient path (or the model's own path) and accept any step that achieves a fixed fraction of its model decrease; for second order add a fraction of the eigenstep decrease; a cheap bonus step can be credited in the same test. | [S008 pp. 3–4, 7, 11; S031 pp. 17–18; S026 pp. 8–9; S012 pp. 5–6; S056 pp. 6–7] |
+| P2 | **Radius bounded below via the first violating iteration** | To show Δ_k stays away from zero while ‖g_k‖ ≥ ε, take the first iteration at which Δ drops below the threshold: the previous iteration had a small radius and failed, which contradicts the "small radius ⇒ successful" lemma. | [S008 pp. 14–15; S031 pp. 19–20; S047 pp. 17–20; S013 pp. 18–19; S025 pp. 13–14] |
+| P3 | **Counting over successful iterations** | Split the iterations into successful ones (bounded by total decrease divided by the decrease per success) and the rest; with growing Hessian bounds b_k, a finite Σ1/b_k contradicts the growth assumption. | [S008 pp. 15–16; S031 p. 21; S047 pp. 20–21; S022 p. 13] |
+| P4 | **liminf → lim by interleaved subsequences** | Assume ‖g‖ ≥ 2ε at k_i and < ε at the next ℓ_i; bound the path length Σ Δ_j between them by the function decrease, which tends to zero, and contradict continuity of the gradient. | [S013 pp. 21–22; S012 pp. 19–21; S031 pp. 22–24] |
+| P5 | **Criticality coupling Δ ≤ μ‖g‖** | When the model gradient is small, improve the model until Δ ≤ μ‖g_model‖; then ‖∇f − g‖ ≤ κμ‖g‖ carries model-gradient convergence to the true gradient, and Δ → 0 doubles as a stopping test. | [S013 pp. 16–17, 20; S012 pp. 18–19; S025 pp. 14–15; S065 p. 10; S075 pp. 6–7] |
+| P6 | **Interpolation-geometry calculus** | Move between the abstract Λ-poisedness measure and the computable ‖M⁻¹‖ of the scaled interpolation matrix; cancel the value error by subtracting one interpolation equation; prove on the unit ball and rescale; enforce a pivot threshold during the factorisation to get both a bound and a repair. | [S016 pp. 6–13, 15–23; S028 pp. 4, 9–13, 24; S124 pp. 8–10, 17; S013 pp. 10–13; S019 pp. 13–14] |
+| P7 | **Parameter bounded away from zero** | Assume the penalty or barrier reduction fires infinitely often; show that the multiplier-update acceptance test must then eventually always hold, a contradiction, so the parameter settles. | [S005 pp. 17–19; S007 pp. 44–47; S022 pp. 20–23; S107 pp. 19–23; S054 p. 15; S126 pp. 15–16] |
+| P8 | **Necessity by a constructed counterexample** | To show an assumption cannot be dropped, or that a rival rule or a published theorem fails, build an admissible iterate cycle or the smallest instance that breaks it. | [S005 pp. 21–25; S007 pp. 20, 47–51; S126 p. 8; S031 pp. 54–55; S022 p. 24; S107 p. 24; S018 pp. 14–15; S028 pp. 19–20; S009 pp. 7–8; S003 pp. 4–5 (unweighted)] |
+| P9 | **Finitely many active sets, plus an insurance assumption** | Pass to a subsequence on which the active or dominant index set is constant; when you cannot know which subset will occur, state the assumption for every subset ("insurance"). | [S005 pp. 13–14; S022 pp. 8–9, 15; S107 p. 14; S026 pp. 26–27] |
+| P10 | **Active-set identification** | Split variables into dominated and floating (or strongly and weakly active), prove finite identification under strict complementarity, then treat the free variables as an unconstrained problem. | [S005 pp. 5–6; S007 pp. 10–11; S008 pp. 20–22; S022 pp. 14–15; S107 p. 12; S113 p. 19; S074 p. 15; S031 p. 8] |
+| P11 | **Range/null error split with a two-step contraction** | Split the error into range-space and null-space parts, bound each, and get a two-step contraction; prove the rate first and local convergence afterwards. | [S018 pp. 8–13; S021 pp. 10–12, 20–26; S030 pp. 18–22] |
+| P12 | **Bounded deterioration in a weighted norm** | Show the quasi-Newton matrix deteriorates by at most a summable amount in a weighted Frobenius norm, and keep ‖B⁻¹‖ bounded inside the induction with the Banach perturbation lemma. | [S021 pp. 15–17, 24–25; S056 pp. 11–12; S049 p. 7] |
+| P13 | **Direction-to-matrix lift with a computable bound** | Bound a matrix error from its errors along the steps, ‖A‖ ≤ ‖AS‖/σ_min(S), using an averaged Hessian; make the bound computable from a run so experiments can print it beside the observed error. | [S010 pp. 10–12] |
+| P14 | **Factorisation certificates** | Read optimality, inertia or negative curvature off the factorisation you already computed (LDLᵀ pivots, Fredholm alternative, exact Schur-complement cancellation), so the certificate costs nothing. | [S096 pp. 4–11; S049 pp. 8–9; S089 pp. 7–9; S054 pp. 7–8; S126 pp. 7–8] |
+| P15 | **Proof by reuse** | List which lemma uses which assumption; when an assumption changes, re-prove only those lemmas and map the rest by number to the predecessor (Heuristic H11). | [S113 pp. 9, 17; S031 pp. 57–58; S022 pp. 13–15; S025 p. 12; S074 pp. 10, 12; S058 p. 6; S155 pp. 27–35] |
+| P16 | **Inexactness as a fraction of the predicted decrease** | Require every inexact quantity (lower-level solve, noise in f) to stay below a fraction of the predicted decrease, and insert that ratio into the ratio-test lemma. | [S066 pp. 5–6; S031 pp. 57–58; S019 p. 12] |
+| P17 | **Alternatives and duality** | Use Gordan or Fredholm alternatives for existence of descent; use LP weak duality as a stopping certificate. | [S130 p. 22; S096 p. 6; S031 pp. 50–51; S017 p. 2; S060 pp. 29–30 (unweighted)] |
+| P18 | **Non-recurring patterns; impossibility first** | Show that the sign or active-set pattern defining a step cannot recur, so the method terminates finitely; prove what cannot work before constructing what can. | [S155 p. 26; S141 pp. 4–7] |
+| P19 | **Reduce to the classical case** | Show that eventually the trust region is inactive, or that the global method reduces to a known local algorithm, so the classical local proof applies; check the one-component reduction of every new rule. | [S018 pp. 7, 14; S008 pp. 19–22; S065 pp. 13–17; S047 pp. 10, 14] |
+| P20 | **Descent for max-type functions from multipliers** | Write the gradient of the active pieces as a convex combination; use the multipliers' signs to choose the descent direction and which pieces to drop. | [S130 pp. 22–23; S108 pp. 7–9, 11–12; S164 pp. 8, 18–19; S233 pp. 2–3] |
+
+## 2. Algorithm-design moves
+
+| # | Technique | How to use it | Cards |
+|---|---|---|---|
+| A1 | **Specify each component by the checkable property the proof uses** | Write the inner stopping test on a criticality measure, and the model class as error bounds plus a finite improvement procedure; any implementation meeting them inherits the theorem. | [S005 pp. 7, 27; S007 pp. 14, 27; S013 p. 13; S022 pp. 5–6; S058 pp. 6–7; S012 pp. 7–8; S113 pp. 5, 14–19; S031 pp. 9–11] |
+| A2 | **Two-regime outer loop** | Pair a sure-to-converge fallback (reduce the penalty parameter) with a fast mechanism (update the multipliers), switched by one test on constraint violation; set the tolerances as powers of the penalty parameter. | [S005 pp. 7–8, 18–19; S007 pp. 12–13, 20; S022 p. 6] |
+| A3 | **Fallback direction from the same factorisation** | When a slope test rejects the main direction, take the fallback from the factorisation already computed rather than solving a new system. | [S054 pp. 6–11, 14; S126 pp. 12, 14; S017 p. 10] |
+| A4 | **Split by type** | Handle cheap or linear parts exactly and penalise or model only the hard part; give each component (element, residual, constraint class) its own radius or penalty. | [S005 pp. 1, 4; S020 pp. 3, 5–8; S022 pp. 2, 6; S047 pp. 5–6, 11–12; S074 p. 2; S080 p. 12; S089 pp. 4–7; S113 pp. 3–4, 20–22; S126 pp. 2–3; S141 p. 4; S108 pp. 15–16] |
+| A5 | **Horizontal/vertical steps for kinked objectives** | Move along the current kink manifold and restore onto it; keep an ε-active working set and halve ε when stuck; use multiplier signs to drop several pieces at once. | [S233 pp. 2–7; S030 pp. 5–10; S108 pp. 5, 9–16; S130 pp. 17–23; S164 pp. 10–13, 19–20; S014, S015, S044 abstract] |
+| A6 | **Factorisation-first design** | Arrange the method so one QR or LDLᵀ gives the direction, the optimality test and the certificate; put the constant columns first so updates are cheap. | [S233 pp. 4–5, 7; S030 pp. 15–16; S048 pp. 11–17; S096 pp. 5–7] |
+| A7 | **Shrink the radius only when the model was certified** | After a failed step, if the model was not certified when the step was computed, repair the geometry and keep Δ; shrink Δ only if it was. | [S009 pp. 9–10; S013 p. 14; S020 pp. 4–5; S025 pp. 7–9; S075 pp. 6–7] |
+| A8 | **Evaluation economy** | Use every evaluated point in the model and its geometry; validate a long step on stored values before paying for a new evaluation; let geometry points become iterates; reject trial points by cheap tests first (Heuristic H12). | [S019 pp. 6–10, 12; S013 pp. 15, 17; S020 p. 6; S026 pp. 8–9; S066 pp. 9, 14; S009 pp. 14–15] |
+| A9 | **Cheap bonus step credited in the ratio test** | After the main step, take a cheap second step (for example a closed-form update of variables of known form, or slack resets) and credit its decrease in the acceptance ratio. | [S056 pp. 4–7, 13–15; S027 p. 5] |
+| A10 | **Reuse inner-solver byproducts** | Keep the CG directions and Rayleigh quotients produced while minimizing the model, and use them for the next subspace or curvature estimate instead of discarding them. | [S058 pp. 4, 8–10] |
+| A11 | **Reformulate before solving** | Max → an epigraph variable z with z ≥ f_i; semi-infinite → an integral equality; robust min–max → bilevel; logical constraints → a continuous penalty. | [S027 p. 2; S036 p. 5; S039 pp. 2–3; S066 pp. 16–17; S099 pp. 6–10; S141 pp. 4, 11] |
+| A12 | **One adjoint for the merit-function gradient** | Weight the adjoint excitations by the multipliers so one adjoint analysis returns the gradient of the merit function; choose direct or adjoint sensitivities by the ratio of parameters to functions (5× in JiffyTune). | [S039 p. 4; S036 p. 3; S077, S033, D002 abstract] |
+| A13 | **Failure recovery** | Give the simulator a failure return code; on failure skip the iteration, cut the radius and re-solve; count failed evaluations in the budget (Heuristic H13). | [S020 pp. 7–8; S027 p. 5; S026 p. 8] |
+| A14 | **A family with the rival methods as its extremes** | Build a parametrised family whose endpoints are the two classical rival methods and tune the parameter instead of choosing a side. | [S082 pp. 3, 5–6; S003 pp. 3, 9–10 (unweighted)] |
+| A15 | **Import a device, then retune it** | When moving a device from another school into your method, re-derive its parameters for the host's evaluations per iteration. | [S075 pp. 13, 20] |
+| A16 | **Ratio test to stabilise a non-NLP method** | Add a trust-region radius and ratio test to an oscillating method (a cutting-plane dual). | [S060 pp. 18–19 (unweighted)] |
+| A17 | **Fix discrete decisions from a cheap continuous solve, then repair** | Solve a cheap continuous relaxation, fix the discrete decisions it suggests, then repair or prove globally. | [S099 pp. 19–20; S060 pp. 19–20 (unweighted)] |
+| A18 | **Noise level and physical units as algorithm parameters** | Set the initial radius, feasibility and bound tolerances and the stopping step in the application's units (smallest meaningful move), and compare the predicted reduction with the noise level. | [S019 p. 12; S036 p. 5; S031 pp. 57–58; S025 pp. 17–19] |
+| A19 | **Warm starts from structure** | Start multipliers at 1/n, reuse the previous inner solution, use a linear surrogate of the solution map, or take an alternative first step after a parameter change. | [S027 p. 4; S074 pp. 3, 7; S066 pp. 12–13; S082 pp. 5–6] |
+| A20 | **Treat the given structure as a design variable** | Do not accept the user's partially separable decomposition as fixed: merge elements when that lowers the linear-algebra cost. | [S085 pp. 2, 6–7] |
+
+## 3. Experiment protocols
+
+| # | Technique | How to use it | Cards |
+|---|---|---|---|
+| E1 | **Testing twin** | Test exactly the analysed class; check each implementation deviation against the theory; repair a failure only within what the theory allows. | [S011 pp. 3, 5, 19–20; S040 pp. 7–16] |
+| E2 | **One change at a time, before any external comparison** | Run variants that differ from a printed default in one option each, or a full factorial of your own options; report best and worst over a parameter box. | [S011 p. 10; S040 pp. 32–34; S049 p. 10; S058 pp. 12–16; S075 pp. 19–22; S030 p. 26] |
+| E3 | **Coded failures and a same-answer filter** | Code every failure by cause (stall, infeasible, memory, iterations, CPU, arithmetic), filter runs that reach different answers, and count false failures and false successes symmetrically. | [S040 pp. 34, 38; S103; S102 pp. 12–14; S120 p. 27; S019 p. 17; S049 p. 10] |
+| E4 | **Complete results in a companion report** | Put every per-run number in a separate report so the paper can argue from summaries while readers can check each run. | [S103 pp. 1–2; S120 pp. 2, 27; S030 pp. 4, 27] |
+| E5 | **Cost unit = what the user pays** | Count function and gradient calls for expensive functions, CPU and linear-algebra work when evaluations are cheap; if two units rank methods differently, show both. | [S011 p. 22; S020 p. 10; S019 pp. 15–18; S058 p. 3; S049 pp. 10–11; S120 pp. 28–50] |
+| E6 | **Two tiers** | A public collection plus application instances, reported separately. | [S020 pp. 8–10; S056 pp. 16–23; S075 pp. 17–23; S108 pp. 20–22; S017 pp. 11–18; S027 pp. 5–7; S236 p. 6] |
+| E7 | **Noise protocol** | Run the same problems noiseless and at two noise levels; give the method and the baseline the true level; use data profiles with deterministic noise and tolerances at the noise level. | [S019 pp. 17–18; S025 pp. 17–19; S065 pp. 23–24] |
+| E8 | **Stress variants** | Add bounds around the unconstrained solution, degenerate variants that break an assumption (strict complementarity), a conditioning knob, and published generators with seeds. | [S011 pp. 11, 24–25; S010 pp. 13–14, 21; S049 pp. 10, 20–21; S096 pp. 14–16; S048 pp. 18–20] |
+| E9 | **Fair to the rival** | Invite the rival code's author as coauthor; declare your own-code expertise bias; re-implement the rival on the same simulator; rerun on the earlier study's machine and instances; fix the problem list and compulsory defaults in advance; swap one component to explain a gap. | [S102 p. 2; S061 p. 25; S027 p. 6; S017 p. 14; S025 p. 16; S040 pp. 36–37; S188 pp. 5, 7; S003 pp. 15–16 (unweighted)] |
+| E10 | **Tier 0** | Validate on an analytic prototype with exact gradients, synthetic input sequences, or the subclass where baselines exist; size a synthetic model to expose the difficulties but keep iteration fast; re-evaluate final designs with a higher-fidelity reference simulator. | [S027 p. 5; S010 pp. 14–19; S026 p. 30; S054 p. 27; S236 p. 6; S036 pp. 2, 6] |
+| E11 | **Stratify by the feature the design says matters** | Split results by the structural property the method was built to exploit (problem class, number of zero norms, degeneracy). | [S102 pp. 15–18; S017 p. 13; S096 pp. 14–16] |
+| E12 | **Report adoption and where time goes** | For a deployed tool, report users, sessions, distinct problems and runs, and split time between simulation and optimizer. | [S036 p. 6; S027 p. 6] |
+| E13 | **Disclose exclusions** | List excluded problems and why, state whether each starting point is feasible, and for constrained data profiles count feasible points only. | [S075 pp. 17–19; S040 p. 28] |
+| E14 | **A win/lose regime conclusion** | Tie the conclusion to the tables as regimes where the method wins and loses, with a dedicated section for the bad cases. | [S049 p. 19; S056 pp. 19–24; S020 pp. 7–8] |
+
+## 4. Writing moves
+
+| # | Technique | How to use it | Cards |
+|---|---|---|---|
+| W1 | **Numbered comments after the algorithm** | After the algorithm box, list what practical codes do differently and your own weak spots with remedies. | [S013 pp. 15–16; S019 pp. 13–15; S022 p. 7; S031 pp. 10–13] |
+| W2 | **Map each result by number to its predecessor** | In an extension paper, spend prose only on what is new and cite the rest by lemma number. | [S022 pp. 13–15; S007 p. 8; S113 p. 9] |
+| W3 | **Derivative triage in the introduction** | One sentence per route (finite differences, automatic differentiation, source access, modelling f) with the reason it fails or works for the target user. | [S009 pp. 3–4; S019 p. 3; S020 pp. 2–3] |
+| W4 | **Gap statement as categories** | Sort prior methods into categories, each paired with the exact property it lacks; place your own earlier work in the same grid. | [S012 p. 2; S021 pp. 5–6; S017 pp. 2–4; S080 pp. 9–11] |
+| W5 | **Close a survey with your own agenda** | End a survey with a numbered list of open problems that your group will attack next. | [S009 p. 17; S061 pp. 15–22; S080 pp. 16–17; S086 pp. 15–16] |
+| W6 | **Calibrated claims** | Use "competitive", "complement each other", "appears preferable" where that is what the data show; keep package-specific and general conclusions apart. | [S075 pp. 1, 22–23; S102 p. 17; S108 pp. 18–19; S010 p. 20; S048 p. 21; S040 p. 50; S236 p. 6] |
+| W7 | **Proved versus observed** | Say which part of a behaviour is proved and which is only observed, and on which problems the observation holds beyond the assumptions. | [S074 p. 3; S048 p. 21; S011 p. 20] |
+| W8 | **Public errata crediting the finders** | Publish a correction that keeps the statement and numbering and names who found the error. | [D001 p. 1; S059 pp. 1, 4] |
+| W9 | **Name the next theorem, then deliver it** | End with a future-work paragraph that names the next result, and publish it as the sequel. | [S018 p. 15 → S021 p. 6; S005 p. 4 → S022; S113 p. 25 → S107] |
+| W10 | **Recover a forgotten lesson** | Rehabilitate an overlooked precursor and name what it lacked. | [S007 pp. 4–5; S009 pp. 5–6] |
+| W11 | **The smallest degenerate example** | Teach a degeneracy with the smallest instance (six points on a circle for quadratic interpolation in the plane). | [S009 pp. 7–8; S016 p. 6] |
+| W12 | **Infrastructure papers written for users** | Number the design requirements with their costs; order sections by the user's questions; include a real session transcript; end each manual chapter with the problem class now expressible. | [S046 pp. 11–13; S004 pp. 3, 35–39; S149 pp. 30, 38] |
+| W13 | **Constants table and roadmap** | Before the analysis, give a table of constants with mnemonic subscripts and a roadmap of the proof. | [S012 p. 4] |
+| W14 | **Justify infrastructure by the failure it prevents** | Argue for a standard format by the invalid comparisons that format differences cause. | [S137 p. 2] |
+| W15 | **Essay voice** | Put highlights and lowlights side by side, back claims with concrete figures, state lessons as short aphorisms, and footnote terms for non-specialists. | [S236 pp. 2–6] |
+
+## 5. Engagement moves (one source: the 2007 essay)
+
+These come from Conn's single first-person essay [S236]; each has one source, so they are variant notes on Method 4, not heuristics.
+
+| # | Technique | How to use it | Cards |
+|---|---|---|---|
+| N1 | **The vintage gap as the entry** | In a users' meeting, compare the age of the algorithms they run with the state of the art and offer to present the newer ones. | [S236 p. 3] |
+| N2 | **Aim at the users' next structural change** | Choose the next topic from the change you can see coming in the partner's problem (discrete variables entering continuous tuning) and start before they ask. | [S236 p. 4] |
+| N3 | **Written topic criteria** | Before entering an area, write the criteria: under-researched, rising importance, in-house strength, a complementary partner, applications at hand. | [S236 pp. 4, 6] |
+| N4 | **Let the domain experts argue the case** | Make the technical argument to management from what the optimizer needs (derivatives, speed, reliability) and let the engineers carry it. | [S236 pp. 3–4] |
+| N5 | **Low-stake pilot** | Enter a new industry through a small exploratory project with a small customer investment, expecting some pilots not to continue. | [S236 p. 6] |
+| N6 | **Move on after adoption** | Once a tool is the users' daily routine, start a new application area. | [S236 p. 5] |

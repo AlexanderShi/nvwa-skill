@@ -58,5 +58,8 @@
  "S175": "https://link.springer.com/chapter/10.1007/BFb0069455",
  "S177": "https://api.openalex.org/works/W2145378315",
  "S188": "https://www.osti.gov/biblio/36409",
- "D002": "https://link.springer.com/book/10.1007/978-0-387-35514-6 (publisher 'About this book' description; DOI 10.1007/978-0-387-35514-6; IFIP AICT vol. 46, eds. M. J. D. Powell and S. Scholtes)"
+ "D002": "https://link.springer.com/book/10.1007/978-0-387-35514-6 (publisher 'About this book' description; DOI 10.1007/978-0-387-35514-6; IFIP AICT vol. 46, eds. M. J. D. Powell and S. Scholtes)",
+ "S079": "https://link.springer.com/article/10.1007/BF02591941 (Springer landing page, fetched 2026-09-27 with curl; math extraction is lossy: italic symbols run into words, and in S064 \"Bd--g\" and \"Z 1 BZ=1\" are extraction damage)",
+ "S064": "https://link.springer.com/article/10.1007/BF02591850 (Springer landing page, fetched 2026-09-27 with curl; math extraction is lossy: italic symbols run into words, and in S064 \"Bd--g\" and \"Z 1 BZ=1\" are extraction damage)",
+ "S144": "https://link.springer.com/article/10.1007/BF01890568 (Springer landing page, fetched 2026-09-27 with curl; math extraction is lossy: italic symbols run into words, and in S064 \"Bd--g\" and \"Z 1 BZ=1\" are extraction damage)"
 }
