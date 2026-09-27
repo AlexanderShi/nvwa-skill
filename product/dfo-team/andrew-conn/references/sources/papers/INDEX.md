@@ -189,9 +189,9 @@
 | 177 | S233 | 1978 | DIRECT APPROACHES FOR THE MINIMAX PROBLEM | Computers and Mathematical Programming: Proceedings of the Bicentennial Conference (NBS Special Publication 502) | — | conference | manual | txt | 10 | supplement | — |
 | 178 | S234 | — | Report 93/15 June 16, 1993 | — | — | report | — | no-oa |  | skip | — |
 | 179 | S235 | — | Report 92/14 August 20, 1992 | — | — | report | — | no-oa |  | skip | — |
-| 180 | S236 | — | SIAG/OPT Views-and-News | — | — | other | — | no-oa |  | supplement | — |
+| 180 | S236 | 2007 | SIAG/OPT Views-and-News | SIAG/OPT Views-and-News 18(2), Oct 2007 (theme: Optimizers in Industry) | — | essay | manual | txt | 23 | core | — |
 | 181 | S237 | — | ARNE FRANStN | — | — | other | — | no-oa |  | skip | — |
 | 182 | D001 | 1981 | Erratum | Math. Program. | — | journal | manual | txt | 1 | supplement | — |
 | 183 | D002 | 2000 | Noise considerations in circuit optimization | IEEE Trans. Comput. Aided Des. Integr. Circuits Syst. | — | journal | — | no-oa |  | supplement | — |
 
-183 works · txt 71 · pdf 0 · no-oa 112
+183 works · txt 72 · pdf 0 · no-oa 111

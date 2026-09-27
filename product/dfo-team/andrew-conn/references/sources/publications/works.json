@@ -3997,17 +3997,20 @@
    "id": "S236",
    "title": "SIAG/OPT Views-and-News",
    "authors": "AR Conn, MGC Resende, KM Anstreicher, LN Vicente, AR Conn",
-   "venue": null,
-   "year": null,
+   "venue": "SIAG/OPT Views-and-News 18(2), Oct 2007 (theme: Optimizers in Industry)",
+   "year": 2007,
    "cites": null,
    "doi": null,
    "arxiv": null,
-   "urls": [],
-   "kind": "other",
+   "urls": [
+    "https://siagoptimization.github.io/assets/views/18-2.pdf"
+   ],
+   "kind": "essay",
    "dup_of": null,
    "sources": [
     "scholar"
-   ]
+   ],
+   "note": "Conn's first-person essay 'My Experiences as an Industrial Research Mathematician' (pp. 1-7); the rest of the issue is by others."
   },
   {
    "id": "S237",

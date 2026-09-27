@@ -32,6 +32,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -169,7 +170,8 @@ def ocr_pages(doc) -> list[str] | None:
             for i in range(len(doc)):
                 png = Path(tmp) / f"p{i + 1}.png"
                 doc[i].render(scale=300 / 72).to_pil().convert("L").save(png)  # 需要 Pillow
-                r = subprocess.run(["tesseract", str(png), "-", "--psm", "1"], capture_output=True, text=True)
+                r = subprocess.run(["tesseract", str(png), "-"], capture_output=True, text=True,
+                                   env={**os.environ, "OMP_THREAD_LIMIT": "1"})  # 多线程在小机器上反而极慢
                 out.append(r.stdout)
     except (ImportError, OSError, subprocess.SubprocessError):
         return None
