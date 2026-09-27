@@ -35,6 +35,6 @@
       "student_mode": true
     }
   ],
-  "targetWords": 11500,
+  "target_words": 11500,
   "force": false
 }

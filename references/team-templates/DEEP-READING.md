@@ -71,7 +71,7 @@ Run every stage per member (one workflow per member, in parallel: a workflow run
    - **book**: over 150 pages, read chapter by chapter, alone in its batch;
    - **abstract**: no full text, so an abstract or metadata card only, 30 per batch.
 
-   It runs in rounds as new full texts turn up; each later round passes the earlier rounds' plan files to `--exclude`, including rounds still being read. The last round emits the abstract batches. Batch IDs are `c01`, `s02`, … in round 1 and `c2-01`, `a2-03`, … in later rounds.
+   It runs in rounds as new full texts turn up; with `--out-dir <scratch>` it picks the next round number itself and excludes the other rounds' plan files it finds there (including rounds still being read). The last round emits the abstract batches. Batch IDs are `c01`, `s02`, … in round 1 and `c2-01`, `a2-03`, … in later rounds; `team-increment.js` (T4) continues the rounds (e.g. `c5-01`). A batch named by hand says what it holds in its header line.
 5. **Cards (T3.5, `team-read.js`).** One agent per batch writes `references/research/cards/<batch>.md` and `<batch>.digest.json` using the brief below. `07-paper-cards.md` indexes every card.
 6. **Quote check.** `scripts/verify_card_quotes.py` looks up every quoted passage (`quotes[].text` in the digests) in the extracted text or abstract, normalising ligatures, hyphenation, quote marks and whitespace. Every NOT FOUND is fixed before synthesis.
 7. **Read column.** `scripts/mark_read_from_cards.py` fills INDEX.md's Read column from each card's `read_level`: `full` → `carded`, `partial` → `skimmed`, `abstract` → `abstract`, `metadata` → `metadata`, `unreadable` → `unreadable`.
@@ -80,8 +80,8 @@ Run every stage per member (one workflow per member, in parallel: a workflow run
    2. A conservative edit of `SKILL.md` follows, within a word budget stated up front, writing `09-evidence-ledger.md` at the same time. Existing methods get evidence first. A new core method needs 3 or more distinct papers plus the four checks.
    3. Read-only skeptics review the edit adversarially.
    4. The verified objections are fixed, and `quality_check.py` is re-run.
-9. **Tighten (T3.7, `team-tighten.js`, only for skills still over the word budget).** Long evidence moves from `SKILL.md` to `09-evidence-ledger.md` without loss; `scripts/check_ledger.py --before <scratch>/<slug>-SKILL.before-tighten-<date>.md` (the pre-tighten copy) proves every card id, page reference and quote survives, the front matter and rule sections are unchanged, and every ledger anchor resolves. After the synthesis alone, `scripts/check_ledger.py` without `--before` checks the ledger anchors.
-10. **Integrate (T3.8, `team-integrate.js`).** The team README, this file and the roundtable's fault lines are refreshed from the members' 08 syntheses; the coverage table comes from `scripts/team_status.py`; `scripts/check_links.py` checks every link.
+9. **Tighten (T3.7, `team-tighten.js`, only for skills still over the word budget).** Long evidence moves from `SKILL.md` to `09-evidence-ledger.md` without loss; `scripts/check_ledger.py --before <scratch>/<slug>-SKILL.before-tighten-<date>.md` (the pre-tighten copy, no `--allow`) proves every card id, page reference and quote survives, the front matter and rule sections are unchanged, and every ledger anchor resolves. After the synthesis alone, `scripts/check_ledger.py` without `--before` checks the ledger anchors; the synthesis reviewers compare with the pre-synthesis copy using `--allow frontmatter,activation-disclaimer`, the parts a synthesis changes by design.
+10. **Integrate (T3.8, `team-integrate.js`).** The team README, this file and the roundtable's fault lines are refreshed from the members' 08 syntheses; the coverage table here comes from `scripts/team_status.py --coverage` and the README's five-column summary from `--coverage --short`; `scripts/check_links.py` checks every link.
 
 ### Commands, per researcher
 
@@ -104,10 +104,11 @@ python3 scripts/acquire_fulltexts.py $T/$R
 # T3.3 after team-chase.js: merge its output and re-run the acquisition
 python3 scripts/merge_chase.py $T/$R
 
-# T3.4 roles + reading batches; one round per wave of new full texts (team-read.js reads $S/batches-<slug>-r<round>.json)
-python3 scripts/plan_reading_batches.py $T/$R --no-abstract > "$S/batches-$R-r1.json"
-python3 scripts/plan_reading_batches.py $T/$R --round 2 --no-abstract --exclude "$S/batches-$R-r1.json" > "$S/batches-$R-r2.json"
-#    ... once a round plans no full-text batch, a last round without --no-abstract gives the remaining works abstract/metadata batches
+# T3.4 roles + reading batches; one round per wave of new full texts. Writes $S/batches-<slug>-r<N>.json (what team-read.js
+#    reads with round: N), picks N itself and excludes the other rounds' plans in $S; prints N per member
+python3 scripts/plan_reading_batches.py $T --out-dir "$S" --no-abstract
+#    ... once it prints "no full-text batches left" for a member, a last round without --no-abstract gives the remaining works abstract/metadata batches
+python3 scripts/plan_reading_batches.py $T/$R --out-dir "$S"
 
 # T3.5 after team-read.js: check every quote, then fill the Read column (no unread rows after the last round)
 python3 scripts/verify_card_quotes.py $T/$R
@@ -121,7 +122,8 @@ python3 scripts/check_ledger.py $T/$R --before "$S/$R-SKILL.before-tighten-$D.md
 #    scratch lost? every stage is committed: git show <pre-tighten commit>:$T/$R/SKILL.md > "$S/$R-SKILL.before-tighten-$D.md"
 
 # T3.8 team level
-python3 scripts/team_status.py $T --coverage     # paste into Coverage below, unchanged
+python3 scripts/team_status.py $T --coverage           # paste into Coverage below, unchanged
+python3 scripts/team_status.py $T --coverage --short   # the five-column summary for the team README's Honest Boundary, unchanged
 python3 scripts/check_links.py $T
 ```
 
@@ -177,8 +179,8 @@ Report: cards written, method links, new-pattern candidates, papers you could no
 2. **Name the file like the index.** Use `<ID>-<year>-<first eight title words, lowercased, hyphenated>.pdf`, the stem `acquire_fulltexts.py` uses.
 3. **Put it in `<researcher>/references/sources/papers/`.** This folder is git-ignored. Check by hand that the file is the paper, because the title check only runs on downloads.
 4. **Re-run the acquire script.** Use `python3 scripts/acquire_fulltexts.py product/{{TEAM_SLUG}}/<researcher> --only <ID>`. It extracts the text, OCRs scans, and sets `Full text = txt` and `Source = manual`. Run it in the checkout that holds the other papers' PDFs and `txt/`: rows without local files keep their committed status, but their quotes cannot be re-verified.
-5. **Card and fold it in.** Either run `team-increment.js` (T4; see `scripts/workflows/README.md`), which cards the new material, folds it into the skill, verifies and fixes; or by hand: plan a new round with `plan_reading_batches.py … --round <next> --no-abstract --exclude <earlier plan files, comma-separated>`, read with the brief above, run `verify_card_quotes.py` and `mark_read_from_cards.py`, add the card's row to `07-paper-cards.md` from its digest fields, and apply the conservative-update rules to `SKILL.md`, `09-evidence-ledger.md` and `technique-catalog.md`.
-6. **Refresh the numbers.** Re-run `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage`, paste it unchanged into the Coverage table here, and update the five-column summary in the team README from it (or run `team-integrate.js`, which does both).
+5. **Card and fold it in.** Either run `team-increment.js` (T4; see `scripts/workflows/README.md`), which cards the new material, folds it into the skill, verifies and fixes; or by hand: plan a new round with `plan_reading_batches.py <member folder> --out-dir <scratch> --no-abstract` (it picks the next round and skips works that already have cards), read with the brief above, run `verify_card_quotes.py` and `mark_read_from_cards.py`, regenerate `07-paper-cards.md` from the digests with `python3 scripts/build_card_index.py <member folder>`, and apply the conservative-update rules to `SKILL.md`, `09-evidence-ledger.md` and `technique-catalog.md`.
+6. **Refresh the numbers.** Re-run `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage` and paste it unchanged into the Coverage table here; paste the output of `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage --short` unchanged over the five-column summary in the team README (or run `team-integrate.js`, which does both).
 
 ## Privacy and integrity
 

@@ -24,10 +24,21 @@ export const meta = {
 //   args.skip_ids         optional {"<member-slug>": ["S012", ...]} works not to chase (not the author's, known closed)
 //   args.only_chunks      optional {"<member-slug>": [1, 3]} 1-based chunk numbers to (re)run; the others are skipped and logged
 //   args.merge            default true; false leaves papers/abstracts-chase-*.json unmerged (run scripts/merge_chase.py later)
+//   args.search_budget    WebSearch calls this run may use in total (default 24 per member); each chunk agent gets an equal
+//                         share of its member's part (the session has about 200 shared by every agent; playbook §六)
+//   skip_ids and only_chunks are keyed by member slug: a key that is not a member of this run is logged, and for
+//   only_chunks it stops the run when a member of the run has no entry (a misspelt slug would re-run every chunk).
 // Inputs per member: references/sources/publications/works.json and references/sources/papers/INDEX.md.
 // Outputs per member: PDFs at the exact paths scripts/acquire_fulltexts.py expects (git-ignored), then (merge stage)
 //   abstracts.json / abstract-sources.json / INDEX.md refreshed by scripts/merge_chase.py, found URLs added to works.json.
-// Chunk files: <scratch>/chase/<member-slug>.json (a JSON array of chunks; each work has an exact "target" path).
+// Chunk files: <scratch>/chase/<member-slug>.json (a JSON array of chunks; each work has an exact "target" path), written
+//   by scripts/chase_chunks.py in the Plan stage (a low-effort agent runs it and returns its summary).
+// Book leads: the chase agents report open parts of books (table of contents, errata, reviews); the merge stage keeps
+//   them in papers/book-leads.json ({"<id>": [{"part", "url"}]}), where team-increment.js find: ["book-parts"] starts.
+// Abstract files: papers/abstracts-chase-<date>-r<run>-<chunk>.json. The planning agent picks <run> = 1 + the highest run
+//   already on disk for that date, so a same-day rerun (e.g. with merge: false, or args.only_chunks) never overwrites an
+//   unmerged file; a chase agent that still finds its file present writes <name>-b.json, -c.json … and reports the name.
+//   scripts/merge_chase.py merges every abstracts-chase-*.json whatever its suffix.
 // Gates run by the agents: scripts/merge_chase.py, scripts/validate_works.py (0 errors).
 // Launch: Workflow({scriptPath: "<repo>/scripts/workflows/team-chase.js", args: {...}}).
 // Cost baseline (DFO worked example, product/dfo-team/): ~5 agents and ~0.9M tokens per member.
@@ -42,8 +53,8 @@ need(typeof ARGS.scratch === 'string' && ARGS.scratch.startsWith('/'), 'args.scr
 need(/^\d{4}-\d{2}-\d{2}$/.test(ARGS.date || ''), 'args.date must be "YYYY-MM-DD"')
 need(Array.isArray(ARGS.members) && ARGS.members.length > 0, 'args.members must be a non-empty array copied from team.json')
 ARGS.members.forEach((m, i) => need(m && /^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') && m.name, `args.members[${i}] needs a kebab-case slug and a name`))
-// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'chunk_size', 'max_searches', 'skip_ids', 'only_chunks', 'merge']
+// args keys this workflow reads (all snake_case, like every team workflow); anything else is logged
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'chunk_size', 'max_searches', 'skip_ids', 'only_chunks', 'merge', 'search_budget']
 const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
 if (unknownArgs.length) log(`team-chase.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
@@ -59,6 +70,23 @@ const SKIP_IDS = ARGS.skip_ids && typeof ARGS.skip_ids === 'object' ? ARGS.skip_
 const ONLY = ARGS.only_chunks && typeof ARGS.only_chunks === 'object' ? ARGS.only_chunks : {}
 const DO_MERGE = ARGS.merge !== false
 const NOREPLY = 'nuwa-skill@users.noreply.github.com'
+const RUN_SLUGS = MEMBERS.map(m => m.slug)
+for (const [key, strict] of [['only_chunks', true], ['skip_ids', false]]) {
+  const v = ARGS[key]
+  if (v === undefined || v === null) continue
+  need(typeof v === 'object' && !Array.isArray(v), `args.${key} must be an object keyed by member slug, e.g. {"${RUN_SLUGS[0]}": ...}`)
+  const unknown = Object.keys(v).filter(k => !RUN_SLUGS.includes(k))
+  if (!unknown.length) continue
+  const uncovered = RUN_SLUGS.filter(k => !(k in v))
+  need(!(strict && uncovered.length), `args.${key} names ${unknown.join(', ')}, not a member of this run (${RUN_SLUGS.join(', ')}); ${uncovered.join(', ')} would then run every chunk. Fix the slug.`)
+  log(`team-chase.js: args.${key} has entries for member(s) not in this run, ignored: ${unknown.join(', ')}`)
+}
+const BUDGET = Number.isInteger(ARGS.search_budget) && ARGS.search_budget >= 0 ? ARGS.search_budget : 24 * MEMBERS.length
+const SHARE = Math.floor(BUDGET / MEMBERS.length)
+const SUFFIX = /^(jr|sr|ii|iii|iv)\.?$/i
+// family name for author checks and queries: team.json "family_name", else the last word of "name" ("surname" is the
+// lens label and may read "N. Higham" when two members share a family name)
+function fam(m) { if (m.family_name) return m.family_name; const w = String(m.name).trim().split(/\s+/).filter(x => !SUFFIX.test(x)); return w.length ? w[w.length - 1] : m.name }
 
 const HOUSE = `House rules for every agent in this workflow (nuwa research-team kit):
 - Read ${TEAM}/team.json first: it gives the team's field, "language", the field-wide "chase_hints" (legitimate open repositories of this field) and each member's entry (name, surname, hint, homepage, member "chase_hints"). The member entry there is authoritative if it differs from what this prompt repeats.
@@ -86,10 +114,11 @@ const PLAN = {
     works: { type: 'number' },
     chunks: { type: 'number' },
     books: { type: 'number' },
+    next_run: { type: 'number' },
     excluded: { type: 'array', items: { type: 'object', properties: { reason: { type: 'string' }, count: { type: 'number' } }, required: ['reason', 'count'] } },
     problems: { type: 'array', items: { type: 'string' } },
   },
-  required: ['chunk_file', 'works', 'chunks', 'books', 'excluded', 'problems'],
+  required: ['chunk_file', 'works', 'chunks', 'books', 'next_run', 'excluded', 'problems'],
 }
 const CHASE = {
   type: 'object',
@@ -103,7 +132,7 @@ const CHASE = {
     searches_used: { type: 'number' },
     notes: { type: 'string' },
   },
-  required: ['found', 'not_found', 'abstracts_added', 'rejected', 'book_leads', 'notes'],
+  required: ['found', 'not_found', 'abstracts_added', 'rejected', 'book_leads', 'searches_used', 'notes'],
 }
 const MERGE = {
   type: 'object',
@@ -115,39 +144,36 @@ const MERGE = {
     rejected_by_acquire: { type: 'array', items: { type: 'string' } },
     merge_chase: { type: 'string' },
     validate_works: { type: 'string' },
+    book_leads_file: { type: 'string' },
     problems: { type: 'array', items: { type: 'string' } },
   },
   required: ['urls_recorded', 'abstracts_merged', 'new_full_texts', 'still_no_oa', 'merge_chase', 'validate_works', 'problems'],
 }
 
 function planPrompt(m) {
-  const { PUB, PAPERS, CHUNKFILE } = dirs(m)
+  const { MD, CHUNKFILE } = dirs(m)
   const skip = Array.isArray(SKIP_IDS[m.slug]) ? SKIP_IDS[m.slug] : []
   return `Task (T3.3 chase, planning) for ${m.name}: build the list of works to chase. Do not search or download anything in this step.
-1. With Python, load ${PUB}/works.json and parse ${PAPERS}/INDEX.md (a markdown table with columns # | ID | Year | Title | Venue | Cites | Kind | Source | Full text | Pages | Role | Read; split rows on unescaped "|").
-2. Select works whose "Full text" is "no-oa" and whose Role is not "skip". Exclude, and count by reason: dup_of set; kind patent or talk; kind "other" without a DOI and without a venue (Scholar's "other" rows are mostly fragments)${skip.length ? `; ids the user asked to skip: ${skip.join(', ')}` : ''}. Works missing from INDEX.md mean acquire_fulltexts.py has not run on the current works.json: report it as a problem and stop (chunks 0).
-3. For each selected work build {"id", "year", "title", "authors", "venue", "doi", "kind", "urls", "target"} where target is the exact PDF path the acquisition script will pick up:
-   import sys; sys.path.insert(0, "${REPO}/scripts"); from acquire_fulltexts import slug
-   target = "${PAPERS}/" + slug(work) + ".pdf"
-4. Put books (kind book) last, split into chunks of ${CHUNK}, and write the list of chunks (a JSON array of arrays, indent 1, ensure_ascii False) to ${CHUNKFILE} (create ${SCRATCH}/chase/).
-Return the counts. Edit nothing in the repo.`
+Run exactly this (it selects the no-oa works from INDEX.md and works.json, computes each work's exact target PDF path, splits them into chunks of ${CHUNK} with books last, writes the chunk file and picks the next abstracts-chase run number for ${DATE}):
+  python3 ${REPO}/scripts/chase_chunks.py ${MD} --out ${CHUNKFILE} --date ${DATE} --chunk-size ${CHUNK}${skip.length ? ` --skip-ids ${skip.join(',')}` : ''}
+It prints one JSON line {"chunk_file", "works", "chunks", "books", "next_run", "excluded": [{"reason", "count"}], "problems": [...]}; return those fields as they are (exit code 1 means problems, e.g. acquire_fulltexts.py has not run on the current works.json: then chunks is 0). If the script is missing or crashes, say so in problems and return chunks 0. Edit nothing in the repo.`
 }
 
-function chasePrompt(m, i, n) {
+function chasePrompt(m, i, n, run, search) {
   const { PAPERS, CHUNKFILE } = dirs(m)
-  const absFile = `${PAPERS}/abstracts-chase-${DATE}-${i + 1}.json`
+  const absFile = `${PAPERS}/abstracts-chase-${DATE}-r${run}-${i + 1}.json`
   return `Task (T3.3 chase, chunk ${i + 1} of ${n}): find LEGITIMATE open-access full texts for works by ${m.name} (${m.hint || 'see team.json'}) that the automatic pass (arXiv by id, title and author listing; Unpaywall; URLs already in works.json) could not find. If no full text exists, find at least a genuine abstract.
 Your works: python3 -c "import json;[print(json.dumps(w, ensure_ascii=False)) for w in json.load(open('${CHUNKFILE}'))[${i}]]"
 
 Where to look, in this order:
 1. This member's leads (team.json member "chase_hints"): ${hintList(m)}. Field-wide leads: the "chase_hints" list at the top of team.json.
 2. The researcher's own and coauthors' homepages${m.homepage ? ` (start with ${m.homepage})` : ''} and CV publication pages; university and institutional repositories; department technical-report series; arXiv (arxiv.org/search HTML); HAL; CiteSeerX; OSTI, DTIC and NASA report servers; free conference proceedings; publisher open-access versions (the DOI landing page's own free PDF link); Semantic Scholar and CORE open PDFs; Unpaywall (https://api.unpaywall.org/v2/<doi>?email=${NOREPLY}, OA locations only).
-Use curl against those sites first; use WebSearch ("<exact title>" ${m.surname || m.name} pdf) only when the direct routes fail. At most ${MAXS} search attempts per work; move on when nothing turns up.
+Use curl against those sites first; use WebSearch ("<exact title>" ${fam(m)} pdf) only when the direct routes fail. WebSearch allowance for this whole chunk: ${search > 0 ? `at most ${search} call(s)` : 'none (its share of args.search_budget is 0): curl and WebFetch only'}, and at most ${MAXS} search attempts per work; move on when nothing turns up. Report your WebSearch calls in searches_used.
 
 For each work:
 1. Download a candidate to the EXACT target path given for it: curl -sL -A "Mozilla/5.0" --max-time 90 -o <target> "<url>". It must be a PDF (head -c4 <target> prints %PDF). A PostScript file (%!PS): save it under ${SCRATCH}/chase/, convert with ps2pdf, move the PDF to the target. HTML or a login page: delete it.
-2. Verify it is THIS paper by THIS author: python3 -c "import pypdfium2 as p; d=p.PdfDocument('<target>'); print(d[0].get_textpage().get_text_range()[:900])" (pip install pypdfium2 pillow if missing) must show the title, or clearly the same work (a technical-report or preprint version with the same title is fine: say which in "version"), AND ${m.surname || m.name} among the authors on page 1. Report series and repositories hold other people's reports with similar titles, so a title match alone is not enough. A scan with no text layer: check the first page image or the repository metadata, keep it (acquisition will OCR it) and say so. Delete every wrong file and list it under "rejected".
-3. No PDF, but a genuine abstract on a legitimate page (publisher landing page, Crossref, DBLP, a repository record): add it to ${absFile} — one JSON object for this chunk, keyed by work id, with the verbatim abstract as the value and "<id>__src" = the page URL (create the file; json.dump(obj, f, ensure_ascii=False, indent=1)). Copy, never paraphrase; skip abstracts that are cut off mid-sentence unless the page shows no more.
+2. Verify it is THIS paper by THIS author: python3 -c "import pypdfium2 as p; d=p.PdfDocument('<target>'); print(d[0].get_textpage().get_text_range()[:900])" (pip install pypdfium2 pillow if missing) must show the title, or clearly the same work (a technical-report or preprint version with the same title is fine: say which in "version"), AND ${m.name} (family name ${fam(m)}) among the authors on page 1. Report series and repositories hold other people's reports with similar titles, so a title match alone is not enough. A scan with no text layer: check the first page image or the repository metadata, keep it (acquisition will OCR it) and say so. Delete every wrong file and list it under "rejected".
+3. No PDF, but a genuine abstract on a legitimate page (publisher landing page, Crossref, DBLP, a repository record): add it to ${absFile} — one JSON object for this chunk, keyed by work id, with the verbatim abstract as the value and "<id>__src" = the page URL (json.dump(obj, f, ensure_ascii=False, indent=1)). The keys are only the "id" values of YOUR chunk list, exactly as written there (never a DOI, a title or an id you made up): scripts/merge_chase.py keeps back a whole file that holds an id missing from works.json / INDEX.md. Create the file when you write your first abstract; if a file of that name already exists before you start (an earlier run), do not overwrite it: use the same name with -b, -c, … before .json. Report the file you wrote in abstract_file. Copy, never paraphrase; skip abstracts that are cut off mid-sentence unless the page shows no more.
 4. Books (kind book): the body is rarely open. Never fetch a book body from anywhere except the publisher or the authors offering it openly. List the legitimately open parts you find (table of contents, preface or front matter, errata, addenda, published reviews) under "book_leads" with URLs; a later increment step reads them.
 
 Write nothing else: not works.json, not INDEX.md, not abstracts.json (the merge step records your URLs and runs the scripts). Report found (id, url, file, version), not_found ids, rejected downloads, abstracts added, book leads, and roughly how many searches you used.`
@@ -156,12 +182,15 @@ Write nothing else: not works.json, not INDEX.md, not abstracts.json (the merge 
 function mergePrompt(m, chunks) {
   const { MD, PUB, PAPERS } = dirs(m)
   const found = chunks.flatMap(c => c.found)
-  return `Task (T3.3 chase, merge) for ${m.name}. The chase agents finished (${chunks.length} chunk reports). They found these files: ${JSON.stringify(found)}; they wrote abstracts to ${PAPERS}/abstracts-chase-*.json (${chunks.reduce((s, c) => s + (c.abstracts_added || 0), 0)} reported).
+  const leads = chunks.flatMap(c => c.book_leads || [])
+  const absFiles = chunks.map(c => c.abstract_file).filter(Boolean)
+  return `Task (T3.3 chase, merge) for ${m.name}. The chase agents finished (${chunks.length} chunk reports). They found these files: ${JSON.stringify(found)}; they wrote abstracts to ${PAPERS}/abstracts-chase-*.json (${chunks.reduce((s, c) => s + (c.abstracts_added || 0), 0)} reported${absFiles.length ? `; files named: ${absFiles.join(', ')}` : ''}).
 1. For each found item: check the file exists at its path and starts with %PDF. Then add its URL to that work's "urls" list in ${PUB}/works.json if it is not there yet (change nothing else; json.dump(..., ensure_ascii=False, indent=1)). The URL tells the index where the copy came from.
 2. Run python3 ${REPO}/scripts/validate_works.py ${PUB}/works.json and fix any error you introduced (0 errors).
-3. Run python3 ${REPO}/scripts/merge_chase.py ${MD} in the background with OMP_THREAD_LIMIT=1 and output to ${SCRATCH}/chase/${m.slug}-merge.log. It merges the abstracts-chase files into abstracts.json / abstract-sources.json (never overwriting an existing abstract), then re-runs scripts/acquire_fulltexts.py, which indexes the new PDFs, extracts their text and OCRs scans. Poll the log until it exits; if it hangs for more than 15 minutes on one work, kill it by exact PID and report. If merge_chase.py reports a malformed chunk file or bad entries, fix the JSON (not the content) and run it again.
+3. Run python3 ${REPO}/scripts/merge_chase.py ${MD} in the background with OMP_THREAD_LIMIT=1 and output to ${SCRATCH}/chase/${m.slug}-merge.log. It merges the abstracts-chase files into abstracts.json / abstract-sources.json (never overwriting an existing abstract), then re-runs scripts/acquire_fulltexts.py, which indexes the new PDFs, extracts their text and OCRs scans. Poll the log until it exits; if it hangs for more than 15 minutes on one work, kill it by exact PID and report. If merge_chase.py reports a malformed chunk file, fix the JSON syntax (not the content) and run it again. If it keeps a file back because of an id that is not in works.json / INDEX.md, look the work up by its title in works.json: rename the key to the right id when the match is certain, otherwise delete that entry (and its __src) and name it in problems; then run it again.
 4. From its output and ${PAPERS}/INDEX.md: the ids that now have "txt"; files acquisition rejected as mismatches (delete those PDFs); how many selected works are still "no-oa".
-Edit only works.json ("urls" lists) and, when merge_chase.py rejects one, the JSON syntax of a papers/abstracts-chase-*.json file (never its content); the scripts write INDEX.md, abstracts.json and abstract-sources.json.`
+${leads.length ? `5. Book leads: the chase agents found openly available parts of books: ${JSON.stringify(leads)}. Merge them into ${PAPERS}/book-leads.json, a JSON object {"<work id>": [{"part": "...", "url": "..."}]} (create it if missing; keep existing entries; no duplicate URL per id; json.dump(..., ensure_ascii=False, indent=1)), and report its path in book_leads_file. team-increment.js (find: ["book-parts"]) starts from this file.
+` : ''}Edit only works.json ("urls" lists)${leads.length ? ', papers/book-leads.json' : ''} and, when merge_chase.py keeps one back, a papers/abstracts-chase-*.json file (its JSON syntax, or a key as described above; never an abstract's text); the scripts write INDEX.md, abstracts.json and abstract-sources.json.`
 }
 
 phase('Plan')
@@ -170,7 +199,7 @@ if (!DO_MERGE) log('args.merge is false: abstracts-chase-*.json stay unmerged an
 const results = await pipeline(
   MEMBERS,
   // the runtime ends an item's pipeline when a stage returns null, so a dead planning agent is reported here
-  m => A(planPrompt(m), { label: `chase-plan:${m.slug}`, phase: 'Plan', schema: PLAN }).then(plan => {
+  m => A(planPrompt(m), { label: `chase-plan:${m.slug}`, phase: 'Plan', schema: PLAN, effort: 'low' }).then(plan => {
     if (!plan) log(`${m.slug}: planning agent returned nothing; member skipped`)
     return plan
   }),
@@ -180,10 +209,15 @@ const results = await pipeline(
     if (ex) log(`${m.slug}: not chased — ${ex}`)
     if (plan.problems.length) log(`${m.slug}: planning problems — ${plan.problems.join('; ')}`)
     if (!plan.chunks) { log(`${m.slug}: nothing to chase (${plan.works} works)`); return { plan, chunks: [] } }
+    const run = Number.isInteger(plan.next_run) && plan.next_run > 0 ? plan.next_run : 1
+    if (run !== plan.next_run) log(`${m.slug}: planning agent gave no usable next_run (${plan.next_run}); using r1 (chase agents still never overwrite an existing abstracts file)`)
+    else if (run > 1) log(`${m.slug}: abstracts-chase files of earlier runs today exist; this run writes abstracts-chase-${DATE}-r${run}-<chunk>.json`)
     const only = Array.isArray(ONLY[m.slug]) ? ONLY[m.slug].filter(k => Number.isInteger(k) && k >= 1 && k <= plan.chunks) : null
     const idx = Array.from({ length: plan.chunks }, (_, i) => i).filter(i => !only || only.includes(i + 1))
     if (only) log(`${m.slug}: running chunks ${idx.map(i => i + 1).join(', ')} of ${plan.chunks}; the other chunks are skipped (args.only_chunks)`)
-    return parallel(idx.map(i => () => A(chasePrompt(m, i, plan.chunks), { label: `chase:${m.slug}:${i + 1}`, phase: 'Chase', schema: CHASE })))
+    const per = idx.length ? Math.floor(SHARE / idx.length) : 0
+    log(`${m.slug}: WebSearch allowance ${per} per chunk agent (${SHARE} for this member; args.search_budget)`)
+    return parallel(idx.map(i => () => A(chasePrompt(m, i, plan.chunks, run, per), { label: `chase:${m.slug}:${i + 1}`, phase: 'Chase', schema: CHASE })))
       .then(rs => {
         const failed = idx.filter((_, k) => !rs[k]).map(i => i + 1)
         if (failed.length) log(`${m.slug}: chase chunk(s) ${failed.join(', ')} returned nothing; their works were not chased (rerun with args.only_chunks)`)
@@ -194,8 +228,9 @@ const results = await pipeline(
     if (!r) return null
     const nFound = r.chunks.reduce((s, c) => s + c.found.length, 0)
     const nAbs = r.chunks.reduce((s, c) => s + (c.abstracts_added || 0), 0)
-    log(`${m.slug}: chase found ${nFound} full texts and ${nAbs} abstracts`)
-    if (!DO_MERGE || (!nFound && !nAbs)) return { ...r, merge: null }
+    const nLeads = r.chunks.reduce((s, c) => s + (c.book_leads || []).length, 0)
+    log(`${m.slug}: chase found ${nFound} full texts, ${nAbs} abstracts and ${nLeads} book lead(s); ${r.chunks.reduce((s, c) => s + (c.searches_used || 0), 0)} WebSearch call(s)`)
+    if (!DO_MERGE || (!nFound && !nAbs && !nLeads)) return { ...r, merge: null }
     return A(mergePrompt(m, r.chunks), { label: `chase-merge:${m.slug}`, phase: 'Merge', schema: MERGE }).then(mg => {
       if (!mg) log(`${m.slug}: merge agent returned nothing; run python3 scripts/merge_chase.py by hand`)
       return { ...r, merge: mg }
@@ -203,7 +238,7 @@ const results = await pipeline(
   },
 )
 
-return MEMBERS.map((m, i) => {
+const out = MEMBERS.map((m, i) => {
   const r = results[i]
   if (!r) return { member: m.slug, error: 'no result (see log)' }
   return {
@@ -215,6 +250,22 @@ return MEMBERS.map((m, i) => {
     rejected: r.chunks.flatMap(c => c.rejected),
     abstracts_added: r.chunks.reduce((s, c) => s + (c.abstracts_added || 0), 0),
     book_leads: r.chunks.flatMap(c => c.book_leads),
+    searches_used: r.chunks.reduce((s, c) => s + (c.searches_used || 0), 0),
     merge: r.merge,
   }
 })
+const searches = out.reduce((s, r) => s + (r.searches_used || 0), 0)
+log(`WebSearch calls reported by the chase agents: ${searches} (budget ${BUDGET})`)
+const unmerged = out.filter(r => !r.error && !r.merge && (r.found.length || r.abstracts_added)).map(r => r.member)
+return {
+  stage: 'T3.3 chase',
+  date: DATE,
+  search_budget: BUDGET,
+  searches_used: searches,
+  members: out,
+  next: [
+    unmerged.length ? `Not merged yet (${DO_MERGE ? 'the merge agent returned nothing' : 'args.merge is false'}): python3 scripts/merge_chase.py ${TEAM_REL}/<slug> for ${unmerged.join(', ')}.` : 'Chase output merged (abstracts.json, INDEX.md, works.json urls).',
+    `Commit each member: bash scripts/team_commit.sh ${TEAM_REL}/<slug> "chase(<slug>): open copies and abstracts" (PDFs stay out of git; book-leads.json is committed).`,
+    `Then plan the first reading round: python3 scripts/plan_reading_batches.py ${TEAM_REL} --out-dir ${SCRATCH} --no-abstract, and run team-read.js per member with round: 1.`,
+  ],
+}

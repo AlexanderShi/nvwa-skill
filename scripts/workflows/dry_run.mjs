@@ -2,6 +2,10 @@
 // dry_run.mjs — preview and debug a saved team workflow without spending tokens (Node >= 18).
 //
 //   node scripts/workflows/dry_run.mjs <workflow.js> <args.json | '{...inline json...}'> [options]
+//   node scripts/workflows/dry_run.mjs <workflow.js> --team product/<team> [--member a,b] [options]
+//
+// The second form previews YOUR team with exactly the args make_args.mjs builds for a real launch (repo, team, scratch,
+// today's date, the members from team.json); add workflow options with --set KEY=JSON as in make_args.mjs.
 //
 // The workflow runs in a sandbox that mimics the Workflow runtime: agent() returns a fake result shaped by
 // opts.schema instead of spawning an agent; parallel() and pipeline() keep the runtime's semantics (a thunk or item
@@ -21,8 +25,16 @@
 //                     successive matching call (the last one repeats). See examples/*.answers.json.
 // Args: string values "$REPO" and "$SCRATCH" are replaced (default: this repo, and <tmpdir>/nuwa-dry-run/<team>).
 //   --repo PATH       value for $REPO             --scratch PATH   value for $SCRATCH
-//   --team DIR        use <repo>/DIR/team.json: sets args.team and args.members (all, or --member ones)
-//   --member a,b      keep only these member slugs (after --team, or from the args file)
+//   --team DIR        use <repo>/DIR/team.json: sets args.team and args.members (all, or --member ones). With an
+//                     args file, "roundtable" (when the file has one, and always for team-layer.js) is set from team.json too, and when the file is one of
+//                     examples/*.args.json its example-only values (user_context, notes, what, skip_ids, batch_files,
+//                     batches, only, only_chunks, since, label) are dropped and the date becomes today's (each change
+//                     is printed as a note). For a real preview write your own args with make_args.mjs.
+//   --member a,b      keep only these member slugs (after --team, or from the args file); a warning for the team-level
+//                     workflows (team-layer.js, team-integrate.js), which must run with every member
+//   --set KEY=JSON    with --team and no args file: a workflow option, as in make_args.mjs
+// Checks also: per-member map args (only, only_chunks, skip_ids, batch_files, batches, notes, what) keyed by a slug
+// that is not in args.members (a typo would silently turn "only" off) are warnings.
 // Output:
 //   --chars N         prompt characters shown per agent (default 500; a prefix shared with an earlier prompt,
 //                     such as the house rules, is collapsed to one line)
@@ -37,6 +49,7 @@ import os from 'node:os'
 import path from 'node:path'
 import vm from 'node:vm'
 import { fileURLToPath } from 'node:url'
+import { buildCalls, EXAMPLE_ONLY, loadTeam, mapProblems, TEAM_LEVEL, today, workflowName } from './make_args.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_REPO = path.resolve(HERE, '..', '..')
@@ -52,7 +65,7 @@ function usage(code) {
   process.exit(code)
 }
 const argv = process.argv.slice(2)
-const opt = { chars: 500, items: 0, bools: 'happy', full: false, quiet: false, strict: false, out: null, answers: null, forbid: null, repo: null, scratch: null, team: null, member: null }
+const opt = { chars: 500, items: 0, bools: 'happy', full: false, quiet: false, strict: false, out: null, answers: null, forbid: null, repo: null, scratch: null, team: null, member: null, set: [] }
 const pos = []
 for (let i = 0; i < argv.length; i++) {
   const a = argv[i]
@@ -71,17 +84,21 @@ for (let i = 0; i < argv.length; i++) {
   else if (a === '--scratch') opt.scratch = val()
   else if (a === '--team') opt.team = val()
   else if (a === '--member') opt.member = val().split(',').map(s => s.trim()).filter(Boolean)
+  else if (a === '--set') opt.set.push(val())
   else if (a.startsWith('--')) { console.error(`unknown option ${a}`); usage(1) }
   else pos.push(a)
 }
-if (pos.length !== 2) usage(1)
+if (pos.length !== 2 && !(pos.length === 1 && opt.team)) usage(1)
+if (opt.set.length && pos.length === 2) { console.error('--set goes with --team and no args file (edit the args file instead)'); process.exit(1) }
 if (!['happy', 'true', 'false'].includes(opt.bools)) { console.error('--bools must be happy, true or false'); process.exit(1) }
 if (!Number.isInteger(opt.items) || opt.items < 0 || !Number.isInteger(opt.chars) || opt.chars < 0) { console.error('--items and --chars take a non-negative integer'); process.exit(1) }
 
 const WF_PATH = path.resolve(pos[0])
+const WF_NAME = workflowName(WF_PATH)
 const REPO = path.resolve(opt.repo || DEFAULT_REPO)
 const warnings = []
 const warn = msg => { warnings.push(msg); console.log(`  ⚠ ${msg}`) }
+const notes = []
 const readJson = (p, what) => {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')) } catch (e) { console.error(`cannot read ${what} ${p}: ${e.message}`); process.exit(1) }
 }
@@ -89,7 +106,15 @@ const readJson = (p, what) => {
 // ---------------------------------------------------------------- args
 let args
 let argsLabel
-if (/^\s*[{"[]/.test(pos[1])) {
+if (pos.length === 1) {
+  // --team without an args file: the same args make_args.mjs builds for a real launch
+  try {
+    const r = buildCalls({ workflow: WF_PATH, team: opt.team, repo: REPO, scratch: opt.scratch || undefined, set: opt.set, together: true,
+      member: TEAM_LEVEL.has(WF_NAME) ? undefined : opt.member })
+    args = r.calls[0].args
+  } catch (e) { console.error(`dry_run: ${e.message}`); process.exit(1) }
+  argsLabel = `built by make_args.mjs from ${opt.team}/team.json`
+} else if (/^\s*[{"[]/.test(pos[1])) {
   // inline JSON; a JSON string ("{\"repo\": ...}") reaches the script as a string, as a stringified Workflow args would
   try { args = JSON.parse(pos[1]) } catch (e) { console.error(`inline args are not valid JSON: ${e.message}`); process.exit(1) }
   argsLabel = typeof args === 'string' ? 'inline JSON, passed to the script as a string' : 'inline JSON'
@@ -98,11 +123,25 @@ if (/^\s*[{"[]/.test(pos[1])) {
   argsLabel = path.relative(process.cwd(), path.resolve(pos[1])) || pos[1]
 }
 if ((opt.team || opt.member) && (!args || typeof args !== 'object' || Array.isArray(args))) { console.error('--team / --member need args given as a JSON object'); process.exit(1) }
-if (opt.team) {
-  const tj = readJson(path.join(REPO, opt.team, 'team.json'), 'team.json')
+if (opt.team && pos.length === 2) {
+  let tj
+  try { tj = loadTeam(REPO, opt.team).tj } catch (e) { console.error(`dry_run: ${e.message}`); process.exit(1) }
   args.team = opt.team.replace(/^\.\//, '').replace(/\/+$/, '')
   args.members = tj.members
+  if (('roundtable' in args || WF_NAME === 'team-layer') && tj.roundtable && args.roundtable !== tj.roundtable) {
+    notes.push(args.roundtable === undefined ? `args.roundtable set to team.json's "${tj.roundtable}"` : `args.roundtable "${args.roundtable}" replaced by team.json's "${tj.roundtable}"`)
+    args.roundtable = tj.roundtable
+  }
+  const fromExamples = path.resolve(pos[1]).startsWith(path.join(HERE, 'examples') + path.sep)
+  if (fromExamples) {
+    const dropped = EXAMPLE_ONLY.filter(k => k !== 'roundtable' && k in args)
+    dropped.forEach(k => delete args[k])
+    if (dropped.length) notes.push(`example-only values dropped: ${dropped.join(', ')} (they describe the fictional example team)`)
+    if (args.date) { notes.push(`args.date ${args.date} → today, ${today()}`); args.date = today() }
+    notes.push('previewing with an examples/ args file: for a real run build the args with make_args.mjs (or dry-run with --team and no args file)')
+  }
 }
+if (opt.member && TEAM_LEVEL.has(WF_NAME)) warn(`--member with ${WF_NAME}: a team-level workflow must run with ALL members of team.json; this preview shows a partial run`)
 if (opt.member && Array.isArray(args.members)) {
   const unknown = opt.member.filter(s => !args.members.some(m => m && m.slug === s))
   if (unknown.length) { console.error(`--member: not in members: ${unknown.join(', ')}`); process.exit(1) }
@@ -174,8 +213,12 @@ function pureLiteralProblems(lit) {
 }
 
 console.log(`dry run  ${path.relative(process.cwd(), WF_PATH) || WF_PATH}`)
-console.log(`args     ${argsLabel}${opt.team ? ` (members from ${opt.team}/team.json)` : ''}; $REPO=${REPO}; $SCRATCH=${SCRATCH}`)
+console.log(pos.length === 1 ? `args     ${argsLabel}; scratch ${args.scratch}` : `args     ${argsLabel}${opt.team ? ` (members from ${opt.team}/team.json)` : ''}; $REPO=${REPO}; $SCRATCH=${SCRATCH}`)
 if (opt.answers) console.log(`answers  ${opt.answers} (${answers.length} rule(s))`)
+notes.forEach(n => console.log(`note     ${n}`))
+if (args && typeof args === 'object' && Array.isArray(args.members)) {
+  for (const p of mapProblems(args, args.members.map(m => m && m.slug))) warn(`args.${p.key} names member(s) not in args.members: ${p.unknown.join(', ')} (a misspelt slug silently drops the per-member option)`)
+}
 console.log(`fakes    strings ${opt.items ? 'placeholders' : '""'}, numbers 0, arrays of ${opt.items}, booleans ${opt.bools}`)
 
 const metaMatch = /^export\s+const\s+meta\s*=\s*/m.exec(src)
@@ -406,8 +449,9 @@ async function workflow() { throw new Error('workflow() is not supported in dry 
 const consoleStub = { log: (...a) => { warn('console.log is not part of the workflow API (use log())'); console.log(...a) } }
 
 // ---------------------------------------------------------------- run
-// top-level args keys the script reads: a key it never reads is usually a misspelt option (the workflows mix
-// snake_case and camelCase names, e.g. word_budget vs wordBudget) and would be ignored silently in a real run
+// top-level args keys the script reads: a key it never reads is usually a misspelt option (every workflow option is
+// snake_case, e.g. word_budget; an old camelCase alias such as wordBudget is read and logged) and would be ignored
+// in a real run
 const readKeys = new Set()
 const argsSeen = args && typeof args === 'object' && !Array.isArray(args)
   ? new Proxy(args, {

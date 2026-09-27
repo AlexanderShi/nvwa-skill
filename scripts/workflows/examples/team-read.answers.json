@@ -1,5 +1,5 @@
 {
-  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada's plan has one batch of each mode (core, supplement, book, abstract); her supplement batch dies once and its retry succeeds. Bo's plan shows the resume and missing-text skips.",
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Ada's plan has one batch of each mode (core, supplement, book, abstract); her supplement batch dies once and its retry succeeds. Bo's plan shows the resume and missing-text skips. Ada's gate reports one garbled text (REOCR), one wrong file and one new open text, so the result's next shows the acquire_fulltexts.py --reocr / --drop and plan_reading_batches.py --reread commands.",
   "^plan:ada-example$": {
     "file_exists": true,
     "already_carded": [],
@@ -61,6 +61,19 @@
     ]
   },
   "^read:ada-example:s01$": null,
+  "^read:ada-example:a01$": {
+    "cards_written": 4,
+    "full_read": [
+      "S001",
+      "S002"
+    ],
+    "partial_read": [
+      "S003"
+    ],
+    "unreadable": [],
+    "problems": [],
+    "searches_used": 5
+  },
   "^read:": {
     "cards_written": 4,
     "full_read": [
@@ -71,7 +84,24 @@
       "S003"
     ],
     "unreadable": [],
-    "problems": []
+    "problems": [],
+    "searches_used": 0
+  },
+  "^gate:ada-example$": {
+    "merged_chase": true,
+    "quotes_total": 38,
+    "quotes_fixed": 2,
+    "quotes_not_found": 0,
+    "status_row": "| <slug> | fictional status row |",
+    "reocr": [
+      "S007"
+    ],
+    "wrong_text": [
+      "S009: another author's report with the same title"
+    ],
+    "new_texts": [
+      "S012"
+    ]
   },
   "^gate:": {
     "merged_chase": true,

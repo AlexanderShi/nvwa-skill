@@ -24,16 +24,25 @@ export const meta = {
 // Workflow-specific keys:
 //   args.roundtable     optional roundtable slug (default: team.json "roundtable", read by the agents)
 //   args.deep_tier      default true: deep reading (T3) is planned, so the TODO items the templates reserve for
-//                       team-integrate.js (T3.8) stay in place; false: delete those deep-tier-only parts
+//                       later steps (T3.1, T3.6, T3.8) stay in place; false (base tier, no deep reading planned):
+//                       DEEP-READING.md becomes the template's short base-tier note, each RESOURCES.md drops its
+//                       deep-tier placeholder row and marks row 1 "not harvested (base tier)", the README drops its
+//                       deep-tier-only parts, the roundtable gets its base-tier wording, and no TODO may remain.
+//                       Rerun on a team whose members already have paper cards (e.g. after adding a member): the
+//                       card-backed fault lines and the deep-tier Honest Boundary that team-integrate.js wrote are kept.
 //   args.example_team   optional team folder (relative to repo) of a finished team to imitate for shape only,
 //                       e.g. "product/dfo-team"
 // Outputs: <team>/README.md, <team>/<roundtable>/SKILL.md, each member's Roundtable Card (only if missing or
-//   incomplete) and references/sources/RESOURCES.md, private/README.md where missing.
+//   incomplete) and references/sources/RESOURCES.md, private/README.md where missing; with deep_tier false also
+//   <team>/DEEP-READING.md (the base-tier note).
 // Gates run by the agents: scripts/check_links.py (0 broken), no "{{" left, TODOs only where a template reserves
-//   them for a later step, scripts/quality_check.py 12/12 per member, scripts/team_status.py.
+//   them for a later step (none at all at the base tier), scripts/quality_check.py 12/12 per MEMBER, scripts/team_status.py.
+//   The roundtable is not a research-craft skill and is never gated on quality_check.py; its gate is: links, every
+//   seated member has a complete Roundtable Card, every fault line has evidence from both sides.
 // Next: commit; then the deep tier (team-harvest.js ...) or deliver the base tier.
 // Launch: Workflow({scriptPath: "<repo>/scripts/workflows/team-layer.js", args: {...}}).
-// Cost: 2 agents per member + 5 (roundtable, README, 2 verifiers, fixer).
+// Cost: 2 agents per member (card, resources) + 4-5 for the team (roundtable, README, 2 verifiers, and a fixer when
+//   there are findings).
 // ---------------------------------------------------------------------------------------------
 
 const ARGS = typeof args === 'string' ? JSON.parse(args) : args
@@ -46,7 +55,7 @@ need(/^\d{4}-\d{2}-\d{2}$/.test(ARGS.date || ''), 'args.date must be "YYYY-MM-DD
 need(Array.isArray(ARGS.members) && ARGS.members.length > 0, 'args.members must be a non-empty array copied from team.json')
 ARGS.members.forEach((m, i) => need(m && /^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') && m.name, `args.members[${i}] needs a kebab-case slug and a name`))
 need(ARGS.roundtable === undefined || /^[a-z0-9][a-z0-9-]*$/.test(ARGS.roundtable), 'args.roundtable must be a kebab-case slug')
-// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
+// args keys this workflow reads (all snake_case, like every team workflow); anything else is logged
 const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'roundtable', 'deep_tier', 'example_team']
 const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
 if (unknownArgs.length) log(`team-layer.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
@@ -63,11 +72,18 @@ const TPL = `${REPO}/references/team-templates`
 const EXAMPLE = typeof ARGS.example_team === 'string' && ARGS.example_team.trim()
   ? `Worked example of a finished team (read for shape and level of detail only; never copy its field, researchers or content): ${REPO}/${ARGS.example_team.replace(/^\.\//, '').replace(/\/+$/, '')}/.`
   : ''
-const LATER = 'team-harvest.js, team-read.js, team-synthesize.js, team-tighten.js, team-increment.js, team-integrate.js, T3, T3.1, T3.8, T4'
+const LATER = 'team-harvest.js, team-read.js, team-synthesize.js, team-tighten.js, team-increment.js, team-integrate.js, T3, T3.1, T3.6, T3.8, T4'
+const RUN_SLUGS = MEMBERS.map(m => m.slug).join(', ')
+const TODO_RULE = DEEP
+  ? `grep -n "TODO" shows only items a template reserves for a later step (${LATER})`
+  : 'grep -n "TODO" shows nothing (base tier: every TODO item is resolved now, or deleted with its deep-tier-only part)'
+const RT_GATE = 'The roundtable is not a research-craft skill: never run scripts/quality_check.py on it (its persona-mode score, about 2/6, means nothing here). Its gate is: check_links.py 0 broken; every seated member has a complete Roundtable Card; every fault line has evidence from both sides; no "{{" and no TODO beyond what this step allows.'
 
 const HOUSE = `House rules for every agent in this workflow (nuwa research-team kit):
 - Read ${TEAM}/team.json first: "team" (slug), "title", "field", "language" (of every member skill; the team layer follows it too), "roundtable" (the roundtable skill's folder slug${ARGS.roundtable ? `, here ${ARGS.roundtable}` : ''}) and the member entries (name, surname — used for lens labels such as [Surname lens] and @Surname —, living, hint, student_mode).
-- Templates live in ${TPL}/ (team-README.md, roundtable-SKILL.md, member-RESOURCES.md, private-README.md). scripts/new_team.py fills their {{PLACEHOLDERS}} and leaves [TODO: …] items, each naming the step that resolves it. This workflow (team-layer.js, T2) resolves the items marked team-layer.js / T2 (and T1 items that are still open); items reserved for later steps (${LATER}) stay as they are${DEEP ? '' : ' unless this prompt says to delete deep-tier-only parts'}.
+- Templates live in ${TPL}/ (team-README.md, roundtable-SKILL.md, member-RESOURCES.md, private-README.md, DEEP-READING.md). scripts/new_team.py fills their {{PLACEHOLDERS}} and leaves [TODO: …] items, each naming the step that resolves it. This workflow (team-layer.js, T2) resolves the items marked team-layer.js / T2 (and T1 items that are still open); ${DEEP ? `items reserved for later steps (${LATER}) stay as they are` : 'this team is BASE TIER (no deep reading planned), so nothing is left for later steps: items reserved for T3/T4 are resolved with the base-tier wording each template gives, or deleted with their deep-tier-only part, and no TODO item may remain'}.
+- This run was given these members: ${RUN_SLUGS}. team-layer.js must be run with ALL members of team.json (the roundtable needs every card).
+- ${RT_GATE}
 - Evidence: every paper, tool or link you name carries a DOI, arXiv id or URL that you checked with a tool in this run; never cite from memory. What you say about a member must come from that member's own SKILL.md or research notes (references/research/), never from general knowledge of the researcher. Quotes verbatim with their source. If you did not check something, say so; never guess.
 - Sources: public and legitimate only; never shadow libraries or paywall circumvention.
 - Privacy: never open, read, quote or copy anything under a references/sources/private/ folder except its README.md. Never send the user's email address or any other personal identifier to an external service.
@@ -188,17 +204,21 @@ team-base-skills.js (T1) filled it from the research notes; SKILL.md may cite so
 2. Every paper, book, software, talk or page cited in ${SKILL} (and in references/proof-playbook.md, open-problems.md, reading-path.md, technique-catalog.md if they exist) has a row. Add the missing ones, verified with a tool in this run: DOI -> curl -s -o /dev/null -w "%{http_code}" https://doi.org/<doi> gives 30x and the Crossref title matches; arXiv -> the abs page title matches; other -> the page exists and says what the row says. Add "SKILL" (with the section) to "Used in" where SKILL.md cites the source.
 3. Re-check 10 ✅ rows chosen across the table (all if fewer); a failing row becomes ⚠️ with the reason in Notes; if more than 2 fail, re-check every ✅ row.
 4. A source SKILL.md cites that you cannot verify: mark it ⚠️ and list it in unverifiable_cited (the fixer decides whether the skill may keep citing it).
-5. Leave TODO items reserved for later steps (the Google Scholar row for team-harvest.js; the deep-tier rows for T3/T4) exactly as they are. No "{{" may remain.
+${DEEP
+    ? '5. Deep tier planned: leave the TODO items reserved for later steps (row 1, the publication list, for team-harvest.js; the deep-tier placeholder row for team-synthesize.js) exactly as they are. No "{{" may remain.'
+    : '5. Base tier (no deep reading planned): row 1 (the publication list) keeps Status ⚠️; its Link cell becomes "—" if it still holds a TODO item or the scaffold\'s "— (no Scholar profile in team.json; list from DBLP/homepage)" text (a real profile URL stays); its Notes become "not harvested (base tier)". Delete the deep-tier placeholder row (the one whose Title cell starts "[TODO: placeholder for the deep-tier rows") and keep the # column consecutive. Afterwards grep -n -e "TODO" -e "{{" on the file prints nothing except the TODO mentions inside the HTML comment at the top.'}
 6. Make sure ${SRC}/private/README.md exists; if missing, create it from ${TPL}/private-README.md (replace {{MEMBER_NAME}} and {{MEMBER_SLUG}}). Never open anything else in private/.
 Edit only ${SRC}/RESOURCES.md and (create only) ${SRC}/private/README.md. Return the counts.`
 }
 
-function roundtablePrompt(cards, missing) {
+function roundtablePrompt(cards, missing, deepDone) {
   return `Task (T2 team layer: the roundtable skill). Output: ${RT_DIR}/SKILL.md.
-Start from that file if scripts/new_team.py created it (${TPL}/roundtable-SKILL.md with the {{…}} placeholders filled and [TODO: …] items open). If it does not exist, copy the template and replace every placeholder yourself — {{ROUNDTABLE_SLUG}}, {{TEAM_TITLE}}, {{FIELD}}, {{MEMBER_LIST}} (comma-separated member names), {{DATE}} = ${DATE} — so that no "{{" remains. ${EXAMPLE}
+Start from that file if scripts/new_team.py created it (${TPL}/roundtable-SKILL.md with the {{…}} placeholders filled and [TODO: …] items open). If it does not exist, copy the template and replace every placeholder yourself — {{ROUNDTABLE_SLUG}}, {{TEAM_TITLE}}, {{FIELD}}, {{MEMBER_LIST}} (comma-separated member names), {{ROUNDTABLE_MEMBER_TABLE}} (the Team table rows, item 2 below), {{DATE}} = ${DATE} — so that no "{{" remains. ${EXAMPLE}
+If the file is already filled (a rerun, e.g. after a member was added), update it in place: add the new member(s) to every table, seating row and fault line the evidence supports, and keep everything else.
 Seated members (each has a SKILL.md with a Roundtable Card); digests from their cards: ${JSON.stringify(cards)}
-${missing.length ? `Members listed but without a skill yet (leave them out of every table; say so in the Honest Boundary): ${missing.join(', ')}.\n` : ''}Read each seated member's Roundtable Card, Core Research Methods and Research Taste yourself (${TEAM}/<slug>/SKILL.md) before writing; the digests are a map, not the evidence.
-
+${missing.length ? `Members listed but without a skill yet (leave them out of every table; say so in the Honest Boundary): ${missing.join(', ')}.\n` : ''}Members in this run: ${RUN_SLUGS}. Compare with the "members" of team.json: for a member of team.json that is NOT in this run, do not delete its existing rows, seating or fault lines, and add "NOT-IN-RUN <slug>" to card_problems (team-layer.js must be run with all members).
+Read each seated member's Roundtable Card, Core Research Methods and Research Taste yourself (${TEAM}/<slug>/SKILL.md) before writing; the digests are a map, not the evidence.
+${deepDone.length ? `Deep reading already done for: ${deepDone.join(', ')} (their paper cards and 07-09 exist), so this is a rerun on a deep-tier team. Do NOT downgrade what team-integrate.js (T3.8) wrote: keep the card-backed fault lines with their card evidence, "Papers behind the documented disagreements" and the deep-tier Honest Boundary bullets (coverage in ../DEEP-READING.md; fault lines resting on paper cards) and its research-date line. Only add what the new or changed members need; a fault line side that rests on a member without paper cards ends with "(card evidence pending for <slug>)". Say in summary what you kept.\n` : ''}
 Keep every part of the template: it is what makes the roundtable work.
  (a) "How the Roundtable Runs": each seated member runs as its own agent (Agent/Task tool, all seated members launched in one message, agents reused across rounds when the runtime can continue them); the model reading the skill is the moderator and never argues a member's position; the user chairs and the discussion pauses at every 🔵 checkpoint; the single-model fallback is announced; the cost line.
  (b) Activation Rules, Research Integrity Rules (with the private/ rule), Your Controls, Loading the Team (absolute paths; the moderator reads only the Roundtable Cards; a missing member is named, never improvised).
@@ -216,19 +236,25 @@ Resolve the TODO items marked team-layer.js (T2):
    - Keep a fault line only with evidence from BOTH sides: for each side, a passage in that member's SKILL.md or research notes (references/research/01-06; paper cards and 07-09 if they exist) that rests on a verifiable paper (DOI or arXiv id; page or section when a full text was read). Open those files and check the passage says it. Cite as [<member-slug> <file> §<section>; <DOI or arXiv id>] — or, once paper cards exist, [<member-slug> card <id> p. N].
    - Say whether it is an exchange in print between members (only when you found papers on both sides answering each other) or a contrast of published methods (the usual case). Never invent a debate or a quote.
    - Name what is still contested and the observation or experiment that would settle it.
-   - While the members have no paper cards, end each fault line with "(card evidence pending)"; team-integrate.js (T3.8) rewrites them from the cards later.
+${DEEP
+    ? '   - While the members have no paper cards, end each fault line with "(card evidence pending)"; team-integrate.js (T3.8) rewrites them from the cards later.'
+    : '   - Base tier: there will be no paper cards, so cite the research notes and papers as above and do not add "(card evidence pending)".'}
    - One-sided or unsupported contrasts are not fault lines: drop them and list them in dropped_contrasts with the missing side.
 6. Draft-plan items: the settings a plan in this field must always state, 2-3 switch signals, and the field's standard comparison protocol (verified, with its reference in Shared References).
 7. Outside the Team: 2-4 bullets "problem signal -> the neighbouring tradition, method or tool that fits better", from team.json "field" and the members' blind spots; say whether any member partly covers it; every tool or paper named verified.
 8. Shared References (verified <month year>): 3-8 field-wide references (the standard for comparing methods, a taxonomy of problem types, a survey, key open-source software), each a full reference with DOI or URL checked in this run, ending with one line on why it is here.
-9. Papers behind the documented disagreements: while there are no paper cards, write "Pending the deep reading (T3)."; otherwise follow the template.
-10. Honest Boundary: the variants for this stage — members rest on web research only (notes 01-06) unless deep-reading files exist; fault lines drawn from the members' cards and notes and not yet checked against full texts; historical-lens bullets for members with "living": false; the traditions outside the team (matching Outside the Team); research date ${DATE}.
+9. Papers behind the documented disagreements: ${!DEEP
+    ? 'base tier: write "No deep reading was done (base tier); the fault lines rest on the members\' research notes."'
+    : deepDone.length ? 'keep the card-based list team-integrate.js wrote; add papers of new fault lines only where cards exist.' : 'while there are no paper cards, write "Pending the deep reading (T3)."'}
+10. Honest Boundary: ${deepDone.length
+    ? 'keep the deep-tier bullets on coverage and on how the fault lines are grounded (see above); add a note for members without paper cards yet;'
+    : `the ${DEEP ? 'pre-T3' : 'base-tier (final)'} wording from the template — "The members rest on web research only (research notes 01–06); no full text has been read yet." and "Fault lines are drawn from the members' Roundtable Cards and research notes and have not been checked against full texts.";`} historical-lens bullets for members with "living": false; the traditions outside the team (matching Outside the Team); research date ${DATE}.
 Do not edit any other file (not the members' SKILL.md: report a wrong or thin card in card_problems instead).
 Keep it concise (about 4,000 words at most).
-Gates: python3 ${REPO}/scripts/check_links.py ${RT_DIR} (0 broken); grep -n "{{" (none); grep -n "TODO" (only items reserved for ${LATER}). Return the structured summary.`
+Gates: python3 ${REPO}/scripts/check_links.py ${RT_DIR} (0 broken); grep -n "{{" (none); ${TODO_RULE}. Never run quality_check.py on the roundtable (see the house rules). Return the structured summary.`
 }
 
-function readmePrompt(cards, rt) {
+function readmePrompt(cards, rt, deepDone) {
   return `Task (T2 team layer: the team README). Output: ${TEAM}/README.md.
 Start from the README scripts/new_team.py created (${TPL}/team-README.md with placeholders filled and [TODO: …] items open) or, if there is none, from the template itself: replace every placeholder — {{TEAM_TITLE}}, {{TEAM_SLUG}} (team.json "team"), {{FIELD}}, {{MEMBER_LIST}}, {{ROUNDTABLE_SLUG}}, {{MEMBER_TABLE}} (one row per member: | [Name](<slug>/SKILL.md) | lens · known for | status |) — so that no "{{" remains. ${EXAMPLE}
 The roundtable skill was just written: ${rt ? `${rt.file} (seated: ${rt.seated.join(', ')})` : `${RT_DIR}/SKILL.md (its author returned no report; read the file)`}. Member digests: ${JSON.stringify(cards.map(c => ({ slug: c.slug, lens: c.lens, known_for: c.known_for, student_mode: c.student_mode, deep_tier_done: c.deep_tier_done })))}
@@ -239,11 +265,14 @@ Resolve the TODO items marked team-layer.js (T2):
 - Install: the snippets must use the team's real path, ${TEAM_REL} (fix the template's product/<slug> path if the team lives elsewhere).
 - Honest Boundary for the base tier: "The research was done from web search results in <month year>, without full-text reading; each skill's Honest Boundary lists its gaps and RESOURCES.md marks unverified leads ⚠️." (unless team_status.py shows deep-reading output), plus a historical-lens bullet for each member with "living": false (with the year of death from its skill).
 ${DEEP
-    ? '- Deep tier planned: leave the TODO items reserved for team-integrate.js (T3.8) — the technique-catalogs paragraph and the coverage table — in place; they are the open-work list for the deep tier.'
-    : '- No deep reading is planned (args.deep_tier is false): delete the technique-catalogs paragraph, the coverage table and their TODO lines, and say in the Resources section that the deep-reading files are absent.'}
+    ? (deepDone.length
+      ? '- Deep reading already done for some members: if team-integrate.js (T3.8) has filled the technique-catalogs paragraph and the coverage summary, keep them as they are (the next team-integrate.js run refreshes them); a new member without cards is shown "in progress".'
+      : '- Deep tier planned: leave the TODO items reserved for team-integrate.js (T3.8) — the technique-catalogs paragraph and the coverage table — in place; they are the open-work list for the deep tier.')
+    : `- No deep reading is planned (args.deep_tier is false): delete the technique-catalogs paragraph, the coverage table and their TODO lines, and say in the Resources section that the deep-reading files are absent. Also replace ${TEAM}/DEEP-READING.md, entirely, with the base-tier note given in the header comment of ${TPL}/DEEP-READING.md (a heading and one paragraph; fill {{TEAM_TITLE}} from team.json "title" and {{MEMBER_LIST}} with the member names, comma-separated), so the links to it keep working and no TODO item is left.`}
+Members in this run: ${RUN_SLUGS}; never delete the row of a team.json member that is not in this run.
 Keep the Resources tree and its explanation.
-Gates: python3 ${REPO}/scripts/check_links.py ${TEAM}/README.md (0 broken); grep -n "{{" (none); grep -n "TODO" (only items reserved for ${LATER}).
-Edit only ${TEAM}/README.md. Return the structured summary.`
+Gates: python3 ${REPO}/scripts/check_links.py ${TEAM} (0 broken); grep -n "{{" (none); ${TODO_RULE}.
+Edit only ${TEAM}/README.md${DEEP ? '' : ` and ${TEAM}/DEEP-READING.md`}. Return the structured summary.`
 }
 
 const LENSES = [
@@ -251,8 +280,10 @@ const LENSES = [
     key: 'structure',
     prompt: () => `READ-ONLY verifier: structure and consistency of the team layer in ${TEAM}. Edit nothing.
 1. python3 ${REPO}/scripts/check_links.py ${TEAM}: report every broken link.
-2. grep -rn "{{" ${TEAM} --include=*.md: every hit is a finding. grep -n "TODO" in README.md, the roundtable SKILL.md and each member's references/sources/RESOURCES.md: every TODO left must be one a template reserves for a later step (${LATER}); any other TODO is a finding. DEEP-READING.md is not part of this step.
-3. Every member in team.json appears consistently: the README team table (linking to its folder), the roundtable Team table, the disclaimer's member list, the seating table (leads at least one row); lens labels and @-controls use real surnames. Each member SKILL.md has a complete "## Roundtable Card" (7 bullets) and the Activation Rules line about the roundtable; python3 ${REPO}/scripts/quality_check.py <member>/SKILL.md still reports 12/12.
+2. grep -rn "{{" ${TEAM} --include=*.md: every hit is a finding. grep -n "TODO" in README.md, DEEP-READING.md, the roundtable SKILL.md and each member's references/sources/RESOURCES.md (TODO mentions inside a template's top HTML comment do not count): ${DEEP
+    ? `every TODO left must be one a template reserves for a later step (${LATER}; all of DEEP-READING.md's are reserved for team-integrate.js); any other TODO is a finding.`
+    : 'this team is base tier, so every TODO item is a finding: DEEP-READING.md must be the short base-tier note from the template header, each RESOURCES.md has row 1 marked "not harvested (base tier)" and no deep-tier placeholder row, and the README has no deep-tier-only parts.'}
+3. Every member in team.json appears consistently: the README team table (linking to its folder), the roundtable Team table, the disclaimer's member list, the seating table (leads at least one row); lens labels and @-controls use real surnames. This run has: ${RUN_SLUGS}. Any member of team.json not in that list is a major finding (team-layer.js must be run with all members). Each member SKILL.md has a complete "## Roundtable Card" (7 bullets) and the Activation Rules line about the roundtable; python3 ${REPO}/scripts/quality_check.py <member>/SKILL.md still reports 12/12 (members only: never run it on the roundtable, which is not a research-craft skill).
 4. The roundtable keeps: members run as separate agents with the user in the loop ("How the Roundtable Runs"); Activation Rules; Research Integrity Rules incl. the private/ rule; Your Controls; Loading the Team; the Member Agent Brief block; Protocol Steps 0-5 with four checkpoints (Checkpoint 4 never skipped, even in autopilot); Output Template; Outside the Team; Shared References; Honest Boundary; the footer. The README's checkpoint and control tables match the roundtable's.
 5. Roundtable frontmatter: name equals team.json "roundtable"; type: roundtable; description under 1024 characters (count them), triggers present, no keyword stuffing.
 6. Seating rows agree with the members' "Leads when"; the Problem Card's field-specific fields cover each member's "First questions asked".
@@ -278,14 +309,14 @@ Verify each finding yourself (verifiers can be wrong), then apply those you conf
 - A fault line that fails the both-sides test: find the missing evidence in the members' files if it is there; otherwise drop the fault line (or move it to a "contrasts to check" note) and renumber references to it.
 - A wrong or incomplete member card: fix only that member's "## Roundtable Card" in its SKILL.md, then rerun python3 ${REPO}/scripts/quality_check.py on it (12/12).
 - An unverifiable citation: replace it with a verified one or remove it.
-Files you may edit: ${TEAM}/README.md, the roundtable SKILL.md, members' references/sources/RESOURCES.md, members' Roundtable Card sections. Back up each file to ${SCRATCH}/team-layer/ before its first edit.
-Then rerun the gates and report them: python3 ${REPO}/scripts/check_links.py ${TEAM} (0 broken); grep -rn "{{" ${TEAM} --include=*.md (count); quality_check.py on every member SKILL.md.
+Files you may edit: ${TEAM}/README.md, the roundtable SKILL.md, members' references/sources/RESOURCES.md, members' Roundtable Card sections${DEEP ? '' : `, ${TEAM}/DEEP-READING.md (base-tier note only)`}. Back up each file to ${SCRATCH}/team-layer/ before its first edit.
+Then rerun the gates and report them: python3 ${REPO}/scripts/check_links.py ${TEAM} (0 broken); grep -rn "{{" ${TEAM} --include=*.md (count); ${TODO_RULE}; quality_check.py on every member SKILL.md (never on the roundtable: ${RT_GATE})
 Return applied and declined findings (with reasons) and the gate results.`
 }
 
 // ---------- run ----------
 phase('Cards')
-if (!DEEP) log('args.deep_tier is false: the README drops its deep-tier-only parts (technique catalogs, coverage table)')
+if (!DEEP) log('args.deep_tier is false (base tier): DEEP-READING.md becomes the short base-tier note, RESOURCES.md rows 1 and 3 get their base-tier form, the README drops its deep-tier-only parts, and no TODO may remain')
 
 const [resources, team] = await parallel([
   // per-member resource trackers: independent of the cards and the roundtable (disjoint files)
@@ -302,10 +333,16 @@ const [resources, team] = await parallel([
     const edited = seated.filter(c => c.edited).map(c => c.slug)
     if (edited.length) log(`Roundtable Card written or completed for: ${edited.join(', ')}`)
     if (seated.length < 2) { log('fewer than 2 members have a skill: roundtable and README not written'); return { cards: got, roundtable: null, readme: null } }
-    const rt = await A(roundtablePrompt(seated, [...failed, ...noSkill]), { label: 'roundtable', phase: 'Roundtable', schema: RT_OUT })
+    const deepDone = seated.filter(c => c.deep_tier_done).map(c => c.slug)
+    if (deepDone.length) log(`deep reading already done for ${deepDone.join(', ')}: rerun on a deep-tier team, the card-backed roundtable parts and README coverage are kept`)
+    const rt = await A(roundtablePrompt(seated, [...failed, ...noSkill], deepDone), { label: 'roundtable', phase: 'Roundtable', schema: RT_OUT })
     if (!rt) log('roundtable agent returned nothing')
-    else if (rt.dropped_contrasts.length) log(`roundtable: ${rt.dropped_contrasts.length} one-sided contrast(s) dropped: ${rt.dropped_contrasts.join('; ')}`)
-    const rd = await A(readmePrompt(seated, rt), { label: 'readme', phase: 'README', schema: README_OUT })
+    else {
+      if (rt.dropped_contrasts.length) log(`roundtable: ${rt.dropped_contrasts.length} one-sided contrast(s) dropped: ${rt.dropped_contrasts.join('; ')}`)
+      const notInRun = rt.card_problems.filter(x => /^NOT-IN-RUN\s/.test(x)).map(x => x.split(/\s+/)[1])
+      if (notInRun.length) log(`team.json members missing from this run: ${notInRun.join(', ')}; rerun team-layer.js with ALL members (their existing rows were kept)`)
+    }
+    const rd = await A(readmePrompt(seated, rt, deepDone), { label: 'readme', phase: 'README', schema: README_OUT })
     if (!rd) log('README agent returned nothing')
     return { cards: got, roundtable: rt, readme: rd }
   },
@@ -330,8 +367,17 @@ let fix = null
 if (findings.length) fix = await A(fixPrompt(findings), { label: 'fix:team-layer', phase: 'Fix', schema: FIX })
 else if (wroteTeamFiles) log('no findings: fix step skipped')
 
+const fixFailed = fix && (fix.check_links && !/(^|\D)0 broken|✅/.test(fix.check_links) || fix.placeholders_left > 0)
 return {
+  stage: 'T2 team layer',
+  date: DATE,
   team: TEAM_REL,
+  next: !wroteTeamFiles ? ['Nothing was written: fix the causes in the log (e.g. members without SKILL.md: run team-base-skills.js) and rerun team-layer.js with all members.'] : [
+    `Gates: python3 scripts/check_links.py ${TEAM_REL} → 0 broken; grep -rn --include='*.md' -e '{{' -e '\\[TODO' ${TEAM_REL} → ${DEEP ? 'only the items reserved for T3 steps' : 'no output; or all T2 gates at once: python3 scripts/team_check.py ' + TEAM_REL + ' --tier base'}.`,
+    ...(fixFailed ? ['The fixer reported a failing gate (see fix): look at it before committing.'] : []),
+    `Commit: bash scripts/team_commit.sh ${TEAM_REL} "feat(${TEAM_REL.split('/').pop()}): team layer (README + roundtable)".`,
+    DEEP ? `Deep tier next: team-harvest.js per member (node scripts/workflows/make_args.mjs team-harvest --team ${TEAM_REL} builds the calls).` : 'Base tier: the team is complete after the commit; try the roundtable on a real question (playbook §九).',
+  ],
   cards: team && team.cards ? team.cards.map((c, i) => c ? { member: c.slug, edited: c.edited, skill_exists: c.skill_exists, quality_check: c.quality_check } : { member: MEMBERS[i].slug, error: 'no result' }) : null,
   resources: resList,
   roundtable: team ? team.roundtable : null,

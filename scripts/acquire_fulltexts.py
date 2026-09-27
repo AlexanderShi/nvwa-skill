@@ -12,7 +12,21 @@
 抽取纯文本（扫描版PDF没有文字层、或文字层是字体乱码时，若装了 tesseract 则自动逐页 OCR），维护可提交的 INDEX.md（角色、全文状态、阅读状态；Role/Read 手改会保留）。
 
 用法:
-    python3 acquire_fulltexts.py <skill目录> [--works PATH] [--delay SEC] [--only ID,ID] [--recheck]
+    python3 acquire_fulltexts.py <skill目录> [--works PATH] [--delay SEC] [--only ID,ID] [--recheck] [--ocr-lang LANG]
+                                 [--reocr ID,ID] [--drop ID,ID]
+
+读卡 agent 报的两类问题（team-read.js 的 next 会给出现成命令）:
+    --reocr ID,..  REOCR：删掉这些作品的 txt，不管乱码检测结果，强制对 PDF 逐页 OCR（用 --ocr-lang），再重建索引行。
+    --drop ID,..   WRONG-TEXT：删掉这些作品的 PDF 和 txt，索引行改回 no-oa（之后的运行不再自动下载；要重新找用 --recheck，
+                   先把 works.json 里指向错误文件的 url 或 arXiv id 删掉）。
+    两者都只处理给出的 ID（相当于同时给了 --only）。之后用 plan_reading_batches.py --reread <ID,..> 把它们重新排进批次。
+
+OCR 与语言:
+    文字层几乎为空（扫描件）时逐页 OCR；文字层是拉丁字母却几乎没有英文常用词（字体乱码，常用词占比 < 0.01），
+    或非空白字符里控制字符（码位 < 32）占三成以上（Type 3 字体乱码，零星字母会骗过常用词检测）时也 OCR。
+    以非拉丁文字为主的文字层（中文、日文、俄文、希腊文……）不按英文常用词判乱码，原样保留。
+    --ocr-lang 传给 tesseract -l（如 deu、fra、chi_sim、eng+deu；要先装对应的 tesseract 语言包），
+    默认取环境变量 NUWA_OCR_LANG，没有就用 tesseract 自己的默认（eng）。merge_chase.py 重跑本脚本时环境变量照样生效。
 
 works.json 格式:
     {"researcher": "...", "works": [{"id": "S001", "title": "...", "authors": "...", "venue": "...",
@@ -49,9 +63,16 @@ UNPAYWALL_EMAIL = "nuwa-skill@users.noreply.github.com"
 ARXIV_ID_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/([a-z\-]+(?:\.[A-Z]{2})?/\d{7}|\d{4}\.\d{4,5})(?:v\d+)?", re.I)
 STOP = {"the", "and", "for", "with", "from", "into", "via", "its", "their", "using", "based", "on", "of", "in", "a", "an", "to"}
 
-# 不经本脚本下载、手动放进 papers/ 的全文，按 works.json 里 urls 的关键词标注来源（小写匹配，先匹配先用）；
-# 其他报告系列在这里加一行即可，例如 "gerad.ca": "GERAD Cahier"。都不匹配时标 "manual"。
-SOURCE_LABELS = {"damtp": "DAMTP report"}
+# 不经本脚本下载、手动放进 papers/ 的全文，按 works.json 里 urls 的关键词标注来源（小写匹配，先匹配先用）。
+# 标签按团队配置：<团队目录>/team.json 的可选键 "source_labels"，如 {"gerad.ca": "GERAD Cahier"}（成员目录的上一级
+# 就是团队目录）。都不匹配或没有配置时标 "manual"。已有 Source 的行保留原值。
+def source_labels(skill_dir: Path) -> dict[str, str]:
+    tj = skill_dir.resolve().parent / "team.json"
+    try:
+        labels = json.loads(tj.read_text(encoding="utf-8")).get("source_labels") or {}
+    except (OSError, ValueError):
+        return {}
+    return {str(k).lower(): str(v) for k, v in labels.items()} if isinstance(labels, dict) else {}
 
 INDEX_HEADER = ["#", "ID", "Year", "Title", "Venue", "Cites", "Kind", "Source", "Full text", "Pages", "Role", "Read"]
 
@@ -193,14 +214,43 @@ def slug(work: dict) -> str:
 COMMON = set("the and of to in is that for we with this are be by on as it an at from or which can if not our then".split())
 
 
+OCR_LANG = os.environ.get("NUWA_OCR_LANG", "").strip()  # tesseract -l 的值；main() 里 --ocr-lang 覆盖
+
+
 def stopword_ratio(text: str) -> float:
-    """英文常用词占比：正常论文约0.2，字体乱码的文字层 <0.01（非英文论文约0.02-0.04，不会误判）。"""
+    """英文常用词占比：正常论文约0.2，字体乱码的文字层 <0.01（德法等拉丁文字论文约0.02-0.04，不会误判）。"""
     words = re.findall(r"[a-z]+", text.lower())
     return sum(1 for w in words if w in COMMON) / len(words) if words else 0.0
 
 
+def latin_share(text: str) -> float:
+    """字母里拉丁字母（含带重音的）所占比例；没有字母时算 1（按拉丁文字处理，乱码判断照旧）。"""
+    import unicodedata
+    letters = [c for c in text if c.isalpha()]
+    if not letters:
+        return 1.0
+    latin = sum(1 for c in letters if c.isascii() or unicodedata.name(c, "").startswith("LATIN"))
+    return latin / len(letters)
+
+
+def letter_count(text: str) -> int:
+    return sum(1 for c in text if c.isalpha())
+
+
+def control_share(text: str) -> float:
+    """非空白字符里控制字符（码位 < 32）的比例：Type 3 字体乱码的文字层常在 0.4 以上，正常文字层接近 0。"""
+    ns = [c for c in text if not c.isspace()]
+    return sum(1 for c in ns if ord(c) < 32) / len(ns) if ns else 0.0
+
+
+def garbled(text: str) -> bool:
+    """字体乱码的文字层：拉丁文字却几乎没有英文常用词，或控制字符占三成以上（零星字母会骗过常用词检测）。
+    以非拉丁文字为主的正常文字层不按英文常用词判断。"""
+    return control_share(text) >= 0.3 or (latin_share(text) >= 0.5 and stopword_ratio(text) < 0.01)
+
+
 def ocr_pages(doc) -> list[str] | None:
-    """扫描版PDF（无文字层）：逐页渲染后用 tesseract OCR；没装 tesseract 返回 None。"""
+    """扫描版PDF（无文字层）：逐页渲染后用 tesseract OCR（语言 = OCR_LANG）；没装 tesseract 返回 None。"""
     import shutil
     import tempfile
     if not shutil.which("tesseract"):
@@ -211,7 +261,8 @@ def ocr_pages(doc) -> list[str] | None:
             for i in range(len(doc)):
                 png = Path(tmp) / f"p{i + 1}.png"
                 doc[i].render(scale=300 / 72).to_pil().convert("L").save(png)  # 需要 Pillow
-                r = subprocess.run(["tesseract", str(png), "-"], capture_output=True, text=True,
+                r = subprocess.run(["tesseract", str(png), "-"] + (["-l", OCR_LANG] if OCR_LANG else []),
+                                   capture_output=True, text=True,
                                    env={**os.environ, "OMP_THREAD_LIMIT": "1"})  # 多线程在小机器上反而极慢
                 out.append(r.stdout)
     except (ImportError, OSError, subprocess.SubprocessError):
@@ -219,16 +270,22 @@ def ocr_pages(doc) -> list[str] | None:
     return out
 
 
-def extract_text(pdf: Path, txt: Path) -> int:
-    """返回页数；失败返回 0。文字层几乎为空（扫描件）或是字体乱码时自动 OCR。"""
+def extract_text(pdf: Path, txt: Path, force_ocr: bool = False) -> int:
+    """返回页数；失败返回 0。文字层几乎为空（扫描件）或是字体乱码时自动 OCR；force_ocr（--reocr）时总是 OCR。"""
     try:
         import pypdfium2 as pdfium
         doc = pdfium.PdfDocument(str(pdf))
         pages = [doc[i].get_textpage().get_text_range() for i in range(len(doc))]
-        if pages and (sum(len(p.strip()) for p in pages) / len(pages) < 200 or stopword_ratio("".join(pages)) < 0.01):
+        text = "".join(pages)
+        if pages and (force_ocr or sum(len(p.strip()) for p in pages) / len(pages) < 200 or garbled(text)):
             ocr = ocr_pages(doc)  # 无文字层，或文字层是字体乱码（Type 3 字体等）
-            if ocr and stopword_ratio("".join(ocr)) > stopword_ratio("".join(pages)):
-                pages = ocr
+            if force_ocr and ocr is None:
+                print(f"  ⚠️ --reocr {pdf.name}: tesseract is not installed (apt-get install tesseract-ocr); kept the text layer")
+            if ocr:
+                o = "".join(ocr)
+                if (force_ocr and o.strip()) or stopword_ratio(o) > stopword_ratio(text) or \
+                        (latin_share(o) < 0.5 and letter_count(o) > letter_count(text)):  # 非拉丁文字的扫描件
+                    pages = ocr
         txt.write_text("\n\f\n".join(f"[[page {i + 1}]]\n{p}" for i, p in enumerate(pages)), encoding="utf-8")
         return len(pages)
     except ImportError:
@@ -279,12 +336,18 @@ def read_index(path: Path) -> dict[str, dict]:
     return keep
 
 
-def write_index(path: Path, researcher: str, rows: list[dict]) -> None:
+def list_sources(note: str) -> str:
+    """works.json 的 source_note 的第一句（括号或句号之前），如 "Google Scholar profile + DBLP + Crossref"。"""
+    return re.split(r"\s\(|\.\s", (note or "").strip(), maxsplit=1)[0].strip().rstrip(".")
+
+
+def write_index(path: Path, researcher: str, rows: list[dict], source_note: str = "") -> None:
     counts = {k: sum(1 for r in rows if r["Full text"] == k) for k in ("txt", "pdf", "no-oa")}
+    src = list_sources(source_note)
     lines = [
         f"# {researcher} · Full-text index",
         "",
-        "> Generated by `scripts/acquire_fulltexts.py` from `../publications/works.json` (Google Scholar profile + DBLP + Crossref).",
+        f"> Generated by `scripts/acquire_fulltexts.py` from `../publications/works.json`{f' ({src})' if src else ''}.",
         "> Role and Read columns may be edited by hand; re-runs keep them.",
         "> Full text: `txt` = PDF downloaded and text extracted · `pdf` = downloaded, extraction failed · `no-oa` = no open full text found (supply the PDF by hand).",
         "> Source: `arXiv` / `unpaywall` (open-access copy) / `url` (author homepage or repository) / `manual` (supplied by hand).",
@@ -300,18 +363,31 @@ def write_index(path: Path, researcher: str, rows: list[dict]) -> None:
         lines.append("| " + " | ".join(md(r.get(h, "")) for h in INDEX_HEADER) + " |")
     # 书的周边材料（目录、勘误、评论；Venue = "book material"，ID 以 B 开头）不是独立作品，单独计数
     book = [r["ID"] for r in rows if r.get("Venue") == "book material"]
-    head = f"{len(rows)} works"
-    if book:
-        head = f"{len(rows)} rows = {len(rows) - len(book)} works + {len(book)} book-material items ({book[0]}–{book[-1]})"
+    def n(k: int, word: str) -> str:
+        return f"{k} {word}" + ("" if k == 1 else "s")
+    head = n(len(rows), "work")
+    if len(book) == 1:
+        head = f"{n(len(rows), 'row')} = {n(len(rows) - 1, 'work')} + 1 book-material item ({book[0]})"
+    elif book:
+        head = f"{n(len(rows), 'row')} = {n(len(rows) - len(book), 'work')} + {len(book)} book-material items ({book[0]}–{book[-1]})"
     lines += ["", f"{head} · txt {counts['txt']} · pdf {counts['pdf']} · no-oa {counts['no-oa']}", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
 # ---------- 主流程 ----------
 
-def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck: bool) -> dict:
+def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck: bool,
+        reocr: set[str] = frozenset(), drop: set[str] = frozenset()) -> dict:
     data = json.loads(works_path.read_text(encoding="utf-8"))
     researcher = data.get("researcher") or skill_dir.name
+    note = data.get("source_note") or ""
+    labels = source_labels(skill_dir)
+    known = {w.get("id") for w in data.get("works") or []}
+    for i in sorted((reocr | drop) - known):
+        print(f"  ⚠️ {i}: not in works.json (--reocr/--drop ignored for it)")
+    if reocr & drop:
+        print(f"  ⚠️ both --reocr and --drop for {', '.join(sorted(reocr & drop))}: --drop wins")
+        reocr = reocr - drop
     surname = researcher.split()[-1]
     works = [w for w in data.get("works") or [] if w.get("title") and not w.get("dup_of")]
     works.sort(key=lambda w: -(w.get("cites") or 0))
@@ -333,6 +409,22 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
         status, source, pages = "no-oa", prev.get("Source") or "—", prev.get("Pages") or ""
         todo = (not only or w["id"] in only)
         skip_net = (prev.get("Full text") == "no-oa" and not recheck) or w.get("kind") in ("patent", "talk")
+        if w["id"] in drop:  # WRONG-TEXT: the file on disk is another work; forget it, do not re-download it now
+            for f in (pdf, txt):
+                if f.exists():
+                    f.unlink()
+                    print(f"  --drop {w['id']}: deleted {f.name}")
+            if prev.get("Source") in ("arXiv", "url"):
+                print(f"  ⚠️ --drop {w['id']}: the wrong file came from its {prev['Source']} candidate; remove that arXiv id / url "
+                      f"from works.json before any --recheck, or it will be downloaded again")
+            source, pages, skip_net = "—", "", True
+        elif w["id"] in reocr:
+            if pdf.exists():
+                txt.unlink(missing_ok=True)
+                pages = extract_text(pdf, txt, force_ocr=True) or ""
+                print(f"  --reocr {w['id']}: {pages or 0} pages OCR'd from {pdf.name}")
+            else:
+                print(f"  ⚠️ --reocr {w['id']}: no PDF on disk ({pdf.name}); restore it first (a plain run re-downloads what it can)")
 
         if txt.exists() or pdf.exists():
             if not txt.exists():
@@ -342,7 +434,7 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
             status = "txt" if txt.exists() else "pdf"
             if source == "—":  # supplied outside this script (homepage search, report series, by hand)
                 urls = " ".join(w.get("urls") or []).lower()
-                source = next((label for key, label in SOURCE_LABELS.items() if key in urls), "manual")
+                source = next((label for key, label in labels.items() if key in urls), "manual")
         elif todo and not skip_net:
             arx = w.get("arxiv")
             if not arx:
@@ -376,7 +468,7 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
                     break
 
         # PDF 与 txt/ 不进 git，新克隆的仓库里没有本地文件：保留已提交的全文状态，不重置为 no-oa
-        if status == "no-oa" and prev.get("Full text") in ("txt", "pdf"):
+        if status == "no-oa" and prev.get("Full text") in ("txt", "pdf") and w["id"] not in drop:
             status, source, pages = prev["Full text"], prev.get("Source") or "—", prev.get("Pages") or ""
             kept_without_file += 1
 
@@ -396,10 +488,10 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
         })
         print(f"[{n}/{len(works)}] {w['id']} {status:5} {source:9} {w['title'][:70]}", flush=True)
         if n % 10 == 0:
-            write_index(index_path, researcher, rows + [])
+            write_index(index_path, researcher, rows + [], note)
             abs_path.write_text(json.dumps(abstracts, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    write_index(index_path, researcher, rows)
+    write_index(index_path, researcher, rows, note)
     abs_path.write_text(json.dumps(abstracts, ensure_ascii=False, indent=1), encoding="utf-8")
     works_path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")  # 回写新找到的 arXiv ID
     if kept_without_file:
@@ -409,13 +501,21 @@ def run(skill_dir: Path, works_path: Path, delay: float, only: set[str], recheck
 
 
 def main():
+    global OCR_LANG
     ap = argparse.ArgumentParser(description="为研究Skill收集开放获取全文并维护论文索引")
     ap.add_argument("skill_dir")
     ap.add_argument("--works", default="")
     ap.add_argument("--delay", type=float, default=3.0, help="arXiv 请求间隔秒数（默认3）")
     ap.add_argument("--only", default="", help="只处理这些ID（逗号分隔）")
     ap.add_argument("--recheck", action="store_true", help="重新检索之前标为 no-oa 的论文")
+    ap.add_argument("--ocr-lang", default=OCR_LANG, metavar="LANG",
+                    help="tesseract 的 -l 语言（如 deu、chi_sim、eng+fra；默认取环境变量 NUWA_OCR_LANG，否则 tesseract 默认 eng）")
+    ap.add_argument("--reocr", default="", metavar="ID,ID",
+                    help="读卡报 REOCR 的作品：删 txt，强制对 PDF 逐页 OCR（只处理这些 ID）")
+    ap.add_argument("--drop", default="", metavar="ID,ID",
+                    help="读卡报 WRONG-TEXT 的作品：删 PDF 和 txt，索引行改回 no-oa（只处理这些 ID）")
     args = ap.parse_args()
+    OCR_LANG = args.ocr_lang.strip()
 
     skill_dir = Path(args.skill_dir)
     works = Path(args.works) if args.works else skill_dir / "references" / "sources" / "publications" / "works.json"
@@ -423,7 +523,11 @@ def main():
         print(f"❌ works.json not found: {works}")
         sys.exit(1)
     only = {s.strip() for s in args.only.split(",") if s.strip()}
-    c = run(skill_dir, works, args.delay, only, args.recheck)
+    reocr = {s.strip() for s in args.reocr.split(",") if s.strip()}
+    drop = {s.strip() for s in args.drop.split(",") if s.strip()}
+    if (reocr or drop) and not only:
+        only = reocr | drop  # no network work for anything else
+    c = run(skill_dir, works, args.delay, only, args.recheck, reocr, drop)
     print(f"✅ {c['total']} works: txt {c['txt']} · pdf {c['pdf']} · no-oa {c['no-oa']}")
     print(f"   index: {skill_dir / 'references/sources/papers/INDEX.md'}")
 

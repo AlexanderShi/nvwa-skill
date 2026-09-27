@@ -23,14 +23,16 @@ export const meta = {
  *                 independently (no barrier between members)
  *
  * Args specific to team-tighten:
- *   args.targetWords  target SKILL.md length in words (default 11500)
- *   args.maxWords     hard gate for wc -w after tightening (default targetWords + 1500)
- *   args.force        default false: tighten even when SKILL.md is already within targetWords
+ *   args.target_words target SKILL.md length in words (default 11500)
+ *   args.max_words    hard gate for wc -w after tightening (default target_words + 1500)
+ *   args.force        default false: tighten even when SKILL.md is already within target_words
+ *   (old names targetWords / maxWords are still accepted, with a log line)
  *
  * Writes (per member): SKILL.md and references/research/09-evidence-ledger.md only.
  *   Backup before tightening: <scratch>/<slug>-SKILL.before-tighten-<date>.md (kept if it already exists).
- * Gates: scripts/check_ledger.py (card ids + quotes before ⊆ after ∪ ledger; SKILL.md → ledger anchors resolve),
- *   scripts/quality_check.py 12/12, scripts/check_links.py, wc -w ≤ maxWords.
+ * Gates: scripts/check_ledger.py --before <backup>, with NO --allow: tightening changes neither the frontmatter nor
+ *   Activation Rules, so any "verbatim" problem is a real one (card ids + quotes before ⊆ after ∪ ledger; anchors resolve),
+ *   scripts/quality_check.py 12/12, scripts/check_links.py, wc -w ≤ max_words.
  * Next: commit per member; then team-integrate.js.
  * Cost baseline (worked example product/dfo-team/): ~3 agents and ~0.7M tokens per member.
  */
@@ -46,9 +48,18 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(String(a.date))) throw new Error('team-tighten: 
 a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') || !m.name) throw new Error(`team-tighten: members[${i}] needs a kebab-case slug and a name`) })
 if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-tighten: args.repo and args.scratch must be absolute paths')
 if (String(a.team).startsWith('/')) throw new Error('team-tighten: args.team must be relative to args.repo, e.g. "product/<team>"')
-// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'targetWords', 'maxWords', 'force']
-const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k))
+// args keys this workflow reads (all snake_case); anything else is logged. Old camelCase names still work as aliases.
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'target_words', 'max_words', 'force']
+const RENAMED = { targetWords: 'target_words', maxWords: 'max_words' } // old camelCase name -> current name
+const ALIAS_OF = Object.fromEntries(Object.entries(RENAMED).map(([o, k]) => [k, o]))
+function arg(key) { return a[key] !== undefined ? a[key] : ALIAS_OF[key] ? a[ALIAS_OF[key]] : undefined }
+for (const [old, key] of Object.entries(RENAMED)) {
+  if (a[old] === undefined) continue
+  log(a[key] === undefined
+    ? `team-tighten.js: args.${old} is the old name of args.${key}; using it (rename it to ${key})`
+    : `team-tighten.js: args.${old} ignored because args.${key} is also given (${old} is only an alias)`)
+}
+const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k) && !(k in RENAMED))
 if (unknownArgs.length) log(`team-tighten.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = String(a.repo).replace(/\/+$/, '')
@@ -56,8 +67,8 @@ const TEAM_REL = String(a.team).replace(/^\.\//, '').replace(/\/+$/, '')
 const TEAM = `${REPO}/${TEAM_REL}`
 const SCR = String(a.scratch).replace(/\/+$/, '')
 const DATE = a.date
-const TARGET = Number(a.targetWords || 11500)
-const MAXW = Number(a.maxWords || TARGET + 1500)
+const TARGET = Number(arg('target_words') || 11500)
+const MAXW = Number(arg('max_words') || TARGET + 1500)
 const MEMBERS = a.members
 
 function A(prompt, opts) {
@@ -97,7 +108,7 @@ Your job (TIGHTEN, lossless): bring SKILL.md to at most ~${TARGET} words without
 4. Do NOT change: ${protectedList(m)}. Do not add new claims.
 5. Every quotation left in SKILL.md stays verbatim. Every card id in SKILL.md exists in 07-paper-cards.md.
 6. Link the ledger from the sources appendix.
-7. Gates: python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md → 12/12 (the checker counts method headings, steps, say–do marks, taste items, workflows with checkpoints, anatomies, honest-boundary items, tensions and verifiable ids — keep enough of each); python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)} → lossless (card ids, page references and quotes of the pre-tighten copy all in SKILL.md or the ledger; frontmatter, Activation Rules, Research Integrity Rules${m.student_mode ? ', Student Mode' : ''} byte-identical) and every anchor resolves; python3 ${REPO}/scripts/check_links.py ${SK} → 0 broken. Report words before/after (wc -w).
+7. Gates: python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md → 12/12 (the checker counts method headings, steps, say–do marks, taste items, workflows with checkpoints, anatomies, honest-boundary items, tensions and verifiable ids — keep enough of each); python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)} (no --allow: tightening changes neither the frontmatter nor Activation Rules) → lossless (card ids, page references and quotes of the pre-tighten copy all in SKILL.md or the ledger; frontmatter, Activation Rules, Research Integrity Rules${m.student_mode ? ', Student Mode' : ''} byte-identical) and every anchor resolves; python3 ${REPO}/scripts/check_links.py ${SK} → 0 broken. Report words before/after (wc -w).
 Edit only SKILL.md and 09-evidence-ledger.md.`
 }
 
@@ -107,7 +118,7 @@ function verifyPrompt(m, t) {
 
 SKILL.md has just been tightened (report: ${JSON.stringify(t)}); the pre-tighten copy is ${backup(m)} and the moved material is in ${ledger(m)}. You are a READ-ONLY reviewer: do not edit files.
 Check with scripts, not by eye:
-1. Lossless: python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)}: every card id, page reference and quotation in the pre-tighten copy appears in the new SKILL.md or in the ledger, and every SKILL.md → ledger anchor resolves. Every ✗/⚠ correction still appears somewhere, and each method's corrections are at least mentioned in SKILL.md.
+1. Lossless: python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)} (no --allow; every "✗" line it prints is a finding, none is excused by judgement): every card id, page reference and quotation in the pre-tighten copy appears in the new SKILL.md or in the ledger, and every SKILL.md → ledger anchor resolves. Every ✗/⚠ correction still appears somewhere, and each method's corrections are at least mentioned in SKILL.md.
 2. Frontmatter, Activation Rules, Research Integrity Rules${m.student_mode ? ' and Student Mode' : ''} are byte-identical to the pre-tighten copy (check_ledger.py --before checks this; the equivalent headings in another language count); the method numbering and headings, the Honest Boundary facts and coverage numbers and the Roundtable Card are unchanged in substance, and How to Use changed at most by a pointer (diff them).
 3. python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md is 12/12; wc -w ≤ ${MAXW}; python3 ${REPO}/scripts/check_links.py ${SK} is clean; every 09-evidence-ledger.md#anchor linked from SKILL.md exists.
 4. Usefulness: read the new SKILL.md end to end. Is each method still executable (steps intact), and is the strongest evidence still visible next to each claim? Is anything important now only in the ledger that should be back in SKILL.md?
@@ -121,7 +132,7 @@ function fixPrompt(m, findings, round) {
 SKILL.md was tightened (evidence moved to ${ledger(m)}; pre-tighten copy at ${backup(m)}). ${round === 1 ? 'A read-only reviewer reported:' : 'After the first fix round some gates still fail:'} ${JSON.stringify(findings)}
 Your job (FIX${round > 1 ? ', round ' + round : ''}): verify each finding, apply the ones you confirm (blockers and majors always); restore anything lost from the pre-tighten copy (into SKILL.md or the ledger); restore protected sections byte for byte. Do not modify the pre-tighten copy.
 Then run every gate and report each in gates (name, command, passed, detail):
-- lossless: python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)} → no problems
+- lossless: python3 ${REPO}/scripts/check_ledger.py ${SK} --before ${backup(m)} (no --allow) → no problems
 - quality_check: python3 ${REPO}/scripts/quality_check.py ${SK}/SKILL.md → 12/12
 - links: python3 ${REPO}/scripts/check_links.py ${SK} → 0 broken
 - words: wc -w ${SK}/SKILL.md → ≤ ${MAXW}

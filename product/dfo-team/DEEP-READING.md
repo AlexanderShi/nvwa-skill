@@ -172,6 +172,8 @@ Report: cards written, method links, new-pattern candidates, papers you could no
 5. **Plan a new round.** Use `python3 scripts/plan_reading_batches.py product/dfo-team/<researcher> --round <next> --no-abstract --exclude /tmp/<researcher>-round1.json,… > /tmp/<researcher>-round<next>.json` (`--exclude` takes the earlier rounds' plan files, comma-separated), keeping the plan JSON outside the repository. Works that have text but only an abstract or metadata card are batched again.
 6. **Read with the brief above.** Then run `verify_card_quotes.py` and `mark_read_from_cards.py`, and add the card's row to `07-paper-cards.md` by hand from its digest fields (id, year, title, read_level, batch file, method_links, contribution), in the format of the neighbouring rows (the indexes were first built by one-off scripts; none ships). Then apply the conservative-update rules to `SKILL.md`, `09-evidence-ledger.md` and `technique-catalog.md`.
 
+This team is configured by [team.json](team.json). The steps above are now also packaged in the generic kit of this repository (for new material: `scripts/workflows/team-increment.js`); see the [research-team playbook](../../references/research-team-playbook.md).
+
 ## Privacy and integrity
 
 - Private materials stay in `katya-scheinberg/references/sources/private/` (git-ignored) and are never read into public files. The deep reading worked only from public sources.

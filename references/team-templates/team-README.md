@@ -1,9 +1,9 @@
 <!-- Team template (team README) → product/<team>/README.md.
      T0: scripts/new_team.py fills the double-brace placeholders and the member rows of The Team.
      T2: scripts/workflows/team-layer.js fills the lens column, the scope line, the Use examples and the base-tier Honest Boundary.
-     T3.8: scripts/workflows/team-integrate.js adds the technique-catalog paragraph and the five-column coverage summary.
-           Each cell is summed from the full table of python3 scripts/team_status.py <team dir> --coverage, which goes
-           unchanged into DEEP-READING.md; the two must agree.
+     T3.8: scripts/workflows/team-integrate.js adds the technique-catalog paragraph and the five-column coverage summary,
+           pasted unchanged from python3 scripts/team_status.py <team dir> --coverage --short. The script sums it from
+           the full --coverage table, which goes unchanged into DEEP-READING.md, so the two always agree.
      No TODO item may remain after T2 (base tier: team-layer.js deletes the deep-tier-only parts) or after T3.8 (deep tier).
      Open work: grep -n "TODO" README.md. See product/dfo-team for a worked example (README.md). -->
 
@@ -133,7 +133,7 @@ To add a resource later, add a row to that researcher's `RESOURCES.md` and drop 
 
   | Researcher | Works indexed | Read in full / in part | Abstract or metadata only (incl. unreadable) | Skipped (not the author's, or not research) |
   |---|---|---|---|---|
-  | [TODO: one row per member, from `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage`: Distinct works indexed; Read in full / Read in part; Abstract only + Metadata only; Skipped. Each cell is summed from that full table, never typed. team-integrate.js (T3.8); team-layer.js (T2) deletes the table at the base tier.] | | | | |
+  | [TODO: replace this header, its separator and this row with the output of `python3 scripts/team_status.py product/{{TEAM_SLUG}} --coverage --short`, pasted unchanged (the same five columns, one row per member by surname; the script sums Distinct works indexed, Read in full / in part, Abstract only + Metadata only, and Skipped from the full --coverage table). Never type a number. team-integrate.js (T3.8); team-layer.js (T2) deletes the table at the base tier.] | | | | |
 
   [TODO: after the table: what is not openly available (book bodies, early papers), which openly available parts of books were read (T4 increments), and any special items counted among the full reads (interviews, memoirs). End with: "Each skill's Honest Boundary lists its gaps, and `RESOURCES.md` marks unverified leads ⚠️." team-integrate.js (T3.8); deleted with the table at the base tier.]
 - [TODO: historical lenses: for each member with `"living": false` in `team.json`, "<Surname> (d. YYYY) is a historical lens; the skill reflects work up to then." Delete if every member is living; team-layer.js (T2).]

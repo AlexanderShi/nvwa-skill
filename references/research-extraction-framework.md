@@ -212,38 +212,44 @@ Agent 3（过程证据）的prompt要额外强调：**找行为而不是找言�
 - 每条方法标注归属，分歧并列呈现，让用户按自己的处境选
 - 不模拟任何个人口吻
 
+**要的是一支团队时**：用户希望每位研究者都有一个能单独调用的研究Skill，再加一个圆桌让他们就用户的问题会诊、辩论（「用 X 的视角看我的证明」「让 A 和 B 辩一下」），就不用本节，改走团队模式：见 [research-team-playbook.md](research-team-playbook.md)。`scripts/new_team.py` 按 `team.json` 铺团队目录，`scripts/workflows/` 里的工作流按成员跑本框架的第二至八节（每人一个研究Skill）、写圆桌，可选第十二节的全文深读。实例是 `product/dfo-team/`。
+
 ---
 
 ## 十二、全文深读（可选的深度档加强）
 
 搜索摘要只能支撑「他说过什么」；要看清「他实际怎么做」，最终要读论文全文。
 
+下面是逐步做法，单个研究Skill可以照着手动做。团队模式里每一步都有保存好的工作流和闸门：`team-harvest.js`（第1步）、`team-chase.js`（第3步）、`team-read.js`（第5步）、`team-synthesize.js` 与 `team-tighten.js`（第8步），参数见 [scripts/workflows/README.md](../scripts/workflows/README.md)；每一步之间的命令、闸门、失败模式和成本见 [research-team-playbook.md](research-team-playbook.md) 第三至六节。批次计划、备份等中间文件放在仓库外的 scratch 目录，下文记作 `$S`（如 `S=${TMPDIR:-/tmp}/<team>-scratch`），和手册、工作流的 `scratch` 参数是同一个目录。
+
 1. **发表列表**。有两种来源：
    - 用抓取工具（WebFetch 等）逐页读 Google Scholar 个人主页。Scholar 没有 API，也拦 curl。
    - 或跑 `python3 scripts/fetch_publications.py "<姓名>" --json --out <skill目录>/references/sources/publications`（OpenAlex）。
 
-   列表要用 DBLP（REST 被拦时走 SPARQL 端点）、Crossref、arXiv 交叉核对，去重后写成 `publications/works.json` + `scholar.md`。
+   列表要用 DBLP、Crossref、arXiv 交叉核对，去重后写成 `publications/works.json` + `scholar.md`。DBLP 用 `python3 scripts/dblp_works.py --name "<姓名>"` 找人、`--pid <pid>` 取记录（走 SPARQL 端点；dblp.org 的 REST 接口在反爬墙后面）。写完跑 `python3 scripts/validate_works.py <skill目录>`，0 errors 才往下走（ID 字母见 [paper-reading-card.md](paper-reading-card.md) 第四节）。
 2. **开放全文**：`python3 scripts/acquire_fulltexts.py <skill目录>`
    - 依次尝试 arXiv（按 ID 或标题检索）、Unpaywall 开放获取、works.json 里的作者或仓库链接。
-   - 校验下载的 PDF 确实是这篇论文。扫描件或乱码文字层自动用 tesseract 做 OCR。
+   - 校验下载的 PDF 确实是这篇论文。扫描件或乱码文字层自动用 tesseract 做 OCR；非英文的扫描件加 `--ocr-lang <语言>`（如 `deu`、`chi_sim`，要先装对应的 tesseract 语言包），或设环境变量 `NUWA_OCR_LANG`。
    - 生成 `references/sources/papers/INDEX.md`。
    - PDF 与 `txt/` 不提交，新克隆的仓库里没有。本地没有文件的行会保留 INDEX 里已提交的 txt/pdf 状态，但重新抽取文本和第6步的摘录核对都需要原文件，所以要在存有原 PDF 和 `txt/` 的那份工作区里跑。旧版脚本会把这些行重置为 `no-oa`，遇到时用 `git checkout -- <skill目录>/references/sources/papers/INDEX.md` 恢复。
    - arXiv 标题检索要求每个词都出现，预印本标题和发表版差一两个词就搜不到，这时脚本会在研究者的 arXiv 作者列表里按相似度再找一次。
    - OpenAlex 可达时，旧的 `fetch_fulltexts.py` 也能用。它的 arXiv 检索同样走 arxiv.org 网页，因为 export.arxiv.org 的 API 会拒绝云端 IP（HTTP 406）。OpenAlex 没有 API key 时，每个 IP 每天只有 $0.10 额度，云端共享 IP 很快就会 429，所以要设置环境变量 `OPENALEX_API_KEY`。
-3. **agent 补搜**：仍标 `no-oa` 的论文，由 agent 在合法的开放来源里找，比如作者主页、机构技术报告、Optimization Online、HAL、会议官网、OSTI、CORE。
+3. **agent 补搜**：仍标 `no-oa` 的论文，由 agent 在合法的开放来源里找，比如作者主页、机构技术报告系列、领域的预印本或开放仓库、HAL、会议官网、OSTI、CORE。团队模式把领域和成员专属的线索写进 `team.json` 的 `chase_hints`。
    - 找到的文件命名为 `<ID>-<年份>-<标题前8词>.pdf`，存进 `papers/`，再重跑第2步。
+   - 找到的摘要写进 `papers/abstracts-chase-*.json`，由 `python3 scripts/merge_chase.py <skill目录>` 并入 `abstracts.json`，它随后重跑第2步（团队模式的 `team-chase.js` 最后自动跑它）。
    - 不用 Sci-Hub，不绕付费墙。
-4. **切批**：`python3 scripts/plan_reading_batches.py <skill目录> [--round N --exclude /tmp/上一轮.json] > /tmp/batches.json`（批次JSON放在仓库外）
+4. **切批**：`python3 scripts/plan_reading_batches.py <skill目录> --out-dir $S --no-abstract`，以后每来一波新全文再跑一次同样的命令：它写 `$S/batches-<slug>-r<N>.json`，轮次 N 自己定（已有计划和已有卡片批次的最大轮次加 1），`$S` 里其他轮的计划（包括还在读的）自动排除，并打印 N（团队目录也行，一次规划全体成员）。不用 `--out-dir` 时照旧 `--round N --exclude <还在读的轮次的计划> > 文件`。某一轮计划出 0 个全文批次时，跑最后一轮，不带 `--no-abstract`，剩下的作品进摘要、元数据批次。批次 JSON 放在 scratch 目录，不进仓库；`team-read.js` 默认读 `<scratch>/batches-<slug>-r<round>.json`。
    - 定角色：core / supplement。skip 不由它判断：专利、talk 由第2步按 kind 设定，非本人作品用 `--skip-ids` 或手改 INDEX 的 Role 列。
    - 按页数切批：core 精读，supplement 略读，book 按章读，abstract 只写摘要级卡片。
-5. **写卡片**：一批交给一个 agent，按 `references/paper-reading-card.md` 写 `references/research/cards/<批次>.md` 和 `<批次>.digest.json`。`07-paper-cards.md` 做索引，每张卡片按 digest 字段手写一行（仓库里没有生成脚本）。
+5. **写卡片**：一批交给一个 agent，按 `references/paper-reading-card.md` 写 `references/research/cards/<批次>.md` 和 `<批次>.digest.json`。`07-paper-cards.md` 做索引：团队模式由 `team-synthesize.js` 从 digest 生成；手动做时每张卡片按 digest 字段、照相邻行的格式写一行。
 6. **核对摘录**：`python3 scripts/verify_card_quotes.py <skill目录>`。全部逐字通过才往下走。
 7. **回填阅读状态**：`python3 scripts/mark_read_from_cards.py <skill目录>`。
 8. **汇总**：按卡片模板第三节的保守更新规则，先写 `08-deep-reading-synthesis.md`，再改 SKILL.md。
    - DFO 团队的流程是：汇总提案 → 保守修改 → 三个只读质疑者复核 → 修正。
    - 改完重跑 `quality_check.py`。
+   - 开写前就给 SKILL.md 定字数预算（团队模式默认约 11,500 词），长证据同时写进 `09-evidence-ledger.md`。仍超预算时再精简：把长证据移进账本，用 `python3 scripts/check_ledger.py <skill目录> --before <精简前的副本>` 证明无损（卡片 ID、页码引用、引文都还在，账本锚点都能解析）。
 
-需要网络可达 arxiv.org、api.unpaywall.org、api.crossref.org，以及各作者主页和机构仓库。没有开放全文的论文只写摘要级卡片，用户可以按上面的文件名补 PDF。PDF 与抽取文本不提交（版权）。完整实例见 `product/dfo-team/DEEP-READING.md`。
+需要网络可达 arxiv.org、api.unpaywall.org、api.crossref.org，以及各作者主页和机构仓库。没有开放全文的论文只写摘要级卡片，用户可以按上面的文件名补 PDF。PDF 与抽取文本不提交（版权）。以后的新论文、书的开放部分（目录、勘误、增补、前言、已发表书评）按增量处理（团队模式：`team-increment.js`，见手册第八节）。完整实例见 `product/dfo-team/DEEP-READING.md`。
 
 ---
 

@@ -1,12 +1,15 @@
 <!-- Team template (member resource tracker) → product/<team>/<member>/references/sources/RESOURCES.md.
-     T0: scripts/new_team.py fills the double-brace placeholders.
+     T0: scripts/new_team.py fills the double-brace placeholders. With no Scholar id in team.json, row 1's Link reads
+         "— (no Scholar profile in team.json; list from DBLP/homepage)" ("—" with --base-tier) until the harvest rewrites it.
      T1: scripts/workflows/team-base-skills.js adds one row per source found by research agents 01–06.
      T3: team-harvest.js (T3.1) rewrites row 1 completely; team-synthesize.js (T3.6) replaces the deep-tier placeholder row
-         with the real rows (full-text index, cards, synthesis, ledger, technique catalog) and upgrades ⚠️ leads the full
-         texts confirm. After T3 no TODO item may remain in this file.
-     Base tier (team-layer.js with deep_tier: false, no deep reading planned): row 1 keeps Status ⚠️, its Link cell becomes
-         "—" when it still holds a TODO item, and its Notes become "not harvested (base tier)"; the deep-tier placeholder
-         row is deleted.
+         with the real rows (full-text index, cards, synthesis, ledger, technique catalog), or appends them when a
+         base-tier file has no placeholder row, and upgrades ⚠️ leads the full texts confirm. After T3 no TODO item may
+         remain in this file.
+     Base tier (new_team.py --base-tier at T0, or team-layer.js with deep_tier: false at T2; no deep reading planned): row 1 keeps Status ⚠️, its Link cell becomes
+         "—" when it still holds a TODO item or the "— (no Scholar profile in team.json; …)" scaffold text (a real profile
+         URL stays), and its Notes become "not harvested (base tier)"; the deep-tier placeholder row is deleted. Upgrading
+         to the deep tier later: this file keeps its base-tier form until T3.1 rewrites row 1 and T3.6 appends the deep-tier rows.
      T4: scripts/workflows/team-increment.js adds book material and new papers.
      Open work: grep -n "TODO" RESOURCES.md. See product/dfo-team for a worked example (<member>/references/sources/RESOURCES.md). -->
 
@@ -40,5 +43,5 @@ Research date: [TODO: date of the first pass, and how the ✅ rows were verified
 ## Adding a resource
 
 1. Add a row to the table (keep numbering).
-2. If you save a file, put it in the matching folder and mark it 📥. A copyrighted file (PDF, PostScript, DjVu, EPUB, slides) stays local in every folder, not only `papers/`: `.gitignore` does not cover every folder and format, so check `git status` before you commit.
+2. If you save a file, put it in the matching folder and mark it 📥. A copyrighted file (PDF, PostScript, DjVu, EPUB, slides) stays local in every folder, not only `papers/`. The repository's `.gitignore` keeps PDF, PostScript, DjVu and EPUB files anywhere under `references/sources/`, and `papers/txt/`, out of git, but not slides (`.ppt`, `.pptx`, `.key`) or other formats, so check `git status` before you commit.
 3. If it changes a method or claim in `SKILL.md`, note which research file (`../research/0X-*.md`) you updated in **Used in**.

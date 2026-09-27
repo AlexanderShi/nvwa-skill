@@ -12,6 +12,9 @@
   "free proceedings (PMLR, NeurIPS, AAAI)",
   "HAL, CiteSeerX, OSTI, DTIC and NASA report servers"
  ],
+ "source_labels": {
+  "damtp": "DAMTP report"
+ },
  "members": [
   {
    "slug": "michael-powell",
@@ -20,7 +23,7 @@
    "living": false,
    "hint": "Cambridge DAMTP numerical analyst (1936-2015); COBYLA, UOBYQA, NEWUOA, BOBYQA, LINCOA",
    "scholar": "p3kDmy0AAAAJ",
-   "dblp": "",
+   "dblp": "14/5288",
    "orcid": "",
    "homepage": "",
    "chase_hints": [
@@ -36,8 +39,8 @@
    "living": false,
    "hint": "Waterloo, then IBM T. J. Watson Research Center (1946-2019); trust-region methods, LANCELOT, model-based DFO",
    "scholar": "2dAwoocAAAAJ",
-   "dblp": "",
-   "orcid": "",
+   "dblp": "98/1795",
+   "orcid": "0000-0001-7470-1035",
    "homepage": "",
    "chase_hints": [
     "Rutherford Appleton Laboratory (RAL) reports",
@@ -53,8 +56,8 @@
    "living": true,
    "hint": "model-based and stochastic DFO; probabilistic models (IBM Research, Lehigh, Cornell, Georgia Tech)",
    "scholar": "zbqRbOkAAAAJ",
-   "dblp": "",
-   "orcid": "",
+   "dblp": "98/3823",
+   "orcid": "0000-0003-3547-1841",
    "homepage": "",
    "chase_hints": [
     "Lehigh ISE and Columbia IEOR technical reports",
@@ -70,8 +73,8 @@
    "living": true,
    "hint": "direct search, worst-case complexity, probabilistic descent (Coimbra, Lehigh)",
    "scholar": "TLkN5_AAAAAJ",
-   "dblp": "",
-   "orcid": "",
+   "dblp": "64/3987",
+   "orcid": "0000-0003-1097-6384",
    "homepage": "",
    "chase_hints": [
     "Coimbra (DMUC) preprint series",
@@ -86,9 +89,9 @@
    "living": true,
    "hint": "Polytechnique Montreal / GERAD; MADS, NOMAD, blackbox and constrained optimization",
    "scholar": "WuHBdIkAAAAJ",
-   "dblp": "",
-   "orcid": "",
-   "homepage": "",
+   "dblp": "11/4448",
+   "orcid": "0000-0002-3043-5393",
+   "homepage": "https://www.gerad.ca/Charles.Audet/index.html",
    "chase_hints": [
     "GERAD Cahiers (https://www.gerad.ca/en/papers/G-YYYY-NN)",
     "Polytechnique Montreal repository and HAL",

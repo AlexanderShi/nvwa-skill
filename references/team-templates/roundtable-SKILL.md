@@ -11,7 +11,8 @@ type: roundtable
 ---
 
 <!-- Team template (roundtable skill) → product/<team>/<roundtable>/SKILL.md.
-     T0: scripts/new_team.py fills the double-brace placeholders.
+     T0: scripts/new_team.py fills the double-brace placeholders; the Team table gets one row per member (slug, name and
+         a TODO lens cell).
      T2: scripts/workflows/team-layer.js fills the TODO items marked team-layer.js from the members' Roundtable Cards
          (description, Team table, Problem Card fields, seating table, first fault lines, plan items, Outside the Team,
          Shared References, Honest Boundary with its pre-T3 wording, research date).
@@ -30,7 +31,7 @@ Members: {{MEMBER_LIST}}.
 
 | Member skill | Researcher | Lens (shorthand) |
 |--------------|-----------|------------------|
-| [TODO: `member-slug`] | [TODO: full name] | [TODO: one row per member; the lens in one line, condensed from that member's Roundtable Card "Lens (one line)"; team-layer.js (T2)] |
+{{ROUNDTABLE_MEMBER_TABLE}}
 
 The shorthand is only for seating. Each member's own `## Roundtable Card` (inside that member's `SKILL.md`) is authoritative.
 

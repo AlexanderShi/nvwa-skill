@@ -117,6 +117,8 @@ Each researcher has a folder that keeps track of the resources behind that skill
 
 To add a resource later, add a row to that researcher's `RESOURCES.md` and drop the file into the matching folder. If the resource changes a method, update the research note and `SKILL.md`. To add a paper's full text, follow "How to extend" in [DEEP-READING.md](DEEP-READING.md).
 
+This team is configured by [team.json](team.json). To build another team like it, or to update this one, use the generic kit in this repository (`scripts/new_team.py`, the saved workflows in `scripts/workflows/`): see the [research-team playbook](../../references/research-team-playbook.md).
+
 ## Honest Boundary
 
 - These are simulated lenses built from public work, not the researchers' own views.

@@ -1,6 +1,6 @@
 {
-  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Each member's plan yields two chunks, so two chase agents per member run and then the merge.",
-  "^chase-plan:": {
+  "_comment": "Fake agent results for dry_run.mjs --answers (fictional example team). Keys are regular expressions on the agent label; the first matching key wins; an object is merged over the schema-shaped fake, null means the agent died, and an array gives one value per successive call. Each member's plan yields two chunks, so two chase agents per member run and then the merge. Ada's is the first chase run of the day (next_run 1); Bo's is a same-day rerun (next_run 2), so its abstract files are named ...-r2-<chunk>.json and the unmerged files of run 1 stay untouched.",
+  "^chase-plan:ada-example$": {
     "chunk_file": "$SCRATCH/chase/<slug>.json",
     "works": 31,
     "chunks": 2,
@@ -14,7 +14,25 @@
         "reason": "kind talk",
         "count": 2
       }
-    ]
+    ],
+    "next_run": 1
+  },
+  "^chase-plan:bo-sample$": {
+    "chunk_file": "$SCRATCH/chase/<slug>.json",
+    "works": 31,
+    "chunks": 2,
+    "books": 1,
+    "excluded": [
+      {
+        "reason": "dup_of set",
+        "count": 3
+      },
+      {
+        "reason": "kind talk",
+        "count": 2
+      }
+    ],
+    "next_run": 2
   },
   "^chase:": {
     "found": [
@@ -44,7 +62,8 @@
         "url": "https://example.org/book/toc"
       }
     ],
-    "searches_used": 3
+    "searches_used": 3,
+    "abstract_file": "$REPO/product/example-team/<slug>/references/sources/papers/abstracts-chase-2026-01-15-r<run>-<chunk>.json"
   },
   "^chase-merge:": {
     "urls_recorded": 2,

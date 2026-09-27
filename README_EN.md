@@ -202,6 +202,10 @@ It reports top-cited papers, topic shifts in 5-year buckets, first→last-author
 
 Methodology: [references/research-extraction-framework.md](references/research-extraction-framework.md) · Output template: [references/research-skill-template.md](references/research-skill-template.md) (both in Chinese, like the rest of the core files).
 
+### Research teams: several researchers and a roundtable
+
+When one mentor is not enough, Nuwa can build a research advisory board: 3–6 researchers from one field, each with a research skill you can call on its own, plus a roundtable skill that brings them to your problem as separate agents. Each member states a position, they argue the documented disagreements, and you get a plan that every member signs off on or dissents from. The repo ships a kit for this: `scripts/new_team.py` scaffolds the team from one `team.json`, `scripts/workflows/make_args.mjs` turns it into the launch arguments of each workflow, and the saved workflows in `scripts/workflows/` run each stage per member in parallel (base skills → roundtable → optional full-text deep reading → later increments), with a script gate after every stage and `scripts/team_check.py` as the delivery gate. How-to, gates and costs: the [research-team playbook](references/research-team-playbook.md) (in Chinese). Worked example: [product/dfo-team](product/dfo-team/README.md), configured by its [team.json](product/dfo-team/team.json).
+
 ---
 
 ## Distilled People

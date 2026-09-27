@@ -34,13 +34,19 @@ export const meta = {
 //   args.word_budget     target maximum words for each SKILL.md (default 8000; the DFO base skills were 7.5k-8.7k)
 //   args.example_team    optional team folder (relative to repo) of a finished team to imitate for shape only,
 //                        e.g. "product/dfo-team"
+//   args.search_budget   WebSearch calls this run may use in total (default 36 per member). Per member: 3 for the
+//                        review top-up, 1 for the resource tracker, 1 per grading round, the rest split evenly over the
+//                        research agents (5 each at the standard tier); every other agent uses curl/WebFetch only. The
+//                        session has about 200 WebSearch calls shared by every agent: 5 members × 36 = 180, so run T1 in
+//                        its own session (playbook §六).
 // Outputs per member (<repo>/<team>/<slug>/): references/research/01-06-*.md, SKILL.md (type: research-craft, with a
 //   Roundtable Card), references/sources/RESOURCES.md rows, and for student_mode members a Student Mode section plus
 //   references/proof-playbook.md, open-problems.md, reading-path.md. Scratch: <scratch>/base-skills/<slug>/.
 // Gates run by the agents: scripts/merge_research.py (Phase 1.5), scripts/quality_check.py 12/12 (Phases 3-5),
 //   scripts/check_links.py (member folder). Next: team-layer.js (T2).
 // Launch: Workflow({scriptPath: "<repo>/scripts/workflows/team-base-skills.js", args: {...}}).
-// Cost: about 17-20 agents per member at the standard tier (6 research + review + synthesis + 2 build + 3-7 test + 3 refine).
+// Cost: 16-20 agents per member at the standard tier (6 research + review + synthesis + 2 build + 3-7 test + 3 refine);
+//   13-17 at the quick tier (3 research agents). The worked example product/dfo-team/ did not meter this step's tokens.
 // ---------------------------------------------------------------------------------------------
 
 const ARGS = typeof args === 'string' ? JSON.parse(args) : args
@@ -57,8 +63,8 @@ const STEPS = ['research', 'review', 'synthesis', 'build', 'test', 'refine']
 const FROM = STEPS.indexOf(ARGS.from || 'research')
 const TO = STEPS.indexOf(ARGS.to || 'refine')
 need(FROM >= 0 && TO >= 0 && FROM <= TO, `args.from / args.to must be among ${STEPS.join(', ')} with from <= to`)
-// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'from', 'to', 'tier', 'dims', 'user_context', 'word_budget', 'example_team']
+// args keys this workflow reads (all snake_case, like every team workflow); anything else is logged
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'from', 'to', 'tier', 'dims', 'user_context', 'word_budget', 'example_team', 'search_budget']
 const unknownArgs = Object.keys(ARGS).filter(k => !KNOWN_ARGS.includes(k))
 if (unknownArgs.length) log(`team-base-skills.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 const on = s => { const i = STEPS.indexOf(s); return i >= FROM && i <= TO }
@@ -75,6 +81,10 @@ const EXAMPLE = typeof ARGS.example_team === 'string' && ARGS.example_team.trim(
   ? `Worked example of a finished team (read for shape and level of detail only; never copy its field, researchers or content): ${REPO}/${ARGS.example_team.replace(/^\.\//, '').replace(/\/+$/, '')}/.`
   : ''
 const NOREPLY = 'nuwa-skill@users.noreply.github.com'
+const BUDGET = Number.isInteger(ARGS.search_budget) && ARGS.search_budget >= 0 ? ARGS.search_budget : 36 * MEMBERS.length
+const SHARE = Math.floor(BUDGET / MEMBERS.length)
+const FIXED = SHARE >= 12 ? { review: 3, resources: 1, grade: 1 } : { review: 0, resources: 0, grade: 0 }
+function searchLine(n) { return `WebSearch allowance for this task: ${n > 0 ? `at most ${n} call(s)` : 'none (curl and WebFetch only)'}; report the number in searches_used.` }
 
 const HOUSE = `House rules for every agent in this workflow (nuwa research-team kit):
 - Read ${TEAM}/team.json first: "field", "language" (the language of every member skill and research note you write), "title", "roundtable" (the slug of the team's roundtable skill), and the member entries (name, surname, living, hint, scholar, dblp, orcid, homepage, student_mode). The entry there is authoritative if it differs from this prompt.
@@ -83,7 +93,7 @@ const HOUSE = `House rules for every agent in this workflow (nuwa research-team 
 - Honesty over polish: a skill that marks its gaps honestly beats one that looks complete but invents. A research stage without evidence stays empty and says so.
 - Sources: public and legitimate only. Never Sci-Hub, LibGen, Z-Library or other shadow libraries, never paywall circumvention, never scraping behind a login. Do not use Zhihu, WeChat official accounts or Baidu Baike as sources.
 - Privacy: never open, read, quote or copy anything under a references/sources/private/ folder. Never send the user's email address or any other personal identifier to an external service; where an API insists on an email parameter (e.g. Unpaywall) use ${NOREPLY}. A living researcher is distilled from public academic output and public statements only.
-- Tools: load WebSearch/WebFetch with ToolSearch ("select:WebSearch,WebFetch") if they are not loaded. Google Scholar blocks curl (use WebFetch). WebSearch has a per-session budget (about 200 calls shared by all agents): prefer curl/WebFetch on known URLs. Kill background processes by exact PID, never with pkill -f.
+- Tools: load WebSearch/WebFetch with ToolSearch ("select:WebSearch,WebFetch") if they are not loaded. Google Scholar blocks curl (use WebFetch). WebSearch has a per-session budget (about 200 calls shared by all agents): prefer curl/WebFetch on known URLs. Each task below states its WebSearch allowance; a task that states none uses curl and WebFetch only. Kill background processes by exact PID, never with pkill -f.
 - Scope: edit only the files this step names as its outputs (scratch files go under ${SCRATCH}/base-skills/<member-slug>/). Do not touch other members' folders, the repo's root SKILL.md, references/ or scripts/, and do not git commit or push: the session that launched this workflow commits after the stage.`
 
 function A(prompt, opts) {
@@ -146,6 +156,7 @@ const DIM_SEL = Array.isArray(ARGS.dims) && ARGS.dims.length
   ? DIMS.filter(d => ARGS.dims.map(String).includes(d.n))
   : (ARGS.tier === 'quick' ? DIMS.slice(0, 3) : DIMS)
 need(DIM_SEL.length > 0, 'args.dims selects no research agent (use "01" .. "06")')
+const RESEARCH_SEARCH = Math.max(0, Math.floor((SHARE - FIXED.review - FIXED.resources - 2 * FIXED.grade) / DIM_SEL.length))
 
 // ---------- schemas ----------
 const FINDING = { type: 'object', properties: { severity: { type: 'string', enum: ['blocker', 'major', 'minor'] }, location: { type: 'string' }, problem: { type: 'string' }, fix: { type: 'string' } }, required: ['severity', 'problem', 'fix'] }
@@ -159,6 +170,7 @@ const NOTE = {
     key_findings: { type: 'array', items: { type: 'string' } },
     contradictions: { type: 'array', items: { type: 'string' } },
     gaps: { type: 'array', items: { type: 'string' } },
+    searches_used: { type: 'number' },
   },
   required: ['file', 'sources_total', 'primary_sources', 'key_findings', 'contradictions', 'gaps'],
 }
@@ -171,6 +183,7 @@ const REVIEW = {
     thin_left: { type: 'array', items: { type: 'string' } },
     ready: { type: 'boolean' },
     reason: { type: 'string' },
+    searches_used: { type: 'number' },
   },
   required: ['table', 'dimensions', 'contradictions', 'thin_left', 'ready', 'reason'],
 }
@@ -219,6 +232,7 @@ const RESOURCES = {
     saved_locally: { type: 'number' },
     unverifiable: { type: 'array', items: { type: 'string' } },
     summary: { type: 'string' },
+    searches_used: { type: 'number' },
   },
   required: ['rows', 'verified', 'leads', 'unverifiable', 'summary'],
 }
@@ -243,6 +257,7 @@ const GRADE = {
     citations_checked: { type: 'number' },
     citations_failed: { type: 'array', items: { type: 'string' } },
     findings: { type: 'array', items: FINDING },
+    searches_used: { type: 'number' },
   },
   required: ['passed', 'items', 'citations_checked', 'citations_failed', 'findings'],
 }
@@ -282,6 +297,7 @@ ${d.n === '04' && m.student_mode ? `This member has a Student Mode (the user wor
 - Note the era and resource context of each practice (compute, tools, team size, seniority).
 - Keep contradictions; do not reconcile them.
 - About 5 minutes without useful results on a sub-question: move on and list it under Gaps.
+${searchLine(RESEARCH_SEARCH)}
 File structure: a header (researcher, dimension, research date ${DATE}, number of sources consulted), the findings grouped as the framework asks, "Contradictions", "Gaps" (what you could not find), and "Sources" (one line each: title, author, date, URL or DOI, primary/secondary).
 Write in team.json "language". Edit only ${RES}/${d.file} (and transcripts you save under ${SRC}/talks/).
 Return the structured summary.`
@@ -293,7 +309,7 @@ function reviewPrompt(m, notes) {
 The research agents reported: ${JSON.stringify(notes)}
 1. Run python3 ${REPO}/scripts/merge_research.py ${MD} --mode research and keep its markdown table.
 2. Read every research note in ${RES}/ (01-06). Judge each dimension: enough usable sources? Do 02 (stated) and 03 (process evidence) together support at least a few say-do comparisons, which the four-way validation needs? Is the primary share above half? Any paper without an identifier (remove it or find the identifier)? Contradictions between agents (agent X says A, agent Y says B)?
-3. For a dimension that is clearly thin (fewer than about 5 usable sources, or 02/03 unable to support any say-do comparison), run ONE targeted top-up search yourself and append what you find to that note under "Top-up (${DATE})". Do not rewrite the notes otherwise.
+3. For a dimension that is clearly thin (fewer than about 5 usable sources, or 02/03 unable to support any say-do comparison), run ONE targeted top-up search yourself and append what you find to that note under "Top-up (${DATE})". Do not rewrite the notes otherwise. ${searchLine(FIXED.review)}
 4. Rerun merge_research.py and write ${RV}: the table, the contradictions, the thin dimensions left, and your verdict.
 This is the Phase 1.5 checkpoint the user sees ("garbage in, garbage out": say plainly whether the research is good enough to synthesise). Edit only the notes you topped up and ${RV}.
 Return the table (markdown), per-dimension verdicts, contradictions, what is still thin, and ready (true/false) with the reason.`
@@ -351,7 +367,7 @@ function resourcesPrompt(m) {
   return `Task (nuwa Phase 3, resource tracker) for ${m.name}. Output: ${SRC}/RESOURCES.md.
 Start from the existing file (the team scaffold fills ${REPO}/references/team-templates/member-RESOURCES.md and leaves [TODO: …] items) or, if there is none, from that template (replace {{MEMBER_NAME}}, {{MEMBER_SLUG}} and {{SCHOLAR_URL}}; no "{{" may remain).
 Fill the TODO items the template assigns to team-base-skills.js (T1): the research-date line, and one row per source found by the research notes ${RES}/01-06 (papers, books, reports, software, talks, interviews, essays, memoirs, student recollections, critiques, profiles). Verify each row with a tool in this run: DOI resolves (curl -s -o /dev/null -w "%{http_code}" https://doi.org/<doi> gives 30x) and the Crossref title matches, or the arXiv abs page title matches, or the page exists and says what the row says. Status ✅ verified / ⚠️ lead (unverified: reason in Notes, must not be cited as verified) / 📥 saved locally. "Used in" names the notes (01-06) that use it. Merge duplicates; keep numbering.
-Leave TODO items that the template assigns to later steps (the Google Scholar row for team-harvest.js; the deep-tier rows for T3/T4) exactly as they are. Never open private/.
+Leave TODO items that the template assigns to later steps (the Google Scholar row for team-harvest.js; the deep-tier rows for T3/T4) exactly as they are. Never open private/. ${searchLine(FIXED.resources)}
 Edit only ${SRC}/RESOURCES.md. Return counts and the sources you could not verify.`
 }
 
@@ -382,7 +398,7 @@ function gradePrompt(m, qs, answers, round) {
 Expected answers and evidence: ${EXAM} (only the qids below are graded this round).
 Answers given blind from SKILL.md: ${JSON.stringify(answers)}
 Grade each qid: known -> direction consistent with the documented position (pass / partial / fail); taste -> did it predict the direction actually taken, for the right reasons; edge -> hedged, grounded in named methods, no invented certainty; executability -> concrete next steps with 🔴 checkpoints and method labels, different from generic advice (fail if it is encouragement or a literature review).
-Citation check: every paper named in the answers, and a sample of at least 10 papers cited in SKILL.md (all of them if fewer), must resolve: DOI -> https://doi.org/<doi> gives 30x and the Crossref title matches; arXiv -> the abs page title matches; otherwise the venue + year + title must be confirmed by a search. List failures.
+Citation check: every paper named in the answers, and a sample of at least 10 papers cited in SKILL.md (all of them if fewer), must resolve: DOI -> https://doi.org/<doi> gives 30x and the Crossref title matches; arXiv -> the abs page title matches; otherwise the venue + year + title must be confirmed (Crossref's query API with curl first). List failures. ${searchLine(FIXED.grade)}
 Also run python3 ${REPO}/scripts/quality_check.py ${SKILL} and report it.
 For each miss, say what in SKILL.md caused it (a method weighted wrongly, a missing routing row, a vague step, a missing boundary) and give a concrete fix. Severity: blocker = invented citation or a claim the evidence contradicts; major = failed test item; minor = polish. passed = no fail verdicts and no blockers or majors. Read-only: edit nothing.
 Questions graded: ${JSON.stringify(qs)}`
@@ -481,7 +497,7 @@ const results = await pipeline(
       const grade = await A(gradePrompt(m, qs, ans.answers, round), { label: `grade:${m.slug}:r${round}`, phase: 'Test', schema: GRADE })
       if (!grade) { log(`${m.slug}: grader returned nothing in round ${round}; tests stop`); break }
       const serious = grade.findings.filter(f => f.severity !== 'minor').length
-      rounds.push({ round, items: grade.items, citations_failed: grade.citations_failed, findings: grade.findings.length, serious })
+      rounds.push({ round, items: grade.items, citations_failed: grade.citations_failed, findings: grade.findings.length, serious, searches_used: grade.searches_used || 0 })
       if (grade.passed && serious === 0) break
       const fix = await A(fixPrompt(m, grade, round, round === 2), { label: `fix:${m.slug}:r${round}`, phase: 'Test', schema: FIX })
       rounds[rounds.length - 1].fix = fix
@@ -506,4 +522,19 @@ const results = await pipeline(
   },
 )
 
-return MEMBERS.map((m, i) => results[i] || { member: m.slug, error: 'pipeline dropped this member (see log)' })
+const out = MEMBERS.map((m, i) => results[i] || { member: m.slug, error: 'pipeline dropped this member (see log)' })
+const used = r => [...(r.notes || []), r.review, r.resources, ...(r.tests || [])].reduce((s, x) => s + ((x && x.searches_used) || 0), 0)
+const searches = out.reduce((s, r) => s + used(r), 0)
+log(`WebSearch calls reported: ${searches} (budget ${BUDGET})`)
+const S = STEPS[TO]
+const next = S === 'research' || S === 'review'
+  ? [`Checkpoint 1.5: show the user each member's review table (members[].review.table) and what is still thin.`,
+    `Commit the notes now (the container can be recycled while the user reads): bash scripts/team_commit.sh ${TEAM_REL}/<slug> "research(<slug>): notes 01–06".`,
+    'Then rerun with from: "synthesis", to: "synthesis".']
+  : S === 'synthesis'
+    ? [`Checkpoint 2.5: show the Phase 2 records (${SCRATCH}/base-skills/<slug>/phase2-synthesis.md) and the Roundtable Card drafts; check the lenses do not overlap and the seating can be drawn.`,
+      'Then rerun with from: "build" (the record lives in the scratch folder: if it is lost, rerun from: "synthesis").']
+    : [`Gate: python3 scripts/quality_check.py ${TEAM_REL}/<slug>/SKILL.md → 12/12 for each member (members[].build.quality_check).`,
+      `Commit: bash scripts/team_commit.sh ${TEAM_REL}/<slug> "feat(<slug>): research skill".`,
+      `When every member has a SKILL.md: team-layer.js with ALL members (node scripts/workflows/make_args.mjs team-layer --team ${TEAM_REL}).`]
+return { stage: 'T1 base skills', date: DATE, steps: `${STEPS[FROM]}..${S}`, search_budget: BUDGET, searches_used: searches, members: out, next }

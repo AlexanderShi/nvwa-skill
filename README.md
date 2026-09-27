@@ -52,7 +52,7 @@
 | Skill | 说明 |
 |-------|------|
 | [`product/刘亦菲`](product/刘亦菲) | 刘亦菲思维视角：7 个核心心智模型、12 条决策启发式、完整表达 DNA + 13 份调研底稿 |
-| [`product/dfo-team`](product/dfo-team) | 无导数优化（DFO）研究顾问团：Powell / Conn / Scheinberg / Vicente / Audet 五个研究Skill + `dfo-roundtable` 圆桌（遇到问题时召集五人讨论并给出方案）。每人一个资源文件夹，见 [product/dfo-team/README.md](product/dfo-team/README.md)。五个研究Skill已按各自 Google Scholar 发表列表做过全文深读（有开放全文的逐篇精读或选读：355篇全文、59篇部分；本人每篇研究作品至少一张卡片，共775张；摘录逐字核对），见 [DEEP-READING.md](product/dfo-team/DEEP-READING.md) |
+| [`product/dfo-team`](product/dfo-team) | 无导数优化（DFO）研究顾问团：Powell / Conn / Scheinberg / Vicente / Audet 五个研究Skill + `dfo-roundtable` 圆桌（遇到问题时召集五人讨论并给出方案）。每人一个资源文件夹，见 [product/dfo-team/README.md](product/dfo-team/README.md)。五个研究Skill已按各自 Google Scholar 发表列表做过全文深读（有开放全文的逐篇精读或选读：356篇全文、59篇部分；本人每篇研究作品至少一张卡片，连同书的开放部分共795张；摘录逐字核对），见 [DEEP-READING.md](product/dfo-team/DEEP-READING.md) |
 
 ### 怎么用
 
@@ -349,6 +349,10 @@ python3 scripts/fetch_publications.py "Richard Hamming" --out <skill目录>/refe
 
 完整方法论见 [references/research-extraction-framework.md](references/research-extraction-framework.md)，产出模板见 [references/research-skill-template.md](references/research-skill-template.md)。
 
+### 研究团队：几位研究者 + 一张圆桌
+
+想要的不止一位导师时，女娲可以搭一支研究顾问团：一个领域的 3–6 位研究者各有一个研究Skill，可以单独调用；再加一个圆桌Skill，把他们作为独立 agent 请到你的问题上，各自发言、就有据可查的分歧辩论，最后给出一份带签字或异议的方案。仓库里有一套现成的工具：`scripts/new_team.py` 从一个 `team.json` 铺出团队骨架，`scripts/workflows/make_args.mjs` 从它生成每个工作流的启动参数，`scripts/workflows/` 里保存好的工作流按成员并行跑完每一步（基础Skill → 圆桌 → 可选的全文深读 → 以后的增量），每一步都有脚本闸门，交付前 `scripts/team_check.py` 一次查完。做法、成本和闸门见 [研究团队搭建手册](references/research-team-playbook.md)；完整实例是 [product/dfo-team](product/dfo-team/README.md)，它的配置就是 [team.json](product/dfo-team/team.json)。
+
 ---
 
 ## 已蒸馏人物
@@ -544,7 +548,7 @@ Not role-playing. Cognitive architecture extraction.
 
 **How it works**: Input a name → 6 parallel research agents → 40+ primary sources → triple-verified mental models → quality-validated SKILL.md
 
-**Research skills**: For top researchers, Nuwa can also distill *how they do research* — problem selection, experiment design, debugging, when to quit, paper writing — into an executable research-mentor skill. Say "distill Richard Hamming's research skills". See [references/research-extraction-framework.md](references/research-extraction-framework.md).
+**Research skills**: For top researchers, Nuwa can also distill *how they do research* — problem selection, experiment design, debugging, when to quit, paper writing — into an executable research-mentor skill. Say "distill Richard Hamming's research skills". See [references/research-extraction-framework.md](references/research-extraction-framework.md). For a whole advisory board (several researchers, each callable, plus a roundtable), see the [research-team playbook](references/research-team-playbook.md) and the worked example [product/dfo-team](product/dfo-team/README.md).
 
 **13 person skills + 1 topic skill included** — all with full research data. The Jobs example includes a complete multi-turn conversation demo.
 

@@ -24,22 +24,31 @@ export const meta = {
  *
  * Args specific to team-read:
  *   args.round       reading round number (default 1); only used to build the default batch-file path
- *   args.batchFiles  optional {slug: absolute path}: the batch JSON of each member, written by
- *                      python3 scripts/plan_reading_batches.py <team>/<slug> --round N [--exclude a.json,b.json] > FILE
- *                    default: <scratch>/batches-<slug>-r<round>.json
+ *   args.batch_files optional {slug: absolute path}: the batch JSON of each member, written by
+ *                      python3 scripts/plan_reading_batches.py <team>/<slug> --out-dir <scratch> [--no-abstract]
+ *                    (it writes <scratch>/batches-<slug>-r<N>.json, the default path below, and prints N)
+ *                    default: <scratch>/batches-<slug>-r<round>.json (old name batchFiles still accepted, with a log line)
  *   args.batches     optional {slug: [{bid, mode}]}: skip the Plan agent for that member (then no already-carded check)
  *   args.only        optional {slug: [bid, ...]}: run only these batches of that member (the others are logged as skipped)
  *   args.overwrite   default false: batches whose cards/<bid>.md and <bid>.digest.json already exist are skipped (resume)
  *   args.retry       default true: re-run a batch once when its agent died or wrote no cards
+ *   args.search_budget  WebSearch calls this run may use in total (default 8 per member). Only abstract batches search
+ *                    (full-text batches read files); each abstract batch gets an equal share. The session has about 200
+ *                    WebSearch calls shared by every agent (research-team playbook §六).
+ *   Per-member maps (batch_files, batches, only) are keyed by member slug. A key that is not a member of this run is
+ *   logged; for "only" it stops the run when a member of the run has no entry (a misspelt slug would otherwise read
+ *   every batch of that member again, and with overwrite: true overwrite its cards).
  *
  * Writes (per member): <team>/<slug>/references/research/cards/<bid>.md + <bid>.digest.json;
  *   abstract batches may add papers/abstracts-chase-<bid>.json and open PDFs they found; the Gate merges the
  *   abstracts (scripts/merge_chase.py), fixes failing quotes and fills INDEX.md's Read column.
- * Next: commit the member's references/ (PDFs and txt/ are git-ignored); new open texts → acquire_fulltexts.py and a
- *   further round (plan_reading_batches.py --round N+1 --exclude <this round's batch file>); then team-synthesize.js.
+ * Next (the return value's "next" gives the exact commands): commit the member's references/ (PDFs and txt/ are
+ *   git-ignored); REOCR ids → acquire_fulltexts.py --reocr, WRONG-TEXT ids → --drop, then plan_reading_batches.py
+ *   --out-dir <scratch> --reread <ids> and a further round; new open texts → a further round; then team-synthesize.js.
  * Concurrency is min(16, CPUs-2) agents per workflow, so one workflow per member in parallel is faster than one big run.
  * Batch sizing that worked (plan_reading_batches.py defaults): core ≤110 pp and ≤5 works, supplement ≤220 pp and ≤8, a book
- *   (>150 pp) alone, abstract batches of 30; a later round must --exclude the batch files of rounds still in flight.
+ *   (>150 pp) alone, abstract batches of 30; plan_reading_batches.py --out-dir excludes the plans of the other rounds
+ *   (in flight or not) that it finds in the scratch folder, so no work is dispatched twice.
  * Cost baseline (worked example product/dfo-team/, 5 members, 795 cards): ~22 agents and ~5.8M tokens per member.
  */
 
@@ -54,9 +63,18 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(String(a.date))) throw new Error('team-read: arg
 a.members.forEach((m, i) => { if (!m || !/^[a-z0-9][a-z0-9-]*$/.test(m.slug || '') || !m.name) throw new Error(`team-read: members[${i}] needs a kebab-case slug and a name`) })
 if (!String(a.repo).startsWith('/') || !String(a.scratch).startsWith('/')) throw new Error('team-read: args.repo and args.scratch must be absolute paths')
 if (String(a.team).startsWith('/')) throw new Error('team-read: args.team must be relative to args.repo, e.g. "product/<team>"')
-// args keys this workflow reads; anything else is logged (the kit mixes snake_case and camelCase option names)
-const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'round', 'batchFiles', 'batches', 'only', 'overwrite', 'retry']
-const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k))
+// args keys this workflow reads (all snake_case); anything else is logged. Old camelCase names still work as aliases.
+const KNOWN_ARGS = ['repo', 'team', 'scratch', 'date', 'members', 'round', 'batch_files', 'batches', 'only', 'overwrite', 'retry', 'search_budget']
+const RENAMED = { batchFiles: 'batch_files' } // old camelCase name -> current name
+const ALIAS_OF = Object.fromEntries(Object.entries(RENAMED).map(([o, k]) => [k, o]))
+function arg(key) { return a[key] !== undefined ? a[key] : ALIAS_OF[key] ? a[ALIAS_OF[key]] : undefined }
+for (const [old, key] of Object.entries(RENAMED)) {
+  if (a[old] === undefined) continue
+  log(a[key] === undefined
+    ? `team-read.js: args.${old} is the old name of args.${key}; using it (rename it to ${key})`
+    : `team-read.js: args.${old} ignored because args.${key} is also given (${old} is only an alias)`)
+}
+const unknownArgs = Object.keys(a).filter(k => !KNOWN_ARGS.includes(k) && !(k in RENAMED))
 if (unknownArgs.length) log(`team-read.js ignores args key(s) it does not know (misspelt?): ${unknownArgs.join(', ')}; it reads ${KNOWN_ARGS.join(', ')}`)
 
 const REPO = String(a.repo).replace(/\/+$/, '')
@@ -66,20 +84,43 @@ const SCR = String(a.scratch).replace(/\/+$/, '')
 const DATE = a.date
 const ROUND = Number(a.round || 1)
 const RETRY = a.retry !== false
+const OVERWRITE = a.overwrite === true
 const MEMBERS = a.members
+const RUN_SLUGS = MEMBERS.map(m => m.slug)
+// per-member maps: keys must be member slugs of this run; a misspelt key in "only" would run (and, with overwrite, redo)
+// every batch of the member it was meant for, so that stops the run
+for (const [key, strict] of [['only', true], ['batches', false], ['batch_files', false], ['batchFiles', false]]) {
+  const v = a[key]
+  if (v === undefined || v === null) continue
+  if (typeof v !== 'object' || Array.isArray(v)) throw new Error(`team-read: args.${key} must be an object keyed by member slug, e.g. {"${RUN_SLUGS[0]}": ...}`)
+  const unknown = Object.keys(v).filter(k => !RUN_SLUGS.includes(k))
+  if (!unknown.length) continue
+  const uncovered = RUN_SLUGS.filter(k => !(k in v))
+  if (strict && uncovered.length) throw new Error(`team-read: args.${key} names ${unknown.join(', ')}, not a member of this run (${RUN_SLUGS.join(', ')}); ${uncovered.join(', ')} would then read every batch${OVERWRITE ? ' and overwrite its cards' : ''}. Fix the slug.`)
+  log(`team-read.js: args.${key} has entries for member(s) not in this run, ignored: ${unknown.join(', ')}`)
+}
+const BUDGET = Number.isInteger(a.search_budget) && a.search_budget >= 0 ? a.search_budget : 8 * MEMBERS.length
+const SHARE = Math.floor(BUDGET / MEMBERS.length)
+const SUFFIX = /^(jr|sr|ii|iii|iv)\.?$/i
+// family name for author checks and queries: team.json "family_name", else the last word of "name" ("surname" is the
+// lens label and may read "N. Higham" when two members share a family name)
+function fam(m) { if (m.family_name) return m.family_name; const w = String(m.name).trim().split(/\s+/).filter(x => !SUFFIX.test(x)); return w.length ? w[w.length - 1] : m.name }
+function authorCheck(m) { return `${m.name} (family name ${fam(m)})` }
 
 function A(prompt, opts) {
   if (!opts || !opts.phase || !opts.label) throw new Error('A() needs opts.phase and opts.label')
   return agent(prompt, opts)
 }
 function list(x) { return Array.isArray(x) && x.length ? x.join('; ') : '' }
+function searchLine(n) { return n > 0 ? `at most ${n} WebSearch call(s) for this whole batch` : 'no WebSearch calls for this batch (its share of args.search_budget is 0)' }
 function skillDir(m) { return `${TEAM}/${m.slug}` }
 function cardsDir(m) { return `${skillDir(m)}/references/research/cards` }
-function batchFile(m) { return (a.batchFiles && a.batchFiles[m.slug]) || `${SCR}/batches-${m.slug}-r${ROUND}.json` }
+function batchFile(m) { const bf = arg('batch_files'); return (bf && bf[m.slug]) || `${SCR}/batches-${m.slug}-r${ROUND}.json` }
 
 function teamCtx(m) {
   return `Team: ${TEAM}/. Read ${TEAM}/team.json first: "field" is the research field, "language" the language of the member skills, "roundtable" the roundtable folder, "chase_hints" field-wide open repositories, and "members" the researchers (hint, student_mode, chase_hints). The team was built with the nuwa kit in ${REPO} (rules and templates in ${REPO}/references/, tools in ${REPO}/scripts/). Today is ${DATE}.
-Member: ${m.name} (slug ${m.slug}${m.hint ? `; ${m.hint}` : ''}). Skill folder: ${skillDir(m)}/. Where this prompt and the member's entry in team.json differ, team.json wins.`
+Member: ${m.name} (slug ${m.slug}${m.hint ? `; ${m.hint}` : ''}). Skill folder: ${skillDir(m)}/. Where this prompt and the member's entry in team.json differ, team.json wins.
+If team.json has "card_dimensions" (e.g. {"D3": "...", "D4": "...", "D5": "..."}), those are what the listed dimensions mean in this field: use them in every card; the digest field names stay the same.`
 }
 
 const RULES = `House rules (non-negotiable):
@@ -95,7 +136,7 @@ function cardRules(m) {
 - Quotes: at most 2 per card, copied EXACTLY from the text file (or from abstracts.json for an abstract) so that scripts/verify_card_quotes.py finds them; give the page.
 - Link each card to the skill: "Method N" of ${m.slug}/SKILL.md (evidence ✅ / variant ⚠ / contradiction ✗) or "new-pattern candidate: <short name>". In the digest, method_links[].method is always written "Method N" (N = the number in the SKILL.md heading, whatever language the skill is written in) so that scripts can count it.
 - A "transferable technique" is something a PhD student in this field could copy into their own work tomorrow (a proof device, an algorithm- or study-design move, an experiment or evaluation protocol, a writing move). Leave the line out rather than write a platitude.
-- The D1–D8 dimensions were written for mathematical and computational research. Where a dimension is meaningless for a work in this field (for example no proofs), write "n/a" instead of forcing it.
+- The D1–D8 dimensions were written for mathematical and computational research; team.json "card_dimensions", when present, redefines them for this field. Where a dimension is still meaningless for a work (for example no proofs), write "n/a" instead of forcing it.
 - Card language: write the cards in the language of the texts you read (English texts → English cards) so that notes and verbatim quotes sit side by side; the skill itself follows team.json "language".`
 }
 
@@ -135,10 +176,10 @@ Before reading, read:
 Batch ${b.bid} (mode ${b.mode}).
 ${specLine(b, bf)}
 
-How to read (the text files have [[page N]] markers; page through long files with the Read tool's offset/limit and locate sections with grep -n):
+How to read (the text files have [[page N]] markers; page through long files with the Read tool's offset/limit and locate sections with grep -n; everything you need is in the files, so use no WebSearch in this batch):
 ${modeText(b, m)}
 - If a work entry carries a non-empty "note", follow it: it says what the item is, whose voice it is and how to read it. A published review is the reviewer's voice, never the authors'; a table of contents is "title only" (never invent chapter content).
-- Before reading a text, check its first page: the title AND ${m.surname || m.name} among the authors (report series and title matching can yield other people's work). If it is not the work named, mark it "unreadable" and add "WRONG-TEXT <id>: <what the file really is>" to problems.
+- Before reading a text, check its first page: the title AND ${authorCheck(m)} among the authors (report series and title matching can yield other people's work). If it is not the work named, mark it "unreadable" and add "WRONG-TEXT <id>: <what the file really is>" to problems.
 - If a text is garbled (mostly non-words, e.g. a broken font layer) or nearly empty (a scan without a text layer), mark it "unreadable" and add "REOCR <id>" to problems.
 
 Output files (mkdir -p ${CARDS} first):
@@ -168,13 +209,13 @@ Batch ${b.bid} (mode abstract).
 ${specLine(b, bf)}
 
 If the WebFetch or WebSearch tools are not loaded, load them with ToolSearch "select:WebFetch,WebSearch".
-For a work with no abstract in abstracts.json, try (curl first; the WebSearch tool has a small per-session budget shared by every agent, so use it only when the curl leads are exhausted, at most 2 searches per work):
+For a work with no abstract in abstracts.json, try (curl first; the WebSearch tool has a small per-session budget shared by every agent, so use it only when the curl leads are exhausted: ${searchLine(b.search)}, and at most 2 per work):
 - Crossref: curl -s "https://api.crossref.org/works/<doi>" (the "abstract" field) — never add an e-mail or mailto parameter;
 - the arXiv abstract page https://arxiv.org/abs/<id>; DataCite for arXiv DOIs (10.48550/arXiv.<id>); the Semantic Scholar graph API (https://api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=abstract,openAccessPdf); the publisher landing page.
 ${leads(m)}
 Forbidden: Sci-Hub, LibGen, paywall circumvention, scraping behind a login.
-- An abstract you found: record it verbatim in ${PAP}/abstracts-chase-${b.bid}.json (a JSON object keyed by work id, plus "<id>__src" holding the source URL; json.dump(..., ensure_ascii=False, indent=1)). The Gate merges it into abstracts.json with scripts/merge_chase.py, so your abstract quotes will verify afterwards.
-- An OPEN PDF that is clearly the work (first page shows the title and ${m.surname || m.name} among the authors): download it with curl -sL -A "Mozilla/5.0" --max-time 90 to ${PAP}/<slug>.pdf, where <slug> is exactly what acquire_fulltexts.py computes from the works.json row (otherwise the next acquisition run will not see the file): python3 -c "import sys,json;sys.path.insert(0,'${REPO}/scripts');import acquire_fulltexts as q;w=[x for x in json.load(open('${SK}/references/sources/publications/works.json'))['works'] if x['id']=='<id>'][0];print(q.slug(w))". Check it starts with %PDF (head -c4) and add "NEW-PDF <id> <url>" to problems. Do not read it here; the next round will.
+- An abstract you found: record it verbatim in ${PAP}/abstracts-chase-${b.bid}.json (a JSON object keyed by work id, plus "<id>__src" holding the source URL; json.dump(..., ensure_ascii=False, indent=1)). Keys are only the work ids of your batch list, exactly as written there (never a DOI, a title or an invented id): scripts/merge_chase.py keeps back a whole file that holds an id missing from works.json / INDEX.md. The Gate merges it into abstracts.json with merge_chase.py, so your abstract quotes will verify afterwards.
+- An OPEN PDF that is clearly the work (first page shows the title and ${authorCheck(m)} among the authors): download it with curl -sL -A "Mozilla/5.0" --max-time 90 to ${PAP}/<slug>.pdf, where <slug> is exactly what acquire_fulltexts.py computes from the works.json row (otherwise the next acquisition run will not see the file): python3 -c "import sys,json;sys.path.insert(0,'${REPO}/scripts');import acquire_fulltexts as q;w=[x for x in json.load(open('${SK}/references/sources/publications/works.json'))['works'] if x['id']=='<id>'][0];print(q.slug(w))". Check it starts with %PDF (head -c4) and add "NEW-PDF <id> <url>" to problems. Do not read it here; the next round will.
 
 Write ${CARDS}/${b.bid}.md: a header line "Abstract-level cards — full text not available; claims rest on the abstract/metadata only", then for each work a compact card "### <id> · <title> (<venue> <year>, <DOI/arXiv>)" with **Read**: abstract | metadata-only, D1 (problem/entry), D2 (key idea), D8 (contribution), each one or two lines citing "abstract" as the location, and **Method links** only where the abstract clearly supports them. For a metadata-only work write one line on what can be inferred from title, venue and coauthors, labelled "inferred from title".
 Also write ${CARDS}/${b.bid}.digest.json with the same object shape as full cards:
@@ -186,7 +227,7 @@ ${cardRules(m)}
 ${RULES}
 Edit no file other than the card files, abstracts-chase-${b.bid}.json and any open PDF you downloaded.${retry ? '\nA previous attempt at this batch died or wrote no cards; files it left may exist. Overwrite the card files.' : ''}
 
-Return the structured status (bid "${b.bid}"; count works with an abstract as partial_read and metadata-only works as unreadable).`
+Return the structured status (bid "${b.bid}"; count works with an abstract as partial_read and metadata-only works as unreadable; searches_used = your WebSearch calls).`
 }
 
 function planPrompt(m, bf) {
@@ -229,6 +270,7 @@ const STATUS = {
     unreadable: { type: 'array', items: { type: 'string' } },
     new_pattern_candidates: { type: 'array', items: { type: 'string' } },
     problems: { type: 'array', items: { type: 'string' } },
+    searches_used: { type: 'number' },
   },
   required: ['bid', 'cards_written', 'full_read', 'partial_read', 'unreadable', 'new_pattern_candidates', 'problems'],
 }
@@ -291,7 +333,7 @@ async function readStage(pl, m) {
     log(`${m.slug}: skipping ${blockedByTxt.length} batch(es) whose text files are missing (${blockedByTxt.join(', ')}); run python3 scripts/acquire_fulltexts.py ${TEAM_REL}/${m.slug} to restore txt/, then rerun with only: {"${m.slug}": ${JSON.stringify(blockedByTxt)}}`)
     todo = todo.filter(b => !noTxt.has(b.bid))
   }
-  if (!a.overwrite && pl.already_carded.length) {
+  if (!OVERWRITE && pl.already_carded.length) {
     const done = new Set(pl.already_carded)
     const skipped = todo.filter(b => done.has(b.bid)).map(b => b.bid)
     if (skipped.length) log(`${m.slug}: ${skipped.length} batch(es) already carded, skipped (overwrite: true redoes them): ${skipped.join(', ')}`)
@@ -301,6 +343,9 @@ async function readStage(pl, m) {
   const byMode = {}
   todo.forEach(b => { byMode[b.mode] = (byMode[b.mode] || 0) + 1 })
   log(`${m.slug}: reading ${todo.length} batch(es) ${JSON.stringify(byMode)}`)
+  const nAbs = byMode.abstract || 0
+  todo = todo.map(b => b.mode === 'abstract' ? { ...b, search: Math.floor(SHARE / nAbs) } : b)
+  if (nAbs) log(`${m.slug}: WebSearch allowance ${Math.floor(SHARE / nAbs)} per abstract batch (${SHARE} for this member; args.search_budget)`)
 
   const run = (b, retry) => A(b.mode === 'abstract' ? absPrompt(m, b, pl.bf, retry) : readPrompt(m, b, pl.bf, retry),
     { label: `read:${m.slug}:${b.bid}${retry ? ':retry' : ''}`, phase: 'Read', schema: STATUS })
@@ -332,6 +377,7 @@ async function gateStage(rd, m) {
     unreadable: done.flatMap(r => r.unreadable),
     new_pattern_candidates: done.flatMap(r => r.new_pattern_candidates),
     reader_problems: done.flatMap(r => r.problems.map(p => `${r.bid}: ${p}`)),
+    searches_used: done.reduce((s, r) => s + (r.searches_used || 0), 0),
     plan_problems: rd.problems || [],
   }
   if (!rd.todo.length) return { ...summary, gate: null }
@@ -346,17 +392,33 @@ async function gateStage(rd, m) {
 
 const results = await pipeline(MEMBERS, planStage, readStage, gateStage)
 const members = results.map((r, i) => r || { slug: MEMBERS[i].slug, error: 'a stage threw; this member was dropped (see the run transcript)' })
-const more = members.filter(r => r.gate && (r.gate.new_pdfs.length || r.gate.new_texts.length || r.gate.reocr.length)).map(r => r.slug)
+const ids = xs => [...new Set((xs || []).flatMap(x => String(x).match(/\b[A-Z]\d{3,}\b/g) || []))]
 const incomplete = members.filter(r => (r.batches_failed && r.batches_failed.length) || (r.batches_skipped_missing_txt && r.batches_skipped_missing_txt.length) || (r.gate && r.gate.batches_incomplete.length)).map(r => r.slug)
+const searches = members.reduce((s, r) => s + (r.searches_used || 0), 0)
+if (searches) log(`WebSearch calls reported by the readers: ${searches} (budget ${BUDGET})`)
+const redo = []
+for (const r of members.filter(x => x.gate)) {
+  const M = `${TEAM_REL}/${r.slug}`
+  const reocr = ids(r.gate.reocr), wrong = ids(r.gate.wrong_text)
+  const again = [...reocr, ...wrong]
+  if (reocr.length) redo.push(`${r.slug}: re-OCR the garbled texts: python3 scripts/acquire_fulltexts.py ${M} --reocr ${reocr.join(',')}`)
+  if (wrong.length) redo.push(`${r.slug}: drop the wrong files (another work): python3 scripts/acquire_fulltexts.py ${M} --drop ${wrong.join(',')} (then look for the right copy with team-chase.js, or leave it to an abstract card)`)
+  if (again.length || r.gate.new_texts.length || r.gate.new_pdfs.length) {
+    redo.push(`${r.slug}: plan the next round: python3 scripts/plan_reading_batches.py ${M} --out-dir ${SCR} --no-abstract${again.length ? ` --reread ${again.join(',')}` : ''} (it prints the round N), then team-read.js with round: N`)
+  }
+}
 return {
   stage: 'T3.5 read',
   date: DATE,
   round: ROUND,
+  search_budget: BUDGET,
+  searches_used: searches,
   members,
   next: [
-    `Commit each member's references/ (cards, INDEX.md, abstracts*.json); PDFs and txt/ are git-ignored.`,
+    `Commit each member's references/ (cards, INDEX.md, abstracts*.json): bash scripts/team_commit.sh ${TEAM_REL}/<slug> "cards(<slug>): round ${ROUND}" (PDFs and txt/ stay out of git).`,
     incomplete.length ? `Incomplete or skipped batches for: ${incomplete.join(', ')}; restore missing texts with acquire_fulltexts.py if listed, then rerun team-read with args.only for those batch ids.` : 'All batches of this round have cards.',
-    more.length ? `New open texts or re-OCR candidates for: ${more.join(', ')}; run python3 scripts/acquire_fulltexts.py ${TEAM_REL}/<slug>, then plan_reading_batches.py ${TEAM_REL}/<slug> --round ${ROUND + 1} --exclude <this round's batch file> and run team-read again.` : 'No new open texts reported.',
+    ...(redo.length ? redo : ['No new open texts, re-OCR or wrong-text items reported.']),
+    `Further rounds: python3 scripts/plan_reading_batches.py ${TEAM_REL} --out-dir ${SCR} --no-abstract plans every member's next round and prints its number; a member with no full-text batch left gets the final round (without --no-abstract).`,
     'When every member is fully carded and verify_card_quotes.py is all exact: team-synthesize.js.',
   ],
 }

@@ -40,7 +40,7 @@
     "book-parts",
     "new-papers"
   ],
-  "batchFiles": {
+  "batch_files": {
     "bo-sample": "$SCRATCH/batches-bo-sample-inc-2026-02.json"
   },
   "since": "2026-01-15",
@@ -48,5 +48,5 @@
     "ada-example": "the open parts of her (fictional) monograph: table of contents, errata, one published review",
     "bo-sample": "two new preprints listed on the homepage"
   },
-  "maxGrowth": 400
+  "max_growth": 400
 }

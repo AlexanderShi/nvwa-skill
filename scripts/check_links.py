@@ -13,18 +13,25 @@ GitHub slug 规则：小写；去掉除 - 和 _ 以外的标点与符号；空�
 前面补 / 后也会再试一次，所以 */private/* 也能命中顶层的 private/）。排除只作用于目录递归，
 直接点名的文件总会检查；--no-default-excludes 取消两条默认排除。
 
+研究团队的脚手架（scripts/new_team.py 刚铺好、T1 还没跑）：团队 README 的成员表按约定链到 <成员>/SKILL.md，
+而成员的 SKILL.md 由 T1 写。这种链接记为 pending，单列一行、不算坏链。条件全部满足才算：目标文件名是 SKILL.md；
+它所在的文件夹存在，并且列在再上一级 team.json 的 members（slug）里；这位成员的 references/research/ 存在但
+还没有任何 .md（T1 一开始就写 01–06 调研笔记，所以 T1 开始后仍缺 SKILL.md 就是坏链）。--strict 把 pending 也算坏链。
+
 用法:
-    python3 check_links.py <文件或目录>... [--exclude GLOB]... [--no-default-excludes]
+    python3 check_links.py <文件或目录>... [--exclude GLOB]... [--no-default-excludes] [--strict]
 
 输出:
     每条坏链一行：<文件>: <链接目标> (missing file|missing anchor)
-    最后一行汇总：✅/❌ N files checked, M broken links；有坏链时退出码为 1，路径不存在为 2。
+    每条 pending 一行：· <文件>: <链接目标> (pending: ...)
+    最后一行汇总：✅/❌ N files checked, M broken links[ · K pending ...]；有坏链时退出码为 1，路径不存在为 2。
 """
 
 from __future__ import annotations
 
 import argparse
 import html
+import json
 import os
 import re
 import sys
@@ -34,6 +41,7 @@ from urllib.parse import unquote
 
 DEFAULT_EXCLUDES = ["*/private/*", "*/cards/*"]
 MD_SUFFIXES = {".md", ".markdown"}
+PENDING = "pending"   # check_file 里 why 以此开头：新铺的团队里还没写的成员 SKILL.md（见文件头）
 
 FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
 ATX_RE = re.compile(r"^ {0,3}(#{1,6})(?:[ \t]+(.*?))?(?:[ \t]+#+)?[ \t]*$")
@@ -105,6 +113,31 @@ class Checker:
     def __init__(self):
         self.anchor_cache: dict[Path, set[str]] = {}
         self.root_cache: dict[Path, Path] = {}
+        self.team_cache: dict[Path, set[str]] = {}
+
+    def team_members(self, team_dir: Path) -> set[str]:
+        """team_dir/team.json 里成员的 slug；没有或读不了时为空集。"""
+        if team_dir not in self.team_cache:
+            slugs: set[str] = set()
+            try:
+                cfg = json.loads((team_dir / "team.json").read_text(encoding="utf-8"))
+                ms = cfg.get("members") if isinstance(cfg, dict) else None
+                slugs = {m["slug"] for m in ms or [] if isinstance(m, dict) and isinstance(m.get("slug"), str)}
+            except (OSError, UnicodeDecodeError, ValueError):
+                pass
+            self.team_cache[team_dir] = slugs
+        return self.team_cache[team_dir]
+
+    def pending_member(self, target: Path) -> str | None:
+        """target 是新铺团队里还没写的成员 SKILL.md（T1 还没开始）时返回成员 slug，否则 None。"""
+        target = target.resolve()
+        member = target.parent
+        if target.name != "SKILL.md" or not member.is_dir():
+            return None
+        research = member / "references" / "research"
+        if not research.is_dir() or any(f.is_file() and f.suffix.lower() in MD_SUFFIXES for f in research.rglob("*")):
+            return None
+        return member.name if member.name in self.team_members(member.parent) else None
 
     def anchors(self, path: Path) -> set[str]:
         key = path.resolve()
@@ -146,7 +179,9 @@ class Checker:
                     cands = dict.fromkeys([unquote(path_part), path_part])
                     resolved = next((base / c.lstrip("/") for c in cands if (base / c.lstrip("/")).exists()), None)
                     if resolved is None:
-                        bad.append((target, "missing file"))
+                        slug = self.pending_member(base / next(iter(cands)).lstrip("/"))
+                        bad.append((target, f"{PENDING}: {slug} has no SKILL.md yet; fresh scaffold, T1 writes it"
+                                    if slug else "missing file"))
                         continue
                 else:
                     resolved = f
@@ -193,18 +228,26 @@ def main():
                     help="目录递归时排除的 fnmatch 模式，可重复")
     ap.add_argument("--no-default-excludes", action="store_true",
                     help="不使用默认排除 " + " ".join(DEFAULT_EXCLUDES))
+    ap.add_argument("--strict", action="store_true",
+                    help="新铺团队里还没写的成员 SKILL.md（pending）也算坏链")
     a = ap.parse_args()
 
     excludes = ([] if a.no_default_excludes else DEFAULT_EXCLUDES) + a.exclude
     files = collect(a.paths, excludes)
     checker = Checker()
-    broken = 0
+    broken = pending = 0
     for f in files:
         for target, why in checker.check_file(f):
-            print(f"{display(f)}: {target} ({why})")
-            broken += 1
+            if why.startswith(PENDING) and not a.strict:
+                print(f"· {display(f)}: {target} ({why})")
+                pending += 1
+            else:
+                print(f"{display(f)}: {target} ({why})")
+                broken += 1
     mark = "❌" if broken else "✅"
-    print(f"{mark} {len(files)} files checked, {broken} broken links")
+    tail = (f" · {pending} pending (member SKILL.md not written yet: T1 writes it; --strict counts these as broken)"
+            if pending else "")
+    print(f"{mark} {len(files)} files checked, {broken} broken links{tail}")
     sys.exit(1 if broken else 0)
 
 
