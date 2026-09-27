@@ -4,12 +4,15 @@ Goal: deepen `michael-powell`, `andrew-conn`, `katya-scheinberg`, `luis-nunes-vi
 
 ## Status (2026-09-27)
 
-**Blocked on network access.** The session that built this plan could not reach `api.openalex.org`, `export.arxiv.org` or `arxiv.org` (egress policy denial). Google Scholar is not usable either: it offers no API and blocks automated access. The publication list therefore comes from OpenAlex, and the full texts come from arXiv.
+**Ready to run.** The environment now allows `api.openalex.org` and `arxiv.org`, and both scripts were tested against the live services. Google Scholar is not usable: it offers no API and blocks automated access. The publication list therefore comes from OpenAlex, and the full texts come from arXiv.
 
-To unblock:
+What the environment needs (claude.ai/code → cloud icon above the message box → gear next to the environment):
 
-1. In the cloud environment settings (session title bar → environment menu → Edit → Network access), allow `api.openalex.org`, `export.arxiv.org` and `arxiv.org`. Optional: `www.damtp.cam.ac.uk` (Powell's technical reports).
-2. Start a **new session** on branch `claude/sharp-ritchie-6wmwie` and say: *"Run the DFO deep reading in product/dfo-team/DEEP-READING.md."*
+1. **Network access**: `api.openalex.org` and `arxiv.org`. `export.arxiv.org` is no longer needed: its API refuses cloud IPs (HTTP 406), so the scripts use arxiv.org's web search instead. Optional: `www.damtp.cam.ac.uk` (Powell's technical reports).
+2. **Environment variables**: `OPENALEX_API_KEY=<key>`. Without a key, OpenAlex allows $0.10 of requests per day per IP, and the shared cloud IP runs out almost at once (HTTP 429).
+3. **Setup script**: `pip install pypdfium2` (PDF text extraction).
+
+Then start a **new session** on the branch that carries this file and say: *"Run the DFO deep reading in product/dfo-team/DEEP-READING.md."*
 
 Papers that are not on arXiv (most of Conn's and Powell's pre-2005 work) will show `no-oa` in each researcher's index. Their PDFs have to come from you: drop them into `<researcher>/references/sources/papers/` (git-ignored) and re-run step 2.
 

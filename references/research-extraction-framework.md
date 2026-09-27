@@ -223,7 +223,7 @@ Agent 3（过程证据）的prompt要额外强调：**找行为而不是找言�
 3. 按 `references/paper-reading-card.md` 分批写论文卡片，追加到 `references/research/07-paper-cards.md`
 4. 按卡片模板第三节的保守更新规则汇总回 SKILL.md
 
-需要网络可达 api.openalex.org、export.arxiv.org、arxiv.org。不在arXiv上的论文需要用户提供PDF。PDF与抽取文本不提交（版权）。
+需要网络可达 api.openalex.org、arxiv.org（export.arxiv.org 的 API 会拒绝云端 IP，脚本已改走 arxiv.org 网页检索，不再需要）。OpenAlex 没有 API key 时每个 IP 每天只有 $0.10 额度，云端共享 IP 很快用完，请设置环境变量 `OPENALEX_API_KEY`。不在arXiv上的论文需要用户提供PDF。PDF与抽取文本不提交（版权）。
 
 ---
 
