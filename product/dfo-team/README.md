@@ -39,12 +39,34 @@ Restart Claude Code so it picks up the new skills.
   each run takes 20 minutes and sometimes crashes. Budget is ~500 runs.
 ```
 
-The roundtable fills a Problem Card (asking at most 2 questions), seats the 2–3 most relevant lenses, runs a short cross-examination on the real disagreements, and ends with a plan: method, solver, settings, a minimal comparison experiment, a switch rule, and the dissenting view.
+Each seated member runs as **its own agent** that reads its own skill file; the main session moderates. You chair the discussion — it pauses at four checkpoints:
+
+| Checkpoint | You see | You can |
+|-----------|---------|---------|
+| 1 · Card and seats | Problem Card, who sits and why | Correct the card, change seats, answer ≤2 questions |
+| 2 · After openings | Each member's position, first experiment, risk; agreements and splits | Answer members' questions, ask anyone, pick the disagreement to argue |
+| 3 · After each round | Both sides' replies and the test that would settle the point | Another round, bring someone in, or move to the plan |
+| 4 · Draft plan | Plan with each member's sign-off or dissent | Approve, change, or reopen a point (never skipped) |
+
+**Controls** (any time):
+
+| Say | Effect |
+|-----|--------|
+| `go` | Accept the default and continue |
+| `@Powell …` / `@all …` | Ask one member, or every seated member |
+| `add Conn` / `drop Vicente` | Change who is seated |
+| `pursue 2` / `round` | Pick the disagreement / run another round |
+| `plan` / `autopilot` | Go to the plan now / run to the draft plan without stopping |
+| `stop` | End the roundtable |
+
+Anything else you type is passed to the seated members as new information. At the end the moderator offers to save the transcript as a markdown file.
+
+Cost: one agent call per member per turn — about 3 per round with default seating. Runtimes without subagents fall back to a single-model simulation, and the moderator says so.
 
 **Other modes:**
 
 ```
-> DFO team, quick: …                        # best-fit 1–2 members only
+> DFO team, quick: …                        # best-fit 1–2 members, straight to plan
 > DFO team, debate Powell vs Audet: …       # two lenses argue one decision
 > Use the Vicente lens on my convergence proof
 > How would Scheinberg handle noise here?   # a single member directly

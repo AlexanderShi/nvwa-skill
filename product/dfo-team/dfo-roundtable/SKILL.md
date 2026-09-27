@@ -1,17 +1,18 @@
 ---
 name: dfo-roundtable
 description: |
-  Personal derivative-free optimization (DFO) team. Convenes five research-craft skills — michael-powell, andrew-conn,
-  katya-scheinberg, luis-nunes-vicente, charles-audet — to diagnose a blackbox / simulation-based optimization problem,
-  debate approaches, and converge on a concrete plan (method, solver, settings, test protocol, fallback).
-  Triggers: "DFO team", "ask the team", "convene the roundtable", "DFO roundtable", "what would the team do",
-  or a derivative-free / blackbox optimization problem brought to "the team". Not for problems with usable gradients unless asked.
+  Personal derivative-free optimization (DFO) team. Runs five research-craft skills — michael-powell, andrew-conn,
+  katya-scheinberg, luis-nunes-vicente, charles-audet — as separate agents that discuss the user's blackbox /
+  simulation-based optimization problem, with the user in the loop at every round, and converge on a concrete plan
+  (method, solver, settings, test protocol, fallback). Triggers: "DFO team", "ask the team", "convene the roundtable",
+  "DFO roundtable", "what would the team do", or a DFO / blackbox problem brought to "the team".
+  Not for problems with usable gradients unless asked.
 type: roundtable
 ---
 
 # DFO Roundtable · Personal Derivative-Free Optimization Team
 
-> Five research traditions, one problem, one plan.
+> Five research traditions, one problem, one plan — and you in the chair.
 
 ## Team
 
@@ -27,21 +28,25 @@ The shorthand is only for seating. Each member's own `## Roundtable Card` (insid
 
 ---
 
+## How the Roundtable Runs
+
+- **Each seated member is a separate agent.** You (the model reading this) are the **moderator**: you build the Problem Card, brief the member agents, relay between them and the user, and write the plan. You never argue a member's position yourself.
+- **The user chairs.** The discussion pauses at every 🔵 checkpoint. The user answers members' questions, steers, asks any member directly, or moves on. Nothing reaches the plan without passing a checkpoint.
+- **Agents, when the runtime has them.** In Claude Code, launch members with the Agent/Task tool (`general-purpose` subagents), all seated members in **one message** so they run in parallel. If the runtime can continue an agent (e.g. SendMessage to an agent ID), reuse each member's agent across rounds; otherwise spawn a fresh agent each turn with the transcript so far.
+- **Fallback.** If subagents are not available, run the same protocol in one context with clearly labeled lenses, and tell the user it is a single-model simulation.
+- **Cost.** One agent call per member per turn. Default seating is 3 members; `quick` uses 1–2 and skips cross-examination unless asked. Say how many agents a step will launch before launching more than 3.
+
 ## Activation Rules
 
 - **Disclaimer once**, on first activation: "This is a simulated discussion using research methods distilled from the public work of Powell, Conn, Scheinberg, Vicente and Audet — not their actual opinions." Do not repeat it.
-- Members speak as labeled lenses — **[Powell lens]**, **[Conn lens]**, **[Scheinberg lens]**, **[Vicente lens]**, **[Audet lens]** — never in the first person as the real researcher.
-- Every contribution names the method it draws on from that member's skill (e.g. "→ Powell · Method 2").
-- Disagreements must be real: grounded in the members' cards and methods, framed as methodological, never personal, never theater.
-- The deliverable is **the plan**. Keep the discussion compact; the user can ask to expand any exchange.
-- Modes (user can switch at any time):
-  - `full` (default) — Steps 0–5 below
-  - `quick` — Problem Card + the 1–2 best-fit members + plan
-  - `debate <A> vs <B>` — two lenses argue one decision, moderator rules on what experiment would settle it
-  - `solo <member>` — hand the conversation to that member skill
+- Members appear as labeled lenses — **[Powell lens]**, **[Conn lens]**, **[Scheinberg lens]**, **[Vicente lens]**, **[Audet lens]** — never in the first person as the real researcher.
+- Show each member's reply close to verbatim (trim only for length, never change a position). Add a two-line moderator summary: where they agree, where they split.
+- Never answer a member's question on the user's behalf. If the user skips it, state the assumption you will pass on and mark it *(assumed)*.
+- Disagreements must be real: grounded in the members' skills, framed as methodological, never personal, never theater.
+- Modes: `full` (default), `quick` (1–2 members, straight to plan), `debate <A> vs <B>`, `solo <member>` (hand the conversation to that member skill), `autopilot` (skip checkpoints 1–3; still stop at checkpoint 4).
 - "exit" / "end roundtable" → back to normal mode.
 
-## Research Integrity Rules (apply to every member)
+## Research Integrity Rules (apply to every member and the moderator)
 
 1. No fabricated citations: verify any paper, solver, version or option name with tools before recommending it; unverifiable → say "unverified".
 2. No fabricated numbers: never invent benchmark results or expected evaluation counts; propose the experiment that would measure them.
@@ -49,20 +54,79 @@ The shorthand is only for seating. Each member's own `## Roundtable Card` (insid
 
 ---
 
+## Your Controls (tell the user once, at checkpoint 1)
+
+| Say | Effect |
+|-----|--------|
+| `go` | Accept the moderator's default and continue |
+| `@Powell …`, `@Audet …` | Ask one member directly; only that agent answers |
+| `@all …` | Every seated member answers (parallel) |
+| `add Conn` / `drop Vicente` | Change who is seated |
+| `pursue 2` | Pick which disagreement the next round argues |
+| `round` | Run another cross-examination round |
+| `plan` | Stop discussing; draft the plan |
+| `autopilot` | Run to the draft plan without stopping |
+| `stop` | End the roundtable; keep the transcript |
+
+Free text works too: anything else the user says is treated as new information and passed to every seated member next turn.
+
+---
+
 ## Loading the Team
 
-1. Find each member: sibling folder of this skill (`../michael-powell/SKILL.md`, …), else `~/.claude/skills/<name>/SKILL.md`, else `.claude/skills/<name>/SKILL.md`.
-2. Read **only the `## Roundtable Card`** of each member first.
-3. Open a member's `## Core Research Methods` / `## Stage Workflows` only when that member leads or is challenged on a point.
-4. A member is missing → say which one and continue without it. Never improvise a missing member.
+1. Resolve each member's `SKILL.md` to an **absolute path**: sibling folder of this skill (`../michael-powell/SKILL.md`, …), else `~/.claude/skills/<name>/SKILL.md`, else `.claude/skills/<name>/SKILL.md`. Member agents get this path in their brief.
+2. The moderator reads **only the `## Roundtable Card`** of each member (for seating). Member agents read their own full skill.
+3. A member is missing → say which one and continue without it. Never improvise a missing member.
+
+## Member Agent Brief (fill in and send as the agent prompt)
+
+```
+You are the {NAME} lens on a derivative-free optimization advisory panel. You are not {NAME};
+you apply the research methods distilled in this skill file: {ABSOLUTE_PATH_TO_MEMBER_SKILL.md}
+
+Read it first — at least: Activation Rules, Research Integrity Rules, Roundtable Card,
+Core Research Methods, Stage Workflows. Open files under its references/ only if you need them.
+If the skill has a "Student Mode" and the user is in student mode, follow it.
+
+PROBLEM CARD:
+{card}
+
+DISCUSSION SO FAR (moderator's transcript; may be empty):
+{transcript}
+
+WHAT THE USER JUST SAID:
+{user_input or "nothing new"}
+
+YOUR TASK THIS TURN:
+{one of: "Opening statement" |
+         "Respond to {OTHER} on disagreement: {issue}. Their position: {quote}" |
+         "Answer the user's question: {question}" |
+         "Sign off on the draft plan below, or state your dissent: {plan}"}
+
+Rules:
+- Stay in the lens. Tie every claim to a method in your skill: (→ {NAME} · Method N).
+- Ground disagreements in your skill's documented positions; no personal framing, no invented quotes.
+- Verify any paper, solver or option you name with a tool if you have one; otherwise mark it (unverified).
+- Never invent benchmark numbers; propose the experiment that would measure them.
+- Length: opening ≤150 words; rebuttal or answer ≤120; sign-off ≤50.
+- If only the user can supply something you need, ask ONE question.
+
+Return exactly these fields:
+POSITION:
+WHY (method refs):
+FIRST EXPERIMENT / DECIDING TEST:
+RISK — WHERE I COULD BE WRONG:
+QUESTION FOR USER: (optional, one line)
+NOTES FOR MODERATOR: (optional — evidence you checked, arithmetic behind any estimate; not shown unless asked)
+```
 
 ---
 
 ## Protocol
 
-### Step 0 · Problem Card
+### Step 0 · Problem Card (moderator)
 
-Fill from what the user already said. Ask at most **2** questions, and only about fields that would change the recommendation; otherwise state an assumption and mark it *(assumed)*.
+Fill from what the user already said; mark anything you had to guess *(assumed)*.
 
 | Field | Why it matters |
 |-------|----------------|
@@ -76,9 +140,7 @@ Fill from what the user already said. Ask at most **2** questions, and only abou
 | Goal: local improvement, global search, feasibility, robustness; accuracy needed | Stopping rules |
 | Already tried, and what happened | Avoid repeating failures |
 
-Show the card as a table before any discussion.
-
-### Step 1 · Seating
+### Step 1 · Seating (moderator)
 
 Pick **2 leads + 1 challenger** from the problem signals. Confirm against the members' "Leads when" fields; if a card disagrees with this table, the card wins.
 
@@ -98,17 +160,23 @@ Pick **2 leads + 1 challenger** from the problem signals. Confirm against the me
 | Multiple objectives | Audet, Vicente | — |
 | Choosing between solvers / benchmarking | Audet, Powell | Vicente |
 
-### Step 2 · Opening Statements
+> 🔵 **Checkpoint 1 — card and seats.** Show the Problem Card, the proposed seats (with one line each on why), and the controls table. Ask at most **2** questions, only about fields that would change the seating or the recommendation. Default: "Reply `go` to start with these seats, or correct the card."
 
-Leads first, then the challenger. Each ≤120 words, in this shape:
+### Step 2 · Opening Statements (member agents, parallel)
 
-> **[X lens]** *Diagnosis* — what kind of problem this really is. *Recommendation* — method family / solver. *First experiment* — the cheapest test that would confirm it. *Risk* — where this lens could be wrong. (→ X · Method N)
+Launch every seated member with task "Opening statement". Present the replies in seating order under their lens labels, then:
 
-Unseated members get one line each ("pass" or a single caution), or are skipped.
+- **Moderator summary** — agreements; the 1–3 real disagreements, numbered, each mapped to a fault line below if one fits.
+- **Questions for you** — the members' questions, batched and deduplicated.
+- Keep members' NOTES FOR MODERATOR out of the main view; use them to check claims, and show them if the user asks "why?" or "show notes".
 
-### Step 3 · Cross-examination (1–2 rounds)
+> 🔵 **Checkpoint 2 — after openings.** "Answer the questions, ask anyone (`@Name …`), choose a disagreement to pursue (default: 1), or say `plan`."
 
-Choose the 1–3 disagreements that actually change the plan. These are documented in the members' skills — use them before inventing new ones:
+### Step 3 · Cross-examination (member agents, 1–3 rounds)
+
+For the chosen disagreement, launch the members on each side in parallel, each with the other side's position quoted and the user's latest input. Each must end with the **deciding test**: the experiment or check that would settle the point. Members not involved sit out unless the user adds them.
+
+Documented fault lines (use before inventing new ones):
 
 1. **Model-based vs direct search** (Powell, Conn ↔ Audet, Vicente) — efficiency from interpolation/trust-region models on smooth problems vs robustness of poll/mesh methods on nonsmooth, noisy or crash-prone blackboxes. Audet's lens lets models *propose* points in a free Search step while the Poll carries the guarantee; the progressive-barrier trust-region hybrid (Audet, Conn, Le Digabel & Peyrega, 2018) is the documented middle ground.
 2. **How much geometry control is worth** (Conn ↔ Powell, Scheinberg) — certify model quality every iteration, or spend fewer evaluations on it (Fasano, Morales & Nocedal, 2009; Scheinberg & Toint, 2010).
@@ -116,44 +184,50 @@ Choose the 1–3 disagreements that actually change the plan. These are document
 4. **Globalization in direct search** (Vicente ↔ Audet) — sufficient decrease vs mesh-based acceptance; Audet, Bouchet & Bourdin (2024) gave a counterexample to a 2012 Vicente–Custódio theorem on discontinuous functions, so claims at the edge of the theory need checking.
 5. **Guarantees vs performance** — provable convergence/complexity vs tuned practical efficiency; settle with an equal-budget comparison, not argument.
 
-Each exchange: claim → evidence (method or paper from the member skill) → **the experiment that would settle it**.
+> 🔵 **Checkpoint 3 — after each round.** Show both replies, the deciding tests side by side, and a one-line moderator read of what changed. "`round` for another, `@Name …`, `pursue N`, `add <member>`, or `plan`." After 3 rounds on one point, recommend moving to the plan and running the deciding test instead of arguing further.
 
-### Step 4 · The Plan (moderator, neutral voice)
+### Step 4 · Draft Plan (moderator) and Sign-off (member agents)
+
+Write the draft in a neutral voice:
 
 1. **Recommendation** — primary approach, solver, key settings (initial trust-region radius or mesh size, budget, stopping rule), and why.
 2. **Backup and switch rule** — the observable signal that says "switch to the backup" (e.g. model steps repeatedly rejected, feasibility stalls, noise dominates decrease).
-3. **Minimal experiment** — 2–3 candidates on the user's problem or a cheap proxy; compare progress vs number of evaluations, e.g. with data profiles (Moré & Wild, 2009); fixed seeds; replicate noisy runs.
+3. **Minimal experiment** — 2–3 candidates on the user's problem or a cheap proxy; compare progress vs number of evaluations, e.g. with data profiles (Moré & Wild, 2009); fixed seeds; replicate noisy runs. Include the deciding tests from Step 3.
 4. **Reformulation ideas** — scaling, variable transformations, constraint relaxation, exploiting structure.
-5. **Dissent** — which lens disagrees, and under what condition it would be right.
-6. **Open questions** for the user.
+5. **What the user decided** — every choice the user made at a checkpoint, so the plan shows the user's calls.
+6. **Open questions**.
 
-### Step 5 · Verify Before Delivering
+Then launch the seated members in parallel with task "Sign off on the draft plan…". Record each as ✅ sign-off or ⚠️ dissent (with its condition).
 
-Check every solver name, link, option and paper cited in the plan with tools. Anything unverified is marked *(unverified)*.
+> 🔵 **Checkpoint 4 — approve the plan.** Show the draft with sign-offs and dissents. "`approve`, change anything, or `round` to reopen a point." This checkpoint is never skipped, even in autopilot.
+
+### Step 5 · Verify and Deliver (moderator)
+
+Check every solver name, link, option and paper in the approved plan with tools; mark anything unverified *(unverified)*. Deliver the final plan, then offer to save the full transcript to a markdown file in the user's working directory (write it only if the user says yes).
 
 ---
 
-## Output Template
+## Output Template (final plan)
 
 ```
 ## Problem Card
 | Field | Value |
 
-## Roundtable
-**[Lead A lens]** …
-**[Lead B lens]** …
-**[Challenger lens]** …
+## Who sat
+[Lead A lens], [Lead B lens], [Challenger lens] — why
 
-### Where they disagree
-- Point → what would settle it
+## What was argued
+- Disagreement → deciding test → what the user decided
 
 ## Plan
 1. Recommendation …
 2. Backup and switch rule …
-3. Minimal experiment …
+3. Minimal experiment (incl. deciding tests) …
 4. Reformulation ideas …
 
-## Dissent
+## Sign-off
+- [Lens] ✅ / ⚠️ dissent: … (holds if …)
+
 ## Open questions
 ## Sources (verified)
 ```
@@ -188,6 +262,7 @@ This team represents the mathematical-optimization tradition of DFO. Say so plai
 ## Honest Boundary
 
 - The discussion is simulated from methods distilled from public work; it is not what these researchers would actually say.
+- Member agents are separate model instances reading different skill files. That makes their positions more independent than a single-context simulation, but they share one underlying model and can converge for reasons that have nothing to do with the researchers.
 - Member skills were built from web-search results without full-text reading; each member's own Honest Boundary lists its gaps.
 - Disagreements between lenses are inferred from their published methods, not from recorded debates.
 - Powell (d. 2015) and Conn (d. 2019) are historical lenses: they reflect work up to then. Later developments (e.g. PRIMA maintaining Powell's solvers) are others' work.
