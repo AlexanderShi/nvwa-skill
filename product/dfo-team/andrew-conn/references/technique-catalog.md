@@ -4,7 +4,7 @@
 >
 > Date: 2026-09-27. Page numbers are those of the text versions read (often FUNDP/Namur or IBM technical reports and preprints), so they may differ from the published papers. Eight early papers were read from page images (S018, S021, S030, S046, S048, S108, S130, S164); their page references come from the images.
 >
-> Attribution: nearly every device here is joint work (with Gould and Toint for 1984–2003, with Scheinberg, Toint and Vicente for DFO, with IBM engineers for circuits, with Coleman, Calamai, Li and Bartels at Waterloo). A technique listed here is a *device the papers use*, not a claim that Conn invented it; where a device is imported (Dennis–Moré bounded deterioration, Sauer–Xu error bounds, MADS's progressive barrier) the card says from where. Papers where Conn is a middle author or his role cannot be identified (S003, S032/S123, S057, S060) are marked *(unweighted)* and only illustrate a device.
+> Attribution: nearly every device here is joint work (with Gould and Toint for 1984–2003, with Scheinberg, Toint and Vicente for DFO, with IBM engineers for circuits, with Coleman, Calamai, Li and Bartels at Waterloo). A technique listed here is a *device the papers use*, not a claim that Conn invented it; where a device is imported (Dennis–Moré bounded deterioration, Sauer–Xu error bounds, MADS's progressive barrier) the card says from where. Papers where Conn is a middle author or his role cannot be identified (S003, S032/S123, S057, S060, S136) are marked *(unweighted)* and only illustrate a device.
 >
 > Reading lesson (general): before reusing a number from any paper, check that its tables, captions and text agree, and that the experiment's parameters satisfy the theorem being cited.
 
@@ -56,11 +56,13 @@ How the techniques map onto `SKILL.md`: proof devices serve Methods 1 and 3, Heu
 | A13 | **Failure recovery** | Give the simulator a failure return code; on failure skip the iteration, cut the radius and re-solve; count failed evaluations in the budget (Heuristic H13). | [S020 pp. 7–8; S027 p. 5; S026 p. 8] |
 | A14 | **A family with the rival methods as its extremes** | Build a parametrised family whose endpoints are the two classical rival methods and tune the parameter instead of choosing a side. | [S082 pp. 3, 5–6; S003 pp. 3, 9–10 (unweighted)] |
 | A15 | **Import a device, then retune it** | When moving a device from another school into your method, re-derive its parameters for the host's evaluations per iteration. | [S075 pp. 13, 20] |
-| A16 | **Ratio test to stabilise a non-NLP method** | Add a trust-region radius and ratio test to an oscillating method (a cutting-plane dual). | [S060 pp. 18–19 (unweighted)] |
-| A17 | **Fix discrete decisions from a cheap continuous solve, then repair** | Solve a cheap continuous relaxation, fix the discrete decisions it suggests, then repair or prove globally. | [S099 pp. 19–20; S060 pp. 19–20 (unweighted)] |
+| A17 | **Fix discrete decisions from a cheap continuous solve, then repair** | Solve a cheap continuous relaxation, fix the discrete decisions it suggests, then repair or prove globally. | [S099 pp. 19–20] (S060 pp. 19–20 is an unweighted illustration) |
 | A18 | **Noise level and physical units as algorithm parameters** | Set the initial radius, feasibility and bound tolerances and the stopping step in the application's units (smallest meaningful move), and compare the predicted reduction with the noise level. | [S019 p. 12; S036 p. 5; S031 pp. 57–58; S025 pp. 17–19] |
 | A19 | **Warm starts from structure** | Start multipliers at 1/n, reuse the previous inner solution, use a linear surrogate of the solution map, or take an alternative first step after a parameter change. | [S027 p. 4; S074 pp. 3, 7; S066 pp. 12–13; S082 pp. 5–6] |
 | A20 | **Treat the given structure as a design variable** | Do not accept the user's partially separable decomposition as fixed: merge elements when that lowers the linear-algebra cost. | [S085 pp. 2, 6–7] |
+| A21 | **Per-component models on one shared sample set** | For a sum of squares, interpolate every residual on the same 2n+1 points with minimum-Frobenius updates (extra models cost storage, not evaluations); switch the model Hessian from Gauss–Newton to Gauss–Newton + κ‖m‖I to the full model by gradient and residual size; take a safety step without evaluation when the step is short; shrink the radius only when the failure cannot be blamed on geometry (Heuristic H2). | [S025 pp. 2, 5–9, 16–17; S065 pp. 1–2] |
+
+Unweighted illustration (not a Conn device on this evidence): a trust-region radius and ratio test added to stabilise an oscillating cutting-plane dual [S060 pp. 18–19] (formerly A16; Conn's role in S060 is not identifiable).
 
 ## 3. Experiment protocols
 

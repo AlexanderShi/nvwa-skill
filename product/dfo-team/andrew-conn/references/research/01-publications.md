@@ -98,7 +98,8 @@ Source list: `../sources/publications/scholar.md` (Google Scholar profile harves
 |---|---|---|
 | Google Scholar rows | 237 (+2 DBLP-only) | 56 duplicate rows set aside (`dup_of`) |
 | Distinct works | 155 | kinds: journal 66, conference 25, report 22, patent 13, chapter 10, other 9, book 5, thesis 2, talk 2, preprint 1 |
-| Skipped, excluded from every denominator | 45 | 17 rows that are not Conn publications (referee and acknowledgement lists, progress-report sections, a misattributed row, an organisers' message), 11 unresolved title-page fragments, 13 patents, 2 talks (S148, S187), S153 (authorship doubtful), S156 (a student's thesis) |
+| Full-text index rows | 183 | the 155 distinct works plus 28 rows that are not Conn works: 11 unresolved title-page fragments and 17 referee or acknowledgement lists, progress-report sections, misattributed rows or an organisers' message (`../sources/papers/INDEX.md`) |
+| Skipped index rows, excluded from every denominator | 45 | the 28 non-work rows, plus 17 of the 155 works: 13 patents, 2 talks (S148, S187), S153 (authorship doubtful), S156 (a student's thesis). 155 − 17 = 183 − 45 = 138 in scope |
 | In-scope works / card entries | 138 / 140 | S236 and S049 each have a superseded second card |
 | Distinct papers | 133 | after merging S032 = S123, S093 = S108, S111 = S026, S126 ~ S054, S102 ~ S120 |
 | Read in full text | 71 | 53 in full, 18 in part; 8 scanned papers read from page images (S018, S021, S030, S046, S048, S108, S130, S164) |
@@ -108,7 +109,7 @@ Source list: `../sources/publications/scholar.md` (Google Scholar profile harves
 
 Full-text reads by period (full or partial / carded): 1972–1979 1/11; 1980–1989 12/26; 1990–1995 17/27; 1996–2000 22/32; 2001–2005 2/7; 2006–2010 6/11; 2011–2015 4/15; 2016–2023 7/9. The CGT, LANCELOT and early DFO years (1985–2000) are read almost completely; the 1970s penalty and minimax papers, the three books and the 2006–2015 energy work are known mostly from abstracts (`08-deep-reading-synthesis.md` §1, §11).
 
-Weighting: IBM team papers where Conn is a middle author (S032/S123, S057) and papers where his role cannot be identified (S003, S060) are carded but carry no weight as evidence of his personal practice.
+Weighting: IBM team papers where Conn is a middle author (S032/S123, S057) and papers where his role cannot be identified (S003, S060, and the 16-author grid white paper S136) are carded but carry no weight as evidence of his personal practice.
 
 Works the first pass did not know about and that matter for the skill: Conn's single-author essay *My Experiences as an Industrial Research Mathematician* (SIAG/OPT Views-and-News 18(2), 2007) [S236]; the first JiffyTune paper (ICCAD 1996) [S036]; the 1989 LANCELOT design statement [S046]; the LANCELOT–MINOS comparison and its complete-results report [S102; S120]; the 1994 survey with its closing rule on publishing practical algorithms [S061]; the 1996 survey with its critique of papers without numbers [S080]; and the posthumous co-authored papers of 2020–2023 [S032; S135; S099; S141].
 

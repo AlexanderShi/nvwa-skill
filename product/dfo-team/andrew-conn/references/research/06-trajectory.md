@@ -14,7 +14,7 @@ Research date: 2026-09-27. Biographical facts come from the SIAM News obituary (
 | 1971 | Ph.D., Dept. of Applied Analysis and Computer Science, University of Waterloo. Thesis title reported by one snippet as "A gradient type method of locating constrained minima" (⚠️ unconfirmed; advisor not found) | SIAM & Waterloo obituaries |
 | 1971–72 | Postdoctoral fellowship, Hebrew University of Jerusalem | Waterloo obituary |
 | 1968–1971 | *(full texts)* At Waterloo from 1968 as a doctoral student; later two sabbaticals in France | [S236 p. 1] |
-| 1971 (thesis) | *(full texts)* Thesis title in the Scholar record: "A gradient type method of locating constrained minima" (metadata only; advisor still unknown) | [S134 metadata] |
+| 1971 (thesis) | *(full texts)* Thesis "A gradient type method of locating constrained minima" (University of Waterloo, 1971), with T. Pietrzykowski named as "Conn's PhD advisor" by his coauthors' posthumous paper (secondary, not Conn's own words); the title also appears in the Scholar record. ✗ Corrects "advisor not found" in the row above. | [S141 pp. 3, 13; S134 metadata] |
 | 1972–1990 | Faculty, Dept. of Combinatorics & Optimization and Dept. of Computer Science, Waterloo. 10 PhD students | SIAM & Waterloo obituaries |
 | 1973 | Nondifferentiable penalty function paper, SIAM J. Numer. Anal. | DOI 10.1137/0710063 |
 | 1975–1989 | *(full texts)* Direct minimax and ℓ₁ fitting (with Bartels; the numerical-linear-algebra emphasis is credited to him); exact-penalty programme with Coleman (1982 global and asymptotic analysis, 1984 quasi-Newton); minimax with Y. Li (1988–1990) | [S233 pp. 1, 9; S018; S030; S021; S130; S164; S108] |
@@ -33,7 +33,7 @@ Research date: 2026-09-27. Biographical facts come from the SIAM News obituary (
 | 2000 | *Trust-Region Methods* (first book in the MPS-SIAM Series on Optimization) | DOI 10.1137/1.9780898719857; SIAM obituary |
 | ~2001 | DFO code released on COIN-OR (date as cited by secondary sources) | https://projects.coin-or.org/Dfo |
 | 2006 | Joins technical board of NTNU Center for Integrated Operations (Statoil collaboration). **Pivot 3:** energy applications | IBM Research group page (secondary) |
-| 2004–2008 | *(full texts)* IBM–CMU MINLP project, initiated and chosen by Conn in answer to a management call; BONMIN released in little more than a year; he calls his own contribution minimal | [S236 pp. 4–5; S003 pp. 1–2 (role not identifiable)] |
+| Mid-2000s–2008 (start year not dated in the sources) | *(full texts)* IBM–CMU MINLP project, initiated and chosen by Conn in answer to a management call; BONMIN released in little more than a year; he calls his own contribution minimal | [S236 pp. 4–5; S003 pp. 1–2 (role not identifiable)] |
 | 2006–2015 | *(full texts)* Petroleum work (seismic matching, history matching) as IBM first-of-a-kind projects, entered once circuit tuning was routine; maintenance scheduling posed as simulation-based DFO | [S236 pp. 5–7; S098, S161, S171, S100, S076, S142, S101 abstract] |
 | 2008–2010 | CSV geometry papers (2008 ×2), general convergence (2009), book *Introduction to DFO* (2009), least-squares DFO (2010) | records |
 | 2012–2013 | Bilevel/robust DFO (Conn & Vicente 2012). **Pivot 4:** hybridizing with MADS (Conn & Le Digabel 2013) | records |
@@ -56,7 +56,7 @@ Research date: 2026-09-27. Biographical facts come from the SIAM News obituary (
 | *(full texts)* same pivot | Stated: "the applications presented to the authors", where f is very expensive and derivatives are missing because f is a measurement or the output of a simulation without available source [S009 p. 3]; geophysical and helicopter-rotor examples [S019 pp. 2–3]. The 1994 survey already names very expensive evaluations as the case for small-scale methods [S061 p. 3]. |
 | Circuit tuning (1990s) | *(full texts)* First person: an engineer's minimax question, then an invitation to an IBM-wide circuit-tuning meeting [S236 p. 3]. |
 | Circuit tuning → petroleum and other areas (mid-2000s) | *(full texts)* First person: once circuit tuning had become an accepted daily tool he wanted to make a splash in a new area, through low-stake first-of-a-kind projects [S236 pp. 5–6]. |
-| Continuous → mixed-integer (2004) | *(full texts)* First person: a management call for IBM–CMU projects, answered with the structural change coming to circuit tuning (discrete threshold-voltage choices) [S236 p. 4]. |
+| Continuous → mixed-integer (mid-2000s) | *(full texts)* First person: a management call for IBM–CMU projects, answered with the structural change coming to circuit tuning (discrete threshold-voltage choices) [S236 p. 4]. |
 | Pure model-based → hybrid with direct search (2011–2018) | **Inference**: constrained, nonsmooth engineering blackboxes, and the Montréal collaboration. The 2018 results are "competitive" with NOMAD rather than dominant. |
 
 ## Entry/exit timing (taste signal)
@@ -89,7 +89,7 @@ From `08-deep-reading-synthesis.md` §8.1: carded works per period, with full/pa
 
 ## What stayed constant (full texts)
 
-- The trust region as the default globalisation device: bounds (1988) [S008], convex sets [S031], element radii [S047], DFO [S013; S012], least squares [S025], a cutting-plane dual [S060 pp. 18–19], the progressive barrier [S075].
+- The trust region as the default globalisation device: bounds (1988) [S008], convex sets [S031], element radii [S047], DFO [S013; S012], least squares [S025], a cutting-plane dual [S060 pp. 18–19] (unweighted illustration: Conn's role not identifiable), the progressive barrier [S075].
 - Penalty functions from the thesis to the posthumous papers: S134 → S024 → S018/S030 → S005 (augmented Lagrangian) → S007 (Lagrangian barrier) → S091 (ℓ₁ and augmented Lagrangian inside MADS, abstract) → S135 (abstract) → S141 [S141 pp. 4, 13].
 - Working on the structure rather than around it: kinks [S233], partial separability [S046; S149], slacks [S089], residuals [S025], nesting [S066].
 - Shared problem sets and evaluation counts: 1988 [S011 p. 22] to 2018 [S075 pp. 17–23].
@@ -111,5 +111,5 @@ From `08-deep-reading-synthesis.md` §8.1: carded works per period, with full/pa
 | Maintenance scheduling for several dependent facilities [S236 pp. 6–7] | S101 (2010) treats one installation (abstract); the generalisation is not in the cards |
 | Whether penalty functions help discrete or global optimization (1981) [S141 p. 4] | S141 (2023), by his coauthors |
 
-The shape of 1992–2000 is explained by the self-audit loop that SKILL.md promotes to Method 7: most of those papers repair or extend LANCELOT after its own testing papers named the weak points.
+Much of the shape of 1992–2000 is explained by the self-audit loop that SKILL.md promotes to Method 7: a large part of the CGT group's output in those years repairs or extends LANCELOT after its own testing papers named the weak points (the table above gives the proportions; circuit and DFO papers start in the same years).
 
