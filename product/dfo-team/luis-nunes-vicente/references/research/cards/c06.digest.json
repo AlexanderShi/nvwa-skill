@@ -1,0 +1,99 @@
+[
+ {
+  "id": "S017",
+  "year": "2024",
+  "title": "The stochastic multi-gradient algorithm for multi-objective optimization and its application to supervised machine learning",
+  "read_level": "full",
+  "contribution": "Shows that the stochastic multi-gradient direction (a min-norm convex combination of sampled gradients) is biased even when the individual gradients are unbiased. Under a bias bound proportional to the step size it proves SG-like rates for a weighted gap: O(1/k) under strong convexity and O(1/sqrt(k)) under convexity. It wraps SMG in a list-based Pareto-front algorithm (PF-SMG), tested on 13 noisy DMS problems and on fairness in logistic classification. Read from arXiv v3 (Feb 2021).",
+  "problem_entry": "A gap where two mature methods meet: SG is well understood and deterministic multi-gradient descent is well understood, but 'little is known yet about stochastic multi-gradient descent'. The predecessor [43] missed the bias property and needed 'strong and unnatural assumptions', and it had no Pareto-front version (p. 5).",
+  "key_idea": "Feed sampled gradients into the same dual QP as the deterministic multi-gradient method and step as in projected SG (Algorithm 1, p. 8). The QP acts as a nonlinear map, so the output is biased (p. 9). Tolerate a bias of order alpha_k, enforced by growing batch sizes (pp. 6, 17). Build the front by list updates: perturb at the largest holes, run SMG several times, drop dominated points (Algorithm 2, pp. 18-19).",
+  "assumptions": "Lipschitz gradients (5.1). Unbiased individual gradients, a first-moment error bound proportional to alpha_k, and a variance bound (5.2). Bounded X with diameter Theta (5.3). A globally Lipschitz QP solution map, admitted to be only locally justified (5.4, p. 12). Strong convexity (5.5) or convexity (5.7). The stronger 5.6 (lambda_k 'identifies well' lambda*) is needed for the rate against the limit (pp. 10-16). Random variables independent across objectives (p. 5). The synthetic experiments violate unbiasedness, as stated on p. 22.",
+  "proof_devices": [
+   "classical SG distance recursion E||x_{k+1}-x*||^2 with a nonexpansive projection (Nemirovski et al. template) (p. 14)",
+   "null-term insertion splitting the cross term into ideal term + multi-gradient bias + weight perturbation (eq. (22), p. 14)",
+   "bias bounded by alpha_k L_gradS via Jensen and Assumption 5.2(b); multiplied by the domain diameter Theta, it becomes order alpha_k^2 (pp. 11-12, 14)",
+   "weight perturbation bounded via the Lipschitz QP solution map (constant beta) and linearity of grad_x S in lambda: alpha_k beta L_gradS M_S (p. 13)",
+   "weighted telescoping with alpha_k = 2/(c(k+1)) and weights s, giving a gap against averaged weights lambda_bar_k = sum s lambda_s / sum s; sign caveat stated (pp. 13-15)",
+   "extra assumption 5.6 giving the contraction (1 - 2 alpha_k c) and the induction of [38, Eqs. (2.9)-(2.10)] for E||x_k - x*||^2 = O(1/k) (pp. 15-16)",
+   "convex case: alpha_k = alpha_bar/sqrt(k) with Theta^2 telescoping and a simple-average lambda_bar_k (Appendix A, pp. 26-27)",
+   "batch-size realization of the bias bound: Var of batch mean <= sigma^2/b and E||X|| <= sigma sqrt(n) for Gaussian X (p. 17)"
+  ],
+  "experiments": "Monte Carlo bias exhibit (n = 4, m = 2, N = 3000, 10^4 batches per batch size; pp. 9-10). Fairness on 4 LIBSVM sets split by a binary feature, with per-group logistic losses (pp. 19-22). 13 DMS-collection problems with uniform noise on the variables (p. 22). Same 30 starts; new points per iteration equalized (PF-SMG p = 2, r = 5 vs PF-MG p = 1, r = 10); the run with average Gamma out of 10 is reported. Purity, Gamma and Delta shown as profiles and in Table 4. Losses are reported: lower purity, e.g. FF1 0.630 vs 0.982. Costs are counted in iterations and CPU only. The only baseline is the authors' own deterministic PF-MG. The PF-SMG batch size is not stated, and there is no code statement (pp. 18-25).",
+  "positioning": "Extends Robbins-Monro SG and the Fliege-Svaiter multi-gradient method, with the deterministic rates of Fliege-Vaz-Vicente [25]. Direct critique of predecessor [43], including a footnote comparing assumptions. NSGA-II/AMOSA are criticized for having no theory and being slow, and a priori scalarization for three drawbacks. Self-citations are DMS [13] (method, list update, test set, Delta metric), [25] and the fairness report [36], 3 of 52 references (pp. 2-5, 15, 18-19, 22, 28-30).",
+  "writing": "Survey-style introduction, then a modest contribution sentence ('providing an understanding of the behavior and basic properties'). A separate phenomenon section (intuition figure + Monte Carlo bias plot) comes before the theory. Each theorem is followed by an interpretation with explicit caveats ('Rigorously speaking … not even guaranteed to be positive'). Minor typos survive in v3 (pp. 4-6, 9-10, 15, 24).",
+  "limits_future": "Stated limits: no stopping criterion, a stronger assumption for the rate against lambda*, possible negative gap, slower weight averaging in the convex case, lower purity of PF-SMG, and biased gradients in the synthetic tests. Not stated: no front theory, no sample-complexity count, only a self-baseline. Future: noise/variance reduction, non-box feasible regions, proximal terms for nonsmooth regularizers, deep learning, nonconvex rates (pp. 8, 15-16, 22-26).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "The SG skeleton is kept. The changed object is the direction subproblem's input (sampled instead of true gradients), not an acceptance test, since SG has none. Steps 5 and 6 are evidenced: the price (bias) is stated in the abstract, and class-native metrics Purity, Gamma, Delta are used.",
+    "pages": "pp. 1, 8, 19, 27-28"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "The rates are placed next to SG's ('of order similar to what is known for stochastic gradient'). Variant aspects: the unit is iterations, with no sample count despite growing batches, no lower-bound question, and the gap is measured with averaged weights as in S015.",
+    "pages": "pp. 1, 6, 13-17, 25-26"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "An accuracy requirement tied to the step size (first-moment gradient error <= alpha_k(...)) is realized by dynamic batch growth. It is an expectation condition, not a probability-p condition, and has no threshold.",
+    "pages": "pp. 11, 17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Reuses 13 DMS-collection problems, performance profiles and class-native metrics, with a real application and visible losses. But the only baseline is the authors' own deterministic counterpart, and the text has no code statement (code is in the companion S016).",
+    "pages": "pp. 18-25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Reversed structure, as in S016: a heuristic outer list loop (perturb at the largest holes, p restarts, filter) around SMG trajectories that carry guarantees. There is no theorem for the front.",
+    "pages": "pp. 17-19"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "composite-estimator bias audit",
+    "evidence": "Unbiased gradient estimates pass through the nonlinear QP solution map, so the output is biased. The bias is shown by a Monte Carlo plot, then tolerated at O(alpha_k) and enforced by batch growth.",
+    "pages": "pp. 5-6, 9-11, 17"
+   },
+   {
+    "pattern": "averaged-weight gap with a two-tier theorem",
+    "evidence": "A weak rate against the iterates' averaged weights, with a stated sign caveat, then a strong rate against lambda* under one named extra assumption. The same device appears in S015 (c05), so 2 papers.",
+    "pages": "pp. 13-16"
+   },
+   {
+    "pattern": "diagnose the predecessor's strong assumption as a symptom of a missed property",
+    "evidence": "[43] 'failed to identify a critical property' and so needed 'strong and unnatural assumptions'. A footnote shows that its key inequality would follow from the authors' own condition if the direction were unbiased.",
+    "pages": "p. 5; p. 15 (footnote 2)"
+   },
+   {
+    "pattern": "theory paper / application paper split",
+    "evidence": "This is the theory half, with a first fairness demonstration. It forwards the detailed accuracy-fairness study to [36] (S016).",
+    "pages": "p. 19"
+   }
+  ],
+  "transferable": [
+   "Null-term three-way split of the SG cross term (ideal + estimator bias + weight perturbation). Make each error O(alpha_k) and multiply by the domain diameter so it matches the alpha_k^2 variance term (pp. 13-14).",
+   "When the algorithm cannot know its limiting target, prove a rate against the iterates' averaged target and flag the sign issue. Then add one named assumption for the rate against the limit (pp. 13-16).",
+   "State a new noise assumption in step-size units (error <= alpha_k * const) and show a batch-size rule that enforces it (pp. 11, 17).",
+   "Before the theory, exhibit a suspected estimator bias with a Monte Carlo plot of ||E[estimator - target]|| against batch size (10^4 replications) (pp. 9-10).",
+   "When comparing list-based Pareto-front methods, equalize the new points added per iteration, and add points only at the largest gap along each objective axis (p. 19).",
+   "Footnote a line-by-line comparison of your assumption with the predecessor's stronger one (p. 15)."
+  ],
+  "coauthors": "S. Liu",
+  "quotes": [
+   {
+    "text": "it is shown that this direction is biased even when all individual gradient estimators are unbiased.",
+    "page": 1
+   },
+   {
+    "text": "The authors in [43] introduced and analyzed it, but failed to identify a critical property about the stochastic multi-gradient direction, and as a consequence analyzed the method under strong and unnatural assumptions.",
+    "page": 5
+   }
+  ]
+ }
+]

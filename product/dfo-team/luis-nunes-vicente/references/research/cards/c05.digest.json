@@ -1,0 +1,387 @@
+[
+ {
+  "id": "S023",
+  "year": "2013",
+  "title": "Worst case complexity of direct search",
+  "read_level": "full",
+  "contribution": "First worst-case complexity bound for directional direct search with sufficient decrease: O(eps^-2) iterations and O(n^2 eps^-2) function evaluations to reach ||grad f|| <= eps, matching steepest descent in the eps-order.",
+  "problem_entry": "Analogy with Nesterov's O(eps^-2) bound for steepest descent: a positive spanning set always contains a descent direction, so the same order is 'not unreasonable to expect'; stated as a Nesterov-style Model/Oracle/eps-solution problem class (p. 2).",
+  "key_idea": "No new algorithm: take the GPS/GSS framework and insist on sufficient decrease rho(t)=c t^p, which makes each success count; the bound then follows from counting successes and step-size contractions (pp. 3-5).",
+  "assumptions": "f bounded below, C^1 with nu-Lipschitz gradient on a neighbourhood of the level set; cosine measure >= cm_min and bounded direction norms (Assumption 2.1); search step costs O(n); n-dependence of nu ignored by choice (pp. 5, 7).",
+  "proof_devices": [
+   "unsuccessful-iteration bound ||grad f|| <= cm^-1 (nu/2 alpha dmax + rho(alpha)/(alpha dmin)) (Theorem 2.1, p. 4)",
+   "step-size floor alpha_k >= beta1 L1 eps^{1/min(p-1,1)} by backtracking to the last unsuccessful iteration, then telescoping sufficient decrease to count successes (Theorem 3.1, pp. 5-6)",
+   "log of the step-size product alpha <= alpha0 gamma^|S| beta2^|U| to count failures (Theorem 3.2, p. 6)",
+   "n^2 = cm^-2 (cm=1/sqrt(n) for [I -I]) times O(n) evaluations per poll (Corollary 3.2, pp. 7-8)",
+   "eps-order tightness by reducing n=1 direct search to steepest descent with Goldstein-Armijo on the Cartis-Gould-Toint example (p. 8)"
+  ],
+  "experiments": "none (only a remark that p != 2 did worse in earlier numerics, p. 7)",
+  "positioning": "Joins the O(eps^-2) family (Nesterov, Gratton-Toint, Cartis-Gould-Toint) and concedes that finite-difference ARC has a better eps-power (pp. 8-9).",
+  "writing": "Short note; main claim in the first abstract sentence; one intuition sentence per device; constants' dependencies listed after each corollary; light hedging ('not unreasonable to expect', 'seems to corroborate') (pp. 1-2, 4, 7-8).",
+  "limits_future": "Smooth only (nonsmooth deferred to Garmanjani-Vicente); lattice simple-decrease methods need extra decrease-rate assumption; eps-power worse than FD-ARC; alpha-based stopping still needs nu; extension to bound/linear constraints via chi(x) (pp. 8-9).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Origin of the method: sufficient decrease -> count successes and alpha-contractions -> multiply by poll size and cm^-2 -> compare with steepest descent.",
+    "pages": "pp. 5-8"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Step 5 only partly: eps-order tightness shown via the n=1 reduction; n-order optimality not discussed here.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Constrained extension keeps the skeleton and swaps only the stationarity measure (chi instead of grad f). Weak evidence.",
+    "pages": "p. 9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose",
+    "evidence": "Volunteers that the finite-difference ARC bound has a better eps-power than direct search.",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Lattice/simple-decrease direct search admits a complexity bound only under an additional strong decrease-rate condition.",
+    "pages": "p. 9"
+   }
+  ],
+  "transferable": [
+   "Two-counter complexity proof: successes via step-size floor plus telescoped sufficient decrease; failures via the log of the step-size product (pp. 5-6).",
+   "Split the n-dependence into geometry (cm^-2) and per-iteration cost (poll size) and state both (pp. 7-8).",
+   "Borrow a lower bound by reducing your method to a classical one in dimension 1 (p. 8).",
+   "Choose a free exponent (p in rho=c t^p) by minimizing the eps-power of the bound, then check it against earlier numerics (p. 7).",
+   "State the result as an upper complexity bound for a Nesterov-style Model/Oracle/eps-solution class (p. 2)."
+  ],
+  "coauthors": "none (single author)",
+  "quotes": [
+   {
+    "text": "Intuitively speaking, insisting on a sufficient decrease will make the function values decrease by a certain non-negligible amount each time a successful iteration is performed.",
+    "page": 4
+   },
+   {
+    "text": "Such an analysis of worst case complexity contributes to a better understanding of the numerical performance of this class of derivative-free optimizations methods.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S014",
+  "year": "2014",
+  "title": "Convergence of trust-region methods based on probabilistic models",
+  "read_level": "full",
+  "contribution": "Introduces probabilistically fully linear/quadratic models (accurate with probability >= 1/2 conditioned on the past) and proves almost-sure first-order (lim) and second-order (liminf) convergence of an almost classical trust-region method that uses them. Read from arXiv v1.",
+  "problem_entry": "Model-based DFO pays for a 'complex mechanism of sample set maintenance' to keep models accurate; random sample sets could give better trade-offs, as illustrated on Rosenbrock (pp. 2, 5-6, 23).",
+  "key_idea": "Keep the trust-region algorithm and make only the model random: require it to be fully linear with probability p >= 1/2 given the past, and add ||g_k|| >= eta2 delta_k to the success test so that good models always enlarge the radius (pp. 7-8).",
+  "assumptions": "Deterministic f, exact function values; C^1 with Lipschitz gradient on the enlarged level set, bounded below; fraction of Cauchy decrease; bounded model Hessians ('introduced for convenience'); second order: C^2, Lipschitz and bounded Hessian (pp. 7-8, 15, 27).",
+  "proof_devices": [
+   "delta_k -> 0 for every realization (deterministic lemma, pp. 8-9)",
+   "+-1 random walk W_k = sum(2*1_{S_i} - 1) is a submartingale, so lim sup W_k = infinity a.s.; compare with R_k = log_gamma(delta_k / b) (Theorem 4.2, pp. 10-11)",
+   "bounded-increment submartingale: converges or lim sup = infinity (Theorem 4.1, pp. 9-10)",
+   "sum of Delta_k over non-stationary iterations finite a.s. via Bernoulli-weighted submartingale G_k = G_{k-1} + B_k Z_k (Lemmas 4.1-4.2, pp. 11-12)",
+   "'ascent pair' crossing argument to upgrade liminf to lim (Theorem 4.3, p. 13)",
+   "conjecture with explicit failing step: second-order decrease gives only sum delta^2 < infinity, not sum delta (Conjecture 5.1, pp. 20-21)"
+  ],
+  "experiments": "Illustrations only: Rosenbrock 2-D with four methods (pp. 5-6); random vs deterministic 5-point MFN sample sets, 2700 vs 8500 evaluations (pp. 23-24); 10-D sparse Rosenbrock RSTR/GSTR/MFN (p. 26). No collection, no profiles.",
+  "positioning": "Contrasts with stochastic gradient (models correct only in expectation) and random search (fixed step sizes); builds on the authors' DFO book and sparse-model paper; credits Moré-Wild for model-based superiority (pp. 1, 4-5, 25).",
+  "writing": "Contrast-framed abstract plus one-line slogan; motivating illustration before theory; notation table; intuition after the martingale theorem; open admission 'we were unable to extend' (pp. 1, 3, 5, 10, 20).",
+  "limits_future": "Second-order lim-type result left as a conjecture; exact function values required; sample reuse may break the submartingale property; condition-number bounds for random quadratic models open; asynchronous parallel evaluation suggested (pp. 20-21, 25, 27).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Origin, with the model as the random object: fully linear at every iteration becomes fully linear with probability >= 1/2 given the past; submartingale proof.",
+    "pages": "pp. 2, 7, 10-13"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Only almost-sure convergence, no complexity. Rates for this method are sketched later in S019 section 6. The threshold is the fixed 1/2 of the symmetric radius update.",
+    "pages": "pp. 8, 10-13"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "The skeleton is kept; the only change is in the acceptance/radius rule (||g_k|| >= eta2 delta_k). The new class is random models, not a new problem class.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Theory-first paper: single-problem illustrations only, no solver, no collection, no profiles.",
+    "pages": "pp. 5-6, 23-26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Conjecture 5.1 is published together with the proof attempt and the exact inequality that fails in the probabilistic case.",
+    "pages": "pp. 20-21"
+   },
+   {
+    "pattern": "condition on the past, not independence",
+    "evidence": "Accuracy is required with probability p conditioned on the sigma-algebra of past models, because independence cannot be ensured; repeated in S019.",
+    "pages": "p. 7"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "Admits that RSTR uses more function evaluations than GSTR/MFN and argues they can be obtained in parallel.",
+    "pages": "p. 26"
+   }
+  ],
+  "transferable": [
+   "Log-radius vs +-1 random-walk comparison to get almost-sure liminf convergence in half a page (pp. 10-11).",
+   "Ascent-pair argument to upgrade liminf to lim once the sum of radii over non-stationary iterations is finite (pp. 12-13).",
+   "Add ||g_k|| >= eta2 delta_k to the success condition so that the radius tracks the model gradient (p. 8).",
+   "Publish an unproved extension as a conjecture with the exact failing inequality (pp. 20-21).",
+   "Motivating example that isolates ingredients (fixed vs random directions, directions vs models) (pp. 5-6)."
+  ],
+  "coauthors": "A. S. Bandeira, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "Hence we show that a standard optimization framework can be used in cases when models are random and may or may not provide good approximations, as long as “good” models are more likely than “bad” models.",
+    "page": 1
+   },
+   {
+    "text": "We believe this condition is more reasonable than assuming complete independence of Mk from the past, which is difficult to ensure given that the current iterate, around which the model is built, and the trust-region radius depend on the algorithm history.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S019",
+  "year": "2015",
+  "title": "Direct search based on probabilistic descent",
+  "read_level": "full",
+  "contribution": "Analyses direct search with random polling sets that are only probabilistically descent (conditioned on the past): almost-sure convergence, O(1/sqrt(k)) gradient decay and O(eps^-2) iterations with overwhelming probability, and O(m n eps^-2) evaluations against O(n^2 eps^-2) for positive spanning sets.",
+  "problem_entry": "Numerical surprise: random polling directions without the positive-spanning property, even fewer than n+1, did better (Gratton-Vicente merit-function paper [18]; own Table 1 on CUTEr n=40); plus the 'obvious connection' to S014 (pp. 1-2, 6-7).",
+  "key_idea": "The proof only needs cm(D_k, -g_k) >= kappa, not cm(D_k) >= kappa; ask for it with probability p conditioned on the past. The threshold p0 = ln(theta)/ln(theta/gamma) comes from the step-size factors, so m=2 random directions suffice for gamma=2, theta=1/2 regardless of n (pp. 5, 7, 9, 20).",
+  "assumptions": "f bounded below, C^1 with Lipschitz gradient; forcing function o(alpha) with scaling bounds (Assumptions 2.2, 4.1); normalized directions for simplicity; gamma > 1 required; conditioning on the past needed for probabilities tending to 1 (pp. 5, 9, 14, 19).",
+  "proof_devices": [
+   "Lemma 2.1: cm(D,-g) >= kappa and alpha < phi(kappa||g||) imply success, with phi(t) = 2t/(c+nu) for rho = c alpha^2/2 (pp. 5-6)",
+   "submartingale sum Z_k ln(gamma) + (1-Z_k) ln(theta) for almost-sure convergence, reorganized from S014 (pp. 8-9)",
+   "realization-wise counting lemma: sum_{l<k} z_l <= beta/rho(min{alpha0/gamma, phi(kappa ||g~_k||)}) + p0 k, via z_l <= (1-v_l) + v_l y_l and the step-size product (Lemma 4.2, pp. 11-12)",
+   "bounded series sum rho(alpha_k) <= beta by geometric blocks between successes (Lemma 4.1, p. 10)",
+   "Chernoff lower tail for sum Z_l under conditional probability >= p, proved with Markov and iterated conditioning (Lemma 4.4, p. 13; Appendix A pp. 23-24)",
+   "spherical-cap bound rho(kappa) >= 1/2 - kappa sqrt(n/2pi) via incomplete Beta and log-convexity of Gamma (Appendix B, pp. 25-26)"
+  ],
+  "experiments": "Matlab, 10 CUTEr problems at n=40 and n=100; evaluations to reach f_low + 1e-3(f(x0)-f_low) as a ratio to the best variant; random variants averaged over 10 runs with failures marked; PSS baselines with cyclic polling; then a bias-corrected rerun with gamma=1 for the PSS variants (pp. 6-7, 20-21). No profiles; no code release mentioned.",
+  "positioning": "Explicit continuation of S014; separates itself from random search, ES/CMA, and the closest work (Diniz-Ehrhardt-Martinez-Raydan: almost-sure convergence but no rate, 'much easier to establish'); deterministic yardstick is S023 (pp. 2-3, 7-9, 16).",
+  "writing": "Abstract arc: requirement -> surprising numerics -> result -> 'helps to understand numerical behavior'; one-sentence algorithm and proof roadmap in the intro; conclusion leads with 'We introduced a new proof technique'; limits stated openly (pp. 1-3, 20, 22).",
+  "limits_future": "gamma > 1 required; smooth unconstrained only; the bound without conditioning stays below 1; optimal design of sets with m > 2 open ({d,-d} optimal for m=2, per Trefethen); convex O(1/eps), local r-linear rates, constraints and nonsmoothness left for later (pp. 19-23).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "All steps visible: PSS requirement -> probability conditioned on the past -> threshold p0(theta,gamma) -> rule for m -> almost-sure convergence and complexity with overwhelming probability -> randomized vs deterministic runs.",
+    "pages": "pp. 5-20"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "O(m n eps^-2) evaluations set next to O(n^2 eps^-2); Proposition 4.1 re-derives and generalizes the S023 bound.",
+    "pages": "pp. 12, 16, 22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Same-problem comparison, bias-corrected rerun and reported failures, but ratio tables rather than profiles and no code release.",
+    "pages": "pp. 6-7, 20-21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose / self-debias the experiment",
+    "evidence": "Admits the first experiment was biased in favour of the new method (gamma=1 is better for PSS), reruns it, and reports the smaller gain.",
+    "pages": "p. 20"
+   },
+   {
+    "pattern": "two-layer proof: realization-wise count + conditional Chernoff",
+    "evidence": "Presented as the paper's main contribution and transferred to probabilistic trust-region methods in section 6.",
+    "pages": "pp. 9, 11-13, 21-22"
+   },
+   {
+    "pattern": "condition on the past, not independence",
+    "evidence": "Definition 3.1 conditions on D_0..D_{k-1}; Proposition 5.3 shows the weaker unconditioned result.",
+    "pages": "pp. 7, 19"
+   }
+  ],
+  "transferable": [
+   "Find the one instance of a uniform requirement that the proof uses (cm(D,-g) instead of cm(D)) and ask for it only probabilistically (p. 5).",
+   "Two-layer rate proof: deterministic counting lemma for every realization, then a conditional Chernoff bound (pp. 11-13, 23-24).",
+   "Derive the probability threshold from the expansion/contraction factors and print an implementation rule (m > log2[1 - ln theta/ln gamma]) (pp. 9, 20).",
+   "Re-derive the deterministic special case with the new lemma as a free check and generalization (p. 12).",
+   "After the theory, rerun the motivating experiment with the baselines at their best parameters and say so (p. 20)."
+  ],
+  "coauthors": "S. Gratton, C. W. Royer, Z. Zhang",
+  "quotes": [
+   {
+    "text": "The proof technique separates the counting of the number of iterations that descent holds from the probabilistic properties of such a number.",
+    "page": 22
+   },
+   {
+    "text": "In this sense, the experiment in Subsection 2.2 is biased in favor of direct search based on probabilistic descent.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S015",
+  "year": "2019",
+  "title": "Complexity of gradient descent for multiobjective optimization",
+  "read_level": "full",
+  "contribution": "Global rates for multiobjective steepest descent (Fliege-Svaiter direction with backtracking) that match single-objective gradient descent: 1/sqrt(k) nonconvex, 1/k convex and linear strongly convex, the convex ones for implicit scalarizations given by the subproblem multipliers.",
+  "problem_entry": "Many multiobjective first-order methods had global-convergence proofs but no rates; the aim is to extend the single-objective rate theory, flagging that in the convex case it is not obvious which gap to measure (pp. 1-2).",
+  "key_idea": "Read the KKT multipliers of the direction QP (d = -sum lambda_i grad f_i, sum lambda_i = 1) as implicit scalarization weights, and prove each single-objective inequality for the lambda-weighted sum (pp. 3, 6-8).",
+  "assumptions": "Each f_i C^1 with L_i-Lipschitz gradient; at least one f_i bounded below (nonconvex); convex cases assume the whole sequence (x_k, lambda_k) converges, called a 'slightly stronger assumption' (pp. 1, 4, 6-7).",
+  "proof_devices": [
+   "failed-doubling backtracking floor t_min = min{(1-beta)/(2 L_max), 1} (Lemma 3.1, p. 4)",
+   "telescoping sufficient decrease of one bounded-below component with stationarity measure ||d_k|| (Theorem 3.1, pp. 4-5)",
+   "multiplier-weighted sum of per-objective descent inequalities giving the three-point identity (||x_k - x*||^2 - ||x_{k+1} - x*||^2)/(2 t_min) (Lemma 4.2, pp. 6-7)",
+   "averaged weights lambda-bar for the 1/k gap (Theorem 4.1, pp. 7-8)",
+   "contraction ||x_{k+1} - x*||^2 <= (1 - t_min mu)||x_k - x*||^2 (Theorem 4.2, p. 8)"
+  ],
+  "experiments": "none",
+  "positioning": "Continues Fliege-Svaiter; credits Grapiglia's earlier trust-region (and unpublished line-search) O(eps^-2) result after a referee pointed it out, and claims only conciseness plus the convex cases (pp. 1-2).",
+  "writing": "Very short; deliberate understatement ('without too much surprise'); convex caveat already in the abstract; the conclusion packages three rates with their complexity translations (pp. 1-2, 9).",
+  "limits_future": "Convex rates only for implicit scalarization and under a convergence assumption; acceleration to 1/k^2 'more intricate than it seems' with this direction and proof technology; momentum and proximal variants as future work (pp. 6, 9).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Whole paper is Method 2 step 4 in a new class: match single-objective gradient rates; an earlier (2019) instance of the recover-classical-rates stance that SKILL.md dates to 2026. Lower bounds only cited for m=1.",
+    "pages": "pp. 2, 9"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Gradient-plus-backtracking skeleton kept; success redefined as sufficient decrease of every component; stationarity measure becomes ||d_k||; the price (implicit scalarization) stated in the abstract.",
+    "pages": "pp. 1, 3-4"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Pure theory note: no numerics, no code.",
+    "pages": "pp. 1-9"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "state where you lose / credit priority in the text",
+    "evidence": "The referee-flagged prior result by Grapiglia is acknowledged in the introduction, and the claimed novelty is scaled down accordingly.",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "name where the proof technology breaks",
+    "evidence": "Acceleration is 'more intricate than it seems' using the steepest descent direction and this proof technology.",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "implicit scalarization in the analysis only",
+    "evidence": "The algorithm never scalarizes, but the analysis uses the dual multipliers as weights.",
+    "pages": "pp. 3, 6-8"
+   }
+  ],
+  "transferable": [
+   "Use the dual multipliers of the direction subproblem as scalarization weights inside the proof only (pp. 3, 6-8).",
+   "Failed-doubling argument with L_max for a uniform step floor across m objectives (p. 4).",
+   "Warn up front which part of the extension is not routine (which gap to measure in the convex case) (p. 2).",
+   "Explain why a convergence assumption is needed by showing what breaks without it (Remark 4.1: sign of the weighted gap) (p. 7)."
+  ],
+  "coauthors": "J. Fliege, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "We will see without too much surprise that the same rates of the single-objective setting are attainable, although the convex and strongly convex cases unveil interesting questions.",
+    "page": 2
+   },
+   {
+    "text": "The results of our paper are derived in a more concise way and cover the convex and strongly convex cases.",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S016",
+  "year": "2022",
+  "title": "Accuracy and fairness trade-offs in machine learning: a stochastic multi-objective approach",
+  "read_level": "full",
+  "contribution": "Formulates fair binary classification as a stochastic multiobjective problem (loss vs covariance-based disparate-impact or equal-opportunity surrogates) and computes whole Pareto fronts with PF-SMG. The fronts are better spread and cheaper than the epsilon-constraint baseline, extend to multiple attributes and measures, handle streaming data, and the code is released. Read from arXiv v3.",
+  "problem_entry": "Application (credit scoring, criminal justice): constraint or penalty approaches are a priori epsilon-constraint methods that 'limits the information given to decision-makers', so compute the full accuracy-fairness front instead (pp. 1-3).",
+  "key_idea": "Loss plus Zafar's squared decision-boundary covariance as smooth finite-sum objectives, solved with the list-based Pareto-front stochastic multi-gradient method (perturb, run SMG, drop dominated points); max/min group aggregators smoothed by softmax (pp. 4, 6-7, 13).",
+  "assumptions": "Smooth (convex or nonconvex) objectives; linear logistic classifier; single binary sensitive attribute at first; covariance proxy justified because zero covariance is necessary for independence, and admitted imperfect on COMPAS (pp. 2-4, 8).",
+  "proof_devices": [
+   "none new; SMG rates imported from Liu & Vicente 2021 (p. 4)",
+   "explicit statement that no convergence/complexity theory exists for computing the whole Pareto front (Appendix B, p. 13)"
+  ],
+  "experiments": "Adult (45,222 samples, 60/10/30 split), 20 synthetic sets, COMPAS (5,278, train = test). Baseline EPS-fair (epsilon-constraint + SLSQP), with 70-80% of its points dominated and removed. Performance profiles over 40 datasets for purity, Gamma, Delta, hypervolume, CPU time and gradient evaluations per nondominated point; PF-SMG front down-sampled to the baseline's size; losses reported (purity, mixed dominance); code on GitHub (pp. 5-8, 13-15).",
+  "positioning": "In-training fairness; reclassifies Zafar et al. as a priori epsilon-constraint; among the few whole-front approaches (Zafar, Navon); SMG credited to Mercier et al. and Liu & Vicente; DMS cited for the Delta metric (pp. 2, 4, 14).",
+  "writing": "ML-venue style with contribution bullets and interpretive plots; stronger claims ('proved to be computational efficient', meaning shown numerically) but honest caveats (mixed dominance, proxy mismatch) (pp. 3, 5-8).",
+  "limits_future": "No whole-front theory; imperfect proxies; small COMPAS data; logistic regression only; streaming result preliminary. Future: multi-class, regression, other predictors, nonconvex surrogates such as mutual information and fairness risk measures (pp. 8-9, 13).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Keep a nondominated list, do not aggregate a priori (Research heuristic 4; warning sign 2).",
+    "pages": "pp. 2, 4, 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Released code, 40-dataset collection, performance profiles with class-native metrics (purity, Gamma, Delta, hypervolume), strongest accessible baseline, losses reported.",
+    "pages": "pp. 5-7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Reversed structure: a heuristic outer loop (perturb, run SMG, filter dominated) around an inner method with per-point guarantees; no guarantee for the whole front.",
+    "pages": "pp. 4, 13"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "No complexity here; rates delegated to the companion theory paper.",
+    "pages": "p. 4"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory paper / application paper split",
+    "evidence": "Rates live in Liu & Vicente 2021 (Annals of OR); this paper imports them by citation and states that the whole-front gap is open.",
+    "pages": "pp. 4, 13"
+   },
+   {
+    "pattern": "state where you lose",
+    "evidence": "EPS-fair has slightly better purity; dominance is 'mixed' for race.",
+    "pages": "p. 6"
+   },
+   {
+    "pattern": "reclassify a neighbouring field's method in your taxonomy",
+    "evidence": "Constrained fair learning presented as the a priori epsilon-constraint method of MOO.",
+    "pages": "p. 2"
+   }
+  ],
+  "transferable": [
+   "Down-sample the denser Pareto front to the baseline's size before computing purity, spread and hypervolume; report cost per nondominated solution (p. 6).",
+   "Clean the baseline's output (remove dominated points) and report how much was removed (p. 5).",
+   "Smooth max/min group aggregators with a softmax-weighted average so stochastic multi-gradient applies (pp. 6-7).",
+   "Warm-start the Pareto list from the current front when a new data batch arrives (p. 9).",
+   "Robustness check that rebalances the sensitive groups (50/50) to test whether the conflict is a sample-composition artefact (p. 5)."
+  ],
+  "coauthors": "S. Liu",
+  "quotes": [
+   {
+    "text": "We found that 70-80% of the final points produced by this process were actually dominated ones, and we removed them for the purpose of analyzing results.",
+    "page": 5
+   },
+   {
+    "text": "However, in multiobjective optimization, as far as we know, there are no convergence or complexity results to determine the whole Pareto front (under reasonable assumptions that do not reduce to evaluating the objective functions in a set that is dense in the decision space).",
+    "page": 13
+   }
+  ]
+ }
+]

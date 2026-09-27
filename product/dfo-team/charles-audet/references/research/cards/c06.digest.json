@@ -1,0 +1,239 @@
+[
+ {
+  "id": "S130",
+  "year": "2025",
+  "title": "Cat-Suite: A collection of optimization problems with categorical and quantitative variables for benchmarking",
+  "read_level": "full",
+  "contribution": "Releases Cat-Suite, a CUTEst-inspired public Python collection of 60 analytic mixed-variable problems (30 unconstrained, 30 constrained; each with at least one categorical and one continuous variable; about half nonsmooth), built by named transformations of classic test functions.",
+  "problem_entry": "Infrastructure gap: categorical variables are hard and the literature offers few mixed-variable test problems, so new methods cannot be tested thoroughly (p. 4).",
+  "key_idea": "Turn classic continuous or minimax problems into mixed-variable ones with a documented operator catalogue (cont-to-cat, fct-to-cases, penalty, minimax-to-cat, con-to-int, cat table) and record provenance per problem (pp. 5-6).",
+  "assumptions": "Non-hierarchical mixed-variable problems (no meta variables, fixed dimension, predefined bounds) with g_j(x) <= 0 constraints built or chosen so a feasible point exists; constraints are not typed EB/PB/hidden (pp. 4, 7).",
+  "proof_devices": [
+   "feasibility-by-construction: add constraints satisfied by a reference point, flip the sign of any violated one (p. 7)"
+  ],
+  "experiments": "none (no solver runs; best-known values said to be in the GitHub repository, p. 5)",
+  "positioning": "Constructive, no criticism; modelled on CUTEst; problems drawn from Jamil-Yang, Luksan-Vlcek minimax, Munoz Zuniga-Sinoquet, Pelamatti et al., Crelot et al., VLSE; serves MADS, Bayesian optimization and metaheuristic users (pp. 4-6, 45).",
+  "writing": "One-page introduction, open invitation to contribute, provenance tables with Ref./Original problem/Modifications columns; several editorial inconsistencies (Cat-23 vs Cat-cstrs-7, HS-114 vs HS144, a paragraph announcing four techniques that names six labels) (pp. 4-6, 26-27).",
+  "limits_future": "Analytic and non-hierarchical only, no experiments; described as an ongoing project to be extended with more diverse problems (pp. 3-4).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Public release habit confirmed (bbopt GitHub, best-known values, citable report) but problems are synthetic analytic transformations, not real blackboxes.",
+    "pages": "pp. 3, 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Supplies the target-pathology (categorical) layer for benchmarking; the abstract frames benchmarking as essential for assessment and parameter tuning; no comparison run here.",
+    "pages": "p. 3"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Keeps g_j(x) <= 0 convention but does not classify constraints as unrelaxable/relaxable/hidden.",
+    "pages": "pp. 4, 7"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "Benchmark released alongside the Halle-Hannan categorical framework line (refs [5], [10]).",
+    "pages": "p. 45"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "benchmark by systematic transformation",
+    "evidence": "Named operator catalogue (cont-to-cat, fct-to-cases, penalty, minimax-to-cat, con-to-int, cat table) converts classic functions into mixed-variable problems, recorded per problem in a Modifications column.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "pattern": "feasible-by-construction constraints",
+    "evidence": "Constraints added around a reference point so that it stays feasible; sign flipped if violated.",
+    "pages": "p. 7"
+   }
+  ],
+  "transferable": [
+   "Build a test set for a new variable class by applying named, documented operators to well-known functions and recording the operator per problem (pp. 5-6).",
+   "Create constrained problems as unconstrained problem plus added constraints and guarantee feasibility by orienting each constraint around a reference point (pp. 6-7).",
+   "Give each benchmark problem a provenance row (source, original problem, modifications, n per type, category combinations, m, smoothness) (Tables 1-2, pp. 5-6)."
+  ],
+  "coauthors": "E. Halle-Hannan, Y. Diouane, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "However, the current literature offers few test problems that are mixed-variable, making it difficult to thoroughly test the performance of novel solution methods.",
+    "page": 4
+   },
+   {
+    "text": "To this end, one may start from a reference point and add constraints in such a way that this point remains feasible.",
+    "page": 7
+   }
+  ]
+ },
+ {
+  "id": "S137",
+  "year": "2025",
+  "title": "Convergence towards a local minimum by direct search methods with a covering step",
+  "read_level": "full",
+  "contribution": "Adds a cheap covering step (one farthest-from-history evaluation per iteration in a ball of radius r) to direct search and proves that every refined point is then a local minimizer, even for discontinuous f, under a new assumption shown strictly weaker than prior ones and tight.",
+  "problem_entry": "Gap between existing DSM theory for discontinuous f (necessary conditions only, and only if f(x^k) -> f(x*) or a unique refined point) and the goal that all refined points be local solutions; grew out of re-examining their own revealing step (p. 2).",
+  "key_idea": "Force the evaluation history to be dense in B_r(x*) around every refined point via a covering oracle placed before search/poll (a search-type step), which turns density into local optimality (pp. 3-8).",
+  "assumptions": "f bounded below with bounded sublevel sets, f|X lower semicontinuous, X partitioned into ample (semi-open) continuity sets; no Lipschitz continuity; x0 in X (p. 4).",
+  "proof_devices": [
+   "Property 1 (B_r(x*) subset cl(H)) as an intermediate property separating theorem from construction (pp. 3-4)",
+   "first-evaluation index kappa(l)=min{k: y_l in T^k} linking evaluated points to acceptance tests (pp. 4-5)",
+   "running minimum of poll radii delta_bar^k -> 0 (Remark 1, p. 4)",
+   "topological lemma on dense intersections with ample sets (Prop. 8, p. 16)",
+   "Bolzano-Weierstrass clustering of covering points plus distance chain (Prop. 3, p. 7)",
+   "beta-ratio covering oracle as a priori sufficient condition (Def. 1, p. 6)",
+   "2D counterexample with two refined points for the revealing step (Example 1, pp. 5-6)",
+   "2D thin-continuity-set counterexample for tightness (Prop. 6, p. 12)",
+   "explicit 1D/2D examples for strict weakness of the assumption (Props. 4-5, 11, pp. 11, 17)"
+  ],
+  "experiments": "Appendix only: two 2D discontinuous problems, 10 runs of cDSM vs DSM (momentum search, OrthoMADS poll), best f vs calls to f and ratio-of-iteration-outcomes plots; cDSM +5-10% evaluations on easy case, always correct continuity set on thin-set case where DSM fails 4/10 (pp. 14-15).",
+  "positioning": "Extends Vicente-Custodio 2012 and the authors' own DiscoMads revealing step and Math. Program. 2024 note; comparison by formal ordering of assumptions (strictly weaker) and a three-aspect strength claim (pp. 2, 11-12).",
+  "writing": "Contribution as 'two main goals and two related auxiliary ones'; justifies renaming revealing->covering; closing DSM vs cDSM comparison table; frank admission that the step lacks finite-time efficiency (pp. 2, 13).",
+  "limits_future": "Asymptotic only, (r/eps)^n covering cost, no rule for r beyond defaults, toy experiments; future: covering in Bayesian/model-based methods, EI- or model-driven oracles, explicit partitions, PB for infeasible x0, covering step in DiscoMads (pp. 9, 12-13).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Guarantee ladder raised from necessary conditions to local minima; new assumption proved strictly weaker and tight by counterexample; own earlier device audited by counterexample; unused Lipschitz hypothesis dropped.",
+    "pages": "pp. 4-6, 11-12"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Covering step admitted as a search-type step so DSM properties are inherited.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The new guarantee is carried by a mandatory search-like step and the poll becomes optional in the generic Algorithm 2, inverting the rigid-Poll split.",
+    "pages": "pp. 9-10, 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Evaluation-count currency but only two 2D toy problems, no other solver family.",
+    "pages": "pp. 14-15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "a priori checkable conditions",
+    "evidence": "Oracle condition (Prop. 3) can be checked a priori while Property 1 only a posteriori; a local relaxation of the assumption is rejected because it is only checkable a posteriori; Theorem 1 praised for assuming only the problem.",
+    "pages": "pp. 8, 12"
+   },
+   {
+    "pattern": "algorithm-agnostic guarantee step",
+    "evidence": "Generic Algorithm 2 with covering step plus optional step; Theorem 2 makes the step self-sufficient for any DFO method it is fitted into.",
+    "pages": "pp. 9-10"
+   }
+  ],
+  "transferable": [
+   "Farthest-point covering oracle: one evaluation per iteration at the point of B_r(x^k) farthest from the history (or an alpha-fraction approximation via grid/Halton/distance transform) (pp. 7-8).",
+   "Route a convergence proof through a named history property and prove property=>theorem and oracle=>property separately (pp. 3-8).",
+   "Use the first-evaluation index kappa(l) to tie any evaluated point to its iteration's acceptance test (pp. 4-5).",
+   "Use the running minimum of step sizes to get a monotone sequence tending to 0 (p. 4, p. 10).",
+   "Prove tightness of a regularity assumption with a 2D function whose bad continuity set is a half-line (p. 12).",
+   "Plot the cumulative ratio of iteration outcomes (search/poll/new-step success, failure) vs iteration to show which step drives progress (p. 15)."
+  ],
+  "coauthors": "P.-Y. Bouchet, L. Bourdin",
+  "quotes": [
+   {
+    "text": "Theorem 2 shows that the covering step is, roughly speaking, a self-sufficient algorithmic step that ensures the local optimality of all accumulation points returned by any algorithm it is fitted into.",
+    "page": 10
+   },
+   {
+    "text": "Hence our framework cannot be broadened using only information available a priori.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "S150",
+  "year": "2025",
+  "title": "Risk averse constrained blackbox optimization under mixed aleatory/epistemic uncertainties",
+  "read_level": "full",
+  "contribution": "Proposes RAMSA, a four-timescale stochastic approximation method using a bound-respecting truncated-Gaussian two-point gradient estimator on a smoothed Lagrangian of a CVaR-constrained reformulation, with almost-sure convergence to a feasible point near a local solution and empirically derived hyperparameter rules.",
+  "problem_entry": "Criteria audit of RBDO methods (FORM linearisation, known distributions, reliability-analysis-only sampling, weak epistemic handling, no convergence proofs) summarised in a check-mark table where the new method ticks all columns (pp. 2-4).",
+  "key_idea": "CVaR reformulation + truncated-Gaussian smoothing (samples stay inside unrelaxable bounds) + Lagrangian relaxation + multi-timescale SA replacing nested loops, with gradients from two noisy blackbox outputs regardless of dimension (pp. 5, 8, 13-15).",
+  "assumptions": "Three nested levels of integrable/a.s. Lipschitz bounds on C_j(x,xi) with continuous CDF, no differentiability; Robbins-Monro step sizes with vanishing ratios; strict feasibility and eventual entry into the domain of attraction for the main theorem (pp. 5-6, 14, 16).",
+  "proof_devices": [
+   "truncated-Gaussian convolution with mean correction (u-mu) giving an unbiased two-point estimator (Lemma 3.1, pp. 8-10)",
+   "E||u|| <= sqrt(n) via differentiating the log normalising constant in beta (pp. 10-11)",
+   "approximation bound (L2 beta1 sqrt(n)+beta2)/(1-alpha) and feasibility for alpha near 1 by continuity of CVaR in alpha (Thm 3.2, pp. 11-13)",
+   "multi-timescale ODE method with one Lyapunov function per timescale (Borkar ch. 6; App. A, pp. 16-17, 33-39)",
+   "local saddle point theorem with projection-based KKT arguments (pp. 39-40)"
+  ],
+  "experiments": "Four analytic RBDO problems (SCD, WBD, VSI, SRD); 100 runs x 5000 (or 15000) evaluations; 1e4 Monte Carlo re-evaluation, success if all chance constraints >= 0.99; SORA solution as reference not competitor; experimental/validation split for hyperparameter rules; truncated estimator ~3x slower; epistemic VSI tests with worst-case audit (pp. 18-24).",
+  "positioning": "Positioned in RBDO/reliability engineering and constrained-RL CVaR (Chow et al., Prashanth) plus Nesterov-Spokoiny smoothing; no MADS/NOMAD/StoMADS; novelty claim hedged with a to-the-best-of-our-knowledge clause (pp. 2-5, 17).",
+  "writing": "Abstract announces three experimental purposes that structure Sections 6 and 7; First/Second/Finally contribution list with section pointers; high-level proof overview before the appendix; check-mark table with self-qualifying footnotes (pp. 1, 4-5, 16).",
+  "limits_future": "Hyperparameter rules from few problems, unexplained 3x slowdown of truncated estimator, CVaR conservatism, worst-case only for interval data; future: industrial cases and comparison with state-of-the-art, decreasing beta1 (pp. 5, 22-26).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Unrelaxable bounds (Le Digabel-Wild taxonomy) drive the design of a truncated sampling kernel so no evaluation falls outside bounds.",
+    "pages": "pp. 8, 22, 25"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "General constraints handled by Lagrangian relaxation rather than a progressive barrier; no hidden-constraint treatment.",
+    "pages": "p. 13"
+   },
+   {
+    "method": "Method 1",
+    "relation": "contradiction",
+    "note": "No direct-search backbone (no mesh/poll); convergence comes from a zeroth-order stochastic approximation ODE analysis, so Heuristic 9's advice to keep the direct-search backbone is not universal for Audet's coauthored work.",
+    "pages": "pp. 14-17"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Guarantee stated as smoothed->original->feasible ladder but hypotheses (strict feasibility, domain of attraction) not tested for necessity.",
+    "pages": "pp. 11-17"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Fixed budgets and 100 replications with spread, but no profiles and no head-to-head competitor; comparison deferred.",
+    "pages": "pp. 18-19, 26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "hyperparameter rules via experimental/validation problem split",
+    "evidence": "Problems split into experimental (SCD/WBD/VSI) and validation (SRD); problem-dependent parameters tied to start-point quantities (estimator variance, gradient norm) and validated on the held-out problem.",
+    "pages": "pp. 19-22"
+   },
+   {
+    "pattern": "input/output transformations to cut hyperparameters",
+    "evidence": "Variables mapped to [0,1]^n and outputs through arctan(cube root) so a single step size serves all coordinates and constraints.",
+    "pages": "pp. 17-18"
+   }
+  ],
+  "transferable": [
+   "Truncated-Gaussian two-point gradient estimator (u-mu)(c(x+beta u)-c(x))/beta: unbiased for the smoothed function and never samples outside unrelaxable bounds (pp. 8-10).",
+   "Replace nested inner loops by multi-timescale stochastic approximation with ordered step-size decays, proving convergence one timescale at a time (pp. 14-17, 19).",
+   "Risk-level continuation alpha^{k+1} = alpha* + gamma(alpha^k - alpha*) starting at 0 to avoid over-conservative early iterations (pp. 18-19).",
+   "Evaluation protocol for stochastic constrained solvers: 100 runs at fixed budget, 1e4 Monte Carlo re-evaluation of final points, success = all chance constraints above target, report mean point +- std (pp. 18-19).",
+   "Pick the smoothing radius minimising the empirical estimator variance at x0, then halve it; reuse samples to set the initial step from the gradient norm (pp. 20-21).",
+   "Epistemic feasibility audit: deterministic worst-case epistemic parameters at the means, then Monte Carlo chance-constraint check (pp. 23-24)."
+  ],
+  "coauthors": "J. Bigeon, R. Couderc, M. Kokkolaras",
+  "quotes": [
+   {
+    "text": "To the best of our knowledge, this result is the first of its kind in the area of derivative-free RBDO with unknown uncertainty distribution.",
+    "page": 17
+   },
+   {
+    "text": "However, they must be used with caution due to the limited number of problems used to derive them, especially for the value of β1.",
+    "page": 22
+   }
+  ]
+ }
+]

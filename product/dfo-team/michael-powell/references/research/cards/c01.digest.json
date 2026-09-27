@@ -1,0 +1,408 @@
+[
+ {
+  "id": "S165",
+  "year": "1997",
+  "title": "Trust region calculations revisited",
+  "read_level": "full",
+  "contribution": "Argues that the Moré–Sorensen trust-region step should be used more often than truncated CG. It reviews the method with Powell's own λ-update refinements and shows that, for quasi-Newton B, a banded orthogonal change of variables cuts the work per iteration to O(n^{7/3}), or O(n^{11/5}) in product form.",
+  "problem_entry": "Refutes a community belief (truncated CG is preferred because MS is too expensive) with a 2-variable counterexample (reduction 2e-6 versus >1) and a cost analysis (pp. 1, 3).",
+  "key_idea": "Keep the MS guarantee and termination test. Improve the λ bracketing (Newton lower bound, false-position upper bound). Make ΩᵀBΩ banded (s≈n^{2/3}) so each Cholesky costs O(ns²) (pp. 7-16).",
+  "assumptions": "Euclidean norm, admitted to lose generality (p. 2); symmetric, possibly indefinite B; for §3, a dense B with rank-1/2 quasi-Newton updates and a few trial λ per iteration (pp. 12-13).",
+  "proof_devices": [
+   "characterization theorem via Lagrangian stationarity plus a negative-curvature perturbation (pp. 4-5)",
+   "WLOG diagonal B by orthogonal similarity (p. 5)",
+   "secular function φ(λ)=1/Δ−1/‖d(λ)‖ shown convex with bounded derivative via Cauchy–Schwarz (p. 6)",
+   "φ′ from the same Cholesky factor, ‖ŷ‖²/‖d‖³ (p. 9)",
+   "MS termination test proved by an exact identity for Q(d)+½λ‖d‖² (pp. 10-11)",
+   "Givens-rotation counting O(n²/(s+1)) (pp. 14-16)",
+   "balancing cost monomials: s≈n^{3/5}, t≈n^{4/5} gives O(n^{11/5}) (p. 20)"
+  ],
+  "experiments": "No optimization runs. One band-vs-full timing table (Sun 4, n=50..800, ratio 1.43 to 10.85), copied from S148, is used to estimate the constant c≈0.12 (p. 17).",
+  "positioning": "Defends Moré–Sorensen against the growing Steihaug truncated-CG preference with a counterexample (p. 3). Concedes Yuan's conjecture and the O(n²) line-search case at the end (p. 19).",
+  "writing": "Thesis stated as an argument in the abstract (p. 1). Counterexample in the introduction (p. 3). The Discussion critiques the three standard convergence-theory questions (pp. 17-18). Low-key hedging (pp. 17, 20).",
+  "limits_future": "Practical importance called debatable (p. 17). The case for MS is weaker for positive-definite quasi-Newton matrices with line searches (p. 19). Hoped to help future software (p. 20).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The paper's goal is to cut per-iteration flops so that a better subproblem solver becomes affordable.",
+    "pages": "pp. 1, 12-17, 19-20"
+   },
+   {
+    "method": "Research Taste mark 2",
+    "relation": "evidence",
+    "note": "The saving factor grows with n (Table 1).",
+    "pages": "p. 17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Rationale for avoiding small radii far from the minimum; a poor step forces Δ<0.001 on the example.",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "variant",
+    "note": "O(n³) is reduced by a change of coordinates in the linear algebra, not by a new model.",
+    "pages": "pp. 12-13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "tiny counterexample against a popular default",
+    "evidence": "2-D ill-conditioned example where truncated CG gets 2e-6 against an optimum above 1",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "critique the questions theory asks",
+    "evidence": "three standard convergence questions, each with an objection; 'the questions do not go far enough'",
+    "pages": "pp. 17-18"
+   },
+   {
+    "pattern": "advocacy rewrite of one's own report for a broader audience",
+    "evidence": "conference review repackaging S148 (Table 1 copied)",
+    "pages": "p. 17"
+   }
+  ],
+  "transferable": [
+   "Refute a community's stated reason for preferring method A with a 2-variable counterexample plus a cost analysis (p. 3).",
+   "Reparametrize a secular equation (1/‖d‖) so Newton's target is convex with a bounded derivative; take the derivative from the same factorization (pp. 6, 9).",
+   "Safeguard Newton with a false-position bound and a biased 0.9/0.1 combination (pp. 9-10).",
+   "Choose free integers as powers of n that balance the cost monomials (p. 20).",
+   "Report the hidden asymptotic constant measured from timings (p. 17)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "The importance of the given work to practical applications is debatable, partly because current methods of theoretical analysis have many inadequacies.",
+    "page": 17
+   },
+   {
+    "text": "Therefore we take the view that one should try to develop algorithms that provide favourable answers to the questions, but that the questions do not go far enough.",
+    "page": 18
+   }
+  ]
+ },
+ {
+  "id": "S014",
+  "year": "1998",
+  "title": "Direct search algorithms for optimization calculations",
+  "read_level": "full",
+  "contribution": "An opinionated, mechanism-by-mechanism survey of derivative-free methods (line search, grids, simplices, conjugate directions, linear and quadratic models, simulated annealing), each with its theory and failure examples. It is also the first written record of the two-radius (ρ/Δ) trust-region scheme and of Lagrange-function geometry control.",
+  "problem_entry": "From practice: IMSL wrapped his gradient codes with finite differences. With no organizing key idea, the paper is 'a collection of essays' meant to show 'many opportunities for improvements' (pp. 1-2).",
+  "key_idea": "For each mechanism, give its best convergence argument and its cleanest failure. New material: ρ_k (a lower bound, never increased) with Δ_k≥ρ_k and nine step-choice rules; a simplex step maximizing |ℓ_ℓ(x)| because the Lagrange function equals the determinant ratio (pp. 24-35).",
+  "assumptions": "Section-specific: C¹ F with bounded level sets in exact arithmetic for convergence (pp. 4-5, 10); rational mesh ratio for grids (pp. 10-11); a finite state set for annealing (p. 38); finite precision justifies the termination assumption (p. 45).",
+  "proof_devices": [
+   "coordinate-search cycling counterexample and the ‖x_{k+1}−x_k‖→0 sufficient-decrease remedy (pp. 4-7)",
+   "finite-grid argument, then checking that the grid constant 2.93e-20 is below machine precision (pp. 10-11)",
+   "affine invariance: WLOG regular simplex (pp. 12-13)",
+   "cos θ=1/3 number-theory argument: simplices never repeat for n≥3 (p. 14)",
+   "o(Δ) averaging: simplex termination implies a small gradient (pp. 15-16)",
+   "natural measure of independence maximal iff conjugate, via a π/4 rotation (p. 22)",
+   "Lagrange function = determinant ratio (p. 32)",
+   "Markov-chain stationary vector and divergent series giving T_k~1/log k (pp. 38, 41-42)",
+   "4-state annealing counterexample with asymmetric W (pp. 39-40)",
+   "termination by contradiction via unbounded simplex volume (pp. 45-46)"
+  ],
+  "experiments": "none new; reports Jones' numerical investigation (p. 34), preliminary SIAM 1996 results (p. 35), Elster–Neumaier comparisons (p. 36) and the Westland Helicopters origin of COBYLA (p. 45)",
+  "positioning": "First-person critic of Nelder–Mead (pp. 17-18, 44) and simulated annealing (p. 47). Credits and criticizes grid theory (pp. 11, 44). Credits Conn–Scheinberg–Toint and compares their single radius with Jones' two radii (p. 35). Self-critical about his 1964 method (pp. 44-45).",
+  "writing": "Essay form (definition, then convergence, then counterexample), with a Discussion revisiting every section from the theory-versus-practice angle (pp. 42-47). Candid first person (pp. 44, 47). Admits an open question (p. 14).",
+  "limits_future": "Lists concrete directions: derivative-free nonlinear constraints (p. 3), self-adjusting line-search parameters (p. 43), simplices on grids (p. 44), conjugate-direction convergence (p. 45), sparse quadratic models and linear constraints first (p. 46), non-random global methods (p. 47).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ρ/Δ split written out: ρ is a lower bound on Δ, is never increased, and is reduced only when the rules show it blocks progress. Credited to Evan Jones; constants β=2.1 and γ=1/4 given.",
+    "pages": "pp. 26-28, 34-35"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "A large ρ₁ is recommended because it alleviates noise, which refines the SKILL's claim that a monotone RHO is ill-suited to noise.",
+    "pages": "p. 27"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The quadratic version (§7) is derived from the linear one (§6) by changing only the model; generalized to any finite-dimensional linear space.",
+    "pages": "pp. 31-32, 46"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Geometry repair as a separate step type with measurable triggers; finite-precision arguments.",
+    "pages": "pp. 11, 14, 25-26, 33"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "'it is important to study what can go wrong'; open question admitted.",
+    "pages": "pp. 14, 42"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "The Fortran program for Powell (1994) is available from the author.",
+    "pages": "p. 45"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Proposes cutting model parameters through Hessian sparsity (Toint), not least-Frobenius updating.",
+    "pages": "pp. 35-36, 46"
+   },
+   {
+    "method": "Heuristic 6",
+    "relation": "evidence",
+    "note": "Each constraint gets its own linear model; the merit function is used only for ranking.",
+    "pages": "pp. 3, 24, 29-30"
+   },
+   {
+    "method": "Warning sign 1",
+    "relation": "evidence",
+    "note": "Nelder–Mead failure examples and McKinnon (1997).",
+    "pages": "pp. 17-18, 44"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "tiny counterexample for every mechanism",
+    "evidence": "coordinate search, grids with linear constraints, simplex non-repetition, Nelder–Mead collapse, annealing, grid example (9.2)",
+    "pages": "pp. 4, 9-10, 14, 17-18, 39-40, 44"
+   },
+   {
+    "pattern": "survey as vehicle for recording unpublished (student) work",
+    "evidence": "records his 1994 Stockholm talk and Evan Jones' two radii",
+    "pages": "pp. 34-35"
+   },
+   {
+    "pattern": "sanity-check proof constants against machine precision",
+    "evidence": "grid constant 2.93e-20 is below machine precision",
+    "pages": "p. 11"
+   },
+   {
+    "pattern": "critique the questions theory asks",
+    "evidence": "hardly any correlation between algorithms in practical use and those with guaranteed convergence",
+    "pages": "p. 42"
+   }
+  ],
+  "transferable": [
+   "Organize a survey as one essay per mechanism: algorithm, best convergence argument and cleanest failure example, closed by a discussion revisiting every section (pp. 1, 42-47).",
+   "Diagnose a failed model step as either too long or caused by a degenerate sample set, with separate remedies and step types (p. 25).",
+   "Pick geometry-improving points by maximizing the Lagrange function of the point being replaced, a basis-independent determinant ratio (p. 32).",
+   "Weight each drop candidate's determinant ratio by its distance relative to Δ, so far points leave first (pp. 29, 34).",
+   "Compute the actual constant a convergence proof relies on and compare it with machine precision (p. 11).",
+   "Prove that a rule set terminates and use the proof to justify each proviso (pp. 45-46)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "Therefore the author has always supported the view that new algorithms should be developed from ideas for techniques that may provide improvements to actual calculations.",
+    "page": 42
+   },
+   {
+    "text": "Therefore one of the reasons for the present contribution to Acta Numerica is to catch up on the recording of this work.",
+    "page": 35
+   }
+  ]
+ },
+ {
+  "id": "S148",
+  "year": "1998",
+  "title": "The use of band matrices for second derivative approximations in trust region algorithms",
+  "read_level": "full",
+  "contribution": "Shows, with a rotation-count lower bound, that his long-held tridiagonal idea cannot beat O(n³). Relaxing to bandwidth 2s+1 with Givens updates of rank-one quasi-Newton changes gives O(n^{7/3}) per trust-region iteration (s≈n^{2/3}), confirmed by Sun 4 timings, and O(n^{11/5}) with product-form rotations.",
+  "problem_entry": "A years-old idea (tridiagonalize B so each λ trial is O(n)) is tested first. It fails because the transform costs O(n³) and updating needs ~n²/4 rotations (pp. 3-13).",
+  "key_idea": "Keep the Moré–Sorensen iteration and the quasi-Newton update; change only the basis. Maintain B=ΩMΩᵀ with M banded, absorb rank-one updates by adjacent Givens rotations plus bulge chasing, and balance O(s²n+n³/s) (pp. 14-21).",
+  "assumptions": "Dense B, rank ≤2 updates, a number of λ trials independent of n, and genericity (no unexpected zeros) (pp. 1, 4, 8, 20).",
+  "proof_devices": [
+   "induction over the stages q at which columns are finished with ℓ(q)≥min[2q+2,n] giving ≥~n²/4 rotations (pp. 8-13)",
+   "normalizing rotation sequences via commutation for |p−ℓ|≥2 and the G(ℓ)G(ℓ+1)G(ℓ) exchange (pp. 8-11)",
+   "rank-one structure preserved below the band during the recursion (pp. 15-16)",
+   "exact floor-sum counts with matched upper and lower bounds (pp. 18-20)",
+   "cost balancing: s~n^{2/3}; then s~n^{3/5}, t~n^{4/5} for product form (pp. 20-24)"
+  ],
+  "experiments": "Fortran timings on a Sun 4: tridiagonal break-even (Table 1, p. 6); n=400 sweep over s, optimum s=60 (Table 2, pp. 21-22); best s per n with Full/Total ratio 1.43 to 10.85 and a 2^{7/3} scaling check (Table 3, p. 22).",
+  "positioning": "Builds on Moré (1983) and Moré–Sorensen (1983) (p. 3). Contrasts with Steihaug's CG via counterexample (1.10), granting CG is cheaper unless it needs more than ~n^{1/3} iterations (p. 5). Credits Osborne and Parlett, and Stewart's lower-bound proof (pp. 13-14).",
+  "writing": "Negative results reported in full before the positive one ('Unfortunately', 'the unwelcome conclusion', pp. 4, 13). Hedged novelty ('may be new', p. 11). Unproved steps flagged (pp. 7, 12).",
+  "limits_future": "Large problems usually have structure, so the gain applies when the user prefers not to exploit it (p. 24). The tridiagonal route is uneconomic (pp. 6, 13). The product-form version is analysed but not timed (pp. 22-24).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Per-iteration flops and storage as the design target.",
+    "pages": "pp. 20-24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Experiments are timing sweeps calibrating constants and the crossover n (≥50), not solver runs; scope stated honestly.",
+    "pages": "pp. 22, 24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Relax-one-limitation applied inside one paper to his own failed idea (tridiagonal to band).",
+    "pages": "pp. 6-14"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "variant",
+    "note": "O(n³) becomes O(n^{7/3}) by a coordinate change, not a model redesign.",
+    "pages": "p. 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "negative result first, then relax the design parameter",
+    "evidence": "tridiagonal fails (Table 1, lower bound), then bandwidth 2s+1 succeeds",
+    "pages": "pp. 4-14"
+   },
+   {
+    "pattern": "balance cost monomials by choosing parameters as powers of n",
+    "evidence": "s~n^{2/3}; s~n^{3/5}, t~n^{4/5}",
+    "pages": "pp. 20-24"
+   },
+   {
+    "pattern": "timing sweep to calibrate hidden constants and the crossover n",
+    "evidence": "'the unknown constant factors'; best s=60 at n=400; advantageous for ≥50 variables",
+    "pages": "p. 22"
+   },
+   {
+    "pattern": "tiny counterexample against a popular default",
+    "evidence": "truncated CG example (1.10)",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Write the break-even inequality (Transform + k·Band-solve < k·Full-solve) and measure each term (p. 6).",
+   "Prove operation-count lower bounds by normalizing sequences of local operations with commutation and exchange rules, and flag the non-rigorous steps (pp. 7-13).",
+   "Report matched upper and lower counts with a small explicit gap (p. 20).",
+   "Amortize an O(n³) refactorization over t iterations with product-form storage (pp. 23-24).",
+   "Sweep the structural parameter at fixed n and check the empirical optimum against the predicted exponent (pp. 21-22)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "An easy answer is that trust region algorithms are so useful that any idea deserves careful investigation.",
+    "page": 5
+   },
+   {
+    "text": "Therefore our procedures may be particularly valuable in cases when the user would prefer not to consider the structure of his or her problem.",
+    "page": 24
+   }
+  ]
+ },
+ {
+  "id": "S068",
+  "year": "2001",
+  "title": "On the Lagrange functions of quadratic models that are defined by interpolation",
+  "read_level": "full",
+  "contribution": "Provides the Lagrange-function toolkit behind UOBYQA: the determinant-ratio criterion for replacing points, a self-correcting O(m²) update, the error bound |Q−F| ≤ (M/6)Σ|ℓ_j|‖x−x_j‖³ with M estimated online, an error-bound test that cuts the evaluations per ρ reduction far below ½n², and a sparse closed-form initialization.",
+  "problem_entry": "From his own algorithm under development ('draw attention to three more properties', p. 2). COBYLA testing had exposed severe inadequacies when second derivatives matter (p. 4), and the earlier ρ-reduction tests cost ~½n² values (p. 11).",
+  "key_idea": "Store and update all Lagrange functions. Choose the point to replace by |ℓ_j(x̂)|. Accept the model, and allow ρ to fall, when each point either passes the error-bound test or is within βρ (pp. 5-12).",
+  "assumptions": "Bounded continuous third derivatives for Theorem 2 (pp. 8-9) and poised points (p. 9), but the rule is used even without third derivatives (p. 3). Targets noisy or unsmooth F (p. 10). The ε in (4.3) uses ρ² and the least eigenvalue of G_Q (p. 11; constant garbled in the extraction).",
+  "proof_devices": [
+   "determinant ratio as a quadratic in x̂ that equals ℓ_1, independent of basis (p. 5)",
+   "self-correction: the update only zeroes column j of Bᵀ−H⁻¹, so its Frobenius norm decreases monotonically (Theorem 1, pp. 6-8)",
+   "WLOG subtract the Taylor quadratic, then a 1-D Taylor remainder along each line (Theorem 2, pp. 9-10)",
+   "M taken as the greatest observed lower bound, using Σℓ_j≡1 (p. 4)",
+   "closed-form sparse initial Lagrange functions (pp. 14-15)"
+  ],
+  "experiments": "Provisional algorithm on the Fletcher–Powell trigonometric sums with n=3,5,10,20 (5 functions each) and ρ from 1e-1 to 1e-8. For n=20, F_min 3.3e-18 after 1489 evaluations, with late ρ steps costing 13-17 values against ½n²=200. Failure reported at tinier ρ (pp. 12-13).",
+  "positioning": "States a preference for Lagrange functions over the CST Newton fundamental polynomials, noting his 1994 ideas influenced CST (p. 4). Credits Davis/Kowalewski and Waldron after rediscovering the error bound (p. 10). Abandons the extra tests of his own 1998 survey (p. 12).",
+  "writing": "Organized around 'properties' of one object, with the purpose stated in §1 (p. 2). Provisional results with details promised later (p. 12). Hedged superlinear claim (p. 4). Candid 'by mistake' anecdote (p. 7).",
+  "limits_future": "O(n⁴) work per iteration restricts n (pp. 3, 12-13). Tiny ρ destroys the gains through rounding (p. 13). The per-term test is 'optimistic' (p. 12). Future: sparsity and linear constraints to reduce m (p. 16).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Step 4: choose the point to replace by |ℓ_j(x̂)|, the determinant ratio.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Precursor: m still equals the number of parameters, but evaluations per ρ reduction are cut below ½n², and sparsity reduces m.",
+    "pages": "pp. 2, 13, 15-16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ρ is the least inter-point distance with Δ≥ρ. A step shorter than ½ρ triggers model tests before ρ falls (Heuristic 4). The rationale is noise: well-separated points first.",
+    "pages": "pp. 10-11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "ε is motivated by the curvature reduction a step shorter than ½ρ gives up. Inferred, unverified link to NEWUOA's 0.125·CRVMIN·RHO² (½·(½ρ)²·λ).",
+    "pages": "p. 11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "x₀ shift against rounding; O(m²) update with a stability theorem; rounding limits at tiny ρ.",
+    "pages": "pp. 2-3, 6-8, 13"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Tests dropped because numerical results showed them unnecessary; failure at small ρ reported.",
+    "pages": "pp. 12-13"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Linear (COBYLA) to quadratic models, driven by a measured inadequacy.",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Research Taste mark 5",
+    "relation": "evidence",
+    "note": "Theory written for the author's algorithm under development.",
+    "pages": "p. 2"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "estimate an unknown constant online as the greatest observed lower bound",
+    "evidence": "M chosen from the error bound at each new point",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "self-correcting maintained basis",
+    "evidence": "wrong initial ℓ_i are corrected once all points are replaced; this happened by mistake and recovery worked",
+    "pages": "pp. 6-8"
+   },
+   {
+    "pattern": "rediscover, then check the literature and credit it",
+    "evidence": "error bound found independently, then credited to Kowalewski (via Davis) and Waldron",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "determinant-ratio (Lagrange-function) geometry control",
+    "evidence": "det ratio = ℓ_j(x̂) (also S014 p. 32)",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "Estimate an unknown Lipschitz-type constant during the run as the largest value implied by observed errors (p. 4).",
+   "Use a model-error bound, not only point distances, to decide when the sample set is good enough (pp. 11-12).",
+   "Design the initial sample so the maintained basis is in closed form and mostly zero (pp. 14-15).",
+   "Prove an update self-corrects by showing that the error matrix loses a column per step (pp. 7-8).",
+   "WLOG-subtract the part the approximation reproduces exactly (the Taylor quadratic) before bounding the error (p. 9).",
+   "Report the cumulative evaluation count at each resolution level (p. 13)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "The author discovered the error bound (3.3) himself, before enquiring whether it had been published already.",
+    "page": 10
+   },
+   {
+    "text": "All of those tests have been abandoned, however, because they increase the amount of computation substantially, and numerical results have indicated that they are unnecessary.",
+    "page": 12
+   }
+  ]
+ }
+]

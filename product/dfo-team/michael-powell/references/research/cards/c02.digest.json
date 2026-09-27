@@ -1,0 +1,399 @@
+[
+ {
+  "id": "S025",
+  "year": "2002",
+  "title": "UOBYQA: unconstrained optimization by quadratic approximation",
+  "read_level": "full",
+  "contribution": "Describes the UOBYQA Fortran code: a trust-region method on full quadratic interpolation models that keeps all Lagrange functions explicitly and uses them for model updates, geometry (model) steps, and an error-bound-based test that saves evaluations; numerics cover accuracy, rounding, kinks and cost, with an explicit n <= 20 (O(n^4)) limit (read from DAMTP 2000/NA14).",
+  "problem_entry": "Software-first entry: a DFO code for smooth unconstrained problems that tolerates noise better than finite differences, with the O(n^4) scaling limit stated in the abstract (p. 1-2).",
+  "key_idea": "Keep and update every Lagrange function of the (n+1)(n+2)/2-point interpolation problem, and use them for the model update, the geometry step max|l_j|, and the error bound |Q-F| <= (M/6) sum |l_i| ||x-x_i||^3 with M/6 estimated online (p. 3, p. 10, p. 16-17).",
+  "assumptions": "No derivatives or constraints; the error bound assumes bounded third derivatives, a view the paper concedes is academic; superlinear convergence is only conjectured, under bounded third derivatives, convergence to a positive-definite minimum and bounded Lagrange functions; finite termination rests on finite precision (p. 10, p. 25).",
+  "proof_devices": [
+   "self-correcting Lagrange update (4.10)-(4.11): the conditions at the moved point are restored exactly whatever the old errors (p. 16-17)",
+   "determinant factor: replacing x_t multiplies the interpolation determinant by l_t(new point) (p. 18)",
+   "crude max|l_j| on a ball with factor-1/2 guarantee (2.11), top-eigenvector surrogate from span{w, G w} with 0.5 n^{-1/2} spectral-radius bound (2.15), counterexample matrix (2.13), angle grid loss (12+2*sqrt2)/17 ~ 0.872 (p. 7-9)",
+   "More-Sorensen trust-region solve after orthogonal tridiagonalization; stop when ratio (2.5) <= 0.01 (p. 5-6)",
+   "online estimate of M/6 as the running max of observed |Q-F| / sum|l_i| ||x-x_i||^3 (3.2) (p. 10)",
+   "scalar-product trick Q(x_k+d)-Q(x_k)=v_Q^T w, built in O(n^2) (5.4)-(5.7) (p. 20-21)",
+   "cheap Frobenius-norm sufficient test (5.9) to skip subproblem solves (p. 22)",
+   "heuristic superlinear-convergence argument (p. 24-25) and finite-termination counting argument using finite machine precision (p. 25)"
+  ],
+  "experiments": "Random trigonometric sums of squares (Fletcher-Powell 1963), n = 3, 5, 10, 20, 5 instances each, rho 0.1 -> 1e-8, NFTOT per instance, per-rho traces, a +1e4 rounding test, kinked variants (one fails), cost fit 0.8n^2+8.2n+2, per-task timings, Rosenbrock, the singular function, and Chebyquad vs Powell 1964 counts from Fletcher 1965 (p. 22-30).",
+  "positioning": "A development of COBYLA (1994) and the 1998 survey; Winfield 1973 credited with the idea; Conn-Scheinberg-Toint 1997 distinguished because they do not use Lagrange functions; the only baseline is his own 1964 method; 12 references, 5 by Powell (p. 4, p. 23, p. 31).",
+  "writing": "Organised as a software description with an 11-step summary; design choices justified by development numerics; limits in the abstract; conjecture hedged and the gap admitted (p. 1, p. 18-20, p. 24-25).",
+  "limits_future": "O(n^4) work, prohibitive beyond about 50 variables; quadratics model kinks poorly; rounding sets a floor on useful rho; future: a sparse-Hessian version and methods that do not need all Lagrange parameters (the seed of NEWUOA) (p. 26-30).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "rho never increased; Delta >= rho mandatory; ratio bands 0.1/0.7; rho schedule 16/250; rho lowered only after the model passes the adequacy tests",
+    "pages": "p. 3, p. 11-14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "contradiction",
+    "note": "Partial, against the Limitations line saying the constants' rationale is undocumented: the paper gives reasons for the 0.1/0.7 bands, the 1.5*rho reset and the 16/250 schedule (factor-ten reductions ending exactly at rho_end)",
+    "pages": "p. 11, p. 14"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "presented as a development of COBYLA's linear-model method; the binding limit (n > 50) and the next step are named in the conclusion",
+    "pages": "p. 4, p. 30"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "x_b shifted to the best point to limit rounding damage; early exit when rounding makes the predicted reduction <= 0; rounding experiment; O(n^4) cost accounting and per-task timing",
+    "pages": "p. 2, p. 14, p. 20-21, p. 26, p. 28"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "failures published (kinked n-term case, different minimizers, rounding floor)",
+    "pages": "p. 23, p. 26-27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "the test set is a random family with 5 instances per n, not only hand-picked problems",
+    "pages": "p. 22"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "the F77 code is available free of charge from the author",
+    "pages": "p. 30"
+   },
+   {
+    "method": "Research Heuristic 4",
+    "relation": "evidence",
+    "note": "short steps (< rho/2) trigger point-distance and error-bound tests before rho is lowered",
+    "pages": "p. 11-13"
+   },
+   {
+    "method": "Research Heuristic 7",
+    "relation": "evidence",
+    "note": "O(n^4) cost diagnosed by timing and named as the reason to redesign",
+    "pages": "p. 28, p. 30"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "theory bound as runtime test with online-estimated constant",
+    "evidence": "the unknown M/6 in bound (3.1) is replaced by the running max of observed error ratios (3.2) and used to decide which far points need not be moved (3.11)-(3.12), switched on after ten updates",
+    "pages": "p. 10, p. 13"
+   },
+   {
+    "pattern": "tolerate model error of the size of the forgone reduction",
+    "evidence": "not evaluating a short step gives up a predicted gain eps, so model errors of size eps are declared tolerable",
+    "pages": "p. 13"
+   },
+   {
+    "pattern": "cheap approximate subproblem with a proven worst-case ratio plus a logged empirical ratio",
+    "evidence": "factor-1/2 and 0.872 bounds, plus a measured ratio distribution over 8466 solves (never below 0.5)",
+    "pages": "p. 7-9"
+   }
+  ],
+  "transferable": [
+   "Turn an error bound with an unknowable constant into a practical test by using the running max of observed error ratios, switched on after enough observations (p. 10, p. 13).",
+   "Set an accuracy tolerance equal to the gain you forgo by not stepping, which is self-consistent and needs no new constant (p. 13).",
+   "For a crude max|quadratic| on a ball, compare the gradient direction with a top-eigenvector surrogate from span{w, Gw}; this costs O(n^2) and guarantees a factor of 1/2 (p. 7-8).",
+   "Add a large constant to the objective and rerun to find a method's precision floor and advise on rho_end (p. 26).",
+   "Report per-task timing shares, measured by repeating one task and differencing, to locate the bottleneck for the next design (p. 28).",
+   "Put failures in the same tables as successes, and mark runs that converge to a different minimizer (p. 23, p. 26-27)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "Any failure in the Lagrange conditions at an interpolation point is corrected by the updating method when the interpolation point is moved to a new position.",
+    "page": 17
+   },
+   {
+    "text": "It would be better, however, to establish this property without some of the assumptions that have been made.",
+    "page": 25
+   }
+  ]
+ },
+ {
+  "id": "S047",
+  "year": "2003",
+  "title": "On trust region methods for unconstrained minimization without derivatives",
+  "read_level": "full",
+  "contribution": "Sets out one interpolation trust-region framework for any linear model space, compares linear (COBYLA), full-quadratic (UOBYQA), sparse (UOBSQA) and diagonal (UOBDQA) models on sparse and random trigonometric problems, and first reports least-Frobenius-norm updating with 2n+1 conditions, which solves n = 160 in fewer evaluations than a quadratic has parameters (read from DAMTP 2002/NA02).",
+  "problem_entry": "A cost trade-off over model spaces of dimension m: full quadratics give O(n^4) work (intolerable beyond about 50 variables), linear models lack curvature; is a diagonal-Hessian space (m = 2n+1) enough? Expectations are stated before the tests (p. 2-3).",
+  "key_idea": "A generic framework (trust-region vs model iterations, F only if the step >= rho/2, ratio 0.1, move the centre on any decrease, Lagrange-function updates) with only the model space swapped; then least-Frobenius-norm change of the Hessian, by analogy with symmetric Broyden, to get full quadratics from 2n+1 conditions (p. 4-9, p. 17-19).",
+  "assumptions": "No derivatives; no convergence theorem; UOBYQA's error estimate is used for UOBDQA although it is invalid there, in order to test empirically; the section-5 rank conditions on X and B; the projection property only for quadratic F; the prototype is not rotation-invariant (p. 11, p. 18-20).",
+  "proof_devices": [
+   "induction on the first singularity: the new system is singular iff l_t(new point) = 0 (p. 7)",
+   "O(m^2) update of all Lagrange functions argued optimal-order because the matrix has m^2 entries (p. 8-9)",
+   "two-variable quadratic counterexamples with one huge parameter for the linear (3.1)-(3.2) and diagonal (3.3)-(3.6) model classes (p. 9-12)",
+   "ill-conditioning explained through Hessian = 2 Z^T Z at the solution and its least eigenvalue (4.5)-(4.6) (p. 14-15)",
+   "projection/Pythagoras property of the least-Frobenius update for quadratic F via one-parameter minimization (5.6)-(5.8) (p. 18-19)",
+   "KKT form Hessian_new = Hessian_old + sum lambda_j x_j x_j^T with X lambda = 0, giving the saddle system (5.11) with A_ij = (x_i^T x_j)^2/2 (p. 19)"
+  ],
+  "experiments": "ARWHEAD, BDQRTIC, CHROSEN at n = 10-25 (rho 0.5 -> 1e-6); random trigonometric family with n or 2n terms, 5 fixed-seed instances, min-max reported; a scaled variant designed after a surprise; timings to n = 40; section-5 prototype to n = 160 (two instances, about 25 h each); metric: number of F values (p. 12-21).",
+  "positioning": "Contrast with simulated annealing and line searches; Winfield 1973 lacked robust nonsingularity; CST 1997 noted; symmetric Broyden (Fletcher 1987) as the template; baselines are only his own codes; 10 references, 4 by Powell (p. 2, p. 10, p. 17, p. 22).",
+  "writing": "Main results in the abstract; expectations before results; surprises labelled in the first person ('staggering and unexplained'); an explicit note that the work is incomplete ('jumping the gun'); one arithmetic slip (13122 for 13041 parameters) (p. 1, p. 3, p. 13, p. 19-21).",
+  "limits_future": "UOBDQA is inefficient on ill-conditioned or non-diagonal Hessians; the prototype is not rotation-invariant; the direct O((m+n)^3) solve is to be replaced by an updating technique; the model's parameters need not all be accurate, which points to new algorithms (p. 12, p. 15-16, p. 19-21).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "one framework, four solvers differing only in the model space; each judged by its limitation; section 5 removes the remaining limitation",
+    "pages": "p. 3-12, p. 17-21"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "first published statement of 2n+1 conditions plus a least-Frobenius Hessian change (symmetric-Broyden analogy); n = 160 solved in fewer evaluations than the model has parameters",
+    "pages": "p. 17-21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "rho never increased, factor-ten reductions; Delta = rho (COBYLA) vs Delta >= rho (UOBYQA); F skipped for steps < rho/2; about m model iterations after a rho cut are 'tolerable for COBYLA but not for UOBYQA', which motivates relaxed geometry tests",
+    "pages": "p. 5-6"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "same random instances across methods, min-max ranges, hardest instances named, unexpected results published and followed up",
+    "pages": "p. 13-16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "per-iteration time vs evaluation count trade-off (UOBDQA faster at n = 20 despite about 3x more F values); direct solve flagged as temporary",
+    "pages": "p. 16-17, p. 19"
+   },
+   {
+    "method": "Research Heuristic 7",
+    "relation": "evidence",
+    "note": "O(n^4) work intolerable beyond about 50 variables drives the redesign",
+    "pages": "p. 2-3, p. 17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "toy counterexample per model class",
+    "evidence": "two-variable quadratics with one huge parameter show where the linear and diagonal model steps are useless",
+    "pages": "p. 9-12"
+   },
+   {
+    "pattern": "explain a surprise with a designed follow-up experiment",
+    "evidence": "COBYLA's unexpected success attributed to a near-isotropic Hessian and tested by random diagonal scaling, which destroys it",
+    "pages": "p. 15-16"
+   },
+   {
+    "pattern": "publish preliminary results with explicit status",
+    "evidence": "section 5 research begun in January 2002, 'not complete'; prototype 'only for some preliminary investigations'",
+    "pages": "p. 19-20"
+   }
+  ],
+  "transferable": [
+   "Test a cheaper model class by restricting the model space inside the full code, with the same initial points and parameters, so count differences are attributable to the model (p. 3, p. 11).",
+   "Prove nonsingularity is preserved by induction on the first failure: check l_t(new point) != 0 (p. 7).",
+   "Build random test families where one parameter controls conditioning (n vs 2n terms) and report the min-max over fixed seeds (p. 14-15).",
+   "Test your explanation of a surprise by transforming the problem to remove the suspected mechanism (random diagonal scaling) and rerunning (p. 15-16).",
+   "Report evaluation counts and seconds side by side so that the reader's cost model decides (p. 16-17).",
+   "State expectations before the experiments and label surprises explicitly (p. 3, p. 13)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "We continue, however, to use the formula for the estimate as if it were true, in order to discover experimentally whether UOBDQA may be useful in practice.",
+    "page": 11
+   },
+   {
+    "text": "The success of UOBDQA on both ARWHEAD and BDQRTIC is staggering and unexplained.",
+    "page": 13
+   }
+  ]
+ },
+ {
+  "id": "X002",
+  "year": "2003",
+  "title": "An Interview with M. J. D. Powell (Bulletin of the International Center for Mathematics, n. 14, June 2003)",
+  "read_level": "full",
+  "contribution": "A first-person account of Powell's research process: numerical experience as the main source of ideas, conjectures settled by proof or counterexample, exact-arithmetic-first design with stability properties, subroutine-reliability code discipline, zero tolerance for test failures, working alone on uncrowded topics, and strict refereeing and PhD standards (interview, not a research paper).",
+  "problem_entry": "Problems chosen where a new algorithm he has in mind would help, not from reading others' papers; students steered to topics with little attention (p. 3, p. 5).",
+  "key_idea": "Research loop: numerical testing suggests convergence and accuracy properties, the conjectures are settled by proofs or counterexamples, and both good and bad features of numerical results are exploited (p. 2-3).",
+  "assumptions": "New methods are invented assuming exact arithmetic; stability properties let the matrix details be settled after the principal features are chosen (p. 4).",
+  "proof_devices": [
+   "examples and counterexamples as the partner of proofs (p. 2)",
+   "hand calculations still used occasionally (p. 2)"
+  ],
+  "experiments": "Stance, not experiments: numerical results are the main source of ideas; a 10% failure rate on test problems is intolerable; SA/GA are extravagant in function evaluations (p. 3-4).",
+  "positioning": "Does not study others' software or papers in detail; considers refereed submissions in isolation (self-admitted gap); credits Davidon for DFP; mostly single-authored by choice (p. 3-6).",
+  "writing": "Documentation should state what programs can do, with few internal comments; subroutine reliability over formal structure; refereeing checks substantial contribution, correctness and the right amount of detail, line by line (p. 4-5).",
+  "limits_future": "Open: RBF convergence orders at edges, seen numerically but not proved; the nonlinear optimization book postponed; TOLMIN limited to a few hundred variables; most gratifying paper: the augmented Lagrangian source (p. 6-7).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "stated: numerical experience is the main source of ideas; exploit good and bad features of results; a 10% failure rate is intolerable",
+    "pages": "p. 3-4"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "stated: a Harwell duty to write Fortran for general calculations; he started the Harwell Subroutine Library; documentation should state what programs can do",
+    "pages": "p. 3-4"
+   },
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "sequencing: exact arithmetic first, then stability properties so the matrix details can follow; S045 is that second phase",
+    "pages": "p. 4"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "explains the Limitations (maintainability): only subroutine reliability matters, few internal comments, no formal structure",
+    "pages": "p. 3-4"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "weak: scope stated by reachable n (TOLMIN: a few hundred variables because of full quadratic models)",
+    "pages": "p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "numerics -> conjecture -> proof or counterexample",
+    "evidence": "stated loop; also practised in S025 (superlinear conjecture, p. 24-25) and S045 (Lemma 3 suggested by numerics, p. 26, p. 32)",
+    "pages": "p. 2"
+   },
+   {
+    "pattern": "self-derivation over literature study; work alone on uncrowded topics",
+    "evidence": "rarely progresses by studying others' papers; never studies others' software; prefers students on neglected topics; single-authored by choice",
+    "pages": "p. 3-5"
+   },
+   {
+    "pattern": "referee by checking every line",
+    "evidence": "published accuracy relies on someone other than the authors checking every line",
+    "pages": "p. 5"
+   }
+  ],
+  "transferable": [
+   "After each test run, write down the observed convergence and accuracy behaviour as explicit conjectures and try to prove or break each one with a small example (p. 2).",
+   "Design in exact arithmetic but choose update formulas with a stability property, so the rounding analysis can follow without redesign (p. 4).",
+   "When refereeing, check correctness line by line and whether the amount of detail is right, not only novelty (p. 5)."
+  ],
+  "coauthors": "interviewer L. N. Vicente",
+  "quotes": [
+   {
+    "text": "Answers to such questions are either proofs or counter-examples, and often I have tried to discover which of these alternatives applies.",
+    "page": 2
+   },
+   {
+    "text": "Indeed, without numerical experience, I would be cut off from my main source of ideas.",
+    "page": 3
+   }
+  ]
+ },
+ {
+  "id": "S045",
+  "year": "2004",
+  "title": "Least Frobenius norm updating of quadratic models that satisfy interpolation conditions",
+  "read_level": "full",
+  "contribution": "Formulates the least-Frobenius-norm model update as an (m+n+1)x(m+n+1) saddle system whose inverse H holds the Lagrange-function coefficients, and gives a stable O((m+n)^2) rank-two update of H, an x0-shift procedure, and a constant-term-free variant; stress tests show errors do not grow and are self-corrected (read from DAMTP 2002/NA08).",
+  "problem_entry": "The predecessor's measured limit (UOBYQA prohibitive at about n = 50; 20 -> 1087 s from n = 20 to 40) plus the S047 prototype (n = 160 in 9688 evaluations vs 13041 parameters) lead to the question of how to update in O(m^2) without serious loss of accuracy when m = O(n) (p. 3-6).",
+  "key_idea": "Minimize ||Hessian(Q+) - Hessian(Q)||_F subject to m interpolation conditions (chosen for shift-of-origin invariance and uniqueness, by analogy with symmetric Broyden); keep H = W^{-1} and update it by a rank-two formula; store the Hessian implicitly; shift x0; suppress constant terms (p. 4-5, p. 8, p. 13-24).",
+  "assumptions": "(A1) independent interpolation constraints; (A2) no nonzero linear polynomial vanishes on the points; m >= n+2; one point replaced per update; no fitting; the projection property only for quadratic F; the stability analysis ignores current-iteration rounding (p. 2, p. 4, p. 7, p. 14).",
+  "proof_devices": [
+   "KKT conditions -> saddle system W (2.8); symmetry of G comes out automatically (p. 7-8)",
+   "A positive semidefinite by a sum-of-squares rewrite (2.10) (p. 8-9)",
+   "projection/Pythagoras property (1.8) via one-parameter Frobenius minimization (p. 9-10)",
+   "Lagrange functions = columns of H = W^{-1} (3.3)-(3.4) (p. 10)",
+   "inheritance of (A1)/(A2) whenever l_t(x+) != 0 (p. 11)",
+   "rank-two inverse update (4.2)/(4.12), proved by checking H+ times each column of W+ (p. 14-17)",
+   "error-propagation invariant: Xi = W - H^{-1}; the update zeros the t-th row and column and leaves the rest unchanged (4.1) (p. 14)",
+   "Lemma 1: the leading m x m block of H is independent of x0 (p. 18-19)",
+   "Lemma 2: alpha, beta >= 0 via the sign structure of the saddle-matrix block inverse, plus a tiny-perturbation device for alpha = 0 (p. 21-22)",
+   "cancellation analysis: errors of order M^4 times machine precision when ||x0 - x_b|| = M*Delta (p. 19)",
+   "Lemma 3: the self-correcting set of valid Lagrange conditions grows monotonically for the Omega update (p. 26-28)",
+   "magnitude bookkeeping of the W and H blocks in powers of Delta (7.12)-(7.13) (p. 34)"
+  ],
+  "experiments": "Stress tests of the update only: n = 50, m = 101, random points in a ball, up to 1e5 iterations; tests on the choice of t (max |l| vs oldest eligible point), a far x0, injected 1e-4 errors, and shrinking Delta with x0 = 0 or 1e4*e; log10 error measures of the HW - I blocks; failures (Test 4, Test 7) published (p. 29-35).",
+  "positioning": "The DFO analogue of symmetric Broyden (Fletcher 1987) and of Broyden-Dennis-More 1973; directly challenges the common advice to update factorizations rather than inverses; 8 references, 4 by Powell (p. 4-5, p. 35-36).",
+  "writing": "Two numbered reasons plus a roadmap; long algebra suppressed with an admission; a skippable lemma flagged; numerical origin of Lemma 3 disclosed; 'triumph' reserved for Test 5; dedicated to Fletcher (p. 1, p. 5-6, p. 14, p. 26, p. 30, p. 32).",
+  "limits_future": "The x0 shift costs O(n^3); m, the point-removal rule and the trust-region solver are left open; the (7.5) precaution breaks exact error cancellation; Test 7 fails without x0 shifts; Fortran software (NEWUOA) begun, a CG trust-region solver expected (p. 6, p. 13, p. 19, p. 31, p. 33, p. 35).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "formal source: variational problem, (m+n+1) system, Lagrange functions from H, O((m+n)^2) update; the Frobenius norm is justified by shift invariance, uniqueness and the monotone projection property, answering part of the 'norm is debatable' limitation",
+    "pages": "p. 1, p. 4-5, p. 7-17"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "Step 4 says not to use age alone; Test 2 uses age deliberately (oldest point with |l_t| >= half the max) because the update erases errors in the replaced row and column",
+    "pages": "p. 14, p. 29"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "stability invariant, M^4 cancellation analysis and x0 shift, constant-term suppression, implicit Hessian to meet the O(m^2) budget, code precaution (7.5), inverses over factorizations",
+    "pages": "p. 13-14, p. 19-24, p. 31, p. 35"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "experiment-first applied to a component (the update formula) on synthetic random geometry with fault injection, not to optimization test problems; failures still published",
+    "pages": "p. 29-33"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "motivated by UOBYQA's measured limit; keeps its machinery and changes only how the model is determined",
+    "pages": "p. 3-6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "weak: the theory is written for Fortran software under development",
+    "pages": "p. 6, p. 35"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "fault-injection test of a self-correcting update",
+    "evidence": "Test 5 perturbs H and Omega with 1e-4 errors, and the updates restore the Lagrange conditions to machine precision",
+    "pages": "p. 30-32"
+   },
+   {
+    "pattern": "invariance requirement selects the least-change norm",
+    "evidence": "the change must be independent of x0, so the Hessian's Frobenius norm is used (shift-invariant, strictly convex)",
+    "pages": "p. 4"
+   },
+   {
+    "pattern": "numerics -> conjecture -> proof",
+    "evidence": "Lemma 3 suggested by computing Omega*Xi products; the feature was discovered numerically",
+    "pages": "p. 26, p. 32"
+   }
+  ],
+  "transferable": [
+   "Represent every Lagrange function by a column of the inverse saddle-point matrix; one rank-two update of the inverse then updates all of them and the model (p. 10, p. 15-17).",
+   "Prove 'no error growth' for a recursive matrix update with an error matrix Xi = W - H^{-1} that the update provably zeros in the touched row and column (p. 14).",
+   "Choose the least-change norm by the invariance you need (shift of origin), and say so (p. 4).",
+   "Store a matrix you cannot afford to update explicitly as a base matrix plus stored multipliers on known rank-one terms (p. 13).",
+   "Compute l_j(x+) - l_j(x_b) from the step and the midpoint rather than from a far origin, to avoid cancellation (p. 23).",
+   "Stress-test an update for 1e5 random iterations, with injected errors, shrinking radii and a far origin; measure the invariants directly and publish the failing phase (p. 29-34)."
+  ],
+  "coauthors": "none (sole author; dedicated to Roger Fletcher)",
+  "quotes": [
+   {
+    "text": "Therefore high accuracy in the solution of an optimization problem may not require high accuracy in any of the quadratic models.",
+    "page": 5
+   },
+   {
+    "text": "This feature of the updating formula (6.11) was discovered by numerical experiments, which assisted the development of Lemma 3.",
+    "page": 32
+   }
+  ]
+ }
+]

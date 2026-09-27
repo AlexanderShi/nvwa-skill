@@ -1,0 +1,292 @@
+[
+ {
+  "id": "S007",
+  "year": "2004",
+  "title": "A globally convergent primal-dual interior-point filter method for nonlinear programming",
+  "read_level": "full",
+  "contribution": "First use of the Fletcher-Leyffer filter to globalize a primal-dual interior-point method for NLP, with a normal/tangential split of the Newton step, a 2-D filter (quasi-centrality, optimality measure), a restoration algorithm, and a proof of global convergence to first-order critical points (lim inf of the two measures = 0).",
+  "problem_entry": "Technique transfer into an open gap: filters worked for SLP/SQP, but interior-point globalization in NLP lacked an 'ideal merit function' (pp. 1-2).",
+  "key_idea": "Split the right-hand side of the perturbed-KKT Newton system into a normal (quasi-central) and a tangential (criticality/complementarity) part; the filter coordinates follow the split, and the optimality measure replaces f (pp. 5-7, 10).",
+  "assumptions": "C2 data; bounded iterates, Lipschitz derivatives, uniformly bounded inverse of the KKT Jacobian (A3). A3 excludes infeasible problems and fails on Waechter-Biegler; the optimality measure is admitted to reflect minimization poorly (pp. 6, 13, 25).",
+  "proof_devices": [
+   "disjoint-squares area argument for filter entries giving lim inf theta = 0 (Lemma 10, p. 17)",
+   "case split: infinitely vs finitely many filter additions (Thms 1-2, pp. 21-22)",
+   "transitivity-of-dominance lemma (Lemma 9, p. 17) and the Remark 4 caveat that acceptability is not inherited by dominated pairs (p. 18)",
+   "step estimates of each measure in terms of Delta, with a model-decrease lower bound (Lemma 1, p. 9; appendix Lemma 13, pp. 27-28)",
+   "restoration merit 1/2(||h||^2+||centrality||^2): the normal step is a descent direction, the tangential step is orthogonal (eq. 41, p. 22)"
+  ],
+  "experiments": "No tables. Matlab tests on QP and small NLP called 'encouraging'. A qualitative failure on the Waechter-Biegler example is traced to A3, and an alternative restoration via projected Newton fixes it (pp. 25-26).",
+  "positioning": "Extends Fletcher-Leyffer and Fletcher-Gould-Leyffer-Toint-Waechter SQP-filter ('partially motivated by'); lists merit-function IP methods without criticism; claims priority over later filter-IP papers (p. 2).",
+  "writing": "Contribution sentence first; the base method is re-taught before a bullet list of new features (p. 4); proofs in the appendix; specific hedges and a concrete open-question list (pp. 6, 27).",
+  "limits_future": "Imperfect optimality measure; A3 limits; no numerics. Future: Fortran 90 numerics, 3D filter, local rates with the filter inactive, better filter components, robust restoration (pp. 26-27).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Globalization changes only the acceptance test (nondominance filter instead of merit decrease) and keeps the Newton/trust-region skeleton; the nondominance idea is explicitly borrowed from multicriteria optimization, seven years before DMS.",
+    "pages": "pp. 1-4, 10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Keeps an efficient local core (primal-dual Newton with centrality) and adds a globalization layer, but the core is Newton, not a heuristic, and the glue is a filter, not sufficient decrease.",
+    "pages": "pp. 2, 4, 11-12"
+   },
+   {
+    "method": "Method 5",
+    "relation": "contradiction",
+    "note": "Theory-only paper; solver and numerics are deferred to a future paper.",
+    "pages": "p. 26"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nondominance as a design primitive for single-objective difficulties",
+    "evidence": "Filter replaces the merit function via nondominance 'borrowed from multi-criteria optimization'; recurs in S022 (bilevel) and DMS 2011.",
+    "pages": "pp. 1-3"
+   },
+   {
+    "pattern": "run the class's known counterexample and report the failure",
+    "evidence": "Waechter-Biegler example: bad behaviour diagnosed as an A3 violation, with an alternative restoration shown to work.",
+    "pages": "pp. 25-26"
+   }
+  ],
+  "transferable": [
+   "Split one Newton system's right-hand side into two parts to get two directions from one factorization, each decreasing one measure, with separate step lengths (pp. 6-7).",
+   "When reducing the trust-region-like parameter, keep the directions and rescale only the step lengths min{1, Delta/||s||} (pp. 4, 7, 12).",
+   "Filter proof skeleton: positive theta for entries + disjoint squares + finitely/infinitely many additions (pp. 13, 17, 21-22).",
+   "Run the canonical failure example of the algorithm class, name the violated assumption, and show a remedy (pp. 25-26)."
+  ],
+  "coauthors": "M. Ulbrich, S. Ulbrich",
+  "quotes": [
+   {
+    "text": "However, given that the investigation of filter methods is still in its beginnings, we think that our choice of the optimality measure is appropriate for the purpose of this paper.",
+    "page": 6
+   },
+   {
+    "text": "This paper is hopefully a first step in this challenging topic.",
+    "page": 27
+   }
+  ]
+ },
+ {
+  "id": "S025",
+  "year": "2004",
+  "title": "Pattern search methods for user-provided points: Application to molecular geometry problems",
+  "read_level": "full",
+  "contribution": "A class of (parallel) pattern search methods that uses user-provided points (here physically meaningful geometric deformations of atomic clusters) by rounding them onto the mesh in the search step and using them to select and order a uniform-angle positive basis in the poll step, with released Fortran 95/MPI code and sodium-cluster total-energy experiments.",
+  "problem_entry": "Application-driven: expensive DFT total-energy minimization of sodium clusters, with many local minima and costly or unavailable gradients; incumbent Langevin/Car-Parrinello methods are not parallel, have no stopping rule and need gradients (pp. 1-2).",
+  "key_idea": "Iterate-dependent domain moves cannot define the pattern, so they are projected to the nearest mesh point (search) and used to pick and order the poll basis by angle, over a family of 2n uniform-angle minimal positive bases (pp. 6-10).",
+  "assumptions": "Unconstrained smooth f; inherited theory needs a compact level set, C1 f and an integer-lattice mesh; no theory for global minimization, which the paper states itself (pp. 1, 6).",
+  "proof_devices": [
+   "no new convergence theorem: integer-lattice pattern search theory inherited by keeping all trial points on the mesh (pp. 6, 9)",
+   "Gram-sum derivation that n+1 equiangular unit vectors have cosine -1/n (eqs. 3.1-3.5, p. 7)",
+   "construction V = Q Lambda^{1/2} Q^T plus v_{n+1} = -sum v_i and Corollary 2.1 for a positive basis; Householder + permutation rotations for 2n bases (pp. 7-8)"
+  ],
+  "experiments": "Na4/Na8/Na16/Na32 from 8 (2 for Na32) starts on a 12-PC MPI cluster, reporting iterations, evaluations and energy; empirical fit fevals ~ n^1.6; head-to-head vs PDS 6/9 wins with losses reported; no collection or profiles (pp. 11-14).",
+  "positioning": "Within the Torczon / Audet-Dennis pattern search lineage; credits Meza-Martinez and Hart; criticizes physics incumbents on practical grounds only (pp. 2-3).",
+  "writing": "Physics motivation first, general method in the body, application details in the appendices; generality claim closes the abstract and the conclusion; heavy, honest hedging ('preliminary', 'mildly favorable', 'far from being exhaustively tuned') (pp. 1, 12-14).",
+  "limits_future": "Untuned code, incomplete Na32 runs, no global theory. Future: evolutionary programming/strategies in the search step, other clusters, other uniform-direction patterns (pp. 13-15).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Earliest instance in the corpus: domain moves free in the search step, convergence from the poll and mesh.",
+    "pages": "pp. 5-6, 9-10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The glue is simple decrease on an integer-lattice mesh with rounding, not the sufficient-decrease forcing function of Method 1, Step 3.",
+    "pages": "pp. 4-6, 9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Code released and a real application, but no problem collection, no profiles, and a single baseline (PDS) on a different set-up.",
+    "pages": "pp. 3, 11-14"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Cost reported in function evaluations as an empirical growth exponent in n (about n^1.6), not a worst-case bound.",
+    "pages": "p. 13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "project the domain/heuristic proposal onto the convergence structure",
+    "evidence": "User points rounded to the nearest mesh point by an integer program so lattice theory applies; PSwarm (S005) projects particles onto the mesh.",
+    "pages": "pp. 6, 9"
+   },
+   {
+    "pattern": "use guidance information to order the poll",
+    "evidence": "The poll basis is chosen and ordered by angle to a physics move, a precursor of simplex-gradient poll ordering (Heuristic 7).",
+    "pages": "p. 10"
+   }
+  ],
+  "transferable": [
+   "Round iterate-dependent domain proposals to the nearest mesh point and use them only in the search step, so the convergence proof is untouched (pp. 6, 9).",
+   "Choose and order the poll basis by maximum cosine with a domain-suggested direction (p. 10).",
+   "Uniform-angle minimal positive basis via V = Q Lambda^{1/2} Q^T for A = (1 on the diagonal, -1/n off it), plus Householder/permutation rotations (pp. 7-8).",
+   "Report an empirical scaling exponent by fitting log(fevals) = A + B log n across sizes (p. 13).",
+   "Set search-step parameters as a fixed multiple (x5) of the poll's to separate exploration from polling (p. 11)."
+  ],
+  "coauthors": "P. Alberto, F. Nogueira, H. Rocha",
+  "quotes": [
+   {
+    "text": "The new pattern search methods can be used in any other context where there is an user-provided scheme to generate points leading to potential objective function decrease.",
+    "page": 1
+   },
+   {
+    "text": "We point out that the implementation of PSM:MGP used in these computations is far from being exhaustively tuned.",
+    "page": 14
+   }
+  ]
+ },
+ {
+  "id": "S022",
+  "year": "2006",
+  "title": "Multicriteria approach to bilevel optimization",
+  "read_level": "full",
+  "contribution": "Characterizes solutions of (nonlinear, unconstrained) bilevel problems as the nondominated points of an order relation built from the whole bilevel problem; relaxes it via lower-level first-order conditions; and gives a nonconvex four-criteria cone whose nondominated points are bilevel optimal under lower-level convexity, with a discussion of scalarization (linear fails, quadratic works in an example).",
+  "problem_entry": "History of failed links: linear bilevel-bicriteria equivalences refuted by counterexamples; Fuelop only characterized linear feasible sets; motive is derivative-free bilevel design via one-level reformulation (pp. 1-2, 12).",
+  "key_idea": "Build the multicriteria problem from the whole bilevel problem, including lower-level optimality, rather than from the two objectives. Encode optimality in an order relation, replace argmin by a gradient condition, and induce the order by a nonconvex cone (pp. 2, 7-9).",
+  "assumptions": "Unconstrained bilevel, lower level C1 in y (convex in y for equivalence); the cone is admitted nonconvex, and scalarization choice is 'highly problem dependent' (pp. 8-9, 11).",
+  "proof_devices": [
+   "order relation defined so that 'solution iff nondominated' follows from the definition (Thm 6, p. 8)",
+   "replace the argmin condition by a first-order condition and track the one-way inclusion of nondominated sets (eq. 7, p. 8)",
+   "cone-induced order properties and monotone scalarization theorems (Thms 1-5, pp. 3-6)",
+   "two-variable example as a negative test of linear scalarization (pp. 9-10; formulas garbled in extraction)"
+  ],
+  "experiments": "none (one analytic example, pp. 9-10)",
+  "positioning": "Against the linear bilevel/bicriteria literature via its counterexample list; credits Fuelop as the first to see that more than two criteria are needed; differs in nonlinearity, solutions vs feasible points, and use of lower-level optimality (pp. 1-2).",
+  "writing": "Short definition-theorem-corollary paper with a skip-ahead background section; candid admissions ('Unfortunately', 'none of which seems totally satisfactory'); the DFO motivation is saved for the conclusion (pp. 2, 8-9, 12).",
+  "limits_future": "Nonconvex cone blocks standard scalarization; scalarization choice open; three-level case unsatisfactory; no algorithm. Future: study scalarization on particular bilevel classes (pp. 9-13).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "variant",
+    "note": "Problem-level version: redefine what counts as better (an order relation or cone) so existing multicriteria and DFO machinery can be reused, rather than changing an algorithm's acceptance test.",
+    "pages": "pp. 7-9, 12"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Supports the Workflow E checkpoint: linear (fixed-weight) scalarization fails for the nonconvex cone, while quadratic scalarization recovers the solution.",
+    "pages": "pp. 9-10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "nondominance as a unifying lens",
+    "evidence": "Bilevel solutions characterized as nondominated points; same lens as the S007 filter and DMS 2011.",
+    "pages": "pp. 2, 8"
+   },
+   {
+    "pattern": "reformulate to reuse existing DFO solvers",
+    "evidence": "Stated aim: a one-level reformulation so that existing derivative-free algorithms and implementations can be applied.",
+    "pages": "p. 12"
+   }
+  ],
+  "transferable": [
+   "To link class A with class B, define the order that makes A's solutions exactly B's nondominated points, then replace intractable parts with checkable necessary conditions and state the inclusion direction (pp. 7-8).",
+   "For a nonconvex cone that is a union of convex cones, scalarize with the minimum of one monotone function per piece (p. 9).",
+   "Test a scalarization on a tiny example with a known answer before recommending it (pp. 9-10).",
+   "Open with the chronological counterexample list that sank earlier formulations (pp. 1-2)."
+  ],
+  "coauthors": "J. Fliege",
+  "quotes": [
+   {
+    "text": "It should not be seen as a surprise that the optimal solution of a bilevel problem can be dominated in terms of upper and lower level functions.",
+    "page": 2
+   },
+   {
+    "text": "It is important to stress the high complexity of hierarchical optimization problems and to convey the point that the jump from two-level to three-level should not be regarded as a simple increase in dimensionality.",
+    "page": 12
+   }
+  ]
+ },
+ {
+  "id": "S005",
+  "year": "2007",
+  "title": "A particle swarm pattern search method for bound constrained global optimization",
+  "read_level": "full",
+  "contribution": "PSwarm: one particle-swarm iteration per search step of coordinate search (poll around the swarm leader), with bounds via extreme barrier, stationarity convergence from pattern search theory, an expected-velocity termination analysis, a C/AMPL solver, a public 122-problem collection, and profile-based benchmarks and an ablation.",
+  "problem_entry": "Pattern search is local but has a free search step; particle swarm is simple and parallel but unguaranteed; the goal is to incorporate the swarm into pattern search without losing convergence to stationary points (pp. 1-3).",
+  "key_idea": "Search = one PSO step (velocity rule unchanged, points ideally projected onto the mesh); poll = D+ coordinate directions around the leader; consecutive successful searches are plain PSO; hybrid stopping on alpha and velocities (pp. 8-10).",
+  "assumptions": "Bounded level set and integer-lattice mesh for Thm 5.1; strict differentiability or C1 for stationarity; Thm 5.2 treats swarm quantities as random with constant expected bests, which the authors say is hard to verify rigorously (pp. 6-7, 10-13).",
+  "proof_devices": [
+   "integer-lattice argument: a subsequence of unsuccessful iterations with alpha -> 0 (Thm 5.1, p. 10); sufficient decrease named as the alternative to integrality (pp. 10-11)",
+   "expected-velocity second-order linear recurrence with characteristic roots a, b; max{|a|,|b|} < 1 gives E(v) -> 0 and almost-sure finite termination (Thm 5.2, pp. 11-13)",
+   "informal justification of assumptions: monotone bounded best values, and projection error proportional to alpha (pp. 13-14)"
+  ],
+  "experiments": "122 AMPL bound-constrained global problems (public); DIRECT, ASA, MCS, PGAPack at defaults; budgets 1000 and 10000 evaluations; 30 runs per stochastic solver; profiles of best/average/worst final f with a shifted ratio, plus evaluation profiles; ablation vs coordinate search alone and PSO alone (pp. 14-27).",
+  "positioning": "Search/poll view of Audet-Dennis as the natural host for heuristics; cites S025 and surrogate search steps; explicit difference from Hart's evolutionary pattern search (deterministic alpha -> 0); benchmarking after Dolan-More and Ali et al. (pp. 2-3, 5, 16-17).",
+  "writing": "Goal sentence in the introduction; one-line mechanism claim that the poll guarantees convergence (p. 6); explicit theory hedge (p. 13); losses reported ('loses in performance against DIRECT and MCS', p. 18), but the conclusion claims more robustness than the profiles strictly show (p. 28).",
+  "limits_future": "Only stationarity guaranteed; Thm 5.2 assumptions unverifiable; mesh projection not implemented in the code; no tuning; Lennard-Jones poorly solved. Future: parallel version, general constraints, PSO on a surrogate in the search step (pp. 13, 15, 24-28).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The canonical case: the heuristic in the search step with its own velocity rule intact; 'It is the poll step that guarantees the global convergence'.",
+    "pages": "pp. 6, 8-10"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Glue is an integer-lattice mesh with simple decrease, not sufficient decrease (the paper names sufficient decrease as an alternative). The released code does not project swarm points onto the mesh, so the solver is not exactly the analysed algorithm.",
+    "pages": "pp. 10-11, 15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Solver + public 122-problem collection + profiles + default-setting baselines + ablation of hybrid vs heuristic alone vs safeguard alone (Workflow B ablation already in 2007).",
+    "pages": "pp. 14-18, 26-27"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Function evaluations are the fair unit of comparison, but there is no worst-case evaluation bound.",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "analyse the heuristic's own termination separately",
+    "evidence": "The expected-velocity recurrence with root moduli < 1 justifies the hybrid stopping rule.",
+    "pages": "pp. 11-13"
+   },
+   {
+    "pattern": "disclose where the code departs from the analysed algorithm",
+    "evidence": "The mesh projection required by the theory is not implemented in the search step; compare S007 (A3 failure) and S022 (open scalarization).",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "project the domain/heuristic proposal onto the convergence structure",
+    "evidence": "Particles projected onto the pattern-search mesh (in theory), as with user points in S025.",
+    "pages": "pp. 8-9"
+   }
+  ],
+  "transferable": [
+   "Run one heuristic iteration per search step and centre the poll at the heuristic's best point (pp. 8-10).",
+   "Handle bounds with an extreme barrier plus D+ instead of projections in the pattern-search part (pp. 6-7).",
+   "Prove termination of a stochastic heuristic via an expected-value linear recurrence and a root-modulus bound (pp. 11-13).",
+   "Profile the final objective value under fixed evaluation budgets (best/average/worst of 30 runs), with the shift r = 1 + t - min when min < eps (p. 17).",
+   "Ablate the hybrid against each component alone with identical parameters (pp. 26-27).",
+   "Enforce evaluation budgets in wrappers and report solvers that overshoot them (p. 16).",
+   "Remove population members within alpha(0) of the leader to save evaluations (pp. 15-16)."
+  ],
+  "coauthors": "A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "It is the poll step that guarantees the global convergence of the pattern search method.",
+    "page": 6
+   },
+   {
+    "text": "A fair comparison among different solvers should be based on the number of function evaluations, instead of based on the number of iterations or on the CPU time.",
+    "page": 16
+   }
+  ]
+ }
+]

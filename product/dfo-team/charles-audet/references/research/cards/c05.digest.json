@@ -1,0 +1,367 @@
+[
+ {
+  "id": "S112",
+  "year": "2025",
+  "title": "Inter-DS: a cost saving algorithm for expensive constrained multi-fidelity blackbox optimization",
+  "read_level": "full",
+  "contribution": "A solver-agnostic wrapper around a multi-fidelity blackbox. Each constraint is assigned to the lowest fidelity trusted to predict its feasibility, through a biadjacency matrix that minimises expected evaluation time under a misidentification bound ε. Evaluations of points predicted infeasible are interrupted early. The matrix-design MINLP reduces to an exhaustive search (text file is arXiv v2, titled 'Fidelity and interruption control for expensive constrained multi-fidelity blackbox optimization').",
+  "problem_entry": "An industrial time budget (Hydro-Québec PRIAD) where some constraint violations are predictable at low fidelity. Parallelism is ruled out with a processor count, and multi-fidelity use in constrained direct search is found to be under-researched (pp. 2-4).",
+  "key_idea": "Use fidelity to cut cost, not to guide search: sub-evaluate in increasing fidelity and stop at the first violated assigned constraint. Force a full-fidelity check only when a point is about to become the incumbent (Alg. 3.1, pp. 6-8).",
+  "assumptions": "A1-A4 (extra checks ignored; satisfied at assigned fidelity implies satisfied above, admitted violated in ≤ε cases; violation probability monotone in fidelity; time monotone in fidelity) plus independence across constraints. All are needed only for the subproblem theory, and convergence is 'inherited' from the solver without proof (pp. 10, 12, 14).",
+  "proof_devices": [
+   "expected sequential cost Σ t_i y_i Π_{k<i} P_k(B), with P_k(B)=Π_j(1−p_kj B_kj) (eqs. 7-9, pp. 9-10)",
+   "variable elimination y_i(B) and index i(j)=min{i: r_ij ≥ 1−ε} turning Q into Q1 (p. 11)",
+   "exchange lemma: shifting a row down one fidelity keeps feasibility (Lemma 1) and does not increase cost via a four-term split of f(B) (Lemma 2), iterated to prove Theorem 3 (pp. 12-13)",
+   "reduction to exhaustive enumeration over Ω_Q after filtering fidelities and a-priori constraints (p. 14)"
+  ],
+  "experiments": "SOLAR solar2/3/4/7 with NOMAD 4 in three variants (Inter PB, Inter EB, base case at fidelity 1), no other solvers. Data profiles on blackbox time with the LH time charged, 20 runs per instance. The method fails without x0 on solar3/4, is better with x0 (EB best when feasible points are scarce), and correctly reduces to the base case on solar7 (pp. 16-19).",
+  "positioning": "Continues the group's PB/PEB/interruptible-EB line (ORL 2022) and combines Razavi preemption with Polak-Wetter increasing fidelity. Contrasts with BO/GP multi-fidelity (unconstrained, sampling-guiding) and criticises analytical multi-fidelity benchmarks (pp. 3-5).",
+  "writing": "The abstract states the conditional/negative outcome, a Fig. 2 timeline gives the intuition before the model, and the discussion lists 'favorable conditions' as bullets. The title differs between arXiv and the journal (pp. 1, 7, 19-20).",
+  "limits_future": "Needs homogeneous constraint behaviour inside the LH box and ideally a feasible x0. B is static, and the EB/PB choice is problem-dependent. Future: dynamic B, ML classifiers, trust-region tools, a multi-fidelity barrier, application to PRIAD (pp. 17, 20).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "unrelaxable bounds, quantifiable c_j, hidden failures as ∞, a-priori constraints checked first; EB vs PB tested",
+    "pages": "pp. 2, 6, 16"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "the barrier choice depends on the wrapper (interrupted points return non-true outputs, so EB may suit better), not only on constraint semantics",
+    "pages": "pp. 16, 20"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "the new idea sits in the blackbox interface, outside both Search and Poll; convergence 'inherited' from the solver, asserted not proved",
+    "pages": "p. 14"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "PRIAD motivation tested on released SOLAR, the only suite with fidelity-dependent constraints",
+    "pages": "pp. 2, 16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "currency is blackbox time (not evaluation count), with preprocessing time charged; no other-family solver",
+    "pages": "pp. 16-19"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "implemented on NOMAD 4 because it 'can easily be modified'",
+    "pages": "p. 16"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "evidence",
+    "note": "exploits exposed fidelity structure while keeping a direct-search backbone",
+    "pages": "pp. 5-6, 14"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Solver-agnostic blackbox wrapper",
+    "evidence": "interruption logic lives in the evaluation function so any solver benefits; the solver sees interruptions as part of the blackbox",
+    "pages": "p. 14"
+   },
+   {
+    "pattern": "Report the degenerate-to-baseline and failure instances",
+    "evidence": "solar7: optimal B puts all constraints at φ=1, identical to the base case; solar3/4 without x0: every point estimated infeasible",
+    "pages": "pp. 17, 19"
+   }
+  ],
+  "transferable": [
+   "Put a cost-saving mechanism in a wrapper around the blackbox rather than inside the solver (p. 14).",
+   "Incumbent guard: trust cheap outputs for rejection, re-evaluate at full fidelity only before accepting a new best (Alg. 3.1, pp. 7-8).",
+   "Replace a bi-objective design choice with a threshold ε and minimise expected time alone (p. 9).",
+   "Exchange lemma plus enumeration instead of calling a MINLP solver (Lemmas 1-2, Thm 3, pp. 12-13).",
+   "Charge preprocessing time on the profile axis (curves start after LH time) (pp. 18-19)."
+  ],
+  "coauthors": "S. Alarie, M. Diago, S. Le Digabel, X. Lebeuf",
+  "quotes": [
+   {
+    "text": "This is possible since the interruption mechanism is not implemented in the solver, but as a wrapper around the blackbox.",
+    "page": 14
+   },
+   {
+    "text": "As a result, when using Algorithm 3.2 with those two instances, every evaluated point is systematically estimated to be infeasible.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S120",
+  "year": "2025",
+  "title": "The cosine measure relative to a subspace",
+  "read_level": "full",
+  "contribution": "Defines the cosine measure and cosine vector set relative to a subspace, for possibly infinite sets. Characterises positive spanning and the case cm_D(D)=0, gives projected-gradient error bounds at a failed poll (O(Δ) and, for symmetric sets, O(Δ²)), and gives an exact deterministic algorithm for cm relative to span(D).",
+  "problem_entry": "The classical cosine measure needs a finite set and returns 0 for any positive spanning set of a proper subspace, so it is useless for the subspace-decomposition methods now gaining traction (pp. 2, 4, 11).",
+  "key_idea": "Replace the minimum over unit vectors of ℝⁿ with a minimum over unit vectors of a subspace L (and max with sup). This recovers the classical measure when L=ℝⁿ, detects whether pspan(D)=L, and bounds ‖P_D∇f‖ after a failed poll (Def. 6, Prop. 22, Thm 31, pp. 4, 11, 15).",
+  "assumptions": "D is a non-empty set of non-zero vectors, closed in the main results (harmless: closure preserves cm) and finite for the algorithm; ∇f Lipschitz, or ∇²f Lipschitz with symmetric directions, for the error bounds (pp. 4, 6, 15, 17).",
+  "proof_devices": [
+   "Carathéodory to extract a finite positive spanning subset (Cor. 12, p. 7)",
+   "half-space separation lemma giving pspan(D)=L iff every v in L has some d with vᵀd>0 (Lemma 17, Prop. 18, pp. 8-9)",
+   "orthogonal split v = P_D v + v⊥ (Prop. 19, Cor. 23, pp. 9, 11)",
+   "perturbation u' = u* + εv* of an optimal cosine vector for contradiction (Lemma 27, p. 13; Thm 38, pp. 19-20)",
+   "reductionist descent to strictly smaller subsets (Thm 28, p. 14)",
+   "Taylor remainder + cosine inequality for ‖P_D∇f‖ ≤ ½ L cm_D⁻¹ Δ_D; symmetric pair d, −α_d d cancels the Hessian term for an O(Δ²) bound (Thm 31, pp. 15-16)",
+   "exactness of the SOCP convex relaxation when pspan ≠ span by normalisation (Lemma 33, p. 18)",
+   "a counterexample for each hypothesis or converse (Examples 8, 15, 21, floating ring, non-closed set; pp. 5-11)"
+  ],
+  "experiments": "none ('No datasets were generated or analysed', p. 21); MATLAB code available on request.",
+  "positioning": "Extends Davis 1954, Regis, Hare & Jarry-Bolduc 2020 and Nævdal. Results are framed as extensions of named theorems, and Thm 31(i) reproduces the Conn-Scheinberg-Vicente bound (pp. 11, 15, 17, 20). No criticism of prior work.",
+  "writing": "Definition-proposition-example rhythm with a running example revisited after each result. Candid about incremental value. Hedged abstract ('might be useful') vs a strong introduction ('will be of high value'). The conclusion enumerates results by number (pp. 1-2, 8, 10, 21).",
+  "limits_future": "The algorithm handles finite sets only (an infinite-set algorithm is an 'obvious future research direction'). Applications to subspace methods (stopping tests, subspace-switch flags, next step after a failed poll) are suggested but untested. The cost of basis enumeration is not discussed (pp. 16-17).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "every characterisation is bounded by counterexamples showing which hypothesis or converse fails",
+    "pages": "pp. 5-11"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "the ladder is over properties of direction sets (finite/infinite, closed, positive spanning of span), not smoothness of f; Thm 31 is a non-asymptotic error bound, partly countering SKILL.md's 'quantitative guarantees absent'",
+    "pages": "pp. 6-15"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "sharpens what a failed poll certifies and what to poll next when D is not positive spanning",
+    "pages": "pp. 15-17"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "no NOMAD integration; MATLAB code only on request",
+    "pages": "p. 21"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "cm relative to ℝⁿ equals the classical cm; Thm 31(i) with L=ℝⁿ reproduces Thm 30 [CSV, Thm 2.8]",
+    "pages": "pp. 5, 15"
+   },
+   {
+    "pattern": "Complete-with-one-vector dichotomy",
+    "evidence": "adding w = −Σ b_j makes any set positive spanning in its span; either the new step decreases f or the projected gradient is small",
+    "pages": "pp. 8, 16-17"
+   }
+  ],
+  "transferable": [
+   "When a measure degenerates on your objects, relativise it to the natural subspace and check that the classical measure is the special case (pp. 4-5).",
+   "Symmetric-direction cancellation: combine the Taylor expansions along d and −α_d d to kill the Hessian term and get an O(Δ²) gradient bound (Thm 31(ii), pp. 15-16).",
+   "Add one vector w = −Σ b_j to make a set positive spanning in its span, giving a 'decrease or small projected gradient' dichotomy (Prop. 16, Cor. 32, pp. 8, 16-17).",
+   "Split an algorithm on an LP-decidable case: exact enumeration vs an exact convex relaxation (Alg. 1, Lemma 33, pp. 17-18).",
+   "After each iff, give the smallest example showing a needed hypothesis or a failing converse (pp. 5-11)."
+  ],
+  "coauthors": "W. Hare, G. Jarry-Bolduc",
+  "quotes": [
+   {
+    "text": "The extended definition of the cosine measure might be useful for subspace decomposition methods.",
+    "page": 1
+   },
+   {
+    "text": "The results herein will be of high value in understanding the subspace decomposition methods which are recently gaining traction in [2,5,9,16,18,27].",
+    "page": 2
+   }
+  ]
+ },
+ {
+  "id": "S121",
+  "year": "2025",
+  "title": "CatMADS: Mesh Adaptive Direct Search for constrained blackbox optimization with categorical variables",
+  "read_level": "full",
+  "contribution": "CatMADS extends MADS to categorical, integer and continuous variables with the progressive barrier. Categorical polls use distance-induced neighbourhoods, integers use the granular mesh, and a PB-compatible ξ-extended poll selects among four named mixed-variable local-minimum types. A cross-validated-distance instance beats Pymoo, Optuna and BoTorch on the new 32-problem Cat-Suite.",
+  "problem_entry": "Applications with categorical choices (hyperparameters, turbine types, aircraft design). Direct search lags BO and metaheuristics here. MV-MADS needs arbitrary user-defined neighbourhoods, lumps integers with categories and uses only the EB (pp. 2-4).",
+  "key_idea": "Replace hand-made neighbourhoods with the m nearest categorical components under a (learned) distance, which generalises every user-defined neighbourhood. Keep MADS's search/poll/mesh and the PB (Defs. 1-2, p. 7; §2.3-2.4).",
+  "assumptions": "x0 with finite f, iterates in a compact set, finite categorical set; f restricted to the continuous variables Lipschitz near the refined point; dense refining directions; semicontinuity for Thm 4; converging neighbourhoods, ensured by fixing m and d^cat (pp. 3, 12, 15, 17-18).",
+  "proof_devices": [
+   "four local-minimum types in a hyphen/comma nomenclature: [cat−int−cont], [cat,int,cont], [cat−cont,int], [cat−cont,cat−int] (Defs. 9-12, pp. 12-14)",
+   "refining subsequence extended with converging m(k) and neighbourhoods (Def. 13, p. 15)",
+   "nested subsequence extraction K5⊆…⊆K1 using the finiteness of the categorical/integer/m sets (Thm 1, p. 15)",
+   "reduction to MADS/PB Clarke results on the continuous restriction f⋆, h⋆ with discrete parts fixed (Thms 2-3, pp. 17-18)",
+   "semicontinuity limit passage f(x⋆) ≤ f(y⋆) and a case split that forces infinitely many extended polls (Thm 4, p. 18)",
+   "ξ ↔ local-minimum type correspondence (p. 20)"
+  ],
+  "experiments": "Cat-Suite, 32 analytical mixed-variable problems (16 constrained), budget 250n, 5 seeds (160 instances), data profiles at τ=1e-1/1e-3/1e-5. Compared with Pymoo GA, Optuna CMA-ES and BoTorch BO from the same DoE; BoTorch stopped by its own criterion. ξ=0.05 is tuned first; CatMADS ~70% vs Pymoo 30% at 1e-5 (pp. 19-25).",
+  "positioning": "Improves the group's own MV-MADS and reuses G-MADS, the PB and the 2001 extended poll. Directly contrasts with BO kernel approaches and metaheuristics, which 'lack' convergence guarantees (pp. 3-5).",
+  "writing": "Five numbered objectives, RG/RBG toy figures carrying the definitions, a coined nomenclature, an 'intentionally simple' implementation framing, strong claims ('strongly dominates') (pp. 4, 13, 19, 23).",
+  "limits_future": "Local method; a DoE costing 20% of the budget; strongest minimum not covered; meta variables excluded; analytical tests only. Future: hybridise with BO, exploration searches, deep-model hyperparameter tuning (pp. 3, 13, 20, 24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "searches bring performance, polls carry guarantees; the optional extended poll is 'labeled as a poll, since it affects the convergence guarantees'; finite extended polls keep Thm 1",
+    "pages": "pp. 4, 6, 15, 21"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "hidden and unrelaxable constraints set f=+∞; relaxable/quantifiable handled by the PB, replacing MV-MADS's EB",
+    "pages": "pp. 2, 4, 9-10"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "the guarantee ladder runs along a cost-vs-strength axis (four minimum types chosen by ξ), not smoothness; no counterexamples to hypotheses",
+    "pages": "pp. 12-14, 20"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "new public Cat-Suite (32 problems) and prototype repo; problems analytical rather than real blackboxes",
+    "pages": "pp. 19, 24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "evaluation budget 250n, data profiles, 5 seeds, three other-family competitors, same DoE, fairness caveat for BoTorch",
+    "pages": "pp. 22-23"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "prototype built on NOMAD's G-MADS, PB, speculative and quadratic searches",
+    "pages": "p. 19"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "evidence",
+    "note": "thesis-to-paper: PhD student first and corresponding author",
+    "pages": "p. 1"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "distance-induced neighbourhoods contain every MV-MADS user-defined neighbourhood",
+    "pages": "p. 7"
+   },
+   {
+    "pattern": "Optimality strength as a user knob",
+    "evidence": "ξ<0, ξ∈ℝ+ and ξ=∞ map to named local-minimum types; ξ is then chosen by data profiles",
+    "pages": "pp. 20, 23"
+   }
+  ],
+  "transferable": [
+   "Replace a hand-made discrete neighbourhood with 'the m nearest under a distance learned once from the DoE by 3-fold cross-validated inverse-distance interpolation' (pp. 7, 20).",
+   "Tune your own algorithmic knob by data profiles before the head-to-head and publish that figure (Fig. 6, pp. 23-24).",
+   "Name partially-joint optimality notions with a hyphen/comma scheme and one picture per type (pp. 13-14).",
+   "Build mixed-variable test problems from classic continuous ones by making continuous variables depend on categories or by casewise definitions (p. 19).",
+   "Fix the categorical distance and neighbour count after some iteration so neighbourhoods converge and the refining-subsequence theory applies (p. 15)."
+  ],
+  "coauthors": "Y. Diouane, E. Hallé-Hannan, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "The main advantage of CatMADS over alternative methods is its convergence guarantees and theoretical results, which BO or metaheuristic methods lack.",
+    "page": 3
+   },
+   {
+    "text": "The extended poll is optional, but is labeled as a poll, since it affects the convergence guarantees.",
+    "page": 6
+   }
+  ]
+ },
+ {
+  "id": "S129",
+  "year": "2025",
+  "title": "Adaptive direct search algorithms for constrained optimization",
+  "read_level": "full",
+  "contribution": "ADS, a new class of directional direct search. The mesh is replaced by a punctured space (the complement of δ-balls around visited points) under a simple-decrease rule, so search points go anywhere. The paper proves lim δ=0 and Clarke-Jahn stationarity, shows OrthoMADS and QRMADS are ADS instances, and reports gains over MADS and SDDS, notably on SOLAR10 and Simplified-Wing.",
+  "problem_entry": "Two rival DDS families: MADS restricts placement but accepts any decrease, SDDS places freely but rejects small improvements. Two 1D examples each isolate one family's failure (pp. 1-6).",
+  "key_idea": "Keep simple decrease, and enforce point separation with an exclusion radius δ around visited points instead of a mesh. Improving search points too close to visited points re-centre the poll, and poll points inside the exclusion balls are skipped (Def. 3.1, Alg. 1, pp. 7-10).",
+  "assumptions": "Compact closure of the level set; f Lipschitz near the refined point; refining directions in the hypertangent cone (generated, not necessarily evaluated); δ/Δ → 0 via δ = min{Δ, Δ²/Δ0}; EB constraints only; τ need not be rational (pp. 11-14).",
+  "proof_devices": [
+   "ε-separation of successful iterates plus Bolzano-Weierstrass to get lim δ^k = 0, not just lim inf (Thm 4.1, p. 12)",
+   "corrected poll point y^k = p^k + Δ^k(v^k + (δ^k/Δ^k) w^k), ‖w^k‖≤1, replacing skipped trial points (eq. 5, Fig. 6, p. 14)",
+   "Clarke-Jahn generalized derivative with MADS Prop. 3.9 (Thm 4.4, pp. 13-14)",
+   "embedding the union of rational-τ meshes into one finer mesh and a minimum-distance bound µ q^{-ẑ_k} δ̄^k (Lemma 4.3, Prop. 4.4, pp. 15-16)",
+   "parameter map (δ shrunk by τ/q, failure counter n_U) plus induction on iterations to show OrthoMADS = ADS instance (Table 1, Lemma 4.5, Thm 4.6, pp. 16-18)"
+  ],
+  "experiments": "One Python code base for ADS/MADS/SDDS, with and without a quadratic search. Moré-Wild 53 problems smooth/nonsmooth × 20 seeds; 16 CUTEst constrained × 20 seeds with admitted bias toward MADS; mechanism statistics (Table 3); SOLAR10 with 30 LHS starts, one seed, 240 evaluations; Simplified-Wing with 30 feasible starts, 1200 evaluations; data profiles (pp. 19-25).",
+  "positioning": "Bridges mesh-based (GPS/MADS/OrthoMADS/QRMADS) and sufficient-decrease (Lucidi-Sciandrone, GSS, CS-DFN, TREGO) methods. Credits GLODS for a similar set and reuses the 2024 revealing-poll idea. Both rivals are shown winning on one example (pp. 2-7).",
+  "writing": "Motivating toy examples before the method, a flowchart and geometric figures, 'family/new class' framing. Abstract claims are later scoped to 'the two real engineering blackbox problems'. v1 typos (pp. 5-9, 25).",
+  "limits_future": "EB only; SOLAR10 has a single seed; no complexity result although sufficient decrease is noted to enable one; competitors only from the DDS family. Future: PB integration, adapting search strategies, NOMAD integration (pp. 4, 24-25).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "the search is freed further (no mesh projection; an improving search point re-centres the poll) while the poll still ensures convergence; answers the SKILL.md limitation that the mesh restricts trial points",
+    "pages": "pp. 4, 9, 14"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "MADS-style refining-subsequence/Clarke-Jahn ladder; the rational-τ hypothesis from the 2004 tightness paper is shown unnecessary for ADS; reuses the counterexample-driven revealing poll",
+    "pages": "pp. 7, 11-14"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "one code base, seeds, data profiles in n+1 groups, analytical plus two realistic blackboxes, admitted test-set bias, mechanism counters",
+    "pages": "pp. 19-24"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "no competitor from another family (all DDS)",
+    "pages": "p. 19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "SOLAR10 and Simplified-Wing with published starting points",
+    "pages": "pp. 23-24"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "'ADS will be integrated into the NOMAD solver'",
+    "pages": "p. 25"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "Generalize-and-recover",
+    "evidence": "OrthoMADS and QRMADS proved to be particular ADS instances",
+    "pages": "pp. 17-19"
+   },
+   {
+    "pattern": "Rival-failure toy examples",
+    "evidence": "f1 (SDDS stalls at saddle) and f2 (MADS mesh projection wastes evaluations), then ADS matches the best on each",
+    "pages": "pp. 5-6, 20"
+   },
+   {
+    "pattern": "Reconcile two rival families with a third acceptance rule",
+    "evidence": "punctured space combines simple decrease (mesh family) with free placement (sufficient-decrease family)",
+    "pages": "pp. 1-2, 25"
+   }
+  ],
+  "transferable": [
+   "Replace a lattice with an exclusion-ball condition around visited points; compactness still bounds successes, and lim inf becomes lim (Def. 3.1, Thm 4.1, pp. 7, 12).",
+   "Corrected poll point: reuse a nearby visited point in place of a skipped trial point and bound the direction error by δ/Δ (eq. 5, p. 14).",
+   "Coupled update δ = min{Δ, Δ²/Δ0} to get δ/Δ → 0 whenever δ → 0 (p. 11).",
+   "Prove your flagship old algorithm is an instance of the new framework via a parameter map and induction (Table 1, Thm 4.6, pp. 17-18).",
+   "Implement all compared methods in one code base, differing only in the studied mechanism, and report mechanism counters beside profiles (p. 19; Table 3, p. 23).",
+   "Admit test-set bias that favours a competitor (pp. 21-22)."
+  ],
+  "coauthors": "T. Denorme, Y. Diouane, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "This work introduces a new class of methods, Adaptive Direct Search (ADS), which uses a novel acceptance rule based on the so-called punctured space, avoiding both meshes and sufficient decrease conditions.",
+    "page": 1
+   },
+   {
+    "text": "This projection introduces a displacement that may not decrease as fast as the accuracy of the model.",
+    "page": 22
+   }
+  ]
+ }
+]

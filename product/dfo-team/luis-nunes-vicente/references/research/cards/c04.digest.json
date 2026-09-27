@@ -1,0 +1,305 @@
+[
+ {
+  "id": "S018",
+  "year": "2009",
+  "title": "PSwarm: A hybrid solver for linearly constrained global derivative-free optimization",
+  "read_level": "full",
+  "contribution": "Extends the PSwarm hybrid (particle swarm in the search step, coordinate/tangent-cone polling) from bounds to general linear inequality constraints, with a feasible maximum-volume-ellipsoid initial swarm, ratio-test-damped particle moves, and ε-active tangent-cone polling. It is benchmarked on a 110+10-problem AMPL collection with a new 'function profile'. The paper contains no convergence theorem.",
+  "problem_entry": "Global DFO practice relies on heuristics with little benchmarking (p. 2), and the bound-constrained PSwarm could not handle general, often unrelaxable, linear constraints (pp. 5, 18).",
+  "key_idea": "Keep PSO as the search step and coordinate-type polling around the best particle. Make the swarm feasible (MVE initialisation, per-component and per-constraint ratio tests) and poll along positive generators of the ε-active tangent cone with ε = O(α), falling back to D⊕ (pp. 6–11).",
+  "assumptions": "Linear inequalities only (unrelaxable, so a feasible method is used); f possibly nonsmooth or noisy; MVE needs a bounded region, full-rank A and a strictly feasible point. No convergence theory: mesh projection omitted, sufficient decrease ignored, and a D⊕ fallback in the degenerate case (pp. 3, 7, 8, 10–11).",
+  "proof_devices": [
+   "none (no lemmas or theorems in the paper, checked pp. 1–22)",
+   "constructive: tangent-cone generators D = [B −B N −N] from a QR of C̄ᵀ, with ε halved until C̄ has full row rank (Algorithm 3.2, p. 11)",
+   "constructive: ratio-test step lengths keeping particles feasible (eqs. 8–9, p. 9)"
+  ],
+  "experiments": "110 linearly constrained AMPL problems (from 1564) and 10 random-constraint nonconvex problems; baselines ASA, NOMADm, DIRECT; 10 runs per stochastic solver; performance profiles of min/avg/max final value at 2000/10000 evaluations; function profiles (evaluations to relative error τ = 0.1); no initial guesses for fairness (pp. 11–18, 20).",
+  "positioning": "Criticises heuristic-only global DFO practice; builds on Vaz & Vicente 2007; adopts Kolda–Lewis–Torczon's ε = O(α) without their sufficient decrease; simplifies NOMADm's degeneracy handling; rejects data profiles for stated reasons (pp. 2, 10, 13, 17).",
+  "writing": "The algorithm box marks in bold what changed from the prior version; contributions come in three layers (extension, benchmark collection, function profiles); candid about process ('intensive testing') and doubt on nonlinear constraints (pp. 6, 18–20).",
+  "limits_future": "Nonlinear constraints are open and a penalty/augmented-Lagrangian route 'might not be the way to proceed'; the degenerate fallback is not covered by theory; no guarantee is stated for the linear-constraint version (pp. 10–11, 20).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "PSO in the optional search step, poll around the best particle",
+    "pages": "pp. 2, 5"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The glue is simple decrease on a mesh, and the implementation drops the mesh projection and explicitly declines sufficient decrease; so SKILL.md's claim that sufficient decrease, not a mesh, is the glue does not hold for the 2009 paper",
+    "pages": "pp. 5, 7, 10–11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Only the poll set (tangent-cone generators) and search feasibility change for linear constraints; extreme barrier for unrelaxable constraints (Heuristic 6)",
+    "pages": "pp. 5–7, 9–11"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Shared collection, repeated runs for stochastic solvers, new function profile, modified performance ratio",
+    "pages": "pp. 11–18, 20"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "No comparison against the raw, unsafeguarded particle swarm (step 4)",
+    "pages": "pp. 12–13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "Omits mesh projection, ignores sufficient decrease, falls back to D⊕ under degeneracy, and says so with reasons",
+    "pages": "pp. 7, 10–11"
+   }
+  ],
+  "transferable": [
+   "Sample an initial population in a polytope from its maximum-volume inscribed ellipsoid x = q + ϱ^{1/n}Eς, adding fictitious bounds only for this purpose (pp. 7–8)",
+   "Keep a population heuristic feasible by scaling each particle's displacement with per-component bound ratio tests and then a linear-constraint ratio test (eqs. 8–9, p. 9)",
+   "Tangent-cone generators: halve ε from min(ε_init, 10α) until the ε-active rows have full row rank, D = [B −B N −N] from a QR, fallback D⊕ (Algorithm 3.2, p. 11)",
+   "For stochastic solvers, profile best, average and worst of 10 runs separately; use ratio 1 + t − min t when min t is near 0 (pp. 14–15, 20)",
+   "Withhold initial guesses from all solvers and draw them at random in common bounds for fairness (p. 13)",
+   "Report hybrid instrumentation (share of iterations reaching the poll, poll success rate) (p. 14)"
+  ],
+  "coauthors": "A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "However, our numerical experience has shown us that this is a robust and efficient way of handling degeneracy.",
+    "page": 11
+   },
+   {
+    "text": "It is not clear to us how to proceed toward this goal.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S012",
+  "year": "2010",
+  "title": "Incorporating minimum Frobenius norm models in direct search",
+  "read_level": "full",
+  "contribution": "Adds to SID-PSM's coordinate-search skeleton a search step that minimises minimum-Frobenius-norm (or regression) quadratic models built from all previously evaluated points in a step-size-tied trust region. Data profiles show clear gains over other direct-search codes, and wins over NEWUOA on noisy or nonsmooth problems at larger budgets.",
+  "problem_entry": "Moré–Wild benchmarks showed model-based trust-region codes beating direct search even on piecewise-smooth and noisy problems, so the paper combines the two (p. 2).",
+  "key_idea": "Keep search/poll direct search; build MFN models (regression above (n+1)(n+2)/2 points) from store-all points, 80% nearest and 20% farthest, with deliberately loose geometry, and minimise them in Δ_k = σ_k α_{k−1} max‖d‖; opportunistic poll on [e −e I −I] ordered by simplex gradient (pp. 6–9).",
+  "assumptions": "Recalled fully-linear error bounds assume a Lipschitz gradient and Λ-poisedness (pp. 4–5), but the algorithm does not enforce poisedness (p. 8); simple-decrease acceptance (p. 6); no convergence result is stated; unconstrained only (p. 6).",
+  "proof_devices": [
+   "no new proofs",
+   "design justification: gradient-error constant C_pΛ_L[C_f + ‖H‖] grows with ‖H‖, so minimise ‖H‖_F (Thm 2.1, p. 4)",
+   "combination of Thm 2.1 and the MFN Hessian bound (Thm 2.2) gives fully-linear MFN models (p. 5)"
+  ],
+  "experiments": "Moré–Wild data profiles, 53 problems × 4 classes (smooth, nonstochastic noisy, piecewise smooth, stochastic noisy), n ∈ [2, 12], τ = 1e−3 and 1e−7, 1500 evaluations in units of n+1; baselines NEWUOA, NMSMAX, APPSPACK; NEWUOA best on smooth problems (pp. 9–10).",
+  "positioning": "Model-based codes (DFO, NEWUOA, MNH) as the efficiency benchmark; Powell's least-updating MFN tested and found worse in this context; loose geometry justified via Fasano–Morales–Nocedal; builds on SID-PSM; first-attempt claim ('to our knowledge') (pp. 2, 5, 8, 15).",
+  "writing": "Design-by-elimination narrative ('report the various possibilities and describe the ones which we found to be the most successful'); negative result against NEWUOA stated in the introduction; frequent hedges (pp. 2, 7, 8).",
+  "limits_future": "Below NEWUOA on smooth problems with small budgets; the constrained MFN search step is future research; no convergence statement for the modified method (pp. 2, 10, 15).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Models only in the optional search step; optionality licenses loose geometry",
+    "pages": "pp. 6–8"
+   },
+   {
+    "method": "Heuristic 7",
+    "relation": "evidence",
+    "note": "Store-all reuse of evaluated points; simplex-gradient poll ordering",
+    "pages": "pp. 7, 9"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Simple-decrease acceptance and no convergence result; the skeleton's guarantee is inherited by reference, not checked",
+    "pages": "pp. 2, 6–9"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Standard four-class collection, profiles in n+1 units, strongest model-based baseline, losses reported, code released",
+    "pages": "pp. 9–10, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "Recalls a fully-linear (poisedness-based) theory, then disables geometry control, justified by the optional search step",
+    "pages": "pp. 4–5, 8"
+   }
+  ],
+  "transferable": [
+   "Tie the search trust-region radius to the previous direct-search step size (Δ_k = σ_k α_{k−1} max‖d‖, σ ∈ {1, 2}) (p. 7)",
+   "Choose the model criterion by reading the error bound's constant: minimise the controllable quantity (‖H‖_F) (p. 4)",
+   "Sample-set selection: 80% nearest points and 20% farthest to keep locality plus some geometry (p. 8)",
+   "In an optional step, replace poisedness control by SVD thresholding of singular values at machine eps (pp. 8–9)",
+   "Add ±e (all-ones) to the coordinate poll; cyclic polling when no simplex gradient is available (p. 9)",
+   "Report the four Moré–Wild classes at two accuracies, with budgets in units of n+1, and state where the strongest baseline still wins (pp. 2, 10)"
+  ],
+  "coauthors": "A. L. Custódio, H. Rocha",
+  "quotes": [
+   {
+    "text": "The approach taken here is to maintain the structure of directional direct-search methods, organized around a search and a poll step, and to use the set of previously evaluated points generated during a direct-search run to build the models.",
+    "page": 1
+   },
+   {
+    "text": "The geometry control of the sample set used for the model computation is extremely loose.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S003",
+  "year": "2011",
+  "title": "Direct multisearch for multiobjective optimization",
+  "read_level": "full",
+  "contribution": "Introduces direct multisearch (DMS): directional direct search generalised to multiobjective DFO without aggregation, by iterating on a list of nondominated (x; α) pairs with success defined as a change in the list. It proves that some limit point is Pareto–Clarke stationary (lattice or sufficient-decrease globalisation) and releases a 100-problem AMPL MOO collection with MOO performance and data profiles.",
+  "problem_entry": "Black-box or noisy multiobjective problems; a-priori aggregation needs weights and yields one point, and weight sweeps or normal-boundary intersection have known drawbacks (pp. 1–2).",
+  "key_idea": "Replace the incumbent with a filtered list of nondominated points; success = list change; sufficient decrease = outside the ℓ∞ ρ̄-neighbourhood of the dominated region; search, poll and step update unchanged; reduces to direct search when m = 1 (pp. 2, 4–7).",
+  "assumptions": "Compact union of level sets, F bounded (Assumption 4.1, p. 9); F Lipschitz near x*; refining directions dense in the Clarke tangent cone (stronger than a dense D, p. 13); lattice route A.1–A.4 or sufficient-decrease route A.5 (pp. 28–30); numerics use a non-dense D⊕ with ρ̄ = 0 (p. 20).",
+  "proof_devices": [
+   "lattice route: finite lattice ∩ compact set plus no-cycling by transitivity of dominance means finitely many successes (Thm A.1, p. 30)",
+   "sufficient-decrease route: hypercube packing in objective space; each success removes a ρ*-hypercube from the nondominated region (Thm A.2, pp. 30–31)",
+   "Clarke–Jahn lim sup along a refining subsequence with ρ̄(α_k‖d_k‖) added and subtracted, then pigeonhole over the m objectives to fix j(d) (Thm 4.8, p. 13)",
+   "density of refining directions gives Pareto–Clarke criticality (Thm 4.9, p. 14); sanity corollaries for m = 1 and for an eventually singleton list (Cors 4.10–4.11, p. 14)"
+  ],
+  "experiments": "100 bound-constrained AMPL MOO problems (69 bi-, 30 tri-, 1 four-objective per Table 5.1), public; 8 solvers, best 3 reported (AMOSA, BIMADS, NSGA-II); pairwise purity, spread Γ/Δ, MOO data profiles; 10 runs for stochastic solvers (best/worst); 20000-evaluation budget; DMS initialisation ablation; cache and spread-based poll-centre improvement (pp. 15–25).",
+  "positioning": "A-posteriori class, against weighted sums and NBI; generalises GPS, GSS and MADS; nonsmooth analysis follows Audet–Dennis; neutral data-driven comparison with evolutionary codes and BIMADS (pp. 2, 11–12, 22–25, 30).",
+  "writing": "Coined name justified by the m = 1 reduction; abstract states the gap between the weak theorem and the 'impressive' practice; test set and profiles framed as by-products; worked example before theory; intuition in the text, rigour in the appendix (pp. 1–2, 7–10, 26).",
+  "limits_future": "Only a stationary limit point of the front is guaranteed; the density assumption is strong and not met by the tested poll; future: swarm or model search steps, simplex-gradient polls, parallel polling, preference insertion, discontinuous extension (pp. 13, 20, 26–28).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Acceptance test redefined (dominance, list change, ℓ∞ sufficient decrease) with the skeleton kept; proofs carry over; native metrics purity, Γ, Δ",
+    "pages": "pp. 2, 4–5, 13, 17–18, 30–31"
+   },
+   {
+    "method": "Heuristic 4",
+    "relation": "evidence",
+    "note": "No aggregation; the drawbacks of weights are argued",
+    "pages": "pp. 1–2"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Public collection, class-native metrics, MOO profiles, strongest 3 of 8 solvers",
+    "pages": "pp. 15–20, 24"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Optional search step for dissemination; a swarm search step is proposed",
+    "pages": "pp. 1, 27"
+   },
+   {
+    "method": "Signature Work Anatomy (DMS row)",
+    "relation": "contradiction",
+    "note": "Table 5.1 gives 69 bi-, 30 tri-, 1 four-objective problem, not 69/29/2 as SKILL.md states",
+    "pages": "p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "unified ρ̄ statement (lattice simple decrease and forcing-function sufficient decrease in one algorithm and one proof)",
+    "evidence": "ρ̄ ∈ {0, ρ} in Algorithm 2.1 and Thm 4.8, with two lim-inf routes in the appendix",
+    "pages": "pp. 4, 13, 28–31"
+   },
+   {
+    "pattern": "disclosed theory–implementation gap",
+    "evidence": "Footnote: Thm 4.9 needs dense refining directions, but the tested poll is D⊕; random orthogonal polls 'were not better'",
+    "pages": "p. 20"
+   }
+  ],
+  "transferable": [
+   "Lift a single-point method to a set-valued goal: the iterate becomes a list, success means the list changed, and the list elements that must be kept for the proof are stated (pp. 4–7)",
+   "Sufficient decrease for a set incumbent: require the trial value outside the ℓ∞ a-neighbourhood of the dominated region (p. 4)",
+   "Prove lim inf α_k = 0 for list methods by packing ρ*-hypercubes in a bounded objective region (pp. 30–31)",
+   "Pigeonhole over a finite index set to make a per-iteration witness j(k) constant on a subsequence (p. 13)",
+   "Use purity only pairwise (similar solvers depress each other); report best and worst of 10 runs for stochastic solvers (p. 17)",
+   "Keep non-monotone metrics (spread) out of data profiles (pp. 19–20)",
+   "Worked three-iteration example with figures before the theory; corollary recovering the m = 1 result (pp. 7–9, 14)"
+  ],
+  "coauthors": "A. L. Custódio, J. F. A. Madeira, A. I. F. Vaz",
+  "quotes": [
+   {
+    "text": "We propose a novel multiobjective derivative-free methodology, calling it direct multisearch (DMS), which does not aggregate any of the objective functions.",
+    "page": 1
+   },
+   {
+    "text": "Thus, we decided to only compare solvers in pairs when using the Purity metric.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S024",
+  "year": "2012",
+  "title": "Analysis of direct searches for discontinuous functions",
+  "read_level": "full",
+  "contribution": "Extends the refining-direction stationarity theory of directional direct search (MADS and sufficient-decrease/GSS variants) from Lipschitz to lower-semicontinuous, directionally Lipschitz functions via Rockafellar's upper subderivative (rebuilt for constraints). It shows that, for two-piece step discontinuities, the method approaches the limit along the better piece. 2-D numerics are designed around the hypotheses.",
+  "problem_entry": "Audet–Dennis stationarity needs f Lipschitz near the limit point, little is known for discontinuous f, and applications (Omega ratio, parameter tuning, error analysis, aircraft design) are discontinuous (pp. 2–4).",
+  "key_idea": "Same generic algorithm with the forcing function on the displacement ρ̄(α_k‖d_k‖) (making lattice and sufficient decrease compatible); replace the Clarke derivative by f↑ = f⁺ = f°_R on the directionally Lipschitz cone; prove best-branch identification by Lipschitz extension across a step boundary (pp. 4, 6, 11–17).",
+  "assumptions": "Bounded level set; f lsc at x*; directionally Lipschitz with respect to the refining direction; lim f(x_k) = f(x*) assumed in §3; dense refining directions (in a ball, or for every subsequence); §4 needs a finite partition with nonempty interiors, the exterior-cone property and Lipschitz pieces, and exactly two pieces for the strong result (pp. 7, 9, 11–17).",
+  "proof_devices": [
+   "Audet–Dennis lim sup along a refining subsequence with base points x_k →_f x*, with ρ̄(α_k‖d_k‖) added and subtracted (Thm 3.1, pp. 11–12)",
+   "constrained extension of Rockafellar: epi f↑(x; ·) = tangent cone of the restricted epigraph; directional Lipschitzness ⇔ hypertangency in the epigraph; f↑ = f⁺ = f°_R on D_{f,Ω} (Prop. A.1, Thms A.1–A.2, pp. 25–29)",
+   "lim-inf representation of f↑ on the tangent cone (eq. 9, p. 28; Thm 3.2, p. 13)",
+   "proof by extension: Lipschitz continuous extension (constant 3L+2) and a McShane extension strictly decreasing into an exterior cone give a contradiction forcing infinitely many poll points out of the piece (Props 4.1–4.2, Thm 4.1, pp. 14–17)",
+   "two pieces: monotone f(x_k) plus lsc give f(x_k) → f(x*) along the better piece (Cor. 4.1, p. 17)"
+  ],
+  "experiments": "Four 2-D lsc functions each meeting or violating a named hypothesis (two-piece gap, non-Lipschitz continuous, empty-interior piece, four pieces); NOMADm LTMADS vs a sufficient-decrease variant ([Q −Q], ρ(t) = t²); 10 runs, then a 100-start grid × 10 runs at tolerances 1e−7 and 1e−10; failures only where hypotheses fail (pp. 17–23).",
+  "positioning": "Continues the Audet–Dennis Clarke-calculus line for GPS and MADS; generalises Rockafellar 1980 to constraints and notes differing hypertangency definitions; claims a first nonsmooth GSS analysis as a by-product (pp. 3, 5, 11).",
+  "writing": "Hypothesis-precise abstract; explicit reader guidance and geometric intuition for f↑; modest final remarks with a mechanistic explanation of the two-piece barrier; numerics framed as agreeing with theory (pp. 1, 10–11, 22–23).",
+  "limits_future": "Only two pieces (poll points may approach the border more slowly than the iterates); lim f(x_k) = f(x*) assumed in §3; 2-D numerics only; SKILL.md records a 2024 counterexample to the result, whose target step was not determined from this text (pp. 11, 17–23).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Skeleton untouched; the stationarity notion is changed (Clarke to Rockafellar upper subderivative) for the new class",
+    "pages": "pp. 4, 6, 11"
+   },
+   {
+    "method": "Method 4 (limitation) / Inner Tension: Generality vs correctness",
+    "relation": "variant",
+    "note": "The text shows the reach-extending steps (assumed f(x_k) → f(x*), density in every subsequence, rebuilt constrained calculus); whether the 2024 counterexample targets these was not checked",
+    "pages": "pp. 11, 15, 23–29"
+   },
+   {
+    "method": "Heuristic 10",
+    "relation": "variant",
+    "note": "Adversarial examples probe the hypotheses (f3, f4) but not the proof; numerical agreement cannot detect a proof gap",
+    "pages": "pp. 19–23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "unified ρ̄ statement with ρ̄(α_k‖d_k‖)",
+    "evidence": "Forcing function on the displacement makes MADS and sufficient decrease compatible in one proof",
+    "pages": "p. 6; footnote 1, p. 12"
+   },
+   {
+    "pattern": "assumption-boundary test suite",
+    "evidence": "Each 2-D illustration built to meet or break a named hypothesis, with a grid of starts and two tolerances",
+    "pages": "pp. 17–23"
+   }
+  ],
+  "transferable": [
+   "Write the forcing function on the displacement ρ(α_k‖d_k‖) so that lattice-based and sufficient-decrease variants share one proof (p. 6; p. 12)",
+   "Extend a function from one piece to a Lipschitz function with a designed property (strict decrease on an exterior cone), apply known Lipschitz theory, and derive where poll points must go (pp. 14–17)",
+   "Test suite where each function violates exactly one hypothesis; rerun at a tighter tolerance to separate slow asymptotics from violated assumptions (pp. 17–23)",
+   "Explain an unfamiliar generalised derivative via the epigraph–tangent-cone identity so readers can compute 1-D and 2-D examples (pp. 10–11)",
+   "Close with a mechanistic reason the proof does not extend, instead of generic future work (p. 23)"
+  ],
+  "coauthors": "A. L. Custódio",
+  "quotes": [
+   {
+    "text": "Failures in locating the minimizer occur only when at least one of the assumptions required for establishing convergence is violated.",
+    "page": 23
+   },
+   {
+    "text": "The problem in extending this result to more than two local steps or branches lies on the fact that the speed at which the poll points approach the border of a step domain can be slower than the speed at which these points approach the iterates.",
+    "page": 23
+   }
+  ]
+ }
+]

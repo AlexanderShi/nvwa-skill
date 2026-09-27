@@ -1,0 +1,573 @@
+[
+ {
+  "id": "S055",
+  "year": "1999",
+  "title": "Recent research at Cambridge on radial basis functions",
+  "read_level": "full",
+  "contribution": "Status report (DAMTP 1998/NA05) on three Cambridge RBF topics: a fast iterative solver for thin-plate-spline interpolation with n up to 10^5, an RBF semi-norm criterion for choosing the next point in expensive global optimization, and numerically observed edge-accuracy orders of 1-D thin-plate splines.",
+  "problem_entry": "Numerical facts: dense TPS systems need O(n log n) iterations for n > 10^4 (pp. 3, 7); experiments show accuracy orders not confirmed by theory (p. 3); Jones (1996) prompts RBF-based global optimization of expensive f (p. 8).",
+  "key_idea": "Newton-form interpolation with approximate Lagrange functions on q ≈ 30 nearest points plus iterative refinement (pp. 4–7); choose x_{n+1} by minimising the semi-norm of the interpolant through a target value f*, closed form (3.27) (pp. 8–13); change side conditions to raise edge accuracy while keeping scaling invariance (pp. 15–17).",
+  "assumptions": "P full rank (non-collinear points for d = 2 TPS) and conditionally positive definite φ (p. 2); expensive derivative-free f in §3 (p. 8); uniform 1-D grid and smooth f in §4 (pp. 13–14).",
+  "proof_devices": [
+   "minimum semi-norm property of RBF interpolation via conditional positive definiteness after padding the centre set with zero coefficients, (3.10)–(3.15) (pp. 10–11)",
+   "orthogonality of the new Lagrange function to the current interpolant gives a closed-form merit σ̂(x, f*) (3.24)–(3.27) (p. 13)",
+   "scaling-invariance check (4.10)–(4.12) used to reject/repair a variant (pp. 16–17)"
+  ],
+  "experiments": "Halving tables of |e(h/2)| for n = 80–640 under several f and side conditions (Tables 1–3, pp. 14–16); constructed divergence cases for the cheaper iterative variant (n = 1000 on two concentric quarter circles, p. 7).",
+  "positioning": "Builds on Beatson–Powell 1992/1994, Powell 1997, Duchon 1977, Schaback 1993 and Jones 1996 without criticising anyone (pp. 3, 8, 9, 12).",
+  "writing": "Group status report with open questions marked open (pp. 1, 7, 14) and precise acknowledgement of each student's contribution (p. 17).",
+  "limits_future": "Fast variant fails on constructed examples, intermediate version under study (p. 7); global-optimization algorithms only hoped for (p. 9); edge orders are conjectures (pp. 14–15); best 1-D variant not recommended over cubic splines (p. 17).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "conjectured orders read from halving tables; failures of the cheap variant reported; recommendation withheld",
+    "pages": "pp. 7, 14–17"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "O(n log n) per iteration via Laurent expansions; q-fold saving from residual reuse",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "intermediate version keeps old reliability and part of new savings (outside DFO)",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "minimum (semi-)norm subject to interpolation, here an RBF native semi-norm used for point selection; no causal link to Frobenius-norm updating shown",
+    "pages": "pp. 8–13"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "adversarial test-case construction for one's own fast method",
+    "evidence": "attempts to construct point sets that make the cheaper version diverge; concentric quarter circles radii 1 and 1+10^-5",
+    "pages": "p. 7"
+   },
+   {
+    "pattern": "numerics → conjecture → proof or counterexample",
+    "evidence": "accuracy orders conjectured from tables, analytic work begun",
+    "pages": "pp. 14–15"
+   },
+   {
+    "pattern": "invariance as a veto on a more accurate variant",
+    "evidence": "Σλ_j² variant loses scaling invariance, repaired by adding a quadratic term",
+    "pages": "pp. 16–17"
+   }
+  ],
+  "transferable": [
+   "Estimate a convergence order from a halving table, then construct an f cancelling the leading error term and check the order rises (pp. 14–15).",
+   "Test any more accurate variant for invariance under rescaling of the variables before adopting it (pp. 16–17).",
+   "Turn a where-to-sample-next rule into a closed-form merit via orthogonality of the new Lagrange function to the current interpolant (p. 13).",
+   "For a cheaper variant of a working method, build data that make it diverge and report them (p. 7)."
+  ],
+  "coauthors": "none (acknowledges Goodsell, Faul, Gutmann, Bejancu, p. 17)",
+  "quotes": [
+   {
+    "text": "The year old version seems to be very robust, but some examples of failure have been found for the newer version that usually requires much less computation.",
+    "page": 7
+   },
+   {
+    "text": "We do not recommend, however, that the new method should be used in practice instead of cubic spline interpolation.",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S075",
+  "year": "1999",
+  "title": "Proof of convergence of an iterative technique for thin plate spline interpolation in two dimensions",
+  "read_level": "full",
+  "contribution": "Proves convergence of (a generalisation of) the Beatson–Goodsell–Powell iterative thin-plate-spline solver by showing every stage reduces the native semi-norm of the error, and extends the result to conditionally positive/negative definite radial functions.",
+  "problem_entry": "A method that worked in practice (p. 7) lacked a proof; the direct O(n^3) solve is prohibitive for n > 1000 (p. 3) and the spectral-radius route was thought very hard (p. 4).",
+  "key_idea": "Each stage adds a multiple of an approximate Lagrange function on q points, like forward substitution, and a final stage interpolates the last q residuals (pp. 3–4); the step coefficient equals the exact minimiser of (s*−s, s*−s) along that function (p. 5).",
+  "assumptions": "Distinct, non-collinear data points and non-collinear L_k\\{k} (p. 3); for the extension, conditional definiteness of order m, q > dim Π_m, L_k\\{k} not in a polynomial zero set (pp. 7–8).",
+  "proof_devices": [
+   "native-norm descent: each stage is an exact line search in the semi-norm, shown by integration by parts (3.1)–(3.2) (p. 5)",
+   "last stage as orthogonal projection onto a subspace (3.4) (p. 5)",
+   "monotone bounded sequence ⇒ inner products → 0 via identity (3.6), then induction and back-substitution through a triangular system with nonzero diagonal (3.9) (p. 6)",
+   "finite dimension ⇒ equivalence of norms, norm = max over data points (3.5) (p. 6)"
+  ],
+  "experiments": "Circle, grid, random disc and a deliberately slow case D (two concentric eighth-circles, radii 1 and 1+10^-5), n = 400/900, q = 10–50, tolerance 10^-8, iteration counts beside the largest normalised scalar product (5.1), including runs stopped at 1000 iterations (p. 9).",
+  "positioning": "Contrasts with the spectral-radius approach of Beatson, Goodsell and Powell (1995) (pp. 4–5); credits Beatson with the original idea and Goodsell with the programs (p. 10).",
+  "writing": "Short proof-centred paper; the expectation linking speed to orthogonality is stated before the experiments (p. 9).",
+  "limits_future": "Convergence without a rate; the observed link between speed and orthogonality ((5.1) < 0.1) is offered to guide the choice of L_k (p. 10).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "non-converged runs kept in the table with final residuals",
+    "pages": "p. 9"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "proof rests on the minimum-norm (variational) property of the interpolant, the same kind of principle as least-change updating",
+    "pages": "p. 2, p. 5"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "native-norm descent proof",
+    "evidence": "each stage exactly minimises the error semi-norm; monotonicity + finite dimension give convergence",
+    "pages": "pp. 5–6"
+   },
+   {
+    "pattern": "adversarial test-case construction for one's own fast method",
+    "evidence": "Problem D found by seeking very slow convergence",
+    "pages": "p. 9"
+   },
+   {
+    "pattern": "numerics → conjecture → proof or counterexample",
+    "evidence": "practical success, then proof, then a tested conjecture about speed",
+    "pages": "pp. 5–10"
+   }
+  ],
+  "transferable": [
+   "When the residual-iteration matrix is intractable, find a norm in which each stage is an exact line search (pp. 4–5).",
+   "Order stages so that limits of inner products form a triangular system with nonzero diagonal and back-substitute to get residuals → 0 (p. 6).",
+   "Tabulate the quantity the analysis says controls speed next to iteration counts (pp. 9–10)."
+  ],
+  "coauthors": "A. C. Faul",
+  "quotes": [
+   {
+    "text": "The analysis of convergence for the algorithm was thought to be very hard.",
+    "page": 4
+   },
+   {
+    "text": "Problem D was found by seeking a case where the convergence of the method of Section 2 is very slow.",
+    "page": 9
+   }
+  ]
+ },
+ {
+  "id": "S085",
+  "year": "1999",
+  "title": "Krylov subspace methods for radial basis function interpolation",
+  "read_level": "full",
+  "contribution": "Recasts the Cambridge iterative RBF solvers as a Krylov subspace method in the native semi-norm, gives four sufficient conditions on the operator A for exact-arithmetic termination, specifies a recommended A from approximate Lagrange functions, and measures when the Krylov safeguard pays.",
+  "problem_entry": "Direct solves limit n to about 1000 (p. 4); Goodsell's cheaper method occasionally fails to converge, so a Krylov technique was added and then reinterpreted as the core (p. 5).",
+  "key_idea": "Iterate k is the element of span{A^j s*} closest to s* in the native semi-norm, computed CG-style (pp. 8–9) using ⟨s, s*⟩ obtainable from the data (2.6) (p. 7); A built from approximate Lagrange functions on q ≈ 30 nearest points plus an exact q-point operator H, aiming at A ≈ I (pp. 14–16).",
+  "assumptions": "Distinct, polynomially unisolvent points; conditionally definite φ with sign σ (pp. 3–4); for TPS three far-from-collinear points forced into every L_j (p. 22).",
+  "proof_devices": [
+   "sufficient-condition abstraction: nonsingularity, polynomial reproduction, ellipticity, self-adjointness (3.6) (p. 9)",
+   "induction giving conjugacy, strict semi-norm decrease and termination in ≤ n − m̂ + 1 iterations (pp. 10–12)",
+   "Gram–Schmidt direction (3.21) when A is not self-adjoint (pp. 12–13)",
+   "greatest-index argument for ellipticity of the recommended A (4.19)–(4.20) (p. 17)"
+  ],
+  "experiments": "Circle, grid, random disc and two arcs 10^-5 apart; random data, ε = 10^-8, n = 400/900, q = 10/30/50, φ = r and r² log r; iteration counts (Tables 2–3, p. 21), comparison with the plain iteration governed by the spectral radius of I − A (p. 21), random orderings (p. 23).",
+  "positioning": "Like GMRES but A need not come from the equations and the semi-norm need not be a norm (p. 8); follows Dyn–Levin–Rippa CG and Beatson–Powell 1994 (p. 5).",
+  "writing": "Calls its own termination proof misleading about practice (p. 13) and narrates how each test problem shaped the algorithm (pp. 19–20).",
+  "limits_future": "Guarantee plus large gains in hard cases at O(n) extra work (p. 22), but little advantage on most problems (p. 22); open: slow TPS Problem 4, ordering, d ≥ 3; software promised after that work (pp. 22–23).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "BP 1994 → Powell 1997 → Goodsell variant → Krylov safeguard, one limitation removed per step (outside DFO)",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "reports that the safeguard helps only when spectral radius of I − A > 0.5 and saves at most a third otherwise",
+    "pages": "pp. 21–22"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "O(n) extra cost vs O(nq) and O(n²); product formed with d_k to avoid rounding inconsistencies",
+    "pages": "p. 18, p. 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "native-norm descent proof",
+    "evidence": "Krylov iterate minimises the error semi-norm; strict decrease and termination by induction",
+    "pages": "pp. 8–12"
+   },
+   {
+    "pattern": "safeguard designed so that the proof goes through",
+    "evidence": "Krylov step turns an occasionally divergent heuristic into a method with guaranteed termination at negligible cost",
+    "pages": "p. 5, p. 22"
+   },
+   {
+    "pattern": "recast a working heuristic into a principled framework after the fact",
+    "evidence": "five years of development reduce to the choice of a self-adjoint operator A",
+    "pages": "p. 5, p. 14"
+   },
+   {
+    "pattern": "adversarial test-case construction for one's own fast method",
+    "evidence": "Problem 4 came from looking for divergence",
+    "pages": "p. 20"
+   }
+  ],
+  "transferable": [
+   "Abstract the method into an operator and list only the properties the proof needs (3.6) (p. 9).",
+   "Use a quantity computable before the solution is known (⟨s, s*⟩ from data) to do exact line searches on the error norm (p. 7).",
+   "Report when a safeguard helps, when it does not, and its marginal cost; include it when hard cases cannot be recognised in advance (p. 22).",
+   "Warn readers when a worst-case bound misrepresents practice (p. 13)."
+  ],
+  "coauthors": "A. C. Faul",
+  "quotes": [
+   {
+    "text": "The proof of termination in the previous section is misleading, because it suggests that the number of iterations of the Krylov subspace method may be close to n.",
+    "page": 13
+   },
+   {
+    "text": "These remarks suggest correctly that there is little advantage in including the Krylov subspace technique when solving most radial basis function interpolation problems.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S170",
+  "year": "1999",
+  "title": "An optimal way of moving a sequence of points onto a curve in two dimensions",
+  "read_level": "partial",
+  "contribution": "Gives an algorithm that finds the global lexicographic minimax assignment of ordered points to parameters on a piecewise arc/segment curve, usually in O(n) total work, using greedy feasibility sweeps, bisection on the optimal value and splitting by certified bounds.",
+  "problem_entry": "Application pull from image registration (initial values for mapping curves into curves, Powell 1996), with local minima from a self-intersecting curve (pp. 2–3).",
+  "key_idea": "A greedy forward/backward sweep decides h ≥ h* or h < h* (Lemma 1, Corollary 2, pp. 4–5); bisection on h yields certified bounds on each t*_i that split the problem into independent subproblems (Lemmas 3, 4, 6, pp. 5–10).",
+  "assumptions": "Curve of circular arcs and straight segments with continuous direction (pp. 2–3); analysis valid in higher dimensions (p. 11); bracket tolerance at least h0 times relative machine precision (p. 12).",
+  "proof_devices": [
+   "greedy sweep + induction for a feasibility oracle (Lemma 1, p. 4)",
+   "exchange argument for splitting, proved formally though obvious (Lemma 3, p. 5)",
+   "exact optimality of a cheap choice for a perturbed problem with perturbation equal to the bracket width (Lemma 5, (2.8), pp. 7–8)"
+  ],
+  "experiments": "Rounded-hexagon curves (1 or n/125 cycles), n = 125–8000, perturbations 0/δ/10δ, CPU seconds (Table 1, p. 22); constructed O(n²) case (Table 2, pp. 23–24); accuracy check by solving the reversed problem (p. 25).",
+  "positioning": "Minimax objective set against a sum-of-squares formulation (p. 3); image-registration literature for motivation (p. 2).",
+  "writing": "Surprisingly small errors called incredible, then explained by a hypothesis checked with extra program output (pp. 25–26).",
+  "limits_future": "O(n²) work for data far from the curve (pp. 23–24), theoretical ε^{1/2} accuracy of the bisection route (p. 25), no known application needing high accuracy (p. 26); further analytic techniques proposed (p. 26).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "self-constructed bad case reported and analysed; accuracy self-test by symmetry",
+    "pages": "pp. 23–25"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "tolerance tied to machine precision; total work O(n) vs O(n²)",
+    "pages": "p. 3, p. 12, p. 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "justify a practical choice by exact optimality for a nearby problem",
+    "evidence": "Lemma 5 proves t_p = τ_p(h1) optimal for a perturbed problem instead of handling degenerate cases",
+    "pages": "pp. 7–8"
+   },
+   {
+    "pattern": "adversarial test-case construction for one's own fast method",
+    "evidence": "data on a circle inside S give O(n²) work, analysed and tabulated",
+    "pages": "pp. 23–24"
+   },
+   {
+    "pattern": "explain a surprise with a designed follow-up experiment",
+    "evidence": "tiny discrepancies traced to analytic settings by extra output",
+    "pages": "pp. 25–26"
+   }
+  ],
+  "transferable": [
+   "Replace a minimax optimisation by feasibility tests answered by a greedy sweep and bisect on the optimal value (pp. 4–5).",
+   "Keep certified two-sided bounds per variable and split the problem when neighbouring bounds separate (p. 5).",
+   "Prove a cheap choice optimal for a problem perturbed at bracket-width level instead of handling degeneracies (pp. 7–8).",
+   "Check accuracy without the answer by solving the mirrored problem and comparing (p. 25)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "Although it seems obvious that this splitting is valid, we present a formal proof.",
+    "page": 5
+   },
+   {
+    "text": "he has found in similar situations that the development of a new algorithm can create applications, because many computer users restrict attention to numerical computations that can be solved routinely by available software.",
+    "page": 26
+   }
+  ]
+ },
+ {
+  "id": "S121",
+  "year": "2000",
+  "title": "On the convergence of the DFP algorithm for unconstrained optimization when there are only two variables",
+  "read_level": "partial",
+  "contribution": "Proves that DFP with exact (first-local-minimum, monotone) line searches has gradients not bounded away from zero for any C² function of two variables with bounded level sets, without convexity.",
+  "problem_entry": "DFP convergence theory since ~1970 assumed convexity (p. 2); Powell seeks theorems or counterexamples under bounded level sets and C² (p. 2), to explain DFP's success rather than improve software (p. 3).",
+  "key_idea": "For n = 2 the exact line search and quasi-Newton equation fix the next direction by (1.5), so B_k disappears from the analysis (p. 3); comparison with Polak–Ribière counterexamples isolates monotone line-search decrease as the needed hypothesis (pp. 3–4).",
+  "assumptions": "n = 2, bounded level set, continuous second derivatives (1.1), step to the largest α with monotone decrease (pp. 2–3); no convexity (p. 1).",
+  "proof_devices": [
+   "reduction of the algorithm to direction conditions in the smallest case n = 2 (p. 3)",
+   "topology of the limit set T of the piecewise-linear iterate path: closed, connected, no stationary points, collinear (Lemmas 2.1–2.4, pp. 5–8)",
+   "Zoutendijk-type bound Σcos²θ_k < ∞ (2.7) (p. 7)",
+   "WLOG normalisation of T to a unit segment (pp. 8–9)",
+   "sign split of iterations into K_same/K_opp and monotone ‖d_k‖/‖g_k‖ on K_opp contradicting ‖d_k‖ → ∞ (pp. 9–10)"
+  ],
+  "experiments": "none",
+  "positioning": "Builds on Powell 1972 (Theorem 2), Dixon 1972, Wolfe 1970 and Powell's 1984 CG counterexamples (pp. 2–4, 7).",
+  "writing": "Personal dedication to Davidon (p. 2); intricate lemma isolated with advice to read §4 first (pp. 4, 10); closes by calling the result a small contribution (p. 22).",
+  "limits_future": "Only n = 2; for n ≥ 3 the path can pass around T (p. 22); an n = 3 counterexample sought with Dai as a nonlinear feasibility problem, unsuccessful for months, paper deferred (pp. 22–23).",
+  "method_links": [
+   {
+    "method": "Research Taste mark 5",
+    "relation": "variant",
+    "note": "theory explicitly not aimed at improving code; aims to explain DFP's success",
+    "pages": "p. 3"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimal-instance counterexample / smallest-case analysis",
+    "evidence": "theorem proved in the smallest case n = 2 where the algorithm collapses",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "numerics → conjecture → proof or counterexample",
+    "evidence": "stated aim of theorems or counter-examples; both pursued",
+    "pages": "p. 2, pp. 22–23"
+   },
+   {
+    "pattern": "counterexample search posed as a nonlinear feasibility problem",
+    "evidence": "self-similar iterate sequence (5.1) with DFP and line-search conditions as NLP constraints",
+    "pages": "pp. 22–23"
+   }
+  ],
+  "transferable": [
+   "Shrink the setting until the algorithm's state collapses and prove the theorem there first (p. 3).",
+   "Compare with a sister method satisfying the same reduced conditions and having known counterexamples to name the hypothesis your proof needs (pp. 3–4).",
+   "Analyse the limit set of the piecewise-linear iterate path rather than the iterates (pp. 5–8).",
+   "State a long lemma's conclusion early and tell readers to go on to the main argument (pp. 4, 10).",
+   "Search for counterexamples by parametrising a self-similar iterate sequence and solving the algorithm's conditions as NLP constraints (pp. 22–23)."
+  ],
+  "coauthors": "none",
+  "quotes": [
+   {
+    "text": "I am now particularly interested in convergence theorems or counter-examples for the algorithm",
+    "page": 2
+   },
+   {
+    "text": "Several months of work on this problem have been unsuccessful, although Dai and Powell are very close to achieving a solution.",
+    "page": 23
+   }
+  ]
+ },
+ {
+  "id": "S057",
+  "year": "2001",
+  "title": "Radial basis function methods for interpolation to functions of many variables",
+  "read_level": "partial",
+  "contribution": "Reviews RBF interpolation theory and shows numerically that, for data on 2- or 3-dimensional nonlinear manifolds in R^d with d up to 40, linear and multiquadric interpolation accuracy and the iteration counts of the Cambridge solver are nearly independent of d.",
+  "problem_entry": "Fixed basis spaces become singular for some point positions when d ≥ 2 (p. 2); data-mining data (e.g. life expectancy from d answers) lie near low-dimensional manifolds, so does needed n depend on d? (pp. 1, 6).",
+  "key_idea": "Review of nonsingularity, polynomial terms and grid accuracy (pp. 2–6), then experiments on synthetic edge-free nonlinear manifolds using the Faul–Goodsell–Powell CG-like solver (pp. 7–13, 17–19).",
+  "assumptions": "Linear or multiquadric φ with a constant (p. 7); Gaussian test f with width set by min f(x_i) = 0.01 (p. 7); manifolds built from distorted sines with random phases (pp. 7–8).",
+  "proof_devices": [
+   "review-level nonsingularity via conditional negative definiteness (p. 3)",
+   "regular-simplex counterexample for TPS without polynomial term (p. 4)"
+  ],
+  "experiments": "Accuracy for d = 5–40, n = 64–4096, grids with/without edges, random points, c > 0 (Tables 1–4, pp. 8–12); iteration counts for q = 10/30/50, tolerance 10^-8 (Tables 5–6, pp. 18–19).",
+  "positioning": "Draws on Hardy, Micchelli, Buhmann, Bejancu (pp. 2–6); acknowledges fast multipole methods missing from his code (p. 21).",
+  "writing": "Concrete application example motivates manifolds (p. 6); explicit caveats on random-point figures (p. 10); surprises flagged (p. 18).",
+  "limits_future": "√n iteration growth for random data in the ball with d ≥ 5 (p. 18), more iterations for multiquadrics (p. 19), slow beyond 5000 points on a Sparc 10 (p. 21), attempted improvement gave the same coefficients (p. 22); Fortran program available (p. 22).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "randomised test families swept over d and n rather than a few hand-picked problems; unfavourable results reported",
+    "pages": "pp. 7–12, 18–19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "O(nq) per iteration + O(n²) product, O(nq³) preliminary; storage slowdown quantified",
+    "pages": "p. 17, p. 21"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Fortran program available from the author",
+    "pages": "p. 22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "test the regime users actually have, not only the worst case",
+    "evidence": "data on low-dimensional manifolds in high d, motivated by data mining",
+    "pages": "p. 6, pp. 8–9, 19"
+   },
+   {
+    "pattern": "close a design avenue with a theorem",
+    "evidence": "improved-coefficient idea reproduces existing coefficients (proved in S074)",
+    "pages": "p. 22"
+   }
+  ],
+  "transferable": [
+   "Build bounded, edge-free nonlinear manifolds from distorted sines with random phases to vary ambient d without edge effects (pp. 7–8).",
+   "Tie the test function's width to the data so the test stays meaningful as n and d change, and switch test functions when unresolvable (pp. 7, 11).",
+   "Randomly reorder data when an ordering-dependent method slows as points track gradually through the region (p. 17)."
+  ],
+  "coauthors": "none (algorithm with Faul and Goodsell, p. 23)",
+  "quotes": [
+   {
+    "text": "It is remarkable that most of the iteration counts become smaller when d is increased from 20 to 40, which may happen because tiny distances between data points are less likely to occur in higher dimensions.",
+    "page": 18
+   },
+   {
+    "text": "The lack of other methods for interpolation to values of functions of large numbers of variables should make the new software useful to many applications.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S074",
+  "year": "2005",
+  "title": "A Krylov subspace algorithm for multiquadric interpolation in many dimensions",
+  "read_level": "partial",
+  "contribution": "Specifies and analyses the Faul–Goodsell–Powell preconditioned-CG (Krylov) solver for multiquadric interpolation in any dimension, proving termination, a linear rate governed by a spectral radius, and optimality of its Lagrange-function coefficients, with extensive randomised experiments for d = 2–40 and n up to 10000.",
+  "problem_entry": "Earlier Cambridge solvers need about ten iterations for d = 2, c = 0 but lose efficiency as d and c grow; convergence to be guaranteed (p. 1); fast multipole hard for d > 3 (p. 3).",
+  "key_idea": "Random ordering, nearest-q sets with an exchange rule, Cholesky-based approximate Lagrange functions, CG-like directions and a max-residual-minimising constant (Steps 0–9, pp. 3–6), read as preconditioned CG with Ξ ≈ Ξfull (pp. 3, 16).",
+  "assumptions": "Distinct points, c ≥ 0, Micchelli's negative definiteness of Φ on zero-sum vectors (pp. 2, 9).",
+  "proof_devices": [
+   "Krylov termination/conjugacy theorem by induction (Theorem 1, p. 13)",
+   "linear rate by substituting (I − Ξ)^k into the Krylov minimum; ρ = spectral radius of I − H for a normalised Gram matrix (pp. 18–19)",
+   "expected-cost analysis of set construction under random ordering (3.3)–(3.4) (pp. 7–8)",
+   "optimality theorem closing a proposed improvement via Cauchy–Schwarz and orthogonal decomposition (Theorem 2, pp. 21–23)"
+  ],
+  "experiments": "Problems A–D, n = 200–10000, q = 10–50, ε = 10^-10, ten random instances with min–max ranges (Table 1, p. 24); d = 5–40 (Table 2, p. 26); c > 0 averages (Table 3, p. 27); timings vs direct method on a Sun Ultra 10 (Table 4, p. 28).",
+  "positioning": "Continues Beatson–Powell 1994, Powell 1997, Faul–Powell 2000, Faul 2001, Powell 2002; ~25% more iterations than Powell 1997 except q = 10 (pp. 2–3, 25).",
+  "writing": "Specification first, reasons later (p. 3); unexplained findings reported as unexplained after a designed test (p. 26).",
+  "limits_future": "Iterations nearly proportional to n for d = 40, c > 0 (p. 27); q choice application-dependent (p. 28); one nonpositive Cholesky pivot run replaced (pp. 24–25); free Fortran 77 code, up to 10000 points (p. 29).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "removes the large-d / c > 0 efficiency and guarantee limitation while keeping the Lagrange-approximation machinery",
+    "pages": "pp. 1–3"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "ten random replications reported as min–max ranges; unexplained d = 40 result probed and reported",
+    "pages": "pp. 24, 26"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "expected operation counts, O(q³n) preliminary work, timings, storage limits",
+    "pages": "pp. 7–9, 28–29"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Fortran 77 code free of charge from the third author",
+    "pages": "p. 29"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "native-norm descent proof",
+    "evidence": "Krylov optimality in the multiquadric semi-norm yields termination and a linear rate",
+    "pages": "pp. 13–18"
+   },
+   {
+    "pattern": "close a design avenue with a theorem",
+    "evidence": "Theorem 2: current coefficients already minimise the normalised scalar product V",
+    "pages": "pp. 21–23"
+   },
+   {
+    "pattern": "explain a surprise with a designed follow-up experiment",
+    "evidence": "minimum-distance constraint (6.2) tests an explanation of good d = 40 counts; result stays unexplained",
+    "pages": "p. 26"
+   }
+  ],
+  "transferable": [
+   "Randomise data ordering for multigrid-like coarsening and cheap nearest-neighbour updates, and prove the expected cost (pp. 7–8).",
+   "Derive a linear rate from Krylov optimality by substituting (I − Ξ)^k and identifying ρ with a spectral radius (pp. 18–19).",
+   "Before publishing an improved variant, check whether the current choice already solves its optimisation problem (p. 21).",
+   "Run each configuration on ten random instances and report min–max ranges (p. 24).",
+   "Time preliminary work and one iteration separately next to a direct baseline (p. 28)."
+  ],
+  "coauthors": "A. C. Faul, G. Goodsell",
+  "quotes": [
+   {
+    "text": "We found, however, that the changes to the iteration counts due to this modification are negligible, so the relatively good performance of the algorithm for d = 40 is unexplained.",
+    "page": 26
+   },
+   {
+    "text": "The use of such coefficients, however, is not an improvement over the present algorithm",
+    "page": 21
+   }
+  ]
+ },
+ {
+  "id": "S078",
+  "year": "2007",
+  "title": "Fast evaluation of polyharmonic splines in three dimensions",
+  "read_level": "partial",
+  "contribution": "Derives far-field expansions, error bounds, a uniqueness lemma and translation formulae for (ν+1)-harmonic splines in R³ and details a binary-tree hierarchical evaluator that computes matrix–vector products in O(N log N).",
+  "problem_entry": "O(N) per evaluation and O(N²) per matrix–vector product bottleneck iterative interpolation (citing Faul–Goodsell–Powell) and applications such as lidar surface reconstruction and ore grade modelling (pp. 2, 19).",
+  "key_idea": "Generalised Legendre expansion (Theorem 4.1, p. 9) with truncation bound (Theorem 4.2, p. 12); uniqueness of truncated outer expansions lets parent coefficients come cheaply from children (pp. 14, 17); hierarchical tree with per-panel distance thresholds per truncation order (pp. 18–22).",
+  "assumptions": "Distinct centres unisolvent for π_ν (p. 2); real coefficients for symmetry savings (p. 23).",
+  "proof_devices": [
+   "coefficients found by algebra for ν = 1–4, then proved generally (Iserles; later authors' induction) (p. 12)",
+   "uniqueness lemma for truncated expansions used to certify indirect computation (Lemma 5.1, pp. 14, 17)",
+   "adaptive error estimate with three safety layers of coefficients (§7.1, pp. 22–23)"
+  ],
+  "experiments": "Biharmonic matrix–vector products, N = 4000–128000, centres in a cube or on a sphere, relative accuracy 10^-3/10^-6, 10 replications, fast vs direct times (Tables 1–2, pp. 24–25).",
+  "positioning": "Builds on Barnes–Hut, Greengard–Rokhlin, Epton–Dembart and Powell's 1993 2-D TPS evaluator (pp. 3, 19).",
+  "writing": "States the engineering choice plainly: hierarchical code because it is much simpler and full FMM wins only for very large N (p. 27).",
+  "limits_future": "Adaptive error estimate could fail for contrived data (p. 23); per-panel tolerance heuristic (p. 23); extra log N vs full FMM (p. 27); outer-to-inner formulas given for a future full FMM (pp. 27–28).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "evaluation formula chosen by flop count; symmetry halves storage; hierarchical vs FMM counts",
+    "pages": "pp. 23–24, 27"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "relative-accuracy protocol with replications; estimator admitted defeatable",
+    "pages": "pp. 23, 25"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "no free-distribution statement seen; C code served an application paper, proof posted on a web page",
+    "pages": "pp. 12, 24"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "numerics → conjecture → proof or counterexample",
+    "evidence": "coefficient formula found by algebra for small ν, then proved for all ν",
+    "pages": "p. 12"
+   },
+   {
+    "pattern": "prefer the simpler code when the asymptotically better one pays off only at extreme sizes",
+    "evidence": "hierarchical instead of full fast multipole code",
+    "pages": "p. 27"
+   }
+  ],
+  "transferable": [
+   "Use a uniqueness lemma to certify that a cheap indirect computation equals the direct one (pp. 14, 17).",
+   "Precompute per tree node the distance at which each truncation order meets the tolerance (pp. 19–23).",
+   "Set the absolute tolerance from a relative target τ‖s‖∞ and report achieved relative accuracy over replications (p. 25).",
+   "Guess a formula from small cases by hand and then prove it by induction (p. 12)."
+  ],
+  "coauthors": "R. K. Beatson, A. M. Tan",
+  "quotes": [
+   {
+    "text": "the error estimation method described above could fail for contrived input data. However, in our computational experience, it has never failed.",
+    "page": 23
+   },
+   {
+    "text": "Firstly, a hierarchical code is an order of magnitude simpler to write.",
+    "page": 27
+   }
+  ]
+ }
+]

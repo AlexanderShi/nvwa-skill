@@ -1,0 +1,542 @@
+[
+ {
+  "id": "S037",
+  "year": "1996",
+  "title": "Trust-region interior-point algorithms for minimization problems with simple bounds",
+  "read_level": "full",
+  "contribution": "Two trust-region interior-point (TRIP) algorithms for box-constrained minimization that keep Coleman–Li's affine scaling in the model but differ in the trust-region shape (scaled vs unscaled), with one unified global convergence theorem and dogleg/CG step computations that stay strictly feasible.",
+  "problem_entry": "Coleman–Li scale both model and trust region; with radius > 1 the ellipsoid no longer enforces the bounds, and near a non-active bound it slows progress when the solution is interior (pp. 2, 4–5).",
+  "key_idea": "Keep the affine scaling in the model, choose S_k = D_k^p or S_k = I for the trust region, define the Cauchy step along D^{2p}g inside the box, and reuse the classical proof via one lemma (pp. 4–7).",
+  "assumptions": "f C^1, bounded below on a compact level set; Hessian approximations only bounded; S_k^{-1}D_k^p bounded; any scaling power p >= 1/2 (pp. 3, 7).",
+  "proof_devices": [
+   "Lemma 4.1: Cauchy-decrease lower bound 1/2||g^|| min(||g^||/||H^||, ||g^||Delta/||S^-1 D^p g^||, sigma||g^||/||h||_inf) via the 1-D quadratic along the scaled gradient on [0, T_k] (pp. 6–7)",
+   "two-case analysis: interior minimizer vs minimizer at the first blocking constraint T_k (pp. 6–7)",
+   "reduction to Coleman–Li Theorem 3.5 once the denominators are bounded (p. 7)"
+  ],
+  "experiments": "MATLAB; 23 Conn–Gould–Toint problems in interior (U) and constrained (C) versions, n = 8–30; per-problem gradient/function evaluation counts; totals 866/998 (S=D) vs 855/942 (S=I) (pp. 8–10).",
+  "positioning": "Adopts Coleman–Li's scaling (called elegant) but changes trial-step computation and trust-region shape; proof via Powell; Coleman–Li's second-order results acknowledged, not matched (pp. 2, 5, 8).",
+  "writing": "Numbered list of three novelty points in the introduction (pp. 2–3); short theorem-plus-table note; hedged closing belief about larger problems (p. 10).",
+  "limits_future": "First-order convergence only; small numerical advantage (Table 2, p. 10); claim for larger problems stated as a belief (p. 10); no future-work section.",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Trust-region skeleton and ratio test kept; only trust-region shape and Cauchy-step definition change; one lemma carries the old proof over (early, derivative-based).",
+    "pages": "pp. 5–7"
+   },
+   {
+    "method": "Taste #3",
+    "relation": "evidence",
+    "note": "CG and dogleg reused, changed only in the step-length rule enforcing strict feasibility.",
+    "pages": "pp. 7–8"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Per-problem evaluation counts on a standard collection, but no profiles, no external baseline run, no code release.",
+    "pages": "pp. 8–10"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "bridge inequality to a classical proof",
+    "evidence": "Lemma 4.1 puts the new Cauchy decrease into Powell's form; the global theorem then follows Coleman–Li's proof. Same move in S031 (p. 10) and S039 (pp. 6–7).",
+    "pages": "pp. 6–7"
+   }
+  ],
+  "transferable": [
+   "Decouple the scaling of the model from the scaling of the trust region and test both choices under one convergence theorem (pp. 4–6).",
+   "After changing the Cauchy step, minimize the 1-D model along the scaled Cauchy direction on [0, T] (T = first blocking constraint) and bound interior and boundary cases separately to recover Powell's bound (pp. 6–7).",
+   "Extend Steihaug–Toint CG to a box-constrained subproblem by changing only the maximal-step computation so iterates stay strictly feasible (pp. 7–8)."
+  ],
+  "coauthors": "J. E. Dennis",
+  "quotes": [
+   {
+    "text": "In both algorithms, the trial step computation is very simple and convenient with respect to staying strictly inside B.",
+    "page": 2
+   },
+   {
+    "text": "From this table we observe that the second algorithm (Sk = In) performed better. We believe that this will be more clearly the case in larger problems.",
+    "page": 10
+   }
+  ]
+ },
+ {
+  "id": "S031",
+  "year": "1997",
+  "title": "On the convergence theory of trust-region-based algorithms for equality-constrained optimization",
+  "read_level": "partial",
+  "contribution": "Global convergence to points satisfying second-order necessary conditions for the Dennis–El-Alem–Maciel class of trust-region SQP algorithms, plus trust-radius behaviour, local q-quadratic rates and a hard-case result for the linearized-constraint subproblem, with conditions verified for discretized optimal control.",
+  "problem_entry": "DEM had first-order global convergence for a general trust-region SQP class; existing second-order results needed exact normal components, least-squares multipliers and orthogonal null-space bases (pp. 2–4).",
+  "key_idea": "Keep DEM's algorithm; add fraction of optimal decrease on the tangential step, exact Hessian and two O(Delta) conditions on the quasi-normal step and multiplier change, explained by the O(Delta^2) size of the tangential decrease (pp. 4, 6–8).",
+  "assumptions": "DEM's A.1–A.4 plus exact Hessian with Lipschitz second derivatives (A.5); full column rank of grad C; conditions (2.3), (2.8) verified for normal+least-squares and optimal-control choices (pp. 9, 17–18).",
+  "proof_devices": [
+   "trust-region subproblem multiplier gamma_k as curvature measure: KKT identity gives q(0) - q(s*) >= 1/2 tau (1-r)^2 gamma_k Delta^2 (pp. 9–10)",
+   "case split on ||C_k|| <= alpha Delta_k with explicit alpha (3.12) giving pred >= kappa Delta^2 (pp. 11–13)",
+   "contradiction on the bounded augmented Lagrangian after bounding penalty parameter and radius (Lemmas 3.7–3.9, Theorem 3.1, pp. 13–15)",
+   "hard-case characterization via SVD limit of ||(grad C grad C^T + lambda I)^-1 grad C C|| (Theorem 7.2, p. 23)"
+  ],
+  "experiments": "none",
+  "positioning": "Complements Dennis–El-Alem–Maciel; generalizes Moré–Sorensen; contrasts Byrd–Schnabel–Shultz, Coleman–Yuan and El-Alem, whose results need exact normal components and least-squares multipliers (pp. 3–4, 23).",
+  "writing": "Introduction states each added condition and explains why it is needed before the formal development (p. 4); proofs announced as having the structure of the parent proof (p. 10).",
+  "limits_future": "Exact second derivatives required; no numerics; no future work listed (pp. 9, 23).",
+  "method_links": [
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Same algorithm and proof structure; only conditions on step components and multipliers strengthened to upgrade first- to second-order convergence (pre-DFO).",
+    "pages": "p. 4, p. 10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Era effect: finished result is limit statements, radius bounded away from zero and local q-quadratic rate, not evaluation counts.",
+    "pages": "pp. 15, 20–21"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Discretized optimal control introduced as the justification for the general form of algorithm and theory (weak).",
+    "pages": "p. 5, pp. 16–17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "minimal-condition upgrade",
+    "evidence": "Identify the weakest extra conditions that upgrade DEM's theorem, explain each in the introduction, verify them on optimal-control and normal/least-squares choices.",
+    "pages": "p. 4, pp. 17–18"
+   },
+   {
+    "pattern": "bridge inequality to a classical proof",
+    "evidence": "Proof of the extended lim-inf result has the same structure as DEM's.",
+    "pages": "p. 10"
+   }
+  ],
+  "transferable": [
+   "Use the trust-region subproblem's KKT multiplier gamma_k as the curvature measure; PSD of H + gamma W^T W gives a model decrease >= 1/2 gamma Delta^2 that replaces the Cauchy bound in second-order proofs (pp. 9–10).",
+   "For a two-component step, split on ||C_k|| <= alpha Delta_k with alpha written out explicitly so that constraint terms are dominated by the tangential decrease (pp. 11–12).",
+   "Check each added hypothesis against the natural choices of an application class and record it as a one-line lemma (Lemma 4.1, p. 17)."
+  ],
+  "coauthors": "J. E. Dennis",
+  "quotes": [
+   {
+    "text": "The proof of (3.2) although simpler has the same structure as the proof given in [7].",
+    "page": 10
+   },
+   {
+    "text": "We also prove that if the algorithm is well behaved (for instance if the trust radius is uniformly bounded away from zero), then this subproblem has a natural tendency to fall into the so{called hard case.",
+    "page": 4
+   }
+  ]
+ },
+ {
+  "id": "S039",
+  "year": "1999",
+  "title": "Two-step algorithms for nonlinear optimization with structured applications",
+  "read_level": "full",
+  "contribution": "A two-step trust-region framework in which a cheap, structure-exploiting second step follows the classical step, with ared/pred redefined so that global convergence theory carries over, a q-quadratic two-step Newton result, and LANCELOT/circuit-optimization evidence including a failure analysis.",
+  "problem_entry": "Expensive evaluations call for maximal improvement per iteration; variables with a known functional form (slacks, minimax variable) admit a cheap second update after the classical step (pp. 1–2).",
+  "key_idea": "pred = model decrease of the first step + actual decrease of the second step; the new ratio (t+rho)/(t+1) never rejects what the classical test accepts (pp. 4, 7).",
+  "assumptions": "f C^2, bounded model Hessians, fraction of Cauchy decrease for the first step; lim result needs ||s^|| <= kappa Delta or decrease >= kappa ||s^|| and uniformly continuous gradient (pp. 2, 5–7).",
+  "proof_devices": [
+   "pred keeps Powell's Cauchy bound because the second step's actual decrease is nonnegative (eq. (8), p. 6)",
+   "ared - pred involves only the first step, so |ared - pred| = o(Delta) (eq. (11), p. 7)",
+   "monotonicity of rho^ = (t + rho)/(t + 1) in t (Remark 3.1, p. 7)",
+   "perturbation lemma for the two-step Newton q-quadratic rate (Corollary 4.1, pp. 11–12)",
+   "two-case convexity argument for quadratic decrease of the slack update (Proposition 5.1, pp. 13–14)"
+  ],
+  "experiments": "Modified LANCELOT on 56 CUTE problems (26 non-minimax, 30 minimax), 15% fewer iterations on average with named outliers excluded; JiffyTune and static-timing circuit problems; failure section on six minimax problems (pp. 16–24).",
+  "positioning": "Credits the conservative line-search version to Bertsekas and Luenberger (spacer steps) and variable elimination to Golub–Pereyra; builds on Moré's trust-region framework; notes NPSOL/SNOPT use similar slack updates (pp. 2, 13).",
+  "writing": "Abstract insists that the second step must yield decrease; a remark explains why the ared/pred definitions matter; open about a result it considers unlikely to hold and about failures (pp. 1, 7, 11, 19–24).",
+  "limits_future": "Minimax failures from ill-conditioning induced by the second step, mostly improved by a larger penalty parameter and a tighter CG tolerance; lim result under quadratic decrease alone left open; future: minimax strategies (pp. 11, 21–24).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "Derivative-based precursor: a free, structure-exploiting step added to a provably convergent trust-region step; it can only help acceptance (glue is a redefined ratio, not a forcing function).",
+    "pages": "p. 4, p. 7"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Skeleton and radius update untouched; only ared/pred redefined; classical proof carries over.",
+    "pages": "p. 4, pp. 6–7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "CUTE collection, strongest in-house baseline (unmodified LANCELOT), per-problem tables, industrial application; no profiles (1999).",
+    "pages": "pp. 16–24"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Circuit tuning at IBM with evaluations taking over ten minutes of CPU time.",
+    "pages": "pp. 17–18, 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "failure-analysis section",
+    "evidence": "§6.3 isolates the minimax problems where the method is worse, explains the ill-conditioning mechanism and tests fixes.",
+    "pages": "pp. 19–24"
+   },
+   {
+    "pattern": "bridge inequality to a classical proof",
+    "evidence": "pred >= Powell bound (8) and |ared - pred| = o(Delta), then Moré's proof.",
+    "pages": "pp. 6–7"
+   }
+  ],
+  "transferable": [
+   "When adding a non-model step to a trust-region method, set pred = model decrease of the model step + actual decrease of the extra step; the Cauchy bound and the standard proof survive (p. 4, pp. 6–7).",
+   "Show a modified acceptance ratio dominates the classical one by writing it as (t + rho)/(t + 1) and using monotonicity in t (p. 7).",
+   "If the natural property of the extra step is too weak for the theorem, add a cheap scaling safeguard that enforces one of the sufficient conditions (Algorithm 3.1, p. 10).",
+   "Report average gains with outliers named and excluded explicitly (p. 16)."
+  ],
+  "coauthors": "A. R. Conn, C. Visweswariah",
+  "quotes": [
+   {
+    "text": "However, there are some minimax problems where the two-step algorithm performs poorly",
+    "page": 16
+   },
+   {
+    "text": "that two-step updating is unlikely to be helpful",
+    "page": 17
+   }
+  ]
+ },
+ {
+  "id": "S028",
+  "year": "2008",
+  "title": "Recovering risk-neutral probability density functions from options prices using cubic splines and ensuring nonnegativity",
+  "read_level": "full",
+  "contribution": "A nonparametric cubic-spline estimator of risk-neutral densities from option prices, posed as a convex QP (nonnegativity at knots, heuristic) or as a QP-SDP that guarantees nonnegativity everywhere via the Bertsimas–Popescu characterization, tested on Black–Scholes and S&P 500 data.",
+  "problem_entry": "Underdetermined inversion (many more states than prices) and a catalogue of existing methods that can return negative probabilities (pp. 2, 6–7).",
+  "key_idea": "Spline coefficients as variables make prices linear, so least squares is a convex QP; exact nonnegativity adds one 4x4 PSD matrix per spline piece (pp. 7–11).",
+  "assumptions": "One-period economy, European options, no arbitrage; market data cleaned with Herzel's no-arbitrage conditions (pp. 4–5, 16–17).",
+  "proof_devices": [
+   "exact SDP reformulation of nonnegativity of a cubic on an interval (Corollary 1, p. 11)",
+   "knot-only constraint implied by the SDP one (x^s_00 >= 0, p. 11)",
+   "epigraph/SOC reformulation of the quadratic objective for SDPT3 (p. 12)"
+  ],
+  "experiments": "Black–Scholes data with known lognormal answer and three S&P 500 CBOE sets; baseline mixture of two lognormals (fmincon); residual tables, knot sensitivity, robustness to arbitrage-containing data (pp. 12–19).",
+  "positioning": "Parametric vs nonparametric taxonomy (Jackwerth, Bondarenko); list of methods that can produce negative probabilities; claims the first spline method with a positivity guarantee (pp. 2–3, 6–7).",
+  "writing": "Finance background (RNPM, arbitrage, fundamental theorem) given before the optimization model; plain statement of the heuristic's failure between knots (pp. 4–5, 10).",
+  "limits_future": "Knot placement sensitivity, SDP more sensitive to scaling, QP tails slightly negative; future: volatility estimation from the density and robust QP/SDP under data uncertainty (pp. 15, 18–19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "A cheap heuristic formulation (knot-only QP) set beside a guaranteed costlier one (SDP), with data showing when the guarantee matters, instead of wrapping a heuristic.",
+    "pages": "pp. 9–11, 18–19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Synthetic data with a known answer + real market data + parametric baseline; no collection, profiles or code release.",
+    "pages": "pp. 13–19"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Finance application on public market data.",
+    "pages": "p. 5, p. 16"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "ground truth first",
+    "evidence": "Validate on Black–Scholes data whose density is known (lognormal) before market data.",
+    "pages": "pp. 14–15"
+   },
+   {
+    "pattern": "clean inputs with a characterization theorem",
+    "evidence": "Herzel's necessary and sufficient no-arbitrage conditions used to remove inconsistent prices before fitting.",
+    "pages": "pp. 16–17"
+   }
+  ],
+  "transferable": [
+   "Enforce nonnegativity of a piecewise polynomial exactly with one small PSD matrix per piece, keeping the knot-only linear version as the cheap fallback (pp. 10–11).",
+   "For SDP solvers with linear objectives, move a convex quadratic objective into an epigraph constraint written as a second-order cone (p. 12).",
+   "Weight residuals by trading volume so that unreliable, thinly traded data count less (p. 17).",
+   "Rerun on the data you would have discarded (arbitrage-containing prices) and report whether the answer changes (pp. 18–19)."
+  ],
+  "coauthors": "A. M. Monteiro, R. H. Tütüncü",
+  "quotes": [
+   {
+    "text": "To our knowledge, this is the first spline function approach to risk-neutral density estimation with a positivity guarantee.",
+    "page": 3
+   },
+   {
+    "text": "While the simpler QP approach is generally sufficient to recover an appropriate risk-neutral pdf both with simulated and market data, there are instances where the solution of the more difficult SDP model is necessary to obtain a nonnegative pdf estimate.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S029",
+  "year": "2012",
+  "title": "Computation of sparse low degree interpolating polynomials and their application to derivative-free optimization",
+  "read_level": "partial",
+  "contribution": "Minimum-l1 underdetermined quadratic interpolation that recovers fully quadratic models with high probability from O(n (log n)^4) random points when the Hessian has O(n) nonzeros, plus a practical DFO trust-region code with l1 models that outperforms NEWUOA on the test set.",
+  "problem_entry": "Fully quadratic models need (n+1)(n+2)/2 well-poised points and an O(n^6) check; Hessian sparsity helps only when its pattern is known; import compressed sensing into DFO (pp. 2, 5, 8).",
+  "key_idea": "Fill the free degrees of freedom by minimizing the l1 norm of the Hessian coefficients (an LP) instead of the Frobenius norm (p. 8).",
+  "assumptions": "Lipschitz Hessian; approximate Hessian sparsity (an h-sparse fully quadratic model exists for each x0, Delta); random samples in an l-infinity ball (pp. 4, 16–17).",
+  "proof_devices": [
+   "orthonormal K-bounded basis on the hypercube via Fubini, K = 3 (Theorem 4.4, pp. 13–15)",
+   "RIP for random samples in a bounded orthonormal system (Theorem 4.1, p. 11)",
+   "f minus sparse fully quadratic model treated as measurement noise eta = sqrt(p) kappa'_ef Delta^3 (proof of Theorem 4.5, p. 20)",
+   "coefficient error converted to value/gradient/Hessian error with card(alpha) factors (Lemma 4.1, pp. 18–21)"
+  ],
+  "experiments": "MATLAB; DFO-TR Frob vs DFO-TR l1 vs NEWUOA, performance profiles in function evaluations on 26 CUTEr problems at 1e-4 and 1e-6; 13 sparse-Hessian CUTEr problems (n = 20–22), l1 wins about 8/9; failures reported (pp. 25–29).",
+  "positioning": "Minimum-Frobenius models of Conn–Scheinberg–Vicente and Powell as state of the art; group partial separability [7] needs known structure; practical algorithm follows Fasano–Morales–Nocedal (pp. 3, 7–8, 22).",
+  "writing": "Contribution stated as twofold; explicit disclaimers that the theorem cannot validate the practical code and that the constants are impractical (pp. 2–3, 21).",
+  "limits_future": "Theory–practice gap, impractical constants, LP overhead and warm starts for larger n, l2-ball basis open; future: stochastic trust-region framework, sparse gradients/fully linear models, uses beyond optimization (pp. 16, 21–22, 28–29).",
+  "method_links": [
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "Precursor: deterministic fully-quadratic certification replaced by random sampling giving accurate models with high probability; convergence theory named as next step.",
+    "pages": "pp. 5–6, 22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Performance profiles in function evaluations vs NEWUOA (best interpolation-set size) with a written fairness rule.",
+    "pages": "pp. 25–27"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Practical code uses minimal geometry care without the safeguard and says it is theoretically weak but works.",
+    "pages": "pp. 22–23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "reverse field import",
+    "evidence": "Compressed-sensing recovery theory used to improve an optimizer rather than the reverse.",
+    "pages": "p. 2, p. 28"
+   },
+   {
+    "pattern": "idealized theorem + practical algorithm with the gap written out",
+    "evidence": "Theorem 4.5 for random sampling vs deterministic Algorithm 5.1; the paper states the theorem cannot validate the practical setting.",
+    "pages": "p. 21"
+   }
+  ],
+  "transferable": [
+   "Prove a sampled model accurate by treating (f - best structured model) as bounded measurement noise at the Taylor-error level and applying a noisy recovery theorem (p. 20).",
+   "Build a uniformly bounded orthonormal basis on a domain where integrals factorize so random-sampling RIP results apply with a dimension-free constant (pp. 13–15).",
+   "Put both model-selection rules in one trust-region code so the experiment isolates the model choice (pp. 24–25)."
+  ],
+  "coauthors": "A. S. Bandeira, K. Scheinberg",
+  "quotes": [
+   {
+    "text": "The main idea of our work is to implicitly and automatically take advantage of the sparsity of the Hessian in the cases when the sparsity structure is not known in advance, to build accurate models from relatively small sample sets.",
+    "page": 2
+   },
+   {
+    "text": "Theorem 4.5 cannot strictly validate a practical setting in DFO like the one discussed in the next section.",
+    "page": 21
+   }
+  ]
+ },
+ {
+  "id": "S034",
+  "year": "2013",
+  "title": "Smoothing and worst case complexity for direct-search methods in non-smooth optimization",
+  "read_level": "full",
+  "contribution": "Smoothing direct search for non-smooth, locally Lipschitz functions: global convergence to smoothing-stationary points and a worst-case bound of O(n^{5/2}[-log eps + log n] eps^-3) function evaluations, about one order worse than smooth direct search, with profiles showing better final values at no extra cost.",
+  "problem_entry": "Smooth direct search matches steepest descent's complexity, but no non-smooth bound exists; a direct extension fails because a descent direction may be far from all poll directions (pp. 1, 5, 7).",
+  "key_idea": "Run unchanged sufficient-decrease direct search on f~(., mu) until alpha < r(mu) = c mu^q, then shrink mu (Algorithm 4.1, p. 7).",
+  "assumptions": "f locally Lipschitz with a known smoothing function whose gradient has Lipschitz constant O(1/mu); f~ bounded below; positive spanning sets with bounded-below cosine measure (pp. 2–3, 8, 10).",
+  "proof_devices": [
+   "inner-loop count with alpha >= r(mu) as the floor in the forcing function; unsuccessful iterations by alpha-contraction counting (Theorem 6.1, pp. 9–10)",
+   "outer-loop count log(xi/mu0)/log(sigma) (p. 10)",
+   "gradient at exit from the unsuccessful-iteration bound: O(xi^{q-1} + xi^{(p-1)q}) (Corollary 6.1, p. 10)",
+   "exponent balancing q = 2, p = 3/2 (Corollary 6.2, p. 10)",
+   "gradient consistency of the Chen–Zhou smoothing of ||F||_1 (Theorem 8.2, pp. 15–16)"
+  ],
+  "experiments": "53 Moré–Wild problems min ||F(x)||_1 (n = 2–12); SID-PSM vs smoothing SID-PSM; best-value differences, data profile (theta = 1e-7, budget 1500), performance profile (theta = 1e-4); ablations described in words (pp. 16–18).",
+  "positioning": "Builds on Vicente's smooth direct-search complexity; compares with Nesterov's Gaussian smoothing (slightly better in n) and Cartis–Gould–Toint finite differences; notes MADS/dense-direction convergence without rates (pp. 5–7, 11).",
+  "writing": "Price stated in the abstract (roughly one order of magnitude worse); result framed as a Nesterov-style problem class with model, oracle and eps-solution (pp. 1, 11).",
+  "limits_future": "Price of one order from L ~ 1/mu; composite piecewise-linear case still unresolved directly; n-dependence of the Lipschitz constant ignored; future: bound and linear constraints (pp. 11, 19).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Bound in iterations and evaluations with n-dependence, next to smooth direct search and Nesterov's bound; price named.",
+    "pages": "pp. 5–6, 9–11"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Direct-search skeleton kept; objective becomes f~(., mu) and the only new rule is the inner stopping threshold r(mu). Source of SKILL.md Research Heuristic 5.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Own solver SID-PSM reused inside the method; Moré–Wild data and performance profiles; f* from a larger solver set.",
+    "pages": "pp. 16–18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "exponent balancing",
+    "evidence": "Choose forcing-function power p and stopping power q to equalize the two error terms (q = 2, p = 3/2); also in S032 (p. 15).",
+    "pages": "p. 10"
+   },
+   {
+    "pattern": "problem-class statement for upper complexity bounds",
+    "evidence": "Model / oracle / eps-solution box in Nesterov's style.",
+    "pages": "p. 11"
+   }
+  ],
+  "transferable": [
+   "Solve a sequence of smooth problems and stop each inner run on a step-size threshold r(mu) = c mu^q; convergence needs r(mu) -> 0 and L(mu) r(mu) -> 0 (Theorem 5.3, pp. 8–9).",
+   "For complexity with a varying parameter, bound each inner run with alpha >= r(mu) inside the forcing function and multiply by the number of outer reductions (pp. 9–10).",
+   "Compare with the naive fixed-parameter alternative inside the analysis to justify continuation (p. 11).",
+   "In profiles on a small test set, take f* as the best value over a larger solver set than the two compared (p. 18)."
+  ],
+  "coauthors": "R. Garmanjani",
+  "quotes": [
+   {
+    "text": "The idea is simple and consists of applying directly a direct-search method to the smoothing function with a fixed value of the smoothing parameter µ until a certain precision is achieved, after which the smoothing parameter is reduced and the process repeated.",
+    "page": 7
+   },
+   {
+    "text": "One pays a price in smoothing non-smooth objective functions, in the sense that the bound in the worst case complexity is at least one order worse than the corresponding bound for smooth direct search.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S032",
+  "year": "2016",
+  "title": "Trust-region methods without using derivatives: Worst case complexity and the non-smooth case",
+  "read_level": "partial",
+  "contribution": "Worst-case complexity of general derivative-free trust-region methods: O(n^2 eps^-2) evaluations for smooth f, a smoothing trust-region method with O(n^{5/2}[|log eps| + log n] eps^-3) evaluations for non-smooth f, and O(l n^2 eps^-2) for composite h(F), removing a |log eps| factor from earlier work.",
+  "problem_entry": "DFO trust-region analysis had only global convergence; direct search already had complexity and smoothing results; the composite trust-region attempt was restrictive with an extra |log eps| (pp. 1–3).",
+  "key_idea": "Count each criticality-step inner iteration as a regular iteration and subtract c1 Delta^p from the actual decrease in the ratio; smoothing and composite variants reuse the skeleton (pp. 5–6, 12, 16–17).",
+  "assumptions": "F C^1 with Lipschitz Jacobian on an enlarged level set; fully linear models with a model-improvement algorithm; bounded model Hessians; kappa_ef, kappa_eg = O(sqrt(n) L); h convex, globally Lipschitz, bounded below for the composite case (pp. 4–5, 7–8, 10, 17). The eps glyph is lost in the extraction; bounds restored from context.",
+  "proof_devices": [
+   "iteration taxonomy C^r, C^nr, S, A, U, M with |C^nr| <= |S| + |R| and |M| <= 2(|S| + |R|) (pp. 7, 9–10)",
+   "radius floor Delta >= gamma C3 eps^{1/min(p-1,1)} while ||grad f|| > eps (Lemma 3.3, p. 8)",
+   "gradient bounded by C1 Delta + C2 Delta^{p-1} at radius-reducing iterations (Lemma 3.2, p. 8)",
+   "|Psi - Psi^m| <= L_h kappa_eg Delta from full linearity only (eq. (11), p. 16)",
+   "convexity: Psi^m(x, Delta) >= min{Delta, 1} Psi^m (Lemma 5.1, p. 17)"
+  ],
+  "experiments": "Numerical illustration on 53 Moré–Wild l1 problems: smoothing TR vs composite TR (LP subproblem, simplex-gradient models), then smoothing TR vs smoothing SID-PSM; data and performance profiles (pp. 20–22).",
+  "positioning": "Extends Garmanjani–Vicente (direct search) to trust regions; improves Grapiglia–Yuan–Yuan by |log eps| and without radius reduction on model-improvement iterations; keeps the general setting of Conn–Scheinberg–Vicente (pp. 2–3, 5, 20).",
+  "writing": "Contribution stated as threefold; candid that much still had to be built from scratch; long proofs moved to an appendix to let the paper flow (pp. 3, 8).",
+  "limits_future": "Bounds are the expected ones; the worse-bound smoothing method wins numerically; future: eps^-1 for convex f, second-order points (Júdice's thesis), constraints (p. 22).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "WCC in iterations and evaluations with n- and l-dependence, compared with direct search, gradient methods and the previous composite bound.",
+    "pages": "p. 3, p. 11, p. 15, p. 20"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Trust-region skeleton kept; acceptance ratio gets a -c1 Delta^p term; composite criticality measure Psi replaces ||g||.",
+    "pages": "pp. 5–6, 16–17"
+   },
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Bound does not predict the numerical ranking: the method with the worse bound performs much better; reported openly (step 6; Taste #4).",
+    "pages": "p. 22"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Only a small numerical illustration with profiles; no code release mentioned.",
+    "pages": "pp. 20–22"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "iteration taxonomy for complexity",
+    "evidence": "Classify iterations into six types and bound each non-successful class by successful and radius-reducing ones.",
+    "pages": "p. 7, pp. 9–10"
+   },
+   {
+    "pattern": "exponent balancing",
+    "evidence": "p = 3/2, q = 2 chosen to make the smoothing gradient O(sqrt(n) xi), as in S034.",
+    "pages": "p. 15"
+   }
+  ],
+  "transferable": [
+   "Subtract c1 Delta^p from the actual decrease in rho_k to tune the complexity exponent; p = 2 recovers the classical bound, p = 3/2 matches smoothing (pp. 5–6).",
+   "Count a multi-step inner procedure (criticality step) one iteration at a time; this removed a |log eps| factor (p. 3).",
+   "Bound bookkeeping iterations (model improvement, non-reducing criticality) by the type of iteration that must follow them (p. 10).",
+   "Bound the error of a model criticality measure from full linearity alone through the Lipschitz constant of h (p. 16)."
+  ],
+  "coauthors": "R. Garmanjani, D. Júdice",
+  "quotes": [
+   {
+    "text": "Despite the fact of exhibiting a worse WCC bound, the smoothing approach worked much better than the composite one, which does not come as a surprise given the absence of curvature exploration in the latter one.",
+    "page": 22
+   },
+   {
+    "text": "The WCC bounds established in the various cases were the expected ones, matching existent bounds for derivative-free or derivative-based optimization.",
+    "page": 22
+   }
+  ]
+ },
+ {
+  "id": "S035",
+  "year": "2017",
+  "title": "Prediction of chronic damage in systemic lupus erythematosus by using machine-learning models",
+  "read_level": "full",
+  "contribution": "A recurrent neural network trained on longitudinal visit data from the Sapienza Lupus Cohort predicts chronic damage onset in SLE with cross-validated AUC 0.77, whereas static feed-forward and logistic-regression baselines reach about 0.5.",
+  "problem_entry": "Chronic damage affects up to half of SLE patients; tools to predict it are needed; earlier neural-network SLE studies targeted renal outcomes (pp. 1–3).",
+  "key_idea": "Treat each patient's visit history as a variable-length sequence and let an RNN output the probability of damage within two years (pp. 5, 7).",
+  "assumptions": "Stringent case/control selection (38 cases; 94 controls with >= 5 visits and 2 years of follow-up); rare binary features discarded (pp. 5–7).",
+  "proof_devices": [],
+  "experiments": "Eight-fold cross-validation with pooled ROC, AUC 0.77, threshold table; hidden-unit robustness; static FFNN/logistic baselines on the last L = 1, 2, 3 visits reach AUC slightly above 0.5 (pp. 8–9).",
+  "positioning": "Reviews earlier ANN and random-forest SLE studies (renal outcomes, graft survival, mortality) and claims the first RNN model for SLE damage (pp. 3, 9–10).",
+  "writing": "Clinical IMRaD structure; repeated first-study claims; Vicente listed under formal analysis, methodology, software and validation (pp. 9–12).",
+  "limits_future": "Small data set, black-box model, feature ranking not yet reliable; larger cohorts needed. Observation: early stopping is based on training AUC (pp. 8, 11).",
+  "method_links": [
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "ML evaluation protocol (cross-validation, ROC/AUC, simple baselines) instead of a problem collection with profiles.",
+    "pages": "p. 8"
+   },
+   {
+    "method": "Taste #6",
+    "relation": "evidence",
+    "note": "Optimization/ML methodology and software contributed to a medical application.",
+    "pages": "p. 1, pp. 11–12"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "ablate the key modelling choice",
+    "evidence": "Static models given the same last L visits reach AUC about 0.5, isolating the value of the sequence model.",
+    "pages": "p. 8"
+   }
+  ],
+  "transferable": [
+   "To show that temporal structure matters, feed the same information to static baselines (last L visits concatenated) and compare AUC (p. 8).",
+   "Report a threshold table with sensitivity/specificity pairs rather than one operating point (Table 3, p. 9).",
+   "Define negatives with a minimum follow-up so that a patient without an event so far is not labelled as a patient without an event (p. 5)."
+  ],
+  "coauthors": "F. Ceccarelli, M. Sciandrone, C. Perricone, G. Galvan, F. Morelli, I. Leccese, L. Massaro, E. Cipriano, F. R. Spinelli, C. Alessandri, G. Valesini, F. Conti",
+  "quotes": [
+   {
+    "text": "With L = 1, 2, 3, both FFNNs and the logistic regression approach obtained AUC slightly greater than 0.5.",
+    "page": 8
+   },
+   {
+    "text": "We obtained an AUC value of 0.77, indicating a good performance of our model.",
+    "page": 11
+   }
+  ]
+ }
+]

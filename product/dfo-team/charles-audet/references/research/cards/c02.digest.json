@@ -1,0 +1,100 @@
+[
+ {
+  "id": "S019",
+  "year": "2009",
+  "title": "NOMAD user guide",
+  "read_level": "full",
+  "contribution": "The citable user reference for NOMAD 3.x (text read: version 3.7.2, revised August 2015). It defines the blackbox problem class and the I/O contract, the constraint-type semantics (EB, PB, PEB, F, hidden), how every NOMAD feature attaches to the MADS search/poll skeleton, and the defaults, a symptom-to-remedy table, and release notes that map each version's features to the group's papers.",
+  "problem_entry": "Enters from the user's problem class, not from an algorithm: the preface lists simulator pathologies (cost from seconds to days, noise and limited precision, failures at acceptable inputs, non-repeatable outputs, constraints known a priori vs a posteriori) and scopes NOMAD negatively (not for convex, smooth-cheap or large-n problems); formal problem min f over {x in X : c_j(x) <= 0} with f, c_j : X -> R U {inf} (p. 11, p. 16, p. 37).",
+  "key_idea": "One MADS skeleton (search, then poll; coarsen the mesh on success, refine it on failure) with four extension slots. Search: quadratic models, LH, VNS, speculative, cache, TGP and user searches. Poll: 16 direction types, default ORTHO N+1 QUAD, anisotropic XMesh, variable groups, categorical extended poll. Constraints: EB/PB/PEB/F. Evaluation management: opportunistic strategy, cache, blocks, count flags. New algorithm classes are built as drivers that call MADS runs (BiMADS, VNS, extended-poll descents, Coop-MADS, PSD-MADS, multistart) (pp. 16-17, 53-55, 80-99, 104-112).",
+  "assumptions": "No smoothness is stated (theory delegated to [8], [18], [20]). Practical assumptions: few variables (efficient up to about 20; DIMENSION capped at 1000), expensive evaluations, user-classified constraints (CSTR = PB if unsure), bounds declared to NOMAD rather than coded in the blackbox, static user-supplied surrogates (TGP the dynamic exception), trial points on the mesh. Noise is named but no noise mechanism appears in the parameter tables (pp. 11, 15-16, 41, 49, 53, 84, 97, 100, 111).",
+  "proof_devices": [
+   "none (software manual: no theorem, lemma or proof)",
+   "theoretical invariant exposed to extenders: search trial points must lie on the current mesh, enforced with project_to_mesh() helpers (p. 100)",
+   "convergence carrier in the decomposition variant: the PSD-MADS 'pollster' polls all variables with fewer directions and ensures convergence (p. 97)",
+   "extended-poll descents run on meshes not refined beyond the mesh at the start of the extended poll (p. 88)"
+  ],
+  "experiments": "No benchmark or profiles. A worked example (n=5, one PB and one EB constraint, 8 bounds, infeasible x0, 100 evaluations) is run in batch mode (f=-3.48827, p. 45) and in library mode (f=-3.890758281, p. 62) with no comment on the difference; batch-log OBJ values look rounded to about 6 digits (my inference: default cout precision in bb.cpp, p. 40). There is a MATLAB smoke test (134 evaluations, p. 31). Performance claims are qualitative ('Tests have suggested', p. 95; defaults as a benchmark compromise, p. 73). Rich measurement infrastructure: BBE/EVAL/SIM_BBE/SGTE/BLK_EVA/TIME counters and budgets, SGTE_COST, the seed in file names, and the bi-objective surf and Delta indicators (pp. 50, 56, 79-82, 90).",
+  "positioning": "Positioned against a problem class, not against competitors: no other DFO solver is named in the text ('often useful when other optimizers fail', p. 11). MADS [18] is the most-cited reference (12 in-text uses). The external frame is the Booker et al. SMF [33] for surrogates and the roadmap, plus VNS [56, 46], TGP [43, 45], EI [48], CUTEr [42] and GAMS [34]. 29 of the 61 bibliography entries (theory papers such as [10], [14], [16] and most applications) are never cited in the text, so the bibliography serves as a portfolio (pp. 84, 99, 107, 111-118).",
+  "writing": "Manual rhetoric ordered by user expertise (p. 5): margin boxes restating rules (p. 39, p. 42), a table per parameter with defaults (pp. 49-50, 79-82, 110), a symptom-suggestion-reference table (p. 74), and one worked example carried through batch, library and block-parallel modes. Hedging is concentrated where no data is shown (pp. 73, 95, 97), while semantics and theory invariants are stated categorically (pp. 53, 100). There are small internal inconsistencies (EXTENDED_POLL_TRIGGER default r0.1 on p. 80 vs r0.2 on p. 89; DISPLAY_DEGREE ranges on p. 50 vs p. 82; block-size parameter names on p. 84 vs pp. 80, 91).",
+  "limits_future": "Concrete limits: about 20 variables (p. 97), static surrogates only (p. 84), parallel runs not repeatable even with OrthoMADS (p. 95), block evaluation can exceed MAX_BB_EVAL (p. 92), library-mode crashes end the run (p. 59), batch categorical neighbours must keep the dimension (p. 88), MATLAB limitations (p. 32), and VNS extra cost and incompatibility with BiMADS (p. 99). Future directions: adaptive surrogates/SMF, Multi-MADS with 3 or more objectives, BiMADS with hard feasibility, integer variables (p. 107), smarter PSD-MADS variable groups (p. 97). Noise is left unaddressed (p. 11 vs the parameter tables).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The guide states the search/poll division of labour (search flexible but 'a difficulty for the theory'; poll 'the basis of the convergence analysis'), requires user searches to stay on the mesh with a projection helper, and implements VNS, LH, speculative, cache, quadratic and TGP searches as search components. The PSD-MADS pollster keeps convergence.",
+    "pages": "pp. 16-17, 58, 81, 97, 99-100, 105, 111"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "Structural information also enters the Poll without breaking it: the default ORTHO N+1 QUAD picks the (n+1)-th poll direction with a quadratic model, model ordering sorts trial points, and user-supplied categorical neighbourhoods live in the extended poll rather than the search.",
+    "pages": "pp. 55, 83, 87-89, 105"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Exact 3.7.2 wording for EB (unrelaxable), PB/PEB/F (relaxable), hidden constraints (the evaluation simply fails) and CSTR=PB when unsure; the c_j <= 0 convention and two-sided splitting; bounds kept out of the blackbox; a status code for failures; crash isolation in batch mode; the R U {inf} codomain. The guide adds PEB (PB then EB) and the filter F, which SKILL.md does not list.",
+    "pages": "pp. 16, 39, 41, 48, 53"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The bb.exe x.txt contract (single input-file argument, objective then constraints on stdout, zero status for success) that later bbopt benchmarks use is already fixed here, together with CUTEr/AMPL/GAMS interfaces.",
+    "pages": "pp. 39-40, 69"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "The accounting infrastructure fully supports evaluation budgets (several counters, budgets, SGTE_COST, CNT_EVAL/count_eval), but the guide's own performance claims about defaults, parallel variants and PSD-MADS settings are qualitative and deferred to unreported benchmarks or slides [52]; no profiles appear.",
+    "pages": "pp. 50, 53, 56, 64, 73, 79-80, 95-97"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Defaults presented as a benchmark compromise, the symptom table, the bug-report invitation, acknowledged user testers, funders, release notes mapping versions to papers, a roadmap, multi-language interfaces.",
+    "pages": "pp. 18-20, 69, 73-74, 103-107"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "MADS-as-subroutine composition",
+    "evidence": "New algorithm classes are built as drivers that call convergent MADS runs: BiMADS (series of single-objective runs), VNS (runs from perturbed points), categorical extended-poll descents, Coop-MADS (seeded instances plus a cache server), PSD-MADS (subspace runs plus a pollster), multistart, and constraint sensitivity via BiMADS.",
+    "pages": "pp. 68, 88, 90, 96-99"
+   },
+   {
+    "pattern": "Cheap-first evaluation gating",
+    "evidence": "Constraints computable before the simulation are distinguished from those computed after it; a cheap EB blackbox runs first and the expensive blackbox is not launched if it fails; h_max is passed into eval_x so a too-infeasible evaluation can be aborted and not counted (count_eval=false).",
+    "pages": "pp. 11, 51, 64"
+   },
+   {
+    "pattern": "Evaluation cache as shared memory and data source",
+    "evidence": "The cache prevents double evaluation, including across parallel processes via a cache server; it seeds X0, is kept across runs after reset(), feeds a cache search, and is mined after the run (cache_inspect) for zero-cost constraint what-if analysis before a targeted bi-objective study.",
+    "pages": "pp. 58, 68, 72, 80, 96, 98-99"
+   }
+  ],
+  "transferable": [
+   "Open a method paper or manual with the pathologies the method targets plus one sentence naming the problem classes where readers should use something else (convex, smooth-cheap, large n) (p. 11).",
+   "Write failure into the problem statement (f, c_j : X -> R U {inf}), make the blackbox return a non-zero status on failure, and in block/parallel protocols distinguish FAIL (never re-evaluated) from REJECT (may be resubmitted) (pp. 16, 39, 92).",
+   "Split two-sided constraints into two c_j <= 0 outputs and declare variable bounds in the optimizer's problem file rather than in the blackbox (pp. 39, 41).",
+   "Chain blackboxes so that cheap unrelaxable constraints are checked first, and pass the current barrier threshold h_max into the simulator so that it can abort and not count a hopeless evaluation (pp. 51, 64).",
+   "Two-stage sensitivity analysis: first mine the evaluation cache for non-dominated (c_j, f) pairs at zero cost, then solve min (c_j(x), f(x)) with c_j removed from the feasible set and bounded, for the constraint of interest (pp. 98-99).",
+   "Count cost in separate units (true blackbox calls, cache hits, surrogate calls in blackbox-equivalents via SGTE_COST, blocks, time), give each its own budget, and write the seed into every output file name (pp. 50, 56, 79-82).",
+   "Ship one ablation switch that disables all model-based components (DISABLE MODELS) so the contribution of models can be measured against the bare method (p. 83).",
+   "When documenting an extension point, state the single invariant the convergence proof needs (trial points on the mesh) and ship the helper that enforces it (project_to_mesh) (p. 100).",
+   "For a bi-objective method, report a front-quality indicator (surf) and a spacing indicator (Delta, largest gap) and state the budget trade-off: fewer, longer runs lower surf, more, shorter runs lower Delta (pp. 90-91).",
+   "Keep release notes that cite the paper behind each feature, so the software history doubles as a map of the research programme (pp. 103-107)."
+  ],
+  "coauthors": "S. Le Digabel, C. Tribes (title page of the 2015 revision orders them Le Digabel, Tribes, Audet, p. 3; self-citation [25] orders them Audet, Le Digabel, Tribes, p. 115)",
+  "quotes": [
+   {
+    "text": "The search step is crucial in practice because it is so flexible, but it is a difficulty for the theory for the same reason.",
+    "page": 16
+   },
+   {
+    "text": "Please note that the MADS theory assumes that trial search points must be lying on the current mesh.",
+    "page": 100
+   }
+  ]
+ }
+]

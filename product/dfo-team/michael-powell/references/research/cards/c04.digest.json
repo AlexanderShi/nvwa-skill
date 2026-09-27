@@ -1,0 +1,398 @@
+[
+ {
+  "id": "S029",
+  "year": "2007",
+  "title": "A view of algorithms for optimization without derivatives",
+  "read_level": "full",
+  "contribution": "An invited-lecture essay that surveys simplex, pattern-search and quadratic-model methods for derivative-free optimization as a chain of failures on small examples, states Powell's design philosophy, and reports NEWUOA's roughly linear growth of #F in n up to n=320.",
+  "problem_entry": "Observation that most unconstrained calculations in practice use no derivatives (p. 1), plus the personal motive: IMSL forced difference approximations on TOLMIN, and random methods (simulated annealing, genetic algorithms) were popular (p. 2); the Westland Helicopters 4-variable problem led to COBYLA (p. 3).",
+  "key_idea": "Each method answers a failure of its predecessor on an explicit 2-D example: simplex contraction far away (p. 4), McKinnon's Nelder-Mead failure (pp. 5-6), COBYLA's linear step pointing away from the solution (p. 9), UOBYQA's O(n^4) work, answered by NEWUOA with m=2n+1 and least-Frobenius-change updates (p. 10).",
+  "assumptions": "Pattern-search theory needs bounded level sets, a C1 function F, exact arithmetic and infinitely many iterations (p. 7); noise is handled by the lower bound rho on Delta (p. 6); no convergence claims for COBYLA (p. 8); design is done on contrived, often quadratic, test functions (p. 2).",
+  "proof_devices": [
+   "integer-lattice argument that forces a contraction of the original simplex method for n=2 (p. 4)",
+   "McKinnon example rebuilt as a three-term linear recurrence with eigen-solution ((1±√33)/8)^k and explicit inequalities (8)-(9) (pp. 5-6)",
+   "pattern-search lim inf proof via the infinite set K of Delta-reducing iterations (pp. 7-8)",
+   "finite-precision count: about 10^21 floating-point values of F versus the lattice points of the unit cube, to show a finiteness bound is useless (p. 8)",
+   "projection identity for the Frobenius update on quadratic F, eq. (18) (p. 10)"
+  ],
+  "experiments": "One table: NEWUOA on the trigonometric sum of squares with a planted x*, n=10..320, 5 random cases each, rho_beg=0.1, rho_end=1e-6; #F grows no faster than linearly and all errors are <6e-6 (pp. 10-11). No baselines. The counts differ from S036 Table 1 for the same described experiment, and neither paper comments (p. 11; S036 p. 6).",
+  "positioning": "Warns users of Nelder-Mead and simulated annealing (p. 5); generous to pattern search, calling Kolda-Lewis-Torczon a mine of information (p. 8); admits that pattern search has convergence guarantees COBYLA lacks (p. 8); 11 references, 5 of them his own (p. 12).",
+  "writing": "First person and autobiographical (Harwell, HSL, Apollo 11 and DFP, IMSL) (p. 2); the research creed is stated in the introduction (p. 2); each section turns on a 2-D worked example (pp. 4, 5, 9); strong words for his own result (stunning success) beside plain admissions of ignorance (pp. 8, 11).",
+  "limits_future": "No COBYLA convergence theory (p. 8); no experience of pattern search versus n (p. 8); UOBYQA limited to about n=100 by O(n^4) work (p. 10); no future directions given (not stated).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "The COBYLA -> UOBYQA -> NEWUOA lineage is explained limitation by limitation, keeping one point changed per iteration.",
+    "pages": "pp. 9-10"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "In COBYLA the lower bound rho on Delta is never increased and is reduced only when it blocks progress, after an alternative (volume-maximizing) iteration. The stated rationale is noise; the same logic appears in pattern-search mesh reduction.",
+    "pages": "pp. 6, 8"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "m=2n+1 with least Frobenius change; #F at most linear in n although Q has O(n^2) parameters.",
+    "pages": "pp. 10-11"
+   },
+   {
+    "method": "Research Taste mark 2 / Heuristic 7",
+    "relation": "variant",
+    "note": "Powell puts UOBYQA's practical limit at about n=100, not the n<=20 of SKILL.md (from the 2002 abstract).",
+    "pages": "p. 10"
+   },
+   {
+    "method": "Research Taste warning sign 1",
+    "relation": "evidence",
+    "note": "The McKinnon example is discussed and reconstructed in full.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "All four packages are free by e-mail; HSL distribution was unrestricted.",
+    "pages": "pp. 2, 11"
+   },
+   {
+    "method": "Heuristic 9",
+    "relation": "variant",
+    "note": "Possible tension: Table 1 differs from S036 Table 1 for the same described experiment, and no difference is explained.",
+    "pages": "p. 11; S036 p. 6"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "tiny counterexample for every mechanism",
+    "evidence": "simplex contraction far from the solution; McKinnon's Nelder-Mead failure; COBYLA's linear model stepping away from the solution",
+    "pages": "pp. 4, 5-6, 9"
+   },
+   {
+    "pattern": "design for the quadratic case in a way that admits general F",
+    "evidence": "Powell says he built several useful algorithms this way; the projection identity (18) is the realization for NEWUOA",
+    "pages": "pp. 2, 10"
+   },
+   {
+    "pattern": "critique the questions theory asks",
+    "evidence": "the floating-point count shows that a finiteness bound on work is useless in practice",
+    "pages": "p. 8"
+   }
+  ],
+  "transferable": [
+   "Show the predecessor failing on a 2-variable quadratic with explicit starting vertices, and count the wasted iterations (pp. 4, 9).",
+   "Rebuild a known direct-search counterexample as a linear recurrence with a closed-form solution (pp. 5-6).",
+   "Put a number on any finiteness-based bound (grid points, floating-point values) to show whether it means anything (p. 8).",
+   "Scale-test on a random problem family with a planted minimizer, 5 instances per n, n doubling from 10 to 320 (pp. 10-11)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "It is very helpful, however, to try to solve some particular problems well, in order to receive guidance from numerical results, and in order not to be misled from efficiency in practice by a desire to prove convergence theorems.",
+    "page": 2
+   },
+   {
+    "text": "Therefore, when asked about the convergence properties of COBYLA, I am unable to give a favourable answer within the usual conventions of convergence theory.",
+    "page": 8
+   }
+  ]
+ },
+ {
+  "id": "S036",
+  "year": "2008",
+  "title": "Developments of NEWUOA for minimization without derivatives",
+  "read_level": "full",
+  "contribution": "A design-experiment record: it summarizes NEWUOA, describes a BOBYQA prototype for simple bounds, compares five versions of the alternative (geometry) step and three values of m on four test families up to n=320, and publishes the chaotic and unexplained results before the release decision.",
+  "problem_entry": "Starts from a success (NEWUOA solves dense 320-variable problems with #F roughly linear in n, p. 6), which motivated the bounds extension; a surprise there (the cheaper Version 2 wins, pp. 10-11) prompted testing the same simplification without constraints (p. 11) and a study of m (p. 16).",
+  "key_idea": "Replace the approximate maximization of |Lambda_t| over the trust region by an exact maximization over a few cheap lines (n+1 coordinate lines plus the line through y_t, or the m-1 lines through the other interpolation points), safeguarded by a Cauchy-point test (3.2)-(3.3). Most of NEWUOA is copied into BOBYQA (pp. 7-14).",
+  "assumptions": "Unconstrained, or simple bounds with b_i >= a_i + 2 rho_beg (pp. 6-7); component fixing argued from first-order optimality (p. 7); no theorems, and permutation effects are said to be analysable only by experiment (pp. 18-19).",
+  "proof_devices": [
+   "variational (least-squares projection) reading of the Frobenius update: Hessian errors decrease monotonically for quadratic F (p. 5)",
+   "Lagrange-function coefficients read from a column of the stored inverse (p. 5)",
+   "cost counting O(mn)+O(n) for exact line maximization of a quadratic (p. 9)",
+   "lower bound |Lambda_t| >= ||grad Lambda_t|| Delta along the gradient, used as a one-line test (p. 13)",
+   "permutations of the variables, invariant in exact arithmetic, used as a rounding probe (pp. 14, 18-19)"
+  ],
+  "experiments": "Trigonometric sum of squares, points in square (bounds, KKT residuals), ARWHEAD and CHROSEN, with n in {10,...,320} and 5 cases each (random data, permutations or random starts), identical random numbers across variants; ranges of #F and final errors reported in Tables 1-11; rankings reverse between problems, and local minima are marked (pp. 6-18).",
+  "positioning": "Only two references (Dennis-Schnabel 1983 for least-change updates, and Powell 2006); every comparison is against his own previous version (pp. 5, 11, 19).",
+  "writing": "Openly provisional (lack of completeness, p. 19); calls the explanation wisdom after the event (p. 10); humour about the BOBYQA name (p. 7); uniform table captions (pp. 11-12); ends with explicit release criteria for the undecided component (p. 19).",
+  "limits_future": "Details strongly influenced by rounding (p. 1); no theory for the permutation effects (pp. 18-19); the best m may depend strongly on F (p. 19). Future: choose one alternative step before releasing BOBYQA, study m further, let users pick m (p. 19).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "BOBYQA copies most NEWUOA features and changes only the subproblems for bounds.",
+    "pages": "p. 7"
+   },
+   {
+    "method": "Method 3 / Heuristic 2",
+    "relation": "evidence",
+    "note": "The m=2n+1 versus n+6 evidence is mixed: n+6 wins on CHROSEN and ARWHEAD but loses by about 3x on the trigonometric problem; the best m depends on F.",
+    "pages": "pp. 17-19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Origin shifts and a factored inverse block; permutations used as a rounding probe; recovery from rounding damage is called a triumph.",
+    "pages": "pp. 4-5, 14, 18-19"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Experiments are used to choose between design variants before release, and the paper is published while the choice is open. Chaotic and unexplained results are printed.",
+    "pages": "pp. 15, 18-19"
+   },
+   {
+    "method": "Heuristic 3",
+    "relation": "evidence",
+    "note": "b_i >= a_i + 2 rho_beg is already required by the prototype.",
+    "pages": "pp. 6-7"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "publish preliminary results with explicit status",
+    "evidence": "published before the release decision, with an explicit apology for incompleteness",
+    "pages": "p. 19"
+   },
+   {
+    "pattern": "explain a surprise with a designed follow-up experiment",
+    "evidence": "Version 2's win under bounds is re-tested without constraints by running BOBYQA with bounds of ±1e10",
+    "pages": "pp. 10-11"
+   },
+   {
+    "pattern": "restrict the subproblem to a few cheap lines and solve it exactly",
+    "evidence": "d_cd over n+1 lines and d_ip over m-1 lines, computed exactly in O(mn)",
+    "pages": "pp. 8-10, 12-13"
+   },
+   {
+    "pattern": "exact-arithmetic-invariant perturbations as a rounding-sensitivity probe",
+    "evidence": "five cases per n made by random permutations of the variables in ARWHEAD and CHROSEN",
+    "pages": "pp. 14, 18-19"
+   }
+  ],
+  "transferable": [
+   "Test an unconstrained design change inside the bound-constrained code with bounds of ±1e10 (p. 11).",
+   "Make test cases from random permutations of the variables, so any spread in #F measures rounding sensitivity (p. 14).",
+   "Guard a cheap heuristic step with an analytic lower bound (c ||grad|| Delta) and fall back to a Cauchy-type step (p. 13).",
+   "Mark local-minimum runs in tables, and state which variant is excluded from a range and why (pp. 15, 17).",
+   "Before release, list explicit selection criteria for the undecided component (p. 19)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "The last remark shows wisdom after the event that was accumulated from several numerical experiments.",
+    "page": 10
+   },
+   {
+    "text": "I hope the reader finds that the information in the given numerical results is sufficiently interesting to compensate for the lack of completeness in the work that is presented.",
+    "page": 19
+   }
+  ]
+ },
+ {
+  "id": "S007",
+  "year": "2009",
+  "title": "The BOBYQA algorithm for bound constrained optimization without derivatives",
+  "read_level": "full",
+  "contribution": "The design report for BOBYQA. It extends NEWUOA's least-Frobenius quadratic-model trust-region method to simple bounds with an active-set truncated CG step (TRSBOX), a line-plus-Cauchy geometry step (ALTMOV) and a new RESCUE procedure against rounding damage, and reports tests up to n=320 with several m and rho_end values.",
+  "problem_entry": "Carry NEWUOA's excellent efficiency for large n (#F often of order n with m=2n+1) over to problems with bounds a<=x<=b, where F is evaluated only at feasible points (pp. 1-3).",
+  "key_idea": "Keep all of NEWUOA's update and radius machinery. Add bound-aware initial points (2.2), TRSBOX, and an ALTMOV step on lines through the interpolation points that uses the analytic beta bound (3.10) plus a Cauchy step against subspace drift. Add RESCUE: rebuild H from a closed-form stencil and swap old points back when the denominator test (5.7) is safe (pp. 4-25).",
+  "assumptions": "Simple bounds with b_i >= a_i + 2 Delta_1 (p. 5); F evaluated only at feasible x (p. 2); no convergence theory, which Powell says played no role in the success (p. 3); rounding treated explicitly (§5, p. 32).",
+  "proof_devices": [
+   "KKT structure of the least-change problem: the Hessian change is sum lambda_l y_l y_l^T with sum lambda=0 and sum lambda y=0 (pp. 14-15)",
+   "implicit Hessian M + sum mu_l (y_l-x0)(y_l-x0)^T for O(m^2) updates (p. 15)",
+   "inverse update (4.9) with denominator sigma = alpha beta + tau^2, and the H v = e_s trick to drop row and column m+1 (pp. 16-17)",
+   "Z update after an orthogonal rotation so only its first column changes (p. 17)",
+   "proof of beta <= ½ alpha^2 (1-alpha)^2 ||y_j - x_k||^4 via origin invariance, W H = I eliminations and Omega PSD (pp. 19-20)",
+   "reproduction of linear polynomials by Lagrange functions shows the RESCUE threshold is positive (pp. 23-24)",
+   "eighth-power cancellation argument ||x_k-x0||^8 H_ij for the origin-shift rule (p. 32)",
+   "triangle-inequality argument that successful models can block all steps, hence the explicit rho-exit test with eps_max (pp. 30-31)"
+  ],
+  "experiments": "Trigonometric sum of squares with the same random numbers as S036, n=10..320, m in {2n+1, n+6, (n+1)(n+2)/2}, reporting #F range, worst error, #shifts, CPU seconds and workspace (pp. 33-35). Points in square with many local minima: n=20..160, 3 random starts plus two 1e-6 perturbations, rho_end in {1e-4, 1e-6, 1e-8}, relative projected gradient; rerunning at a tighter rho_end shows the final values are distinct local minima (pp. 35-38). RESCUE was never called (p. 38). No clear winner versus NEWUOA (p. 39).",
+  "positioning": "Claims NEWUOA/BOBYQA are the only known least-Frobenius quadratic-model methods (p. 3); presents them as a counterexample to Gould-Toint (2004) on the vital importance of theory (p. 3); says Conn-Scheinberg-Vicente (2009) does not address high accuracy with #F well below O(n^2) (p. 3); 5 references, 3 his own (p. 39). Revises the S029 and S036 Hessian-accuracy explanation: grad^2 Q stays far from grad^2 F (p. 3).",
+  "writing": "A design record keyed to Fortran routine names (pp. 9, 13, 17, 21); empirical constants labelled as such (0.01 on p. 23, 0.1 on p. 32); in-text correction of a simplification (p. 28); verification of the initial inverse left as an exercise (p. 7); candid release decision (p. 39). The third case of (6.6) reads 0.1 rho_end, probably a typo for 0.1 rho_k (pp. 27, 29).",
+  "limits_future": "No clear gain over NEWUOA without bounds (p. 39); RESCUE costs O(m^3) (p. 25); rare error return (p. 26); rounding may widen the #F ranges (p. 38); the best m depends on the problem (p. 34). Future: automatic m, and an update that combines the Frobenius change with first-derivative changes, not urgent (p. 39).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "evidence",
+    "note": "NEWUOA's efficiency is extended to bounds; most machinery is copied.",
+    "pages": "pp. 3, 27-29, 32"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Gives rationale for the tacit constants: short steps are postponed because they magnify model errors (p. 8); Delta >= rho postpones short steps (pp. 27-28); the (6.4) thresholds 0.1/0.7 and the 1.5 rho snap; (6.6) cuts rho by a factor in [4,16]; the eps_max exit test; final x usually within 10 rho_end of a local minimum.",
+    "pages": "pp. 8, 27-31"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "SKILL.md credits curvature memory. Powell reports that grad^2 Q stays far from grad^2 F on quadratics at termination, and that the success is unexplained by theory. The 2n+1 and n+6 choices are confirmed.",
+    "pages": "pp. 3, 34, 37"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "RESCUE, the eighth-power origin-shift argument, shift counts and CPU time reported as costs; the ZZ^T factorization was adopted because explicit Omega gave chaotic #F ranges.",
+    "pages": "pp. 20-25, 32, 34, 38-39"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Two problems, perturbed starts, a rho_end sweep, local minima identified, no clear winner stated.",
+    "pages": "pp. 36-39"
+   },
+   {
+    "method": "Method 6 / Heuristic 9",
+    "relation": "evidence",
+    "note": "Free Fortran; differences from the published NEWUOA numbers are explained.",
+    "pages": "pp. 33, 39"
+   },
+   {
+    "method": "Heuristic 3",
+    "relation": "evidence",
+    "note": "Error return if b_i < a_i + 2 Delta_1.",
+    "pages": "p. 5"
+   },
+   {
+    "method": "Heuristic 5",
+    "relation": "evidence",
+    "note": "Distinct local minima identified by the rho_end comparison.",
+    "pages": "p. 38"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "critique the questions theory asks (practice as counterexample to a theory-first claim)",
+    "evidence": "the Gould-Toint (2004) claim is rebutted by NEWUOA/BOBYQA's success",
+    "pages": "p. 3"
+   },
+   {
+    "pattern": "separate local minima from rounding by tightening the tolerance",
+    "evidence": "rho_end 1e-6 versus 1e-8 changes F by at most 4e-6, far below the between-run gaps",
+    "pages": "p. 38"
+   },
+   {
+    "pattern": "restart-and-reinsert repair",
+    "evidence": "RESCUE rebuilds H from a closed-form stencil, then reinserts old points under the 0.01 safety test",
+    "pages": "pp. 21-25"
+   },
+   {
+    "pattern": "public self-correction of an earlier explanation",
+    "evidence": "the Hessian-accuracy explanation of S029 p. 11 and S036 p. 5 is withdrawn: grad^2 Q is not a good approximation",
+    "pages": "p. 3"
+   }
+  ],
+  "transferable": [
+   "Use origin-shift invariance to put the origin where the proof is easiest (pp. 19-20).",
+   "Run the numerical-health test before spending an F evaluation (p. 25).",
+   "Add 1e-6-perturbed copies of a start to measure how chaotic #F is (p. 36).",
+   "Report the costs of safeguards (shifts, CPU, workspace) next to #F and accuracy (p. 34).",
+   "Rerun with a 100x tighter tolerance to classify final values as distinct minima or rounding noise (p. 38).",
+   "Bound an expensive selection quantity analytically along the candidate family instead of computing it (pp. 12, 19-20)."
+  ],
+  "coauthors": "none (sole author)",
+  "quotes": [
+   {
+    "text": "Thus NEWUOA and BOBYQA provide a counter-example to the suggestion in Gould and Toint (2004) that theoretical insight is of vital importance to the development of good numerical methods.",
+    "page": 3
+   },
+   {
+    "text": "It was not easy to decide to release the Fortran software for general use, instead of seeking further improvements.",
+    "page": 39
+   }
+  ]
+ },
+ {
+  "id": "S129",
+  "year": "2010",
+  "title": "On the convergence of a wide range of trust region methods for unconstrained optimization",
+  "read_level": "full",
+  "contribution": "A single termination theorem (lim inf ||grad F|| = 0) for a wide class of gradient-based trust-region methods defined by inequalities. The class allows any-decrease acceptance, ||B_k|| growing linearly in k (so symmetric Broyden and safeguarded SR1 are covered) and a Lipschitz condition only on the level set. A 2-D example shows lim inf is sharp.",
+  "problem_entry": "Nearly every trust-region method has its own proof; Powell wants one theorem for a wide range, chosen to admit his strong preference that x_{k+1}=x_k+s_k whenever F decreases (p. 2). The SR1 analyses rest on questionable assumptions (p. 6).",
+  "key_idea": "Define the method class by one inequality per decision: Cauchy-decrease steps (2.1), radius brackets (2.8), any x_{k+1} with the decrease conditions (2.9) and ||B_k|| <= lambda + mu k (2.10). Prove termination by counting successful iterations (pp. 3-11).",
+  "assumptions": "F bounded below; grad F Lipschitz on the level set only (1.6), enlarged to the step segments for symmetric Broyden (pp. 3, 5); exact arithmetic, eps > 0; theta=1 and Euclidean norms for simplicity (p. 3); the upper bound on Delta_{k+1} is admitted to be important (p. 13).",
+  "proof_devices": [
+   "Cauchy decrease (2.6) rederived from the scalar quadratic phi(sigma) (p. 4)",
+   "Lemma 1 with a largest level-set step fraction tau-hat proven equal to 1 (pp. 7-8)",
+   "induction lower bound Delta_k >= delta/(M + mu k) and per-success decrease ½ rho* delta eps/(M + mu k) (pp. 8-9)",
+   "sandwich of Delta giving q(l) >= 0.9 log(1/beta) l/log l successes (p. 10)",
+   "dyadic blocks Q_j giving a divergent harmonic sum of decreases (pp. 10-11)",
+   "growth bound ||B_{k+1}|| <= ||B_k|| + 3 Lambda for symmetric Broyden (p. 6)",
+   "2-D sharpness example u(x)+v(y) with y cycling through 0, 3, -5 (pp. 11-13)",
+   "non-Euclidean trust regions via sandwich balls, at the cost of Omega^2 factors (pp. 14-15)"
+  ],
+  "experiments": "none",
+  "positioning": "Against Conn-Gould-Toint 2000: their basic algorithm has no upper bound on Delta but needs uniformly bounded B_k, and it allows arbitrarily small radius changes (pp. 5, 13-14); against Powell 1984, which had much stronger conditions (p. 5); SR1 analyses called questionable (p. 6); the level-set Lipschitz condition admits barrier functions of non-convex regions (p. 13); Yuan's suggestion becomes open problem (4.8) (p. 14).",
+  "writing": "Calls it our ubiquitous convergence theorem (p. 3); §2 gives one practical justification per condition (pp. 3-5); after the proof, an example shows the limit of the conclusion (pp. 11-13); candid that the worst-case count is monstrous (p. 15).",
+  "limits_future": "Only lim inf, shown sharp (pp. 11-13); worst case about 2^22000 iterations (p. 15); non-Euclidean norms only sketched (p. 15); theta-generality omitted (p. 3). Future: prove under Yuan's weaker conditions (4.8) (p. 14); use the theorem as a start for analysing single efficient methods (p. 15).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "One-radius, with-gradient theory. It formalizes the any-decrease acceptance used by NEWUOA and BOBYQA and shows its cost: lim inf only.",
+    "pages": "pp. 2, 11-13"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The symmetric Broyden (least-Frobenius-change) update satisfies the linear growth bound; this is the with-derivatives theory of NEWUOA's update.",
+    "pages": "pp. 5-6"
+   },
+   {
+    "method": "Research Taste mark 5",
+    "relation": "evidence",
+    "note": "The class is widened to include Powell's practical choices; the theorem is offered as a start for analysing efficient methods.",
+    "pages": "pp. 2, 4-5, 15"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "prove for a parameterized family",
+    "evidence": "the class is defined by inequalities on step, radius, next iterate and matrix",
+    "pages": "pp. 3-5"
+   },
+   {
+    "pattern": "tiny explicit counterexample to justify an odd rule",
+    "evidence": "the 2-D example shows lim inf is sharp and why the upper bound on Delta_{k+1} matters",
+    "pages": "pp. 11-13"
+   },
+   {
+    "pattern": "make the theorem admit the practitioner's preferred choice",
+    "evidence": "any-decrease acceptance and linearly growing B_k are included rather than excluded",
+    "pages": "pp. 2, 5"
+   },
+   {
+    "pattern": "sanity-check proof constants",
+    "evidence": "he computes the implied 2^22000 worst case and calls it monstrous",
+    "pages": "p. 15"
+   },
+   {
+    "pattern": "turn a colleague's suggestion into a stated open problem",
+    "evidence": "Yuan's ||s_k|| variant is stated as conditions (4.8)",
+    "pages": "p. 14"
+   }
+  ],
+  "transferable": [
+   "Replace bounded B_k by ||B_k|| <= lambda + mu k and verify it for your update with a triangle-inequality bound (pp. 5-6).",
+   "With a Lipschitz condition only on the level set, use the largest step fraction tau-hat inside the level set and prove tau-hat=1 (p. 7).",
+   "Prove lim inf by counting successes (at least order l/log l) and summing decreases over dyadic blocks into a harmonic series (pp. 9-11).",
+   "After the theorem, build a 2-variable example in which all hypotheses hold but the stronger conclusion fails (pp. 11-13).",
+   "State the worst-case count your proof implies, even when it is absurd (p. 15)."
+  ],
+  "coauthors": "none (sole author); dedicated to Ron Mitchell",
+  "quotes": [
+   {
+    "text": "Although this number is monstrous, our proof of convergence may be welcome, because each Bk can be the least favourable matrix that satisfies the bound (2.10), each xk can be any vector in Rn that is permitted by the conditions (2.9), and the constraints (2.8) allow much freedom in the adjustment of the trust region radius.",
+    "page": 15
+   },
+   {
+    "text": "One benefit of our work is that there is now no need to search for a counter-example if one wishes to know whether or not the test (1.2) for termination is satisfied eventually.",
+    "page": 15
+   }
+  ]
+ }
+]

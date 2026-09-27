@@ -1,0 +1,277 @@
+[
+ {
+  "id": "S158",
+  "year": "2026",
+  "title": "A penalty-interior point method combined with MADS for equality and inequality constrained optimization",
+  "read_level": "full",
+  "contribution": "MADS-PIP: MADS applied to a sequence of merit subproblems (log barrier on an aggregated interior violation, quadratic penalty on the other inequalities and all equalities) with a step-size-gated penalty update. Limit points are feasible under FCQ and Clarke-stationary for inequality-only problems under SCQ, and the method beats MADS-PB clearly once equalities are present (pp. 3-7, 13-18, 24-25).",
+  "problem_entry": "Gap in MADS constraint handling: EB/PB cannot handle nonlinear equalities (PB covers linear equalities only, by reformulation), and LOG-DS handles them only under continuous differentiability. Entry: rebuild that smooth method for nonsmooth blackboxes (pp. 2-3).",
+  "key_idea": "Split inequalities by their sign at x0 into a log-barrier set, with violations aggregated through min{1,-g} so the barrier stays bounded below, and an exterior-penalty set that also holds the equalities. Run MADS on z = f - rho log(-c_int) + c_ext/rho, and shrink rho only when Delta_{k+1} <= min{rho^beta, phi_prox^2} (pp. 3-7).",
+  "assumptions": "Bounded level sets of f. f, c_int and c_ext Lipschitz near the limit. Dense poll directions. New constraint qualifications FCQ (feasibility) and SCQ (stationarity), where SCQ is incompatible with equalities, so stationarity holds for p = 0 only (pp. 8, 13-16).",
+  "proof_devices": [
+   "rho_k -> 0 by contradiction: with rho fixed the method is plain MADS, so liminf Delta = 0 and the gate forces phi_prox -> 0, hence z -> +inf (Thm 3.3, p. 9)",
+   "path-following subsequences / end-path points / path-refining directions, borrowed from interior-point terminology (Defs 3.1, 3.8, pp. 8, 11)",
+   "gate Delta_{k+1} <= phi_prox^2 plus Lipschitz continuity puts the whole minimal frame strictly inside Omega_int (Prop 3.6, pp. 10-11)",
+   "log t <= t - 1 to linearize the barrier difference in the failed-poll inequality (p. 11)",
+   "multiply the failed-poll inequality by rho_k and let rho_k -> 0 so only (c_ext)° survives; FCQ then gives feasibility (Prop 3.10, Thm 3.14, pp. 12-15)",
+   "Clarke mean-value theorem gives monotone violations along hypertangent directions, hence f° >= 0 on the hypertangent cone (Prop 3.18, Thm 3.19, pp. 16-18)"
+  ],
+  "experiments": "NOMAD 4 fork with GMesh and Ortho 2N, with/without the quadratic-model search. Data profiles in groups of n+1 evaluations plus first-feasible profiles on 14 literature problems (780 runs), solar6 (30 x0, plus CMA-ES), 25 CUTEst problems with equalities, and Aircraft Range MDO in IDF form (100 instances). PIP ~ PB on inequalities; PIP far better with equalities (pp. 18-25).",
+  "positioning": "Restates two lineages, direct-search constraint handling and merit/linesearch DFO (Lucidi-Liuzzi school, LOG-DS), without criticism beyond LOG-DS's smoothness assumption; LOG-DS itself is not run as a competitor (pp. 2-3, §5).",
+  "writing": "Four-sentence contribution paragraph (p. 3); an intuition paragraph after each new constraint qualification (pp. 13, 16); hedged empirical verbs plus one strong priority claim (p. 25). Editing slips: propositions and definitions cross-referenced as Theorems (pp. 12, 18), duplicated reference (p. 26), and a naming slip in the MDO results paragraph (p. 25).",
+  "limits_future": "No stationarity result with equalities (p. 16); the threshold t is out of scope (p. 4); constants come from preliminary tests (pp. 19-20); the conclusion has no future-work paragraph (pp. 25-26).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Equalities get their own mechanism (exterior penalty) and inequalities are routed by their status at x0. PB's failure on equality sets grounds the SKILL rule that equalities go to EQPB with Mads-PIP rather than Mads-PB (Method 2, step 3).",
+    "pages": "pp. 3-4, 7, 24-25"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The Search stays free, but convergence is carried by the Poll plus a new outer-parameter gate at unsuccessful iterations, not by the Poll alone.",
+    "pages": "pp. 5-7"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "A two-rung ladder (feasibility under FCQ including equalities, then Clarke stationarity under SCQ for inequalities only) with its boundary stated, but no counterexample is built; the pathological case is delegated to the PB paper's appendix.",
+    "pages": "pp. 13-16"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Evaluation-group data profiles, feasibility profiles, analytic + CUTEst + two realistic blackboxes, CMA-ES on solar6. Gap: the closest rival, LOG-DS, is not run.",
+    "pages": "pp. 20-25"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "Reuses solar6 with its repository starting points, and aircraft_range in two formulations (MDF and IDF).",
+    "pages": "pp. 21-22, 24"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "MADS-PIP is implemented as a class derived from MADS-PB in NOMAD 4.",
+    "pages": "p. 18"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "step-size-gated outer parameter",
+    "evidence": "The penalty-barrier parameter is decreased only when the frame size falls below min{rho^beta, phi_prox^2}. This single gate yields rho -> 0, Delta -> 0 on the path-following subsequence, and a frame inside the barrier interior.",
+    "pages": "pp. 6-7, 9-11"
+   },
+   {
+    "pattern": "cross-school import with nonsmooth re-proof",
+    "evidence": "The LOG-DS mixed penalty-log-barrier from the Rome/Lisbon linesearch school (smooth, KKT) is rebuilt inside MADS with Clarke-calculus guarantees, and the first author comes from that school.",
+    "pages": "pp. 1, 3"
+   }
+  ],
+  "transferable": [
+   "Threshold each constraint at 1 before the log barrier (log min{1,-g} >= 0) so the merit is bounded below inside the feasible set (p. 4).",
+   "Choose barrier vs penalty per constraint by its sign at x0; migrate a constraint to the barrier the first time an incumbent satisfies it strictly; finitely many migrations keep the analysis intact (pp. 7, 18-19).",
+   "Gate the outer-parameter decrease on the inner step size and on the squared distance to the barrier boundary (pp. 7, 9-11).",
+   "Scale-then-limit: multiply the failed-poll inequality by the penalty parameter so only the violation's Clarke derivative survives in the limit (pp. 12, 15).",
+   "Report a first-feasible-point profile next to tau-solved data profiles, with one relaxed equality tolerance shared by all methods (pp. 20-21).",
+   "Benchmark one engineering model in two formulations (MDF vs IDF) to isolate the effect of equality constraints (pp. 22, 24).",
+   "After the merit function changes, re-score the whole cache and restart from its best point (p. 20)."
+  ],
+  "coauthors": "A. Brilli (first and corresponding author), Y. Diouane, S. Le Digabel, E. J. Silva, C. Tribes",
+  "quotes": [
+   {
+    "text": "On this test set, the impact of the models is much more important than the choice in the strategy (PIP versus PB) to handle the constraints.",
+    "page": 21
+   },
+   {
+    "text": "MADS-PIP is the first variant of MADS to handle equality constraints.",
+    "page": 25
+   }
+  ]
+ },
+ {
+  "id": "S172",
+  "year": "2026",
+  "title": "Adaptive direct search algorithms with relaxable and quantifiable constraints",
+  "read_level": "full",
+  "contribution": "ADS-PB: the progressive barrier inside the mesh-free Adaptive Direct Search. The Search is completely free, poll points near past successes are skipped via an exclusion radius, and a new reframing iteration status is added. The paper proves full-limit step-size convergence and Clarke stationarity along refining directions, and outperforms MADS-PB (including the NOMAD default) on analytic problems, STYRENE and SOLAR6 (pp. 3, 8-15, 17-19).",
+  "problem_entry": "ADS uses only the extreme barrier, which is overly restrictive for quantifiable constraints, and MADS-PB's mesh projection wastes good model-based trial points. A 2D convex toy problem shows MADS-PB never evaluating the optimum that a model finds in under ten evaluations (pp. 2-3, 7-8).",
+  "key_idea": "Keep the PB machinery (feasible and infeasible incumbents, dominating/improving/unsuccessful iterations, h_max rule) but replace the mesh with a punctured space: R^n minus delta-balls around previously successful points. Search points are never projected, and skipped poll points are absorbed in the proof (pp. 4-11).",
+  "assumptions": "All evaluated points lie in a compact set. f (or h) Lipschitz near the refined point. Update rules give delta/Delta -> 0. No sufficient decrease and no density assumption, so the results hold along refining directions in the hypertangent cone (pp. 1, 11-15).",
+  "proof_devices": [
+   "packing argument: accepted points stay pairwise >= eps apart in a compact set, contradicting Bolzano-Weierstrass, so lim delta = lim Delta = 0 (full limit, stronger than MADS-PB's liminf) (Thm 3.1, pp. 12-13)",
+   "skipped poll point replaced by a nearby cached point y = p + Delta(v + (delta/Delta) w), ||w|| <= 1; delta/Delta -> 0 keeps the limit direction (Thm 3.2, p. 14)",
+   "Clarke-Jahn generalized derivative with the direction-perturbation lemma [8, Prop. 3.9] (pp. 14-15)",
+   "same argument with h in place of f for infeasible refined points; a feasible limit is a global minimizer of h (Thm 3.3, p. 15)"
+  ],
+  "experiments": "NOMAD dev variant of MADS-PB with shared quadratic/speculative/NM searches and 2n vs n+1 polls. 14 analytic problems (780 instances, tau = 1e-3..1e-7), then STYRENE (30 x0 x 3 seeds) and SOLAR6 (30 x0, about 4 CPU-days) against NSGA-II, CMA-ES and LOGDS. Data profiles in groups of n+1 evaluations (pp. 16-19).",
+  "positioning": "PB is presented as a framework separable from the mesh (it can be realized by merit-function methods). Theorem strength is compared explicitly with MADS-PB and sufficient-decrease analyses, and the critique of the mesh is made by a toy figure rather than by criticizing papers (pp. 3-4, 7-8, 13).",
+  "writing": "Three-move contribution section (framework, theory under standard assumptions, NOMAD plus experiments) (p. 3); (f,h)-plane partition figure (pp. 5-6); hedged discussion (p. 20); explicit Use-of-AI statement (p. 20). Slips: duplicated paragraph and a grammar error (p. 11), and an equality between poll centers and their limit written where convergence is meant (p. 14).",
+  "limits_future": "Future work: hybrids with sufficient decrease for complexity guarantees, a fusion with MADS-PIP for equalities, and Search strategies that exploit the absence of mesh projection (p. 20). Not discussed: the single seed on SOLAR6, the missing ablation of the quadratic-model effect (p. 19), and how STYRENE's 4 non-relaxable constraints were handled (p. 18).",
+  "method_links": [
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The Poll still carries the proof and the Search is free, now even of the mesh. The Poll gains an exclusion filter, and the Search/Poll interplay creates a new reframing status.",
+    "pages": "pp. 8-11"
+   },
+   {
+    "method": "Method 2",
+    "relation": "evidence",
+    "note": "Relaxable and quantifiable constraints move from EB to PB. The rival LOGDS's poor STYRENE results are explained by non-quantifiable and hidden constraints.",
+    "pages": "pp. 2, 18"
+   },
+   {
+    "method": "Method 3",
+    "relation": "evidence",
+    "note": "The result is placed on the ladder explicitly (full limit vs liminf); stationarity is stated only along refining directions; no counterexamples.",
+    "pages": "pp. 13-15"
+   },
+   {
+    "method": "Method 5",
+    "relation": "evidence",
+    "note": "Same-solver comparison with identical search components, then realistic blackboxes against three other families, including the rival's own code; tolerances adapted to problem cost.",
+    "pages": "pp. 16-19"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "STYRENE and SOLAR are run from the bbopt repository starting points.",
+    "pages": "p. 18"
+   },
+   {
+    "method": "Method 6",
+    "relation": "evidence",
+    "note": "Implemented as a NOMAD variant and shown to beat the current NOMAD default (MADS-PB n+1).",
+    "pages": "pp. 16-17"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "toy pathology figure before the algorithm",
+    "evidence": "A 2D convex QP with two linear constraints: trajectory and convergence plots show mesh projection blocking an optimum a quadratic model finds at once, which motivates removing the mesh.",
+    "pages": "pp. 7-8"
+   },
+   {
+    "pattern": "same-solver controlled comparison with shared components",
+    "evidence": "ADS-PB is implemented as a variant of MADS-PB in NOMAD, sharing all search components, so the comparison isolates the mesh-free mechanism (S158 does the same with MADS-PIP derived from MADS-PB, S158 p. 18).",
+    "pages": "pp. 16, 20"
+   }
+  ],
+  "transferable": [
+   "Open with a 2-variable toy where the incumbent method's structural feature blocks an obviously reachable optimum; show trajectory and convergence plots side by side (pp. 7-8).",
+   "Replace a lattice with exclusion balls around accepted points so that only finitely many successes can occur while the step stays bounded away from 0, without projecting trial points (pp. 8, 12-13).",
+   "Packing argument (pairwise-separated accepted points in a compact set) to get a full limit of the step size (pp. 12-13).",
+   "Absorb skipped trial points into the proof by using the nearby cached point along v + (delta/Delta) w, with delta/Delta -> 0 (pp. 14-15).",
+   "Compare the new method and the baseline inside one solver with identical search components and two poll variants, and include the solver's current default as a baseline (pp. 16-17)."
+  ],
+  "coauthors": "T. Denorme, Y. Diouane, S. Le Digabel, C. Tribes",
+  "quotes": [
+   {
+    "text": "By lifting these restrictions, the framework can directly exploit high-quality trial points generated by search heuristics, surrogate models, or hybrid strategies without altering them through mesh projection or rejecting them because of restrictive acceptance requirements.",
+    "page": 3
+   },
+   {
+    "text": "The implementation within NOMAD enables a direct comparison with MADS-PB under identical algorithmic components.",
+    "page": 20
+   }
+  ]
+ },
+ {
+  "id": "S173",
+  "year": "2026",
+  "title": "Multi-fidelity constraints in blackbox optimization",
+  "read_level": "full",
+  "contribution": "IDS and DIDS: a solver-agnostic fidelity-controller wrapper that assigns each constraint the cheapest fidelity at which its violation is reliably detected and interrupts evaluations of points deemed infeasible. The assignment subproblem gets small exchange-argument proofs, and both methods improve NOMAD on the solar2/3/4 benchmarks (pp. 6-17, 19-24).",
+  "problem_entry": "Industrial cost wall at Hydro-Quebec's PRIAD (up to 145 days per high-fidelity evaluation) plus repairing the authors' own Inter-DS. The literature gap: multi-fidelity methods mostly unconstrained or penalized, two fidelities, low fidelity used for gradients or models (pp. 3-4).",
+  "key_idea": "Use low fidelities only to detect infeasibility, per constraint. Choose the constraint-to-fidelity assignment by minimizing estimated expected cost subject to representativity 1 on feasible sample points, with an offline sample (IDS) or a local sample rebuilt from intermediary outputs around the incumbent (DIDS, closed-form a*_j = i(j)). Evaluate the truth before any cheap verdict changes the incumbent (pp. 6-17).",
+  "assumptions": "Discrete increasing fidelities with unknown, usually increasing costs; independence of the per-constraint satisfaction probabilities; Assumption 1 declared false by the authors but needed for Thm 3 (unneeded for DIDS). No convergence analysis of the solver on the wrapped problem, which is not a function of x (pp. 2, 9-11, 14-16).",
+  "proof_devices": [
+   "monotonicity of representativity in fidelity by set inclusion (Lemma 1, p. 10)",
+   "expected evaluation cost as a sum of costs times products of non-interruption probabilities (Thm 3, pp. 10-11)",
+   "exchange argument: moving constraints assigned to a fidelity outside the union of i(j) down one index strictly lowers the cost, which justifies the cuts before enumeration (Lemma 4, Thm 5, p. 13)",
+   "exchange argument for the closed-form DIDS assignment a*_j = i(j) (Thm 6, p. 16)"
+  ],
+  "experiments": "solar2/3/4 run deterministically with 11 fidelities, 20 NOMAD-seed instances each and ~16 h budgets. Time-based data profiles count blackbox time only; baselines are plain NOMAD and Inter-DS. Diagnostics: last-fidelity histograms and divergence-from-baseline tables. DIDS best on solar3/4, IDS best on solar2; 6,333 h of compute in total (pp. 17-23).",
+  "positioning": "KARQ taxonomy; builds on the group's interruptible/hierarchical EB and on model preemption from water-resources calibration; contrasts itself with multi-fidelity trust-region methods and constrained multi-fidelity Bayesian optimization; explicit self-critique of Inter-DS (pp. 4-6, 23-24).",
+  "writing": "Contribution bullets that invert literature defaults (p. 4); classification figure before the method (p. 3); candid admissions (an assumption declared false, p. 10; a surprising result called most likely chance, p. 23; a stated shortcoming, p. 24); results explained by naming the constraint that triggered interruptions (pp. 19-22); several typos (pp. 14, 19, 24).",
+  "limits_future": "Unclear whether feasibility mistakes help on solar2, so more instances are needed; possible bias from missing high-fidelity information on infeasible points; objective multi-fidelity information unused (future work); IDS needs fidelity behaviour to be constant across the space; the motivating simulator is not yet available (pp. 3-4, 17, 23-24).",
+  "method_links": [
+   {
+    "method": "Method 2",
+    "relation": "variant",
+    "note": "Constraint semantics drive the design (per-constraint assignment, KARQ, a priori constraints checked first), but constraints the paper calls relaxable/quantifiable are run under EB in NOMAD because interrupted outputs are low-fidelity. Algorithmic need overrides the relaxable -> PB rule.",
+    "pages": "pp. 1, 5, 7, 18"
+   },
+   {
+    "method": "Method 1",
+    "relation": "variant",
+    "note": "The idea sits in neither Search nor Poll but in a wrapper around the blackbox; the solver is untouched, but no convergence guarantee is claimed for the wrapped problem.",
+    "pages": "pp. 6, 14, 16"
+   },
+   {
+    "method": "Method 4",
+    "relation": "evidence",
+    "note": "The industrial problem (PRIAD) is proxied by the public solar benchmark, extended with intermediary-output code for this study.",
+    "pages": "pp. 17-18"
+   },
+   {
+    "method": "Method 5",
+    "relation": "variant",
+    "note": "Blackbox time instead of evaluation counts; no competitor from another family (only base NOMAD and the authors' own Inter-DS), justified by 6,333 h of compute.",
+    "pages": "pp. 18, 23"
+   },
+   {
+    "method": "Method 3",
+    "relation": "variant",
+    "note": "The theory covers only the auxiliary assignment problem, with one assumption openly declared false; no convergence ladder for the optimizer.",
+    "pages": "pp. 10-16"
+   },
+   {
+    "method": "Method 6",
+    "relation": "variant",
+    "note": "NOMAD 4.4.0 is the host solver, but the contribution is a solver-agnostic wrapper that is not integrated into NOMAD.",
+    "pages": "pp. 18, 23"
+   }
+  ],
+  "new_pattern_candidates": [
+   {
+    "pattern": "solver-agnostic evaluation wrapper",
+    "evidence": "The fidelity controller wraps the blackbox so any direct-search solver is used unchanged; properties are proved for the wrapper, not the solver.",
+    "pages": "pp. 6-7"
+   },
+   {
+    "pattern": "divergence-from-baseline diagnostics",
+    "evidence": "Tables of the evaluation-count factor, % of runs whose evaluation sequence diverges from base NOMAD, and % of evaluations before divergence, plus histograms of the last fidelity used, to explain each win and loss.",
+    "pages": "pp. 19-23"
+   },
+   {
+    "pattern": "self-successor paper that repairs one's own previous algorithm",
+    "evidence": "IDS is a strict theoretical upgrade of the authors' Inter-DS and removes its pathological no-feasible-sample case by construction.",
+    "pages": "pp. 4, 8, 23-24"
+   }
+  ],
+  "transferable": [
+   "State the cost wall with the partner's numbers (days per evaluation, CPUs needed for a realistic budget) in the motivation (p. 3).",
+   "Put the idea in a wrapper around the blackbox so it pairs with any solver, and prove properties of the wrapper (pp. 6-7).",
+   "Add a fallback that makes the method identical to the baseline when it has no information (no feasible sample => evaluate the truth) (p. 8).",
+   "Pay for one truth evaluation before accepting a cheap verdict that would change the incumbent (p. 7).",
+   "Prove cuts for a small combinatorial design subproblem by an exchange argument, then enumerate (pp. 12-13).",
+   "Explain results with divergence-from-baseline tables and last-fidelity histograms (pp. 19-23).",
+   "When evaluation cost dwarfs solver cost, build time-based profiles from blackbox time only and say so (pp. 18, 23)."
+  ],
+  "coauthors": "S. Alarie (Hydro-Quebec), M. Diago (Hydro-Quebec), S. Le Digabel, X. Lebeuf (corresponding author)",
+  "quotes": [
+   {
+    "text": "The assumption is false, but since the moments where a solution could become a new incumbent are unpredictable, it is necessary for the following theorem.",
+    "page": 10
+   },
+   {
+    "text": "This challenges the idea that interruption methods should be designed to minimize feasibility estimation errors.",
+    "page": 22
+   }
+  ]
+ }
+]
