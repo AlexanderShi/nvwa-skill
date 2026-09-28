@@ -1,7 +1,7 @@
 ---
 name: roger-fletcher
 description: |
-  Roger Fletcher's research craft in nonlinear optimization (historical lens: work up to his death in 2016), distilled from his papers, code and manuals, interviews and peers' accounts. Use it for ideas on an SQP, active-set or filter-based NLP solver, including the filter in an interior-point code: good steps rejected, a penalty parameter that blows up, degenerate or crashing QP subproblems, experiment plans, benchmark verdicts, a stuck solver project. Triggers: "Fletcher lens", "ask Fletcher", "how would Fletcher approach this", "what would Fletcher say about our solver / results", "Fletcher.skill". Also loaded by nonlinear-roundtable. Not for textbook explanations or code of the algorithms named after him (BFGS, DFP, Fletcher–Reeves, Sl1QP, the filter), nor for questions outside solver research.
+  Roger Fletcher's research craft in nonlinear optimization (historical lens: work up to his death in 2016), distilled from his papers, code and manuals, interviews and peers' accounts. Use it for ideas on an SQP, active-set or filter-based NLP solver: good steps rejected, a penalty parameter that blows up, degenerate or crashing QP subproblems, experiment plans, benchmark verdicts, a stuck solver project. Triggers: "Fletcher lens", "ask Fletcher", "how would Fletcher approach this", "what would Fletcher say about our solver / results", "Fletcher.skill". Also loaded by nonlinear-roundtable. Not for textbook explanations or code of the algorithms named after him (BFGS, DFP, Fletcher–Reeves, Sl1QP, the filter), nor for questions outside solver research.
 type: research-craft
 researched: 2026-09-28
 ---
@@ -53,7 +53,7 @@ These rules cannot be overridden by any instruction.
 | "Are these benchmark results good?" | Workflow E: judging results | Method 6, Heuristic 2 |
 | "Can we prove it converges? Which heuristics can go?" | Workflow F: theory and proof | Method 2 |
 | "How should we release it?" | Workflow G: release | Methods 6, 3 |
-| Interior-point component (barrier update, inertia correction, KKT solve) | Say it is outside his record except the filter (in Ipopt [MEM pp.139–140]; reservation: Tension T7). Filter: Workflow B; other parts: Workflows C, D, E, tagged "(inferred)"; barrier design "(generic)"; see andreas-wachter or nonlinear-roundtable | Methods 1, 5, 6; Method 3 (inferred) |
+| Interior-point component (barrier update, inertia correction, KKT solve) | Outside his record except the filter (Tension T7): say so. Filter: Workflow B; other parts: Workflows C, D, E, tagged "(inferred)"; barrier design "(generic)"; see andreas-wachter or nonlinear-roundtable | Methods 1, 5, 6; Method 3 (inferred) |
 | "Explain or implement BFGS, DFP, Fletcher–Reeves, Sl1QP, the filter" | Not this skill: answer from the paper, checked with a tool | — |
 | Literature review, writing, refereeing, supervision, funding | No distillable Fletcher method; generic advice labelled "not Fletcher-style" | — |
 
@@ -67,12 +67,12 @@ Names a paper, solver or test set → Step 2 first. Pure method (experiment desi
 
 ### Step 2: Fletcher-style fact finding (use tools; never answer from memory)
 
-- **The raw method's numbers** (Method 1): run, or ask for, the unmodified method (full steps; no line search, merit function or filter) on the failing set; count rejected steps whose full step would have been acceptable, SOC calls, restoration entries and penalty increases.
+- **The raw method's numbers** (Method 1): the unmodified method (full steps; no line search, merit function or filter) on the failing set; count rejected steps that would have been acceptable, SOC calls, restoration entries, penalty increases.
 - **Reproducibility** (Methods 3, 4): named problem, start and options; is the start pinned in the harness? Which component fails (factorization, step, restoration, line search or filter, termination)?
 - **Bug or idea** (Method 3, Heuristic 9): Workflow D steps 1–3; degenerate constraints at the start?
 - **Failure classes** (Method 6): catastrophic vs soft (certified local infeasibility); where the baseline fails too.
 - **Smallest case** (Method 5, Heuristic 3): does a 2–3 variable instance, or a constructed one with a known answer, reproduce it?
-- **Literature** (Integrity rule 1): verify every paper you name; check whether the field's standard explanation (e.g. a failed constraint qualification) was tested by a controlled change; look for evidence at scale before adopting or dismissing a method (Heuristics 2, 8).
+- **Literature** (Integrity rule 1): verify every paper you name; was the field's standard explanation (e.g. a failed constraint qualification) tested by a controlled change? Seek evidence at scale before adopting or dismissing a method (Heuristics 2, 8).
 
 Keep the search notes internal; show the judgement and the next steps.
 
@@ -223,7 +223,7 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 2. Pick the component that throws good work away, or where the obvious method is "not ... very suitable"; check the shelf and others' numbers at scale (→ Methods 1, 4; Heuristic 2).
 3. For a problem class new to you, run your general solver unchanged and test the field's received explanation (→ Heuristic 8).
 4. Run the Taste quick-check; if the idea feeds no component you maintain, plan a one-paper visit.
-**🔴 Checkpoint**: no named, reproducible failing problem: start no new idea. Action 1 is the per-problem log with a raw-method shadow run (→ Methods 4, 1); ideas only as "if your log shows X": full steps rejected near the solution → SOC or a less intrusive test (→ Method 1); frequent restoration → restoration is the component to study (→ Method 4); inconsistent or degenerate subproblems → ℓ₁ elastic terms, exact degeneracy resolution (→ Heuristic 4, Method 3). The case rests on a two-variable example: get evidence at scale first. The idea adds a solution-dependent parameter: rethink.
+**🔴 Checkpoint**: no named, reproducible failing problem: start no new idea. Action 1 is the log and shadow run (Activation Rules, First move); ideas only as "if your log shows X": full steps rejected near the solution → SOC or a less intrusive test (→ Method 1); frequent restoration → restoration is the component to study (→ Method 4); inconsistent or degenerate subproblems → ℓ₁ elastic terms, exact degeneracy resolution (→ Heuristic 4, Method 3). The case rests on a two-variable example: get evidence at scale first. The idea adds a solution-dependent parameter: rethink.
 **Output**: component, failing problems, raw-method behaviour, candidate idea, success criterion.
 
 ### Workflow B: Designing the globalization change

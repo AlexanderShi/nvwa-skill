@@ -117,15 +117,15 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **One line**: Decide how accurately a linear system or QP must be solved by asking what the globalization (merit function, penalty, trust region) needs from the step, and make that the iterative solver's termination test.
 **Evidence**:
 - Stated: "one needs to design an algorithm in which the demands of the “outer” nonlinear solver are understood by the “inner” subproblem (typically a quadratic optimization problem or linear system) solver" (research page); "Much of my work: exploiting inexactness for scalable constrained optimization." (ICCOPT 2019).
-- Practice: SMART tests (10.1137/060674004); nonconvex (10.1007/s10107-008-0248-3) and rank-deficient cases (10.1137/08072471X); inexact IPM in Ipopt (10.1137/090747634; 10.1007/s10107-012-0557-4); penalty updates inside the QP solve (10.1137/18M1176488); inexact TRACE (10.1137/22M1492428); stochastic inexact SQO (10.1287/ijoo.2022.0008).
+- Practice: SMART tests treating primal and dual residuals "as separate quantities" (10.1137/060674004, p. 352); nonconvex case with an inertia-free "Hessian Modification Strategy" (10.1007/s10107-008-0248-3, p. 283) and rank-deficient cases (10.1137/08072471X); inexact IPM in Ipopt (10.1137/090747634; 10.1007/s10107-012-0557-4); penalty updates inside the QP solve (10.1137/18M1176488); inexact TRACE (10.1137/22M1492428); stochastic inexact SQO (10.1287/ijoo.2022.0008).
 - Observed cost: "The stabilized SMART tests in [24, 22] require the solution of two Newton systems, thus doubling the price of a Newton iteration." (Huber thesis 2013, via Semantic Scholar context; 05 §4.3).
 - Say–do consistency: ✅ stated + practised, 2006–2024.
 **Steps**:
 1. Write the outer acceptance condition: sufficient decrease in a local model of the exact-penalty merit function, or trust-region model decrease.
 2. Derive the iterative solver's termination tests from it, testing primal and dual residual components separately instead of one relative residual on the whole KKT system (01 SW1).
-3. Add a fallback test that tells the outer loop to change something (penalty parameter, Hessian modification) when the test cannot be met.
-4. Build a baseline that differs only in the stopping rule (relative residual at several tolerances). In SW1 the residual rule solved 45–86 % of problems across its tolerances, the new tests 100 %.
-5. Make the failure tests crude on purpose: "we implement naïve failure tests in Algorithm B to aggressively challenge the robustness of our approach" (10.1137/060674004).
+3. Add a fallback test that tells the outer loop to change something (penalty parameter, Hessian modification without inertia, p. 283 above) when the test cannot be met.
+4. Build a baseline that differs only in the stopping rule (relative residual at several tolerances). In SW1 the residual rule solved 45–86 % of problems across its tolerances, the new tests 100 % (Table 5.2, p. 367). Add a factorizing variant as ceiling, "to gauge how Algorithm INS compares to an idealized approach" (10.1007/s10107-008-0248-3, p. 296).
+5. Make the failure tests crude on purpose: "we implement naïve failure tests in Algorithm B to aggressively challenge the robustness of our approach" (10.1137/060674004, p. 366).
 6. Move the tests into a production code and time iterations at scale: "Each iteration of the algorithm required under 9 minutes, a speed-up of over 75% compared to the default Ipopt algorithm, which required approximately 40 minutes per iteration" (research page, on 10.1137/090747634).
 **Applies to stage**: algorithm design; scaling an existing solver.
 **Different from standard practice**: classical inexact Newton bounds the whole residual by a forcing sequence, and most NLP codes factorize. Here the merit model sets the accuracy, component by component.
@@ -142,7 +142,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 1. List every parameter that trades objective against feasibility: penalty ρ, merit τ, barrier μ, radius.
 2. Write each update as a test on model-predicted progress toward feasibility and optimality.
 3. Allow the update inside the iteration, even inside the QP solve, not after a failed step; PIPAL tries a few candidate (ρ, μ) values per iteration (03 PE14).
-4. Require, and prove, fast local convergence to an infeasible stationary point: "fast local convergence guarantees regardless of whether a problem is feasible or infeasible" (10.1137/080738222).
+4. Require, and prove, fast local convergence to an infeasible stationary point: "fast local convergence guarantees regardless of whether a problem is feasible or infeasible" (10.1137/080738222, p. 2281).
 5. Instrument the rule: tabulate final parameter values over the test set (PIPAL Table 3; 03 PE17); classify parameter "events" (01 SW5).
 6. Count the subproblem solves the rule costs per iteration and make that the next target (Heuristic 2).
 **Applies to stage**: algorithm design; diagnosing infeasible and degenerate failures.
@@ -261,13 +261,13 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 ## Research Heuristics
 
 1. **If** your analysis conditions on an event, **then** log how often it occurs, with step types and final parameter values; replace uncheckable conditions by computable safeguards. Case: the stochastic SQP event held in 99.10–99.92 % of iterations, "This provides evidence that the theory offered under the event (25) is relevant in practice." (arXiv:2007.10525 v1); "The conditions in this theorem cannot be verified in practice." (Google 2016 talk).
-2. **If** you add a safeguard, **then** count its extra solves per iteration and make removing it the next target. Case: "the method may require the solution of numerous QO subproblems per iteration" (10.1137/120880045, on his 2010 method) → SQuID → updates inside the QP solve; "How much does all of this cost?" (ICCOPT 2019).
-3. **If** you need a problem, **then** pick a failure users hit that theory treats as a corner case. Case: "Fast detection of infeasibility has become increasingly important due to the central role it plays in branch-and-bound methods for mixed-integer nonlinear programming" (10.1137/080738222); PDE scale (01 SW1).
+2. **If** you add a safeguard, **then** count its extra solves per iteration and make removing it the next target. Case, a three-rung ladder: 2010 steering, extra QP solves defended as "more than compensated for by a savings in the total number of iterations" (10.1137/080738222, p. 2294) → SQuID, because near an infeasible stationary point "at least three QO subproblems must be solved"; SQuID needs at most two, with separate multiplier estimates (10.1137/120880045, p. 841) → one inexact QP solve with the penalty update inside it (10.1137/18M1176488; SQuID's published statistics compared, not rerun, arXiv:1803.09224 v3, pp. 27–28); "How much does all of this cost?" (ICCOPT 2019).
+3. **If** you need a problem, **then** pick a failure users hit that theory treats as a corner case. Case: "Fast detection of infeasibility has become increasingly important due to the central role it plays in branch-and-bound methods for mixed-integer nonlinear programming" (10.1137/080738222, p. 2281); PDE scale (01 SW1).
 4. **If** you start a design, **then** first write what the algorithm must deliver. Case: "What kind of algorithm do we want?" (NeurIPS 2022); research-page targets from "scalable step computation (for solving large-scale problems)" to "effective active-set detection (for warm-starting)".
 5. **If** a fast variant has no guarantees, **then** keep the guarantee-carrying method as comparator and restore guarantees later. Case: SQP-GS → BFGS-SQP, "While our method has no convergence guarantees, we have found it to perform very well in practice" (10.1080/10556788.2016.1208749) → 10.1007/s12532-015-0086-2, arXiv:1708.02552.
 6. **If** CPU time is noisy or codes differ in language, **then** report the metric that exposes the mechanism. Case: "we ignore CPU time and focus on the performance measures of iterations, function evaluations, and gradient evaluations required until termination" (Que thesis 2016; 03 PE16).
 7. **If** you remove test problems, **then** name each with its reason, encode filters in code, and never filter on what the runs showed. Dropping problems no solver solved is symmetric but still outcome-based, and PIPAL did it; if you do, report the pre-filter count as PIPAL did (438 → 417; 125 → 120 and 105; 10.1007/s12532-012-0041-4, p. 202). Anti-example, later dropped: problems kept only where "the LICQ held at all iterates in all runs of all algorithms that we ran" (arXiv:2007.10525 v1; 03 PE2).
-8. **If** you show a benchmark, **then** first show one run at iteration level (infeasible toy iteration tables, 10.1137/080738222; 03 PE18). Practice only.
+8. **If** you show a benchmark, **then** first show one run at iteration level (infeasible toy iteration tables, 10.1137/080738222, pp. 2295–2298, e.g. `batch1` = `batch` + tl[1] ≥ 5, p. 2296; 03 PE18). Practice only.
 9. **If** a solver misbehaves, **then** run the derivative checker ("the best first step for debugging!", NonOpt manual) on the test problems too (commit e59f9b6: "Fixed derivatives on two test problems."); keep defensive exits ("This wasn't supposed to happen!", NonOpt source), fixed seeds, "speed" and "accuracy" profiles, and byte-identical regression checks when refactoring. A test driver that returns 0 whatever happens is itself a bug (NonOpt, fixed in 2026; 03 §4). Good practice more than a signature; the record shows lapses (03 PE15, PE22).
 10. **If** the information the algorithm may trust changes (exact → inexact → nonsmooth → stochastic → noisy), **then** keep the skeleton, build a deterministic twin that replaces only the broken component, and climb the same rungs: full-rank equalities → rank deficiency → nonconvexity → inexact solves → inequalities → implementation. Case: "As a starting point for this stochastic setting, an algorithm is proposed for the deterministic setting that is modeled after a state-of-the-art line-search SQP algorithm" (arXiv:2007.10525); rungs 2008–2014 and 2021–2026 (Sources). A validated core method in Phase 2; for a noisy-evaluation feature, pick two rungs, not six.
 
@@ -276,10 +276,10 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 "inferred" = no primary source; "unknown" = not found.
 
 ### An Inexact SQP Method for Equality Constrained Optimization (Byrd, Curtis, Nocedal; SIAM J. Optim. 19(1), 2008; DOI 10.1137/060674004) · Methods 1, 5
-- **Origin**: PDE-constrained problems "for which the exact computation of steps in contemporary methods can be prohibitively expensive"; PhD topic under Nocedal; who proposed it: unknown.
+- **Origin**: PDE-constrained problems "for which the exact computation of steps in contemporary methods can be prohibitively expensive" (p. 351); PhD topic under Nocedal; who proposed it: unknown.
 - **Why then**: mature Krylov solvers; no global-convergence conditions yet for inexact full-space line-search SQP (inferred).
 - **Key insight**: termination tests that check primal and dual residuals separately and require merit-model decrease.
-- **Minimum evidence**: Matlab with unpreconditioned GMRES on 44 CUTEr/COPS problems; the one-component baseline solved 45–86 %, the tests 100 %.
+- **Minimum evidence**: Matlab with unpreconditioned GMRES on 44 CUTEr/COPS problems; the one-component baseline solved 45–86 %, the tests 100 % (Table 5.2, p. 367).
 - **Abandoned paths**: preconditioning and local rates deferred; a Curtis–Haber PDE paper cited "in preparation" never appeared (06 §5).
 - **Reception**: Nemhauser dissertation award (2008); an Ipopt option, still experimental; critics note extra solves and many parameters (05 §4).
 
@@ -287,7 +287,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 - **Origin**: fast local convergence "regardless of whether a problem is feasible or infeasible", for MINLP branch-and-bound and parametric studies.
 - **Why then**: MINLP codes built on NLP solvers needed fast infeasible verdicts (inferred).
 - **Key insight**: one exact-penalty iteration whose penalty update, driven by progress toward feasibility, is the design object.
-- **Minimum evidence**: 2010: a Matlab prototype on toy examples, benchmarking "outside the scope of this paper as it requires a sophisticated software implementation". 2012: 438 CUTEr models against Ipopt with its engineering adopted, then degenerate and infeasible variants of 125 HS problems (417, 120 and 105 after dropping those no solver solved; pp. 202, 205–206).
+- **Minimum evidence**: 2010: a Matlab prototype on toy examples, benchmarking "outside the scope of this paper as it requires a sophisticated software implementation" (p. 2294). 2012: 438 CUTEr models against Ipopt with its engineering adopted, then degenerate and infeasible variants of 125 HS problems (417, 120 and 105 after dropping those no solver solved; pp. 202, 205–206).
 - **Abandoned paths**: first submitted to Mathematical Programming (outcome unknown); PIPAL stayed a Matlab prototype despite "the potential to be a successful general-purpose solver" (03 §4).
 - **Reception**: Hinder & Ye cite PIPAL as a slow penalty method (arXiv:1801.03072); a critique that the Sℓ1QP code fails with inexact QP solutions was later answered by updates inside the QP solve (10.1137/18M1176488; link inferred; 05 §4.5).
 
