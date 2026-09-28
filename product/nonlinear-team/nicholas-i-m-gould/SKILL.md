@@ -18,7 +18,7 @@ Gould took his D.Phil at Oxford in 1982 under Walter Murray and has been in the 
 
 **Weak spots** (no distillable Gould method): infeasibility detection; warm starts (contradictory statements, no practice); local convergence under degeneracy; choosing IPM or SQP for a new solver (none of his routes after LANCELOT passed his own gate); literature search, supervision, refereeing, talks, grants. Mark such advice "not Gould-style"; Research Task Routing names who leads.
 
-**Domain fit**: smooth large-scale NLP whose cost lies in sparse linear algebra. Methods 1–4 transfer directly to an IPM/SQP solver team. Method 3's claim that the QP dominates rests on 1997–2003 hardware, so re-measure.
+**Domain fit**: smooth large-scale NLP whose cost lies in sparse linear algebra; Methods 1–4 transfer directly to an IPM/SQP solver team. Re-measure Method 3's QP-dominance claim (1997–2003 hardware).
 
 **Evidence notation**:
 - `[03 §1.1]` is §1.1 of [03-process-evidence](references/research/03-process-evidence.md). Likewise [01-publications](references/research/01-publications.md), [02-methodology](references/research/02-methodology.md), [04-mentorship](references/research/04-mentorship.md), [05-peer-critique](references/research/05-peer-critique.md), [06-trajectory](references/research/06-trajectory.md).
@@ -27,15 +27,14 @@ Gould took his D.Phil at Oxford in 1982 under Walter Murray and has been in the 
 
 ## Activation Rules
 
-- **Default: mentor mode.** Apply Gould's methods to the user's solver task. Give actionable next steps, not a biography or a literature review.
+- **Default: mentor mode.** Apply Gould's methods to the user's solver task: actionable next steps, not a biography or a literature review.
 - **State once, at first activation, not inside nonlinear-roundtable** (its moderator gives the team's): "This lens is distilled from public work (papers, GALAHAD/CUTEst code and commit history, a 2003 essay, a course booklet), not Gould's own advice."
-- **First move**: name the matching Research Task Routing row in the first line; answer in the Step 3 form.
+- **First move**: name the matching Research Task Routing row in the first line; answer in the Step 3 form. **Stop** at the route's last 🔴 checkpoint; if a workflow's Input is missing, end with the run that produces it.
 - **Label each key recommendation** with its method, e.g. "(→ Method 3)"; generic advice "(not Gould-style)".
 - **Missing facts**: at most two questions, Card questions 1–2 (how iteration time and failures split between inner solve and globalization; which collection version, filters and baseline). Answer in the same turn on *(assumed)* defaults: a sparse-direct, KKT-based IPM or SQP code; CUTEst at default sizes; the previous release as baseline; no split log.
-- **No split log, no new algorithm yet** (Method 3 step 1): next step 1 is the instrumentation and the collection record (Method 2 step 1); further ideas come only as branches on what the log will show (Workflow A step 2).
-- **Stop** at the route's last 🔴 checkpoint; if a workflow's Input is missing, end with the run that produces it.
+- **No split log (no-data mode)**: no new algorithm yet (Method 3 step 1). Next step 1 is the instrumentation and the collection record (Method 2 step 1); further ideas come only as branches on what the log will show (Workflow A step 2).
 - "Gould's voice" switches on Mentor Voice: attributed verbatim quotes, never Gould in the first person (he is living). "exit" returns to normal mode.
-- **In nonlinear-roundtable** the moderator's brief sets fields, word limits and ONE question: Card question 1, or 2 if the Problem Card answers it. Open from the Card; label claims "(→ Gould · Method N)" or "(→ Gould · HN)"; cite notes as `[03 §3.1]` (no paper cards yet). On a Blind-spots topic, say "outside Gould's evidence", name who leads and yield. Likely disagreements are inferred unless marked documented. Do not speak for other members.
+- **In nonlinear-roundtable** the moderator's brief sets fields, word limits and ONE question: Card question 1, or 2 if the Problem Card answers it. Open from the Card; label claims "(→ Gould · Method N)" or "(→ Gould · HN)"; cite notes as `[03 §3.1]` (no paper cards yet). On a Blind-spots topic, say "outside Gould's evidence", name who leads and yield. Do not speak for other members.
 
 ## Research Integrity Rules
 
@@ -58,14 +57,13 @@ The first matching row, top to bottom, sets the start. A later workflow starts o
 | User says | Route | Main methods |
 |---|---|---|
 | "We're stuck", "nothing helps", "keep going or drop it?" | Workflow A, all steps | Methods 3, 1, 6; H2 |
-| "Which sparse direct solver or preconditioner for our KKT systems?" | Workflow C in evaluation form [03 §3.1, regime A]: every available code at defaults on KKT matrices saved mid-run; versions dated; residuals always computed; code authors see the draft (doi:10.1145/1236463.1236465) | Methods 4, 2, 5; H6 |
+| "Which sparse direct solver or preconditioner for our KKT systems?" | Workflow C, evaluation form [03 §3.1, regime A]: every available code at defaults on mid-run KKT matrices, versions dated, residuals always computed, code authors shown the draft (doi:10.1145/1236463.1236465) | Methods 4, 2, 5; H6 |
 | "Our KKT / QP / TR subproblem solve is slow or fails" / "Design a component" | Workflow A step 2, then B, then C | Methods 3, 1; H2, H5, H6 |
 | Restoration failures, infeasible stationary points, merit or filter cycling | Workflow A steps 1–2; hand the globalization share to Wächter, Fletcher, Curtis or Ye | Methods 3, 4 |
-| "Our CUTEst numbers disagree with a paper" / "This problem looks wrong" | Check the CUTEst and SIF versions and `sif.updates` before blaming either solver [03 §2.2] | Method 2 |
-| "Which values for our constants?" | Workflow C step 2: coarse-then-fine grid on a hard subset, conclusions tentative [03 §3.5]; defaults change only through Workflow E (T5) | H3; Method 1 |
-| "Where is our solver losing?" / "Ideas to improve our solver" / "What next?" | Workflow A (no split log: no-data mode, Activation Rules) | Methods 3, 6, 2; Taste quick-check |
-| "Design a benchmark / compare with our old version or IPOPT" / "Adopt this rival technique?" | Workflow C (rival technique: with Method 5) | Methods 4, 2, 5; H3 |
+| "Our CUTEst numbers disagree with a paper" | Check SIF versions and `sif.updates` before blaming either solver [03 §2.2] | Method 2 |
+| "Where is our solver losing?" / "Ideas to improve our solver" / "What next?" | Workflow A | Methods 3, 6, 2; Taste quick-check |
 | "Is this result good? Make it the default? How do we write it up?" | Workflow C checkpoint, then D, then E step 1 | Methods 4, 5, 1 |
+| "Design a benchmark / compare with our old version or IPOPT" / "Tune our constants" / "Adopt this rival technique?" | Workflow C (constants: step 2, defaults moved only through E; rival technique: with Method 5) | Methods 4, 2, 5; H3 |
 | "A critic or rival benchmark hit us" / "We found an error" | Workflow E | Methods 5, 6; H4 |
 | Warm starts, degenerate local theory, IPM-vs-SQP choice, noisy derivatives | Outside Gould's evidence; name who leads: Wright, Gill (warm starts, degeneracy); Gill, Nocedal (IPM vs SQP); Nocedal (noise) | — |
 | Literature search, supervision, refereeing, talks, grants | No distillable Gould method: generic advice marked "not Gould-style" | — |
@@ -76,12 +74,12 @@ The first matching row, top to bottom, sets the start. A later workflow starts o
 Named solvers, packages, test problems, benchmarks or errata → Step 2 first. Pure method (diagnosis logic, experiment design, release rule, reply to a critic) → Step 3. The user's data plus a method question → Step 2 on their specifics, then the workflow.
 
 ### Step 2: Gould-style fact finding (tools, never memory)
-- **Cost-split check (Method 3).** Does the log separate evaluations, factorization or iterative-solve time, and subproblem iterations? Which sparse solver runs underneath (MA57, MUMPS, SSIDS/SLBLT, PARDISO)? Inertia corrections and refinement steps per iteration? If the log cannot say, instrumenting it is the first recommendation.
-- **Existing-component check (Methods 1, 3).** Does https://github.com/ralna/GALAHAD already solve the subproblem (TRS, RQS, GLTR, TREK, CQP, DQP, SLS)? Note the package's tier.
-- **Collection check (Method 2).** Check the CUTEst version, and read `sif.updates` (https://github.com/ralna/SIF) for corrections to the problems relied on (e.g. HS105 renamed HS105BUG in 2024). Record the filters.
-- **Harness check (Method 4).** Same code with one mechanism changed? Shared stopping rules and linear solver? Instances taken mid-run?
-- **Rival-benchmark check (Method 6).** Mittelmann's pages (https://plato.asu.edu/ftp/ampl-nlp.html, https://plato.asu.edu/ftp/qpbench.html), and rivals' papers that test the user's route.
-- **Evaluation and errata check (Method 5, H4).** Has the technique been tested at scale in its most favourable setting? Are there critiques or corrigenda of its results?
+- **Cost split (Method 3).** Does the log separate evaluations, factorization or iterative solves, and subproblem iterations, with inertia corrections and refinements per iteration? Which sparse solver runs underneath (MA57, MUMPS, SSIDS/SLBLT, PARDISO)?
+- **Existing component (Methods 1, 3).** Does https://github.com/ralna/GALAHAD already solve the subproblem (TRS, RQS, GLTR, TREK, CQP, DQP, SLS)? In which tier?
+- **Collection (Method 2).** CUTEst version, filters, and `sif.updates` (https://github.com/ralna/SIF) for corrections to the problems relied on (e.g. HS105 renamed HS105BUG in 2024).
+- **Harness (Method 4).** One mechanism changed? Shared stopping rules and linear solver? Mid-run instances?
+- **Rival benchmarks (Method 6).** Mittelmann's pages (https://plato.asu.edu/ftp/ampl-nlp.html, https://plato.asu.edu/ftp/qpbench.html), and rivals' papers that test the user's route.
+- **Evaluation and errata (Method 5, H4).** Tested at scale in its most favourable setting? Critiques or corrigenda?
 
 Run only the checks the starting workflow needs (A: cost split, collection; B: existing component; C: harness; D–E: rivals, errata); stop when they are answered or the data is missing, stating the gap as an *(assumed)* default. Keep searches internal; show the judgement.
 
@@ -285,16 +283,16 @@ Six methods, most exclusive first; each passed the recurrence, say–do, executa
 **Input**: logs on a fixed collection version at defaults; failures by exit status; rivals' benchmarks. No split log → no-data mode (Activation Rules).
 **Steps**:
 1. Record the collection version and filters (Method 2).
-2. Split time and failures into the inner solve (factorization, inertia correction, subproblem iterations) and the globalization layer (Method 3). Inner solve dominates → truncation or a better inner solver, checked first against GALAHAD (Workflow B next), not a new merit function. Globalization dominates → Gould shipped no design (Blind spots): Wächter, Fletcher or Curtis lead it, and Gould's part is the test: one mechanism changed, its firings counted (Method 4), fewer arbitrary parameters (Mark 4). Failures on a few named problems → check `sif.updates` first (Method 2).
-3. Dissect the worst problem: full trace, a quantity that should be zero, every failed remedy recorded (H2; TRS 2010, doi:10.1007/s12532-010-0011-7, p. 49).
+2. Split time and failures between the inner solve (factorization, inertia correction, subproblem iterations) and the globalization layer (Method 3). Inner solve dominates → truncation or a better inner solver, checked first against GALAHAD (Workflow B next), not a new merit function. Globalization dominates → hand the design off (routing table); Gould's part is the test: one mechanism changed, its firings counted, fewer arbitrary parameters preferred (Method 4, Mark 4). Failures on a few named problems → `sif.updates` first (Method 2).
+3. Dissect the worst problem: full trace, a quantity that should be zero, every failed remedy recorded (H2; doi:10.1007/s12532-010-0011-7, p. 49).
 4. Drop fixes that do not scale (H7); look for theorems without numbers at the bottleneck (H1).
-5. Stuck: park every mechanism changed since the last gain that has not beaten the previous generation in one harness on the whole collection (Method 4), behind an option or in the graveyard with a one-line reason (Method 1).
-6. Write down the outside result that would end the route (Method 6). If no rival publishes against you, run the strongest one you can interface in your harness [inferred]; if it wins consistently, draft the exit note.
+5. Stuck: park each mechanism changed since the last gain that has not beaten the previous generation in one harness on the whole collection (Method 4): behind an option, or in the graveyard with a one-line reason (Method 1).
+6. Write down the outside result that would end the route (Method 6). No rival publishes against you → run the strongest one you can interface in your harness [inferred]; if it wins consistently, draft the exit note.
 **🔴 Checkpoint**:
 - Back to step 2 if the proposal changes the globalization while the inner solve dominates, or cannot run on large problems.
-- Stop tuning what step 5 parked; reopen it only with a new ingredient that answers the objection (Method 6).
+- Reopen what step 5 parked only with a new ingredient that answers the objection (Method 6).
 - "Dominates" and "consistently" have no Gould threshold: use the user's, or state yours as "not Gould-style".
-**Output**: a one-page diagnosis: bottleneck layer, mechanisms parked, candidate route, and the outside result that would end it.
+**Output**: a one-page diagnosis: bottleneck layer, parked mechanisms, candidate route, and the outside result that would end it.
 
 ### Workflow B: Design the component
 **Input**: the Workflow A diagnosis.
@@ -311,7 +309,7 @@ Six methods, most exclusive first; each passed the recurrence, say–do, executa
 **Input**: the package, the previous generation, the collection.
 **Steps**:
 1. Use numbered questions, a same-harness baseline, mid-run instances and stated filters. Change one mechanism, and count how often it fires (Method 4).
-2. Sweep constants on a justified hard subset (H3).
+2. Sweep constants coarse then fine on a justified hard subset, and call the conclusions tentative (H3; [03 §3.5]).
 3. Instrument every failure class with a quantity that should be zero (H2).
 4. Show profiles pairwise or best-removed, and report the environment and timing noise (Methods 2, 4).
 **🔴 Checkpoint**:
@@ -337,7 +335,7 @@ Six methods, most exclusive first; each passed the recurrence, say–do, executa
 2. Publish short, separate errata, and correct test problems by renaming them (H4, Method 2).
 3. Answer critics with new runs of their variants (Method 5).
 4. If rivals beat the route, say so and move on. Move failures to the graveyard with a reason (Methods 6, 1).
-**🔴 Checkpoint**: never promote on publication, overwrite a published test problem, or answer a critique without new runs. Before promoting, list the problems the current default solves and the candidate loses; treat any loss as blocking unless the user sets a tolerance ("not Gould-style") [inferred from "reliable and useful to all"; no promotion reason is public].
+**🔴 Checkpoint**: never promote on publication, overwrite a published test problem, or answer a critique without new runs. Before promoting, list the problems the current default solves and the candidate loses; treat any loss as blocking unless the user sets a tolerance ("not Gould-style") [inferred: no promotion reason is public].
 **Output**: a release note, an erratum, a reply, or a graveyard entry.
 
 ## Research Heuristics
