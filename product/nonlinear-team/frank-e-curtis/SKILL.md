@@ -205,33 +205,33 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 ## Stage Workflows
 
 ### Workflow A: Problem choice
-**Input**: the solver's failures and slowdowns (user reports, test-set failures) and the problem classes they come from.
+**Input**: the solver's failures and slowdowns and the problem classes they come from.
 **Steps**:
-1. Sort failures by cause, using his list: "“high” nonlinearity, degeneracy, and infeasibility", plus scale that defeats factorization (→ Heuristic 3).
+1. Sort failures by cause, using his list, "“high” nonlinearity, degeneracy, and infeasibility", plus scale that defeats factorization (→ Heuristic 3).
 2. Keep a failure that theory treats as a corner case (→ Taste 1).
-3. Reproduce it on a constructed tiny model and on a mechanically built variant of a standard set (→ Method 3).
+3. Reproduce it on a tiny constructed model and on a mechanically built variant of a standard set (→ Method 3).
 4. Write the desiderata the repaired solver must meet (→ Heuristic 4).
-**🔴 Checkpoint**: if the failure cannot be reproduced on a constructed instance, or it vanishes once the incumbent's own engineering (scaling, bound relaxation, presolve) is switched on, stop: it is plumbing, not a research problem.
-**Output**: a one-page problem statement: failure mode, constructed instances, desiderata.
+**🔴 Checkpoint**: if the failure cannot be reproduced on a constructed instance, or vanishes once the incumbent's own engineering (scaling, bound relaxation, presolve) is on, stop: it is plumbing, not a research problem.
+**Output**: a one-page statement: failure mode, constructed instances, desiderata.
 
 ### Workflow B: Algorithm design
 **Input**: the Workflow A statement and the current algorithm skeleton.
 **Steps**:
 1. Derive inner-solver termination tests from the outer acceptance condition (→ Method 1).
 2. Express every objective-versus-feasibility parameter as an update rule on predicted progress, inside one iteration (→ Method 2).
-3. If the information model changes (inexact, noisy, sampled), build the deterministic twin first and plan the rungs (→ Heuristic 10).
+3. If the information model changes (inexact, noisy, sampled), build the deterministic twin first (→ Heuristic 10).
 4. Count the per-iteration cost of each safeguard (→ Heuristic 2).
 **🔴 Checkpoint**: if the design needs a second phase (restoration, restart) to converge, or a safeguard costs more than one extra subproblem solve per iteration with no plan to remove it, redesign before experimenting.
-**Output**: algorithm statement plus a table of parameters, update rules, termination tests and their costs.
+**Output**: algorithm statement plus a table of parameters, update rules, termination tests and costs.
 
 ### Workflow C: Experiment design
 **Input**: a working prototype inside a strategy-object framework.
 **Steps**:
 1. Build the rival inside the framework and ablate the one component the claim is about (→ Method 5).
-2. Add infeasible and degenerate variants and toy models; presolve off (→ Method 3).
-3. Before comparing with an external code, adopt its engineering (→ Method 5, step 4).
+2. Add infeasible and degenerate variants and toy models, presolve off (→ Method 3).
+3. Adopt an external code's engineering before comparing with it (→ Method 5, step 4).
 4. Write the exclusion log and encode filters in code (→ Heuristic 7).
-5. Give the baseline the tuning advantage and record the numbers; seeds and at least 10 runs for anything randomized (→ Method 5).
+5. Give the baseline the tuning advantage and record it; seeds and at least 10 runs for anything randomized (→ Method 5).
 **🔴 Checkpoint**: stop if the test set is filtered on something observed in the runs, if success is decided by your own termination flag, or if the baseline is less tuned than your method.
 **Output**: a protocol: sets, variants, exclusions with reasons, rivals, settings, tuning budgets.
 
@@ -239,11 +239,10 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Input**: the protocol and the code.
 **Steps**:
 1. Run the derivative checker first, on the test problems too (→ Heuristic 9).
-2. Keep defensive exits for impossible states and fixed seeds.
-3. Offer a "speed" and an "accuracy" option profile.
-4. Refactor one change at a time, with a byte-identical regression check.
+2. Keep defensive exits for impossible states, fixed seeds, and "speed" and "accuracy" option profiles.
+3. Refactor one change at a time with a byte-identical regression check.
 **🔴 Checkpoint**: an "impossible" exit or a derivative mismatch halts the benchmark until explained; a test driver that returns 0 whatever happens is itself a bug (NonOpt, fixed only in 2026; 03 §4).
-**Output**: a versioned code state and raw outputs. These habits are good practice more than a Curtis signature; the record shows both the habits and lapses (03 PE15, PE22).
+**Output**: a versioned code state and raw outputs. Good practice more than a Curtis signature; the record shows lapses too (03 PE15, PE22).
 
 ### Workflow E: Judging results
 **Input**: raw outputs.
@@ -251,22 +250,22 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 1. Look at one run at iteration level (→ Heuristic 8).
 2. Measure how often the theory's event occurs; tabulate final parameter values and step types (→ Heuristic 1).
 3. Pick the metric that exposes the mechanism (→ Heuristic 6).
-4. Ask whether the measure favours you; try a view of objective versus violation versus budget; weigh any complexity claim by method class (→ Method 4).
+4. Ask whether the measure favours you; view objective versus violation versus budget; weigh any complexity claim by method class (→ Method 4).
 5. List where the incumbent wins (→ Method 5, step 7).
-**🔴 Checkpoint**: if the advantage vanishes when the test set changes, or the theory's event is rare in runs, narrow the claim or return to Workflow B. His example: PIPAL's advantage shows on degenerate variants, not on the standard set, and the paper says so.
+**🔴 Checkpoint**: if the advantage vanishes when the test set changes, or the theory's event is rare in runs, narrow the claim or return to Workflow B. His example: PIPAL's advantage shows on degenerate variants, not the standard set, and the paper says so.
 **Output**: a results memo: wins, losses, event frequencies, the narrowest honest claim.
 
 ### Workflow F: Writing and after publication
 **Input**: the results memo and the code.
 **Steps**:
-1. Calibrate claims ("We do not claim that “SQP Adaptive” is as efficient as “SQP Backtracking”", arXiv:2007.10525 v1; 03 PE27) and drop adjectives the experiments did not test (titles lost "Robust" and "Large-Scale" in review; reason inferred; 03 PE29).
-2. Ship a reproduction directory mapping sections to executables, with raw outputs and runtimes (03 PE23); label released code a prototype and invite bug reports (03 PE32).
-3. Post a corrigendum with the full corrected statement; contact the journal only when a main conclusion changes (Errata page; 03 PE26).
-4. Build talks around a stated "Take-home message" (02 §6.1). Practice only: theory goes to arXiv first, practitioner evidence is often added at submission or on referees' request (03 PE24).
+1. Calibrate claims ("We do not claim that “SQP Adaptive” is as efficient as “SQP Backtracking”", arXiv:2007.10525 v1) and drop untested adjectives (titles lost "Robust" and "Large-Scale" in review; 03 PE29).
+2. Ship a reproduction directory with raw outputs and runtimes (03 PE23); label code a prototype and invite bug reports (03 PE32).
+3. Post corrigenda with the full corrected statement; contact the journal only when a main conclusion changes (Errata page; 03 PE26).
+4. Practice only: theory goes to arXiv first; practitioner evidence is often added at submission or on referees' request (03 PE24).
 **🔴 Checkpoint**: a scale claim or adjective the experiments did not test comes out; a numerical claim without a reproduction path waits.
 **Output**: paper, reproduction package, errata entry when needed.
 
-**Stages with no distillable Curtis method**: literature review (one positioning slide, "What could I say that is new?", ICCOPT 2019); peer review, rebuttal and rejections (no public record); one-to-one supervision and draft review; grant writing. Say "no distillable Curtis method" and label any generic advice "not Curtis-style".
+**Stages with no distillable Curtis method**: literature review (one positioning slide, "What could I say that is new?", ICCOPT 2019); peer review and rebuttal; one-to-one supervision; grant writing. Say "no distillable Curtis method" and label generic advice "not Curtis-style".
 
 ## Research Heuristics
 
