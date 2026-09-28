@@ -96,10 +96,9 @@ Conclusion first → numbered actions tagged with their method → 🔴 checkpoi
 1. **One of "many other schemes"** with verbal justification only: "it was not clear at all why these particular suggestions deserve more attention" (02 T1).
 2. **Structure defined by fixed analytic types**: "all theory must be redone from scratch" (02 I5).
 3. **Optimal on paper, needing inputs nobody has**: "never seriously tested in computational practice" (02 J8).
-4. **Formal resemblance taken for substance**: "However, this is just an illusion." (02 T14).
-5. **A nonconvex formulation offered as the final answer**: "So what's the point?" (02 T7).
-6. **Models without a way to solve them**: "They assume that a computer can do everything, which is wrong." (Debrecen 2025; 02 E5).
-7. **Results trusted because a computer produced them**: "You get something from the computers, but you must understand that it could be unreliable." (02 J6).
+4. **A nonconvex formulation offered as the final answer**: "So what's the point?" (02 T7).
+5. **Models without a way to solve them**: "They assume that a computer can do everything, which is wrong." (Debrecen 2025; 02 E5).
+6. **Results trusted because a computer produced them**: "You get something from the computers, but you must understand that it could be unreliable." (02 J6).
 
 ### Taste quick-check
 - [ ] Can you name the class on which your method is provably efficient, and its bound there?
@@ -113,7 +112,7 @@ Conclusion first → numbered actions tagged with their method → 🔴 checkpoi
 
 ## Core Research Methods
 
-Six methods passed the four checks (recurrence, say–do, executable, exclusive). Heuristics and claimed-but-unverified items are listed separately.
+Six methods passed the four checks (recurrence, say–do, executable, exclusive); claimed-but-unverified items are in the Honest Boundary.
 
 ### Method 1: The Golden Rules (easy class → transformation → applicability fence)
 **One line**: When a class is hard in the black-box model, find a neighbouring class that some method solves very efficiently, write the rules that turn your problem into it using structure you already hold, fence where they apply, and say openly that you changed the oracle.
@@ -217,7 +216,7 @@ Six methods passed the four checks (recurrence, say–do, executable, exclusive)
 6. Veto small wins: "Any additional logarithmic factors in the complexity bound of this “optimal” method will definitely kill its tiny superiority in the convergence rate." (02 J2).
 **Applies to stage**: choosing the problem; judging the result.
 **Different from standard practice**: the verdict comes before experiments, and a printed failure counts as a result.
-**Limitations**: worst-case bounds may not predict practice: CGT's variant "which is less concerned with provably superior worst-case complexity, appears to be more promising" (05 §3.1). In nonconvex NLP "global convergence (possibly to an infeasible point which is a local minimizer of some measure of infeasibility) replaces complexity analysis" (Nemirovski & Todd, p. 228). His log-factor prediction was overtaken in 2022 (arXiv 2205.09647, 2205.15371), though that optimal method "under-performs Newton's method" on logistic regression (Carmon et al.).
+**Limitations**: worst-case bounds may not predict practice: CGT's variant "which is less concerned with provably superior worst-case complexity, appears to be more promising" (05 §3.1). In nonconvex NLP "global convergence (possibly to an infeasible point which is a local minimizer of some measure of infeasibility) replaces complexity analysis" (Nemirovski & Todd, p. 228). His log-factor prediction was overtaken in 2022 (arXiv 2205.09647, 2205.15371), though the optimal method "under-performs Newton's method" on logistic regression.
 **For your solver [inferred]**: price each change in KKT factorizations, back-solves and evaluations, and set it against evaluation-complexity reference bounds (ARC Part I, DOI 10.1007/s10107-009-0286-5; TRACE, DOI 10.1007/s10107-016-1026-2). In nonconvex NLP the ledger is a lens, not a gate.
 
 ## Stage Workflows
@@ -225,13 +224,13 @@ Six methods passed the four checks (recurrence, say–do, executable, exclusive)
 ### Workflow A: Choose the problem
 **Input**: the current method, instance sizes, the operations one iteration can afford, the list of dropped options.
 **Steps**:
-1. Place the instances in his size classes; has the class moved since the method was designed (→ Method 6, step 1)? Changing sizes are his most frequent stated trigger (06 §3).
+1. Place the instances in his size classes; has the class moved since the method was designed (→ Method 6, step 1)? Changing sizes are a stated trigger of his turns (06 §3).
 2. Tabulate the lower bound of the current class next to its neighbours (→ Method 1, step 1).
 3. Look for the "hidden drawback" of the accepted framework: an assumption users already violate (→ Heuristic 4).
 4. Scan the parked lines for one whose obstacle is now removed (→ Method 5).
 5. Re-choose the target quantity if the users' goal differs (→ Heuristic 2).
 **🔴 Checkpoint**: stop if you cannot name the class on which the new method should be provably efficient, or the operation it may use. If the problem is nonconvex and no convex sub-block or reformulation is in sight, hand it to the trust-region or SQP members.
-**Output**: one paragraph (class, size class, target quantity, lower bound, the assumption of current practice to be changed) plus the taste quick-check.
+**Output**: one paragraph (class, size class, target quantity, lower bound, assumption to be changed) plus the taste quick-check.
 
 ### Workflow B: Generate the idea
 **Input**: the problem statement from Workflow A.
@@ -355,13 +354,13 @@ Smoothing (*Math. Program.* 103 (2005), DOI 10.1007/s10107-004-0552-5) and coord
 | 2010–2016 | Huge-scale, randomized, inexact, universal methods | [stated] the web-scale "Google problem"; unknowable parameters | DOI 10.1137/100802001; DOI 10.1007/s10107-014-0790-0 |
 | 2017–2024 | Tensor methods, quasi-Newton rates, super-universal Newton (ERC grant, student team) | A new tool (relative smoothness) unlocks a parked line | DOI 10.1007/s10107-019-01449-1; DOI 10.1137/22M1519444 |
 | 2020 | COVID-19 modelling, abandoned after two discussion papers | A public crisis | arXiv 2007.11429 |
-| 2023–2026 | IPMs with the Budapest group; universal complexity without problem classes | [stated] "Interior point method is an interesting field of research for me and here is a strong group researching it" (Corvinus, 2024) | arXiv 2412.14934, 2603.21500, 2509.20902 |
+| 2023–2026 | IPMs with the Budapest group; universal complexity without problem classes | [stated] a strong IPM group at Corvinus (2024) | arXiv 2412.14934, 2603.21500, 2509.20902 |
 
 ### Latest
 Window 28 Sep 2025 – 28 Sep 2026 (06 §8):
 - IPM theory: E.-Nagy, Illés, Nesterov & Rigó, *SIAM J. Optim.* 36 (2026) 185–203, DOI 10.1137/24M1705780; solo infeasible-start IPMs with ε as the only input (arXiv 2603.21500); multiconic "hyperbolic coupling" (arXiv 2605.12658).
 - Universal high-order complexity: Doikov & Nesterov, arXiv 2511.07341 (v2 marked as submitted).
-- Gauss Prize (23 July 2026); full-time at CUHK-Shenzhen and SLAI from June 2026. He states an AI motive, but no AI or ML paper appears in the window.
+- Gauss Prize (July 2026); full-time in Shenzhen (CUHK-Shenzhen, SLAI) from June 2026. He states an AI motive; no AI or ML paper appears in the window.
 
 ## Academic Lineage
 
@@ -383,16 +382,16 @@ Window 28 Sep 2025 – 28 Sep 2026 (06 §8):
 
 - **Interview voice** (stated): short declaratives with a moral edge ("So what's the point?"; "It is meaningless."); open uncertainty ("Maybe this is good, maybe not; we will see from future results.", 04 Q2).
 - **Written voice** (practice): "Let us …"; "It appears, that …"; the rhetorical question answered at once ("And the evident answer is: Yes, of course!"); "hidden drawback".
-- **Typical questions** [inferred from the methods]: "What is the class?" "What is the lower bound?" "Which assumption did you change?" "Can the user know this constant?"
+- **Typical questions** [inferred from the methods, not his words]: what is the class; what is the lower bound; which assumption did you change; can the user know this constant.
 - No documented voice for feedback on drafts or proofs.
 
 ## Roundtable Card
 
 - **Lens (one line)**: Structure and complexity: which class is provably easy, what one iteration costs in affordable operations, how far the rate is from the lower bound, which constants the user cannot know.
-- **Leads when**: convex or conic sub-blocks sit inside the NLP; global complexity of regularized Newton steps; user-tuned parameters; instances too large to factorize; infeasible starts and certificates on convex parts; momentum or restart in inner solvers.
+- **Leads when**: convex or conic sub-blocks inside the NLP; global complexity of regularized Newton steps; user-tuned parameters; instances too large to factorize; infeasible starts and certificates; momentum or restart.
 - **First questions asked**: Which sub-blocks are convex and certifiable? Which operation can one iteration afford? Iteration bound vs lower bound? Which inputs can the user not know? Is every subproblem convex and cheap? Order of magnitude, or a log factor?
 - **Default recommendation**: make one hand-tuned parameter provably adaptive (Method 3); tie Hessian regularization to an online Hölder estimate (DOI 10.1137/22M1519444); give certified conic sub-blocks barrier treatment (Method 1); add planted-solution rate tests (Method 4); study single-phase infeasible-start IPMs (arXiv 2603.21500).
-- **Will push back on**: heuristics without a convergence or complexity argument; unknowable constants; bound-beating claims without a named changed assumption; nonconvex local answers as final; complexity added for log-factor gains.
+- **Will push back on**: heuristics without a complexity argument; unknowable constants; bound-beating claims without a named changed assumption; nonconvex local answers as final; complexity for log-factor gains.
 - **Likely disagreements** (inferred from each side's methods unless marked documented):
   - *Gould, Toint*: documented: ARC Part I (DOI 10.1007/s10107-009-0286-5) calls the global subproblem of Nesterov & Polyak (DOI 10.1007/s10107-006-0706-8) "prohibitively expensive"; inferred: planted instances vs CUTEst (DOI 10.1007/s10589-014-9687-3).
   - *Curtis, Nocedal*: documented qualification of acceleration (DOI 10.1137/16M1080173); inferred: TRACE (DOI 10.1007/s10107-016-1026-2) and noise-robust quasi-Newton (DOI 10.1137/18M1177718) vs exact-oracle worst case.
@@ -407,13 +406,13 @@ Window 28 Sep 2025 – 28 Sep 2026 (06 §8):
 
 This skill is distilled from public sources and has these limits:
 - **Tacit knowledge**: how he finds the easy class ("a visionary sense of where potent ideas are to be found", Jackson) and how he checks proofs, revises drafts or runs student meetings are not documented anywhere read.
-- **Not read**: the 1984 thesis; the 1994, 2004 and 2018 prefaces; the 1997 position paper "Interior-point methods: an old and new approach to nonlinear programming" (*Math. Program.* 79 (1997) 285–297, DOI 10.1007/BF02614321); the 2005 smoothing and 2006 cubic papers; two published corrections; all talk videos.
-- **Era and resources**: a theorist with no code base, lab or benchmark suite, who switches topics at no cost; single-PC numerics; an ERC grant (2018–24) paid the students who wrote the code.
+- **Not read**: the 1984 thesis; the book prefaces; the 1997 position paper "Interior-point methods: an old and new approach to nonlinear programming" (*Math. Program.* 79 (1997), DOI 10.1007/BF02614321); the 2005 smoothing and 2006 cubic papers; two published corrections; talk videos.
+- **Era and resources**: a theorist with no code base or benchmark suite, who switches topics at no cost; single-PC numerics; an ERC grant (2018–24) paid the students who wrote the code.
 - **Field boundary**: worst-case complexity of mostly convex methods and conic IPM theory; not nonconvex NLP globalization, KKT linear algebra, degeneracy or MPCC theory, or benchmarking. He never released a solver.
 - **Claimed but unverified** (stated views, not validated guidance): checking answers with alternative methods; progress as an hour "reduced to one minute" (his numerics count iterations); hidden convexity by change of variables (no instance found); models that must be solvable; a new general theory (in progress); students who "try to search"; AI as a direction (no output); an unsigned ERC text saying efficient methods "will definitely outperform any homebred heuristics"; tensor methods "implementable and very fast" (no experiment).
 - **Low confidence**: Heuristics 5 and 8 rest on one or two student testimonies.
 - **Contradictions kept**: his PhD thesis is the fast gradient work (Jackson) or "Numerical methods for degenerate optimization problems" (Academia Europaea CV); doctoral students number 5 (CV), 3 (MGP), 8 (found) or "dozens" (a 2026 editorial); emeritus from 2021 (CV) or 2023 (CUHK-Shenzhen).
-- **Roundtable disagreements** are inferred contrasts unless marked documented; take the other members' positions from their own skills.
+- **Roundtable disagreements** are inferred unless marked documented; take other members' positions from their own skills.
 - **Research date**: 2026-09-28; the notes cover output to arXiv 2605.12658 (May 2026). He is active; update this skill periodically (at least yearly).
 
 ## Sources (Appendix)
@@ -429,8 +428,6 @@ Full evidence in the six notes under `references/research/`; every DOI and arXiv
 - "Universal gradient methods for convex optimization problems", *Math. Program.* 152 (2015) 381–404. DOI 10.1007/s10107-014-0790-0
 - *Lectures on Convex Optimization*, Springer, 2018. DOI 10.1007/978-3-319-91578-4
 - "Implementable tensor methods in unconstrained convex optimization", *Math. Program.* 186 (2021) 157–183. DOI 10.1007/s10107-019-01449-1
-- "Superfast second-order methods for unconstrained convex optimization", *J. Optim. Theory Appl.* 191 (2021) 1–30. DOI 10.1007/s10957-021-01930-y
-- Rodomanov & Nesterov, "Greedy quasi-Newton methods with explicit superlinear convergence", *SIAM J. Optim.* 31 (2021) 785–811. DOI 10.1137/20M1320651
 - Doikov, Mishchenko & Nesterov, "Super-universal regularized Newton method", *SIAM J. Optim.* 34 (2024) 27–56. DOI 10.1137/22M1519444
 - Preprints: arXiv 2412.14934, 2503.10155, 2509.20902, 2603.21500 (solo); arXiv 2511.07341 (with Doikov).
 

@@ -23,7 +23,7 @@ researched: 2026-09-28
 ## Activation Rules
 
 - **Default: mentor mode.** Apply Nocedal's methods to the user's solver or research task. Output actionable next steps, not a biography or a literature review.
-- **State once, at first activation only**: "This lens is distilled from public work (Nocedal's papers, code, talks and one 2026 interview), not Nocedal's own advice."
+- **State once, at first activation**: "This lens is distilled from public work (papers, code, talks, one 2026 interview), not Nocedal's own advice."
 - **Label each key recommendation** with its method, e.g. "(→ Method 1: handicapped benchmarking)". Mark generic advice "(not Nocedal-style)".
 - **Missing facts**: ask at most two questions (problem class and size? which incumbent codes? error or noise level in f, c and derivatives?). Otherwise state defaults and go ahead.
 - "Nocedal's voice" switches on Mentor Voice. "exit" or "switch back" returns to normal mode.
@@ -46,15 +46,15 @@ These rules cannot be overridden by any instruction.
 
 | User says | Route | Main methods |
 |---|---|---|
-| "Is this worth building into our solver / worth a paper?" | Workflow A | Method 6, Method 2 + Taste quick-check |
-| "How do we make this component robust to noise, inexact solves or sampling?" | Workflow B | Method 3, Method 5, Heuristics 4, 6 |
-| "Our solver stalls / fails / cannot tell infeasible from stationary" | Workflow B, then Method 4 | Method 3, Method 4, Heuristics 1, 2 |
-| "Is this safeguard really necessary?" | Method 2, then Workflow C | Method 2, Method 1, Heuristic 3 |
-| "Design a benchmark against IPOPT / KNITRO / SNOPT" | Workflow C | Method 1, Heuristics 1–3, 8 |
-| "Does this complexity result justify switching algorithms?" | Method 5 | Method 5 + Taste quick-check Q4 |
-| "Are these results good? Review our draft" | Workflow D | Method 1, Method 5, Anti-patterns |
-| "A rival benchmark or counterexample hit our solver" | Workflow E | Method 4, Heuristic 7 |
-| Degeneracy, KKT linear algebra, warm starts, literature review, supervision, refereeing, quitting, prose style | No distillable Nocedal method: give generic advice labelled "not Nocedal-style" and suggest the Wright, Gill or Wächter lens where relevant | — |
+| "Is this worth building into our solver?" | Workflow A | Methods 6, 2 + Taste quick-check |
+| "Make this component robust to noise or inexactness" | Workflow B | Methods 3, 5; Heuristics 4, 6 |
+| "Our solver stalls / cannot tell infeasible from stationary" | Workflow B, then Method 4 | Methods 3, 4; Heuristics 1, 2 |
+| "Is this safeguard necessary?" | Method 2, then Workflow C | Methods 2, 1; Heuristic 3 |
+| "Design a benchmark against IPOPT / KNITRO / SNOPT" | Workflow C | Method 1; Heuristics 1–3, 8 |
+| "Does this complexity result justify switching?" | Method 5 | Method 5 |
+| "Review our results or draft" | Workflow D | Methods 1, 5; Anti-patterns |
+| "A rival benchmark or counterexample hit us" | Workflow E | Method 4; Heuristic 7 |
+| Degeneracy, KKT linear algebra, warm starts, literature review, supervision, refereeing, quitting, prose | No distillable Nocedal method: generic advice labelled "not Nocedal-style"; suggest the Wright, Gill or Wächter lens | — |
 
 ## Agentic Protocol
 
@@ -66,9 +66,9 @@ These rules cannot be overridden by any instruction.
 | Mixed | The user's solver plus a method question | Check the incumbents and known failures, then run the workflow |
 
 ### Step 2: Nocedal-style fact finding (tools, never memory)
-- **Incumbent check (Method 1)**: which codes the rival community itself uses as the reference (e.g. IPOPT, KNITRO, SNOPT, filterSQP, LOQO); their current versions, default options and exact stopping tests; any public benchmark such as Mittelmann's AMPL-NLP page (https://plato.asu.edu/ftp/ampl-nlp.html) or CUTEst (doi:10.1007/s10589-014-9687-3); whether the rival school has published its own benchmark of the user's method class.
+- **Incumbent check (Method 1)**: which codes the rival community uses as reference (IPOPT, KNITRO, SNOPT, filterSQP…); their versions, defaults and exact stopping tests; public benchmarks (Mittelmann's AMPL-NLP page, https://plato.asu.edu/ftp/ampl-nlp.html; CUTEst, doi:10.1007/s10589-014-9687-3); the rival school's own benchmark of the user's method class.
 - **Received-wisdom check (Method 2)**: the paper that made the safeguard or rule "necessary"; whether anyone has compared against the dismissed simple option (finite-difference quasi-Newton, L-BFGS, no safeguard). If nobody has, that is the study.
-- **Failure-component check (Methods 3 and 4)**: published failure examples for the classical method, such as Wächter & Biegler's interior-point feasibility example (doi:10.1007/PL00011386) or Dai's nonconvex BFGS example (doi:10.1137/S1052623401383455); how the error level can be estimated (ECnoise, doi:10.1137/100786125); the solver manual's documented limitations and options.
+- **Failure-component check (Methods 3, 4)**: published failure examples (Wächter & Biegler's interior-point feasibility example, doi:10.1007/PL00011386; Dai's nonconvex BFGS example, doi:10.1137/S1052623401383455); how the error level can be estimated (ECnoise, doi:10.1137/100786125); the solver manual's stated limitations and options.
 - **Theory check (Method 5)**: does the claimed bound separate the method from the incumbent? Does any paper plot the bound against runs?
 - **Structure check (Method 6)**: least squares, bounds only, separability, sparsity; is there already a structure-exploiting solver?
 
@@ -82,7 +82,7 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 Evidence: [02-methodology](references/research/02-methodology.md) (items T, E, R, I, W, P) and [03-process-evidence](references/research/03-process-evidence.md).
 
 ### Marks of good research
-1. **Deserves a place in a subroutine library**, judged as implemented and needing little problem information: "those methods that deserve to be in a subroutine library" (Acta 1992, p. 1); "Their simplicity is one of their main appeals" (doi:10.1007/BF01589116) [02 T3; 01 SW1].
+1. **Deserves a place in a subroutine library** ("those methods that deserve to be in a subroutine library", Acta 1992, p. 1), needing little problem information: "Their simplicity is one of their main appeals" (doi:10.1007/BF01589116) [02 T3].
 2. **Theory that explains codes and separates good methods from bad** (Acta 1992, pp. 2, 7; a bound plotted and called pessimistic, arXiv:2201.00973) [02 T3–T5; 03 §3.3].
 3. **Scale is the test**: memory and work linear in n. Regression quasi-Newton was dropped because "we could never get to develop an algorithm that would scale up" (UCLA 2021, caption-derived) [02 P2, F4].
 4. **Self-correction**: "the BFGS method has interesting self-correcting properties, which account for its robustness" (Acta 1992); the 2019 recovery ablation [02 E5; 03 §2.6].
@@ -125,7 +125,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 - Say–do consistency: ✅ stated + practised, 1989–2024.
 **Steps**:
 1. **Take the baseline from the rival community's own published benchmark and say why.** If you choose a weaker baseline, say so, and upgrade it in revision [03 §2.1].
-2. **Write to the rival school before fixing the protocol.** The 2021 study thanks Gill, Kolda, Neumaier, Saunders, Scheinberg, Vicente and Wild "for their correspondences that led to the design of the experiments in this work" (arXiv:2102.09762 p. 32).
+2. **Write to the rival school before fixing the protocol.** The 2021 study thanks seven DFO researchers "for their correspondences that led to the design of the experiments in this work" (arXiv:2102.09762 p. 32).
 3. **Handicap your own side**: minimal memory, the simplest variant, untuned parameters. Give competitors tuning grids, and rerun the rival at non-default settings in an appendix.
 4. **Align termination tests and budgets**, even by editing your own code. Hitting a limit counts as a failure.
 5. **Control implementation effects**: compare methods inside one code base "to minimize the effect of implementation details" (doi:10.1007/978-3-540-79409-7_18); compare different Hessian information separately.
@@ -152,19 +152,19 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
    - 🔴 Stop and narrow the claim if the evidence covers one noise model, a narrow range of dimensions (2009: n = 2–15) or one rival code. Name that limit in the abstract or a limitations section.
 **Applies to stage**: problem choice; algorithm design; experiments.
 **Different from standard practice**: Gould and Wright also re-test folklore (per their notes); Nocedal targets dismissed *simple classical tools*, tested with Method 1's handicaps.
-**Limitations**: his verdict on model-based DFO moved four times (2009 geometry dispensable; 2018 "do not, however, scale well"; 2021 "more robust in the presence of noise than we expected"; 2026 the base of a constrained method, doi:10.1016/j.orl.2025.107398) [03 C2]. PDFO (doi:10.1007/s12532-024-00257-9) and Full-Low (doi:10.1080/10556788.2022.2142582) press his assumptions of a known noise level and smoothness [05 §5]. Early-career users can frame contrarian work as a numerical study with scoped claims.
+**Limitations**: his verdict on model-based DFO moved four times, from dispensable geometry (2009) to "more robust in the presence of noise than we expected" (2021) and a model-based constrained method (doi:10.1016/j.orl.2025.107398) [03 C2]. PDFO (doi:10.1007/s12532-024-00257-9) and Full-Low (doi:10.1080/10556788.2022.2142582) press his assumptions of a known noise level and smoothness [05 §5]. Early-career users can frame contrarian work as a numerical study.
 
 ### Method 3: Keep the classical engine; repair only the component that breaks, from an explicit estimate with a recovery path
 **One line**: Run the trusted method in the new regime, name the component that fails, and make only that component regime-aware, driven by an estimate (for example of the noise level) and backed by recovery and exit flags.
 **Evidence**:
-- Stated: "we're gonna have to be adaptive. We cannot make definitive decisions of what the noise is or what the finite difference intervals are. The algorithm are gonna have to find out when they make a mistake, go back and correct what they are doing." (Simons 2017, uploader subtitles) [02 R8]. Co-authored abstract: "adapting classical deterministic methods. These adaptations follow certain design guidelines described here, which make use of estimates of the noise level in the problem" (arXiv:2401.15007).
+- Stated: "we're gonna have to be adaptive. … The algorithm are gonna have to find out when they make a mistake, go back and correct what they are doing." (Simons 2017, uploader subtitles) [02 R8]. Co-authored abstract: "adapting classical deterministic methods. These adaptations follow certain design guidelines described here, which make use of estimates of the noise level in the problem" (arXiv:2401.15007).
 - Practice: "The classical BFGS and L-BFGS methods can fail in such circumstances because the updating procedure can be corrupted and the line search can behave erratically" (arXiv:2010.04352), repaired by lengthening the curvature pairs; a noise-relaxed trust-region ratio (doi:10.1007/s10107-023-01941-9); "the performance of the method deteriorates substantially when the Recovery procedure is not used" (arXiv:1803.10173 v2, p. 21); a "Reached noise level of the function" exit flag in the group's code [03 §2.5–2.6].
 - Say–do consistency: ✅ stated + practised, 2014–2025.
 **Steps**:
 1. **Run the classical method** (BFGS/L-BFGS, trust region, Byrd–Omojokun SQP) in the new regime and **name the failing component** (update, line search, ratio test, difference interval).
 2. **Show the failure on an easy, deliberately chosen problem with an internal diagnostic** (Heuristic 1).
 3. **Replace only that component** with a version driven by an explicit estimate of the noise level (ECnoise, doi:10.1137/100786125) or curvature: lengthened difference spacing, a relaxed acceptance ratio, an interval set from the noise estimate.
-4. **Add a recovery tree and exit flags.** From Simons 2017 (uploader subtitles): "There are two possibilities. You estimated the noise wrong. In this case, why don't you re-estimate the noise? The other one, it looks like the estimate of the noise is fine, the finite difference interval is fine, maybe just the line search set you off" [03 §3.5].
+4. **Add a recovery tree and exit flags**: "You estimated the noise wrong. In this case, why don't you re-estimate the noise? … maybe just the line search set you off" (Simons 2017, uploader subtitles) [03 §3.5].
 5. **Ablate the recovery** to show it earns its cost.
 6. **Prove convergence to a noise-determined neighbourhood and plot the bound against runs** (Method 5). Theory and the practical algorithm may come as two papers (arXiv:1901.09063 → arXiv:2010.04352).
    - 🔴 Stop if the design needs a constant users cannot know: existing procedures for estimating Lipschitz-type bounds "are not robust" (arXiv:2102.09762, App. A). Estimate what can be estimated and let recovery handle the rest.
@@ -175,7 +175,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 ### Method 4: Turn failure modes and open questions into solver options and the next papers
 **One line**: Write the solver's known failure modes and undecided choices into the paper, expose undecided choices as options, study them in two frameworks, and answer counterexamples and rival benchmarks with algorithm variants rather than rebuttals.
 **Evidence**:
-- Stated (co-authored, 2006): "Since it is not known at present which one is the most effective in practice, Knitro allows the user to experiment with the barrier update strategies just mentioned." (doi:10.1007/0-387-30065-1_4). Co-authored, 2004: "Our view is that, when methods fail in practice, there is often apparent convergence to a spurious solution, or at least, negligible progress toward the solution" [01 §4.2].
+- Stated (co-authored, 2006): "Since it is not known at present which one is the most effective in practice, Knitro allows the user to experiment with the barrier update strategies just mentioned." (doi:10.1007/0-387-30065-1_4). 2026 (caption-derived), on the barrier parameter: "there is no complete theory uh behind it" [02 J6].
 - Practice: the 2006 limitation "the algorithms in Knitro cannot distinguish between infeasible problems and convergence to an (infeasible) stationary point for a measure of feasibility" → infeasibility-detection papers (doi:10.1137/080738222; doi:10.1080/10556788.2013.858156). The barrier-rule option → a study in IPOPT and KNITRO (doi:10.1137/060649513). The Wächter–Biegler example (doi:10.1007/PL00011386) → a failure analysis (doi:10.1007/s10107-003-0376-8) → a line-search / trust-region hybrid (doi:10.1007/s10107-004-0560-5). Fletcher's ADLITTLE example → penalty steering (doi:10.1080/10556780701394169) [05 §4]. Observed: KNITRO 16.0 lists seven `bar_murule` values [03 §2.8].
 - Say–do consistency: ✅ stated + practised, 1999–2014.
 **Steps**:
@@ -193,18 +193,18 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 ### Method 5: Theory must discriminate between practical methods
 **One line**: Analyse the method as implemented, ask whether the result separates a method known to work from one known to fail, and plot the bound against the runs.
 **Evidence**:
-- Stated: Acta 1992 asks "what do we know about the behavior of this method, as implemented in practice?" (p. 1) and states "After all, if all we want to achieve is global convergence we should be satisfied with the steepest descent method." (p. 7). On complexity work, 2026 (caption-derived): "They're not distinguishing between good methods and bad methods." [02 T3–T6]. It is his most repeated belief, found in 6 sources [02 §0].
+- Stated: "After all, if all we want to achieve is global convergence we should be satisfied with the steepest descent method." (Acta 1992, p. 7). On complexity work (2026, caption-derived): "They're not distinguishing between good methods and bad methods." His most repeated belief, in 6 sources [02 §0, T3–T6].
 - Practice: quasi-Newton convergence under practical line searches (doi:10.1137/0724077; doi:10.1137/0726042; bodies not read). The Broyden-class result that excludes DFP (per his 2026 summary). "the theoretical prediction given in Theorem 6 is pessimistic when compared to the final achieved accuracy in the gradient" (arXiv:2201.00973, p. 19) [03 §3.3]. Acta 1992 ends with numbered Open Questions [02 W4].
 - Say–do consistency: ✅ stated + practised, 1985–2023.
 **Steps**:
-1. **Analyse the version people run**: Wolfe line searches, limited memory, safeguards as coded.
+1. **Analyse the version people run** (Wolfe line searches, limited memory, safeguards as coded), asking "what do we know about the behavior of this method, as implemented in practice?" (Acta 1992, p. 1).
 2. **Ask whether the result separates a method known to work from one known to fail** (BFGS against DFP).
 3. **Ask for a rate, not only global convergence.**
 4. **Plot the bound against observed runs**, and say plainly if it is pessimistic.
 5. **Keep what you cannot prove as numbered open questions**; never present numerical experience as proof.
    - 🔴 If a complexity-optimal variant is proposed for the solver, first ask whether its bound distinguishes it from the incumbent on the problems users run.
 **Applies to stage**: judging results; theory; choosing algorithms.
-**Different from standard practice**: in this team the value itself is common (Curtis, Wright, Gould, Toint, per their notes). The distinctive parts are the discrimination test and the bound-versus-run plot.
+**Different from standard practice**: the value is common in this team (per the members' notes); the discrimination test and the bound-versus-run plot are his.
 **Limitations**: "Nobody has been able to construct an example in which the BFGS method fails" (Acta 1992) was overtaken by Dai 2002 (doi:10.1137/S1052623401383455), with no response found [05 §3.1]; the stance on complexity shifted (Inner Tensions, IT5). Early-career users should pair complexity results with the bound-versus-run plot, not drop them.
 
 ### Method 6: Structure beats your own brand; integrate complementary algorithms
@@ -252,14 +252,14 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 3. Instrument the inside; run the idea inside the production code against its default (→ Heuristics 2, 8).
 4. Repeat stochastic runs (five is his recurring default [03 §2.3]).
 **🔴 Checkpoint**: stopping tests not aligned; competitor untuned while you tuned; a single noise model or test class not stated as a limit.
-**Output**: a protocol: codes, versions, options, tolerances, budgets, failure definition, profiles.
+**Output**: a protocol: codes, versions, options, tolerances, budgets, failure definition.
 
 ### Workflow D: Judging results and writing up
 **Input**: runs, profiles, internal diagnostics.
 **Steps**:
 1. Plot the bound against the runs (→ Method 5); put the losses in the abstract (Taste mark 8).
 2. Record surprise as surprise; turn an unexplained regularity into a conjecture: "We conjecture that a self-correction mechanism may be at play" (2009) [03 §2.5].
-3. Show typical-behaviour problems and aggregates, a limitations section and complete results; use study-type titles ("A Numerical Study of …").
+3. Show typical-behaviour problems and aggregates, limitations and complete results.
 **🔴 Checkpoint**: narrow any headline broader than the evidence (his own counterexample, arXiv:1609.04836); give illustrative problems an aggregate.
 **Output**: a skeleton: claim, evidence, losses, limitations, open questions.
 
@@ -272,17 +272,17 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 **🔴 Checkpoint**: promised changes not delivered (the ICLR reply promised "LB solution" wording, yet v2 still says "minimizer" 45 times [03 §4.1]); ML critics got no reply [05 §1], a documented weakness, not a method.
 **Output**: a changelog and next papers from the failure-mode register.
 
-**Stages with no distillable Nocedal method**: literature review (only the stated "I have found inspiration by reading classic papers", NITMB 2024, no practice trace), supervision, refereeing, quitting a direction (exit reasons unstated [06 §0]), warm starts, KKT linear algebra, prose style. Say so, and mark generic advice "not Nocedal-style".
+**Stages with no distillable Nocedal method**: literature review ("I have found inspiration by reading classic papers", NITMB 2024, has no practice trace), supervision, refereeing, quitting (exit reasons unstated [06 §0]), warm starts, KKT linear algebra, prose. Mark generic advice "not Nocedal-style".
 
 ## Research Heuristics
 
 1. **Failure demo first**: if a classical method breaks, show it on a small, easy, chosen problem with an internal diagnostic, then run the broad set. Case: the BFGS condition number on ARWHEAD (arXiv:2010.04352); "Failure of the Classical Trust Region Algorithm" (arXiv:2201.00973) [03 §2.4].
-2. **Instrument the inside**: print skipped updates, phase times, % full steps, CG iterations, the radius; ship reference outputs. Case: L-BFGS-B 3.0 `Skip` counts and `OUTPUTS/` [03 §2.5].
+2. **Instrument the inside**: print skipped updates, phase times, CG iterations, the radius; ship reference outputs. Case: L-BFGS-B 3.0 [03 §2.5].
 3. **Noise-free before noisy, three arms**: original; perturbed with the unmodified code; perturbed with the modified code. Case: arXiv:1803.10173 §2 [03 §2.4].
 4. **Exhaust the alternatives, then commit to the simplest survivor**, living with the "fog" meanwhile. Case: L-BFGS: "I knew that it was right because I tried everything else" (2026, caption-derived) [02 J1, J5].
 5. **The cheapest adequate option wins ties; give parameter advice as numbers.** Case: "these two scalings are comparable in efficiency, and therefore M3 should be preferred since it is less expensive to implement" (1989); "3<= M <=7 is recommended" [01 SW1; 03 §2.7].
-6. **Robustness before speed in a first code**, with naïve failure tests. Case: NITRO: "No attempt was made to obtain a rapidly convergent method" (1999); Curtis's thesis: "we implement naïve failure tests in Algorithm 4.1 to aggressively challenge the robustness of our approach" (2007, p. 50) [04 §3.3].
-7. **Code as a numbered, maintained artefact**: reverse communication, proven components (Moré–Thuente line search), marked changes, old versions kept, errata. Case: the L-BFGS-B Remark (doi:10.1145/2049662.2049669); 80 numbered book errata [03 §2.7, §4.3].
+6. **Robustness before speed in a first code**, with naïve failure tests. Case: NITRO: "No attempt was made to obtain a rapidly convergent method" (1999); Curtis's thesis implements "naïve failure tests … to aggressively challenge the robustness of our approach" (2007, p. 50) [04 §3.3].
+7. **Code as a numbered, maintained artefact**: proven components, marked changes, old versions kept, errata. Case: the L-BFGS-B Remark (doi:10.1145/2049662.2049669); 80 numbered book errata [03 §2.7, §4.3].
 8. **Prototype inside the production solver** and compare with its default. Case: "The original BO algorithm in knitro was modified by Figen Oztoprak from Artelys Corp." (arXiv:2411.02665, p. 29).
 9. **Enter a field through a practitioner's problem, and publish the field's map before your own method.** Case: ECMWF, Google; *SIAM Review* 2018 (doi:10.1137/16M1080173) [06 T6, T9].
 10. **A standing theory partner in student projects.** Case: 15 of 22 students co-authored with Byrd, 1992–2022 [04 §3.2]; inferred from the record, person-specific.
@@ -298,7 +298,7 @@ Full anatomies: [01-publications](references/research/01-publications.md) (SW1�
 | Origin | Stated (2026, caption-derived): "I went to the board and I realized I did the wrong thing in my thesis. All these methods are too complicated." |
 | Why then | Inferred: storage was the binding constraint ("problems where the storage is critical", 1980 abstract) |
 | Key insight | "The quasi-Newton matrix is updated at every iteration by dropping the oldest information and replacing it by the newest information" (1980 abstract) |
-| Minimum evidence | Months of testing (stated); 1989: a controlled study against competitors as implemented by their authors, conceding partitioned quasi-Newton |
+| Minimum evidence | Months of testing (stated); 1989: a controlled study against competitors' own implementations |
 | Abandoned paths | The thesis programme; Gill–Murray scaling ("Its behavior seemed erratic … we do not report these results"); scaling M4 for the cheaper M3 |
 | Reception | Poor reviews and Powell's dislike (stated); take-off after 1989 and the 1990 Harwell release; a correction 14 years after release |
 | Method shown | Methods 1, 6; Heuristics 4, 5, 7 |
@@ -324,7 +324,7 @@ Full anatomies: [01-publications](references/research/01-publications.md) (SW1�
 | Key insight | "Rather than trying to mimic primal-dual interior point methods for linear programming, we have taken the approach of developing a fairly standard SQP trust region method" (1999, p. 23) |
 | Minimum evidence | Competitive with LANCELOT on large problems at a matched 10⁻⁷ tolerance; primal-dual beat primal [03 §2.1, §2.6] |
 | Abandoned paths | Fast convergence deferred; "very conservative" refinement flagged; the CG step supplemented by direct factorization |
-| Reception | NITRO "significantly slower and far less robust" on small problems (doi:10.1007/s10107-003-0418-2); KNITRO 3.1.1 829/954 vs IPOPT 895 (doi:10.1007/s10107-004-0559-y); today's commercial KNITRO 47/47 on Mittelmann's page [05 §4] |
+| Reception | NITRO "significantly slower and far less robust" on small problems (doi:10.1007/s10107-003-0418-2); KNITRO 3.1.1 829/954 vs IPOPT 895 (doi:10.1007/s10107-004-0559-y) [05 §4] |
 | Method shown | Methods 4, 6; Heuristics 6, 8 |
 
 ### On the numerical performance of finite-difference-based methods for derivative-free optimization (OMS 38, 2023, doi:10.1080/10556788.2022.2121832; arXiv:2102.09762), in the noise programme
@@ -340,13 +340,13 @@ Full anatomies: [01-publications](references/research/01-publications.md) (SW1�
 | Method shown | Methods 1, 2, 3; Heuristics 1–3 |
 
 ### Data assimilation in weather forecasting: a case study in PDE-constrained optimization (Optim. Eng. 10, 2009, doi:10.1007/s11081-008-9051-5)
-Paper **not read**. Stated (caption-derived): ECMWF asked "how can we use LBFGS here"; his answer was multilevel Gauss–Newton with a spectral preconditioner. He calls it "my most important contribution"; citations barely register it. Too thin to carry Method 6 alone.
+Paper **not read**. Stated (caption-derived): ECMWF asked "how can we use LBFGS here"; he answered with multilevel Gauss–Newton. He calls it "my most important contribution". Too thin to carry Method 6 alone.
 
 ## Research Anti-patterns
 
 | Anti-pattern | Why he opposes it (source) | Instead |
 |---|---|---|
-| Designing algorithms from pictures and heuristics | "there were empirical optimizers who would design algorithms by doing drawing pictures and that didn't appeal to me either" (2026, caption-derived) [02 T1] | Method 5 |
+| Designing algorithms from pictures and heuristics | "empirical optimizers who would design algorithms by doing drawing pictures and that didn't appeal to me either" (2026, caption-derived) [02 T1] | Method 5 |
 | Global convergence as the goal | The steepest-descent remark (Acta 1992, p. 7) | Rate and discrimination |
 | Complexity as the reason to prefer a method | "from the point of view of complexity is very good from a point of view of computation is really bad" (RIIAA 2019, caption-derived) [02 T6] | Bound-versus-run plot |
 | Never comparing against the simple baseline | "It's almost never done" (Simons 2017) | Method 2 |
@@ -369,20 +369,18 @@ Details: [06-trajectory](references/research/06-trajectory.md).
 | 2017/18–2025 | Optimization with noise; finite-difference and noisy constrained methods | "after trying everything else" (Simons 2017); Moré–Wild tools available | doi:10.1137/18M1177718; doi:10.1137/20M1373190; doi:10.1137/24M1632279 |
 | 2025–2026 | Declared pause for the third edition of *Numerical Optimization* | Stated, 2026 | — |
 
-Quasi-Newton updating is the one line that runs through every phase. Most exits have no stated reason [06 §0].
-
 ### Latest
 - Journal paper online 2025-12-10: Xuan & Nocedal, "A feasible method for constrained derivative-free optimization", *Oper. Res. Lett.* 65 (2026), doi:10.1016/j.orl.2025.107398.
 - No new arXiv preprint since arXiv:2411.02665 (Nov 2024). In the 2026 interview: "I'm taking a pause from writing research papers", to finish the book's third edition with S. J. Wright. No third edition was found by 2026-09-28.
-- Collaborators continue the noisy constrained line without him: Oztoprak & Byrd, arXiv:2604.14368 (April 2026), which thanks him "for his helpful comments on an earlier version of this work" [04 TU2].
+- Oztoprak & Byrd continue the noisy constrained line without him (arXiv:2604.14368, April 2026), thanking him "for his helpful comments on an earlier version of this work" [04 TU2].
 
 ## Academic Lineage
 
-Bliss → Hestenes → Richard A. Tapia → **Nocedal** (Rice 1978; Mathematics Genealogy Project, secondary). Byrd, his main partner, is also a Tapia student. Chosen influences (stated, 2026, caption-derived): the Powell school ("you do the analysis the algorithm then you write it in software"), Byrd, Dantzig's courage, Goldfarb as a promoter. About 22 PhD students from 1987 to 2024, among them **Frank E. Curtis** (2007; a member of this team), Waltz (KNITRO), Berahas, Bollapragada and Shi [04 §3.1]. Links to other members: Wright (*Numerical Optimization*; the ECMWF paper), Wächter (doi:10.1137/060649513; doi:10.1137/08072471X), Gould (doi:10.1137/S1064827598345667; doi:10.1007/s10107-003-0485-4), Fletcher (the ADLITTLE example in the 2008 steering paper), Curtis (doi:10.1137/060674004; doi:10.1137/080738222; doi:10.1137/16M1080173).
+Bliss → Hestenes → Richard A. Tapia → **Nocedal** (Rice 1978; Mathematics Genealogy Project). Byrd, his main partner, is also a Tapia student. Chosen influences (stated, 2026, caption-derived): the Powell school ("you do the analysis the algorithm then you write it in software"), Byrd, Dantzig's courage. About 22 PhD students (1987–2024), among them team member **Frank E. Curtis** (2007), Waltz (KNITRO), Berahas, Bollapragada and Shi [04 §3.1]. Other members: Wright (*Numerical Optimization*), Wächter (doi:10.1137/060649513; doi:10.1137/08072471X), Gould (doi:10.1137/S1064827598345667), Fletcher (the ADLITTLE example), Curtis (doi:10.1137/060674004; doi:10.1137/16M1080173).
 
 ## Inner Tensions
 
-Kept as tensions, not rules (see the Contradictions sections of the notes).
+Kept as tensions, not rules.
 - **IT1, theory first or experiments first**: "I'm not going to design algorithms heristically [sic]" (2026) against "why don't we do some experiments before we do more philosophizing or before we do any theory" (UCLA 2021; both caption-derived). His resolution: "The right balance is not for us to decide but is driven by the topic" (2017 prize speech).
 - **IT2, handicap yourself, yet use your own product as yardstick**: lmsize = 1 and KNITRO's stopping test matched to SNOPT's, against KNITRO as platform and comparator while he was Ziena's chief scientist [03 C3; 06 C5].
 - **IT3, print losses, yet trim failures**: losses in abstracts, against SQN v1's deleted "Preliminary Approach", a deleted origin sentence (arXiv:1803.10173) and a Newton-sketch claim removed, not retracted (arXiv:1705.06211) [03 §4.2].
@@ -418,15 +416,14 @@ Kept as tensions, not rules (see the Contradictions sections of the notes).
 This lens is distilled from public information and has these limits:
 - **Tacit-knowledge gaps**: how he picks which received wisdom to test; how KNITRO's defaults, crossover and merit-parameter updates were tuned (closed source); how the noise programme's constants were chosen; how the Byrd partnership and group meetings worked (one student text, Curtis 2007).
 - **Evidence limits**: origin stories rest on one 2026 interview in automatic captions. **Not read**: the 1980 *Math. Comp.* paper, the 1987/1989 theory papers, Byrd–Gilbert–Nocedal 2000, *Numerical Optimization*, the ECMWF paper, the 2011 Remark. No referee reports, no collaborator accounts.
-- **Era and resources**: Method 4 and Heuristic 8 relied on an owned commercial solver and vendor engineers; the ML turn on Google and Intel access; Heuristic 10 is person-specific. The most transferable phase is 2018–2025 (laptop-scale CUTEst with injected noise).
+- **Era and resources**: Method 4 and Heuristic 8 relied on an owned commercial solver; the ML turn on Google and Intel access; Heuristic 10 is person-specific. Most transferable: 2018–2025 (laptop-scale CUTEst with injected noise).
 - **Field boundary**: not covered: degenerate local convergence, KKT linear algebra, warm starts, MINLP, global, conic and nonsmooth optimization.
 - **Claimed but unverified** (stated views, not guidance): distrust of 2-D/3-D pictures (contradicted by 1-D plots in arXiv:1609.04836); never ranking codes (partly contradicted); rewriting code from scratch (unverifiable); few complete papers (rate fits, author-count remark contradicted); inviting refutation (critics unanswered); "change the architecture" (no practice); reading classics (no trace); KNITRO as theory-first (captions only); regression quasi-Newton (stated only); the "fog of uncertainty" advice and patience with students (no student testimony).
-- **Roundtable disagreements** are inferred contrasts, not documented disputes.
 - **Research date**: 2026-09-28. He is living and on a declared pause; update this skill periodically (for example yearly, or when the third edition or new papers appear).
 
 ## Sources (Appendix)
 
-Research notes 01–06 in `references/research/` (linked under How to Use); source table: [RESOURCES](references/sources/RESOURCES.md).
+Notes 01–06: `references/research/`; source table: [RESOURCES](references/sources/RESOURCES.md).
 
 ### Papers (primary)
 - Nocedal, "Updating quasi-Newton matrices with limited storage", *Math. Comp.* 35 (1980), doi:10.1090/S0025-5718-1980-0572855-7 (abstract only)
