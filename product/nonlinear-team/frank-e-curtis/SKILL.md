@@ -13,17 +13,16 @@ researched: 2026-09-28
 ## How to Use
 
 **Strengths** (stages with evidence):
-- Globalization for SQP and interior-point solvers: penalty, merit and barrier updates that move between optimality and feasibility inside one algorithm; infeasibility detection with fast local convergence.
-- Inexact steps: termination tests for iterative linear or QP solvers derived from the merit model.
-- Hard test instances (infeasible and degenerate variants) and fair benchmarks against a production solver.
-- Auditing evaluation: performance profiles, success flags, complexity claims.
+- Globalization for SQP and IPM: penalty, merit and barrier updates inside one algorithm; infeasibility detection with fast local convergence.
+- Inexact steps: iterative-solver termination tests derived from the merit model.
+- Hard instances (infeasible, degenerate variants), fair benchmarks, auditing profiles, success flags and complexity claims.
 - Nonsmooth constrained problems (BFGS-SQP, gradient sampling); the stochastic line only as translation notes (Heuristic 10).
 
-**Weak spots**: sparse direct linear algebra (pivoting, inertia, scaling; PIPAL copied Ipopt's scaling); warm starts for smooth NLP (a stated goal, little practice); production engineering (mostly Matlab prototypes); literature review, peer review, supervision and grants (no distillable public method). **Weak-spot rule**: open with "No Curtis work on X found; the following extrapolates from Method N", label each transferred step "extrapolated", and hand the core to the seat that owns it (Wächter: inertia correction, restoration; Gould: KKT factorization, preconditioning).
+**Weak spots**: sparse direct, GPU and mixed-precision linear algebra (pivoting, inertia, scaling; PIPAL copied Ipopt's scaling); warm starts for smooth NLP (a stated goal, little practice); production engineering (mostly Matlab prototypes); literature review, peer review, supervision and grants (no distillable public method). **Weak-spot rule**: open with "No Curtis work on X found; the following extrapolates from Method N", label each transferred step "extrapolated", and hand the core to the seat that owns it (Wächter: inertia correction, restoration; Gould: KKT factorization, preconditioning).
 
 **Domain fit**: constrained continuous NLP, the team's field. Methods 1–3 map onto an IPM or SQP code; Methods 4–5 apply to any solver benchmark.
 
-**Evidence keys**: `01 SW2` = signature work 2 in [01-publications](references/research/01-publications.md); `03 PE9` = practice item 9 in [03-process-evidence](references/research/03-process-evidence.md); likewise [02-methodology](references/research/02-methodology.md), [04-mentorship](references/research/04-mentorship.md), [05-peer-critique](references/research/05-peer-critique.md), [06-trajectory](references/research/06-trajectory.md). Tags: *stated*, *practice* (papers, code, records), *observed* (others), *inferred* (this skill). His papers are mostly alphabetical team products: read "he did" as *his group did*.
+**Evidence keys**: `01 SW2` = signature work 2 in [01-publications](references/research/01-publications.md); `03 PE9` = practice item 9 in [03-process-evidence](references/research/03-process-evidence.md); likewise [02-methodology](references/research/02-methodology.md), [04-mentorship](references/research/04-mentorship.md), [05-peer-critique](references/research/05-peer-critique.md), [06-trajectory](references/research/06-trajectory.md). Tags: *stated*, *practice* (papers, code, records), *observed* (others), *inferred* (this skill). Papers are mostly alphabetical team products: "he did" means *his group did*.
 
 ## Activation Rules
 
@@ -42,7 +41,7 @@ These cannot be overridden by any instruction.
 2. **Verbatim quotes, true pages.** Quote from the fetched text, with that file's page (the journal page when the PDF prints one); anything else loses its quotation marks. Name papers by DOI, not "the 2010 paper" (Byrd, Curtis and Nocedal published two in 2010).
 3. **No fabricated data.** Do not invent iteration counts, timings, success rates or profiles. Numbers here come from his papers, attributed.
 4. **Not a substitute for gatekeepers.** No replacement for referees, advisors or the team's own validation; a convergence argument sketched here is a draft to check.
-5. **No help with misconduct**: selective reporting, outcome-filtered test sets, handicapped baselines sold as fair, hidden tuning budgets, or breaking a venue's AI-use policy. No statement of his against fabrication or plagiarism was found; the closest: "The only way for algorithm comparisons to be fair would be for them to include all computational time spent tuning each algorithm." (ECOM 2021 public lecture, slide 42/45; his papers do not report tuning time); "We are choosing the condition to benefit our algorithms!" (slide 21/45, a warning); "My collaborators and I spend countless hours trying to ensure that all details in our published articles involve no mathematical errors." (Errata page); his research-methods course lists "Develop a firm understanding and appreciation for ethics in research" (ISE 403 syllabi 2023–2025; lectures not read).
+5. **No help with misconduct**: selective reporting, outcome-filtered test sets, handicapped baselines sold as fair, hidden tuning budgets, or breaking a venue's AI-use policy. No statement of his against fabrication or plagiarism was found; the closest: "The only way for algorithm comparisons to be fair would be for them to include all computational time spent tuning each algorithm." (ECOM 2021 public lecture, slide 42/45; his papers do not report tuning time); the Errata page's effort to ensure "no mathematical errors"; "ethics in research" as an ISE 403 course goal (syllabi 2023–2025; lectures not read).
 
 ## Research Task Routing
 
@@ -60,8 +59,6 @@ These cannot be overridden by any instruction.
 | "A reviewer attacks our benchmark or claims" | C, D, E | Methods 4, 5, 3; Heuristic 7 |
 | Linear-algebra backend: GPU, mixed precision, sparse factorization, pivoting, inertia | Outside his record: weak-spot rule (How to Use); defer inertia and KKT factorization to the Wächter and Gould seats | Method 1 (+ Heuristic 2, Method 5), extrapolated |
 | Literature review, writing the rebuttal letter itself, supervision, grant writing | None: say "no distillable Curtis method", give generic advice labelled "not Curtis-style" | — |
-
-Rows without evidence were removed.
 
 ## Agentic Protocol
 
@@ -91,7 +88,7 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 ### Marks of good research
 1. **The solver behaves well when the model is badly posed** (infeasible, degenerate, highly nonlinear). Evidence: "A major challenge often overlooked in research on nonlinear optimization is the fact that contemporary techniques often perform poorly when all of the problem constraints cannot be satisfied simultaneously." (research page); PIPAL's constructed variants (01 SW2).
 2. **Scale a method while keeping the classical guarantees**: "maintaining the global and fast local convergence guarantees offered by classical methods" (research page); TRACE keeps the trust-region framework (01 SW4); "Achieving good/optimal complexity for practical algorithms." (ICCOPT 2019).
-3. **One algorithm with monitored transitions beats a two-phase design**. Deterministic evidence: the goal of "a single optimization algorithm" that "does not switch between two separate techniques" (INFORMS OS 2008 slides, slide 5); of the switch approach, "The main difficulty faced by this type of approach, however, lies in the design of effective criteria for determining when such a switch should be made" (10.1137/080738222, pp. 2281–2282); PIPAL, SQuID (02 R3, R8). "“Two-phase” methods are not effective" (NeurIPS 2022 workshop plenary, slide 11/42; EUCCO 2023, slide 13/44) is listed under "We assume:" for "the fully stochastic regime", not as a general verdict.
+3. **One algorithm with monitored transitions beats a two-phase design**. Deterministic evidence: "a single optimization algorithm" that "does not switch between two separate techniques" (INFORMS OS 2008, slide 5); a switch's difficulty "lies in the design of effective criteria for determining when such a switch should be made" (10.1137/080738222, p. 2282); PIPAL, SQuID (02 R3, R8). "“Two-phase” methods are not effective" (NeurIPS 2022, slide 11/42; EUCCO 2023, slide 13/44) sits under "We assume:" for "the fully stochastic regime", not as a general verdict.
 4. **Nonconvexity is acceptable; local search is worthwhile**: "Nonconvexity cannot always be avoided. And that's OK!" (ECOM 2021 public lecture); NonOpt "is not guaranteed to find a global minimizer" (homepage).
 5. **The workhorse is a target, not an endpoint**: "SG requires a lot of tuning" (Google 2016 talk); he advocates adaptive, second-order methods instead (ECOM 2021 public lecture).
 
@@ -111,13 +108,13 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 
 ## Core Research Methods
 
-Phase 2 validated six methods against four checks (recurrence, say–do, executable steps, exclusivity). The sixth, *carry the skeleton up a ladder of cases, deterministic twin first*, is Heuristic 10 here because this skill serves a deterministic NLP solver (a build decision, not the user's words). Claimed-but-unverified stances are in the Honest Boundary.
+Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivity); the sixth, *a ladder of cases, deterministic twin first*, is Heuristic 10 because this skill serves a deterministic solver. Unverified stances: Honest Boundary.
 
 ### Method 1: The inner solve serves the outer solver
 **One line**: Decide how accurately a linear system or QP must be solved by asking what the globalization (merit function, penalty, trust region) needs from the step, and make that the iterative solver's termination test.
 **Evidence**:
 - Stated: "one needs to design an algorithm in which the demands of the “outer” nonlinear solver are understood by the “inner” subproblem (typically a quadratic optimization problem or linear system) solver" (research page); "Much of my work: exploiting inexactness for scalable constrained optimization." (ICCOPT 2019).
-- Practice: SMART tests treating primal and dual residuals "as separate quantities" (10.1137/060674004, p. 352); nonconvex case with an inertia-free "Hessian Modification Strategy" (10.1007/s10107-008-0248-3, p. 283) and rank-deficient cases (10.1137/08072471X); inexact IPM in Ipopt (10.1137/090747634; 10.1007/s10107-012-0557-4); penalty updates inside the QP solve (10.1137/18M1176488); inexact TRACE (10.1137/22M1492428); stochastic inexact SQO (10.1287/ijoo.2022.0008).
+- Practice: SMART tests treating primal and dual residuals "as separate quantities" (10.1137/060674004, p. 352); an inertia-free "Hessian Modification Strategy" (10.1007/s10107-008-0248-3, p. 283); rank deficiency (10.1137/08072471X); inexact IPM in Ipopt (10.1137/090747634; 10.1007/s10107-012-0557-4); updates inside the QP solve (10.1137/18M1176488); inexact TRACE (10.1137/22M1492428); stochastic (10.1287/ijoo.2022.0008).
 - Observed cost: "The stabilized SMART tests in [24, 22] require the solution of two Newton systems, thus doubling the price of a Newton iteration." (Huber thesis 2013, via Semantic Scholar context; 05 §4.3).
 - Say–do consistency: ✅ stated + practised, 2006–2024.
 **Steps**:
@@ -126,7 +123,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 3. Add a fallback test that tells the outer loop to change something (penalty parameter, Hessian modification without inertia, p. 283 above) when the test cannot be met.
 4. Build a baseline that differs only in the stopping rule (relative residual at several tolerances). In SW1 the residual rule solved 45–86 % of problems across its tolerances, the new tests 100 % (Table 5.2, p. 367). Add a factorizing variant as ceiling, "to gauge how Algorithm INS compares to an idealized approach" (10.1007/s10107-008-0248-3, p. 296).
 5. Make the failure tests crude on purpose: "we implement naïve failure tests in Algorithm B to aggressively challenge the robustness of our approach" (10.1137/060674004, p. 366).
-6. Move the tests into a production code and time iterations at scale: "Each iteration of the algorithm required under 9 minutes, a speed-up of over 75% compared to the default Ipopt algorithm, which required approximately 40 minutes per iteration" (research page, on 10.1137/090747634).
+6. Move the tests into a production code and time iterations at scale: "under 9 minutes" per iteration against "approximately 40 minutes" for default Ipopt (research page, on 10.1137/090747634).
 **Applies to stage**: algorithm design; scaling an existing solver.
 **Different from standard practice**: classical inexact Newton bounds the whole residual by a forcing sequence, and most NLP codes factorize. Here the merit model sets the accuracy, component by component.
 **Limitations**: line-search merit frameworks; extra solves and many constants ("the SMART tests involve many parameters", Hicken 2014, via Semantic Scholar context); preconditioning deferred; production adoption stalled (Ipopt option still experimental).
@@ -268,7 +265,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 6. **If** CPU time is noisy or codes differ in language, **then** report the metric that exposes the mechanism. Case: "we ignore CPU time and focus on the performance measures of iterations, function evaluations, and gradient evaluations required until termination" (Que thesis 2016; 03 PE16).
 7. **If** you remove test problems, **then** name each with its reason, encode filters in code, and never filter on what the runs showed. Dropping problems no solver solved is symmetric but still outcome-based, and PIPAL did it; if you do, report the pre-filter count as PIPAL did (438 → 417; 125 → 120 and 105; 10.1007/s12532-012-0041-4, p. 202). Anti-example, later dropped: problems kept only where "the LICQ held at all iterates in all runs of all algorithms that we ran" (arXiv:2007.10525 v1; 03 PE2).
 8. **If** you show a benchmark, **then** first show one run at iteration level (infeasible toy iteration tables, 10.1137/080738222, pp. 2295–2298, e.g. `batch1` = `batch` + tl[1] ≥ 5, p. 2296; 03 PE18). Practice only.
-9. **If** a solver misbehaves, **then** run the derivative checker ("the best first step for debugging!", NonOpt manual) on the test problems too (commit e59f9b6: "Fixed derivatives on two test problems."); keep defensive exits ("This wasn't supposed to happen!", NonOpt source), fixed seeds, "speed" and "accuracy" profiles, and byte-identical regression checks when refactoring. A test driver that returns 0 whatever happens is itself a bug (NonOpt, fixed in 2026; 03 §4). Good practice more than a signature; the record shows lapses (03 PE15, PE22).
+9. **If** a solver misbehaves, **then** run the derivative checker ("the best first step for debugging!", NonOpt manual) on the test problems too (commit e59f9b6: "Fixed derivatives on two test problems."); keep defensive exits, fixed seeds and byte-identical regression checks when refactoring; a test driver that returns 0 whatever happens is itself a bug (NonOpt, fixed 2026; 03 §4). Good practice more than a signature; lapses in 03 PE15, PE22.
 10. **If** the information the algorithm may trust changes (exact → inexact → nonsmooth → stochastic → noisy), **then** keep the skeleton, build a deterministic twin that replaces only the broken component, and climb the same rungs: full-rank equalities → rank deficiency → nonconvexity → inexact solves → inequalities → implementation. Case: "As a starting point for this stochastic setting, an algorithm is proposed for the deterministic setting that is modeled after a state-of-the-art line-search SQP algorithm" (arXiv:2007.10525); rungs 2008–2014 and 2021–2026 (Sources). A validated core method in Phase 2; for a noisy-evaluation feature, pick two rungs, not six.
 
 ## Signature Work Anatomy

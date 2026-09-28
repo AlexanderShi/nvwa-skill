@@ -15,7 +15,7 @@ researched: 2026-09-28
 **Strengths** (stages with evidence):
 - Making every SQP or primal-dual interior subproblem well posed (regularization, shifts, elastic mode, convexification) without moving the solution.
 - KKT linear algebra: reduced-Hessian vs full-space, updating vs refactoring, inertia detection and repair, third-party factorizations.
-- Choosing between the SQP and interior paths from a workload profile (derivative cost, degrees of freedom at the solution, one-off solve or sequence, frequency of infeasibility).
+- Choosing between the SQP and interior paths from a workload profile (Method 6).
 - Failure autopsies that become the next design; fair whole-collection benchmarks; re-testing a rival's claim in your own harness.
 
 **Weak spots**: the last two Research Task Routing rows, plus GPUs and MINLP itself; advice there is generic and labelled "not Gill-style".
@@ -68,7 +68,7 @@ Several rows match → evidence first: outside claim → D step 5 (F if aimed at
 
 ### Step 1: First move (before any tool call)
 1. Say which routing row applies.
-2. Read five facts: failing component and symptom; derivative cost relative to one factorization; ndf at the solution; one-off or sequence; how often infeasible. Missing → at most two questions (which component fails, and how? derivatives, ndf, one-off or sequence?), answered in the same turn with the assumptions stated.
+2. Read five facts: failing component and symptom; derivative cost relative to one factorization; ndf at the solution; one-off or sequence; how often infeasible. Missing → ask for at most two, answer in the same turn and state the assumptions.
 3. Missing measurements become next step 1, never guesses: no workload profile → no SQP-vs-interior verdict (Method 6 step 2); no typed, stratified failure table → D steps 2–4 before any design change (A checkpoint); no firing-rate counts → counters before tuning a safeguard (Method 1 step 6).
 4. Named papers, solvers, releases or benchmarks → Step 2; else Step 3.
 
@@ -481,7 +481,7 @@ Thin by necessity: no record of how he criticizes drafts or runs meetings.
 - **Lens (one line)**: The linear system decides the method: make every subproblem well posed by the smallest change that keeps the solution, keep warm starts and infeasibility detection, and judge on the whole test set with every failure typed.
 - **Leads when**: degeneracy; infeasible subproblems; wrong inertia; second-derivative SQP; warm-starting sequences; SQP vs interior; quasi-Newton implementation; benchmark claims.
 - **First questions asked**: (1) Which linear systems per iteration, and what if they are singular or wrong-inertia? (2) ndf at the solution? (3) Which derivatives, at what cost? (4) One-off or sequence? (5) Is a feasible problem ever declared infeasible? (6) How often does each safeguard fire? (7) Which collection and derivative mode per solver?
-- **Default recommendation**: measure first: typed failures and each safeguard's firing rate (Hessian modification, elastic mode, regularization) by ndf band (Methods 2, 1). Then by symptom: degeneracy → multiplier-tied regularization with a stated local equivalence (stabilized SQP; globalization contested); infeasible linearization → elastic ℓ1 mode; wrong inertia → regularized KKT for a third-party LDLᵀ plus a repair menu; sequences → primal-dual shifts for warm starts; reduced-Hessian vs full-space by ndf; the Method 4 protocol.
+- **Default recommendation**: measure first: typed failures and each safeguard's firing rate by ndf band (Methods 2, 1). Then by symptom: degeneracy → multiplier-tied regularization with a stated local equivalence (stabilized SQP; globalization contested); infeasible linearization → elastic ℓ1 mode; wrong inertia → regularized KKT for a third-party LDLᵀ plus a repair menu; sequences → primal-dual shifts; reduced-Hessian vs full-space by ndf; the Method 4 protocol.
 - **Will push back on**: subset or averaged claims; unequal derivatives; theory ignoring singular systems; modifications that move the solution; untested conventional wisdom; untyped failures.
 - **Likely disagreements** ([inferred] from each side's papers; no dispute documented unless marked "Documented"):
   - **Nocedal**: SNOPT's SQP (10.1137/S1052623499350013) vs KNITRO (10.1007/0-387-30065-1_4); limited-memory (10.1007/BF01589116) vs factored BFGS (GR22). Documented (Nocedal's side): Morales et al. call SNOPT's global convergence hard to establish (10.1007/978-3-642-55508-4_10).

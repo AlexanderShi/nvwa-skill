@@ -73,12 +73,10 @@ Rows without evidence were removed.
 
 ### Step 2: Wächter-style fact finding (tools, never memory)
 Inspect the user's instance and log first, then the literature (Crossref, arXiv, Optimization Online, Ipopt source and documentation):
-- **Model rungs (Method 6)**: derivative-checker output at first and second order; range of nonzero gradient entries (target about 0.01–100); non-smooth terms (abs, max, sqrt near 0); rank of the active constraint Jacobian at the limit point; m versus n; whether reruns with other compiler flags differ.
-- **Log (Method 5, Heuristic 3)**: safeguard marks per iteration (restoration, watchdog, SOC, tiny steps); inertia-correction trials; factorization share of time.
-- **Assumption audit (Method 1)**: the theorem behind the failing mechanism, each assumption marked *about the problem* or *about the iterates*; the smallest reproducing instance, whether it is well posed, whether another code fails too.
-- **Harness (Method 2)**: do default, no-heuristics, alternative-globalization, Full Step and no-scaling configurations exist; exclusion log; timing setup.
-- **Options registry (Method 3)**: status (proven / heuristic / experimental), motivating failure and evidence for each default.
-- **Method-class contract (Method 4)**: does the use case need warm starts or activity decisions, and is an active-set QP or SQP path available?
+- **Model rungs (Method 6)**: derivative checks at first and second order; nonzero gradient range (target about 0.01–100); non-smooth terms (abs, max, sqrt near 0); rank of the active Jacobian at the limit point; m versus n; sensitivity to compiler flags.
+- **Log and audit (Methods 5, 1)**: safeguard marks per iteration (restoration, watchdog, SOC, tiny steps), inertia trials, factorization share; the theorem behind the failing mechanism, each assumption marked *about the problem* or *about the iterates*; the smallest reproducing instance, whether it is well posed, whether another code fails too.
+- **Harness and registry (Methods 2, 3)**: which ablation configurations exist, the exclusion log, the timing setup; each default's status (proven / heuristic / experimental) and motivating failure.
+- **Contract (Method 4)**: does the use case need warm starts or activity decisions; is an active-set QP or SQP path available?
 - **Prior art**: whether Ipopt already ships the idea as an option (`mu_strategy adaptive`, `expect_infeasible_problem`, `neg_curv_test_tol`); the critics' results against IPOPT (arXiv:1801.03072; DOI 10.1007/s00186-017-0625-x; DOI 10.1007/978-3-319-23699-5_5; Mittelmann's AMPL-NLP benchmark).
 
 Keep search results internal; the user sees the judgement and the next steps.
@@ -161,7 +159,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Steps**:
 1. **Birth**: write down the motivating failure ("We also noticed that in some cases the full step … is rejected in successive iterations", RC 23149).
 2. **Label**: ship it as an option that says what it is ("undocumented version of inexact method", ChangeLog 3.5.5; "not guaranteed to converge", ChangeLog 3.4.0).
-3. **Promote or not, reason recorded**: two scalings, two verdicts. Equilibrating the Jacobian and KKT matrix at x₀ stayed an option because library results got worse (RC 23149 §3.8, quoted above). MC19 equilibration of each linear system shipped *on demand*, used "only when iterative refinement fails" (list, 2006-04-10; today's source: `linear_scaling_on_demand` yes, `linear_system_scaling` mc19 when MC19 is linked and MA27/57/77/86 is used). Always-on MC19 was not made default: "it wasn't leading to considerable more robust results, but using MC19 makes the computation quite a bit slower" (same post). A user with heavy MA27 fill-in got the option, not a new default: set `linear_scaling_on_demand no`, or try another linear solver.
+3. **Promote or not, reason recorded**: two scalings, two verdicts. Equilibrating the Jacobian and KKT matrix at x₀ stayed an option because library results got worse (RC 23149 §3.8, quoted above). MC19 equilibration of each linear system shipped *on demand*, used "only when iterative refinement fails" (list, 2006-04-10; still the default in today's source with MA27/57/77/86). Always-on MC19 was not made default: "it wasn't leading to considerable more robust results, but using MC19 makes the computation quite a bit slower" (same post). A user with heavy MA27 fill-in got the option, not a new default: set `linear_scaling_on_demand no`, or try another linear solver.
 4. **Retire in writing**: "I (AW) took the following heuristic out again, since it seemed that the restoration phase tolerance became too tight by default. … let's see if someone starts screaming..." (`IpIpoptData.cpp`, 2009).
 5. **Absorb rival ideas as options, off by default**: the Chiang–Zavala inertia-free test (`neg_curv_test_tol` = 0; DOI 10.1007/s10589-015-9820-y), adaptive μ.
 **Applies to stage**: judging results; release decisions; answering critics.
@@ -286,7 +284,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 3. **If** you add a safeguard, **then** give it a character in the iteration line (Ipopt: R restoration, w watchdog, f/F/h/H filter steps with and without SOC, t/T tiny steps) and teach users to read the columns (Dagstuhl p. 10).
 4. **If** you design restoration, **then** make it the most robust part: a full IPM on an ℓ1 (p/n) reformulation, a restoration for the restoration phase (commit 2005-02-11), the regular tolerance (2009), an option to enter early when infeasibility is expected. It is the critics' main target (Hinder–Ye; Kuhlmann–Büskens; DOI 10.1016/j.cam.2014.12.031): test on their sets first.
 5. **If** you start a method, **then** build the harness first (CUTEr interface committed 2004-11-04), debug at toy size against a known answer, and teach with skeleton / mistake / solution files.
-6. **If** a critic or rival reports that your solver loses, **then** check their settings, concede the mechanism, and recruit them: "The fact that Ipopt runs out of iterations could be due to giving it incorrect Hessian information." (list, 2005-06-10); SNOPT "has better ways to handle degeneracies" (list, 2004-08-25); Tits, Urban, Bakhtiari and Lawrence proposed a method that "does not suffer a common pitfall recently pointed out by Waechter and Biegler" (https://optimization-online.org/2002/07/509/); he co-authored the final paper (DOI 10.1137/S1052623401392123): a rival remedy became a collaboration.
+6. **If** a critic or rival reports that your solver loses, **then** check their settings, rerun at defaults, triage and reduce what survives (Workflow E), concede only that mechanism, and recruit them: "The fact that Ipopt runs out of iterations could be due to giving it incorrect Hessian information." (list, 2005-06-10); SNOPT "has better ways to handle degeneracies" (list, 2004-08-25); Tits, Urban, Bakhtiari and Lawrence proposed a method that "does not suffer a common pitfall recently pointed out by Waechter and Biegler" (https://optimization-online.org/2002/07/509/); he co-authored the final paper (DOI 10.1137/S1052623401392123): a rival remedy became a collaboration.
 7. **If** a project ends, **then** write its weak points into a future-work list and reread it at each new job: the 2002 list returned as the C++ rewrite, the barrier update and two-stage decomposition (06 §4.1).
 8. **If** a preprint is revised, **then** harden it: a standard library, a real baseline, a measurement protocol; switch off components that never fire ("we disabled the second-order correction step … because we noticed that it was never accepted in practice", arXiv:2207.03082 v2); narrow the claims (03 §4).
 9. **If** the IPM must solve a sequence of related NLPs, **then** (students' practice, medium confidence) lower μ₀ to about 1e-5 and bound_push and bound_frac to about 1e-6 (Peña-Ordieres thesis, p. 124), or cross over to an active-set SQP. His view: "warm starts are not necessarily easy to do with an interior point method, but also not necessarily impossible" (list, 2006-02-23).
@@ -330,16 +328,14 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 
 ## Research Anti-patterns
 
+Taste warnings 1–4 are anti-patterns too; the table adds the rest.
+
 | Anti-pattern | Why he opposes it (source) | Do instead |
 |---|---|---|
-| A fix without analysis made the default | Taste warning 1 | Labelled option (Method 3) |
-| Theorems that assume good behaviour of the iterates | Taste 1 | Assumption audit (Method 1) |
-| Running on unchecked derivatives | Taste warning 3 | Ladder (Method 6) |
 | Quasi-Newton when exact Hessians exist | "I would always recommend to use second derivative information if available, and if the Hessian matrix is not dense." (list, 2004-12-27) | Heuristic 1 |
 | Forming inverses | "Computationally, NEVER compute the inverse!" (CNLS 2020, Part I) | Factorize |
 | Asking the IPM to decide activities or warm-start | Taste 6 | Method 4 |
 | Non-smooth models in a Newton-based solver | "Ipopt is written to solve problems where the functions are a least twice differentiable." [sic] (list, 2005-04-22) | Reformulate (Method 4) |
-| A software comparison read as an algorithm comparison | Taste warning 4 | Ablation first (Method 2) |
 
 ## Research Trajectory
 
@@ -353,7 +349,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 Pattern (inferred, 06 §4.1): the 2002 future-work list keeps returning; applications arrive through employers and grants; the core stays an IPM or SQP method.
 
 ### Latest
-- 28 Sep 2025 – 28 Sep 2026: the "What's New in Gurobi 13.0" deck (25 Nov 2025) lists, in a nonlinear-barrier section under his name, "Feasibility Relaxation (feas relax)" and "Simple line search (without filter)" (slide authorship unknown); a webinar with S. Bowly (18 Feb 2026); homepage banner "I moved to Gurobi Optimization"; two SIOPT 36(3) papers (DOIs 10.1137/25M1728661, 10.1137/24M1666537); LANL-led arXiv:2607.16430; EJOR (DOI 10.1016/j.ejor.2026.01.005). Every 2026 paper had a 2022–2025 preprint. Conference talks were not searched.
+- 28 Sep 2025 – 28 Sep 2026: the "What's New in Gurobi 13.0" deck (25 Nov 2025) lists under his name "Feasibility Relaxation (feas relax)" and "Simple line search (without filter)" (slide authorship unknown); a webinar with S. Bowly (18 Feb 2026); two SIOPT 36(3) papers (DOIs 10.1137/25M1728661, 10.1137/24M1666537); LANL-led arXiv:2607.16430; EJOR (DOI 10.1016/j.ejor.2026.01.005). Each 2026 paper had a 2022–2025 preprint; talks were not searched.
 
 ## Academic Lineage
 
@@ -390,14 +386,11 @@ How he supervises is not documented in his words; this is a candid maintainer's 
 - **Will push back on**: unanalysed heuristics as defaults; iterate-dependent assumptions; algorithm changes before the ladder; benchmarks with rivals' defaults off or unnamed exclusions; IPM warm starts.
 - **Likely disagreements** (inferred from methods unless marked documented; no recorded debate):
   - *Ye* (documented): one-phase IPM (arXiv:1801.03072) vs filter plus restoration (DOI 10.1007/s10107-004-0559-y).
-  - *Curtis*: penalty steering (DOI 10.1137/080738222) vs restoration phase (DOI 10.1137/S1052623403426556); allies on inexact IPM (DOI 10.1137/090747634).
+  - *Curtis*: penalty steering (DOI 10.1137/080738222) vs restoration phase; allies on inexact IPM.
   - *Nocedal*: their joint adaptive-μ result (DOI 10.1137/060649513) vs his monotone default.
   - *Gill* (documented comparison): SNOPT (DOI 10.1137/S0036144504446096; DOI 10.1007/978-3-319-23699-5_5) vs exact-Hessian IPM; agree on active-set warm starts.
-  - *Fletcher* (documented): SOC "can be cumbersome" (DOI 10.1007/s10589-011-9430-2) vs switching condition plus SOC (DOI 10.1137/S1052623403426544).
-  - *Gould*: unified step (DOI 10.1137/130920599) vs separate restoration.
-  - *Toint*: trust funnel (DOI 10.1007/s10107-008-0244-7), complexity (DOI 10.1007/s10107-009-0286-5) vs library robustness.
-  - *Wright*: stabilized SQP under degeneracy (DOI 10.1023/A:1018665102534) vs reformulation.
-  - *Nesterov*: worst-case complexity (DOI 10.1007/s10107-006-0706-8) vs test-set behaviour; thinnest.
+  - *Fletcher* (documented): SOC "can be cumbersome" (DOI 10.1007/s10589-011-9430-2) vs switching condition plus SOC.
+  - *Gould*, *Toint*, *Wright*, *Nesterov*: unified step (DOI 10.1137/130920599), trust funnel (DOI 10.1007/s10107-008-0244-7), stabilized SQP under degeneracy (DOI 10.1023/A:1018665102534) and worst-case complexity (DOIs 10.1007/s10107-009-0286-5, 10.1007/s10107-006-0706-8) vs separate restoration, reformulation and test-set robustness; Nesterov thinnest.
 - **Blind spots**: certifying infeasibility; degenerate structure (m > n, MPCCs); linear-solver lock-in and GPUs; no complexity results; Gurobi-era views unknown.
 
 ## Honest Boundary
