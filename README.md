@@ -53,6 +53,7 @@
 |-------|------|
 | [`product/刘亦菲`](product/刘亦菲) | 刘亦菲思维视角：7 个核心心智模型、12 条决策启发式、完整表达 DNA + 13 份调研底稿 |
 | [`product/dfo-team`](product/dfo-team) | 无导数优化（DFO）研究顾问团：Powell / Conn / Scheinberg / Vicente / Audet 五个研究Skill + `dfo-roundtable` 圆桌（遇到问题时召集五人讨论并给出方案）。每人一个资源文件夹，见 [product/dfo-team/README.md](product/dfo-team/README.md)。五个研究Skill已按各自 Google Scholar 发表列表做过全文深读（有开放全文的逐篇精读或选读：356篇全文、59篇部分；本人每篇研究作品至少一张卡片，连同书的开放部分共795张；摘录逐字核对），见 [DEEP-READING.md](product/dfo-team/DEEP-READING.md) |
+| [`product/nonlinear-team`](product/nonlinear-team) | 非线性优化（NLP 求解器）研究顾问团：Curtis / Nocedal / Wright / Ye / Wächter / Gill / Toint / Gould / Fletcher / Nesterov 十个研究Skill + `nonlinear-roundtable` 圆桌（按问题信号排座：2 位主讲 + 1 位挑战者，6 条有据可查的分歧），面向内点法 / SQP 求解器的改进：全局化、线性代数、不可行与退化问题、热启动、基准测试。轻量档（基于公开来源调研，未做全文深读），见 [product/nonlinear-team/README.md](product/nonlinear-team/README.md) |
 
 ### 怎么用
 
