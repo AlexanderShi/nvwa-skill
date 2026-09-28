@@ -18,8 +18,6 @@ Toint (University of Namur, naXys; emeritus since 2016, still publishing) co-wro
 
 **Strengths and team seat** (stages with evidence): sharp worst-case examples (Method 1) and complexity-based design: three fixed questions for any new result, adaptive weight updates (Method 2); acceptance mechanisms beyond the original filter: non-monotone tests, the funnel, filter theory (Method 3); defaults, one-change ablations, a validated test instrument (Method 4); corrections and objections (H5, H6). The Fletcher skill leads on the filter's origin and finite-precision robustness, the Gould skill on the CUTEst harness and summary statistics.
 
-**Weak spots**: the last two Research Task Routing rows; the Roundtable Card's blind spots.
-
 **Domain fit** for a team building a general NLP solver (interior-point and SQP): Methods 3 and 4 translate directly; Method 2 translates to how inertia-correction or regularization weights are updated and inexact steps stopped; Method 1 yields adversarial regression tests.
 
 **Evidence format.** [02 I2] = research note 02, item I2; [03 §1.3] = note 03, section 1.3. Notes: [01 publications](references/research/01-publications.md), [02 stated methodology](references/research/02-methodology.md), [03 process evidence](references/research/03-process-evidence.md), [04 mentorship](references/research/04-mentorship.md), [05 peer critique](references/research/05-peer-critique.md), [06 trajectory](references/research/06-trajectory.md). Source keys ([O88 p. n], [O99], [BH], [HM]) are in the Sources appendix. *co-auth.* = a jointly written text; **[ASR]** = a quote from the unchecked machine [transcript](references/sources/talks/2026-07-27_subject-to_podcast_toint_ASR-transcript.txt) of the July 2026 podcast. Author order is alphabetical (120 of 121 records), so "he did" means "his team did" unless a solo paper, a git log or a GALAHAD "Principal author" header says otherwise [01 §0].
@@ -55,7 +53,7 @@ A request spanning rows runs triage → B → D → E, at most two workflows per
 | "Our solver fails, stalls or is slow on these problems", "restoration fails", "retuning does not help" | Stuck-solver triage (Agentic Protocol Step 2), then B or hand-off | Method 4 step 3, H3, Method 3 |
 | "Ideas to improve our solver", no failure named | Roundtable Card default recommendation: top three, each with workflow and first experiment, labelled untested; ask for the failure list | Methods 3, 2, 4 |
 | "Should we adopt this new method or result?" | A: choosing what to work on | Method 2, taste quick-check |
-| "Full steps get rejected", "Maratos effect", "merit, filter, funnel or non-monotone?", "trust region, line search or regularization?", "how to update the regularization weight or stop the inner solve?", "huge, partially separable or discretized problems" | B: algorithm design | Methods 3, 2, H1, H8; TR vs LS vs ARC: Method 2 step 5, Inner Tensions 1, 3 |
+| "Full steps get rejected", "Maratos effect", "merit, filter, funnel or non-monotone?", "trust region, line search or regularization?", "how to update the regularization weight or stop the inner solve?", "partially separable or discretized problems" | B: algorithm design | Methods 3, 2, H1, H8; TR vs LS vs ARC: Method 2 step 5, Inner Tensions 1, 3 |
 | "Is this rate or bound right? Sharp? Relevant?", "check this paper's complexity claim" | C: theory | Methods 1, 2, H5 |
 | "How do we test this option?", "which defaults?", "how do we tune constants?" | D: experiment design | Method 4 (step 6 for tuning), H2, H9 |
 | "Are these benchmark results good?", "review our numerical section" | E: judging results | Method 4, H3, H4 |
@@ -99,7 +97,7 @@ Conclusion first → at most five numbered next steps, each method-tagged → th
 4. **Say what is not understood.** "Newton's behaviour unexplained" (2004, 2009, 2016) [02 J4]; "No significant conclusions can be drawn on the shape of the typical-case landscape beforehand." [O88 p. 9, co-auth.].
 5. **Structure makes large problems solvable.** [ASR] "Structure is what allows us to solve large problems. If they were unstructured, we would be just lost." [02 I6]; H1.
 6. **A shared, free, correct instrument counts as research.** SIF has "the advantages of merely existing and of coming with free decoding programs" [02 T10]; S2MPJ [03 §1.6].
-7. **A problem practitioners demand that lacks its theory or practice.** "the remarkably high demand from practitioners for such tools" (2006) [02 P1]; complexity theory "for the convex case" only [ASR; 02 P9].
+7. **A problem practitioners demand that lacks its theory or practice.** "the remarkably high demand from practitioners for such tools" (2006) [02 P1]; the convex-only theory (ARC anatomy).
 
 ### Warning signs of bad research
 The Research Anti-patterns table, plus "a more self-centered discourse or the repetition of older ideas instead of the creation of new ones" (his sign of a senile field) [HM; 02 T2].
@@ -135,7 +133,7 @@ Six or more "yes" fit the lens; a "no" on the second or third is where it pushes
 **🔴 Stop rules**: the example needs parameter values the method never uses → not an example for that method. No example → write "sharpness unknown". A run contradicts a bound → find why before choosing a side; on Jarre's example the methods "terminate at points that have small enough gradients but that are far from the solution, thus resolving the contradiction." [O88 p. 9, co-auth.]
 **Applies to stage**: theory; judging results; building regression tests.
 **Different from standard practice**: the author attacks his own upper bound, and the robustness of the bad case is a separate result.
-**Limitations**: the examples are low-dimensional and, in his words, "typically quite contrived" [05 §4.3]; their relevance to typical performance is disputed (Tension 3). For a solver team the payoff is adversarial test functions, not a design rule; the stated design payoff of complexity analysis is unverified (Honest Boundary).
+**Limitations**: the examples are low-dimensional and, in his words, "typically quite contrived" [05 §4.3]; their relevance to typical performance is disputed (Tension 3); the stated design payoff of complexity analysis is unverified (Honest Boundary).
 
 ### Method 2: The three obvious questions: import, relax, unify
 **One line**: Enter where a fresh result lacks theory, practice or validation; ask whether the uncheckable assumption can go, whether the subproblem can be inexact, whether it works in practice; then state the class once.
@@ -342,7 +340,7 @@ Literature review (only the 972-reference commented bibliography of the 2000 boo
 | 2021–26 | Objective-function-free (OFFO), Adagrad-type and ML optimizers | Adagrad and Adam popular under noise | DOI 10.1137/22M1499522; arXiv:2604.17423 |
 | 2021–26 | Test problems out of Fortran | "the use of Fortran has significantly declined since 1995" [06 §0] | arXiv:2112.05636; DOI 10.1080/10556788.2025.2490640 |
 
-Side lines: transport modelling (1975–c. 2015) and derivative-free optimization (1994–2022; see dfo-team). He enters new NLP ideas early (filters, cubic regularization: within one or two years of the originating result) and leaves quietly, without announcing exits [06 §0, §4].
+Side lines: transport modelling (1975–c. 2015) and derivative-free optimization (1994–2022; see dfo-team). He enters new NLP ideas within one or two years of the originating result (filters, cubic regularization) and leaves quietly [06 §0, §4].
 
 ### Latest
 - Constrained OFFO: arXiv:2510.16390 (equality constraints), arXiv:2602.11770 (general constraints), arXiv:2603.29685 (stochastic objective, deterministic constraints).

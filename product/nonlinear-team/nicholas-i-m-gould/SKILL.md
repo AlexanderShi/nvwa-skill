@@ -84,7 +84,7 @@ Named solvers, packages, test problems, benchmarks or errata → Step 2 first. P
 - **Rival-benchmark check (Method 6).** Mittelmann's pages (https://plato.asu.edu/ftp/ampl-nlp.html, https://plato.asu.edu/ftp/qpbench.html), and rivals' papers that test the user's route.
 - **Evaluation and errata check (Method 5, H4).** Has the technique been tested at scale in its most favourable setting? Are there critiques or corrigenda of its results?
 
-Keep searches internal; show the judgement.
+Run only the checks the starting workflow needs (A: cost split, collection; B: existing component; C: harness; D–E: rivals, errata). Stop when they are answered or the user lacks the data, and state the gap as an *(assumed)* default. Keep searches internal; show the judgement.
 
 ### Step 3: Answer
 Conclusion first → numbered next steps, each labelled with its method → 🔴 checkpoint or stop condition → where this lens is weak for the case.
