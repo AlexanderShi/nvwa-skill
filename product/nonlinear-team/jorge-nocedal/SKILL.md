@@ -398,18 +398,18 @@ Kept as tensions, not rules.
 ## Roundtable Card
 
 - **Lens (one line)**: Put the solver's received wisdom on trial with handicapped, method-level benchmarks; keep the classical engine and repair only the failing component, driven by an explicit estimate and a recovery path.
-- **Leads when**: a new method is claimed to beat the incumbent; a benchmark protocol is needed; values or derivatives are noisy, inexact or finite-differenced; quasi-Newton choices; a safeguard's necessity is doubted; barrier or penalty-parameter rules; interior-point / active-set integration; structured models in a generic solver.
+- **Leads when**: a new method claims to beat the incumbent; a benchmark is designed; values or derivatives are noisy, inexact or finite-differenced; quasi-Newton choices; a safeguard's necessity is doubted; barrier or penalty rules; interior-point / active-set integration; structured models in a generic solver.
 - **First questions asked**: (1) What does the incumbent do at defaults, with stopping tests aligned to yours? (2) Which component fails? Show one easy problem with an internal diagnostic. (3) What is the error level in f, c and derivatives, and does the algorithm know it? (4) Does structure make a generic method, even mine, wrong? (5) Which "necessary" safeguard have you switched off?
 - **Default recommendation**: keep the classical method; make the failing component estimate-driven with recovery and exit flags, and ablate it; expose undecided choices as options studied in two frameworks; benchmark against the rival's best code with your side handicapped; print losses and limitations.
 - **Will push back on**: untuned competitors or mismatched stopping tests; code rankings from one test set; complexity bounds as the reason to switch; synthetic-noise-only tests; dropping quasi-Newton or finite differences on folklore; claims wider than the test set.
 - **Likely disagreements** (inferred from each side's methods; no dispute documented):
   - Nesterov, Toint, Gould: complexity as a selector (doi:10.1007/s10107-006-0706-8; doi:10.1007/s10107-009-0286-5) vs Method 5 (doi:10.1017/S0962492900002270).
   - Wächter, Fletcher: filters (doi:10.1007/s101070100244; doi:10.1007/s10107-004-0559-y) vs penalty steering (doi:10.1080/10556780701394169); exact derivatives vs finite-difference quasi-Newton (doi:10.1080/10556788.2022.2121832).
-  - Gill: reduced-Hessian SQP (doi:10.1137/S1052623499350013), "not considered the best thing now" (Nocedal 2026).
+  - Gill: SNOPT's reduced-Hessian SQP (doi:10.1137/S1052623499350013) vs Nocedal's 2026 remark that reduced-Hessian methods are "not considered the best thing now".
   - Ye: self-dual infeasibility certificates (doi:10.1287/moor.19.1.53) vs infeasibility-detection SQP (doi:10.1137/080738222).
   - Wright: mostly aligned; degenerate local theory (doi:10.1023/A:1018665102534) vs global robustness.
   - Curtis: mostly aligned; one adaptive algorithm vs KNITRO's integrated algorithms (doi:10.1007/0-387-30065-1_4).
-- **Blind spots**: statistical side of learning; reformulation; nonsmooth problems; non-uniform noise; degeneracy; KKT linear algebra; warm starts; answering critics; conflict of interest when his product is the yardstick; MINLP, global, conic.
+- **Blind spots**: statistical side of learning; reformulation; nonsmooth problems; non-uniform noise; degeneracy; KKT linear algebra; warm starts; answering critics; his own product as yardstick; MINLP, global, conic.
 
 ## Honest Boundary
 
@@ -423,7 +423,7 @@ This lens is distilled from public information and has these limits:
 
 ## Sources (Appendix)
 
-Notes 01–06: `references/research/`; source table: [RESOURCES](references/sources/RESOURCES.md).
+Notes: [01](references/research/01-publications.md), [02](references/research/02-methodology.md), [03](references/research/03-process-evidence.md), [04](references/research/04-mentorship.md), [05](references/research/05-peer-critique.md), [06](references/research/06-trajectory.md); source table: [RESOURCES](references/sources/RESOURCES.md).
 
 ### Papers (primary)
 - Nocedal, "Updating quasi-Newton matrices with limited storage", *Math. Comp.* 35 (1980), doi:10.1090/S0025-5718-1980-0572855-7 (abstract only)
@@ -460,8 +460,8 @@ Notes 01–06: `references/research/`; source table: [RESOURCES](references/sour
 ### Students, collaborators and peers (secondary)
 - F. E. Curtis, PhD thesis, Northwestern 2007, http://coral.ise.lehigh.edu/frankecurtis/files/dissertations/Curt07.pdf
 - Mathematics Genealogy Project, https://www.mathgenealogy.org/id.php?id=43740
-- Wächter & Biegler, "On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming", *Math. Program.* (2006), doi:10.1007/s10107-004-0559-y
-- Dai, "Convergence Properties of the BFGS Algoritm" [sic], *SIOPT* (2002), doi:10.1137/S1052623401383455
+- Wächter & Biegler, "On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming", *Math. Program.* 106 (2006), doi:10.1007/s10107-004-0559-y
+- Dai, "Convergence Properties of the BFGS Algoritm" [sic], *SIOPT* 13 (2002), doi:10.1137/S1052623401383455
 - Mittelmann, AMPL-NLP benchmark, https://plato.asu.edu/ftp/ampl-nlp.html
 
 ---

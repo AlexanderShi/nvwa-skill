@@ -93,7 +93,7 @@ Evidence: [02 §1](references/research/02-methodology.md), [03 §7–8](referenc
 1. **Theory that tracks what wins in practice.** The ellipsoid method's "impact on practical computations with LP was negligible." [OTP25 p. 8]; "more computation-guided development of algorithms and theory" [OPT02 slide 58].
 2. **Assumptions real instances and real arithmetic satisfy.** MFCQ in place of LICQ [FP01 p. 2]; roundoff inside the local analysis [P643 abstract].
 3. **Simple and teachable.** "a slight modification of the well-known sequential quadratic programming method" [P643 abstract]; a bound that "can be proved from scratch in a single lecture" [OTP25 p. 10].
-4. **Fast rates, or why practice beats the bound.** Superlinear convergence under degeneracy (1998–2006; 2026 [LW26]); "First-order algorithms converge faster than O(1/k) on convex problems" [LeeW19]; [observed] "Steve Wright ... always said that 1/√T is a negative result." [Recht 2023]
+4. **Fast rates, or why practice beats the bound.** Superlinear convergence under degeneracy (1998–2006; 2026 [LW26]); faster-than-O(1/k) first-order rates [LeeW19]; [observed] "Steve Wright ... always said that 1/√T is a negative result." [Recht 2023]
 5. **Serious computation or usable code.** "The Grid isn't all hype! Optimizers have done serious computations on it." [SIAM04 slide 48]; folklore tested: "(We did not find evidence to support this belief.)" [LW03 note]
 6. **Structure from an application.** "Different applications have very different properties and requirements, that require different algorithmic approaches." [NIPS08 slide 10]; IPMs entered through optimal-control structure [06 T3].
 7. **Honest scope.** GPSR's abstract admits that performance "tends to degrade as the regularization term is de-emphasized" [GPSR07]; "all" corrected to "most of" in his book errata [PDIPM errata].
@@ -271,7 +271,7 @@ Six methods passed the Phase 2 checks (recurrence, say–do, executability, excl
 **Steps**:
 1. Write the ground rules: data exactness; accuracy needed; one solve or a sequence (continuation, MPC, restoration loops, sweeps); active-set change between solves; structure; must iterates stay feasible?
 2. Map rules to class: a moving active set along a sequence points to warm-startable active-set, LP-based or first-order methods (IPM warm starts only for a stable active set [KW15 p. 2; YW02]); low accuracy to first-order, high accuracy to Newton-type; "The best algorithms may combine both approaches!" [NIPS08 slide 10]
-3. Reformulate so the subproblem is easy: split variables (GPSR), a separable quadratic plus the regularizer (SpaRSA), squared slacks (DW25) [NIPS08 slide 10]
+3. Reformulate so the subproblem is easy: split variables (GPSR), a separable quadratic plus the regularizer (SpaRSA), squared slacks (DW25); use duality where it gives a practical formulation [NIPS08 slide 10].
 4. Re-examine a dismissed simple method and test the folklore [LW03 note; CD15 p. 2].
 5. Test with Method 5 on the application's instances and a standard set.
 
@@ -436,7 +436,7 @@ Full anatomies: [01 §2](references/research/01-publications.md).
 | Period | Main direction | Why it turned | Representative work |
 |---|---|---|---|
 | 1983–1990 | Sparse nonlinear least squares (PhD, Queensland 1984); SQP and nonsmooth local theory (NC State) | Application, then a move | [06 T0–T1] |
-| 1990–2002 | Argonne: parallel and optimal-control algorithms, then IPMs, entered through control structure about 7 years after Karmarkar | New algorithm class; lab time | PDIPM97; PCx; MC99; FP01 |
+| 1990–2002 | Argonne: parallel and optimal-control algorithms, then IPMs, entered mid-wave through control structure | New algorithm class; lab time | PDIPM97; PCx; MC99; FP01 |
 | 1997–2006 | Degenerate NLP | His own degenerate-LCP IPM results | SSQP98 → OW06 |
 | 1997–2021 | Model predictive control with J. B. Rawlings | Application partner | WT04 |
 | 2006–2015 | Sparse optimization and ML (at UW-Madison from 2001) | New "ground rules"; partner Nowak | GPSR07; SpaRSA09; HOG11 |
@@ -483,14 +483,14 @@ Thin: no record of how he criticizes drafts or runs meetings was found.
 - **First questions asked**: (1) Smallest instance that shows it, prediction printed? (2) Which assumption fails: LICQ, strict complementarity, unique multipliers, exact arithmetic? (3) Does it persist with presolve, scaling and safeguards off? (4) Which code feature explains it, when toggled? (5) One solve or a sequence; how much does the active set move?
 - **Default recommendation** ([inferred] translations, not his NLP advice): a degeneracy-and-roundoff harness (Method 1); working-set warm starts, inexact QP solves, stabilized multipliers, each switchable with a twin (Methods 2–4); warm starts chosen by measured active-set change (Method 6); equal-target benchmarks with failure tables (Method 5).
 - **Will push back on**: safeguards without a twin; defaults picked by bounds; LICQ-only designs; robustness claims without degenerate and infeasible sets; unequal stopping rules; IPM warm starts when the active set moves.
-- **Likely disagreements** (inferred from each side's methods):
-  - **Gill**: globalized sSQP (10.1137/120882913) vs Wright's local-only sSQP (10.1137/S1052623498333731). Documented: FP01 faults Forsgren–Gill–Shinnerl's pivot assumption (10.1137/S0895479894270658); no reply found.
-  - **Wächter**: restoration and global robustness (10.1007/s10107-004-0559-y) vs local rate; IPM warm starts (YW02). No dispute documented.
-  - **Fletcher**: unmodified SQP handles MPECs (10.1080/10556780410001654241) vs Wright's SQP modifications. No dispute documented.
-  - **Curtis**: guarantee safeguards by default? (joint CRRW21, 10.1137/19M130563X, vs Wright's 2025 verdict). No dispute documented.
-  - **Nocedal**: quasi-Newton and inexact engineering (10.1007/0-387-30065-1_4) vs exact-Hessian local theory. No dispute documented.
-  - **Ye**: bounds as a design guide (10.1287/moor.19.1.53). Documented: Wright answered Sun–Ye's worst case (10.1007/s10107-019-01437-5) with LW19 (10.1093/imanum/dry040).
-  - **Toint, Gould, Nesterov**: complexity-first ARC and cubic Newton (10.1007/s10107-009-0286-5; 10.1007/s10107-006-0706-8) vs minimal-safeguard Newton-CG (10.1007/s10107-019-01362-7); with Gould, benign ill-conditioning (MC99) vs factorization control. No dispute documented.
+- **Likely disagreements** (inferred from each side's methods; Wright's side first):
+  - **Gill**: local-only sSQP (10.1137/S1052623498333731) vs globalized sSQP (10.1137/120882913). Documented: FP01 (10.1137/S1052623498347438) faults Forsgren–Gill–Shinnerl's pivot assumption (10.1137/S0895479894270658); no reply found.
+  - **Wächter**: local rate and IPM warm-start limits (10.1137/S1052623400369235) vs global robustness and restoration (10.1007/s10107-004-0559-y). No dispute documented.
+  - **Fletcher**: modified SQP for degeneracy (10.1007/s10107-002-0344-8) vs unmodified SQP on MPECs (10.1080/10556780410001654241). No dispute documented.
+  - **Curtis**: safeguards judged by practice (arXiv:2510.15734) vs guarantees as design criteria, as in their joint CRRW21 (10.1137/19M130563X). No dispute documented.
+  - **Nocedal**: exact-Hessian local theory (10.1137/S1052623498333731) vs quasi-Newton and inexact engineering (10.1007/0-387-30065-1_4). No dispute documented.
+  - **Ye**: bounds not a design guide (arXiv:2510.15734) vs complexity-led design (10.1287/moor.19.1.53). Documented: Sun–Ye's worst case (10.1007/s10107-019-01437-5) answered by LW19 (10.1093/imanum/dry040).
+  - **Toint, Gould, Nesterov**: minimal-safeguard Newton-CG (10.1007/s10107-019-01362-7) vs complexity-first ARC and cubic Newton (10.1007/s10107-009-0286-5; 10.1007/s10107-006-0706-8); with Gould, benign ill-conditioning (10.1137/S1052623496304712) vs factorization control. No dispute documented.
 - **Blind spots**: globalization, NLP infeasibility, quasi-Newton under degeneracy, production NLP engineering, inertia correction, how common degeneracy is.
 
 ## Honest Boundary
@@ -522,7 +522,7 @@ Notes: [01](references/research/01-publications.md) · [02](references/research/
 - PDIPM97: *Primal-Dual Interior-Point Methods*, SIAM 1997, 10.1137/1.9781611971453
 - PCx: Czyzyk, Mehrotra, Wagner & Wright, Optim. Methods Softw. 11 (1999), 10.1080/10556789908805757
 - OOQP03: Gertz & Wright, ACM TOMS 29 (2003), 10.1145/641876.641880
-- LW03: Linderoth & Wright, Comput. Optim. Appl. 24 (2003), 10.1023/A:1021858008222 (Best Paper note, COAP 29 (2004) 123–126)
+- LW03: Linderoth & Wright, Comput. Optim. Appl. 24 (2003), 10.1023/A:1021858008222 (and its Best Paper note, COAP 29 (2004))
 - GPSR07: Figueiredo, Nowak & Wright, IEEE JSTSP 1 (2007), 10.1109/JSTSP.2007.910281
 - SpaRSA09: Wright, Nowak & Figueiredo, IEEE TSP 57 (2009), 10.1109/TSP.2009.2016892
 - HOG11: Niu, Recht, Ré & Wright, arXiv:1106.5730 (NIPS 2011)
@@ -557,12 +557,12 @@ Notes: [01](references/research/01-publications.md) · [02](references/research/
 ### Process evidence (primary)
 - PCx page and changelog: https://pages.cs.wisc.edu/~swright/PCx/
 - OOQP page and changelog: https://pages.cs.wisc.edu/~swright/ooqp/
-- PDIPM errata: https://pages.cs.wisc.edu/~swright/IPPD/siampage/typos.pdf; Tenny's JOTA errata: https://pages.cs.wisc.edu/~swright/papers/P664-corrections.ps
+- PDIPM errata: https://pages.cs.wisc.edu/~swright/IPPD/siampage/typos.pdf; Tenny's errata for Rao, Wright & Rawlings, JOTA 99 (1998), 10.1023/A:1021711402723: https://pages.cs.wisc.edu/~swright/papers/P664-corrections.ps
 - NIPS13 reviews and author feedback (arXiv:1311.2661): https://proceedings.neurips.cc/paper_files/paper/2013/file/2a50e9c2d6b89b95bcb416d6857f8b45-Reviews.html
 
 ### Students, collaborators and peers (secondary)
 - Theses: S. Lee 2011, https://pages.cs.wisc.edu/~sklee/papers/lee_dissertation.pdf; C.-P. Lee 2019, https://asset.library.wisc.edu/1711.dl/5RD55CUH2O2GW8F/R/file-a20b8.pdf; Tenny 2002, https://sites.engineering.ucsb.edu/~jbraw/jbrweb-archives/theses/tenny.pdf; Venkat 2006, https://sites.engineering.ucsb.edu/~jbraw/jbrweb-archives/theses/venkat.pdf; Stewart 2010, https://sites.engineering.ucsb.edu/~jbraw/jbrweb-archives/theses/stewart.pdf
-- Royer HDR 2025: https://www.lamsade.dauphine.fr/~croyer/docs/hdrRoyer.pdf
+- Royer: HDR 2025, https://www.lamsade.dauphine.fr/~croyer/docs/hdrRoyer.pdf; homepage news item (in the HTML source), https://www.lamsade.dauphine.fr/~croyer/
 - Recht 2023: https://www.argmin.net/p/regretfully-yours (1/√T); https://www.argmin.net/p/there-is-no-optimum (tool chest)
 - IS11: Izmailov & Solodov, Math. Program. 126 (2011), 10.1007/s10107-009-0279-4
 - GR13: Gill & Robinson, SIAM J. Optim. 23 (2013), 10.1137/120882913; Gill, Kungurtsev & Robinson, Math. Program. 163 (2017), 10.1007/s10107-016-1066-7
