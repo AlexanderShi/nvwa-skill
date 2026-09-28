@@ -282,16 +282,23 @@ Six methods, most exclusive first; each passed the recurrence, say–do, executa
 
 ## Stage Workflows
 
-### Workflow A: Diagnose where the solver loses (problem choice)
-**Input**: logs on a fixed collection version at defaults, with the time per iteration split; failures by exit status; rivals' benchmarks.
+### Workflow A: Diagnose where the solver loses (problem choice; stuck projects)
+**Input**: logs on a fixed collection version at defaults; failures by exit status; rivals' benchmarks. No split log → no-data mode (Activation Rules).
 **Steps**:
 1. Record the collection version and filters (Method 2).
-2. Split time and failures into the inner-solve layer and the globalization layer (Method 3).
-3. If the inner solve dominates, work on truncation or a better inner solver, not a new merit function (Method 3).
-4. If rivals consistently beat the route, draft the exit note now (Method 6).
-5. Drop ideas that do not scale (H7). Look for theorems without numbers at the bottleneck (H1).
-**🔴 Checkpoint**: stop if the proposal changes the globalization while the subproblem dominates, or if it cannot run on the large problems.
-**Output**: a one-page diagnosis: the bottleneck layer, the candidate route, and the outside result that would end it.
+2. Split time and failures into the inner solve (factorization, inertia correction, subproblem iterations) and the globalization layer (Method 3).
+   - Inner solve dominates → truncation or a better inner solver, checked first against GALAHAD's packages (Workflow B next), not a new merit function.
+   - Globalization dominates → no shipped Gould design exists (Blind spots); Wächter, Fletcher or Curtis lead the design. Gould's part is the test: change one mechanism and count how often it fires (Method 4); prefer fewer arbitrary parameters (Mark 4).
+   - Failures cluster on a few named problems → check `sif.updates` before blaming the solver (Method 2).
+3. Dissect the worst problem: full trace, a quantity that should be zero, every failed remedy recorded (H2; TRS 2010, doi:10.1007/s12532-010-0011-7, p. 49).
+4. Drop fixes that do not scale (H7); look for theorems without numbers at the bottleneck (H1).
+5. Stuck: every mechanism changed since the last gain that has not beaten the previous generation in one harness on the whole collection (Method 4) goes behind an option, or to the graveyard with a one-line reason (Method 1).
+6. Write down the outside result that would end the route (Method 6). If no rival publishes against you, run the strongest one you can interface in your harness [inferred]; if it wins consistently, draft the exit note.
+**🔴 Checkpoint**:
+- Back to step 2 if the proposal changes the globalization while the inner solve dominates, or cannot run on large problems.
+- Stop tuning what step 5 parked; reopen it only with a new ingredient that answers the objection (Method 6).
+- "Dominates" and "consistently" have no Gould threshold: use the user's, or state yours as "not Gould-style".
+**Output**: a one-page diagnosis: bottleneck layer, mechanisms parked, candidate route, and the outside result that would end it.
 
 ### Workflow B: Design the component
 **Input**: the Workflow A diagnosis.
@@ -334,10 +341,8 @@ Six methods, most exclusive first; each passed the recurrence, say–do, executa
 2. Publish short, separate errata, and correct test problems by renaming them (H4, Method 2).
 3. Answer critics with new runs of their variants (Method 5).
 4. If rivals beat the route, say so and move on. Move failures to the graveyard with a reason (Methods 6, 1).
-**🔴 Checkpoint**: never promote on publication, overwrite a published test problem, or answer a critique without new runs.
+**🔴 Checkpoint**: never promote on publication, overwrite a published test problem, or answer a critique without new runs. Before promoting, list the problems the current default solves and the candidate loses; treat any loss as blocking unless the user sets a tolerance ("not Gould-style") [inferred from "reliable and useful to all"; no promotion reason is public].
 **Output**: a release note, an erratum, a reply, or a graveyard entry.
-
-**Stages with no distillable Gould method** (say so; mark generic advice "not Gould-style"): literature search; supervision and draft feedback; refereeing and editing (SIOPT Editor-in-Chief c. 2004–2010, no method documented); talks; grants; infeasibility detection; warm starts; choosing IPM or SQP; the promotion decision itself.
 
 ## Research Heuristics
 
