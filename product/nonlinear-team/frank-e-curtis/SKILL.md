@@ -182,21 +182,21 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 6. Weigh theory by method class: "Some methods actually behave like their worst-case; others don't." (ISMP 2018)
 **Applies to stage**: judging results; reviewing; choosing between methods.
 **Different from standard practice**: algorithm designers rarely build evaluation tools or question the yardstick they publish under.
-**Limitations**: easier to preach than to apply to one's own line; relative minimization profiles were built for nonsmooth, multi-run comparisons and need adapting for smooth NLP benchmarks.
+**Limitations**: easier to preach than to apply to one's own line; relative minimization profiles were built for nonsmooth multi-run comparisons and need adapting to smooth NLP.
 
 ### Method 5: Fair-fight benchmarking
-**One line**: Make the comparison test the idea, not the plumbing: the rival lives in your framework with one component varied, the incumbent's engineering is adopted, the baseline is favoured and the handicap stated, and the incumbent's wins are printed.
+**One line**: Make the comparison test the idea, not the plumbing: the rival lives in your framework with one component varied, the incumbent's engineering is adopted, the baseline is favoured with the handicap stated, and the incumbent's wins are printed.
 **Evidence**:
-- Stated: "Fair comparison would" not ignore tuning time, show speed and reliability, and "involve many runs of each algorithm" (Oaxaca 2017, slide 33/33, bullet list); "Hard to beat a highly tuned state-of-the-art solver! Curtis (2012). I've seen many papers rejected for this reason." (ECOM 2021 public lecture, slide 37/45).
+- Stated: "Fair comparison would" not ignore tuning time and would "involve many runs of each algorithm" (Oaxaca 2017, slide 33/33); "Hard to beat a highly tuned state-of-the-art solver! Curtis (2012)" and "I’ve seen many papers rejected for this reason." (ECOM 2021 public lecture, slide 37/45).
 - Practice: 03 PE6–PE11, PE27, 2008–2022.
-- Say–do consistency: ✅ stated + practised, improving after about 2018. ⚠️ Parameters tuned on the evaluation set without reporting the effort (2012, 2012, 2019; 03 PE13); randomized SVANO-GS reported from single runs (2019; 03 PE15).
+- Say–do consistency: ✅ stated + practised, improving after about 2018. ⚠️ Parameters tuned on the evaluation set without reporting the effort (2012, 2012, 2019; 03 PE13); a randomized method reported from single runs (2019; 03 PE15).
 **Steps**:
 1. Put algorithm variants in one framework as strategy objects (NonOpt's direction, step-size and QP-solver classes; 03 PE33).
-2. Build the rival as another strategy: ARC beside i-TRACE ("all of the algorithms were implemented in a single software package in Matlab", arXiv:2204.11322); GS-exact is GS-inexact with the QP solved to 10⁻¹⁰, "every aspect of this implementation is the same as that of GS-inexact" (arXiv:2005.07822).
-3. Ablate the one component the claim is about: sample size p = 0 in SQP-GS, "providing strong evidence that the GS procedure is critical for the effectiveness of our approach" (10.1137/090780201); a delete-instead-of-aggregate arm that "shows the effect of aggregation itself" (arXiv:1903.03471).
+2. Build the rival as another strategy: ARC beside i-TRACE, "all of the algorithms were implemented in a single software package in Matlab" (arXiv:2204.11322); GS-exact is GS-inexact with the QP solved to 10⁻¹⁰, "every aspect of this implementation is the same as that of GS-inexact" (arXiv:2005.07822).
+3. Ablate the one component the claim is about: p = 0 sampled gradients in SQP-GS, "providing strong evidence that the GS procedure is critical for the effectiveness of our approach" (10.1137/090780201); a delete-instead-of-aggregate arm that "shows the effect of aggregation itself" (arXiv:1903.03471).
 4. Against an external code, adopt its engineering first: PIPAL copied Ipopt's bound relaxation, initial point, gradient scaling, second-order correction and evaluation-error handling "for the purpose of providing a fairer comparison" (03 PE8).
-5. Favour the baseline and put the handicap in numbers: "“Stochastic Subgradient” was given 110 times the number of iterations that were allowed for “Stochastic SQP.”" (arXiv:2007.10525 v1); tuning "did not require more effort than the tuning used for the SG method" (arXiv:1712.10277).
-6. Time-match the external state of the art and average over runs (CPU limit set to LMBM's average time, 10 runs; 03 PE11).
+5. Favour the baseline and put the handicap in numbers: "“Stochastic Subgradient” was given 110 times the number of iterations that were allowed for “Stochastic SQP.”" (arXiv:2007.10525 v1); tuning that "did not require more effort than the tuning used for the SG method" (arXiv:1712.10277).
+6. Time-match the external state of the art and average over runs (CPU limit = LMBM's average time, 10 runs; 03 PE11).
 7. Print where the incumbent wins and narrow the claim: "PIPAL-a and especially IPOPT have an edge in terms of efficiency"; "LMBM yields lower values for some problems while GS-inexact-agg yields lower values for a few others" (arXiv:2005.07822 v2).
 **Applies to stage**: experiment design; judging results; writing.
 **Different from standard practice**: ablations are common; building the rival inside your own framework, importing the incumbent's engineering and paying the baseline 110× are not.
