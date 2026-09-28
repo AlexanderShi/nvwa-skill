@@ -152,19 +152,19 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **One line**: Do not wait for hard test problems: turn a standard set into infeasible and degenerate variants by a mechanical rule, run every solver on them with presolve off, and say how narrow the construction is.
 **Evidence**:
 - Stated: the research-page "often overlooked" passage (Taste 1); the ISMP 2018 epigraph; "(We want your infeasible test problems!)" (SIAM Optimization 2011 slides, slide 6/35).
-- Practice: constructed variants in 2010, 2012 and 2020 (03 PE1); the 2020 paper added its infeasible set during revision (03 PE24).
+- Practice: constructed variants in 2010, 2012 and 2020 (03 PE1); the 2020 paper added its infeasible set in revision (03 PE24).
 - Result: on the standard set "PIPAL-a and especially IPOPT have an edge in terms of efficiency"; on the degenerate variants "IPOPT is not only less efficient than both PIPAL-c and PIPAL-a, but it also lags slightly in terms of robustness" (10.1007/s12532-012-0041-4).
 - Say–do consistency: ✅ stated + practised 2010–2020.
 **Steps**:
 1. Take a standard set (Hock–Schittkowski in CUTEr/AMPL then; CUTEst now).
-2. Degenerate variant: add −c_i(x)² ≤ 0 for each constraint (PIPAL: 120 problems). Infeasible variants: add c_i(x)² ≤ −1 (105 problems), or "we modified the 126 CUTEr Hock-Schittkowski (hs) problems by adding bound constraints x1≤ 0 and x1≥ 1 to make all hs problems infeasible" (arXiv:1803.09224); or make one application model infeasible (10.1137/080738222: model `robot` with c4 = c1² + 1).
+2. Degenerate variant: add −c_i(x)² ≤ 0 for each constraint (PIPAL: 120 problems). Infeasible: add c_i(x)² ≤ −1 (105 problems), or "we modified the 126 CUTEr Hock-Schittkowski (hs) problems by adding bound constraints x1≤ 0 and x1≥ 1 to make all hs problems infeasible" (arXiv:1803.09224), or make one application model infeasible (`robot` with c4 = c1² + 1; 10.1137/080738222).
 3. Turn presolve off "so as to test the algorithms on difficult constraint sets" (PIPAL).
-4. Add two- or three-variable toy models ("s.t. c: 1 <= 0;", "s.t. c: y^2 + 1 <= 0;") and record for many solvers whether each declares infeasibility (2011 slides 32–33: ten solvers).
-5. State what is not covered: "We admit that creating instances in this manner only produces a certain type of degeneracy, but these models are sufficient for illustrating the robustness of our software on certain rank-deficient problems." (PIPAL)
-6. Ask users and colleagues for their failing models.
+4. Add two- or three-variable toy models ("s.t. c: 1 <= 0;", "s.t. c: y^2 + 1 <= 0;") and record which solvers declare infeasibility (2011 slides: ten solvers).
+5. State what is not covered: "We admit that creating instances in this manner only produces a certain type of degeneracy" (PIPAL).
+6. Ask users for their failing models.
 **Applies to stage**: problem choice; experiment design.
-**Different from standard practice**: most NLP papers report the standard set only; here the hard instances are manufactured and reported separately.
-**Limitations**: small problems; one kind of degeneracy (no MPCC-type or redundant-equality variants); the "I have results!" claim beyond these constructions was not found (Honest Boundary).
+**Different from standard practice**: most NLP papers report the standard set only; here hard instances are manufactured and reported separately.
+**Limitations**: small problems; one kind of degeneracy (no MPCC-type or redundant-equality variants); the "I have results!" claim beyond these constructions was not found.
 
 ### Method 4: Audit the yardstick
 **One line**: When a method looks better or worse than practice suggests, check whether the measure (complexity class, stationarity test, performance profile, success flag, test set) favours someone, and build a view that shows the hidden trade-off.

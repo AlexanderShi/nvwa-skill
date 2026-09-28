@@ -65,8 +65,8 @@ Only rows with evidence are kept.
 
 | Type | Signal | Action |
 |---|---|---|
-| Needs facts | Named solvers, papers, known local-convergence or complexity results | Check with tools first (Step 2) |
-| Pure method | Experiment design, safeguard decision, benchmark protocol | Go to the workflow (Step 3) |
+| Needs facts | Named solvers, papers, known results | Tools first (Step 2) |
+| Pure method | Experiment design, safeguards, benchmark protocol | Workflow (Step 3) |
 | Mixed | The user's solver behaviour plus a method question | Step 2, then the workflow |
 
 ### Step 2: Wright-style fact finding (tools, never memory)
@@ -157,7 +157,7 @@ Six methods passed the Phase 2 checks (recurrence, say–do, executability, excl
 - Say–do consistency: ✅ stated + practised.
 
 **Steps**:
-1. Collect a named observation from a real code: SNOPT's local behaviour on degenerate problems [SQP02]; "Fletcher & Leyffer ('02) showed that ordinary SQP codes performed excellently on MPEC benchmarks (and interior-point codes were also quite good). Why?" [SIAM04 slide 38].
+1. Collect a named observation from a real code: SNOPT's local behaviour on degenerate problems [SQP02]; "Fletcher & Leyffer ('02) showed that ordinary SQP codes performed excellently on MPEC benchmarks ... Why?" [SIAM04 slide 38].
 2. Write the current guarantee and its assumptions; locate the gap.
 3. Run his four-reason checklist [OTP25 pp. 5–6, paraphrased]: (a) the analysis assumes more than most instances need; (b) hard instances are rare; (c) adaptive mechanisms exploit variation; (d) the instances of interest form an easier subclass.
 4. Find the feature and toggle it on a Method 1 instance. For SNOPT he named reuse of the previous QP working set and a QP solver "allowed to return a slightly infeasible answer" [SQP02 preprint pp. 1–2].
@@ -271,7 +271,7 @@ Six methods passed the Phase 2 checks (recurrence, say–do, executability, excl
 **Steps**:
 1. Write the ground rules: data exactness; accuracy needed; one solve or a sequence (continuation, MPC, restoration loops, sweeps); active-set change between solves; structure; must iterates stay feasible?
 2. Map rules to class: a moving active set along a sequence points to warm-startable active-set, LP-based or first-order methods (IPM warm starts only for a stable active set [KW15 p. 2; YW02]); low accuracy to first-order, high accuracy to Newton-type; "The best algorithms may combine both approaches!" [NIPS08 slide 10]
-3. Reformulate so the subproblem is easy: split variables (GPSR), a separable quadratic plus the regularizer (SpaRSA), squared slacks (DW25); "Duality often key to getting a practical formulation." [NIPS08 slide 10]
+3. Reformulate so the subproblem is easy: split variables (GPSR), a separable quadratic plus the regularizer (SpaRSA), squared slacks (DW25) [NIPS08 slide 10]
 4. Re-examine a dismissed simple method and test the folklore [LW03 note; CD15 p. 2].
 5. Test with Method 5 on the application's instances and a standard set.
 
@@ -460,7 +460,7 @@ The only exit he explained: in 2002 IPM research had moved "into a phase of cons
 
 Each tension keeps both sides; none is resolved here.
 
-- **T-1. Theory and practice must drive each other, yet his degenerate-NLP techniques never reached a solver.** He calls for "more computation-guided development of algorithms and theory" [OPT02 slide 58] but deferred the practical embedding in 2000, 2002 and 2006 and released no NLP code [03 §4].
+- **T-1. Theory and practice must drive each other, yet his degenerate-NLP techniques never reached a solver.** He calls for computation-guided theory [OPT02 slide 58] but deferred the practical embedding in 2000, 2002 and 2006 and released no NLP code [03 §4].
 - **T-2. "Retains" versus "does not improve".** CRRW21's abstract says "retains", its §6 shows the twins winning, and in 2025 the modifications "do not improve the practical performance" [OTP25 p. 23]. Not strictly inconsistent; the emphasis moved from defence to self-critique.
 - **T-3. Realistic assumptions for others, idealized ones for himself.** He faulted Forsgren, Gill & Shinnerl's pivot assumption [FP01 p. 2], while critics faulted idealized timing and delay models in his asynchronous analyses [05 §1]; he fixed only what his own implementation exposed [05 §1.7].
 - **T-4. Depth versus pivot.** A nine-year degeneracy ladder and a return after twenty years, yet he leaves topics at maturity [06 §4].
