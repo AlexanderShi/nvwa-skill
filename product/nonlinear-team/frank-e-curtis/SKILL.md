@@ -414,56 +414,56 @@ Built from slide text, syllabi and students' acknowledgements; no talk transcrip
 Full evidence is in [01-publications](references/research/01-publications.md) through [06-trajectory](references/research/06-trajectory.md). Every DOI and arXiv id below resolved in Crossref or on arxiv.org on 2026-09-28.
 
 ### Papers (primary)
-- Byrd, Curtis, Nocedal. An inexact SQP method for equality constrained optimization. SIAM J. Optim. 2008. DOI 10.1137/060674004
-- Curtis, Nocedal. Flexible penalty functions for nonlinear constrained optimization. IMA J. Numer. Anal. 2008. DOI 10.1093/imanum/drn003
-- Byrd, Curtis, Nocedal. An inexact Newton method for nonconvex equality constrained optimization. Math. Program. 2010. DOI 10.1007/s10107-008-0248-3
-- Curtis, Nocedal, Wächter. A matrix-free algorithm for equality constrained optimization problems with rank-deficient Jacobians. SIAM J. Optim. 2009. DOI 10.1137/08072471X
-- Byrd, Curtis, Nocedal. Infeasibility detection and SQP methods for nonlinear optimization. SIAM J. Optim. 2010. DOI 10.1137/080738222
-- Curtis, Schenk, Wächter. An interior-point algorithm for large-scale nonlinear optimization with inexact step computations. SIAM J. Sci. Comput. 2010. DOI 10.1137/090747634
-- Curtis, Huber, Schenk, Wächter. A note on the implementation of an interior-point algorithm for nonlinear optimization with inexact step computations. Math. Program. 2012. DOI 10.1007/s10107-012-0557-4
-- Curtis. A penalty-interior-point algorithm for nonlinear constrained optimization. Math. Program. Comput. 2012. DOI 10.1007/s12532-012-0041-4
-- Curtis, Overton. A sequential quadratic programming algorithm for nonconvex, nonsmooth constrained optimization. SIAM J. Optim. 2012. DOI 10.1137/090780201
-- Burke, Curtis, Wang. A sequential quadratic optimization algorithm with rapid infeasibility detection. SIAM J. Optim. 2014. DOI 10.1137/120880045
-- Curtis, Johnson, Robinson, Wächter. An inexact sequential quadratic optimization algorithm for nonlinear optimization. SIAM J. Optim. 2014. DOI 10.1137/130918320
-- Curtis, Jiang, Robinson. An adaptive augmented Lagrangian method for large-scale constrained optimization. Math. Program. 2015. DOI 10.1007/s10107-014-0784-y
-- Curtis, Que. A quasi-Newton algorithm for nonconvex, nonsmooth optimization with global convergence guarantees. Math. Program. Comput. 2015. DOI 10.1007/s12532-015-0086-2
-- Curtis, Mitchell, Overton. A BFGS-SQP method for nonsmooth, nonconvex, constrained optimization and its evaluation using relative minimization profiles. Optim. Methods Softw. 2017. DOI 10.1080/10556788.2016.1208749
-- Curtis, Robinson, Samadi. A trust region algorithm with a worst-case iteration complexity of O(ε^-3/2) for nonconvex optimization. Math. Program. 2017. DOI 10.1007/s10107-016-1026-2
-- Curtis, Gould, Robinson, Toint. An interior-point trust-funnel algorithm for nonlinear optimization. Math. Program. 2017. DOI 10.1007/s10107-016-1003-9
+- Byrd, Curtis, Nocedal. An inexact SQP method for equality constrained optimization. SIAM J. Optim. 2008. 10.1137/060674004
+- Curtis, Nocedal. Flexible penalty functions for nonlinear constrained optimization. IMA J. Numer. Anal. 2008. 10.1093/imanum/drn003
+- Byrd, Curtis, Nocedal. An inexact Newton method for nonconvex equality constrained optimization. Math. Program. 2010. 10.1007/s10107-008-0248-3
+- Curtis, Nocedal, Wächter. A matrix-free algorithm for equality constrained optimization problems with rank-deficient Jacobians. SIAM J. Optim. 2009. 10.1137/08072471X
+- Byrd, Curtis, Nocedal. Infeasibility detection and SQP methods for nonlinear optimization. SIAM J. Optim. 2010. 10.1137/080738222
+- Curtis, Schenk, Wächter. An interior-point algorithm for large-scale nonlinear optimization with inexact step computations. SIAM J. Sci. Comput. 2010. 10.1137/090747634
+- Curtis, Huber, Schenk, Wächter. A note on the implementation of an interior-point algorithm for nonlinear optimization with inexact step computations. Math. Program. 2012. 10.1007/s10107-012-0557-4
+- Curtis. A penalty-interior-point algorithm for nonlinear constrained optimization. Math. Program. Comput. 2012. 10.1007/s12532-012-0041-4
+- Curtis, Overton. A sequential quadratic programming algorithm for nonconvex, nonsmooth constrained optimization. SIAM J. Optim. 2012. 10.1137/090780201
+- Burke, Curtis, Wang. A sequential quadratic optimization algorithm with rapid infeasibility detection. SIAM J. Optim. 2014. 10.1137/120880045
+- Curtis, Johnson, Robinson, Wächter. An inexact sequential quadratic optimization algorithm for nonlinear optimization. SIAM J. Optim. 2014. 10.1137/130918320
+- Curtis, Jiang, Robinson. An adaptive augmented Lagrangian method for large-scale constrained optimization. Math. Program. 2015. 10.1007/s10107-014-0784-y
+- Curtis, Que. A quasi-Newton algorithm for nonconvex, nonsmooth optimization with global convergence guarantees. Math. Program. Comput. 2015. 10.1007/s12532-015-0086-2
+- Curtis, Mitchell, Overton. A BFGS-SQP method for nonsmooth, nonconvex, constrained optimization and its evaluation using relative minimization profiles. Optim. Methods Softw. 2017. 10.1080/10556788.2016.1208749
+- Curtis, Robinson, Samadi. A trust region algorithm with a worst-case iteration complexity of O(ε^-3/2) for nonconvex optimization. Math. Program. 2017. 10.1007/s10107-016-1026-2
+- Curtis, Gould, Robinson, Toint. An interior-point trust-funnel algorithm for nonlinear optimization. Math. Program. 2017. 10.1007/s10107-016-1003-9
 - Curtis, Robinson, Zhou. A self-correcting variable-metric algorithm framework for nonsmooth optimization. arXiv:1708.02552
-- Bottou, Curtis, Nocedal. Optimization methods for large-scale machine learning. SIAM Review 2018. DOI 10.1137/16M1080173
-- Curtis, Scheinberg, Shi. A stochastic trust region algorithm based on careful step normalization. INFORMS J. Optim. 2019. DOI 10.1287/ijoo.2018.0010 (arXiv:1712.10277)
+- Bottou, Curtis, Nocedal. Optimization methods for large-scale machine learning. SIAM Review 2018. 10.1137/16M1080173
+- Curtis, Scheinberg, Shi. A stochastic trust region algorithm based on careful step normalization. INFORMS J. Optim. 2019. 10.1287/ijoo.2018.0010 (arXiv:1712.10277)
 - Berahas, Curtis, Zhou. Limited-memory BFGS with displacement aggregation. arXiv:1903.03471
-- Burke, Curtis, Wang, Wang. Inexact sequential quadratic optimization with penalty parameter updates within the QP solver. SIAM J. Optim. 2020. DOI 10.1137/18M1176488 (arXiv:1803.09224)
+- Burke, Curtis, Wang, Wang. Inexact sequential quadratic optimization with penalty parameter updates within the QP solver. SIAM J. Optim. 2020. 10.1137/18M1176488 (arXiv:1803.09224)
 - Curtis, Li. Gradient sampling methods with inexact subproblem solutions and gradient aggregation. arXiv:2005.07822
-- Curtis, Robinson. Regional complexity analysis of algorithms for nonconvex smooth optimization. Math. Program. 2021. DOI 10.1007/s10107-020-01492-3
-- Berahas, Curtis, Robinson, Zhou. Sequential quadratic optimization for nonlinear equality constrained stochastic optimization. SIAM J. Optim. 2021. DOI 10.1137/20M1354556 (arXiv:2007.10525)
-- Curtis, Robinson, Royer, Wright. Trust-region Newton-CG with strong second-order complexity guarantees for nonconvex optimization. SIAM J. Optim. 2021. DOI 10.1137/19M130563X
-- Curtis, Wang. Worst-case complexity of TRACE with inexact subproblem solutions for nonconvex smooth optimization. SIAM J. Optim. 2023. DOI 10.1137/22M1492428 (arXiv:2204.11322)
-- Stochastic SQP rungs: DOI 10.1287/moor.2021.0154; DOI 10.1287/ijoo.2022.0008; DOI 10.1007/s10107-023-01981-1; DOI 10.1137/23M1556149; DOI 10.1007/s10957-024-02568-2; DOI 10.1137/23M1569460; DOI 10.1007/s10107-025-02320-2 (arXiv:2408.16186)
-- Curtis, Robinson. Practical Nonconvex Nonsmooth Optimization. SIAM 2025. DOI 10.1137/1.9781611978599 (not read)
-- Curtis, Zebiane. NonOpt: Nonconvex, Nonsmooth Optimizer. Math. Program. Comput. 2026. DOI 10.1007/s12532-026-00322-5 (arXiv:2503.22826)
+- Curtis, Robinson. Regional complexity analysis of algorithms for nonconvex smooth optimization. Math. Program. 2021. 10.1007/s10107-020-01492-3
+- Berahas, Curtis, Robinson, Zhou. Sequential quadratic optimization for nonlinear equality constrained stochastic optimization. SIAM J. Optim. 2021. 10.1137/20M1354556 (arXiv:2007.10525)
+- Curtis, Robinson, Royer, Wright. Trust-region Newton-CG with strong second-order complexity guarantees for nonconvex optimization. SIAM J. Optim. 2021. 10.1137/19M130563X
+- Curtis, Wang. Worst-case complexity of TRACE with inexact subproblem solutions for nonconvex smooth optimization. SIAM J. Optim. 2023. 10.1137/22M1492428 (arXiv:2204.11322)
+- Stochastic SQP rungs: 10.1287/moor.2021.0154; 10.1287/ijoo.2022.0008; 10.1007/s10107-023-01981-1; 10.1137/23M1556149; 10.1007/s10957-024-02568-2; 10.1137/23M1569460; 10.1007/s10107-025-02320-2 (arXiv:2408.16186)
+- Curtis, Robinson. Practical Nonconvex Nonsmooth Optimization. SIAM 2025. 10.1137/1.9781611978599 (not read)
+- Curtis, Zebiane. NonOpt: Nonconvex, Nonsmooth Optimizer. Math. Program. Comput. 2026. 10.1007/s12532-026-00322-5 (arXiv:2503.22826)
 - Recent preprints: arXiv:2502.11302; arXiv:2509.00888; arXiv:2510.00417; arXiv:2601.11795; arXiv:2604.00278; arXiv:2605.06945; arXiv:2608.12665
 - Curtis. Inexact Sequential Quadratic Programming Methods for Large-Scale Nonlinear Optimization. PhD thesis, Northwestern 2007. http://coral.ise.lehigh.edu/frankecurtis/files/dissertations/Curt07.pdf
 
 ### Stated methodology (primary)
-- Research, Errata, Editorship/Reviewership, Software and Talks pages: https://coral.ise.lehigh.edu/frankecurtis/research/ · https://coral.ise.lehigh.edu/frankecurtis/errata/ · https://coral.ise.lehigh.edu/frankecurtis/editorshipreviewship/ · https://coral.ise.lehigh.edu/frankecurtis/software/ · https://coral.ise.lehigh.edu/frankecurtis/talks/
-- Slides, 2008–2026: https://coral.ise.lehigh.edu/frankecurtis/files/talks/infopt_08.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/siopt_11.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/copper_12.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/cse_15.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/google_16.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/oaxaca_17.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/ismp_18.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/mopta_18.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/us-mex_18.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/iccopt_semi_19.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/2021_ecom_public.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/2022_neurips.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/2023_eucco.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/2024_ismp.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/2025_neurips.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/talks/2026_vtech.pdf
-- Syllabi: https://coral.ise.lehigh.edu/frankecurtis/files/syllabi/2025FallISE403.pdf · https://coral.ise.lehigh.edu/frankecurtis/files/syllabi/2019SpringISE417.pdf
+- Research, Errata, Editorship/Reviewership, Software and Talks pages: https://coral.ise.lehigh.edu/frankecurtis/research/, https://coral.ise.lehigh.edu/frankecurtis/errata/, https://coral.ise.lehigh.edu/frankecurtis/editorshipreviewship/, https://coral.ise.lehigh.edu/frankecurtis/software/, https://coral.ise.lehigh.edu/frankecurtis/talks/
+- Slides, 2008–2026: https://coral.ise.lehigh.edu/frankecurtis/files/talks/infopt_08.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/siopt_11.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/copper_12.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/cse_15.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/google_16.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/oaxaca_17.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/ismp_18.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/mopta_18.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/us-mex_18.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/iccopt_semi_19.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2021_ecom_public.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2022_neurips.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2023_eucco.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2024_ismp.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2025_neurips.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2026_vtech.pdf
+- Syllabi: https://coral.ise.lehigh.edu/frankecurtis/files/syllabi/2025FallISE403.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/syllabi/2019SpringISE417.pdf
 - NonOpt homepage: https://frankecurtis.github.io/NonOpt/
 
 ### Process evidence (primary)
-- Code: https://github.com/frankecurtis/NonOpt (commit history, manual, source) · https://github.com/frankecurtis/PIPAL · https://github.com/frankecurtis/TRACE · https://github.com/frankecurtis/StochasticSQP
+- Code: https://github.com/frankecurtis/NonOpt (commit history, manual, source), https://github.com/frankecurtis/PIPAL, https://github.com/frankecurtis/TRACE, https://github.com/frankecurtis/StochasticSQP
 - Ipopt inexact option: https://github.com/coin-or/Ipopt/blob/stable/3.14/configure.ac
 - PIPAL preprint, 2010: https://optimization-online.org/2010/06/2661/
 - Curriculum vitae (revised 2026-04-07): https://coral.ise.lehigh.edu/frankecurtis/files/cv/cv.pdf
 
 ### Students, collaborators and peers (secondary)
-- Theses: Que 2016, https://web.archive.org/web/20200319034744/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3774&context=etd · Wang 2015, https://web.archive.org/web/20200318151147/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3862&context=etd · Han 2015, https://web.archive.org/web/20200322073308/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3626&context=etd · Guo 2017, https://web.archive.org/web/20200322040506/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3621&context=etd · Mitchell 2014, https://cs.nyu.edu/media/publications/mitchell_tim.pdf
+- Theses: Que 2016, https://web.archive.org/web/20200319034744/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3774&context=etd, Wang 2015, https://web.archive.org/web/20200318151147/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3862&context=etd, Han 2015, https://web.archive.org/web/20200322073308/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3626&context=etd, Guo 2017, https://web.archive.org/web/20200322040506/https://preserve.lehigh.edu/cgi/viewcontent.cgi?article=3621&context=etd, Mitchell 2014, https://cs.nyu.edu/media/publications/mitchell_tim.pdf
 - Genealogy: https://www.mathgenealogy.org/id.php?id=130450
-- Critics and commentators: Hinder, Ye, arXiv:1801.03072 · Na, Anitescu, Kolar, DOI 10.1007/s10107-022-01846-z · O'Neill, arXiv:2408.16656 · Wright, arXiv:2510.15734 · Cartis, Gould, Toint, arXiv:1709.07180 · Jiang et al., arXiv:2311.11489 · Kungurtsev, Mitchell, Vyhlídal, arXiv:1812.11630 · Werner, Overton, Peherstorfer, DOI 10.1137/22M1500137 · Huber thesis, DOI 10.5451/unibas-006145479 · Hicken, DOI 10.1007/s11081-014-9258-6
-- Peers' papers named in the Roundtable Card: DOI 10.1137/S1052623403426556 · DOI 10.1007/s10107-004-0559-y · DOI 10.1007/s101070100244 · DOI 10.1137/S1052623499350013 · DOI 10.1007/s10107-009-0286-5 · DOI 10.1007/s10107-008-0244-7 · DOI 10.1007/s10107-006-0706-8 · DOI 10.1023/A:1018665102534 · DOI 10.1137/20M1373190
+- Critics and commentators: Hinder, Ye, arXiv:1801.03072, Na, Anitescu, Kolar, 10.1007/s10107-022-01846-z, O'Neill, arXiv:2408.16656, Wright, arXiv:2510.15734, Cartis, Gould, Toint, arXiv:1709.07180, Jiang et al., arXiv:2311.11489, Kungurtsev, Mitchell, Vyhlídal, arXiv:1812.11630, Werner, Overton, Peherstorfer, 10.1137/22M1500137, Huber thesis, 10.5451/unibas-006145479, Hicken, 10.1007/s11081-014-9258-6
+- Peers' papers named in the Roundtable Card: 10.1137/S1052623403426556, 10.1007/s10107-004-0559-y, 10.1007/s101070100244, 10.1137/S1052623499350013, 10.1007/s10107-009-0286-5, 10.1007/s10107-008-0244-7, 10.1007/s10107-006-0706-8, 10.1023/A:1018665102534, 10.1137/20M1373190
 
 ---
 
-> Generated with [女娲 · Skill造人术](https://github.com/alchaincyf/nuwa-skill) research-craft mode
+> Generated with [女娲, Skill造人术](https://github.com/alchaincyf/nuwa-skill) research-craft mode

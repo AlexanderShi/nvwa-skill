@@ -185,18 +185,18 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 **One line**: Beat the method's own simplest special case on a problem you built, trace the mechanism on a case with a known answer, compare with the obvious alternative built from the same parts, choose standard problems by the targeted property, and only then run the broad benchmark.
 **Evidence**:
 - Stated: "Firstly it is important to establish whether or not the sweep method improves on the BB method (m = 1) as the number of back vectors m is increased." [LMSD p.5]; Leyffer: "So, I know when I was in Dundee, one of the things you always told us was to look at examples"; Fletcher: "Part of it, yeah." [O99 p.4].
-- Practice: LMSD against BB on a 20-variable quadratic with a geometric spectrum; an eigencomponent trace showing "Thus the last non-monotonic step is a disaster as regards providing local convergence." [LMSD p.11], which led to the fix; then CG-FR, CG-PR, BFGS and l-BFGS with the same line search and termination test, up to n = 10⁶ [LMSD p.13]. PBB: random box QPs with controlled condition number and active-set size [PBB p.27]. NA223 samples CUTE problems whose null-space dimension "is a significant proportion of n" [NA223 p.15]. NMF runs both codes on the same QP solver. MacMPEC was built because no library existed [NA210 p.7].
+- Practice: LMSD against BB on a 20-variable quadratic with a geometric spectrum; an eigencomponent trace showing "Thus the last non-monotonic step is a disaster as regards providing local convergence." [LMSD p.11], which led to the fix; then CG, BFGS and l-BFGS with the same line search and termination test, up to n = 10⁶ [LMSD p.13]. PBB: random box QPs with controlled conditioning and active-set size [PBB p.27]. NA223 samples CUTE problems with large null spaces [NA223 p.15]. MacMPEC was built because no library existed [NA210 p.7].
 - Say–do consistency: ✅ (1972, 2002, 2005, 2009, 2011–13).
 **Steps**:
 1. **Special case first**: show the method beats its own simplest special case (m = 1; the previous code) on a clean problem you designed. If not, stop.
-2. **Known-answer instances**: prescribed spectra, a designed x* with a start near it, random instances with set condition number and active-set size; settle design choices on small cheap ones.
+2. **Known-answer instances**: prescribed spectra, a designed x* with a start near it, random instances with set conditioning and active-set size; settle design choices on small cheap ones.
 3. **Mechanism trace**: supply the exact information (true spectrum, true active set) and trace the controlled quantity per iteration; fix what the trace shows first.
 4. **Same-parts comparison**: the obvious alternative built from the same components (QP solver, line search, termination test).
 5. **Targeted selection**: standard problems chosen by the targeted property (null-space size, degeneracy, complementarity), estimated from a baseline run if unknown; build a library if none covers the class.
 6. **Broad run last**, in solver-independent counts and storage (Heuristic 7), naming the machine.
 **Applies to stage**: experiment design.
 **Different from standard practice**: whole-library performance profiles usually come first; here the library confirms, it does not discover.
-**Limitations**: he reimplemented competitors himself ("(my) implementations", [LMSD p.13]), which limits how even the comparison was; comparisons against external codes appear in co-authored work.
+**Limitations**: he reimplemented competitors himself ("(my) implementations", [LMSD p.13]), which limits how even the comparison was.
 
 ### Method 6: Failure accounting
 **One line**: Classify failures before counting them, attribute every bad number to a mechanism, test the popular explanation with a controlled change, say when nothing explains it, size claims to the design, and print the weak spots.
@@ -213,7 +213,7 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 6. Print losses in the paper; list known weak spots and workarounds in the manual.
 **Applies to stage**: judging results; release.
 **Different from standard practice**: attribution before aggregation; profiles come after classification, not instead of it.
-**Limitations**: the catastrophic/soft split and performance profiles appear only in papers with Leyffer (probably his habit, inferred); single-author reports use per-problem tables. Honesty about negative results in general is not specific to Fletcher.
+**Limitations**: the catastrophic/soft split and profiles appear only in papers with Leyffer (probably his habit, inferred). Honesty about negative results in general is not specific to Fletcher.
 
 ## Stage Workflows
 
