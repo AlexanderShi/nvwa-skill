@@ -382,3 +382,13 @@ Papers named in §A.2. Identifiers were checked with Crossref or arXiv in this r
 - DOI 10.1007/s11081-022-09766-9
 - DOI 10.1137/15M1031679
 - arXiv:2502.11302
+
+---
+
+## Top-up (2026-09-28)
+
+Phase 1.5 review top-up, aimed at this note's central gap (no first-person statement by Wächter on how he supervises or does research; primary share 4 of 33).
+
+- **WebSearch (1 call):** `"Andreas Wächter" OR "Andreas Waechter" interview Ipopt research students advice`. The results were his DBLP page, homepage publications page, the INFORMS award-recipient page, the Ipopt docs, the Dagstuhl tutorial, the IPOPT paper, arXiv 1909.08104, Wikipedia's IPOPT article, and ResearchGate and alphaXiv profile pages. **No interview, podcast, Q&A, profile or advising statement was found.** Every hit is already covered by 01–06 or is an aggregator. [observed, S]
+- **Known URL re-read with curl (no search):** McCormick News, "Andreas Wächter Serving as Ulam Distinguished Scholar at Los Alamos National Laboratory", 2 Oct 2019, https://mccormick.northwestern.edu/industrial/news-events/news/articles/2019/waechter-lanl.html. The article contains **no quotation from Wächter**. It adds service facts not recorded above: since joining in fall 2011 he "has won several teaching awards, served as the Chair of an INFORMS Computing Society Prize Committee, as Vice Chair for the SIAM Activity Group on Optimization, as Associate Editor for SIAM Journal on Optimization", and was announced as "a plenary speaker at the 2020 INFORMS Optimization Society Conference". [observed, S]
+- **Result:** the gap stands. His supervision style is known only from students' acknowledgments and practices (§B–§C), not in his own words.

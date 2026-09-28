@@ -83,7 +83,7 @@
    "name": "Andreas Wächter",
    "surname": "Wächter",
    "living": true,
-   "hint": "Northwestern University IEMS (earlier IBM T. J. Watson Research Center; PhD Carnegie Mellon); IPOPT, filter line-search interior-point method, restoration phase and inertia correction; name also written Waechter / Wachter",
+   "hint": "Northwestern University IEMS 2011- (earlier IBM T. J. Watson Research Center; PhD Carnegie Mellon; his homepage now says he moved to Gurobi Optimization); IPOPT, filter line-search interior-point method, restoration phase and inertia correction, inexact-step IPM; name also written Waechter / Wachter",
    "scholar": "",
    "dblp": "62/4235",
    "orcid": "",
