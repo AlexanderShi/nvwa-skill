@@ -58,7 +58,7 @@ A request spanning rows runs triage → B → D → E, at most two workflows per
 | "How do we test this option?", "which defaults?", "how do we tune constants?" | D: experiment design | Method 4 (step 6 for tuning), H2, H9 |
 | "Are these benchmark results good?", "review our numerical section" | E: judging results | Method 4, H3, H4 |
 | "We found an error", "a referee says the example is exceptional" | F: after publication | H5, H6, Method 1 |
-| KKT linear algebra, pivoting, inertia control, barrier rules, warm starts, degeneracy, infeasibility detection, scaling; restoration failures free Newton shares | No distillable Toint method: say so first; hand off per current cards (Gould, Gill, Wächter: KKT, inertia; Nocedal: barrier; Wright, Gill: degeneracy, warm starts; Curtis, Ye: infeasibility; Wächter, Curtis: restoration) or to nonlinear-roundtable | — |
+| KKT linear algebra, pivoting, inertia control, barrier rules, warm starts, degeneracy, infeasibility detection, scaling; restoration failures free Newton shares | No distillable Toint method: say so first; hand off per current cards (KKT, inertia: Gould, Gill, Wächter; barrier: Nocedal; degeneracy, warm starts: Wright, Gill; infeasibility: Curtis, Ye; restoration: Wächter, Curtis) or to nonlinear-roundtable | — |
 | Literature review, writing, supervision, funding, refereeing | No distillable Toint method; generic advice labelled "not Toint-style" | — |
 
 ## Agentic Protocol
@@ -380,7 +380,7 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
 - **Default recommendation**: a free-Newton column beside the solver; minimal acceptance relaxation with a proof (non-monotone memory first, then filter or funnel); weights updated adaptively like a trust-region radius; one-change ablations on validated CUTEst/S2MPJ with written exclusions; defaults published with evidence.
 - **Will push back on**: unmeasured safeguards; proofs for algorithms nobody runs; small or post-hoc filtered test sets; averages without per-problem results; better complexity offered as better performance; tuning on the reported set; silent corrections.
 - **Likely disagreements** (inferred from published methods unless noted):
-  - *Curtis*: bounds rest on "anomalous objectives" (10.1007/s10107-020-01492-3) vs slow examples "not isolated" (10.1007/s10107-025-02286-1), both in print, link inferred [05 K8]; penalty steering (10.1137/080738222) vs funnel (10.1007/s10107-008-0244-7).
+  - *Curtis*: bounds rest on "anomalous objectives" (10.1007/s10107-020-01492-3) vs "not isolated" (10.1007/s10107-025-02286-1), both in print [05 K8]; penalty steering (10.1137/080738222) vs funnel (10.1007/s10107-008-0244-7).
   - *Nocedal*: limited memory (10.1007/BF01589116) vs partitioned updates (10.1007/BF01399316).
   - *Wright*: Royer–Wright (10.1137/17M1134329), placed by CGT inside their optimal class (arXiv:1709.07180).
   - *Ye*: one-phase infeasibility handling (arXiv:1801.03072) vs two-phase target following [O88 p. 7].
@@ -389,7 +389,7 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
   - *Gould*: co-author; Fortran CUTEst vs native S2MPJ; profile caution (10.1145/2950048) vs profile-area training (10.1145/3310362).
   - *Fletcher*, documented [O99]: real industrial problems vs CUTE(st) "absolutely crucial for tuning, comparison and standardization".
   - *Nesterov*: global constant (10.1007/s10107-006-0706-8) vs adaptive σ_k.
-- **Blind spots**: sparse KKT linear algebra; production barrier strategies; warm starts; scaling; degeneracy; practical infeasibility detection; CPU time at scale after 2002.
+- **Blind spots**: KKT linear algebra, inertia control; production barrier strategies; warm starts; scaling; degeneracy; practical infeasibility detection; CPU time at scale after 2002.
 
 ## Honest Boundary
 
@@ -400,7 +400,7 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
 - **Field boundary**: smooth nonlinear optimization. Not distilled: transport modelling, derivative-free optimization (dfo-team), the ML-optimizer results themselves; mixed-integer, global and conic are outside.
 - **Team, not individual**: CGT, Cartis–Gould–Toint and Gratton–Toint practices are team practices; overlaps with Gould (CUTEst, GALAHAD) and Fletcher (filters) are real.
 - **Not read**: the 1991 SINUM paper, the LANCELOT book, the CUTE 1995 and CUTEst papers, the 2022 book, the full 2017 corrigendum, the complete-results reports; no referee reports exist publicly; no critique of the OFFO line was found.
-- **Podcast**: several stated items rest on an ASR transcript not checked against the audio; ASR quotes are marked and should be re-checked before reuse.
+- **Podcast**: several stated items rest on an ASR transcript not checked against the audio; re-check [ASR] quotes before reuse.
 - **Roundtable disagreements** are inferred from published methods, except the *Optima* 99 exchange with Fletcher and the Curtis worst-case positions (in print; link inferred).
 
 ## Sources (Appendix)
