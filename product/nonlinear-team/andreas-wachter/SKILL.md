@@ -164,7 +164,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Evidence**:
 - Stated: the IPM avoids "the combinatorial complexity of identifying the active constraints" (thesis abstract; six documents, 02 R4); in 2003, jointly: "Whereas this is naturally handled in active set SQP methods, better warm start strategies need to be developed for IP algorithms." (Views-and-News 14(1), 2003, p. 13); "There has been some work on trying to make warmstarts work better for interior point methods, but this has not been implemented in Ipopt." (list, 2012-01-18).
 - Practice: hot-start active-set QP (DOI 10.1137/130940384); a conic SQP that "can capitalize on the warm-start capabilities of active-set quadratic programming subproblem solvers" (DOI 10.1137/22M1507681); smooth quantile chance constraints (DOI 10.1137/19M1261985); barrier-smoothed decomposition (DOIs 10.1109/TPWRS.2020.3002189, 10.1137/25M1728661).
-- Say–do consistency: ✅ stated + practised 2002–2026.
+- Say–do consistency: ✅ stated + practised 2002–2026; ⚠️ the 2003 call for IPM warm starts points the other way.
 **Steps**:
 1. State the contract: C² functions, a constraint qualification, no activity decisions, poor warm starts.
 2. If the model breaks it, reformulate into a smooth NLP: log(h(x)) → log(y) with y ≥ ε and h(x) − y = 0 (Dagstuhl p. 13); a chance constraint as a smooth quantile; a second-stage response smoothed by its own barrier term.
@@ -173,7 +173,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 5. Keep the solver generic; put structure in the interface (one subroutine for all constraint operations, thesis p. 162).
 **Applies to stage**: problem choice; algorithm design; product scope.
 **Different from standard practice**: warm starts were answered by a change of method class (2015, 2024), not an IPM patch.
-**Limitations**: IPM warm starts stayed unsolved in Ipopt, against the 2003 call for them; why he turned to active-set methods is not stated (Tension 6); co-authored E4 slides reverse his auxiliary-variable advice.
+**Limitations**: IPM warm starts stayed unsolved in Ipopt; why he turned to active-set methods is not stated (Tension 6); co-authored E4 slides reverse his auxiliary-variable advice.
 
 ### Method 5: The solver is the laboratory: prototype inside the production code, attack its measured bottleneck, ship the result back
 **One line**: Measure where the production solver spends time or fails, find minimal conditions under which the expensive exact kernel can be replaced, implement the new method first as an undocumented option inside the production code, prove, publish, and return it as a supported option.

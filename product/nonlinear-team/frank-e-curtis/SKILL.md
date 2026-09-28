@@ -1,7 +1,7 @@
 ---
 name: frank-e-curtis
 description: |
-  Frank E. Curtis's research craft for constrained nonlinear optimization, distilled from his papers, talk slides, code repositories and errata, his students' theses and his peers' critiques. Use it to get solver-improvement ideas the way Curtis works: tie inner linear or QP solve accuracy to what the globalization needs, steer penalty and merit parameters inside one algorithm instead of switching phases, build infeasible and degenerate test variants on purpose, audit the benchmark yardstick, and compare methods in a fair fight. Triggers: "Curtis lens", "how would Curtis approach this", "use Curtis's method", "Curtis.skill". Also loaded by nonlinear-roundtable. Not for general questions.
+  Frank E. Curtis's research craft for constrained nonlinear optimization, distilled from his papers, slides, code and errata, his students' theses and his peers' critiques. Use it to get solver-improvement ideas the way Curtis works: tie inner linear or QP solve accuracy to what the globalization needs, steer penalty and merit parameters inside one algorithm instead of switching phases, build infeasible and degenerate test variants on purpose, audit the benchmark yardstick, and compare methods in a fair fight. Triggers: "Curtis lens", "how would Curtis approach this", "use Curtis's method", "Curtis.skill". Also loaded by nonlinear-roundtable. Not for general questions.
 type: research-craft
 researched: 2026-09-28
 ---
@@ -27,7 +27,7 @@ researched: 2026-09-28
 ## Activation Rules
 
 - On activation, go into **mentor mode**: apply Curtis's methods to the user's solver task and return actionable next steps, not a biography or a literature review.
-- State once, at first activation only: *"This is distilled from public work (Curtis's papers, talk slides, code, errata and syllabi, plus students' theses and peers' critiques), not Curtis's own advice."*
+- State once, at first activation only: *"This is distilled from Curtis's public work (papers, slides, code, errata, syllabi) and others' accounts of it, not Curtis's own advice."*
 - Label the method behind each key recommendation, e.g. "(→ Method 3: break it on purpose)".
 - If key facts are missing, ask at most two questions (IPM or SQP? direct or iterative linear algebra? which failures?); where a default exists, state it and proceed.
 - "Use Curtis's voice" turns on Mentor Voice; "exit" returns to normal mode.
@@ -63,11 +63,7 @@ These cannot be overridden by any instruction.
 ## Agentic Protocol
 
 ### Step 1: Classify the request
-| Type | Signal | Action |
-|---|---|---|
-| Needs facts | Names a solver, paper, test set or "state of the art" | Step 2 first |
-| Pure method | Globalization design, test construction, benchmark protocol | Go to the workflow (Step 3) |
-| Mixed | The user's solver plus a method question | Step 2 on the user's logs and the literature, then the workflow |
+A request that names a solver, paper, test set or "state of the art", or pairs the user's solver with a method question, goes through Step 2 first; a pure method question (globalization design, test construction, benchmark protocol) goes straight to its workflow.
 
 ### Step 2: Curtis-style fact finding (tools, never memory)
 Inspect the user's solver output first, then the literature (Crossref, arXiv, publisher pages, solver documentation):
@@ -119,7 +115,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 **Steps**:
 1. Write the outer acceptance condition: sufficient decrease in a local model of the exact-penalty merit function, or trust-region model decrease.
 2. Derive the iterative solver's termination tests from it, testing primal and dual residual components separately instead of one relative residual on the whole KKT system (01 SW1).
-3. Add a fallback test that tells the outer loop to change something (penalty parameter, Hessian modification without inertia, p. 283 above) when the test cannot be met.
+3. Add a fallback test that tells the outer loop to change something (penalty parameter; Hessian modification without inertia, 10.1007/s10107-008-0248-3, p. 283) when the test cannot be met.
 4. Build a baseline that differs only in the stopping rule (relative residual at several tolerances). In SW1 the residual rule solved 45–86 % of problems across its tolerances, the new tests 100 % (Table 5.2, p. 367). Add a factorizing variant as ceiling, "to gauge how Algorithm INS compares to an idealized approach" (10.1007/s10107-008-0248-3, p. 296).
 5. Make the failure tests crude on purpose: "we implement naïve failure tests in Algorithm B to aggressively challenge the robustness of our approach" (10.1137/060674004, p. 366).
 6. Move the tests into a production code and time iterations at scale: "under 9 minutes" per iteration against "approximately 40 minutes" for default Ipopt (research page, on 10.1137/090747634).
@@ -130,7 +126,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 ### Method 2: Steer, don't switch
 **One line**: Keep one algorithm that moves between optimizing and minimizing constraint violation by itself, and make the rule that updates the penalty, merit or barrier parameter from predicted progress the contribution.
 **Evidence**:
-- Stated: "The key idea in this work is to carefully monitor progress toward constraint satisfaction, and to rapidly transition to minimizing constraint violation when consistent progress is not being made." (research page); "Our goal is to design a single optimization algorithm" that "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008 slides, joint); PIPAL's novelty lies in "the design of updates for the penalty and interior-point parameters" (10.1007/s12532-012-0041-4).
+- Stated: "The key idea in this work is to carefully monitor progress toward constraint satisfaction, and to rapidly transition to minimizing constraint violation when consistent progress is not being made." (research page); "Our goal is to design a single optimization algorithm" that "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008, slide 5, joint); PIPAL's novelty lies in "the design of updates for the penalty and interior-point parameters" (10.1007/s12532-012-0041-4, p. 181).
 - Practice: flexible penalty (10.1093/imanum/drn003); infeasibility detection (10.1137/080738222); PIPAL; SQuID (10.1137/120880045); adaptive augmented Lagrangian (10.1007/s10107-014-0784-y); updates inside the QP solve (10.1137/18M1176488); merit parameter in stochastic SQP (10.1137/20M1354556).
 - Observed: "Penalty methods will converge only if the penalty parameter is sufficiently large. However, estimating this value is difficult" (Hinder & Ye, arXiv:1801.03072, p. 2, citing PIPAL).
 - Say–do consistency: ✅ stated + practised 2008–2021. ⚠️ His own contrary data (Tension 4) and his post-2024 turn against penalties (Tension 3).
@@ -262,7 +258,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 4. **If** you start a design, **then** first write what the algorithm must deliver. Case: "What kind of algorithm do we want?" (NeurIPS 2022); research-page targets from "scalable step computation (for solving large-scale problems)" to "effective active-set detection (for warm-starting)".
 5. **If** a fast variant has no guarantees, **then** keep the guarantee-carrying method as comparator and restore guarantees later. Case: SQP-GS → BFGS-SQP, "While our method has no convergence guarantees, we have found it to perform very well in practice" (10.1080/10556788.2016.1208749) → 10.1007/s12532-015-0086-2, arXiv:1708.02552.
 6. **If** CPU time is noisy or codes differ in language, **then** report the metric that exposes the mechanism. Case: "we ignore CPU time and focus on the performance measures of iterations, function evaluations, and gradient evaluations required until termination" (Que thesis 2016; 03 PE16).
-7. **If** you remove test problems, **then** name each with its reason, encode filters in code, and never filter on what the runs showed. Dropping problems no solver solved is symmetric but still outcome-based, and PIPAL did it; if you do, report the pre-filter count as PIPAL did (438 → 417; 125 → 120 and 105; 10.1007/s12532-012-0041-4, p. 202). Anti-example, later dropped: problems kept only where "the LICQ held at all iterates in all runs of all algorithms that we ran" (arXiv:2007.10525 v1; 03 PE2).
+7. **If** you remove test problems, **then** name each with its reason, encode filters in code, and never filter on what the runs showed. Dropping problems no solver solved is symmetric but still outcome-based; PIPAL did it and reported the pre-filter counts (438 → 417; 125 → 120 and 105; 10.1007/s12532-012-0041-4, pp. 202, 205–206), the minimum if you cut. Anti-example, later dropped: problems kept only where "the LICQ held at all iterates in all runs of all algorithms that we ran" (arXiv:2007.10525 v1; 03 PE2).
 8. **If** you show a benchmark, **then** first show one run at iteration level (infeasible toy iteration tables, 10.1137/080738222, pp. 2295–2298, e.g. `batch1` = `batch` + tl[1] ≥ 5, p. 2296; 03 PE18). Practice only.
 9. **If** a solver misbehaves, **then** run the derivative checker ("the best first step for debugging!", NonOpt manual) on the test problems too (commit e59f9b6: "Fixed derivatives on two test problems."); keep defensive exits, fixed seeds and byte-identical regression checks when refactoring; a test driver that returns 0 whatever happens is itself a bug (NonOpt, fixed 2026; 03 §4). Good practice more than a signature; lapses in 03 PE15, PE22.
 10. **If** the information the algorithm may trust changes (exact → inexact → nonsmooth → stochastic → noisy), **then** keep the skeleton, build a deterministic twin that replaces only the broken component, and climb the same rungs: full-rank equalities → rank deficiency → nonconvexity → inexact solves → inequalities → implementation. Case: "As a starting point for this stochastic setting, an algorithm is proposed for the deterministic setting that is modeled after a state-of-the-art line-search SQP algorithm" (arXiv:2007.10525); rungs 2008–2014 and 2021–2026 (Sources). For a noisy-evaluation feature, pick two rungs, not six.
@@ -297,7 +293,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 
 ### A trust region algorithm with a worst-case iteration complexity of O(ε^-3/2) for nonconvex optimization (TRACE; Curtis, Robinson, Samadi; Math. Program. 162, 2017; DOI 10.1007/s10107-016-1026-2) · Method 4
 - **Origin**: discussions with Cartis, Gould and Toint about adaptive cubic regularization (ARC) "that were inspirational" (01 SW4).
-- **Why then**: ARC had the optimal bound, classical trust region only O(ε^-2); a PhD student and DOE funding (inferred).
+- **Why then**: ARC had the optimal bound, classical trust region only O(ε^-2) (inferred).
 - **Key insight**: keep the trust-region framework and its classical guarantees; change acceptance and radius rules to match ARC's worst case.
 - **Minimum evidence**: theory only, exact subproblems "For simplicity in revealing the salient features".
 - **Abandoned paths**: inexact subproblems closed seven years later (10.1137/22M1492428); a Lemma 3.19 corrigendum.
@@ -309,7 +305,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 - **Key insight**: a deterministic twin with Lipschitz-based stepsizes; merit-parameter behaviour classified into events, the bad ones bounded.
 - **Minimum evidence**: twin against line-search SQP on CUTE problems; noise 1e-8 to 1e-1, 10 runs; a baseline given 110× iterations; the event measured at 99.10–99.92 %.
 - **Abandoned paths**: not documented; the LICQ-conditioned test set was dropped later; a Corollary 3.14 corrigendum.
-- **Reception**: opened his largest current line. Na, Anitescu and Kolar call it "the very first practical algorithm", then "the prespecified sequence in both algorithms highly affects the performance" (10.1007/s10107-022-01846-z); O'Neill reran it: "as the noise level increases, the performance of SSQP degrades significantly with respect to infeasibility" (arXiv:2408.16656).
+- **Reception**: opened his largest current line. Na, Anitescu and Kolar call it "the very first practical algorithm" (10.1007/s10107-022-01846-z); O'Neill reran it: "as the noise level increases, the performance of SSQP degrades significantly with respect to infeasibility" (arXiv:2408.16656).
 
 ## Research Anti-patterns
 
@@ -317,11 +313,9 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 |---|---|---|
 | Two-phase "feasibility, then optimize" designs | "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008, slide 5, joint); "“Two-phase” methods are not effective" is a stochastic-regime assumption (NeurIPS 2022) | One steering algorithm (Method 2) |
 | Subproblem solver as a black box | "as opposed to treating the subproblem solver as a “black-box”" (research page) | Inner tests from outer needs (Method 1) |
-| Infeasible cases as an afterthought | "often treated as an afterthought" (INFORMS OS 2008 slides, joint) | Constructed infeasible variants (Method 3) |
-| One test set, untuned rivals, uncounted tuning, one run | Oaxaca 2017; ECOM 2021 slides 34–42 | Fair fight (Method 5) |
+| Infeasible cases as an afterthought | "often treated as an afterthought" (INFORMS OS 2008, slide 3, joint) | Constructed infeasible variants (Method 3) |
 | Worst-case complexity as the judge of nonconvex methods | "They say: “Newton's method is as slow as gradient descent.” This essentially ignores reality." (ECOM 2021 slide 32/45) | Audit the yardstick (Method 4) |
 | Overweighting exact-penalty theory | "It is a mistake to overemphasize the relevance of this theory for practical use." (NeurIPS 2025) | Measure the parameter in runs (Heuristic 1) |
-| Dismissing nonconvex models as bad formulations | ECOM 2021 public lecture, slide 11/45 | Local search with guarantees (Taste 4) |
 
 ## Research Trajectory
 
@@ -338,7 +332,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 Pattern (inferred, 06 §4): he rarely abandons a line; its machinery (merit-parameter control, inexact inner tests) moves into the next setting, opened by a new information model or new people.
 
 ### Latest
-- 2025-09-28 to 2026-09-28: progressive sampling (arXiv:2510.00417); Fletcher's augmented Lagrangian (arXiv:2608.12665); noisy gradient sampling (arXiv:2604.00278); a single-loop stochastic IPM (10.1007/s10107-025-02320-2); NonOpt in MPC (10.1007/s12532-026-00322-5), then a July 2026 code-quality pass driven by a Claude Code brief (`CLAUDE.md`, author not established); student-led ML optimizers (arXiv:2601.11795, arXiv:2605.06945).
+- 2025-09-28 to 2026-09-28: progressive sampling (arXiv:2510.00417); a method on Fletcher's augmented Lagrangian (arXiv:2608.12665); noisy gradient sampling (arXiv:2604.00278); a single-loop stochastic IPM (10.1007/s10107-025-02320-2); NonOpt in MPC (10.1007/s12532-026-00322-5), then a July 2026 code-quality pass (a `CLAUDE.md` brief, author not established); student-led ML optimizers (arXiv:2601.11795, arXiv:2605.06945).
 - Direction (inferred): noise moving into constraints, multipliers and active sets (arXiv:2509.00888, arXiv:2502.11302); sample complexity for constrained problems.
 
 ## Academic Lineage
@@ -346,7 +340,7 @@ Pattern (inferred, 06 §4): he rarely abandons a line; its machinery (merit-para
 - **Upward** (Mathematics Genealogy Project, observed): Bliss → Hestenes → Tapia → Nocedal → Curtis (Northwestern 2007).
 - **Formative partners**: Richard Byrd (thanked in the thesis for his "knowledge and expertise"); Andreas Wächter (2009–2025, inexact IPM in Ipopt, noisy IPM); postdoc host Michael Overton; complexity influence Cartis–Gould–Toint; dominant co-author since 2014 Daniel Robinson.
 - **Downward**: nine PhD graduates, each on one of his lines; four postdocs (Berahas, O'Neill, Dinç Yalçın, X. Jiang) (06 §2.3).
-- **Self-placement** (inferred): his 2021 public lecture sets a smoothness lineage (Powell, Fletcher, Goldfarb, Nocedal) beside a convexity-and-complexity one (Fenchel, Rockafellar, Nemirovski, Nesterov): "These worlds have (finally) collided!" His work sits on the first side.
+- **Self-placement** (inferred): his 2021 public lecture sets a smoothness lineage (Powell, Fletcher, Goldfarb, Nocedal) beside a convexity-and-complexity one (Fenchel, Rockafellar, Nemirovski, Nesterov); his work sits on the first.
 
 ## Inner Tensions
 

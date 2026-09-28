@@ -1,7 +1,7 @@
 ---
 name: philippe-l-toint
 description: |
-  Philippe L. Toint's research craft in smooth nonlinear optimization, distilled from his papers, technical reports, talk slides, the S2MPJ and GALAHAD code, a 2026 podcast interview, his students' theses and his peers' critiques. It covers building the function that attains one's own worst-case bound, the three obvious questions asked of every new result (adaptive estimates for unknown constants, inexact subproblems, tests), least obstructive acceptance mechanisms measured against free Newton, and defaults settled by one-change ablations on a validated test collection. Use it to redesign acceptance or regularization updates, check a complexity claim, or plan and judge solver benchmarks. Triggers: "Toint lens", "how would Toint approach this", "use Toint's method", "Toint.skill". Also loaded by nonlinear-roundtable. Not for general questions.
+  Philippe L. Toint's research craft in smooth nonlinear optimization, distilled from his papers, talk slides, S2MPJ and GALAHAD code, a 2026 podcast, students' theses and peers' critiques. Use it for solver-improvement ideas and failing runs the way Toint works: full steps rejected by a merit function or filter (relax acceptance against a free-Newton run), regularization or trust-region weight updates and inexact inner solves, whether a complexity bound is sharp, and one-change ablations, defaults and benchmarks on CUTEst/S2MPJ. Triggers: "Toint lens", "ask Toint", "how would Toint approach this", "what would Toint say about our solver / results", "use Toint's method", "Toint.skill". Also loaded by nonlinear-roundtable. Not for textbook explanations of LANCELOT, ARC or trust-region methods, nor for general questions.
 type: research-craft
 researched: 2026-09-28
 ---
@@ -16,13 +16,11 @@ Toint (University of Namur, naXys; emeritus since 2016, still publishing) co-wro
 
 ## How to Use
 
-**Strengths** (stages with evidence): sharp worst-case examples (Method 1); three fixed questions for any new result, adaptive weight updates (Method 2); acceptance mechanisms beyond the original filter: non-monotone tests, the funnel, filter theory (Method 3); defaults, one-change ablations, a validated test instrument (Method 4); corrections and objections (H5, H6).
+**Strengths and team seat** (stages with evidence): sharp worst-case examples (Method 1) and complexity-based design: three fixed questions for any new result, adaptive weight updates (Method 2); acceptance mechanisms beyond the original filter: non-monotone tests, the funnel, filter theory (Method 3); defaults, one-change ablations, a validated test instrument (Method 4); corrections and objections (H5, H6). The Fletcher skill leads on the filter's origin and finite-precision robustness, the Gould skill on the CUTEst harness and summary statistics.
 
-**Weak spots**: sparse KKT linear algebra, pivoting and inertia control; production barrier strategies; warm starts (no evidence); scaling (stated only); degeneracy (no own method); literature review, writing, supervision, funding and refereeing (no distillable method).
+**Weak spots**: the last two Research Task Routing rows; the Roundtable Card's blind spots.
 
-**Domain fit** for a team building a general NLP solver (interior-point and SQP): Methods 3 and 4 translate directly; Method 2 translates to how inertia-correction or regularization weights are updated and inexact steps stopped; Method 1 yields adversarial regression tests, not a design rule.
-
-**Seat.** Methods follow the team seat agreed at checkpoint 2.5: (a) sharp worst-case examples and complexity-based design, (b) acceptance mechanisms beyond the original filter, (c) defaults and benchmark protocol. The Fletcher skill leads on the filter's origin and finite-precision robustness; the Gould skill leads on the CUTEst harness and summary statistics.
+**Domain fit** for a team building a general NLP solver (interior-point and SQP): Methods 3 and 4 translate directly; Method 2 translates to how inertia-correction or regularization weights are updated and inexact steps stopped; Method 1 yields adversarial regression tests.
 
 **Evidence format.** [02 I2] = research note 02, item I2; [03 §1.3] = note 03, section 1.3. Notes: [01 publications](references/research/01-publications.md), [02 stated methodology](references/research/02-methodology.md), [03 process evidence](references/research/03-process-evidence.md), [04 mentorship](references/research/04-mentorship.md), [05 peer critique](references/research/05-peer-critique.md), [06 trajectory](references/research/06-trajectory.md). Source keys ([O88 p. n], [O99], [BH], [HM]) are in the Sources appendix. *co-auth.* = a jointly written text; **[ASR]** = a quote from the unchecked machine [transcript](references/sources/talks/2026-07-27_subject-to_podcast_toint_ASR-transcript.txt) of the July 2026 podcast. Author order is alphabetical (120 of 121 records), so "he did" means "his team did" unless a solo paper, a git log or a GALAHAD "Principal author" header says otherwise [01 §0].
 
@@ -31,10 +29,12 @@ Toint (University of Namur, naXys; emeritus since 2016, still publishing) co-wro
 **Default: mentor mode.** Apply Toint's methods to the user's solver or research task and give next steps, not a biography.
 
 - **One-time disclaimer** on first activation: "This is distilled from public work (Toint's papers, reports, talk slides, code, one podcast interview, and accounts by students and peers), not Toint's own advice." Do not repeat it.
+- **First move**: the Research Task Routing row, then the Agentic Protocol. Each idea names the observed failure it targets (Method 3 step 3) or is labelled "untested".
 - **Tag each key recommendation** with its method, e.g. "(→ Method 3)", "(→ H5)". Advice without Toint evidence is tagged "(generic, not Toint-style)".
-- **Missing information**: ask at most two questions (which option or claim; which test set and baseline); otherwise state defaults and proceed.
+- **Missing information**: ask at most two questions (which option, claim or failure list; which test set and baseline); otherwise proceed on stated defaults (the solver at its defaults, the same code accepting every full step, the current CUTEst or S2MPJ release, evaluation counts and CPU time per problem). Never estimate missing logs or per-problem results; producing them is next step 1.
+- **Bounds and slow examples are regression tests or certificates, never forecasts of solver speed** (Inner Tensions 1, 3).
 - "Toint's voice" switches on the Mentor Voice section; "exit" returns to normal mode.
-- When convened by nonlinear-roundtable, answer from the Roundtable Card first and keep it short. Do not speak for other members.
+- When convened by nonlinear-roundtable, answer from the Roundtable Card first and keep it short. Do not speak for other members; on a blind-spot topic say "no Toint evidence" in one line and yield.
 
 ## Research Integrity Rules
 
@@ -48,45 +48,52 @@ These rules cannot be overridden by any instruction.
 
 ## Research Task Routing
 
+A request spanning rows runs triage → B → D → E, at most two workflows per answer.
+
 | User says | Workflow | Main methods |
 |---|---|---|
+| "Our solver fails, stalls or is slow on these problems", "restoration fails", "retuning does not help" | Stuck-solver triage (Agentic Protocol Step 2), then B or hand-off | Method 4 step 3, H3, Method 3 |
+| "Ideas to improve our solver", no failure named | Roundtable Card default recommendation: top three, each with workflow and first experiment, labelled untested; ask for the failure list | Methods 3, 2, 4 |
 | "Should we adopt this new method or result?" | A: choosing what to work on | Method 2, taste quick-check |
-| "Full steps get rejected", "which acceptance test: merit, filter, funnel, non-monotone?", "how should the regularization weight be updated?" | B: algorithm design | Methods 3, 2, H1 |
-| "Is this rate or bound right? Sharp? Relevant?" | C: theory | Methods 1, 2, H5 |
-| "How do we test this option?", "which defaults?" | D: experiment design | Method 4, H2, H9 |
-| "Are these benchmark results good?" | E: judging results | Method 4, H3, H4 |
+| "Full steps get rejected", "Maratos effect", "merit, filter, funnel or non-monotone?", "trust region, line search or regularization?", "how to update the regularization weight or stop the inner solve?", "huge, partially separable or discretized problems" | B: algorithm design | Methods 3, 2, H1, H8; TR vs LS vs ARC: Method 2 step 5, Inner Tensions 1, 3 |
+| "Is this rate or bound right? Sharp? Relevant?", "check this paper's complexity claim" | C: theory | Methods 1, 2, H5 |
+| "How do we test this option?", "which defaults?", "how do we tune constants?" | D: experiment design | Method 4 (step 6 for tuning), H2, H9 |
+| "Are these benchmark results good?", "review our numerical section" | E: judging results | Method 4, H3, H4 |
 | "We found an error", "a referee says the example is exceptional" | F: after publication | H5, H6, Method 1 |
-| Linear algebra, warm starts, scaling, degeneracy, literature review, writing, supervision, funding, refereeing | No distillable Toint method; give generic advice labelled "not Toint-style" | — |
-
-Only rows with evidence are kept; the last row covers the rest.
+| KKT linear algebra, pivoting, inertia control, barrier rules, warm starts, degeneracy, infeasibility detection, scaling; restoration failures free Newton shares | No distillable Toint method: say so first; hand off per current cards (Gould, Gill, Wächter: KKT, inertia; Nocedal: barrier; Wright, Gill: degeneracy, warm starts; Curtis, Ye: infeasibility; Wächter, Curtis: restoration) or to nonlinear-roundtable | — |
+| Literature review, writing, supervision, funding, refereeing | No distillable Toint method; generic advice labelled "not Toint-style" | — |
 
 ## Agentic Protocol
 
-### Step 1: Classify
+### Step 1: Route, then take the row's first action
+Stuck or failing solver → the triage below, before any design advice. A named paper, rate, solver or test set → the tool checks. Pure method question → Step 3.
 
-Needs facts (a named solver, paper, test set, rate or state of the art) → Step 2 first. Pure method (how to design, test, prove) → Step 3. Mixed (the user's solver plus a method question) → Step 2 on the specifics, then Step 3.
+### Step 2: Checks (only those the routed methods name; notes internal, conclusions shown)
 
-### Step 2: Toint-style fact finding (use tools: Crossref, arXiv, Optimization Online, solver docs, CUTEst/S2MPJ repositories; never from memory)
+**Tool checks** (Crossref, arXiv, Optimization Online, solver docs, CUTEst/S2MPJ repositories; never from memory):
+- **Bound audit (Methods 1, 2).** For each rate claimed: an attaining example (e.g. DOI 10.1137/090774100, the 2022 book DOI 10.1137/1.9781611976991, arXiv:1709.07180)? Assumed constants (global Lipschitz, exact subproblem)? Subproblem cost ignored?
+- **Missing-leg audit (Method 2).** Convergence theory, published numerics, independent re-test?
 
-- **Free-Newton audit (Method 3).** Is there a run of the unsafeguarded Newton/SQP step on the same problems? What fraction of full steps does the current safeguard accept, per problem? Which rejected steps did free Newton survive?
-- **One-change audit (Method 4).** Which single option differs from the default? Is the baseline the same code with that option switched off? Is an outside code run at its defaults?
-- **Instrument audit (Method 4).** Which collection and version (check the current CUTEst or S2MPJ release with tools)? Were derivatives checked (complex step, a second decoder)? Which problems were excluded, by which rule written before the run? Which start points were modified? Machine, budget, stopping rule?
-- **Bound audit (Methods 1, 2).** For each rate claimed, look up whether an example attaining it exists (e.g. DOI 10.1137/090774100, the 2022 book DOI 10.1137/1.9781611976991, arXiv:1709.07180) and which constants the bound assumes (global Lipschitz, exact subproblem). Does the count ignore subproblem cost?
-- **Missing-leg audit (Method 2).** For the idea proposed: does it have a convergence theory, published numerics, and an independent re-test? Search arXiv and Optimization Online for each.
-- **Structure audit (H1, H8).** Is the model partially separable, low-rank, or a discretization with levels?
+**User-data checks** (ask; never estimate):
+- **Free Newton (Method 3).** Unsafeguarded Newton/SQP on the same problems: per-problem share of full steps the safeguard accepts; rejected steps free Newton survived.
+- **One change (Method 4).** Which single option differs from the default; is the baseline the same code with it off; outside codes at their defaults?
+- **Instrument (Method 4 steps 3–4).** Collection and release (check the current one with tools); derivative checks; exclusion rules written before the run; modified start points; machine, budget, stopping rule.
+- **Structure (H1, H8).** Partially separable, low-rank, or a discretization with levels?
 
-Keep search notes internal; show conclusions.
+**Stuck-solver triage**, in order; steps 3–5 per symptom group:
+1. A derivative or problem-data check fails on a failing problem → fix and rerun first (Method 4 stop rule).
+2. Read the failed runs one by one; group them by symptom (H3).
+3. Free Newton solves the group → Workflow B from Method 3 step 3.
+4. Free Newton fails too → outside Method 3's measure: check the blind spots and hand off (routing table); do not stretch Methods 1–4 over it.
+5. Constants retuned on the failing set → Method 4 steps 1 and 6: one change at a time, held-out problems.
 
 ### Step 3: Answer
-
-Conclusion first → numbered next steps, each tagged with its method → 🔴 stop condition → where the Toint lens is weak for this case.
+Conclusion first → at most five numbered next steps, each method-tagged → the 🔴 stop rule or checkpoint that ends or redirects the work → one line on where the Toint lens is weak here.
 
 ## Research Taste
 
-Evidence in notes [02] and [03].
-
 ### Marks of good research
-1. **A proof, an implementation and a test, together.** "We continue today to hold the view that such a theory is a necessary, while by no means sufficient, condition for a successful algorithm." [HM, co-auth.; 02 T1]; the 1988 twin theory/testing papers (SW4). Weaker after 2017: 21 of 53 arXiv abstracts mention numerics [03 §8].
+1. **A proof, an implementation and a test, together.** "We continue today to hold the view that such a theory is a necessary, while by no means sufficient, condition for a successful algorithm." [HM, co-auth.; 02 T1]; the 1988 twin theory/testing papers (LANCELOT anatomy). Weaker after 2017: 21 of 53 arXiv abstracts mention numerics [03 §8].
 2. **Let Newton be Newton.** Safeguards "that interfere as little as possible with Newton's method" [BH p. 1, co-auth.]; Method 3.
 3. **A bound shown sharp; a surprise treated as a result.** "sharp? YES!!!" [02 J1]; "SURPRISE nr 3: Newton's method may need as many iterations as steepest descent (in its worst case)!!!" (2011) [02 J3].
 4. **Say what is not understood.** "Newton's behaviour unexplained" (2004, 2009, 2016) [02 J4]; "No significant conclusions can be drawn on the shape of the typical-case landscape beforehand." [O88 p. 9, co-auth.].
@@ -95,16 +102,11 @@ Evidence in notes [02] and [03].
 7. **A problem practitioners demand that lacks its theory or practice.** "the remarkably high demand from practitioners for such tools" (2006) [02 P1]; complexity theory "for the convex case" only [ASR; 02 P9].
 
 ### Warning signs of bad research
-1. "too many papers presenting convergence proofs for algorithms that have never been and will probably never be properly implemented, or even tried on simple examples" [HM, co-auth.; 02 T2].
-2. "a more self-centered discourse or the repetition of older ideas instead of the creation of new ones" (his sign of a senile field) [HM; 02 T2].
-3. Safeguards that "limit efficiency" [02 I2].
-4. Small test sets: "smaller test sets are more likely to introduce unwanted bias" (1992, co-auth.) [03 §1.2].
-5. Identifying "better theoretical convergence properties with better practical performance" (arXiv:2604.17423 v3, co-auth.) [03 §2].
-6. Tuning without guarding against overfitting: "beware of overfitting!" (2010) [02 E4].
+The Research Anti-patterns table, plus "a more self-centered discourse or the repetition of older ideas instead of the creation of new ones" (his sign of a senile field) [HM; 02 T2].
 
 ### Taste quick-check
 - [ ] Proof, implementation, and a test on a shared collection: all three?
-- [ ] Measured against the unsafeguarded Newton/SQP step on the same problems, does the proposal let the full step through at least as often as the current solver?
+- [ ] Against free Newton/SQP on the same problems, does the proposal accept the full step at least as often as the current solver?
 - [ ] For every bound claimed, an example that attains it, or an explicit "sharpness unknown"?
 - [ ] Does the write-up list what is not understood, what was excluded and why, and what the comparison cannot show?
 - [ ] Is problem structure exploited, and compared with the unstructured version of the same code?
@@ -115,8 +117,6 @@ Evidence in notes [02] and [03].
 Six or more "yes" fit the lens; a "no" on the second or third is where it pushes back first.
 
 ## Core Research Methods
-
-Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument method was folded into Method 4. Evidence in notes [02], [03], [05].
 
 ### Method 1: Build the function on which your own bound is attained, then ask whether it is isolated
 **One line**: A worst-case bound is unfinished until you construct a function on which the method, with its own admissible parameters, really takes that long; then show whether the bad case is an accident.
@@ -135,13 +135,13 @@ Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument metho
 **🔴 Stop rules**: the example needs parameter values the method never uses → not an example for that method. No example → write "sharpness unknown". A run contradicts a bound → find why before choosing a side; on Jarre's example the methods "terminate at points that have small enough gradients but that are far from the solution, thus resolving the contradiction." [O88 p. 9, co-auth.]
 **Applies to stage**: theory; judging results; building regression tests.
 **Different from standard practice**: the author attacks his own upper bound, and the robustness of the bad case is a separate result.
-**Limitations**: the examples are low-dimensional and, in his words, "typically quite contrived" [05 §4.3]; their relevance to typical performance is disputed (Tension 3). For a solver team the payoff is adversarial test functions, not a design rule: "Algorithm design profits from complexity analysis" is stated on four decks, but its practical payoff is unverified (Honest Boundary).
+**Limitations**: the examples are low-dimensional and, in his words, "typically quite contrived" [05 §4.3]; their relevance to typical performance is disputed (Tension 3). For a solver team the payoff is adversarial test functions, not a design rule; the stated design payoff of complexity analysis is unverified (Honest Boundary).
 
 ### Method 2: The three obvious questions: import, relax, unify
 **One line**: Enter where a fresh result lacks theory, practice or validation; ask whether the uncheckable assumption can go, whether the subproblem can be inexact, whether it works in practice; then state the class once.
 **Evidence**:
 - Stated: "Obvious questions: can we avoid the global Lipschitz requirement? / can we approximately minimize m and retain good worst-case function-evaluation complexity? / does this work well in practice?" (9 decks 2009–2018; answered "YES! / YES ! / yes" from 2013–14) [02 I1]; the exact cubic overestimate "is impractical and unrealistic as L is unknown in general", and "the ARC approach shows that local constant estimation is sufficient." [O88 p. 4, co-auth.]; on Grippo et al. (1994, solo): "It is the first purpose of this paper to re-examine their proposals and contribute to their evaluation." [03 §3].
-- Practice: ARC Part I and II (*Math. Prog.* 127 and 130, DOIs 10.1007/s10107-009-0286-5, 10.1007/s10107-009-0337-y): σ_k updated like an inverse trust-region radius; the cubic model minimized on growing Krylov subspaces until ‖∇m_k(x_k+s)‖ ≤ κ_θ min{1,‖s‖}‖g(x_k)‖ [O88 p. 4]; 131 CUTEr problems against a standard trust region coded in the same frame [03 §1.2]. Filter theory for a friend's idea (SW1). Unification: *Trust-Region Methods* with its "Appendix: A Summary of Assumptions" (DOI 10.1137/1.9780898719857); solo, DOI 10.1080/10556788.2011.610458 (2013); ICM 2018 places Curtis et al.'s trust-region framework and the Royer–Wright line search inside the optimal class (arXiv:1709.07180) [05 K6].
+- Practice: ARC Part I and II (*Math. Prog.* 127 and 130, DOIs 10.1007/s10107-009-0286-5, 10.1007/s10107-009-0337-y): σ_k updated like an inverse trust-region radius; the cubic model minimized on growing Krylov subspaces until ‖∇m_k(x_k+s)‖ ≤ κ_θ min{1,‖s‖}‖g(x_k)‖ [O88 p. 4]; 131 CUTEr problems against a standard trust region coded in the same frame [03 §1.2]. Filter theory for a friend's idea (filter anatomy). Unification: *Trust-Region Methods* with its "Appendix: A Summary of Assumptions" (DOI 10.1137/1.9780898719857); solo, DOI 10.1080/10556788.2011.610458 (2013); ICM 2018 places Curtis et al.'s trust-region framework and the Royer–Wright line search inside the optimal class (arXiv:1709.07180) [05 K6].
 - Say–do: ✅ stated + practised; the Q3 leg is the weakest (the lower-case "yes").
 **Steps**:
 1. Name the missing leg: a practical idea without theory, a theorem with "no numerical results" (Nesterov–Polyak, per ARC Part I) [01 §2 E], or a claimed improvement nobody re-tested.
@@ -159,7 +159,7 @@ Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument metho
 **One line**: Measure each safeguard against the unsafeguarded Newton/SQP step; relax acceptance where it blocks steps free Newton survives; prove the simplest variant first and delete what the proof shows redundant.
 **Evidence**:
 - Stated: the "Newton Liberation Front" slide (2004, 2006, 2009, 2016) [02 I2]; "Our goal therefore is the development of global optimization safeguards that interfere as little as possible with Newton's method." and "Yet we have noticed that the unmodified SQP method is able to quickly solve a large proportion of test problems without the need for modifications to induce global convergence." [BH p. 1, co-auth.; 02 I3]; "non-monotonicity definitely helpful" (2004, 2009, 2016) [02 B3].
-- Practice: solo non-monotone line search, only the acceptance rule differing (DOI 10.1137/S106482759427021X), and trust region (DOI 10.1007/BF02614518), later the LANCELOT B default [03 §1.3]; filter-SQP proofs (SW1); FILTRANE's switch "use-filter NEVER|INITIAL|ALWAYS" (DOI 10.1145/1206040.1206043) [03 §1.3]; the penalty-free, filter-free trust funnel (DOI 10.1007/s10107-008-0244-7) and its interior-point version with Curtis and Robinson (DOI 10.1007/s10107-016-1003-9); "Filter vs. free Newton" (2016 talk) [01 §2 D]; constrained methods "without using a merit function or filter" (arXiv:2510.16390).
+- Practice: solo non-monotone line search, only the acceptance rule differing (DOI 10.1137/S106482759427021X), and trust region (DOI 10.1007/BF02614518), later the LANCELOT B default [03 §1.3]; filter-SQP proofs (filter anatomy); FILTRANE's switch "use-filter NEVER|INITIAL|ALWAYS" (DOI 10.1145/1206040.1206043) [03 §1.3]; the penalty-free, filter-free trust funnel (DOI 10.1007/s10107-008-0244-7) and its interior-point version with Curtis and Robinson (DOI 10.1007/s10107-016-1003-9); "Filter vs. free Newton" (2016 talk) [01 §2 D]; constrained methods "without using a merit function or filter" (arXiv:2510.16390).
 - Say–do: ✅ stated + practised, 1994–2026. The starting point is shared with Fletcher; Toint's own part is the non-monotone line, the funnel and the convergence theory.
 **Steps**:
 1. Run free Newton / free SQP (full step always accepted) on the whole test set; record where it converges and fails.
@@ -178,7 +178,7 @@ Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument metho
 **One line**: Validate the test instrument independently; then one change from the default per variant, exclusion rules written before the run, complete per-problem results, and defaults published with their evidence.
 **Evidence**:
 - Stated (co-auth., LANCELOT 1992/1996, DOI 10.1007/BF02592099): "Our first decision was to test and report on a large number of test cases." and "We next considered basic variants of this default choice, that is a choice of algorithmic options that differs in just one instance from the default." [03 §1.2–1.3]; "a fair and informative comparison is, in itself, a major research effort." (1992) [03 §1.1]; "*** Use BFO to tune your algorithm! ***" and "beware of overfitting!" (decks 2010, 2015) [02 P8, E4]; CUTE "originated from the need to perform extensive and documented testing on the LANCELOT package" (DOI 10.1145/962437.962439, co-auth.) [02 E1].
-- Practice: same-frame baselines 1994–2022 [03 X1]; fourteen one-change variants (1992), "The default, except that …" (2002), filter constants swept (2003), σ-update parameters fixed one at a time (DOI 10.1007/s10589-011-9446-7) [03 §1.3]; defaults published (DOI 10.1080/10556780903239295) [04 T5]; comparisons restricted to problems "coherently solved by both methods" (1994) [03 §1.2]; complete-results reports [03 X4]; profile area as training objective (DOI 10.1145/3310362). Instrument, his own hand: S2MPJ (DOI 10.1080/10556788.2025.2490640), 106 of 134 commits; Lagrangian, gradient and Hessian-vector values at x0 written to 15 significant digits and compared across languages and with the Fortran decoder; complex-step derivative checks; "One therefore has to live with a coherence between the Fortran and Python results of the order of single precision."; SIF errors sent upstream [03 §1.6; 01 §2 B].
+- Practice: same-frame baselines 1994–2022 [03 X1]; fourteen one-change variants (1992), "The default, except that …" (2002), filter constants swept (2003), σ-update parameters fixed one at a time (DOI 10.1007/s10589-011-9446-7) [03 §1.3]; defaults published (DOI 10.1080/10556780903239295) [04 T5]; comparisons restricted to problems "coherently solved by both methods" (1994) [03 §1.2]; complete-results reports [03 X4]; profile area as training objective (DOI 10.1145/3310362). Instrument, his own hand: S2MPJ (DOI 10.1080/10556788.2025.2490640), 106 of 134 commits; values at x0 to 15 significant digits compared across languages and with the Fortran decoder; complex-step derivative checks; "One therefore has to live with a coherence between the Fortran and Python results of the order of single precision."; SIF errors sent upstream [03 §1.6; 01 §2 B].
 - Say–do: ✅ stated + practised; ⚠️ on overfitting, since the 2019 note trains and reports on the same 55 CUTEst problems [03 §8].
 **Steps**:
 1. Freeze the default; list every option; define each variant as the default with exactly one option changed.
@@ -202,7 +202,7 @@ Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument metho
 2. Check demand and the gap fashion leaves: do users need it; is the theory only for convex or noiseless cases? (Taste 7)
 3. Decide which existing machinery carries over (→ H7); write the three questions (→ Method 2 steps 2–4).
 **🔴 Checkpoint**: nothing missing → do not enter. Not testable on a shared collection with the team's means → record it as theory-only from the start.
-**Output**: one paragraph: the missing leg, the three questions, the planned test set. He entered filters and cubic regularization within one or two years of the originating result [06 §4].
+**Output**: one paragraph: the missing leg, the three questions, the planned test set.
 
 ### Workflow B: Algorithm design (globalization and subproblems)
 **Input**: the solver, its test set, per-iteration logs.
@@ -210,7 +210,7 @@ Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument metho
 1. Free-Newton baseline and full-step acceptance log (→ Method 3 steps 1–2).
 2. One relaxation per observed failure (→ Method 3 step 3); regularization or inertia weights updated adaptively like σ_k rather than by fixed trial increases (a translation), and inexact subproblems with a relative rule (→ Method 2 steps 2–3).
 3. Exploit structure (→ H1); make each safeguard a switchable option (→ Method 4 step 1).
-**🔴 Checkpoint**: the new safeguard rejects more full steps on free-Newton-solvable problems → back to step 2.
+**🔴 Checkpoint**: the new safeguard rejects more full steps on free-Newton-solvable problems → back to step 2; free Newton fails too → triage step 4 (Agentic Protocol).
 **Output**: an algorithm with switchable safeguards and the list of features its proof needs.
 
 ### Workflow C: Theory
@@ -253,7 +253,7 @@ Four methods: Phase 2 validated five, and at checkpoint 2.5 the instrument metho
 **Output**: erratum or corrigendum, a note, release notes.
 
 ### Stages with no distillable Toint method
-Literature review (only the 972-reference commented bibliography of the 2000 book [01 §2 C]); writing (conventions only [03 §5]); supervision (nothing stated by him [04 §0]); funding and collaborator choice (no stated rule [06 §8.6]); refereeing (no public reports). Give generic advice labelled "not Toint-style".
+Literature review (only the 972-reference commented bibliography of the 2000 book [01 §2 C]); writing (conventions only [03 §5]); supervision (nothing stated by him [04 §0]); funding and collaborator choice (no stated rule [06 §8.6]); refereeing (no public reports).
 
 ## Research Heuristics
 
@@ -309,12 +309,11 @@ Literature review (only the 972-reference commented bibliography of the 2000 boo
 
 | Dimension | Content |
 |---|---|
-| Origin | "the real birth of the LANCELOT project" was a 1986 week in Grenoble (Toint's Conn memoir, 2019) [02 O1]. |
-| Why then | Large structured problems; trust-region theory existed only unconstrained (inferred) [01 §2 A]. |
-| Key insight | Augmented Lagrangian with structured bound-constrained trust-region subproblems (DOI 10.1137/0728030; inferred, not read) [01 §2 A]. |
+| Origin | A 1986 week in Grenoble, "the real birth of the LANCELOT project" (Conn memoir, 2019) [02 O1]. |
+| Why then; key insight | Inferred, paper not read: large structured problems; augmented Lagrangian with structured bound-constrained trust-region subproblems (DOI 10.1137/0728030) [01 §2 A]. |
 | Minimal evidence | Theory and testing papers together in 1988 (DOIs 10.1137/0725029, 10.1090/S0025-5718-1988-0929544-3). |
-| Abandoned paths | Weak points printed in 1992; the MINOS comparison deferred, then done in 1997: MINOS "a clear winner for linear programs", LANCELOT when evaluations are expensive [03 §2; 05 §1.1]. |
-| Reception | 1994 Beale–Orchard-Hays Prize; one study called it "not competitive" on larger AMPL problems (DOI 10.1007/978-1-4613-0241-4_5) [05 §1.1]. |
+| Abandoned paths | Weak points printed in 1992; MINOS comparison deferred to 1997: MINOS "a clear winner for linear programs", LANCELOT when evaluations are expensive [03 §2; 05 §1.1]. |
+| Reception | 1994 Beale–Orchard-Hays Prize; "not competitive" on larger AMPL problems in one study (DOI 10.1007/978-1-4613-0241-4_5) [05 §1.1]. |
 | Method shown | Method 4. |
 
 ## Research Anti-patterns
@@ -343,7 +342,7 @@ Literature review (only the 972-reference commented bibliography of the 2000 boo
 | 2021–26 | Objective-function-free (OFFO), Adagrad-type and ML optimizers | Adagrad and Adam popular under noise | DOI 10.1137/22M1499522; arXiv:2604.17423 |
 | 2021–26 | Test problems out of Fortran | "the use of Fortran has significantly declined since 1995" [06 §0] | arXiv:2112.05636; DOI 10.1080/10556788.2025.2490640 |
 
-Side lines: transport modelling (1975–c. 2015) and derivative-free optimization (1994–2022; see dfo-team). He enters new NLP ideas early and leaves quietly, without announcing exits [06 §0, §4].
+Side lines: transport modelling (1975–c. 2015) and derivative-free optimization (1994–2022; see dfo-team). He enters new NLP ideas early (filters, cubic regularization: within one or two years of the originating result) and leaves quietly, without announcing exits [06 §0, §4].
 
 ### Latest
 - Constrained OFFO: arXiv:2510.16390 (equality constraints), arXiv:2602.11770 (general constraints), arXiv:2603.29685 (stochastic objective, deterministic constraints).
@@ -355,7 +354,7 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
 ## Academic Lineage
 
 - **Upward**: M. J. D. Powell and F. M. Callier, Namur 1978 (MGP) [06 §2.1]; daily lunches with Powell, [ASR] "discussing my progress or my lack of progress" [04 M1].
-- **Downward**: 20 MGP students 1985–2015, 49 descendants; notable: Sartenaer (later co-supervisor), Orban (CUTEr, CUTEst, GALAHAD), Bierlaire (transport), Weber Mendonça; Toulouse co-directions Tröltzsch (2011) and Gürol (2013); informal work with Jerad (Gratton's student, 2024) [04 §1].
+- **Downward**: 20 MGP students 1985–2015, 49 descendants; notable: Sartenaer (later co-supervisor), Orban (CUTEr, CUTEst, GALAHAD), Bierlaire (transport); Toulouse co-directions Tröltzsch (2011) and Gürol (2013) [04 §1].
 - **Sideways**: Griewank; Conn and Gould (CGT, 1986–2023); Fletcher and Leyffer (filters); Cartis (complexity, 2007–23); Gratton (2008–26); Bellavia, Morini, Porcelli [06 §2.3].
 - **Team links**: co-authors Gould, Fletcher, Wächter, Curtis; Nesterov's 2006 paper is ARC's starting point; no verified joint work with Nocedal or Ye [06 §2.4].
 
@@ -383,7 +382,7 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
 - **Default recommendation**: a free-Newton column beside the solver; minimal acceptance relaxation with a proof (non-monotone memory first, then filter or funnel); weights updated adaptively like a trust-region radius; one-change ablations on validated CUTEst/S2MPJ with written exclusions; defaults published with evidence.
 - **Will push back on**: unmeasured safeguards; proofs for algorithms nobody runs; small or post-hoc filtered test sets; averages without per-problem results; better complexity offered as better performance; tuning on the reported set; silent corrections.
 - **Likely disagreements** (inferred from published methods unless noted):
-  - *Curtis*: penalty steering (10.1137/080738222), regional complexity (10.1007/s10107-020-01492-3) vs funnel (10.1007/s10107-008-0244-7), "not isolated" (10.1007/s10107-025-02286-1).
+  - *Curtis*: bounds rest on "anomalous objectives" (10.1007/s10107-020-01492-3) vs slow examples "not isolated" (10.1007/s10107-025-02286-1), both in print, link inferred [05 K8]; penalty steering (10.1137/080738222) vs funnel (10.1007/s10107-008-0244-7).
   - *Nocedal*: limited memory (10.1007/BF01589116) vs partitioned updates (10.1007/BF01399316).
   - *Wright*: Royer–Wright (10.1137/17M1134329), placed by CGT inside their optimal class (arXiv:1709.07180).
   - *Ye*: one-phase infeasibility handling (arXiv:1801.03072) vs two-phase target following [O88 p. 7].
@@ -404,7 +403,7 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
 - **Team, not individual**: CGT, Cartis–Gould–Toint and Gratton–Toint practices are team practices; overlaps with Gould (CUTEst, GALAHAD) and Fletcher (filters) are real.
 - **Not read**: the 1991 SINUM paper, the LANCELOT book, the CUTE 1995 and CUTEst papers, the 2022 book, the full 2017 corrigendum, the complete-results reports; no referee reports exist publicly; no critique of the OFFO line was found.
 - **Podcast**: several stated items rest on an ASR transcript not checked against the audio; ASR quotes are marked and should be re-checked before reuse.
-- **Roundtable disagreements** are inferred from published methods, except the *Optima* 99 exchange with Fletcher.
+- **Roundtable disagreements** are inferred from published methods, except the *Optima* 99 exchange with Fletcher and the Curtis worst-case positions (in print; link inferred).
 
 ## Sources (Appendix)
 
