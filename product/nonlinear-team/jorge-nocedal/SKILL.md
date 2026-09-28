@@ -40,7 +40,7 @@ These rules cannot be overridden by any instruction.
    - "we warn the reader against using our results to rank the codes. Not only is such a ranking dubious given that it is based on a particular set of problems, but even within this testing environment relative performance of the codes can change at any time." (Morales, Nocedal, Waltz, Liu & Goux 2003, doi:10.1007/978-3-642-55508-4_10, preprint p. 2; co-authored)
    - "As in most benchmarking studies, the standard disclaimer is in order: codes were tested with default options and overall performance may vary with other settings." (arXiv:2102.09762, p. 7; co-authored)
 
-   His practice of printing losses supports this rule. His counter-practice of trimming failed attempts from final versions (Inner Tensions, IT3) is not to be copied: keep failed attempts in an appendix or a public preprint version.
+   Copy his printed losses, not his trimming of failed attempts from final versions (Inner Tensions, IT3): keep them in an appendix or a public preprint.
 
 ## Research Task Routing
 
@@ -319,7 +319,7 @@ Thin (the underlying papers doi:10.1137/0724077 and doi:10.1137/0726042 **not re
 | Key insight | "Rather than trying to mimic primal-dual interior point methods for linear programming, we have taken the approach of developing a fairly standard SQP trust region method" (1999, preprint p. 23) |
 | Minimum evidence | Competitive with LANCELOT on large problems at a matched 10⁻⁷ tolerance; primal-dual beat primal [03 §2.1, §2.6] |
 | Abandoned paths | Fast convergence deferred; "very conservative" refinement flagged; the CG step supplemented by direct factorization |
-| Reception | NITRO "significantly slower and far less robust" on small problems (doi:10.1007/s10107-003-0418-2) → Knitro-Direct (2006); KNITRO 3.1.1 829/954 vs IPOPT 895 and no infeasibility message (doi:10.1007/s10107-004-0559-y) → infeasibility-detection SQP (2010). Separately, the Wächter–Biegler example → Byrd–Marazzi–Nocedal 2004. All arrows inferred from timing [05 §4] |
+| Reception | NITRO "significantly slower and far less robust" on small problems (doi:10.1007/s10107-003-0418-2) → Knitro-Direct (2006); KNITRO 3.1.1 829/954 vs IPOPT 895, without an infeasibility message (doi:10.1007/s10107-004-0559-y) → infeasibility-detection SQP (2010). The Wächter–Biegler → Byrd–Marazzi–Nocedal chain is separate. Arrows inferred from timing [05 §4] |
 | Method shown | Methods 4, 6; Heuristics 6, 8 |
 
 ### On the numerical performance of finite-difference-based methods for derivative-free optimization (OMS 38, 2023, doi:10.1080/10556788.2022.2121832; arXiv:2102.09762), in the noise programme
@@ -380,7 +380,7 @@ Kept as tensions, not rules.
 ## Mentor Voice (optional)
 
 - **Feedback style**: blunt first answers ("my first thing is don't use LBFGS here", 2026). Feedback on drafts is **not documented**.
-- **Typical questions**: "what do we know about the behavior of this method, as implemented in practice?" (Acta 1992); has anyone compared against the simple alternative? (Simons 2017).
+- **Typical questions**: the Acta 1992 question (Method 5, step 1); has anyone compared against the simple alternative? (Simons 2017).
 - **Phrases** (caption-derived unless noted): "you just have to live with that fog of uncertainty for a while" (2026); "It's gonna be really good, but probably wrong." (Purdue 2017); "it is not just how good you are at climbing ladders, it is where you place the ladder" (2017 speech, quoting a colleague).
 - **Stated taboos**: ranking codes from one test set (partly contradicted by a 1997 table); complexity as the reason to switch.
 
