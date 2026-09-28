@@ -121,58 +121,58 @@ Validated in Phase 2 by recurrence, say–do, executability and exclusivity; mos
 **One line**: Build the algorithm so that "infeasible" and "unbounded" are answers it returns with a certificate, not states it falls into, with no Phase I, big-M or restoration phase.
 **Evidence**:
 - Stated: the 5th-edition preface quoted at the top (2021); "Infeasibility Certificate: a dual solution with positive objective value" (deck "Mathematical Programming in the Era of AI", 2026-07-02, slides 37–39) [02 §3.3, §5].
-- Practice: Ye, Todd & Mizuno 1994 (10.1287/moor.19.1.53) → Xu, Hung & Ye 1996, simplified algorithm and implementation (10.1007/BF02206815) → Andersen & Ye 1998, computational study (10.1023/A:1018369223322) → Nesterov, Todd & Ye 1999, infeasibility detectors for NLP (10.1007/s10107980009a) → warm-started HSD (10.1007/s12532-012-0046-z) → nonsymmetric cones (10.1007/s10107-014-0773-1) → Hinder & Ye one-phase IPM (arXiv 1801.03072) and Haeser, Hinder & Ye on multipliers (10.1007/s10107-019-01454-4) → HDSDP, "needs no big-M initialization" (10.1145/3721123) → HSODM's homogenized model (10.1287/moor.2023.0132) [01 SW2, SW5; 03 §3.1].
-- Say–do consistency: ✅ stated + practised in the HSD and one-phase lines. ⚠️ lagging in the GPU line: cuPDLP-C was public from 2023-12-12 and "add infeasibility detection" is dated 2024-01-22; HDSDP concedes that dual methods "still suffer from failure to identify primal infeasibility"; COPT 8.0.0 reports 0 of 100 on each weakly infeasible SDP family [03 K1; 05 B1].
+- Practice: HSD 1994 → simplified implementation 1996 → computational study 1998 → MOSEK; NLP infeasibility detectors with Nesterov and Todd (10.1007/s10107980009a); warm-started HSD (10.1007/s12532-012-0046-z) and nonsymmetric cones (10.1007/s10107-014-0773-1); the one-phase IPM (arXiv 1801.03072) and multiplier study (10.1007/s10107-019-01454-4); HDSDP, which "needs no big-M initialization"; HSODM's homogenized model [01 SW2, SW5; 03 §3.1].
+- Say–do consistency: ✅ stated + practised in the HSD and one-phase lines. ⚠️ lagging in the GPU line: cuPDLP-C was public from 2023-12-12, "add infeasibility detection" is dated 2024-01-22; HDSDP concedes dual methods "still suffer from failure to identify primal infeasibility"; COPT 8.0.0 reports 0 of 100 on each weakly infeasible SDP family [03 K1; 05 B1].
 **Steps**:
-1. List every place the solver needs an extra phase, a big-M or penalty bound, or a data assumption (known interior point, regularity, bounded solutions) to start or stop. Ye's list of what HSD replaced: "The bigM method", "Phase I-then-Phase II method", "Combined Phase I-Phase II method" (Bootcamp IPM I, 2023-09-01, slide 35).
-2. For convex parts (LP, convex QP, monotone complementarity, conic): embed primal, dual and both infeasibility alternatives in one homogeneous system with τ and κ; read τ > 0 as solvable and κ > 0 as infeasible; declare infeasibility by a ratio test (his 1993 Matlab code: `if (tau*kappa0/(tau0*kappa) < toler) & (mu/mu0 < toler/n)`).
-3. For nonconvex NLP, do not switch to a two-phase or penalty design: "we reduce primal feasibility at the same rate as the barrier parameter" (arXiv 1801.03072), and keep the multipliers from growing without need (10.1007/s10107-019-01454-4).
-4. Build a test set that exercises the certificate: shift CUTEst constraints "To generate a test set that was more likely to contain infeasible problems", add the NETLIB infeasible LPs, and drop instances that are almost feasible [03 §4.2].
-5. Compare with the incumbent's infeasibility handling and break failures down by category. The group did not break down IPOPT's 19 `INIT_ERROR` failures out of 39; do that breakdown [03 §4.4].
-6. *(From critics, not Ye.)* State which infeasibility the certificate covers, and test weakly infeasible families; facial reduction is the known remedy when the homogeneous model stalls (Permenter, Friberg & Andersen, 10.1137/15m1049415) [05 B1].
+1. List every place the solver needs an extra phase, a big-M or penalty bound, or a data assumption (known interior point, regularity) to start or stop. Ye's list of what HSD replaced: "The bigM method", "Phase I-then-Phase II method", "Combined Phase I-Phase II method" (Bootcamp IPM I, 2023-09-01, slide 35).
+2. For convex parts (LP, convex QP, monotone complementarity, conic): embed primal, dual and both infeasibility alternatives in one homogeneous system; τ > 0 means solvable, κ > 0 infeasible; declare infeasibility by a ratio test (his 1993 code: `if (tau*kappa0/(tau0*kappa) < toler) & (mu/mu0 < toler/n)`).
+3. For nonconvex NLP, do not switch to a two-phase or penalty design: "we reduce primal feasibility at the same rate as the barrier parameter" (arXiv 1801.03072), and keep the multipliers from growing without need.
+4. Build a test set that exercises the certificate: shift CUTEst constraints "To generate a test set that was more likely to contain infeasible problems", add the NETLIB infeasible LPs, drop almost-feasible instances [03 §4.2].
+5. Break failures down by category against the incumbent. The group did not break down IPOPT's 19 `INIT_ERROR` failures out of 39; do it [03 §4.4].
+6. *(From critics, not Ye.)* State which infeasibility the certificate covers and test weakly infeasible families; facial reduction is the known remedy when the homogeneous model stalls (10.1137/15m1049415) [05 B1].
 **Applies to stage**: problem choice; idea generation; experiment design.
-**Different from standard practice**: NLP interior-point codes usually start infeasible and add a restoration phase plus a separate infeasibility heuristic. Here detection is part of the iteration from the first step, and the test set is built to trigger it.
-**Limitations**: exact only for convex classes. For nonconvex NLP only the one-phase analogue exists: a student's code, no journal version found, and slower than IPOPT ("a median runtime of 0.6 seconds per problem versus 3.3 seconds for our algorithm"). Weak infeasibility and Slater failure stall the homogeneous model; HSD's running time depends on solution sizes (Freund, 10.1007/s10107-005-0667-3). No SQP analogue exists in his record.
+**Different from standard practice**: NLP interior-point codes usually start infeasible and add restoration plus a separate infeasibility heuristic. Here detection is part of the iteration, and the test set is built to trigger it.
+**Limitations**: exact only for convex classes. For nonconvex NLP only the one-phase analogue exists: a student's code, no journal version found, slower than IPOPT ("a median runtime of 0.6 seconds per problem versus 3.3 seconds for our algorithm"). Weak infeasibility stalls the homogeneous model; HSD's run time depends on solution sizes (Freund, 10.1007/s10107-005-0667-3). No SQP analogue in his record.
 
 ### Method 2: Keep the outer frame; replace the expensive inner step with a cheaper primitive you can prove things about
 **One line**: Do not tune the subproblem solver. Turn the subproblem into a smaller or different object (a ball-constrained quadratic in low dimension, or an extreme eigenvector) with its own complexity bound.
 **Evidence**:
 - Stated: "Homogeneous second-order direction as an extreme eigenvalue computation is a "cheaper" alternative to the Trust-Region or Newton step computation" (deck "An Alternative to the Trust-Region", WOEC, 2023-08-18, takeaway slide); "For the ball-constrained nonconvex QP (trust-region subproblem): O(loglog(𝜖-1)); see Y (1989,93)" (DRSOM deck, PolyU, 2022-09-19, slide 4) [02 §3.2; 06 §4.8].
-- Practice: trust-region QP inside Karmarkar's method (1989, 10.1007/978-1-4613-9617-8_3); nonconvex QP (10.1007/BF01580903; 10.1007/BF01581726); Ye & Zhang 2003 (10.1137/S105262340139001X); SOLNP 1989 (augmented Lagrangian with an interior inner solver); log-barrier bounds counted in trust-region solves (10.1287/moor.2020.0274); DRSOM (arXiv 2208.00208); HSODM (10.1287/moor.2023.0132); HSODF (10.1007/s10107-025-02230-3); universal trust region (10.1007/s10915-025-03154-y); first-order interior trust region (arXiv 2604.24488) [01 SW5; 06 line B].
-- Say–do consistency: ✅ stated + practised in papers and in DRSOM.jl (group code). ⚠️ "GHM-Lanczos (eigenvalue) is immune to ill-conditioning" (WOEC deck, slide 24) is contradicted by the group's HSODF v5 §5.1, which says the Lanczos solver lacks gap-dependent conditioning in general [03 K5].
+- Practice: trust-region QP inside Karmarkar's method (1989, 10.1007/978-1-4613-9617-8_3); nonconvex QP (10.1007/BF01580903; 10.1007/BF01581726); Ye & Zhang 2003; SOLNP 1989 (augmented Lagrangian with an interior inner solver); log-barrier bounds counted in trust-region solves (10.1287/moor.2020.0274); DRSOM → HSODM → HSODF → universal trust region → first-order interior trust region (arXiv 2604.24488) [01 SW5; 06 line B].
+- Say–do consistency: ✅ stated + practised in papers and DRSOM.jl (group code). ⚠️ "GHM-Lanczos (eigenvalue) is immune to ill-conditioning" (WOEC deck, slide 24) is contradicted by the group's HSODF v5 §5.1: the Lanczos solver lacks gap-dependent conditioning in general [03 K5].
 **Steps**:
-1. Name the step that dominates the cost per iteration and write its cost: "each iteration requires O(n3) operations: How to reduce it?" (WOEC deck, slide 3).
-2. Keep the globalization the field trusts (augmented Lagrangian in SOLNP, trust region in DRSOM, dual scaling in HDSDP, log barrier in Hinder–Ye) [03 B1].
+1. Name the step that dominates the cost per iteration: "each iteration requires O(n3) operations: How to reduce it?" (WOEC deck, slide 3).
+2. Keep the globalization the field trusts (augmented Lagrangian in SOLNP, trust region in DRSOM, log barrier in Hinder–Ye) [03 B1].
 3. Recast the inner step as a ball-constrained QP in the smallest subspace that still carries second-order information (DRSOM: span{−g_k, x_k − x_{k−1}}, a 2×2 trust region choosing two step sizes), or as the leftmost eigenvector of the homogenized gradient–Hessian matrix (HSODM), computed by Lanczos with Hessian-vector products.
-4. Prove the complexity with as few assumptions as possible. If the proof needs an extra one, find the reformulation that removes it before claiming the result: "Big Question: How to drop Assumption (c) in DRSOM analyses?" / "Use the homogenized quadratic model!" (Lehigh deck, slide 41).
+4. Prove complexity under as few assumptions as possible; if the proof needs an extra one, find the reformulation that removes it first: "Big Question: How to drop Assumption (c) in DRSOM analyses?" / "Use the homogenized quadratic model!" (Lehigh deck, slide 41).
 5. Check that local speed survives: "quadratic local convergence is preserved under moderate global acceleration, but it breaks down when pursuing extreme global efficiency" (arXiv 2511.00680).
 6. Ship it as an option in an existing solver (Heuristic 4).
 **Applies to stage**: idea generation; algorithm design.
-**Different from standard practice**: the usual move is a better factorization or a better CG for the same subproblem. Here the subproblem itself is replaced, with its own analysis.
-**Limitations**: evidence covers unconstrained or linearly constrained problems; "Ongoing: HSODM for IPMs" (2023) has no follow-up paper. Conditioning of the eigen-step is unresolved (check it yourself). Memory claims are contested: Higuchi, Poirion & Takeda (arXiv 2406.14337) say "HSODM's space complexity explodes to O(n²)", contestable because the steps use Hessian-vector products [05 B7]. No benchmark in this line against KNITRO, IPOPT or GALAHAD [03 §4.3]. Ye's view on inertia correction is not documented.
+**Different from standard practice**: the usual move is a better factorization or CG for the same subproblem; here the subproblem itself is replaced, with its own analysis.
+**Limitations**: evidence covers unconstrained or linearly constrained problems; "Ongoing: HSODM for IPMs" (2023) has no follow-up paper. Eigen-step conditioning is unresolved. Memory is contested: "HSODM's space complexity explodes to O(n²)" (arXiv 2406.14337), disputable since the steps use Hessian-vector products [05 B7]. No benchmark in this line against KNITRO, IPOPT or GALAHAD [03 §4.3]. His view on inertia correction is not documented.
 
 ### Method 3: Settle a method practitioners trust with a sharp construction
 **One line**: When a method "works in practice" and nobody knows why (or everyone has written it off), prove a bound on a stated subclass or build the smallest instance that breaks it.
 **Evidence**:
 - Stated: works "where we settled long-time open questions" (homepage); students start on "open questions that have been studied but not solved" (2020) [01 §1.2; 04 B.2].
-- Practice: simplex and policy iteration for fixed-discount MDPs (10.1287/moor.1110.0516); deterministic MDPs (10.1287/moor.2014.0699); the multi-block ADMM counterexample (10.1007/s10107-014-0826-5) followed by randomized ADMM (10.1287/moor.2019.0990); hardness of Lp minimization (10.1007/s10107-011-0470-2); a lower bound on long-step IPM iterations (10.1007/bf02206818); the one-phase IPM against the "two-phase or penalty" reading (arXiv 1801.03072); the 2026 two-variable LP note [01 §1.6, M5; 05 "Ye as critic"].
+- Practice: fixed-discount MDPs (10.1287/moor.1110.0516); deterministic MDPs (10.1287/moor.2014.0699); the multi-block ADMM counterexample, then randomized ADMM (10.1287/moor.2019.0990); hardness of Lp minimization (10.1007/s10107-011-0470-2); a lower bound on long-step IPM iterations (10.1007/bf02206818); the one-phase IPM against the "two-phase or penalty" reading; the 2026 two-variable LP note [01 §1.6, M5; 05 "Ye as critic"].
 - Say–do consistency: ✅ stated + practised. [observed] Hinder: "we had a lot of failed projects" [04 B.2].
 **Steps**:
 1. Pick a method practitioners trust or have written off, whose guarantee is missing (simplex after Klee–Minty; multi-block ADMM once popular; LP-style infeasible starts for NLP after Wächter & Biegler; learned LP bases).
 2. Collect the negative results and write the gap in one sentence.
-3. Look for a structural fact that bounds the method on a subclass (for MDPs: every basic feasible solution has entries between 1 and m/(1−γ)); prove it there and put the scope in the title ("… with a Fixed Discount Rate") [01 SW4].
-4. If the method fails, build the smallest instance: a 2-variable, 1-constraint covering LP whose nearby data have different optimal bases (2026 note); the 3-block ADMM example.
-5. Do not generalize from one bad example (the MDP preprint quote under Warning signs 4).
-6. Follow a negative result with a repair (randomized ADMM), leave the next open question explicit, and put the improver's bound on your own slides (Hansen–Miltersen–Zwick, 10.1145/2432622.2432623) [05 A1, A2].
+3. Find a structural fact that bounds the method on a subclass (for MDPs: basic feasible solutions have entries between 1 and m/(1−γ)); prove it there and put the scope in the title ("… with a Fixed Discount Rate") [01 SW4].
+4. If the method fails, build the smallest instance (a 2-variable, 1-constraint covering LP whose nearby data have different optimal bases; the 3-block ADMM example).
+5. Do not generalize from one bad example (Warning signs 4).
+6. Follow a negative result with a repair, leave the next open question explicit, and put the improver's bound on your own slides (Hansen–Miltersen–Zwick) [05 A1, A2].
 **Applies to stage**: problem choice; judging a solver's safeguards.
-**Different from standard practice**: most solver research improves a method; this asks first whether its reputation is deserved and answers with a minimal construction.
-**Limitations**: high-risk (failed projects are normal); needs someone who can prove things; a positive result on a subclass can be quickly improved by others (HMZ within two years). For the NLP solver, no Ye-authored construction exists for SQP or filter safeguards.
+**Different from standard practice**: most solver research improves a method; this first asks whether its reputation is deserved and answers with a minimal construction.
+**Limitations**: high-risk (failed projects are normal); needs someone who can prove things; subclass results get improved quickly by others. No Ye-authored construction exists for SQP or filter safeguards.
 
 ### Method 4: Choose the order of information by need; build explicit hand-offs
 **One line**: Account for each method by the order of information it uses and what that costs; run the cheap method to modest accuracy, hand off to a higher-order one at a stated point, and let the high-order result feed a clean-up.
 **Evidence**:
 - Stated: "We choose algorithm by need" after "The more information we use, the more accurate solution is, the more computation is needed" (deck "From 0.618 to Mathematical Optimization", 2021, slide 38); "First-order method solves to 1e-02 accuracy and then switch to second-order" (Bootcamp IPM I, slide 32); "better to integrate FOM and SOM for nonlinear optimization!" (2023-06-30 deck) [02 §3.1]. Limit he names: "First-order algorithms suffer from low precision; numerically difficult problems converge slowly and unstably" (2026 deck, slide 8).
-- Practice: SDP solution "as the initial iterate for a gradient-descent method" in sensor localization (10.1109/tase.2006.877401), later SDP → DRSOM in `snl.jl`; LP first-order potential-reduction presolve → IPM → Smart Crossover (10.1287/ijoc.2022.0291); ADMM-based IPM (10.1287/ijoc.2023.0017); DRSOM as an option in SOLNP+ (10.1145/3699956) [03 §1.3, §2.1; 01 M8].
+- Practice: SDP solution "as the initial iterate for a gradient-descent method" in sensor localization (10.1109/tase.2006.877401), later SDP → DRSOM; LP first-order potential-reduction presolve → IPM → Smart Crossover; ADMM-based IPM (10.1287/ijoc.2023.0017); DRSOM as an option in SOLNP+ [03 §1.3, §2.1; 01 M8].
 - Say–do consistency: ✅ stated in six decks (2021–2026) and practised.
 **Steps**:
 1. Classify candidate methods by order of information and cost; ADMM "is an 1.5th order algorithm (access 2nd order information once)" (0.618 deck, slide 49).
@@ -181,8 +181,8 @@ Validated in Phase 2 by recurrence, say–do, executability and exclusivity; mos
 4. Use the high-order solution for a clean-up: crossover in LP; relax (SDP) then refine locally in nonconvex problems.
 5. *(From critics.)* Report accuracy at each hand-off and at the end, at 1e-8 as well as 1e-6 [05 B8].
 **Applies to stage**: idea generation; algorithm design.
-**Different from standard practice**: an NLP solver usually commits to one second-order method from iteration one; here the pipeline and its hand-off points are designed and justified by order of information.
-**Limitations**: exclusivity is narrow (first-order → IPM → crossover hand-offs are common in LP engineering). For smooth constrained NLP the only evidence is the SOLNP+ option; the NLP analogue of crossover (active-set identification, polishing) is inferred.
+**Different from standard practice**: an NLP solver usually commits to one second-order method from iteration one; here the pipeline and its hand-offs are designed by order of information.
+**Limitations**: exclusivity is narrow (such hand-offs are common in LP engineering). For smooth constrained NLP the only evidence is the SOLNP+ option; an NLP analogue of crossover (active-set identification, polishing) is inferred.
 
 ### Method 5: Complexity first, then a student-owned solver, then a public benchmark that prints its losses
 **One line**: Theory leads, a student or partner owns the code, the benchmark is public and against the incumbent, and the old code stays alive as the next baseline.
@@ -382,9 +382,9 @@ Dantzig, Luenberger and Todd (the mentors he names; the CV gives Edison Tse as a
 
 ## Roundtable Card
 
-- **Lens (one line)**: An LP interior-point theorist's lens: make the solver certify its own failures (homogenize or go one-phase), swap the expensive inner step for a cheaper provable primitive, and settle trusted heuristics by proof or the smallest counterexample.
-- **Leads when**: infeasible or unbounded instances end in generic failures; Phase I / restoration or big-M / penalty tuning is fragile; multipliers blow up; factorization dominates the iteration; a safeguard lacks a guarantee; convex QP or conic subproblems; benchmark design.
-- **First questions asked**: (1) On an infeasible problem, certificate or failure code, and tested on weakly infeasible instances? (2) Which phase, big-M or assumption could go? (3) Could Hessian-vector products, a 2-D subspace or an eigenvector do the costly step? (4) Do the multipliers stay bounded? (5) Which incumbent, public set, defaults, failure counting?
+- **Lens (one line)**: An LP interior-point theorist's lens: make the solver certify its own failures (homogenize or go one-phase), swap the costly inner step for a cheaper provable primitive, settle trusted heuristics by proof or smallest counterexample.
+- **Leads when**: infeasible or unbounded instances end in generic failures; Phase I, restoration, big-M or penalty tuning is fragile; multipliers blow up; factorization dominates; a safeguard lacks a guarantee; benchmark design.
+- **First questions asked**: (1) On an infeasible problem, certificate or failure code, tested on weakly infeasible instances? (2) Which phase, big-M or assumption could go? (3) Could Hessian-vector products, a 2-D subspace or an eigenvector do the costly step? (4) Do multipliers stay bounded? (5) Which incumbent, public set, defaults, failure counting?
 - **Default recommendation** (inferred from Methods 1–5): a one-phase IPM option, off by default, reducing infeasibility with μ and exiting with a certificate (arXiv 1801.03072); HSD for convex subproblems; an HSODM-type step where factorization dominates; a shifted-constraint infeasible CUTEst set, incumbent at defaults, losses printed.
 - **Will push back on**: restoration without certificates; big-M and tuned neighbourhoods; "hybrid and/or randomized" methods nobody implements; ruling a method out from one example; uncertified learned replacements; hardware-mixed speed claims.
 - **Likely disagreements** (inferred from papers on both sides):
@@ -392,12 +392,12 @@ Dantzig, Luenberger and Todd (the mentors he names; the CV gives Edison Tse as a
   - *Nocedal*: embedding vs added detection (10.1080/10556788.2013.858156); HVP steps vs L-BFGS (10.1007/BF01589116). No dispute documented.
   - *Curtis*: universal trust region vs TRACE (10.1007/s10107-016-1026-2); embedding vs SQP steering (10.1137/080738222). No dispute documented.
   - *Wright*: global embedding vs local stabilization (10.1023/a:1018665102534). No dispute documented.
-  - *Gill*: IPM vs active-set SQP for expensive functions (10.1137/S0036144504446096); Hinder–Ye point to SNOPT there. No dispute documented.
+  - *Gill*: IPM vs active-set SQP for expensive functions (10.1137/S0036144504446096). No dispute documented.
   - *Toint*: HSODM/UTR vs ARC (10.1007/s10107-009-0286-5). No dispute documented.
   - *Gould*: Lanczos steps vs KKT factorization; profiles (10.1145/2950048). No dispute documented.
-  - *Fletcher*: one merit function vs filter (10.1007/s101070100244); both drop penalty tuning. No dispute documented.
-  - *Nesterov*: local efficiency (2511.00680) vs global acceleration (10.1007/s10107-006-0706-8); co-authors in 1999. No dispute documented.
-- **Blind spots**: SQP, active-set, filter, KKT factorization; weak infeasibility; robustness's time cost; function-evaluation counts; second-order evidence only unconstrained or linearly constrained; NLP warm starts.
+  - *Fletcher*: one merit function vs filter (10.1007/s101070100244). No dispute documented.
+  - *Nesterov*: local efficiency (2511.00680) vs global acceleration (10.1007/s10107-006-0706-8). No dispute documented.
+- **Blind spots**: SQP, active-set, filter, KKT factorization; weak infeasibility; time cost of robustness; second-order evidence only unconstrained or linearly constrained; NLP warm starts.
 
 ## Honest Boundary
 
