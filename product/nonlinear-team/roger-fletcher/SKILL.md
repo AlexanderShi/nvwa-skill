@@ -168,8 +168,8 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 **One line**: The next research problem is the part of the solver you maintain that fails on named problems; half-ideas stay parked until a component needs them.
 **Evidence**:
 - Stated: "Currently the obvious Conjugate Gradient (CG) methods have been used, but these have not proved to be very suitable." [LMSD p.1]; "It came about because I was trying to work out why I couldn't get MINRES to work on the Rockafellar's augmented Lagrangian" [O99 p.4]; the shelf: "I have therefore returned to some thoughts that I had some 20 years ago" [LMSD p.2].
-- Practice: the filter grew out of the penalty SQP he maintained; LMSD was built as the null-space solver of SLCP/filterSD; Wolfe's method lived in bqpd for years before the 2014 paper; students' theses were layers of his stack (LU updates, sparse LP linear algebra, MINLP on bqpd, SLP-filter) (04 §1).
-- Say–do consistency: ✅ (filter 1996, LMSD 2009, SLCP 2012, box QP 2013–17). Inferred pattern (06 §3): topics that fed a maintained code became long threads; the rest stayed one-paper visits.
+- Practice: the filter grew out of the penalty SQP he maintained; LMSD was built as the null-space solver of SLCP/filterSD; Wolfe's method lived in bqpd for years before the 2014 paper; students' theses were layers of his stack (04 §1).
+- Say–do consistency: ✅ (filter 1996, LMSD 2009, SLCP 2012, box QP 2013–17). Inferred (06 §3): topics that fed a maintained code became long threads; the rest stayed one-paper visits.
 **Steps**:
 1. Keep a one-line-per-problem results log from the harness (problem, sizes, f, constraint violation, gradient norm, iterations, evaluations, failure code), as filterSD's driver does (03 §1.2).
 2. Group the failures by component (QP solver, restoration, null-space minimization, factorization updates).
@@ -178,8 +178,8 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 5. Build it as a drop-in replacement with the same interface; study it standalone (paper), then inside the solver (release).
 6. If an idea feeds no component you maintain, publish once and park it.
 **Applies to stage**: problem choice; research agenda; supervision.
-**Different from standard practice**: the question comes from a named failure of a maintained code, not from a gap in the literature.
-**Limitations**: needs a solver stack owned for years, and can narrow vision: he stayed out of interior-point methods, and several one-off ideas did not spread.
+**Different from standard practice**: the question comes from a named failure of a maintained code, not a gap in the literature.
+**Limitations**: needs a solver stack owned for years, and can narrow vision (he stayed out of interior-point methods).
 
 ### Method 5: The mechanism-first experimental ladder
 **One line**: Beat the method's own simplest special case on a problem you built, trace the mechanism on a case with a known answer, compare with the obvious alternative built from the same parts, choose standard problems by the targeted property, and only then run the broad benchmark.
