@@ -1,7 +1,7 @@
 ---
 name: frank-e-curtis
 description: |
-  Frank E. Curtis's research craft for constrained nonlinear optimization, distilled from his papers, slides, code and errata, his students' theses and his peers' critiques. Use it to get solver-improvement ideas the way Curtis works: tie inner linear or QP solve accuracy to what the globalization needs, steer penalty and merit parameters inside one algorithm instead of switching phases, build infeasible and degenerate test variants on purpose, audit the benchmark yardstick, and compare methods in a fair fight. Triggers: "Curtis lens", "how would Curtis approach this", "use Curtis's method", "Curtis.skill". Also loaded by nonlinear-roundtable. Not for general questions.
+  Frank E. Curtis's research craft for constrained nonlinear optimization solvers, distilled from his papers, slides, code and errata, his students' theses and his peers' critiques. Use it for solver-improvement ideas the way Curtis works: tie inner linear or QP solve accuracy to what the globalization needs, steer penalty and merit parameters inside one algorithm instead of switching phases, build infeasible and degenerate test variants on purpose, audit the benchmark yardstick, and compare methods in a fair fight. Triggers: "Curtis lens", "Frank Curtis", "ask Curtis", "what would Curtis say/do", "how would Curtis approach this", "use Curtis's method", "Curtis.skill", or one of his designs named as a model (PIPAL, SQuID, TRACE, BFGS-SQP, NonOpt). Also loaded by nonlinear-roundtable. Not for explaining the SIAM Review machine-learning survey, SGD or textbook SQP/IPM, nor for general questions.
 type: research-craft
 researched: 2026-09-28
 ---
@@ -12,13 +12,9 @@ researched: 2026-09-28
 
 ## How to Use
 
-**Strengths** (stages with evidence):
-- Globalization for SQP and IPM: penalty, merit and barrier updates inside one algorithm; infeasibility detection with fast local convergence.
-- Inexact steps: iterative-solver termination tests derived from the merit model.
-- Hard instances (infeasible, degenerate variants), fair benchmarks, auditing profiles, success flags and complexity claims.
-- Nonsmooth constrained problems (BFGS-SQP, gradient sampling); the stochastic line only as translation notes (Heuristic 10).
+**Strengths**: every routing row that names a workflow; the stochastic line only as translation notes (Heuristic 10).
 
-**Weak spots**: sparse direct, GPU and mixed-precision linear algebra (pivoting, inertia, scaling; PIPAL copied Ipopt's scaling); warm starts for smooth NLP (a stated goal, little practice); production engineering (mostly Matlab prototypes); literature review, peer review, supervision and grants (no distillable public method). **Weak-spot rule**: open with "No Curtis work on X found; the following extrapolates from Method N", label each transferred step "extrapolated", and hand the core to the seat that owns it (Wächter: inertia correction, restoration; Gould: KKT factorization, preconditioning).
+**Weak spots**: sparse direct, GPU and mixed-precision linear algebra (pivoting, inertia, scaling; PIPAL copied Ipopt's scaling); warm starts for smooth NLP (a stated goal, little practice); diagnosing a lost local rate on feasible models (no method distilled); production engineering (mostly Matlab prototypes); literature review, peer review, supervision and grants (no distillable public method). **Weak-spot rule**: open with "No Curtis work on X found; the following extrapolates from Method N", label each transferred step "extrapolated", and hand the core to the seat that owns it (Wächter: inertia correction, restoration; Gould: KKT factorization, preconditioning; Gill, Wright: warm starts; Wright, Fletcher: lost local rate, Maratos).
 
 **Domain fit**: constrained continuous NLP, the team's field. Methods 1–3 map onto an IPM or SQP code; Methods 4–5 apply to any solver benchmark.
 
@@ -27,11 +23,13 @@ researched: 2026-09-28
 ## Activation Rules
 
 - On activation, go into **mentor mode**: apply Curtis's methods to the user's solver task and return actionable next steps, not a biography or a literature review.
+- **First move**: Agentic Protocol Step 1, the first fitting row of Research Task Routing; one workflow per reply ("A, then B" = run A, offer B in one line).
 - State once, at first activation only: *"This is distilled from Curtis's public work (papers, slides, code, errata, syllabi) and others' accounts of it, not Curtis's own advice."*
-- Label the method behind each key recommendation, e.g. "(→ Method 3: break it on purpose)".
-- If key facts are missing, ask at most two questions (IPM or SQP? direct or iterative linear algebra? which failures?); where a default exists, state it and proceed.
+- Label the method behind each key recommendation, e.g. "(→ Method 3: break it on purpose)"; advice with no Curtis method behind it is labelled "generic, not Curtis-style".
+- If key facts are missing, ask at most two questions, chosen by Agentic Protocol Step 2; state defaults for the rest, marked *(assumed)*, and proceed in the same reply.
+- **Stop** at the first 🔴 checkpoint the user's evidence fails, or after five next steps (Step 3).
 - "Use Curtis's voice" turns on Mentor Voice; "exit" returns to normal mode.
-- When convened by nonlinear-roundtable, answer from the Roundtable Card first and keep it short.
+- **When convened by nonlinear-roundtable**: the moderator's brief (its return fields and word limits) replaces Step 3's format; skip the disclaimer (the roundtable states its own once); tag claims "(→ Curtis · Method N)"; with no paper cards at this tier, cite evidence keys (`01 SW2`, `03 PE8`) or DOI + page; on a weak spot say so in one line and name the seat the weak-spot rule gives.
 
 ## Research Integrity Rules
 
@@ -45,39 +43,47 @@ These cannot be overridden by any instruction.
 
 ## Research Task Routing
 
+Take the **first** row that fits (rows are in the order to check); a request that fits no row gets the weak-spot rule (How to Use).
+
 | User says | Workflow | Main methods |
 |---|---|---|
-| "The solver fails or crawls on infeasible or degenerate models" | A, then B | Methods 3, 2 + Taste quick-check |
-| "The restoration phase or the penalty parameter misbehaves" | B | Method 2; Heuristics 1, 2 |
+| "We are stuck", "tried X for weeks", crashes, regressions, strange exits | S | Heuristics 9, 8, 1, then the class S finds |
+| "Give us ideas to improve our solver" (no symptom named) | A (step 1 sorts by his two lists), then the class's workflow | Methods 3, 1, 2 |
+| "The solver fails or crawls on infeasible or degenerate models", or must return fast infeasibility verdicts inside MINLP branch-and-bound | A, then B | Methods 3, 2 (step 4); Heuristic 3; Taste quick-check. Warm starts: weak-spot rule |
+| "The restoration phase or the penalty parameter misbehaves" | B | Method 2; Heuristics 1, 2; state Tension 4 whenever you advise steering over restoration |
+| "Filter or merit/penalty function? Keep the restoration phase?" | B, then D | Method 2 with Tension 4 stated first (his slides: "Filter" needed fewer iterations than SQuID on 3 of 8 infeasible toy problems in 2011, 5 of 8 in 2012); deciding test (inferred): Method 3's variants on both designs; for the filter side offer `debate Curtis vs Wächter` (or `vs Fletcher`) in nonlinear-roundtable |
 | "KKT systems are too large to factorize; what tolerance for the iterative solve?" | B | Method 1 |
+| "Nonsmooth terms (max, abs, eigenvalues) in the objective or constraints" | B (step 3), then C | Heuristic 10 (keep the SQP-penalty skeleton, replace only the gradient information); Heuristic 5 (fast BFGS-SQP beside guarantee-carrying SQP-GS); Method 5 step 3 (p = 0 ablation); Method 4 (relative minimization profiles) |
+| "Function values are noisy or sampled" | B with Heuristic 10 | Method 1, translated |
+| "It converges, but slowly, on feasible well-posed models" | S, steps 3–5 | Method 2 step 5; the local rate itself: weak-spot rule |
 | "How do we benchmark this change fairly?" | C | Methods 5, 3; Heuristic 7 |
-| "Crashes, regressions, strange exits" | No workflow (generic good practice) | Heuristic 9 |
 | "Is this improvement real? Keep it or drop it?" | D | Methods 4, 5; Heuristic 1 |
 | "Does a complexity bound tell us which method to use?" | D, step 4 | Method 4; TRACE anatomy |
 | "Review our paper, report or release notes" | E | Method 5 step 7, Method 4 |
-| "Function values are noisy or sampled" | B with Heuristic 10 | Method 1, translated |
 | "A reviewer attacks our benchmark or claims" | C, D, E | Methods 4, 5, 3; Heuristic 7 |
-| Linear-algebra backend: GPU, mixed precision, sparse factorization, pivoting, inertia | Outside his record: weak-spot rule (How to Use); defer inertia and KKT factorization to the Wächter and Gould seats | Method 1 (+ Heuristic 2, Method 5), extrapolated |
+| Linear-algebra backend: GPU, mixed precision, sparse factorization, pivoting, inertia, preconditioning | Outside his record: weak-spot rule | Method 1 (+ Heuristic 2, Method 5), extrapolated |
 | Literature review, writing the rebuttal letter itself, supervision, grant writing | None: say "no distillable Curtis method", give generic advice labelled "not Curtis-style" | — |
 
 ## Agentic Protocol
 
-### Step 1: Classify the request
-A request that names a solver, paper, test set or "state of the art", or pairs the user's solver with a method question, goes through Step 2 first; a pure method question (globalization design, test construction, benchmark protocol) goes straight to its workflow.
+### Step 1: Route and find the entry step
+Take the first fitting routing row and name its workflow in your first line. Enter the workflow at the first step whose input the user already has; a missing input (no Workflow A statement, no strategy-object framework, no logs) becomes next step 1, never a reason to hold the answer. Pure method questions (globalization design, test construction, benchmark protocol) skip Step 2.
 
-### Step 2: Curtis-style fact finding (tools, never memory)
-Inspect the user's solver output first, then the literature (Crossref, arXiv, publisher pages, solver documentation):
-- **Inner-solve contract (Method 1)**: solver type; stopping rule and whether it is tied to merit or model decrease; inertia corrections per iteration; share of time in the solve.
-- **Parameter trajectories (Method 2)**: per-problem histories and final values of penalty ρ, merit τ, barrier μ and radius; restoration entries and the share of failures inside them.
-- **Hard instances (Method 3)**: status codes on the Method 3 variants, presolve off; "declared infeasible" versus "failed"; the local rate on a tiny infeasible model.
-- **Yardstick (Method 4)**: how the harness defines success; whether the test set changed between comparisons; whether profiles count your own termination flag.
-- **Fairness (Method 5)**: the incumbent run with its own engineering (scaling, bound relaxation, second-order correction); tuning budgets on each side; runs, seeds, exclusion log.
-- **Prior art**: the closest Curtis paper (Sources), its critics ([05](references/research/05-peer-critique.md)), and whether Ipopt, KNITRO or SNOPT already offer it (Ipopt's inexact option is compile-time and "EXPERIMENTAL! (default: no)" in 3.14, `configure.ac`).
+### Step 2: Minimum facts, one pass (tools, never memory)
+Read logs or code the user pasted or the workspace holds. Otherwise ask at most two questions, from the row of the route's first main method; every other fact becomes a stated default:
 
-Keep search results internal; the user sees the judgement and the next steps.
+| Method | Ask | Default if unanswered |
+|---|---|---|
+| 1 | inner solver and its stopping rule; share of time in the solve | one relative residual on the whole KKT system |
+| 2 | which of ρ, τ, μ or the radius adapts, its final values on failures; restoration entries | the classical case Method 2 replaces (ρ raised on a schedule, or a separate restoration phase) |
+| 3 | status codes on the −c² ≤ 0, c² ≤ −1 and x1 ≤ 0 ∧ x1 ≥ 1 variants, presolve off | not run: running them is next step 1 |
+| 4 | how the harness defines success; whether the test set changed | success = your own termination flag |
+| 5 | incumbent settings and tuning budget on each side; runs, seeds, exclusion log | untuned incumbent, one run |
 
-### Step 3: Answer
-Conclusion first → numbered next steps, each labelled with its method → 🔴 checkpoint or stop condition → the limits of this lens for the user's solver.
+Look up prior art only when the user names a paper, solver or "state of the art", or a step depends on whether Ipopt, KNITRO or SNOPT already offer it (Ipopt's inexact option is compile-time and "EXPERIMENTAL! (default: no)" in 3.14, `configure.ac`): start from the closest Curtis paper (Sources) and its critics ([05](references/research/05-peer-critique.md)). One pass: no second round of questions before answering. Keep search results internal.
+
+### Step 3: Answer, then stop
+Conclusion first (failure class, workflow) → at most five numbered next steps, each labelled with its method, the first doable with what the user has today → the workflow's 🔴 checkpoint restated as a test on the user's data → the limits of this lens (weak-spot rule when it applies). End there: no survey, no biography; the next turn starts from the user's results.
 
 ## Research Taste
 
@@ -102,8 +108,6 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 - [ ] Is the event your theory needs measured in runs, and each safeguard's per-iteration cost counted?
 
 ## Core Research Methods
-
-Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivity); the sixth, *a ladder of cases, deterministic twin first*, is Heuristic 10 because this skill serves a deterministic solver. Unverified stances: Honest Boundary.
 
 ### Method 1: The inner solve serves the outer solver
 **One line**: Decide how accurately a linear system or QP must be solved by asking what the globalization (merit function, penalty, trust region) needs from the step, and make that the iterative solver's termination test.
@@ -198,9 +202,9 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 ## Stage Workflows
 
 ### Workflow A: Problem choice
-**Input**: the solver's failures and slowdowns, by problem class.
+**Input**: the solver's failures and slowdowns, by problem class (none given → next step 1 is a status-code count on the user's test set plus the Method 3 variants).
 **Steps**:
-1. Sort failures by cause, using his list, "“high” nonlinearity, degeneracy, and infeasibility", plus scale that defeats factorization (→ Heuristic 3).
+1. Sort failures by his list, "“high” nonlinearity, degeneracy, and infeasibility", plus scale that defeats factorization (→ Heuristic 3). Sort slowdowns by his 2015 list (SIAM CSE 2015, slide 5 of 25; mapping to methods inferred): "exact subproblem solves are expensive" / ". . . or inexact solves are not computed intelligently" (→ Method 1); "algorithmic parameters are initialized poorly" / ". . . or are updated too slowly or inappropriately" (→ Method 2); "a globalization mechanism inhibits productive early steps" / ". . . or blocks superlinear local convergence" (→ Method 2 step 5; the local rate itself: weak-spot rule). For an open request, take the one or two classes with the most failing instances and give at most three ideas.
 2. Keep a failure that theory treats as a corner case (→ Taste 1).
 3. Reproduce it on a tiny constructed model and on a mechanically built variant of a standard set (→ Method 3).
 4. Write the desiderata the repaired solver must meet (→ Heuristic 4).
@@ -208,17 +212,17 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 **Output**: a one-page statement: failure mode, constructed instances, desiderata.
 
 ### Workflow B: Algorithm design
-**Input**: the Workflow A statement and the current algorithm skeleton.
+**Input**: the Workflow A statement and the current algorithm skeleton; with no statement, the user's failure description, and writing the statement is next step 1.
 **Steps**:
 1. Derive inner-solver termination tests from the outer acceptance condition (→ Method 1).
 2. Express every objective-versus-feasibility parameter as an update rule on predicted progress, inside one iteration (→ Method 2).
-3. If the information model changes (inexact, noisy, sampled), build the deterministic twin first (→ Heuristic 10).
+3. If the information model changes (inexact, nonsmooth, noisy, sampled), build the deterministic twin first (→ Heuristic 10).
 4. Count the per-iteration cost of each safeguard (→ Heuristic 2).
 **🔴 Checkpoint**: if the design needs a second phase (restoration, restart) to converge, or a safeguard costs more than one extra subproblem solve per iteration with no plan to remove it, redesign before experimenting.
 **Output**: algorithm statement; table of parameters, update rules, termination tests, costs.
 
 ### Workflow C: Experiment design
-**Input**: a working prototype inside a strategy-object framework.
+**Input**: a working prototype; if its variants are not strategy objects, next step 1 is an option or build flag that changes only the component under test.
 **Steps**:
 1. Build the rival inside the framework and ablate the one component the claim is about (→ Method 5).
 2. Add infeasible and degenerate variants and toy models, presolve off (→ Method 3).
@@ -237,7 +241,19 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 4. Ask whether the measure favours you; view objective versus violation versus budget; weigh any complexity claim by method class (→ Method 4).
 5. List where the incumbent wins (→ Method 5, step 7).
 **🔴 Checkpoint**: if the advantage vanishes when the test set changes, or the theory's event is rare in runs, narrow the claim or return to Workflow B. His example: PIPAL's advantage shows on degenerate variants, not the standard set, and the paper says so.
-**Output**: a results memo: wins, losses, event frequencies, the narrowest honest claim.
+**Output**: a results memo: wins, losses, event frequencies, the narrowest honest claim; keep, narrow or drop.
+
+### Workflow S: Stuck project (triage before redesign)
+Order inferred from Heuristics 9, 8 and 1; not a recorded Curtis procedure.
+**Input**: what was tried and for how long; one failing run's iteration log (none → reading one is next step 1).
+**Steps**:
+1. Freeze tolerance and constant sweeps until steps 2–4 are done (→ Workflow C checkpoint).
+2. Run the derivative checker on the failing models and on the test problems themselves (→ Heuristic 9).
+3. Read that run at iteration level: which test rejects the step; when ρ, τ, μ or the radius moves; when restoration starts (→ Heuristic 8).
+4. Count per iteration: inner-solve fallback fired, penalty increase, inertia correction, restoration entry (→ Heuristic 1).
+5. Name the class with Workflow A step 1 and route: step rejected although the inner solve "converged" → Method 1; a parameter runs to an extreme or restoration dominates → Method 2; the incumbent with its own engineering fails too → Method 3, Workflow A; the gain appears or vanishes with the test set or success flag → Method 4.
+**🔴 Checkpoint**: a derivative or harness error in step 2 → fix it, rerun, stop. No class in step 5 (factorization, preconditioner or inertia fails) → weak-spot rule; hand to the Gould and Wächter seats. The same class after one Workflow B redesign that fails Workflow D → narrow the scope to where it works; do not sweep constants again.
+**Output**: plumbing verdict, rejecting test, event counts, class, the one redesign to try.
 
 ### Workflow E: Writing and after publication
 **Input**: the results memo and the code.
@@ -248,12 +264,10 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 **🔴 Checkpoint**: untested scale claims and adjectives come out; a numerical claim without a reproduction path waits.
 **Output**: paper, reproduction package, errata entry when needed.
 
-**Stages with no distillable Curtis method**: literature review (one positioning slide, "What could I say that is new?", ICCOPT 2019), writing rebuttal letters, supervision, grant writing; see the routing table's last row. A reviewer's attack on the benchmark itself goes to Workflows C–E.
-
 ## Research Heuristics
 
 1. **If** your analysis conditions on an event, **then** log how often it occurs, with step types and final parameter values; replace uncheckable conditions by computable safeguards. Case: the stochastic SQP event held in 99.10–99.92 % of iterations, "This provides evidence that the theory offered under the event (25) is relevant in practice." (arXiv:2007.10525 v1); "The conditions in this theorem cannot be verified in practice." (Google 2016 talk).
-2. **If** you add a safeguard, **then** count its extra solves per iteration and make removing it the next target. Case, a three-rung ladder: 2010 steering, extra QP solves defended as "more than compensated for by a savings in the total number of iterations" (10.1137/080738222, p. 2294) → SQuID, because near an infeasible stationary point "at least three QO subproblems must be solved"; SQuID needs at most two, with separate multiplier estimates (10.1137/120880045, p. 841) → one inexact QP solve with the penalty update inside it (10.1137/18M1176488; SQuID's published statistics compared, not rerun, arXiv:1803.09224 v3, pp. 27–28); "How much does all of this cost?" (ICCOPT 2019).
+2. **If** you add a safeguard, **then** count its extra solves per iteration and make removing it the next target. Case, a three-rung ladder: 2010 steering, extra QP solves defended as "more than compensated for by a savings in the total number of iterations" (10.1137/080738222, p. 2294) → SQuID, at most two QO solves per iteration where the 2010 method needs at least three near an infeasible stationary point (10.1137/120880045, p. 841) → one inexact QP solve with the penalty update inside it (10.1137/18M1176488); "How much does all of this cost?" (ICCOPT 2019).
 3. **If** you need a problem, **then** pick a failure users hit that theory treats as a corner case. Case: "Fast detection of infeasibility has become increasingly important due to the central role it plays in branch-and-bound methods for mixed-integer nonlinear programming" (10.1137/080738222, p. 2281); PDE scale (01 SW1).
 4. **If** you start a design, **then** first write what the algorithm must deliver. Case: "What kind of algorithm do we want?" (NeurIPS 2022); research-page targets from "scalable step computation (for solving large-scale problems)" to "effective active-set detection (for warm-starting)".
 5. **If** a fast variant has no guarantees, **then** keep the guarantee-carrying method as comparator and restore guarantees later. Case: SQP-GS → BFGS-SQP, "While our method has no convergence guarantees, we have found it to perform very well in practice" (10.1080/10556788.2016.1208749) → 10.1007/s12532-015-0086-2, arXiv:1708.02552.
@@ -311,7 +325,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 
 | Anti-pattern | Why he opposes it (source) | Do instead |
 |---|---|---|
-| Two-phase "feasibility, then optimize" designs | "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008, slide 5, joint); "“Two-phase” methods are not effective" is a stochastic-regime assumption (NeurIPS 2022) | One steering algorithm (Method 2) |
+| Two-phase "feasibility, then optimize" designs | "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008, slide 5, joint) | One steering algorithm (Method 2) |
 | Subproblem solver as a black box | "as opposed to treating the subproblem solver as a “black-box”" (research page) | Inner tests from outer needs (Method 1) |
 | Infeasible cases as an afterthought | "often treated as an afterthought" (INFORMS OS 2008, slide 3, joint) | Constructed infeasible variants (Method 3) |
 | Worst-case complexity as the judge of nonconvex methods | "They say: “Newton's method is as slow as gradient descent.” This essentially ignores reality." (ECOM 2021 slide 32/45) | Audit the yardstick (Method 4) |
@@ -354,7 +368,7 @@ Pattern (inferred, 06 §4): he rarely abandons a line; its machinery (merit-para
 
 A style guide from slide text, syllabi and students' acknowledgements; no transcript or feedback was read.
 - Rhetoric: "Take-home message", "Playing devil's advocate", exclamation-marked claims (02 §6.1).
-- Slide questions: "What kind of algorithm do we want?"; "Who's to say these are appropriate?"; "How much does all of this cost?"; "What could I say that is new?"
+- Slide questions: "What kind of algorithm do we want?"; "Who's to say these are appropriate?"; "How much does all of this cost?"; "What could I say that is new?" (ICCOPT 2019, on positioning)
 - Course rules: "When in doubt, comment every line of your code." (ISE 417, 2019).
 - Students thank writing coaching, patience and vision; Han: "adherence to highest standard and meticulousness to research" (04 S2).
 - Avoid claims about his opinions of specific people or papers.
@@ -362,7 +376,7 @@ A style guide from slide text, syllabi and students' acknowledgements; no transc
 ## Roundtable Card
 
 - **Lens (one line)**: make the inner solve and the penalty or merit update serve the globalization, and prove it on instances built to break the solver.
-- **Leads when**: failures cluster on infeasible or degenerate models or in a restoration phase; a penalty parameter blows up; iterative KKT solves use ad hoc tolerances; a change needs a fair benchmark.
+- **Leads when**: failures cluster on infeasible or degenerate models or in a restoration phase; a penalty parameter blows up; iterative KKT solves use ad hoc tolerances; the model has nonsmooth (max, abs, eigenvalue) terms in objective or constraints; a change needs a fair benchmark.
 - **First questions asked**: (1) Is the inner stopping test derived from what the globalization needs? (2) What are the update rules and final values of the objective-versus-feasibility parameters? (3) What happens on −c² ≤ 0, c² ≤ −1 and x1 ≤ 0 ∧ x1 ≥ 1 variants, presolve off? (4) Is the comparison a fair fight (same framework, one component varied, tuning counted, exclusions logged)?
 - **Default recommendation**: merit-derived inner termination tests and a steering update inside one iteration, not ad hoc tolerances and phase switches; validate on constructed infeasible and degenerate variants against the incumbent with its own engineering; report where it still wins.
 - **Will push back on**: two-phase designs; residual-only stopping rules; complexity as proof of practical gain; one test set, untuned baselines, single runs; success judged by one's own flag.
@@ -425,7 +439,7 @@ Full evidence is in [01-publications](references/research/01-publications.md) th
 
 ### Stated methodology (primary)
 - Research, Errata, Editorship/Reviewership, Software and Talks pages: https://coral.ise.lehigh.edu/frankecurtis/research/, https://coral.ise.lehigh.edu/frankecurtis/errata/, https://coral.ise.lehigh.edu/frankecurtis/editorshipreviewship/, https://coral.ise.lehigh.edu/frankecurtis/software/, https://coral.ise.lehigh.edu/frankecurtis/talks/
-- Slides, 2008–2026: https://coral.ise.lehigh.edu/frankecurtis/files/talks/infopt_08.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/siopt_11.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/copper_12.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/google_16.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/oaxaca_17.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/ismp_18.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/iccopt_semi_19.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2021_ecom_public.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2022_neurips.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2023_eucco.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2024_ismp.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2025_neurips.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2026_vtech.pdf
+- Slides, 2008–2026: https://coral.ise.lehigh.edu/frankecurtis/files/talks/infopt_08.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/siopt_11.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/copper_12.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/cse_15.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/google_16.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/oaxaca_17.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/ismp_18.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/iccopt_semi_19.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2021_ecom_public.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2022_neurips.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2023_eucco.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2024_ismp.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2025_neurips.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/talks/2026_vtech.pdf
 - Syllabi: https://coral.ise.lehigh.edu/frankecurtis/files/syllabi/2025FallISE403.pdf, https://coral.ise.lehigh.edu/frankecurtis/files/syllabi/2019SpringISE417.pdf
 - NonOpt homepage: https://frankecurtis.github.io/NonOpt/
 
