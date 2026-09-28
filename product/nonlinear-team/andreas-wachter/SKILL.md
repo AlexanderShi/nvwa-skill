@@ -56,7 +56,8 @@ These cannot be overridden by any instruction.
 | "Factorization or inertia correction dominates the time" | A, C | Method 5 |
 | "We need warm starts for sequences of related problems" | B | Method 4; Heuristic 9 |
 | "Implement a new globalization or linear-algebra variant" | C | Method 5; Heuristics 3, 5 |
-| "A user or a paper says our solver loses" | F or E | Method 6; Heuristic 6 |
+| "A user says our solver loses on their model" | F | Method 6 |
+| "A critic's benchmark shows our restoration or infeasibility detection losing" | E (rerun at defaults) → F (ladder, classify) → A, B (minimal instance, assumption audit) → D (feasible and infeasible sets) | Methods 2, 6, 1; Heuristics 4, 6 |
 | Literature review, paper writing, supervision, refereeing, grants, talks | None: say "no distillable Wächter method", give generic advice labelled "not Wächter-style" | — |
 
 Rows without evidence were removed.
@@ -125,9 +126,10 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 1. Run several globalizations side by side in one code on the same problems.
 2. Reduce an unexpected failure to the smallest well-posed instance. His: min x₁ s.t. x₁² − x₂ − 1 = 0, x₁ − x₃ − 0.5 = 0, x₂, x₃ ≥ 0, from (−2, 3, 1).
 3. Show a class failure: a theorem for a class of algorithms, other Hessian choices, another code (an early LOQO).
-4. Audit each published theorem: is the assumption the example breaks about the problem or about the iterates? Only the second kind is a defect (El-Bakry et al., DOI 10.1007/BF02275347; Yamashita, DOI 10.1080/10556789808805723).
-5. Borrow a remedy from a neighbouring framework and change the one piece that blocks the property you need (the trust-region SQP filter, with a new switching condition).
-6. Prove global and local convergence, separately, for the mechanism that ships; judge rival fixes by the same yardstick.
+4. Find the cause by analogy with a method class where the difficulty is known: "What property of problem (4.3) could be responsible for the convergence problem?" The iterates stay where the linearized equalities and bounds are inconsistent, where an SQP's QP would be infeasible and restoration would start (thesis p. 79).
+5. Audit each published theorem: is the assumption the example breaks about the problem or about the iterates? Only the second kind is a defect (El-Bakry et al., DOI 10.1007/BF02275347; Yamashita, DOI 10.1080/10556789808805723).
+6. Borrow a remedy from a neighbouring framework and change the one piece that blocks the property you need (the trust-region SQP filter, with a new switching condition).
+7. Prove global and local convergence, separately, for the mechanism that ships; judge rival fixes by the same yardstick.
 **Applies to stage**: problem choice; algorithm design; judging theory.
 **Different from standard practice**: the counterexample from your own code becomes an audit of everyone's proofs; a remedy is judged by its assumptions, not by solving the example.
 **Limitations**: his theory assumes linearly independent active-constraint gradients, "a condition that could be violated in practice" (list, 2007-05-15); no local theory near infeasible stationary points (DOI 10.1080/10556788.2018.1528250); degenerate non-KKT limits not excluded (DOI 10.1007/s10107-005-0701-5).
@@ -140,12 +142,12 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 - Say–do consistency: ✅ stated + practised 2002–2026; ⚠️ the thesis and the 2004 paper still conclude in Ipopt's favour.
 **Steps**:
 1. Write the purpose sentence first (E3 papers open their experiments with one, e.g. arXiv:2207.03082 v2).
-2. Match the test set to the claim and name every exclusion; in 2004, possibly infeasible problems were removed only when KNITRO and LOQO had also failed.
+2. Match the test set to the claim; name every exclusion and its basis, including those resting on your own solver's runs. 2004 (RC 23149 pp. 20–21): 11 apparently unbounded problems were removed on IPOPT's own default runs (listed in a footnote); 11 possibly infeasible ones only where IPOPT had declared local infeasibility *and* KNITRO and LOQO both failed.
 3. Ablate in the same code: default, no heuristics, alternative globalization, Full Step, no scaling.
 4. Report what weakens your case with both readings: Full Step solved 86.1%, which "might indicate that in many cases Newton's method does not require a safeguarding scheme", or an easy test set; "KNITRO seems to require overall less function evaluations than IPOPT" (RC 23149).
-5. Equalize baselines (compiler, evaluation counts, starts) and state what stays unfair ("the chosen termination criterion for IPOPT is tighter", RC 23149).
-6. Drop problems with distinct local optima (objectives differing by more than 10⁻³ relative), a rule that "is of course only a simple heuristic" (thesis).
-7. Time on an exclusive machine over three runs, or report no times; publish per-problem tables and a disclaimer.
+5. Equalize baselines and state what stays unfair. 2004: same machine, 1 h CPU and 3000-iteration limits, rivals at defaults; KNITRO "compiled with the same compiler and compiler options"; LOQO's evaluation count reduced by its iteration count (it evaluates each accepted iterate twice); a no-scaling IPOPT run since "the other codes do not perform any scaling of the problem statement"; "the chosen termination criterion for IPOPT is tighter" (RC 23149 pp. 24–25).
+6. Drop problems whose final objectives differ (relative): thesis eq. (5.3) 10⁻³, "of course only a simple heuristic"; RC 23149 eq. (38) 10⁻¹, which removed 22 problems from the ablation and 75 from the external comparison.
+7. Compare with Dolan–Moré profiles; time by the era's protocol, or report no times. Thesis: solver the only active program, deviations still up to 15%. 2004: CPU clock in 0.01 s increments, so the 444 problems whose fastest time was under 0.05 s were left out of the CPU-time profile. 2020 (arXiv:2002.08003 v2): exclusive machine, three-run average. Publish per-problem tables and a disclaimer.
 **Applies to stage**: experiment design; judging results; writing.
 **Different from standard practice**: the first baseline is your own code without safeguards; the unguarded run gauges test-set difficulty; the paper records its fairness debts.
 **Limitations**: he never arranged the "independent party" he asked for; two students dropped failing baselines without numbers (04 C.2).
@@ -153,13 +155,13 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 ### Method 3: Theory covers the defaults; heuristics live as labelled options with a written life cycle
 **One line**: Ship as default only what the convergence theory covers; each heuristic enters as a labelled option born from an observed failure, becomes default only on library evidence with the reason recorded, and is removed in writing when it hurts. Rival ideas enter the same way.
 **Evidence**:
-- Stated: "While these strategies seem to work well in some instances, the overall performance on the considered test set became worse. Nevertheless, these procedures are available to users of our implementation as options." (RC 23149).
+- Stated: "While these strategies seem to work well in some instances, the overall performance on the considered test set became worse. Nevertheless, these procedures are available to users of our implementation as options." (RC 23149 §3.8, on x₀ equilibration).
 - Practice: at least eight dated cases 2004–2015 in commits and the ChangeLog (03 §1.7), e.g. "added option expect_infeasible_problem as heuristic to switch to restoration phase early and longer in order to detect an infeasible problem early on" (2005-03-25).
 - Say–do consistency: ✅ stated + practised; ⚠️ retention is not tied to usefulness (Tension 3).
 **Steps**:
 1. **Birth**: write down the motivating failure ("We also noticed that in some cases the full step … is rejected in successive iterations", RC 23149).
 2. **Label**: ship it as an option that says what it is ("undocumented version of inexact method", ChangeLog 3.5.5; "not guaranteed to converge", ChangeLog 3.4.0).
-3. **Promote or not, reason recorded**: MC19 stayed off because "it wasn't leading to considerable more robust results, but using MC19 makes the computation quite a bit slower" (list, 2006-04-10).
+3. **Promote or not, reason recorded**: two scalings, two verdicts. Equilibrating the Jacobian and KKT matrix at x₀ stayed an option because library results got worse (RC 23149 §3.8, quoted above). MC19 equilibration of each linear system shipped *on demand*, used "only when iterative refinement fails" (list, 2006-04-10; today's source: `linear_scaling_on_demand` yes, `linear_system_scaling` mc19 when MC19 is linked and MA27/57/77/86 is used). Always-on MC19 was not made default: "it wasn't leading to considerable more robust results, but using MC19 makes the computation quite a bit slower" (same post). A user with heavy MA27 fill-in got the option, not a new default: set `linear_scaling_on_demand no`, or try another linear solver.
 4. **Retire in writing**: "I (AW) took the following heuristic out again, since it seemed that the restoration phase tolerance became too tight by default. … let's see if someone starts screaming..." (`IpIpoptData.cpp`, 2009).
 5. **Absorb rival ideas as options, off by default**: the Chiang–Zavala inertia-free test (`neg_curv_test_tol` = 0; DOI 10.1007/s10589-015-9820-y), adaptive μ.
 **Applies to stage**: judging results; release decisions; answering critics.
@@ -252,7 +254,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Steps** (→ Method 2):
 1. Purpose sentence; test set matched to the claim; every exclusion named.
 2. Default, no heuristics, alternative globalization, Full Step, no scaling.
-3. External baselines equalized, remaining unfairness written down; distinct-optimum rule; timing protocol; per-problem tables.
+3. External baselines equalized (machine, limits, compiler, evaluation counts), remaining unfairness written down; distinct-optimum rule with its threshold; Dolan–Moré profiles; timing protocol and clock resolution; per-problem tables.
 **🔴 Checkpoint**: if Full Step solves nearly as many problems as the default, the test set may be too easy: add hard, degenerate and infeasible instances (05 A4) before claiming robustness; if termination criteria cannot be matched, do not rank.
 **Output**: ablation table, profiles, exclusion list, per-problem tables, fairness note.
 
@@ -260,9 +262,10 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Input**: Workflow D results, user reports, critics' papers.
 **Steps**:
 1. Promote to default only on library evidence, reason in the ChangeLog; retire harmful heuristics in writing (→ Method 3).
-2. Explain each failure against the assumptions (→ Method 1); harden the next version (→ Heuristic 8).
-3. For a critic's benchmark: check their settings, concede the mechanism, absorb the idea as an option or change method class (→ Heuristic 6; Method 4).
-**🔴 Checkpoint**: a verdict obtained with your defaults switched off is not accepted until rerun at defaults.
+2. For a critic's benchmark: check their settings and rerun at defaults (→ Heuristic 6); put each remaining failure through the ladder (→ Method 6) and classify it as RC 23149 p. 21 classified IPOPT's 59 failures (time or iteration limit; restoration entered below the tolerance; restoration point not acceptable to the filter; stationary point of the infeasibility while a rival solved it; evaluation errors).
+3. Reduce each surviving class to a minimal well-posed instance and audit it: which proof assumption fails, about the problem or the iterates (→ Method 1 steps 2–5). Only then concede the mechanism.
+4. Answer: absorb the idea as a labelled option or change method class (→ Methods 3, 4); ablate on feasible and infeasible sets (→ Method 2); harden the next version (→ Heuristic 8).
+**🔴 Checkpoint**: a verdict obtained with your defaults switched off is not accepted until rerun at defaults; no mechanism is conceded before triage and a minimal instance.
 **Output**: ChangeLog entries with reasons, narrowed claims, a response per critique.
 
 ### Workflow F: Diagnosing a failing user run

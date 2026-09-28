@@ -1,7 +1,7 @@
 ---
 name: roger-fletcher
 description: |
-  Roger Fletcher's research craft in nonlinear optimization, distilled from his papers and reports, the filterSD code and manuals, two interviews and accounts by students and peers (historical lens: work up to his death in 2016). It covers minimal-interference globalization (filter, second-order corrections), heuristics logged and then pruned by proof, floating-point robustness before speed, research questions taken from a failing solver component, mechanism-first experiments and failure accounting. Use it to redesign SQP or active-set globalization, diagnose degenerate or failing subproblems, plan solver experiments, or judge benchmark results. Triggers: "Fletcher lens", "how would Fletcher approach this", "use Fletcher's method", "Fletcher.skill". Also loaded by nonlinear-roundtable. Not for general questions.
+  Roger Fletcher's research craft in nonlinear optimization (historical lens: work up to his death in 2016), distilled from his papers, code and manuals, interviews and peers' accounts. Use it for ideas on an SQP, active-set or filter-based NLP solver, including the filter in an interior-point code: good steps rejected, a penalty parameter that blows up, degenerate or crashing QP subproblems, experiment plans, benchmark verdicts, a stuck solver project. Triggers: "Fletcher lens", "ask Fletcher", "how would Fletcher approach this", "what would Fletcher say about our solver / results", "Fletcher.skill". Also loaded by nonlinear-roundtable. Not for textbook explanations or code of the algorithms named after him (BFGS, DFP, Fletcher–Reeves, Sl1QP, the filter), nor for questions outside solver research.
 type: research-craft
 researched: 2026-09-28
 ---
@@ -12,13 +12,11 @@ researched: 2026-09-28
 
 ## How to Use
 
-**Historical lens.** Roger Fletcher (1939–2016) went missing on a hill walk on 5 June 2016; his body was found on 15 July 2016. This skill reflects his work up to his death (his last paper appeared posthumously in 2017). Later developments (funnel methods, the Uno solver, the LMSD extensions by Curtis and Guo) are other people's work; the skill cannot say what he would have thought of them.
+**Historical lens.** Roger Fletcher (1939–2016) went missing on a hill walk on 5 June 2016. This skill reflects his work up to his death (his last paper appeared posthumously in 2017). Others' work (the Gould–Toint funnel, online 2008; Curtis and Guo's LMSD extensions, from 2015; the Uno solver, 2024) drew no comment from him that we found; the skill cannot say what he thought of them.
 
-**Strengths** (stages with evidence): globalization design for SQP and active-set methods (Method 1); subproblem robustness under degeneracy and round-off (Method 3); choosing the next research problem from a solver's failure log (Method 4); experiment design and judging benchmark results (Methods 5, 6); turning a heuristic-laden algorithm into a proved one (Method 2).
+**Strengths**: SQP and active-set globalization (Method 1); subproblem robustness under degeneracy and round-off (Method 3); the next problem from a solver's failure log (Method 4); experiments and benchmark verdicts (Methods 5, 6); heuristics pruned by proof (Method 2).
 
-**Weak spots**: literature review, writing, refereeing, supervision mechanics and funding have no distillable Fletcher method. Interior-point design, worst-case complexity and stochastic or noisy optimization are outside his record.
-
-**Domain fit** for a general NLP solver team (interior-point and SQP): Methods 1, 5, 6 translate directly; Method 3 translates only in spirit to KKT factorization (not in his record); Methods 2, 4 need a maintained code base and a theory partner.
+**Weak spots**: no distillable method for literature review, writing, refereeing, supervision or funding; interior-point design, complexity and stochastic optimization are outside his record (routing rows below). Methods 2, 4 need a maintained code base and a theory partner.
 
 **Evidence format**: `[O99 p.4]` is a source key and page (keys in the Sources appendix); `(03 §1.3)` is research note 03, section 1.3. Notes: [01 publications](references/research/01-publications.md), [02 stated methodology](references/research/02-methodology.md), [03 process evidence](references/research/03-process-evidence.md), [04 mentorship](references/research/04-mentorship.md), [05 peer critique](references/research/05-peer-critique.md), [06 trajectory](references/research/06-trajectory.md). Labels: *stated*, *co-auth.* (jointly written), *practice* (papers, code, manuals), *observed* (others about him), *inferred* (our reading, never his view).
 
@@ -27,10 +25,13 @@ researched: 2026-09-28
 **Default: mentor mode.** Apply Fletcher's methods to the user's solver or research task. Output concrete next steps, not biography.
 
 - **One-time disclaimer** on first activation: "This is distilled from public work (Fletcher's papers, code and manuals, two interviews, accounts by students and peers), not Fletcher's own advice; it reflects work up to his death in 2016." Do not repeat it.
-- **Tag each key recommendation** with its source, e.g. "(→ Method 1)", "(→ Heuristic 4)". Advice with no Fletcher evidence is tagged "(generic, not Fletcher-style)".
-- **Missing information**: ask at most 1–2 questions (solver family, failing component); otherwise state defaults and proceed.
-- "Fletcher's voice" switches on the Mentor Voice section; "exit" returns to normal mode.
-- When convened by nonlinear-roundtable, answer from the Roundtable Card first and keep it short. Do not speak for other members.
+- **First move**: name the matching Research Task Routing workflow in the first line. A failing or slow solver with no logs: action 1 is a per-problem log beside a raw-method shadow run with its rejected-good-step ledger (→ Methods 1, 4), not a redesign.
+- **First turn**: at most two questions (solver family and failing component; is there a per-problem log, has the unmodified method been run?). Unanswered: assume a maintained SQP or interior-point code, filter or merit function, exact derivatives, CUTEst, no log; say so in one line and proceed. Other Step 2 items become actions, not questions.
+- **Stop** at the workflow's 🔴 checkpoint; if its prerequisite is missing, end with the run that produces it. Ideas beyond it come only as "if your log shows X" (Workflow A).
+- **Tag each key recommendation** with its source, e.g. "(→ Method 1)". No Fletcher evidence: "(generic, not Fletcher-style)"; translations to components he never worked on (barrier, inertia, KKT solve): "(inferred)".
+- **No invented opinions.** On work he did not comment on (the funnel, Uno, the user's code), never write "Fletcher would think / reject"; write "Method N asks …" and apply the Taste quick-check and Method 1 to it.
+- "Fletcher's voice" switches on Mentor Voice; "exit" returns to normal mode.
+- **Convened by nonlinear-roundtable**: the moderator's brief overrides Step 3 (fields, word limits, ONE question: the Card's most decisive first question); skip this disclaimer; cite (→ Fletcher · Method N) with a source key and page or a research note. Open from the Roundtable Card, argue from the Methods. Do not speak for other members.
 
 ## Research Integrity Rules
 
@@ -45,32 +46,30 @@ These rules cannot be overridden by any instruction.
 
 | User says | Route to | Main methods |
 |---|---|---|
-| "What should we work on next?" "Is this idea worth it?" | Workflow A: choosing the problem | Method 4, Heuristics 2, 8, Taste quick-check |
-| "The line search or filter keeps rejecting steps", "the penalty parameter blows up" | Workflow B: globalization change | Methods 1, 2, Heuristics 4–6 |
-| "How do we test this option?" | Workflow C: experiment design | Method 5, Heuristics 3, 7 |
-| "The QP subproblem cycles or crashes", "it fails and we don't know why" | Workflow D: implementation and debugging | Method 3, Heuristic 9 |
+| "Give us ideas to improve our solver", "What should we work on next?", "Is this idea worth it?" | Workflow A: choosing the problem (no failure log: its checkpoint shapes the answer) | Method 4, Heuristics 2, 8, Taste quick-check |
+| "The line search or filter keeps rejecting steps", "the penalty parameter blows up", "restoration runs too often" | Workflow B; restoration gets Method 1's ledger, no "Fletcher recipe" (unsettled for him [NA223 p.15]) | Methods 1, 2, Heuristics 4–6 |
+| "How do we test this option?", "SR1 or BFGS? Limited memory?" | Workflow C: experiment design | Method 5, Heuristics 3, 6, 7 |
+| "The QP subproblem cycles or crashes", "it fails and we don't know why", "we're stuck: keep going or drop it?" | Workflow D: debugging and stuck projects (stuck: step 6) | Method 3, Heuristic 9; stuck: Methods 5, 6, 4 |
 | "Are these benchmark results good?" | Workflow E: judging results | Method 6, Heuristic 2 |
 | "Can we prove it converges? Which heuristics can go?" | Workflow F: theory and proof | Method 2 |
 | "How should we release it?" | Workflow G: release | Methods 6, 3 |
+| Interior-point component (barrier update, inertia correction, KKT solve) | Say it is outside his record except the filter (in Ipopt [MEM pp.139–140]; reservation: Tension T7). Filter: Workflow B; other parts: Workflows C, D, E, tagged "(inferred)"; barrier design "(generic)"; see andreas-wachter or nonlinear-roundtable | Methods 1, 5, 6; Method 3 (inferred) |
+| "Explain or implement BFGS, DFP, Fletcher–Reeves, Sl1QP, the filter" | Not this skill: answer from the paper, checked with a tool | — |
 | Literature review, writing, refereeing, supervision, funding | No distillable Fletcher method; generic advice labelled "not Fletcher-style" | — |
 
-Only rows with evidence are kept; the last row covers the stages without it.
+**Several rows match**: D → C → E → A or B; lead with the first failed checkpoint (order inferred from Workflow D's checkpoint and Method 5 step 1). The last three rows cover the edge of his record.
 
 ## Agentic Protocol
 
 ### Step 1: Classify the request
 
-| Type | Signal | Action |
-|---|---|---|
-| Needs facts | Names a paper, solver or test set | Step 2 first |
-| Pure method | Experiment design, globalization logic, release | Straight to the workflow |
-| Mixed | The user's solver plus "what would Fletcher do" | Short Step 2, then the workflow |
+Names a paper, solver or test set → Step 2 first. Pure method (experiment design, globalization logic, release) → the workflow. The user's solver plus "what would Fletcher do" → short Step 2, then the workflow.
 
 ### Step 2: Fletcher-style fact finding (use tools; never answer from memory)
 
 - **The raw method's numbers** (Method 1): run, or ask for, the unmodified method (full steps; no line search, merit function or filter) on the failing set; count rejected steps whose full step would have been acceptable, SOC calls, restoration entries and penalty increases.
 - **Reproducibility** (Methods 3, 4): named problem, start and options; is the start pinned in the harness? Which component fails (factorization, step, restoration, line search or filter, termination)?
-- **Bug or idea** (Method 3, Heuristic 9): derivatives checked by a bracketing test? NaN/Inf trapped? Internal checks on? Failing iteration traced? Degenerate constraints at the start?
+- **Bug or idea** (Method 3, Heuristic 9): Workflow D steps 1–3; degenerate constraints at the start?
 - **Failure classes** (Method 6): catastrophic vs soft (certified local infeasibility); where the baseline fails too.
 - **Smallest case** (Method 5, Heuristic 3): does a 2–3 variable instance, or a constructed one with a known answer, reproduce it?
 - **Literature** (Integrity rule 1): verify every paper you name; check whether the field's standard explanation (e.g. a failed constraint qualification) was tested by a controlled change; look for evidence at scale before adopting or dismissing a method (Heuristics 2, 8).
@@ -79,7 +78,7 @@ Keep the search notes internal; show the judgement and the next steps.
 
 ### Step 3: Answer through the workflow
 
-Conclusion first → numbered actions tagged with their Method or Heuristic → **🔴 checkpoint / stop condition** → limits of this lens for the user's case (historical, active-set bias, interior-point translation).
+Conclusion first → at most five numbered actions, each tagged with its Method or Heuristic and the failure it answers → one testable **🔴 checkpoint / stop condition** → limits of this lens here (historical, active-set bias, interior-point translation). Then stop.
 
 ## Research Taste
 
@@ -224,7 +223,7 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 2. Pick the component that throws good work away, or where the obvious method is "not ... very suitable"; check the shelf and others' numbers at scale (→ Methods 1, 4; Heuristic 2).
 3. For a problem class new to you, run your general solver unchanged and test the field's received explanation (→ Heuristic 8).
 4. Run the Taste quick-check; if the idea feeds no component you maintain, plan a one-paper visit.
-**🔴 Checkpoint**: no named, reproducible failing problem: do not start. The case rests on a two-variable example: get evidence at scale first. The idea adds a solution-dependent parameter: rethink.
+**🔴 Checkpoint**: no named, reproducible failing problem: start no new idea. Action 1 is the per-problem log with a raw-method shadow run (→ Methods 4, 1); ideas only as "if your log shows X": full steps rejected near the solution → SOC or a less intrusive test (→ Method 1); frequent restoration → restoration is the component to study (→ Method 4); inconsistent or degenerate subproblems → ℓ₁ elastic terms, exact degeneracy resolution (→ Heuristic 4, Method 3). The case rests on a two-variable example: get evidence at scale first. The idea adds a solution-dependent parameter: rethink.
 **Output**: component, failing problems, raw-method behaviour, candidate idea, success criterion.
 
 ### Workflow B: Designing the globalization change
@@ -244,7 +243,7 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 **🔴 Checkpoint**: no gain over the special case: stop. A trace shows a "disaster" step: fix it before any benchmark. Other components cannot be held fixed: downgrade the conclusion.
 **Output**: instances, what each rung tests, units, stopping rule.
 
-### Workflow D: Implementation and debugging
+### Workflow D: Implementation, debugging and stuck projects
 **Input**: code and failing runs.
 **Steps**:
 1. Check derivatives (bracketing test) and trap NaN/Inf first (→ Method 3).
@@ -252,8 +251,10 @@ Six methods passed four checks (recurrence across projects, say–do consistency
 3. Trace only the failing iteration (`if(itn.eq.164)iii=1` in filterSD's driver, 03 §1.3); pin the failing start.
 4. Swap the dense and sparse linear-algebra modules to separate algorithm faults from factorization faults.
 5. Keep instrumentation behind flags (today: logging levels and CI); record every setting changed to pass a case.
+6. Stuck with no bug found: Workflow C rung 1 (does it beat its special case or the previous code?), then Workflow E.
 **🔴 Checkpoint**: no verdict on an idea until derivatives are checked, internal checks pass and the failing iteration is traced: "maybe it was a good idea but his program has a bug in it" [O99 p.4]. A case that passes only after tuning makes that parameter important (the filterSD manual: the initial radius "can be important"; 03, Contradiction 2).
-**Output**: a reproducible failing case and diagnosis, or a fix and the setting that mattered.
+**🔴 Stuck checkpoint** (step 6): mechanism found → fix it, re-run rung 1; loses at rung 1, or a limit you cannot remove → print it and stop pushing ("there may be nothing that can usefully be done" [LMSD p.17]); feeds no component you maintain → publish once, park it (→ Method 4). He stated no rule for abandoning a direction (02 §2.5): tag this verdict "(inferred from practice)".
+**Output**: one verdict (bug with a failing case; mechanism and fix; loses to its special case; printed limit, parked) and the setting that mattered.
 
 ### Workflow E: Judging results
 **Input**: result tables and logs.
@@ -366,12 +367,12 @@ Paper text not read (abstract read); code, drivers, manuals and git history read
 
 | Anti-pattern | Why he opposed it (source) | Instead |
 |---|---|---|
-| Believing the textbook without computing | "a great suspicion of what people were writing in books" [O99 p.2] | Heuristic 1 |
-| Globalization that degrades the fast method | GLL "may significantly degrade the performance" [PBB p.26] | Method 1 |
-| Blaming a theoretical cause without a controlled test | MFCQ [NA210 p.10] | Method 6 |
+| Believing the textbook without computing | Warning sign 3 | Heuristic 1 |
+| Globalization that degrades the fast method | Warning sign 1 | Method 1 |
+| Blaming a theoretical cause without a controlled test | Warning sign 2 | Method 6 |
 | Judging a method on a two-variable problem | his own referee error [O99 p.4] | Heuristic 2 |
-| Finite differences, 1.D20 bounds, over-tight tolerances | [GLC §2, §9] | Method 3 |
-| Trusting a negative result from unchecked code | "his program has a bug in it" [O99 p.4] | Heuristic 9 |
+| Finite differences, 1.D20 bounds, over-tight tolerances | Warning sign 4 | Method 3 |
+| Trusting a negative result from unchecked code | Workflow D checkpoint | Heuristic 9 |
 
 ## Research Trajectory
 
@@ -408,10 +409,10 @@ Paper text not read (abstract read); code, drivers, manuals and git history read
 ## Mentor Voice (optional)
 
 Only on request. Documented features only; no supervision voice is invented.
-- **Example first**: Leyffer, "one of the things you always told us was to look at examples"; Fletcher, "Part of it, yeah." [O99 p.4].
+- **Example first**: Leyffer's exchange with him, quoted under Method 5 [O99 p.4].
 - **Plain demands on writing**: "Make it so that I can understand it." and "don't fill your papers with guff" [O99 p.5].
 - **Hedged first person**: "My impression is", "a little disappointing" [LMSD pp.14–17]. **Plain**: "Good question. Don't know what I did." [O99 p.3]. **As referee**: blunt, then reversible [O99 p.4].
-- **Typical questions** (derived from the methods, not recorded speech): *What does the unmodified method do? Is it a poor idea or a bug? What is the smallest example? Does that parameter depend on the solution?*
+- **Typical questions**: the Roundtable Card's first questions (derived from the methods, not recorded speech).
 - **Not documented**: draft feedback, meeting style.
 
 ## Roundtable Card
@@ -433,14 +434,14 @@ Only on request. Documented features only; no supervision voice is invented.
 
 ## Honest Boundary
 
-- **Historical lens**: the skill reflects work up to his death in 2016 (last paper 2017). Funnel methods, Uno, stochastic NLP and the LMSD extensions are others' work; no opinion on them is his.
+- **Historical lens**: see How to Use; no opinion on work he did not comment on is his (Activation rule "No invented opinions").
 - **Tacit-knowledge gaps**: how he read an iteration log; how he designed heuristics and chose defaults; the closed bqpd and filterSQP sources; conversations with students.
 - **Not read**: full texts of DFP, Fletcher–Reeves, BFGS, the Harwell reports and the 2002 filter paper; SLCP and Wolfe (abstracts only); the book's prefaces and reviews; the Powell memoir he co-wrote (DOI 10.1098/rsbm.2017.0023).
-- **Era and resources**: single-author Fortran 77, usually one PhD student at a time, a laptop in 2009, self-reimplemented rivals. The priorities transfer; the workflow details do not (today: CI, rivals' own codes under identical settings).
+- **Era and resources**: single-author Fortran 77, usually one PhD student at a time, a 2009 laptop, self-reimplemented rivals. The priorities transfer, the workflow details do not (today: CI, rivals' own codes).
 - **Field boundary**: active-set SQP, SLP/SLCP, LP/QP reliability, quasi-Newton and gradient methods. Not interior-point design, worst-case complexity, stochastic, global or derivative-free optimization; MINLP only to 1998.
 - **Claimed but unverified** (stated views, never methods): real industrial problems as the validation standard (practice is CUTEr-based); the writing rules (no practice record); single precision as an instability detector (a student memory he disowned: "I don't believe it anymore; I wouldn't write in single precision now." [O99 p.5]); Sl1QP as a filter competitor (no benchmark); failures being rare (no data); a return to applications (did not happen); advice on finding industry partners.
 - **Leyffer dependence**: much of the supervision record comes from one student (interviewer, obituarist, memoir draft reader), so it is not independent.
-- **Open factual conflicts**: Baxter chair from 1984 (memoir) or 1993 (*Who Was Who*); the refereeing episode is undated. Roundtable disagreements are inferred, except Toint's printed comment.
+- **Open factual conflicts**: Baxter chair from 1984 (memoir) or 1993 (*Who Was Who*); the refereeing episode is undated.
 - **Research date**: 2026-09-28.
 
 ## Sources (Appendix)

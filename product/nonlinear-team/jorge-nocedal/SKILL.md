@@ -54,7 +54,7 @@ These rules cannot be overridden by any instruction.
 | "Does this complexity result justify switching?" | Method 5 | Method 5 |
 | "Review our results or draft" | Workflow D | Methods 1, 5; Anti-patterns |
 | "A rival benchmark or counterexample hit us" | Workflow E | Method 4; Heuristic 7 |
-| "How should we set or update the penalty / merit parameter?" (SQP, SLQP, interior) | Method 3 worked case (penalty steering), then Workflow C | Methods 3, 2, 4 |
+| "How should we set or update the penalty / merit parameter?" | Method 3 worked case (penalty steering), then Workflow C | Methods 3, 2, 4 |
 | Warm starts, MPC-style sequences | No Nocedal study: low confidence, verdict labelled inference. Test the view that interior methods warm-start poorly (Method 2) by an aligned warm-versus-cold benchmark on the user's sequences (Method 1); consider active-set crossover (Method 6); instrument complementarity and μ at the warm point (Heuristics 1–2); cross-check the Wächter and Gill lenses | Methods 2, 1, 6 |
 | Degeneracy, KKT linear algebra, literature review, supervision, refereeing, quitting, prose | No distillable method: advice labelled "not Nocedal-style"; suggest the Wright, Gill or Wächter lens | — |
 
@@ -104,6 +104,7 @@ Evidence: [02-methodology](references/research/02-methodology.md) (items T, E, R
 - [ ] Was it compared against the dismissed simple option, with the scales tipped against yourself?
 - [ ] Does the theory separate a method known to work from one known to fail, with the bound plotted against runs?
 - [ ] Does the algorithm detect when its own estimates are wrong, and recover?
+- [ ] Does the problem's structure make your favourite method the wrong choice?
 - [ ] Are limitations and known failure modes written down?
 
 Four or more "yes" answers fit this lens; a "no" to the second or third is where he would push back first.
@@ -171,8 +172,8 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 - *Diagnosis*: Sℓ1QP-type methods "were never incorporated into production-quality software. We conjecture that this was mainly due to the difficulties of choosing the penalty parameter" (preprint p. 5). A huge fixed ν "is not to be recommended because excessively large penalty parameters can lead to inefficient behavior, damaging roundoff errors, and failures" (p. 7).
 - *Engine kept, one component replaced*: the ℓ1-penalty SQP / SLQP step stays; ν is set against an auxiliary LP (the subproblem with ν = ∞), which gives the best reduction in linearized infeasibility inside the trust region. Guidelines: reach linear feasibility when attainable, else at least a fraction ε1 of the best reduction; then raise ν until the model decrease is at least ε2·ν times the feasibility gain (pp. 9–10).
 - *Numbers as defaults* (Heuristic 5): Knitro-Active (Knitro 4.0) uses ν0 = 10, ε1 = 0.1, ε2 = 0.5, multiplying ν by 10 and re-solving until the conditions hold (p. 13). The extra LPs cost "less than three percent of the total number of simplex iterations", thanks to warm starts (p. 13).
-- *Tests*: Fletcher's ADLITTLE (the penalty model is unbounded for ν slightly below about 3.31 × 10³) as a specification (Method 4): the fixed-ν failure reproduced ("We confirmed this behavior experimentally."), then solved with ν raised to 10⁴ in 1 or 6 iterations for initial radii 10¹⁰ and 10 (pp. 14–15). The "huge fixed ν" heuristic ablated (Method 2): on a CUTEr subset, problems solved fell from 485 of 616 to 449 at ν0 = 10⁵ and 321 at ν0 = 10¹⁰; "the risks of using excessively large penalty parameters are real indeed" (pp. 15–16).
-- *Merit functions* (line search, equality constraints): the same ε2 test gives ν_trial = (∇fᵀd + (σ/2)dᵀWd) / ((1 − ε2)‖h‖), σ = 1 if dᵀWd > 0 else 0, and ν⁺ = ν_trial + 1 when ν < ν_trial (pp. 18–19); claimed "significantly more effective" than choosing ν for descent alone, in Knitro-Interior/Direct, with no table shown (p. 20).
+- *Tests*: Fletcher's ADLITTLE (the penalty model is unbounded for ν slightly below about 3.31 × 10³) as a specification (Method 4): the fixed-ν failure reproduced ("We confirmed this behavior experimentally."), then solved with ν raised to 10⁴ in 1 or 6 iterations for initial radii 10¹⁰ and 10 (pp. 14–15). The heuristic of a huge fixed ν ablated (Method 2): on a CUTEr subset, problems solved fell from 485 of 616 to 449 at ν0 = 10⁵ and 321 at ν0 = 10¹⁰; "the risks of using excessively large penalty parameters are real indeed" (pp. 15–16).
+- *Merit functions* (line search, equality constraints): the ε2 test gives ν⁺ = ν_trial + 1 when ν < ν_trial, with ν_trial = (∇fᵀd + (σ/2)dᵀWd) / ((1 − ε2)‖h‖), σ = 1 if dᵀWd > 0, else 0 (pp. 18–19); "significantly more effective" than a descent-only ν in Knitro-Interior/Direct, no table shown (p. 20).
 - *Scope printed*: penalty SQP untested ("We have not yet developed a software implementation … and therefore, cannot evaluate the computational tradeoffs", p. 11); "It remains an open question, however, how to extend our guidelines to penalty line search methods" (p. 20).
 - *Inferred link*: the 2010 infeasibility-detection SQP "adjusts the penalty parameter automatically, when appropriate, to emphasize feasibility over optimality" (doi:10.1137/080738222, abstract; body not read).
 **Limitations**: "It is assumed that noise level is known or can be estimated by means of difference tables or sampling" (arXiv:2102.09762). Mainly additive, bounded, uniform noise [03 §2.3]; nonsmooth problems out of scope. His noise-aware constrained work is equality-constrained only (Oztoprak, Byrd & Nocedal, "Constrained Optimization in the Presence of Noise", *SIOPT* 33, 2023, doi:10.1137/21M1450999; arXiv:2411.02665): noisy barrier, filter or inequality tests are inference; Oztoprak & Byrd continue without him (Latest). That KNITRO's `findiff_estnoise` option came from this research is inferred [03 §2.8].
@@ -181,7 +182,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 **One line**: Write the solver's known failure modes and undecided choices into the paper, expose undecided choices as options, study them in two frameworks, and answer counterexamples and rival benchmarks with algorithm variants rather than rebuttals.
 **Evidence**:
 - Stated (co-authored, 2006): "Since it is not known at present which one is the most effective in practice, Knitro allows the user to experiment with the barrier update strategies just mentioned." (doi:10.1007/0-387-30065-1_4). 2026 (caption-derived), on the barrier parameter: "there is no complete theory uh behind it" [02 J6].
-- Practice (arrows inferred from timing unless noted): the 2006 limitation "the algorithms in Knitro cannot distinguish between infeasible problems and convergence to an (infeasible) stationary point for a measure of feasibility" → infeasibility-detection papers (doi:10.1137/080738222; doi:10.1080/10556788.2013.858156). The barrier-rule option → a study in IPOPT and KNITRO: "heuristic adaptive choices, such as Mehrotra's probing procedure, outperform monotone strategies" (doi:10.1137/060649513, abstract). Two separate critique chains: (a) the Wächter–Biegler example (doi:10.1007/PL00011386) → Byrd, Marazzi & Nocedal's analysis of why Newton iterations stall (doi:10.1007/s10107-003-0376-8); (b) the LOQO authors' benchmarks (doi:10.1007/s10107-003-0418-2) → Knitro-Direct, the line-search / trust-region hybrid of Waltz, Morales, Nocedal & Orban (doi:10.1007/s10107-004-0560-5), which credits LOQO. Fletcher's ADLITTLE example → penalty steering, acknowledged in the paper (Method 3 worked case) [05 §4]. Observed: KNITRO 16.0 lists seven `bar_murule` values [03 §2.8].
+- Practice (arrows inferred from timing unless noted): the 2006 limitation "the algorithms in Knitro cannot distinguish between infeasible problems and convergence to an (infeasible) stationary point for a measure of feasibility" → infeasibility-detection papers (doi:10.1137/080738222; doi:10.1080/10556788.2013.858156). The barrier-rule option → a study in IPOPT and KNITRO: "heuristic adaptive choices, such as Mehrotra's probing procedure, outperform monotone strategies" (doi:10.1137/060649513, abstract). Two separate critique chains: (a) the Wächter–Biegler example (doi:10.1007/PL00011386) → Byrd, Marazzi & Nocedal's analysis of why Newton iterations stall, which discusses the example (doi:10.1007/s10107-003-0376-8, preprint p. 2); (b) the LOQO authors' benchmarks (doi:10.1007/s10107-003-0418-2) → Knitro-Direct, the line-search / trust-region hybrid of Waltz, Morales, Nocedal & Orban (doi:10.1007/s10107-004-0560-5), which credits LOQO. Fletcher's ADLITTLE example → penalty steering, acknowledged in the paper (Method 3 worked case) [05 §4]. Observed: KNITRO 16.0 lists seven `bar_murule` values [03 §2.8].
 - Say–do consistency: ✅ stated + practised, 1999–2014.
 **Steps**:
 1. **In each solver paper, list the known failure modes and undecided choices**, e.g. "the choice of the merit parameter ν plays a crucial role in the efficiency of the algorithm" (2006, preprint p. 11) [01 SW3].
@@ -193,7 +194,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
    - 🔴 Before publishing a solver paper, check the failure-mode list. If it is empty, you have not looked: run naïve failure tests (Heuristic 6).
 **Applies to stage**: algorithm design; after publication; research agenda.
 **Different from standard practice**: the undecided choice becomes a user option and a study inside a rival's framework.
-**Limitations**: the critique → response links are inferred from timing; only the steering paper names its critic (it thanks Fletcher for ADLITTLE) [05 §4.3, §4.6]. Lewis & Overton's weak-Wolfe suggestion (doi:10.1007/s10107-012-0514-2) was not adopted [05 §3.2]; ML critics got no replies [05 §1.2]. The full form needs an owned production solver; otherwise keep the register and expose options in open-source code.
+**Limitations**: responses to benchmarks do not cite them, so those links are inferred from timing [05 §4.3]; responses to counterexamples name them (Byrd–Marazzi–Nocedal; steering thanks Fletcher) [05 §4.1, §4.6]. Lewis & Overton's weak-Wolfe suggestion (doi:10.1007/s10107-012-0514-2) was not adopted [05 §3.2]; ML critics got no replies [05 §1.2]. The full form needs an owned production solver; otherwise keep the register and expose options in open-source code.
 
 ### Method 5: Theory must discriminate between practical methods
 **One line**: Analyse the method as implemented, ask whether the result separates a method known to work from one known to fail, and plot the bound against the runs.
@@ -227,7 +228,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
    - 🔴 If a user asks how to use method X on their problem, first check whether the answer is "don't".
 **Applies to stage**: problem choice; solver architecture.
 **Different from standard practice**: exploiting structure is common; recommending against his own famous method is not.
-**Limitations**: the ECMWF account rests on the 2026 interview (paper not read). Integration needs a team, and conflicts with Curtis's preference for one adaptive algorithm (inferred). Warm starts: the only trace is simplex warm starts keeping steering's extra LPs under 3% of simplex iterations (steering preprint p. 13); interior-point warm starts were not studied.
+**Limitations**: the ECMWF account rests on the 2026 interview (paper not read). Integration needs a team, and conflicts with Curtis's preference for one adaptive algorithm (inferred). Warm starts: the nearest trace is simplex warm starts keeping steering's extra LPs under 3% of simplex iterations (steering preprint p. 13); no Nocedal study of interior-point warm starts was found.
 
 ## Stage Workflows
 
@@ -241,7 +242,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 **Output**: incumbent, received wisdom to test, scale target, structure found.
 
 ### Workflow B: Algorithm design and repair
-**Input**: a classical method plus a new regime (noise, sampling, inexact subproblems, infeasibility).
+**Input**: a classical method in a new regime (noise, sampling, inexact subproblems, infeasibility).
 **Steps**:
 1. Try the naïve adaptation first and record the result (→ Heuristic 4; SQN v1's "A Preliminary Approach", arXiv:1401.7020 v1).
 2. Name the failing component, design an estimate-driven repair, add recovery and exit flags (→ Method 3).
@@ -250,7 +251,7 @@ Six methods, ordered from most to least exclusive. The four-way validation (recu
 **Output**: algorithm with estimate, recovery tree, exit flags, undecided choices (→ Method 4).
 
 ### Workflow C: Experiment design and benchmarking
-**Input**: a prototype, the incumbent codes, a test set (CUTEst, COPS, an application).
+**Input**: prototype, incumbent codes, test set (CUTEst, COPS, an application).
 **Steps**:
 1. Method 1, steps 1–7.
 2. Failure demo first; noise-free, then perturbed, three arms (→ Heuristics 1, 3).
@@ -319,7 +320,7 @@ Thin (the underlying papers doi:10.1137/0724077 and doi:10.1137/0726042 **not re
 | Key insight | "Rather than trying to mimic primal-dual interior point methods for linear programming, we have taken the approach of developing a fairly standard SQP trust region method" (1999, preprint p. 23) |
 | Minimum evidence | Competitive with LANCELOT on large problems at a matched 10⁻⁷ tolerance; primal-dual beat primal [03 §2.1, §2.6] |
 | Abandoned paths | Fast convergence deferred; "very conservative" refinement flagged; the CG step supplemented by direct factorization |
-| Reception | NITRO "significantly slower and far less robust" on small problems (doi:10.1007/s10107-003-0418-2) → Knitro-Direct (2006); KNITRO 3.1.1 829/954 vs IPOPT 895, without an infeasibility message (doi:10.1007/s10107-004-0559-y) → infeasibility-detection SQP (2010). The Wächter–Biegler → Byrd–Marazzi–Nocedal chain is separate. Arrows inferred from timing [05 §4] |
+| Reception | NITRO "significantly slower and far less robust" on small problems (doi:10.1007/s10107-003-0418-2) → Knitro-Direct (2006); KNITRO 3.1.1 829/954 vs IPOPT 895, without an infeasibility message (doi:10.1007/s10107-004-0559-y) → infeasibility-detection SQP (2010); both arrows inferred from timing. The Wächter–Biegler → Byrd–Marazzi–Nocedal chain is separate [05 §4] |
 | Method shown | Methods 4, 6; Heuristics 6, 8 |
 
 ### On the numerical performance of finite-difference-based methods for derivative-free optimization (OMS 38, 2023, doi:10.1080/10556788.2022.2121832; arXiv:2102.09762), in the noise programme
@@ -379,10 +380,9 @@ Kept as tensions, not rules.
 
 ## Mentor Voice (optional)
 
-- **Feedback style**: blunt first answers ("my first thing is don't use LBFGS here", 2026). Feedback on drafts is **not documented**.
+- **Feedback style**: blunt first answers ("my first thing is don't use LBFGS here", 2026); feedback on drafts **not documented**.
 - **Typical questions**: the Acta 1992 question (Method 5, step 1); has anyone compared against the simple alternative? (Simons 2017).
 - **Phrases** (caption-derived unless noted): "you just have to live with that fog of uncertainty for a while" (2026); "It's gonna be really good, but probably wrong." (Purdue 2017); "it is not just how good you are at climbing ladders, it is where you place the ladder" (2017 speech, quoting a colleague).
-- **Stated taboos**: ranking codes from one test set (partly contradicted by a 1997 table); complexity as the reason to switch.
 
 ## Roundtable Card
 
