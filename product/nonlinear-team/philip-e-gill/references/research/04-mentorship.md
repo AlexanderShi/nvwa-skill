@@ -337,3 +337,64 @@ Each item names its evidence. None was confirmed by a student account.
 29. Crossref metadata records used to verify every DOI above, plus DOIs 10.1137/S0895479894270658, 10.1137/060650210, 10.1007/s10107-015-0966-2, 10.1137/S1052623400307950, 10.1137/S1052623497319973, 10.1007/s10107-003-0486-3, 10.1007/978-3-0348-8802-8_21, 10.1007/978-3-642-55508-4_13, 10.1137/08072440X, 10.1093/imanum/drw004, 10.1007/s10107-016-1066-7, 10.1137/19M1247425, 10.1007/BF02592025, 10.1007/s10589-010-9339-1, 10.1007/s10589-016-9868-3, 10.1016/j.laa.2016.11.003, 10.1109/TIP.2011.2158229, 10.1016/j.physleta.2007.12.051, 10.1093/acprof:oso/9780195393798.003.0008, 10.2172/1177970; https://api.crossref.org, queried 2026-09-28. Secondary (bibliographic).
 30. Wikipedia, "Michael Saunders (academic)", raw wikitext, fetched 2026-09-28. Secondary; background only, not cited for any claim above.
 31. WebSearch results (2 queries: thesis acknowledgements; Gill tribute or birthday workshop), 2026-09-28. Secondary; led to Gill's Google Scholar profile id, no tribute found.
+
+---
+
+## Top-up (2026-09-28)
+
+Added at the Phase 1.5 review checkpoint. **Why**: this note had enough sources overall, but its central question (how Gill supervises) rested on zero first-hand student accounts, and the Gaps section named thesis acknowledgements as "the best next lead". **What was done**: eScholarship item ids were found through the OpenAlex API (Wong, Erway, Ferry; OpenAlex returned 503/429 for the others) and one WebSearch (M. Zhang). The PDFs were fetched with WebFetch and their text extracted with pypdf. Front matter and acknowledgements were read for four theses. WebSearch calls used for this top-up: 1. Text-layer caveat: the Erway PDF's text layer splits words ("guidanc e", "writ ten"); those spaces are restored below and nothing else is changed. The Wong quote keeps its missing word ("It would several pages") as printed.
+
+### A. What four students say about their advisor (first-hand, [observed · P] for Gill; [stated · P] for the student)
+
+- **Elizabeth Wong**, *Active-Set Methods for Quadratic Programming*, PhD UCSD 2011, eScholarship https://escholarship.org/uc/item/2sp3173p. Committee: "Professor Philip E. Gill, Chair", Abarbanel, Bank, Holst, Marsden (title page). Acknowledgements (p. ix):
+  - "It would several pages to thank my advisor Philip Gill. I am most grateful for his patience and encouragement over the years. I am also thankful for the funding he has provided, and for the opportunities to travel to various conferences and workshops around the world. On a lighter note, I would also like to thank Philip for teaching me the importance of booking air travel in advance, and the aesthetic value of dropping subscripts in LATEX." [sic; "LATEX" is the text layer of the LaTeX logo]
+  - "I would also like to thank Michael Saunders for numerous conversations about quadratic programming and all things in life, and for his company at several workshops and conferences. I would also like to thank Michael for inviting me to give a talk at Stanford University."
+  - "Some of the work in this dissertation would not be possible without the help of Iain Duff, who provided an additional subroutine for HSL MA57."
+- **Jennifer B. Erway**, *Iterative Methods for Large-Scale Unconstrained Optimization*, PhD UCSD 2006, eScholarship https://escholarship.org/uc/item/65t4c5zd. Committee: "Professor Philip Gill, Chair", Bank, Bitmead, Holst, Rao (title page). Acknowledgements (p. ix):
+  - "This thesis would not have been possible without the guidance and support of my advisor, Philip Gill. His dedication to this research and his patience in support of me for many years was, and continues to be, the greatest factor in my accomplishments in mathematics."
+  - "I am especially indebted to Mike Holst and Randy Bank for their unwavering encouragement and reassurance."
+  - "In the writing of this thesis, Josh Griffin's advice and suggestions were indispensable." (Griffin was a fellow Gill student, PhD 2005; §1.2.)
+- **Michael W. Ferry**, *Projected-Search Methods for Box-Constrained Optimization*, PhD UCSD 2011, eScholarship https://escholarship.org/uc/item/99277951. Committee: "Professor Philip E. Gill, Chair", Bank, Bewley, Bitmead, Holst (title page). Acknowledgements (p. x):
+  - "I owe a debt of gratitude to my advisor, Philip Gill, for pointing me in the right direction with my research, for supporting me as a Research Assistant for several quarters, and for helping me to always catch the errant split infinitive."
+  - "A special thanks goes to Tom Bewley, David Zhang, Joe Cessna, Chris Colburn, Robert Krohn, and Paul Belitz in the Engineering department for the opportunity to collaborate together on a number of projects."
+- **Minxin Zhang**, *Projected-Search Methods for Constrained Optimization*, PhD UCSD 2023, eScholarship https://escholarship.org/uc/item/1sj0p4qk. Committee: "Professor Philip E. Gill, Chair", Bank, Bitmead, Holst, Wenxin Zhou (title page). Acknowledgements (p. x):
+  - "I would like to express my deepest gratitude to my advisor, Prof. Philip Gill, for his unwavering support in all aspects of my research. His patient guidance, immense passion and exceptional expertise in optimization were essential to the successful completion of this dissertation."
+  - "Special thanks to Prof. Bank and Prof. Holst for the inspiring discussions during the weekly CCoM seminars over the years and for their many other forms of guidance."
+
+### B. A student's own statement of who led an alphabetically ordered paper ([stated · P], student voice)
+
+Zhang's acknowledgements page (p. x) carries the chapter-reprint statements:
+- "Chapter 3, as well as the numerical results in Sections 5.1–5.2, is partially a reprint of the paper "Projected-search methods for bound-constrained optimization" by Michael W. Ferry, Philip E. Gill, Elizabeth Wong, and Minxin Zhang, available on arXiv:2110.08359 [math.OC]. Manuscript submitted for publication, 2021. The dissertation author served as the primary investigator and author of the paper."
+- "Chapter 4 and Section 5.3, in part, reprint the paper by Philip E. Gill and Minxin Zhang, "A projected-search interior method for nonlinear optimization." Manuscript submitted for publication, 2023. The dissertation author was the primary investigator and author of the paper."
+- "Appendix A, in part, reprints the material by Philip E. Gill and Minxin Zhang, "Equations for a Projected-Search Path-Following Method for Nonlinear Optimization." Center for Computational Mathematics Report CCoM 22-02 … The dissertation author was the primary author of this material."
+- Reading: the student, listed **last** on Ferry–Gill–Wong–Zhang (OMS 2024, DOI 10.1080/10556788.2023.2241769) and **second** on Gill–Zhang (COAP 2024, DOI 10.1007/s10589-023-00549-1), states she was the primary investigator and author of both. This is direct support for the §2.1 reading rule (author order says nothing about who led). Caveat [inferred]: the wording looks like a fixed formula UCSD dissertations use for reprinted chapters. I did not check it against Graduate Division rules, so it is a formal role statement, not a narrative. The 2006 and 2011 theses read here contain no such statement.
+- The equations report (CCoM 22-02) becomes a thesis appendix. So the "equations" companion reports of §4.3 are, at least in this case, the student's own derivations.
+
+### C. What this changes in §7 (tacit knowledge)
+
+| Item | Change |
+|---|---|
+| T1 (alphabetical order) | Now also backed by a student's stated role (B). Confidence stays high; the evidence is no longer only Wright's account plus practice |
+| T10 (outside senior reader) | Supported by Wong's thanks to Saunders ("numerous conversations about quadratic programming") and to Duff for an MA57 subroutine. Raise from low-medium to medium |
+| New T11: writing is edited down to typography and grammar | Two independent students: "the aesthetic value of dropping subscripts in LATEX" (Wong 2011); "to always catch the errant split infinitive" (Ferry 2011). Confidence medium |
+| New T12: funded as a research assistant, sent to conferences | Wong ("the funding he has provided … opportunities to travel to various conferences and workshops around the world"); Ferry ("supporting me as a Research Assistant for several quarters"). Confidence medium |
+| New T13: the advisor sets the direction; patience over years is the thing students name | "pointing me in the right direction with my research" (Ferry); "patience" in Wong, Erway and Zhang (three of four). Confidence medium. Nothing here says how often he meets students or how he edits the mathematics |
+| New T14: a stable CCoM committee and seminar | Bank and Holst sit on all four committees (and on Kungurtsev's, §1.4); Bitmead on three; Zhang names "the weekly CCoM seminars". Senior students help juniors (Erway thanks Griffin). Confidence medium-high for the committee, low for the peer help (one case) |
+
+### D. New contradiction found in this top-up
+
+- **Report number of the LRHB report.** §4.2 above gives "A limited-memory reduced-Hessian method for bound-constrained optimization" as CCoM 20-05, 2020 (from the reference list of CCoM 20-07). Zhang's thesis (p. x and Vita) gives the same title as "CCoM 21-01 … 2021". 03-process-evidence records that arXiv 2110.08359 also gives "CCoM 21-01", for the projected-search paper. The report is not on Gill's homepage list. Unresolved; 01-publications excluded a same-title Semantic Scholar record (2022, no identifier).
+
+### E. Still missing after the top-up
+
+- Acknowledgements of Robinson 2007, Runnoe 2024, Guldemond 2023, Huang 2023, Shustrova 2015, Su 2019 and the Stanford-era students: not read (item ids not found; OpenAlex returned 503/429).
+- All four accounts are acknowledgements: short, positive by genre, and silent on meeting frequency, topic assignment, draft editing of the mathematics, or disagreements. Treat them as what students chose to thank, not as a description of the method of supervision.
+
+### Top-up sources
+
+32. E. Wong, *Active-Set Methods for Quadratic Programming*, PhD thesis, UCSD, 2011, https://escholarship.org/uc/item/2sp3173p (front matter and acknowledgements read). Primary (student voice).
+33. J. B. Erway, *Iterative Methods for Large-Scale Unconstrained Optimization*, PhD thesis, UCSD, 2006, https://escholarship.org/uc/item/65t4c5zd (front matter and acknowledgements read). Primary (student voice).
+34. M. W. Ferry, *Projected-Search Methods for Box-Constrained Optimization*, PhD thesis, UCSD, 2011, https://escholarship.org/uc/item/99277951 (front matter, acknowledgements and vita read). Primary (student voice).
+35. M. Zhang, *Projected-Search Methods for Constrained Optimization*, PhD thesis, UCSD, 2023, https://escholarship.org/uc/item/1sj0p4qk (front matter, acknowledgements with reprint statements, and vita read). Primary (student voice).
+36. OpenAlex works API, dissertation title searches (item ids for sources 32–34), queried 2026-09-28, https://api.openalex.org/works. Secondary (aggregator).
+37. WebSearch (1 query, restricted to escholarship.org) that located source 35, 2026-09-28. Secondary.
