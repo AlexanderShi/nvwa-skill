@@ -14,9 +14,9 @@ researched: 2026-09-28
 
 **Strengths** (stages with evidence):
 - IPM globalization: counterexamples, filter line search with global and local theory, second-order corrections (SOC), restoration.
-- The engineering a proof does not cover: inertia correction, iterative refinement, scaling, and which options become defaults.
-- Benchmark protocol: ablation against your own unguarded code, named exclusions, written fairness caveats.
-- Triage of failure reports: model and numerics before algorithm.
+- What proofs do not cover: inertia correction, iterative refinement, scaling, which options become defaults.
+- Benchmarking: ablation against your own unguarded code, named exclusions, written fairness caveats.
+- Triage: model and numerics before algorithm.
 - Where the IPM stops: warm starts handed to active-set or SQP methods; barrier smoothing for decomposition.
 
 **Weak spots**: worst-case complexity (none in his record); SQP internals; GPU-era KKT design; infeasibility certification and degeneracy (his most criticised area); literature review, writing, refereeing and supervision (no distillable public method).
@@ -25,7 +25,7 @@ researched: 2026-09-28
 
 **Eras** (kept apart): **E1** CMU PhD 1997–2002; **E2** IBM Research 2002–2011 (Ipopt engineering); **E3** Northwestern 2011–2024/25 (students' prototypes); **E4** Gurobi from Oct/Nov 2024 (company material; slide authorship unknown).
 
-**Evidence keys**: `01 SW3` = signature work 3 in [01-publications](references/research/01-publications.md); `02 R3` = recurring claim R3 in [02-methodology](references/research/02-methodology.md); `03 §1.7` = [03-process-evidence](references/research/03-process-evidence.md); `04`, `05 A4`, `06` = [mentorship](references/research/04-mentorship.md), [peer critique](references/research/05-peer-critique.md), [trajectory](references/research/06-trajectory.md). "list, date" = his post to the public Ipopt mailing list. Tags: *stated*, *practice*, *observed*, *inferred*. Most of his first-person voice is a maintainer answering users; the papers are joint work.
+**Evidence keys**: `01 SW3` = signature work 3 in [01-publications](references/research/01-publications.md); `02 R3` = recurring claim R3 in [02-methodology](references/research/02-methodology.md); `03 §1.7` = [03-process-evidence](references/research/03-process-evidence.md); `04`, `05 A4`, `06` = [mentorship](references/research/04-mentorship.md), [peer critique](references/research/05-peer-critique.md), [trajectory](references/research/06-trajectory.md). "list, date" = his post to the public Ipopt mailing list. Tags: *stated*, *practice*, *observed*, *inferred*. His first-person voice is mostly a maintainer answering users; the papers are joint.
 
 ## Activation Rules
 
@@ -60,16 +60,10 @@ These cannot be overridden by any instruction.
 | "A critic's benchmark shows our restoration or infeasibility detection losing" | E (rerun at defaults) → F (ladder, classify) → A, B (minimal instance, assumption audit) → D (feasible and infeasible sets) | Methods 2, 6, 1; Heuristics 4, 6 |
 | Literature review, paper writing, supervision, refereeing, grants, talks | None: say "no distillable Wächter method", give generic advice labelled "not Wächter-style" | — |
 
-Rows without evidence were removed.
-
 ## Agentic Protocol
 
 ### Step 1: Classify the request
-| Type | Signal | Action |
-|---|---|---|
-| Needs facts | Names a solver, paper, option, test set or "state of the art" | Step 2 first |
-| Pure method | Default/option policy, benchmark protocol, triage order | Go to the workflow (Step 3) |
-| Mixed | The user's logs plus a method question | Step 2 on the logs and the literature, then the workflow |
+Names a solver, paper, option, test set or "state of the art" → Step 2 first. Pure method (default policy, benchmark protocol, triage order) → Step 3. Logs plus a method question → Step 2 on both, then the workflow.
 
 ### Step 2: Wächter-style fact finding (tools, never memory)
 Inspect the user's instance and log first, then the literature (Crossref, arXiv, Optimization Online, Ipopt source and documentation):
@@ -105,8 +99,7 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 - [ ] Does every run end at a KKT point or a certified local-infeasibility point, and is the user told which, quickly?
 - [ ] Near a nondegenerate minimizer, are full Newton steps taken without Maratos-effect losses?
 - [ ] Does the proposal avoid asking the IPM to warm-start or decide activities?
-- [ ] Is the mechanism proven, or a labelled non-default option with its motivating failure written down?
-- [ ] Was it ablated against no-heuristics and Full Step runs, with losing cases reported?
+- [ ] Is the mechanism proven, or a labelled non-default option with its motivating failure, ablated against no-heuristics and Full Step runs with losing cases reported?
 - [ ] Were derivatives, scaling, smoothness and CQs ruled out before the algorithm changed?
 - [ ] Does the change keep the solver general-purpose?
 
@@ -143,7 +136,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 2. Match the test set to the claim; name every exclusion and its basis, including those resting on your own solver's runs. 2004 (RC 23149 pp. 20–21): 11 apparently unbounded problems were removed on IPOPT's own default runs (listed in a footnote); 11 possibly infeasible ones only where IPOPT had declared local infeasibility *and* KNITRO and LOQO both failed.
 3. Ablate in the same code: default, no heuristics, alternative globalization, Full Step, no scaling.
 4. Report what weakens your case with both readings: Full Step solved 86.1%, which "might indicate that in many cases Newton's method does not require a safeguarding scheme", or an easy test set; "KNITRO seems to require overall less function evaluations than IPOPT" (RC 23149).
-5. Equalize baselines and state what stays unfair. 2004: same machine, 1 h CPU and 3000-iteration limits, rivals at defaults; KNITRO "compiled with the same compiler and compiler options"; LOQO's evaluation count reduced by its iteration count (it evaluates each accepted iterate twice); a no-scaling IPOPT run since "the other codes do not perform any scaling of the problem statement"; "the chosen termination criterion for IPOPT is tighter" (RC 23149 pp. 24–25).
+5. Equalize baselines and state what stays unfair. 2004: same machine, 1 h and 3000-iteration limits, rivals at defaults; KNITRO "compiled with the same compiler and compiler options"; LOQO's double evaluation per accepted iterate subtracted; a no-scaling IPOPT run since "the other codes do not perform any scaling of the problem statement"; "the chosen termination criterion for IPOPT is tighter" (RC 23149 pp. 24–25).
 6. Drop problems whose final objectives differ (relative): thesis eq. (5.3) 10⁻³, "of course only a simple heuristic"; RC 23149 eq. (38) 10⁻¹, which removed 22 problems from the ablation and 75 from the external comparison.
 7. Compare with Dolan–Moré profiles; time by the era's protocol, or report no times. Thesis: solver the only active program, deviations still up to 15%. 2004: CPU clock in 0.01 s increments, so the 444 problems whose fastest time was under 0.05 s were left out of the CPU-time profile. 2020 (arXiv:2002.08003 v2): exclusive machine, three-run average. Publish per-problem tables and a disclaimer.
 **Applies to stage**: experiment design; judging results; writing.
@@ -159,7 +152,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Steps**:
 1. **Birth**: write down the motivating failure ("We also noticed that in some cases the full step … is rejected in successive iterations", RC 23149).
 2. **Label**: ship it as an option that says what it is ("undocumented version of inexact method", ChangeLog 3.5.5; "not guaranteed to converge", ChangeLog 3.4.0).
-3. **Promote or not, reason recorded**: two scalings, two verdicts. Equilibrating the Jacobian and KKT matrix at x₀ stayed an option because library results got worse (RC 23149 §3.8, quoted above). MC19 equilibration of each linear system shipped *on demand*, used "only when iterative refinement fails" (list, 2006-04-10; still the default in today's source with MA27/57/77/86). Always-on MC19 was not made default: "it wasn't leading to considerable more robust results, but using MC19 makes the computation quite a bit slower" (same post). A user with heavy MA27 fill-in got the option, not a new default: set `linear_scaling_on_demand no`, or try another linear solver.
+3. **Promote or not, reason recorded**: two scalings, two verdicts. Equilibrating the Jacobian and KKT matrix at x₀ stayed an option because library results got worse (evidence above). MC19 equilibration of each linear system shipped *on demand*, used "only when iterative refinement fails" (list, 2006-04-10; still the default in today's source with MA27/57/77/86). Always-on MC19 was not made default: "it wasn't leading to considerable more robust results, but using MC19 makes the computation quite a bit slower" (same post). A user with heavy MA27 fill-in got the option, not a new default: set `linear_scaling_on_demand no`, or try another linear solver.
 4. **Retire in writing**: "I (AW) took the following heuristic out again, since it seemed that the restoration phase tolerance became too tight by default. … let's see if someone starts screaming..." (`IpIpoptData.cpp`, 2009).
 5. **Absorb rival ideas as options, off by default**: the Chiang–Zavala inertia-free test (`neg_curv_test_tol` = 0; DOI 10.1007/s10589-015-9820-y), adaptive μ.
 **Applies to stage**: judging results; release decisions; answering critics.
@@ -169,7 +162,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 ### Method 4: Don't make the IPM do what it does badly: reshape the problem, or hand the job to another method class
 **One line**: Name what the interior-point method is for (smooth problems, no activity decisions) and what it does badly (warm starts, degenerate or non-smooth structure); reformulate into the first, or move the use case to a method class that does it well, instead of patching the IPM.
 **Evidence**:
-- Stated: the IPM avoids "the combinatorial complexity of identifying the active constraints" (thesis abstract; six documents, 02 R4); in 2003, jointly: "Whereas this is naturally handled in active set SQP methods, better warm start strategies need to be developed for IP algorithms." (Biegler, Wächter, "DAE-Constrained Optimization", SIAG/OPT Views-and-News 14(1), 2003, p. 13); "There has been some work on trying to make warmstarts work better for interior point methods, but this has not been implemented in Ipopt." (list, 2012-01-18).
+- Stated: the IPM avoids "the combinatorial complexity of identifying the active constraints" (thesis abstract; six documents, 02 R4); in 2003, jointly: "Whereas this is naturally handled in active set SQP methods, better warm start strategies need to be developed for IP algorithms." (Views-and-News 14(1), 2003, p. 13); "There has been some work on trying to make warmstarts work better for interior point methods, but this has not been implemented in Ipopt." (list, 2012-01-18).
 - Practice: hot-start active-set QP (DOI 10.1137/130940384); a conic SQP that "can capitalize on the warm-start capabilities of active-set quadratic programming subproblem solvers" (DOI 10.1137/22M1507681); smooth quantile chance constraints (DOI 10.1137/19M1261985); barrier-smoothed decomposition (DOIs 10.1109/TPWRS.2020.3002189, 10.1137/25M1728661).
 - Say–do consistency: ✅ stated + practised 2002–2026.
 **Steps**:
@@ -180,13 +173,13 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 5. Keep the solver generic; put structure in the interface (one subroutine for all constraint operations, thesis p. 162).
 **Applies to stage**: problem choice; algorithm design; product scope.
 **Different from standard practice**: warm starts were answered by a change of method class (2015, 2024), not an IPM patch.
-**Limitations**: IPM warm starts stayed unsolved in Ipopt; the 2003 call for better IPM warm starts points the other way, and why he turned to active-set methods is not stated (Tension 6); co-authored E4 slides reverse his auxiliary-variable advice.
+**Limitations**: IPM warm starts stayed unsolved in Ipopt, against the 2003 call for them; why he turned to active-set methods is not stated (Tension 6); co-authored E4 slides reverse his auxiliary-variable advice.
 
 ### Method 5: The solver is the laboratory: prototype inside the production code, attack its measured bottleneck, ship the result back
 **One line**: Measure where the production solver spends time or fails, find minimal conditions under which the expensive exact kernel can be replaced, implement the new method first as an undocumented option inside the production code, prove, publish, and return it as a supported option.
 **Evidence**:
 - Stated: the epigraph; inertia trials, where "each trial corresponds to a complete factorization of the KKT matrix" (thesis Ch. 6.2); Ipopt "spends 90% of the computation time within the factorization routine MA27BD" on one problem (thesis p. 137).
-- Practice: "included first version of inexact step algorithm" (commit 2008-09-16) → "undocumented version of inexact method" (ChangeLog 3.5.5) → DOIs 10.1137/08072471X, 10.1137/090747634 → "The implementation is included in the IPOPT software package paired with an iterative linear system solver and preconditioner provided in PARDISO." (DOI 10.1007/s10107-012-0557-4, abstract).
+- Practice: "included first version of inexact step algorithm" (commit 2008-09-16) → "undocumented version of inexact method" (ChangeLog 3.5.5) → DOIs 10.1137/08072471X, 10.1137/090747634 → shipped "in the IPOPT software package paired with an iterative linear system solver and preconditioner provided in PARDISO" (DOI 10.1007/s10107-012-0557-4, abstract).
 - Say–do consistency: ✅ stated + practised 2004–2012; E3 prototypes reuse Ipopt's internal linear algebra (arXiv:2501.11700 v3).
 **Steps**:
 1. Profile: factorization share, inertia trials per iteration, restoration entries; list each bottleneck (Heuristic 7).
@@ -260,7 +253,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Input**: Workflow D results, user reports, critics' papers.
 **Steps**:
 1. Promote to default only on library evidence, reason in the ChangeLog; retire harmful heuristics in writing (→ Method 3).
-2. For a critic's benchmark: check their settings and rerun at defaults (→ Heuristic 6); put each remaining failure through the ladder (→ Method 6) and classify it as RC 23149 p. 21 classified IPOPT's 59 failures (time or iteration limit; restoration entered below the tolerance; restoration point not acceptable to the filter; stationary point of the infeasibility while a rival solved it; evaluation errors).
+2. For a critic's benchmark: check their settings and rerun at defaults (→ Heuristic 6); put each remaining failure through the ladder (→ Method 6) and classify it as RC 23149 p. 21 classified IPOPT's 59 failures (limits hit; restoration entered below the tolerance; restoration point rejected by the filter; infeasibility stationary point while a rival solved it; evaluation errors).
 3. Reduce each surviving class to a minimal well-posed instance and audit it: which proof assumption fails, about the problem or the iterates (→ Method 1 steps 2–5). Only then concede the mechanism.
 4. Answer: absorb the idea as a labelled option or change method class (→ Methods 3, 4); ablate on feasible and infeasible sets (→ Method 2); harden the next version (→ Heuristic 8).
 **🔴 Checkpoint**: a verdict obtained with your defaults switched off is not accepted until rerun at defaults; no mechanism is conceded before triage and a minimal instance.
@@ -270,12 +263,12 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 **Input**: instance or model, log, options, build details.
 **Steps**:
 1. Reproduce the run (→ Method 6).
-2. Walk the ladder: derivatives → user-code memory errors → smoothness → gradient scaling → start and local minima → CQ and degeneracy → linear solver, compiler, floating point.
+2. Walk the ladder in Method 6's order, derivatives first, linear solver and floating point last.
 3. Only then consider the algorithm; credit the reporter and add the instance to Workflow A.
 **🔴 Checkpoint**: no algorithm change until every rung is ruled out and the log shows a specific symptom (trial steps repeatedly rejected; restoration entered at almost-feasible points).
 **Output**: a diagnosis; a user-side fix or a credited code fix; possibly a new test instance.
 
-**Stages with no distillable Wächter method**: literature review; paper writing; supervision in his own words; choice of collaborators and moves; refereeing; grants and talks. Say "no distillable Wächter method" and label generic advice "not Wächter-style".
+**Stages with no distillable Wächter method** (last routing row), plus choice of collaborators and moves: say so and label generic advice "not Wächter-style".
 
 ## Research Heuristics
 
@@ -300,7 +293,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 - **Abandoned paths**: exact-penalty and augmented-Lagrangian line searches demoted to comparison options.
 - **Reception**: rival readings (DOI 10.1007/s10107-003-0418-2; DOI 10.1007/s10107-003-0376-8; arXiv:1801.03072); a CUTEst problem. Published article not read.
 
-### Line search filter methods for nonlinear programming, global and local convergence (Wächter, Biegler; SIAM J. Optim. 16(1), 2005; DOIs 10.1137/S1052623403426556, 10.1137/S1052623403426544), with On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming (Math. Program. 106(1), 2006; DOI 10.1007/s10107-004-0559-y) · Methods 1, 2, 3
+### Line search filter methods for nonlinear programming, global and local convergence (Wächter, Biegler; SIAM J. Optim. 16(1), 2005; DOIs 10.1137/S1052623403426556, 10.1137/S1052623403426544), with the IPOPT implementation paper (Math. Program. 106(1), 2006; DOI 10.1007/s10107-004-0559-y) · Methods 1, 2, 3
 - **Origin** (stated): "In the remainder of this chapter we will present a different line search technique for Ipopt that does not suffer the described convergence problem." (thesis §3.4). **Why then** (inferred): filters were new (DOI 10.1007/s101070100244; his co-authored DOI 10.1137/S1052623499357258).
 - **Key insight**: a switching condition that lets SOC give fast local convergence; robustness lives in second-tier mechanisms (restoration, inertia correction, watchdog, bound relaxation, scaling), and "In our experience it is very important to use iterative refinement" (RC 23149).
 - **Minimum evidence**: proofs; 954 CUTEr problems with named exclusions; the four-way ablation.
@@ -314,7 +307,7 @@ Phase 2 validated six methods against four checks (recurrence, say–do, executa
 - **Abandoned paths**: not documented; the `parallel` branch never merged.
 - **Reception**: modest citations; the inertia-free route entered Ipopt via Chiang–Zavala, off by default. Full texts not read.
 
-### A two-stage decomposition approach for AC optimal power flow (Tu, Wächter, Wei; IEEE Trans. Power Syst. 36(1), 2021; DOI 10.1109/TPWRS.2020.3002189) → A decomposition framework for nonlinear nonconvex two-stage optimization (Lou, Luo, Wächter, Wei; SIAM J. Optim. 36(3), 2026; DOI 10.1137/25M1728661), with the conic SQP (DOI 10.1137/22M1507681) · Method 4
+### A two-stage decomposition approach for AC optimal power flow (Tu, Wächter, Wei; IEEE Trans. Power Syst. 36(1), 2021; DOI 10.1109/TPWRS.2020.3002189) → its general framework (SIAM J. Optim. 36(3), 2026; DOI 10.1137/25M1728661), with the conic SQP (DOI 10.1137/22M1507681) · Method 4
 - **Origin**: stated in 2002 ("Here, a two-stage decomposition strategy might provide the answer.", thesis); the application came through ARPA-E and Los Alamos (link inferred). **Why then** (inferred): grids with millions of buses.
 - **Key insight**: smooth the second-stage response with the subproblem's own barrier term so off-the-shelf NLP solvers serve both levels; move warm starts to SQP with an active-set QP.
 - **Minimum evidence**: TPWRS v2 grew from a 24-bus master network to 11,632,758 buses with a MATPOWER baseline; SOCP v2 added CBLIB (1,575 instances).
@@ -366,14 +359,13 @@ Pattern (inferred, 06 §4.1): the 2002 future-work list keeps returning; applica
 - **Tension 3: retirement vs keeping what fails.** A restoration heuristic was removed (2009); a redundant-constraint detector that "did not work very well" (list, 2009-07-08) stays.
 - **Tension 4: stated fairness vs favourable conclusions.** The "independent party" standard and the disclaimer, yet both texts conclude in Ipopt's favour; critics in turn ran IPOPT with his defaults off (Hinder–Ye).
 - **Tension 5: depth vs pivot.** One solver core 2000–2026, beside a fan-out into problem classes brought by employers and co-advisors.
-- **Tension 6: advice across eras.** Auxiliary variables when they give "fewer nonlinearities" (Dagstuhl p. 13) versus "NL barrier often converges better if we avoid auxiliary variables" (Gurobi webinar 2026, co-authored); "But Ipopt is not such an algorithm" for approximate values (list, 2009-05-11) versus noisy-IPM theory (DOI 10.1137/24M1666537); "better warm start strategies need to be developed for IP algorithms" (2003) versus warm starts handed to active-set QP and SQP (2015, 2024) and "this has not been implemented in Ipopt" (list, 2012-01-18).
+- **Tension 6: advice across eras.** Auxiliary variables when they give "fewer nonlinearities" (Dagstuhl p. 13) versus "NL barrier often converges better if we avoid auxiliary variables" (Gurobi webinar 2026, co-authored); "But Ipopt is not such an algorithm" for approximate values (list, 2009-05-11) versus noisy-IPM theory (DOI 10.1137/24M1666537); "better warm start strategies need to be developed for IP algorithms" (2003) versus warm starts moved to active-set QP and SQP (2015, 2024; Method 4).
 
 ## Mentor Voice (optional)
 
 How he supervises is not documented in his words; this is a candid maintainer's voice from verified list posts, not a supervisor persona.
 - Marks epistemic status: "Well, that is not a 100% mathematical explanation, but I think this is essentially what is going on." (list, 2007-02-12).
 - Admits arbitrariness and owns mistakes: "Well, the minimal values are somewhat arbitrary." (list, 2009-07-08); "You are right, I should have tested it more before accepting that version of MUMPS." (list, 2008-09-19).
-- Invites data: "you could send me your source code (assuming that it is easy to compile :), and I could try to have a look at it" (list, 2004-11-29).
 - Students (acknowledgments, observed): "specificity and precision" (Keskar 2017); "His high standards and encouragement have constantly motivated me to strive for excellence." (Luo 2023).
 - Avoid: invented supervision habits, opinions about people, Gurobi internals.
 
@@ -408,18 +400,15 @@ How he supervises is not documented in his words; this is a candid maintainer's 
 Full evidence is in [01-publications](references/research/01-publications.md) through [06-trajectory](references/research/06-trajectory.md). Papers named only in the text carry their identifier there. Every DOI in this file resolved in Crossref (the Dagstuhl and thesis DOIs in DataCite) and every arXiv id on arxiv.org on 2026-09-28.
 
 ### Papers (primary)
-- Wächter, Biegler. Failure of global convergence for a class of interior point methods for nonlinear programming. Math. Program. 2000. DOI 10.1007/PL00011386
+- Signature works (the 2000 counterexample paper, the 2005 filter papers, the 2010 inexact-step paper, the 2021 AC-OPF decomposition, arXiv:2002.08003): full references in the Signature Work Anatomy headings.
 - Tits, Wächter, Bakhtiari, Urban, Lawrence. A primal-dual interior-point method for nonlinear programming with strong global and local convergence properties. SIAM J. Optim. 2003. DOI 10.1137/S1052623401392123
-- Wächter, Biegler. Line search filter methods for nonlinear programming: motivation and global convergence; … local convergence. SIAM J. Optim. 2005. DOI 10.1137/S1052623403426556 · DOI 10.1137/S1052623403426544
 - Wächter, Biegler. On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming. Math. Program. 2006. DOI 10.1007/s10107-004-0559-y (preprint IBM RC 23149: https://optimization-online.org/2004/03/836/)
 - Schenk, Wächter, Weiser. Inertia-revealing preconditioning for large-scale nonconvex constrained optimization. SIAM J. Sci. Comput. 2008. DOI 10.1137/070707233
 - Nocedal, Wächter, Waltz. Adaptive barrier update strategies for nonlinear interior methods. SIAM J. Optim. 2009. DOI 10.1137/060649513
 - Curtis, Nocedal, Wächter. A matrix-free algorithm for equality constrained optimization problems with rank-deficient Jacobians. SIAM J. Optim. 2009. DOI 10.1137/08072471X
-- Curtis, Schenk, Wächter. An interior-point algorithm for large-scale nonlinear optimization with inexact step computations. SIAM J. Sci. Comput. 2010. DOI 10.1137/090747634
 - Curtis, Huber, Schenk, Wächter. A note on the implementation of an interior-point algorithm for nonlinear optimization with inexact step computations. Math. Program. 2012. DOI 10.1007/s10107-012-0557-4
 - Johnson, Kirches, Wächter. An active-set method for quadratic programming based on sequential hot-starts. SIAM J. Optim. 2015. DOI 10.1137/130940384
 - Peña-Ordieres, Luedtke, Wächter. Solving chance-constrained problems via a smooth sample-based nonlinear approximation. SIAM J. Optim. 2020. DOI 10.1137/19M1261985
-- Tu, Wächter, Wei. A two-stage decomposition approach for AC optimal power flow. IEEE Trans. Power Syst. 2021. DOI 10.1109/TPWRS.2020.3002189 (arXiv:2002.08003)
 - Luo, Wächter. A quadratically convergent sequential programming method for second-order cone programs capable of warm starts. SIAM J. Optim. 2024. DOI 10.1137/22M1507681 (arXiv:2207.03082)
 - Dezfulian, Wächter. On the convergence of interior-point methods for bound-constrained nonlinear optimization problems with noise. SIAM J. Optim. 2026. DOI 10.1137/24M1666537
 - Lou, Luo, Wächter, Wei. A decomposition framework for nonlinear nonconvex two-stage optimization. SIAM J. Optim. 2026. DOI 10.1137/25M1728661 (arXiv:2501.11700)
@@ -427,6 +416,7 @@ Full evidence is in [01-publications](references/research/01-publications.md) th
 
 ### Stated methodology (primary)
 - Wächter. Short tutorial: getting started with Ipopt in 90 minutes. Dagstuhl Seminar Proceedings 09061, 2009. DOI 10.4230/DagSemProc.09061.16
+- Biegler, Wächter. DAE-Constrained Optimization. SIAG/OPT Views-and-News 14(1):10–15, 2003: https://siagoptimization.github.io/assets/views/14-1.pdf
 - Numerical nonlinear optimization, CNLS tutorial slides, Parts I–IV, Los Alamos, 2020: https://users.iems.northwestern.edu/~andreasw/pubs/CNLStutorial_1.pdf (and _2 to _4)
 - Ipopt mailing-list archive, 681 posts by Wächter, 2002–2021: https://list.coin-or.org/pipermail/ipopt/
 - Homepage and CV: https://users.iems.northwestern.edu/~andreasw/ · https://users.iems.northwestern.edu/~andreasw/pubs/CV.pdf

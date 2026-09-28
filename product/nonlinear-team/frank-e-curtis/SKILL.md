@@ -71,9 +71,9 @@ These cannot be overridden by any instruction.
 
 ### Step 2: Curtis-style fact finding (tools, never memory)
 Inspect the user's solver output first, then the literature (Crossref, arXiv, publisher pages, solver documentation):
-- **Inner-solve contract (Method 1)**: which linear or QP solver, direct or iterative; stopping rule and tolerance, and whether it is tied to merit or model decrease; inertia corrections per iteration; share of time in the solve.
-- **Parameter trajectories (Method 2)**: per-problem histories of penalty ρ, merit τ, barrier μ and radius; final values across the test set; restoration-phase entries and the share of failures inside them.
-- **Hard instances (Method 3)**: status codes on infeasible and degenerate variants (−c_i(x)² ≤ 0; c_i(x)² ≤ −1; x1 ≤ 0 and x1 ≥ 1) with presolve off; "declared infeasible" versus "failed"; the local rate on a tiny infeasible model.
+- **Inner-solve contract (Method 1)**: solver type; stopping rule and whether it is tied to merit or model decrease; inertia corrections per iteration; share of time in the solve.
+- **Parameter trajectories (Method 2)**: per-problem histories and final values of penalty ρ, merit τ, barrier μ and radius; restoration entries and the share of failures inside them.
+- **Hard instances (Method 3)**: status codes on the Method 3 variants, presolve off; "declared infeasible" versus "failed"; the local rate on a tiny infeasible model.
 - **Yardstick (Method 4)**: how the harness defines success; whether the test set changed between comparisons; whether profiles count your own termination flag.
 - **Fairness (Method 5)**: the incumbent run with its own engineering (scaling, bound relaxation, second-order correction); tuning budgets on each side; runs, seeds, exclusion log.
 - **Prior art**: the closest Curtis paper (Sources), its critics ([05](references/research/05-peer-critique.md)), and whether Ipopt, KNITRO or SNOPT already offer it (Ipopt's inexact option is compile-time and "EXPERIMENTAL! (default: no)" in 3.14, `configure.ac`).
@@ -88,7 +88,7 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 ### Marks of good research
 1. **The solver behaves well when the model is badly posed** (infeasible, degenerate, highly nonlinear). Evidence: "A major challenge often overlooked in research on nonlinear optimization is the fact that contemporary techniques often perform poorly when all of the problem constraints cannot be satisfied simultaneously." (research page); PIPAL's constructed variants (01 SW2).
 2. **Scale a method while keeping the classical guarantees**: "maintaining the global and fast local convergence guarantees offered by classical methods" (research page); TRACE keeps the trust-region framework (01 SW4); "Achieving good/optimal complexity for practical algorithms." (ICCOPT 2019).
-3. **One algorithm with monitored transitions beats a two-phase design**. Deterministic evidence: "a single optimization algorithm" that "does not switch between two separate techniques" (INFORMS OS 2008, slide 5); a switch's difficulty "lies in the design of effective criteria for determining when such a switch should be made" (10.1137/080738222, p. 2282); PIPAL, SQuID (02 R3, R8). "“Two-phase” methods are not effective" (NeurIPS 2022, slide 11/42; EUCCO 2023, slide 13/44) sits under "We assume:" for "the fully stochastic regime", not as a general verdict.
+3. **One algorithm with monitored transitions beats a two-phase design**. Deterministic evidence: the 2008 single-algorithm goal (Method 2; INFORMS OS 2008, slide 5); a switch's difficulty "lies in the design of effective criteria for determining when such a switch should be made" (10.1137/080738222, p. 2282); PIPAL, SQuID (02 R3, R8). "“Two-phase” methods are not effective" (NeurIPS 2022, slide 11/42; EUCCO 2023, slide 13/44) sits under "We assume:" for "the fully stochastic regime", not as a general verdict.
 4. **Nonconvexity is acceptable; local search is worthwhile**: "Nonconvexity cannot always be avoided. And that's OK!" (ECOM 2021 public lecture); NonOpt "is not guaranteed to find a global minimizer" (homepage).
 5. **The workhorse is a target, not an endpoint**: "SG requires a lot of tuning" (Google 2016 talk); he advocates adaptive, second-order methods instead (ECOM 2021 public lecture).
 
@@ -98,13 +98,12 @@ Conclusion first → numbered next steps, each labelled with its method → 🔴
 3. **Worst-case complexity sold as practical gain**: "“Better complexity” has yet to mean “better performance” for nonconvex!" (ECOM 2021 public lecture, citing his own TRACE).
 
 ### Taste quick-check
-- [ ] Does the idea still work, provably or measurably, on infeasible or degenerate instances, keeping the global and fast local guarantees of the method it modifies?
-- [ ] Is it one algorithm with a monitored transition rather than a switch to a separate phase?
-- [ ] Is the inner solve's accuracy derived from what the outer globalization needs?
-- [ ] Would the advantage survive another test set, a tuned incumbent, counted tuning effort and repeated runs?
-- [ ] Is success measured independently of your own method (not your termination flag, not a stationarity test that favours you)?
-- [ ] Can you name the event your theory needs and show how often it occurs in runs?
-- [ ] Is the per-iteration cost of each new safeguard counted and small?
+- [ ] Does it still work on infeasible or degenerate instances, keeping the global and fast local guarantees of the method it modifies?
+- [ ] One algorithm with a monitored transition, not a switch to a separate phase?
+- [ ] Is the inner solve's accuracy derived from what the globalization needs?
+- [ ] Would the advantage survive another test set, a tuned incumbent, counted tuning and repeated runs?
+- [ ] Is success judged independently of your own termination flag or favourable stationarity test?
+- [ ] Is the event your theory needs measured in runs, and each safeguard's per-iteration cost counted?
 
 ## Core Research Methods
 
@@ -151,14 +150,14 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 **Evidence**:
 - Stated: the research-page "often overlooked" passage (Taste 1); the ISMP 2018 epigraph; "(We want your infeasible test problems!)" (SIAM Optimization 2011 slides, slide 6/35).
 - Practice: constructed variants in 2010, 2012 and 2020 (03 PE1); the 2020 paper added its infeasible set in revision (03 PE24).
-- Result: on the standard set "PIPAL-a and especially IPOPT have an edge in terms of efficiency"; on the degenerate variants "IPOPT is not only less efficient than both PIPAL-c and PIPAL-a, but it also lags slightly in terms of robustness" (10.1007/s12532-012-0041-4).
+- Result: on the standard set "PIPAL-a and especially IPOPT have an edge in terms of efficiency"; on the degenerate variants "IPOPT is not only less efficient than both PIPAL-c and PIPAL-a, but it also lags slightly in terms of robustness" (10.1007/s12532-012-0041-4, pp. 204–205).
 - Say–do consistency: ✅ stated + practised 2010–2020.
 **Steps**:
 1. Take a standard set (Hock–Schittkowski in CUTEr/AMPL then; CUTEst now).
-2. Degenerate variant: add −c_i(x)² ≤ 0 for each constraint. Infeasible: add c_i(x)² ≤ −1. (PIPAL built both from 125 HS problems; 120 degenerate and 105 infeasible remained after keeping those "solved by at least one of the algorithms", 10.1007/s12532-012-0041-4, pp. 202, 205–206: report the pre-filter count, Heuristic 7.) Or "we modified the 126 CUTEr Hock-Schittkowski (hs) problems by adding bound constraints x1≤ 0 and x1≥ 1 to make all hs problems infeasible" (arXiv:1803.09224 v3, p. 28), or make one application model infeasible (`robot` with c4 = c1² + 1; 10.1137/080738222, p. 2295).
-3. Turn presolve off "so as to test the algorithms on difficult constraint sets" (PIPAL).
+2. Degenerate variant: add −c_i(x)² ≤ 0 for each constraint. Infeasible: add c_i(x)² ≤ −1. (PIPAL: from 125 HS problems, 120 and 105 kept as "solved by at least one of the algorithms", pp. 205–206; report the pre-filter count, Heuristic 7.) Or "we modified the 126 CUTEr Hock-Schittkowski (hs) problems by adding bound constraints x1≤ 0 and x1≥ 1 to make all hs problems infeasible" (arXiv:1803.09224 v3, p. 28), or make one application model infeasible (`robot` with c4 = c1² + 1; 10.1137/080738222, p. 2295).
+3. Turn presolve off "so as to test the algorithms on difficult constraint sets" (PIPAL, p. 202).
 4. Add two- or three-variable toy models ("s.t. c: 1 <= 0;", "s.t. c: y^2 + 1 <= 0;") and record which solvers declare infeasibility (2011 slides: ten solvers).
-5. State what is not covered: "We admit that creating instances in this manner only produces a certain type of degeneracy" (PIPAL).
+5. State what is not covered: "We admit that creating instances in this manner only produces a certain type of degeneracy" (PIPAL, p. 205).
 6. Ask users for their failing models.
 **Applies to stage**: problem choice; experiment design.
 **Different from standard practice**: most NLP papers report the standard set only; here hard instances are manufactured and reported separately.
@@ -190,7 +189,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 - Say–do consistency: ✅ stated + practised, improving after about 2018. ⚠️ Parameters tuned on the evaluation set without reporting the effort (2012, 2012, 2019; 03 PE13); a randomized method reported from single runs (2019; 03 PE15).
 **Steps**:
 1. Put algorithm variants in one framework as strategy objects (NonOpt's direction, step-size and QP-solver classes; 03 PE33).
-2. Build the rival as another strategy: ARC beside i-TRACE, "all of the algorithms were implemented in a single software package in Matlab" (arXiv:2204.11322); GS-exact is GS-inexact with the QP solved to 10⁻¹⁰, "every aspect of this implementation is the same as that of GS-inexact" (arXiv:2005.07822).
+2. Build the rival as another strategy: ARC beside i-TRACE, "all of the algorithms were implemented in a single software package in Matlab" (arXiv:2204.11322); GS-exact is GS-inexact with the QP solved to 10⁻¹⁰ (arXiv:2005.07822).
 3. Ablate the one component the claim is about: p = 0 sampled gradients in SQP-GS, "providing strong evidence that the GS procedure is critical for the effectiveness of our approach" (10.1137/090780201); a delete-instead-of-aggregate arm that "shows the effect of aggregation itself" (arXiv:1903.03471).
 4. Against an external code, adopt its engineering first: PIPAL copied Ipopt's bound relaxation, initial point, gradient scaling, second-order correction and evaluation-error handling "for the purpose of providing a fairer comparison" (03 PE8).
 5. Favour the baseline and put the handicap in numbers: "“Stochastic Subgradient” was given 110 times the number of iterations that were allowed for “Stochastic SQP.”" (arXiv:2007.10525 v1); tuning that "did not require more effort than the tuning used for the SG method" (arXiv:1712.10277).
@@ -253,7 +252,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 **🔴 Checkpoint**: untested scale claims and adjectives come out; a numerical claim without a reproduction path waits.
 **Output**: paper, reproduction package, errata entry when needed.
 
-**Stages with no distillable Curtis method**: literature review (one positioning slide, "What could I say that is new?", ICCOPT 2019); peer review and rebuttal; one-to-one supervision; grant writing. Say "no distillable Curtis method" and label generic advice "not Curtis-style".
+**Stages with no distillable Curtis method**: literature review (one positioning slide, "What could I say that is new?", ICCOPT 2019), writing rebuttal letters, supervision, grant writing; see the routing table's last row. A reviewer's attack on the benchmark itself goes to Workflows C–E.
 
 ## Research Heuristics
 
@@ -266,7 +265,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 7. **If** you remove test problems, **then** name each with its reason, encode filters in code, and never filter on what the runs showed. Dropping problems no solver solved is symmetric but still outcome-based, and PIPAL did it; if you do, report the pre-filter count as PIPAL did (438 → 417; 125 → 120 and 105; 10.1007/s12532-012-0041-4, p. 202). Anti-example, later dropped: problems kept only where "the LICQ held at all iterates in all runs of all algorithms that we ran" (arXiv:2007.10525 v1; 03 PE2).
 8. **If** you show a benchmark, **then** first show one run at iteration level (infeasible toy iteration tables, 10.1137/080738222, pp. 2295–2298, e.g. `batch1` = `batch` + tl[1] ≥ 5, p. 2296; 03 PE18). Practice only.
 9. **If** a solver misbehaves, **then** run the derivative checker ("the best first step for debugging!", NonOpt manual) on the test problems too (commit e59f9b6: "Fixed derivatives on two test problems."); keep defensive exits, fixed seeds and byte-identical regression checks when refactoring; a test driver that returns 0 whatever happens is itself a bug (NonOpt, fixed 2026; 03 §4). Good practice more than a signature; lapses in 03 PE15, PE22.
-10. **If** the information the algorithm may trust changes (exact → inexact → nonsmooth → stochastic → noisy), **then** keep the skeleton, build a deterministic twin that replaces only the broken component, and climb the same rungs: full-rank equalities → rank deficiency → nonconvexity → inexact solves → inequalities → implementation. Case: "As a starting point for this stochastic setting, an algorithm is proposed for the deterministic setting that is modeled after a state-of-the-art line-search SQP algorithm" (arXiv:2007.10525); rungs 2008–2014 and 2021–2026 (Sources). A validated core method in Phase 2; for a noisy-evaluation feature, pick two rungs, not six.
+10. **If** the information the algorithm may trust changes (exact → inexact → nonsmooth → stochastic → noisy), **then** keep the skeleton, build a deterministic twin that replaces only the broken component, and climb the same rungs: full-rank equalities → rank deficiency → nonconvexity → inexact solves → inequalities → implementation. Case: "As a starting point for this stochastic setting, an algorithm is proposed for the deterministic setting that is modeled after a state-of-the-art line-search SQP algorithm" (arXiv:2007.10525); rungs 2008–2014 and 2021–2026 (Sources). For a noisy-evaluation feature, pick two rungs, not six.
 
 ## Signature Work Anatomy
 
@@ -316,7 +315,7 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 
 | Anti-pattern | Why he opposes it (source) | Do instead |
 |---|---|---|
-| Two-phase "feasibility, then optimize" designs | "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008, slide 5, joint); for the stochastic regime only, an assumption: "“Two-phase” methods are not effective" (NeurIPS 2022) | One steering algorithm (Method 2) |
+| Two-phase "feasibility, then optimize" designs | "does not switch between two separate techniques (e.g., no feasibility restoration as in Fletcher and Leyffer, 1997)" (INFORMS OS 2008, slide 5, joint); "“Two-phase” methods are not effective" is a stochastic-regime assumption (NeurIPS 2022) | One steering algorithm (Method 2) |
 | Subproblem solver as a black box | "as opposed to treating the subproblem solver as a “black-box”" (research page) | Inner tests from outer needs (Method 1) |
 | Infeasible cases as an afterthought | "often treated as an afterthought" (INFORMS OS 2008 slides, joint) | Constructed infeasible variants (Method 3) |
 | One test set, untuned rivals, uncounted tuning, one run | Oaxaca 2017; ECOM 2021 slides 34–42 | Fair fight (Method 5) |
@@ -328,7 +327,6 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 
 | Period | Main direction | Trigger | Representative work |
 |---|---|---|---|
-| 1999–2006 | Combinatorial matrix theory (William & Mary) turning to optimization | Undergraduate research | 10.1016/j.jcta.2003.10.001 |
 | 2003–2014 | Inexact, matrix-free SQP and IPM (PhD Northwestern 2007, Nocedal) | PDE-scale problems (stated) | 10.1137/060674004; 10.1137/090747634 |
 | 2007– | Nonsmooth nonconvex: gradient sampling, BFGS-SQP | Postdoc with Overton, NYU | 10.1137/090780201; 10.1080/10556788.2016.1208749 |
 | 2008–2020 | Infeasibility detection, penalty updates (Lehigh ISE from 2009) | MINLP users' needs (stated) | 10.1137/080738222; 10.1137/120880045; 10.1137/18M1176488 |
@@ -340,13 +338,13 @@ Phase 2 validated six methods (recurrence, say–do, executable steps, exclusivi
 Pattern (inferred, 06 §4): he rarely abandons a line; its machinery (merit-parameter control, inexact inner tests) moves into the next setting, opened by a new information model or new people.
 
 ### Latest
-- 2025-09-28 to 2026-09-28: progressive sampling (arXiv:2510.00417); a method built on "minimizing Fletcher's augmented Lagrangian function" (arXiv:2608.12665); noisy gradient sampling (arXiv:2604.00278); a single-loop stochastic IPM (10.1007/s10107-025-02320-2); NonOpt in MPC (10.1007/s12532-026-00322-5), then a July 2026 code-quality pass driven by a Claude Code brief (`CLAUDE.md`, author not established); student-led ML optimizers (arXiv:2601.11795, arXiv:2605.06945).
+- 2025-09-28 to 2026-09-28: progressive sampling (arXiv:2510.00417); Fletcher's augmented Lagrangian (arXiv:2608.12665); noisy gradient sampling (arXiv:2604.00278); a single-loop stochastic IPM (10.1007/s10107-025-02320-2); NonOpt in MPC (10.1007/s12532-026-00322-5), then a July 2026 code-quality pass driven by a Claude Code brief (`CLAUDE.md`, author not established); student-led ML optimizers (arXiv:2601.11795, arXiv:2605.06945).
 - Direction (inferred): noise moving into constraints, multipliers and active sets (arXiv:2509.00888, arXiv:2502.11302); sample complexity for constrained problems.
 
 ## Academic Lineage
 
 - **Upward** (Mathematics Genealogy Project, observed): Bliss → Hestenes → Tapia → Nocedal → Curtis (Northwestern 2007).
-- **Formative partners**: Richard Byrd ("Any scientific accomplishments contained in these pages would not have been possible without the knowledge and expertise of Richard Byrd", thesis); Andreas Wächter (2009–2025, inexact IPM in Ipopt, noisy IPM); postdoc host Michael Overton; complexity influence Cartis–Gould–Toint; dominant co-author since 2014 Daniel Robinson.
+- **Formative partners**: Richard Byrd (thanked in the thesis for his "knowledge and expertise"); Andreas Wächter (2009–2025, inexact IPM in Ipopt, noisy IPM); postdoc host Michael Overton; complexity influence Cartis–Gould–Toint; dominant co-author since 2014 Daniel Robinson.
 - **Downward**: nine PhD graduates, each on one of his lines; four postdocs (Berahas, O'Neill, Dinç Yalçın, X. Jiang) (06 §2.3).
 - **Self-placement** (inferred): his 2021 public lecture sets a smoothness lineage (Powell, Fletcher, Goldfarb, Nocedal) beside a convexity-and-complexity one (Fenchel, Rockafellar, Nemirovski, Nesterov): "These worlds have (finally) collided!" His work sits on the first side.
 
@@ -355,7 +353,7 @@ Pattern (inferred, 06 §4): he rarely abandons a line; its machinery (merit-para
 - **Tension 1: complexity critic vs complexity producer.** "Continuous optimization has become too theoretical in recent years!" (ECOM 2021) and "Our worst-case analysis for nonconvex optimization is faulty." (ISMP 2018), yet about ten complexity papers 2017–2024 and "a better worst-case sample complexity bound" claimed in 2025 (arXiv:2510.00417). His 2019 reconciliation: "Achieving good/optimal complexity for practical algorithms."
 - **Tension 2: fair-comparison preacher vs his own benchmarks.** He said to count tuning time, avoid one-test-set bias and repeat runs (2017, 2021); he tuned on the test set unreported (2012–2019), reused one nonsmooth set (2018–2025), reported single runs for a randomized method (2019), kept only problems some solver solved (2012), and set SQuID's published statistics on 122–123 problems beside new runs on 126 (arXiv:1803.09224 v3, pp. 27–28). Practice improved from 2018 (equal-effort tuning, a 110× baseline, time-matched LMBM over 10 runs).
 - **Tension 3: penalty steerer vs avoiding penalties.** Penalty and augmented-Lagrangian designs 2008–2016; then "handling constraints as constraints", "(i.e., avoid penalty methods, augmented Lagrangian, etc.)" and "Penalization is not often the best route" (2024–2026 slides); yet the stochastic SQP keeps an adaptive merit parameter and arXiv:2608.12665 builds on Fletcher's augmented Lagrangian. It may target only fixed-weight reformulations (inferred).
-- **Tension 4: single algorithm vs his own data.** The 2008 goal names Fletcher–Leyffer restoration as what to avoid (infopt_08, slide 5). On the same 8 infeasible toy problems his slides show a code labelled "Filter" (filterSQP with restoration is inferred) with fewer iterations than SQuID on 3 of 8, SQuID on 4, one tie (siopt_11, slide 16/35); a year later, with a different SQuID column, "Filter" is fewer on 5 of 8, one tie (copper_12, slide 28/41). Neither deck explains the change; 02 C4 misstates the 2011 count.
+- **Tension 4: single algorithm vs his own data.** The 2008 goal names Fletcher–Leyffer restoration as what to avoid (infopt_08, slide 5). On 8 infeasible toy problems a code labelled "Filter" (filterSQP with restoration: inferred) needs fewer iterations than SQuID on 3, SQuID on 4, one tie (siopt_11, slide 16/35); in 2012, with a different SQuID column, "Filter" is fewer on 5, one tie (copper_12, slide 28/41). Neither deck explains the change; 02 C4 misstates the 2011 count.
 - **Tension 5: guarantees vs speed.** BFGS-SQP published with "no convergence guarantees", later restored; merit-parameter events "can be ignored" in practice versus O'Neill's measured degradation (05 X2); almost-sure results "do not provide significant additional insights" (SIAM Review) versus his 2023–2026 almost-sure papers.
 
 ## Mentor Voice (optional)
@@ -393,7 +391,6 @@ A style guide from slide text, syllabi and students' acknowledgements; no transc
 - **Field boundary**: continuous, mostly nonconvex, local search. Not mixed-integer, global or conic. His current energy goes to stochastic, noisy and ML problems, which a deterministic solver team must translate (Heuristic 10).
 - **Claimed but unverified** (never used as methods): counting all tuning time (no paper reports it); "We should not let one test set (or a few) bias all research." (his nonsmooth set ran 2018–2025); avoiding penalty methods (contradicted by his designs); minimizing f subject to controlled violation v(x) ≤ ε, announced as on-going (no paper); "I have results!" beyond PIPAL's constructions; a 12-reviews-a-year quota; the larger inexact-Ipopt speed-up; ISE 403 research-topic teaching (syllabus only); smooth-NLP warm-start active-set detection (no paper).
 - **Record limits**: Google Scholar and Semantic Scholar profiles not read; 2019–2024 papers read in arXiv versions; the 2025 book not read; no referee reports; some critique quotes come from Semantic Scholar citation contexts, not full texts.
-- **Co-authorship**: nearly all papers are alphabetical team products; the skill describes a group's practice unless a git log shows his hand.
 
 ## Sources (Appendix)
 
