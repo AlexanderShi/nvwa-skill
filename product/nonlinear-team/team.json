@@ -1,0 +1,178 @@
+{
+ "schema": 1,
+ "team": "nonlinear-team",
+ "title": "Nonlinear Team",
+ "field": "continuous nonlinear optimization and NLP solver design (interior-point, SQP and active-set, trust-region and regularization, quasi-Newton, penalty / augmented-Lagrangian / filter globalization, complexity of first- and second-order methods); mixed-integer, global, derivative-free (see dfo-team) and conic first-order splitting traditions are not represented",
+ "language": "English",
+ "created": "2026-09-28",
+ "roundtable": "nonlinear-roundtable",
+ "chase_hints": [
+  "Optimization Online (optimization-online.org)",
+  "arXiv math.OC",
+  "technical-report series of the members' institutions (Northwestern OTC, Lehigh ISE / COR@L, UW-Madison CS, Stanford SOL, UCSD CCoM, Namur NAXYS, STFC RAL ePubs, Dundee numerical-analysis reports, UCLouvain CORE discussion papers)",
+  "solver documentation and papers pages (COIN-OR Ipopt, KNITRO, SNOPT, GALAHAD, CUTEst)"
+ ],
+ "card_dimensions": {},
+ "members": [
+  {
+   "slug": "frank-e-curtis",
+   "name": "Frank E. Curtis",
+   "surname": "Curtis",
+   "living": true,
+   "hint": "Lehigh University ISE (PhD Northwestern); SQP and exact-penalty steering, inexact / matrix-free Newton-SQP, infeasibility detection, nonsmooth BFGS-SQP, stochastic SQP, trust-region complexity (TRACE); co-author of 'Optimization Methods for Large-Scale Machine Learning' (SIAM Review 2018)",
+   "scholar": "Zfd6irsAAAAJ",
+   "dblp": "61/7604",
+   "orcid": "0000-0001-7214-9187",
+   "homepage": "http://coral.ise.lehigh.edu/frankecurtis/",
+   "chase_hints": [
+    "Lehigh ISE and COR@L technical reports",
+    "papers page on his Lehigh homepage"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "jorge-nocedal",
+   "name": "Jorge Nocedal",
+   "surname": "Nocedal",
+   "living": true,
+   "hint": "Northwestern University IEMS; L-BFGS and quasi-Newton methods, KNITRO (with Byrd and Waltz), 'Numerical Optimization' (with S. J. Wright), inexact and stochastic methods for machine learning, optimization with noisy functions",
+   "scholar": "gGNxMZ0AAAAJ",
+   "dblp": "n/JorgeNocedal",
+   "orcid": "0000-0002-9662-2730",
+   "homepage": "http://www.ece.northwestern.edu/~nocedal/",
+   "chase_hints": [
+    "Northwestern IEMS / Optimization Technology Center reports",
+    "papers page on his Northwestern homepage"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "stephen-j-wright",
+   "name": "Stephen J. Wright",
+   "surname": "Wright",
+   "living": true,
+   "hint": "University of Wisconsin-Madison Computer Sciences (earlier Argonne); 'Primal-Dual Interior-Point Methods' (SIAM 1997), 'Numerical Optimization' (with Nocedal), local convergence of SQP / IPM under degeneracy (stabilized SQP), coordinate descent, 'Optimization for Data Analysis'",
+   "scholar": "VFQRIOwAAAAJ",
+   "dblp": "w/StephenJWright",
+   "orcid": "0000-0001-6815-7379",
+   "homepage": "https://pages.cs.wisc.edu/~swright/",
+   "chase_hints": [
+    "UW-Madison Computer Sciences technical reports",
+    "Argonne MCS preprints (1990s)",
+    "papers page on his homepage"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "yinyu-ye",
+   "name": "Yinyu Ye",
+   "surname": "Ye",
+   "living": true,
+   "hint": "Stanford University MS&E; interior-point complexity (potential reduction, homogeneous self-dual algorithm), 'Interior Point Algorithms: Theory and Analysis', SDP relaxations and sensor-network localization, online linear programming, recent first- and second-order methods (e.g. DRSOM)",
+   "scholar": "",
+   "dblp": "42/1372-1",
+   "orcid": "",
+   "homepage": "https://web.stanford.edu/~yyye/",
+   "chase_hints": [
+    "papers page on his Stanford homepage (web.stanford.edu/~yyye)"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "andreas-wachter",
+   "name": "Andreas Wächter",
+   "surname": "Wächter",
+   "living": true,
+   "hint": "Northwestern University IEMS (earlier IBM T. J. Watson Research Center; PhD Carnegie Mellon); IPOPT, filter line-search interior-point method, restoration phase and inertia correction; name also written Waechter / Wachter",
+   "scholar": "",
+   "dblp": "62/4235",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "COIN-OR Ipopt project pages and documentation",
+    "IBM Research reports (2000s)"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "philip-e-gill",
+   "name": "Philip E. Gill",
+   "surname": "Gill",
+   "living": true,
+   "hint": "University of California San Diego, Mathematics; SNOPT (with Murray and Saunders), 'Practical Optimization' (with Murray and M. H. Wright, 1981), SQP and active-set QP, reduced-Hessian quasi-Newton, primal-dual augmented Lagrangian and stabilized SQP",
+   "scholar": "",
+   "dblp": "04/4552",
+   "orcid": "",
+   "homepage": "",
+   "chase_hints": [
+    "UCSD Center for Computational Mathematics (CCoM) reports",
+    "Stanford Systems Optimization Laboratory (SOL) reports"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "philippe-l-toint",
+   "name": "Philippe L. Toint",
+   "surname": "Toint",
+   "living": true,
+   "hint": "University of Namur (NAXYS), Belgium; trust-region methods ('Trust-Region Methods' with Conn and Gould, SIAM 2000), LANCELOT, GALAHAD, CUTE / CUTEr / CUTEst, filter trust-region, evaluation complexity of adaptive regularization (with Cartis and Gould), objective-function-free optimization",
+   "scholar": "",
+   "dblp": "61/1414",
+   "orcid": "0000-0002-6166-1860",
+   "homepage": "",
+   "chase_hints": [
+    "Namur research portal and NAXYS technical reports",
+    "STFC RAL reports co-authored with Gould"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "nicholas-i-m-gould",
+   "name": "Nicholas I. M. Gould",
+   "surname": "Gould",
+   "living": true,
+   "hint": "STFC Rutherford Appleton Laboratory, UK (also Oxford); GALAHAD, CUTEst, HSL; KKT / saddle-point linear algebra and preconditioning, nonconvex QP, trust-region subproblem; LANCELOT and 'Trust-Region Methods' with Conn and Toint",
+   "scholar": "",
+   "dblp": "55/5344",
+   "orcid": "0000-0002-1031-1588",
+   "homepage": "",
+   "chase_hints": [
+    "STFC ePubs (epubs.stfc.ac.uk) RAL technical reports",
+    "Oxford NA group preprints"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "roger-fletcher",
+   "name": "Roger Fletcher",
+   "surname": "Fletcher",
+   "living": false,
+   "hint": "University of Dundee numerical analyst (1939-2016); 'Practical Methods of Optimization', BFGS (1970), DFP and Fletcher-Reeves, Sl1QP exact-penalty SQP, filter methods and filterSQP (with Leyffer), analysis of Barzilai-Borwein steps",
+   "scholar": "",
+   "dblp": "34/2426",
+   "orcid": "",
+   "homepage": "http://www.maths.dundee.ac.uk/~fletcher/",
+   "chase_hints": [
+    "University of Dundee numerical-analysis reports (NA series)",
+    "Sven Leyffer's Argonne pages for filter / filterSQP reports",
+    "obituaries and memorial articles (SIAM News, Optima, Royal Society of Edinburgh)"
+   ],
+   "student_mode": false
+  },
+  {
+   "slug": "yurii-nesterov",
+   "name": "Yurii Nesterov",
+   "surname": "Nesterov",
+   "living": true,
+   "hint": "CORE / UCLouvain, Belgium; accelerated gradient method (1983), self-concordant barriers and polynomial interior-point theory (with Nemirovski, 1994), cubic regularization of Newton's method (with Polyak, 2006), smoothing, universal, tensor and second-order methods; 'Lectures on Convex Optimization'",
+   "scholar": "DJ8Ep8YAAAAJ",
+   "dblp": "00/343",
+   "orcid": "0000-0002-0542-8757",
+   "homepage": "",
+   "chase_hints": [
+    "UCLouvain CORE discussion papers (DIAL repository)"
+   ],
+   "student_mode": false
+  }
+ ]
+}
