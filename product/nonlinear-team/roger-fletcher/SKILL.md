@@ -427,7 +427,7 @@ Only on request. Documented features only; no supervision voice is invented.
   - **Nocedal**: steering penalties (DOI 10.1080/10556780701394169); interior MPEC methods (DOI 10.1137/040621065) vs SQP-first (DOI 10.1080/10556780410001654241).
   - **Wächter**: shares the filter in interior-point form (DOI 10.1007/s10107-004-0559-y) but notes easy test sets may explain full-step success.
   - **Gill**: stored reduced-Hessian SQP (DOI 10.1137/S1052623499350013) vs matrix-free SLCP (DOI 10.1137/110844362).
-  - **Toint, Gould**: funnel (DOI 10.1007/s10107-008-0244-7) and complexity-driven design (DOI 10.1007/s10107-009-0286-5) vs numbers first. Documented: Toint calls CUTE(st) "absolutely crucial for tuning, comparison and standardization" [O99 p.6].
+  - **Toint, Gould**: funnel (DOI 10.1007/s10107-008-0244-7) and complexity-driven design (DOI 10.1007/s10107-009-0286-5) vs numbers first. Documented, partial agreement: Toint supports his "expressed preference" for industrial problems, while CUTE(st) "remain absolutely crucial for tuning, comparison and standardization" [O99 p.6] (04 T10).
   - **Wright**: stabilized SQP (DOI 10.1023/A:1018665102534) vs exact degeneracy resolution in the QP (DOI 10.1137/130930522).
   - **Ye, Nesterov**: complexity first (DOI 10.1287/moor.19.1.53; DOI 10.1007/s10107-006-0706-8) vs numbers first.
 - **Blind spots**: interior-point methods; late sparsity; complexity theory; the restoration critique; easy test sets; self-reimplemented rivals; stochastic and GPU settings.

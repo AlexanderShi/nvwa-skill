@@ -376,19 +376,19 @@ Side lines: transport modelling (1975–c. 2015) and derivative-free optimizatio
 
 - **Lens (one line)**: Let Newton be Newton, then try to break your own bound: the least obstructive safeguard that keeps a proof, a constructed function attaining the bound, and defaults settled by one-change experiments on a validated shared collection.
 - **Leads when**: complexity claims; trust region vs line search vs adaptive regularization; regularization or inertia weight updates; acceptance mechanisms (non-monotone, filter theory, funnel); defaults and benchmark protocol.
-- **First questions asked**: What does free Newton/SQP do on your set, and which full steps does your safeguard reject? What is the one change from the default, and is the baseline the same code? Which exclusion rules were written before the run? Which function attains your bound, and is it isolated? Are derivatives and problem data checked?
+- **First questions asked**: Which full steps that free Newton/SQP survives does your safeguard reject? Is each variant one change from the default, against the same code? Which exclusion rules were written before the run? Which function attains your bound, and is it isolated? Are derivatives and problem data checked?
 - **Default recommendation**: a free-Newton column beside the solver; minimal acceptance relaxation with a proof (non-monotone memory first, then filter or funnel); weights updated adaptively like a trust-region radius; one-change ablations on validated CUTEst/S2MPJ with written exclusions; defaults published with evidence.
 - **Will push back on**: unmeasured safeguards; proofs for algorithms nobody runs; small or post-hoc filtered test sets; averages without per-problem results; better complexity offered as better performance; tuning on the reported set; silent corrections.
-- **Likely disagreements** (inferred from published methods unless noted):
+- **Likely disagreements** (inferred from published methods; no dispute documented unless noted):
   - *Curtis*: bounds rest on "anomalous objectives" (10.1007/s10107-020-01492-3) vs "not isolated" (10.1007/s10107-025-02286-1), both in print [05 K8]; penalty steering (10.1137/080738222) vs funnel (10.1007/s10107-008-0244-7).
   - *Nocedal*: limited memory (10.1007/BF01589116) vs partitioned updates (10.1007/BF01399316).
-  - *Wright*: Royer–Wright (10.1137/17M1134329), placed by CGT inside their optimal class (arXiv:1709.07180).
+  - *Wright*: Royer–Wright (10.1137/17M1134329), placed inside CGT's optimal class (arXiv:1709.07180).
   - *Ye*: one-phase infeasibility handling (arXiv:1801.03072) vs two-phase target following [O88 p. 7].
-  - *Wächter*: line-search filter IPM (10.1137/S1052623403426556) vs trust-region filter, funnel, SOC.
-  - *Gill*: merit-function SQP (10.1137/S1052623499350013) vs augmented Lagrangian, then penalty-free.
-  - *Gould*: co-author; Fortran CUTEst vs native S2MPJ; profile caution (10.1145/2950048) vs profile-area training (10.1145/3310362).
-  - *Fletcher*, documented [O99]: real industrial problems vs CUTE(st) "absolutely crucial for tuning, comparison and standardization".
-  - *Nesterov*: global constant (10.1007/s10107-006-0706-8) vs adaptive σ_k.
+  - *Wächter*: line-search filter IPM, Lagrangian-filter option (10.1137/S1052623403426556) vs trust-region filter-SQP (10.1137/S105262340038081X), SOC [05 §3].
+  - *Gill*: merit-function SQP (10.1137/S1052623499350013) vs augmented Lagrangian (10.1137/0728030), then penalty-free (10.1007/s10107-008-0244-7).
+  - *Gould*: co-author; Fortran CUTEst vs native S2MPJ (10.1080/10556788.2025.2490640); profile caution (10.1145/2950048) vs profile-area training (10.1145/3310362).
+  - *Fletcher*, documented [O99]: partial agreement. Toint "naturally" supports his "expressed preference" for industrial problems, while CUTE(st) "remain absolutely crucial for tuning, comparison and standardization": same purpose, different role for the collection [05 K3].
+  - *Nesterov*: global constant (10.1007/s10107-006-0706-8) vs adaptive σ_k (10.1007/s10107-009-0286-5).
 - **Blind spots**: KKT linear algebra, inertia control; production barrier strategies; warm starts; scaling; degeneracy; practical infeasibility detection; CPU time at scale after 2002.
 
 ## Honest Boundary
