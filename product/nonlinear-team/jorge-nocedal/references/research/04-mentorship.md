@@ -423,3 +423,60 @@ One line each: title, author, date, URL or DOI, primary/secondary.
 - Lou, Sun & Nocedal 2025, doi:10.1137/24M1632279 (arXiv:2401.15007)
 - Xuan & Nocedal 2026, doi:10.1016/J.ORL.2025.107398
 - Dinh, Pascanu, Bengio & Bengio, "Sharp Minima Can Generalize For Deep Nets", arXiv:1703.04933 (title checked on arxiv.org)
+
+---
+
+## Top-up (2026-09-28)
+
+Added at the Phase 1.5 review checkpoint by the review agent, not by research agent 04. Target: the one thin part of this dimension, first-hand evidence from the student side (Gap 1). Budget used: 3 WebSearch calls, plus curl on known URLs. Nothing above this heading was changed.
+
+**Result in one line.** No second first-hand student account of *how* Nocedal supervises was found; Curtis's 2007 thesis acknowledgement is still the only one. The top-up adds one student's own records (Shigeng Sun) and a collaborators' acknowledgement from April 2026.
+
+**TU1. Shigeng Sun's own homepage and CV** [practice, primary: student-written records; factual, not testimony about supervision]
+- Homepage: "I obtained my PhD in Applied Mathematics under the supervision of National Academy of Engineering member, Prof. Jorge Nocedal in 2024." And: "I graduated in 2024 and joined The D.E.Shaw Group as a Quant Analyst upon graduation."
+- CV (quoted as extracted, including its spellings):
+  - "Ph.D, Engineering Sciences and Applied Mathematics Sept. 2019 - Sept. 2024" / "Advisor: Dr. Jorge Nocedal";
+  - "Prof. Nocedal’s Research Group, Department of IEMS, Northwestern University … Sept. 2020-Present";
+  - internships: "Virtu Financial … Quantitive Strategiest (Intern) June. 2023 - Aug. 2023" and "Amazon A WS AI Labs … Applied Scientist (Intern) Sept. 2023 - Dec. 2023";
+  - "Center of Optimization and Statistical Learning … Student Administrator Aug. 2021-Present";
+  - "The D. E. Shaw Group … Quantitive Analyst Oct. 2024 - Present".
+- What this changes in this note:
+  - **Contradiction C1 (Sun)**: resolved. He finished in September 2024 (his CV; MGP agrees on 2024). The "Current Students" list on `jnocedal.github.io` is stale.
+  - **§3.6 industry embedding**: the internship pattern continues past 2021, into 2023 (finance and AWS AI Labs), and the placement is in quantitative finance.
+  - **Supervision across departments**: the degree is in ESAM (Engineering Sciences and Applied Mathematics), not IEMS, and he joined the group one year into the PhD (2019 vs 2020) [practice].
+  - **Title history of arXiv:2401.15007**: the CV lists the Lou–Sun–Nocedal paper under a third title, "Nonlinear Optimization in the Presence of Noise: Applications, Noise Models and Problem Structure. Preprint on revision with SIAM Journal Of Scientific Computing (2024)". Matching it to arXiv:2401.15007 / doi:10.1137/24M1632279 is [inferred] from authors, year and venue. It adds a middle step to the retitling recorded in `03-process-evidence.md` §4.2.
+  - The CV also lists "S. Sun, J. Nocedal, On the Global Convergence of Byrd-Omojokun SQP Method for Equality Constrained Optimization. Preprint." An arXiv title search and a Crossref query found no record, so it has no identifier and must not be cited as a paper.
+- Still missing: neither page says anything about how supervision worked.
+
+**TU2. Collaborators continue the noisy-constrained line during his pause and thank him for comments** [practice, primary]
+- F. Oztoprak & R. Byrd, "A Noise Tolerant SQP Algorithm for Inequality Constrained Optimization", arXiv:2604.14368 v1 (submitted 15 Apr 2026). Nocedal is **not** an author.
+- Acknowledgments (PDF p. 28): "The authors are grateful to Jorge Nocedal for his helpful comments on an earlier version of this work."
+- It extends Oztoprak, Byrd & Nocedal 2023 (doi:10.1137/21M1450999). It cites Sun & Nocedal, arXiv:2411.02665 as still a preprint in April 2026 (reference [20]; mentioned on PDF p. 2).
+- Reading [inferred]:
+  - During the pause he announced in the 2026 interview, he still reads and comments on his core collaborators' drafts. This reverses the "Byrd as standing reader" role in `03-process-evidence.md` §7.
+  - The Byrd–Oztoprak pair carries the constrained-noise line on without him.
+  - For `06-trajectory.md` §7: this is an item inside the last-12-months window. It is not a Nocedal paper, so 06's "no Nocedal arXiv preprint since 2024-11-04" still holds.
+
+**TU3. Identifier fix for this note.** "Öztoprak, Byrd & Nocedal 2023 … (DBLP record; DOI not listed here)" is doi:10.1137/21M1450999 (Crossref: *SIAM J. Optim.* 33 (2023) 2118–2136; authors Oztoprak, Byrd, Nocedal).
+
+**TU4. What was tried and failed**
+- WebSearch 1, `"Jorge Nocedal" PhD dissertation Northwestern acknowledgments "my advisor" pdf`: returned only profile pages (Wikipedia, Northwestern Scholars, Scholar, ResearchGate, MGP, Shi's bio page already used in §3.6).
+- WebSearch 2, `"advisor, Jorge Nocedal" OR "advisor Jorge Nocedal" thesis acknowledgements`: returned only profile pages, plus an unrelated Scribd document (not opened).
+- WebSearch 3, `Northwestern dissertation "Jorge Nocedal" "Richard Byrd" "I would like to thank" optimization pdf`:
+  - it surfaced arXiv:2604.14368 (TU2);
+  - the other hits were copies of *Numerical Optimization* on third-party sites. They were **not opened**, because they are not legitimate sources.
+- curl on known URLs:
+  - MOS *Optima* back issues, sought for the 2012 Dantzig Prize citation: the index sits behind a Cloudflare Turnstile page, and the old `Optima-Issues/optima89–91.pdf` paths return 404;
+  - Berahas's Michigan homepage returned 403, and `keskarnitish.github.io` returned 404;
+  - Bollapragada's publications page lists his thesis ("Methods for Deterministic and Stochastic Optimization") but gives no link;
+  - `hjmshi.github.io` links only a CV;
+  - the OSL publications page lists no theses.
+- **Gap 1 therefore stands.** Supervision claims in this note rest on the record, on Nocedal's own statements and on one student's acknowledgement.
+
+**Top-up sources** (retrieved 2026-09-28)
+- T1. S. Sun, homepage, https://shigengsun.github.io/. Primary (student's own page).
+- T2. S. Sun, CV, https://github.com/shigengsun/shigengsun.github.io/blob/master/Shigeng%20CV.pdf (fetched via raw.githubusercontent.com). Primary (student's own record). Personal contact details in it were not copied.
+- T3. F. Oztoprak & R. Byrd, "A Noise Tolerant SQP Algorithm for Inequality Constrained Optimization", arXiv:2604.14368 v1 (PDF read: abstract, §1 related work, acknowledgements, references). Primary (collaborators' practice).
+- T4. Crossref REST API record for doi:10.1137/21M1450999. Secondary (bibliographic).
+- T5. R. Bollapragada, publications page, https://sites.google.com/view/raghub/publications. Primary (thesis listed, no link).
+- T6. WebSearch calls 1–3 above. Secondary.
