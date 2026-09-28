@@ -294,3 +294,27 @@ One line each. P = primary (Gould's own text or record), S = secondary. "Read" =
 - M50 · "Andrew Conn (1946–2019)", University of Waterloo Combinatorics & Optimization news, 18 March 2019, https://uwaterloo.ca/combinatorics-and-optimization/news/andrew-conn-1946-2019 · S (read via WebFetch; nothing on working style)
 - M51 · "Obituary: Andrew R. Conn", SIAM News, https://www.siam.org/publications/siam-news/articles/obituary-andrew-r-conn · S, **not read** (403)
 - M52 · WebSearch, 2 queries (60th-birthday workshop; "thank Nick Gould" thesis), 2026-09-28 · no relevant results. Also blocked or rate-limited: ORA search (403), eprints.maths.ox.ac.uk (unreachable), OpenAlex and Semantic Scholar search (rate-limited), CORE (403) · **not read**
+
+---
+
+## Top-up (2026-09-28)
+
+Added at the Phase 1.5 review checkpoint. One WebSearch was used, aimed at a gap listed above: "H. Sue Dollar (later Thorne) ... Her Oxford D.Phil thesis and its supervisors: **not read / not verified**" (§1 table and Gaps). Nothing above this heading was changed.
+
+**Source read**
+- M53 · H. Dollar, *Iterative Linear Algebra for Constrained Optimization*, D.Phil. thesis, Keble College, University of Oxford, Michaelmas 2005. The author-built PDF (235 pp., created 2006-03-31 according to its metadata) is hosted on a third-party academic site, https://camo.ici.ro/books/thesis/dollar.pdf. No DOI was found. Read: PDF pp.1–4 (title page, abstract, acknowledgements), the list of tables, and a keyword search of the full text for "Gould", "GALAHAD" and "CUTEr". · S about Gould (the student's own words)
+- Identity check [inferred, high confidence]: the thesis calls itself "Hilary Dollar". On PDF p.69 it describes its analysis as "recently been published in the work of Dollar, Gould and Wathen [21]", and reference [21] is "H. S. Dollar, N. I. M. Gould, and A. J. Wathen, On implicit-factorization constraint preconditioners", in *Large-Scale Nonlinear Optimization* (Di Pillo and Roma, eds.), Nonconvex Optimization and Its Applications 83 (p.226). Crossref resolves this chapter to 10.1007/0-387-30065-1_5 (2006, pp.61–82; authors Dollar, Gould, Wathen). So the thesis author is the H. S. Dollar of the §1 table.
+
+**Findings**
+- **Supervisor, stated by the student** [observed, secondary]: "I thank Andy Wathen, my supervisor, for his advice and enthusiasm throughout my DPhil." (PDF p.4). Gould was **not** her formal supervisor. His 2023 CV does not list her among his advisor or examiner roles (CV pp.24–25, checked in this run), so this is an informal relation.
+- **A second student voice about Gould** [observed, secondary; verbatim]: "I thank Nick Gould for his advice during this research and the use of his codes: the discussions that we have had have been invaluable." (PDF p.4).
+- **The student worked inside his infrastructure** [practice, secondary]: the experiments use "a small subset of problems from the CUTEr collection of quadratic programming problems [47]" (PDF p.38; [47] is Gould, Orban & Toint's CUTEr paper), and a results table reports "the number of GLTR iterations performed to achieve a residual decrease of at least 10^-2" (table caption, PDF p.130; exponent retyped from the PDF).
+- **Joint outputs** already in this note or in note 01: the 2006 chapter above (10.1007/0-387-30065-1_5), Dollar, Gould, Schilders & Wathen, *SIMAX* 2006 (10.1137/05063427X), and Dollar, Gould, Stoll & Wathen, *SIAM J. Sci. Comput.* 2010 (10.1137/080727129). Crossref also returns Dollar, Gould, Schilders & Wathen, "Using constraint preconditioners with regularized saddle-point problems", *Comput. Optim. Appl.* (2007), 10.1007/s10589-006-9004-x (metadata only, not read).
+
+**What this changes in the note**
+- The gap "Her Oxford D.Phil thesis and its supervisors" is closed: supervisor Wathen; Gould gave advice, codes and discussion.
+- It adds a second, independent instance of the S5 pattern ("Encouragement at a distance to other people's students", Curtis 2007). Gould's help to students who are not his own runs through **discussion plus his own software and test problems** (GLTR, CUTEr), and it turns into joint papers. [inferred, from two acknowledgements]
+- It does **not** supply supervision advice in Gould's own words. That gap stays open.
+
+**Still not verified**
+- The GitHub PR quotes (PRs #10, #272 and #518) remain WebFetch extractions. In this review, `api.github.com/repos/ralna/GALAHAD/issues/10/comments` returned HTTP 403 with the message "GitHub access to this repository is not enabled for this session. Use add_repo to request access." Attaching the repository is a session-configuration change and was not done here. Until those comments are re-pulled verbatim, the skill should not quote them.
