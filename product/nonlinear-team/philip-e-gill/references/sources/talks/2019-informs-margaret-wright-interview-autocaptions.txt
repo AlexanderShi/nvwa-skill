@@ -1,0 +1,493 @@
+Source: INFORMS History & Traditions Interview with Margaret Wright (uploader: INFORMS; YouTube upload date 2019-11-18; duration 3970 s)
+URL: https://www.youtube.com/watch?v=2L5nQIvTohk
+Transcript type: YouTube AUTO-GENERATED English captions (not human-checked), fetched with yt-dlp on 2026-09-28 and cleaned with scripts/srt_to_transcript.py. Names are often misrecognised (e.g. 'Gil' = Gill, 'Karmakar/karmic art' = Karmarkar, 'Cotchin/Koch in' = Khachiyan, 'fiat code McCormick' = Fiacco and McCormick, 'Tom one' = Tomlin).
+Relevance to philip-e-gill: first-hand account by co-author Margaret H. Wright of the NPL -> Stanford SOL move, the 'Gang of Four' alphabetical-authorship rule, the writing of Practical Optimization, the Khachiyan/Karmarkar episodes, and the unfinished volume 2 of Numerical Linear Algebra and Optimization. Speaker is Wright, not Gill: everything here is [observed] for Gill.
+Used in: ../../research/01-publications.md
+----
+so I'm here today with Margaret right a professor in the computer science department of the Courant Institute at New York University Margaret has had a distinguished career in the area of optimization I've known her since I was
+
+a graduate student at Stanford and Margaret was a research professor in the systems optimization laboratory at Stanford back in the mid 80s so we're gonna hear today about Margaret's career and optimization how she got there so
+
+Margaret Ron thank you for taking the time today for doing this interview it's a pleasure all right so let's start off with your early life where and when were you born I was born in February of 1944 I was
+
+born in San Francisco California but only lived there three days my mother was a medical doctor and she wanted me to be born in a certain hospital in San Francisco and when I was old enough to travel we went back to Hanford
+
+California which is in the Central Valley and that's where you that's where I grew up till I was 10 to 10 and then where did you go to Tucson Arizona I went to junior high and high school in Tucson and then I my family moved to
+
+Southern California but I went to Stanford so you were graduated high school into in Tucson right and what about your parents did they have any math background as you mentioned your mother was the medical doctor right both
+
+my parents were medical doctors my father was a type of doctor that I think doesn't exist anymore which is general practice so he did surgery he did everything I think that is no longer done everyone specializes my mother was
+
+in my ear nose and throat as it was called then which again they don't have now it's completely divided up into specialties my mom claimed different points in her life that she had been very good at math but I never saw any
+
+evidence of that and so in Tucson did you start doing math then when you were at what age did you become interested in math well I was always interested in math even in elementary school but in Tucson when we
+
+got into more interesting things I was very interested in math and I was always the best in the class okay which really sounds obnoxious but it's factual and I loved it so we used to have things where this one teacher
+
+had something where you would start at one end of the room one student would be sitting down and the other one would be standing up and he'd ask you a problem okay and then whoever got the right answer quicker moved on to the next
+
+person and so the idea was to get as far around the room as you could and again obnoxiously I will say I always whenever I started out I always ended up at the end of the room faster than anybody else now what year did you graduate high
+
+school 1960 so 1960 I was 16 he was 16 so I guess you got a little bit ahead of the curve at that point right in Hanford California they skipped me a grade when I was in I never did fourth grade also it by an accident of birth I was born in
+
+February and the cutoff date for starting school was March 1st so I was always at the young end I say okay now being two years younger was kind of a big deal then it certainly isn't true but now what was it like being at at
+
+that time in place being a young woman in a high school in Arizona that was good at math when there are stereotypes back then I imagine where you don't belong here absolutely well that's something I have
+
+thought about occasionally I had a counselor in high school I told her I was interested in medicine both my parents were doctors so that wasn't so surprising and she said maybe you could be a nurse and I said actually I'd like
+
+to be a doctor and she said oh well are you sure you want to do that girls don't usually become doctors and I said my mom's a doctor so there was that but apart from her she was a counselor she should have known better but it was
+
+you know the late 50 gramme became less interested in being a doctor and more interested in math so what made you choose Stanford to go to school both my parents had gone to University of California at Berkeley so there was a
+
+certain amount of family history that they said where you could go to Berkeley and even though I was living in Arizona UC had a rule that if you were the child of an alum you could go in for in-state tuition which was very cheap so to be
+
+difficult I said I'd like to go to Stanford one of my teachers in high school had gone to Matt Holyoke another one had gone to Wellesley and they were women's colleges you know women could not go to Harvard Princeton Yale etc etc
+
+so I wanted to go to a famous school a good school that admitted women Stanford was one of the few so I decided to apply to Stanford and I got into various schools but I decided I'll go to Stanford and what I imagine you must
+
+have also applied to Berkeley as well of course so what made you pick I mean I know there's always the Stanford Cal Ravel rivalries right so what made you pick Stanford / Cal I think part of it could've been a desire not to do just
+
+what my parents wanted you know they kept saying oh you should go to Berkeley and I said well I don't know no Stanford was considered expensive at the time tuition was $1,000 for a year and but my parents could afford it right so I
+
+thought fine I'll go to Stanford it wasn't a well-thought-out careful decision based on an analysis of the quality of the education I see and so when you got to Stanford did you enroll them immediately in math or what area
+
+were you in at Stanford I had the experience which as you know from your own experience many smart kids have which is they're the best in their high school they get to Stanford or wherever and suddenly everybody is just like them
+
+was number one in their class and it's a bit of a shock but I absolutely wanted to take math and I started off my freshman year with calculus which is what you had to do and I hadn't had calculus in high school
+
+this is before they started teaching calculus to high school students so yes but what I also liked was French and I also liked history and literature but it's Stanford at that time you didn't have to declare a major till your junior
+
+year so I just thought I'll take the classes that I want and decide later so that's what I did but I always took enough math classes so I could finish a math major and so and that became your major as an undergraduate well when I
+
+was I think just before I had to declare my major I was talking to some older person probably in this 20s okay I don't know what should i major in should it be math should it be history should it be something else and he said you know if
+
+you plan to have a job which I did because my mom had always worked math is really better and I said they'll pay you to do math and he said yes they will much more than history or English or whatever so I said okay so I majored in
+
+math and the now this was at the time they were forming the operations research department at Stanford while you were an undergrad and the computer science department as well yes so did you have interactions with those
+
+departments as an undergrad I did because they were starting to teach computer science courses and of course now it's amazing when you think how long ago this was this was 64 65 and they talked about computer science and I took
+
+a computer science course as an undergraduate and I loved it I thought this is the greatest thing I've ever done I can put these now these were decks of cards that you submitted to a keypunch okay and I thought this is so
+
+great I can make the machine do what I want so I love computer science and took two computer science undergraduate courses which they were just starting to teach and then the next year the very next year 65 was the first year that the
+
+computer science department existed so I got a master's in computer science and so was that and that so that was in your fifth year then was a one-year master's so that was like so you must have been one of the first computer science
+
+graduates yes I'm guessing first female computer science no there were a couple of other women Barbara Liskov and Susan Graham who were PhD students I say okay they were PhD students I was a master students and then as now a master's was
+
+a terminal degree you know you weren't gonna then go on to get a PhD which you then did which I did but a few years later so there was something in between the master's degree in getting the PhD so what happened that right so here's
+
+what happened I got a job and there was a funny experience so I was interviewing you know I had this master's in all A's and all that stuff and I was interviewing at some company I forgotten which in the Bay Area because I wanted
+
+to stay there and the person said well do you know how to program in Fortran well Stanford computer science at that time they taught us Algol and I said no I don't know Fortran but I had been taught that if you know one programming
+
+language you can quickly pick up others and this man said well I don't know we require a knowledge of Fortran in order to get this job and I just thought well okay but another person who became my boss believed that I could learn Fortran
+
+quickly which I did if you've programmed in Fortune you know that it's pretty easy to pick it up after you know Algol so I got a job at GTE Sylvania doing a scientific programming and what kind of problems were you solving I because I
+
+didn't have a PhD I was just the lowest of the low I worked on things people assigned me so GTE at that time was doing a lot of work for the military mainly not for weapons but simulations you know like ship recognition and
+
+various things like that where they had simulations with numerical computing and I wrote the codes that did these calculations so the engineer just thought about the models and then they would talk to me and I would write
+
+the code was it okay so that's how it worked and finally enough there was a guy in my department who said there's this new thing an optimization by these two people called Fletcher and Powell this was in 63 that they published their
+
+paper but it had trickled down to Sylvania and he said I bet you could use this to solve this problem that you have and I said okay so I read their paper and implemented if you want to call it that the Fletcher pilot algorithm
+
+another person I worked with was using linear programming to do ship photo recognition so they had pictures of ships I hate to think now what they were doing with those pictures of ships he had figured out a way to use LP now I
+
+had never learned linear programming as a math major and in computer science they did not teach optimization so I had no idea that George Danzig was at Stanford I didn't know what linear programming was but I had to learn it to
+
+write this code another funny thing which may come up later is that it was legal at that time to discriminate against women in employment in the newspapers that classified ads would say jobs female jobs male the female jobs
+
+were often things like secretary personal assistant whatever the male jobs were things like engineer etc and so and that was perfectly legal I would never be allowed today right so but then it was legal so I discovered in some
+
+circuitous way I've forgotten how that these two guys in my department who had degrees from junior colleges and they didn't really know any math and they were kind of jerks actually and I found out that one of them earned 40 percent
+
+more than I did I wasn't very happy about this so I went to the they called it personnel then HR and I said look I you know earned 40 percent less and this guy and she said you're a woman and we know you're not going to have a
+
+long career and so and this guy has a family and has to support them so you're gonna get paid less I wasn't too happy about that a few years later the law changed that point and also because I was getting a little tired of having
+
+other people tell me what to do I decided to go back to Stanford and get a PhD so how many years were you at I was at Sylvania I went to work there in 65 and I went back to graduate school in 71 so six years six years okay and so you
+
+went back and you applied to the computer science department well again this is one of those things where I was lucky I called the computer science department I talked to the person who was Deputy Chair or whatever and I said
+
+I have a master's from your department but now I'd like to come back and be a PhD student he said fine that's fine now you see this would never happen today right the PhD admission it's a whole different thing it's extremely they'd
+
+never say Oh fine you have a master's degree you can be a PhD student but that's what he said so I said oh great so I'll go back and be a PhD student so I did I didn't have to do anything I never had to take the GREs I never had
+
+to do anything and was it then - and they would be all doing allowing you to become a PhD student with financial support no cuz I mean I could have paid my own tuition but as it turned out gene Golub of the computer science department
+
+heard that I was interested in optimization and he said well I have money you can have an assistantship so gene actually supported me did you know did you know gene while you were an undergraduate student no but somehow I
+
+think I went to a talk at Stanford and he always had was very sociable and had little gatherings after the talk and he said well you know who are you kind of and I introduced myself and explained what I did and I said I was working on
+
+Fletcher Powell's method and he said oh how are you updating the inverse and of course in the paper they talk about just updating the inverse explicitly which of course now we say no no no you have to update a factorization anyway and he
+
+said oh maybe you'd like to come and give a talk in our department about what you're doing and we were getting great results so I thought why not so I went and gave a little talk in the computer science department so now it's
+
+interesting that there was at that by that point the operations research department and no and I know Dan sacado was already there probably I think courtesy's was probably there trying to think of who else hilly or Lieberman I
+
+mean so there was this established group and yet do you ended up and gene saying oh well here you can do optimization over here in computer science so was what was the nature of the like relationships back then between work and
+
+optimization and computer science and whatever was happening over in the ole our department well I actually don't know because later when I was a PhD student of course I had to take a course in the end optimization and I learned
+
+about linear programming and people said the father of linear programming is here at Stanford but before that I had not heard about it to get a master's in computer science I only had to take courses in computer science like systems
+
+sure but as a PhD student now so you come back in 71 how was the relationship at that point in time well as we have now hear in many other places do first-year PhD students have to get sort of a qualifying system out of the way
+
+so I had to take a special course that was sort of creative thinking for computer science taught by Bob Floyd I had to pass an exam on systems I had to pass an exam on compilers I had to pass an exam on theory and I had to pass an
+
+exam on a none of which were offered in the Oh our department so because it was a computer science degree and I had to do all that to get admitted to the admitted to candidacy as they called it so it was
+
+only later my second year as a PhD student that someone said you know you can take these classes in the Oh our department and Kurtis Yves taught the linear programming when George was on leave that year I think so I met Curtis
+
+so I didn't actually meet George for a couple of years I see ok and so you're in computer science you studied under gene Golub and your thesis was on well this is another set of coincidences Philip Gill who worked at the National
+
+Physical Laboratory in England had come to Stanford as a visitor I think in 73 and he was a great guy you know him then gene invited Walter who was Philips colleague and also worked at the end field to come to Stanford for a whole
+
+quarter and teach a class and I was his teaching assistant so I was Walter's teaching assistant in basically numerical analysis elementary numerical analysis ok and Walter was deeply shocked by Stanford because in England
+
+undergraduates are majoring in a specific topic and they're at a pretty advanced level even when they start so he was used to teaching UK undergraduates who already knew plenty of math the students in elementary
+
+numerical analysis did not know plenty of math many of them barely knew what a derivative was they didn't know linear algebra so Walter would give these lectures and the students would say I don't know what that means so I was the
+
+TA and I was much more sympathetic that's true I think it's fair to say so they would come in and talk to me I'd try to explain you know what things were so it was probably good that I did this TN cuz I got to know Walter and then
+
+when I finished he was going back to England and Jean said would you do you think you might want to work with Walter on your thesis and he said if you think so I'm going to just support you when you're in England
+
+working at the NPL so I went to England worked at the NPL worked with Philip and Walter on non-linear optimization right and your thesis topic was well it was called numerical methods for nonlinearly constrained optimization so backing up a
+
+little bit Walter and his thesis had written about what today we would call the penalty trajectory method martin beal was his advisor although martin once told me that he and Walter were like orthogonal when they
+
+talked about anything which you can sort of imagine knowing them yes okay so Walter had always wanted to have someone who would work on the equivalent of the penalty trajectory method for barrier functions so that's what my
+
+thesis was about it was about using barrier methods for nonlinear optimization and not for linear programming but for nonlinear optimization and so how much time did you spend in the UK I was in the UK for
+
+six months six months then I came back to Stanford and finished and George Dancy comes in at the picture now because Michael Saunders had finished his PhD in computer science in 72 he was also one of Jean students right so when
+
+I arrived in 71 Michael was just finishing so I got to know Michael and about his work in linear programming and the linear algebra so say with linear programming and he was forced because of the terms of his fellowship which had
+
+been from the New Zealand government he had to go back to New Zealand he had promised after he got his PhD he would go back to New Zealand and work it I forget what it was called the government organisation
+
+and so he was spending a lot of time in the o our department as was John Tomlin who knew Michael okay and Sol systems optimization lab decided that they wanted to hire people basically I'm laughing because it was kind of a cross
+
+purpose thing so I wanted a job where I could do research and optimization in retrospect I see that what the Oh our faculty wanted was someone to write programs based on other people's work which is what I had done at Sylvania yes
+
+so I had an interview and I remember one of the faculty members here would say so so will tell you about these methods and then you can write the code and I said well that's that's really not what I have in mind but George bless his heart
+
+said this seems fine it's fine with me she can work on nonlinear things it's okay so they hired me as a senior research associate not a faculty member just to solve money so but now now I know the SOL I mean it was the Gang of
+
+Four as we always referred to in became that but so when you started who else was but there or were you the first person to hired I believe and see I wasn't in the our department at that point I believe it was John Tomlin and
+
+an article about George which is written by Philip Walter John Michael and me included a statement by John I'm pretty sure that the systems optimization lab consisted of a room with a sign on the door that said systems optimization lab
+
+and a few decks of IBM cards and John and that was it George liked the name systems optimization lab he wanted to have a lab where people worked on big problems I think Michael worked there for a little bit either before or just
+
+after he came back from New Zealand and John worked there and there had been another person before that but I forgotten his name and then soon after then that then Philip and Walter then came enjoy Isis Philip and Walter had become
+
+increasingly unhappy with the NPL previously the NPL had been a place where you could just do the research you wanted it was part of the government it didn't have to make a product it didn't have to make money and as has happened
+
+to many other organizations the bosses changed the view they said no no the people that work here have to make contributions to British industry and they have to you know find business customers and this kind of thing well
+
+they didn't want to do that you could say too bad for them but they said we don't like it we don't want to be here and George had already expressed a strong interest in having a bigger group he knew Michael would come back from New
+
+Zealand as soon as he finished his obligation and Philip and Walter agreed that they would come to Stanford four of us started working together meantime John had left he went to catch her on another company so anyway that was when
+
+the so-called Gang of Four started so I want to actually rewind a little bit in your thesis which was on numerical methods for constrained optimization I imagine you did not only the math but you also did some implementation at the
+
+time oh yes and I had some very nasty nonlinear problems and I in effect had what we would now call a primal dual method so I updated the multipliers and the exes it's just you know a different way to solve them now what kind of
+
+computing environments were available to you about could IBM 360 that's all all punch card types of stuff yeah no no I had a terminal I had terminals we had a network okay yeah I mean for the time it was fairly advanced right and and the
+
+through the computer science is through the computer science department right there was a terminal 1 terminal I think in the office building where the numerical analysis students were and you could log on to slack the linear
+
+accelerator and you could run things there right so that's what we did so so you're early collaborations mostly were focused on nonlinear optimization as a group that's right decided that we would always have
+
+all four names on what we did and that they would be an alphabetical order Phillip liked that a lot because it would always be Gil at all and I would sometimes say what if I changed my name to aardvark they don't laugh but I was
+
+always last okay but we decided that there was no way we could work closely together and have arguments about you know who gets the credit whose name gets to go first because we all knew of instances of that where it led to very
+
+bad feeling so we we had all four people beyond all but yes we've worked on n piece all we worked on I don't know some linear algebra things lots of stuff like that did a lot of really interesting and fun work the four of us we had talked
+
+for quite a while about writing a book Michael basically said I don't I don't want to be a co-author I don't want to do this it's going to be kind of away from the research that I want to do I just don't want to do is just said I'll
+
+happy happy to look at what you've done but I don't want to be a co-author so the three of us started working on this book practical optimization which was I discovered just the other day because I was looking this up the second book to
+
+be published using tech yes I was looking at it before I came here of who's published 1981 and so that was Tekken it's very early infancy it was and if you read some of the things Knuth wrote at the time he talks about
+
+discovering these pages of beautiful mathematics because there was a high quality printer called the Alpha type which did I don't know five thousand dpi or something which we could use for the final pages not in general and that was
+
+us that was our book so that was that was really great to be able to do that it's a great story in the history of tech which amazingly now so we're talking almost 40 years later is still the basis of the standards for people
+
+writing in all forms of mathematics because that's right that's right it's fascinating and I had taken the class from Knuth when I was a master student so I actually knew him in a sense but the tech thing was just I mean we heard
+
+about it and we thought ok let's do this the publisher which was Academic Press at the time we talked to them and they said if you'll give us the you know camera-ready copy we'll take it and there it was yeah exactly that's right
+
+that's great so while at Stanford while I was there as a graduate student the Karmakar thing happened which brought back barrier methods which is obviously became the connection to your work that was done when you were a PhD
+
+student yes so why don't you tell our audience a little bit of the stories of how that discovery came about where you made the connection between what Karmakar had done and barrier methods okay so I'll go back before that to
+
+Cotchin that was 79 so kochia you know there'd been this open problem is there a polynomial time algorithm for linear programming people knew about the Clemente example so the simplex method could be exponential time in the worst
+
+case so people were really spending time on finding a polynomial time algorithm for linear programming koch ins method made the front page of the New York Times saying Soviet mathematician you know solves important problems right
+
+Russia was our enemy the Soviet Union was our enemy and the article I when I teach about linear programming I give a copy of that article because it's full of mistakes it says that this will allow the Russians to break our codes
+
+reporters were calling us and they wanted to call George but he of course did not want to talk to them I remember a conversation with a reporter where the person and he said okay I have to write this story can you just tell me what
+
+polynomial-time means and I said do you know what a polynomial is he said no I said okay x-squared you know and I started and he said I can't understand this I can't understand this doesn't it just mean really really fast and I said
+
+no it does not just mean really really fast so huge publicity so I think we and other groups I'm not positive who did this decide to test conscience method you know so we'd take some linear programs we would run conscience myth
+
+and it was always always in our examples way slower than the simplex method I mean way slower it was not even a contender so we didn't ever write a paper about this in retrospect I wish we had because we had lots of numerical
+
+results about it but basically there was huge excitement about conscience method and then people just said well it's not fast meaning really fast so that was sort of that was 79 and then an 84 narendra Karmakar who worked at Bell
+
+Labs at the time announced that he had found a polynomial time method that was 50 times faster than the simplex method on every problem well you could say those were fighting words I mean people just went oh come on we went through
+
+this with with Koch and but what car marker had was appeared to be different okay and everyone was excited about it including George he was very excited I mean even though you could say he would be upset if it was better than the
+
+simplex method he wasn't he just loved the idea of linear programming and he invited Karmakar to come to Stanford to give a talk so he did carmaker came to Stanford and he gave it taught and I don't know if you would remember this
+
+kind of thing but he was very very very cagey he wrote down just like he just wrote down a matrix and a right hands on and people kept saying what do you do exactly and he didn't tell them because he said it was AT&T proprietary and that
+
+he wasn't allowed to talk about the details but he did write down an equation which had the form of a diagonal matrix with one over the square of the constraints okay now we've talked about this the group we were sitting
+
+around listening to karmic art and from that conversation emerge the this looks like the equations in a barrier method now I have asserted that since my thesis was about barrier methods I'm the one that said it Walter says yeah but I was
+
+your adviser you know I think I'm said Michael said no no I knew about it Philip knew about it so what was interesting was if karma curse thing had happened a few years later I'm not sure there would have been anybody who really
+
+knew about barrier methods except maybe fiat code McCormick but we all did so then we thought well maybe karma curse method has some connection with the barrier method and you look at it for a while and it does so that was kind of a
+
+big event right so I so and I guess I know that I was there and it was all this excitement happening and then there was so you there was a paper that it was the gang of four plus one we know right John Tom one because he of course was
+
+very interested in this - yes so I know you've done you wrote a paper saying look this seems to be a connection and that there does seem to be something here because if I recall correctly the numerical results that you obtained said
+
+hey sometimes it is better than simplex and sometimes it's not and that led then I we were talking prior to the cameras rolling in 1985 I know it was my first time going to a conference at the math programming symposium in Boston you and
+
+Riccar were back-to-back as keynote speakers and so can you describe kind of the environment and what was happening then as people were reacting to all of this well of course many people who were used to the simplex method could not
+
+conceive that anything would be faster than the simplex method especially given what had happened with the Koch in where it turned out not to be faster ok Karmarkar had been a student at berkeley dick carp was his advisor i think so and
+
+he knew about algorithms so you know he was absolutely plausible as a as a person to think of this and he gave the problem in a different format it wasn't in a standard form for LP so what had happened with us in the meantime you
+
+know was to put it into a standard form and then try to figure out what it was doing ok so there was going to be this math programming meeting in 1985 and one of the big things that was happening was is there a polynomial time algorithm
+
+that's faster than the simplex method is it karmarkar's method ok so originally Walter was asked to give that talk and then at the last minute I've even forgotten what happened but he didn't go so I got chosen to give the talk so the
+
+group of us sat around and worried and what should we say and we knew it was going to be very competitive people were already saying they had found a better way to do this blah blah blah anyway I gave that talk it seemed to me I gave
+
+the theorem showing there was of equivalence you had to choose the barrier parameter in a certain way but the steps were identical and then I gave our numerical results I'd say half the audience was interested in the theory
+
+half was interested in the numerical results okay so we did both and after my talk where there was kind of an uproar I would say this pretty well-known person who's a friend of mine came up to me and said this is terrible this is
+
+terrible and I said what do you mean it's terrible and he said this can't be right this can't be right and I said it's a theorem you saw the proof it's a theorem we're mathematicians it's a theorem theorems are true he said it's
+
+terrible it's terrible I can't stand it it can't be right so that people got really worked up about it really worked up about it I think people who had thought this was a fundamental breakthrough never seen before on the
+
+planet were upset because if you say this is a barrier method from the late sixties look at the fiat code McCormick book it kind of shatters that idea right right and I know there's stories that I could tell about all of that happened
+
+when AT&T and I think Dave shano's interview we talked about some of the stuff that 18t was doing and when we said what Dave said but it was sunk and there's a code and it works and if nobody's used it to solve linear
+
+programs but if you did it would be a barrier mess right that was one of the things my thesis was about barrier methods but no one would have ever thought of using linear a barrier method for this for linear programming right it
+
+was a simplex mindset you know which I think we all have to keep in mind that something can come along and overturn conventional wisdom right maybe we should try this for this crazy thing and see if it works sometimes it won't work
+
+of course sometimes it might work well I know and I know there was a paper that you wrote around 2004 or something that talked about the interior point revolution and how it's changed and sometimes changes to pedagogy because
+
+now we can't just teach me your programming about using the simplex method we have to use think about interior methods at the same time which brings a whole different mindset to the problem it makes it much harder I mean
+
+speaking now because I remember then remember I didn't teach and people would say oh now we have to teach them about Newton's method and we have to teach it system and I said well they should know it you know really righteously
+
+now that I'm teaching about it I think I have to teach them about Newton's method so you have to teach about derivative so you I have to have matrices so I have much more sympathy with that but it's true you can't just teach the simplex
+
+method anymore so shortly after that time I think around 1988 you left Stanford and went to Bell Labs and what caused that transition to occur well I mean I said that the four of us worked together and
+
+we wanted all our names to be on every paper and that's absolutely true but I was getting slightly fed up with the fact that in the o.r department there was no possibility that I would ever get to be a research faculty member and I
+
+agonized about it and I thought what what can I do so I just started to mention in the mid 80s to people that I knew that I saw at conferences that I might be interested in leaving and some of them followed up on it in particular
+
+norm Schreyer of Bell Labs called me up and he said would you like to come to Bell Labs you know you could work in the Computer Science Center and there were a few universities that we're also interested and I even though I hated to
+
+do it because we had had such a long run and worked so closely together but I just thought in 20 years am I still going to be here as a research associate and it it just and you were talking earlier about control and I think you
+
+want to have some control over your career was it it was way before departments might have thought oh this is a woman maybe we should give her you know some thought no no that's right because I think all the faculty in the
+
+Oh our department at that one was all male yes definitely I could have gone to the University of Wisconsin and Bell Labs was my other choice I visited both places and that was a terrible time for me you know I felt I was betraying my
+
+friends by leaving that I didn't know whether I would like Bell Labs I didn't know whether I would like being a professor but I ended up choosing Bell Labs and what a good decision that was because I think Bell Labs is unique in
+
+the history of science which of course I didn't know then and it's like probably won't be seen again you know a big company is setting up a research lab where they just say do good work and that's it you don't have to work on
+
+products you don't have to work on making money you just do good work right and the structure at Bell Labs at that time was you can work it doesn't have to be work that's connected with the business absolutely you could do
+
+whatever you wanted right when I talked to norm who was my boss he said what we care about is that you do good work now he says it's judged by academic standards do you publish papers do you give talks do you do that but it doesn't
+
+have to be connected with the company we like it if what you do is connected with the company if someone comes by and asked you about something you help them but he said you don't have to do that so were there people that you were
+
+collaborating with at the time that were at Bell Labs or were your collaboration still happening Michael at well because we wrote a second book Phillip Walter and I a name which we regret in America linear algebra and optimization volume
+
+one yes because as we worked on it it became very clear that I would be leaving to go to Bell Labs before the whole thing was finished and so I don't remember which of us thought of this someone said let's
+
+just put volume and then we can finish later well of course we didn't if on to never came out well it is sad Bell Labs let me wait for almost two years from my first interview took finally going there so when you when you went to Bell Labs
+
+then were there people at Bell Labs that you were collaborating with that were at the lab David Gay was one he was right across the hall for me you know author of ample right and Linda Kaufman who was another person who had been a PhD
+
+student at Stanford and I met Bob Vander by I mean but we there was not much in optimization and and how did it feel for you to be now doing things on your own wonderful well no I mean it was I am regretting that it was paradise to be at
+
+Bell Labs at Stanford we were on soft money you've been on that yeah every time you wanted to buy a pad of paper you had to say who which grant was paying for it which grant is paying for these phone calls so when I got to build
+
+labs I said okay who's gonna pay for when I go to trips I give talks I and norm said we pay for you your salary we pay for whatever you need so go ahead take trips have visitors it's fine I thought wow and there were so many smart
+
+people at Bell Labs I mean it ken Thompson was there Dennis inventors of Unix I mean Dennis Ritchie was there Brian Kernighan was I mean all these computer science yeah well plenty of famous mathematicians there but see remember my
+
+PhD is in computer scientists and if I had to choose what field I would be in I think it would be computer science although this is an informed discussion we're having I discovered after the fact that a war includes math it includes
+
+computer science it includes economics it includes statistics is right so it's kind of an interesting accident of history which I don't understand why they're all separate well I mean I know the joke that we used to tell when I was
+
+a student at Stanford in the 80s was well Stanford is for all our departments because there was the Oh our department there was Industrial Engineering there was engineering economics and management and then there was a group
+
+over in the business school now the three that are in the School of Engineering finally became only one department since we both left but it's it it's evolved and you know I do want to come back to the
+
+topic of a war and how you see it a little bit later on so but but Bell Labs when it was a man when AT&T was a monopoly they had an economic Center they mainly studied the economics of monopolies but they did other things to
+
+demand and supply and traditional economics well and and I think if I recall correctly the group that was at Murray Hill had that research freedom that correct I was incredibly lucky to be in the group that in a sense I mean I
+
+amazes me now you know that you could just do whatever you want you know it was an industrial research lab right but it didn't have any ties to the business except I worked on some things that were interesting connected to the business
+
+but that's because they were interesting in terms of optimization right so is there something from that period of Bell Labs that you particularly have good memories of why is Wireless system engineering for wireless systems now
+
+this is a long time ago but it was something they were interested in and I worked with Brian Carnahan who did the user interface David gay and I did the optimization Steve fortune did the computational geometry because it
+
+modeled Ray's in buildings you know reflecting and moving around the building the wireless engineering people who did the engineering work we wrote a paper we had a code that they were going to use to sell wireless systems it was
+
+great and I learned about wireless engineering which I never would have done before we had a lot of fun a lot of them do you think that any of that work that you did then has had an influence on wireless technology today I believe
+
+it has of course gone way beyond it they went and did something that was outdoor for outdoor wireless systems we're working on and the company people said we have to have a cute name for this we have a cute name
+
+for this product so one guy said I'm gonna think of cute animals so he came up with Ocelot it's called Ocelot and people would say what does it stand for like optimal he said doesn't stand for anything it's
+
+just a cute animal he had a cute picture of an ocelot you know so that was aussolas so now in 2001 you came here to Garant and what made initiated that transition this is like this is your life Margaret
+
+right so the perfection of Bell Labs began to disintegrate ask first of all I mean the AT&T was broken up then they split it into AT&T Lucent and NCR I think so there was that split which meant now AT&T and loosen which were two
+
+separate parts of the former AT&T had competition so there was an agonizing time I will never forget these conversations where we were supposed to choose whether we wanted to go to AT&T or loosen you know they were gonna split
+
+research and everybody in my Center computer science we had this incredible camaraderie and feeling of we uh we all wanted to be together and some people said well then you should really be together others said no no what you do
+
+is more like math so in the end I mean it was way above my pay grade but they decided to put basically all the CS people in loosen and everybody else in AT&T so I think in one of the and Lucent was took over the facility in Murray
+
+Hill correct and I think in an eighteenth each of the facility in Holmdel right and one in Florham Park okay which was new okay okay so we were all gonna stay together but it was just a ganache really agonizing and more important
+
+probably was the tenor of the place seemed to change it was you have to work on things connected with business you know we're gonna count how much vacation do you get a year I mean when do you come in there's nothing wrong with a
+
+corporate environment if that's what you want but if you've been in a freewheeling environment and change to a corporate environment it's different plus and this again may sound obnoxious but pretty much everybody could get
+
+other jobs universities were eager to hire people so the universities in this geographic area got a lot of Bell Labs people who wanted to stay in the area but they didn't want to be in the new environment so there was just this
+
+agonizing period of about a year I would say where people didn't know what to do and finally there was a moment when Brian Kernighan one of the great figures of computers on said I'm going I'm going to be a faculty member at Princeton and
+
+it was sort of like that was everybody said okay we better leave too you know because Brian was a foundation of the old computer science center and and just at that moment the director of the Kuran Institute phoned me up I was in touch
+
+with Michael of course Michael was here Burton was already here he'd been here since 81 nothing so he knew I had been agonizing about this and what to do and the director of the Kuran Institute phoned me and said we're looking for a
+
+chair of the computer science department are you interested well I wasn't really interested in being chair of the computer science department I'd been a department head at Bell Labs for three years and management is not my favorite
+
+thing but I thought I should go and see what they have to say I mean Quran Institute is a famous place I know people there so I did and Here I am so it's only was there was not a matter of you like when you went from Stanford to
+
+Bell Labs and you said you they re visited Wisconsin here you said you got the call from Quran t came over and you said hey this I interviewed it a few other University I figured if I'm gonna leave Bell Labs which is a torture
+
+for me to do and go somewhere is Korat the best place so there were another a number of other options and I had and again the usual agonizing know what I mean and people always say it's a tough choice but I tend to think if a choice
+
+is tough it's God to have these ingredients you're really torn you know if it were obvious which one was optimum you just do it now huh how was it that you also were moving from being at Stanford being a research associate not
+
+teaching you weren't teaching when at Bell Labs and now you were coming into a teaching environment was how were you thinking about that form of the transition part of the transition so when I was at Stanford in the OU our
+
+department taught a few advanced optimization classes actually the very first time right after I finished my PhD I taught the elementary numerical analysis course because the computer science department needed someone to do
+
+that when I was at Bell Labs I taught twice I guess at Princeton so I had some experience with teaching and I knew that it wasn't always fun but on the other hand you get to see that friendly eager faces of all the students
+
+that are really interested in what you want to teach hahaha so but I was going to be chair of the department here and that was the part that I think in retrospect worried me the most because I had heard stories about people from
+
+research labs going to academic environments in in administrative positions and having a lot of trouble so a very well-known guy at Bell Labs had taken an academic job in New York as chair of the department at Bell Labs if
+
+the director had a meeting you would go I mean Bell Labs had a lot of people who were kind of wild and didn't obey orders the director said I'm having this meeting you'd go to the meeting if the director made a speech
+
+during the meeting you'd listen okay so this guy went to a university not here and called a meeting and I guess half the people didn't come half the people were late and they would pay no attention to him and he was used to you
+
+know this other environment and the first thing I went to it and why you a welcome to new faculty or something we were all Stan it was a big meeting it wasn't just in Quran it was all the new fact that we're all standing around and
+
+the president of the university was gonna make a speech half the people just kept right on talking and I thought you know if the president of Bell Labs had been giving a talk at Bell Labs you would be quiet and
+
+pay attention so I thought okay it's a little different environment there's much less hierarchy so in I know also you spent a lot of time giving service to the profession at large I mean I know you probably the majority of it with
+
+Sian I think so can you speak about some of the things that you done I know I think you were president of Siam before a bit that you're proud of accomplishments in that role well it's hard to talk about this in a sense
+
+objectively because some people and you know this very well are really good on committees and others are terrible sometimes you meet someone and you think if I'm on a committee with you I want to be against whatever you're proposing and
+
+also we have to be frank about this I think more and more and more people that make up committees are thinking of we'd better get a woman we'd better have a woman you know especially in math computer science oh our whatever all
+
+right I mean I know that that's true I think that's it's good that they're paying attention to that because once there was a sigh a meeting an optimization and I got a phone call from a really great guy and he said hi
+
+we would like you to be on the organizing committee of this meeting and I thought oh this is nice and then he said I have to tell you we've already chosen all the invited speakers we've already defined the themes of the
+
+meeting and we've already organized all the mini symposia and I said well what exactly would I do and he said what we'd want to hear your opinion I said but you've made all the decisions haven't you and he said right I said no things
+
+and I thought hmm okay so I think that was gradually changing and I was on the same console and when I ran for the Sian kaan sille a very well-known guy was talking to me about why I should do this and he said well you know that in Siam
+
+we always try to have two candidates that are both strong so there won't be sort of a setup and then someone no one's ever heard of he said but unfortunately in this case you're going to be the sacrificial lamb because there
+
+was a pretty well-known person running and I thought about I said fine I it's okay well I won you know I thought haha sacrificial lamb and I advised young women who are facing this issue where they go to a university they're the only
+
+woman in their department and they want them to be on every committee you know they'll say will you be on the university committee for this we because they want to then say look we have a woman so I say you should only do it if
+
+it's gonna benefit you do not do it just to be a good person because which has happened many times then that young woman comes up for tenure and people say well she didn't write any paper she was just on all the committee she was on all
+
+those committees so I say if you don't think you're gonna get anything out of it do it don't do it and don't feel bad about it you know there's a stereotype which is often true that women feel they have to be the goody two-shoes and you
+
+know your chair says oh please please please won't you be on this committee and you you have to be a little heartless and just say no so you know you've you were one of the early women in computer science getting a dream from Stanford in
+
+the mid-60s and now we're almost 50 years later scary is it right what changes do you think you've seen in the course I mean you mentioned earlier obviously the equal pay aspect but that was early on but what changes have you
+
+seen in terms of how women are being treated in y'all say stem in general right not just in computer science or math or what have you over the course of your career I think there's a lot of talk about it
+
+I think there's much less action and there should be I think that there are numerous examples I won't list them where there's say a big important conference in optimization and you look at the list of speakers and there's
+
+maybe one woman and 20 men and you look at the organizing committee and there are 40 men and one woman I mean you know I think this is 9 this is 2019 think of the optics of this you know this is a big field I can name plenty of people
+
+but I think it's hard to change that I think you have to deliberately think about it and not just say let's pick the best people in this area who all I are the people I happen to know and are my buddies you know it's hard to understand
+
+it's hard to change that but I think if you don't start saying are there any women in this field would they be any good maybe they could talk about a different topic than the one we've got in mind and I think there's less of that than
+
+there should be there's things are way better at the I was just at the ischium International Congress for industrial and applied math and Valencia Spain and the two women that are running that organization are
+
+women right and they had plenty of women speakers and I thought okay this is you know it's an example so it's getting better but it's still not perfect I think that you've read this a million times overt sexism is much less people no
+
+longer say as they said to me when I went to Sylvania do you know what a cosign is you know they don't do that but they think things like that women aren't as good they don't have the right style they won't fit in so are there
+
+things that you've done here to try to encourage more women's being in computer science or in courant there's an organization called wink women in computing which is just an organization of our department they've
+
+collaborated with it's a group at Princeton I forget C's women in science and engineering so we maybe I forget so I started that when I was chair I said okay we have ACM you know many of whom were stereotypical males who were
+
+awkward socially and didn't like having women around and we started wink and it's thriving now I mean it's really good and we get together every year with the group from Princeton and have a meeting for undergraduate women we've
+
+had things for high school students in New York who come with their teachers and we work very careful to have see this is ageism in a way but we have young women students preferably give talks about the research they're doing
+
+and how interested they are in it the high school girls I'm using the term girl appropriately relate to that much more than if I talk about how excited I am about my research so I want to return back to a topic we touched on a little
+
+bit earlier which was the you know this the Oh our math computer science etc and how do you view the kind of the world today as it's it's you know a war now for the past 10 years or so in forms has been using analytics now we hear a lot
+
+about data science etc how do you view this these areas as being separate together different etc well I'd happen to be looking at a website this morning that said that operations research is a field of applied mathematics and I
+
+thought how informs would definition I think ideally and it's kind of I'm an example of someone who's worked in what could be called math computer science oh are and may be statistics I was in academia which is now 30 years ago you
+
+know we were publishing all over the place there were informs journals there was math programming I think you know the key paper that I wrote with Dave and Roy no Roy Marston was in linear algebra and it's applications because they did a
+
+special issue about interior point methods so so that's good but I think that the field is becoming more diverse but also more fragmented yeah so so what would you view as your main contributions to your the field I could
+
+say Oh our optimization is probably the right place to put place you computer science I'm not sure but I think optimization is probably the right right so I would say the work on barrier methods I mean I actually liked my
+
+thesis a lot stuff about carmakers method and and what we show the equivalence and all that and then because of the wise work I got interested in optimization without derivatives anyway well I want to thank
+
+you for your time again Margaret this has been a fascinating discussion and so thank you for your time in doing this well thank you for talking to me

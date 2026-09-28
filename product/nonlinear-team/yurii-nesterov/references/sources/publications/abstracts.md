@@ -1,0 +1,15 @@
+# Yurii E. Nesterov · 代表作候选摘要
+
+> 来自OpenAlex，仅供筛选精读对象。引用前请回到原文核对。
+
+## Interior-Point Polynomial Algorithms in Convex Programming
+
+1994 · Society for Industrial and Applied Mathematics eBooks · 被引4401 · https://doi.org/10.1137/1.9781611970791
+
+Written for specialists working in optimization, mathematical programming, or control theory. The general theory of path-following and potential reduction interior point polynomial time methods, interior point methods, interior point methods for linear and quadratic programming, polynomial time methods for nonlinear convex programming, efficient computation methods for control problems and variational inequalities, and acceleration of path-following methods are covered. In this book, the authors describe the first unified theory of polynomial-time interior-point methods. Their approach provides a simple and elegant framework in which all known polynomial-time interior-point methods can be explained and analyzed; this approach yields polynomial-time interior-point methods for a wide variety of problems beyond the traditional linear and quadratic programs. The book contains new and important results in the general theory of convex programming, e.g., their "conic" problem formulation in which duality theory is completely symmetric. For each algorithm described, the authors carefully derive precise bounds on the computational effort required to solve a given family of problems to a given precision. In several cases they obtain better problem complexity estimates than were previously known. Several of the new algorithms described in this book, e.g., the projective method, have been implemented, tested on "real world" problems, and found to be extremely efficient in practice. Contents : Chapter 1: Self-Concordant Functions and Newton Method; Chapter 2: Path-Following Interior-Point Methods; Chapter 3: Potential Reduction Interior-Point Methods; Chapter 4: How to Construct Self- Concordant Barriers; Chapter 5: Applications in Convex Optimization; Chapter 6: Variational Inequalities with Monotone Operators; Chapter 7: Acceleration for Linear and Linearly Constrained Quadratic Problems
+
+## Primal–dual accelerated gradient methods with small-dimensional relaxation oracle
+
+2020 · Optimization methods & software · 被引45 · https://doi.org/10.1080/10556788.2020.1731747
+
+In this paper, a new variant of accelerated gradient descent is proposed. The proposed method does not require any information about the objective function, uses exact line search for the practical accelerations of convergence, converges according to the well-known lower bounds for both convex and non-convex objective functions, possesses primal–dual properties and can be applied in the non-euclidian set-up. As far as we know this is the first such method possessing all of the above properties at the same time. We also present a universal version of the method which is applicable to non-smooth problems. We demonstrate how in practice one can efficiently use the combination of line-search and primal-duality by considering a convex optimization problem with a simple structure (for example, linearly constrained).
