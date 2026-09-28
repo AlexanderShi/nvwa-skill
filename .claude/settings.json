@@ -1,0 +1,20 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"${CLAUDE_PROJECT_DIR:-.}\" && git config user.name \"AlexanderShi\" && git config user.email \"sr881005@gmail.com\" 2>/dev/null || true",
+            "statusMessage": "Setting the repo's git identity to the maintainer"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1592 @@
+# "Subject to: Philippe Toint" -- podcast interview (host: Anand Subramanian)
+# Published: 2026-07-27, duration 1:11:05
+# Episode: https://podcasters.spotify.com/pod/show/subject-to/episodes/Subject-to-Philippe-Toint-e3mjb27
+# Feed:    https://anchor.fm/s/4dbe3348/podcast/rss
+# Transcript: AUTOMATIC speech recognition (faster-whisper 1.2.1, model small.en, int8, beam 1, VAD on),
+#             made 2026-09-28 by research agent 02 (nuwa research-team kit). NOT checked by a human.
+# Caveats: names are often misheard (e.g. "Thoine"=Toint, "Poe"/"Paul"=Powell, "Lancelot"/"Landslot"=LANCELOT,
+#          "Qt"=CUTE, "Leifer"=Leyffer, "Griswank"=Griewank, "Graton"=Gratton, "Gros-en-Oble"=Grenoble,
+#          "Corralia"/"Cora Lecates"=Coralia Cartis). Wording may contain recognition errors; re-check against
+#          the audio before quoting verbatim in a published skill. Timestamps are segment starts [h:mm:ss].
+# Speakers are not labelled (host asks questions; Toint answers).
+[0:00:14] Hi, Philippe.
+[0:00:16] Hello, Anand.
+[0:00:17] How are you?
+[0:00:18] Fine, thank you very much.
+[0:00:20] Yeah, it's a huge honor to have you here today.
+[0:00:23] My pleasure for me.
+[0:00:25] Yeah, so today my guest is Philippe Thoine.
+[0:00:28] He's an emeritus professor of mathematics
+[0:00:30] at the University of Némour in Belgium,
+[0:00:32] specializing in numerical analysis, OR,
+[0:00:35] and continuous optimization.
+[0:00:37] His academic career has centered on the theory,
+[0:00:40] computation, and software design
+[0:00:42] of large-scale nonlinear optimization,
+[0:00:45] including the co-development of the Lancelot software package
+[0:00:49] and contributions to trust region and filter methods.
+[0:00:53] Philippe has co-authored several books and about 200 papers,
+[0:00:57] the vast majority of which were published
+[0:00:59] in highly regarded journals.
+[0:01:01] He was elected a SIAM Fellow in 2009,
+[0:01:04] received the Bill Archadhey's Prize in 1994,
+[0:01:08] and the Lagrange Prize in continuous optimization in 2006.
+[0:01:12] He also served as chair of the Mathematical Optimization
+[0:01:15] Society from 2010 to 2012.
+[0:01:18] Philippe, I'm very grateful that you
+[0:01:20] have accepted the invitation.
+[0:01:22] Looking forward to having a great conversation with you.
+[0:01:26] Same for me.
+[0:01:27] All right.
+[0:01:28] So Philippe, you were born in Belgium in 1952.
+[0:01:32] Where specifically?
+[0:01:34] Well, I was born in Brussels, like a lot of Belgians,
+[0:01:37] actually.
+[0:01:39] OK.
+[0:01:41] So you come from the French part of the country,
+[0:01:43] as I suspected?
+[0:01:45] Yes, yes.
+[0:01:47] My mother was a French teacher, so I'm
+[0:01:50] very much in the French culture from that point of view.
+[0:01:54] Yeah, so you mentioned your mom.
+[0:01:55] What can you tell me about your family background,
+[0:01:57] maybe starting with your grandparents?
+[0:02:01] My grandfather on my father's side
+[0:02:04] was a lawyer working for the government.
+[0:02:07] And my grandfather from the mother's side
+[0:02:10] was a financial official and an archer, interestingly enough.
+[0:02:14] He was the best archer in Brussels at the time.
+[0:02:19] Wow.
+[0:02:21] Now that's pretty random.
+[0:02:24] Yes, that's quite curious, isn't it?
+[0:02:26] Yeah, amazing.
+[0:02:28] I enjoyed it very much when I was a kid,
+[0:02:30] because he would show me his prizes from competitions
+[0:02:35] and so on.
+[0:02:35] So that was quite funny.
+[0:02:37] Amazing.
+[0:02:38] My father was an engineer, an urban planner.
+[0:02:42] And as I said, my mother was a French teacher.
+[0:02:45] So that gives you some background.
+[0:02:47] Yeah, did any of your relatives were involved
+[0:02:51] in the Second World War?
+[0:02:52] Not directly.
+[0:02:54] I mean, my father and mothers were very young at the time.
+[0:02:57] And my father moved to France as a youngster
+[0:03:02] to avoid being drafted by the Germans.
+[0:03:05] He told me a few times the story,
+[0:03:07] but I don't know very much more than that.
+[0:03:10] OK, do you have siblings?
+[0:03:12] I have a brother who is a movie producer.
+[0:03:15] And I had a sister who was a philosopher
+[0:03:17] and died in a car accident more than 35 years ago.
+[0:03:21] Wow.
+[0:03:22] I'm sorry to hear that.
+[0:03:24] But at the same time, I'm again very much impressed
+[0:03:26] by your brother's career like a movie producer.
+[0:03:32] Well, yes.
+[0:03:34] So he's mainly based in Belgium?
+[0:03:38] Or did he produce movies elsewhere?
+[0:03:41] No, mainly based in Belgium.
+[0:03:43] OK.
+[0:03:43] And how were your childhood years?
+[0:03:46] Well, I think they were quite peaceful
+[0:03:48] and nothing special about them.
+[0:03:51] I moved a few times with my parents from Brussels
+[0:03:55] to another place south of Brussels.
+[0:03:58] And then from that place to a place near Lierge
+[0:04:01] in another part of Belgium.
+[0:04:03] And then finally to my current place in Namur.
+[0:04:07] So I moved quite a bit, but otherwise these
+[0:04:10] were the really big events on my childhood, honestly.
+[0:04:15] OK, so it was sort of an eventless childhood?
+[0:04:19] Yes, quite happy, I would say.
+[0:04:21] So from that point of view, some people
+[0:04:24] are marked by their childhood in a negative way.
+[0:04:28] I'm certainly not my case.
+[0:04:30] Yeah, that's very good for you.
+[0:04:32] And did you have any interest in sports?
+[0:04:35] Yes, I did.
+[0:04:36] Like all kids, I played a bit of football.
+[0:04:38] I did some skiing, a lot of cycling when I was a youngster.
+[0:04:42] I swam a lot.
+[0:04:43] I still like swimming a lot.
+[0:04:45] So swimming is one of my favorite sports.
+[0:04:48] I played tennis somewhat just like most youngsters
+[0:04:53] and people of the time.
+[0:04:55] It's nothing very special.
+[0:04:56] I was never really very competitive
+[0:04:59] except once in swimming.
+[0:05:02] I did take part once in a swimming competition.
+[0:05:05] But that was it.
+[0:05:07] Nothing, nothing really.
+[0:05:09] I'm not such a sporty type, I have to say.
+[0:05:12] Do you like to watch sports?
+[0:05:15] Not that much.
+[0:05:16] I spent some time yesterday evening
+[0:05:18] to watch the semi-final of the World Football Cup.
+[0:05:24] But that's all I can do.
+[0:05:26] Yeah, Belgium actually did all right in this World Cup.
+[0:05:30] Yes, yes, it went to quarter-final,
+[0:05:32] which I think was quite amazing already.
+[0:05:36] And what about music?
+[0:05:37] Did you play any musical instruments?
+[0:05:40] Yes, music is very important for me.
+[0:05:43] And I played the various instruments
+[0:05:46] with various levels of perfection.
+[0:05:49] I started with badly playing the piano and the organ.
+[0:05:53] Then I took lessons to play the baroque recorder.
+[0:05:58] I sang for the best of 40 years in a choir.
+[0:06:02] And now I'm just learning piano again.
+[0:06:04] So it's a long, long part of my activity.
+[0:06:10] And it's important for me to listen to music in general.
+[0:06:13] It's an important part of my life.
+[0:06:16] Yeah, same here.
+[0:06:18] But 40 years in a choir, that's just unbelievable.
+[0:06:23] It's a huge time frame.
+[0:06:27] Yes.
+[0:06:28] So we saw many, many pieces, mostly from the baroque
+[0:06:32] and Renaissance music, Monteverdi, Bach, Buxte,
+[0:06:36] the Handel, and others, and also some Brahms
+[0:06:41] and modern ones.
+[0:06:43] But we mostly in the Renaissance and baroque music.
+[0:06:48] I like it very much.
+[0:06:50] Yeah.
+[0:06:51] When you mentioned baroque music,
+[0:06:53] I immediately thought of Bach, obviously.
+[0:06:56] Bach was one of the greatest.
+[0:06:58] And he arranged many pieces like that, right, in Leipzig,
+[0:07:01] especially when he went there later.
+[0:07:04] So I was wondering, when did you start singing?
+[0:07:08] When I was 18, something like that,
+[0:07:11] or maybe a little bit before.
+[0:07:12] Right.
+[0:07:13] And what kind of music did you like to listen to when you were young?
+[0:07:17] Essentially the same sort of music.
+[0:07:19] But I also listened to a lot of jazz and song pop music as well.
+[0:07:24] I'm quite eclectic in terms of listening to music.
+[0:07:28] There are lots of music I like.
+[0:07:30] I like music quite a lot.
+[0:07:31] And in fact, so much, I have 11,000 songs on my phone
+[0:07:35] and I'm listening to them mostly at random,
+[0:07:39] just to make sure I don't forget any of this.
+[0:07:41] Yeah.
+[0:07:42] So throughout the day, you might listen to classical music,
+[0:07:45] then jazz, then pop.
+[0:07:47] Yes.
+[0:07:48] And sometimes the transitions are very good.
+[0:07:50] Sometimes they're not so good.
+[0:07:53] Yeah, that should be fun.
+[0:07:55] Yeah, you're listening to some Baroque music,
+[0:07:58] then all of a sudden you're listening to Beatles,
+[0:07:59] and then you're jumping to other things.
+[0:08:01] Yeah.
+[0:08:02] Right.
+[0:08:03] Great.
+[0:08:03] And when it comes to books, what are your preferences?
+[0:08:07] I read a lot when I was younger.
+[0:08:09] And now I'm mostly reading technical stuff
+[0:08:12] and things related to my work, which is not so pleasant,
+[0:08:17] maybe.
+[0:08:18] I also read magazines and news in general.
+[0:08:22] So maybe the non-technical stuff I'm reading nowadays
+[0:08:26] is mostly news and comments and analysis
+[0:08:30] on the international situation and political scene.
+[0:08:34] But when you were young, did you
+[0:08:36] have any particular preferences in terms of lifestyle?
+[0:08:39] No, I had just everything I could put my hand on.
+[0:08:42] For quite a few years, I read a book a day on average,
+[0:08:47] which was just crazy in a sense.
+[0:08:49] But I read just everything from philosophy book to thrillers,
+[0:08:55] science fiction, poetry, theater, just anything
+[0:09:00] I could put my hands on.
+[0:09:02] Right.
+[0:09:02] You mentioned poetry, like Ronnie Bental,
+[0:09:06] which I had the chance to interview.
+[0:09:08] You also enjoy writing poems, right?
+[0:09:11] Yes, yes.
+[0:09:12] I think it's a very good way of expressing.
+[0:09:14] It's very nice.
+[0:09:17] I'm glad to hear Ronnie is also interested,
+[0:09:19] but certainly I like it, yes.
+[0:09:22] Have you ever thought of releasing a book?
+[0:09:25] I have published a few books, a few small sample of poems.
+[0:09:33] They are not widely known though,
+[0:09:35] so I'm not a very well-known poet.
+[0:09:38] Forget about that.
+[0:09:41] It's all in French, right?
+[0:09:43] Oh, yes, yes, yes.
+[0:09:44] Yeah, very nice.
+[0:09:46] So you really have an act for humanities, don't you?
+[0:09:49] Well, when I was in high school,
+[0:09:51] I was essentially studying old Greek and old Latin
+[0:09:55] for six years, and I turned to science mostly by accident,
+[0:10:01] much to the dismay of my professors at the time.
+[0:10:04] OK, so what's your favorite philosopher?
+[0:10:09] Well, I had to say, but Plato is once,
+[0:10:12] Spinoza is another, yes, that probably other two ones,
+[0:10:17] the two that I like best.
+[0:10:19] You mentioned Spinoza.
+[0:10:21] Do you consider yourself as a skeptical person?
+[0:10:25] Yes, to some extent, I'm pretty skeptical.
+[0:10:28] Yes.
+[0:10:29] Were you a good student in school?
+[0:10:31] I think so.
+[0:10:32] I mean, I'm not the one to say,
+[0:10:33] but as far as I remember, I never had any problem,
+[0:10:36] and I was typically in the best of the class.
+[0:10:40] So, yes, I was a good student, I suppose.
+[0:10:43] And why did you decide to study mathematics?
+[0:10:46] Well, because in the last two years of my high school,
+[0:10:50] I had a great teacher who just showed me
+[0:10:52] that it could be interesting and challenging and mind-teasing.
+[0:10:57] And so I decided to try,
+[0:11:01] but I was completely ill-prepared
+[0:11:04] because I had a very weak course in maths
+[0:11:07] during my high school.
+[0:11:09] And so it was a real shock
+[0:11:11] when I went in first year of mathematics.
+[0:11:14] Okay, so, I mean, you began your studies
+[0:11:18] at University of Namur in 1970,
+[0:11:20] and you really had difficulties
+[0:11:23] adapting to this new environment, right?
+[0:11:25] Well, difficulties, I was mostly a surprise.
+[0:11:29] I remember in my first lectures,
+[0:11:31] I see the professor drawing some funny signs
+[0:11:36] on the blackboard.
+[0:11:36] I had no idea what it meant,
+[0:11:38] and I was trying to draw the same sort of thing
+[0:11:42] on my sheet of paper,
+[0:11:43] and it's only later that I understood
+[0:11:45] what it was actually about.
+[0:11:47] So it took me a while to get into the mood
+[0:11:51] and into this form of mind,
+[0:11:54] but it was okay, I managed in the end.
+[0:11:57] Very interesting.
+[0:11:58] You also studied physics at the same time
+[0:12:00] for two years before dropping out, correct?
+[0:12:03] Yes, and in fact, I dropped out
+[0:12:06] because it was impossible to continue
+[0:12:09] to do both math and physics at the same time,
+[0:12:13] essentially because of the laboratories
+[0:12:15] which were two times consuming in physics.
+[0:12:18] But yes, I would have liked to continue,
+[0:12:21] but that turned out to be impossible.
+[0:12:23] I liked physics a lot, actually.
+[0:12:25] Well, I've applied optimization
+[0:12:27] to several physical problems.
+[0:12:28] So in some of that point of view,
+[0:12:30] not everything is lost on me.
+[0:12:33] I've worked in, for instance,
+[0:12:35] in the design of optical lenses
+[0:12:38] or in weather forecasting,
+[0:12:41] which is very much a physical problem.
+[0:12:44] Yeah, yeah.
+[0:12:45] Yes, definitely.
+[0:12:48] I liked the physical background.
+[0:12:50] All right, yeah, fair enough.
+[0:12:52] And did you take any optimization classes?
+[0:12:55] I had a course in optimization
+[0:12:57] in the very last year of my course.
+[0:13:02] And I wasn't very good,
+[0:13:05] at least from what my prof says.
+[0:13:08] He claimed that I did not understand anything
+[0:13:10] about the KKT conditions.
+[0:13:13] Fortunately, the colleagues and my professors
+[0:13:18] at the time didn't quite believe him, I think.
+[0:13:21] And so I passed nonetheless,
+[0:13:23] but it was not my greatest mark ever, for sure.
+[0:13:27] And it seems that optimization was not very popular.
+[0:13:32] In French-speaking countries at a time, right?
+[0:13:36] Optimization was, no, I think,
+[0:13:38] I think convex analysis was more popular at the time.
+[0:13:42] And also numerical analysis was dominated by PDEs.
+[0:13:46] And that was the case for many, many years.
+[0:13:50] And so, for instance, my topic for my final work
+[0:13:55] to get my graduation was on PDE constraint optimal control.
+[0:14:00] So that was more fashionable at the time
+[0:14:05] than nonlinear optimization, for sure.
+[0:14:08] Yeah, partial differential equations
+[0:14:10] can be quite challenging.
+[0:14:12] Yes, indeed.
+[0:14:15] Yeah, so you started dating your wife around that time.
+[0:14:19] How did you meet?
+[0:14:20] And when did you get married?
+[0:14:22] Well, I met her in the choir.
+[0:14:24] I was mentioning before.
+[0:14:26] So we were singing together.
+[0:14:28] And we knew each other in 1973, 74,
+[0:14:33] and got married in 77.
+[0:14:35] And just after, I spent a year in Cambridge for my thesis.
+[0:14:40] So that was quite an experience for both of us.
+[0:14:44] Yeah, I asked this because I know
+[0:14:46] that she's very important in your life.
+[0:14:47] And she deserved to be mentioned here, for sure, right?
+[0:14:50] No, absolutely, yes.
+[0:14:51] Yeah, and what was your next step after graduating?
+[0:14:56] Well, when I graduated, I was hired by the university
+[0:14:59] right away as a teaching assistant.
+[0:15:02] This job was essentially half-time research
+[0:15:05] and half-time teaching.
+[0:15:07] And so I started my thesis immediately.
+[0:15:11] And I was looking at problems using conjugate gradient
+[0:15:15] methods, derivative-free method inspired by Michael Poe's work.
+[0:15:20] And this is essentially my first job.
+[0:15:24] This is essentially my first two papers about that subject.
+[0:15:29] So I know you mentioned a couple of topics,
+[0:15:32] but I would like to know essentially
+[0:15:34] what was your PhD work about?
+[0:15:38] Well, when I asked Michael Poe, what
+[0:15:43] were the proposals for the subject?
+[0:15:45] And he told me I could choose between two subjects.
+[0:15:48] One was SQP, and the other one was
+[0:15:51] large-scale nonlinear problems.
+[0:15:53] And I did the wrong choice.
+[0:15:55] I chose the second.
+[0:15:57] Otherwise, my name would be associated with SQP,
+[0:16:00] but that's too bad.
+[0:16:01] And then so I chose the other one
+[0:16:04] and started working on the sparse quasi-Newton methods.
+[0:16:07] And I derived the first sparse quasi-Newton method
+[0:16:11] at the time, which was quite useful.
+[0:16:14] And the rest of my thesis was essentially building on that
+[0:16:18] and working on the theory, the experiments, and the software.
+[0:16:24] So I think that's the kind of method
+[0:16:26] associated with this sort of topic.
+[0:16:28] Yeah.
+[0:16:29] So SQP, for those who are not familiar with,
+[0:16:32] is sequential quadratic programming.
+[0:16:35] Yes, that is correct.
+[0:16:37] It's one of the most important methods for solving constraint
+[0:16:41] problem, and it's quite popular.
+[0:16:43] Yeah.
+[0:16:44] So you mentioned Mike Powell.
+[0:16:46] We are going to talk about him shortly.
+[0:16:49] That's a very important part of your story.
+[0:16:53] So you had a 1975 conference in Dundee, in Scotland.
+[0:16:57] Yes, that was my first conference as a PhD student.
+[0:17:02] I was sent by my university to this conference,
+[0:17:06] and I remember very well getting off the plane in Edinburgh
+[0:17:09] and taking the bus to Dundee.
+[0:17:12] And the guy sitting next to me in the bus
+[0:17:14] was a nice gentleman whom I didn't know.
+[0:17:17] And we started talking, and it turned out
+[0:17:21] and we have kept excellent contact with all of you since then.
+[0:17:25] I mean, he's a very nice person, and I have appreciated him
+[0:17:29] very much.
+[0:17:29] And he was very considerate for a student
+[0:17:32] at the time, which was also much in his personality,
+[0:17:36] I think.
+[0:17:37] And when I arrived in Dundee, I met Michael Powell
+[0:17:40] for the first time.
+[0:17:41] And then I was asking him whether he knew somebody in the UK
+[0:17:48] I could possibly work with.
+[0:17:49] And then he started asking me a few questions about my interests
+[0:17:53] and so on.
+[0:17:54] And then he said, why don't you work with me?
+[0:17:56] And I said, sure.
+[0:17:58] And that's how I started this long story with Michael, which
+[0:18:03] was very fruitful and very important for me.
+[0:18:06] Were you aware that he was a big name at a time?
+[0:18:10] He was the pope of the discipline, honestly.
+[0:18:13] So that's why I didn't dare to ask working with him
+[0:18:16] immediately, because I thought it was maybe
+[0:18:20] ambitious.
+[0:18:21] So I was asking for a recommendation for somebody else.
+[0:18:25] But since he proposed to work with him, of course, I said yes.
+[0:18:30] Yes.
+[0:18:31] And Philip, I think around that time,
+[0:18:33] some people were highly skeptical
+[0:18:35] about numerical capabilities of the methods, right?
+[0:18:40] Especially when it comes to inverting matrices and so on.
+[0:18:44] Do you have any memories from any events?
+[0:18:47] Yes, certainly.
+[0:18:49] Linear algebra was a very important field.
+[0:18:51] And in particular, there was a big emphasis on error analysis.
+[0:18:58] And a very important person in error analysis
+[0:19:01] was Jim Wilkinson from England.
+[0:19:04] And I remember him very well saying
+[0:19:06] that it would be forever impossible to invert a 20
+[0:19:09] by 20 matrix, which today looks amusing, I think.
+[0:19:15] But at the time, he was really worried about rounding errors
+[0:19:19] and misuse of that type.
+[0:19:23] And although he was a very, very bright person,
+[0:19:27] I think he misread the future there.
+[0:19:29] Yes.
+[0:19:30] And we were talking about the 70s.
+[0:19:32] Yes, yes.
+[0:19:33] Yeah.
+[0:19:34] Late 70s.
+[0:19:35] But that changed pretty quickly, though.
+[0:19:38] I mean, it didn't take long in optimization for people
+[0:19:41] like Phil Gill, Walter Murray, Margaret Wright, and Michael
+[0:19:46] Saunders to take the lead in using very good linear algebra
+[0:19:52] techniques in optimization.
+[0:19:54] So that was very interesting.
+[0:19:56] Yeah, also known as the GANGO 4.
+[0:19:59] Yes, yes.
+[0:20:01] But there was a time where people were worried about updating
+[0:20:04] matrix factorizations and things like that.
+[0:20:08] This looks a little bit quaint now,
+[0:20:10] but it was all the rage.
+[0:20:12] Yeah.
+[0:20:13] So in 1977, you went to work with the legendary Mike Powell
+[0:20:18] in Cambridge for a little over six months.
+[0:20:22] That was possible because you received funding
+[0:20:25] from the Royal Society, right?
+[0:20:26] Yes, yes.
+[0:20:27] That was quite a story in itself,
+[0:20:29] because I had applied to the Royal Society
+[0:20:32] and got the grant.
+[0:20:34] But the guy who was responsible for my file
+[0:20:37] died in the middle of the process.
+[0:20:40] When I arrived in Cambridge, there
+[0:20:42] was no file available in the Royal Society about my grant
+[0:20:47] and no money in my bank account as a consequence.
+[0:20:51] So I had a hard time for the first two weeks
+[0:20:54] while this was being sorted out.
+[0:20:57] And when it was sorted out, they still
+[0:21:01] did a big mistake or an amusing mistake.
+[0:21:04] They misclassified me.
+[0:21:05] And instead of being a PhD student,
+[0:21:08] I was classified as a senior visitor.
+[0:21:12] And as a result, I was invited to share
+[0:21:14] repartees with the colleges and the fellows
+[0:21:17] of the colleges in Cambridge.
+[0:21:19] I was the only young person around.
+[0:21:21] They had a lot of fun, and I had a lot of fun too.
+[0:21:27] That's incredible.
+[0:21:30] So you mingle with the senior people
+[0:21:32] while still PhD students?
+[0:21:34] Yes, yes, yes.
+[0:21:35] That was quite amusing.
+[0:21:38] So which college were you affiliated with?
+[0:21:42] I was not affiliated to any college
+[0:21:44] because Michael Powell at the time
+[0:21:46] was not affiliated to any college.
+[0:21:48] And as a consequence, I was working
+[0:21:51] in the department of applied physics and mathematics
+[0:21:56] in Silver Street.
+[0:21:58] And my office was not far from Michael Powell's,
+[0:22:02] but there was no former affiliation.
+[0:22:05] So we spent, for instance, lunchtime together
+[0:22:08] in the grad center, having lunch every day
+[0:22:11] and discussing my progress or my lack of progress.
+[0:22:16] And that was quite challenging for me,
+[0:22:19] and I learned a lot from that.
+[0:22:23] Cambridge has 30 plus colleges nowadays.
+[0:22:27] Yes, it's a big university.
+[0:22:29] And I think Mike subsequently
+[0:22:33] was accepted to a far higher college,
+[0:22:36] but that was after I left.
+[0:22:38] Yeah, I visited Cambridge very recently,
+[0:22:43] maybe a couple of weeks ago.
+[0:22:45] And it's an incredible city.
+[0:22:47] It's not only historical, but the environment is very nice.
+[0:22:53] And Mike Powell actually never formally got a PhD degree
+[0:23:00] and faced some difficulties because of that, didn't he?
+[0:23:03] Well, when he graduated, he was hired directly
+[0:23:07] by the Atomic Energy Research Establishment.
+[0:23:11] And so it didn't work for a PhD, but it didn't prevent him
+[0:23:15] to become a very well-known person in optimization.
+[0:23:19] And when there was a chair opening in Cambridge,
+[0:23:22] it was selected to fill the chair,
+[0:23:26] although he was not a PhD.
+[0:23:28] There was a bit of a problem in the Cambridge establishment,
+[0:23:32] which is so formal on many things.
+[0:23:35] And so he was a bit upset about those problems.
+[0:23:40] And that was one reason why he was not accepted immediately
+[0:23:43] by a college when he arrived in Cambridge.
+[0:23:46] But fortunately, he applied and got a DSC later,
+[0:23:50] which is a doctoral in sciences.
+[0:23:52] It's a super PhD, a very honorific title,
+[0:23:57] which erased this unfortunate past.
+[0:24:00] Uh-huh.
+[0:24:01] And is it true that he was not allowed to have lunch
+[0:24:06] with his fellow colleagues because he had a PhD?
+[0:24:10] He was not a fellow of a college,
+[0:24:12] so there was no college which he could have gone to.
+[0:24:17] So that's why he was having lunch with me.
+[0:24:19] Yes.
+[0:24:22] And you took advantage of that.
+[0:24:24] That's good.
+[0:24:25] Yes, definitely.
+[0:24:27] And were you his first PhD student in a way?
+[0:24:31] And what did you learn from him?
+[0:24:33] I was his first PhD student in Cambridge for sure,
+[0:24:36] because when I actually decided to work with him
+[0:24:40] and when he accepted me, he was still working at Howard.
+[0:24:44] And so I had to wait a little bit
+[0:24:45] until he got installed in Cambridge properly
+[0:24:49] before I could move there.
+[0:24:50] So I was definitely his first student there, that's for sure.
+[0:24:55] Yes, I learned enormously from him.
+[0:24:58] And he was a very person with very high standards
+[0:25:03] for everybody, including himself, but also for his students.
+[0:25:07] And so that was pretty tough at times,
+[0:25:10] but I survived somehow.
+[0:25:13] And there was one amusing story.
+[0:25:16] When I arrived, I was a reasonably reasonable Go player.
+[0:25:22] And Mike wanted to learn Go.
+[0:25:25] And so while he was teaching me mathematics in the day,
+[0:25:29] I spent some evening teaching him Go.
+[0:25:32] That was a reverse war, which I enjoyed very much.
+[0:25:36] We both enjoyed it very much, actually.
+[0:25:39] And did he end up playing well?
+[0:25:42] Not really.
+[0:25:45] You know, Go is a game where the game stops
+[0:25:48] when both players agree there is nothing else to do.
+[0:25:52] Mike being as competitive as he was
+[0:25:55] would never agree there was nothing to do.
+[0:25:57] And so he would lose more and more.
+[0:25:59] And he didn't like that very much.
+[0:26:01] And I think from that point on,
+[0:26:03] he sort of stopped playing Go as far as I know.
+[0:26:08] Maybe because of that, I don't know.
+[0:26:10] Yeah, you mentioned that he was tough at times.
+[0:26:14] Could you elaborate more on this?
+[0:26:16] Just for us to have a sort of a better idea
+[0:26:19] of his style.
+[0:26:22] He was quite direct and to the point.
+[0:26:25] And so he was, in a way,
+[0:26:28] rightly inquisitive about concepts.
+[0:26:31] He didn't let vagueness hang around.
+[0:26:35] And so if you had a vague ID,
+[0:26:37] that didn't fit with his view of things.
+[0:26:41] And so the IDs had to be precise
+[0:26:43] and the result had to be verified.
+[0:26:47] And there was no room for approximations.
+[0:26:50] Although he was an expert in approximation theory,
+[0:26:52] it was no room for approximating concepts for sure.
+[0:26:58] And for young students, that is sometimes difficult.
+[0:27:01] But I guess that's how you learn.
+[0:27:03] Yes, I mean, you took it from a positive side
+[0:27:06] and that was extremely beneficial for you in the end.
+[0:27:10] Yes, yes, absolutely.
+[0:27:12] So when he died, you and Corralia Cartis
+[0:27:16] went to his office to clear it
+[0:27:18] and found an interesting letter to John Dennis,
+[0:27:22] who's one of the key figures in the field
+[0:27:24] of nonlinear optimization.
+[0:27:26] What makes it so special?
+[0:27:27] Well, first of all, Corralia and I visited
+[0:27:31] and went to clear up his office
+[0:27:34] because I was my first student
+[0:27:37] and Corralia was my last student.
+[0:27:40] And so that was a fitting qualification
+[0:27:43] for us to do this important task.
+[0:27:46] And the letter in question was a letter we wrote
+[0:27:51] to John Dennis while I was working on the sparse
+[0:27:54] quasi-Newton update I mentioned before.
+[0:27:57] Because John Dennis has a student working
+[0:28:00] on more or less on the same topic,
+[0:28:02] but I managed to get the result first.
+[0:28:05] And I think the student and John were a bit annoyed by that.
+[0:28:10] And so Mike wrote to them a letter saying that,
+[0:28:14] well, that was life and that,
+[0:28:17] and you know, I was a nice guy and I could understand
+[0:28:19] that somebody else was working on the topic,
+[0:28:22] which of course I did.
+[0:28:23] And I was quite pleased to meet the other guy
+[0:28:27] in the conference a year after that.
+[0:28:30] But he essentially was called Marwill
+[0:28:33] and what he left the field for a few years later.
+[0:28:37] So can have lost track of what he has become.
+[0:28:41] And how was the feeling of, you know,
+[0:28:44] returning to that office and I mean,
+[0:28:46] with him no longer there, did it spark any memories
+[0:28:51] and particular reactions?
+[0:28:54] Of course, I was quite close to him and his family.
+[0:28:58] I knew his wife and kids very well.
+[0:29:01] And so yes, it was a very sad moment for both Corralia
+[0:29:06] and me and also for other students of Mike, I know for sure.
+[0:29:10] So this was a very sad moment and a very sad year.
+[0:29:15] Somebody needed to do it and I was asked to do it
+[0:29:20] for the reasons I mentioned.
+[0:29:22] And of course I accepted it.
+[0:29:24] It was not something particularly offensive for, of course.
+[0:29:30] Yeah, exactly.
+[0:29:31] Like someone has to do that.
+[0:29:33] And when he died, it seemed like that end of an era.
+[0:29:36] It was certainly the end of an impressive career.
+[0:29:40] And yes, in a sense, at the end of an era,
+[0:29:43] I think John Dennis used that phrase.
+[0:29:46] Ah, oh, nice.
+[0:29:49] And did you have the chance to meet some important names
+[0:29:52] in the field while you were in Cambridge?
+[0:29:55] Of course, yes.
+[0:29:56] I mean, Mike had a lot of visitors and so I would meet them.
+[0:30:00] And the first time I got my first result,
+[0:30:03] when I knocked on Mike's door to talk about it,
+[0:30:06] there was another guy in the room, whom I didn't know.
+[0:30:09] And it turned out to be Bill Davidan,
+[0:30:11] the co-author of the DFP method.
+[0:30:14] And so Mike told me that I have to explain my result
+[0:30:18] to both of them.
+[0:30:20] And Bill was quite enthusiastic about the results.
+[0:30:23] So that helped me too, actually.
+[0:30:25] So I have a very good memory of that.
+[0:30:27] But of course, I met other people.
+[0:30:29] Charles Broyden was often there.
+[0:30:32] Roger Fletcher, of course, which was a colleague and friend
+[0:30:36] of Mike, Donald Goldfarb, David Schano, Alan Curtis,
+[0:30:41] John Reed, Yandaf, many, many people I remember very fondly.
+[0:30:46] Also, Mike was hard to convince about the new stuff.
+[0:30:51] But once he was convinced, he was your best advocate.
+[0:30:56] That was very helpful.
+[0:30:58] And in later conferences, he would introduce me
+[0:31:01] to other people and mention my results
+[0:31:04] and be very positive about it.
+[0:31:06] So that definitely helped me quite a lot.
+[0:31:08] Yeah.
+[0:31:09] Jorge Nocidal mentioned something similar,
+[0:31:11] that he helped him quite a bit in promoting his ideas.
+[0:31:15] And he was a very good advocate of other people's ID
+[0:31:20] once he got convinced, which was not easy.
+[0:31:26] So we mentioned Bill Davijon.
+[0:31:28] He's known to be the creator of the first quasi-Newton method.
+[0:31:34] And he was also involved in this FBI story, which I mentioned
+[0:31:41] in Jorge Nocidal's episode.
+[0:31:43] And you mentioned Broyden, Fletcher, Goldfarb, and Schano.
+[0:31:47] So the BFGS method.
+[0:31:50] Yes, yes.
+[0:31:51] Of course.
+[0:31:54] I remember also another guy, Lawrence Dixon, who very fondly,
+[0:31:58] he was from Huttfield, who was also a very important person
+[0:32:02] at the time and a very nice gentleman.
+[0:32:05] Yes.
+[0:32:06] It's all amazing.
+[0:32:07] And around 1977, you also met Mehedin Albali,
+[0:32:12] who became one of your best friends in the field.
+[0:32:15] How did you guys meet?
+[0:32:17] Mehi was a student of Roger Fletcher's.
+[0:32:20] And so because Mike and Roger were meeting regularly,
+[0:32:25] the underlings met as well.
+[0:32:28] And so that's how I became to know Mehi.
+[0:32:32] And we've kept good contact throughout the years.
+[0:32:35] And not so long ago, I visited him in Oman,
+[0:32:40] where he still organizes optimization conferences there.
+[0:32:44] And so we've kept excellent relations from that time.
+[0:32:48] Nice.
+[0:32:49] You graduated in 1978.
+[0:32:52] What were the main contributions of your PhD thesis?
+[0:32:55] But I think it was essentially about large scale,
+[0:32:59] nonlinear optimization.
+[0:33:00] So using sparsity, using structure,
+[0:33:04] and in particular, using a structure
+[0:33:06] which is called the partially separable structure.
+[0:33:10] That was not directly in my thesis,
+[0:33:12] but came just immediately after.
+[0:33:14] But the thesis was essentially in this direction,
+[0:33:18] using structure for large, at the time, large problems.
+[0:33:23] And again, looking at it in retrospect,
+[0:33:26] large at the time meant 50 variables, which again today
+[0:33:31] is somewhat amusing given the size of problem we solved today.
+[0:33:38] So that large was 50 variables at the time.
+[0:33:41] And yes, and I was also interested in estimating
+[0:33:46] the Hessian matrices at the time, using finite difference.
+[0:33:52] I've co-authored only two papers with Michael Powell.
+[0:33:55] And one of them was on this topic.
+[0:33:59] And it was during my thesis.
+[0:34:01] And he was a bit upset because it ended up
+[0:34:03] being Appendix 7 in my thesis.
+[0:34:06] And so he thought that was not very respectful.
+[0:34:11] He could tolerate it in the end.
+[0:34:13] It was a good paper, I think.
+[0:34:15] He still did not do it very well.
+[0:34:17] Appendix 7.
+[0:34:18] How many appendixes did you have?
+[0:34:20] I don't remember.
+[0:34:21] Something like 10 or so.
+[0:34:23] Wow.
+[0:34:24] Mike Powell ended up being the president of the examination
+[0:34:27] committee of your PhD, correct?
+[0:34:29] Yes, yes, absolutely.
+[0:34:32] So he went there to Namur.
+[0:34:33] And yes, he came here and stayed with us,
+[0:34:38] with his family.
+[0:34:39] And we had a very good time.
+[0:34:40] I mean, they had become friends in the meantime.
+[0:34:43] It was a real pleasure to have him around,
+[0:34:46] as well as a good opportunity for my thesis, of course.
+[0:34:50] So ultimately, he was the main advisor of your PhD work.
+[0:34:53] Yes, yes, certainly.
+[0:34:56] I'm definitely one of my students, for sure.
+[0:34:59] What a privilege.
+[0:35:01] Your name became quite associated
+[0:35:03] with Truss-Rejean methods.
+[0:35:05] Could you please provide a brief explanation
+[0:35:08] of this framework in the context of quasi-Newton methods?
+[0:35:13] But it's not directly related to quasi-Newton methods,
+[0:35:16] although it was invented in that context.
+[0:35:19] I mean, the idea is that you have a non-linear problem,
+[0:35:23] a non-linear function, non-convex possibly.
+[0:35:26] And you have an approximation of the Hessian matrix.
+[0:35:29] And so you can build the second order Taylor's model
+[0:35:33] around your current point.
+[0:35:34] And this model need not be convex.
+[0:35:37] So if you want to minimize that model,
+[0:35:40] well, it may lead you to infinity.
+[0:35:43] So you have to restrict yourself to a sort of region
+[0:35:46] around the current point.
+[0:35:49] And in this region, you hope you trust the model
+[0:35:53] that you've built using the Taylor expansion.
+[0:35:55] And this is the Truss region.
+[0:35:57] So you minimize the quadratic model in that region,
+[0:36:01] this Truss region, and this gives you a step.
+[0:36:05] And then you move on from there.
+[0:36:07] Yeah.
+[0:36:08] That's how Truss region were invented.
+[0:36:10] Okay.
+[0:36:11] The beginning, there was no fixed vocabulary about that.
+[0:36:16] Roger Fletcher was talking about restricted step method.
+[0:36:20] I used the word confidence region for a while.
+[0:36:23] And then it's a paper by John Dennis and Holly Moray,
+[0:36:27] I think in 1980, which solidified the terminology
+[0:36:32] about this type of methods,
+[0:36:35] which remains amongst the very best
+[0:36:37] for solving large scale problems and difficult ones.
+[0:36:41] Who came up with this method originally?
+[0:36:43] Was it Mike Paul?
+[0:36:45] Yes, it was Mike Paul in a paper about the PSB update,
+[0:36:50] one of the quasi-union update,
+[0:36:53] and it was in 1970 exactly.
+[0:36:57] Yeah.
+[0:36:57] So this method is 1970 by Michael Paul.
+[0:37:01] Yeah, that's why I asked this
+[0:37:02] because about this connection with quasi-neutral methods
+[0:37:07] due to the quadratic approximation aspects,
+[0:37:11] because I know Mike Paul liked a lot
+[0:37:13] quadratic programming, right?
+[0:37:15] Yes.
+[0:37:16] So I'm not an expert in the field.
+[0:37:19] So I was wondering whether this has any connection
+[0:37:21] or it was just something that turned out
+[0:37:24] to be useful at a time.
+[0:37:26] Well, it wasn't necessary in a way
+[0:37:29] because the update Mike was working at the time
+[0:37:33] was not like the GIS or DFP
+[0:37:36] in the sense that it did not guarantee
+[0:37:38] that the matrix would stay positive definite.
+[0:37:42] And from that point of view,
+[0:37:44] the quadratic model associated with it
+[0:37:46] need not be convex.
+[0:37:49] And if it's not convex,
+[0:37:50] then you have the problem I just mentioned
+[0:37:53] and you need to restrict your step in the region
+[0:37:57] around the current iterate.
+[0:37:58] So it was necessary to do something about that.
+[0:38:01] There were other techniques
+[0:38:03] like resorting to the true function
+[0:38:05] and doing a line search.
+[0:38:07] This was and still is popular,
+[0:38:09] but it's a different way to look at things.
+[0:38:12] And trust region has become, I think,
+[0:38:14] one of the stop-holes of nonlinear optimization.
+[0:38:17] It's a very important method today.
+[0:38:19] Right.
+[0:38:20] So, Philippe, the 1979 ISMP,
+[0:38:24] which is the International Symposium
+[0:38:26] on Mathematical Programming,
+[0:38:27] was an important one for you, right?
+[0:38:30] Yes.
+[0:38:32] I met two people I ended up working with
+[0:38:37] many, many years at that conference,
+[0:38:40] Nick Gould and Andy Cone.
+[0:38:42] The conference was in Montreal
+[0:38:44] and Andy was working in Waterloo.
+[0:38:47] So I was looking for a place to visit after the conference
+[0:38:51] and Andy generously offered to host me for a few days.
+[0:38:55] And I went to Waterloo and met Nick
+[0:38:58] who was working there at the time.
+[0:39:02] And so we went along very well,
+[0:39:04] discussed the main thing,
+[0:39:06] the needs to work on large scale problems
+[0:39:08] and the need to write software to do it.
+[0:39:12] And we didn't do anything for a while.
+[0:39:16] And then a few years later,
+[0:39:18] I think it was in 1981,
+[0:39:20] Andy went for a sub-article in France in Gros-en-Oble.
+[0:39:25] And there was an opportunity for Nick,
+[0:39:28] Andy and me to meet.
+[0:39:30] And we started working on Trust Regions at that time.
+[0:39:34] And it has resulted in a long, long story of collaboration
+[0:39:39] and friendship with these two people.
+[0:39:42] I think we wrote more than 50 papers together.
+[0:39:45] It's a long story,
+[0:39:47] but a long and very nice story,
+[0:39:50] which I'm very proud of.
+[0:39:51] Yeah, unbelievable.
+[0:39:53] It's not that easy to have this very long-term collaboration.
+[0:39:58] I mean, 50 papers.
+[0:40:00] That's just insane, I think.
+[0:40:01] You also met other important collaborators
+[0:40:04] in the early 80s, didn't you?
+[0:40:05] Yes, I mean, one of the collaborators I work with
+[0:40:09] in the beginning of my career
+[0:40:11] was Andreas Griswank from Germany.
+[0:40:15] And it is within that we worked
+[0:40:17] on this partially separable structure,
+[0:40:19] which is an important structure in many problems.
+[0:40:24] It's when you can think of a function being separable,
+[0:40:27] when you can split into various pieces
+[0:40:30] and the variables don't interact.
+[0:40:33] It's partially separable when there is some interaction
+[0:40:36] between the variables, but not a full interaction.
+[0:40:39] And so this structure can be used in particular.
+[0:40:42] It was used for designing
+[0:40:45] very efficient quasi-Newton methods,
+[0:40:48] but it can be used in other contexts.
+[0:40:49] And we worked on that topic
+[0:40:51] with Andreas Griswank for a few years.
+[0:40:54] It was a very nice collaborator.
+[0:40:56] And then he got interested in automatic differentiation
+[0:41:00] and did most of his career in this sector later on.
+[0:41:04] And what sparked your interest
+[0:41:06] in studying partially separable functions?
+[0:41:08] And could you explain why you consider this topic
+[0:41:11] so relevant while highlighting your main contributions to it?
+[0:41:15] Well, as I mentioned,
+[0:41:19] these partially separable functions,
+[0:41:21] they are functions which consist of some of functions.
+[0:41:26] And each one of these functions is defined
+[0:41:29] on the small dimensional subspace.
+[0:41:31] And so the fact that these subspace are small dimensional
+[0:41:36] means that there are lots of things you can do.
+[0:41:39] If you want to approximate derivatives,
+[0:41:41] say in the quasi-Newton method,
+[0:41:44] or if you want to search for other types of questions,
+[0:41:48] the fact that you can look at each
+[0:41:50] of these spaces individually,
+[0:41:52] each of them is quite small,
+[0:41:54] typically two or three dimensions,
+[0:41:58] sometimes five or 10,
+[0:41:59] but that's quite exceptional.
+[0:42:01] So they remain small dimensional,
+[0:42:04] but the total thing can be very large.
+[0:42:07] And so you can use this structure
+[0:42:09] to solve very, very large problems
+[0:42:12] while focusing on small dimensional linear algebra,
+[0:42:15] for instance.
+[0:42:16] And also you can show that every function
+[0:42:21] whose Hessian is sparse,
+[0:42:23] which is a very large class of problems,
+[0:42:26] is partially separable for sure.
+[0:42:28] So that's a very wide class
+[0:42:31] and it covers for instance,
+[0:42:33] all discretized problems and many others.
+[0:42:36] So it's a very, very interesting class of problems.
+[0:42:40] Very interesting.
+[0:42:40] So through this type of approach,
+[0:42:43] you can devise more efficient algorithms, right?
+[0:42:47] Yes, and there is a strong connection
+[0:42:50] between partial separability and sparsity, of course.
+[0:42:54] And there are many things that can be done,
+[0:42:57] frontal methods and whatever.
+[0:42:59] I mean, there are many connections there
+[0:43:01] that can be exploited to good effect.
+[0:43:05] Yeah, sparsity is something that the people
+[0:43:07] from the field like to take advantage, right?
+[0:43:10] Well, when you have structure, whatever it is,
+[0:43:13] you should take advantage of it.
+[0:43:15] Structure is what allows us to solve large problems.
+[0:43:19] If they were unstructured, we would be just lost.
+[0:43:22] Yes, yes, absolutely.
+[0:43:23] We have to talk about your award-winning
+[0:43:26] Lancelot software from the early 90s.
+[0:43:29] Tell me the story behind its name and development
+[0:43:33] and why it became a very successful project.
+[0:43:37] Well, this was the project we started
+[0:43:39] with Nick Gould and Andy Cone.
+[0:43:41] So we designed the name,
+[0:43:45] which has something to do with augmented Lagrangian.
+[0:43:49] In an evening with some wine and some beer around
+[0:43:53] and after some joyous moments,
+[0:43:56] we stumbled on this acronym which stayed with us
+[0:44:00] and so we used it.
+[0:44:02] And the software was with Minos,
+[0:44:06] the software by Michael Saunders,
+[0:44:09] was one of the first or maybe the first software,
+[0:44:14] the first package for solving large scale
+[0:44:16] non-linear problems constrained and unconstrained.
+[0:44:19] From that point of view, it was very successful.
+[0:44:22] It was very robust.
+[0:44:23] It still is very robust.
+[0:44:25] It's still being used.
+[0:44:28] And it's a method which was a precursor of what came next
+[0:44:33] like IPOP and other big packages.
+[0:44:37] But it was the first one, I think,
+[0:44:40] which people really used
+[0:44:42] for solving practical large scale problems.
+[0:44:46] From that point of view, yes,
+[0:44:48] because of it successful has been quoted quite a bit for sure.
+[0:44:52] Yeah, have you thought of making it commercial?
+[0:44:56] Yes and no.
+[0:44:57] We thought we were all paid by the public funds
+[0:45:02] and so we wanted to make our research public.
+[0:45:05] We made some restriction on its use.
+[0:45:11] We didn't want it to be used for the design of weapons,
+[0:45:15] but otherwise everything was a lot.
+[0:45:18] Very interesting.
+[0:45:19] That's an interesting fun fact, actually.
+[0:45:21] And what about Qt?
+[0:45:24] Again, a very interesting name.
+[0:45:26] You should mention that.
+[0:45:27] Which is a project related to the design
+[0:45:29] of a collection of test problems.
+[0:45:32] Did you expect this project to be that successful?
+[0:45:35] No, not at all.
+[0:45:36] When we worked on Landslot,
+[0:45:38] we needed the collection of test problems
+[0:45:40] to test the software on.
+[0:45:42] And at the time, test problems were exchanged
+[0:45:45] by exchanging reports and pieces of paper.
+[0:45:48] And so there was a very high likelihood of reproducing
+[0:45:53] or introducing mistakes in the statements of the functions
+[0:45:57] or the derivatives and so on.
+[0:45:59] And so we decided that we would need something
+[0:46:02] which would be a file that would actually,
+[0:46:05] we could exchange and make sure
+[0:46:07] the thing was the same as before.
+[0:46:09] And so we worked on a format for writing down these problems.
+[0:46:15] And we ended up with a collection of about a thousand problems.
+[0:46:19] And since we had them and we used them for testing Landslot,
+[0:46:24] we thought we could just give them away as well
+[0:46:26] so that people could use them in the same way.
+[0:46:30] And in fact, it has been probably even more successful
+[0:46:33] than Landslot.
+[0:46:34] It's still the major benchmarking test
+[0:46:38] for nonlinear optimization today.
+[0:46:40] And its success was honestly quite unexpected.
+[0:46:45] We expected to be used for a few years, of course,
+[0:46:48] otherwise you wouldn't have done the work.
+[0:46:50] But the success was beyond our expectation.
+[0:46:53] And of course, it requires maintenance and development,
+[0:46:57] which we did.
+[0:46:58] And we also did with Dominique Auvin and other people.
+[0:47:04] But that was really a success from that point of view.
+[0:47:09] A bit unexpected, but nevertheless very pleasant.
+[0:47:13] Yeah, a neat and cute benchmark.
+[0:47:17] You have to tell me about the name.
+[0:47:18] I don't remember how we came about that name.
+[0:47:21] It was Constrain and Unconstrained Testing Environment, I think.
+[0:47:26] At the time we didn't realize it would be confused
+[0:47:31] with other unpleasant site on internets.
+[0:47:34] But this happened later.
+[0:47:37] So it was too late to change the name.
+[0:47:40] Okay.
+[0:47:41] And in 2000, you co-authored a 900 page book
+[0:47:46] on trust region methods with Andy Kahn and Nick Gould.
+[0:47:50] Tell me a bit about this book,
+[0:47:52] which has over 4,000 citations on Google Scholar.
+[0:47:56] Well, this book started as a course I thought
+[0:47:59] in my university, I thought a course about trust region.
+[0:48:03] And I started writing notes about the basics.
+[0:48:07] And since I had those notes,
+[0:48:09] I suggested to other guys that what about,
+[0:48:13] you know, elaborating on this.
+[0:48:15] And unfortunately, maybe we could not stop.
+[0:48:19] There was always something else to say
+[0:48:21] and something else to add.
+[0:48:23] And so the book grew to 900 pages.
+[0:48:27] In retrospect, I'm not so sure.
+[0:48:29] This is such a great idea to have such a massive book,
+[0:48:33] but it turned out to be quite useful.
+[0:48:35] And in the end, people have quoted it quite a bit,
+[0:48:39] as you said, because it's been the standard book
+[0:48:43] on this subject for more than 20 years now.
+[0:48:46] And how long did it take for you guys
+[0:48:48] to finish writing the book?
+[0:48:50] About three years, if I remember well.
+[0:48:52] So yes, that's all about that.
+[0:48:54] We had the good support for Siam
+[0:48:56] from that point of view.
+[0:48:58] And the writing was quite time consuming, as you would expect.
+[0:49:03] But yes, it took a little bit more than three years.
+[0:49:08] So each of you wrote about 300 pages
+[0:49:11] and 100 pages per year.
+[0:49:13] More complicated story than that, but nevermind.
+[0:49:16] I mean, it did.
+[0:49:18] Yeah.
+[0:49:19] That monster, some people say
+[0:49:22] the nicest thing about it is the cover,
+[0:49:24] but I don't think.
+[0:49:27] Yes.
+[0:49:28] And between 2000 and 2010,
+[0:49:31] you did extensive work on filter methods,
+[0:49:34] which led to one of your papers on the topic
+[0:49:37] receiving the Lagrange Prize.
+[0:49:39] Could you kindly give an overview
+[0:49:41] of this class of methods highlighting again
+[0:49:43] your main contributions?
+[0:49:45] Filter method is a method for constraint optimization.
+[0:49:48] So the idea is very simple in a way.
+[0:49:51] If you look at standard methods for constraint optimization,
+[0:49:55] maybe the most standard one is penalty functions.
+[0:49:58] You add the penalization of the constraint
+[0:50:00] in the objective function,
+[0:50:02] and you minimize that,
+[0:50:04] and then you increase the penalty and so on.
+[0:50:06] You can do it a bit more intelligently
+[0:50:09] using augmented Lagrangian,
+[0:50:10] where the way you increase the penalty
+[0:50:13] is more intelligent, essentially.
+[0:50:16] Or you can also use SQP,
+[0:50:19] the method I failed to be associated with,
+[0:50:22] which is also a very good method.
+[0:50:25] Filters are a bit different in the sense
+[0:50:27] that they do not mix the objective function
+[0:50:31] under constraints.
+[0:50:32] They consider them separately a little bit like
+[0:50:35] you would do in multi-objective optimization.
+[0:50:38] And so you work in a sort of a plane
+[0:50:41] where you have the objective function value on one hand
+[0:50:45] and the constraint violation on the other.
+[0:50:47] And the idea there is that you look at dominated point,
+[0:50:52] in that subspace, in that two dimensional space,
+[0:50:55] and you chop off bits of the space which are dominated.
+[0:50:58] And so the idea there is that
+[0:51:00] when you have chopped enough space,
+[0:51:03] and that well, you have to find the solution.
+[0:51:06] And the idea was originated
+[0:51:10] with Roger Fletcher and Sven Leifer.
+[0:51:14] And I work with them to establish the theory,
+[0:51:17] the convergence theory for that method,
+[0:51:20] which turned out to be this paper
+[0:51:23] who won the language prize.
+[0:51:25] Fascinating.
+[0:51:26] And Philip, you were the president of MOS,
+[0:51:30] the Mathematical Optimization Society,
+[0:51:32] between 2010 and 2013.
+[0:51:35] What were your main achievements?
+[0:51:37] Well, I mean, the main achievement was to run the society.
+[0:51:40] But I think one important aspect
+[0:51:43] that occurred at the time,
+[0:51:46] it was between the transition
+[0:51:48] between the time of the previous chairman,
+[0:51:51] who was Steve Wright and myself.
+[0:51:54] And we launched the idea of modifying the name of the society.
+[0:51:59] The society was called the Mathematical Programming Society.
+[0:52:03] And this was inducing lots of confusion
+[0:52:05] with computer science and difficulties
+[0:52:09] with people in some departments.
+[0:52:12] And we thought that calling the society
+[0:52:15] the Mathematical Optimization Society would be better.
+[0:52:19] And so we ran a consultation of all the members
+[0:52:24] to see whether the ID would actually make enough consensus.
+[0:52:28] And the consensus was very large,
+[0:52:31] although there was some opposition,
+[0:52:35] but not very numerous.
+[0:52:39] So we could actually move on that change of name.
+[0:52:44] We didn't change the name of the journal,
+[0:52:47] although I would have liked to do it at the time.
+[0:52:50] But the reason for not changing it
+[0:52:52] was that it would mess up citations
+[0:52:55] and bibliographical databases and so on.
+[0:52:59] And so we gave them that.
+[0:53:00] Maybe that was a mistake
+[0:53:02] and we should have done it as well.
+[0:53:03] But I mean, that's too late now.
+[0:53:06] Or maybe for some future president of the society,
+[0:53:09] I don't know.
+[0:53:10] Yeah, but at least the transition was smooth
+[0:53:13] within the community with some people being a bit reluctant,
+[0:53:16] but overall, based on your accounts,
+[0:53:19] it seemed to have been a good choice.
+[0:53:21] Yes, and I still meet people regularly
+[0:53:24] who recall that period as a positive change.
+[0:53:28] And in particular, people who are in competition
+[0:53:32] in departments with computer science,
+[0:53:34] and it's sometimes difficult to make a computer scientist
+[0:53:38] to believe that mathematical programming
+[0:53:40] has nothing to do with programming.
+[0:53:43] And so the fact that the society at least
+[0:53:46] is called mathematical optimization was a progress.
+[0:53:49] Yeah, sometimes I keep thinking about the implications
+[0:53:53] of adopting the terminology programming back in the day.
+[0:53:57] To describe the field, I mean, linear programming,
+[0:54:00] nonlinear programming, mathematical programming,
+[0:54:03] and even dynamic programming.
+[0:54:05] I think that I know it created difficulties
+[0:54:08] for some people, for sure, and serious ones,
+[0:54:11] which one of the reasons why Steve and I
+[0:54:13] were motivated to do the change.
+[0:54:16] Yeah.
+[0:54:17] Know that it was an historical fixture.
+[0:54:20] I mean, in the early days,
+[0:54:21] programming was conceived as a technique to achieve goals,
+[0:54:27] which of course, you could think of optimization
+[0:54:30] as a technique to achieve some goals.
+[0:54:33] No, programming turned out to be something else
+[0:54:37] in later years, but in the origin,
+[0:54:40] that was the idea.
+[0:54:42] Incidentally, there is goal programming too.
+[0:54:46] It's literally a technique to achieve.
+[0:54:48] Yeah, dynamic programming was one of the first, I think,
+[0:54:50] and linear programming along the way of programming.
+[0:54:53] Right.
+[0:54:54] But those large dancing work.
+[0:54:56] Yes, I know.
+[0:54:57] Yeah, yeah.
+[0:54:58] And sometimes I think about
+[0:54:59] the operations research terminology too,
+[0:55:02] that it's also something that probably
+[0:55:04] would be very difficult to change.
+[0:55:07] Today, it's already a bit going to talk about
+[0:55:11] operations research.
+[0:55:12] Very few people know what it would mean, actually.
+[0:55:15] Yeah.
+[0:55:16] Unless you're in the field, it's a bit obscure.
+[0:55:19] Yeah, but so many years passed by,
+[0:55:21] many people discussing about this issue.
+[0:55:24] Some people prefer to use now analytics,
+[0:55:26] decision science, or varieties of this, right?
+[0:55:30] So it's an open question, this issue.
+[0:55:35] This is a question to ask to the president of the OR Society.
+[0:55:39] For the OR Society to decide.
+[0:55:42] Yeah, very difficult question.
+[0:55:45] Because the community is much broader, right?
+[0:55:47] So that's, I mean, very difficult question.
+[0:55:51] So from 1979 to 2016,
+[0:55:55] you had a second independent research career
+[0:55:58] as a director of the transportation research group
+[0:56:01] of your university.
+[0:56:02] In fact, from the very days of my thesis,
+[0:56:06] in Belgium, we have to present the thesis
+[0:56:08] and also an annex thesis,
+[0:56:10] which is a development on another topic.
+[0:56:13] And since my father was an urban planner,
+[0:56:17] he asked me one day,
+[0:56:18] what can you do about all this mathematics
+[0:56:21] for urban planning?
+[0:56:22] And I started to get interested
+[0:56:24] in traffic assignment problems.
+[0:56:27] And so this is a very nice mathematical problem,
+[0:56:30] which has lots of good history
+[0:56:34] and collaborators and nice theorems about it.
+[0:56:38] And so I started working on this topic with colleagues
+[0:56:43] and I created a little group of people in my university
+[0:56:47] who were interested in transportation
+[0:56:50] and in traffic at the time.
+[0:56:53] And of course, the thing evolved considerably over time.
+[0:56:56] I mean, the focus on mathematical traffic assignment,
+[0:57:00] essentially disappeared.
+[0:57:02] There were all the questions about choice modeling,
+[0:57:08] behavioral studies, surveys, whatever.
+[0:57:13] I mean, we all group run the first survey,
+[0:57:16] the first national Belgian mobility survey, for instance,
+[0:57:20] which was quite a massive task.
+[0:57:24] So yes, it was a subject which in the beginning
+[0:57:27] was close to optimization
+[0:57:29] and to diverge rather far away as he passed by.
+[0:57:37] But that was interested for sure, yes.
+[0:57:39] Yeah, you conducted so many relevant activities
+[0:57:42] and published, for example,
+[0:57:44] many transportation science papers,
+[0:57:47] which is very impressive.
+[0:57:48] And some people might not be even aware of that, right?
+[0:57:50] Because they associate your name
+[0:57:52] mostly with nonlinear optimization and...
+[0:57:55] That's quite funny because in my university,
+[0:57:58] people think of me as being the transportation guy,
+[0:58:02] not at all the optimization guy.
+[0:58:04] And of course, in the optimization community,
+[0:58:07] they don't know much about more transportation activities,
+[0:58:11] but that's to be expected.
+[0:58:12] I mean, there's nothing to worry about.
+[0:58:16] Yeah, impressive.
+[0:58:19] Two distinct careers, but very successful ones.
+[0:58:22] So I mentioned 2016,
+[0:58:24] you officially retired 10 years ago in 2016.
+[0:58:28] What changed after that?
+[0:58:31] No longer meetings, no faculty meetings,
+[0:58:35] no dependable told stories,
+[0:58:37] no boards of director,
+[0:58:40] essentially a lot of freedom for doing what I like,
+[0:58:43] which is very often research and also other things,
+[0:58:46] but yes.
+[0:58:49] But before going to...
+[0:58:52] And I'm still doing research with somebody I met in the 1990s
+[0:58:57] in the mid-90s, Serge Graton,
+[0:59:00] who was a student in CERFAC in France, in Toulouse, France.
+[0:59:06] And I've been visiting Toulouse many, many times since then.
+[0:59:09] And I also know I have a long track of record,
+[0:59:13] a long record track of publishing
+[0:59:15] with Serge on various subjects.
+[0:59:17] And so we continue to be interested, for instance,
+[0:59:20] in the method for deep learning
+[0:59:24] and network training, for instance,
+[0:59:27] a subject which has a lot of activities going on,
+[0:59:30] as you know.
+[0:59:32] So this continues in a way.
+[0:59:35] I think curiosity has not ended with my retirement,
+[0:59:39] fortunately, and I'm still going on
+[0:59:42] and doing so with good friends and colleagues.
+[0:59:45] Yeah, you also worked with him
+[0:59:47] on data simulation for Weatherforce.
+[0:59:50] I did work with him.
+[0:59:50] The first thing I did with him,
+[0:59:53] he was mostly doing data simulation at the time.
+[0:59:57] And I joined him on a project like that.
+[1:00:00] That's why I was mentioning weather prediction earlier.
+[1:00:04] We did some data simulation for weather forecasting together.
+[1:00:09] That was very nice.
+[1:00:11] And then we moved to other topics
+[1:00:14] like regularization method.
+[1:00:16] This branch taught also with another group
+[1:00:20] with whom I still have good contacts,
+[1:00:23] which is a group in Florence in Italy
+[1:00:25] with Benedict Angorini and Stefania Belladilla
+[1:00:30] and Margaretha Porcelli.
+[1:00:32] Good people who I'm still working with on a regular basis.
+[1:00:36] And I'm very pleased to be the collaborator.
+[1:00:39] Right.
+[1:00:40] After retirement, you said that
+[1:00:42] you also started doing other things.
+[1:00:44] Can you give me an example outside academia?
+[1:00:48] One thing I did start two years before I retired
+[1:00:51] was a metal engraving.
+[1:00:55] I wanted to do something with my hands
+[1:00:57] and not only with my brain.
+[1:00:59] And so that turned out to be quite interesting.
+[1:01:02] And I've now finished my courses on engravings.
+[1:01:09] I'm at the end of my classes,
+[1:01:11] but it's been a very good time
+[1:01:14] and a very pleasant activity, very expressive.
+[1:01:18] And if you look at the book we published
+[1:01:22] with Cora Lecates and Nicole,
+[1:01:25] the complexity theory, it has a lot of illustrations,
+[1:01:28] which are some of them are my engravings.
+[1:01:31] So I've used them to illustrate mathematics as well.
+[1:01:35] So it's quite pleasant. Wonderful.
+[1:01:38] Wonderful. That's really impressive.
+[1:01:40] And I mean, talking about them,
+[1:01:43] a few years before the retirement,
+[1:01:45] you started working in evaluating the complexity
+[1:01:48] of algorithms for non-convex optimization
+[1:01:51] with the two of them,
+[1:01:52] which led to a book published in 2022.
+[1:01:56] What do you have to say about it?
+[1:01:57] Well, it was another long project.
+[1:01:59] I mean, not so long as the Trasijan book.
+[1:02:02] We managed to be a bit faster,
+[1:02:05] but it was a time where complexity began
+[1:02:09] to be a major buzzword in optimization.
+[1:02:13] And a lot of the theory was and still is
+[1:02:16] for the convex case.
+[1:02:18] We thought that doing theory for the non-convex case
+[1:02:21] was important and useful.
+[1:02:24] And this led us to gather existing results
+[1:02:28] and particular results by Yuri Nesterov and others,
+[1:02:32] but and then right around results
+[1:02:35] for all the possible cases,
+[1:02:38] constraints, no constraints,
+[1:02:40] noisy, no noisy, many, many different frameworks,
+[1:02:45] composite functions.
+[1:02:47] Again, the book is too weak for my taste,
+[1:02:50] but it's very hard to stop once you are going on.
+[1:02:53] Yeah, you have an extensive knowledge, right, Philip?
+[1:02:56] So it's not a surprise that you're able to come up
+[1:02:59] with these long books,
+[1:03:00] because it's basically a compilation of many things
+[1:03:03] that you have learned over the years.
+[1:03:05] And I think that's very important for the community.
+[1:03:08] I know you were doing research on deep learning
+[1:03:10] and these type of things connected with AI.
+[1:03:13] I would like to know what are your views
+[1:03:15] regarding the AI revolution
+[1:03:17] that we are currently experiencing
+[1:03:19] both from a teaching and research perspective?
+[1:03:23] Well, it's clearly a big revolution.
+[1:03:25] I think whether it will lead us,
+[1:03:28] I think is unclear for the moment.
+[1:03:31] There are various dangers and various advantages.
+[1:03:36] The weight, the weighting of advantages
+[1:03:39] versus drawbacks is still going on.
+[1:03:43] No, there is, for instance, a very big debate
+[1:03:45] in the publishing business about what is a referee,
+[1:03:50] what is an author of a paper,
+[1:03:51] and to some extent, what is knowledge.
+[1:03:54] Is knowledge knowledge by humans
+[1:03:57] or possibly knowledge by machines as well?
+[1:04:00] So when we say that all tasks
+[1:04:02] is to make knowledge progress,
+[1:04:04] which knowledge are you talking about?
+[1:04:07] So these are serious questions.
+[1:04:09] And I don't claim I have a final assessment about this.
+[1:04:16] I think things are changing so fast,
+[1:04:19] the technology is evolving so quickly
+[1:04:22] that it's very hard to see where this is all going.
+[1:04:26] But clearly it's a very important issue
+[1:04:29] and a very important turning point
+[1:04:31] in the history of science,
+[1:04:33] not only in mathematics, but in science in general,
+[1:04:36] and probably society as a whole.
+[1:04:39] It's an important question,
+[1:04:41] but I'm not a guru, maybe unfortunately,
+[1:04:44] but that is something we have to consider seriously
+[1:04:51] and also take our responsibilities
+[1:04:54] with respect to it and its use.
+[1:04:56] It's a big tool.
+[1:04:57] So like old tools, you can do wonderful things with it
+[1:05:01] and you can do dreadful things with it.
+[1:05:03] So responsibility to act accordingly,
+[1:05:09] difficult choices sometimes.
+[1:05:11] Yeah, I see your point.
+[1:05:13] But regarding the students,
+[1:05:15] when it comes to teaching-
+[1:05:17] The students, yeah, the students is yet another question.
+[1:05:21] I mean, how do you teach students
+[1:05:24] when they have access to AI?
+[1:05:27] I think preventing them to get access to AI
+[1:05:30] is a real gap models, I think.
+[1:05:34] So it doesn't make much sense.
+[1:05:36] But we should teach them how to use AI
+[1:05:42] efficiently and responsibly.
+[1:05:45] This is the main thing, I believe.
+[1:05:48] So instead of preventing them
+[1:05:50] or saying that it is no good to work with AI,
+[1:05:56] I think we should encourage them to use it,
+[1:06:00] but encourage them to use it in a responsible way
+[1:06:04] and in a transparent way.
+[1:06:06] I mean, in a sense, I keep finding
+[1:06:09] that when you write something,
+[1:06:12] would it be a paper or an essay or an exam or anything?
+[1:06:16] You're responsible for what you write.
+[1:06:18] Not a machine is responsible, you are responsible.
+[1:06:22] And so you better check what you say is correct
+[1:06:25] and meaningful.
+[1:06:26] Yes, thanks for sharing your thoughts on this.
+[1:06:28] So let's see what happens in the next years.
+[1:06:31] And Philip, did you have any involvement
+[1:06:34] in the creation of the SIAM Journal Optimization?
+[1:06:38] Well, maybe I have some involvement.
+[1:06:42] I can tell you a story.
+[1:06:43] I remember very well walking
+[1:06:46] on the Saturday morning market in Namir here
+[1:06:50] with Jean Golub, and Jean was visiting me
+[1:06:53] and we were discussing journals and publication policy
+[1:06:59] and so on.
+[1:07:00] And I mentioned to him that the then SIAM Journal
+[1:07:04] on Optimization and Optimal Control
+[1:07:06] was mostly on optimal control.
+[1:07:09] And that there was room in my view
+[1:07:11] for a SIAM Journal on Optimization proper.
+[1:07:16] And I think that the idea stuck a chord
+[1:07:19] in Jean's mind, I think.
+[1:07:21] And he went on discussing this idea with other people,
+[1:07:25] I guess, in North America and then SIAM people
+[1:07:28] and John Dennis and others.
+[1:07:30] And maybe this conversation had a role
+[1:07:33] in the creation of SIOP.
+[1:07:35] But I certainly would not claim
+[1:07:38] being the originator of the journal.
+[1:07:40] Yeah, but certainly you had at least some involvement
+[1:07:44] to bring that conversation to the table, maybe.
+[1:07:47] Yeah, but at some point that was quite relevant, right?
+[1:07:50] I mean, to make that distinction
+[1:07:52] between the optimal control and optimization.
+[1:07:56] Yes, and again, I think this was salient at the time.
+[1:08:01] It may no longer be such a distinction
+[1:08:04] because in fact the optimal control community
+[1:08:08] has also moved in the direction of optimization
+[1:08:11] while optimization was moving in the direction
+[1:08:14] of optimal control.
+[1:08:15] So the two communities are closer than they were at that time.
+[1:08:21] So, okay, but the two journals do their job very well
+[1:08:25] and there is no real reason to backtrack on this so far.
+[1:08:29] I believe no, no, it's all right.
+[1:08:31] Yes, Philippe, do you have any regrets?
+[1:08:34] Oh, not enough time.
+[1:08:38] But that's beyond your control.
+[1:08:41] In my control, not really, no.
+[1:08:45] Well, maybe missing over a skimpy is a big regret,
+[1:08:48] but well, after 60 years, it's more or less in the past.
+[1:08:55] So I don't worry about that.
+[1:08:58] Otherwise, no, I think I had a carrier
+[1:09:02] which was reasonable and fruitful
+[1:09:05] and I met wonderful people.
+[1:09:07] So I have from that point of view, no regrets at all.
+[1:09:10] Yes, you're certainly a very fortunate person.
+[1:09:13] And what are your plans for the future?
+[1:09:16] Well, as long as I can, I continue to be curious.
+[1:09:20] And as long as other people are willing to talk to me
+[1:09:24] and possibly work with me, I'm happy to share.
+[1:09:28] And that will hopefully be another, some years.
+[1:09:33] I don't know how many, but we'll see.
+[1:09:35] All right.
+[1:09:36] And would you like to leave a takeaway message
+[1:09:38] to our young viewers and listeners?
+[1:09:40] Well, I think I always think of a sentence
+[1:09:42] of John Dennis say, which say not so long ago
+[1:09:46] that today is the best time ever to be an optimizer
+[1:09:50] because the field has seen this incredible increase
+[1:09:56] in popularity, in relevance, in activity.
+[1:10:01] So never a better time to be an optimizer than now.
+[1:10:04] Right, fair enough.
+[1:10:06] I agree with you.
+[1:10:07] And I agree with John Dennis.
+[1:10:09] Yes.
+[1:10:10] So, Philippe, it was a huge honor
+[1:10:13] to have this conversation with you.
+[1:10:14] I had a lot of fun.
+[1:10:17] You are certainly a very, very interesting person
+[1:10:20] with many facets, not only in terms of research,
+[1:10:23] but also on your personal interests.
+[1:10:26] So it has been a treat, really.
+[1:10:28] Thank you very much.
+[1:10:29] Well, thank you very much to you as well.
+[1:10:30] It was a very pleasant conversation.
+[1:10:32] And I hope your listener and viewers will be interested.
+[1:10:37] Yeah, for sure they will.
+[1:10:38] So once again, thank you very much.
+[1:10:40] Philippe Merci beaucoup.
+[1:10:41] And I wish you all the best.
+[1:10:43] I wish you a happy future
+[1:10:46] and also that you are in good shape,
+[1:10:49] take care of your health,
+[1:10:51] and looking forward to meeting you in one of these days.
+[1:10:54] Well, goodbye,
+[1:10:55] and I hope everything will be fine on your side as well.
+[1:10:59] Okay, thank you.
+[1:11:01] Bye, ciao.
+[1:11:02] Bye.
+
+# ---------------------------------------------------------------------------
+# VERIFICATION CLIPS: the same audio re-transcribed for 13 key passages with a larger model
+# (faster-whisper medium.en, int8, beam 5, condition_on_previous_text=False). Quotes in
+# ../../research/02-methodology.md use these wordings where they differ from small.en above.
+# ---------------------------------------------------------------------------
+[0:15:36] What were the proposals for the subject?
+[0:15:38] He told me I could choose between two subjects.
+[0:15:42] One was SQP and the other one was large-scale non-linear problems.
+[0:15:47] I did the wrong choice.
+[0:15:48] I chose the second.
+[0:15:50] Otherwise, my name would be associated with SQP, but that's too bad.
+[0:15:55] I chose the other one and started working on the SPARs.
+[0:16:00] I chose the SPARs.
+[0:16:02] And so I choose the other one and started working on the sparse quasi-Newton methods.
+[0:16:07] And I derived the first sparse quasi-Newton method at the time, which was quite useful.
+[0:16:14] And the rest of my thesis was essentially building on that and working on the theory,
+[0:16:20] the experiments and the software associated with this sort of topic.
+[0:16:25] Yeah. So SQP, for those who are not familiar with,
+[0:16:29] Is
+[0:22:00] was not far from Michael Pounds,
+[0:22:02] but there was no former affiliation.
+[0:22:05] We spent for instance lunchtime together in
+[0:22:08] the Gratz Center having lunch every day and
+[0:22:12] discussing my progress or my lack of progress.
+[0:22:16] That was quite challenging for me,
+[0:22:19] and I learned a lot from that.
+[0:24:52] student there, that's for sure. Yes, I learned enormously from him and he was a very
+[0:25:01] person with very high standards for everybody, including himself, but also for his students.
+[0:26:14] at times, could you elaborate more on this?
+[0:26:16] Just for us to have a better idea of his style.
+[0:26:21] He was quite direct and to the point,
+[0:26:25] and so he was in a way rightly inquisitive about concepts.
+[0:26:31] He didn't let vagueness hang around.
+[0:26:35] If you had a vague idea,
+[0:26:37] that didn't fit with his view of things.
+[0:26:41] The ideas had to be precise
+[0:26:43] and the result had to be verified and there was no room for approximations.
+[0:26:50] Although he was an expert in approximation theory,
+[0:26:52] it was no room for approximating concepts, for sure.
+[0:26:57] And for young students, that is sometimes difficult,
+[0:27:01] but I guess that's how you learn.
+[0:27:02] Yes, I mean you took it
+[0:39:00] working there at the time.
+[0:39:02] And so we went along very well,
+[0:39:04] discussed the main thing,
+[0:39:06] the needs to work on large scale problems
+[0:39:09] and the needs to write software to do it.
+[0:39:13] And we didn't do anything for a while.
+[0:39:16] And then a few years later, I think it was in 81,
+[0:39:20] Andy went for a sabbatical in France in Grenoble.
+[0:39:25] And that was an opportunity for Nick and me to meet.
+[0:39:30] And we started working on trust regions at that time and it has resulted in a long,
+[0:39:37] long story of collaboration and friendship with these two people. I think we wrote more than 50
+[0:39:43] papers together. It's a long story but a long and very nice story which I'm very proud of.
+[0:43:05] Yeah, sparsity is something that the people from the field like to take advantage, right?
+[0:43:11] Well, when you have structure, whatever it is, you should take advantage of it.
+[0:43:15] Structure is what allows us to solve large problems.
+[0:43:19] If they were unstructured, we would be just lost.
+[0:44:52] Yeah. Have you thought of making it commercial?
+[0:44:55] Yes and no. We thought we were all paid by the public funds, and so we wanted to make our research public.
+[0:45:05] We made some restrictions on its use. We didn't want it to be used for the design of weapons.
+[0:45:15] But otherwise, everything was a lot.
+[0:45:18] Very interesting.
+[0:45:34] successful?
+[0:45:35] No, not at all.
+[0:45:36] When we worked on Lancelot, we needed the collection
+[0:45:39] of test problem to test the software on.
+[0:45:42] And at the time, test problems were exchanged
+[0:45:45] by exchanging reports and pieces of paper.
+[0:45:49] And so there was a very high likelihood
+[0:45:51] of reproducing or introducing mistakes
+[0:45:55] in the statements of the functions
+[0:45:57] or the derivatives and so on.
+[0:45:59] And so we decided that we would need something
+[0:46:02] which would be a file that we could exchange
+[0:46:06] and make sure the thing was the same as before.
+[0:46:09] And so we worked on a format
+[0:46:12] for writing down these problems.
+[0:46:15] And we ended up with a collection
+[0:46:17] of about a thousand problems.
+[0:46:19] And since we had them
+[0:46:21] and we use them for testing Landslot,
+[0:46:24] we thought we could just give them away as well
+[0:46:26] so that people could use them in the same way.
+[0:46:30] And in fact, it has been probably even more successful
+[0:46:33] than Landslot.
+[0:46:34] It's still the major benchmarking test
+[0:46:38] for non-linear optimization today.
+[0:46:40] And its success was honestly quite unexpected.
+[0:46:45] We expect it to be used for a few years, of course,
+[0:46:48] otherwise you wouldn't have done the work,
+[0:46:50] but the success was beyond our expectation.
+[0:46:53] And of course...
+[0:47:54] 4,000 citations on Google Scholar.
+[0:47:56] Well, this book started as a course, I thought,
+[0:47:59] in my university, I thought a course about trust region
+[0:48:03] and I started writing notes about the basics.
+[0:48:07] And since I had those notes, I suggested to other guys
+[0:48:12] that what about, you know, elaborating on this?
+[0:48:15] And unfortunately, maybe we could not stop.
+[0:48:19] There was always something else to say
+[0:48:22] and something else to add.
+[0:48:23] And so the book grew to 900 pages.
+[0:48:27] In retrospect, I'm not so sure this is such a great idea
+[0:48:31] to have such a massive book,
+[0:48:33] but it turned out to be quite useful.
+[0:59:32] So this is this continues in a way and I think curiosity has not ended with my with my retirement, fortunately, and I'm still going on and doing so with with friends and colleagues.
+[1:01:55] 2022. What do you have to say about it?
+[1:01:57] Well, it was another long project. I mean, not so long as the Transfusion book.
+[1:02:02] We managed to be a bit faster.
+[1:02:05] But it was a time where complexity
+[1:02:08] began to be a major buzzword in optimization.
+[1:02:13] And a lot of the theory was and still is for the convex case.
+[1:02:18] We thought that doing theory for the non-convex case was important and useful.
+[1:02:24] This led us to gather existing results,
+[1:02:28] in particular results by Yuri Nesterov and others,
+[1:02:31] and then right or wrong results
+[1:02:35] for all the possible cases,
+[1:02:38] constraints, no constraints, noisy,
+[1:02:41] no noisy, many different frameworks,
+[1:02:45] composite functions, and again,
+[1:02:48] the book is too weak for my taste,
+[1:02:50] but it's very hard to stop once you're going on.
+[1:02:53] Yeah, you have an extensive knowledge.
+[1:05:40] to use AI efficiently and responsibly.
+[1:05:45] This is the main thing, I believe.
+[1:05:48] So instead of preventing them
+[1:05:50] or saying that it's no good to work with AI,
+[1:05:56] I think we should encourage them to use it,
+[1:06:00] but encourage them to use it in a responsible way
+[1:06:04] and in a transparent way.
+[1:06:06] I mean, in a sense,
+[1:06:08] I keep finding that when you write something, would it be a paper or an essay or an exam or anything,
+[1:06:16] you're responsible for what you write, not a machine is responsible, you are responsible.
+[1:06:22] And so you better check what you say is correct and meaningful.
+[1:06:26] Yes, thanks for sharing your thoughts.
+[1:09:14] And what are your plans for the future?
+[1:09:16] Well, as long as I can continue to be curious and as long as other people are willing to talk to me and possibly work with me, I'm happy to share and that will hopefully...
