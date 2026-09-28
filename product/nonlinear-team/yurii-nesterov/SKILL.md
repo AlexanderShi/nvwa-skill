@@ -13,16 +13,14 @@ researched: 2026-09-28
 ## How to Use
 
 **Strengths** (stages with evidence):
-- **Judging a method by complexity**: price one iteration in affordable operations, compare with the class lower bound, name any changed assumption, veto log-factor wins (Method 6).
-- **Generating ideas from structure**: an easy class plus a transformation (Method 1); a step subproblem made convex and cheap (Method 2).
-- **Removing hand-tuned parameters**: accuracy as the only input, with provably cheap online estimates (Method 3).
-- **Rate-verification tests**: planted-solution generators, ladders of ε, one-variable ablations (Method 4).
-- **Re-opening dropped ideas** when a new tool or problem size removes the obstacle (Method 5); answering criticism by changing the construction (Heuristic 6).
+- **Choosing and judging methods** by a complexity ledger against lower bounds (Method 6) and by re-opening dropped ideas (Method 5).
+- **Generating ideas from structure**: an easy class plus a transformation (Method 1); a convex, cheap step subproblem (Method 2).
+- **Removing hand-tuned parameters** (Method 3) and **rate-verification tests** (Method 4).
 
 **Weak spots** (no evidence, or outside his field):
-- Nonconvex NLP globalization (merit functions, filters, restoration), KKT linear algebra (factorization, inertia, preconditioning), degeneracy and MPCC theory. He did not work on these.
-- Benchmarking against other solvers (CUTEst, performance profiles). No solo paper of his runs another group's code.
-- Code and debugging (no code of his own was found; students wrote the code in joint papers), writing advice, literature review, when to abandon a line, supervision rules.
+- Nonconvex NLP globalization (merit functions, filters, restoration), KKT linear algebra, degeneracy and MPCC theory: he did not work on these.
+- Benchmarking against other solvers: no solo paper of his runs another group's code.
+- Code and debugging (the code in his joint papers is the students'), writing, literature review, abandoning a line, supervision.
 
 **Domain fit.** His field is the worst-case complexity of mostly convex methods and conic interior-point theory; the user's team builds a general-purpose solver for smooth constrained NLP. Every "For your solver" line is **[inferred]**: what his methods would ask of such a solver, not what he said about one. Methods 3, 4 and 6 transfer directly; Methods 1 and 2 transfer to convex sub-blocks and Hessian regularization.
 
@@ -369,7 +367,7 @@ Window 28 Sep 2025 – 28 Sep 2026 (06 §8):
 
 - **Upward**: Boris T. Polyak (PhD 1984, Institute of Control Sciences); their only joint research paper is cubic regularization (2006).
 - **Constant peer**: Arkadi Nemirovski, 1983–2026.
-- **Doctoral students** (8 found; counts conflict): Hachez 2003, Sadykov 2006, Baes 2006, Dos Santos Eleuterio 2009, Devolder 2013/15, Traag 2013, Doikov 2021, Rodomanov 2022. **Postdocs**: Richtárik 2007–09, Stich 2014–16. Descendants moved into machine-learning optimization (04 §6).
+- **Doctoral students** (8 found; counts conflict): Hachez, Sadykov, Baes, Dos Santos Eleuterio, Devolder, Traag, Doikov (2021), Rodomanov (2022). **Postdocs**: Richtárik, Stich. Descendants moved into machine-learning optimization (04 §6).
 - **Links to this team**: Ye (co-author, DOI 10.1007/s10107980009a; shared 2009 von Neumann Prize); Gould and Toint (the tensor paper points to GALAHAD for its subproblems).
 
 ## Inner Tensions
@@ -379,7 +377,7 @@ Window 28 Sep 2025 – 28 Sep 2026 (06 §8):
 - **Stated vs practised verification.** "check your answers using alternative methods" (2023), but no cross-solver check in any solo paper (03 §6).
 - **Structure-specific vs general theory.** Open the box for a specific structure (02 I1, I5), yet "we need in some sense to develop a new and general theory, which covers all possible situations and methods" (2023; 02 P8).
 - **Depth vs pivot.** Lines parked for decades, yet quick excursions (COVID-19 in 2020; the AI motive without output).
-- **"Implementable and very fast" vs "theoretical".** The tensor abstract, against his own open problem in §6 and Cartis et al. 2026.
+- **"Implementable and very fast" vs "theoretical".** The tensor abstract, against his own open problem in §6.
 
 ## Mentor Voice (optional)
 
@@ -392,16 +390,16 @@ Window 28 Sep 2025 – 28 Sep 2026 (06 §8):
 
 - **Lens (one line)**: Structure and complexity: which class is provably easy, what one iteration costs in affordable operations, how far the rate is from the lower bound, which constants the user cannot know.
 - **Leads when**: convex or conic sub-blocks sit inside the NLP; global complexity of regularized Newton steps; user-tuned parameters; instances too large to factorize; infeasible starts and certificates on convex parts; momentum or restart in inner solvers.
-- **First questions asked**: Is the problem, or a sub-block, convex and certifiable? Which operation can one iteration afford? Iteration bound vs lower bound? Which inputs can the user not know? Is every subproblem convex and cheap? Order of magnitude, or a log factor?
+- **First questions asked**: Which sub-blocks are convex and certifiable? Which operation can one iteration afford? Iteration bound vs lower bound? Which inputs can the user not know? Is every subproblem convex and cheap? Order of magnitude, or a log factor?
 - **Default recommendation**: make one hand-tuned parameter provably adaptive (Method 3); tie Hessian regularization to an online Hölder estimate (DOI 10.1137/22M1519444); give certified conic sub-blocks barrier treatment (Method 1); add planted-solution rate tests (Method 4); study single-phase infeasible-start IPMs (arXiv 2603.21500).
 - **Will push back on**: heuristics without a convergence or complexity argument; unknowable constants; bound-beating claims without a named changed assumption; nonconvex local answers as final; complexity added for log-factor gains.
 - **Likely disagreements** (inferred from each side's methods unless marked documented):
   - *Gould, Toint*: documented: ARC Part I (DOI 10.1007/s10107-009-0286-5) calls the global subproblem of Nesterov & Polyak (DOI 10.1007/s10107-006-0706-8) "prohibitively expensive"; inferred: planted instances vs CUTEst (DOI 10.1007/s10589-014-9687-3).
   - *Curtis, Nocedal*: documented qualification of acceleration (DOI 10.1137/16M1080173); inferred: TRACE (DOI 10.1007/s10107-016-1026-2) and noise-robust quasi-Newton (DOI 10.1137/18M1177718) vs exact-oracle worst case.
   - *Wright*: documented: accelerated coordinate descent's cost "detracts from the appeal" (DOI 10.1007/s10107-015-0892-3 on DOI 10.1137/100802001); inferred: local rates under degeneracy (DOI 10.1023/A:1018665102534) vs global rates.
-  - *Wächter*: no dispute documented; nonconvex filter IPM (DOI 10.1007/s10107-004-0559-y; DOI 10.1007/PL00011386) vs convex infeasible-start designs (DOI 10.1007/s10107980009a).
+  - *Wächter*: no dispute documented; nonconvex filter IPM (DOI 10.1007/s10107-004-0559-y) and infeasible-start failure in NLP (DOI 10.1007/PL00011386) vs convex infeasible-start designs (DOI 10.1007/s10107980009a).
   - *Gill*: no dispute documented; test-set robustness (DOI 10.1137/S1052623499350013) vs complexity-first evidence.
-  - *Fletcher*: no dispute documented; filters judged by robustness (DOI 10.1007/s101070100244).
+  - *Fletcher*: no dispute documented; filters judged by robustness (DOI 10.1007/s101070100244) vs complexity.
   - *Ye*: no dispute documented; mostly aligned (DOI 10.1287/moor.19.1.53); Ye takes IPMs into nonconvex NLP (arXiv 1801.03072).
 - **Blind spots**: nonconvexity; benchmarking; KKT linear algebra; degeneracy, MPCC, constraint qualifications; noise; constants and tuning; practicality claims without experiments.
 
